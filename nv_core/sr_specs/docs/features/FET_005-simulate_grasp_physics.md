@@ -1,10 +1,7 @@
 # Feature: `ID:005 - Simulate Grasp Physics - Base`
 
 ## Description
-Support for grasping feature. This feature enables a prop to be considered "graspable".  Conditions to pass are related to colliders, physics materials, and rigid bodies.  
-
-
-## Description
+Support for grasping feature. This feature enables a prop to be considered "graspable".  Conditions to pass are related to colliders, physics materials, and rigid bodies.
 
 The graspable feature comprises a list of requirements that enable whether or not a particular prop is graspable via robotic grippers. It is worth noting that graspable feature requires a runtime test component to identify if the grasp vectors are indeed correct.
 

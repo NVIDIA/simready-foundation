@@ -1,6 +1,6 @@
 
 # Feature: `ID:004 - Simulate Multi-Body Physics - Base`
-## Description: 
+## Description
 Features needed to support Simulate Multi-Body physics. This feature enables simulation of physically accurate motion and collisions for props and dynamic assets that have multibody bodies that need to be joined or simulated together.  The enables real world "joints" to describe how two bodies work together. It is suitable for testing, validation, or reference applications where basic physical interactions are required.
 
 ## Neutral Format
