@@ -1,0 +1,925 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Profiles Documentation Guide &#8212; SimReady Foundation v2026.04.0</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tags.css?v=f64b827a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+
+
+    <script src="../../_static/documentation_options.js?v=cf553ac4"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=fd10adb8"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'guides/profiles/profiles';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+
+    <link rel="canonical" href="https://nvidia.github.io/simready-foundation/guides/profiles/profiles.html" />
+    <link rel="icon" href="../../_static/favicon.png"/>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Runtime Testing" href="../runtime_testing/runtime_testing.html" />
+    <link rel="prev" title="Feature Adapters Documentation Guide" href="../feature_adapters/feature_adapters.html" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2026.04.0" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+
+
+  </head>
+
+  <body data-default-mode="">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="SimReady Foundation v2026.04.0 - Home"/>
+    <img src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="SimReady Foundation v2026.04.0 - Home"/>
+  
+  
+    <p class="title logo__title">SimReady Foundation v2026.04.0</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="SimReady Foundation v2026.04.0 - Home"/>
+    <img src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="SimReady Foundation v2026.04.0 - Home"/>
+  
+  
+    <p class="title logo__title">SimReady Foundation v2026.04.0</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../guides.html">Guides</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validate_workflow.html">SimReady Validation Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../acceptance_workflow.html">SimReady Acceptance Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../feature_adapters/feature_adapters.html">Feature Adapters</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../runtime_testing/runtime_testing.html">Runtime Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../SimReady_learning_workflow.html">SimReady Learning Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../naming_conventions.html">Naming Conventions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../development.html">Development Workflows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../features_expansion_workflow.html">Features Expansion Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../capabilities/capabilities.html">Capabilities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/core/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/visualization/visualization.html">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/isaac_sim/isaac_sim.html">Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/physics_bodies/physics_bodies.html">Physics Bodies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/hierarchy/hierarchy.html">Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_sensors.html">Non-Visual Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/semantic_labels/capability-semantic_labels.html">Semantic Labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/packaging/packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/example/example.html">Example</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../features/features.html">Features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../features/feature-dependency-graph.html">Feature dependency graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_000-base_neutral-0.1.0-core.html">ID:000 - Core - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_001-minimal.html">ID:001 - Minimal - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_002-posable_bodies.html">ID:002 - Posable Bodies - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_003-rigid_body_physics.html">ID:003 - RBD Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004-simulate_multi_body_physics.html">ID:004 - Simulate Multi-Body Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_005-simulate_grasp_physics.html">ID:005 - Simulate Grasp Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_006-materials.html">ID:006 - Materials - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_007-nonvisual_materials.html">ID:007 - Non-Visual Materials - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_011-semantic_labels.html">ID:011 - Semantic Labels - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_100-isaacsim-0.1.0-composition.html">ID:100 - IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_021-robot_core.html">ID:021 - Core Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_022-driven_joints.html">ID:022 - Driven Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_023-robot_materials.html">ID:023 - Robot Materials - Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_024-base_articulation.html">ID:024 - Base Articulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_030-packaging_core.html">ID:030 - Packaging Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_031-package_self_contained.html">ID:031 - Package Self Contained</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_032-packaging_introspection.html">ID:032 - Packaging Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_033-simready_packaging.html">ID:033 - SimReady Packaging</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../profiles/profiles.html">Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/prop-robotics-neutral.html">Prop Robotics Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/prop-robotics-physx.html">Prop Robotics Physx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/prop-robotics-isaac.html">Prop Robotics Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-body-neutral.html">Robot Body Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-body-runnable.html">Robot Body Runnable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-body-isaac.html">Robot Body Isaac</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../indexes/indexes.html">Indexes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../indexes/capability_status_index.html">Capability Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../indexes/requirements_index.html">Requirements Index</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../guides.html" class="nav-link">End to End Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Profiles Documentation Guide</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="profiles-documentation-guide">
+<h1>Profiles Documentation Guide<a class="headerlink" href="#profiles-documentation-guide" title="Link to this heading">#</a></h1>
+<section id="about-this-guide">
+<h2>About this guide<a class="headerlink" href="#about-this-guide" title="Link to this heading">#</a></h2>
+<p>This guide will walk you through the process of understanding, creating, and managing profiles in the SimReady Foundation system. Profiles are collections of features that define the capabilities and requirements for assets, enabling consistent asset transformation and validation across different simulation environments.</p>
+</section>
+<section id="what-is-a-profile">
+<h2>What is a Profile?<a class="headerlink" href="#what-is-a-profile" title="Link to this heading">#</a></h2>
+<p>A <strong>Profile</strong> is a named collection of features that defines the complete set of capabilities and requirements for an asset. Profiles serve as blueprints that specify exactly what features an asset must have to be considered compliant with a particular simulation environment or use case.</p>
+<section id="key-components">
+<h3>Key Components<a class="headerlink" href="#key-components" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Profile Name (ID)</strong>: Unique identifier for the profile (e.g., <code class="docutils literal notranslate"><span class="pre">Prop-Robotics-Neutral</span></code>)</p></li>
+<li><p><strong>Version</strong>: Specific version of the profile (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;1.0.0&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;2.0.0&quot;</span></code>)</p></li>
+<li><p><strong>Feature Requirements</strong>: List of required features with their specific versions</p></li>
+<li><p><strong>Version Locking</strong>: Profile versions are immutable - changes require creating a new version</p></li>
+</ul>
+</section>
+<section id="profile-structure">
+<h3>Profile Structure<a class="headerlink" href="#profile-structure" title="Link to this heading">#</a></h3>
+<p>Each profile consists of:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[Profile-Name]</span>
+<span class="s2">&quot;version&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FEATURE_ID&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;feature_version&quot;</span><span class="p">}},</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FEATURE_ID&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;feature_version&quot;</span><span class="p">}},</span>
+<span class="w">    </span><span class="c1"># ... more features</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+</section>
+<section id="how-profiles-work">
+<h3>How Profiles Work<a class="headerlink" href="#how-profiles-work" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Asset Classification</strong>: Assets are tagged with a specific profile and version</p></li>
+<li><p><strong>Feature Validation</strong>: Assets are validated against all required features in the profile</p></li>
+<li><p><strong>Transformation Path</strong>: Feature adapters enable transformation between different profiles</p></li>
+<li><p><strong>Environment Compatibility</strong>: Profiles ensure assets work correctly in specific simulation environments</p></li>
+</ol>
+</section>
+</section>
+<section id="profile-examples">
+<h2>Profile Examples<a class="headerlink" href="#profile-examples" title="Link to this heading">#</a></h2>
+<section id="example-1-prop-robotics-neutral-profile">
+<h3>Example 1: Prop-Robotics-Neutral Profile<a class="headerlink" href="#example-1-prop-robotics-neutral-profile" title="Link to this heading">#</a></h3>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[Prop-Robotics-Neutral]</span>
+<span class="s2">&quot;1.0.0&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET000_CORE&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Core&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Minimal&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET003_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;RBD Physics&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET004_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Simulate Multi-Body Physics&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET005_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Simulate Grasp Physics&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET006_BASE_MDL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Materials (MDL)&quot;</span>
+<span class="p">]}</span>
+<span class="s2">&quot;2.0.0&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET000_CORE&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Core&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Minimal&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET003_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;RBD Physics&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET004_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Simulate Multi-Body Physics&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET005_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Simulate Grasp Physics&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET006_BASE_MDL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Materials (MDL)&quot;</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-prop-robotics-physx-profile">
+<h3>Example 2: Prop-Robotics-Physx Profile<a class="headerlink" href="#example-2-prop-robotics-physx-profile" title="Link to this heading">#</a></h3>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[Prop-Robotics-Physx]</span>
+<span class="s2">&quot;1.0.0&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET000_CORE&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Core&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Minimal&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET003_BASE_PHYSX&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;RBD Physics&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET004_BASE_PHYSX&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Simulate Multi-Body Physics and SDF collision approximation&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET005_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Simulate Grasp Physics&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET006_BASE_MDL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Materials (MDL)&quot;</span>
+<span class="p">]}</span>
+<span class="s2">&quot;2.0.0&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET000_CORE&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Core&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Minimal&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET003_BASE_PHYSX&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;RBD Physics&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET004_BASE_PHYSX&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Simulate Multi-Body Physics and SDF collision approximation&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET005_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Simulate Grasp Physics&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET006_BASE_MDL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Materials (MDL)&quot;</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="creating-a-new-profile">
+<h2>Creating a New Profile<a class="headerlink" href="#creating-a-new-profile" title="Link to this heading">#</a></h2>
+<section id="step-1-define-profile-requirements">
+<h3>Step 1: Define Profile Requirements<a class="headerlink" href="#step-1-define-profile-requirements" title="Link to this heading">#</a></h3>
+<p>Before creating a profile, you need to understand:</p>
+<ol class="arabic simple">
+<li><p><strong>Target Environment</strong>: What simulation and or render environment will use this profile</p></li>
+<li><p><strong>Required Capabilities</strong>: What features need to be accounted for</p></li>
+<li><p><strong>Feature Dependencies</strong>: Which features are required vs. optional (see the <a class="reference internal" href="../../features/feature-dependency-graph.html"><span class="doc std std-doc">feature dependency graph</span></a> and <a class="reference internal" href="../../profiles/profiles.html"><span class="doc std std-doc">Asset Profiles</span></a> comparison table)</p></li>
+<li><p><strong>Version Compatibility</strong>: What versions of features are needed</p></li>
+</ol>
+</section>
+<section id="step-2-choose-a-profile-name">
+<h3>Step 2: Choose a Profile Name<a class="headerlink" href="#step-2-choose-a-profile-name" title="Link to this heading">#</a></h3>
+<p><strong>Naming Conventions:</strong></p>
+<ul class="simple">
+<li><p>Use descriptive names that indicate the target environment</p></li>
+<li><p>Use hyphens and title case for multi-word names</p></li>
+<li><p>Include the primary use case or environment</p></li>
+<li><p>Examples: <code class="docutils literal notranslate"><span class="pre">Prop-Robotics-Neutral</span></code>, <code class="docutils literal notranslate"><span class="pre">Prop-Robotics-Physx</span></code>, <code class="docutils literal notranslate"><span class="pre">Vehicle-Simulation</span></code></p></li>
+</ul>
+</section>
+<section id="step-3-create-the-profile-configuration">
+<h3>Step 3: Create the Profile Configuration<a class="headerlink" href="#step-3-create-the-profile-configuration" title="Link to this heading">#</a></h3>
+<p>Create a new profile entry in the <code class="docutils literal notranslate"><span class="pre">profiles.toml</span></code> file:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[Your-Profile-Name]</span>
+<span class="s2">&quot;1.0.0&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Minimal&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET003_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;RBD Physics&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET004_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Simulate Multi-Body Physics&quot;</span>
+<span class="w">    </span><span class="c1"># Add more features as needed</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+</section>
+<section id="step-4-validate-feature-availability">
+<h3>Step 4: Validate Feature Availability<a class="headerlink" href="#step-4-validate-feature-availability" title="Link to this heading">#</a></h3>
+<p>Ensure all referenced feature IDs and versions exist as JSON files under
+<code class="docutils literal notranslate"><span class="pre">nv_core/sr_specs/docs/features/</span></code>. Each feature variant+version has a
+corresponding file (e.g. <code class="docutils literal notranslate"><span class="pre">FET_003_base_physx-0.1.0-rigid_body_physics.json</span></code>).
+The <code class="docutils literal notranslate"><span class="pre">&quot;id&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;version&quot;</span></code> fields in the JSON must match what the profile
+references.</p>
+</section>
+<section id="step-5-test-profile-creation">
+<h3>Step 5: Test Profile Creation<a class="headerlink" href="#step-5-test-profile-creation" title="Link to this heading">#</a></h3>
+<p>Create a test asset and validate it against the new profile, see “SimReady - Feature Docs”:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>workspace<span class="w"> </span>validate<span class="w"> </span>&lt;path<span class="w"> </span>to<span class="w"> </span>usd<span class="w"> </span>asset&gt;
+</pre></div>
+</div>
+</section>
+<section id="step-6-create-documentation">
+<h3>Step 6: Create documentation<a class="headerlink" href="#step-6-create-documentation" title="Link to this heading">#</a></h3>
+<p>In <code class="docutils literal notranslate"><span class="pre">nv_core/sr_specs/docs/profiles/</span></code> each profile should have its own markdown file, that should also be referred to in <code class="docutils literal notranslate"><span class="pre">profiles.md</span></code>.</p>
+</section>
+</section>
+<section id="creating-a-new-profile-version">
+<h2>Creating a New Profile Version<a class="headerlink" href="#creating-a-new-profile-version" title="Link to this heading">#</a></h2>
+<section id="when-to-create-a-new-version">
+<h3>When to Create a New Version<a class="headerlink" href="#when-to-create-a-new-version" title="Link to this heading">#</a></h3>
+<p>Create a new profile version when:</p>
+<ul class="simple">
+<li><p><strong>Feature Updates</strong>: Required feature(s) have a new version</p></li>
+<li><p><strong>New Requirements</strong>: Additional features are needed</p></li>
+<li><p><strong>Breaking Changes</strong>: Existing features have incompatible changes</p></li>
+<li><p><strong>Environment Changes</strong>: Target simulation environment requirements change</p></li>
+</ul>
+</section>
+<section id="step-1-plan-the-version-update">
+<h3>Step 1: Plan the Version Update<a class="headerlink" href="#step-1-plan-the-version-update" title="Link to this heading">#</a></h3>
+<p><strong>Version Numbering:</strong></p>
+<ul class="simple">
+<li><p><strong>Major Version</strong> (X.0.0): Breaking changes, new features, incompatible updates</p></li>
+<li><p><strong>Minor Version</strong> (0.X.0): New features, backward compatible</p></li>
+<li><p><strong>Patch Version</strong> (0.0.X): Bug fixes, minor updates</p></li>
+</ul>
+</section>
+<section id="step-2-update-feature-versions">
+<h3>Step 2: Update Feature Versions<a class="headerlink" href="#step-2-update-feature-versions" title="Link to this heading">#</a></h3>
+<p>Identify which features need version updates:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[Prop-Robotics-Neutral]</span>
+<span class="s2">&quot;1.0.0&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Minimal&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET003_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;RBD Physics&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET004_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Simulate Multi-Body Physics&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET005_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Simulate Grasp Physics&quot;</span>
+<span class="p">]}</span>
+<span class="s2">&quot;2.0.0&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Minimal&quot; - UPDATED</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET003_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;RBD Physics&quot; - SAME</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET004_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Simulate Multi-Body Physics&quot; - SAME</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET005_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Simulate Grasp Physics&quot; - SAME</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+</section>
+<section id="step-3-add-new-version-to-profile">
+<h3>Step 3: Add New Version to Profile<a class="headerlink" href="#step-3-add-new-version-to-profile" title="Link to this heading">#</a></h3>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[Your-Profile-Name]</span>
+<span class="s2">&quot;1.0.0&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET002_MATERIAL_BASIC&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span>
+<span class="p">]}</span>
+<span class="s2">&quot;2.0.0&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># Updated feature version</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET002_MATERIAL_BASIC&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET100_ANIMATION_BASIC&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># New feature added</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+</section>
+<section id="step-4-document-version-changes">
+<h3>Step 4: Document Version Changes<a class="headerlink" href="#step-4-document-version-changes" title="Link to this heading">#</a></h3>
+<p>Create a changelog entry:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gu">## Profile Version 2.0.0</span>
+
+<span class="gu">### Changes</span>
+<span class="k">-</span><span class="w"> </span>Updated FET001_BASE_NEUTRAL from version 0.1.0 to 1.0.0
+<span class="k">-</span><span class="w"> </span>Added FET100_ANIMATION_BASIC version 0.1.0
+<span class="k">-</span><span class="w"> </span>Improved asset validation for animation properties
+
+<span class="gu">### Migration Notes</span>
+<span class="k">-</span><span class="w"> </span>Existing assets using version 1.0.0 will need feature adapter transformation
+<span class="k">-</span><span class="w"> </span>New animation features require additional asset properties
+</pre></div>
+</div>
+</section>
+<section id="step-5-upgrade-assets">
+<h3>Step 5: Upgrade assets<a class="headerlink" href="#step-5-upgrade-assets" title="Link to this heading">#</a></h3>
+<p>Its possible to “upgrade” assets that support a particular profile version to a new version, one way to achieve this is run “workspace upgrade” after creating the appropriate feature adapters, see the next section</p>
+</section>
+</section>
+<section id="creating-a-second-profile-and-required-adapters">
+<h2>Creating a Second Profile and Required Adapters<a class="headerlink" href="#creating-a-second-profile-and-required-adapters" title="Link to this heading">#</a></h2>
+<section id="step-1-identify-profile-differences">
+<h3>Step 1: Identify Profile Differences<a class="headerlink" href="#step-1-identify-profile-differences" title="Link to this heading">#</a></h3>
+<p>When creating a second profile, identify the differences from existing profiles:</p>
+<p><strong>Example: Prop-Robotics-Neutral vs Prop-Robotics-Physx</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Neutral Version</p></th>
+<th class="head"><p>Physx Version</p></th>
+<th class="head"><p>Difference</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FET001_BASE_NEUTRAL</p></td>
+<td><p>0.1.0</p></td>
+<td><p>0.1.0</p></td>
+<td><p>Same</p></td>
+</tr>
+<tr class="row-odd"><td><p>FET003_BASE_NEUTRAL</p></td>
+<td><p>0.1.0</p></td>
+<td><p>-</p></td>
+<td><p>Neutral physics</p></td>
+</tr>
+<tr class="row-even"><td><p>FET003_BASE_PHYSX</p></td>
+<td><p>-</p></td>
+<td><p>0.1.0</p></td>
+<td><p>PhysX physics</p></td>
+</tr>
+<tr class="row-odd"><td><p>FET004_BASE_NEUTRAL</p></td>
+<td><p>0.1.0</p></td>
+<td><p>-</p></td>
+<td><p>Neutral multi-body</p></td>
+</tr>
+<tr class="row-even"><td><p>FET004_BASE_PHYSX</p></td>
+<td><p>-</p></td>
+<td><p>0.1.0</p></td>
+<td><p>PhysX multi-body</p></td>
+</tr>
+<tr class="row-odd"><td><p>FET005_BASE_NEUTRAL</p></td>
+<td><p>0.1.0</p></td>
+<td><p>0.1.0</p></td>
+<td><p>Same</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="step-2-plan-required-feature-adapters">
+<h3>Step 2: Plan Required Feature Adapters<a class="headerlink" href="#step-2-plan-required-feature-adapters" title="Link to this heading">#</a></h3>
+<p>Based on the differences, identify required adapters:</p>
+<p><strong>Required Adapters:</strong></p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">FET003_BASE_NEUTRAL</span></code> → <code class="docutils literal notranslate"><span class="pre">FET003_BASE_PHYSX</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FET004_BASE_NEUTRAL</span></code> → <code class="docutils literal notranslate"><span class="pre">FET004_BASE_PHYSX</span></code></p></li>
+</ol>
+</section>
+<section id="step-4-implement-missing-adapters">
+<h3>Step 4: Implement Missing Adapters<a class="headerlink" href="#step-4-implement-missing-adapters" title="Link to this heading">#</a></h3>
+<p>If adapters don’t exist, please refer to &lt;feature_adapters&gt;</p>
+</section>
+<section id="step-5-test-profile-transformation">
+<h3>Step 5: Test Profile Transformation<a class="headerlink" href="#step-5-test-profile-transformation" title="Link to this heading">#</a></h3>
+<p>please refer to “SimReady - Feature Docs” “Feature: Convert” to learn how to convert assets:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>workspace<span class="w"> </span>upgrade<span class="w"> </span>--output_uri<span class="w"> </span><span class="o">[</span>output<span class="w"> </span>asset<span class="w"> </span>file<span class="w"> </span>path<span class="o">]</span>
+--output_profile<span class="w"> </span><span class="o">[</span>profile<span class="w"> </span>name<span class="o">]</span><span class="w"> </span>&lt;optional&gt;--output_profile_version<span class="w"> </span><span class="o">[</span>version<span class="w"> </span>number<span class="o">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h2>
+<section id="profile-design">
+<h3>1. <strong>Profile Design</strong><a class="headerlink" href="#profile-design" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Keep profiles focused</strong> on specific use cases or environments</p></li>
+<li><p><strong>Use descriptive names</strong> that clearly indicate the target environment</p></li>
+<li><p><strong>Minimize feature overlap</strong> between similar profiles</p></li>
+<li><p><strong>Document profile purposes</strong> and use cases</p></li>
+</ul>
+</section>
+<section id="version-management">
+<h3>2. <strong>Version Management</strong><a class="headerlink" href="#version-management" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Never modify existing versions</strong> - always create new versions</p></li>
+<li><p><strong>Use semantic versioning</strong> (major.minor.patch)</p></li>
+<li><p><strong>Document all changes</strong> in version changelogs</p></li>
+<li><p><strong>Maintain backward compatibility</strong> when possible</p></li>
+</ul>
+</section>
+<section id="feature-selection">
+<h3>3. <strong>Feature Selection</strong><a class="headerlink" href="#feature-selection" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Include only necessary features</strong> to avoid bloat</p></li>
+<li><p><strong>Consider feature dependencies</strong> and requirements</p></li>
+<li><p><strong>Test feature combinations</strong> for compatibility</p></li>
+<li><p><strong>Validate against real-world use cases</strong></p></li>
+</ul>
+</section>
+<section id="testing-and-validation">
+<h3>4. <strong>Testing and Validation</strong><a class="headerlink" href="#testing-and-validation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Create comprehensive test assets</strong> for each profile version</p></li>
+<li><p><strong>Test all transformation paths</strong> between profiles</p></li>
+<li><p><strong>Validate against real simulation environments</strong></p></li>
+<li><p><strong>Automate validation</strong> in CI/CD pipelines</p></li>
+</ul>
+</section>
+</section>
+<section id="getting-help">
+<h2>Getting Help<a class="headerlink" href="#getting-help" title="Link to this heading">#</a></h2>
+<p>If you need assistance creating or managing profiles:</p>
+<ol class="arabic simple">
+<li><p><strong>Review existing profiles</strong> for examples and patterns</p></li>
+<li><p><strong>Check feature documentation</strong> for available features and versions</p></li>
+<li><p><strong>Test with simple profiles</strong> before complex ones</p></li>
+<li><p><strong>Use validation tools</strong> to verify profile correctness</p></li>
+<li><p><strong>Ask the development team</strong> for guidance on complex profile designs</p></li>
+</ol>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>This comprehensive guide provides everything needed to understand and manage profiles in the SimReady Foundation system. Profiles are essential for ensuring asset compatibility across different simulation environments, and proper profile management is crucial for maintaining a robust and flexible asset pipeline.</p>
+<p>By following the guidelines in this document, you can create effective profiles that meet your simulation requirements while maintaining compatibility and enabling smooth asset transformations between different environments.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../feature_adapters/feature_adapters.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Feature Adapters Documentation Guide</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../runtime_testing/runtime_testing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Runtime Testing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-this-guide">About this guide</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-profile">What is a Profile?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-components">Key Components</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#profile-structure">Profile Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-profiles-work">How Profiles Work</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profile-examples">Profile Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-prop-robotics-neutral-profile">Example 1: Prop-Robotics-Neutral Profile</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-prop-robotics-physx-profile">Example 2: Prop-Robotics-Physx Profile</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-new-profile">Creating a New Profile</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-define-profile-requirements">Step 1: Define Profile Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-choose-a-profile-name">Step 2: Choose a Profile Name</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-create-the-profile-configuration">Step 3: Create the Profile Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-validate-feature-availability">Step 4: Validate Feature Availability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-test-profile-creation">Step 5: Test Profile Creation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-create-documentation">Step 6: Create documentation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-new-profile-version">Creating a New Profile Version</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-create-a-new-version">When to Create a New Version</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-plan-the-version-update">Step 1: Plan the Version Update</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-update-feature-versions">Step 2: Update Feature Versions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-add-new-version-to-profile">Step 3: Add New Version to Profile</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-document-version-changes">Step 4: Document Version Changes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-upgrade-assets">Step 5: Upgrade assets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-second-profile-and-required-adapters">Creating a Second Profile and Required Adapters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-identify-profile-differences">Step 1: Identify Profile Differences</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-plan-required-feature-adapters">Step 2: Plan Required Feature Adapters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-implement-missing-adapters">Step 4: Implement Missing Adapters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-test-profile-transformation">Step 5: Test Profile Transformation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#profile-design">1. <strong>Profile Design</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#version-management">2. <strong>Version Management</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-selection">3. <strong>Feature Selection</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-and-validation">4. <strong>Testing and Validation</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-help">Getting Help</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
