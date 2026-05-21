@@ -1,0 +1,20 @@
+name: OSRB License Risk Triage
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  triage:
+    uses: NVIDIA-Omniverse/sectools-skills/.github/workflows/osrb-triage.yml@v1
+    with:
+      product-name: simready-foundation
+      # Advisory-only during initial adoption: post the PR comment and Job
+      # Summary on every PR, but never block the merge. Remove this override
+      # (or set to 'true') once known high-risk deps are resolved.
+      gate-on-high: 'false'
