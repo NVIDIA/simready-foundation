@@ -1,0 +1,952 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SimReady Foundation &#8212; SimReady Foundation v2026.04.0</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/tags.css?v=f64b827a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+
+
+
+    <script src="../_static/documentation_options.js?v=cf553ac4"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=fd10adb8"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'guides/getting_started';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.18.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.04.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+
+    <link rel="canonical" href="https://nvidia.github.io/simready-foundation/2026.04.1/guides/getting_started.html" />
+    <link rel="icon" href="../_static/favicon.png"/>
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SimReady Validation Workflow" href="validate_workflow.html" />
+    <link rel="prev" title="End to End Guides" href="guides.html" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2026.04.0" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+
+
+  </head>
+
+  <body data-default-mode="">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="SimReady Foundation v2026.04.0 - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="SimReady Foundation v2026.04.0 - Home"/>
+  
+  
+    <p class="title logo__title">SimReady Foundation v2026.04.0</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-4"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-4"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-4"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-4">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="SimReady Foundation v2026.04.0 - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="SimReady Foundation v2026.04.0 - Home"/>
+  
+  
+    <p class="title logo__title">SimReady Foundation v2026.04.0</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-5"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-5"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-5"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-5">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-6"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-6"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-6"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-6">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="guides.html">Guides</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validate_workflow.html">SimReady Validation Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acceptance_workflow.html">SimReady Acceptance Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_adapters/feature_adapters.html">Feature Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiles/profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SimReady_learning_workflow.html">SimReady Learning Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="naming_conventions.html">Naming Conventions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="development.html">Development Workflows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="features_expansion_workflow.html">Features Expansion Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../capabilities/capabilities.html">Capabilities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/core/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/visualization/visualization.html">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/isaac_sim/isaac_sim.html">Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/physics_bodies/physics_bodies.html">Physics Bodies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/hierarchy/hierarchy.html">Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/nonvisual_sensors/nonvisual_sensors.html">Non-Visual Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/semantic_labels/capability-semantic_labels.html">Semantic Labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/packaging/packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/example/example.html">Example</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../features/features.html">Features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../features/feature-dependency-graph.html">Feature dependency graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_000-base_neutral-0.1.0-core.html">ID:000 - Core - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_001-minimal.html">ID:001 - Minimal - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_002-posable_bodies.html">ID:002 - Posable Bodies - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_003-rigid_body_physics.html">ID:003 - RBD Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_004-simulate_multi_body_physics.html">ID:004 - Simulate Multi-Body Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_005-simulate_grasp_physics.html">ID:005 - Simulate Grasp Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_006-materials.html">ID:006 - Materials - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_007-nonvisual_materials.html">ID:007 - Non-Visual Materials - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_011-semantic_labels.html">ID:011 - Semantic Labels - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_100-isaacsim-0.1.0-composition.html">ID:100 - IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_021-robot_core.html">ID:021 - Core Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_022-driven_joints.html">ID:022 - Driven Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_023-robot_materials.html">ID:023 - Robot Materials - Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_024-base_articulation.html">ID:024 - Base Articulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_030-packaging_core.html">ID:030 - Packaging Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_031-package_self_contained.html">ID:031 - Package Self Contained</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_032-packaging_introspection.html">ID:032 - Packaging Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_033-simready_packaging.html">ID:033 - SimReady Packaging</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../profiles/profiles.html">Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/prop-robotics-neutral.html">Prop Robotics Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/prop-robotics-physx.html">Prop Robotics Physx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/prop-robotics-isaac.html">Prop Robotics Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-body-neutral.html">Robot Body Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-body-runnable.html">Robot Body Runnable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-body-isaac.html">Robot Body Isaac</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../indexes/indexes.html">Indexes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../indexes/capability_status_index.html">Capability Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../indexes/requirements_index.html">Requirements Index</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="guides.html" class="nav-link">End to End Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">SimReady Foundation</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="simready-foundation">
+<h1>SimReady Foundation<a class="headerlink" href="#simready-foundation" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<section id="what-is-simready-foundation">
+<h3>What is SimReady Foundation?<a class="headerlink" href="#what-is-simready-foundation" title="Link to this heading">#</a></h3>
+<p>Training a robot to grasp objects, generating synthetic data for perception
+models, or building a digital twin of a warehouse all depend on the same thing:
+simulation-ready 3D content. Today that content is fragile — an asset authored
+for one physics engine often breaks in another, collision geometry is missing or
+inconsistent, and there is no reliable way to know whether a USD file will
+actually work before you load it into a simulator.</p>
+<p>SimReady Foundation fixes this. It is an open specification layer on top of
+OpenUSD that defines exactly what a simulation-ready asset must contain —
+physics colliders, materials, joint structures, semantic labels — and ships two
+frameworks to act on those definitions:</p>
+<ol class="arabic simple">
+<li><p><strong>Rules</strong> — machine-checkable validation rules that verify whether an asset
+satisfies each requirement. Run them before any simulator touches the file to
+catch missing colliders, bad joint hierarchies, or incorrect material
+bindings early.</p></li>
+<li><p><strong>Feature Adapters</strong> — a conversion framework that transforms an asset from
+one profile to another (e.g. Neutral → PhysX) by applying only the
+mutations needed for features that differ between the two profiles.</p></li>
+</ol>
+<p>Everything else in the foundation is specification: versioned <strong>features</strong> (each
+backed by concrete <strong>requirements</strong> and rules), <strong>capabilities</strong> (the USD
+properties each requirement checks), and <strong>profiles</strong> that compose features
+into a complete simulation scenario (e.g. <code class="docutils literal notranslate"><span class="pre">Prop-Robotics-PhysX</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Robot-Core</span></code>). The spec is modular and extensible — new domains such as
+deformable bodies, fluid interactions, or sensor models plug in as additional
+features without breaking existing ones.</p>
+</section>
+<section id="is-simready-foundation-useful-to-me">
+<h3>Is SimReady Foundation useful to me?<a class="headerlink" href="#is-simready-foundation-useful-to-me" title="Link to this heading">#</a></h3>
+<p>SimReady operates entirely on <strong>OpenUSD content</strong> — every rule inspects USD
+prims, attributes, and APIs; every feature adapter reads and writes USD stages;
+every profile describes a set of USD-native capabilities. If your workflow
+touches <code class="docutils literal notranslate"><span class="pre">.usd</span></code>, <code class="docutils literal notranslate"><span class="pre">.usda</span></code>, or <code class="docutils literal notranslate"><span class="pre">.usdc</span></code> files for simulation, the foundation
+applies.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>If you are a…</p></th>
+<th class="head"><p>SimReady helps you…</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Roboticist / Robot Software Engineer</strong></p></td>
+<td><p>Run validation rules against your OpenUSD assets to confirm correct <code class="docutils literal notranslate"><span class="pre">CollisionAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">RigidBodyAPI</span></code>, joint hierarchies, and mass properties before loading into a simulation application such as NVIDIA Isaac Sim — catch USD-level problems before runtime.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>3D Asset Creator / Technical Artist</strong></p></td>
+<td><p>Author OpenUSD content against a base profile, run rules to validate USD structure and material bindings, and use feature adapters to produce runtime-specific USD variants without manual rework.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>AI / Simulation Engineer (Synthetic Data, World Models)</strong></p></td>
+<td><p>Validate every USD asset in a pipeline with the rules framework so that composed USD stages for domain randomization and scene generation behave consistently at scale.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Pipeline / Integration Engineer</strong></p></td>
+<td><p>Structure CAD-to-OpenUSD conversion around SimReady features and run rule validation to guarantee that output USD files meet spec before entering production.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Researcher / Domain Specialist</strong></p></td>
+<td><p>Define new features and rules for emerging simulation domains and use them to evaluate whether OpenUSD content (or AI-generated USD output) meets the spec.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="core-specification-concepts">
+<h2>Core specification concepts<a class="headerlink" href="#core-specification-concepts" title="Link to this heading">#</a></h2>
+<p>SimReady Foundation is built on three concepts:</p>
+<ul class="simple">
+<li><p><strong>Capabilities</strong> define <em>what OpenUSD properties</em> an asset must have. A
+capability groups related requirements — each requirement has a unique ID
+(e.g. <code class="docutils literal notranslate"><span class="pre">RB.COL.001</span></code>) and a machine-checkable rule that inspects USD prims,
+attributes, or APIs (e.g. “every rigid shape must carry a <code class="docutils literal notranslate"><span class="pre">CollisionAPI</span></code>”).</p></li>
+<li><p><strong>Features</strong> define <em>what use case or behavior</em> an asset should produce in
+simulation (e.g. “rigid-body physics,” “grasp-ready colliders”). A feature
+lists the capability requirements it needs, giving every rule a traceable
+purpose. Features are versioned independently.</p></li>
+<li><p><strong>Profiles</strong> combine required features into a named, versioned set that
+represents a complete simulation scenario (e.g. <code class="docutils literal notranslate"><span class="pre">Prop-Robotics-PhysX</span></code>).
+Validating an asset against a profile checks every feature — and therefore
+every requirement and rule — in one pass.</p></li>
+</ul>
+<section id="why-is-the-foundation-structured-this-way">
+<h3>Why is the foundation structured this way?<a class="headerlink" href="#why-is-the-foundation-structured-this-way" title="Link to this heading">#</a></h3>
+<p>Simulation content has a natural layering problem. At the bottom you need to
+know <em>what USD properties an asset must carry</em>. In the middle you need to know
+<em>why</em> those properties matter — they serve a use case such as “this object can
+be grasped by a robot gripper.” At the top you need to know <em>which collection
+of use cases</em> a particular simulation scenario demands — a robotics prop scene
+requires physics, grasp support, and semantic labels, but not articulated
+joints.</p>
+<p>Without explicit layers these concerns blur together and assets silently break
+across pipelines. See each concept in depth:
+<a class="reference internal" href="features/features.html"><span class="std std-doc">Features</span></a> |
+<a class="reference internal" href="../capabilities/capabilities.html"><span class="std std-doc">Capabilities</span></a> |
+<a class="reference internal" href="profiles/profiles.html"><span class="std std-doc">Profiles</span></a></p>
+<p>Each layer references the one below it, so any failure traces to the exact USD
+property at fault — and new layers extend the spec without breaking existing
+profiles.</p>
+<p>To understand how new capabilities, features, and profiles move from an idea to
+an accepted part of the specification, see the
+<a class="reference internal" href="acceptance_workflow.html"><span class="std std-doc">SimReady Acceptance Workflow</span></a>.</p>
+</section>
+<section id="problems-simready-foundation-solves">
+<h3>Problems SimReady Foundation solves<a class="headerlink" href="#problems-simready-foundation-solves" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Problem</p></th>
+<th class="head"><p>Solution</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Validation fails with “asset invalid” — no way to trace <em>which</em> USD property is wrong.</p></td>
+<td><p>Profile → Feature → Requirement → Rule. Every failure traces to the exact USD property at fault.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Adding a new domain (e.g. deformable bodies) risks breaking unrelated profiles.</p></td>
+<td><p>New domains are added as new features. Existing profiles that do not reference them are unaffected.</p></td>
+</tr>
+<tr class="row-even"><td><p>Two runtimes need mostly the same asset but differ on one aspect (e.g. neutral colliders vs. PhysX SDF). Maintaining separate assets is impractical.</p></td>
+<td><p>Profiles share features and differ only where needed. Feature adapters convert the delta.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Updating a single rule forces a version bump on every profile that uses it.</p></td>
+<td><p>Capabilities, features, and profiles version independently. Update a rule without bumping profiles; pin a profile version for production.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="should-i-care-about-simready">
+<h2>Should I care about SimReady?<a class="headerlink" href="#should-i-care-about-simready" title="Link to this heading">#</a></h2>
+<p>Work through these five questions. Each answer tells you whether SimReady
+applies to your situation and exactly where to go next.</p>
+<hr class="docutils" />
+<section id="q1-do-you-work-with-3d-content-for-simulation">
+<h3>Q1 — Do you work with 3D content for simulation?<a class="headerlink" href="#q1-do-you-work-with-3d-content-for-simulation" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><em>This includes physics simulation, synthetic data generation, digital twins,
+robot training environments, or any workflow where 3D assets must behave
+correctly at runtime — not just look correct.</em></p>
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>Yes</strong> — continue to Q2.</p></li>
+<li><p><strong>No / Not sure</strong> — SimReady is specifically for simulation-ready OpenUSD
+content. If your work is purely visualization or rendering with no simulation
+requirements, the foundation may not apply today. You can still browse the
+<a class="reference internal" href="../capabilities/capabilities.html"><span class="std std-doc">capabilities</span></a> to see if upcoming
+domains are relevant.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="q2-what-format-are-your-assets-in-today">
+<h3>Q2 — What format are your assets in today?<a class="headerlink" href="#q2-what-format-are-your-assets-in-today" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Your situation</p></th>
+<th class="head"><p>What to do</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Already in OpenUSD</strong> (<code class="docutils literal notranslate"><span class="pre">.usd</span></code>, <code class="docutils literal notranslate"><span class="pre">.usda</span></code>, <code class="docutils literal notranslate"><span class="pre">.usdc</span></code>)</p></td>
+<td><p>You can validate immediately. Jump to Q3.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>URDF</strong> (common in robotics)</p></td>
+<td><p>Import into USD using the <a class="reference external" href="https://github.com/isaac-sim/urdf-importer-extension">URDF Importer Extension</a>. See the <a class="reference download internal" download="" href="../_downloads/f13e1cd42edec0ff38b50c545ba44a10/ur10.usda"><span class="xref download myst">UR10 sample</span></a> for the expected USD output, and <a class="reference internal" href="../capabilities/physics_bodies/physics_rigid_bodies/creators.html"><span class="std std-doc">rigid-body creators guide</span></a> for details. Convert first, then continue to Q3.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>MJCF</strong> (MuJoCo)</p></td>
+<td><p>See the <a class="reference download internal" download="" href="../_downloads/22541def0090b1c75ce3e82aa2a3b5e2/ur10.urdf"><span class="xref download myst">UR10 URDF source</span></a> alongside its <a class="reference download internal" download="" href="../_downloads/f13e1cd42edec0ff38b50c545ba44a10/ur10.usda"><span class="xref download myst">SimReady USD output</span></a> for the conversion pattern. Convert first, then continue to Q3.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>CAD (STEP, Fusion 360, etc.)</strong></p></td>
+<td><p>Export to OpenUSD via <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_cad-converter.html">Omniverse CAD Converter</a> or <a class="reference external" href="https://docs.blender.org/manual/en/latest/files/import_export/usd.html">Blender USD export</a>. See the <a class="reference internal" href="../capabilities/visualization/geometry/creators_overview.html"><span class="std std-doc">geometry creators guide</span></a> for supported CAD paths. Convert first, then continue to Q3.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Other formats</strong></p></td>
+<td><p>Convert to OpenUSD. The foundation validates USD content — the source format does not matter as long as the USD output is well-structured. Continue to Q3.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="q3-what-kind-of-asset-are-you-building">
+<h3>Q3 — What kind of asset are you building?<a class="headerlink" href="#q3-what-kind-of-asset-are-you-building" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Asset type</p></th>
+<th class="head"><p>Recommended profile</p></th>
+<th class="head"><p>What it covers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>A robot arm, mobile robot, or articulated agent</strong></p></td>
+<td><p><a class="reference internal" href="../profiles/robot-body-neutral.html"><span class="std std-doc">Robot-Body-Neutral</span></a> or <a class="reference internal" href="../profiles/robot-body-runnable.html"><span class="std std-doc">Robot-Body-Runnable</span></a></p></td>
+<td><p>Rigid-body physics, articulation, driven joints, base hierarchy. See the <a class="reference download internal" download="" href="../_downloads/f13e1cd42edec0ff38b50c545ba44a10/ur10.usda"><span class="xref download myst">UR10 sample</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>A prop or object in a robotics scene</strong> (box, shelf, tool, etc.)</p></td>
+<td><p><a class="reference internal" href="../profiles/prop-robotics-neutral.html"><span class="std std-doc">Prop-Robotics-Neutral</span></a> or <a class="reference internal" href="../profiles/prop-robotics-physx.html"><span class="std std-doc">Prop-Robotics-PhysX</span></a></p></td>
+<td><p>Rigid-body physics, multi-body simulation, grasp-ready colliders.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>A robot or prop targeting a specific runtime</strong> (e.g. NVIDIA Isaac Sim)</p></td>
+<td><p><a class="reference internal" href="../profiles/robot-body-isaac.html"><span class="std std-doc">Robot-Body-Isaac</span></a> or <a class="reference internal" href="../profiles/prop-robotics-isaac.html"><span class="std std-doc">Prop-Robotics-Isaac</span></a></p></td>
+<td><p>Everything above plus runtime-specific composition and adaptation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Something else</strong> (vehicle, deformable, environment)</p></td>
+<td><p>Start with the <a class="reference internal" href="../profiles/profiles.html"><span class="std std-doc">full profile list</span></a> to see if an existing profile fits. If not, the spec is extensible — see the <a class="reference internal" href="features/features.html"><span class="std std-doc">Features Guide</span></a> for how to define new features.</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="q4-what-do-you-need-to-do-with-the-asset">
+<h3>Q4 — What do you need to do with the asset?<a class="headerlink" href="#q4-what-do-you-need-to-do-with-the-asset" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Your goal</p></th>
+<th class="head"><p>Where to go</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Validate</strong> that an existing USD asset meets a profile</p></td>
+<td><p>SimReady learning workflow — includes setup, running the validator, and reading results.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Author</strong> a new asset from scratch</p></td>
+<td><p>Study the sample assets in <code class="docutils literal notranslate"><span class="pre">sample_content/common_assets/</span></code> for structure, then validate against your target profile.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Convert</strong> an asset from one profile to another (e.g. Neutral → PhysX)</p></td>
+<td><p><a class="reference internal" href="feature_adapters/feature_adapters.html"><span class="std std-doc">Feature Adapters Guide</span></a> — covers the adapter framework and the <code class="docutils literal notranslate"><span class="pre">workspace</span> <span class="pre">upgrade</span></code> command.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Extend</strong> the spec with new requirements or features</p></td>
+<td><p><a class="reference internal" href="SimReady_learning_workflow.html"><span class="std std-doc">SimReady Learning Workflow</span></a> — walks through adding a requirement, rule, and feature end-to-end.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Integrate</strong> SimReady validation into a pipeline or CI system</p></td>
+<td><p>Start with the <a class="reference internal" href="SimReady_learning_workflow.html"><span class="std std-doc">SimReady Learning Workflow</span></a> to understand the validator, then integrate the validation step into your build.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="q5-how-many-assets-or-runtimes-are-you-targeting">
+<h3>Q5 — How many assets or runtimes are you targeting?<a class="headerlink" href="#q5-how-many-assets-or-runtimes-are-you-targeting" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Your scale</p></th>
+<th class="head"><p>Why SimReady pays off</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Single asset, single runtime</strong></p></td>
+<td><p>Validation rules catch USD-level mistakes before you discover them in the simulator. Even for one asset, that saves debugging time.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Multiple assets, single runtime</strong></p></td>
+<td><p>Every asset validates against the same profile, so you get consistency across your scene or dataset without manual spot-checks.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Same assets, multiple runtimes</strong></p></td>
+<td><p>Author against a base (Neutral) profile and use feature adapters to produce runtime-specific variants. One source of truth, multiple outputs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Large-scale pipelines</strong> (synthetic data, world models)</p></td>
+<td><p>Pin a profile version for your production pipeline. New features or rules extend the spec without breaking your validated asset set.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<p><strong>Still not sure?</strong> Browse the <a class="reference internal" href="../profiles/profiles.html"><span class="std std-doc">full profile comparison</span></a>
+to see what the foundation covers today, or jump into the
+<a class="reference internal" href="SimReady_learning_workflow.html"><span class="std std-doc">SimReady Learning Workflow</span></a> to try it hands-on
+with the sample validator.</p>
+</section>
+</section>
+<section id="terminology-concepts">
+<h2>Terminology &amp; Concepts<a class="headerlink" href="#terminology-concepts" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Refer to the <a class="reference internal" href="guides.html"><span class="std std-doc">Guides</span></a>.</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="guides.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">End to End Guides</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="validate_workflow.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">SimReady Validation Workflow</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-simready-foundation">What is SimReady Foundation?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-simready-foundation-useful-to-me">Is SimReady Foundation useful to me?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-specification-concepts">Core specification concepts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-the-foundation-structured-this-way">Why is the foundation structured this way?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problems-simready-foundation-solves">Problems SimReady Foundation solves</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#should-i-care-about-simready">Should I care about SimReady?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q1-do-you-work-with-3d-content-for-simulation">Q1 — Do you work with 3D content for simulation?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q2-what-format-are-your-assets-in-today">Q2 — What format are your assets in today?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q3-what-kind-of-asset-are-you-building">Q3 — What kind of asset are you building?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q4-what-do-you-need-to-do-with-the-asset">Q4 — What do you need to do with the asset?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q5-how-many-assets-or-runtimes-are-you-targeting">Q5 — How many assets or runtimes are you targeting?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terminology-concepts">Terminology &amp; Concepts</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

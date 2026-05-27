@@ -1,0 +1,1451 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Feature: ID:004 - Simulate Multi-Body Physics - Base &#8212; SimReady Foundation v2026.04.0</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/tags.css?v=f64b827a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+
+
+
+    <script src="../_static/documentation_options.js?v=cf553ac4"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=fd10adb8"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = `pre.mermaid {
+    /* Same as .mermaid-container > pre */
+    display: block;
+    width: 100%;
+}
+
+pre.mermaid > svg {
+    /* Same as .mermaid-container > pre > svg */
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}`;
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = `.mermaid-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.mermaid-container > pre {
+    display: block;
+    width: 100%;
+}
+
+.mermaid-container > pre > svg {
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+
+.mermaid-fullscreen-btn {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    color: #333;
+}
+
+.mermaid-fullscreen-btn:hover {
+    opacity: 100% !important;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-btn.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-btn.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 95vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    z-index: 9999;
+    padding: 20px;
+    overflow: auto;
+}
+
+.mermaid-fullscreen-modal.dark-theme {
+    background: rgba(0, 0, 0, 0.98);
+}
+
+.mermaid-fullscreen-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen {
+    position: relative;
+    width: 95vw;
+    height: 90vh;
+    max-width: 95vw;
+    max-height: 90vh;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen.dark-theme {
+    background: #1a1a1a;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.mermaid-container-fullscreen pre.mermaid {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen .mermaid svg {
+    height: 100% !important;
+    width: 100% !important;
+    cursor: grab;
+}
+
+.mermaid-fullscreen-close {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+    font-size: 24px;
+    line-height: 1;
+    color: #333;
+}
+
+.mermaid-fullscreen-close:hover {
+    background: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-close.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-close.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal .mermaid-fullscreen-btn {
+    display: none !important;
+}`;
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        all_mermaids.forEach((el) => {
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+        await mermaid.run();
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    const mermaids_processed = document.querySelectorAll(".mermaid[data-processed='true']");
+
+    if ("False" === "True") {
+        const mermaids_to_add_zoom = -1 === -1 ? all_mermaids.length : -1;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("");
+            if(all_mermaids.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            } else if(svgs.size() !== mermaids_to_add_zoom) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            } else {
+                svgs.each(function() {
+                    var svg = d3.select(this);
+                    svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+                    var inner = svg.select("g");
+                    var zoom = d3.zoom().on("zoom", function(event) {
+                        inner.attr("transform", event.transform);
+                    });
+                    svg.call(zoom);
+                });
+            }
+        }
+    } else if(all_mermaids.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if ("True" !== "True") return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = '⛶';
+        fullscreenBtn.style.opacity = '50%';
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scroll, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.sdisplay = 'block';
+
+                if ("False" === "True") {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+const load = async () => {
+    initStyles();
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...JSON.parse(
+                    `{"startOnLoad": false}`
+                ),
+                ...{ darkMode: darkTheme, theme: darkTheme ? 'dark' : 'default' },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...JSON.parse(
+        `{"startOnLoad": false}`
+    ),
+    ...{ darkMode: darkTheme, theme: darkTheme ? 'dark' : 'default' },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'features/FET_004-simulate_multi_body_physics';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.18.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.04.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+
+    <link rel="canonical" href="https://nvidia.github.io/simready-foundation/2026.04.1/features/FET_004-simulate_multi_body_physics.html" />
+    <link rel="icon" href="../_static/favicon.png"/>
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Feature: ID:005 - Simulate Grasp Physics - Base" href="FET_005-simulate_grasp_physics.html" />
+    <link rel="prev" title="Feature: ID:003 - RBD Physics - Base" href="FET_003-rigid_body_physics.html" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2026.04.0" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+
+
+  </head>
+
+  <body data-default-mode="">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="SimReady Foundation v2026.04.0 - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="SimReady Foundation v2026.04.0 - Home"/>
+  
+  
+    <p class="title logo__title">SimReady Foundation v2026.04.0</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-4"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-4"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-4"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-4">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="SimReady Foundation v2026.04.0 - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="SimReady Foundation v2026.04.0 - Home"/>
+  
+  
+    <p class="title logo__title">SimReady Foundation v2026.04.0</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-5"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-5"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-5"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-5">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-6"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-6"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-6"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-6">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../guides/guides.html">Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/validate_workflow.html">SimReady Validation Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/acceptance_workflow.html">SimReady Acceptance Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/features/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/feature_adapters/feature_adapters.html">Feature Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/profiles/profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/SimReady_learning_workflow.html">SimReady Learning Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/naming_conventions.html">Naming Conventions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../guides/development.html">Development Workflows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/features_expansion_workflow.html">Features Expansion Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../capabilities/capabilities.html">Capabilities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/core/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/visualization/visualization.html">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/isaac_sim/isaac_sim.html">Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/physics_bodies/physics_bodies.html">Physics Bodies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/hierarchy/hierarchy.html">Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/nonvisual_sensors/nonvisual_sensors.html">Non-Visual Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/semantic_labels/capability-semantic_labels.html">Semantic Labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/packaging/packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/example/example.html">Example</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="features.html">Features</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="feature-dependency-graph.html">Feature dependency graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_000-base_neutral-0.1.0-core.html">ID:000 - Core - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_001-minimal.html">ID:001 - Minimal - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_002-posable_bodies.html">ID:002 - Posable Bodies - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_003-rigid_body_physics.html">ID:003 - RBD Physics - Base</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">ID:004 - Simulate Multi-Body Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_005-simulate_grasp_physics.html">ID:005 - Simulate Grasp Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_006-materials.html">ID:006 - Materials - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_007-nonvisual_materials.html">ID:007 - Non-Visual Materials - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_011-semantic_labels.html">ID:011 - Semantic Labels - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_100-isaacsim-0.1.0-composition.html">ID:100 - IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_021-robot_core.html">ID:021 - Core Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_022-driven_joints.html">ID:022 - Driven Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_023-robot_materials.html">ID:023 - Robot Materials - Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_024-base_articulation.html">ID:024 - Base Articulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_030-packaging_core.html">ID:030 - Packaging Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_031-package_self_contained.html">ID:031 - Package Self Contained</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_032-packaging_introspection.html">ID:032 - Packaging Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_033-simready_packaging.html">ID:033 - SimReady Packaging</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../profiles/profiles.html">Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/prop-robotics-neutral.html">Prop Robotics Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/prop-robotics-physx.html">Prop Robotics Physx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/prop-robotics-isaac.html">Prop Robotics Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-body-neutral.html">Robot Body Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-body-runnable.html">Robot Body Runnable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-body-isaac.html">Robot Body Isaac</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../indexes/indexes.html">Indexes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../indexes/capability_status_index.html">Capability Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../indexes/requirements_index.html">Requirements Index</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="features.html" class="nav-link">Features</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Feature: <code class="docutils literal notranslate"><span class="pre">ID:004</span> <span class="pre">-</span> <span class="pre">Simulate</span> <span class="pre">Multi-Body</span> <span class="pre">Physics</span> <span class="pre">-</span> <span class="pre">Base</span></code></span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="feature-id-004-simulate-multi-body-physics-base">
+<h1>Feature: <code class="docutils literal notranslate"><span class="pre">ID:004</span> <span class="pre">-</span> <span class="pre">Simulate</span> <span class="pre">Multi-Body</span> <span class="pre">Physics</span> <span class="pre">-</span> <span class="pre">Base</span></code><a class="headerlink" href="#feature-id-004-simulate-multi-body-physics-base" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Property</strong></p></th>
+<th class="head"><p><strong>Value</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Internal ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FET004_BASE_NEUTRAL</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading">#</a></h2>
+<p>Features needed to support Simulate Multi-Body physics. This feature enables simulation of physically accurate motion and collisions for props and dynamic assets that have multibody bodies that need to be joined or simulated together.  The enables real world “joints” to describe how two bodies work together. It is suitable for testing, validation, or reference applications where basic physical interactions are required.</p>
+</section>
+<section id="dependency-graph">
+<h2>Dependency Graph<a class="headerlink" href="#dependency-graph" title="Link to this heading">#</a></h2>
+<pre  class="mermaid">
+        flowchart LR
+    FET003N[&quot;FET003_BASE_NEUTRAL\n0.1.0&quot;]
+    FET004N[&quot;FET004_BASE_NEUTRAL\n0.1.0&quot;]
+    FET003P[&quot;FET003_BASE_PHYSX\n0.1.0&quot;]
+    FET004P[&quot;FET004_BASE_PHYSX\n0.1.0&quot;]
+    FET004RN[&quot;FET004_ROBOT_PHYSX\n0.1.0&quot;]
+    FET022N[&quot;FET022_DRIVEN_JOINTS_NEUTRAL\n0.1.0&quot;]
+    FET022P[&quot;FET022_DRIVEN_JOINTS_PHYSX\n0.1.0&quot;]
+
+    FET004N --&gt; FET003N
+    FET004P --&gt; FET003P
+    FET004P --&gt; FET004N
+    FET022N --&gt; FET004N
+    FET022P --&gt; FET004RN
+
+    classDef current fill:#90EE90,stroke:#333
+    classDef other fill:#fff,stroke:#333
+    class FET004N,FET004P,FET004RN current
+    class FET003N,FET003P,FET022N,FET022P other
+    </pre></section>
+<section id="use-cases">
+<h2>Use Cases<a class="headerlink" href="#use-cases" title="Link to this heading">#</a></h2>
+<p>Products that consume this feature:</p>
+<ul class="simple">
+<li><p>IsaacSim</p></li>
+<li><p>MEGA</p></li>
+<li><p>Lightwheel SOW1</p></li>
+</ul>
+</section>
+<section id="neutral-format">
+<h2>Neutral Format<a class="headerlink" href="#neutral-format" title="Link to this heading">#</a></h2>
+<section id="version-0-1-0">
+<h3>Version 0.1.0<a class="headerlink" href="#version-0-1-0" title="Link to this heading">#</a></h3>
+<details>
+<summary><strong>Details</strong></summary>
+<section id="used-in-profiles">
+<h4>Used in Profiles<a class="headerlink" href="#used-in-profiles" title="Link to this heading">#</a></h4>
+<p>This version is used in the following profiles:</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="../profiles/prop-robotics-neutral.html"><span class="std std-doc">Prop Robotics Neutral Profile</span></a></strong> (v0.1.0) - Used for multi-body dynamics with joint and articulation support</p></li>
+</ul>
+</section>
+<section id="requirements">
+<h4>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Property</strong></p></th>
+<th class="head"><p><strong>Value</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Dependency</p></td>
+<td><p><a class="reference internal" href="FET_003-rigid_body_physics.html#version-0-1-0"><span class="std std-ref">ID:003 - RBD Physics - Base - Neutral Format - v0.1.0</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p>Capability: <a class="reference internal" href="../capabilities/physics_bodies/physics_joints/capability-physics_joints.html"><span class="std std-doc">Physics-Bodies/Physics-Joints</span></a></p>
+<ul>
+<li><p>Requirements</p>
+<ul>
+<li><p><a class="reference internal" href="../capabilities/physics_bodies/physics_joints/requirements/joint-capability.html"><span class="std std-doc">Joint-Capability</span></a></p>
+<ul>
+<li><p>JT.001 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/5ff588ccad0d8ac91e833fd964de777e/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../capabilities/physics_bodies/physics_joints/requirements/articulation-no-nesting.html"><span class="std std-doc">Articulation-No-Nesting</span></a></p>
+<ul>
+<li><p>JT.ART.002 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/5ff588ccad0d8ac91e833fd964de777e/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../capabilities/physics_bodies/physics_joints/requirements/articulation-not-on-kinematic-body.html"><span class="std std-doc">Articulation-Not-On-Kinematic-Body</span></a></p>
+<ul>
+<li><p>JT.ART.003 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/5ff588ccad0d8ac91e833fd964de777e/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../capabilities/physics_bodies/physics_joints/requirements/articulation-not-on-static-body.html"><span class="std std-doc">Articulation-Not-On-Static-Body</span></a></p>
+<ul>
+<li><p>JT.ART.004 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/5ff588ccad0d8ac91e833fd964de777e/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../capabilities/physics_bodies/physics_joints/requirements/joint-body-target-exists.html"><span class="std std-doc">Joint-Body-Target-Exists</span></a></p>
+<ul>
+<li><p>JT.002 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/5ff588ccad0d8ac91e833fd964de777e/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../capabilities/physics_bodies/physics_joints/requirements/joint-no-multiple-body-targets.html"><span class="std std-doc">Joint-No-Multiple-Body-Targets</span></a></p>
+<ul>
+<li><p>JT.003 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/5ff588ccad0d8ac91e833fd964de777e/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Capability: <a class="reference internal" href="../capabilities/physics_bodies/physics_rigid_bodies/capability-physics_rigid_bodies.html"><span class="std std-doc">Physics_Bodies/Physics_Rigid_Bodies</span></a></p>
+<ul>
+<li><p>Requirements:</p>
+<ul>
+<li><p><a class="reference internal" href="../capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-multibody-capability.html"><span class="std std-doc">Multibody-Capability</span></a></p>
+<ul>
+<li><p>RB.MB.001 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/53c2c1c8bf6790f7ccbc0b67cffe83c8/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="pipelines-supported-for-this-feature">
+<h4>Pipelines Supported for this Feature<a class="headerlink" href="#pipelines-supported-for-this-feature" title="Link to this heading">#</a></h4>
+<p>Source file type:</p>
+<ul class="simple">
+<li><p>.blend</p>
+<ul>
+<li><p>Via Blender SimReady Add-ons</p></li>
+</ul>
+</li>
+<li><p>.mjcf</p>
+<ul>
+<li><p>Via Blender SimReady Add-ons + MJCF2USD Tool</p></li>
+</ul>
+</li>
+<li><p>.step</p>
+<ul>
+<li><p>Via Blender SimReady Add-ons + CAD Converter</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="multibody-rigidbody-samples-neutral">
+<h4>MultiBody | Rigidbody Samples (Neutral)<a class="headerlink" href="#multibody-rigidbody-samples-neutral" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/d1468bbc83c65068b56d8eea6a9a09d3/sm_obs_workbench_tool_a01_01.usd"><span class="xref download myst">simready_usd/sm_obs_workbench_tool_a01_01.usd</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/6cde9e9f66c5b2ab85761bf8cddf20a0/sm_obs_electricians_large_tool_box_a01_01.usd"><span class="xref download myst">simready_usd/sm_obs_electricians_large_tool_box_a01_01.usd</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/ecd22a8b02b80c47affcff259122460f/sm_obs_joystick_a01_01.usd"><span class="xref download myst">simready_usd/sm_obs_joystick_a01_01.usd</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/7d29217e0a2df58e95fcbe1c6484a167/sm_obs_lamp_revolute_a01_01.usd"><span class="xref download myst">simready_usd/sm_obs_lamp_revolute_a01_01.usd</span></a></p></li>
+</ul>
+</section>
+<section id="test-process">
+<h4>Test Process<a class="headerlink" href="#test-process" title="Link to this heading">#</a></h4>
+<p>None.</p>
+</details>
+</section>
+</section>
+</section>
+<section id="nvidia-physx-format">
+<h2>NVIDIA Physx Format<a class="headerlink" href="#nvidia-physx-format" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>Version 0.1.0<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<details>
+<summary><strong>Details</strong></summary>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Property</strong></p></th>
+<th class="head"><p><strong>Value</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Internal ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FET004_BASE_PHYSX</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Proprietary Techs</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Physx</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="id2">
+<h4>Used in Profiles<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<p>This version is used in the following profiles:</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="../profiles/prop-robotics-physx.html"><span class="std std-doc">Prop Robotics Physx Profile</span></a></strong> (v0.1.0) - Used for advanced multi-body dynamics with PhysX joint and articulation system</p></li>
+</ul>
+</section>
+<section id="id3">
+<h4>Requirements<a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Property</strong></p></th>
+<th class="head"><p><strong>Value</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Dependency</p></td>
+<td><p><a class="reference internal" href="FET_003-rigid_body_physics.html#id1"><span class="std std-ref">ID:003 - RBD Physics - Base - Nvidia Physx Format -  v0.1.0</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Dependency</p></td>
+<td><p><a class="reference internal" href="#neutral-format">ID:004 - Simulate Multi-Body Physics - Base - Neutral Format - v0.1.0</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>No additional requirements.</p>
+</section>
+<section id="id4">
+<h4>Pipelines Supported for this Feature<a class="headerlink" href="#id4" title="Link to this heading">#</a></h4>
+<p>Source file type:</p>
+<ul class="simple">
+<li><p>.usd</p>
+<ul>
+<li><p>Via CIP.</p></li>
+<li><p>Convert from Neutral Format - Version 0.1.0.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="multibody-rigidbody-samples-physx">
+<h4>MultiBody | Rigidbody Samples (Physx)<a class="headerlink" href="#multibody-rigidbody-samples-physx" title="Link to this heading">#</a></h4>
+</section>
+<section id="multibody-robot-rigidbody-samples-physx">
+<h4>MultiBody | Robot Rigidbody Samples (Physx)<a class="headerlink" href="#multibody-robot-rigidbody-samples-physx" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/07dddb8f428440cb912d13f975ec7342/sm_obs_workbench_tool_a01_01.usd"><span class="xref download myst">simready_physx_usd/sm_obs_workbench_tool_a01_01.usd</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/8e6ac76b21636c69613a3b9738fea67e/sm_obs_electricians_large_tool_box_a01_01.usd"><span class="xref download myst">simready_physx_usd/sm_obs_electricians_large_tool_box_a01_01.usd</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/3cd4829e68f295b61da8d47338404113/sm_obs_joystick_a01_01.usd"><span class="xref download myst">simready_physx_usd/sm_obs_joystick_a01_01.usd</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/b3b115c6017f7932c6dca8b64102718e/sm_obs_lamp_revolute_a01_01.usd"><span class="xref download myst">simready_physx_usd/sm_obs_lamp_revolute_a01_01.usd</span></a></p></li>
+</ul>
+</section>
+<section id="id5">
+<h4>Test Process<a class="headerlink" href="#id5" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Obtain Isaac Sim</p>
+<ul>
+<li><p>4.5 is public and can be downloaded <a class="reference external" href="https://docs.isaacsim.omniverse.nvidia.com/4.5.0/installation/download.html">here</a></p></li>
+<li><p>5.0 requires users to build on their systems, you can follow the docs <a class="reference external" href="https://docs.isaacsim.omniverse.nvidia.com/5.0.0/installation/download.html">here</a></p></li>
+</ul>
+</li>
+<li><p>Find directory where Isaac Sim was installed</p>
+<ul>
+<li><p>Launch isaacsim.bat</p></li>
+<li><p>In Isaac Sim, open this usd: <a class="reference internal" href="#../../../testing_tools/testing_data/runtime_physics_tests.usda"><span class="xref myst">test stage</span></a></p>
+<ul>
+<li><p>Can be manually located here: <code class="docutils literal notranslate"><span class="pre">nv_core/testing_tools/testing_data/runtime_physics_tests.usda</span></code></p></li>
+</ul>
+</li>
+<li><p>Activate correct prim (right click + activate)</p>
+<ul>
+<li><p>select on of these prims:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">/World/Drop_On_Ground_Plane</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/World/Drop_On_Tilted_Plane</span></code></p></li>
+</ul>
+</li>
+<li><p><img alt="image1" src="../_images/testing_stage_deactived_prims.png" /></p></li>
+<li><p>Right-click on selected prim for context menu and click “Activate”</p></li>
+<li><p><img alt="image2" src="../_images/testing_stage_right_click_and_activate.png" /></p></li>
+</ul>
+</li>
+<li><p>Drill down into activated hierarchy, there should be a prim called “StartPoint”</p>
+<ul>
+<li><p>or the direct prim path is: <code class="docutils literal notranslate"><span class="pre">/World/Drop_On_Ground_Plane/StartPoint</span></code></p></li>
+</ul>
+</li>
+<li><p>Select that prim</p></li>
+<li><p>Right-click, add reference to (path/to/asset/in_question.usd)</p></li>
+<li><p><img alt="image3" src="../_images/testing_stage_right_click_and_reference.png" /></p></li>
+</ul>
+</li>
+<li><p>Hit play button in UI.</p>
+<ul>
+<li><p>Press play to start sim</p></li>
+<li><p>Warnings will occur based on collider schema, this is expected</p></li>
+</ul>
+</li>
+<li><p>Expected result:</p>
+<ul>
+<li><p>item should fall down and stop and settle after 5 seconds.</p></li>
+<li><p>Joints should move as expected</p>
+<ul>
+<li><p>Jointed assets should not disconnect</p></li>
+<li><p>Item should be splayed out in some form</p></li>
+</ul>
+</li>
+<li><p>Video Examples:</p>
+<ul>
+<li><p><a class="reference download internal" download="" href="../_downloads/b58f4e78b7894500992d5b40aa4cfb51/multi_body_drop_test.mp4"><span class="xref download myst">Drop test results link</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/d7483b04ce4565ff48dcc6697f7563ec/multi_body_slope_test.mp4"><span class="xref download myst">Sloped Drop test results link</span></a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</details>
+</section>
+</section>
+</section>
+<section id="robot-physx-format-fet004-robot-physx">
+<h2>Robot PhysX Format (FET004_ROBOT_PHYSX)<a class="headerlink" href="#robot-physx-format-fet004-robot-physx" title="Link to this heading">#</a></h2>
+<p>This variant is used in <strong>Robot-Body</strong> profiles (e.g. Robot-Body-Physx, Robot-Body-Runnable, Robot-Body-Isaac) for multi-body robot physics with PhysX. It uses the same multi-body and joint requirements as the base PhysX format, but with a different set of collision requirements.</p>
+<section id="rb-col-001-exclusion">
+<h3>RB.COL.001 exclusion<a class="headerlink" href="#rb-col-001-exclusion" title="Link to this heading">#</a></h3>
+<p><strong>RB.COL.001</strong> (“Colliding Gprims must apply the Collision API”) is <strong>not</strong> enforced for FET004_ROBOT_PHYSX.</p>
+<ul class="simple">
+<li><p><strong>Reason:</strong> RB.COL.001 is too strict for Omniverse/Isaac Sim robot assets. In practice, <strong>nesting for CollisionAPI</strong> is allowed (e.g. collision shapes under non-Gprim hierarchy or applied in ways that RB.COL.001 would reject).</p></li>
+<li><p><strong>Effect:</strong> The Robot PhysX feature does <strong>not</strong> include RB.COL.001 in its requirement set. It does include <strong>RB.COL.002</strong>, <strong>RB.COL.003</strong>, and <strong>RB.COL.004</strong> (mesh collision API, collider mesh, uniform scale), plus the other rigid-body and joint requirements listed in the <a class="reference download internal" download="" href="../_downloads/7435d418eb97336fe4d39e723ae772fb/FET_004_robot_physx-0.1.0-simulate_multi_body_phyics.json"><span class="xref download myst">feature JSON</span></a>.</p></li>
+</ul>
+<p>When authoring or validating robot USDs for Robot-Body profiles, do not require RB.COL.001 compliance; the validator configuration for this feature omits it by design.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="FET_003-rigid_body_physics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Feature: <code class="docutils literal notranslate"><span class="pre">ID:003</span> <span class="pre">-</span> <span class="pre">RBD</span> <span class="pre">Physics</span> <span class="pre">-</span> <span class="pre">Base</span></code></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="FET_005-simulate_grasp_physics.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Feature: <code class="docutils literal notranslate"><span class="pre">ID:005</span> <span class="pre">-</span> <span class="pre">Simulate</span> <span class="pre">Grasp</span> <span class="pre">Physics</span> <span class="pre">-</span> <span class="pre">Base</span></code></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#description">Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependency-graph">Dependency Graph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-cases">Use Cases</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neutral-format">Neutral Format</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-1-0">Version 0.1.0</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#used-in-profiles">Used in Profiles</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pipelines-supported-for-this-feature">Pipelines Supported for this Feature</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multibody-rigidbody-samples-neutral">MultiBody | Rigidbody Samples (Neutral)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#test-process">Test Process</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nvidia-physx-format">NVIDIA Physx Format</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Version 0.1.0</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Used in Profiles</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Requirements</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Pipelines Supported for this Feature</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multibody-rigidbody-samples-physx">MultiBody | Rigidbody Samples (Physx)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multibody-robot-rigidbody-samples-physx">MultiBody | Robot Rigidbody Samples (Physx)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Test Process</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robot-physx-format-fet004-robot-physx">Robot PhysX Format (FET004_ROBOT_PHYSX)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rb-col-001-exclusion">RB.COL.001 exclusion</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

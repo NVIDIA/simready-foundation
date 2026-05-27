@@ -1,0 +1,1276 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Feature Adapters Documentation Guide &#8212; SimReady Foundation v2026.04.0</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tags.css?v=f64b827a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+
+
+
+    <script src="../../_static/documentation_options.js?v=cf553ac4"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=fd10adb8"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'guides/feature_adapters/feature_adapters';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.18.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.04.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+
+    <link rel="canonical" href="https://nvidia.github.io/simready-foundation/2026.04.1/guides/feature_adapters/feature_adapters.html" />
+    <link rel="icon" href="../../_static/favicon.png"/>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Profiles Documentation Guide" href="../profiles/profiles.html" />
+    <link rel="prev" title="Features Documentation Guide" href="../features/features.html" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2026.04.0" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+
+
+  </head>
+
+  <body data-default-mode="">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="SimReady Foundation v2026.04.0 - Home"/>
+    <img src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="SimReady Foundation v2026.04.0 - Home"/>
+  
+  
+    <p class="title logo__title">SimReady Foundation v2026.04.0</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-4"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-4"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-4"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-4">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="SimReady Foundation v2026.04.0 - Home"/>
+    <img src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="SimReady Foundation v2026.04.0 - Home"/>
+  
+  
+    <p class="title logo__title">SimReady Foundation v2026.04.0</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-5"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-5"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-5"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-5">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-6"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-6"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-6"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-6">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../guides.html">Guides</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validate_workflow.html">SimReady Validation Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../acceptance_workflow.html">SimReady Acceptance Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/features.html">Features</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Feature Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../SimReady_learning_workflow.html">SimReady Learning Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../naming_conventions.html">Naming Conventions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../development.html">Development Workflows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../features_expansion_workflow.html">Features Expansion Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../capabilities/capabilities.html">Capabilities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/core/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/visualization/visualization.html">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/isaac_sim/isaac_sim.html">Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/physics_bodies/physics_bodies.html">Physics Bodies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/hierarchy/hierarchy.html">Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_sensors.html">Non-Visual Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/semantic_labels/capability-semantic_labels.html">Semantic Labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/packaging/packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/example/example.html">Example</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../features/features.html">Features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../features/feature-dependency-graph.html">Feature dependency graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_000-base_neutral-0.1.0-core.html">ID:000 - Core - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_001-minimal.html">ID:001 - Minimal - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_002-posable_bodies.html">ID:002 - Posable Bodies - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_003-rigid_body_physics.html">ID:003 - RBD Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004-simulate_multi_body_physics.html">ID:004 - Simulate Multi-Body Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_005-simulate_grasp_physics.html">ID:005 - Simulate Grasp Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_006-materials.html">ID:006 - Materials - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_007-nonvisual_materials.html">ID:007 - Non-Visual Materials - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_011-semantic_labels.html">ID:011 - Semantic Labels - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_100-isaacsim-0.1.0-composition.html">ID:100 - IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_021-robot_core.html">ID:021 - Core Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_022-driven_joints.html">ID:022 - Driven Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_023-robot_materials.html">ID:023 - Robot Materials - Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_024-base_articulation.html">ID:024 - Base Articulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_030-packaging_core.html">ID:030 - Packaging Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_031-package_self_contained.html">ID:031 - Package Self Contained</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_032-packaging_introspection.html">ID:032 - Packaging Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_033-simready_packaging.html">ID:033 - SimReady Packaging</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../profiles/profiles.html">Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/prop-robotics-neutral.html">Prop Robotics Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/prop-robotics-physx.html">Prop Robotics Physx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/prop-robotics-isaac.html">Prop Robotics Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-body-neutral.html">Robot Body Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-body-runnable.html">Robot Body Runnable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-body-isaac.html">Robot Body Isaac</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../indexes/indexes.html">Indexes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../indexes/capability_status_index.html">Capability Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../indexes/requirements_index.html">Requirements Index</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../guides.html" class="nav-link">End to End Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Feature Adapters Documentation Guide</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="feature-adapters-documentation-guide">
+<h1>Feature Adapters Documentation Guide<a class="headerlink" href="#feature-adapters-documentation-guide" title="Link to this heading">#</a></h1>
+<section id="about-this-guide">
+<h2>About this guide<a class="headerlink" href="#about-this-guide" title="Link to this heading">#</a></h2>
+<p>This guide will walk you through the process of understanding, creating, and managing feature adapters in the SimReady Foundation system. Feature adapters are the mechanism that transforms assets from one profile to another by mutating their features.</p>
+</section>
+<section id="what-is-a-feature-adapter">
+<h2>What is a Feature Adapter?<a class="headerlink" href="#what-is-a-feature-adapter" title="Link to this heading">#</a></h2>
+<p>A <strong>Feature Adapter</strong> is a mechanism that mutates an asset with a particular profile into a new profile. For this to work, there must be a direct path for all the features that are different from profile A to profile B.</p>
+<section id="key-concepts">
+<h3>Key Concepts<a class="headerlink" href="#key-concepts" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Profile Transformation</strong>: Converts assets between different feature profiles</p></li>
+<li><p><strong>Feature Mutation</strong>: Modifies asset properties to meet new feature requirements</p></li>
+<li><p><strong>Direct Path Requirement</strong>: All feature differences must have defined transformation logic</p></li>
+<li><p><strong>Asset Handler Modules</strong>: Located in <code class="docutils literal notranslate"><span class="pre">simready-foundation/nv_core/cip_specs/asset_handler_modules</span></code></p></li>
+</ul>
+</section>
+<section id="how-feature-adapters-work">
+<h3>How Feature Adapters Work<a class="headerlink" href="#how-feature-adapters-work" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Input Profile</strong>: Asset starts with one set of features (e.g., <code class="docutils literal notranslate"><span class="pre">FET003_BASE_NEUTRAL</span></code>)</p></li>
+<li><p><strong>Transformation Logic</strong>: Adapter applies specific mutations to the asset</p></li>
+<li><p><strong>Output Profile</strong>: Asset now conforms to new features (e.g., <code class="docutils literal notranslate"><span class="pre">FET003_BASE_PHYSX</span></code>)</p></li>
+<li><p><strong>Validation</strong>: Asset can now be validated against the new feature set</p></li>
+</ol>
+</section>
+</section>
+<section id="feature-adapter-structure">
+<h2>Feature Adapter Structure<a class="headerlink" href="#feature-adapter-structure" title="Link to this heading">#</a></h2>
+<section id="core-components">
+<h3>Core Components<a class="headerlink" href="#core-components" title="Link to this heading">#</a></h3>
+<p>Each feature adapter consists of:</p>
+<ul class="simple">
+<li><p><strong>Decorator</strong>: <code class="docutils literal notranslate"><span class="pre">&#64;feature_adapter</span></code> with transformation metadata</p></li>
+<li><p><strong>Input/Output Mapping</strong>: Source and target feature specifications</p></li>
+<li><p><strong>Transformation Function</strong>: Logic that modifies the asset</p></li>
+<li><p><strong>Asset Handler Module</strong>: Location in the asset handler modules directory</p></li>
+</ul>
+</section>
+<section id="example-rigid-body-neutral-to-physx-adapter">
+<h3>Example: Rigid Body Neutral to PhysX Adapter<a class="headerlink" href="#example-rigid-body-neutral-to-physx-adapter" title="Link to this heading">#</a></h3>
+<p>Here’s a complete example of an existing feature adapter:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">Usd</span><span class="p">,</span> <span class="n">UsdGeom</span><span class="p">,</span> <span class="n">UsdPhysics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">omni.cip.configurable.feature_adapter</span><span class="w"> </span><span class="kn">import</span> <span class="n">feature_adapter</span>
+
+<span class="c1"># Add the root directory to the Python path</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
+
+<span class="nd">@feature_adapter</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;_rigid_body_neutral_to_physx_sample&quot;</span><span class="p">,</span>
+    <span class="n">input_feature_id</span><span class="o">=</span><span class="s2">&quot;FET003_BASE_NEUTRAL&quot;</span><span class="p">,</span>
+    <span class="n">input_feature_version</span><span class="o">=</span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+    <span class="n">output_feature_id</span><span class="o">=</span><span class="s2">&quot;FET003_BASE_PHYSX&quot;</span><span class="p">,</span>
+    <span class="n">output_feature_version</span><span class="o">=</span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">modify_stage</span><span class="p">(</span><span class="n">input_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">,</span> <span class="n">output_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">):</span>
+    <span class="c1"># compute extent for all meshes</span>
+    <span class="k">for</span> <span class="n">prim</span> <span class="ow">in</span> <span class="n">output_stage</span><span class="o">.</span><span class="n">Traverse</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">prim</span><span class="o">.</span><span class="n">IsA</span><span class="p">(</span><span class="n">UsdGeom</span><span class="o">.</span><span class="n">Mesh</span><span class="p">):</span>
+            <span class="n">boundable</span> <span class="o">=</span> <span class="n">UsdGeom</span><span class="o">.</span><span class="n">Boundable</span><span class="p">(</span><span class="n">prim</span><span class="p">)</span>
+            <span class="n">extent</span> <span class="o">=</span> <span class="n">UsdGeom</span><span class="o">.</span><span class="n">Boundable</span><span class="o">.</span><span class="n">ComputeExtentFromPlugins</span><span class="p">(</span><span class="n">boundable</span><span class="p">,</span> <span class="n">Usd</span><span class="o">.</span><span class="n">TimeCode</span><span class="o">.</span><span class="n">Default</span><span class="p">())</span>
+            <span class="n">boundable</span><span class="o">.</span><span class="n">GetExtentAttr</span><span class="p">()</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">extent</span><span class="p">)</span>
+
+    <span class="c1"># set collider approximation to SDF</span>
+    <span class="n">default_prim</span> <span class="o">=</span> <span class="n">output_stage</span><span class="o">.</span><span class="n">GetDefaultPrim</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">default_prim</span><span class="p">:</span>
+        <span class="n">_set_collider_approximation_to_sdf</span><span class="p">(</span><span class="n">default_prim</span><span class="p">)</span>
+        <span class="n">output_stage</span><span class="o">.</span><span class="n">Save</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_set_collider_approximation_to_sdf</span><span class="p">(</span><span class="n">prim</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Prim</span><span class="p">):</span>
+    <span class="c1"># Set the collider approximation to SDF</span>
+    <span class="c1"># TODO: add support for PhysxSchema.PhysxTriangleMeshCollisionAPI</span>
+    <span class="c1"># TODO: add support physxSDFMeshCollision:sdfResolution</span>
+    <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">Usd</span><span class="o">.</span><span class="n">PrimRange</span><span class="p">(</span><span class="n">prim</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">HasAPI</span><span class="p">(</span><span class="n">UsdPhysics</span><span class="o">.</span><span class="n">MeshCollisionAPI</span><span class="p">):</span>
+            <span class="n">collider</span> <span class="o">=</span> <span class="n">UsdPhysics</span><span class="o">.</span><span class="n">MeshCollisionAPI</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+            <span class="n">approx_attr</span> <span class="o">=</span> <span class="n">collider</span><span class="o">.</span><span class="n">GetApproximationAttr</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">approx_attr</span><span class="p">:</span>
+                <span class="n">approx_attr</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="s2">&quot;sdf&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">child</span><span class="o">.</span><span class="n">HasAPI</span><span class="p">(</span><span class="n">UsdPhysics</span><span class="o">.</span><span class="n">CollisionAPI</span><span class="p">):</span>
+            <span class="n">collider</span> <span class="o">=</span> <span class="n">UsdPhysics</span><span class="o">.</span><span class="n">MeshCollisionAPI</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+            <span class="n">approx_attr</span> <span class="o">=</span> <span class="n">child</span><span class="o">.</span><span class="n">GetAttribute</span><span class="p">(</span><span class="s2">&quot;physics:approximation&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">approx_attr</span><span class="p">:</span>
+                <span class="n">child</span><span class="o">.</span><span class="n">CreateAttribute</span><span class="p">(</span><span class="s2">&quot;physics:approximation&quot;</span><span class="p">,</span> <span class="n">Sdf</span><span class="o">.</span><span class="n">ValueTypeNames</span><span class="o">.</span><span class="n">Token</span><span class="p">,</span> <span class="s2">&quot;sdf&quot;</span><span class="p">)</span>
+                <span class="n">approx_attr</span> <span class="o">=</span> <span class="n">child</span><span class="o">.</span><span class="n">GetAttribute</span><span class="p">(</span><span class="s2">&quot;physics:approximation&quot;</span><span class="p">)</span>
+            <span class="n">approx_attr</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="s2">&quot;sdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="creating-a-new-feature-adapter">
+<h2>Creating a New Feature Adapter<a class="headerlink" href="#creating-a-new-feature-adapter" title="Link to this heading">#</a></h2>
+<section id="step-1-understand-the-feature-transformation">
+<h3>Step 1: Understand the Feature Transformation<a class="headerlink" href="#step-1-understand-the-feature-transformation" title="Link to this heading">#</a></h3>
+<p>Before creating an adapter, you need to understand:</p>
+<ol class="arabic simple">
+<li><p><strong>Source Feature</strong>: What features does the asset currently have?</p></li>
+<li><p><strong>Target Feature</strong>: What features should the asset have after transformation?</p></li>
+<li><p><strong>Differences</strong>: What specific changes are needed?</p></li>
+<li><p><strong>Dependencies</strong>: Are there any required libraries or APIs?</p></li>
+</ol>
+</section>
+<section id="step-2-create-the-adapter-file">
+<h3>Step 2: Create the Adapter File<a class="headerlink" href="#step-2-create-the-adapter-file" title="Link to this heading">#</a></h3>
+<p>Create a new Python file in the appropriate asset handler module directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">simready_foundation</span><span class="o">/</span><span class="n">nv_core</span><span class="o">/</span><span class="n">cip_specs</span><span class="o">/</span><span class="n">asset_handler_modules</span><span class="o">/</span><span class="p">[</span><span class="n">module_name</span><span class="p">]</span><span class="o">/</span>
+</pre></div>
+</div>
+<p><strong>File naming convention:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[feature_name]_[source]_to_[target].py</span></code></p></li>
+<li><p>Example: <code class="docutils literal notranslate"><span class="pre">rigid_body_neutral_to_physx.py</span></code></p></li>
+</ul>
+</section>
+<section id="step-3-implement-the-feature-adapter">
+<h3>Step 3: Implement the Feature Adapter<a class="headerlink" href="#step-3-implement-the-feature-adapter" title="Link to this heading">#</a></h3>
+<section id="basic-template">
+<h4>Basic Template<a class="headerlink" href="#basic-template" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">Usd</span><span class="p">,</span> <span class="n">UsdGeom</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">omni.cip.configurable.feature_adapter</span><span class="w"> </span><span class="kn">import</span> <span class="n">feature_adapter</span>
+
+<span class="c1"># Add the root directory to the Python path</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
+
+<span class="nd">@feature_adapter</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;[adapter_name]&quot;</span><span class="p">,</span>
+    <span class="n">input_feature_id</span><span class="o">=</span><span class="s2">&quot;[INPUT_FEATURE_ID]&quot;</span><span class="p">,</span>
+    <span class="n">input_feature_version</span><span class="o">=</span><span class="s2">&quot;[input_version]&quot;</span><span class="p">,</span>
+    <span class="n">output_feature_id</span><span class="o">=</span><span class="s2">&quot;[OUTPUT_FEATURE_ID]&quot;</span><span class="p">,</span>
+    <span class="n">output_feature_version</span><span class="o">=</span><span class="s2">&quot;[output_version]&quot;</span>
+<span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">modify_stage</span><span class="p">(</span><span class="n">input_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">,</span> <span class="n">output_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transform asset from input_feature_id to output_feature_id.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        input_stage: Source USD stage with input features</span>
+<span class="sd">        output_stage: Target USD stage to be modified</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement transformation logic</span>
+    <span class="k">pass</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_helper_function</span><span class="p">(</span><span class="n">prim</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Prim</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function for specific transformation tasks.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        prim: USD prim to modify</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement helper logic</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</section>
+<section id="complete-example-simple-material-adapter">
+<h4>Complete Example: Simple Material Adapter<a class="headerlink" href="#complete-example-simple-material-adapter" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">Usd</span><span class="p">,</span> <span class="n">UsdShade</span><span class="p">,</span> <span class="n">Sdf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">omni.cip.configurable.feature_adapter</span><span class="w"> </span><span class="kn">import</span> <span class="n">feature_adapter</span>
+
+<span class="c1"># Add the root directory to the Python path</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
+
+<span class="nd">@feature_adapter</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;minimal_to_material_basic&quot;</span><span class="p">,</span>
+    <span class="n">input_feature_id</span><span class="o">=</span><span class="s2">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">,</span>
+    <span class="n">input_feature_version</span><span class="o">=</span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+    <span class="n">output_feature_id</span><span class="o">=</span><span class="s2">&quot;FET002_MATERIAL_BASIC&quot;</span><span class="p">,</span>
+    <span class="n">output_feature_version</span><span class="o">=</span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">modify_stage</span><span class="p">(</span><span class="n">input_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">,</span> <span class="n">output_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transform asset from minimal features to basic material features.</span>
+<span class="sd">    Adds basic material properties to all mesh prims.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get the default prim</span>
+    <span class="n">default_prim</span> <span class="o">=</span> <span class="n">output_stage</span><span class="o">.</span><span class="n">GetDefaultPrim</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">default_prim</span><span class="p">:</span>
+        <span class="k">return</span>
+    
+    <span class="c1"># Add materials to all mesh prims</span>
+    <span class="n">_add_basic_materials_to_meshes</span><span class="p">(</span><span class="n">default_prim</span><span class="p">)</span>
+    
+    <span class="c1"># Save the modified stage</span>
+    <span class="n">output_stage</span><span class="o">.</span><span class="n">Save</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_add_basic_materials_to_meshes</span><span class="p">(</span><span class="n">prim</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Prim</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add basic material properties to mesh prims.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        prim: Root prim to traverse</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">Usd</span><span class="o">.</span><span class="n">PrimRange</span><span class="p">(</span><span class="n">prim</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">IsA</span><span class="p">(</span><span class="n">UsdGeom</span><span class="o">.</span><span class="n">Mesh</span><span class="p">):</span>
+            <span class="c1"># Create a basic material binding</span>
+            <span class="n">material_binding</span> <span class="o">=</span> <span class="n">UsdShade</span><span class="o">.</span><span class="n">MaterialBindingAPI</span><span class="o">.</span><span class="n">Apply</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+            
+            <span class="c1"># Create a simple material</span>
+            <span class="n">material_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">child</span><span class="o">.</span><span class="n">GetPath</span><span class="p">()</span><span class="si">}</span><span class="s2">/Material&quot;</span>
+            <span class="n">material</span> <span class="o">=</span> <span class="n">UsdShade</span><span class="o">.</span><span class="n">Material</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">GetStage</span><span class="p">(),</span> <span class="n">material_path</span><span class="p">)</span>
+            
+            <span class="c1"># Create a basic shader</span>
+            <span class="n">shader_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">material_path</span><span class="si">}</span><span class="s2">/Shader&quot;</span>
+            <span class="n">shader</span> <span class="o">=</span> <span class="n">UsdShade</span><span class="o">.</span><span class="n">Shader</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">GetStage</span><span class="p">(),</span> <span class="n">shader_path</span><span class="p">)</span>
+            <span class="n">shader</span><span class="o">.</span><span class="n">CreateIdAttr</span><span class="p">(</span><span class="s2">&quot;UsdPreviewSurface&quot;</span><span class="p">)</span>
+            
+            <span class="c1"># Connect shader to material</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">CreateSurfaceOutput</span><span class="p">()</span><span class="o">.</span><span class="n">ConnectToSource</span><span class="p">(</span><span class="n">shader</span><span class="o">.</span><span class="n">ConnectableAPI</span><span class="p">(),</span> <span class="s2">&quot;surface&quot;</span><span class="p">)</span>
+            
+            <span class="c1"># Bind material to mesh</span>
+            <span class="n">material_binding</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">material</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="step-4-define-the-adapter-metadata">
+<h3>Step 4: Define the Adapter Metadata<a class="headerlink" href="#step-4-define-the-adapter-metadata" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">&#64;feature_adapter</span></code> decorator requires specific parameters:</p>
+<section id="required-parameters">
+<h4>Required Parameters<a class="headerlink" href="#required-parameters" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>name</strong>: Unique identifier for the adapter</p></li>
+<li><p><strong>input_feature_id</strong>: Source feature ID (e.g., <code class="docutils literal notranslate"><span class="pre">FET001_BASE_NEUTRAL</span></code>)</p></li>
+<li><p><strong>input_feature_version</strong>: Source feature version (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;0.1.0&quot;</span></code>)</p></li>
+<li><p><strong>output_feature_id</strong>: Target feature ID (e.g., <code class="docutils literal notranslate"><span class="pre">FET002_MATERIAL_BASIC</span></code>)</p></li>
+<li><p><strong>output_feature_version</strong>: Target feature version (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;0.1.0&quot;</span></code>)</p></li>
+</ul>
+</section>
+<section id="naming-conventions">
+<h4>Naming Conventions<a class="headerlink" href="#naming-conventions" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Adapter Name</strong>: <code class="docutils literal notranslate"><span class="pre">[feature_type]_[source]_to_[target]</span></code></p></li>
+<li><p><strong>Feature IDs</strong>: Use the exact IDs from your feature definitions</p></li>
+<li><p><strong>Versions</strong>: Match the versions specified in your feature JSON files</p></li>
+</ul>
+</section>
+</section>
+<section id="step-5-implement-transformation-logic">
+<h3>Step 5: Implement Transformation Logic<a class="headerlink" href="#step-5-implement-transformation-logic" title="Link to this heading">#</a></h3>
+<section id="core-transformation-function">
+<h4>Core Transformation Function<a class="headerlink" href="#core-transformation-function" title="Link to this heading">#</a></h4>
+<p>The main function <code class="docutils literal notranslate"><span class="pre">modify_stage()</span></code> receives two USD stages:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">modify_stage</span><span class="p">(</span><span class="n">input_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">,</span> <span class="n">output_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function should:</span>
+<span class="sd">    1. Read from input_stage (if needed)</span>
+<span class="sd">    2. Modify output_stage to meet new feature requirements</span>
+<span class="sd">    3. Save output_stage when complete</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Read input stage properties</span>
+    <span class="n">input_props</span> <span class="o">=</span> <span class="n">_read_input_properties</span><span class="p">(</span><span class="n">input_stage</span><span class="p">)</span>
+    
+    <span class="c1"># Apply transformations to output stage</span>
+    <span class="n">_apply_transformations</span><span class="p">(</span><span class="n">output_stage</span><span class="p">,</span> <span class="n">input_props</span><span class="p">)</span>
+    
+    <span class="c1"># Save the modified output stage</span>
+    <span class="n">output_stage</span><span class="o">.</span><span class="n">Save</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="common-transformation-patterns">
+<h4>Common Transformation Patterns<a class="headerlink" href="#common-transformation-patterns" title="Link to this heading">#</a></h4>
+<section id="adding-properties">
+<h5>1. <strong>Adding Properties</strong><a class="headerlink" href="#adding-properties" title="Link to this heading">#</a></h5>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_add_property_to_prim</span><span class="p">(</span><span class="n">prim</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span> <span class="n">property_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add a new property to a prim.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">prim</span><span class="o">.</span><span class="n">HasAttribute</span><span class="p">(</span><span class="n">property_name</span><span class="p">):</span>
+        <span class="n">prim</span><span class="o">.</span><span class="n">CreateAttribute</span><span class="p">(</span><span class="n">property_name</span><span class="p">,</span> <span class="n">Sdf</span><span class="o">.</span><span class="n">ValueTypeNames</span><span class="o">.</span><span class="n">String</span><span class="p">,</span> <span class="s2">&quot;default_value&quot;</span><span class="p">)</span>
+    
+    <span class="n">attr</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">GetAttribute</span><span class="p">(</span><span class="n">property_name</span><span class="p">)</span>
+    <span class="n">attr</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="modifying-existing-properties">
+<h5>2. <strong>Modifying Existing Properties</strong><a class="headerlink" href="#modifying-existing-properties" title="Link to this heading">#</a></h5>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_modify_existing_property</span><span class="p">(</span><span class="n">prim</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span> <span class="n">property_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">new_value</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Modify an existing property on a prim.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">prim</span><span class="o">.</span><span class="n">HasAttribute</span><span class="p">(</span><span class="n">property_name</span><span class="p">):</span>
+        <span class="n">attr</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">GetAttribute</span><span class="p">(</span><span class="n">property_name</span><span class="p">)</span>
+        <span class="n">attr</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">new_value</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="adding-apis">
+<h5>3. <strong>Adding APIs</strong><a class="headerlink" href="#adding-apis" title="Link to this heading">#</a></h5>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_add_api_to_prim</span><span class="p">(</span><span class="n">prim</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span> <span class="n">api_class</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add an API to a prim.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">prim</span><span class="o">.</span><span class="n">HasAPI</span><span class="p">(</span><span class="n">api_class</span><span class="p">):</span>
+        <span class="n">api_class</span><span class="o">.</span><span class="n">Apply</span><span class="p">(</span><span class="n">prim</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="traversing-prims">
+<h5>4. <strong>Traversing Prims</strong><a class="headerlink" href="#traversing-prims" title="Link to this heading">#</a></h5>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_process_all_meshes</span><span class="p">(</span><span class="n">prim</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Prim</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Process all mesh prims in the hierarchy.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">Usd</span><span class="o">.</span><span class="n">PrimRange</span><span class="p">(</span><span class="n">prim</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">IsA</span><span class="p">(</span><span class="n">UsdGeom</span><span class="o">.</span><span class="n">Mesh</span><span class="p">):</span>
+            <span class="n">_process_single_mesh</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="step-6-testing-your-adapter">
+<h3>Step 6: Testing Your Adapter<a class="headerlink" href="#step-6-testing-your-adapter" title="Link to this heading">#</a></h3>
+<section id="manual-testing">
+<h4>Manual Testing<a class="headerlink" href="#manual-testing" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p><strong>Create test assets</strong> that conform to the input feature</p></li>
+<li><p><strong>Run the adapter</strong> on the test assets</p></li>
+<li><p><strong>Validate the output</strong> against the target feature requirements</p></li>
+<li><p><strong>Check for errors</strong> and edge cases</p></li>
+</ol>
+</section>
+<section id="automated-testing">
+<h4>Automated Testing<a class="headerlink" href="#automated-testing" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_adapter_transformation</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test the adapter transformation logic.&quot;&quot;&quot;</span>
+    <span class="c1"># Create test input stage</span>
+    <span class="n">input_stage</span> <span class="o">=</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="o">.</span><span class="n">CreateInMemory</span><span class="p">()</span>
+    
+    <span class="c1"># Create test output stage</span>
+    <span class="n">output_stage</span> <span class="o">=</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="o">.</span><span class="n">CreateInMemory</span><span class="p">()</span>
+    
+    <span class="c1"># Run the adapter</span>
+    <span class="n">modify_stage</span><span class="p">(</span><span class="n">input_stage</span><span class="p">,</span> <span class="n">output_stage</span><span class="p">)</span>
+    
+    <span class="c1"># Validate the transformation</span>
+    <span class="k">assert</span> <span class="n">_validate_transformation</span><span class="p">(</span><span class="n">output_stage</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="advanced-feature-adapter-patterns">
+<h2>Advanced Feature Adapter Patterns<a class="headerlink" href="#advanced-feature-adapter-patterns" title="Link to this heading">#</a></h2>
+<section id="conditional-transformations">
+<h3>1. <strong>Conditional Transformations</strong><a class="headerlink" href="#conditional-transformations" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">modify_stage</span><span class="p">(</span><span class="n">input_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">,</span> <span class="n">output_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">):</span>
+    <span class="c1"># Check if transformation is needed</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">_needs_transformation</span><span class="p">(</span><span class="n">input_stage</span><span class="p">):</span>
+        <span class="k">return</span>
+    
+    <span class="c1"># Apply conditional transformations</span>
+    <span class="k">if</span> <span class="n">_has_physics_properties</span><span class="p">(</span><span class="n">input_stage</span><span class="p">):</span>
+        <span class="n">_transform_physics_properties</span><span class="p">(</span><span class="n">output_stage</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">_has_material_properties</span><span class="p">(</span><span class="n">input_stage</span><span class="p">):</span>
+        <span class="n">_transform_material_properties</span><span class="p">(</span><span class="n">output_stage</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="batch-processing">
+<h3>2. <strong>Batch Processing</strong><a class="headerlink" href="#batch-processing" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">modify_stage</span><span class="p">(</span><span class="n">input_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">,</span> <span class="n">output_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">):</span>
+    <span class="c1"># Collect all prims that need transformation</span>
+    <span class="n">prims_to_transform</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">prim</span> <span class="ow">in</span> <span class="n">output_stage</span><span class="o">.</span><span class="n">Traverse</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">_should_transform</span><span class="p">(</span><span class="n">prim</span><span class="p">):</span>
+            <span class="n">prims_to_transform</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prim</span><span class="p">)</span>
+    
+    <span class="c1"># Process in batches for efficiency</span>
+    <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">_create_batches</span><span class="p">(</span><span class="n">prims_to_transform</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+        <span class="n">_process_batch</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="error-handling-and-logging">
+<h3>3. <strong>Error Handling and Logging</strong><a class="headerlink" href="#error-handling-and-logging" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">modify_stage</span><span class="p">(</span><span class="n">input_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">,</span> <span class="n">output_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Perform transformation</span>
+        <span class="n">_apply_transformations</span><span class="p">(</span><span class="n">output_stage</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Successfully transformed asset&quot;</span><span class="p">)</span>
+        
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to transform asset: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># Optionally, revert changes or provide fallback</span>
+        <span class="k">raise</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="common-use-cases">
+<h2>Common Use Cases<a class="headerlink" href="#common-use-cases" title="Link to this heading">#</a></h2>
+<section id="adding-physics-properties">
+<h3>1. <strong>Adding Physics Properties</strong><a class="headerlink" href="#adding-physics-properties" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_add_physics_properties</span><span class="p">(</span><span class="n">prim</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Prim</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add basic physics properties to a prim.&quot;&quot;&quot;</span>
+    <span class="c1"># Add collision API</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">prim</span><span class="o">.</span><span class="n">HasAPI</span><span class="p">(</span><span class="n">UsdPhysics</span><span class="o">.</span><span class="n">CollisionAPI</span><span class="p">):</span>
+        <span class="n">UsdPhysics</span><span class="o">.</span><span class="n">CollisionAPI</span><span class="o">.</span><span class="n">Apply</span><span class="p">(</span><span class="n">prim</span><span class="p">)</span>
+    
+    <span class="c1"># Add rigid body API</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">prim</span><span class="o">.</span><span class="n">HasAPI</span><span class="p">(</span><span class="n">UsdPhysics</span><span class="o">.</span><span class="n">RigidBodyAPI</span><span class="p">):</span>
+        <span class="n">UsdPhysics</span><span class="o">.</span><span class="n">RigidBodyAPI</span><span class="o">.</span><span class="n">Apply</span><span class="p">(</span><span class="n">prim</span><span class="p">)</span>
+    
+    <span class="c1"># Set mass</span>
+    <span class="n">rigid_body</span> <span class="o">=</span> <span class="n">UsdPhysics</span><span class="o">.</span><span class="n">RigidBodyAPI</span><span class="p">(</span><span class="n">prim</span><span class="p">)</span>
+    <span class="n">rigid_body</span><span class="o">.</span><span class="n">CreateMassAttr</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="adding-material-properties">
+<h3>2. <strong>Adding Material Properties</strong><a class="headerlink" href="#adding-material-properties" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_add_material_properties</span><span class="p">(</span><span class="n">prim</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Prim</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add basic material properties to a prim.&quot;&quot;&quot;</span>
+    <span class="c1"># Create material binding</span>
+    <span class="n">material_binding</span> <span class="o">=</span> <span class="n">UsdShade</span><span class="o">.</span><span class="n">MaterialBindingAPI</span><span class="o">.</span><span class="n">Apply</span><span class="p">(</span><span class="n">prim</span><span class="p">)</span>
+    
+    <span class="c1"># Create material</span>
+    <span class="n">material</span> <span class="o">=</span> <span class="n">_create_basic_material</span><span class="p">(</span><span class="n">prim</span><span class="o">.</span><span class="n">GetStage</span><span class="p">())</span>
+    
+    <span class="c1"># Bind material</span>
+    <span class="n">material_binding</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">material</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="adding-animation-properties">
+<h3>3. <strong>Adding Animation Properties</strong><a class="headerlink" href="#adding-animation-properties" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_add_animation_properties</span><span class="p">(</span><span class="n">prim</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Prim</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add animation properties to a prim.&quot;&quot;&quot;</span>
+    <span class="c1"># Add animation API</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">prim</span><span class="o">.</span><span class="n">HasAPI</span><span class="p">(</span><span class="n">UsdGeom</span><span class="o">.</span><span class="n">Xformable</span><span class="p">):</span>
+        <span class="n">UsdGeom</span><span class="o">.</span><span class="n">Xformable</span><span class="o">.</span><span class="n">Apply</span><span class="p">(</span><span class="n">prim</span><span class="p">)</span>
+    
+    <span class="c1"># Add animation attributes</span>
+    <span class="n">xformable</span> <span class="o">=</span> <span class="n">UsdGeom</span><span class="o">.</span><span class="n">Xformable</span><span class="p">(</span><span class="n">prim</span><span class="p">)</span>
+    <span class="n">xformable</span><span class="o">.</span><span class="n">CreateXformOpOrderAttr</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h2>
+<section id="performance-considerations">
+<h3>1. <strong>Performance Considerations</strong><a class="headerlink" href="#performance-considerations" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Batch operations</strong> when processing multiple prims</p></li>
+<li><p><strong>Avoid unnecessary API calls</strong> - check if APIs already exist</p></li>
+<li><p><strong>Use efficient traversal patterns</strong> for large hierarchies</p></li>
+<li><p><strong>Minimize stage saves</strong> - save once at the end</p></li>
+</ul>
+</section>
+<section id="error-handling">
+<h3>2. <strong>Error Handling</strong><a class="headerlink" href="#error-handling" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Validate inputs</strong> before processing</p></li>
+<li><p><strong>Handle edge cases</strong> gracefully</p></li>
+<li><p><strong>Provide meaningful error messages</strong></p></li>
+<li><p><strong>Log important operations</strong> for debugging</p></li>
+</ul>
+</section>
+<section id="code-organization">
+<h3>3. <strong>Code Organization</strong><a class="headerlink" href="#code-organization" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Separate concerns</strong> into helper functions</p></li>
+<li><p><strong>Use descriptive function names</strong></p></li>
+<li><p><strong>Add comprehensive documentation</strong></p></li>
+<li><p><strong>Follow consistent coding style</strong></p></li>
+</ul>
+</section>
+<section id="testing-and-validation">
+<h3>4. <strong>Testing and Validation</strong><a class="headerlink" href="#testing-and-validation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Test with various asset types</strong></p></li>
+<li><p><strong>Validate output against feature requirements</strong></p></li>
+<li><p><strong>Test error conditions</strong> and edge cases</p></li>
+<li><p><strong>Performance test</strong> with large assets</p></li>
+</ul>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<section id="common-issues">
+<h3>Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading">#</a></h3>
+<section id="import-errors">
+<h4>1. <strong>Import Errors</strong><a class="headerlink" href="#import-errors" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Problem: Cannot import required modules</span>
+<span class="c1"># Solution: Ensure proper path setup</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="api-not-found">
+<h4>2. <strong>API Not Found</strong><a class="headerlink" href="#api-not-found" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Problem: API class not available</span>
+<span class="c1"># Solution: Check imports and USD version compatibility</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">UsdPhysics</span>  <span class="c1"># Ensure this import works</span>
+</pre></div>
+</div>
+</section>
+<section id="stage-not-saving">
+<h4>3. <strong>Stage Not Saving</strong><a class="headerlink" href="#stage-not-saving" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Problem: Changes not persisting</span>
+<span class="c1"># Solution: Call output_stage.Save() at the end</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">modify_stage</span><span class="p">(</span><span class="n">input_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">,</span> <span class="n">output_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">):</span>
+    <span class="c1"># ... transformation logic ...</span>
+    <span class="n">output_stage</span><span class="o">.</span><span class="n">Save</span><span class="p">()</span>  <span class="c1"># Don&#39;t forget this!</span>
+</pre></div>
+</div>
+</section>
+<section id="performance-issues">
+<h4>4. <strong>Performance Issues</strong><a class="headerlink" href="#performance-issues" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Problem: Adapter runs slowly on large assets</span>
+<span class="c1"># Solution: Use batch processing and efficient traversal</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_efficient_traversal</span><span class="p">(</span><span class="n">prim</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Prim</span><span class="p">):</span>
+    <span class="c1"># Use Usd.PrimRange for efficient traversal</span>
+    <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">Usd</span><span class="o">.</span><span class="n">PrimRange</span><span class="p">(</span><span class="n">prim</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">IsA</span><span class="p">(</span><span class="n">UsdGeom</span><span class="o">.</span><span class="n">Mesh</span><span class="p">):</span>  <span class="c1"># Filter early</span>
+            <span class="n">_process_mesh</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="getting-help">
+<h2>Getting Help<a class="headerlink" href="#getting-help" title="Link to this heading">#</a></h2>
+<p>If you need assistance creating or debugging feature adapters:</p>
+<ol class="arabic simple">
+<li><p><strong>Review existing adapters</strong> for examples and patterns</p></li>
+<li><p><strong>Check USD documentation</strong> for API usage</p></li>
+<li><p><strong>Test with simple assets</strong> before complex ones</p></li>
+<li><p><strong>Use logging</strong> to debug transformation issues</p></li>
+<li><p><strong>Ask the development team</strong> for guidance on complex transformations</p></li>
+</ol>
+</section>
+<section id="id1">
+<h2><a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>This comprehensive guide provides everything needed to understand and create feature adapters, including the complete example from the existing code, step-by-step creation process, best practices, and troubleshooting guidance. It follows the same structure and formatting as the other guides while focusing specifically on the feature adapter functionality.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../features/features.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Features Documentation Guide</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../profiles/profiles.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Profiles Documentation Guide</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-this-guide">About this guide</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-feature-adapter">What is a Feature Adapter?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-concepts">Key Concepts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-feature-adapters-work">How Feature Adapters Work</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-adapter-structure">Feature Adapter Structure</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core-components">Core Components</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-rigid-body-neutral-to-physx-adapter">Example: Rigid Body Neutral to PhysX Adapter</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-new-feature-adapter">Creating a New Feature Adapter</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-understand-the-feature-transformation">Step 1: Understand the Feature Transformation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-create-the-adapter-file">Step 2: Create the Adapter File</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-implement-the-feature-adapter">Step 3: Implement the Feature Adapter</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-template">Basic Template</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-example-simple-material-adapter">Complete Example: Simple Material Adapter</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-define-the-adapter-metadata">Step 4: Define the Adapter Metadata</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#required-parameters">Required Parameters</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#naming-conventions">Naming Conventions</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-implement-transformation-logic">Step 5: Implement Transformation Logic</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#core-transformation-function">Core Transformation Function</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#common-transformation-patterns">Common Transformation Patterns</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-properties">1. <strong>Adding Properties</strong></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-existing-properties">2. <strong>Modifying Existing Properties</strong></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-apis">3. <strong>Adding APIs</strong></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#traversing-prims">4. <strong>Traversing Prims</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-testing-your-adapter">Step 6: Testing Your Adapter</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-testing">Manual Testing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#automated-testing">Automated Testing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-feature-adapter-patterns">Advanced Feature Adapter Patterns</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-transformations">1. <strong>Conditional Transformations</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-processing">2. <strong>Batch Processing</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling-and-logging">3. <strong>Error Handling and Logging</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-use-cases">Common Use Cases</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-physics-properties">1. <strong>Adding Physics Properties</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-material-properties">2. <strong>Adding Material Properties</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-animation-properties">3. <strong>Adding Animation Properties</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-considerations">1. <strong>Performance Considerations</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">2. <strong>Error Handling</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-organization">3. <strong>Code Organization</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-and-validation">4. <strong>Testing and Validation</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-issues">Common Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#import-errors">1. <strong>Import Errors</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#api-not-found">2. <strong>API Not Found</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#stage-not-saving">3. <strong>Stage Not Saving</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-issues">4. <strong>Performance Issues</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-help">Getting Help</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

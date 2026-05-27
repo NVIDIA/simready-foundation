@@ -1,0 +1,873 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Runtime Tests Overview and CLI &#8212; SimReady Foundation v2026.04.0</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tags.css?v=f64b827a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+
+
+
+    <script src="../../_static/documentation_options.js?v=cf553ac4"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=fd10adb8"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'guides/runtime_testing/runtime_tests_overview';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.18.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.04.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+
+    <link rel="canonical" href="https://nvidia.github.io/simready-foundation/2026.04.1/guides/runtime_testing/runtime_tests_overview.html" />
+    <link rel="icon" href="../../_static/favicon.png"/>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2026.04.0" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+
+
+  </head>
+
+  <body data-default-mode="">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="SimReady Foundation v2026.04.0 - Home"/>
+    <img src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="SimReady Foundation v2026.04.0 - Home"/>
+  
+  
+    <p class="title logo__title">SimReady Foundation v2026.04.0</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-4"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-4"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-4"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-4">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="SimReady Foundation v2026.04.0 - Home"/>
+    <img src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="SimReady Foundation v2026.04.0 - Home"/>
+  
+  
+    <p class="title logo__title">SimReady Foundation v2026.04.0</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-5"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-5"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-5"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-5">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-6"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-6"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-6"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-6">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../guides.html">Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validate_workflow.html">SimReady Validation Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../acceptance_workflow.html">SimReady Acceptance Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../feature_adapters/feature_adapters.html">Feature Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../SimReady_learning_workflow.html">SimReady Learning Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../naming_conventions.html">Naming Conventions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../development.html">Development Workflows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../features_expansion_workflow.html">Features Expansion Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../capabilities/capabilities.html">Capabilities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/core/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/visualization/visualization.html">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/isaac_sim/isaac_sim.html">Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/physics_bodies/physics_bodies.html">Physics Bodies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/hierarchy/hierarchy.html">Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_sensors.html">Non-Visual Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/semantic_labels/capability-semantic_labels.html">Semantic Labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/packaging/packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/example/example.html">Example</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../features/features.html">Features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../features/feature-dependency-graph.html">Feature dependency graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_000-base_neutral-0.1.0-core.html">ID:000 - Core - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_001-minimal.html">ID:001 - Minimal - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_002-posable_bodies.html">ID:002 - Posable Bodies - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_003-rigid_body_physics.html">ID:003 - RBD Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004-simulate_multi_body_physics.html">ID:004 - Simulate Multi-Body Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_005-simulate_grasp_physics.html">ID:005 - Simulate Grasp Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_006-materials.html">ID:006 - Materials - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_007-nonvisual_materials.html">ID:007 - Non-Visual Materials - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_011-semantic_labels.html">ID:011 - Semantic Labels - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_100-isaacsim-0.1.0-composition.html">ID:100 - IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_021-robot_core.html">ID:021 - Core Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_022-driven_joints.html">ID:022 - Driven Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_023-robot_materials.html">ID:023 - Robot Materials - Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_024-base_articulation.html">ID:024 - Base Articulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_030-packaging_core.html">ID:030 - Packaging Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_031-package_self_contained.html">ID:031 - Package Self Contained</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_032-packaging_introspection.html">ID:032 - Packaging Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_033-simready_packaging.html">ID:033 - SimReady Packaging</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../profiles/profiles.html">Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/prop-robotics-neutral.html">Prop Robotics Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/prop-robotics-physx.html">Prop Robotics Physx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/prop-robotics-isaac.html">Prop Robotics Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-body-neutral.html">Robot Body Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-body-runnable.html">Robot Body Runnable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-body-isaac.html">Robot Body Isaac</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../indexes/indexes.html">Indexes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../indexes/capability_status_index.html">Capability Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../indexes/requirements_index.html">Requirements Index</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Runtime Tests Overview and CLI</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="runtime-tests-overview-and-cli">
+<h1>Runtime Tests Overview and CLI<a class="headerlink" href="#runtime-tests-overview-and-cli" title="Link to this heading">#</a></h1>
+<p>A three-stage pipeline discovers assets, generates batch jobs, runs tests, and builds reports. Preferred entrypoint inside Kit: <code class="docutils literal notranslate"><span class="pre">workspace</span> <span class="pre">runtime_tests</span></code>.</p>
+<ul class="simple">
+<li><p>batch_maker.py: Discovers assets via search functions and test definitions; writes job JSON under <code class="docutils literal notranslate"><span class="pre">_testing/batch_jobs/</span></code>.</p></li>
+<li><p>job_runner.py: Executes jobs; writes results under <code class="docutils literal notranslate"><span class="pre">_testing/job_outputs/</span></code> (XML, images, logs, artifacts).</p></li>
+<li><p>report_generator.py: Builds <code class="docutils literal notranslate"><span class="pre">test_results.json</span></code>, <code class="docutils literal notranslate"><span class="pre">report/test_results_index.json</span></code>, and <code class="docutils literal notranslate"><span class="pre">index.html</span></code> in <code class="docutils literal notranslate"><span class="pre">_testing/</span></code>.</p></li>
+</ul>
+<p>All three are wrapped by <code class="docutils literal notranslate"><span class="pre">omni.simready.workspace_commands.runtime_tests</span></code> for in-Kit invocation.</p>
+<section id="quickstart">
+<h2>Quickstart<a class="headerlink" href="#quickstart" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Ensure your SimReady project root is configured in WorkspaceConfiguration.</p></li>
+<li><p>Ensure <code class="docutils literal notranslate"><span class="pre">local_run/runners_info.toml</span></code> contains a Kit runner.</p></li>
+<li><p>Generate jobs, run, and report:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">workspace</span> <span class="n">runtime_tests</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Open the report:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">project_root</span><span class="p">}</span><span class="o">/</span><span class="n">_testing</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">html</span>
+</pre></div>
+</div>
+</section>
+<section id="why-use-runtime-tests">
+<h2>Why use runtime tests?<a class="headerlink" href="#why-use-runtime-tests" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Pre-check-in validation: Verify assets meet capability/profile expectations before committing (screenshots, metrics, pass/fail).</p></li>
+<li><p>Repeatable coverage: Run consistent searches over large libraries to validate many assets across engines/platforms.</p></li>
+<li><p>CI-ready outputs: Structured job files, XML results, and deterministic HTML/JSON reports.</p></li>
+<li><p>Fast iteration loop: Filter by modified assets, re-run only affected jobs, keep outputs for diffs.</p></li>
+</ul>
+<p>Typical workflows:</p>
+<ul class="simple">
+<li><p>Before check-in: run full workflow, spot-check the HTML, fix issues, re-run quickly.</p></li>
+<li><p>Feature/profile changes: adjust test definitions or search filters, regenerate jobs, compare reports.</p></li>
+<li><p>Engine updates: re-run existing jobs across updated engines/runners to catch regressions.</p></li>
+</ul>
+</section>
+<section id="end-to-end-usage-preferred">
+<h2>End-to-end usage (preferred)<a class="headerlink" href="#end-to-end-usage-preferred" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Full workflow:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">workspace</span> <span class="n">runtime_tests</span> <span class="p">[</span><span class="o">--</span><span class="n">modified</span><span class="o">-</span><span class="n">assets</span><span class="o">-</span><span class="nb">list</span> <span class="n">FILE</span><span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Sub-commands:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">workspace</span> <span class="n">runtime_tests</span> <span class="n">batch_maker</span> <span class="p">[</span><span class="n">ARGS</span><span class="p">]</span>
+<span class="n">workspace</span> <span class="n">runtime_tests</span> <span class="n">job_runner</span> <span class="p">[</span><span class="n">ARGS</span><span class="p">]</span>
+<span class="n">workspace</span> <span class="n">runtime_tests</span> <span class="n">report_generator</span> <span class="p">[</span><span class="n">ARGS</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Note: <code class="docutils literal notranslate"><span class="pre">help</span></code>, <code class="docutils literal notranslate"><span class="pre">?</span></code>, <code class="docutils literal notranslate"><span class="pre">-?</span></code>, or <code class="docutils literal notranslate"><span class="pre">/?</span></code> are mapped to <code class="docutils literal notranslate"><span class="pre">--help</span></code> for subcommands.</p>
+</section>
+<section id="cli-reference">
+<h2>CLI reference<a class="headerlink" href="#cli-reference" title="Link to this heading">#</a></h2>
+<section id="batch-maker-py">
+<h3>batch_maker.py<a class="headerlink" href="#batch-maker-py" title="Link to this heading">#</a></h3>
+<p>Generates job JSON files. When used via workspace, <code class="docutils literal notranslate"><span class="pre">--search-library-path</span></code> is auto-injected if discoverable; for direct CLI it is required.</p>
+<p>Path specification (choose exactly one method):</p>
+<ul class="simple">
+<li><p>Method 1 (single pathset):</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">--search-functions-dir</span> <span class="pre">PATH</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--test-definitions-dir</span> <span class="pre">PATH</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--project-config-file</span> <span class="pre">PATH</span></code></p></li>
+</ul>
+</li>
+<li><p>Method 2 (multiple pathsets):</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">--pathsets-json</span> <span class="pre">JSON_ARRAY</span></code></p></li>
+</ul>
+</li>
+<li><p>Method 3 (auto-derive from project root):</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">--project-root</span> <span class="pre">PATH</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>Other options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--runner-info</span> <span class="pre">PATH</span></code> (default: <code class="docutils literal notranslate"><span class="pre">local_run/runners_info.toml</span></code>; if default, path is auto-derived from <code class="docutils literal notranslate"><span class="pre">--project-root</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--search-library-path</span> <span class="pre">PATH</span></code> (required for CLI; workspace wrapper auto-discovers)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--modified-assets-list</span> <span class="pre">FILE</span></code> (JSON array of allowed assets)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--tests</span> <span class="pre">TEST...</span></code> (filter to specific tests; search still runs)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--manual-assets</span> <span class="pre">PATH...</span></code> (intersect search results with these assets)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--list-tests</span></code> (print available test identifiers and exit)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--list-tests-format</span></code> (control the format of the –list-tests command, default to <code class="docutils literal notranslate"><span class="pre">text</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--list-tests-path</span></code> (optional absolute path location where the output of the –list-tests output is to be written)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--output-directory</span> <span class="pre">PATH</span></code> (defaults to <code class="docutils literal notranslate"><span class="pre">{project_root}/_testing/batch_jobs</span></code> when project root is known)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--execution-mode</span> <span class="pre">{local|distributed}</span></code> (default: <code class="docutils literal notranslate"><span class="pre">local</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--platforms</span> <span class="pre">windows</span> <span class="pre">linux</span></code> (space-separated list; default auto-detect)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--keep-outputs</span></code></p></li>
+</ul>
+<p>Outputs: <code class="docutils literal notranslate"><span class="pre">{project_root}/_testing/batch_jobs/*.json</span></code></p>
+<p>Examples (Kit):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Minimal project-root invocation (workspace)</span>
+<span class="n">workspace</span> <span class="n">runtime_tests</span> <span class="n">batch_maker</span> <span class="o">--</span><span class="n">project</span><span class="o">-</span><span class="n">root</span> <span class="n">D</span><span class="p">:</span><span class="o">/</span><span class="n">simready</span> <span class="o">--</span><span class="n">keep</span><span class="o">-</span><span class="n">outputs</span>
+
+<span class="c1"># Explicit CLI (advanced) with platforms and modified assets filtering</span>
+<span class="n">python</span> <span class="n">batch_maker</span><span class="o">/</span><span class="n">batch_maker</span><span class="o">.</span><span class="n">py</span> \
+  <span class="o">--</span><span class="n">project</span><span class="o">-</span><span class="n">root</span> <span class="n">D</span><span class="p">:</span><span class="o">/</span><span class="n">simready</span> \
+  <span class="o">--</span><span class="n">search</span><span class="o">-</span><span class="n">library</span><span class="o">-</span><span class="n">path</span> <span class="n">D</span><span class="p">:</span><span class="o">/</span><span class="n">simready</span><span class="o">/</span><span class="n">search_library</span> \
+  <span class="o">--</span><span class="n">platforms</span> <span class="n">windows</span> <span class="n">linux</span> \
+  <span class="o">--</span><span class="n">modified</span><span class="o">-</span><span class="n">assets</span><span class="o">-</span><span class="nb">list</span> <span class="n">D</span><span class="p">:</span><span class="o">/</span><span class="n">simready</span><span class="o">/</span><span class="n">modified_assets</span><span class="o">.</span><span class="n">json</span>
+
+<span class="c1"># Select a specific test (search still runs)</span>
+<span class="n">workspace</span> <span class="n">runtime_tests</span> <span class="n">batch_maker</span> <span class="o">--</span><span class="n">project</span><span class="o">-</span><span class="n">root</span> <span class="n">D</span><span class="p">:</span><span class="o">/</span><span class="n">simready</span> <span class="o">--</span><span class="n">tests</span> <span class="n">kit_test</span><span class="o">/</span><span class="n">minimal_app</span>
+
+<span class="c1"># Select tests and intersect with specific assets</span>
+<span class="n">workspace</span> <span class="n">runtime_tests</span> <span class="n">batch_maker</span> <span class="o">--</span><span class="n">project</span><span class="o">-</span><span class="n">root</span> <span class="n">D</span><span class="p">:</span><span class="o">/</span><span class="n">simready</span> \
+  <span class="o">--</span><span class="n">tests</span> <span class="n">kit_test</span><span class="o">/</span><span class="n">minimal_app</span> \
+  <span class="o">--</span><span class="n">manual</span><span class="o">-</span><span class="n">assets</span> <span class="n">sample_content</span><span class="o">/</span><span class="n">common_assets</span><span class="o">/</span><span class="n">props_general</span><span class="o">/</span><span class="n">obs_orange_a01</span><span class="o">/</span><span class="n">obs_orange_a01</span><span class="o">.</span><span class="n">usd</span>
+</pre></div>
+</div>
+</section>
+<section id="job-runner-py">
+<h3>job_runner.py<a class="headerlink" href="#job-runner-py" title="Link to this heading">#</a></h3>
+<p>Executes a job file and (optionally) archives results.</p>
+<p>Positional:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">job_file</span></code> Path to job JSON.</p></li>
+</ul>
+<p>Options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--timeout</span> <span class="pre">INT</span></code> (default: 600)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--enable-output-timeout</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--output-timeout</span> <span class="pre">FLOAT</span></code> (default: 30.0)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--enable-zip</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--delete-folders-after-zip</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--keep-outputs</span></code></p></li>
+</ul>
+<p>Outputs: <code class="docutils literal notranslate"><span class="pre">{project_root}/_testing/job_outputs/&lt;runner&gt;/&lt;job&gt;/&lt;asset&gt;/</span></code></p>
+<p>Examples (Kit):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run auto-detected job (workspace subcommand)</span>
+<span class="n">workspace</span> <span class="n">runtime_tests</span> <span class="n">job_runner</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="nb">zip</span>
+
+<span class="c1"># Run a specific job file (recommended for distributed)</span>
+<span class="n">python</span> <span class="n">job_runner</span><span class="o">/</span><span class="n">job_runner</span><span class="o">.</span><span class="n">py</span> <span class="n">D</span><span class="p">:</span><span class="o">/</span><span class="n">simready</span><span class="o">/</span><span class="n">_testing</span><span class="o">/</span><span class="n">batch_jobs</span><span class="o">/</span><span class="n">kit_runner_windows_gpu_000_windows</span><span class="o">.</span><span class="n">json</span> <span class="o">--</span><span class="n">timeout</span> <span class="mi">1200</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="nb">zip</span>
+</pre></div>
+</div>
+</section>
+<section id="report-generator-py">
+<h3>report_generator.py<a class="headerlink" href="#report-generator-py" title="Link to this heading">#</a></h3>
+<p>Builds JSON and HTML reports in the output base directory.</p>
+<p>Required:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--output-dir</span> <span class="pre">PATH</span></code> (must contain <code class="docutils literal notranslate"><span class="pre">batch_jobs/</span></code> and <code class="docutils literal notranslate"><span class="pre">job_outputs/</span></code> unless overridden)</p></li>
+</ul>
+<p>Optional:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--jobs-dir</span> <span class="pre">PATH</span></code> (default: <code class="docutils literal notranslate"><span class="pre">{output-dir}/batch_jobs</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--results-dir</span> <span class="pre">PATH</span></code> (default: <code class="docutils literal notranslate"><span class="pre">{output-dir}/job_outputs</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--assets-per-page</span> <span class="pre">INT</span></code> (default: 25)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--keep-outputs</span></code></p></li>
+</ul>
+<p>Outputs:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">{output-dir}/test_results.json</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{output-dir}/report/test_results_index.json</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{output-dir}/index.html</span></code></p></li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Default directories</span>
+<span class="n">workspace</span> <span class="n">runtime_tests</span> <span class="n">report_generator</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="nb">dir</span> <span class="n">D</span><span class="p">:</span><span class="o">/</span><span class="n">simready</span><span class="o">/</span><span class="n">_testing</span>
+
+<span class="c1"># Explicit directories and pagination</span>
+<span class="n">python</span> <span class="n">report_generator</span><span class="o">/</span><span class="n">report_generator</span><span class="o">.</span><span class="n">py</span> \
+  <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="nb">dir</span> <span class="n">D</span><span class="p">:</span><span class="o">/</span><span class="n">simready</span><span class="o">/</span><span class="n">_testing</span> \
+  <span class="o">--</span><span class="n">jobs</span><span class="o">-</span><span class="nb">dir</span> <span class="n">D</span><span class="p">:</span><span class="o">/</span><span class="n">simready</span><span class="o">/</span><span class="n">_testing</span><span class="o">/</span><span class="n">batch_jobs</span> \
+  <span class="o">--</span><span class="n">results</span><span class="o">-</span><span class="nb">dir</span> <span class="n">D</span><span class="p">:</span><span class="o">/</span><span class="n">simready</span><span class="o">/</span><span class="n">_testing</span><span class="o">/</span><span class="n">job_outputs</span> \
+  <span class="o">--</span><span class="n">assets</span><span class="o">-</span><span class="n">per</span><span class="o">-</span><span class="n">page</span> <span class="mi">50</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="runners-info-toml-maintained-by-user-ci">
+<h2>runners_info.toml (maintained by user/CI)<a class="headerlink" href="#runners-info-toml-maintained-by-user-ci" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">runners_info.toml</span></code> is owned by the user or CI/CD maintainer. batch_maker reads this file to know:</p>
+<ul class="simple">
+<li><p>Which engines/runners exist and on which platform they run (Kit and Kit-derived apps)</p></li>
+<li><p>Where the engine executable is located</p></li>
+<li><p>How many runner instances to create (for distributed asset splitting)</p></li>
+<li><p>Optional per-runner output locations and metadata</p></li>
+</ul>
+<p>Required fields per runner:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">engine</span></code> (use <code class="docutils literal notranslate"><span class="pre">&quot;kit&quot;</span></code> for Kit and Kit-derived applications)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">platform</span></code> (<code class="docutils literal notranslate"><span class="pre">&quot;windows&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;linux&quot;</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">project_root</span></code> (absolute path)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">executable_path</span></code> (absolute or relative to <code class="docutils literal notranslate"><span class="pre">project_root</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">number_of_runners</span></code> (int &gt;= 1)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hardware_gpu</span></code> (true for GPU missions)</p></li>
+</ul>
+<p>Optional fields:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">output_dir</span></code>, <code class="docutils literal notranslate"><span class="pre">docker_image</span></code>, <code class="docutils literal notranslate"><span class="pre">runner_config_file</span></code></p></li>
+</ul>
+<p>Example (Windows):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">kit_runner_windows_gpu</span><span class="p">]</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="s2">&quot;kit&quot;</span>
+<span class="n">platform</span> <span class="o">=</span> <span class="s2">&quot;windows&quot;</span>
+<span class="n">project_root</span> <span class="o">=</span> <span class="s2">&quot;D:/simready_next/simready_foundations&quot;</span>
+<span class="n">executable_path</span> <span class="o">=</span> <span class="s2">&quot;../packages/kit_107_3_0&quot;</span>
+<span class="n">hardware_gpu</span> <span class="o">=</span> <span class="n">true</span>
+<span class="n">number_of_runners</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>Example (Linux):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">kit_runner_linux_gpu</span><span class="p">]</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="s2">&quot;kit&quot;</span>
+<span class="n">platform</span> <span class="o">=</span> <span class="s2">&quot;linux&quot;</span>
+<span class="n">project_root</span> <span class="o">=</span> <span class="s2">&quot;/work/simready_next/simready_foundations&quot;</span>
+<span class="n">executable_path</span> <span class="o">=</span> <span class="s2">&quot;../packages/kit_107_3_0&quot;</span>
+<span class="n">hardware_gpu</span> <span class="o">=</span> <span class="n">true</span>
+<span class="n">number_of_runners</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">runners_info.toml</span></code> content is maintained by user/CI; batch_maker only reads it (default path is derived from <code class="docutils literal notranslate"><span class="pre">--project-root</span></code> if not provided).</p></li>
+<li><p>Platforms flag uses space-separated values (e.g., <code class="docutils literal notranslate"><span class="pre">--platforms</span> <span class="pre">windows</span> <span class="pre">linux</span></code>).</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quickstart">Quickstart</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-runtime-tests">Why use runtime tests?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#end-to-end-usage-preferred">End-to-end usage (preferred)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cli-reference">CLI reference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-maker-py">batch_maker.py</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#job-runner-py">job_runner.py</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#report-generator-py">report_generator.py</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#runners-info-toml-maintained-by-user-ci">runners_info.toml (maintained by user/CI)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
