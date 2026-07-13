@@ -1,0 +1,1459 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Attribute Naming Conventions &#8212; SimReady Foundation AIF 0.1.0 (Preview)</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/tags.css?v=f64b827a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+
+
+    <script src="../_static/documentation_options.js?v=0ee7d50d"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=fd10adb8"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'guides/naming_conventions';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'aif-0.1.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+
+    <link rel="canonical" href="https://nvidia.github.io/simready-foundation/aif-0.1.0/guides/naming_conventions.html" />
+    <link rel="icon" href="../_static/favicon.png"/>
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Development Workflows" href="development.html" />
+    <link rel="prev" title="Extending the Validation Sample: Adding a New Demo Validator" href="SimReady_learning_workflow.html" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="aif-0.1.0" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+
+
+  </head>
+
+  <body data-default-mode="">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="SimReady Foundation AIF 0.1.0 (Preview) - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="SimReady Foundation AIF 0.1.0 (Preview) - Home"/>
+  
+  
+    <p class="title logo__title">SimReady Foundation AIF 0.1.0 (Preview)</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-4"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-4"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-4"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-4">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="SimReady Foundation AIF 0.1.0 (Preview) - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="SimReady Foundation AIF 0.1.0 (Preview) - Home"/>
+  
+  
+    <p class="title logo__title">SimReady Foundation AIF 0.1.0 (Preview)</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-5"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-5"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-5"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-5">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-6"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-6"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-6"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-6">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="guides.html">Guides</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validate_workflow.html">SimReady Validation Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acceptance_workflow.html">SimReady Acceptance Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_adapters/feature_adapters.html">Feature Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiles/profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aif_validation.html">Validating an AIF Asset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SimReady_learning_workflow.html">SimReady Learning Workflow</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Naming Conventions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="development.html">Development Workflows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="features_expansion_workflow.html">Features Expansion Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../capabilities/capabilities.html">Capabilities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/core/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/visualization/visualization.html">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/isaac_sim/isaac_sim.html">Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/physics_bodies/physics_bodies.html">Physics Bodies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/hierarchy/hierarchy.html">Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/nonvisual_sensors/nonvisual_sensors.html">Non-Visual Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/semantic_labels/capability-semantic_labels.html">Semantic Labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/packaging/packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/example/example.html">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/aif/metadata/capability-metadata.html">AIF Core Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/aif/connection_points/capability-connection_points.html">Connection Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/aif/thermal_cooling/capability-thermal_cooling.html">AIF Thermal Cooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/aif/electrical/capability-electrical.html">AIF Electrical</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../features/features.html">Features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../features/feature-dependency-graph.html">Feature dependency graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_000-base_neutral-0.1.0-core.html">ID:000 - Core - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_001-minimal.html">ID:001 - Minimal - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_002-posable_bodies.html">ID:002 - Posable Bodies - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_003-rigid_body_physics.html">ID:003 - RBD Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_004-simulate_multi_body_physics.html">ID:004 - Simulate Multi-Body Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_005-simulate_grasp_physics.html">ID:005 - Simulate Grasp Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_006-materials.html">ID:006 - Materials - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_007-nonvisual_materials.html">ID:007 - Non-Visual Materials - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_011-semantic_labels.html">ID:011 - Semantic Labels - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_100-isaacsim-0.1.0-composition.html">ID:100 - IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_021-robot_core.html">ID:021 - Core Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_022-driven_joints.html">ID:022 - Driven Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_023-robot_materials.html">ID:023 - Robot Materials - Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_024-base_articulation.html">ID:024 - Base Articulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_030-packaging_core.html">ID:030 - Packaging Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_031-package_self_contained.html">ID:031 - Package Self Contained</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_032-packaging_introspection.html">ID:032 - Packaging Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_033-simready_packaging.html">ID:033 - SimReady Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_200-aif_metadata.html">ID:200 - AIF Core Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_201-connection_points.html">ID:201 - Connection Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_202-thermal_cooling.html">ID:202 - AIF Thermal Cooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_203-electrical.html">ID:203 - AIF Electrical</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../profiles/profiles.html">Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/prop-robotics-neutral.html">Prop Robotics Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/prop-robotics-physx.html">Prop Robotics Physx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/prop-robotics-isaac.html">Prop Robotics Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-body-neutral.html">Robot Body Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-body-runnable.html">Robot Body Runnable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-body-isaac.html">Robot Body Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-gripper-neutral.html">Robot Gripper Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-gripper-isaac.html">Robot Gripper Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/aif-entity.html">AIF Entity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../indexes/indexes.html">Indexes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../indexes/capability_status_index.html">Capability Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../indexes/requirements_index.html">Requirements Index</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="guides.html" class="nav-link">End to End Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Attribute Naming Conventions</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="attribute-naming-conventions">
+<h1>Attribute Naming Conventions<a class="headerlink" href="#attribute-naming-conventions" title="Link to this heading">#</a></h1>
+<section id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Link to this heading">#</a></h2>
+<p>SimReady Foundation builds on OpenUSD to define simulation-ready asset
+requirements. When contributors add new capabilities, schemas, or custom
+attributes to this repo, every property and attribute name must follow
+consistent namespacing rules so that:</p>
+<ul class="simple">
+<li><p>Users and tools can immediately tell which vendor, tier, or package
+introduced a property.</p></li>
+<li><p>Names from different vendors or teams never collide.</p></li>
+<li><p>Unknown or vendor-specific properties degrade gracefully in tools that do
+not recognise them.</p></li>
+</ul>
+<p>This guide codifies the attribute- and property-level naming rules that all
+SimReady Foundation contributors must follow.</p>
+<p>Schema <em>type</em> naming — requiring a recognisable prefix on IsA schemas and an
+<code class="docutils literal notranslate"><span class="pre">*API</span></code> suffix on applied API schemas — is related but out of scope here. A
+future document will cover those conventions.</p>
+</section>
+<section id="what-is-a-well-formed-vendor-prefix">
+<h2>What is a well-formed vendor prefix?<a class="headerlink" href="#what-is-a-well-formed-vendor-prefix" title="Link to this heading">#</a></h2>
+<p>A <strong>vendor prefix</strong> is a colon-delimited namespace that appears at the start
+of every property or attribute name introduced by a vendor, tier, or package.
+It tells anyone reading the USD file <em>who owns this name</em>.</p>
+<section id="pattern">
+<h3>Pattern<a class="headerlink" href="#pattern" title="Link to this heading">#</a></h3>
+<p>A well-formed prefix consists of one or more <strong>tokens</strong> separated by colons.
+Each token follows the pattern <code class="docutils literal notranslate"><span class="pre">[a-z][a-zA-Z0-9]*</span></code> (camelCase, starting with
+a lowercase letter). The full prefix always ends with a colon:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vendorToken</span><span class="p">:</span>
+<span class="n">vendorToken</span><span class="p">:</span><span class="n">submodule</span><span class="p">:</span>
+<span class="n">vendorToken</span><span class="p">:</span><span class="n">submodule</span><span class="p">:</span><span class="n">group</span><span class="p">:</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <strong>outermost token</strong> identifies the vendor, organisation, or umbrella
+ecosystem (e.g. <code class="docutils literal notranslate"><span class="pre">omni</span></code>, <code class="docutils literal notranslate"><span class="pre">physx</span></code>, <code class="docutils literal notranslate"><span class="pre">acmeCable</span></code>).</p></li>
+<li><p><strong>Inner tokens</strong> identify a tier, submodule, or semantic grouping (e.g.
+<code class="docutils literal notranslate"><span class="pre">simready</span></code>, <code class="docutils literal notranslate"><span class="pre">nonvisual</span></code>, <code class="docutils literal notranslate"><span class="pre">flex</span></code>).</p></li>
+</ul>
+</section>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Prefix</p></th>
+<th class="head"><p>Owner</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">simready:</span></code></p></td>
+<td><p>SimReady Foundation core tier</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">physx:</span></code></p></td>
+<td><p>PhysX tier</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">isaac:</span></code></p></td>
+<td><p>Isaac Sim tier</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">acmeCable:</span></code></p></td>
+<td><p>Hypothetical third-party vendor</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">acmeCable:flex:</span></code></p></td>
+<td><p>Submodule within that vendor</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><strong>Note on legacy <code class="docutils literal notranslate"><span class="pre">omni:simready:</span></code> attributes.</strong> Existing material
+attributes in this repo (notably under the non-visual material docs)
+currently use the <code class="docutils literal notranslate"><span class="pre">omni:simready:*</span></code> form. These predate this guidance
+and will be migrated to <code class="docutils literal notranslate"><span class="pre">simready:*</span></code> in a future pass; new
+SimReady-authored attributes should use <code class="docutils literal notranslate"><span class="pre">simready:</span></code> as the outermost
+token from the start.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="rules">
+<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">#</a></h2>
+<p>The four rules below cover the property- and attribute-naming aspects of
+USD schema hygiene. Each rule states <strong>what to do</strong>, shows <strong>valid and
+invalid USD</strong>, and explains <strong>how to comply</strong>.</p>
+<section id="severity-levels">
+<h3>Severity levels<a class="headerlink" href="#severity-levels" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>MUST</strong> — an absolute requirement; violating it is a spec error.</p></li>
+<li><p><strong>SHOULD</strong> — a strong recommendation; deviations require documented
+justification.</p></li>
+</ul>
+</section>
+<section id="rule-1-applied-api-schema-properties-must">
+<h3>Rule 1 — Applied API schema properties (MUST)<a class="headerlink" href="#rule-1-applied-api-schema-properties-must" title="Link to this heading">#</a></h3>
+<p>Every property name introduced by an <strong>applied API schema</strong> must start with
+a recognisable namespace prefix.</p>
+<ul class="simple">
+<li><p>For <strong>SimReady core</strong> schemas the prefix is
+<code class="docutils literal notranslate"><span class="pre">simready:&lt;submodule&gt;:</span></code>.</p></li>
+<li><p>For <strong>other tiers or vendors</strong> the prefix is their own vendor token (e.g.
+<code class="docutils literal notranslate"><span class="pre">physx:jointMaxForce</span></code>, <code class="docutils literal notranslate"><span class="pre">acmeCable:flex:stiffness</span></code>).</p></li>
+<li><p>The mechanism for getting the prefix on the property name differs between
+<strong>single-apply</strong> and <strong>multi-apply</strong> schemas — see <em>How to comply</em> below.</p></li>
+</ul>
+<section id="valid-single-apply">
+<h4>Valid (single-apply)<a class="headerlink" href="#valid-single-apply" title="Link to this heading">#</a></h4>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># Single-apply applied API — properties carry the acmeCable:flex: prefix.</span>
+<span class="k k-Tokens">over</span><span class="w"> </span><span class="s">&quot;Cable&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;AcmeCableFlexAPI&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="na">acmeCable:flex:stiffness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.85</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="na">acmeCable:flex:dampingRatio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="valid-multi-apply">
+<h4>Valid (multi-apply)<a class="headerlink" href="#valid-multi-apply" title="Link to this heading">#</a></h4>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># Multi-apply API schema — instance name &quot;front&quot; is interpolated between</span>
+<span class="c1"># the schema&#39;s propertyNamespacePrefix and each property name, producing</span>
+<span class="c1"># the final attribute names shown.</span>
+<span class="k k-Tokens">over</span><span class="w"> </span><span class="s">&quot;Wheel&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;AcmeBrakeAPI:front&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="na">acmeBrake:front:torque</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">250.0</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="na">acmeBrake:front:padWear</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.12</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="invalid">
+<h4>Invalid<a class="headerlink" href="#invalid" title="Link to this heading">#</a></h4>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># BAD: no namespace prefix — impossible to tell who owns these properties.</span>
+<span class="k k-Tokens">over</span><span class="w"> </span><span class="s">&quot;Sensor&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;SimReadyNonvisualAPI&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">token</span><span class="w"> </span><span class="na">sensorType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lidar&quot;</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="na">updateRate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-comply">
+<h4>How to comply<a class="headerlink" href="#how-to-comply" title="Link to this heading">#</a></h4>
+<p>The mechanism depends on whether the schema is single-apply or multi-apply.</p>
+<ul class="simple">
+<li><p><strong>Single-apply API schemas.</strong> OpenUSD’s <code class="docutils literal notranslate"><span class="pre">usdGenSchema</span></code> does <strong>not</strong>
+auto-prefix properties on single-apply schemas — <code class="docutils literal notranslate"><span class="pre">propertyNamespacePrefix</span></code>
+is rejected as a <code class="docutils literal notranslate"><span class="pre">customData</span></code> field on anything other than a multi-apply
+schema. You must spell out the full prefixed name on each property in the
+schema’s <code class="docutils literal notranslate"><span class="pre">schema.usda</span></code>. For SimReady core, that means
+<code class="docutils literal notranslate"><span class="pre">simready:&lt;submodule&gt;:&lt;propName&gt;</span></code> directly in the schema definition.</p></li>
+<li><p><strong>Multi-apply API schemas.</strong> Set
+<code class="docutils literal notranslate"><span class="pre">customData</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">token</span> <span class="pre">propertyNamespacePrefix</span> <span class="pre">=</span> <span class="pre">&quot;simready:&lt;submodule&gt;&quot;</span> <span class="pre">}</span></code>
+(or your vendor prefix) on the schema, and list properties <strong>without</strong> any
+prefix. At runtime the final attribute name is composed as
+<code class="docutils literal notranslate"><span class="pre">&lt;propertyNamespacePrefix&gt;:&lt;instanceName&gt;:&lt;propertyName&gt;</span></code> —
+<code class="docutils literal notranslate"><span class="pre">usdGenSchema.py</span></code> does this via <code class="docutils literal notranslate"><span class="pre">MakeMultipleApplyNameTemplate(prefix,</span> <span class="pre">propName)</span></code>.</p></li>
+</ul>
+<p>If schema generation fails with <em>“propertyNamespacePrefix should only be
+used as a customData field on multiple-apply API schemas”</em>, the schema is
+single-apply and the property names need to be spelled out manually.</p>
+</section>
+</section>
+<section id="rule-2-custom-properties-on-standard-usd-types-must">
+<h3>Rule 2 — Custom properties on standard USD types (MUST)<a class="headerlink" href="#rule-2-custom-properties-on-standard-usd-types-must" title="Link to this heading">#</a></h3>
+<p>Any <strong>custom property</strong> added to a <strong>standard USD prim type</strong> (<code class="docutils literal notranslate"><span class="pre">UsdGeom</span></code>,
+<code class="docutils literal notranslate"><span class="pre">UsdLux</span></code>, <code class="docutils literal notranslate"><span class="pre">UsdShade</span></code>, <code class="docutils literal notranslate"><span class="pre">UsdPhysics</span></code>, <code class="docutils literal notranslate"><span class="pre">UsdMedia</span></code>, <code class="docutils literal notranslate"><span class="pre">UsdVol</span></code>, <code class="docutils literal notranslate"><span class="pre">UsdSkel</span></code>,
+<code class="docutils literal notranslate"><span class="pre">UsdUI</span></code>, <code class="docutils literal notranslate"><span class="pre">UsdRender</span></code>) must use a vendor namespace prefix.</p>
+<ul class="simple">
+<li><p>SimReady core: <code class="docutils literal notranslate"><span class="pre">simready:&lt;submodule&gt;:&lt;propName&gt;</span></code>.</p></li>
+<li><p><strong>Exception:</strong> properties that are scoped by a fully custom IsA container
+schema (e.g. the prim type itself is vendor-defined) may omit the prefix
+because the schema already makes ownership clear.</p></li>
+</ul>
+<section id="valid">
+<h4>Valid<a class="headerlink" href="#valid" title="Link to this heading">#</a></h4>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adding a custom property to a standard UsdGeomMesh prim</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;Cable&quot;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1"># Standard USD property — no prefix needed</span>
+<span class="w">    </span><span class="kt">float3[]</span><span class="w"> </span><span class="na">extent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[(</span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">)]</span>
+
+<span class="w">    </span><span class="c1"># Custom vendor property — MUST have prefix</span>
+<span class="w">    </span><span class="k k-Token">custom</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="na">acmeCable:flex:bendRadius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.05</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h4>Invalid<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;Cable&quot;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">float3[]</span><span class="w"> </span><span class="na">extent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[(</span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">)]</span>
+
+<span class="w">    </span><span class="c1"># BAD: custom property on a standard type without a vendor prefix</span>
+<span class="w">    </span><span class="k k-Token">custom</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="na">bendRadius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.05</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h4>How to comply<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<p>Before adding a property to a standard USD prim type, check whether the
+property is defined by the prim’s schema or by any applied API schema. If
+not, prefix it with <code class="docutils literal notranslate"><span class="pre">simready:&lt;submodule&gt;:</span></code> (or your vendor prefix).</p>
+</section>
+</section>
+<section id="rule-3-unschema-d-custom-attributes-must">
+<h3>Rule 3 — Unschema’d custom attributes (MUST)<a class="headerlink" href="#rule-3-unschema-d-custom-attributes-must" title="Link to this heading">#</a></h3>
+<p>Any <strong>custom attribute</strong> that is <strong>not part of any schema</strong> must start with a
+namespace prefix. The prefix rules from Rule 1 apply.</p>
+<p>This is the most common source of naming collisions: ad-hoc attributes added
+during pipeline development that lack any namespace. Even if the attribute
+seems unique today, another team or vendor may introduce the same name
+tomorrow.</p>
+<section id="id3">
+<h4>Valid<a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;ConveyorBelt&quot;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1"># Well-formed: vendor prefix + semantic grouping</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="na">acmeCable:flex:stiffness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.85</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="na">acmeCable:flex:dampingRatio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h4>Invalid<a class="headerlink" href="#id4" title="Link to this heading">#</a></h4>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;ConveyorBelt&quot;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1"># BAD: no prefix — who owns &quot;rig_blob&quot;? what are the four floats?</span>
+<span class="w">    </span><span class="k k-Token">custom</span><span class="w"> </span><span class="kt">float4[]</span><span class="w"> </span><span class="na">rig_blob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h4>How to comply<a class="headerlink" href="#id5" title="Link to this heading">#</a></h4>
+<p>Replace any unstructured, un-prefixed attribute with properly namespaced
+attributes (see the <em>Example: from unstructured to well-formed</em> section
+below).</p>
+</section>
+</section>
+<section id="rule-4-isa-schema-properties-inheriting-standard-usd-should">
+<h3>Rule 4 — IsA schema properties inheriting standard USD (SHOULD)<a class="headerlink" href="#rule-4-isa-schema-properties-inheriting-standard-usd-should" title="Link to this heading">#</a></h3>
+<p>If an <strong>IsA schema</strong> inherits from a <strong>standard USD base</strong> (e.g.
+<code class="docutils literal notranslate"><span class="pre">UsdGeomGprim</span></code>), its own properties <strong>should</strong> use namespace prefixes to
+distinguish them from the base class properties.</p>
+<p>If the IsA schema is fully custom (does not inherit from a standard USD
+type), namespacing <strong>may</strong> be omitted because the prim type already makes
+ownership clear.</p>
+<section id="id6">
+<h4>Valid<a class="headerlink" href="#id6" title="Link to this heading">#</a></h4>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># AcmeCableHarness is a hypothetical IsA schema that inherits from</span>
+<span class="c1"># UsdGeomXformable. The vendor prefix on its own properties keeps them</span>
+<span class="c1"># distinguishable from the inherited xformOp:* properties.</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>AcmeCableHarness<span class="w"> </span><span class="s">&quot;MainPower&quot;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1"># Inherited from Xformable — no prefix needed</span>
+<span class="w">    </span><span class="kt">token</span><span class="w"> </span><span class="na">xformOp:translate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1"># Vendor properties — namespaced to avoid confusion</span>
+<span class="w">    </span><span class="kt">asset</span><span class="w"> </span><span class="na">acmeCable:routingPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./harness_path.usda@</span>
+<span class="w">    </span><span class="kt">token</span><span class="w"> </span><span class="na">acmeCable:wireGauge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;AWG-12&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="when-you-may-omit-the-prefix">
+<h4>When you may omit the prefix<a class="headerlink" href="#when-you-may-omit-the-prefix" title="Link to this heading">#</a></h4>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># AcmePartManifest is a hypothetical fully custom IsA schema — it</span>
+<span class="c1"># inherits only from UsdTyped, not from a standard typed base like</span>
+<span class="c1"># UsdGeomXformable, so its properties are already scoped by the prim</span>
+<span class="c1"># type name and the prefix may be omitted.</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>AcmePartManifest<span class="w"> </span><span class="s">&quot;EngineParts&quot;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">string[]</span><span class="w"> </span><span class="na">partIds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;pn-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;pn-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;pn-003&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="kt">float[]</span><span class="w"> </span><span class="na">partWeights</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="m">2.3</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="example-from-unstructured-to-well-formed">
+<h2>Example: from unstructured to well-formed<a class="headerlink" href="#example-from-unstructured-to-well-formed" title="Link to this heading">#</a></h2>
+<p>The following hypothetical example shows why these rules matter. A pipeline
+team at the fictional vendor <em>AcmeCable</em> has created a custom
+cable-simulation attribute on a prim. Over time the attribute evolves from
+an unstructured convention to a well-formed one.</p>
+<section id="before-poorly-formed">
+<h3>Before — poorly formed<a class="headerlink" href="#before-poorly-formed" title="Link to this heading">#</a></h3>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;CableAssembly&quot;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1"># Single opaque attribute — no namespace, no semantic meaning,</span>
+<span class="w">    </span><span class="c1"># no way to tell which vendor or tool created it.</span>
+<span class="w">    </span><span class="k k-Token">custom</span><span class="w"> </span><span class="kt">float4[]</span><span class="w"> </span><span class="na">rig_blob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[(</span><span class="m">0.85</span><span class="p">,</span><span class="w"> </span><span class="m">0.3</span><span class="p">,</span><span class="w"> </span><span class="m">100.0</span><span class="p">,</span><span class="w"> </span><span class="m">0.01</span><span class="p">)]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Problems:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">rig_blob</span></code> has no vendor prefix — it could collide with any other team’s
+attribute of the same name.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">float4[]</span></code> packs unrelated values into one opaque array — consumers
+must guess which float means what.</p></li>
+<li><p>No schema defines the attribute, so tools cannot validate or document it.</p></li>
+</ul>
+</section>
+<section id="after-well-formed">
+<h3>After — well formed<a class="headerlink" href="#after-well-formed" title="Link to this heading">#</a></h3>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;CableAssembly&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;AcmeCableFlexAPI&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1"># Each property is individually named, typed, and vendor-prefixed.</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="na">acmeCable:flex:stiffness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.85</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="na">acmeCable:flex:dampingRatio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="na">acmeCable:flex:segmentCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="na">acmeCable:flex:thickness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.01</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Improvements:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">acmeCable:flex:</span></code> prefix immediately identifies the owning vendor and
+submodule.</p></li>
+<li><p>Each property has its own meaningful name and type.</p></li>
+<li><p>The applied API schema (<code class="docutils literal notranslate"><span class="pre">AcmeCableFlexAPI</span></code>) documents the property set;
+tools can validate it automatically.</p></li>
+</ul>
+</section>
+</section>
+<section id="naming-across-tiers-and-packages">
+<h2>Naming across tiers and packages<a class="headerlink" href="#naming-across-tiers-and-packages" title="Link to this heading">#</a></h2>
+<p>SimReady Foundation validation rules are delivered as separate Python wheels
+grouped by their dependency footprint. Each tier owns a namespace for its
+rules and introduces USD-attribute prefixes for the schemas it defines:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tier</p></th>
+<th class="head"><p>Wheel</p></th>
+<th class="head"><p>Rule namespace</p></th>
+<th class="head"><p>USD-attribute prefix</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>USD</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nvidia-usd-validators</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">com.nvidia.usd</span></code></p></td>
+<td><p>(upstream standard — no prefix)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Core</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simready-foundation-core</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">com.nvidia.simready</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simready:</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>PhysX</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simready-foundation-physx</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">com.nvidia.simready</span></code> (PhysX rules)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">physx:</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Newton (planned)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simready-foundation-newton</span></code></p></td>
+<td><p>TBD</p></td>
+<td><p>TBD</p></td>
+</tr>
+<tr class="row-even"><td><p>Isaac Sim (planned)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">isaacsim-foundation.core</span></code></p></td>
+<td><p>TBD</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">isaac:</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="key-principles">
+<h3>Key principles<a class="headerlink" href="#key-principles" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Attribute prefix aligns with the tier that introduces the schema.</strong>
+A schema added by the PhysX tier uses <code class="docutils literal notranslate"><span class="pre">physx:</span></code> prefixes, not
+<code class="docutils literal notranslate"><span class="pre">simready:</span></code>. A schema added by SimReady core uses <code class="docutils literal notranslate"><span class="pre">simready:</span></code>.</p></li>
+<li><p><strong>Rule-ID namespacing and USD-attribute namespacing are independent.</strong>
+A rule identifier like <code class="docutils literal notranslate"><span class="pre">com.nvidia.simready.NP.001</span></code> names a <em>rule</em> in
+the validation system. A USD attribute like
+<code class="docutils literal notranslate"><span class="pre">simready:&lt;submodule&gt;:&lt;propName&gt;</span></code> names a <em>property</em> inside an asset.
+Both use the <code class="docutils literal notranslate"><span class="pre">simready</span></code> token but serve different purposes.</p></li>
+<li><p><strong>Harmonization for downstream packages.</strong>
+Downstream or partner packages (e.g. <code class="docutils literal notranslate"><span class="pre">isaacsim-foundation.core</span></code>,
+<code class="docutils literal notranslate"><span class="pre">siemens-core</span></code>) should follow the same naming patterns documented here,
+substituting their own vendor prefix. A harmonised package does not need
+to depend on SimReady Foundation core, but if its rules, features, and
+profiles follow the same conventions, contributions can be merged back
+into core with minimal friction.</p></li>
+</ol>
+</section>
+</section>
+<section id="capabilities-folder-layout">
+<h2>Capabilities folder layout<a class="headerlink" href="#capabilities-folder-layout" title="Link to this heading">#</a></h2>
+<p>When adding a new capability or requirement to the specs, files must be
+placed in the correct location under <code class="docutils literal notranslate"><span class="pre">nv_core/sr_specs/docs/capabilities/</span></code>.
+The folder structure mirrors the layered hierarchy described above.</p>
+<section id="directory-structure">
+<h3>Directory structure<a class="headerlink" href="#directory-structure" title="Link to this heading">#</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>capabilities/
+├── _includes/                         # Shared Sphinx snippets (badges, etc.)
+│   └── badges/
+├── &lt;group&gt;/                           # snake_case group folder
+│   ├── &lt;group&gt;.md                     # Group landing page
+│   ├── &lt;capability&gt;/                  # snake_case capability folder
+│   │   ├── capability-&lt;slug&gt;.md       # Capability overview page
+│   │   ├── requirements.md            # Index: {requirements-table} + {toctree}
+│   │   ├── requirements/              # One .md per requirement
+│   │   │   ├── &lt;kebab-case-slug&gt;.md
+│   │   │   └── ...
+│   │   └── validation.py              # Validator classes for the capability
+│   └── ...
+└── capabilities.md                    # Top-level Sphinx entrypoint
+</pre></div>
+</div>
+</section>
+<section id="existing-groups">
+<h3>Existing groups<a class="headerlink" href="#existing-groups" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Group folder</p></th>
+<th class="head"><p>Area</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">core/</span></code></p></td>
+<td><p>Cross-cutting building blocks (atomic asset, naming/paths, units, sim-ready readiness)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">visualization/</span></code></p></td>
+<td><p>Geometry and materials</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">physics_bodies/</span></code></p></td>
+<td><p>Physics: rigid bodies, colliders, joints, articulations, materials, graspable</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">isaac_sim/</span></code></p></td>
+<td><p>Isaac Sim–specific robot/composition rules</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nonvisual_sensors/</span></code></p></td>
+<td><p>Non-visual sensor materials</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">semantic_labels/</span></code></p></td>
+<td><p>Semantic labeling</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hierarchy/</span></code></p></td>
+<td><p>Stage and prim hierarchy</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>If a new capability logically belongs to an existing group, place it as a
+new subfolder under that group. If it represents an entirely new area,
+create a new group folder and add a <code class="docutils literal notranslate"><span class="pre">&lt;group&gt;.md</span></code> landing page alongside it.</p>
+</section>
+<section id="naming-rules-for-each-layer">
+<h3>Naming rules for each layer<a class="headerlink" href="#naming-rules-for-each-layer" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Layer</p></th>
+<th class="head"><p>Convention</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Group folder</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">snake_case</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">physics_bodies/</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Capability folder</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">snake_case</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">physics_rigid_bodies/</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Capability overview</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">capability-&lt;folder_name&gt;.md</span></code> — slug <strong>must</strong> match the folder name exactly (use underscores, not hyphens)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">capability-physics_rigid_bodies.md</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Requirements index</strong></p></td>
+<td><p>Always <code class="docutils literal notranslate"><span class="pre">requirements.md</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">requirements.md</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Requirement doc</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">kebab-case</span></code> slug under <code class="docutils literal notranslate"><span class="pre">requirements/</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">requirements/rigid-body-no-instancing.md</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Requirement ID (Code)</strong></p></td>
+<td><p>Two-letter prefix + dot + zero-padded number</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RB.005</span></code>, <code class="docutils literal notranslate"><span class="pre">HI.003</span></code>, <code class="docutils literal notranslate"><span class="pre">UN.001</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Python enum</strong></p></td>
+<td><p>Dot becomes underscore: <code class="docutils literal notranslate"><span class="pre">cap.&lt;Cap&gt;Requirements.&lt;PREFIX&gt;_&lt;NNN&gt;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cap.HierarchyRequirements.HI_003</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Validator file</strong></p></td>
+<td><p>Always <code class="docutils literal notranslate"><span class="pre">validation.py</span></code> in the capability folder</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">hierarchy/validation.py</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Validator rule name</strong></p></td>
+<td><p>PascalCase string in <code class="docutils literal notranslate"><span class="pre">&#64;register_rule()</span></code> matching the capability</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&#64;register_rule(&quot;Hierarchy&quot;)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><strong>Known deviations.</strong> Two existing capability overview files do not
+follow the slug-matches-folder rule:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">physics_colliders/capability-collider_approximations.md</span></code> — slug
+should be <code class="docutils literal notranslate"><span class="pre">physics_colliders</span></code> to match the folder.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">base_articulation/capability-base-articulation.md</span></code> — slug uses
+hyphens instead of underscores.</p></li>
+</ul>
+<p>Three Isaac Sim capabilities (<code class="docutils literal notranslate"><span class="pre">composition/</span></code>, <code class="docutils literal notranslate"><span class="pre">robot_core/</span></code>,
+<code class="docutils literal notranslate"><span class="pre">robot_materials/</span></code>) are missing <code class="docutils literal notranslate"><span class="pre">capability-*.md</span></code> overview files
+entirely. <code class="docutils literal notranslate"><span class="pre">core/robot/</span></code> is a stub containing only a placeholder
+<code class="docutils literal notranslate"><span class="pre">validation.py</span></code>. These should be addressed as part of ongoing
+documentation clean-up.</p>
+</div></blockquote>
+</section>
+<section id="requirement-document-structure">
+<h3>Requirement document structure<a class="headerlink" href="#requirement-document-structure" title="Link to this heading">#</a></h3>
+<p>Each requirement <code class="docutils literal notranslate"><span class="pre">.md</span></code> file in <code class="docutils literal notranslate"><span class="pre">requirements/</span></code> must include a metadata
+table and standard sections:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gh"># kebab-case-title</span>
+
+| Code     | XX.NNN |
+|----------|--------|
+| Validator| {oav-validator-latest-link}`xx-nnn` |
+| Compatibility | {compatibility}`&lt;tier&gt;` |
+| Tags     | {tag}`&lt;tag&gt;` |
+
+<span class="gu">## Summary</span>
+<span class="gu">## Description</span>
+<span class="gu">## Why</span>
+<span class="gu">## Examples</span>
+<span class="gu">## How to comply</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Code</span></code> value must be unique across the entire spec. The two-letter
+prefix is drawn from the capability’s abbreviation (e.g. <code class="docutils literal notranslate"><span class="pre">HI</span></code> for
+hierarchy, <code class="docutils literal notranslate"><span class="pre">RB</span></code> for rigid bodies, <code class="docutils literal notranslate"><span class="pre">VG</span></code> for visualization/geometry).</p>
+</section>
+<section id="registering-a-new-capability">
+<h3>Registering a new capability<a class="headerlink" href="#registering-a-new-capability" title="Link to this heading">#</a></h3>
+<p>After creating the folder and files:</p>
+<ol class="arabic simple">
+<li><p>Add the capability’s <code class="docutils literal notranslate"><span class="pre">validation.py</span></code> import to
+<code class="docutils literal notranslate"><span class="pre">nv_core/sr_specs/docs/capabilities/__init__.py</span></code> so validators are
+discovered at package import time.</p></li>
+<li><p>Add the capability overview page to the parent group’s <code class="docutils literal notranslate"><span class="pre">{toctree}</span></code>.</p></li>
+<li><p>Add any badge snippets to <code class="docutils literal notranslate"><span class="pre">_includes/badges/</span></code> if the requirement tables
+need them.</p></li>
+</ol>
+</section>
+</section>
+<section id="relationship-to-existing-requirements">
+<h2>Relationship to existing requirements<a class="headerlink" href="#relationship-to-existing-requirements" title="Link to this heading">#</a></h2>
+<p>SimReady Foundation already has a <strong>Naming and Paths</strong> capability
+(<code class="docutils literal notranslate"><span class="pre">core/naming_paths</span></code>) with requirements NP.001–NP.008. Those requirements
+cover <strong>structural naming</strong>:</p>
+<ul class="simple">
+<li><p>NP.001 — prim naming conventions (camelCase / snake_case)</p></li>
+<li><p>NP.002 — file naming conventions</p></li>
+<li><p>NP.003 — directory structure</p></li>
+<li><p>NP.004 — path length limits</p></li>
+<li><p>NP.005 — asset folder structure</p></li>
+<li><p>NP.006 — metadata location</p></li>
+<li><p>NP.007 — relative paths</p></li>
+<li><p>NP.008 — asset-path validation</p></li>
+</ul>
+<p>This guide covers <strong>semantic naming</strong> — the namespace prefixes on attributes,
+properties, and schema-introduced names. There is no overlap or
+contradiction:</p>
+<ul class="simple">
+<li><p>NP.001 says a prim must be named <code class="docutils literal notranslate"><span class="pre">chairBase</span></code> or <code class="docutils literal notranslate"><span class="pre">chair_base</span></code> (structural).</p></li>
+<li><p>This guide says an attribute on that prim must be named
+<code class="docutils literal notranslate"><span class="pre">simready:&lt;submodule&gt;:&lt;propName&gt;</span></code>, not <code class="docutils literal notranslate"><span class="pre">&lt;propName&gt;</span></code> (semantic).</p></li>
+</ul>
+<p>When formal requirement IDs are introduced for these rules in the future,
+they will live under a separate <code class="docutils literal notranslate"><span class="pre">core/naming_conventions</span></code> capability and
+cross-reference NP.001–NP.008 where relevant.</p>
+</section>
+<hr class="docutils" />
+<section id="appendix-a-background-and-motivation">
+<h2>Appendix A: background and motivation<a class="headerlink" href="#appendix-a-background-and-motivation" title="Link to this heading">#</a></h2>
+<section id="the-problem">
+<h3>The problem<a class="headerlink" href="#the-problem" title="Link to this heading">#</a></h3>
+<p>USD allows any vendor to define custom schemas and add custom attributes to
+prims. Without coordination, this leads to three problems:</p>
+<ol class="arabic simple">
+<li><p><strong>Ambiguity.</strong> Users and tools cannot tell whether a property belongs to a
+standard schema, a vendor extension, or an ad-hoc pipeline attribute.</p></li>
+<li><p><strong>Collision.</strong> Two vendors (or two teams within the same vendor) may
+independently create properties with identical names but different
+semantics, causing silent data corruption when assets move between tools.</p></li>
+<li><p><strong>Degradation.</strong> Tools that encounter unknown properties may re-create
+prims, drop data, or behave incorrectly if they cannot distinguish
+vendor-specific properties from standard ones.</p></li>
+</ol>
+</section>
+<section id="how-namespacing-solves-it">
+<h3>How namespacing solves it<a class="headerlink" href="#how-namespacing-solves-it" title="Link to this heading">#</a></h3>
+<p>OpenUSD already encourages namespace prefixes on properties added by API
+schemas — for example, the standard <code class="docutils literal notranslate"><span class="pre">UsdPhysics</span></code> module uses <code class="docutils literal notranslate"><span class="pre">physics:</span></code> as
+its property prefix. This guide extends that pattern into a consistent set
+of rules that cover not just API-schema properties but also custom
+properties on standard types and ad-hoc attributes that have no schema at
+all.</p>
+<p>The core idea is simple: <strong>every non-standard property must carry a
+colon-delimited prefix that identifies its owner</strong>. The prefix is the
+contract between the property author and every downstream consumer of the
+USD file.</p>
+</section>
+<section id="schema-type-naming-future-scope">
+<h3>Schema type naming (future scope)<a class="headerlink" href="#schema-type-naming-future-scope" title="Link to this heading">#</a></h3>
+<p>Two additional conventions apply to schema <em>type</em> names rather than property
+names:</p>
+<ul class="simple">
+<li><p><strong>IsA schema names</strong> should start with a recognisable prefix (e.g.
+<code class="docutils literal notranslate"><span class="pre">Omni*</span></code>, <code class="docutils literal notranslate"><span class="pre">Physx*</span></code>, <code class="docutils literal notranslate"><span class="pre">Acme*</span></code>) so that prim types are immediately
+identifiable as vendor-defined.</p></li>
+<li><p><strong>Applied API schema names</strong> should end with the <code class="docutils literal notranslate"><span class="pre">*API</span></code> suffix to
+distinguish them from IsA schemas.</p></li>
+</ul>
+<p>These type-naming conventions are not covered by the rules in this guide and
+will be addressed in a separate document.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="appendix-b-coverage-of-the-original-naming-conventions-checklist">
+<h2>Appendix B: coverage of the original naming-conventions checklist<a class="headerlink" href="#appendix-b-coverage-of-the-original-naming-conventions-checklist" title="Link to this heading">#</a></h2>
+<p>The table below maps each item from the original naming-conventions
+requirements checklist to its status in this guide. Items marked <em>not
+addressed</em> or <em>partial</em> represent future work.</p>
+<section id="specification-scope">
+<h3>Specification scope<a class="headerlink" href="#specification-scope" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p>Status</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Naming convention rules expressed as <strong>Foundation Requirements with unique IDs</strong> (e.g. NC.001, NC.002) under a new <code class="docutils literal notranslate"><span class="pre">core/naming_conventions</span></code> capability</p></td>
+<td><p>Not addressed</p></td>
+<td><p>This document provides contributor guidance, not a formal capability with requirement IDs. The rules defined here are the authoritative source from which formal requirements can be created.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Requirements cover <strong>specific tier prefixes</strong> (e.g. <code class="docutils literal notranslate"><span class="pre">simready:</span></code>, <code class="docutils literal notranslate"><span class="pre">physx:</span></code>, <code class="docutils literal notranslate"><span class="pre">isaac:</span></code>) <strong>and</strong> the <strong>cross-vendor pattern</strong> (any vendor prefix with well-formedness rules)</p></td>
+<td><p>Addressed</p></td>
+<td><p>Rules 1–4 and the <em>well-formed vendor prefix</em> section cover both.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>IsA schema naming</strong> (recognisable prefix) and <strong>Applied API schema naming</strong> (<code class="docutils literal notranslate"><span class="pre">*API</span></code> suffix) each have their own Requirement</p></td>
+<td><p>Not addressed</p></td>
+<td><p>These are schema <em>type</em> naming conventions, deferred to a future document. See <em>Appendix A: background and motivation</em>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Property namespace prefixes</strong> and <strong>custom attribute namespacing</strong> each have their own Requirement with unique ID</p></td>
+<td><p>Partial</p></td>
+<td><p>Rules 1–3 document the conventions. Formal requirement IDs do not yet exist.</p></td>
+</tr>
+<tr class="row-even"><td><p>Existing <strong>NP.001–NP.008 cross-referenced</strong>; no duplication or contradiction</p></td>
+<td><p>Addressed</p></td>
+<td><p>See <em>Relationship to existing requirements</em> section.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="validation-scope">
+<h3>Validation scope<a class="headerlink" href="#validation-scope" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p>Status</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Each Requirement has a <strong>corresponding validator</strong> in <code class="docutils literal notranslate"><span class="pre">validation.py</span></code> using the <code class="docutils literal notranslate"><span class="pre">omni.asset_validator.core</span></code> framework and <code class="docutils literal notranslate"><span class="pre">&#64;register_requirements()</span></code> pattern</p></td>
+<td><p>Not addressed</p></td>
+<td><p>No validators are created. Validators depend on formal requirement IDs, which do not yet exist.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Validators detect: missing vendor prefix on IsA schemas, missing namespace prefix on properties, use of unstructured attributes where typed schemas should exist</p></td>
+<td><p>Not addressed</p></td>
+<td><p>Same dependency on formal requirements and a <code class="docutils literal notranslate"><span class="pre">core/naming_conventions</span></code> capability.</p></td>
+</tr>
+<tr class="row-even"><td><p>Compatibility tier: <strong>NEUTRAL</strong> — no PhysX or Isaac dependency</p></td>
+<td><p>N/A</p></td>
+<td><p>No validators to tier. The guide itself is tier-neutral.</p></td>
+</tr>
+<tr class="row-odd"><td><p>All existing <strong>sample_assets pass</strong> the new naming validators</p></td>
+<td><p>N/A</p></td>
+<td><p>No validators to run.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="documentation-scope">
+<h3>Documentation scope<a class="headerlink" href="#documentation-scope" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p>Status</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>At least one example shows the <strong>progression</strong> from poorly-formed (<code class="docutils literal notranslate"><span class="pre">float4[]</span> <span class="pre">rig_blob</span></code>) to well-formed (<code class="docutils literal notranslate"><span class="pre">acmeCable:flex:stiffness</span></code>, <code class="docutils literal notranslate"><span class="pre">acmeCable:flex:dampingRatio</span></code>)</p></td>
+<td><p>Addressed</p></td>
+<td><p>See <em>Example: from unstructured to well-formed</em>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Requirement docs follow the established <strong>authoring pattern</strong> (Summary, Description, Why, Examples, How to comply, Related requirements)</p></td>
+<td><p>Not addressed</p></td>
+<td><p>No formal requirement <code class="docutils literal notranslate"><span class="pre">.md</span></code> files are created. Each rule section in this guide provides description, examples, and how-to-comply guidance in a lighter format.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="SimReady_learning_workflow.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Extending the Validation Sample: Adding a New Demo Validator</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="development.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Development Workflows</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#purpose">Purpose</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-well-formed-vendor-prefix">What is a well-formed vendor prefix?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pattern">Pattern</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rules">Rules</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#severity-levels">Severity levels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rule-1-applied-api-schema-properties-must">Rule 1 — Applied API schema properties (MUST)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#valid-single-apply">Valid (single-apply)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#valid-multi-apply">Valid (multi-apply)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#invalid">Invalid</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-comply">How to comply</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rule-2-custom-properties-on-standard-usd-types-must">Rule 2 — Custom properties on standard USD types (MUST)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#valid">Valid</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Invalid</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">How to comply</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rule-3-unschema-d-custom-attributes-must">Rule 3 — Unschema’d custom attributes (MUST)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Valid</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Invalid</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">How to comply</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rule-4-isa-schema-properties-inheriting-standard-usd-should">Rule 4 — IsA schema properties inheriting standard USD (SHOULD)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Valid</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#when-you-may-omit-the-prefix">When you may omit the prefix</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-from-unstructured-to-well-formed">Example: from unstructured to well-formed</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#before-poorly-formed">Before — poorly formed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#after-well-formed">After — well formed</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naming-across-tiers-and-packages">Naming across tiers and packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-principles">Key principles</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capabilities-folder-layout">Capabilities folder layout</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#directory-structure">Directory structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#existing-groups">Existing groups</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naming-rules-for-each-layer">Naming rules for each layer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#requirement-document-structure">Requirement document structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#registering-a-new-capability">Registering a new capability</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relationship-to-existing-requirements">Relationship to existing requirements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-a-background-and-motivation">Appendix A: background and motivation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem">The problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-namespacing-solves-it">How namespacing solves it</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-type-naming-future-scope">Schema type naming (future scope)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-b-coverage-of-the-original-naming-conventions-checklist">Appendix B: coverage of the original naming-conventions checklist</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specification-scope">Specification scope</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-scope">Validation scope</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-scope">Documentation scope</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

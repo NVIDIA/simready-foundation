@@ -1,0 +1,1418 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Features Documentation Guide &#8212; SimReady Foundation AIF 0.1.0 (Preview)</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tags.css?v=f64b827a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+
+
+    <script src="../../_static/documentation_options.js?v=0ee7d50d"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=fd10adb8"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'guides/features/features';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'aif-0.1.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+
+    <link rel="canonical" href="https://nvidia.github.io/simready-foundation/aif-0.1.0/guides/features/features.html" />
+    <link rel="icon" href="../../_static/favicon.png"/>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Feature Adapters Documentation Guide" href="../feature_adapters/feature_adapters.html" />
+    <link rel="prev" title="SimReady Acceptance Workflow" href="../acceptance_workflow.html" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="aif-0.1.0" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+
+
+  </head>
+
+  <body data-default-mode="">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="SimReady Foundation AIF 0.1.0 (Preview) - Home"/>
+    <img src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="SimReady Foundation AIF 0.1.0 (Preview) - Home"/>
+  
+  
+    <p class="title logo__title">SimReady Foundation AIF 0.1.0 (Preview)</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-4"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-4"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-4"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-4">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="SimReady Foundation AIF 0.1.0 (Preview) - Home"/>
+    <img src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="SimReady Foundation AIF 0.1.0 (Preview) - Home"/>
+  
+  
+    <p class="title logo__title">SimReady Foundation AIF 0.1.0 (Preview)</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-5"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-5"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-5"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-5">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-6"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-6"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-6"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-6">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../guides.html">Guides</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validate_workflow.html">SimReady Validation Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../acceptance_workflow.html">SimReady Acceptance Workflow</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../feature_adapters/feature_adapters.html">Feature Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../aif_validation.html">Validating an AIF Asset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../SimReady_learning_workflow.html">SimReady Learning Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../naming_conventions.html">Naming Conventions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../development.html">Development Workflows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../features_expansion_workflow.html">Features Expansion Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../capabilities/capabilities.html">Capabilities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/core/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/visualization/visualization.html">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/isaac_sim/isaac_sim.html">Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/physics_bodies/physics_bodies.html">Physics Bodies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/hierarchy/hierarchy.html">Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_sensors.html">Non-Visual Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/semantic_labels/capability-semantic_labels.html">Semantic Labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/packaging/packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/example/example.html">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/aif/metadata/capability-metadata.html">AIF Core Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/aif/connection_points/capability-connection_points.html">Connection Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/aif/thermal_cooling/capability-thermal_cooling.html">AIF Thermal Cooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/aif/electrical/capability-electrical.html">AIF Electrical</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../features/features.html">Features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../features/feature-dependency-graph.html">Feature dependency graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_000-base_neutral-0.1.0-core.html">ID:000 - Core - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_001-minimal.html">ID:001 - Minimal - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_002-posable_bodies.html">ID:002 - Posable Bodies - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_003-rigid_body_physics.html">ID:003 - RBD Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004-simulate_multi_body_physics.html">ID:004 - Simulate Multi-Body Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_005-simulate_grasp_physics.html">ID:005 - Simulate Grasp Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_006-materials.html">ID:006 - Materials - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_007-nonvisual_materials.html">ID:007 - Non-Visual Materials - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_011-semantic_labels.html">ID:011 - Semantic Labels - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_100-isaacsim-0.1.0-composition.html">ID:100 - IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_021-robot_core.html">ID:021 - Core Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_022-driven_joints.html">ID:022 - Driven Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_023-robot_materials.html">ID:023 - Robot Materials - Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_024-base_articulation.html">ID:024 - Base Articulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_030-packaging_core.html">ID:030 - Packaging Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_031-package_self_contained.html">ID:031 - Package Self Contained</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_032-packaging_introspection.html">ID:032 - Packaging Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_033-simready_packaging.html">ID:033 - SimReady Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_200-aif_metadata.html">ID:200 - AIF Core Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_201-connection_points.html">ID:201 - Connection Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_202-thermal_cooling.html">ID:202 - AIF Thermal Cooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_203-electrical.html">ID:203 - AIF Electrical</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../profiles/profiles.html">Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/prop-robotics-neutral.html">Prop Robotics Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/prop-robotics-physx.html">Prop Robotics Physx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/prop-robotics-isaac.html">Prop Robotics Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-body-neutral.html">Robot Body Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-body-runnable.html">Robot Body Runnable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-body-isaac.html">Robot Body Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-gripper-neutral.html">Robot Gripper Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-gripper-isaac.html">Robot Gripper Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/aif-entity.html">AIF Entity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../indexes/indexes.html">Indexes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../indexes/capability_status_index.html">Capability Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../indexes/requirements_index.html">Requirements Index</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../guides.html" class="nav-link">End to End Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Features Documentation Guide</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="features-documentation-guide">
+<h1>Features Documentation Guide<a class="headerlink" href="#features-documentation-guide" title="Link to this heading">#</a></h1>
+<section id="about-this-guide">
+<h2>About this guide<a class="headerlink" href="#about-this-guide" title="Link to this heading">#</a></h2>
+<p>This guide will walk you through the process of understanding, creating, and managing features in the SimReady Foundation validation system. Features are collections of related requirements that define specific capabilities for USD assets.</p>
+</section>
+<section id="what-is-a-feature">
+<h2>What is a Feature?<a class="headerlink" href="#what-is-a-feature" title="Link to this heading">#</a></h2>
+<p>A <strong>Feature</strong> is a collection of related requirements that work together to provide a specific capability or functionality. Features are the building blocks of the SimReady validation system and are used to:</p>
+<ul class="simple">
+<li><p>Define what capabilities an asset must have</p></li>
+<li><p>Group related requirements logically</p></li>
+<li><p>Enable versioning and dependency management</p></li>
+<li><p>Support profile-based validation</p></li>
+</ul>
+<section id="feature-structure">
+<h3>Feature Structure<a class="headerlink" href="#feature-structure" title="Link to this heading">#</a></h3>
+<p>Each feature consists of:</p>
+<ul class="simple">
+<li><p><strong>ID</strong>: Unique identifier (e.g., <code class="docutils literal notranslate"><span class="pre">FET001_BASE_NEUTRAL</span></code>)</p></li>
+<li><p><strong>Version</strong>: Semantic versioning (e.g., <code class="docutils literal notranslate"><span class="pre">1.0.0</span></code>)</p></li>
+<li><p><strong>Display Name</strong>: Human-readable name (e.g., “Minimal Editor”)</p></li>
+<li><p><strong>Path</strong>: File path for documentation</p></li>
+<li><p><strong>Requirements</strong>: List of requirement IDs that the feature depends on</p></li>
+</ul>
+</section>
+<section id="example-feature-definition">
+<h3>Example Feature Definition<a class="headerlink" href="#example-feature-definition" title="Link to this heading">#</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;display_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Minimal Editor&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;features/FET_001-minimal_editor.html&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;FET000_CORE&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;AA.001&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;AA.002&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;UN.001&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;UN.002&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="creating-a-new-feature">
+<h2>Creating a New Feature<a class="headerlink" href="#creating-a-new-feature" title="Link to this heading">#</a></h2>
+<p>Follow these 6 steps to create a new feature:</p>
+<section id="step-1-create-feature-json-and-md-from-sample">
+<h3>Step 1: Create Feature JSON and MD from Sample<a class="headerlink" href="#step-1-create-feature-json-and-md-from-sample" title="Link to this heading">#</a></h3>
+<p>Start by copying the sample files and customizing them for your new feature:</p>
+<section id="sample-feature-json-fet-000-base-neutral-new-feature-json">
+<h4>Sample Feature JSON (<code class="docutils literal notranslate"><span class="pre">FET_000_base_neutral-new_feature.json</span></code>)<a class="headerlink" href="#sample-feature-json-fet-000-base-neutral-new-feature-json" title="Link to this heading">#</a></h4>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FET000_NEW_FEATURE&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;display_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;example new feature&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;features/FET_000-new_feature.html&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span><span class="w">    </span>
+<span class="w">    </span><span class="nt">&quot;requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;AA.001&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="sample-feature-markdown-fet-000-new-feature-md">
+<h4>Sample Feature Markdown (<code class="docutils literal notranslate"><span class="pre">FET_000-new_feature.md</span></code>)<a class="headerlink" href="#sample-feature-markdown-fet-000-new-feature-md" title="Link to this heading">#</a></h4>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gh"># Feature: `ID:000 - Sample Feature Documentation`</span>
+
+<span class="gu">## Description</span>
+This is a sample feature documentation that demonstrates the proper structure and format for documenting features in the validation system. This template should be used as a reference when creating new feature documentation.
+
+<span class="gu">## Overview</span>
+
+| <span class="gs">**Property**</span>            | <span class="gs">**Value**</span>                 |
+|-------------------------|---------------------------|
+| Proprietary Techs       | <span class="sb">`Sample Tech`</span>             |
+| Dependency              | <span class="sb">`None`</span>                    |
+| Profile                 | <span class="sb">`Prop-Robotics-Neutral`</span>   |
+
+<span class="gu">## Detailed Description</span>
+
+This sample feature showcases the standard format and structure that should be followed when documenting new features. It includes all the necessary sections and demonstrates proper markdown formatting.
+
+<span class="gu">## Neutral Format</span>
+<span class="gu">### Version 1.0.0</span>
+&lt;details&gt;
+&lt;summary&gt;&lt;strong&gt;Details&lt;/strong&gt;&lt;/summary&gt;
+
+<span class="gu">#### Requirements</span>
+
+<span class="k">*</span><span class="w"> </span>Capability: [<span class="nt">Sample_Capability</span>](<span class="na">../capabilities/sample/sample_capability.md</span>)
+<span class="w">  </span><span class="k">*</span><span class="w"> </span>Requirements:
+<span class="w">    </span><span class="k">*</span><span class="w"> </span>[<span class="nt">Sample-Requirement</span>](<span class="na">../capabilities/sample/requirements/sample-requirement.md</span>)
+<span class="w">      </span><span class="k">*</span><span class="w"> </span>SPL.001 | Version 1.0.0
+
+<span class="gu">### Comments</span>
+<span class="k">*</span><span class="w"> </span>This is a sample comment section
+<span class="k">*</span><span class="w"> </span>Add relevant notes, considerations, or future work items here
+<span class="k">*</span><span class="w"> </span>Use bullet points for clarity
+
+<span class="gu">### Samples </span>
+
+<span class="k">*</span><span class="w"> </span>Sample asset or reference material
+<span class="k">*</span><span class="w"> </span>Additional examples as needed
+
+<span class="gu">## Testing Process</span>
+
+<span class="gu">### Steps for Manual Testing</span>
+<span class="k">*</span><span class="w"> </span>Step 1: Sample testing procedure
+<span class="k">*</span><span class="w"> </span>Step 2: Another testing step
+<span class="k">*</span><span class="w"> </span>Step 3: Final validation step
+
+<span class="gu">### Automated Testing</span>
+<span class="k">*</span><span class="w"> </span>Unit tests for core functionality
+<span class="k">*</span><span class="w"> </span>Integration tests for component interaction
+<span class="k">*</span><span class="w"> </span>End-to-end validation tests
+
+&lt;/details&gt;
+
+<span class="gu">## Implementation Notes</span>
+
+This feature serves as a documentation template and should not be implemented in production systems. When creating actual feature documentation:
+
+<span class="k">1.</span> Replace sample content with real feature details
+<span class="k">2.</span> Update all references and links
+<span class="k">3.</span> Ensure proper versioning and dependency information
+<span class="k">4.</span> Include relevant technical specifications
+<span class="k">5.</span> Document testing procedures thoroughly
+
+<span class="gu">## Related Documentation</span>
+
+<span class="k">*</span><span class="w"> </span>[<span class="nt">Feature Documentation Guide</span>](<span class="na">../guides/feature_documentation.md</span>)
+<span class="k">*</span><span class="w"> </span>[<span class="nt">Capability Documentation</span>](<span class="na">../capabilities/README.md</span>)
+<span class="k">*</span><span class="w"> </span>[<span class="nt">Testing Standards</span>](<span class="na">../testing/standards.md</span>)
+</pre></div>
+</div>
+</section>
+</section>
+<section id="step-2-generate-feature-id-and-version">
+<h3>Step 2: Generate Feature ID and Version<a class="headerlink" href="#step-2-generate-feature-id-and-version" title="Link to this heading">#</a></h3>
+<section id="feature-id-convention">
+<h4>Feature ID Convention<a class="headerlink" href="#feature-id-convention" title="Link to this heading">#</a></h4>
+<p>Feature IDs follow the pattern <code class="docutils literal notranslate"><span class="pre">FET&lt;NNN&gt;_&lt;VARIANT&gt;</span></code> where the variant
+suffix encodes scope, domain, and compatibility tier. Common examples:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">FET001_BASE_NEUTRAL</span></code> — core OpenUSD only</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FET003_BASE_PHYSX</span></code> — uses PhysxSchema extensions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FET021_ROBOT_CORE_ISAAC</span></code> — robot core using IsaacSim schemas</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FET022_DRIVEN_JOINTS_PHYSX</span></code> — driven joints using PhysX</p></li>
+</ul>
+<p>The authoritative list of valid variant suffixes is the set of <code class="docutils literal notranslate"><span class="pre">&quot;id&quot;</span></code>
+values in the feature JSON files under <code class="docutils literal notranslate"><span class="pre">features/</span></code>.</p>
+</section>
+<section id="versioning-strategy">
+<h4>Versioning Strategy<a class="headerlink" href="#versioning-strategy" title="Link to this heading">#</a></h4>
+<p>Use semantic versioning:</p>
+<ul class="simple">
+<li><p><strong>Major.Minor.Patch</strong> (e.g., <code class="docutils literal notranslate"><span class="pre">1.0.0</span></code>)</p></li>
+<li><p><strong>Major</strong>: Breaking changes</p></li>
+<li><p><strong>Minor</strong>: New functionality (backward compatible)</p></li>
+<li><p><strong>Patch</strong>: Bug fixes (backward compatible)</p></li>
+</ul>
+</section>
+</section>
+<section id="step-3-add-requirements">
+<h3>Step 3: Add Requirements<a class="headerlink" href="#step-3-add-requirements" title="Link to this heading">#</a></h3>
+<p>Identify and list all requirements your feature depends on:</p>
+<ol class="arabic simple">
+<li><p><strong>Browse existing capabilities</strong> in <code class="docutils literal notranslate"><span class="pre">nv_core/sr_specs/docs/capabilities/</span></code></p></li>
+<li><p><strong>Select relevant requirements</strong> from each capability</p></li>
+<li><p><strong>List requirement IDs</strong> in the JSON file</p></li>
+<li><p><strong>Document requirement details</strong> in the markdown file</p></li>
+</ol>
+<section id="example-requirements-section">
+<h4>Example Requirements Section<a class="headerlink" href="#example-requirements-section" title="Link to this heading">#</a></h4>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gu">#### Requirements </span>
+<span class="k">*</span><span class="w"> </span>Capability: [<span class="nt">Core/Atomic_Asset</span>](<span class="na">../capabilities/core/atomic_asset/capability-atomic_asset.md</span>)
+<span class="w">    </span><span class="k">*</span><span class="w"> </span>Requirements
+<span class="w">        </span><span class="k">*</span><span class="w"> </span>[<span class="nt">Anchored-Asset-Paths</span>](<span class="na">../capabilities/core/atomic_asset/requirements/anchored-asset-paths.md</span>)
+<span class="w">            </span><span class="k">*</span><span class="w"> </span>AA.001 | version 0.1.0
+<span class="w">            </span><span class="k">*</span><span class="w"> </span>[<span class="nt">Rule | Implementation</span>](<span class="na">../capabilities/core/atomic_asset/validation.py</span>)
+<span class="w">        </span><span class="k">*</span><span class="w"> </span>[<span class="nt">Supported-File-Types</span>](<span class="na">../capabilities/core/atomic_asset/requirements/supported-file-types.md</span>)
+<span class="w">            </span><span class="k">*</span><span class="w"> </span>AA.002 | version 0.1.0
+<span class="w">            </span><span class="k">*</span><span class="w"> </span>[<span class="nt">Rule | Implementation</span>](<span class="na">../capabilities/core/atomic_asset/validation.py</span>)
+</pre></div>
+</div>
+</section>
+</section>
+<section id="step-4-place-into-feature-folder">
+<h3>Step 4: Place into Feature Folder<a class="headerlink" href="#step-4-place-into-feature-folder" title="Link to this heading">#</a></h3>
+<p>Place your feature files in:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">simready_foundation</span><span class="o">/</span><span class="n">nv_core</span><span class="o">/</span><span class="n">sr_specs</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">features</span><span class="o">/</span>
+</pre></div>
+</div>
+<p><strong>File naming convention:</strong></p>
+<ul class="simple">
+<li><p>JSON: <code class="docutils literal notranslate"><span class="pre">FET_###_base_[tech]-[version]-[description].json</span></code></p></li>
+<li><p>Markdown: <code class="docutils literal notranslate"><span class="pre">FET_###-[description].md</span></code></p></li>
+</ul>
+<p><strong>Examples:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">FET_001_base_neutral-1.0.0-minimal.json</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FET_001-minimal.md</span></code></p></li>
+</ul>
+</section>
+<section id="step-5-add-new-feature-to-features-index">
+<h3>Step 5: Add New Feature to Features Index<a class="headerlink" href="#step-5-add-new-feature-to-features-index" title="Link to this heading">#</a></h3>
+<p>Update <code class="docutils literal notranslate"><span class="pre">nv_core/sr_specs/docs/features/features.md</span></code>:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gh"># Features</span>
+
+```{toctree}
+:maxdepth: 1
+
+ID:001 - Minimal - Base &lt;FET_001-minimal&gt;
+ID:002 - Posable Bodies - Base &lt;FET_002-posable_bodies&gt;
+ID:003 - RBD Physics - Base &lt;FET_003-rigid_body_physics&gt;
+ID:004 - Simulate Multi-Body Physics - Base &lt;FET_004-simulate_multi_body_physics&gt;
+ID:005 - Simulate Grasp Physics - Base &lt;FET_005-simulate_grasp_physics&gt;
+ID:000 - Sample Feature - Base &lt;FET_000-new_feature&gt;
+</pre></div>
+</div>
+</section>
+<section id="step-6-use-in-a-profile">
+<h3>Step 6: Use in a Profile<a class="headerlink" href="#step-6-use-in-a-profile" title="Link to this heading">#</a></h3>
+<p>Features are used in profiles to define what capabilities an asset must have. Here’s an example profile:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[Prop-Robotics-Physx]</span>
+<span class="s2">&quot;1.0.0&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Minimal&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET003_BASE_PHYSX&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;RBD Physics&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET004_BASE_PHYSX&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Simulate Multi-Body Physics and SDF collision approximation&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET005_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Simulate Grasp Physics&quot;</span>
+
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET000_NEW_FEATURE&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;New Feature&quot;</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+</section>
+<section id="expanding-a-feature">
+<h3>Expanding a feature<a class="headerlink" href="#expanding-a-feature" title="Link to this heading">#</a></h3>
+<p><strong>Expanding a feature</strong> means adding a technology-specific requirement that <em>replaces</em> a base (e.g. neutral) requirement when the technology supports an exception or extension that the base requirement does not allow. The base and expanded requirements are mutually exclusive for the same feature: a single feature uses one or the other, depending on the profile.</p>
+<section id="when-to-expand">
+<h4>When to expand<a class="headerlink" href="#when-to-expand" title="Link to this heading">#</a></h4>
+<p>Use an expansion when:</p>
+<ul class="simple">
+<li><p>A technology (e.g. PhysX) supports a valid pattern that the base spec forbids or does not define.</p></li>
+<li><p>Enforcing the base requirement would incorrectly fail assets that use that pattern.</p></li>
+<li><p>The two rules cannot both apply: satisfying the expanded rule can violate the base rule, so they must not coexist in the same requirement set.</p></li>
+</ul>
+</section>
+<section id="example-physx-col-001-and-rb-col-001">
+<h4>Example: PHYSX.COL.001 and RB.COL.001<a class="headerlink" href="#example-physx-col-001-and-rb-col-001" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>RB.COL.001</strong> (base / neutral): Every shape (UsdGeom Gprim) must have a collider; CollisionAPI cannot be applied to Xforms. This matches the basic USD/UsdPhysics model where merged mesh is not available.</p></li>
+<li><p><strong>PHYSX.COL.001</strong> (expansion): Same idea—colliders must be well-defined—but adds an exception: a shape does <em>not</em> need its own collider if it is covered by a <strong>merged mesh collider</strong>. In PhysX, an Xform with <strong>PhysxMeshMergeCollisionAPI</strong> acts as an umbrella collider for all sibling geometry (at any depth) via its collisionmeshes collection. So both “per-shape collider” and “merged mesh collider” are valid under PHYSX.COL.001.</p></li>
+</ul>
+<p>Assets using a merged mesh collider would fail RB.COL.001 (no per-shape collider). So the two requirements cannot both be in the same feature: the neutral RBD feature uses RB.COL.001; the PhysX RBD feature uses PHYSX.COL.001 (and related PHYSX collider requirements) instead.</p>
+</section>
+<section id="how-to-implement-an-expansion">
+<h4>How to implement an expansion<a class="headerlink" href="#how-to-implement-an-expansion" title="Link to this heading">#</a></h4>
+<ol class="arabic">
+<li><p><strong>Add the new requirement</strong><br />
+Create the capability and requirement documentation (e.g. <code class="docutils literal notranslate"><span class="pre">physx-collider-capability.md</span></code> for PHYSX.COL.001) that states the expanded rule and its exceptions.</p></li>
+<li><p><strong>Define the tech-specific feature requirement list</strong><br />
+In the technology-specific feature (e.g. <code class="docutils literal notranslate"><span class="pre">FET003_BASE_PHYSX</span></code>), start from the base feature’s full requirement list. Then:</p>
+<ul class="simple">
+<li><p><strong>Remove</strong> the base requirement(s) being replaced (e.g. RB.COL.001, and if applicable RB.COL.002).</p></li>
+<li><p><strong>Add</strong> the new requirement(s) (e.g. PHYSX.COL.001, PHYSX.COL.002).</p></li>
+</ul>
+<p>The tech feature then carries an explicit, full list of requirements; it does not depend on the base feature for those requirements so that the expanded rule replaces the base rule rather than adding to it.</p>
+</li>
+<li><p><strong>Wire profiles</strong><br />
+Profiles choose which feature (and thus which requirement) applies:</p>
+<ul class="simple">
+<li><p><strong>Neutral profile</strong> (e.g. Prop-Robotics-Neutral): uses the base feature (e.g. <code class="docutils literal notranslate"><span class="pre">FET003_BASE_NEUTRAL</span></code>) and therefore RB.COL.001.</p></li>
+<li><p><strong>PhysX profile</strong> (e.g. Prop-Robotics-Physx): uses the tech feature (e.g. <code class="docutils literal notranslate"><span class="pre">FET003_BASE_PHYSX</span></code>) and therefore PHYSX.COL.001.</p></li>
+</ul>
+</li>
+</ol>
+<p><strong>Concrete example:</strong> <code class="docutils literal notranslate"><span class="pre">FET_003_base_neutral-0.1.0-rigid_body_physics.json</span></code> includes <code class="docutils literal notranslate"><span class="pre">RB.COL.001</span></code> in its requirements. <code class="docutils literal notranslate"><span class="pre">FET_003_base_physx-0.2.0-rigid_body_physics.json</span></code> lists all other rigid-body requirements from the base feature but omits <code class="docutils literal notranslate"><span class="pre">RB.COL.001</span></code> (and RB.COL.002) and adds <code class="docutils literal notranslate"><span class="pre">PHYSX.COL.001</span></code> and <code class="docutils literal notranslate"><span class="pre">PHYSX.COL.002</span></code> so that both per-shape and merged-mesh colliders are valid under the PhysX spec.</p>
+</section>
+</section>
+</section>
+<section id="feature-dependencies">
+<h2>Feature Dependencies<a class="headerlink" href="#feature-dependencies" title="Link to this heading">#</a></h2>
+<section id="what-are-dependencies">
+<h3>What are Dependencies?<a class="headerlink" href="#what-are-dependencies" title="Link to this heading">#</a></h3>
+<p><strong>Dependencies</strong> are references to other features that your feature requires. When specified, the validation system will:</p>
+<ol class="arabic simple">
+<li><p><strong>Automatically include</strong> all requirements from dependent features</p></li>
+<li><p><strong>Recursively resolve</strong> nested dependencies (features that depend on other features)</p></li>
+<li><p><strong>Validate against</strong> the complete set of requirements from all dependencies</p></li>
+<li><p><strong>Ensure consistency</strong> across related feature sets</p></li>
+</ol>
+</section>
+<section id="dependency-structure">
+<h3>Dependency Structure<a class="headerlink" href="#dependency-structure" title="Link to this heading">#</a></h3>
+<p>Dependencies are defined in the JSON file as an array of objects:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;FET_003_BASE_PHYSX&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Format:</strong></p>
+<ul class="simple">
+<li><p><strong>Feature ID</strong>: The ID of the dependent feature (e.g., <code class="docutils literal notranslate"><span class="pre">FET_001</span></code>)</p></li>
+<li><p><strong>Version</strong>: Specific version requirement (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;0.1.0&quot;</span></code>)</p></li>
+<li><p><strong>Multiple Dependencies</strong>: Can specify multiple features in the array</p></li>
+</ul>
+</section>
+<section id="how-dependencies-work">
+<h3>How Dependencies Work<a class="headerlink" href="#how-dependencies-work" title="Link to this heading">#</a></h3>
+<section id="automatic-requirement-resolution">
+<h4>Automatic Requirement Resolution<a class="headerlink" href="#automatic-requirement-resolution" title="Link to this heading">#</a></h4>
+<p>When a feature has dependencies, the validation system automatically:</p>
+<ol class="arabic simple">
+<li><p><strong>Loads all requirements</strong> from the specified dependent features</p></li>
+<li><p><strong>Combines requirements</strong> with the feature’s own requirements</p></li>
+<li><p><strong>Creates a complete validation set</strong> for the asset</p></li>
+<li><p><strong>Ensures no conflicts</strong> between feature requirements</p></li>
+</ol>
+</section>
+<section id="example-dependency-chain">
+<h4>Example: Dependency Chain<a class="headerlink" href="#example-dependency-chain" title="Link to this heading">#</a></h4>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="c1">// Feature A depends on Feature B</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FET_A&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;FET_B&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;REQ_A.001&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1">// Feature B depends on Feature C</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FET_B&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;FET_C&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;REQ_B.001&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1">// Feature C has no dependencies</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FET_C&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;REQ_C.001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;REQ_C.002&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Result:</strong> When validating <code class="docutils literal notranslate"><span class="pre">FET_A</span></code>, the system will validate against:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">REQ_A.001</span></code> (from FET_A)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">REQ_B.001</span></code> (from FET_B dependency)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">REQ_C.001</span></code>, <code class="docutils literal notranslate"><span class="pre">REQ_C.002</span></code> (from FET_C dependency of FET_B)</p></li>
+</ul>
+</section>
+<section id="version-compatibility">
+<h4>Version Compatibility<a class="headerlink" href="#version-compatibility" title="Link to this heading">#</a></h4>
+<p>Dependencies specify exact version requirements to ensure compatibility:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;FET003_BASE_PHYSX&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Version values must be exact semantic versions (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;0.1.0&quot;</span></code>) matching
+an existing feature JSON file’s <code class="docutils literal notranslate"><span class="pre">&quot;version&quot;</span></code> field.</p>
+</section>
+</section>
+<section id="benefits-of-using-dependencies">
+<h3>Benefits of Using Dependencies<a class="headerlink" href="#benefits-of-using-dependencies" title="Link to this heading">#</a></h3>
+<section id="code-reuse">
+<h4>1. <strong>Code Reuse</strong><a class="headerlink" href="#code-reuse" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Avoid duplicating requirements across features</p></li>
+<li><p>Build complex features from simpler building blocks</p></li>
+<li><p>Maintain consistency across related feature sets</p></li>
+</ul>
+</section>
+<section id="automatic-validation">
+<h4>2. <strong>Automatic Validation</strong><a class="headerlink" href="#automatic-validation" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>No need to manually track dependent requirements</p></li>
+<li><p>System automatically validates against all dependencies</p></li>
+<li><p>Reduces human error in requirement specification</p></li>
+</ul>
+</section>
+<section id="maintainability">
+<h4>3. <strong>Maintainability</strong><a class="headerlink" href="#maintainability" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Update requirements in one place (the base feature)</p></li>
+<li><p>Changes automatically propagate to dependent features</p></li>
+<li><p>Easier to manage complex requirement relationships</p></li>
+</ul>
+</section>
+<section id="clear-relationships">
+<h4>4. <strong>Clear Relationships</strong><a class="headerlink" href="#clear-relationships" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Document how features relate to each other</p></li>
+<li><p>Make feature hierarchies explicit and traceable</p></li>
+<li><p>Help developers understand feature dependencies</p></li>
+</ul>
+</section>
+</section>
+<section id="best-practices-for-dependencies">
+<h3>Best Practices for Dependencies<a class="headerlink" href="#best-practices-for-dependencies" title="Link to this heading">#</a></h3>
+<section id="keep-dependencies-minimal">
+<h4>1. <strong>Keep Dependencies Minimal</strong><a class="headerlink" href="#keep-dependencies-minimal" title="Link to this heading">#</a></h4>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="c1">// Good: Only depend on what you actually need</span>
+<span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}</span><span class="w">  </span><span class="c1">// Core minimal requirements</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">]</span>
+
+<span class="c1">// Avoid: Don&#39;t depend on features you don&#39;t actually use</span>
+<span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;FET002_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">},</span><span class="w">  </span><span class="c1">// Unused dependency</span>
+<span class="w">        </span><span class="nt">&quot;FET003_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}</span><span class="w">   </span><span class="c1">// Unused dependency</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="use-specific-versions">
+<h4>2. <strong>Use Specific Versions</strong><a class="headerlink" href="#use-specific-versions" title="Link to this heading">#</a></h4>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="c1">// Good: Specify exact versions for stability</span>
+<span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">]</span>
+
+<span class="c1">// Avoid: Using version ranges that could cause instability</span>
+<span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;=0.1.0&quot;</span><span class="p">}</span><span class="w">  </span><span class="c1">// Could break with future changes</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="document-dependency-purpose">
+<h4>3. <strong>Document Dependency Purpose</strong><a class="headerlink" href="#document-dependency-purpose" title="Link to this heading">#</a></h4>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="c1">// Good: Add comments explaining why dependencies are needed</span>
+<span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}</span><span class="w">  </span><span class="c1">// Provides core asset validation</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;FET_003_BASE_PHYSX&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}</span><span class="w">  </span><span class="c1">// Provides physics requirements</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="avoid-circular-dependencies">
+<h4>4. <strong>Avoid Circular Dependencies</strong><a class="headerlink" href="#avoid-circular-dependencies" title="Link to this heading">#</a></h4>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="c1">// BAD: This creates a circular dependency that will cause errors</span>
+<span class="c1">// Feature A depends on Feature B</span>
+<span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;FET_B&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">]</span>
+
+<span class="c1">// Feature B depends on Feature A (circular!)</span>
+<span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;FET_A&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="dependency-validation">
+<h3>Dependency Validation<a class="headerlink" href="#dependency-validation" title="Link to this heading">#</a></h3>
+<p>The system automatically validates dependencies to ensure:</p>
+<ol class="arabic simple">
+<li><p><strong>All dependent features exist</strong> in the system</p></li>
+<li><p><strong>Specified versions are available</strong> and compatible</p></li>
+<li><p><strong>No circular dependencies</strong> are created</p></li>
+<li><p><strong>Requirements can be resolved</strong> without conflicts</p></li>
+</ol>
+<section id="validation-errors">
+<h4>Validation Errors<a class="headerlink" href="#validation-errors" title="Link to this heading">#</a></h4>
+<p>Common dependency validation errors:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="c1">// Error: Feature doesn&#39;t exist</span>
+<span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;NONEXISTENT_FEATURE&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">]</span>
+
+<span class="c1">// Error: Version doesn&#39;t exist</span>
+<span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;99.99.99&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">]</span>
+
+<span class="c1">// Error: Circular dependency detected</span>
+<span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}</span><span class="w">  </span><span class="c1">// Creates circular reference</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="example-complete-feature-with-dependencies">
+<h3>Example: Complete Feature with Dependencies<a class="headerlink" href="#example-complete-feature-with-dependencies" title="Link to this heading">#</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FET004_BASE_PHYSX&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;display_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Simulate Multi-Body Physics&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;features/FET_004-simulate_multi_body_physics.html&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;FET003_BASE_PHYSX&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;JT.001&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;JT.002&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;RB.MB.001&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>What this means:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">FET004_BASE_PHYSX</span></code> automatically includes all requirements from:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">FET003_BASE_PHYSX</span></code> (rigid body physics requirements)</p></li>
+</ul>
+</li>
+<li><p>Plus its own specific requirements: <code class="docutils literal notranslate"><span class="pre">JT.001</span></code>, <code class="docutils literal notranslate"><span class="pre">JT.002</span></code>, <code class="docutils literal notranslate"><span class="pre">RB.MB.001</span></code></p></li>
+<li><p>Total validation set: All requirements from both features</p></li>
+</ul>
+</section>
+</section>
+<section id="feature-documentation-best-practices">
+<h2>Feature Documentation Best Practices<a class="headerlink" href="#feature-documentation-best-practices" title="Link to this heading">#</a></h2>
+<section id="content-structure">
+<h3>Content Structure<a class="headerlink" href="#content-structure" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Clear Description</strong>: Explain what the feature does and why it’s needed</p></li>
+<li><p><strong>Requirements Mapping</strong>: Clearly link to all required capabilities and requirements</p></li>
+<li><p><strong>Version History</strong>: Document changes between versions</p></li>
+<li><p><strong>Testing Procedures</strong>: Include both manual and automated testing steps</p></li>
+<li><p><strong>Examples</strong>: Provide sample assets and use cases</p></li>
+</ol>
+</section>
+<section id="markdown-formatting">
+<h3>Markdown Formatting<a class="headerlink" href="#markdown-formatting" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use consistent heading levels</p></li>
+<li><p>Include proper links to related documentation</p></li>
+<li><p>Use tables for structured information</p></li>
+<li><p>Include code blocks for examples</p></li>
+<li><p>Use admonitions for important notes</p></li>
+</ul>
+</section>
+<section id="validation-integration">
+<h3>Validation Integration<a class="headerlink" href="#validation-integration" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Link to validation rules and implementations</p></li>
+<li><p>Include testing procedures</p></li>
+<li><p>Document expected outcomes</p></li>
+<li><p>Provide troubleshooting guidance</p></li>
+</ul>
+</section>
+</section>
+<section id="testing-your-feature">
+<h2>Testing Your Feature<a class="headerlink" href="#testing-your-feature" title="Link to this heading">#</a></h2>
+<section id="manual-testing">
+<h3>Manual Testing<a class="headerlink" href="#manual-testing" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Create test assets</strong> that should pass validation</p></li>
+<li><p><strong>Create test assets</strong> that should fail validation</p></li>
+<li><p><strong>Verify requirement coverage</strong> is complete</p></li>
+<li><p><strong>Test in different contexts</strong> (various asset types)</p></li>
+</ol>
+</section>
+<section id="automated-testing">
+<h3>Automated Testing<a class="headerlink" href="#automated-testing" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Unit tests</strong> for individual requirements</p></li>
+<li><p><strong>Integration tests</strong> for feature combinations</p></li>
+<li><p><strong>End-to-end validation</strong> with real assets</p></li>
+<li><p><strong>Performance testing</strong> for large assets</p></li>
+</ol>
+</section>
+</section>
+<section id="common-pitfalls">
+<h2>Common Pitfalls<a class="headerlink" href="#common-pitfalls" title="Link to this heading">#</a></h2>
+<section id="avoid-these-mistakes">
+<h3>Avoid These Mistakes<a class="headerlink" href="#avoid-these-mistakes" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Missing Requirements</strong>: Ensure all dependencies are listed</p></li>
+<li><p><strong>Incorrect Versioning</strong>: Use semantic versioning consistently</p></li>
+<li><p><strong>Poor Documentation</strong>: Write clear, comprehensive descriptions</p></li>
+<li><p><strong>Missing Tests</strong>: Include both manual and automated testing</p></li>
+<li><p><strong>Broken Links</strong>: Verify all internal links work correctly</p></li>
+</ol>
+</section>
+<section id="best-practices">
+<h3>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Start Simple</strong>: Begin with minimal requirements and expand</p></li>
+<li><p><strong>Document Everything</strong>: Include examples, tests, and troubleshooting</p></li>
+<li><p><strong>Version Control</strong>: Track changes between versions</p></li>
+<li><p><strong>Peer Review</strong>: Have others review your feature documentation</p></li>
+<li><p><strong>Regular Updates</strong>: Keep documentation current with implementation</p></li>
+</ol>
+</section>
+</section>
+<section id="getting-help">
+<h2>Getting Help<a class="headerlink" href="#getting-help" title="Link to this heading">#</a></h2>
+<p>If you need assistance creating or modifying features:</p>
+<ol class="arabic simple">
+<li><p><strong>Review existing features</strong> for examples</p></li>
+<li><p><strong>Check the capabilities directory</strong> for available requirements</p></li>
+<li><p><strong>Consult the testing framework</strong> for validation procedures</p></li>
+<li><p><strong>Ask the development team</strong> for guidance on complex features</p></li>
+</ol>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>This guide covers the essentials for understanding and creating features in the SimReady Foundation system, including feature JSON and markdown structure, dependency management, variant naming conventions, and testing procedures.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../acceptance_workflow.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">SimReady Acceptance Workflow</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../feature_adapters/feature_adapters.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Feature Adapters Documentation Guide</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-this-guide">About this guide</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-feature">What is a Feature?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-structure">Feature Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-feature-definition">Example Feature Definition</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-new-feature">Creating a New Feature</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-create-feature-json-and-md-from-sample">Step 1: Create Feature JSON and MD from Sample</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-feature-json-fet-000-base-neutral-new-feature-json">Sample Feature JSON (<code class="docutils literal notranslate"><span class="pre">FET_000_base_neutral-new_feature.json</span></code>)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-feature-markdown-fet-000-new-feature-md">Sample Feature Markdown (<code class="docutils literal notranslate"><span class="pre">FET_000-new_feature.md</span></code>)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-generate-feature-id-and-version">Step 2: Generate Feature ID and Version</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-id-convention">Feature ID Convention</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#versioning-strategy">Versioning Strategy</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-add-requirements">Step 3: Add Requirements</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-requirements-section">Example Requirements Section</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-place-into-feature-folder">Step 4: Place into Feature Folder</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-add-new-feature-to-features-index">Step 5: Add New Feature to Features Index</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-use-in-a-profile">Step 6: Use in a Profile</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expanding-a-feature">Expanding a feature</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-expand">When to expand</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-physx-col-001-and-rb-col-001">Example: PHYSX.COL.001 and RB.COL.001</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-implement-an-expansion">How to implement an expansion</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-dependencies">Feature Dependencies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-dependencies">What are Dependencies?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependency-structure">Dependency Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-dependencies-work">How Dependencies Work</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-requirement-resolution">Automatic Requirement Resolution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-dependency-chain">Example: Dependency Chain</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#version-compatibility">Version Compatibility</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#benefits-of-using-dependencies">Benefits of Using Dependencies</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#code-reuse">1. <strong>Code Reuse</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-validation">2. <strong>Automatic Validation</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#maintainability">3. <strong>Maintainability</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#clear-relationships">4. <strong>Clear Relationships</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-dependencies">Best Practices for Dependencies</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#keep-dependencies-minimal">1. <strong>Keep Dependencies Minimal</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#use-specific-versions">2. <strong>Use Specific Versions</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#document-dependency-purpose">3. <strong>Document Dependency Purpose</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#avoid-circular-dependencies">4. <strong>Avoid Circular Dependencies</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependency-validation">Dependency Validation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-errors">Validation Errors</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-complete-feature-with-dependencies">Example: Complete Feature with Dependencies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-documentation-best-practices">Feature Documentation Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#content-structure">Content Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown-formatting">Markdown Formatting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-integration">Validation Integration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-your-feature">Testing Your Feature</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-testing">Manual Testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#automated-testing">Automated Testing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-pitfalls">Common Pitfalls</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#avoid-these-mistakes">Avoid These Mistakes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-help">Getting Help</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

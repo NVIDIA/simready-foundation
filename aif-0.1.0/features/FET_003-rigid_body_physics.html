@@ -1,0 +1,1609 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Feature: ID:003 - RBD Physics - Base &#8212; SimReady Foundation AIF 0.1.0 (Preview)</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/tags.css?v=f64b827a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+
+
+    <script src="../_static/documentation_options.js?v=0ee7d50d"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=fd10adb8"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = `pre.mermaid {
+    /* Same as .mermaid-container > pre */
+    display: block;
+    width: 100%;
+}
+
+pre.mermaid > svg {
+    /* Same as .mermaid-container > pre > svg */
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}`;
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = `.mermaid-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.mermaid-container > pre {
+    display: block;
+    width: 100%;
+}
+
+.mermaid-container > pre > svg {
+    height: 500px;
+    width: 100%;
+    max-width: 100% !important;
+}
+
+.mermaid-fullscreen-btn {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    color: #333;
+}
+
+.mermaid-fullscreen-btn:hover {
+    opacity: 100% !important;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-btn.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-btn.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 95vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    z-index: 9999;
+    padding: 20px;
+    overflow: auto;
+}
+
+.mermaid-fullscreen-modal.dark-theme {
+    background: rgba(0, 0, 0, 0.98);
+}
+
+.mermaid-fullscreen-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen {
+    position: relative;
+    width: 95vw;
+    height: 90vh;
+    max-width: 95vw;
+    max-height: 90vh;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen.dark-theme {
+    background: #1a1a1a;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.mermaid-container-fullscreen pre.mermaid {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mermaid-container-fullscreen .mermaid svg {
+    height: 100% !important;
+    width: 100% !important;
+    cursor: grab;
+}
+
+.mermaid-fullscreen-close {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+    font-size: 24px;
+    line-height: 1;
+    color: #333;
+}
+
+.mermaid-fullscreen-close:hover {
+    background: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
+}
+
+.mermaid-fullscreen-close.dark-theme {
+    background: rgba(50, 50, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+}
+
+.mermaid-fullscreen-close.dark-theme:hover {
+    background: rgba(60, 60, 60, 1);
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+}
+
+.mermaid-fullscreen-modal .mermaid-fullscreen-btn {
+    display: none !important;
+}`;
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+let _lazyObserver = null;
+let _renderQueue = Promise.resolve();
+
+// Apply d3 zoom to each SVG. Idempotent: an SVG already wrapped is skipped,
+// so this is safe to call both for the initial batch and for diagrams that
+// render lazily once they become visible.
+const addZoomToSvgs = (svgs) => {
+    svgs.each(function() {
+        if (this.getAttribute('data-zoom-applied') === 'true') return;
+        var svg = d3.select(this);
+        svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+        var inner = svg.select("g");
+        var zoom = d3.zoom().on("zoom", function(event) {
+            inner.attr("transform", event.transform);
+        });
+        svg.call(zoom);
+        this.setAttribute('data-zoom-applied', 'true');
+    });
+};
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        // Disconnect any previous lazy rendering observer
+        if (_lazyObserver) {
+            _lazyObserver.disconnect();
+            _lazyObserver = null;
+        }
+
+        all_mermaids.forEach((el) => {
+            el.removeAttribute('data-mermaid-deferred');
+            el.removeAttribute('data-mermaid-render-failed');
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+
+        // Separate visible and hidden elements. Mermaid's layout engine measures
+        // text dimensions via the DOM, which fails for elements hidden by a parent
+        // (e.g., Reveal.js non-active slides, sphinx-design unopened tabs),
+        // producing broken SVGs. Render visible elements now, defer hidden ones.
+        const visible = [];
+        const hidden = [];
+        all_mermaids.forEach((el) => {
+            // offsetParent is null for display:none ancestors.
+            // getClientRects().length > 0 catches position:fixed elements
+            // (which also have null offsetParent but are still visible).
+            if (el.offsetParent !== null || el.getClientRects().length > 0) {
+                visible.push(el);
+            } else {
+                hidden.push(el);
+                el.setAttribute('data-mermaid-deferred', 'true');
+            }
+        });
+
+        if (visible.length > 0) {
+            try {
+                await mermaid.run({ nodes: visible });
+            } catch (e) {
+                console.error("Mermaid rendering failed:", e);
+            }
+        }
+
+        // Lazily render hidden elements when they become visible.
+        // Uses a promise chain (_renderQueue) to serialize rendering,
+        // since IntersectionObserver may report multiple entries at once
+        // and mermaid.run() is not safe to call concurrently.
+        if (hidden.length > 0) {
+            if (typeof IntersectionObserver === 'undefined') {
+                console.warn("IntersectionObserver not available; hidden mermaid diagrams will not render.");
+            } else {
+                _renderQueue = Promise.resolve();
+                _lazyObserver = new IntersectionObserver((entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting && entry.target.getAttribute("data-processed") !== "true") {
+                            _lazyObserver.unobserve(entry.target);
+                            const el = entry.target;
+                            _renderQueue = _renderQueue.then(async () => {
+                                try {
+                                    await mermaid.run({ nodes: [el] });
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    // Apply zoom to the now-rendered diagram, matching
+                                    // the decoration visible diagrams receive.
+                                    if ("False" === "True") {
+                                        addZoomToSvgs(d3.selectAll(""));
+                                    }
+                                } catch (e) {
+                                    console.error("Mermaid deferred rendering failed:", e);
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    el.setAttribute('data-mermaid-render-failed', 'true');
+                                }
+                            });
+                        }
+                    }
+                });
+                hidden.forEach((el) => _lazyObserver.observe(el));
+            }
+        }
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    // Exclude deferred (hidden) and render-failed elements from completion checks
+    const mermaids_active = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])");
+    const mermaids_processed = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])[data-processed='true']");
+
+    if ("False" === "True") {
+        const mermaids_to_add_zoom = -1 === -1 ? mermaids_active.length : -1;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("");
+            // Wait until every active (visible) diagram has rendered. Deferred
+            // diagrams are excluded, so a fixed d3_node_count that counts a
+            // hidden diagram no longer loops forever waiting for its SVG.
+            if(mermaids_active.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            }
+            addZoomToSvgs(svgs);
+        }
+    } else if(mermaids_active.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if ("True" !== "True") return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = '⛶';
+        fullscreenBtn.style.opacity = '50%';
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scroll, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.sdisplay = 'block';
+
+                if ("False" === "True") {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+const load = async () => {
+    initStyles();
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...JSON.parse(
+                    `{"startOnLoad": false}`
+                ),
+                ...{ darkMode: darkTheme, theme: darkTheme ? 'dark' : 'default' },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...JSON.parse(
+        `{"startOnLoad": false}`
+    ),
+    ...{ darkMode: darkTheme, theme: darkTheme ? 'dark' : 'default' },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'features/FET_003-rigid_body_physics';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'aif-0.1.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+
+    <link rel="canonical" href="https://nvidia.github.io/simready-foundation/aif-0.1.0/features/FET_003-rigid_body_physics.html" />
+    <link rel="icon" href="../_static/favicon.png"/>
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Feature: ID:004 - Simulate Multi-Body Physics - Base" href="FET_004-simulate_multi_body_physics.html" />
+    <link rel="prev" title="Feature: ID:002 - Posable Bodies - Base" href="FET_002-posable_bodies.html" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="aif-0.1.0" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+
+
+  </head>
+
+  <body data-default-mode="">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="SimReady Foundation AIF 0.1.0 (Preview) - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="SimReady Foundation AIF 0.1.0 (Preview) - Home"/>
+  
+  
+    <p class="title logo__title">SimReady Foundation AIF 0.1.0 (Preview)</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-4"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-4"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-4"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-4">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="SimReady Foundation AIF 0.1.0 (Preview) - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="SimReady Foundation AIF 0.1.0 (Preview) - Home"/>
+  
+  
+    <p class="title logo__title">SimReady Foundation AIF 0.1.0 (Preview)</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-5"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-5"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-5"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-5">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-6"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-6"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-6"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-6">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../guides/guides.html">Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/validate_workflow.html">SimReady Validation Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/acceptance_workflow.html">SimReady Acceptance Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/features/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/feature_adapters/feature_adapters.html">Feature Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/profiles/profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/aif_validation.html">Validating an AIF Asset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/SimReady_learning_workflow.html">SimReady Learning Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/naming_conventions.html">Naming Conventions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../guides/development.html">Development Workflows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/features_expansion_workflow.html">Features Expansion Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../capabilities/capabilities.html">Capabilities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/core/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/visualization/visualization.html">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/isaac_sim/isaac_sim.html">Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/physics_bodies/physics_bodies.html">Physics Bodies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/hierarchy/hierarchy.html">Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/nonvisual_sensors/nonvisual_sensors.html">Non-Visual Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/semantic_labels/capability-semantic_labels.html">Semantic Labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/packaging/packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/example/example.html">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/aif/metadata/capability-metadata.html">AIF Core Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/aif/connection_points/capability-connection_points.html">Connection Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/aif/thermal_cooling/capability-thermal_cooling.html">AIF Thermal Cooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/aif/electrical/capability-electrical.html">AIF Electrical</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="features.html">Features</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="feature-dependency-graph.html">Feature dependency graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_000-base_neutral-0.1.0-core.html">ID:000 - Core - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_001-minimal.html">ID:001 - Minimal - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_002-posable_bodies.html">ID:002 - Posable Bodies - Base</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">ID:003 - RBD Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_004-simulate_multi_body_physics.html">ID:004 - Simulate Multi-Body Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_005-simulate_grasp_physics.html">ID:005 - Simulate Grasp Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_006-materials.html">ID:006 - Materials - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_007-nonvisual_materials.html">ID:007 - Non-Visual Materials - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_011-semantic_labels.html">ID:011 - Semantic Labels - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_100-isaacsim-0.1.0-composition.html">ID:100 - IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_021-robot_core.html">ID:021 - Core Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_022-driven_joints.html">ID:022 - Driven Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_023-robot_materials.html">ID:023 - Robot Materials - Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_024-base_articulation.html">ID:024 - Base Articulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_030-packaging_core.html">ID:030 - Packaging Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_031-package_self_contained.html">ID:031 - Package Self Contained</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_032-packaging_introspection.html">ID:032 - Packaging Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_033-simready_packaging.html">ID:033 - SimReady Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_200-aif_metadata.html">ID:200 - AIF Core Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_201-connection_points.html">ID:201 - Connection Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_202-thermal_cooling.html">ID:202 - AIF Thermal Cooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FET_203-electrical.html">ID:203 - AIF Electrical</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../profiles/profiles.html">Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/prop-robotics-neutral.html">Prop Robotics Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/prop-robotics-physx.html">Prop Robotics Physx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/prop-robotics-isaac.html">Prop Robotics Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-body-neutral.html">Robot Body Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-body-runnable.html">Robot Body Runnable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-body-isaac.html">Robot Body Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-gripper-neutral.html">Robot Gripper Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-gripper-isaac.html">Robot Gripper Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/aif-entity.html">AIF Entity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../indexes/indexes.html">Indexes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../indexes/capability_status_index.html">Capability Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../indexes/requirements_index.html">Requirements Index</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="features.html" class="nav-link">Features</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Feature: <code class="docutils literal notranslate"><span class="pre">ID:003</span> <span class="pre">-</span> <span class="pre">RBD</span> <span class="pre">Physics</span> <span class="pre">-</span> <span class="pre">Base</span></code></span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="feature-id-003-rbd-physics-base">
+<h1>Feature: <code class="docutils literal notranslate"><span class="pre">ID:003</span> <span class="pre">-</span> <span class="pre">RBD</span> <span class="pre">Physics</span> <span class="pre">-</span> <span class="pre">Base</span></code><a class="headerlink" href="#feature-id-003-rbd-physics-base" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Property</strong></p></th>
+<th class="head"><p><strong>Value</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Internal ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FET003_BASE_NEUTRAL</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading">#</a></h2>
+<p>Support for rigid body dynamics (RBD). This feature enables simulation of physically accurate motion and collisions for props and dynamic assets. It is suitable for testing, validation, or reference applications where basic physical interactions are required.</p>
+</section>
+<section id="dependency-graph">
+<h2>Dependency Graph<a class="headerlink" href="#dependency-graph" title="Link to this heading">#</a></h2>
+<pre  class="mermaid">
+        flowchart LR
+    FET003N[&quot;FET003_BASE_NEUTRAL\n0.1.0&quot;]
+    FET003P[&quot;FET003_BASE_PHYSX\n0.1.0&quot;]
+    FET004N[&quot;FET004_BASE_NEUTRAL\n0.1.0&quot;]
+    FET004P[&quot;FET004_BASE_PHYSX\n0.1.0&quot;]
+    FET100[&quot;FET100_BASE_ISAACSIM\n0.1.0&quot;]
+
+    FET003P --&gt; FET003N
+    FET004N --&gt; FET003N
+    FET004P --&gt; FET003P
+    FET100 --&gt; FET003P
+
+    classDef current fill:#90EE90,stroke:#333
+    classDef other fill:#fff,stroke:#333
+    class FET003N,FET003P current
+    class FET004N,FET004P,FET100 other
+    </pre></section>
+<section id="use-cases">
+<h2>Use Cases<a class="headerlink" href="#use-cases" title="Link to this heading">#</a></h2>
+<p>Products that consume this feature:</p>
+<ul class="simple">
+<li><p>IsaacSim</p></li>
+<li><p>MEGA</p></li>
+<li><p>Lightwheel SOW1</p></li>
+</ul>
+</section>
+<section id="neutral-format">
+<h2>Neutral Format<a class="headerlink" href="#neutral-format" title="Link to this heading">#</a></h2>
+<section id="version-0-1-0">
+<h3>Version 0.1.0<a class="headerlink" href="#version-0-1-0" title="Link to this heading">#</a></h3>
+<details>
+<summary><strong>Details</strong></summary>
+<section id="used-in-profiles">
+<h4>Used in Profiles<a class="headerlink" href="#used-in-profiles" title="Link to this heading">#</a></h4>
+<p>This version is used in the following profiles:</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="../profiles/prop-robotics-neutral.html"><span class="std std-doc">Prop Robotics Neutral Profile</span></a></strong> (v0.1.0) - Used as the core physics feature for basic rigid body dynamics</p></li>
+</ul>
+</section>
+<section id="requirements">
+<h4>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Capability: <a class="reference internal" href="../capabilities/physics_bodies/physics_rigid_bodies/capability-physics_rigid_bodies.html"><span class="std std-doc">Physics_Bodies/Physics_Rigid_Bodies</span></a></p>
+<ul>
+<li><p>Requirements:</p>
+<ul>
+<li><p><a class="reference internal" href="../capabilities/physics_bodies/physics_rigid_bodies/requirements/collider-capability.html"><span class="std std-doc">Collider-Capability</span></a></p>
+<ul>
+<li><p>RB.COL.001 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/53c2c1c8bf6790f7ccbc0b67cffe83c8/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../capabilities/physics_bodies/physics_rigid_bodies/requirements/collider-non-uniform-scale.html"><span class="std std-doc">Collider-Non-Uniform-Scale</span></a></p>
+<ul>
+<li><p>RB.COL.004 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/53c2c1c8bf6790f7ccbc0b67cffe83c8/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-capability.html"><span class="std std-doc">Rigid-Body-Capability</span></a></p>
+<ul>
+<li><p>RB.001 | Version 0.1.0</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-mass.html"><span class="std std-doc">Rigid-Body-Mass</span></a></p>
+<ul>
+<li><p>RB.007 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/53c2c1c8bf6790f7ccbc0b67cffe83c8/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-no-instancing.html"><span class="std std-doc">Rigid-Body-No-Instancing</span></a></p>
+<ul>
+<li><p>RB.005 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/53c2c1c8bf6790f7ccbc0b67cffe83c8/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-no-nesting.html"><span class="std std-doc">Rigid-Body-No-Nesting</span></a></p>
+<ul>
+<li><p>RB.006 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/53c2c1c8bf6790f7ccbc0b67cffe83c8/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-schema-application.html"><span class="std std-doc">Rigid-Body-Schema-Application</span></a></p>
+<ul>
+<li><p>RB.003 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/53c2c1c8bf6790f7ccbc0b67cffe83c8/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-schema-no-skew-matrix.html"><span class="std std-doc">Rigid-Body-Schema-No-Skew-Matrix</span></a></p>
+<ul>
+<li><p>RB.009 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/53c2c1c8bf6790f7ccbc0b67cffe83c8/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../capabilities/physics_bodies/physics_rigid_bodies/requirements/collider-mesh.html"><span class="std std-doc">Collider-Mesh</span></a></p>
+<ul>
+<li><p>RB.COL.003 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/53c2c1c8bf6790f7ccbc0b67cffe83c8/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../capabilities/physics_bodies/physics_rigid_bodies/requirements/mesh-collision-api.html"><span class="std std-doc">Mesh-Collision-API</span></a></p>
+<ul>
+<li><p>RB.COL.002 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/53c2c1c8bf6790f7ccbc0b67cffe83c8/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../capabilities/physics_bodies/physics_rigid_bodies/requirements/invisible-collision-mesh-has-purpose-guide.html"><span class="std std-doc">Invisible-Collision-Mesh-Has-Purpose</span></a></p>
+<ul>
+<li><p>RB.010 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/53c2c1c8bf6790f7ccbc0b67cffe83c8/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Capability: <a class="reference internal" href="../capabilities/core/atomic_asset/capability-atomic_asset.html"><span class="std std-doc">Core/Atomic_Asset</span></a></p>
+<ul>
+<li><p>Requirements</p>
+<ul>
+<li><p><a class="reference internal" href="../capabilities/core/atomic_asset/requirements/anchored-asset-paths.html"><span class="std std-doc">Anchored-Asset-Paths</span></a></p>
+<ul>
+<li><p>AA.001 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/c8ae81c7e66276674c7bb762fa0bfd9c/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../capabilities/core/atomic_asset/requirements/supported-file-types.html"><span class="std std-doc">Supported-File-Type</span></a></p>
+<ul>
+<li><p>AA.002 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/c8ae81c7e66276674c7bb762fa0bfd9c/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Capability: <a class="reference internal" href="../capabilities/core/units/requirements.html"><span class="std std-doc">Core/Units</span></a></p>
+<ul>
+<li><p>Requirements</p>
+<ul>
+<li><p><a class="reference internal" href="../capabilities/core/units/requirements/kilograms-per-unit.html"><span class="std std-doc">Kilograms-Per-Unit</span></a></p>
+<ul>
+<li><p>UN.003 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/7ef36ba0c6d3455247f5ee58a0df1897/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../capabilities/core/units/requirements/meters-per-unit.html"><span class="std std-doc">Meters-Per-Unit</span></a></p>
+<ul>
+<li><p>UN.002 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/7ef36ba0c6d3455247f5ee58a0df1897/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../capabilities/core/units/requirements/timecodes-per-second.html"><span class="std std-doc">Timecodes-Per-Second</span></a></p>
+<ul>
+<li><p>UN.005 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/7ef36ba0c6d3455247f5ee58a0df1897/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../capabilities/core/units/requirements/upaxis.html"><span class="std std-doc">Upaxis</span></a></p>
+<ul>
+<li><p>UN.001 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/7ef36ba0c6d3455247f5ee58a0df1897/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Capability: <a class="reference internal" href="../capabilities/visualization/geometry/capability-geometry.html"><span class="std std-doc">Visualization/Geometry</span></a></p>
+<ul>
+<li><p>Requirements</p>
+<ul>
+<li><p><a class="reference internal" href="../capabilities/visualization/geometry/requirements/at-least-one-imageable-geometry.html"><span class="std std-doc">At-Least-One-Imageable-Geometry</span></a></p>
+<ul>
+<li><p>VG.001 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/9d04b9a15c531cef818638cba41d99f3/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+<li><p><em><strong>Proposed</strong></em> <a class="reference internal" href="../capabilities/visualization/geometry/requirements/usdgeom-mesh-triangulation.html"><span class="std std-doc">UsdGeom-Mesh-Triangulation</span></a></p>
+<ul>
+<li><p>VG.021 | Version 0.1.0</p></li>
+<li><p>Description</p>
+<ul>
+<li><p>Error should be thrown if mesh is NOT triangles.  This has a can throw off automatic convex-hull generation if mesh is composed of NGONS.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../capabilities/visualization/geometry/requirements/usdgeom-mesh-manifold.html"><span class="std std-doc">UsdGeom-Mesh-Manifold</span></a></p>
+<ul>
+<li><p>VG.007 | Version 0.1.0</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/9d04b9a15c531cef818638cba41d99f3/validation.py"><span class="xref download myst">Rule | Implementation</span></a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Capability: <a class="reference internal" href="../capabilities/visualization/materials/capability-materials.html"><span class="std std-doc">Visualization/Materials</span></a></p>
+<ul>
+<li><p>Requirements</p>
+<ul>
+<li><p><a class="reference internal" href="../capabilities/visualization/materials/requirements/material-bind-scope.html"><span class="std std-doc">Material-Bind-Scope</span></a></p>
+<ul>
+<li><p>VM.BIND.001 | Version 0.1.0</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../capabilities/visualization/materials/requirements/material-preview-surface.html"><span class="std std-doc">Material-Preview-Surface</span></a></p>
+<ul>
+<li><p>VM.PS.001 | Version 0.1.0</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="pipelines-supported-for-this-feature">
+<h4>Pipelines Supported for this Feature<a class="headerlink" href="#pipelines-supported-for-this-feature" title="Link to this heading">#</a></h4>
+<p>Source file type:</p>
+<ul class="simple">
+<li><p>.blend</p>
+<ul>
+<li><p>Via Blender SimReady Add-ons</p></li>
+</ul>
+</li>
+<li><p>.mjcf</p>
+<ul>
+<li><p>Via Blender SimReady Add-ons + MJCF2USD Tool</p></li>
+</ul>
+</li>
+<li><p>.step</p>
+<ul>
+<li><p>Via Blender SimReady Add-ons + CAD Converter</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="unibody-rigidbody-samples">
+<h4>Unibody | Rigidbody Samples<a class="headerlink" href="#unibody-rigidbody-samples" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/c358cef150d686f9bc33eecb4eb3e30a/sm_obs_small_sledge_hammer_a01_01.usd"><span class="xref download myst">simready_usd/sm_obs_small_sledge_hammer_a01_01.usd</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/446d0226975758590a5eb644b250f652/sm_alcohol_a01_01.usd"><span class="xref download myst">simready_usd/sm_alcohol_a01_01.usd</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/52d9235f4da8f3c7378895ec7c875a29/sm_apple_a01_01.usd"><span class="xref download myst">simready_usd/sm_apple_a01_01.usd</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/a57aea2673dd3736acb326a4ce8bb87f/sm_obs_orange_a01_01.usd"><span class="xref download myst">simready_usd/sm_obs_orange_a01_01.usd</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/36cec47861189064ec1fd0fddf37c599/sm_coffee_cup_grasp_a01_01.usd"><span class="xref download myst">simready_usd/sm_coffee_cup_grasp_a01_01.usd</span></a></p></li>
+</ul>
+</section>
+<section id="test-process">
+<h4>Test Process<a class="headerlink" href="#test-process" title="Link to this heading">#</a></h4>
+<p>None</p>
+</details>
+</section>
+</section>
+</section>
+<section id="nvidia-physx-format">
+<h2>NVIDIA Physx Format<a class="headerlink" href="#nvidia-physx-format" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>Version 0.1.0<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<details>
+<summary><strong>Details</strong></summary>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Property</strong></p></th>
+<th class="head"><p><strong>Value</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Internal ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FET003_BASE_PHYSX</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Proprietary Techs</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Physx</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="id2">
+<h4>Used in Profiles<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<p>This version is used in the following profiles:</p>
+<ul class="simple">
+<li><p><strong><a class="reference internal" href="../profiles/prop-robotics-physx.html"><span class="std std-doc">Prop Robotics Physx Profile</span></a></strong> (v0.1.0) - Used as the core physics feature with advanced PhysX rigid body dynamics</p></li>
+</ul>
+</section>
+<section id="id3">
+<h4>Requirements<a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Property</strong></p></th>
+<th class="head"><p><strong>Value</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Dependency</p></td>
+<td><p><a class="reference internal" href="#version-0-1-0"><span class="std std-ref">ID:003 - RBD Physics - Base - Neutral Format - v0.1.0</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p>Capability: <a class="reference internal" href="../capabilities/physics_bodies/physics_rigid_bodies/capability-physics_rigid_bodies.html"><span class="std std-doc">Physics-Bodies/Physics-Rigid-Bodies</span></a></p>
+<ul>
+<li><p>Requirements:</p>
+<ul>
+<li><p><a class="reference internal" href="../capabilities/physics_bodies/physics_rigid_bodies/requirements/physx-collider-capability.html"><span class="std std-doc">PhysX-Collider-Capability</span></a></p>
+<ul>
+<li><p>PHYSX.COL.001 | Version 0.1.0</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id4">
+<h4>Pipelines Supported for this Feature<a class="headerlink" href="#id4" title="Link to this heading">#</a></h4>
+<p>None; Neutral Format is acceptable.</p>
+</section>
+<section id="id5">
+<h4>Unibody | Rigidbody Samples<a class="headerlink" href="#id5" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/2f467cdddffa91db8adce3bace416c1f/sm_obs_small_sledge_hammer_a01_01.usd"><span class="xref download myst">simready_physx_usd/sm_obs_small_sledge_hammer_a01_01.usd</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/6f68bef703c1acb4857d41000a39831e/sm_alcohol_a01_01.usd"><span class="xref download myst">simready_physx_usd/sm_alcohol_a01_01.usd</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/b08eb5ab6a114983f9af208ca9881385/sm_apple_a01_01.usd"><span class="xref download myst">simready_physx_usd/sm_apple_a01_01.usd</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/11a75a3057e64c483d4457bf30611e39/sm_obs_orange_a01_01.usd"><span class="xref download myst">simready_physx_usd/sm_obs_orange_a01_01.usd</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/4a9b1acecd7654f12d5470165ffe302b/sm_coffee_cup_grasp_a01_01.usd"><span class="xref download myst">simready_physx_usd/sm_coffee_cup_grasp_a01_01.usd</span></a></p></li>
+</ul>
+</section>
+<section id="id6">
+<h4>Test Process<a class="headerlink" href="#id6" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Obtain Isaac Sim 5 (release build)</p></li>
+<li><p>Launch Isaacsim.bat</p>
+<ul>
+<li><p>Launch isaacsim.bat</p></li>
+<li><p>In Isaac Sim, open this usd: <a class="reference internal" href="#../../../testing_tools/testing_data/runtime_physics_tests.usda"><span class="xref myst">test stage</span></a></p>
+<ul>
+<li><p>Can be manually located here: <code class="docutils literal notranslate"><span class="pre">nv_core/testing_tools/testing_data/runtime_physics_tests.usda</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Activate correct prim (right click + activate)</p>
+<ul>
+<li><p>Drop_On_Ground_Plane</p></li>
+<li><p>Drop_On_Tilted_Plane</p></li>
+</ul>
+</li>
+<li><p>Click on empty xform</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">/World/Drop_On_Tilted_Plane/StartPoint</span></code></p></li>
+</ul>
+</li>
+<li><p>Right click, add reference to (path), select Sample above.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">sample_content/common_assets/props_general/obs_small_sledge_hammer_a01/simready_physx_usd/sm_obs_small_sledge_hammer_a01_01.usd</span></code></p></li>
+</ul>
+</li>
+<li><p>Hit play button in UI.</p>
+<ul>
+<li><p>Press play to start sim</p></li>
+</ul>
+</li>
+<li><p>Expected result:</p>
+<ul>
+<li><p>Item should fall down and stop and settle after 5 seconds.</p></li>
+<li><p>Video Examples:</p>
+<ul>
+<li><p><a class="reference download internal" download="" href="../_downloads/696be322b41a265ea69de7e1b6e6e33d/drop_test.mp4"><span class="xref download myst">Drop test results video link</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/8a968443fb4e787f3c66fcfe496a955b/slope_test.mp4"><span class="xref download myst">Slope test results video link</span></a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</details></section>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="FET_002-posable_bodies.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Feature: <code class="docutils literal notranslate"><span class="pre">ID:002</span> <span class="pre">-</span> <span class="pre">Posable</span> <span class="pre">Bodies</span> <span class="pre">-</span> <span class="pre">Base</span></code></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="FET_004-simulate_multi_body_physics.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Feature: <code class="docutils literal notranslate"><span class="pre">ID:004</span> <span class="pre">-</span> <span class="pre">Simulate</span> <span class="pre">Multi-Body</span> <span class="pre">Physics</span> <span class="pre">-</span> <span class="pre">Base</span></code></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#description">Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependency-graph">Dependency Graph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-cases">Use Cases</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neutral-format">Neutral Format</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-1-0">Version 0.1.0</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#used-in-profiles">Used in Profiles</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pipelines-supported-for-this-feature">Pipelines Supported for this Feature</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unibody-rigidbody-samples">Unibody | Rigidbody Samples</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#test-process">Test Process</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nvidia-physx-format">NVIDIA Physx Format</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Version 0.1.0</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Used in Profiles</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Requirements</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Pipelines Supported for this Feature</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Unibody | Rigidbody Samples</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Test Process</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

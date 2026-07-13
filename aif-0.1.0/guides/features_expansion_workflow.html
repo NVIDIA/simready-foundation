@@ -1,0 +1,1070 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Adding a New Feature &#8212; SimReady Foundation AIF 0.1.0 (Preview)</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/tags.css?v=f64b827a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+
+
+    <script src="../_static/documentation_options.js?v=0ee7d50d"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=fd10adb8"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'guides/features_expansion_workflow';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'aif-0.1.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+
+    <link rel="canonical" href="https://nvidia.github.io/simready-foundation/aif-0.1.0/guides/features_expansion_workflow.html" />
+    <link rel="icon" href="../_static/favicon.png"/>
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Profiles Validation Workflow" href="profiles_validation_workflow.html" />
+    <link rel="prev" title="Development Workflows" href="development.html" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="aif-0.1.0" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+
+
+  </head>
+
+  <body data-default-mode="">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="SimReady Foundation AIF 0.1.0 (Preview) - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="SimReady Foundation AIF 0.1.0 (Preview) - Home"/>
+  
+  
+    <p class="title logo__title">SimReady Foundation AIF 0.1.0 (Preview)</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-4"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-4"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-4"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-4">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="SimReady Foundation AIF 0.1.0 (Preview) - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="SimReady Foundation AIF 0.1.0 (Preview) - Home"/>
+  
+  
+    <p class="title logo__title">SimReady Foundation AIF 0.1.0 (Preview)</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-5"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-5"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-5"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-5">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-6"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-6"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-6"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-6">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="guides.html">Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validate_workflow.html">SimReady Validation Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acceptance_workflow.html">SimReady Acceptance Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_adapters/feature_adapters.html">Feature Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiles/profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aif_validation.html">Validating an AIF Asset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SimReady_learning_workflow.html">SimReady Learning Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="naming_conventions.html">Naming Conventions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="development.html">Development Workflows</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Features Expansion Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../capabilities/capabilities.html">Capabilities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/core/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/visualization/visualization.html">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/isaac_sim/isaac_sim.html">Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/physics_bodies/physics_bodies.html">Physics Bodies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/hierarchy/hierarchy.html">Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/nonvisual_sensors/nonvisual_sensors.html">Non-Visual Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/semantic_labels/capability-semantic_labels.html">Semantic Labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/packaging/packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/example/example.html">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/aif/metadata/capability-metadata.html">AIF Core Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/aif/connection_points/capability-connection_points.html">Connection Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/aif/thermal_cooling/capability-thermal_cooling.html">AIF Thermal Cooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/aif/electrical/capability-electrical.html">AIF Electrical</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../features/features.html">Features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../features/feature-dependency-graph.html">Feature dependency graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_000-base_neutral-0.1.0-core.html">ID:000 - Core - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_001-minimal.html">ID:001 - Minimal - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_002-posable_bodies.html">ID:002 - Posable Bodies - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_003-rigid_body_physics.html">ID:003 - RBD Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_004-simulate_multi_body_physics.html">ID:004 - Simulate Multi-Body Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_005-simulate_grasp_physics.html">ID:005 - Simulate Grasp Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_006-materials.html">ID:006 - Materials - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_007-nonvisual_materials.html">ID:007 - Non-Visual Materials - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_011-semantic_labels.html">ID:011 - Semantic Labels - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_100-isaacsim-0.1.0-composition.html">ID:100 - IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_021-robot_core.html">ID:021 - Core Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_022-driven_joints.html">ID:022 - Driven Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_023-robot_materials.html">ID:023 - Robot Materials - Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_024-base_articulation.html">ID:024 - Base Articulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_030-packaging_core.html">ID:030 - Packaging Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_031-package_self_contained.html">ID:031 - Package Self Contained</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_032-packaging_introspection.html">ID:032 - Packaging Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_033-simready_packaging.html">ID:033 - SimReady Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_200-aif_metadata.html">ID:200 - AIF Core Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_201-connection_points.html">ID:201 - Connection Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_202-thermal_cooling.html">ID:202 - AIF Thermal Cooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_203-electrical.html">ID:203 - AIF Electrical</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../profiles/profiles.html">Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/prop-robotics-neutral.html">Prop Robotics Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/prop-robotics-physx.html">Prop Robotics Physx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/prop-robotics-isaac.html">Prop Robotics Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-body-neutral.html">Robot Body Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-body-runnable.html">Robot Body Runnable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-body-isaac.html">Robot Body Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-gripper-neutral.html">Robot Gripper Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-gripper-isaac.html">Robot Gripper Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/aif-entity.html">AIF Entity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../indexes/indexes.html">Indexes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../indexes/capability_status_index.html">Capability Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../indexes/requirements_index.html">Requirements Index</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="development.html" class="nav-link">Development Workflows</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Adding a New Feature</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="adding-a-new-feature">
+<h1>Adding a New Feature<a class="headerlink" href="#adding-a-new-feature" title="Link to this heading">#</a></h1>
+<section id="at-a-glance">
+<h2>At a glance<a class="headerlink" href="#at-a-glance" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Create requirement markdown + validation rule under an existing <code class="docutils literal notranslate"><span class="pre">capabilities/</span></code> folder.</p></li>
+<li><p>Create a feature JSON under <code class="docutils literal notranslate"><span class="pre">features/</span></code> that lists the requirement codes.</p></li>
+<li><p>Document the feature and add it to <code class="docutils literal notranslate"><span class="pre">features/features.md</span></code>.</p></li>
+<li><p>Add the feature to <code class="docutils literal notranslate"><span class="pre">Prop-Robotics-Neutral</span></code> in <code class="docutils literal notranslate"><span class="pre">profiles/profiles.toml</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">simready-validate</span></code>, then run <code class="docutils literal notranslate"><span class="pre">simready-validate</span></code> to verify.</p></li>
+</ol>
+<hr class="docutils" />
+<p>This guide walks through adding a new feature to the SimReady Foundation spec end-to-end. The example adds a dummy <strong>“Has Foo Prim”</strong> feature (<code class="docutils literal notranslate"><span class="pre">FET_099</span></code>) with one requirement (<code class="docutils literal notranslate"><span class="pre">FOO.001</span></code>) to the existing <code class="docutils literal notranslate"><span class="pre">hierarchy</span></code> capability.</p>
+</section>
+<section id="core-concepts">
+<h2>Core concepts<a class="headerlink" href="#core-concepts" title="Link to this heading">#</a></h2>
+<section id="what-is-a-feature">
+<h3>What is a feature?<a class="headerlink" href="#what-is-a-feature" title="Link to this heading">#</a></h3>
+<p>A <strong>feature</strong> describes a runtime behavior that an asset either supports or doesn’t (e.g. “has physics”, “can drive”, “is grasp-ready”). Features are defined as JSON files in <code class="docutils literal notranslate"><span class="pre">features/</span></code> and each one bundles one or more requirements together. A feature <strong>passes only when all of its requirements pass</strong>.</p>
+</section>
+<section id="feature-dependencies">
+<h3>Feature dependencies<a class="headerlink" href="#feature-dependencies" title="Link to this heading">#</a></h3>
+<p>A feature can depend on other features. When specified, the validation system:</p>
+<ol class="arabic simple">
+<li><p><strong>Automatically includes</strong> all requirements from dependent features.</p></li>
+<li><p><strong>Recursively resolves</strong> nested dependencies.</p></li>
+<li><p><strong>Validates against</strong> the complete set of requirements from all dependencies.</p></li>
+</ol>
+<p>This lets you build on existing features without duplicating their requirement lists.</p>
+</section>
+</section>
+<section id="add-the-new-requirement">
+<h2>1. Add the new requirement<a class="headerlink" href="#add-the-new-requirement" title="Link to this heading">#</a></h2>
+<section id="a-create-the-requirement-documentation">
+<h3>1a. Create the requirement documentation<a class="headerlink" href="#a-create-the-requirement-documentation" title="Link to this heading">#</a></h3>
+<p>Add a new <code class="docutils literal notranslate"><span class="pre">.md</span></code> file in the existing capability’s <code class="docutils literal notranslate"><span class="pre">requirements/</span></code> folder. For this example, create <code class="docutils literal notranslate"><span class="pre">capabilities/hierarchy/requirements/has-foo-prim.md</span></code>:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gh"># has-foo-prim</span>
+
+| Code     | FOO.001 |
+|----------|---------|
+| Validator| {oav-validator-latest-link}`foo-001` |
+| Compatibility | {compatibility}`open-usd` |
+| Tags     | {tag}`essential` |
+
+<span class="gu">## Summary</span>
+
+The stage must contain a prim named &quot;Foo&quot;.
+
+<span class="gu">## Description</span>
+
+The stage&#39;s default prim hierarchy must include at least one prim named
+&quot;Foo&quot;. This is a structural requirement that downstream tools depend on
+to locate the primary content root.
+
+<span class="gu">### Valid USDA</span>
+
+<span class="sb">```usda</span>
+<span class="c1">#usda 1.0</span>
+<span class="p">(</span>
+<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Root&quot;</span>
+<span class="p">)</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Root&quot;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Foo&quot;</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="sb">```</span>
+
+<span class="gu">### Invalid USDA</span>
+
+<span class="sb">```usda</span>
+<span class="c1">#usda 1.0</span>
+<span class="p">(</span>
+<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Root&quot;</span>
+<span class="p">)</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Root&quot;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Bar&quot;</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="sb">```</span>
+
+<span class="gu">## How to comply</span>
+
+<span class="k">-</span><span class="w"> </span>Add an Xform prim named &quot;Foo&quot; under the default prim hierarchy.
+</pre></div>
+</div>
+</section>
+<section id="b-register-the-requirement">
+<h3>1b. Register the requirement<a class="headerlink" href="#b-register-the-requirement" title="Link to this heading">#</a></h3>
+<p>Add the requirement filename to <code class="docutils literal notranslate"><span class="pre">capabilities/hierarchy/requirements.md</span></code> in the toctree:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>```{toctree}
+:maxdepth: 1
+:hidden:
+
+requirements/hierarchy-has-root
+requirements/exclusive-xform-parent-for-usdgeom
+requirements/root-is-xformable
+requirements/stage-has-default-prim
+requirements/logical-geometry-grouping
+requirements/xform-common-api-usage
+requirements/placeable-posable-are-xformable
+requirements/has-foo-prim                        &lt;-- add this line
+</pre></div>
+</div>
+</section>
+<section id="c-implement-the-rule">
+<h3>1c. Implement the rule<a class="headerlink" href="#c-implement-the-rule" title="Link to this heading">#</a></h3>
+<p>Add the checker class to <code class="docutils literal notranslate"><span class="pre">capabilities/hierarchy/validation.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@omni</span><span class="o">.</span><span class="n">asset_validator</span><span class="o">.</span><span class="n">register_rule</span><span class="p">(</span><span class="s2">&quot;Hierarchy&quot;</span><span class="p">)</span>
+<span class="nd">@omni</span><span class="o">.</span><span class="n">asset_validator</span><span class="o">.</span><span class="n">register_requirements</span><span class="p">(</span><span class="n">cap</span><span class="o">.</span><span class="n">HierarchyRequirements</span><span class="o">.</span><span class="n">FOO_001</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">HasFooPrimChecker</span><span class="p">(</span><span class="n">omni</span><span class="o">.</span><span class="n">asset_validator</span><span class="o">.</span><span class="n">BaseRuleChecker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Stage must contain a prim named &#39;Foo&#39;.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CheckStage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">default_prim</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetDefaultPrim</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">default_prim</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">default_prim</span><span class="o">.</span><span class="n">GetAllChildren</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">GetName</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Foo&quot;</span><span class="p">:</span>
+                <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_AddFailedCheck</span><span class="p">(</span>
+            <span class="n">requirement</span><span class="o">=</span><span class="n">cap</span><span class="o">.</span><span class="n">HierarchyRequirements</span><span class="o">.</span><span class="n">FOO_001</span><span class="p">,</span>
+            <span class="n">message</span><span class="o">=</span><span class="s2">&quot;No prim named &#39;Foo&#39; found under the default prim.&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="define-the-feature">
+<h2>2. Define the feature<a class="headerlink" href="#define-the-feature" title="Link to this heading">#</a></h2>
+<p>Create <code class="docutils literal notranslate"><span class="pre">features/FET_099_base_neutral-0.1.0-has_foo_prim.json</span></code>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FET099_BASE_NEUTRAL&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;display_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Has Foo Prim&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;features/FET_099-has_foo_prim.html&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;FOO.001&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If your feature builds on an existing feature, you can declare a dependency to inherit its requirements and only list <strong>additional</strong> ones:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FET099_BASE_NEUTRAL&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;display_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Has Foo Prim&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;features/FET_099-has_foo_prim.html&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;FET003_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;FOO.001&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The validation system merges all requirement sets (from dependencies and the feature itself) into a single set that gets validated.</p>
+<section id="feature-id-conventions">
+<h3>Feature ID conventions<a class="headerlink" href="#feature-id-conventions" title="Link to this heading">#</a></h3>
+<p>Feature IDs follow the pattern <code class="docutils literal notranslate"><span class="pre">FET&lt;NNN&gt;_&lt;VARIANT&gt;</span></code>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variant suffix</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BASE_NEUTRAL</span></code></p></td>
+<td><p>Core OpenUSD only</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BASE_PHYSX</span></code></p></td>
+<td><p>Uses PhysX extensions</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BASE_MDL</span></code></p></td>
+<td><p>Uses MDL materials</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ROBOT_PHYSX</span></code></p></td>
+<td><p>Robot domain with PhysX</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ROBOT_CORE_ISAAC</span></code></p></td>
+<td><p>Robot core for Isaac Sim</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Pick the next available number for a new logical feature. If your feature is a runtime-specific variant of an existing feature, reuse the same number with a different suffix.</p>
+</section>
+</section>
+<section id="add-feature-documentation">
+<h2>3. Add feature documentation<a class="headerlink" href="#add-feature-documentation" title="Link to this heading">#</a></h2>
+<section id="a-create-a-feature-markdown">
+<h3>3a. Create a feature markdown<a class="headerlink" href="#a-create-a-feature-markdown" title="Link to this heading">#</a></h3>
+<p>Create <code class="docutils literal notranslate"><span class="pre">features/FET_099-has_foo_prim.md</span></code>:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gh"># Feature: `ID:099 - Has Foo Prim`</span>
+
+<span class="gu">## Neutral Format</span>
+<span class="gu">### Version 0.1.0</span>
+&lt;details&gt;
+&lt;summary&gt;&lt;strong&gt;Details&lt;/strong&gt;&lt;/summary&gt;
+
+<span class="gu">#### Requirements</span>
+<span class="k">*</span><span class="w"> </span>Capability: [<span class="nt">Hierarchy</span>](<span class="na">../capabilities/hierarchy/capability-hierarchy.md</span>)
+<span class="w">    </span><span class="k">*</span><span class="w"> </span>FOO.001
+&lt;/details&gt;
+</pre></div>
+</div>
+</section>
+<section id="b-update-the-features-index">
+<h3>3b. Update the features index<a class="headerlink" href="#b-update-the-features-index" title="Link to this heading">#</a></h3>
+<p>Add the feature to <code class="docutils literal notranslate"><span class="pre">features/features.md</span></code> in the toctree:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>```{toctree}
+:maxdepth: 1
+
+ID:099 - Has Foo Prim - Base &lt;FET_099-has_foo_prim&gt;
+</pre></div>
+</div>
+</section>
+</section>
+<section id="wire-profiles">
+<h2>4. Wire profiles<a class="headerlink" href="#wire-profiles" title="Link to this heading">#</a></h2>
+<p>Add your feature to the <code class="docutils literal notranslate"><span class="pre">Prop-Robotics-Neutral</span></code> profile in <code class="docutils literal notranslate"><span class="pre">profiles/profiles.toml</span></code>:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[Prop-Robotics-Neutral]</span>
+<span class="s2">&quot;1.0.0&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET000_CORE&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w">            </span><span class="c1"># &quot;Core&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w">     </span><span class="c1"># &quot;Minimal&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET003_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w">     </span><span class="c1"># &quot;RBD Physics&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET004_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w">     </span><span class="c1"># &quot;Simulate Multi-Body Physics&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET005_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w">     </span><span class="c1"># &quot;Simulate Grasp Physics&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET006_BASE_MDL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w">         </span><span class="c1"># &quot;Materials&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET099_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w">     </span><span class="c1"># &quot;Has Foo Prim&quot;   &lt;-- add this line</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+</section>
+<section id="install-and-verify">
+<h2>5. Install and verify<a class="headerlink" href="#install-and-verify" title="Link to this heading">#</a></h2>
+<section id="a-install-simready-validate">
+<h3>5a. Install simready-validate<a class="headerlink" href="#a-install-simready-validate" title="Link to this heading">#</a></h3>
+<p>Requires <strong>Python &gt;=3.10,&lt;3.13</strong> (Python 3.12 recommended). Install the SimReady validation library from the repository’s <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>nv_core/validator_sample/requirements.txt
+</pre></div>
+</div>
+</section>
+<section id="b-confirm-it-fails-on-a-non-conforming-asset">
+<h3>5b. Confirm it fails on a non-conforming asset<a class="headerlink" href="#b-confirm-it-fails-on-a-non-conforming-asset" title="Link to this heading">#</a></h3>
+<p>From the root of this repository (<code class="docutils literal notranslate"><span class="pre">simready_foundations/</span></code>), run the following. The sample asset <code class="docutils literal notranslate"><span class="pre">sm_apple_a01_01.usd</span></code> has no prim named “Foo”, so it should fail <code class="docutils literal notranslate"><span class="pre">FOO.001</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-validate<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--rules-path<span class="w"> </span>nv_core/sr_specs/docs/capabilities<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--features-path<span class="w"> </span>nv_core/sr_specs/docs/features<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--profiles-path<span class="w"> </span>nv_core/sr_specs/docs/profiles/profiles.toml<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--profile<span class="w"> </span>Prop-Robotics-Neutral<span class="w"> </span>--version<span class="w"> </span><span class="m">1</span>.0.0<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Asset: sample_content/.../sm_apple_a01_01.usd
+  [FAILED] Prop-Robotics-Neutral v1.0.0
+           FET099_BASE_NEUTRAL: failing requirements: [&#39;FOO.001&#39;]
+</pre></div>
+</div>
+</section>
+<section id="c-fix-the-asset">
+<h3>5c. Fix the asset<a class="headerlink" href="#c-fix-the-asset" title="Link to this heading">#</a></h3>
+<p>Add a “Foo” prim to the stage using the USD Python API and export the result:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">Usd</span><span class="p">,</span> <span class="n">UsdGeom</span>
+
+<span class="n">stage</span> <span class="o">=</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span>
+    <span class="s2">&quot;sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd&quot;</span>
+<span class="p">)</span>
+<span class="n">default_prim</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetDefaultPrim</span><span class="p">()</span>
+<span class="n">UsdGeom</span><span class="o">.</span><span class="n">Xform</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">default_prim</span><span class="o">.</span><span class="n">GetPath</span><span class="p">()</span><span class="o">.</span><span class="n">AppendChild</span><span class="p">(</span><span class="s2">&quot;Foo&quot;</span><span class="p">))</span>
+<span class="n">stage</span><span class="o">.</span><span class="n">Export</span><span class="p">(</span><span class="s2">&quot;fixed_asset.usd&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The exported <code class="docutils literal notranslate"><span class="pre">fixed_asset.usd</span></code> now contains the required prim:</p>
+<div class="highlight-usda notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Root&quot;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Foo&quot;</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1"># ... existing geometry ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="d-confirm-it-passes">
+<h3>5d. Confirm it passes<a class="headerlink" href="#d-confirm-it-passes" title="Link to this heading">#</a></h3>
+<p>Re-run validation against the fixed asset:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-validate<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--rules-path<span class="w"> </span>nv_core/sr_specs/docs/capabilities<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--features-path<span class="w"> </span>nv_core/sr_specs/docs/features<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--profiles-path<span class="w"> </span>nv_core/sr_specs/docs/profiles/profiles.toml<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--profile<span class="w"> </span>Prop-Robotics-Neutral<span class="w"> </span>--version<span class="w"> </span><span class="m">1</span>.0.0<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>fixed_asset.usd
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Asset: fixed_asset.usd
+  [PASSED] Prop-Robotics-Neutral v1.0.0
+</pre></div>
+</div>
+</section>
+</section>
+<section id="checklist">
+<h2>Checklist<a class="headerlink" href="#checklist" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Requirement markdown:</strong> Create under the existing capability’s <code class="docutils literal notranslate"><span class="pre">requirements/</span></code> folder. Add to the <code class="docutils literal notranslate"><span class="pre">requirements.md</span></code> toctree.</p></li>
+<li><p><strong>Validation rule:</strong> Implement the checker class in the capability’s <code class="docutils literal notranslate"><span class="pre">validation.py</span></code>.</p></li>
+<li><p><strong>Feature JSON:</strong> Create under <code class="docutils literal notranslate"><span class="pre">features/</span></code>.</p></li>
+<li><p><strong>Feature documentation:</strong> Create the feature markdown under <code class="docutils literal notranslate"><span class="pre">features/</span></code>. Add to <code class="docutils literal notranslate"><span class="pre">features/features.md</span></code>.</p></li>
+<li><p><strong>Profile wiring:</strong> Add the feature to <code class="docutils literal notranslate"><span class="pre">Prop-Robotics-Neutral</span></code> in <code class="docutils literal notranslate"><span class="pre">profiles/profiles.toml</span></code>.</p></li>
+<li><p><strong>Install:</strong> <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">nv_core/validator_sample/requirements.txt</span></code></p></li>
+<li><p><strong>Verify:</strong> Run <code class="docutils literal notranslate"><span class="pre">simready-validate</span></code> against a sample asset and confirm pass/fail behavior.</p></li>
+</ol>
+</section>
+<section id="tips">
+<h2>Tips<a class="headerlink" href="#tips" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Version from 0.1.0.</strong> Start at <code class="docutils literal notranslate"><span class="pre">0.1.0</span></code> and bump the version when the requirement set changes.</p></li>
+<li><p><strong>One feature per logical concept.</strong> Don’t pack unrelated checks into the same feature.</p></li>
+<li><p><strong>Document clearly.</strong> In the feature markdown, list every requirement and link back to the capability docs.</p></li>
+<li><p><strong>Test with sample assets.</strong> Use the reference assets in <code class="docutils literal notranslate"><span class="pre">sample_content/</span></code> to validate against the target profile before merging.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For the full acceptance lifecycle (domain identification, gap analysis, prototyping, QA, delivery), see the <a class="reference internal" href="acceptance_workflow.html"><span class="std std-doc">Acceptance Workflow</span></a>.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="appendix-a-creating-a-new-capability">
+<h2>Appendix A: Creating a new capability<a class="headerlink" href="#appendix-a-creating-a-new-capability" title="Link to this heading">#</a></h2>
+<p>If your requirement doesn’t fit any existing capability, create a new capability folder under <code class="docutils literal notranslate"><span class="pre">capabilities/</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>capabilities/
+└── foo_prims/
+    ├── capability-foo_prims.md
+    ├── requirements.md
+    ├── requirements/
+    │   └── has-foo-prim.md
+    └── validation.py
+</pre></div>
+</div>
+<p>Then register it by adding the <code class="docutils literal notranslate"><span class="pre">validation</span></code> import to <code class="docutils literal notranslate"><span class="pre">capabilities/__init__.py</span></code>. Once the capability exists, the steps in this guide apply the same way: add requirements, wire features, and validate.</p>
+</section>
+<section id="appendix-b-validating-with-the-python-api">
+<h2>Appendix B: Validating with the Python API<a class="headerlink" href="#appendix-b-validating-with-the-python-api" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">simready-validate</span></code> CLI is backed by the <code class="docutils literal notranslate"><span class="pre">simready.validate</span></code> Python library, which you can use directly for scripted or programmatic validation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">simready.validate</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sv</span>
+
+<span class="n">FOUNDATIONS_DOCS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;nv_core/sr_specs/docs&quot;</span><span class="p">)</span>
+
+<span class="n">sv</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span>
+    <span class="n">rules_and_requirements_paths</span><span class="o">=</span><span class="p">[</span><span class="n">FOUNDATIONS_DOCS_DIR</span> <span class="o">/</span> <span class="s2">&quot;capabilities&quot;</span><span class="p">],</span>
+    <span class="n">features_paths</span><span class="o">=</span><span class="p">[</span><span class="n">FOUNDATIONS_DOCS_DIR</span> <span class="o">/</span> <span class="s2">&quot;features&quot;</span><span class="p">],</span>
+    <span class="n">profiles_paths</span><span class="o">=</span><span class="p">[</span><span class="n">FOUNDATIONS_DOCS_DIR</span> <span class="o">/</span> <span class="s2">&quot;profiles&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">sv</span><span class="o">.</span><span class="n">validate_asset</span><span class="p">(</span><span class="n">sv</span><span class="o">.</span><span class="n">AssetValidationConfig</span><span class="p">(</span>
+    <span class="n">asset_path</span><span class="o">=</span><span class="s2">&quot;fixed_asset.usd&quot;</span><span class="p">,</span>
+    <span class="n">profile_id</span><span class="o">=</span><span class="s2">&quot;Prop-Robotics-Neutral&quot;</span><span class="p">,</span>
+    <span class="n">profile_version</span><span class="o">=</span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+<span class="p">))</span>
+
+<span class="k">assert</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">passed</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="development.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Development Workflows</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="profiles_validation_workflow.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Profiles Validation Workflow</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#at-a-glance">At a glance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-concepts">Core concepts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-feature">What is a feature?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-dependencies">Feature dependencies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-the-new-requirement">1. Add the new requirement</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-create-the-requirement-documentation">1a. Create the requirement documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-register-the-requirement">1b. Register the requirement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-implement-the-rule">1c. Implement the rule</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-feature">2. Define the feature</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-id-conventions">Feature ID conventions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-feature-documentation">3. Add feature documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-create-a-feature-markdown">3a. Create a feature markdown</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-update-the-features-index">3b. Update the features index</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wire-profiles">4. Wire profiles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-and-verify">5. Install and verify</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-install-simready-validate">5a. Install simready-validate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-confirm-it-fails-on-a-non-conforming-asset">5b. Confirm it fails on a non-conforming asset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-fix-the-asset">5c. Fix the asset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-confirm-it-passes">5d. Confirm it passes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checklist">Checklist</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tips">Tips</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-a-creating-a-new-capability">Appendix A: Creating a new capability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-b-validating-with-the-python-api">Appendix B: Validating with the Python API</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

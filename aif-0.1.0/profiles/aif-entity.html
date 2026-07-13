@@ -1,0 +1,870 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>AIF-Entity Profile USD Authoring Guide &#8212; SimReady Foundation AIF 0.1.0 (Preview)</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/tags.css?v=f64b827a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+
+
+    <script src="../_static/documentation_options.js?v=0ee7d50d"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=fd10adb8"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'profiles/aif-entity';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'aif-0.1.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+
+    <link rel="canonical" href="https://nvidia.github.io/simready-foundation/aif-0.1.0/profiles/aif-entity.html" />
+    <link rel="icon" href="../_static/favicon.png"/>
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Indexes" href="../indexes/indexes.html" />
+    <link rel="prev" title="Robot-Gripper-Isaac Profile" href="robot-gripper-isaac.html" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="aif-0.1.0" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+
+
+  </head>
+
+  <body data-default-mode="">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="SimReady Foundation AIF 0.1.0 (Preview) - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="SimReady Foundation AIF 0.1.0 (Preview) - Home"/>
+  
+  
+    <p class="title logo__title">SimReady Foundation AIF 0.1.0 (Preview)</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-4"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-4"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-4"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-4">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="SimReady Foundation AIF 0.1.0 (Preview) - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="SimReady Foundation AIF 0.1.0 (Preview) - Home"/>
+  
+  
+    <p class="title logo__title">SimReady Foundation AIF 0.1.0 (Preview)</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-5"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-5"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-5"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-5">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-6"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-6"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-6"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-6">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../guides/guides.html">Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/validate_workflow.html">SimReady Validation Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/acceptance_workflow.html">SimReady Acceptance Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/features/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/feature_adapters/feature_adapters.html">Feature Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/profiles/profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/aif_validation.html">Validating an AIF Asset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/SimReady_learning_workflow.html">SimReady Learning Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/naming_conventions.html">Naming Conventions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../guides/development.html">Development Workflows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/features_expansion_workflow.html">Features Expansion Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../capabilities/capabilities.html">Capabilities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/core/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/visualization/visualization.html">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/isaac_sim/isaac_sim.html">Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/physics_bodies/physics_bodies.html">Physics Bodies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/hierarchy/hierarchy.html">Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/nonvisual_sensors/nonvisual_sensors.html">Non-Visual Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/semantic_labels/capability-semantic_labels.html">Semantic Labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/packaging/packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/example/example.html">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/aif/metadata/capability-metadata.html">AIF Core Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/aif/connection_points/capability-connection_points.html">Connection Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/aif/thermal_cooling/capability-thermal_cooling.html">AIF Thermal Cooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/aif/electrical/capability-electrical.html">AIF Electrical</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../features/features.html">Features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../features/feature-dependency-graph.html">Feature dependency graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_000-base_neutral-0.1.0-core.html">ID:000 - Core - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_001-minimal.html">ID:001 - Minimal - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_002-posable_bodies.html">ID:002 - Posable Bodies - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_003-rigid_body_physics.html">ID:003 - RBD Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_004-simulate_multi_body_physics.html">ID:004 - Simulate Multi-Body Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_005-simulate_grasp_physics.html">ID:005 - Simulate Grasp Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_006-materials.html">ID:006 - Materials - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_007-nonvisual_materials.html">ID:007 - Non-Visual Materials - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_011-semantic_labels.html">ID:011 - Semantic Labels - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_100-isaacsim-0.1.0-composition.html">ID:100 - IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_021-robot_core.html">ID:021 - Core Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_022-driven_joints.html">ID:022 - Driven Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_023-robot_materials.html">ID:023 - Robot Materials - Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_024-base_articulation.html">ID:024 - Base Articulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_030-packaging_core.html">ID:030 - Packaging Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_031-package_self_contained.html">ID:031 - Package Self Contained</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_032-packaging_introspection.html">ID:032 - Packaging Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_033-simready_packaging.html">ID:033 - SimReady Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_200-aif_metadata.html">ID:200 - AIF Core Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_201-connection_points.html">ID:201 - Connection Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_202-thermal_cooling.html">ID:202 - AIF Thermal Cooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_203-electrical.html">ID:203 - AIF Electrical</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="profiles.html">Profiles</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="prop-robotics-neutral.html">Prop Robotics Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prop-robotics-physx.html">Prop Robotics Physx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prop-robotics-isaac.html">Prop Robotics Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="robot-body-neutral.html">Robot Body Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="robot-body-runnable.html">Robot Body Runnable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="robot-body-isaac.html">Robot Body Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="robot-gripper-neutral.html">Robot Gripper Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="robot-gripper-isaac.html">Robot Gripper Isaac</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">AIF Entity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../indexes/indexes.html">Indexes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../indexes/capability_status_index.html">Capability Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../indexes/requirements_index.html">Requirements Index</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="profiles.html" class="nav-link">Asset Profiles</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">AIF-Entity Profile USD Authoring Guide</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="aif-entity-profile-usd-authoring-guide">
+<h1>AIF-Entity Profile USD Authoring Guide<a class="headerlink" href="#aif-entity-profile-usd-authoring-guide" title="Link to this heading">#</a></h1>
+<p>This document describes how to author a USD asset that conforms to the
+<code class="docutils literal notranslate"><span class="pre">AIF-Entity</span></code> profile. A single profile covers all of the currently defined
+NVIDIA AI Factory data center equipment classes. This set will continue to grow
+and evolve as more equipment types are added; for now it covers the Coolant
+Distribution Unit (CDU), Computer Room Air Handler (CRAH), Uninterruptible Power
+Supply (UPS), and Compute Rack (e.g. GB300). Equipment-class differentiation is
+driven by the <code class="docutils literal notranslate"><span class="pre">aif:core:assetClass</span></code> property and data-driven validation, not by
+separate profiles.</p>
+<section id="profile-definition">
+<h2>Profile definition<a class="headerlink" href="#profile-definition" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">AIF-Entity</span></code> profile includes the following feature set (see <code class="docutils literal notranslate"><span class="pre">profiles.toml</span></code>
+and the <a class="reference internal" href="../features/feature-dependency-graph.html"><span class="doc std std-doc">feature dependency graph</span></a>). Each
+feature’s requirements and dependencies are defined in the feature
+specifications.</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[AIF-Entity]</span>
+<span class="s2">&quot;0.1.0&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET000_CORE&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w">            </span><span class="c1"># Core</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">}},</span><span class="w">    </span><span class="c1"># Minimal Placeable Visual</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET200_AIF_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w">     </span><span class="c1"># Core Metadata (capability; interim feature carrier)</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET201_AIF_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w">     </span><span class="c1"># Connection Points (capability; interim feature carrier)</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET202_AIF_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w">     </span><span class="c1"># Thermal Cooling (feature; assetClass-gated to CDU/CRAH)</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET203_AIF_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w">     </span><span class="c1"># Electrical (feature; assetClass-gated)</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+<section id="features-and-capabilities">
+<h3>Features and capabilities<a class="headerlink" href="#features-and-capabilities" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">AIF-Entity</span></code> profile composes two kinds of rule set:</p>
+<ul class="simple">
+<li><p><strong>Features</strong> (These rule sets change simulation output):
+<a class="reference internal" href="../features/FET_202-thermal_cooling.html"><span class="doc std std-doc">Thermal Cooling</span></a> (<code class="docutils literal notranslate"><span class="pre">FET202</span></code>) and
+<a class="reference internal" href="../features/FET_203-electrical.html"><span class="doc std std-doc">Electrical</span></a> (<code class="docutils literal notranslate"><span class="pre">FET203</span></code>). These are gated by
+<code class="docutils literal notranslate"><span class="pre">aif:core:assetClass</span></code> – thermal applies to CDU and CRAH; electrical applies
+to CDU, CRAH, and UPS.</p></li>
+<li><p><strong>Capabilities</strong> (These rule sets organize and validate, without changing
+simulation output): <a class="reference internal" href="../capabilities/aif/metadata/capability-metadata.html"><span class="doc std std-doc">AIF Core Metadata</span></a>
+and <a class="reference internal" href="../capabilities/aif/connection_points/capability-connection_points.html"><span class="doc std std-doc">Connection Points</span></a>.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>NOTE: The AIF Core Metadata and Connection Points rules are currently carried
+inline in the <code class="docutils literal notranslate"><span class="pre">FET200</span></code>/<code class="docutils literal notranslate"><span class="pre">FET201</span></code> feature JSON as an interim measure so they still
+validate, until SRF supports Profile-to-Capability referencing.</p>
+</div>
+</section>
+</section>
+<section id="equipment-class-differentiation">
+<h2>Equipment-class differentiation<a class="headerlink" href="#equipment-class-differentiation" title="Link to this heading">#</a></h2>
+<p>A single profile validates all four equipment classes. The
+<code class="docutils literal notranslate"><span class="pre">aif:core:assetClass</span></code> property selects which expected attribute set and
+connection-point types apply. The validators read <code class="docutils literal notranslate"><span class="pre">assetClass</span></code>, look up the
+per-class expectations from configuration, and validate generically.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">aif:core:assetClass</span></code></p></th>
+<th class="head"><p>Thermal</p></th>
+<th class="head"><p>Electrical</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CDU</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Facility/technology water loops; full attribute set</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CRAH</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Air-side cooling; liquid connection points</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">UPS</span></code></p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>Power conditioning; no thermal loop</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Rack</span></code></p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>Compute rack (e.g. GB300); metadata + connection points</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="required-usd-properties-and-schemas">
+<h2>Required USD properties and schemas<a class="headerlink" href="#required-usd-properties-and-schemas" title="Link to this heading">#</a></h2>
+<section id="stage-metadata-required">
+<h3>Stage metadata (required)<a class="headerlink" href="#stage-metadata-required" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">defaultPrim</span></code> must be set on every layer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">upAxis</span> <span class="pre">=</span> <span class="pre">&quot;Z&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">metersPerUnit</span> <span class="pre">=</span> <span class="pre">1</span></code> must be set on every stage.</p></li>
+</ul>
+</section>
+<section id="aif-core-attributes-required-on-default-prim-in-properties-usda">
+<h3>AIF core attributes (required on default prim in <code class="docutils literal notranslate"><span class="pre">*Properties.usda</span></code>)<a class="headerlink" href="#aif-core-attributes-required-on-default-prim-in-properties-usda" title="Link to this heading">#</a></h3>
+<p>Set <code class="docutils literal notranslate"><span class="pre">aif:core:assetClass</span></code> to identify the equipment class (<code class="docutils literal notranslate"><span class="pre">&quot;CDU&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;CRAH&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;UPS&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&quot;Rack&quot;</span></code>). The full <code class="docutils literal notranslate"><span class="pre">aif:core:*</span></code> identity, dimension, and
+documentation attribute set, plus the <code class="docutils literal notranslate"><span class="pre">aif:spec:*</span></code> attributes defined for the
+declared equipment class, must be present. See the
+<a class="reference internal" href="../capabilities/aif/metadata/capability-metadata.html"><span class="doc std std-doc">AIF Core Metadata capability</span></a> for
+the authoritative attribute list and the per-class <code class="docutils literal notranslate"><span class="pre">aif:spec:*</span></code> requirements
+validated by AM.007 (equipment-class template compliance).</p>
+</section>
+<section id="connection-points-required">
+<h3>Connection points (required)<a class="headerlink" href="#connection-points-required" title="Link to this heading">#</a></h3>
+<p>Connection point prims must be authored under a <code class="docutils literal notranslate"><span class="pre">ConnectionPoints</span></code> Scope prim
+directly beneath the default prim, following the <code class="docutils literal notranslate"><span class="pre">&lt;vendor&gt;_&lt;type&gt;_&lt;suffix&gt;</span></code>
+naming pattern (e.g. <code class="docutils literal notranslate"><span class="pre">nvidia_fws_supply_01</span></code>) and composed as a separate
+<code class="docutils literal notranslate"><span class="pre">&lt;AssetName&gt;_ConnectionPoints.usd</span></code> sublayer. The valid connection-point types
+depend on the equipment class. See the
+<a class="reference internal" href="../capabilities/aif/connection_points/capability-connection_points.html"><span class="doc std std-doc">Connection Points capability</span></a>
+for the authoritative type enumeration per class.</p>
+</section>
+</section>
+<section id="stage-composition-requirements">
+<h2>Stage composition requirements<a class="headerlink" href="#stage-composition-requirements" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">AssetName</span><span class="o">&gt;.</span><span class="n">usd</span>                    <span class="o">&lt;-</span> <span class="n">root</span> <span class="n">stage</span> <span class="p">(</span><span class="n">sublayer</span> <span class="n">references</span> <span class="n">only</span><span class="p">)</span>
+  <span class="o">&lt;</span><span class="n">AssetName</span><span class="o">&gt;</span><span class="n">_Properties</span><span class="o">.</span><span class="n">usda</span>      <span class="o">&lt;-</span> <span class="nb">all</span> <span class="n">aif</span><span class="p">:</span><span class="n">core</span><span class="p">:</span><span class="o">*</span> <span class="ow">and</span> <span class="n">aif</span><span class="p">:</span><span class="n">spec</span><span class="p">:</span><span class="o">*</span> <span class="n">attributes</span>
+  <span class="o">&lt;</span><span class="n">AssetName</span><span class="o">&gt;</span><span class="n">_ConnectionPoints</span><span class="o">.</span><span class="n">usd</span> <span class="o">&lt;-</span> <span class="n">ConnectionPoints</span> <span class="n">Scope</span> <span class="n">prim</span> <span class="ow">and</span> <span class="n">children</span>
+  <span class="o">&lt;</span><span class="n">AssetName</span><span class="o">&gt;</span><span class="n">_Geometry</span><span class="o">.</span><span class="n">usd</span>         <span class="o">&lt;-</span> <span class="n">mesh</span> <span class="n">geometry</span> <span class="p">(</span><span class="ow">or</span> <span class="n">references</span> <span class="n">to</span> <span class="n">it</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The root stage must reference <code class="docutils literal notranslate"><span class="pre">*Properties.usda</span></code> and <code class="docutils literal notranslate"><span class="pre">*ConnectionPoints.usd</span></code> as sublayers.</p></li>
+<li><p>All layer paths must be relative.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">defaultPrim</span></code> must be set on every layer.</p></li>
+</ul>
+</section>
+<section id="naming-conventions">
+<h2>Naming conventions<a class="headerlink" href="#naming-conventions" title="Link to this heading">#</a></h2>
+<section id="prim-naming">
+<h3>Prim naming<a class="headerlink" href="#prim-naming" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">PascalCase</span></code> for prim names (e.g., <code class="docutils literal notranslate"><span class="pre">CW375</span></code>, <code class="docutils literal notranslate"><span class="pre">ConnectionPoints</span></code>).</p></li>
+<li><p>The default prim name should match the asset model identifier.</p></li>
+</ul>
+</section>
+<section id="file-naming">
+<h3>File naming<a class="headerlink" href="#file-naming" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use the asset model identifier as the base name (e.g., <code class="docutils literal notranslate"><span class="pre">CW375</span></code>).</p></li>
+<li><p>Sublayer files: <code class="docutils literal notranslate"><span class="pre">&lt;AssetName&gt;_Properties.usda</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;AssetName&gt;_ConnectionPoints.usd</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;AssetName&gt;_Geometry.usd</span></code>.</p></li>
+<li><p>Use lowercase for all file extensions.</p></li>
+</ul>
+</section>
+<section id="connection-point-naming">
+<h3>Connection point naming<a class="headerlink" href="#connection-point-naming" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Pattern: <code class="docutils literal notranslate"><span class="pre">&lt;vendor&gt;_&lt;type&gt;_&lt;suffix&gt;</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">nvidia_fws_supply_01</span></code>).</p></li>
+<li><p>Vendor prefix: lowercase alphanumeric only.</p></li>
+<li><p>Valid type prefixes depend on the equipment class (see the Connection Points capability).</p></li>
+</ul>
+</section>
+</section>
+<section id="validation-metadata-recommended">
+<h2>Validation metadata (recommended)<a class="headerlink" href="#validation-metadata-recommended" title="Link to this heading">#</a></h2>
+<p>Include profile metadata in <code class="docutils literal notranslate"><span class="pre">customLayerData</span></code> to simplify validation workflows:</p>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span>customLayerData<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">dictionary</span><span class="w"> </span><span class="na">SimReady_Metadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">dictionary</span><span class="w"> </span><span class="na">validation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">string</span><span class="w"> </span><span class="na">profile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;AIF-Entity&quot;</span>
+<span class="w">            </span><span class="kt">string</span><span class="w"> </span><span class="na">profile_version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;0.1.0&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../features/feature-dependency-graph.html"><span class="doc std std-doc">Feature dependency graph</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nv_core/sr_specs/docs/profiles/profiles.toml</span></code></p></li>
+<li><p><a class="reference internal" href="../capabilities/aif/metadata/capability-metadata.html"><span class="doc std std-doc">AIF Core Metadata capability</span></a></p></li>
+<li><p><a class="reference internal" href="../capabilities/aif/connection_points/capability-connection_points.html"><span class="doc std std-doc">Connection Points capability</span></a></p></li>
+<li><p><a class="reference internal" href="../capabilities/aif/thermal_cooling/capability-thermal_cooling.html"><span class="doc std std-doc">Thermal Cooling capability</span></a></p></li>
+<li><p><a class="reference internal" href="../capabilities/aif/electrical/capability-electrical.html"><span class="doc std std-doc">Electrical capability</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nv_core/sr_specs/docs/features/FET_202-thermal_cooling.md</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nv_core/sr_specs/docs/features/FET_203-electrical.md</span></code></p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="robot-gripper-isaac.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Robot-Gripper-Isaac Profile</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../indexes/indexes.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Indexes</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profile-definition">Profile definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#features-and-capabilities">Features and capabilities</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equipment-class-differentiation">Equipment-class differentiation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-usd-properties-and-schemas">Required USD properties and schemas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stage-metadata-required">Stage metadata (required)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aif-core-attributes-required-on-default-prim-in-properties-usda">AIF core attributes (required on default prim in <code class="docutils literal notranslate"><span class="pre">*Properties.usda</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-points-required">Connection points (required)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stage-composition-requirements">Stage composition requirements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naming-conventions">Naming conventions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prim-naming">Prim naming</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-naming">File naming</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-point-naming">Connection point naming</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-metadata-recommended">Validation metadata (recommended)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
