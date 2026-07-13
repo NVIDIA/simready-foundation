@@ -1,0 +1,20 @@
+--extra-index-url https://pypi.nvidia.com/
+
+# Runtime -- required by simready-validate
+numpy
+
+# Runtime
+simready-validate>=2026.4.2
+# For package validation, omniverse-asset-validator>=1.18.0 is required.
+omniverse-asset-validator>=1.18.0
+# blake3 is optional - if it is available in the environment, BLAKE3 content hashes will be added to the package definition.
+blake3
+# [local] enables the file:// backend the create step needs.
+# Other backends: nucleus, s3, azure, storage-api.
+# Extras can be combined, e.g. omni-wrapp-minimal[local,s3].
+omni-wrapp-minimal[local]>=2.2.0
+
+# Test
+pytest
+pytest-asyncio
+pytest-xdist

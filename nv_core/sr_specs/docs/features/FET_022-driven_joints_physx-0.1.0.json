@@ -1,0 +1,25 @@
+{
+    "id": "FET022_DRIVEN_JOINTS_PHYSX",
+    "version": "0.1.0",
+    "display_name": "Driven Joints Physx",
+    "path": "features/FET_022-driven_joints_physx.html",
+    "dependencies": [
+        {
+            "FET004_ROBOT_PHYSX": {
+                "version": "0.1.0"
+            }
+        }
+    ],
+    "_comment": "'Should' depend on FET022_DRIVEN_JOINTS_NEUTRAL, but that brings in FET003_BASE_NEUTRAL, conflicts with FET004_ROBOT_PHYSX around RB.COL.001.",
+    "requirements": [
+        "DJ.001",
+        "DJ.002",
+        "DJ.003", 
+
+        "DJ.004",
+        "DJ.005",
+        "DJ.006",
+        "DJ.007",
+        "DJ.011"
+    ]
+}

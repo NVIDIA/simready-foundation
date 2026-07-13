@@ -1,0 +1,11 @@
+{
+	"id": "FET006_BASE_USDPREVIEW",
+	"version": "0.1.0",
+	"display_name": "USDPreviewSurface Materials",
+	"path": "features/FET_006-materials.html",
+	"requirements":
+	[
+		"VM.BIND.001",
+		"VM.PS.001"
+	]
+}

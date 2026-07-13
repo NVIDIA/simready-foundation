@@ -1,0 +1,21 @@
+{
+    "output": {
+        "sm_gen_appliance_toaster_v01_01": "sm_gen_appliance_toaster_v01_01.usd"
+    },
+    "pipeline": {
+        "asset_handler": "PropAssetHandler",
+        "timestamp": "2026-03-02 07:32:15",
+        "version": "1.4.25"
+    },
+    "input": {
+        "asset_name": "sm_gen_appliance_toaster_v01_01",
+        "asset_type": "prop",
+        "input_uri": "sample_content/common_assets/props_general/gen_appliance_toaster_v01_01/simready_usd",
+        "stage_filename": null,
+        "stage_modified": "2026-03-02 07:31:41.584131"
+    },
+    "validator": {
+        "version": "1.1.6",
+        "rules": []
+    }
+}

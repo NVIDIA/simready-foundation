@@ -1,0 +1,65 @@
+{
+  "format_version": "1.0",
+  "profile": "Package-Candidate",
+  "profile_version": "1.0.0",
+  "timestamp": "2026-05-13T13:20:55",
+  "assets": [
+    {
+      "asset": "apple_a01/simready_usd/sm_apple_a01_01.usd",
+      "features": [
+        {
+          "FET031_PACKAGE_SELF_CONTAINED": {
+            "version": "0.1.0",
+            "passed": true,
+            "failing_requirements": [],
+            "dependencies": []
+          }
+        },
+        {
+          "FET033_SIMREADY_PACKAGING": {
+            "version": "0.1.0",
+            "passed": true,
+            "failing_requirements": [],
+            "dependencies": [
+              {
+                "FET031_PACKAGE_SELF_CONTAINED": {
+                  "version": "0.1.0"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "asset": "orange_a01/simready_usd/sm_obs_orange_a01_01.usd",
+      "features": [
+        {
+          "FET031_PACKAGE_SELF_CONTAINED": {
+            "version": "0.1.0",
+            "passed": true,
+            "failing_requirements": [],
+            "dependencies": []
+          }
+        },
+        {
+          "FET033_SIMREADY_PACKAGING": {
+            "version": "0.1.0",
+            "passed": true,
+            "failing_requirements": [],
+            "dependencies": [
+              {
+                "FET031_PACKAGE_SELF_CONTAINED": {
+                  "version": "0.1.0"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "content_hash": {
+    "sha256": "dd18f3a1d381a40d72bd35133eff186d26128d19a24fe2fda8cdb8ac62aa1d06"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "format_version": "1.0",
+  "package_id": "pkg_faulty_usd_with_bom.1.0.0",
+  "license": "Apache_2.0",
+  "metadata": [
+    {"name": "com.nvidia.simready.packaging.bom.json", "hash": {"sha256": "cddc800e92b26ed55d944c3f37facba6a1449311e85ad4343464d39a5ad92f45"}}
+  ]
+}

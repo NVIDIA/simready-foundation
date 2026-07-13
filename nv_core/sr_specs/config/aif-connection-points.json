@@ -1,0 +1,70 @@
+{
+    "capability": {
+        "id": "aif_connection_points",
+        "version": "0.1.0",
+        "name": "AIF Connection Points",
+        "description": "Validates AIF connection point prims for thermal, electrical, and airflow interfaces.",
+        "requirements": [
+            {
+                "code": "CP.001",
+                "name": "connectionpoints-scope-structure",
+                "compatibility": "AIF",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/aif/connection_points/requirements/connectionpoints-scope-structure.html"
+                },
+                "message": "Connection point prims must be organized under a ConnectionPoints Scope prim."
+            },
+            {
+                "code": "CP.002",
+                "name": "connection-point-geometry-type",
+                "compatibility": "AIF",
+                "tags": "normative",
+                "metadata": {
+                    "path": "capabilities/aif/connection_points/requirements/connection-point-geometry-type.html"
+                },
+                "message": "Connection point prims must be Plane or Disk geometry only."
+            },
+            {
+                "code": "CP.003",
+                "name": "connection-point-purpose-guide",
+                "compatibility": "AIF",
+                "tags": "normative",
+                "metadata": {
+                    "path": "capabilities/aif/connection_points/requirements/connection-point-purpose-guide.html"
+                },
+                "message": "All connection point prims must have purpose = 'guide'."
+            },
+            {
+                "code": "CP.004",
+                "name": "connection-point-naming-convention",
+                "compatibility": "AIF",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/aif/connection_points/requirements/connection-point-naming-convention.html"
+                },
+                "message": "Connection point prims must follow the <vendor>_<type>_<suffix> naming pattern with a valid type prefix."
+            },
+            {
+                "code": "CP.005",
+                "name": "connection-points-composition",
+                "compatibility": "AIF",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/aif/connection_points/requirements/connection-points-composition.html"
+                },
+                "message": "Connection points must be saved as <AssetName>_ConnectionPoints.usd and composed as a sublayer."
+            },
+            {
+                "code": "CP.006",
+                "name": "connection-point-alignment",
+                "compatibility": "AIF",
+                "tags": "normative",
+                "metadata": {
+                    "path": "capabilities/aif/connection_points/requirements/connection-point-alignment.html"
+                },
+                "message": "Connection point geometry must be positioned and sized to match actual openings on equipment."
+            }
+        ]
+    }
+}

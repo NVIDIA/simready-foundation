@@ -1,0 +1,21 @@
+{
+    "output": {
+        "sm_obs_orange_a01_01": "sm_obs_orange_a01_01.usd"
+    },
+    "pipeline": {
+        "asset_handler": "PropAssetHandler",
+        "timestamp": "2026-03-02 12:46:12",
+        "version": "1.4.25"
+    },
+    "input": {
+        "asset_name": "sm_obs_orange_a01_01",
+        "asset_type": "prop",
+        "input_uri": "sample_content/common_assets/props_general/obs_orange_a01/simready_usd",
+        "stage_filename": null,
+        "stage_modified": "2026-03-02 12:46:02.139707"
+    },
+    "validator": {
+        "version": "1.1.6",
+        "rules": []
+    }
+}

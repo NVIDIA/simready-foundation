@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Add Feature Adapter"
+  short_description: "Create feature/profile mutation adapters"
+  default_prompt: "Use $simready-foundation-add-feature-adapter to add a SimReady feature adapter for converting assets between exact feature or profile versions."

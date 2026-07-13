@@ -1,0 +1,11 @@
+{
+    "version": "1.0",
+    "file_records": [
+        {
+            "source_url": "sample_content/common_assets/props_general/sample_coffee_cup_grasp/simready_usd/sample_coffee_cup_grasp.usd",
+            "source_hash": "4aeb06360e3cc5536461131e7054e111453f71f3",
+            "target_url": "./sample_coffee_cup_grasp.usd",
+            "target_hash": "4aeb06360e3cc5536461131e7054e111453f71f3"
+        }
+    ]
+}

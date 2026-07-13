@@ -1,0 +1,15 @@
+{
+	"id": "FET203_AIF_NEUTRAL",
+	"version": "0.1.0",
+	"display_name": "AIF Electrical",
+	"path": "features/FET_203-electrical.html",
+	"dependencies": [
+		{"FET201_AIF_NEUTRAL": {"version": "0.1.0"}}
+	],
+	"requirements": [
+		"EL.001",
+		"EL.002",
+		"EL.003",
+		"EL.004"
+	]
+}

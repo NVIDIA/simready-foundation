@@ -1,0 +1,16 @@
+{
+    "robots": [
+        {
+            "name": "Spot",
+            "type": "quadrupedal robot",
+            "manufacturer": "Boston Dynamics",
+            "xacro-generated": false,
+            "urdf": [
+                "model.urdf"
+            ],
+            "variant": null,
+            "source-link": "https://dev.bostondynamics.com/docs/concepts/robot_services",
+            "id": 61
+        }
+    ]
+}

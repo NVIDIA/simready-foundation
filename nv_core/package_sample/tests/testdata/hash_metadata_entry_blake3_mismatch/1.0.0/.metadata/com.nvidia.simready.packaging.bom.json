@@ -1,0 +1,16 @@
+{
+  "format_version": "1.0",
+  "content_root": ".",
+  "items": [
+    {
+      "relative_path": "readme.txt",
+      "size": 45,
+      "hash": {
+        "sha256": "d5fe945dbae82861985830dff874599f6852afa6c6c7f47e790fe740a4698d22",
+        "blake3": "0f0db22270af116935d3712a4c2e71ee39d771c96b5f13124bd6f9481e225228",
+        "blake2b": "9b3a1ccf86e7394b6a8ee76e6c3f6147693dfc4e7e3df7544985d86c2a8fe25e1b310f2f64b2f9377258955988c3e96bdb51f99dc368b6213046bef5017d4aad",
+        "sha256-first1m": "d5fe945dbae82861985830dff874599f6852afa6c6c7f47e790fe740a4698d22"
+      }
+    }
+  ]
+}

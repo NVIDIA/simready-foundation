@@ -1,0 +1,90 @@
+{
+    "capability": {
+        "id": "materials",
+        "version": "0.2.0",
+        "name": "Visual Materials",
+        "description": "This capability enables surface appearance through proper material definitions, physically-based rendering of materials in visualization systems and consistent material behavior across different rendering engines.",
+        "requirements": [
+            {
+                "code": "VM.MAT.001",
+                "name": "material-assignment",
+                "compatibility": "core-usd",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-assignment.html"
+                },
+                "message": "Each renderable GPrim must have a computed material bound to it"
+            },
+            {
+                "code": "VM.MDL.002",
+                "name": "material-mdl-schema",
+                "compatibility": "Kit-107.0+",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-mdl-schema.html"
+                },
+                "message": "MDL Shaders must standard OpenUSD shader source attributes to ensure compatibility."
+            },
+            {
+                "code": "VM.PS.001",
+                "name": "material-preview-surface",
+                "compatibility": "Open USD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-preview-surface.html"
+                },
+                "message": "Material attributes must comply with the UsdPreviewSurface specification to ensure consistent rendering and viewer compatibility."
+            },
+            {
+                "code": "VM.BIND.001",
+                "name": "material-bind-scope",
+                "compatibility": "Open USD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-bind-scope.html"
+                },
+                "message": "Material bindings must use appropriate scope to ensure proper material assignment and inheritance."
+            },
+            {
+                "code": "VM.MDL.001",
+                "name": "material-mdl-source-asset",
+                "compatibility": "Open USD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-mdl-source-asset.html"
+                },
+                "message": "Material attributes must comply with the UsdPreviewSurface specification to ensure consistent rendering and viewer compatibility."
+            },
+            {
+                "code": "VM.BIND.002",
+                "name": "material-shader-inputs",
+                "compatibility": "Open USD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-shader-inputs.html"
+                },
+                "message": "Shader inputs must have correct types matching their shader specification to ensure proper material behavior and prevent runtime errors."
+            },
+            {
+                "code": "VM.TEX.002",
+                "name": "material-texture-colorspace",
+                "compatibility": "core-usd",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-texture-colorspace.html"
+                },
+                "message": "Each PBR texture channel must use the correct color space."
+            },
+            {
+                "code": "VM.TEX.001",
+                "name": "material-texture-maxsize",
+                "compatibility": "Open USD",
+                "tags": "performance",
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-texture-maxsize.html"
+                },
+                "message": "Texture dimensions must not exceed 16,384 pixels on either axis to ensure optimal performance and memory usage in simulation environments."
+            }
+        ]
+    }
+}

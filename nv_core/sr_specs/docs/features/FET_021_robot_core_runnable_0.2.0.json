@@ -1,0 +1,14 @@
+{
+    "id": "FET021_ROBOT_CORE_RUNNABLE",
+    "version": "0.2.0",
+    "display_name": "Robot Core Runnable",
+    "path": "features/FET_021-robot_core.html",
+    "dependencies": [
+    ],
+    "requirements": [
+        "RC.003",
+        "RC.007",
+        "RC.008",
+        "RC.009"
+    ]
+}

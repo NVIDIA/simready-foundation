@@ -1,0 +1,13 @@
+{
+  "format_version": "1.0",
+  "content_root": ".",
+  "items": [
+    {
+      "relative_path": "readme.txt",
+      "size": 54,
+      "hash": {
+        "sha256": "c48ba69ecacd4fe9f581597f835a6f565750a0f4077c846299ee4b1806d0e174"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+![Status](https://img.shields.io/badge/Status-Development-yellow) ({ref}`Details <capability-robot-core>`)

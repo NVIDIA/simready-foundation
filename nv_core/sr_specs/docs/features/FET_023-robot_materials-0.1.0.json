@@ -1,0 +1,12 @@
+{
+    "id": "FET023_ROBOT_MATERIALS",
+    "version": "0.1.0",
+    "display_name": "Robot Materials",
+    "path": "features/FET_023-robot_materials.html",
+    "dependencies": [
+    ],
+    "requirements": [
+        "RM.001",
+        "RM.002"
+    ]
+}

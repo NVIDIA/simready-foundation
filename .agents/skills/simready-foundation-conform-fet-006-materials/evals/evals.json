@@ -1,0 +1,24 @@
+[
+    {
+        "id":  "simready-foundation-conform-fet-006-materials-positive-trigger",
+        "question":  "Repair FET006 material binding and shader failures on a USD asset.",
+        "expected_skill":  "simready-foundation-conform-fet-006-materials",
+        "ground_truth":  "The agent should activate simready-foundation-conform-fet-006-materials and follow its workflow.",
+        "expected_behavior":  [
+                                  "Load the simready-foundation-conform-fet-006-materials skill.",
+                                  "Repair material bindings, shader schema, texture path, texture size, and color-space issues for the selected FET006 variant.",
+                                  "Report changed files, validation performed, and any remaining release or validation gaps."
+                              ]
+    },
+    {
+        "id":  "simready-foundation-conform-fet-006-materials-negative-nontrigger",
+        "question":  "Summarize the difference between a SimReady feature and capability without editing files.",
+        "expected_skill":  null,
+        "ground_truth":  "The agent should answer from repo documentation or local context without activating this specific skill.",
+        "expected_behavior":  [
+                                  "Do not activate simready-foundation-conform-fet-006-materials.",
+                                  "Do not modify files.",
+                                  "Provide a concise conceptual answer or choose a more appropriate skill if one is explicitly requested."
+                              ]
+    }
+]

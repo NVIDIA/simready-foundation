@@ -1,0 +1,111 @@
+[repo]
+
+import_configs = [
+    "${root}/_repo/deps/repo_kit_tools/kit-template/repo.toml"
+]
+
+[repo.folders]
+version_file = "${root}/VERSION.md"
+
+[repo.tokens]
+version_token = "${file:${root}/VERSION.md}"
+
+[repo_build.build]
+
+[repo_build.fetch]
+before_pull_commands."++" = [
+    ["${root}/nv_core/sr_specs/codegen${shell_ext}"],
+]
+
+[repo_build.fetch.pip]
+publish_pip_cache = false
+
+[repo_package]
+
+
+[repo_package.packages.foundation_complete]
+archive_format = "zip"
+omniverse_flow_version_scheme = true
+strip_package_infos = true
+
+files = [
+    ["**"]
+]
+
+files_exclude = [
+    ["**/_repo/**"],
+    ["**/_build/packages/**"],
+    ["**/nv_core/materials/**"],
+    [".git"],[".git*"],
+    ["deps"],["repo.*"], ["**.gitlab-ci.yml"]
+]
+
+
+[repo_package.packages.foundation_no_sample_content]
+archive_format = "zip"
+omniverse_flow_version_scheme = true
+strip_package_infos = true
+
+files = [
+    ["**"]
+]
+
+files_exclude = [
+    ["**/_repo/**"],
+    ["**sample_content/**"],
+    ["**/_build/packages/**"],
+    [".git"],[".git*"],
+    ["deps"],["repo.*"], ["**.gitlab-ci.yml"]
+]
+
+
+[repo_docs]
+enabled = false
+
+#####################
+# Repo Format
+#####################
+[repo_format]
+license_preamble = '''
+SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+SPDX-License-Identifier: Apache-2.0
+'''
+license_text = '''
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.'''
+
+
+[repo_format.python]
+line_length = 120
+maintain_legal_blurbs = true
+
+files.extensions = [".py"]
+files.include = [
+    "nv_core/**",
+]
+
+files.exclude = [
+    ".vscode/*",
+    ".pytest_cache/*",
+    "_build/*",
+    "_repo/*",
+    ".git/*",
+    ".eggs/*",
+    ".venv/*",
+    "tools/**",
+    "test_data/*",
+    "tests/test.cpp",
+    "omni/repo/format/_vendor/*",
+]
+
+
+

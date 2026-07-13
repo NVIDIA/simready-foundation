@@ -1,0 +1,22 @@
+{
+    "output": {
+        "sample_coffee_cup_grasp": "sample_coffee_cup_grasp.usd"
+    },
+    "pipeline": {
+        "asset_handler": "PropAssetHandler",
+        "timestamp": "2025-10-08 14:36:13",
+        "version": "1.4.25"
+    },
+    "input": {
+        "asset_name": "sample_coffee_cup_grasp",
+        "asset_type": "prop",
+        "input_uri": "sample_content/common_assets/props_general/sample_coffee_cup_grasp/simready_physx_usd",
+        "stage_file_name": "sample_coffee_cup_grasp.usd",
+        "stage_modified": "2025-10-08 14:29:10.212239",
+        "stage_filename": null
+    },
+    "validator": {
+        "version": "1.1.6",
+        "rules": []
+    }
+}

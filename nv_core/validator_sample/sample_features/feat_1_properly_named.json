@@ -1,0 +1,10 @@
+{
+	"id": "Feat_1",
+	"version": "1.0.0",
+	"display_name": "ProperlyNamed",
+	"path": "sample_features/feat_1_properly_named.json",
+	"requirements":
+	[
+		"SAMP.001"
+	]
+}

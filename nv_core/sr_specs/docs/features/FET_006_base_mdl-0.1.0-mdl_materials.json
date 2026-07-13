@@ -1,0 +1,16 @@
+{
+	"id": "FET006_BASE_MDL",
+	"version": "0.1.0",
+	"display_name": "MDL Materials",
+	"path": "features/FET_006-materials.html",
+	"requirements":
+	[
+		"VM.BIND.001",
+		"VM.BIND.002",
+		"VM.MAT.001",
+		"VM.MDL.001",
+		"VM.MDL.002",
+		"VM.TEX.001",
+		"VM.TEX.002"
+	]
+}

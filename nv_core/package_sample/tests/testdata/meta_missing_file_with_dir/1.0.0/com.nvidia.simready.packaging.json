@@ -1,0 +1,8 @@
+{
+  "format_version": "1.0",
+  "package_id": "meta_missing_file_with_dir.1.0.0",
+  "license": "Apache_2.0",
+  "metadata": [
+    {"name": "com.nvidia.simready.packaging.missing.json", "hash": {"sha256": "aa"}}
+  ]
+}

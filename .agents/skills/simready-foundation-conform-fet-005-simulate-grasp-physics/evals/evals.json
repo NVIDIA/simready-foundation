@@ -1,0 +1,24 @@
+[
+    {
+        "id":  "simready-foundation-conform-fet-005-simulate-grasp-physics-positive-trigger",
+        "question":  "Use a vision-capable model to add a FET005 grasp line to a coffee mug USD asset.",
+        "expected_skill":  "simready-foundation-conform-fet-005-simulate-grasp-physics",
+        "ground_truth":  "The agent should activate simready-foundation-conform-fet-005-simulate-grasp-physics and follow its workflow.",
+        "expected_behavior":  [
+                                  "Load the simready-foundation-conform-fet-005-simulate-grasp-physics skill.",
+                                  "Generate or inspect visual evidence, choose explicit grasp points, author a grasp_identifier BasisCurves line, record rationale/evidence, and rerun FET005 validation.",
+                                  "Report changed files, validation performed, and any remaining release or validation gaps."
+                              ]
+    },
+    {
+        "id":  "simready-foundation-conform-fet-005-simulate-grasp-physics-negative-nontrigger",
+        "question":  "Summarize the difference between a SimReady feature and capability without editing files.",
+        "expected_skill":  null,
+        "ground_truth":  "The agent should answer from repo documentation or local context without activating this specific skill.",
+        "expected_behavior":  [
+                                  "Do not activate simready-foundation-conform-fet-005-simulate-grasp-physics.",
+                                  "Do not modify files.",
+                                  "Provide a concise conceptual answer or choose a more appropriate skill if one is explicitly requested."
+                              ]
+    }
+]

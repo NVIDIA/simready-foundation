@@ -1,0 +1,27 @@
+{
+	"requirements_configs_path": "../config",
+	"requirements_paths": [
+		"capabilities"
+	],
+	"features_paths": [
+		"features"
+	],
+	"profiles_paths": [
+		"profiles/profiles.toml"
+	],
+  "adapter_modules_path": "../../cip_specs/asset_handler_modules",
+  "spec_root": "../../sr_specs/docs",
+	"recipes":
+	{
+		"recipe_test":
+		{
+			"input_profile": "Neutral",
+			"output_profile": "Prop-Poseable",
+			"process":
+			[
+				"cap_001_to_cap_002",
+				"make_test_prim"
+			]
+		}
+	}
+}

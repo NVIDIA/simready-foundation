@@ -1,0 +1,3893 @@
+{
+    "sample_content/common_assets/props_general/alcohol_a01/simready_usd/sm_alcohol_a01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Neutral",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "RB.MB.001"
+                            ],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "RB.MB.001"
+                                    ],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":4,
+                        "failed_count":2
+                    }
+                ]
+            },
+            "ts_hash":"d7a73afb8af71a82933e447f3d2ff8c3"
+        }
+    },
+    "sample_content/common_assets/props_general/obs_electricians_large_tool_box_a01/isaacsim_usd/sm_obs_electricians_large_tool_box_a01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "ts_hash":"08588d38fc14b26e738e693dd665b887"
+        }
+    },
+    "sample_content/common_assets/props_general/pose_electricians_large_tool_box_01/simready_usd/sm_pose_electricians_large_tool_box_01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Neutral",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[]
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[]
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[]
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[]
+                        }
+                    }
+                ],
+                "timestamp":"2025-08-25T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2025-08-25T00:00:00",
+                        "features":[
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[]
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[]
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[]
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[]
+                                }
+                            }
+                        ],
+                        "passed_count":1,
+                        "failed_count":3
+                    },
+                    {
+                        "timestamp":"2025-08-22T00:00:00",
+                        "features":[
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[]
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[]
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[]
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[]
+                                }
+                            }
+                        ],
+                        "passed_count":1,
+                        "failed_count":3
+                    },
+                    {
+                        "timestamp":"2025-08-12T00:00:00",
+                        "features":[
+                            {
+                                "FET_001":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[]
+                                }
+                            },
+                            {
+                                "FET_002":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[]
+                                }
+                            },
+                            {
+                                "FET_003":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[]
+                                }
+                            },
+                            {
+                                "FET_005":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[]
+                                }
+                            }
+                        ],
+                        "passed_count":1,
+                        "failed_count":3
+                    }
+                ]
+            },
+            "ts_hash":"85a6fe1d995e3e479c8f2e9a0a432d10"
+        }
+    },
+    "sample_content/common_assets/props_general/coffee_cup_grasp_a01/simready_usd/sm_coffee_cup_grasp_a01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Neutral",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "RB.MB.001"
+                            ],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "RB.MB.001"
+                                    ],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":4,
+                        "failed_count":2
+                    }
+                ]
+            },
+            "ts_hash":"f69f5be56499cf53a31b80b9455e6bb4"
+        }
+    },
+    "sample_content/common_assets/props_general/obs_joystick_a01/simready_usd/sm_obs_joystick_a01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Neutral",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":5,
+                        "failed_count":1
+                    }
+                ]
+            },
+            "ts_hash":"836e0db90fc0e1b94a30914ea922531e"
+        }
+    },
+    "sample_content/common_assets/props_general/obs_small_sledge_hammer_a01/simready_usd/sm_obs_small_sledge_hammer_a01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Neutral",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":5,
+                        "failed_count":1
+                    }
+                ]
+            },
+            "ts_hash":"259a1811e9dff9da9266d28192d19330"
+        }
+    },
+    "sample_content/common_assets/props_general/alcohol_a01/simready_physx_usd/sm_alcohol_a01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Physx",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "AA.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "RB.MB.001"
+                            ],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "RB.MB.001"
+                            ],
+                            "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "AA.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "RB.MB.001"
+                                    ],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "RB.MB.001"
+                                    ],
+                                    "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":4,
+                        "failed_count":4
+                    }
+                ]
+            },
+            "ts_hash":"19566e1f02d943b0e23c5cdeb6d96498"
+        }
+    },
+    "sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Neutral",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "RB.MB.001"
+                            ],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "RB.MB.001"
+                                    ],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":4,
+                        "failed_count":2
+                    }
+                ]
+            },
+            "ts_hash":"0dbd60abbbd2a113a8217120542248a5"
+        }
+    },
+    "sample_content/common_assets/props_general/obs_lamp_revolute_a01/simready_usd/sm_obs_lamp_revolute_a01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Neutral",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":5,
+                        "failed_count":1
+                    }
+                ]
+            },
+            "ts_hash":"6d3834013adb329910f0f28848b5dbb0"
+        }
+    },
+    "sample_content/common_assets/props_general/obs_electricians_large_tool_box_a01/simready_physx_usd/sm_obs_electricians_large_tool_box_a01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Physx",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "AA.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "AA.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":6,
+                        "failed_count":2
+                    }
+                ]
+            },
+            "ts_hash":"adcc679e2e6fcb35672ca1791d8bb488"
+        }
+    },
+    "sample_content/common_assets/props_general/obs_light_bulb_01/simready_physx_usd/sm_obs_light_bulb_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Physx",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "AA.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "RB.MB.001"
+                            ],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "RB.MB.001"
+                            ],
+                            "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "GSP.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "AA.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "RB.MB.001"
+                                    ],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "RB.MB.001"
+                                    ],
+                                    "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "GSP.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":3,
+                        "failed_count":5
+                    }
+                ]
+            },
+            "ts_hash":"4b9caf2a889b5b2fdafe808ed0402b4f"
+        }
+    },
+    "sample_content/common_assets/props_general/obs_orange_a01/simready_physx_usd/sm_obs_orange_a01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Physx",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "AA.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "RB.MB.001"
+                            ],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "RB.MB.001"
+                            ],
+                            "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "AA.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "RB.MB.001"
+                                    ],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "RB.MB.001"
+                                    ],
+                                    "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":4,
+                        "failed_count":4
+                    }
+                ]
+            },
+            "ts_hash":"e04948779a2863b15dcc30a0d036f0fb"
+        }
+    },
+    "sample_content/common_assets/props_general/obs_small_sledge_hammer_a01/simready_physx_usd/sm_obs_small_sledge_hammer_a01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Physx",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "AA.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "AA.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":6,
+                        "failed_count":2
+                    }
+                ]
+            },
+            "ts_hash":"a2164564396c830bdbad0c631a1af350"
+        }
+    },
+    "sample_content/common_assets/props_general/obs_orange_a01/simready_usd/sm_obs_orange_a01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Neutral",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "RB.MB.001"
+                            ],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "RB.MB.001"
+                                    ],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":4,
+                        "failed_count":2
+                    }
+                ]
+            },
+            "ts_hash":"84f6ea496c79633bbc26bad2c1dde4de"
+        }
+    },
+    "sample_content/common_assets/props_general/coffee_cup_grasp_a01/simready_physx_usd/sm_coffee_cup_grasp_a01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Physx",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "AA.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "RB.MB.001"
+                            ],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "RB.MB.001"
+                            ],
+                            "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "AA.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "RB.MB.001"
+                                    ],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "RB.MB.001"
+                                    ],
+                                    "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":4,
+                        "failed_count":4
+                    }
+                ]
+            },
+            "ts_hash":"a062c2b24c7ddcf5245e1b9369b3c2b4"
+        }
+    },
+    "sample_content/common_assets/props_general/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Neutral",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":5,
+                        "failed_count":1
+                    },
+                    {
+                        "timestamp":"2026-02-28T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":5,
+                        "failed_count":1
+                    }
+                ]
+            },
+            "ts_hash":"2420ad276c8a8fcf908f5cf0d1fcd958"
+        }
+    },
+    "sample_content/common_assets/props_general/obs_electricians_large_tool_box_a01/simready_usd/sm_obs_electricians_large_tool_box_a01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Neutral",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":5,
+                        "failed_count":1
+                    }
+                ]
+            },
+            "ts_hash":"cab9293c45dbf1313e74dcaa21d9c1eb"
+        }
+    },
+    "sample_content/common_assets/props_general/coffee_cup_grasp_a01/isaac_usd/sm_coffee_cup_grasp_a01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Isaac",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_ISAACSIM":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}]"
+                        }
+                    }
+                ],
+                "timestamp":"2025-10-08T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2025-10-08T00:00:00",
+                        "features":[
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_ISAACSIM":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}]"
+                                }
+                            }
+                        ],
+                        "passed_count":3,
+                        "failed_count":3
+                    },
+                    {
+                        "timestamp":"2025-08-25T00:00:00",
+                        "features":[
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[]
+                                }
+                            },
+                            {
+                                "FET003_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[]
+                                }
+                            },
+                            {
+                                "FET004_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[]
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[]
+                                }
+                            }
+                        ],
+                        "passed_count":3,
+                        "failed_count":1
+                    }
+                ]
+            },
+            "ts_hash":"296939570033242e6b35b09d13a6ff6e"
+        }
+    },
+    "sample_content/common_assets/props_general/obs_workbench_tool_a01/simready_usd/sm_obs_workbench_tool_a01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Neutral",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "GSP.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "GSP.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":4,
+                        "failed_count":2
+                    }
+                ]
+            },
+            "ts_hash":"ecedff92f7cb7ce5e8f8087e737cff73"
+        }
+    },
+    "sample_content/common_assets/props_general/gen_appliance_toaster_v01_01/simready_physx_usd/sm_gen_appliance_toaster_v01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Physx",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "AA.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "AA.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":6,
+                        "failed_count":2
+                    },
+                    {
+                        "timestamp":"2026-02-28T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":5,
+                        "failed_count":1
+                    }
+                ]
+            },
+            "ts_hash":"e0afa352e01a92a103086b7b93379740"
+        }
+    },
+    "sample_content/common_assets/props_general/obs_lamp_revolute_a01/simready_physx_usd/sm_obs_lamp_revolute_a01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Physx",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "AA.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "AA.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":6,
+                        "failed_count":2
+                    }
+                ]
+            },
+            "ts_hash":"3f57724c291ec775d3d91e5b2f14df72"
+        }
+    },
+    "sample_content/common_assets/props_general/obs_joystick_a01/simready_physx_usd/sm_obs_joystick_a01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Physx",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "AA.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "AA.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":6,
+                        "failed_count":2
+                    }
+                ]
+            },
+            "ts_hash":"e84275064e35273b83291593cfdc6eed"
+        }
+    },
+    "sample_content/common_assets/props_general/obs_workbench_tool_a01/isaacsim_usd/sm_obs_workbench_tool_a01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "ts_hash":"3c6f04ac496d6bfb8548167c42687738"
+        }
+    },
+    "sample_content/common_assets/props_general/obs_light_bulb_01/simready_usd/sm_obs_light_bulb_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Neutral",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "RB.MB.001"
+                            ],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "GSP.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "RB.MB.001"
+                                    ],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "GSP.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":3,
+                        "failed_count":3
+                    }
+                ]
+            },
+            "ts_hash":"32520fd7752e6673eb9d696c277bc949"
+        }
+    },
+    "sample_content/common_assets/props_general/obs_workbench_tool_a01/simready_physx_usd/sm_obs_workbench_tool_a01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Physx",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "AA.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "GSP.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "AA.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "GSP.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":5,
+                        "failed_count":3
+                    }
+                ]
+            },
+            "ts_hash":"7d6363556f1dc406636c3836b9c42a2f"
+        }
+    },
+    "sample_content/common_assets/props_general/apple_a01/simready_physx_usd/sm_apple_a01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Physx",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "AA.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "RB.MB.001"
+                            ],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "RB.MB.001"
+                            ],
+                            "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "AA.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "RB.MB.001"
+                                    ],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "RB.MB.001"
+                                    ],
+                                    "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":4,
+                        "failed_count":4
+                    }
+                ]
+            },
+            "ts_hash":"89e58bb7a63b2b26772779b04a2a346a"
+        }
+    },
+    "sample_content/common_assets/props_general/gen_cleaning_dishwand_v01_01/simready_usd/sm_gen_cleaning_dishwand_v01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Neutral",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":5,
+                        "failed_count":1
+                    }
+                ]
+            },
+            "ts_hash":"1c55e7cbc4e8fef94f13a3adbef814f8"
+        }
+    },
+    "sample_content/common_assets/props_general/gen_cleaning_dishwand_v01_01/simready_physx_usd/sm_gen_cleaning_dishwand_v01_01.usd":{
+        "null":{
+            "tags":{},
+            "factory":{},
+            "validation":{
+                "profile":"Prop-Robotics-Physx",
+                "profile_version":"1.0.0",
+                "features":[
+                    {
+                        "FET000_CORE":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET001_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "AA.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET003_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET004_BASE_PHYSX":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                        }
+                    },
+                    {
+                        "FET005_BASE_NEUTRAL":{
+                            "version":"0.1.0",
+                            "passed":true,
+                            "failing requirements":[],
+                            "dependencies":"[]"
+                        }
+                    },
+                    {
+                        "FET006_BASE_MDL":{
+                            "version":"0.1.0",
+                            "passed":false,
+                            "failing requirements":[
+                                "VM.MDL.001"
+                            ],
+                            "dependencies":"[]"
+                        }
+                    }
+                ],
+                "timestamp":"2026-03-02T00:00:00",
+                "validation_history":[
+                    {
+                        "timestamp":"2026-03-02T00:00:00",
+                        "features":[
+                            {
+                                "FET000_CORE":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET001_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "AA.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET003_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET004_BASE_PHYSX":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[{'FET003_BASE_PHYSX': {'version': '0.1.0'}}, {'FET004_BASE_NEUTRAL': {'version': '0.1.0'}}]"
+                                }
+                            },
+                            {
+                                "FET005_BASE_NEUTRAL":{
+                                    "version":"0.1.0",
+                                    "passed":true,
+                                    "failing requirements":[],
+                                    "dependencies":"[]"
+                                }
+                            },
+                            {
+                                "FET006_BASE_MDL":{
+                                    "version":"0.1.0",
+                                    "passed":false,
+                                    "failing requirements":[
+                                        "VM.MDL.001"
+                                    ],
+                                    "dependencies":"[]"
+                                }
+                            }
+                        ],
+                        "passed_count":6,
+                        "failed_count":2
+                    }
+                ]
+            },
+            "ts_hash":"24742e3d39f6fea50f0717cf20c4da81"
+        }
+    }
+}

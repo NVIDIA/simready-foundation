@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Add Profile"
+  short_description: "Create new SimReady profile definitions"
+  default_prompt: "Use $simready-foundation-add-profile to add a new SimReady Foundation profile with profiles.toml, profile documentation, feature bundle, and validation notes."

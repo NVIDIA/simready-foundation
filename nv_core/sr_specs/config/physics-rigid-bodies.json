@@ -1,0 +1,161 @@
+{
+    "capability": {
+        "id": "physics-rigid-bodies",
+        "version": "0.2.0",
+        "name": "Physics Rigid Bodies",
+        "description": "This capability enables physical simulation of solid objects with constant shape and size as well as collision detection and response between objects, dynamic motion simulation including gravity, forces, and constraints, and integration with physics engines for real-time and offline simulation. A rigid body is an idealized solid object that maintains a constant shape and size regardless of the forces acting upon it, meaning the distance between any two points within the rigid body remains constant during simulation.",
+        "requirements": [
+            {
+                "code": "RB.COL.002",
+                "name": "mesh-collision-api",
+                "compatibility": "OpenUSD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/mesh-collision-api.html"
+                },
+                "message": "MeshCollisionAPI may only be applied to UsdGeom.Mesh prims and requires CollisionAPI on the same prim."
+            },
+            {
+                "code": "RB.005",
+                "name": "rigid-body-no-instancing",
+                "compatibility": "OpenUSD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-no-instancing.html"
+                },
+                "message": "Rigid bodies cannot be part of a scene graph instance."
+            },
+            {
+                "code": "RB.007",
+                "name": "rigid-body-mass",
+                "compatibility": "OpenUSD",
+                "tags": "high-quality",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-mass.html"
+                },
+                "message": "Rigid bodies _or_ their descendent collision shapes should have a mass specification."
+            },
+            {
+                "code": "RB.006",
+                "name": "rigid-body-no-nesting",
+                "compatibility": "OpenUSD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-no-nesting.html"
+                },
+                "message": "Rigid bodies can not be nested unless xformOp reset xform stack is used."
+            },
+            {
+                "code": "RB.001",
+                "name": "rigid-body-capability",
+                "compatibility": "OpenUSD",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-capability.html"
+                },
+                "message": "Assets must contain at least one rigid body"
+            },
+            {
+                "code": "RB.009",
+                "name": "rigid-body-schema-no-skew-matrix",
+                "compatibility": "OpenUSD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-schema-no-skew-matrix.html"
+                },
+                "message": "Rigid bodies have to be UsdGeomXformable prims without skew matrix."
+            },
+            
+            {
+                "code": "RB.COL.003",
+                "name": "collider-mesh",
+                "compatibility": "OpenUSD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/collider-mesh.html"
+                },
+                "message": "The Mesh Collision API can only be assigned to Mesh Prims."
+            },
+            {
+                "code": "RB.MB.001",
+                "name": "rigid-body-multibody-capability",
+                "compatibility": "OpenUSD",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-multibody-capability.html"
+                },
+                "message": "Assets must contain at least two rigid bodies"
+            },
+            {
+                "code": "RB.COL.001",
+                "name": "collider-capability",
+                "compatibility": "OpenUSD",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/collider-capability.html"
+                },
+                "message": "Colliding Gprims must apply the Collision API."
+            },
+            {
+                "code": "RB.003",
+                "name": "rigid-body-schema-application",
+                "compatibility": "OpenUSD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-schema-application.html"
+                },
+                "message": "Rigid bodies have to be UsdGeomXformable prims."
+            },
+            {
+                "code": "RB.COL.004",
+                "name": "collider-non-uniform-scale",
+                "compatibility": "OpenUSD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/collider-non-uniform-scale.html"
+                },
+                "message": "The collision shape scale must be uniform for the following geometries: Sphere, Capsule, Cylinder, Cone & Points."
+            },
+            {
+                "code": "RB.008",
+                "name": "rigid-body-detailed-mass",
+                "compatibility": "OpenUSD",
+                "tags": "high-quality",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-detailed-mass.html"
+                },
+                "message": "Rigid bodies _or_ their descendent collision shapes may have detailed mass properties including density, center of mass, and inertia tensor."
+            },
+            {
+                "code": "RB.010",
+                "name": "invisible-collision-mesh-has-purpose-guide",
+                "compatibility": "OpenUSD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/invisible-collision-mesh-has-purpose-guide.html"
+                },
+                "message": "Invisible collision meshes must have their purpose attribute set to 'guide' to be properly excluded from rendering."
+            },
+            {
+                "code": "RB.011",
+                "name": "nested-rigid-body-mass",
+                "compatibility": "OpenUSD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/nested-rigid-body-mass.html"
+                },
+                "message": "Rigid bodies must have an explicit mass specification, or their descendant collision shapes must have non-zero volume to allow mass auto-computation. Nested rigid body subtrees are excluded from the traversal."
+            },
+            {
+                "code": "RB.012",
+                "name": "no-nested-rigid-body-without-joint",
+                "compatibility": "OpenUSD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/no-nested-rigid-body-without-joint.html"
+                },
+                "message": "Rigid bodies should not be nested unless they are connected by a joint."
+            }
+        ]
+    }
+}

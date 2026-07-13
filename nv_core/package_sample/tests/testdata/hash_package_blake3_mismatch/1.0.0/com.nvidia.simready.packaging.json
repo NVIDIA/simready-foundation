@@ -1,0 +1,25 @@
+{
+  "format_version": "1.0",
+  "package_id": "hash-package-blake3-mismatch",
+  "license": "Apache-2.0",
+  "content_hash": {
+    "sha256": "7b03a6a1572c58e74ed7663c9f15d8fe6804e9e5db366b4b7274cb59d00fc8b1",
+    "blake3": "be0b3e499d9adaab20aaed9823c18e56510f9baf805a4fd390a3fdf59495c423",
+    "blake2b": "26769af739ec9fc1029fac110ff39cb2e842ee4e98f63b48f35bd535355927c3706cb10330118097490ccf04d152163de58340e609fa33b383a51c4e2d669c5b"
+  },
+  "package_hash": {
+    "sha256": "0c43128df7133d4d5e72898e8ff8e47221f66ed53331ce1631bcf90817b4a2c4",
+    "blake3": "0000000000000000000000000000000000000000000000000000000000000000",
+    "blake2b": "796123474bc0aa8b3e177b2c01a048d4ee249dd68082c36b2d04d08a755ed23116d34d05d775a0408e61aea13763df5949eccd21aa74c8e7a8ebcde1582d2219"
+  },
+  "metadata": [
+    {
+      "name": "com.nvidia.simready.packaging.bom.json",
+      "hash": {
+        "sha256": "f2d4c6fc6bd8b4af979a10bcb28f2739ee7cf992e50420de08e01900dcd1ea1a",
+        "blake3": "8257304554b0f90bbca4c4c160106648772050bfaadef1873a1200bb2a16b726",
+        "blake2b": "ace4be6cdecba82432e1833a302a0c949888cac04db395f98f28e8da6a489edab48ed4dd4142a4b293e3478f385046ff368d93dd8e3a0b7fc023b813a660c0b5"
+      }
+    }
+  ]
+}

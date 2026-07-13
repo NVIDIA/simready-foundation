@@ -1,0 +1,8 @@
+{
+  "format_version": "1.0",
+  "package_id": "hash_content_extra_file_no_bom.1.0.0",
+  "license": "Apache_2.0",
+  "content_hash": {
+    "sha256": "1c44403f81376654c4f13bafe5f682ed1ec0787b450ef7870cd53d562461f603"
+  }
+}

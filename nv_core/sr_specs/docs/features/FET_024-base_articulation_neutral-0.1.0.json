@@ -1,0 +1,12 @@
+{
+    "id": "FET024_BASE_ARTICULATION_NEUTRAL",
+    "version": "0.1.0",
+    "display_name": "Base Articulation Neutral",
+    "path": "features/FET_024-base_articulation.html",
+    "dependencies": [
+    ],
+    "requirements": [
+        "BA.001"
+    ]
+}
+

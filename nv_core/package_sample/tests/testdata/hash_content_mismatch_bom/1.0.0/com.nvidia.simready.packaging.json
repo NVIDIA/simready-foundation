@@ -1,0 +1,16 @@
+{
+  "format_version": "1.0",
+  "package_id": "hash_content_mismatch_bom.1.0.0",
+  "license": "Apache_2.0",
+  "content_hash": {
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "metadata": [
+    {
+      "name": "com.nvidia.simready.packaging.bom.json",
+      "hash": {
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    }
+  ]
+}

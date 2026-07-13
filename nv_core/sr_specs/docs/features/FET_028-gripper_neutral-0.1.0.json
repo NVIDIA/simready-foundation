@@ -1,0 +1,13 @@
+{
+    "id": "FET028_GRIPPER_NEUTRAL",
+    "version": "0.1.0",
+    "display_name": "Gripper Neutral",
+    "path": "features/FET_028-gripper.html",
+    "dependencies": [],
+    "requirements": [
+        "GR.001",
+        "GR.002",
+        "GR.003",
+        "GR.004"
+    ]
+}

@@ -1,0 +1,16 @@
+{
+	"id": "FET100_BASE_ISAACSIM",
+	"version": "0.1.0",
+	"display_name": "Isaacsim Composition",
+	"path": "features/FET_100-isaacsim-0.1.0-composition.html",
+	"dependencies": [
+		{
+			"FET003_BASE_PHYSX": {
+				"version": "0.1.0"
+			}
+		}
+	],
+	"requirements": [
+		"ISA.001"
+	]
+}

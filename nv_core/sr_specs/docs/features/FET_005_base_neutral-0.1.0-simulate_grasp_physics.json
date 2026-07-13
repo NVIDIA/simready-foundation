@@ -1,0 +1,11 @@
+{
+    "id": "FET005_BASE_NEUTRAL",
+    "version": "0.1.0",
+    "display_name": "Simulate Grasp Physics",
+    "path": "features/FET_002-simulate_grasp_physics.html",
+    "requirements":
+    [
+        "PMT.001",
+        "GSP.001"
+    ]
+}

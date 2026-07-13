@@ -1,0 +1,21 @@
+{
+    "output": {
+        "sm_coffee_cup_grasp_a01_01": "sm_coffee_cup_grasp_a01_01.usd"
+    },
+    "pipeline": {
+        "asset_handler": "PropAssetHandler",
+        "timestamp": "2026-03-02 11:53:01",
+        "version": "1.4.25"
+    },
+    "input": {
+        "asset_name": "sm_coffee_cup_grasp_a01_01",
+        "asset_type": "prop",
+        "input_uri": "sample_content/common_assets/props_general/coffee_cup_grasp_a01/simready_usd",
+        "stage_filename": null,
+        "stage_modified": "2026-03-02 11:52:50.432850"
+    },
+    "validator": {
+        "version": "1.1.6",
+        "rules": []
+    }
+}

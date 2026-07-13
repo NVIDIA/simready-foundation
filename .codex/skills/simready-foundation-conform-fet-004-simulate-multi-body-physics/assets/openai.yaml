@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform FET-004 Simulate Multi-Body Physics"
+  short_description: "Repair FET004 multibody joints using existing geometry"
+  default_prompt: "Use $simready-foundation-conform-fet-004-simulate-multi-body-physics to repair FET004 multi-body physics SimReady validation failures on a USD asset without creating new geometry."

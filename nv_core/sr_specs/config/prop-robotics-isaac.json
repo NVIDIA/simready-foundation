@@ -1,0 +1,9 @@
+{
+    "capability": {
+        "id": "prop-robotics-isaac",
+        "version": "0.2.0",
+        "name": "Prop Robotics Isaac Profile",
+        "description": "**Profile:** Prop-Robotics-Isaac  \n**Version:** 0.1.0  \n**Asset Class:** Prop  \n**Target Use Case:** Advanced robotics simulation with NVIDIA Isaac Sim composition",
+        "requirements": []
+    }
+}

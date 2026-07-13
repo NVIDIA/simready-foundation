@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Update Feature Adapter"
+  short_description: "Repair feature/profile upgrade adapters"
+  default_prompt: "Use $simready-foundation-update-feature-adapter to update a SimReady feature adapter while preserving published upgrade paths."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Add Requirement"
+  short_description: "Create new atomic requirement docs"
+  default_prompt: "Use $simready-foundation-add-requirement to add a new SimReady requirement with documentation, examples, capability index updates, and validator planning."

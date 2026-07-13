@@ -1,0 +1,1 @@
+![Status](https://img.shields.io/badge/Status-Draft-red) ({ref}`Details <capability-sim-ready>`)

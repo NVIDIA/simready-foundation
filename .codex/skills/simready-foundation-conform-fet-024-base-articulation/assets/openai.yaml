@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform FET-024 Base Articulation"
+  short_description: "Repair base articulation conformance failures"
+  default_prompt: "Use $simready-foundation-conform-fet-024-base-articulation to repair FET024 base articulation SimReady validation failures on a USD robot asset."

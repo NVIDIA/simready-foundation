@@ -1,0 +1,80 @@
+{
+    "capability": {
+        "id": "aif_metadata",
+        "version": "0.1.0",
+        "name": "AIF Metadata",
+        "description": "Validates AIF equipment metadata attributes on assets.",
+        "requirements": [
+            {
+                "code": "AM.001",
+                "name": "properties-sublayer-required",
+                "compatibility": "AIF",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/aif/metadata/requirements/properties-sublayer-required.html"
+                },
+                "message": "Stage must include a *properties*.usda sublayer for AIF metadata."
+            },
+            {
+                "code": "AM.002",
+                "name": "asset-class-required",
+                "compatibility": "AIF",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/aif/metadata/requirements/asset-class-required.html"
+                },
+                "message": "Default prim must have aif:core:assetClass attribute."
+            },
+            {
+                "code": "AM.003",
+                "name": "asset-identification-metadata",
+                "compatibility": "AIF",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/aif/metadata/requirements/asset-identification-metadata.html"
+                },
+                "message": "Default prim must have aif:core:manufacturer, aif:core:modelNumber, and aif:core:assetVersion attributes."
+            },
+            {
+                "code": "AM.004",
+                "name": "physical-dimensions-metadata",
+                "compatibility": "AIF",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/aif/metadata/requirements/physical-dimensions-metadata.html"
+                },
+                "message": "Default prim must have aif:core:height, aif:core:width, aif:core:depth, aif:core:weight, aif:core:overallGeometryDimensions, aif:core:installationClearance, and aif:core:accessibilityRequirement attributes."
+            },
+            {
+                "code": "AM.005",
+                "name": "simready-version-tracking",
+                "compatibility": "AIF",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/aif/metadata/requirements/simready-version-tracking.html"
+                },
+                "message": "Default prim must have aif:core:simreadyVersion attribute."
+            },
+            {
+                "code": "AM.006",
+                "name": "asset-description-required",
+                "compatibility": "AIF",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/aif/metadata/requirements/asset-description-required.html"
+                },
+                "message": "Default prim must have aif:core:assetDescription and aif:core:connectsToModelDocumentation attributes."
+            },
+            {
+                "code": "AM.007",
+                "name": "equipment-class-template-compliance",
+                "compatibility": "AIF",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/aif/metadata/requirements/equipment-class-template-compliance.html"
+                },
+                "message": "All aif:spec:* attributes defined in the equipment-class schema must be present on the default prim."
+            }
+        ]
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "capability": {
+        "id": "base-articulation",
+        "version": "0.2.0",
+        "name": "Base Articulation",
+        "description": "This capability enables creation of articulated mechanical systems using articulation.",
+        "requirements": [
+            {
+                "code": "BA.001",
+                "name": "has-articulation-root",
+                "compatibility": "OpenUSD",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/base_articulation/requirements/has-articulation-root.html"
+                },
+                "message": "Articulated assets must have exactly one ArticulationRootAPI applied to establish the physics simulation root."
+            },
+            {
+                "code": "BA.002",
+                "name": "non-adjacent-collision-meshes-do-not-clash",
+                "compatibility": "Physx",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/base_articulation/requirements/non-adjacent-collision-meshes-do-not-clash.html"
+                },
+                "message": "Collision meshes on non-adjacent links in the articulation hierarchy must not overlap or intersect at the default pose."
+            }
+        ]
+    }
+}

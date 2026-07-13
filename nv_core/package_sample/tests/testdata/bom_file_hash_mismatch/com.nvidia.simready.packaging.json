@@ -1,0 +1,19 @@
+{
+  "format_version": "1.0",
+  "package_id": "bom-file-hash-mismatch",
+  "license": "Apache-2.0",
+  "content_hash": {
+    "sha256": "415273f39b56e841ea67dae92b5b844d78e9477d1e0c954d2e4322ac1f3da8b7"
+  },
+  "package_hash": {
+    "sha256": "cdb0584f866cbb753ac449ddbf3b72784ff7508b7aceadcba8178101c257a158"
+  },
+  "metadata": [
+    {
+      "name": "com.nvidia.simready.packaging.bom.json",
+      "hash": {
+        "sha256": "f851d2fef9ac94cab5263ea4c285b7da61129674b79b36005dffffef1ebd2b1e"
+      }
+    }
+  ]
+}

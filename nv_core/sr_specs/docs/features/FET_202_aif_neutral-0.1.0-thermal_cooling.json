@@ -1,0 +1,13 @@
+{
+	"id": "FET202_AIF_NEUTRAL",
+	"version": "0.1.0",
+	"display_name": "AIF Thermal Cooling",
+	"path": "features/FET_202-thermal_cooling.html",
+	"dependencies": [
+		{"FET201_AIF_NEUTRAL": {"version": "0.1.0"}}
+	],
+	"requirements": [
+		"TC.001",
+		"TC.002"
+	]
+}

@@ -1,0 +1,24 @@
+[
+    {
+        "id":  "simready-foundation-add-runtime-test-positive-trigger",
+        "question":  "Add a runtime test proving a SimReady factory asset connection point imports and aligns correctly in Kit.",
+        "expected_skill":  "simready-foundation-add-runtime-test",
+        "ground_truth":  "The agent should activate simready-foundation-add-runtime-test and follow its workflow.",
+        "expected_behavior":  [
+                                  "Load the simready-foundation-add-runtime-test skill.",
+                                  "Create or update runtime test definitions and document runner assumptions, expected artifacts, and validation follow-up.",
+                                  "Report changed files, validation performed, and any remaining release or validation gaps."
+                              ]
+    },
+    {
+        "id":  "simready-foundation-add-runtime-test-negative-nontrigger",
+        "question":  "Summarize the difference between a SimReady feature and capability without editing files.",
+        "expected_skill":  null,
+        "ground_truth":  "The agent should answer from repo documentation or local context without activating this specific skill.",
+        "expected_behavior":  [
+                                  "Do not activate simready-foundation-add-runtime-test.",
+                                  "Do not modify files.",
+                                  "Provide a concise conceptual answer or choose a more appropriate skill if one is explicitly requested."
+                              ]
+    }
+]

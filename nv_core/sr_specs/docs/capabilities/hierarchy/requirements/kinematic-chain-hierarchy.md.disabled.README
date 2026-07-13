@@ -1,0 +1,18 @@
+# kinematic-chain-hierarchy.md.disabled - README
+
+This file was temporarily disabled on [2024-11-07] due to a duplicate requirement code issue.
+
+## Issue:
+Both `kinematic-chain-hierarchy.md` and `root-prim-xformable.md` are assigned the requirement code HI.007, 
+which causes the documentation build to fail with a duplicate code error.
+
+## Action Taken:
+Renamed `kinematic-chain-hierarchy.md` to `kinematic-chain-hierarchy.md.disabled` to prevent 
+the documentation build system from processing it.
+
+## Resolution Needed:
+The requirement codes need to be reviewed and one of these requirements should be assigned a different code.
+This appears to be a pre-existing issue in the repository that needs to be resolved by the maintainers.
+
+## To Re-enable:
+Once the duplicate code issue is resolved, rename the file back to `kinematic-chain-hierarchy.md` 

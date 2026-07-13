@@ -1,0 +1,31 @@
+{
+  "format_version": "1.0",
+  "package_id": "com.nvidia.simready.fruit_f01_multi_usd.1.0.0",
+  "license": "LicenseRef-NVIDIA-Proprietary",
+  "metadata": [
+    {
+      "name": "com.nvidia.simready.conformance.Package-Candidate@1.0.0.json",
+      "hash": {
+        "sha256": "daa437dc1ef701d2ef8d5aabeb61be4cb791d754236ae56beec0cca6ce6afe18"
+      }
+    },
+    {
+      "name": "com.nvidia.simready.packaging.bom.json",
+      "hash": {
+        "sha256": "541ad3ecae6b4a3a7ca479b079bf3e264d0068ba20d12603ef4f65c9a606336a"
+      }
+    },
+    {
+      "name": "com.nvidia.simready.root_usds.json",
+      "hash": {
+        "sha256": "c6ecfa55a1421489f6e997e7c74ac9a68956c6fe6ea715707b11aed8aaefb6d9"
+      }
+    }
+  ],
+  "content_hash": {
+    "sha256": "dd18f3a1d381a40d72bd35133eff186d26128d19a24fe2fda8cdb8ac62aa1d06"
+  },
+  "package_hash": {
+    "sha256": "990dd8c25b8e403289d4a76dcb96972b38d5764824256e18edffd502b6badfcf"
+  }
+}

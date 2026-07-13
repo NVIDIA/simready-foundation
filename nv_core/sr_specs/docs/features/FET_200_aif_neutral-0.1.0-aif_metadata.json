@@ -1,0 +1,16 @@
+{
+	"id": "FET200_AIF_NEUTRAL",
+	"version": "0.1.0",
+	"display_name": "AIF Core Metadata",
+	"path": "features/FET_200-aif_metadata.html",
+	"dependencies": [],
+	"requirements": [
+		"AM.001",
+		"AM.002",
+		"AM.003",
+		"AM.004",
+		"AM.005",
+		"AM.006",
+		"AM.007"
+	]
+}

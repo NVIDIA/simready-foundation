@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform FET-023 Robot Materials"
+  short_description: "Repair robot material organization"
+  default_prompt: "Use $simready-foundation-conform-fet-023-robot-materials to repair FET023 robot material organization validation failures on a USD robot asset."

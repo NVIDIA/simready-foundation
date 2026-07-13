@@ -1,0 +1,80 @@
+{
+    "capability": {
+        "id": "physics-joints",
+        "version": "0.2.0",
+        "name": "Physics Joints",
+        "description": "This capability enables creation of articulated mechanical systems with constrained motion, simulation of mechanical assemblies like robots and modeling of mechanical joints with specific degrees of freedom.",
+        "requirements": [
+            {
+                "code": "JT.ART.001",
+                "name": "articulation",
+                "compatibility": "OpenUSD",
+                "tags": "high-quality",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_joints/requirements/articulation.html"
+                },
+                "message": "For stable and fast simulations of kinematic chains, an asset should define an articulation."
+            },
+            {
+                "code": "JT.ART.002",
+                "name": "articulation-no-nesting",
+                "compatibility": "OpenUSD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_joints/requirements/articulation-no-nesting.html"
+                },
+                "message": "Articulation roots cannot be nested."
+            },
+            {
+                "code": "JT.002",
+                "name": "joint-body-target-exists",
+                "compatibility": "OpenUSD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_joints/requirements/joint-body-target-exists.html"
+                },
+                "message": "Targets set to Body0 and Body1 relationships must exist."
+            },
+            {
+                "code": "JT.001",
+                "name": "joint-capability",
+                "compatibility": "OpenUSD",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_joints/requirements/joint-capability.html"
+                },
+                "message": "Rigid bodies which are not free floating should be connected using joints."
+            },
+            {
+                "code": "JT.ART.003",
+                "name": "articulation-not-on-kinematic-body",
+                "compatibility": "OpenUSD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_joints/requirements/articulation-not-on-kinematic-body.html"
+                },
+                "message": "Articulations are not allowed on kinematic bodies."
+            },
+            {
+                "code": "JT.ART.004",
+                "name": "articulation-not-on-static-body",
+                "compatibility": "OpenUSD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_joints/requirements/articulation-not-on-static-body.html"
+                },
+                "message": "Articulations are not allowed on static bodies."
+            },
+            {
+                "code": "JT.003",
+                "name": "joint-no-multiple-body-targets",
+                "compatibility": "OpenUSD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_joints/requirements/joint-no-multiple-body-targets.html"
+                },
+                "message": "Body0 and Body1 relationships must not have more than one target."
+            }
+        ]
+    }
+}

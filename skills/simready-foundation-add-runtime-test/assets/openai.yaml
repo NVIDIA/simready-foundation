@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Add Runtime Test"
+  short_description: "Add runtime test coverage and evidence"
+  default_prompt: "Use $simready-foundation-add-runtime-test to add runtime testing coverage for a SimReady feature, profile, or asset workflow."

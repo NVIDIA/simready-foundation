@@ -1,0 +1,8 @@
+{
+  "format_version": "1.0",
+  "package_id": "meta_happy_case.1.0.0",
+  "license": "Apache_2.0",
+  "metadata": [
+    {"name": "com.nvidia.simready.packaging.info.json", "hash": {"sha256": "c90527be52905ad72a757af2ad3c8c22ef7180fbc4855c7de8c87d20799a25d1"}}
+  ]
+}

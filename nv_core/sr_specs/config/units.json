@@ -1,0 +1,80 @@
+{
+    "capability": {
+        "id": "units",
+        "version": "0.2.0",
+        "name": "Units",
+        "description": "This capability enables proper scaling and composition of assets with different unit systems, accurate physics simulation through consistent mass and scale units, correct time-sampled animation playback via standardized time units, and reliable color reproduction through defined colorspace units. These requirements ensure that assets have consistent and well-defined units for proper scaling when composed together as well as interpretation in simulation and rendering environments.",
+        "requirements": [
+            {
+                "code": "UN.002",
+                "name": "meters-per-unit",
+                "compatibility": "core-usd",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/core/units/requirements/meters-per-unit.html"
+                },
+                "message": "Stage must specify metersPerUnit to define the linear unit scale"
+            },
+            {
+                "code": "UN.004",
+                "name": "corrective-transforms",
+                "compatibility": "core-usd",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/core/units/requirements/corrective-transforms.html"
+                },
+                "message": "Must apply corrective transforms for different units"
+            },
+            {
+                "code": "UN.007",
+                "name": "meters-per-unit-1",
+                "compatibility": "core-usd",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/core/units/requirements/meters-per-unit-1.html"
+                },
+                "message": "Stage must specify metersPerUnit = 1.0 to define the linear unit scale"
+            },
+            {
+                "code": "UN.001",
+                "name": "upaxis",
+                "compatibility": "core-usd",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/core/units/requirements/upaxis.html"
+                },
+                "message": "Stage must specify upAxis to define the orientation of the stage"
+            },
+            {
+                "code": "UN.003",
+                "name": "kilograms-per-unit",
+                "compatibility": "core-usd",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/core/units/requirements/kilograms-per-unit.html"
+                },
+                "message": "Stage must specify kilogramsPerUnit to define the mass unit scale, if physics objects are present in the stage."
+            },
+            {
+                "code": "UN.005",
+                "name": "timecodes-per-second",
+                "compatibility": "core-usd",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/core/units/requirements/timecodes-per-second.html"
+                },
+                "message": "Stage must specify timeCodesPerSecond, if timesamples are present in the stage."
+            },
+            {
+                "code": "UN.006",
+                "name": "upaxis-z",
+                "compatibility": "core-usd",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/core/units/requirements/upaxis-z.html"
+                },
+                "message": "Stage must specify upAxis = \"Z\" to define the orientation of the stage"
+            }
+        ]
+    }
+}

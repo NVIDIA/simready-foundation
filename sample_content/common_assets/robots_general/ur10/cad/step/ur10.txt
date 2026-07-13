@@ -1,0 +1,9 @@
+﻿"Symbol";"Value";"Unit";
+"TraceParts.PartNumber";"10-06032017-106409";"";
+"REFERENCE";"UR10";"";
+"TraceParts.PartTitle";"UR10 Robot";"";
+"TraceParts.InstanceId";"10-06032017-106409EUVI5ZKETW9RIQ5G9NYIVNUVT";"";
+"SUPPLIER";"Universal Robots A/S";"";
+"DESIGN";"UR10 Robot";"";
+"TraceParts.PartVersion";"1.0.2";"";
+"TraceParts.PartLanguage";"en";"";

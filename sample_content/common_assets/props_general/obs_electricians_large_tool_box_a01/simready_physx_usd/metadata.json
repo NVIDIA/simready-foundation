@@ -1,0 +1,21 @@
+{
+    "output": {
+        "sm_obs_electricians_large_tool_box_a01_01": "sm_obs_electricians_large_tool_box_a01_01.usd"
+    },
+    "pipeline": {
+        "asset_handler": "PropAssetHandler",
+        "timestamp": "2026-03-02 12:10:18",
+        "version": "1.4.25"
+    },
+    "input": {
+        "asset_name": "sm_obs_electricians_large_tool_box_a01_01",
+        "asset_type": "prop",
+        "input_uri": "sample_content/common_assets/props_general/obs_electricians_large_tool_box_a01/simready_usd",
+        "stage_filename": null,
+        "stage_modified": "2026-03-02 12:09:50.264329"
+    },
+    "validator": {
+        "version": "1.1.6",
+        "rules": []
+    }
+}

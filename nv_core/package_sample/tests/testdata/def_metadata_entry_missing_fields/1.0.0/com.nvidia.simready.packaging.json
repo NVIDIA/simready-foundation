@@ -1,0 +1,9 @@
+{
+  "format_version": "1.0",
+  "package_id": "def_metadata_entry_missing_fields.1.0.0",
+  "license": "Apache_2.0",
+  "metadata": [
+    {"other": "stuff"},
+    {"name": 42, "hash": "not_an_object"}
+  ]
+}

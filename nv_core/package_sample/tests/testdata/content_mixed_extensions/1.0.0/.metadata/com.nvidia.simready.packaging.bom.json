@@ -1,0 +1,27 @@
+{
+  "format_version": "1.0",
+  "content_root": ".",
+  "items": [
+    {
+      "relative_path": "readme.txt",
+      "size": 58,
+      "hash": {
+        "sha256": "3540356d6b07ee945cf10cda300339beaaafe0e887c781a0225df5997457e235"
+      }
+    },
+    {
+      "relative_path": "simready_usd/asset.usda",
+      "size": 465,
+      "hash": {
+        "sha256": "6dcb5b9495fbdd917b378a68dc79e032ff29301a1fffb45c3aa196e7f672ff87"
+      }
+    },
+    {
+      "relative_path": "textures/sample.png",
+      "size": 68,
+      "hash": {
+        "sha256": "7ac2abfce2be8b46dd9826d597d94edeefc1570b4a992622721b90a1850e3ee9"
+      }
+    }
+  ]
+}

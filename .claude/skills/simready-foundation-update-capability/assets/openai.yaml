@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Update Capability"
+  short_description: "Maintain capability docs and indexes"
+  default_prompt: "Use $simready-foundation-update-capability to update an existing SimReady capability while keeping requirement docs, indexes, validators, and feature references aligned."

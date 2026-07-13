@@ -1,0 +1,178 @@
+{
+    "capability": {
+        "id": "robot-core",
+        "version": "0.1.0",
+        "name": "robot core",
+        "description": null,
+        "requirements": [
+            {
+                "code": "RC.001",
+                "name": "clean-folder",
+                "compatibility": "Isaac",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/clean-folder.html"
+                },
+                "message": "Robot asset folders contain only referenced, required files. No stray or unused content. At the main level of a robot asset, only the interface layer is present. All other required content is bundled on subfolders related to it specific usage."
+            },
+            {
+                "code": "RC.002",
+                "name": "no-overrides",
+                "compatibility": "Isaac",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/no-overrides.html"
+                },
+                "message": "Robot assets avoid local override layers that mask upstream schemas or physics."
+            },
+            {
+                "code": "RC.003",
+                "name": "robot-naming",
+                "compatibility": "Isaac",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/robot-naming.html"
+                },
+                "message": "Canonical robot and prim naming conventions for stable references and tools."
+            },
+            {
+                "code": "RC.004",
+                "name": "thumbnail-exist",
+                "compatibility": "Isaac",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/thumbnail-exist.html"
+                },
+                "message": "The robot interface asset file should contain a thumbnail. The thumbnail should be representative of the robot."
+            },
+            {
+                "code": "RC.005",
+                "name": "verify-robot-physics-attribute-source-layer",
+                "compatibility": "Isaac",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/verify-robot-physics-attribute-source-layer.html"
+                },
+                "message": "Validates that physics attributes are authored in the physics layer."
+            },
+            {
+                "code": "RC.006",
+                "name": "verify-robot-physics-schema-source-layer",
+                "compatibility": "Isaac",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/verify-robot-physics-schema-source-layer.html"
+                },
+                "message": "Validates that robot physics schema are correctly authored."
+            },
+            {
+                "code": "RC.007",
+                "name": "robot-schema",
+                "compatibility": "Isaac",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/robot-schema.html"
+                },
+                "message": "Robot USDs declare and use the required schemas and physics attributes."
+            }
+        ]
+    },
+    "capability": {
+        "id": "robot-core",
+        "version": "0.2.0",
+        "name": "robot core",
+        "description": null,
+        "requirements": [
+            {
+                "code": "RC.001",
+                "name": "clean-folder",
+                "compatibility": "Isaac",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/clean-folder.html"
+                },
+                "message": "Robot asset folders contain only referenced, required files. No stray or unused content. At the main level of a robot asset, only the interface layer is present. All other required content is bundled on subfolders related to it specific usage."
+            },
+            {
+                "code": "RC.002",
+                "name": "no-overrides",
+                "compatibility": "Isaac",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/no-overrides.html"
+                },
+                "message": "Robot assets avoid local override layers that mask upstream schemas or physics."
+            },
+            {
+                "code": "RC.003",
+                "name": "robot-naming",
+                "compatibility": "Isaac",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/robot-naming.html"
+                },
+                "message": "Canonical robot and prim naming conventions for stable references and tools."
+            },
+            {
+                "code": "RC.004",
+                "name": "thumbnail-exist",
+                "compatibility": "Isaac",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/thumbnail-exist.html"
+                },
+                "message": "The robot interface asset file should contain a thumbnail. The thumbnail should be representative of the robot."
+            },
+            {
+                "code": "RC.005",
+                "name": "verify-robot-physics-attribute-source-layer",
+                "compatibility": "Isaac",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/verify-robot-physics-attribute-source-layer.html"
+                },
+                "message": "Validates that physics attributes are authored in the physics layer."
+            },
+            {
+                "code": "RC.006",
+                "name": "verify-robot-physics-schema-source-layer",
+                "compatibility": "Isaac",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/verify-robot-physics-schema-source-layer.html"
+                },
+                "message": "Validates that robot physics schema are correctly authored."
+            },
+            {
+                "code": "RC.007",
+                "name": "robot-schema",
+                "compatibility": "Isaac",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/robot-schema.html"
+                },
+                "message": "Robot USDs declare and use the required schemas and physics attributes."
+            },
+            {
+                "code": "RC.008",
+                "name": "robot-type",
+                "compatibility": "Isaac",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/robot-type.html"
+                },
+                "message": "Robot USDs declare and use the required robot type."
+            },
+            {
+                "code": "RC.009",
+                "name": "root-joint-pinned",
+                "compatibility": "Isaac",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/root-joint-pinned.html"
+                },
+                "message": "The root joint is pinned according to the robot type."
+            }
+        ]
+    }    
+}

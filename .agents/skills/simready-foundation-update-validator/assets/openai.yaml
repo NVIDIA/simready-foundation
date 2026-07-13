@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Update Validator"
+  short_description: "Fix validator behavior and doc drift"
+  default_prompt: "Use $simready-foundation-update-validator to repair existing SimReady validation behavior while keeping requirement docs and feature manifests aligned."

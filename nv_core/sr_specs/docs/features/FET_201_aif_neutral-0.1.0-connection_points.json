@@ -1,0 +1,14 @@
+{
+	"id": "FET201_AIF_NEUTRAL",
+	"version": "0.1.0",
+	"display_name": "Connection Points",
+	"path": "features/FET_201-connection_points.html",
+	"dependencies": [
+		{"FET200_AIF_NEUTRAL": {"version": "0.1.0"}}
+	],
+	"requirements": [
+		"CP.001",
+		"CP.004",
+		"CP.005"
+	]
+}

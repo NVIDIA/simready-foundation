@@ -1,0 +1,14 @@
+{
+	"id": "FET032_PACKAGING_INTROSPECTION",
+	"version": "0.1.0",
+	"display_name": "Packaging Introspection",
+	"path": "features/FET_032-packaging_introspection.html",
+	"dependencies":
+	[
+		{"FET030_PACKAGING_CORE": {"version": "0.1.0"}}
+	],
+	"requirements":
+	[
+		"PKG.BOM.001"
+	]
+}

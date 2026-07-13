@@ -1,0 +1,213 @@
+[Prop-Robotics-Neutral]
+"1.0.0" = {features = [
+    {"FET000_CORE" = {version = "0.1.0"}}, # "Core"
+    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Minimal"
+    {"FET003_BASE_NEUTRAL" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET004_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics"
+    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET006_BASE_MDL" = {version = "0.1.0"}}, # "Matrials"
+
+]}
+"2.0.0" = {features = [
+    {"FET000_CORE" = {version = "0.1.0"}}, # "Core"
+    {"FET001_BASE_NEUTRAL" = {version = "1.0.0"}}, # "Minimal"
+    {"FET003_BASE_NEUTRAL" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET004_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics"
+    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET006_BASE_MDL" = {version = "0.1.0"}}, # "Matrials"
+]}
+"2.0.1" = {features = [
+    {"FET000_CORE" = {version = "0.1.0"}}, # "Core"
+    {"FET001_BASE_NEUTRAL" = {version = "1.0.1"}}, # "Minimal"
+    {"FET003_BASE_NEUTRAL" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET004_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics"
+    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET006_BASE_MDL" = {version = "0.1.0"}}, # "Matrials"
+]}
+"2.1.0" = {features = [ # Deprecate RB.006
+    {"FET000_CORE" = {version = "0.1.0"}}, # "Core"
+    {"FET001_BASE_NEUTRAL" = {version = "1.0.1"}}, # "Minimal"
+    {"FET003_BASE_NEUTRAL" = {version = "0.2.0"}}, # "RBD Physics"
+    {"FET004_BASE_NEUTRAL" = {version = "0.2.0"}}, # "Simulate Multi-Body Physics"
+    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET006_BASE_MDL" = {version = "0.1.0"}}, # "Matrials"
+]}
+
+[Prop-Robotics-Physx]
+"1.0.0" = {features = [
+    {"FET000_CORE" = {version = "0.1.0"}}, # "Core"
+    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Minimal"
+    {"FET003_BASE_PHYSX" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET004_BASE_PHYSX" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET006_BASE_MDL" = {version = "0.1.0"}}, # "Matrials"
+]}
+"2.0.0" = {features = [
+    {"FET000_CORE" = {version = "0.1.0"}}, # "Core"
+    {"FET001_BASE_NEUTRAL" = {version = "1.0.0"}}, # "Minimal"
+    {"FET003_BASE_PHYSX" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET004_BASE_PHYSX" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET006_BASE_MDL" = {version = "0.1.0"}}, # "Matrials"
+]}
+"2.0.1" = {features = [
+    {"FET000_CORE" = {version = "0.1.0"}}, # "Core"
+    {"FET001_BASE_NEUTRAL" = {version = "1.0.1"}}, # "Minimal"
+    {"FET003_BASE_PHYSX" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET004_BASE_PHYSX" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET006_BASE_MDL" = {version = "0.1.0"}}, # "Matrials"
+]}
+"2.1.0" = {features = [# Deprecate RB.006
+    {"FET000_CORE" = {version = "0.1.0"}}, # "Core"
+    {"FET001_BASE_NEUTRAL" = {version = "1.0.1"}}, # "Minimal"
+    {"FET003_BASE_PHYSX" = {version = "0.3.0"}}, # "RBD Physics"
+    {"FET004_BASE_PHYSX" = {version = "0.3.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET006_BASE_MDL" = {version = "0.1.0"}}, # "Matrials"
+]}
+
+[Prop-Robotics-Isaac]
+"1.0.0" = {features = [
+    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Minimal"
+    {"FET003_BASE_PHYSX" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET004_BASE_PHYSX" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET100_BASE_ISAACSIM" = {version = "0.1.0"}}, # "Isaac composition
+]}
+"1.0.1" = {features = [
+    {"FET001_BASE_NEUTRAL" = {version = "1.0.1"}}, # "Minimal"
+    {"FET003_BASE_PHYSX" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET004_BASE_PHYSX" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET100_BASE_ISAACSIM" = {version = "0.1.0"}}, # "Isaac composition
+]}
+"1.1.0" = {features = [
+    {"FET001_BASE_NEUTRAL" = {version = "1.0.1"}}, # "Minimal"
+    {"FET003_BASE_PHYSX" = {version = "0.3.0"}}, # "RBD Physics"
+    {"FET004_BASE_PHYSX" = {version = "0.3.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET100_BASE_ISAACSIM" = {version = "0.2.0"}}, # "Isaac composition
+]}
+
+[Robot-Body-Neutral]
+"1.0.0" = {features = [
+    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Minimal"
+    {"FET003_BASE_NEUTRAL" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET004_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics"
+    {"FET022_DRIVEN_JOINTS_NEUTRAL" = {version = "0.1.0"}}, # "Driven Joints
+    {"FET024_BASE_ARTICULATION_NEUTRAL" = {version = "0.1.0"}}, # "Neutral Base Articulation"
+]}
+"1.1.0" = {features = [ # Deprecate RB.006
+    {"FET001_BASE_NEUTRAL" = {version = "1.0.1"}}, # "Minimal"
+    {"FET003_BASE_NEUTRAL" = {version = "0.2.0"}}, # "RBD Physics"
+    {"FET004_BASE_NEUTRAL" = {version = "0.2.0"}}, # "Simulate Multi-Body Physics"
+    {"FET022_DRIVEN_JOINTS_NEUTRAL" = {version = "0.2.0"}}, # "Driven Joints
+    {"FET024_BASE_ARTICULATION_NEUTRAL" = {version = "0.1.0"}}, # "Neutral Base Articulation"
+]}
+
+[Robot-Body-Runnable]
+"1.0.0" = {features = [
+    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Minimal"
+    {"FET004_ROBOT_PHYSX" = {version = "0.2.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET021_ROBOT_CORE_RUNNABLE" = {version = "0.2.0"}}, # "Robot Core Runnable"
+    {"FET022_DRIVEN_JOINTS_PHYSX" = {version = "0.1.0"}}, # "Physx Driven Joints
+    {"FET024_BASE_ARTICULATION_PHYSX" = {version = "0.1.0"}}, # "Physx Base Articulation"
+]}
+"1.1.0" = {features = [ # Deprecate RB.006
+     {"FET001_BASE_NEUTRAL" = {version = "1.0.1"}}, # "Minimal"
+    {"FET004_ROBOT_PHYSX" = {version = "0.2.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET021_ROBOT_CORE_RUNNABLE" = {version = "0.2.0"}}, # "Robot Core Runnable"
+    {"FET022_DRIVEN_JOINTS_PHYSX" = {version = "0.2.0"}}, # "Physx Driven Joints
+    {"FET024_BASE_ARTICULATION_PHYSX" = {version = "0.1.0"}}, # "Physx Base Articulation"
+]}
+
+[Robot-Body-Isaac]
+"1.0.0" = {features = [
+    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Minimal"
+    {"FET004_ROBOT_PHYSX" = {version = "0.2.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET021_ROBOT_CORE_ISAAC" = {version = "0.2.0"}}, # "Robot Core Isaac"
+    {"FET022_DRIVEN_JOINTS_ISAAC" = {version = "0.1.0"}}, # "Isaac Driven Joints
+    {"FET024_BASE_ARTICULATION_PHYSX" = {version = "0.1.0"}}, # "Isaac Base Articulation"
+    {"FET100_BASE_ISAACSIM" = {version = "0.1.0"}}, # "Isaac composition
+]}
+"1.1.0" = {features = [ # Deprecate RB.006
+    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Minimal"
+    {"FET004_ROBOT_PHYSX" = {version = "0.3.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET021_ROBOT_CORE_ISAAC" = {version = "0.2.0"}}, # "Robot Core Isaac"
+    {"FET022_DRIVEN_JOINTS_ISAAC" = {version = "0.2.0"}}, # "Isaac Driven Joints
+    {"FET024_BASE_ARTICULATION_PHYSX" = {version = "0.1.0"}}, # "Isaac Base Articulation"
+    {"FET100_BASE_ISAACSIM" = {version = "0.2.0"}}, # "Isaac composition
+]}
+
+[Package]
+"1.0.0" = {features = [
+    {"FET030_PACKAGING_CORE" = {version = "0.1.0"}}, # "Packaging Core"
+    {"FET032_PACKAGING_INTROSPECTION" = {version = "0.1.0"}}, # "Packaging Introspection (BOM)"
+]}
+
+[Package-NoBOM]
+"1.0.0" = {features = [
+    {"FET030_PACKAGING_CORE" = {version = "0.1.0"}}, # "Packaging Core (no BOM)"
+]}
+
+[Package-Candidate]
+"1.0.0" = {features = [
+    {"FET031_PACKAGE_SELF_CONTAINED" = {version = "0.1.0"}}, # "Self-contained Package Source"
+    {"FET033_SIMREADY_PACKAGING" = {version = "0.1.0"}}, # "SimReady Packaging (thumbnail)"
+]}
+
+[Robot-Gripper-Neutral]
+"0.1.0" = {features = [
+    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Minimal"
+    {"FET003_BASE_NEUTRAL" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET004_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Multi-Body Physics"
+    {"FET022_DRIVEN_JOINTS_NEUTRAL" = {version = "0.1.0"}}, # "Driven Joints"
+    {"FET024_BASE_ARTICULATION_NEUTRAL" = {version = "0.1.0"}}, # "Articulation"
+    {"FET028_GRIPPER_NEUTRAL" = {version = "0.1.0"}}, # "Gripper"
+]}
+"0.2.0" = {features = [ # Deprecate RB.006
+    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Minimal"
+    {"FET003_BASE_NEUTRAL" = {version = "0.2.0"}}, # "RBD Physics"
+    {"FET004_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Multi-Body Physics"
+    {"FET022_DRIVEN_JOINTS_NEUTRAL" = {version = "0.2.0"}}, # "Driven Joints"
+    {"FET024_BASE_ARTICULATION_NEUTRAL" = {version = "0.1.0"}}, # "Articulation"
+    {"FET028_GRIPPER_NEUTRAL" = {version = "0.1.0"}}, # "Gripper"
+]}
+
+[Robot-Gripper-Isaac]
+"0.1.0" = {features = [
+    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Minimal"
+    {"FET004_ROBOT_PHYSX" = {version = "0.2.0"}}, # "Multi-Body Physics (Robot PhysX)"
+    {"FET021_ROBOT_CORE_ISAAC" = {version = "0.2.0"}}, # "Robot Core (Isaac)"
+    {"FET022_DRIVEN_JOINTS_ISAAC" = {version = "0.1.0"}}, # "Driven Joints (Isaac)"
+    {"FET024_BASE_ARTICULATION_PHYSX" = {version = "0.1.0"}}, # "Articulation"
+    {"FET028_GRIPPER_ISAAC" = {version = "0.1.0"}}, # "Gripper (Isaac)"
+    {"FET100_BASE_ISAACSIM" = {version = "0.1.0"}}, # "Isaac composition"
+]}
+"0.2.0" = {features = [ # Deprecate RB.006
+    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Minimal"
+    {"FET004_ROBOT_PHYSX" = {version = "0.3.0"}}, # "Multi-Body Physics (Robot PhysX)"
+    {"FET021_ROBOT_CORE_ISAAC" = {version = "0.2.0"}}, # "Robot Core (Isaac)"
+    {"FET022_DRIVEN_JOINTS_ISAAC" = {version = "0.2.0"}}, # "Driven Joints (Isaac)"
+    {"FET024_BASE_ARTICULATION_PHYSX" = {version = "0.1.0"}}, # "Articulation"
+    {"FET028_GRIPPER_ISAAC" = {version = "0.1.0"}}, # "Gripper (Isaac)"
+    {"FET100_BASE_ISAACSIM" = {version = "0.2.0"}}, # "Isaac composition"
+]}
+
+# Single AIF profile. Equipment-class differentiation (CDU/CRAH/UPS/Rack) is
+# driven by the `aif:core:assetClass` property and data-driven validation, not
+# by separate profiles. Per Jason Batchkoff direction (May 27 2026):
+#   - thermal and electrical remain Features
+#   - core metadata and connection points are conceptually Capabilities
+#     (see capabilities/aif/), carried here as interim feature entries until
+#     SRF supports Profile-to-Capability referencing (dual-state tech debt).
+[AIF-Entity]
+"0.1.0" = {features = [
+    {"FET000_CORE" = {version = "0.1.0"}},            # "Core"
+    {"FET001_BASE_NEUTRAL" = {version = "1.0.0"}},    # "Minimal Placeable Visual"
+    {"FET200_AIF_NEUTRAL" = {version = "0.1.0"}},     # Core Metadata (capability; interim feature carrier)
+    {"FET201_AIF_NEUTRAL" = {version = "0.1.0"}},     # Connection Points (capability; interim feature carrier)
+    {"FET202_AIF_NEUTRAL" = {version = "0.1.0"}},     # Thermal Cooling (feature; assetClass-gated to CDU/CRAH)
+    {"FET203_AIF_NEUTRAL" = {version = "0.1.0"}},     # Electrical (feature; assetClass-gated)
+]}

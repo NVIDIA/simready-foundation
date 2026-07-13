@@ -1,0 +1,120 @@
+{
+    "capability": {
+        "id": "physics-driven-joints",
+        "version": "0.2.0",
+        "name": "Physics Driven Joints",
+        "description": null,
+        "requirements": [
+            {
+                "code": "DJ.001",
+                "name": "physics-drive-and-joint-state",
+                "compatibility": "OpenUSD",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/physics-drive-and-joint-state.html"
+                },
+                "message": "Validate that each driven joint has correct drive configuration and joint state, including required limits and consistency checks against the current joint state values."
+            },
+            {
+                "code": "DJ.009",
+                "name": "robot-schema-links-exist",
+                "compatibility": "Isaac",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/robot-schema-links-exist.html"
+                },
+                "message": "Robot schema links must exist and be properly connected to joints for kinematic chain definition."
+            },
+            {
+                "code": "DJ.010",
+                "name": "check-robot-relationships",
+                "compatibility": "Isaac",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/check-robot-relationships.html"
+                },
+                "message": "Robot joint and link relationships must be validated for proper kinematic tree structure."
+            },
+            {
+                "code": "DJ.011",
+                "name": "no-articulation-loops",
+                "compatibility": "PhysX",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/no-articulation-loops.html"
+                },
+                "message": "Articulation must have no loops and at most one joint between any two bodies."
+            },
+            {
+                "code": "DJ.005",
+                "name": "physics-joint-max-velocity",
+                "compatibility": "PhysX",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/physics-joint-max-velocity.html"
+                },
+                "message": "PhysX driven joints must have appropriate maximum velocity limits configured."
+            },
+            {
+                "code": "DJ.003",
+                "name": "joint-has-correct-transform-and-state",
+                "compatibility": "OpenUSD",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/joint-has-correct-transform-and-state.html"
+                },
+                "message": "Driven joints must maintain correct transform relationships and state consistency."
+            },
+            {
+                "code": "DJ.007",
+                "name": "mimic-api-check",
+                "compatibility": "PhysX",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/mimic-api-check.html"
+                },
+                "message": "Mimic API configuration must be properly validated for coordinated joint motion."
+            },
+            {
+                "code": "DJ.008",
+                "name": "robot-schema-joint-exist",
+                "compatibility": "Isaac",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/robot-schema-joint-exist.html"
+                },
+                "message": "Robot schema joints must exist and be properly defined for Isaac Sim integration."
+            },
+            {
+                "code": "DJ.004",
+                "name": "physics-joint-has-drive-or-mimic-api",
+                "compatibility": "PhysX",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/physics-joint-has-drive-or-mimic-api.html"
+                },
+                "message": "PhysX driven joints must implement drive API or mimic functionality for controlled motion."
+            },
+            {
+                "code": "DJ.006",
+                "name": "drive-joint-value-reasonable",
+                "compatibility": "PhysX",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/drive-joint-value-reasonable.html"
+                },
+                "message": "Drive joint parameters must be within reasonable ranges for stable simulation. The joint parameters should not be excessively big and should be natural numbers."
+            },
+            {
+                "code": "DJ.002",
+                "name": "joint-has-joint-state-api",
+                "compatibility": "OpenUSD",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/joint-has-joint-state-api.html"
+                },
+                "message": "Driven joints must implement proper joint state API for simulation state management."
+            }
+        ]
+    }
+}

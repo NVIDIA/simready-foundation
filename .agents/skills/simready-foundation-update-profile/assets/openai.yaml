@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Update Profile"
+  short_description: "Version and revise existing SimReady profiles"
+  default_prompt: "Use $simready-foundation-update-profile to add a new version of an existing SimReady Foundation profile while preserving old profile versions."

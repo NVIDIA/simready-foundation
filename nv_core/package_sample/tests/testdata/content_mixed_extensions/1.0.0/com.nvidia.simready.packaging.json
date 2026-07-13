@@ -1,0 +1,19 @@
+{
+  "format_version": "1.0",
+  "package_id": "content_mixed_extensions.1.0.0",
+  "license": "Apache_2.0",
+  "content_hash": {
+    "sha256": "8a6149fa7d1baa5043b290c03148b46bffacee443afa0bf0e6729e6747fb9c1d"
+  },
+  "package_hash": {
+    "sha256": "d9daba0ecf9268e5980b93647dad53d082a3ae711cd549a67731ba4c8a614cf1"
+  },
+  "metadata": [
+    {
+      "name": "com.nvidia.simready.packaging.bom.json",
+      "hash": {
+        "sha256": "76ba3fe13da840025e1e29578915505ffb18aabd02760e13c42de01e78f4cff0"
+      }
+    }
+  ]
+}

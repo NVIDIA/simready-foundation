@@ -1,0 +1,1 @@
+Maya (*.ma, *.mb) files used in creation of geometry.

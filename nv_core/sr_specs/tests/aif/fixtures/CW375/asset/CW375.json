@@ -1,0 +1,7 @@
+{
+  "identifier": "cw375",
+  "version": "0.1.0",
+  "description": "Liebert CW 375 - Chilled Water Computer Room Air Handler, 375 kW nominal cooling capacity",
+  "tags": ["aif", "crah", "thermal_cooling", "electrical"],
+  "author": "NVIDIA"
+}

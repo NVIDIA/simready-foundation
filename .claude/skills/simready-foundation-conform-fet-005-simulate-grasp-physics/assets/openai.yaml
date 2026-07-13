@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform FET-005 Simulate Grasp Physics"
+  short_description: "Repair FET005 grasp vectors with vision"
+  default_prompt: "Use $simready-foundation-conform-fet-005-simulate-grasp-physics with a vision-capable model to repair FET005 grasp vector SimReady validation failures on a USD asset."

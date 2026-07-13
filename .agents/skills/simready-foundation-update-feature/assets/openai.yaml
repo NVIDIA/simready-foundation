@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Update Feature"
+  short_description: "Version and revise existing SimReady features"
+  default_prompt: "Use $simready-foundation-update-feature to update an existing SimReady Foundation feature while preserving published versions and coordinating profile adoption."

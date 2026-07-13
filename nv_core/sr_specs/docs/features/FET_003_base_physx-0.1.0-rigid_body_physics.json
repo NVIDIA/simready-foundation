@@ -1,0 +1,12 @@
+{
+	"id": "FET003_BASE_PHYSX",
+	"version": "0.1.0",
+	"display_name": "Rigid Body Physics",
+	"path": "features/FET_003-rigid_body_physics.html",
+	"dependencies": [
+		{"FET003_BASE_NEUTRAL": {"version": "0.1.0"}}
+	],
+	"requirements": [
+		"COL.001"
+	]
+}

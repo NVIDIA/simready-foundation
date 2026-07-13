@@ -1,0 +1,24 @@
+[
+    {
+        "id":  "simready-foundation-add-capability-positive-trigger",
+        "question":  "Create a new SimReady Foundation capability for factory connection points with requirement pages and index registration.",
+        "expected_skill":  "simready-foundation-add-capability",
+        "ground_truth":  "The agent should activate simready-foundation-add-capability and follow its workflow.",
+        "expected_behavior":  [
+                                  "Load the simready-foundation-add-capability skill.",
+                                  "Add a new capability under docs/capabilities, register it in indexes, and identify follow-up requirements, validators, features, and conform skills.",
+                                  "Report changed files, validation performed, and any remaining release or validation gaps."
+                              ]
+    },
+    {
+        "id":  "simready-foundation-add-capability-negative-nontrigger",
+        "question":  "Summarize the difference between a SimReady feature and capability without editing files.",
+        "expected_skill":  null,
+        "ground_truth":  "The agent should answer from repo documentation or local context without activating this specific skill.",
+        "expected_behavior":  [
+                                  "Do not activate simready-foundation-add-capability.",
+                                  "Do not modify files.",
+                                  "Provide a concise conceptual answer or choose a more appropriate skill if one is explicitly requested."
+                              ]
+    }
+]

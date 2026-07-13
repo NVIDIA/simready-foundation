@@ -1,0 +1,40 @@
+{
+    "capability": {
+        "id": "prop-robotics-physx",
+        "version": "0.2.0",
+        "name": "Prop Robotics Physx Profile",
+        "description": "**Profile:** Prop-Robotics-Physx  \n**Version:** 0.1.0  \n**Asset Class:** Prop  \n**Target Use Case:** High-performance robotics simulation with NVIDIA PhysX",
+        "requirements": [
+            {
+                "code": "PHYSX.COL.001",
+                "name": "physx-collider-capability",
+                "compatibility": "OpenUSD",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/physx-collider-capability.html"
+                },
+                "message": "CollisionAPI may only be applied to a UsdGeom Gprim or to an Xform that has PhysxMeshMergeCollisionAPI and whose collisionmeshes collection includes at least one Gprim."
+            },
+            {
+                "code": "RB.011",
+                "name": "nested-rigid-body-mass",
+                "compatibility": "OpenUSD",
+                "tags": "high-quality",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/nested-rigid-body-mass.html"
+                },
+                "message": "Rigid bodies a mass specificatied, or provide necessary information to compute the mass."
+            },
+            {
+                "code": "RB.012",
+                "name": "no-nested-rigid-body-without-joint",
+                "compatibility": "OpenUSD",
+                "tags": "high-quality",
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/no-nested-rigid-body-without-joint.html"
+                },
+                "message": "Rigid bodies should not be nested unless they are connected by a joint."
+            }            
+        ]
+    }
+}

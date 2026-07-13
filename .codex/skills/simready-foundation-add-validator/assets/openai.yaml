@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Add Validator"
+  short_description: "Implement requirement validation rules"
+  default_prompt: "Use $simready-foundation-add-validator to add executable SimReady validation for documented requirement IDs with precise failure reporting and focused coverage."

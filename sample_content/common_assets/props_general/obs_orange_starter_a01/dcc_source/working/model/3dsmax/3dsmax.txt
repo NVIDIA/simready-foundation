@@ -1,0 +1,1 @@
+3ds max (*.max, *.3ds) files used in creation of geometry. Best practice is to save 3ds max files.

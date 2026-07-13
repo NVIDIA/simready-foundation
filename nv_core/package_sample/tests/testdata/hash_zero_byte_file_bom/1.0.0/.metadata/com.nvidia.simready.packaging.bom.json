@@ -1,0 +1,20 @@
+{
+  "format_version": "1.0",
+  "content_root": ".",
+  "items": [
+    {
+      "relative_path": "empty.txt",
+      "size": 0,
+      "hash": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "relative_path": "readme.txt",
+      "size": 45,
+      "hash": {
+        "sha256": "80f1ec64b6158f7add5cbd96e168877a5ee82afef6013b881412bb071279faab"
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+	"id": "FET031_PACKAGE_SELF_CONTAINED",
+	"version": "0.1.0",
+	"display_name": "Self-contained Package Source",
+	"path": "features/FET_031-package_self_contained.html",
+	"requirements":
+	[
+		"AA.001"
+	]
+}

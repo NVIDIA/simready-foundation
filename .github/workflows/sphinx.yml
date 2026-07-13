@@ -1,0 +1,198 @@
+name: Build and Deploy Docs
+
+on:
+  push:
+    branches:
+      - main
+      - release_*
+      - preview_*
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      version_tag:
+        description: "Git tag to build docs from (e.g. v0.2.0). Leave blank to build from HEAD."
+        required: false
+        type: string
+      branch_ref:
+        description: "Branch to build docs from (e.g. release_2026-04-1 or preview_my-feature)."
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pages: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch_ref || inputs.version_tag || github.ref }}
+          fetch-depth: 0
+          submodules: recursive
+          lfs: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-docs.txt
+
+      - name: Ensure docs version helper
+        run: |
+          if [[ ! -f scripts/docs_version_refs.py ]]; then
+            mkdir -p scripts
+            git show origin/main:scripts/docs_version_refs.py > scripts/docs_version_refs.py
+          fi
+
+      - name: Fetch release and preview branches
+        run: python scripts/docs_version_refs.py fetch
+
+      - name: Determine version
+        id: version
+        run: |
+          TAG_INPUT="${{ inputs.version_tag }}"
+          BRANCH_INPUT="${{ inputs.branch_ref }}"
+          SOURCE_REF="${{ github.ref }}"
+
+          if [[ -n "$BRANCH_INPUT" ]]; then
+            SOURCE_REF="refs/heads/$BRANCH_INPUT"
+          elif [[ -n "$TAG_INPUT" ]]; then
+            SOURCE_REF="refs/tags/$TAG_INPUT"
+          fi
+
+          VER="$(python scripts/docs_version_refs.py version "$SOURCE_REF")"
+          LABEL="$(python scripts/docs_version_refs.py label "$VER")"
+          echo "ver=$VER" >> "$GITHUB_OUTPUT"
+          echo "label=$LABEL" >> "$GITHUB_OUTPUT"
+          echo "source_ref=$SOURCE_REF" >> "$GITHUB_OUTPUT"
+
+          # Only update /latest/ on pushes to main (not tag, branch, or manual builds)
+          if [[ "$SOURCE_REF" == refs/heads/main && -z "$TAG_INPUT" && -z "$BRANCH_INPUT" ]]; then
+            echo "update_latest=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "update_latest=false" >> "$GITHUB_OUTPUT"
+          fi
+          echo "Building docs version: $VER from $SOURCE_REF"
+
+      - name: Get Pages URL
+        id: pages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PAGES_URL=$(gh api "repos/${{ github.repository }}/pages" --jq '.html_url' 2>/dev/null || echo "")
+          PAGES_URL="${PAGES_URL%/}"
+          if [[ -z "$PAGES_URL" ]]; then
+            echo "::warning::Could not fetch Pages URL; falling back to convention"
+            PAGES_URL="https://${{ github.repository_owner }}.github.io/$(echo '${{ github.repository }}' | cut -d/ -f2)"
+          fi
+          echo "url=$PAGES_URL" >> "$GITHUB_OUTPUT"
+          echo "Pages URL: $PAGES_URL"
+
+      - name: Build docs
+        env:
+          DOCS_VERSION: ${{ steps.version.outputs.ver }}
+          DOCS_VERSION_LABEL: ${{ steps.version.outputs.label }}
+          DOCS_BASE_URL: "${{ steps.pages.outputs.url }}/${{ steps.version.outputs.ver }}/"
+          DOCS_VERSIONS_JSON: "${{ steps.pages.outputs.url }}/versions.json"
+        run: python build_docs.py
+
+      - name: Deploy versioned docs to gh-pages
+        env:
+          VERSION: ${{ steps.version.outputs.ver }}
+          SOURCE_REF: ${{ steps.version.outputs.source_ref }}
+          UPDATE_LATEST: ${{ steps.version.outputs.update_latest }}
+          PAGES_URL: ${{ steps.pages.outputs.url }}
+        run: |
+          DOCS_BUILD="nv_core/sr_specs/docs/_build/html"
+          DEPLOY_DIR=$(mktemp -d)
+
+          # Clone existing gh-pages content (or start fresh)
+          git clone --branch gh-pages --single-branch --depth 1 \
+            "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" \
+            "$DEPLOY_DIR" 2>/dev/null || {
+              mkdir -p "$DEPLOY_DIR"
+              cd "$DEPLOY_DIR"
+              git init -b gh-pages
+            }
+
+          cd "$DEPLOY_DIR"
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          touch .nojekyll
+
+          # Remove stale root-level Sphinx artifacts from pre-versioning deploys
+          rm -f *.html *.js *.inv .buildinfo
+          rm -rf _static _sources _images _downloads _sphinx_design_static \
+                 _doctrees capabilities features guides indexes profiles
+
+          # Drop preview branch folders superseded by mapped slug dirs
+          while IFS= read -r stale; do
+            [[ -n "$stale" ]] && rm -rf "$stale"
+          done < <(python "$GITHUB_WORKSPACE/scripts/docs_version_refs.py" stale-dirs "$SOURCE_REF")
+          while IFS= read -r stale; do
+            [[ -n "$stale" ]] && rm -rf "$stale"
+          done < <(python "$GITHUB_WORKSPACE/scripts/docs_version_refs.py" cleanup-previews "$DEPLOY_DIR")
+
+          # Place build into versioned subdirectory
+          rm -rf "$VERSION"
+          cp -r "$GITHUB_WORKSPACE/$DOCS_BUILD" "$VERSION"
+
+          # Update /latest/ on pushes to main
+          if [[ "$UPDATE_LATEST" == "true" ]]; then
+            rm -rf latest
+            cp -r "$VERSION" latest
+          fi
+
+          # Generate versions.json for the in-docs version switcher dropdown
+          echo '[' > versions.json
+          first=true
+          for d in $(ls -d */ 2>/dev/null | grep -v '^latest/$' | sort -rV); do
+            v="${d%/}"
+            label="$(python "$GITHUB_WORKSPACE/scripts/docs_version_refs.py" label "$v")"
+            if [[ "$first" == "true" && "$label" == "$v" ]]; then
+              label="$v (latest)"
+              first=false
+            fi
+            echo '  {"name": "'"$label"'", "version": "'"$v"'", "url": "'"$PAGES_URL"'/'"$v"'/"},' >> versions.json
+          done
+          # Remove trailing comma and close array
+          sed -i '$ s/,$//' versions.json
+          echo ']' >> versions.json
+
+          # Generate root index.html version picker
+          {
+            echo '<!DOCTYPE html>'
+            echo '<html lang="en"><head><meta charset="utf-8">'
+            echo '<title>SimReady Foundation Docs</title>'
+            echo '<style>'
+            echo '  body { font-family: system-ui, sans-serif; max-width: 600px;'
+            echo '         margin: 4rem auto; padding: 0 1rem; }'
+            echo '  h1 { font-size: 1.4rem; }'
+            echo '  ul { list-style: none; padding: 0; }'
+            echo '  li { margin: 0.5rem 0; }'
+            echo '  a  { color: #76b900; text-decoration: none; font-weight: 600; }'
+            echo '  a:hover { text-decoration: underline; }'
+            echo '</style></head><body>'
+            echo '<h1>SimReady Foundation Documentation</h1>'
+            echo '<ul>'
+            echo '  <li><a href="latest/">latest</a></li>'
+            for d in $(ls -d */ 2>/dev/null | grep -v '^latest/$' | sort -rV); do
+              v="${d%/}"
+              label="$(python "$GITHUB_WORKSPACE/scripts/docs_version_refs.py" label "$v")"
+              echo "  <li><a href=\"$v/\">$label</a></li>"
+            done
+            echo '</ul></body></html>'
+          } > index.html
+
+          git add -A
+          git diff --cached --quiet && echo "No changes to deploy" && exit 0
+          git commit -m "Deploy docs $VERSION from ${GITHUB_SHA::8}"
+          git push --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" gh-pages

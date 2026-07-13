@@ -1,0 +1,7 @@
+{
+  "identifier": "exls1",
+  "version": "0.1.0",
+  "description": "Vertiv EXLS1 - Uninterruptible Power Supply (UPS) system",
+  "tags": ["aif", "ups", "electrical"],
+  "author": "NVIDIA"
+}

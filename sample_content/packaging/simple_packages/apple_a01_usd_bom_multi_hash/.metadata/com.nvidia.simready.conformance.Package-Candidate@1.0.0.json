@@ -1,0 +1,39 @@
+{
+  "format_version": "1.0",
+  "profile": "Package-Candidate",
+  "profile_version": "1.0.0",
+  "timestamp": "2026-05-13T13:20:55",
+  "assets": [
+    {
+      "asset": "apple_a01/simready_usd/sm_apple_a01_01.usd",
+      "features": [
+        {
+          "FET031_PACKAGE_SELF_CONTAINED": {
+            "version": "0.1.0",
+            "passed": true,
+            "failing_requirements": [],
+            "dependencies": []
+          }
+        },
+        {
+          "FET033_SIMREADY_PACKAGING": {
+            "version": "0.1.0",
+            "passed": true,
+            "failing_requirements": [],
+            "dependencies": [
+              {
+                "FET031_PACKAGE_SELF_CONTAINED": {
+                  "version": "0.1.0"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "content_hash": {
+    "sha256": "21913039e8c3d6fff77126b7e20a3000b345c31bfc291051ac3dbd56fadec571",
+    "blake3": "56b69b58b40f43fb5011edd96978eecd18cb789acc0137091b2b3e414c5c23cf"
+  }
+}

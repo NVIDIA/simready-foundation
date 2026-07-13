@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Update Requirement"
+  short_description: "Revise requirement docs and semantics safely"
+  default_prompt: "Use $simready-foundation-update-requirement to revise an existing SimReady requirement while coordinating validator, feature, and profile impacts."

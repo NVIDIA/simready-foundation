@@ -1,0 +1,23 @@
+{
+	"id": "FET001_BASE_NEUTRAL",
+	"version": "1.0.0",
+	"display_name": "Minimal Editor",
+	"path": "features/FET_001-minimal_editor.html",
+	"requirements":
+	[
+		"AA.001",
+		"AA.002",
+		"UN.006",
+		"UN.007",
+		"VG.MESH.001",
+		"VG.002",
+		"VG.014",
+		"VG.029",
+		"VG.025",
+		"VG.027",
+		"VG.028",
+		"HI.001",
+		"HI.003",
+		"HI.004"
+	]
+}

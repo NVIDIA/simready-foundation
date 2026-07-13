@@ -1,0 +1,11 @@
+{
+  "format_version": "1.0",
+  "package_id": "hash_package_hash_mismatch.1.0.0",
+  "license": "Apache_2.0",
+  "content_hash": {
+    "sha256": "c36b4f8ea9c560c56f8f41f85dec25c8247d345ee8612b7e657a4620dc52c956"
+  },
+  "package_hash": {
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  }
+}

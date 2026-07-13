@@ -1,0 +1,18 @@
+{
+	"id": "FET000_CORE",
+	"version": "0.1.0",
+	"display_name": "Core",
+	"path": "features/FET_000-core.html",
+	"requirements":
+	[
+		"NP.002",
+		"NP.003",
+		"NP.004",
+		"NP.005",
+		"NP.006",
+		"NP.007",
+		"NP.008",
+		"SR.001",
+		"HI.010"
+	]
+}

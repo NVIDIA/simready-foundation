@@ -1,0 +1,14 @@
+{
+	"id": "FET030_PACKAGING_CORE",
+	"version": "0.1.0",
+	"display_name": "Packaging Core",
+	"path": "features/FET_030-packaging_core.html",
+	"requirements":
+	[
+		"PKG.DEF.001",
+		"PKG.META.001",
+		"PKG.HASH.001",
+		"PKG.CONF.001",
+		"AA.001"
+	]
+}

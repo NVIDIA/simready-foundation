@@ -1,0 +1,9 @@
+{
+  "format_version": "1.0",
+  "content_root": ".",
+  "items": [
+    {"relative_path": "root.usda", "size": 0},
+    {"relative_path": "child.usda", "size": 0},
+    {"relative_path": "grandchild.usda", "size": 0}
+  ]
+}

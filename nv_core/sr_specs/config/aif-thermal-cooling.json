@@ -1,0 +1,30 @@
+{
+    "capability": {
+        "id": "aif_thermal_cooling",
+        "version": "0.1.0",
+        "name": "AIF Thermal Cooling",
+        "description": "Validates thermal cooling metadata and connection points for AIF cooling equipment (CDU, CRAH).",
+        "requirements": [
+            {
+                "code": "TC.001",
+                "name": "nominal-cooling-capacity",
+                "compatibility": "AIF",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/aif/thermal_cooling/requirements/nominal-cooling-capacity.html"
+                },
+                "message": "Cooling equipment must have aif:spec:nominalCoolingCapacity attribute."
+            },
+            {
+                "code": "TC.002",
+                "name": "thermal-cooling-connection-points",
+                "compatibility": "AIF",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/aif/thermal_cooling/requirements/thermal-cooling-connection-points.html"
+                },
+                "message": "Cooling equipment with piping connections must have corresponding connection point prims."
+            }
+        ]
+    }
+}

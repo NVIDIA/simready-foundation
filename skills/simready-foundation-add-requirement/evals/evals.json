@@ -1,0 +1,24 @@
+[
+    {
+        "id":  "simready-foundation-add-requirement-positive-trigger",
+        "question":  "Add a new atomic requirement for factory connection point direction metadata.",
+        "expected_skill":  "simready-foundation-add-requirement",
+        "ground_truth":  "The agent should activate simready-foundation-add-requirement and follow its workflow.",
+        "expected_behavior":  [
+                                  "Load the simready-foundation-add-requirement skill.",
+                                  "Create requirement documentation under the selected capability, assign a stable requirement ID, and update indexes plus validator/feature follow-up.",
+                                  "Report changed files, validation performed, and any remaining release or validation gaps."
+                              ]
+    },
+    {
+        "id":  "simready-foundation-add-requirement-negative-nontrigger",
+        "question":  "Summarize the difference between a SimReady feature and capability without editing files.",
+        "expected_skill":  null,
+        "ground_truth":  "The agent should answer from repo documentation or local context without activating this specific skill.",
+        "expected_behavior":  [
+                                  "Do not activate simready-foundation-add-requirement.",
+                                  "Do not modify files.",
+                                  "Provide a concise conceptual answer or choose a more appropriate skill if one is explicitly requested."
+                              ]
+    }
+]

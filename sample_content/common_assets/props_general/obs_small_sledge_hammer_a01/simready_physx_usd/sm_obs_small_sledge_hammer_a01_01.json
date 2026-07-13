@@ -1,0 +1,16 @@
+{
+    "SimReady_Metadata": {
+        "asset_type": "prop",
+        "validation": {
+            "profile": "Prop-Robotics-Neutral",
+            "profile_version": "1.0.0"
+        }
+    },
+    "asset_dir": ":/git/simready_foundations/sample_content/common_assets/props_general/obs_small_sledge_hammer_a01",
+    "asset_name": "obs_small_sledge_hammer_a01",
+    "asset_type": "prop",
+    "profile": "Prop-Robotics-Neutral",
+    "source_file": "@../dcc_source/working/model/blender/obs_small_sledge_hammer_a01.blend@",
+    "usd_date_generated": "2026-03-02 12:50:59",
+    "used_dsrs_exporter": true
+}

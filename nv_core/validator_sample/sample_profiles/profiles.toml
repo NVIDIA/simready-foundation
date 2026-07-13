@@ -1,0 +1,4 @@
+[Sample-Profile]
+"1.0.0" = {features = [
+    {"Feat_1" = {version = "1.0.0"}}, # "ProperlyNamed"
+]}

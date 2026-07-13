@@ -1,0 +1,7 @@
+{
+  "identifier": "gb300",
+  "version": "0.1.0",
+  "description": "NVIDIA GB300 NVL72 SuperCluster - 72 Blackwell B300 GPUs, 144 Grace CPUs, liquid-cooled AI compute rack",
+  "tags": ["aif", "compute_rack", "rack", "gb300", "nvl72"],
+  "author": "NVIDIA"
+}

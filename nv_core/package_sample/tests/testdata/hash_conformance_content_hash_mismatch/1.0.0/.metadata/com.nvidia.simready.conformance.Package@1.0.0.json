@@ -1,0 +1,12 @@
+{
+  "format_version": "1.0",
+  "profile": "Package",
+  "profile_version": "1.0.0",
+  "timestamp": "2026-04-29T00:00:00Z",
+  "assets": [],
+  "content_hash": {
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "blake3": "be0b3e499d9adaab20aaed9823c18e56510f9baf805a4fd390a3fdf59495c423",
+    "blake2b": "26769af739ec9fc1029fac110ff39cb2e842ee4e98f63b48f35bd535355927c3706cb10330118097490ccf04d152163de58340e609fa33b383a51c4e2d669c5b"
+  }
+}

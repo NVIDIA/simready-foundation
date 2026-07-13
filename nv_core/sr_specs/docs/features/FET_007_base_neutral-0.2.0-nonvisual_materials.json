@@ -1,0 +1,15 @@
+{
+	"id": "FET007_BASE_NEUTRAL",
+	"version": "0.2.0",
+	"display_name": "Non-Visual Materials",
+	"path": "features/FET_007-nonvisual_materials.html",
+	"requirements":
+	[
+		"NVM.001",
+		"NVM.002",
+		"NVM.003",
+		"NVM.004",
+		"NVM.005",
+		"NVM.006"
+	]
+}

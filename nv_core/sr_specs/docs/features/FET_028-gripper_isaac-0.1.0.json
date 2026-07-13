@@ -1,0 +1,13 @@
+{
+    "id": "FET028_GRIPPER_ISAAC",
+    "version": "0.1.0",
+    "display_name": "Gripper Isaac",
+    "path": "features/FET_028-gripper.html",
+    "dependencies": [
+        {"FET028_GRIPPER_NEUTRAL": {"version": "0.1.0"}},
+        {"FET022_DRIVEN_JOINTS_ISAAC": {"version": "0.1.0"}}
+    ],
+    "requirements": [
+        "GR.ISA.001"
+    ]
+}

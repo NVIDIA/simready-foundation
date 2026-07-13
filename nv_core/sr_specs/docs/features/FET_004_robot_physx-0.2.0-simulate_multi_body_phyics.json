@@ -1,0 +1,33 @@
+{
+    "id": "FET004_ROBOT_PHYSX",
+    "version": "0.2.0",
+    "display_name": "Simulate Multi-Body Physics (Robot Physx)",
+    "path": "features/FET_004-simulate_multi_body_physics.html",
+    "dependencies": [
+        
+    ],
+    "_comment": "'Should' depend on FET004_BASE_NEUTRAL, and FET003_BASE_NEUTRAL, but RB.COL.001 is too strict for Omniverse: we allow for nesting for CollisionAPI",
+    "requirements": [
+		"RB.COL.003",
+		"RB.COL.004",
+		"RB.001",
+		"RB.003",
+		"RB.005",
+		"RB.006",
+		"RB.007",
+		"RB.009",
+		"RB.010",
+
+        "JT.001",
+        "JT.002",
+        "JT.003",
+        "JT.ART.002",
+        "JT.ART.003",
+        "JT.ART.004",
+        "RB.MB.001",
+        "PHYSX.COL.001",
+        "PHYSX.COL.002",
+        "RB.011",
+        "RB.012"
+    ]
+}

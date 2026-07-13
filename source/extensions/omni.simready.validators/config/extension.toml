@@ -1,0 +1,25 @@
+[package]
+version = "1.0.0"
+title = "SimReady Foundations Validators"
+description = "SimReady Foundations Validators"
+category = "SimReady"
+keywords = ["SimReady", "validators"]
+icon = "data/icon.png"
+preview_image = "data/icon.png"
+repository = "https://github.com/NVIDIA/simready-foundation"
+readme = "docs/README.md"
+changelog = "docs/CHANGELOG.md"
+
+[dependencies]
+"omni.asset_validator.core" = { version = "1.15.1", exact = true }
+"omni.usd.libs" = {}
+"omni.client" = {}
+"omni.kit.pip_archive" = {}
+"usdrt.scenegraph" = {}
+"omni.physx" = {}
+
+[[python.module]]
+name = "omni.simready.validators"
+
+[[python.module]]
+path = "pip_prebundle"

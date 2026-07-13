@@ -1,0 +1,31 @@
+{
+  "format_version": "1.0",
+  "package_id": "com.nvidia.simready.apple_a01_usd_bom.1.0.0",
+  "license": "LicenseRef-NVIDIA-Proprietary",
+  "metadata": [
+    {
+      "name": "com.nvidia.simready.conformance.Package-Candidate@1.0.0.json",
+      "hash": {
+        "sha256": "f00d95b56cc315b033de9c1e41e2d59cfc4f8f9589cdb02de465fd4daab7fdb2"
+      }
+    },
+    {
+      "name": "com.nvidia.simready.packaging.bom.json",
+      "hash": {
+        "sha256": "cb8053b4ef2db52a06ad97627c30172d7e1e2002bc2e3980914125fe94fd4c6c"
+      }
+    },
+    {
+      "name": "com.nvidia.simready.root_usds.json",
+      "hash": {
+        "sha256": "4744bb1c885f13591bd5b47dd9bb4ea25e2fb9fcd0103963143cd725323113c5"
+      }
+    }
+  ],
+  "content_hash": {
+    "sha256": "21913039e8c3d6fff77126b7e20a3000b345c31bfc291051ac3dbd56fadec571"
+  },
+  "package_hash": {
+    "sha256": "06176bdff4799a837162a967277db4a01a8af93c4e3c18560f60ba6e6c1ca24b"
+  }
+}

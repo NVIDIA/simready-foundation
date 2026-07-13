@@ -1,0 +1,12 @@
+{
+    "id": "FET002_BASE_NEUTRAL",
+    "version": "0.1.0",
+    "display_name": "Posable Bodies",
+    "path": "features/FET_002-posable_bodies.html",
+    "requirements":
+    [
+        "HI.002",
+        "HI.004",
+        "VG.001"
+    ]
+}

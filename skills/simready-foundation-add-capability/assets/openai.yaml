@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Add Capability"
+  short_description: "Create new capability folders and docs"
+  default_prompt: "Use $simready-foundation-add-capability to add a new SimReady capability with overview docs, requirements index, validation module planning, and registration updates."

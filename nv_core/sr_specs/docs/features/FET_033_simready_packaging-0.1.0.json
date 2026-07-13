@@ -1,0 +1,14 @@
+{
+	"id": "FET033_SIMREADY_PACKAGING",
+	"version": "0.1.0",
+	"display_name": "SimReady Packaging",
+	"path": "features/FET_033-simready_packaging.html",
+	"dependencies":
+	[
+		{"FET031_PACKAGE_SELF_CONTAINED": {"version": "0.1.0"}}
+	],
+	"requirements":
+	[
+		"SR.002"
+	]
+}

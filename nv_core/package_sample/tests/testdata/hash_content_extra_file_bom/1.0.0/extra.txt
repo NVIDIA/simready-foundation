@@ -1,0 +1,1 @@
+This extra file is not listed in the BOM and should be ignored by hash computation.

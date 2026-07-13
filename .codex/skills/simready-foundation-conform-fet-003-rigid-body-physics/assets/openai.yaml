@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform FET-003 Rigid Body Physics"
+  short_description: "Repair FET003 rigid body failures"
+  default_prompt: "Use $simready-foundation-conform-fet-003-rigid-body-physics to repair FET003 rigid body SimReady validation failures on a USD asset."

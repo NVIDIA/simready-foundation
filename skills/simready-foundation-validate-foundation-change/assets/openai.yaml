@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Validate Foundation Change"
+  short_description: "Audit SimReady spec consistency"
+  default_prompt: "Use $simready-foundation-validate-foundation-change to audit a SimReady Foundations change for docs, manifest, TOML, validator, adapter, runtime-test, and skill consistency."

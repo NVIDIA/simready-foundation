@@ -1,0 +1,16 @@
+{
+    "id": "FET024_BASE_ARTICULATION_PHYSX",
+    "version": "0.1.0",
+    "display_name": "Base Articulation PhysX",
+    "path": "features/FET_024-base_articulation.html",
+    "dependencies": [
+        {
+            "FET024_BASE_ARTICULATION_NEUTRAL": {
+                "version": "0.1.0"
+            }
+        }
+    ],
+    "requirements": [
+        "BA.002"
+    ]
+}

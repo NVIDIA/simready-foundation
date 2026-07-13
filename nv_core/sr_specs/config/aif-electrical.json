@@ -1,0 +1,50 @@
+{
+    "capability": {
+        "id": "aif_electrical",
+        "version": "0.1.0",
+        "name": "AIF Electrical",
+        "description": "Validates electrical metadata and connection points for AIF AC-powered equipment (CDU, CRAH, UPS).",
+        "requirements": [
+            {
+                "code": "EL.001",
+                "name": "nominal-voltage-required",
+                "compatibility": "AIF",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/aif/electrical/requirements/nominal-voltage-required.html"
+                },
+                "message": "AC-powered equipment must declare its nominal input voltage."
+            },
+            {
+                "code": "EL.002",
+                "name": "power-rating-required",
+                "compatibility": "AIF",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/aif/electrical/requirements/power-rating-required.html"
+                },
+                "message": "AC-powered equipment must declare its power rating."
+            },
+            {
+                "code": "EL.003",
+                "name": "electrical-frequency-required",
+                "compatibility": "AIF",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/aif/electrical/requirements/electrical-frequency-required.html"
+                },
+                "message": "AC-powered equipment must declare its input frequency."
+            },
+            {
+                "code": "EL.004",
+                "name": "electrical-connection-points",
+                "compatibility": "AIF",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/aif/electrical/requirements/electrical-connection-points.html"
+                },
+                "message": "Equipment with electrical connections must have *_electrical_nominal_voltage_* connection point prims."
+            }
+        ]
+    }
+}

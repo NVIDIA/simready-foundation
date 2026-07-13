@@ -1,0 +1,20 @@
+# Compiled python files
+*.pyc
+*.pyo
+
+# Visual Studio Code config
+.vscode/
+
+# automatically generated folders
+_*/
+!docs/capabilities/_includes
+!docs/_ext
+!docs/_static
+docs/capabilities/_includes/tables
+
+# automatically generated files
+*.7z
+*.tmp
+*latest*
+
+.idea

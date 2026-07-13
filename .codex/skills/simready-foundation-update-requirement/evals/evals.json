@@ -1,0 +1,24 @@
+[
+    {
+        "id":  "simready-foundation-update-requirement-positive-trigger",
+        "question":  "Update an existing SimReady requirement to clarify validation criteria and examples.",
+        "expected_skill":  "simready-foundation-update-requirement",
+        "ground_truth":  "The agent should activate simready-foundation-update-requirement and follow its workflow.",
+        "expected_behavior":  [
+                                  "Load the simready-foundation-update-requirement skill.",
+                                  "Update requirement docs and related validator/feature/profile references while preserving or versioning behavior as needed.",
+                                  "Report changed files, validation performed, and any remaining release or validation gaps."
+                              ]
+    },
+    {
+        "id":  "simready-foundation-update-requirement-negative-nontrigger",
+        "question":  "Summarize the difference between a SimReady feature and capability without editing files.",
+        "expected_skill":  null,
+        "ground_truth":  "The agent should answer from repo documentation or local context without activating this specific skill.",
+        "expected_behavior":  [
+                                  "Do not activate simready-foundation-update-requirement.",
+                                  "Do not modify files.",
+                                  "Provide a concise conceptual answer or choose a more appropriate skill if one is explicitly requested."
+                              ]
+    }
+]

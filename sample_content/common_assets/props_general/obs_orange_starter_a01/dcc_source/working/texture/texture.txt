@@ -1,0 +1,1 @@
+All material and texture source files.  If textures are from shared library, autofix will move them to this directory.

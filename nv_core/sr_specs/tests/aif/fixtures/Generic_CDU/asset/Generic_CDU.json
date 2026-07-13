@@ -1,0 +1,7 @@
+{
+  "identifier": "generic_cdu",
+  "version": "0.1.0",
+  "description": "Generic CDU - Coolant Distribution Unit with chilled water system for liquid cooling distribution",
+  "tags": ["aif", "cdu", "thermal_cooling"],
+  "author": "NVIDIA"
+}

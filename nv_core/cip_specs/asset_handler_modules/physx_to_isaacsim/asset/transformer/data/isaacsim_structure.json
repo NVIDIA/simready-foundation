@@ -1,0 +1,328 @@
+{
+  "profile_name": "Isaac Sim Structure",
+  "version": "1.0",
+  "rules": [
+    {
+      "name": "Route Variants",
+      "type": "isaacsim.asset.transformer.rules.structure.variants.VariantRoutingRule",
+      "destination": "payloads",
+      "params": {
+        "excluded_variants": [
+          "none",
+          "default",
+          "physx"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "name": "Flatten Base",
+      "type": "isaacsim.asset.transformer.rules.structure.flatten.FlattenRule",
+      "destination": "payloads",
+      "params": {
+        "output_path": "base.usd",
+        "selected_variants": {
+          "Physics": "PhysX",
+          "Robot": "Robot",
+          "Gripper": "None",
+          "Left_Hand": "None",
+          "Right_Hand": "None"
+        },
+        "clear_variants": false,
+        "case_insensitive": true
+      },
+      "enabled": true
+    },
+    {
+      "name": "Apply Joint State APIs",
+      "type": "isaacsim.asset.transformer.rules.isaac_sim.joint_state_api.JointStateAPIRule",
+      "destination": "payloads",
+      "params": {},
+      "enabled": true
+    },
+    {
+      "name": "Route Isaac Robot Schemas",
+      "type": "isaacsim.asset.transformer.rules.core.schemas.SchemaRoutingRule",
+      "destination": "payloads",
+      "params": {
+        "stage_name": "robot.usda",
+        "schemas": [
+          "IsaacRobotAPI",
+          "IsaacLinkAPI",
+          "IsaacReferencePointAPI",
+          "IsaacJointAPI",
+          "IsaacSurfaceGripper",
+          "IsaacAttachmentPointAPI",
+          "IsaacSiteAPI"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "name": "Route Isaac Robot Properties",
+      "type": "isaacsim.asset.transformer.rules.core.properties.PropertyRoutingRule",
+      "destination": "payloads",
+      "params": {
+        "stage_name": "robot.usda",
+        "prim_types": [
+          "Isaac.*",
+          "isaac.*"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "name": "Route Geometries",
+      "type": "isaacsim.asset.transformer.rules.perf.geometries.GeometriesRoutingRule",
+      "destination": "payloads",
+      "params": {
+        "geometries_layer": "geometries.usd",
+        "instance_layer": "instances.usda",
+        "deduplicate": true
+      },
+      "enabled": true
+    },
+    {
+      "name": "Fix Physics Joint Poses",
+      "type": "isaacsim.asset.transformer.rules.isaac_sim.physics_joint_pose_fix.PhysicsJointPoseFixRule",
+      "destination": "payloads",
+      "params": {},
+      "enabled": true
+    },
+    {
+      "name": "Route Materials",
+      "type": "isaacsim.asset.transformer.rules.perf.materials.MaterialsRoutingRule",
+      "destination": "payloads",
+      "params": {
+        "materials_layer": "materials.usda",
+        "assets_folder": "Textures",
+        "download_textures": true
+      },
+      "enabled": true
+    },
+    {
+      "name": "Route PhysX Schemas",
+      "type": "isaacsim.asset.transformer.rules.core.schemas.SchemaRoutingRule",
+      "destination": "payloads/Physics",
+      "params": {
+        "stage_name": "physx.usda",
+        "schemas": [
+          "Physx.*",
+          "physx.*"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "name": "Route PhysX Prims",
+      "type": "isaacsim.asset.transformer.rules.core.prims.PrimRoutingRule",
+      "destination": "payloads/Physics",
+      "params": {
+        "stage_name": "physx.usda",
+        "prim_types": [
+          "Physx.*",
+          "physx.*"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "name": "Route PhysX Properties",
+      "type": "isaacsim.asset.transformer.rules.core.properties.PropertyRoutingRule",
+      "destination": "payloads/Physics",
+      "params": {
+        "stage_name": "physx.usda",
+        "properties": [
+          "Physx.*",
+          "physx.*"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "name": "Route MuJoCo Schemas",
+      "type": "isaacsim.asset.transformer.rules.core.schemas.SchemaRoutingRule",
+      "destination": "payloads/Physics",
+      "params": {
+        "stage_name": "mujoco.usda",
+        "schemas": [
+          "Mjc.*",
+          "mjc.*"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "name": "Route MuJoCo Prims",
+      "type": "isaacsim.asset.transformer.rules.core.prims.PrimRoutingRule",
+      "destination": "payloads/Physics",
+      "params": {
+        "stage_name": "mujoco.usda",
+        "prim_types": [
+          "Mjc.*",
+          "mjc.*"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "name": "Route MuJoCo Properties",
+      "type": "isaacsim.asset.transformer.rules.core.properties.PropertyRoutingRule",
+      "destination": "payloads/Physics",
+      "params": {
+        "stage_name": "mujoco.usda",
+        "properties": [
+          "Mjc.*",
+          "mjc.*"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "name": "Route Physics Schemas",
+      "type": "isaacsim.asset.transformer.rules.core.schemas.SchemaRoutingRule",
+      "destination": "payloads/Physics",
+      "params": {
+        "stage_name": "physics.usda",
+        "schemas": [
+          "Physics.*",
+          "Newton.*"
+        ],
+        "ignore_schemas": [
+          "PhysicsCollisionAPI"
+        ],
+        "prim_names": [
+          ".*"
+        ],
+        "ignore_prim_names": []
+      },
+      "enabled": true
+    },
+    {
+      "name": "Route Physics Prims",
+      "type": "isaacsim.asset.transformer.rules.core.prims.PrimRoutingRule",
+      "destination": "payloads/Physics",
+      "params": {
+        "stage_name": "physics.usda",
+        "prim_types": [
+          "Physics.*",
+          "Newton.*"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "name": "Make Robot Schema",
+      "type": "isaacsim.asset.transformer.rules.isaac_sim.robot_schema.RobotSchemaRule",
+      "destination": "payloads",
+      "params": {
+        "prim_path": "",
+        "stage_name": "robot.usda",
+        "add_sites": true,
+        "sites_last": false,
+        "sublayer": "Physics/physics.usda"
+      },
+      "enabled": true
+    },
+    {
+      "name": "Make API Schemas Non-Explicit",
+      "type": "isaacsim.asset.transformer.rules.isaac_sim.make_lists_non_explicit.MakeListsNonExplicitRule",
+      "destination": "payloads",
+      "params": {
+        "metadata_names": [
+          "apiSchemas"
+        ],
+        "property_names": [],
+        "list_op_type": "prepend"
+      },
+      "enabled": true
+    },
+    {
+      "name": "Make Robot Relationship Lists Non-Explicit",
+      "type": "isaacsim.asset.transformer.rules.isaac_sim.make_lists_non_explicit.MakeListsNonExplicitRule",
+      "destination": "payloads",
+      "params": {
+        "metadata_names": [],
+        "property_names": [
+          "isaac:physics:robotLinks",
+          "isaac:physics:robotJoints"
+        ],
+        "list_op_type": "prepend"
+      },
+      "enabled": true
+    },
+    {
+      "name": "Generate Interface",
+      "type": "isaacsim.asset.transformer.rules.structure.interface.InterfaceConnectionRule",
+      "destination": "",
+      "params": {
+        "base_layer": "payloads/base.usda",
+        "base_connection_type": "Reference",
+        "generate_folder_variants": true,
+        "payloads_folder": "payloads",
+        "connections": [
+          {
+            "asset_path": "payloads/Physics/physx.usda",
+            "target_path": "payloads/Physics/physics.usda",
+            "connection_type": "Sublayer"
+          },
+          {
+            "asset_path": "payloads/Physics/mujoco.usda",
+            "target_path": "payloads/Physics/physics.usda",
+            "connection_type": "Sublayer"
+          },
+          {
+            "asset_path": "payloads/base.usda",
+            "target_path": "payloads/robot.usda",
+            "connection_type": "Sublayer"
+          }
+        ],
+        "default_variant_selections": {
+          "Physics": "physx",
+          "Gripper": "None",
+          "Left_Hand": "None",
+          "Right_Hand": "None"
+        }
+      },
+      "enabled": true
+    },
+    {
+      "name": "Delete Physics Drive and Joint State APIs",
+      "type": "isaacsim.asset.transformer.rules.core.remove_schema.RemoveSchemaRule",
+      "destination": "payloads/Physics",
+      "params": {
+        "stage_name": "mujoco.usda",
+        "schema_patterns": [
+          "PhysicsDriveAPI.*",
+          "PhysicsJointStateAPI.*"
+        ],
+        "prim_path_patterns": [
+          ".*"
+        ],
+        "clear_properties": false
+      },
+      "enabled": true
+    },
+    {
+      "name": "Delete Newton Redundant APIs",
+      "type": "isaacsim.asset.transformer.rules.core.remove_schema.RemoveSchemaRule",
+      "destination": "payloads/Physics",
+      "params": {
+        "stage_name": "physx.usda",
+        "schema_patterns": [
+          "NewtonMimicAPI.*",
+          "NewtonArticulationRootAPI.*"
+        ],
+        "prim_path_patterns": [
+          ".*"
+        ],
+        "clear_properties": false
+      },
+      "enabled": true
+    }
+  ],
+  "interface_asset_name": null,
+  "output_package_root": null,
+  "flatten_source": false,
+  "base_name": "base.usd"
+}

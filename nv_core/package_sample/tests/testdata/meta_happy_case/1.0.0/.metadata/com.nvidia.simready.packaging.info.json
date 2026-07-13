@@ -1,0 +1,4 @@
+{
+  "format_version": "1.0",
+  "description": "Happy-path metadata fixture: this file is listed in the package definition and present on disk, with a valid reverse-domain filename, UTF-8 JSON content, and a format_version string."
+}

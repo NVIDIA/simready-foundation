@@ -1,0 +1,13 @@
+{
+	"id": "FET011_BASE_NEUTRAL",
+	"version": "0.2.0",
+	"display_name": "Semantic Labels",
+	"path": "features/FET_011-semantic_labels.html",
+	"requirements":
+	[
+		"SL.001",
+		"SL.QCODE.001",
+		"SL.003",
+		"SL.NV.002"
+	]
+}

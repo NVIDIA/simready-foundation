@@ -1,0 +1,31 @@
+[project_root]
+setting = ".."
+
+[content_root]
+name = "sample_content"
+
+[workspace]
+subconfigs = []
+subconfigs_priority = ["sample_content"]
+
+[validate]
+requirements_configs_path = "nv_core/sr_specs/config"
+requirements_paths = ["nv_core/sr_specs/docs/capabilities"]
+features_paths = ["nv_core/sr_specs/docs/features"]
+profiles_paths = ["nv_core/sr_specs/docs/profiles/profiles.toml"]
+
+[cip]
+adapter_modules_path = "nv_core/cip_specs/asset_handler_modules"
+spec_root = "nv_core/sr_specs/docs"
+
+[wrapp]
+install_from_server = "omniverse://example.com/simready_content/assets/.wrapp_publish"
+publish_to_server = "omniverse://example.com/simready_content/assets/.wrapp_publish"
+
+[prod_backend]
+url = "http://example.com:8001"
+nv_core_wrapp_repo_url = "omniverse://example.com/simready_foundations/.wrapp_publish"
+
+[action_default_profiles]
+add = "Prop-Robotics-Neutral"
+generate = "Prop-Robotics-Physx"

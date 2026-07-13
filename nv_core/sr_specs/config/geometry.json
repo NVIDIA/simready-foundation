@@ -1,0 +1,320 @@
+{
+    "capability": {
+        "id": "geometry",
+        "version": "0.2.0",
+        "name": "Geometry",
+        "description": "This capability contains requirements which relate to Geometry.",
+        "requirements": [
+            {
+                "code": "VG.014",
+                "name": "usdgeom-mesh-topology",
+                "compatibility": "Core USD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-topology.html"
+                },
+                "message": "Mesh topology must be valid"
+            },
+            {
+                "code": "VG.009",
+                "name": "usdgeom-mesh-primvar-indexing",
+                "compatibility": "Core USD",
+                "tags": "performance",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-primvar-indexing.html"
+                },
+                "message": "Use indexed primvars when values are repeated"
+            },
+            {
+                "code": "VG.023",
+                "name": "mesh-xform-positioning",
+                "compatibility": "Core USD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/mesh-xform-positioning.html"
+                },
+                "message": "Meshes should be positioned with xform ops rather than by \"baking\" transformations into point positions."
+            },
+            {
+                "code": "VG.022",
+                "name": "usdgeom-mesh-transparent-is-watertight",
+                "compatibility": "Core USD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-transparent-is-watertight.html"
+                },
+                "message": "Transparent physical bodies should be watertight to allow for simulation of light transmission and refraction."
+            },
+            {
+                "code": "VG.002",
+                "name": "usdgeom-extent",
+                "compatibility": "OpenUSD",
+                "tags": "performance",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-extent.html"
+                },
+                "message": "Boundable geometry primitives must have valid extent values."
+            },
+            {
+                "code": "VG.006",
+                "name": "usdgeom-mesh-overlap",
+                "compatibility": "Core USD",
+                "tags": "performance",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-overlap.html"
+                },
+                "message": "Meshes should not overlap unnecessarily"
+            },
+            {
+                "code": "VG.027",
+                "name": "usdgeom-mesh-normals-exist",
+                "compatibility": "Core USD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-normals-exist.html"
+                },
+                "message": "All non-subdivided meshes must have normals."
+            },
+            {
+                "code": "VG.025",
+                "name": "asset-origin-positioning",
+                "compatibility": "Core USD",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/asset-origin-positioning.html"
+                },
+                "message": "Geometry shall be defined as such that the asset is correctly positioned and oriented at the origin (0,0,0)."
+            },
+            {
+                "code": "VG.024",
+                "name": "identical-mesh-consistency",
+                "compatibility": "Core USD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/identical-mesh-consistency.html"
+                },
+                "message": "Repeated occurrences of identically shaped objects should have identical mesh connectivity"
+            },
+            {
+                "code": "VG.017",
+                "name": "usdgeom-mesh-primitive-tessellation",
+                "compatibility": "Core USD",
+                "tags": "performance",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-primitive-tessellation.html"
+                },
+                "message": "Avoid tessellating primitive shapes"
+            },
+            {
+                "code": "VG.010",
+                "name": "usdgeom-mesh-subdivision",
+                "compatibility": "Core USD",
+                "tags": "performance",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-subdivision.html"
+                },
+                "message": "Use subdivision only when needed for smooth surfaces or displacement"
+            },
+            {
+                "code": "VG.019",
+                "name": "usdgeom-mesh-zero-area",
+                "compatibility": "Core USD",
+                "tags": "performance",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-zero-area.html"
+                },
+                "message": "Faces should have non-zero area."
+            },
+            {
+                "code": "VG.005",
+                "name": "usdgeom-boundable-size",
+                "compatibility": "RTX",
+                "tags": "performance",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-boundable-size.html"
+                },
+                "message": "Meshes should maintain appropriate scale and boundary volumes"
+            },
+            {
+                "code": "VG.015",
+                "name": "usdgeom-mesh-identical-timesamples",
+                "compatibility": "Core USD",
+                "tags": "performance",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-identical-timesamples.html"
+                },
+                "message": "Use time samples only when attribute values change"
+            },
+            {
+                "code": "VG.011",
+                "name": "usdgeom-mesh-primvar-usage",
+                "compatibility": "Core USD",
+                "tags": "performance",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-primvar-usage.html"
+                },
+                "message": "Only include primvars that are actively used"
+            },
+            {
+                "code": "VG.008",
+                "name": "usdgeom-mesh-coincident",
+                "compatibility": "Core USD",
+                "tags": "performance",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-coincident.html"
+                },
+                "message": "Meshes should not share the exact same space"
+            },
+            {
+                "code": "VG.013",
+                "name": "usdgeom-mesh-tessellation-density",
+                "compatibility": "Core USD",
+                "tags": "performance",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-tessellation-density.html"
+                },
+                "message": "Use appropriate tessellation density for geometry"
+            },
+            {
+                "code": "VG.026",
+                "name": "asset-pivot-placement",
+                "compatibility": "Core USD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/asset-pivot-placement.html"
+                },
+                "message": "The pivot point of an asset should be positioned logically: at the center of the object's base for ground plane objects, and at the center of rotation for objects that rotate around specific points."
+            },
+            {
+                "code": "VG.001",
+                "name": "at-least-one-imageable-geometry",
+                "compatibility": "core-usd",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/at-least-one-imageable-geometry.html"
+                },
+                "message": "Assets must contain at least one Imageable Geometry"
+            },
+            {
+                "code": "VG.003",
+                "name": "usdgeom-mesh-internal-geometry",
+                "compatibility": "OpenUSD",
+                "tags": "performance",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-internal-geometry.html"
+                },
+                "message": "Only include geometry that contributes to visualization or simulation"
+            },
+            {
+                "code": "VG.004",
+                "name": "usdgeom-mesh-empty-spaces",
+                "compatibility": "RTX",
+                "tags": "performance",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-empty-spaces.html"
+                },
+                "message": "Use efficient mesh boundaries for performance"
+            },
+            {
+                "code": "VG.018",
+                "name": "usdgeom-mesh-unused-topology",
+                "compatibility": "Core USD",
+                "tags": "performance",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-unused-topology.html"
+                },
+                "message": "Mesh topology should be without unused vertices, edges, or faces."
+            },
+            {
+                "code": "VG.028",
+                "name": "usdgeom-mesh-normals-must-be-valid",
+                "compatibility": "Core USD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-normals-must-be-valid.html"
+                },
+                "message": "Mesh normals values must be valid to produce correct shading."
+            },
+            {
+                "code": "VG.029",
+                "name": "usdgeom-mesh-winding-order",
+                "compatibility": "Core USD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-winding-order.html"
+                },
+                "message": "The winding order of faces in a mesh must correctly represent the orientation (front/back) of the face."
+            },
+            {
+                "code": "VG.021",
+                "name": "usdgeom-mesh-triangulation",
+                "compatibility": "Core USD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-triangulation.html"
+                },
+                "message": "Meshes must be triangulated for optimal rendering performance and compatibility when considering automatic collider creation (convex-hull, convex-decomposition, etc...). Triangulating mesh will provide predictable results versus n-gons."
+            },
+            {
+                "code": "VG.012",
+                "name": "usdgeom-mesh-small",
+                "compatibility": "Core USD",
+                "tags": "performance",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-small.html"
+                },
+                "message": "Combine small meshes into larger ones where appropriate"
+            },
+            {
+                "code": "VG.020",
+                "name": "usdgeom-pointbased-points-precision",
+                "compatibility": "Core USD",
+                "tags": "performance",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-pointbased-points-precision.html"
+                },
+                "message": "The values of `points` must not exceed the limit at which a given precision can be represented using 32-bit floats."
+            },
+            {
+                "code": "VG.RTX.001",
+                "name": "usdgeom-boundable-size-rtx-limit",
+                "compatibility": "RTX",
+                "tags": "limitation",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-boundable-size-rtx-limit.html"
+                },
+                "message": "World space bounds must not exceed RTX limit."
+            },
+            {
+                "code": "VG.007",
+                "name": "usdgeom-mesh-manifold",
+                "compatibility": "Core USD",
+                "tags": "correctness",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-manifold.html"
+                },
+                "message": "Mesh geometry must be manifold"
+            },
+            {
+                "code": "VG.MESH.001",
+                "name": "geom-shall-be-mesh",
+                "compatibility": "Core USD",
+                "tags": "essential",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/geom-shall-be-mesh.html"
+                },
+                "message": "All geometry shall be represented as mesh primitives using the UsdGeomMesh schema. Curves, point clouds, implicit surfaces, procedural geometry, and other non-mesh representations are not supported in the current specification."
+            },
+            {
+                "code": "VG.016",
+                "name": "usdgeom-mesh-colocated-points",
+                "compatibility": "Core USD",
+                "tags": "performance",
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-colocated-points.html"
+                },
+                "message": "Each vertex position should be unique"
+            }
+        ]
+    }
+}

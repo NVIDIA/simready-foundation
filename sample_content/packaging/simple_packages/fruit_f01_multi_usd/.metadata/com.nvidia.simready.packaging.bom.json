@@ -1,0 +1,159 @@
+{
+  "format_version": "1.0",
+  "content_root": "file:///tmp/sr_sample_packages_zwyd367m/fruit_f01_multi_usd_repo/.packages/fruit_f01_multi_usd/1.0.0",
+  "items": [
+    {
+      "relative_path": "apple_a01/simready_usd/.thumbs/256x256/sm_apple_a01_01.usd.png",
+      "size": 561714,
+      "hash": {
+        "sha256-flat-1mb": "52922f6bb1fe84dc8f6903d36be6dd44a9696e1d4e7594e69c619d1e411e04e8",
+        "sha256": "95a290a5ee2f8c8db04325375bdc6156e110a5e67885bedbb0ce98d593095774"
+      }
+    },
+    {
+      "relative_path": "apple_a01/simready_usd/.thumbs/sm_apple_a01_01_thumbnail.png",
+      "size": 561714,
+      "hash": {
+        "sha256-flat-1mb": "52922f6bb1fe84dc8f6903d36be6dd44a9696e1d4e7594e69c619d1e411e04e8",
+        "sha256": "95a290a5ee2f8c8db04325375bdc6156e110a5e67885bedbb0ce98d593095774"
+      }
+    },
+    {
+      "relative_path": "apple_a01/simready_usd/materials/OmniPBR/OmniPBR.mdl",
+      "size": 15591,
+      "hash": {
+        "sha256-flat-1mb": "09498c0d2e9e72e83eeeb1a33186b8d5902316b95a48f62ee5ac194ec2234c7f",
+        "sha256": "685a82c18b381f1cd29831490e4c356e61dbeac2d86803babc115cd6a4a845db"
+      }
+    },
+    {
+      "relative_path": "apple_a01/simready_usd/materials/OmniPBR/OmniPBRBase.mdl",
+      "size": 18876,
+      "hash": {
+        "sha256-flat-1mb": "b6e947c33ebd4af4638d33f2d4f765ff151208bdb47897e8a804066ebe4e7d1e",
+        "sha256": "edcc669a238798a4d90ce36bd535282d23f88cddc544d68a532a5b732432788e"
+      }
+    },
+    {
+      "relative_path": "apple_a01/simready_usd/materials/OmniPBR/OmniPBR_ClearCoat.mdl",
+      "size": 29055,
+      "hash": {
+        "sha256-flat-1mb": "0d8a65615a6018bc65b318f801f8b1e84aca10fc6ed47231bba3bffe750c1318",
+        "sha256": "53f5f5e5ca67477f9e105cdc17db13201a876ef54f005978286fef428221bfd8"
+      }
+    },
+    {
+      "relative_path": "apple_a01/simready_usd/sm_apple_a01_01.json",
+      "size": 541,
+      "hash": {
+        "sha256-flat-1mb": "8cfe1623d627ace6c44f7f21d4a7ff01a54f4c886014540524e37252520818b5",
+        "sha256": "d8d956786c2f460e0bd0b3681b77e5a163fc8664d1cde4e0f0f209f7663e4a03"
+      }
+    },
+    {
+      "relative_path": "apple_a01/simready_usd/sm_apple_a01_01.usd",
+      "size": 986139,
+      "hash": {
+        "sha256-flat-1mb": "d150f126f1053e11b16bc25055d8b267892da9843a404a7278b09c1c04d2a43a",
+        "sha256": "9a37dbbfa9cda8b441d574f9e7c3d6333acc67b76a58f929eb6b9d2377591933"
+      }
+    },
+    {
+      "relative_path": "apple_a01/simready_usd/textures/image0.png",
+      "size": 746346,
+      "hash": {
+        "sha256-flat-1mb": "f5b45b32fa5236e78d009635f834954f9889549a2da559febc9ad3c96be090d5",
+        "sha256": "1ec260dd135d75ba247367dd7968ad4b3a1cf36fa2df665ffc6c201311816c0a"
+      }
+    },
+    {
+      "relative_path": "apple_a01/simready_usd/web/sm_apple_a01_01.glb",
+      "size": 970340,
+      "hash": {
+        "sha256-flat-1mb": "2e97208ff805ed58e7feab7f798463645180fadee895924fe4530609b6e5c012",
+        "sha256": "9f0770c2b60d19e6bcff80dfde26b33432c483e0541f4968b217a695811e6b41"
+      }
+    },
+    {
+      "relative_path": "orange_a01/simready_usd/.thumbs/256x256/sm_obs_orange_a01_01.usd.png",
+      "size": 4,
+      "hash": {
+        "sha256-flat-1mb": "933b66bff0ca2aab088bf9c34f90954cede786a4ba19ddbc87a7fa7b531d7528",
+        "sha256": "0f4636c78f65d3639ece5a064b5ae753e3408614a14fb18ab4d7540d2c248543"
+      }
+    },
+    {
+      "relative_path": "orange_a01/simready_usd/materials/OmniPBR/OmniPBR.mdl",
+      "size": 15591,
+      "hash": {
+        "sha256-flat-1mb": "09498c0d2e9e72e83eeeb1a33186b8d5902316b95a48f62ee5ac194ec2234c7f",
+        "sha256": "685a82c18b381f1cd29831490e4c356e61dbeac2d86803babc115cd6a4a845db"
+      }
+    },
+    {
+      "relative_path": "orange_a01/simready_usd/materials/OmniPBR/OmniPBRBase.mdl",
+      "size": 18876,
+      "hash": {
+        "sha256-flat-1mb": "b6e947c33ebd4af4638d33f2d4f765ff151208bdb47897e8a804066ebe4e7d1e",
+        "sha256": "edcc669a238798a4d90ce36bd535282d23f88cddc544d68a532a5b732432788e"
+      }
+    },
+    {
+      "relative_path": "orange_a01/simready_usd/materials/OmniPBR/OmniPBR_ClearCoat.mdl",
+      "size": 29055,
+      "hash": {
+        "sha256-flat-1mb": "0d8a65615a6018bc65b318f801f8b1e84aca10fc6ed47231bba3bffe750c1318",
+        "sha256": "53f5f5e5ca67477f9e105cdc17db13201a876ef54f005978286fef428221bfd8"
+      }
+    },
+    {
+      "relative_path": "orange_a01/simready_usd/sm_obs_orange_a01_01.json",
+      "size": 561,
+      "hash": {
+        "sha256-flat-1mb": "2dcb051ddebbf0bd847d957108d1e953fd3283e670278d263d62a0591e96cf29",
+        "sha256": "e4a75cc4a3b29476070319c9ef90088deefa881369e40171f709383652a41355"
+      }
+    },
+    {
+      "relative_path": "orange_a01/simready_usd/sm_obs_orange_a01_01.usd",
+      "size": 425684,
+      "hash": {
+        "sha256-flat-1mb": "f2fdfae3f516c729217eb802ba202de5321d7d50f86ccb204dfd08521c7db218",
+        "sha256": "5d6e124fe633a7fe1531a66d7c08ed401dccd8c431d1ed542a9f3124bf846c9c"
+      }
+    },
+    {
+      "relative_path": "orange_a01/simready_usd/textures/obs_orange_01_a.png",
+      "size": 765399,
+      "hash": {
+        "sha256-flat-1mb": "471c031f43a9e0149bfd0d06dcb952263fe27c20e3c8fc85f94c243b2c77e6fb",
+        "sha256": "29892d39bab2bf93c3e31594ce46bfe1219987a4d782b1761db1a10753f95b1b"
+      }
+    },
+    {
+      "relative_path": "orange_a01/simready_usd/textures/obs_orange_01_n.png",
+      "size": 956765,
+      "hash": {
+        "sha256-flat-1mb": "e2244ffa9b4d4a26ea41e7cf4b5a4be4cda88cdd411a3271b2f6b07b871ab96f",
+        "sha256": "bcf0c096c7f1339f1bb6a320a28a44bb02e8b6b19cdac5fa91d1d09a86012e1b"
+      }
+    },
+    {
+      "relative_path": "orange_a01/simready_usd/textures/obs_orange_01_orm.png",
+      "size": 489275,
+      "hash": {
+        "sha256-flat-1mb": "f46b9e2710fcdb70fdd35751209978d395c210d615c1b632e00e50fef79be41c",
+        "sha256": "3d36a0fd957bde7c99758150e77f4ccd8d7ab4cd8a89e989b6434b985b9b1a63"
+      }
+    },
+    {
+      "relative_path": "orange_a01/simready_usd/web/sm_obs_orange_a01_01.glb",
+      "size": 2370752,
+      "hash": {
+        "sha256-flat-1mb": "91a2a6457c15030be4d80d8b6e7d4c93ebadcde5b84f61ac1ef9ddc501248d32",
+        "sha256": "b793486f6e0a51c66853baf7c980f8898a6325992e68e115953dd784240bc789",
+        "sha256-first1m": "c75a1ce58c17897deeec2dbcec16c6ec46f0a6f3ca0f70dfa2f8051b5fbe8032"
+      }
+    }
+  ]
+}

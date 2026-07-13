@@ -1,0 +1,78 @@
+{
+  "format_version": "1.0",
+  "content_root": "file:///tmp/sr_sample_packages_zwyd367m/apple_a01_usd_bom_repo/.packages/apple_a01_usd_bom/1.0.0",
+  "items": [
+    {
+      "relative_path": "apple_a01/simready_usd/.thumbs/256x256/sm_apple_a01_01.usd.png",
+      "size": 561714,
+      "hash": {
+        "sha256-flat-1mb": "52922f6bb1fe84dc8f6903d36be6dd44a9696e1d4e7594e69c619d1e411e04e8",
+        "sha256": "95a290a5ee2f8c8db04325375bdc6156e110a5e67885bedbb0ce98d593095774"
+      }
+    },
+    {
+      "relative_path": "apple_a01/simready_usd/.thumbs/sm_apple_a01_01_thumbnail.png",
+      "size": 561714,
+      "hash": {
+        "sha256-flat-1mb": "52922f6bb1fe84dc8f6903d36be6dd44a9696e1d4e7594e69c619d1e411e04e8",
+        "sha256": "95a290a5ee2f8c8db04325375bdc6156e110a5e67885bedbb0ce98d593095774"
+      }
+    },
+    {
+      "relative_path": "apple_a01/simready_usd/materials/OmniPBR/OmniPBR.mdl",
+      "size": 15591,
+      "hash": {
+        "sha256-flat-1mb": "09498c0d2e9e72e83eeeb1a33186b8d5902316b95a48f62ee5ac194ec2234c7f",
+        "sha256": "685a82c18b381f1cd29831490e4c356e61dbeac2d86803babc115cd6a4a845db"
+      }
+    },
+    {
+      "relative_path": "apple_a01/simready_usd/materials/OmniPBR/OmniPBRBase.mdl",
+      "size": 18876,
+      "hash": {
+        "sha256-flat-1mb": "b6e947c33ebd4af4638d33f2d4f765ff151208bdb47897e8a804066ebe4e7d1e",
+        "sha256": "edcc669a238798a4d90ce36bd535282d23f88cddc544d68a532a5b732432788e"
+      }
+    },
+    {
+      "relative_path": "apple_a01/simready_usd/materials/OmniPBR/OmniPBR_ClearCoat.mdl",
+      "size": 29055,
+      "hash": {
+        "sha256-flat-1mb": "0d8a65615a6018bc65b318f801f8b1e84aca10fc6ed47231bba3bffe750c1318",
+        "sha256": "53f5f5e5ca67477f9e105cdc17db13201a876ef54f005978286fef428221bfd8"
+      }
+    },
+    {
+      "relative_path": "apple_a01/simready_usd/sm_apple_a01_01.json",
+      "size": 541,
+      "hash": {
+        "sha256-flat-1mb": "8cfe1623d627ace6c44f7f21d4a7ff01a54f4c886014540524e37252520818b5",
+        "sha256": "d8d956786c2f460e0bd0b3681b77e5a163fc8664d1cde4e0f0f209f7663e4a03"
+      }
+    },
+    {
+      "relative_path": "apple_a01/simready_usd/sm_apple_a01_01.usd",
+      "size": 986139,
+      "hash": {
+        "sha256-flat-1mb": "d150f126f1053e11b16bc25055d8b267892da9843a404a7278b09c1c04d2a43a",
+        "sha256": "9a37dbbfa9cda8b441d574f9e7c3d6333acc67b76a58f929eb6b9d2377591933"
+      }
+    },
+    {
+      "relative_path": "apple_a01/simready_usd/textures/image0.png",
+      "size": 746346,
+      "hash": {
+        "sha256-flat-1mb": "f5b45b32fa5236e78d009635f834954f9889549a2da559febc9ad3c96be090d5",
+        "sha256": "1ec260dd135d75ba247367dd7968ad4b3a1cf36fa2df665ffc6c201311816c0a"
+      }
+    },
+    {
+      "relative_path": "apple_a01/simready_usd/web/sm_apple_a01_01.glb",
+      "size": 970340,
+      "hash": {
+        "sha256-flat-1mb": "2e97208ff805ed58e7feab7f798463645180fadee895924fe4530609b6e5c012",
+        "sha256": "9f0770c2b60d19e6bcff80dfde26b33432c483e0541f4968b217a695811e6b41"
+      }
+    }
+  ]
+}

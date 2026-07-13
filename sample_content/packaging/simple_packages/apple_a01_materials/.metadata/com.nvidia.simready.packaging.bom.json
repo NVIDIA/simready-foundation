@@ -1,0 +1,38 @@
+{
+  "format_version": "1.0",
+  "content_root": "file:///tmp/sr_sample_packages_zwyd367m/apple_a01_materials_repo/.packages/apple_a01_materials/1.0.0",
+  "items": [
+    {
+      "relative_path": "materials/OmniPBR/OmniPBR.mdl",
+      "size": 15591,
+      "hash": {
+        "sha256-flat-1mb": "09498c0d2e9e72e83eeeb1a33186b8d5902316b95a48f62ee5ac194ec2234c7f",
+        "sha256": "685a82c18b381f1cd29831490e4c356e61dbeac2d86803babc115cd6a4a845db"
+      }
+    },
+    {
+      "relative_path": "materials/OmniPBR/OmniPBRBase.mdl",
+      "size": 18876,
+      "hash": {
+        "sha256-flat-1mb": "b6e947c33ebd4af4638d33f2d4f765ff151208bdb47897e8a804066ebe4e7d1e",
+        "sha256": "edcc669a238798a4d90ce36bd535282d23f88cddc544d68a532a5b732432788e"
+      }
+    },
+    {
+      "relative_path": "materials/OmniPBR/OmniPBR_ClearCoat.mdl",
+      "size": 29055,
+      "hash": {
+        "sha256-flat-1mb": "0d8a65615a6018bc65b318f801f8b1e84aca10fc6ed47231bba3bffe750c1318",
+        "sha256": "53f5f5e5ca67477f9e105cdc17db13201a876ef54f005978286fef428221bfd8"
+      }
+    },
+    {
+      "relative_path": "textures/image0.png",
+      "size": 746346,
+      "hash": {
+        "sha256-flat-1mb": "f5b45b32fa5236e78d009635f834954f9889549a2da559febc9ad3c96be090d5",
+        "sha256": "1ec260dd135d75ba247367dd7968ad4b3a1cf36fa2df665ffc6c201311816c0a"
+      }
+    }
+  ]
+}

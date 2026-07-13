@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Add Feature"
+  short_description: "Create new SimReady feature docs and manifests"
+  default_prompt: "Use $simready-foundation-add-feature to add a new SimReady Foundation feature with documentation, JSON manifest, requirement mapping, and index updates."

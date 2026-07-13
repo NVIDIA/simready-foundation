@@ -1,0 +1,24 @@
+[
+    {
+        "id":  "simready-foundation-add-feature-adapter-positive-trigger",
+        "question":  "Add a feature adapter that mutates assets from one exact SimReady feature/profile version to another.",
+        "expected_skill":  "simready-foundation-add-feature-adapter",
+        "ground_truth":  "The agent should activate simready-foundation-add-feature-adapter and follow its workflow.",
+        "expected_behavior":  [
+                                  "Load the simready-foundation-add-feature-adapter skill.",
+                                  "Create a version-pinned feature adapter under the repo adapter location and document source and target feature/profile contracts.",
+                                  "Report changed files, validation performed, and any remaining release or validation gaps."
+                              ]
+    },
+    {
+        "id":  "simready-foundation-add-feature-adapter-negative-nontrigger",
+        "question":  "Summarize the difference between a SimReady feature and capability without editing files.",
+        "expected_skill":  null,
+        "ground_truth":  "The agent should answer from repo documentation or local context without activating this specific skill.",
+        "expected_behavior":  [
+                                  "Do not activate simready-foundation-add-feature-adapter.",
+                                  "Do not modify files.",
+                                  "Provide a concise conceptual answer or choose a more appropriate skill if one is explicitly requested."
+                              ]
+    }
+]

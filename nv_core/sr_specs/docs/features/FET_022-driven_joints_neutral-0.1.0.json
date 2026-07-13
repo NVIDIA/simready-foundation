@@ -1,0 +1,15 @@
+{
+    "id": "FET022_DRIVEN_JOINTS_NEUTRAL",
+    "version": "0.1.0",
+    "display_name": "Driven Joints Neutral",
+    "path": "features/FET_022-driven_joints.html",
+    "dependencies": [
+        {"FET004_BASE_NEUTRAL": {"version": "0.1.0"}}
+    ],
+    "requirements": [
+        "DJ.001",
+        "DJ.002",
+        "DJ.003",
+        "DJ.011"
+    ]
+}

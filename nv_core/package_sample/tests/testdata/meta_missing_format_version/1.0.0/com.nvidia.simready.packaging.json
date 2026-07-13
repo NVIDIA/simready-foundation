@@ -1,0 +1,8 @@
+{
+  "format_version": "1.0",
+  "package_id": "meta_missing_format_version.1.0.0",
+  "license": "Apache_2.0",
+  "metadata": [
+    {"name": "com.nvidia.simready.packaging.nofv.json", "hash": {"sha256": "aa"}}
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "format_version": "1.0",
+  "package_id": "hash_missing_sha256.1.0.0",
+  "license": "Apache_2.0",
+  "content_hash": {
+    "blake3": "0000000000000000000000000000000000000000000000000000000000000000"
+  }
+}

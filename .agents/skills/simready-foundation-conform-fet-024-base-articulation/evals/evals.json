@@ -1,0 +1,24 @@
+[
+    {
+        "id":  "simready-foundation-conform-fet-024-base-articulation-positive-trigger",
+        "question":  "Repair FET024 base articulation root placement failures on a robot USD asset.",
+        "expected_skill":  "simready-foundation-conform-fet-024-base-articulation",
+        "ground_truth":  "The agent should activate simready-foundation-conform-fet-024-base-articulation and follow its workflow.",
+        "expected_behavior":  [
+                                  "Load the simready-foundation-conform-fet-024-base-articulation skill.",
+                                  "Repair articulation root placement and required PhysX collision-clearance evidence for the selected FET024 variant.",
+                                  "Report changed files, validation performed, and any remaining release or validation gaps."
+                              ]
+    },
+    {
+        "id":  "simready-foundation-conform-fet-024-base-articulation-negative-nontrigger",
+        "question":  "Summarize the difference between a SimReady feature and capability without editing files.",
+        "expected_skill":  null,
+        "ground_truth":  "The agent should answer from repo documentation or local context without activating this specific skill.",
+        "expected_behavior":  [
+                                  "Do not activate simready-foundation-conform-fet-024-base-articulation.",
+                                  "Do not modify files.",
+                                  "Provide a concise conceptual answer or choose a more appropriate skill if one is explicitly requested."
+                              ]
+    }
+]

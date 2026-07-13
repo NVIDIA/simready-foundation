@@ -1,0 +1,18 @@
+{
+  "profile_name": "robot_schema",
+  "version": "1.0",
+  "flatten_source": false,
+  "rules": [
+    {
+      "name": "ApplyRobotSchema",
+      "type": "isaacsim.asset.transformer.organizer.rules.robot_schema.RobotSchemaRule",
+      "destination": "payloads",
+      "params": {
+        "prim_path": "",
+        "stage_name": "robot.usda"
+      },
+      "enabled": true
+    }
+  ]
+}
+

@@ -1,0 +1,9 @@
+{
+  "format_version": "1.0",
+  "package_id": "meta_unlisted_entry.1.0.0",
+  "license": "Apache_2.0",
+  "metadata": [
+    {"name": "com.nvidia.simready.packaging.ghost.json", "hash": {"sha256": "0000000000000000000000000000000000000000000000000000000000000000"}},
+    {"name": "com.nvidia.simready.packaging.present.json", "hash": {"sha256": "cfd1f4aa00025a96fc3d54dae8621c3074f6ceb8cd77afde456fc6e95001ec3a"}}
+  ]
+}

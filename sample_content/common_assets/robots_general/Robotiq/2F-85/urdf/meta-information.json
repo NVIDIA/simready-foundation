@@ -1,0 +1,16 @@
+{
+    "robots": [
+        {
+            "name": "2F-85 gripper",
+            "type": "end effector",
+            "manufacturer": "Robotiq",
+            "xacro-generated": true,
+            "urdf": [
+                "urdf/robotiq_arg2f_85_model.urdf"
+            ],
+            "variant": null,
+            "source-link": "https://github.com/ros-industrial/robotiq/tree/kinetic-devel/robotiq_2f_85_gripper_visualization",
+            "id": 228
+        }
+    ]
+}
