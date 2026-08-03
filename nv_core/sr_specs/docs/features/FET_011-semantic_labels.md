@@ -62,16 +62,8 @@ Source file type:
 
 #### Test Process
 
-* Obtain the usd sdk
-  * [usd sdk link](https://developer.nvidia.com/usd?sortBy=developer_learning_library%2Fsort%2Ffeatured_in.usd_resources%3Adesc%2Ctitle%3Aasc&hitsPerPage=6#section-getting-started)
-* Confirm your asset in question has passed validation
-* In your commandline type:
-  * ```path/to/usdsdk/scripts/usdrecord <path to usdfile.usd> <path to output.png>```
-* Open up path/to/output.png
-* Expected Result:
-  * Confirm it is NOT empty or completely black
-  * All geometry prims should have semantic labels
-  * Semantic labels should use proper schema and not contain time samples
+This feature is verified by static validation. Refer to the
+[SimReady Validation Workflow](../guides/validate_workflow.md).
 
 </details>
 

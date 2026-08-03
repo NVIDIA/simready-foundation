@@ -88,18 +88,7 @@ To comply with this feature:
 
 #### Test Process
 
-* Obtain Isaac Sim 5 (release build) or use the SimReady validation tools
-* Launch validation:
-  * Use the Isaac Sim asset validator
-  * Run validation against the Robot Materials feature requirements
-* Test material organization:
-  * Verify all materials are in the top-level Looks prim
-  * Check that no materials contain nested materials
-  * Validate material bindings resolve correctly
-* Expected results:
-  * No nested materials found
-  * All materials located in /<DefaultPrim>/Looks
-  * Material bindings resolve correctly
-  * Assets render consistently across different USD applications
+This feature is verified by static validation. Refer to the
+[SimReady Validation Workflow](../guides/validate_workflow.md).
 
 </details>

@@ -301,7 +301,7 @@ Example: a rule for SAMP.002 that the stage must contain a prim named "Bar" (dif
 
 ```python
 import omni.capabilities as cap
-from omni.asset_validator import (
+from usd_validation_nvidia import (
     BaseRuleChecker,
     register_requirements,
     register_rule,

@@ -1,0 +1,13 @@
+[[dependency]]
+python = "../_build/target-deps/python"
+packages = [
+    "nv_core/sr_specs",
+    "usd-validation-nvidia==1.19.3"
+]
+extra_args = ["--upgrade", "--no-cache-dir"]
+target = "../_build/target-deps/pip_prebundle"
+platforms = ["*"]
+download_only = false
+install_dependencies = true
+append_to_install_folder = true
+gather_licenses_path = "../_build/PACKAGE-LICENSES/PIP-prebundled-LICENSES.txt"

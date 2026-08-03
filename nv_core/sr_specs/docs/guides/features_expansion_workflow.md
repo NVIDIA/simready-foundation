@@ -5,7 +5,7 @@
 1. Create requirement markdown + validation rule under an existing `capabilities/` folder.
 2. Create a feature JSON under `features/` that lists the requirement codes.
 3. Document the feature and add it to `features/features.md`.
-4. Add the feature to `Prop-Robotics-Neutral` in `profiles/profiles.toml`.
+4. Add the feature to `Prop-Robotics-Neutral` in `profiles/prop_robotics_neutral.toml`.
 5. `pip install simready-validate`, then run `simready-validate` to verify.
 
 ---
@@ -112,9 +112,9 @@ requirements/has-foo-prim                        <-- add this line
 Add the checker class to `capabilities/hierarchy/validation.py`:
 
 ```python
-@omni.asset_validator.register_rule("Hierarchy")
-@omni.asset_validator.register_requirements(cap.HierarchyRequirements.FOO_001)
-class HasFooPrimChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Hierarchy")
+@usd_validation_nvidia.register_requirements(cap.HierarchyRequirements.FOO_001)
+class HasFooPrimChecker(usd_validation_nvidia.BaseRuleChecker):
     """Stage must contain a prim named 'Foo'."""
     def CheckStage(self, stage: Usd.Stage) -> None:
         default_prim = stage.GetDefaultPrim()
@@ -211,7 +211,7 @@ ID:099 - Has Foo Prim - Base <FET_099-has_foo_prim>
 
 ## 4. Wire profiles
 
-Add your feature to the `Prop-Robotics-Neutral` profile in `profiles/profiles.toml`:
+Add your feature to the `Prop-Robotics-Neutral` profile in `profiles/prop_robotics_neutral.toml`:
 
 ```toml
 [Prop-Robotics-Neutral]
@@ -230,7 +230,7 @@ Add your feature to the `Prop-Robotics-Neutral` profile in `profiles/profiles.to
 
 ### 5a. Install simready-validate
 
-Requires **Python >=3.10,<3.13** (Python 3.12 recommended).
+Requires **Python >=3.10,<3.13** (Python 3.12 recommended). The package is hosted on the internal NVIDIA Artifactory registry, not the public PyPI.
 
 ```bash
 pip install simready-validate
@@ -244,7 +244,7 @@ From the root of this repository (`simready_foundations/`), run the following. T
 simready-validate \
   --rules-path nv_core/sr_specs/docs/capabilities \
   --features-path nv_core/sr_specs/docs/features \
-  --profiles-path nv_core/sr_specs/docs/profiles/profiles.toml \
+  --profiles-path nv_core/sr_specs/docs/profiles \
   --profile Prop-Robotics-Neutral --version 1.0.0 \
   sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
 ```
@@ -292,7 +292,7 @@ Re-run validation against the fixed asset:
 simready-validate \
   --rules-path nv_core/sr_specs/docs/capabilities \
   --features-path nv_core/sr_specs/docs/features \
-  --profiles-path nv_core/sr_specs/docs/profiles/profiles.toml \
+  --profiles-path nv_core/sr_specs/docs/profiles \
   --profile Prop-Robotics-Neutral --version 1.0.0 \
   fixed_asset.usd
 ```
@@ -310,7 +310,7 @@ Asset: fixed_asset.usd
 2. **Validation rule:** Implement the checker class in the capability's `validation.py`.
 3. **Feature JSON:** Create under `features/`.
 4. **Feature documentation:** Create the feature markdown under `features/`. Add to `features/features.md`.
-5. **Profile wiring:** Add the feature to `Prop-Robotics-Neutral` in `profiles/profiles.toml`.
+5. **Profile wiring:** Add the feature to `Prop-Robotics-Neutral` in `profiles/prop_robotics_neutral.toml`.
 6. **Install:** `pip install simready-validate`
 7. **Verify:** Run `simready-validate` against a sample asset and confirm pass/fail behavior.
 

@@ -53,7 +53,6 @@ def fetch_refs() -> None:
             "fetch",
             "origin",
             "+refs/heads/release_*:refs/remotes/origin/release_*",
-            "+refs/heads/release-*:refs/remotes/origin/release-*",
             "+refs/heads/preview_*:refs/remotes/origin/preview_*",
             "--tags",
         ],
@@ -67,11 +66,7 @@ def fetch_refs() -> None:
 def list_branch_refs() -> list[str]:
     fetch_refs()
     refs: set[str] = set()
-    for pattern in (
-        "refs/remotes/origin/release_*",
-        "refs/remotes/origin/release-*",
-        "refs/remotes/origin/preview_*",
-    ):
+    for pattern in ("refs/remotes/origin/release_*", "refs/remotes/origin/preview_*"):
         result = subprocess.run(
             ["git", "for-each-ref", "--format=%(refname:short)", pattern],
             cwd=REPO_ROOT,
@@ -102,8 +97,8 @@ def ref_to_version(ref: str) -> str:
 
     branch = ref_to_branch(ref)
 
-    if branch.startswith(("release_", "release-")):
-        return branch[len("release_"):].replace("-", ".")
+    if branch.startswith("release_"):
+        return branch.removeprefix("release_").replace("-", ".")
     if branch.startswith("preview_"):
         slug = preview_branch_to_slug(branch)
         if slug:

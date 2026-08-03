@@ -8,7 +8,7 @@
 ## Description
 Support for grasping feature. This feature enables a prop to be considered "graspable".  Conditions to pass are related to colliders, physics materials, and rigid bodies.
 
-The graspable feature comprises a list of requirements that enable whether or not a particular prop is graspable via robotic grippers. It is worth noting that graspable feature requires a runtime test component to identify if the grasp vectors are indeed correct.
+The graspable feature comprises a list of requirements that enable whether or not a particular prop is graspable via robotic grippers. It is worth noting that graspable feature requires a benchmark component to identify if the grasp vectors are indeed correct.
 
 ## Dependency Graph
 
@@ -40,6 +40,12 @@ This version is used in the following profiles:
   * Requirements:
     * [Graspable-Vector-Line](../capabilities/physics_bodies/physics_graspable/requirements/graspable-vector-line.md)
       * GSP.001 | Version 0.1.0
+
+#### Benchmarks
+
+* Suite: [FET005 Grasp](../guides/benchmark/tests/fet005-grasp.md)
+  * Tests:
+    * [grasp_and_lift](../guides/benchmark/tests/fet005/grasp-and-lift.md)
 
 ### Comments
 * Need Physx CCD on smaller meshes potentially, would need new Physx capability for this

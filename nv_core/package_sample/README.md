@@ -343,7 +343,7 @@ install_kit_shim()
 sv.initialize(
     rules_and_requirements_paths=[FOUNDATIONS_DOCS_DIR / "capabilities"],
     features_paths=[FOUNDATIONS_DOCS_DIR / "features"],
-    profiles_paths=[FOUNDATIONS_DOCS_DIR / "profiles" / "profiles.toml"],
+    profiles_paths=[FOUNDATIONS_DOCS_DIR / "profiles"],
 )
 
 async def main():

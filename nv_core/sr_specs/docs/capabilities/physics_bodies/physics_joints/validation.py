@@ -12,16 +12,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import omni.asset_validator
 import omni.capabilities as cap
+import usd_validation_nvidia
 from pxr import Sdf, Usd, UsdGeom, UsdPhysics
 
 from ..utils import BaseRuleCheckerWCache
 
 
-@omni.asset_validator.register_rule("PhysicsJoints")
-@omni.asset_validator.register_requirements(cap.PhysicsJointsRequirements.JT_001, override=True)
-class PhysicsJointCapabilityChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsJoints")
+@usd_validation_nvidia.register_requirements(cap.PhysicsJointsRequirements.JT_001, override=True)
+class PhysicsJointCapabilityChecker(usd_validation_nvidia.BaseRuleChecker):
 
     def CheckStage(self, stage: Usd.Stage) -> None:
         default_prim = stage.GetDefaultPrim()
@@ -65,11 +65,11 @@ class PhysicsJointCapabilityChecker(omni.asset_validator.BaseRuleChecker):
         return all(body in rigid_bodies_from_joint_set for body in rigid_body_path_list)
 
 
-@omni.asset_validator.register_rule("PhysicsJoints")
-@omni.asset_validator.register_requirements(
+@usd_validation_nvidia.register_rule("PhysicsJoints")
+@usd_validation_nvidia.register_requirements(
     cap.PhysicsJointsRequirements.JT_002, cap.PhysicsJointsRequirements.JT_003, override=True
 )
-class PhysicsJointChecker(omni.asset_validator.BaseRuleChecker):
+class PhysicsJointChecker(usd_validation_nvidia.BaseRuleChecker):
     _JOINT_INVALID_PRIM_REL_REQUIREMENT = cap.PhysicsJointsRequirements.JT_002
     _JOINT_MULTIPLE_PRIMS_REL_REQUIREMENT = cap.PhysicsJointsRequirements.JT_003
 
@@ -125,8 +125,8 @@ class PhysicsJointChecker(omni.asset_validator.BaseRuleChecker):
             )
 
 
-@omni.asset_validator.register_rule("PhysicsJoints")
-@omni.asset_validator.register_requirements(
+@usd_validation_nvidia.register_rule("PhysicsJoints")
+@usd_validation_nvidia.register_requirements(
     cap.PhysicsJointsRequirements.JT_ART_002,
     cap.PhysicsJointsRequirements.JT_ART_003,
     cap.PhysicsJointsRequirements.JT_ART_004,

@@ -243,7 +243,7 @@ Description, and Valid/Invalid USDA sections.
 
 ```python
 import omni.capabilities as cap
-from omni.asset_validator import (
+from usd_validation_nvidia import (
     BaseRuleChecker,
     register_requirements,
     register_rule,

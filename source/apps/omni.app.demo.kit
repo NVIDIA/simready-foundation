@@ -1,0 +1,33 @@
+[package]
+title = "SimReady Foundations"
+
+keywords = ["app"]
+
+[dependencies]
+"omni.simready.validators" = {}
+"omni.kit.context_menu" = {}
+"omni.kit.property.usd" = {}
+"omni.kit.widget.layers" = {}
+"omni.kit.widget.prompt" = {}
+"omni.kit.window.content_browser" = {}
+"omni.kit.window.stage" = {}
+"omni.asset_validator.ui" = { version = ">=1.19.5" }
+"omni.kit.window.console" = {}
+"omni.kit.window.script_editor" = {}
+"omni.kit.window.extensions" = {}
+"omni.kit.uiapp" = {}
+"omni.hydra.pxr" = {}
+"omni.kit.viewport.window" = {}
+"omni.kit.material.library" = {}
+
+[settings]
+app.content.emptyStageOnStart = true
+app.file.ignoreUnsavedOnExit = true
+renderer.enabled = "pxr"
+
+# Register extension folder from this repo in kit
+[settings.app.exts]
+folders.'++' = ["${app}/../exts", "${app}/../extscache"]
+
+[[test]]
+pyCoverageEnabled = false

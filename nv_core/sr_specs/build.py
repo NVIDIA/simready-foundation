@@ -43,21 +43,10 @@ class CustomBuildHook(BuildHookInterface):
                     with open(filepath, "r", encoding="utf-8") as f:
                         content = f.read()
 
-                    # Replace Kit imports with PyPi imports
-                    new_content = re.sub(
-                        r"\bomni\.asset_validator\.core\b",
-                        "omni.asset_validator",
-                        content,
-                    )
                     new_content = re.sub(
                         r"\bomni\.capabilities\b",
                         "simready.foundation.core.requirements",
-                        new_content,
-                    )
-                    new_content = re.sub(
-                        r"\bregisterRule\b",
-                        "register_rule",
-                        new_content,
+                        content,
                     )
 
                     with open(filepath, "w", encoding="utf-8") as f:

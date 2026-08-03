@@ -12,26 +12,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from enum import Enum
-
-import omni.asset_validator
+import omni.capabilities as cap
+import usd_validation_nvidia
 from pxr import Usd, UsdPhysics, UsdShade
 
-from ... import Requirement
 
-
-class ColliderApproximationsCapReqs(Requirement, Enum):
-    COL_001 = (
-        "COL.001",
-        "collider-approximation-sdf",
-        "Every mesh collider (prim with PhysicsCollisionAPI and mesh geometry) must have an SDF approximation for efficient collision detection.",
-    )
-
-
-@omni.asset_validator.register_rule("ColliderApproximations")
-@omni.asset_validator.register_requirements(ColliderApproximationsCapReqs.COL_001, override=True)
-class ColliderApproximationsCapabilityChecker(omni.asset_validator.BaseRuleChecker):
-    COLLIDER_APPROXIMATION_REQUIREMENT = ColliderApproximationsCapReqs.COL_001
+@usd_validation_nvidia.register_rule("ColliderApproximations")
+@usd_validation_nvidia.register_requirements(cap.ColliderApproximationsRequirements.COL_001, override=True)
+class ColliderApproximationsCapabilityChecker(usd_validation_nvidia.BaseRuleChecker):
+    COLLIDER_APPROXIMATION_REQUIREMENT = cap.ColliderApproximationsRequirements.COL_001
 
     def CheckStage(self, stage: Usd.Stage) -> None:
         default_prim = stage.GetDefaultPrim()

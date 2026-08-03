@@ -66,16 +66,8 @@ Source file type:
 
 #### Test Process
 
-* Obtain the usd sdk
-  * [usd sdk link](https://developer.nvidia.com/usd?sortBy=developer_learning_library%2Fsort%2Ffeatured_in.usd_resources%3Adesc%2Ctitle%3Aasc&hitsPerPage=6#section-getting-started)
-* Confirm your asset in question has passed validation
-* In your commandline type:
-  * ```path/to/usdsdk/scripts/usdrecord <path to usdfile.usd> <path to output.png>```
-* Open up path/to/output.png
-* Expected Result:
-  * Confirm it is NOT empty or completely black
-  * Materials should render with proper USDPreviewSurface appearance
-  * Example image: ![image1](./images/obs_revolute_lamp_01.png)
+This feature is verified by static validation. Refer to the
+[SimReady Validation Workflow](../guides/validate_workflow.md).
 
 </details>
 
@@ -152,13 +144,7 @@ None; USDPreviewSurface Format is acceptable.
 
 #### Test Process
 
-* Obtain Isaac Sim or Omniverse Create
-  * [Omniverse Create link](https://www.nvidia.com/en-us/omniverse/create/)
-* Confirm your asset in question has passed validation
-* Open the asset in Omniverse Create
-* Expected Result:
-  * Materials should render with proper MDL appearance
-  * Advanced material features should be functional
-  * Material should be compatible with MDL rendering pipeline
+This feature is verified by static validation. Refer to the
+[SimReady Validation Workflow](../guides/validate_workflow.md).
 
 </details>

@@ -4,18 +4,18 @@
     },
     "pipeline": {
         "asset_handler": "PropAssetHandler",
-        "timestamp": "2026-03-02 12:24:08",
-        "version": "1.4.25"
+        "timestamp": "2026-07-17 14:59:05",
+        "version": "2.0.0"
     },
     "input": {
         "asset_name": "sm_obs_lamp_revolute_a01_01",
         "asset_type": "prop",
         "input_uri": "sample_content/common_assets/props_general/obs_lamp_revolute_a01/simready_usd",
         "stage_filename": null,
-        "stage_modified": "2026-03-02 12:23:59.167091"
+        "stage_modified": "2026-07-17 11:42:02.185735"
     },
     "validator": {
-        "version": "1.1.6",
+        "version": "1.20.0-dev.6",
         "rules": []
     }
 }

@@ -12,8 +12,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import omni.asset_validator
 import omni.capabilities as cap
+import usd_validation_nvidia
 from pxr import Usd, UsdGeom, UsdPhysics
 
 
@@ -28,11 +28,9 @@ def get_external_prepended_items(prim: Usd.Prim) -> list:
     return external_prepended_items
 
 
-@omni.asset_validator.register_rule("Units")
-@omni.asset_validator.register_requirements(
-    cap.UnitsRequirements.UN_001, cap.UnitsRequirements.UN_002, override=True
-)
-class StageMetadataChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Units")
+@usd_validation_nvidia.register_requirements(cap.UnitsRequirements.UN_001, cap.UnitsRequirements.UN_002, override=True)
+class StageMetadataChecker(usd_validation_nvidia.BaseRuleChecker):
     """
     All stages should declare their 'upAxis' and 'metersPerUnit'. Stages that can be consumed as referencable assets
     should furthermore have a valid 'defaultPrim' declared, and stages meant for consumer-level packaging should
@@ -70,9 +68,9 @@ class StageMetadataChecker(omni.asset_validator.BaseRuleChecker):
                 self._AddFailedCheck("Stage has missing or invalid defaultPrim.")
 
 
-@omni.asset_validator.register_rule("Units")
-@omni.asset_validator.register_requirements(cap.UnitsRequirements.UN_003, override=True)
-class KilogramsPerUnitChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Units")
+@usd_validation_nvidia.register_requirements(cap.UnitsRequirements.UN_003, override=True)
+class KilogramsPerUnitChecker(usd_validation_nvidia.BaseRuleChecker):
     """Validates that stage has kilogramsPerUnit specified if physics objects are present"""
 
     def CheckStage(self, stage: Usd.Stage) -> None:
@@ -102,9 +100,9 @@ class KilogramsPerUnitChecker(omni.asset_validator.BaseRuleChecker):
             )
 
 
-@omni.asset_validator.register_rule("Units")
-@omni.asset_validator.register_requirements(cap.UnitsRequirements.UN_004, override=True)
-class UnitsCorrectiveTransformChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Units")
+@usd_validation_nvidia.register_requirements(cap.UnitsRequirements.UN_004, override=True)
+class UnitsCorrectiveTransformChecker(usd_validation_nvidia.BaseRuleChecker):
 
     def CheckStage(self, stage: Usd.Stage) -> None:
         # get the world mpu
@@ -169,9 +167,9 @@ class UnitsCorrectiveTransformChecker(omni.asset_validator.BaseRuleChecker):
                                 )
 
 
-@omni.asset_validator.register_rule("Units")
-@omni.asset_validator.register_requirements(cap.UnitsRequirements.UN_005, override=True)
-class TimeCodesPerSecondChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Units")
+@usd_validation_nvidia.register_requirements(cap.UnitsRequirements.UN_005, override=True)
+class TimeCodesPerSecondChecker(usd_validation_nvidia.BaseRuleChecker):
     """Validates that stage has timeCodesPerSecond specified if timesamples are present"""
 
     def CheckStage(self, stage: Usd.Stage) -> None:
@@ -200,9 +198,9 @@ class TimeCodesPerSecondChecker(omni.asset_validator.BaseRuleChecker):
             )
 
 
-@omni.asset_validator.register_rule("Units")
-@omni.asset_validator.register_requirements(cap.UnitsRequirements.UN_006, override=True)
-class UpAxisZChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Units")
+@usd_validation_nvidia.register_requirements(cap.UnitsRequirements.UN_006, override=True)
+class UpAxisZChecker(usd_validation_nvidia.BaseRuleChecker):
     """
     Validates that stage upAxis is 'Z'.
 
@@ -224,9 +222,9 @@ class UpAxisZChecker(omni.asset_validator.BaseRuleChecker):
             )
 
 
-@omni.asset_validator.register_rule("Units")
-@omni.asset_validator.register_requirements(cap.UnitsRequirements.UN_007, override=True)
-class MetersPerUnit1Checker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Units")
+@usd_validation_nvidia.register_requirements(cap.UnitsRequirements.UN_007, override=True)
+class MetersPerUnit1Checker(usd_validation_nvidia.BaseRuleChecker):
     """
     Validates that stage metersPerUnit is exactly 1.0.
 

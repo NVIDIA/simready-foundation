@@ -1,0 +1,3 @@
+[deletion]
+asset_path = "sample_content/common_assets/props_general/coffee_cup_grasp_a01/isaac_usd/sm_coffee_cup_grasp_a01_01.usd"
+reason = "The obsolete Isaac USD variant was intentionally removed; the Neutral and PhysX variants remain supported."

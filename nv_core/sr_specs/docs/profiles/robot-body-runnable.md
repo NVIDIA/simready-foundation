@@ -110,7 +110,7 @@ customLayerData = {
 
 ## References
 
-- `nv_core/sr_specs/docs/profiles/profiles.toml`
+- `nv_core/sr_specs/docs/profiles/robot_body_runnable.toml`
 - `nv_core/sr_specs/docs/features/FET_003-rigid_body_physics.md`
 - `nv_core/sr_specs/docs/features/FET_004-simulate_multi_body_physics.md`
 - `nv_core/sr_specs/docs/features/FET_021-robot_core.md`

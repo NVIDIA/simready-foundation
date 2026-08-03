@@ -13,12 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from enum import Enum
-
-import omni.asset_validator
+import omni.capabilities as cap
+import usd_validation_nvidia
 from pxr import Usd, UsdShade
-
-from ... import Requirement
 
 
 def traverse_without_references_payloads(prim):
@@ -41,29 +38,16 @@ def traverse_without_references_payloads(prim):
         yield from traverse_without_references_payloads(child)
 
 
-class RobotMaterialsCapReqs(Requirement, Enum):
-    RM_001 = (
-        "RM.001",
-        "no-nested-materials",
-        "Materials must not contain nested materials to avoid unexpected rendering behavior.",
-    )
-    RM_002 = (
-        "RM.002",
-        "materials-on-top-level-only",
-        "Materials must only be defined in the top-level Looks prim following USD best practices.",
-    )
-
-
-@omni.asset_validator.register_rule("RobotMaterials")
-@omni.asset_validator.register_requirements(RobotMaterialsCapReqs.RM_001, override=True)
-class NoNestedMaterialsChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("RobotMaterials")
+@usd_validation_nvidia.register_requirements(cap.RobotMaterialsRequirements.RM_001, override=True)
+class NoNestedMaterialsChecker(usd_validation_nvidia.BaseRuleChecker):
     """Validates that materials don't contain nested materials.
 
     This rule checks that UsdShade.Material prims don't have child prims that are also
     materials, which can cause unexpected rendering behavior.
     """
 
-    ROBOT_MATERIALS_REQUIREMENT = RobotMaterialsCapReqs.RM_001
+    ROBOT_MATERIALS_REQUIREMENT = cap.RobotMaterialsRequirements.RM_001
 
     def CheckPrim(self, prim: Usd.Prim) -> None:
         """Check if a material prim contains nested materials.
@@ -83,16 +67,16 @@ class NoNestedMaterialsChecker(omni.asset_validator.BaseRuleChecker):
                     )
 
 
-@omni.asset_validator.register_rule("RobotMaterials")
-@omni.asset_validator.register_requirements(RobotMaterialsCapReqs.RM_002, override=True)
-class MaterialsOnTopLevelOnlyChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("RobotMaterials")
+@usd_validation_nvidia.register_requirements(cap.RobotMaterialsRequirements.RM_002, override=True)
+class MaterialsOnTopLevelOnlyChecker(usd_validation_nvidia.BaseRuleChecker):
     """Validates that materials are only defined in the top-level Looks prim.
 
     This rule checks that all UsdShade.Material prims are direct children of the
     top-level Looks prim, following USD best practices for material organization.
     """
 
-    ROBOT_MATERIALS_REQUIREMENT = RobotMaterialsCapReqs.RM_002
+    ROBOT_MATERIALS_REQUIREMENT = cap.RobotMaterialsRequirements.RM_002
 
     def CheckStage(self, stage: Usd.Stage) -> None:
         """Check if all materials are properly organized in the Looks prim.

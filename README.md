@@ -63,7 +63,7 @@ If any files still show as pointer files, re-run `git lfs pull`.
 
 ### 4. Install Python
 
-The product requires **Python >=3.10,<3.13** (Python 3.12 recommended).
+The product requires **Python >=3.12,<3.13**.
 
 <details open>
 <summary><strong>Windows</strong></summary>
@@ -110,15 +110,27 @@ source .venv/bin/activate
 
 ### 6. Install dependencies
 
-From the repository root, install the SimReady validation library:
+Choose the requirements file that matches your workflow:
+
+| Workflow | Requirements file | What gets installed |
+|----------|-------------------|---------------------|
+| **Validation only** | `requirements.txt` | `simready-validate`, `omniverse-asset-validator`, `usd-core`, `omniverse-usd-profiles` |
+| **Packaging** | `nv_core/package_sample/requirements.txt` | Everything above, plus `simready-package`. `omni-wrapp-minimal` must be installed separately — see the [Packaging Workflow guide](nv_core/sr_specs/docs/guides/packaging_workflow.md). |
 
 ```bash
-pip install -r nv_core/validator_sample/requirements.txt
+# Validation only
+pip install -r requirements.txt
+
+# Packaging (includes validation)
+pip install -r nv_core/package_sample/requirements.txt
 ```
 
-This installs `simready-validate` (which pulls in `omniverse-asset-validator` and `usd-core`) and `omniverse-usd-profiles`.
+> [!NOTE]
+> Both CLIs need profile definitions at runtime. Pass
+> `--project-config sample_content/project_config.toml` on every invocation
+> outside a Kit environment. See the guides below for the exact commands.
 
-You're now ready to go. See [Next steps](#next-steps) for guides on validation, profiles, and more.
+You're now ready to go. See [Next steps](#next-steps) for guides on validation, packaging, profiles, and more.
 
 ## About SimReady Foundation
 
@@ -161,6 +173,8 @@ Once you have the environment set up, explore the guides in [`nv_core/sr_specs/d
 | Guide | Description |
 |-------|-------------|
 | [SimReady Validation Workflow](nv_core/sr_specs/docs/guides/validate_workflow.md) | Run your first validation — commands, expected output, stamping, and troubleshooting |
+| [SimReady Packaging Workflow](nv_core/sr_specs/docs/guides/packaging_workflow.md) | Package a SimReady asset — pre-validate, local mode, full WRAPP build, and troubleshooting |
+| [SimReady Benchmark](nv_core/sr_specs/docs/guides/benchmark/benchmark.md) | Run benchmarks with `simready-benchmark`, covering install, the pipeline stages, and reading reports |
 | [Getting Started](nv_core/sr_specs/docs/guides/getting_started.md) | Orientation — who SimReady is for, choosing a profile, and where to go next |
 | [SimReady Acceptance Workflow](nv_core/sr_specs/docs/guides/acceptance_workflow.md) | How new requirements, features, and profiles move through review |
 | [Features Expansion Workflow](nv_core/sr_specs/docs/guides/features_expansion_workflow.md) | Create technology-specific feature variants (e.g. neutral to PhysX) |

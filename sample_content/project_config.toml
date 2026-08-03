@@ -12,7 +12,7 @@ subconfigs_priority = ["sample_content"]
 requirements_configs_path = "nv_core/sr_specs/config"
 requirements_paths = ["nv_core/sr_specs/docs/capabilities"]
 features_paths = ["nv_core/sr_specs/docs/features"]
-profiles_paths = ["nv_core/sr_specs/docs/profiles/profiles.toml"]
+profiles_paths = ["nv_core/sr_specs/docs/profiles"]
 
 [cip]
 adapter_modules_path = "nv_core/cip_specs/asset_handler_modules"
@@ -29,3 +29,6 @@ nv_core_wrapp_repo_url = "omniverse://example.com/simready_foundations/.wrapp_pu
 [action_default_profiles]
 add = "Prop-Robotics-Neutral"
 generate = "Prop-Robotics-Physx"
+
+[docs]
+url = "https://nvidia.github.io/simready-foundation/latest/"

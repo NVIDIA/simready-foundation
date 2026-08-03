@@ -2,12 +2,12 @@
 
 Asset profiles bundle capabilities, so that assets can be reasoned about and validated for conformance with lists of capability requirements. Asset profiles can serve as a contract between creators and consumers of assets.
 
-Feature requirements and dependency chains are defined in the [feature dependency graph](../features/feature-dependency-graph). Profile feature sets below align with `profiles.toml` and those specifications.
+Feature requirements and dependency chains are defined in the [feature dependency graph](../features/feature-dependency-graph). Profile feature sets below align with the per-profile TOMLs in `profiles/` and those specifications.
 
 (profile-comparison)=
 ## Profile comparison
 
-| Profile | Versions | Summary | Feature set (from `profiles.toml`) |
+| Profile | Versions | Summary | Feature set (from the `profiles/` TOMLs) |
 | --- | --- | --- | --- |
 | Prop-Robotics-Neutral | 1.0.0, 2.0.0 | Neutral format props for robotics | FET000_CORE, FET001_BASE_NEUTRAL, FET003_BASE_NEUTRAL, FET004_BASE_NEUTRAL, FET005_BASE_NEUTRAL, FET006_BASE_MDL |
 | Prop-Robotics-Physx | 1.0.0, 2.0.0 | PhysX props for robotics | FET000_CORE, FET001_BASE_NEUTRAL, FET003_BASE_PHYSX, FET004_BASE_PHYSX, FET005_BASE_NEUTRAL, FET006_BASE_MDL |

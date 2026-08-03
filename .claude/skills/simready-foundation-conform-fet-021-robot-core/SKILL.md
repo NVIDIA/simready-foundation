@@ -51,7 +51,7 @@ Collect these before editing:
 | `fet021_variant` | Selected feature ID and version, such as `FET021_ROBOT_CORE_RUNNABLE@0.2.0` or `FET021_ROBOT_CORE_ISAAC@0.2.0`. |
 | `robot_type` | Required before repairing RC.008 or RC.009. Must be a valid schema value and must not be `Default`. |
 | `link_and_joint_roots` | Existing robot link and joint prims or source topology used to populate robot relationships. |
-| `physics_layer_policy` | Existing `_physics.usd` layer path or user-approved staging strategy for moving physics opinions. |
+| `physics_layer_policy` | Existing `physics.usda` layer path or user-approved staging strategy for moving physics opinions. |
 | `thumbnail_source` | Existing or generated representative thumbnail when RC.004 is in scope. |
 
 ## Instructions
@@ -77,7 +77,7 @@ Use this checklist when changing the repository:
    - Repair robot schema metadata and relationships when link and joint prims are unambiguous.
    - Repair `isaac:robotType` only from explicit source data or user approval.
    - Repair root-joint pinning only after robot type and root joint order are confirmed.
-   - Move physics attributes and schemas into `_physics.usd` only when the layer split can be performed without changing composed physics behavior.
+   - Move physics attributes and schemas into `physics.usda` only when the layer split can be performed without changing composed physics behavior.
 7. Rerun the same profile validation gate, or the narrowest available FET021 validation gate.
 8. Summarize the stage as passed, failed, skipped, or blocked. Stop when FET021 passes or the next FET021 failure requires robot topology, robot type, layer restructuring, thumbnail generation, or Isaac schema tooling.
 
@@ -121,7 +121,7 @@ Block and report instead of guessing when:
 
 For `FET021_ROBOT_CORE_RUNNABLE@0.2.0`, the manifest requires `RC.003`, `RC.007`, `RC.008`, and `RC.009`. Do not add Isaac-only packaging requirements such as clean folder, thumbnail, or physics source-layer checks unless validation reports them separately.
 
-For `FET021_ROBOT_CORE_ISAAC@0.2.0`, the manifest requires `RC.001`, `RC.003`, `RC.004`, `RC.005`, `RC.006`, `RC.007`, `RC.008`, and `RC.009`. Isaac repair should preserve modular composition and keep physics opinions in the `_physics.usd` layer expected by the validator.
+For `FET021_ROBOT_CORE_ISAAC@0.2.0`, the manifest requires `RC.001`, `RC.003`, `RC.004`, `RC.005`, `RC.006`, `RC.007`, `RC.008`, and `RC.009`. Isaac repair should preserve modular composition and keep physics opinions in the `physics.usd` layer expected by the validator.
 
 For `FET021_ROBOT_CORE_ISAAC@0.1.0`, the manifest does not include `RC.008` or `RC.009`. Do not author robot type or root-joint pinning solely for that older feature version unless the user requests an upgrade or another selected feature requires it.
 
@@ -171,7 +171,7 @@ Report:
 | `robot_type` | Authored or confirmed `isaac:robotType`. |
 | `robot_links` | Relationship targets after repair. |
 | `robot_joints` | Relationship targets after repair and chosen root joint. |
-| `layer_repairs` | Physics attributes or schemas moved to `_physics.usd`. |
+| `layer_repairs` | Physics attributes or schemas moved to `physics.usda`. |
 | `package_repairs` | Folder, naming, clean-folder, or thumbnail changes. |
 | `requirements_repaired` | Requirement IDs changed by this skill. |
 | `requirements_blocked` | Requirement IDs that need robot type, topology, thumbnail, or layer intent. |

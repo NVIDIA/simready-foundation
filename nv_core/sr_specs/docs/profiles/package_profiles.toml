@@ -1,0 +1,16 @@
+[Package]
+"1.0.0" = {features = [
+    {"FET030_PACKAGING_CORE" = {version = "0.1.0"}}, # "Packaging Core"
+    {"FET032_PACKAGING_INTROSPECTION" = {version = "0.1.0"}}, # "Packaging Introspection (BOM)"
+]}
+
+[Package-NoBOM]
+"1.0.0" = {features = [
+    {"FET030_PACKAGING_CORE" = {version = "0.1.0"}}, # "Packaging Core (no BOM)"
+]}
+
+[Package-Candidate]
+"1.0.0" = {features = [
+    {"FET031_PACKAGE_SELF_CONTAINED" = {version = "0.1.0"}}, # "Self-contained Package Source"
+    {"FET033_SIMREADY_PACKAGING" = {version = "0.1.0"}}, # "SimReady Packaging (thumbnail)"
+]}

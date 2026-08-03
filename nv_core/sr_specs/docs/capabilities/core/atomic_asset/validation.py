@@ -16,20 +16,12 @@ import os
 from pathlib import Path
 
 import omni.capabilities as cap
-from omni.asset_validator import (
+from pxr import Ar, Sdf, Usd, UsdGeom, UsdShade, UsdUtils
+from usd_validation_nvidia import (
     BaseRuleChecker,
     register_requirements,
     register_rule,
 )
-from pxr import Ar, Sdf, Usd, UsdGeom, UsdShade, UsdUtils
-
-# Older USD had ZipFile in the Usd namespace, but newer versions have it in the Sdf namespace.
-ZipFile = getattr(Usd, "ZipFile", getattr(Sdf, "ZipFile", object))
-
-
-# Older USD had ZipFile in the Usd namespace, but newer versions have it in the Sdf namespace.
-ZipFile = getattr(Usd, "ZipFile", getattr(Sdf, "ZipFile", object))
-
 
 # Older USD had ZipFile in the Usd namespace, but newer versions have it in the Sdf namespace.
 ZipFile = getattr(Usd, "ZipFile", getattr(Sdf, "ZipFile", object))
@@ -108,7 +100,7 @@ class AnchoredAssetPathsChecker(BaseRuleChecker):
             return
 
         msg = f'Dependent {dependency_type} "{asset_path}"'
-        # In the SearchPath case, only MDL search paths are allowed, and a warning will be issued. OMPE-46019
+        # In the SearchPath case, only MDL search paths are allowed, and a warning will be issued.
         if "/" not in asset_path and Sdf.FileFormat.GetFileExtension(asset_path) == "mdl":
             self._AddWarning(
                 requirement=cap.AtomicAssetRequirements.AA_001,
@@ -120,6 +112,11 @@ class AnchoredAssetPathsChecker(BaseRuleChecker):
         # Not anchored relative path case - we only allow "./" or "../"
         if not asset_path.startswith("./") and not asset_path.startswith("../"):
             message = f'{msg} should begin with "./" or "../".'
+            if prim:
+                message = f'{msg} should begin with "./" or "../". see prim {prim.GetPath().pathString} : {asset_path}'
+            elif layer:
+                message = f'{msg} should begin with "./" or "../". see layer {layer.realPath} : {asset_path}'
+
             self._record_failed_check(message=message, at=prim or layer)
             return
 

@@ -4,18 +4,18 @@
     },
     "pipeline": {
         "asset_handler": "PropAssetHandler",
-        "timestamp": "2026-03-02 11:49:20",
-        "version": "1.4.25"
+        "timestamp": "2026-07-17 14:56:48",
+        "version": "2.0.0"
     },
     "input": {
         "asset_name": "sm_alcohol_a01_01",
         "asset_type": "prop",
         "input_uri": "sample_content/common_assets/props_general/alcohol_a01/simready_usd",
         "stage_filename": null,
-        "stage_modified": "2026-03-02 11:49:03.637711"
+        "stage_modified": "2026-04-21 15:26:45.582452"
     },
     "validator": {
-        "version": "1.1.6",
+        "version": "1.20.0-dev.6",
         "rules": []
     }
 }

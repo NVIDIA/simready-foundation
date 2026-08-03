@@ -16,33 +16,18 @@ __all__ = ["BaseArticulationValidation"]
 
 import typing
 
+import omni.capabilities as cap
+import usd_validation_nvidia
+from pxr import Usd, UsdPhysics
+
 # from omni.physics.core import ContactEventType, get_physics_simulation_interface
 # from omni.physx.bindings._physx import SETTING_UPDATE_TO_USD
-from enum import Enum
 
-import omni.asset_validator
-from pxr import Usd, UsdPhysics
 
 try:
     from pxr import PhysxSchema
 except ImportError:
     PhysxSchema = None
-
-from ... import Requirement
-
-
-class BaseArticulationCapReq(Requirement, Enum):
-    BA_001 = (
-        "BA.001",
-        "has-articulation-root",
-        "Articulated assets must have exactly one ArticulationRootAPI applied to establish the physics simulation root.",
-    )
-
-    BA_002 = (
-        "BA.002",
-        "non-adjacent-collision-meshes-do-not-clash",
-        "Collision meshes on non-adjacent links in the articulation hierarchy must not overlap or intersect at the default pose.",
-    )
 
 
 # Copied from Ales's code
@@ -183,9 +168,9 @@ def ComputeAdjacentMeshDict(stage: Usd.Stage) -> dict:
     return adjacent_mesh_matrix
 
 
-@omni.asset_validator.register_rule("BaseArticulation")
-@omni.asset_validator.register_requirements(BaseArticulationCapReq.BA_001, override=True)
-class HasArticulationRoot(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("BaseArticulation")
+@usd_validation_nvidia.register_requirements(cap.BaseArticulationRequirements.BA_001, override=True)
+class HasArticulationRoot(usd_validation_nvidia.BaseRuleChecker):
     """Validates that none or more than one prim in the stage has the ArticulationRootAPI.
 
     This rule checks that the USD stage contains none or more than one prim with the
@@ -205,22 +190,22 @@ class HasArticulationRoot(omni.asset_validator.BaseRuleChecker):
                 roots.append(prim)
         if len(roots) == 0:
             self._AddFailedCheck(
-                requirement=BaseArticulationCapReq.BA_001,
+                requirement=cap.BaseArticulationRequirements.BA_001,
                 message=f"Articulation Root API is not set on any prim in the stage",
                 at=stage,
             )
 
         if len(roots) > 1:
             self._AddFailedCheck(
-                requirement=BaseArticulationCapReq.BA_001,
+                requirement=cap.BaseArticulationRequirements.BA_001,
                 message=f"More than one Articulation Root API is set on the stage",
                 at=stage,
             )
 
 
-@omni.asset_validator.register_rule("BaseArticulation")
-@omni.asset_validator.register_requirements(BaseArticulationCapReq.BA_002, override=True)
-class NonAdjacentCollisionMeshesDoNotClash(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("BaseArticulation")
+@usd_validation_nvidia.register_requirements(cap.BaseArticulationRequirements.BA_002, override=True)
+class NonAdjacentCollisionMeshesDoNotClash(usd_validation_nvidia.BaseRuleChecker):
     """Validates that non-adjacent collision meshes don't intersect.
 
     This rule checks that collision meshes that aren't connected by joints don't
@@ -234,7 +219,9 @@ class NonAdjacentCollisionMeshesDoNotClash(omni.asset_validator.BaseRuleChecker)
             stage: The USD stage to validate.
         """
         if PhysxSchema is None:
-            self._AddError("PhysxSchema is not available in this environment; cannot check non-adjacent collision meshes")
+            self._AddError(
+                "PhysxSchema is not available in this environment; cannot check non-adjacent collision meshes"
+            )
             return
         self.adjacent_mesh_matrix = ComputeAdjacentMeshDict(stage)  # Sdf Path of all joints
         self.collisions_pairs = get_initial_collider_pairs(
@@ -253,7 +240,7 @@ class NonAdjacentCollisionMeshesDoNotClash(omni.asset_validator.BaseRuleChecker)
                 continue
             else:
                 self._AddFailedCheck(
-                    requirement=BaseArticulationCapReq.BA_002,
+                    requirement=cap.BaseArticulationRequirements.BA_002,
                     message=f"Colliding meshes {body0_prim.GetPath()} and {body1_prim.GetPath()} are not adjacent",
                     at=body0_prim,
                 )

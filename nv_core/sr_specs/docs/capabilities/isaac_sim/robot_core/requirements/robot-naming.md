@@ -1,4 +1,9 @@
-# Robot Naming
+# robot-naming
+
+| Code     | RC.003 |
+|----------|--------|
+
+## Summary
 
 Canonical robot and prim naming conventions for stable references and tools.
 

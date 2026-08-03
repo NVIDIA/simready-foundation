@@ -21,12 +21,11 @@ import os
 from pathlib import Path
 from typing import List, Optional
 
-import omni.asset_validator
 import omni.capabilities as cap
-from omni.asset_validator import BaseRuleChecker, register_requirements
 from pxr import Sdf, Sdr, Usd, UsdGeom, UsdShade
+from usd_validation_nvidia import BaseRuleChecker, register_requirements
 
-from .util.mdl_helpers import is_mdl_helper_available, get_mdl_module_parameter_descs
+from .util.mdl_helpers import get_mdl_module_parameter_descs, is_mdl_helper_available
 
 try:
     import omni.client
@@ -78,6 +77,10 @@ class VisualMaterialsCapabilityChecker(BaseRuleChecker):
         "inputs:UV_VertexColor",
         "inputs:Set1SuperAlbedo",
         "inputs:Set2SuperAlbedo",
+    ]
+
+    colorspace_optional_list = [
+        "inputs:diffuse_texture",
     ]
 
     # Texture size limit (VM.TEX.001)
@@ -495,6 +498,8 @@ class VisualMaterialsCapabilityChecker(BaseRuleChecker):
                             requirement=cap.MaterialsRequirements.VM_TEX_002,
                         )
                         errors.append(f"Incorrect color space for {attr_name}: {color_space} (expected sRGB)")
+                elif attr_name in self.colorspace_optional_list:
+                    continue
                 else:
                     # All other attributes should use 'raw' color space
                     if color_space != "raw":

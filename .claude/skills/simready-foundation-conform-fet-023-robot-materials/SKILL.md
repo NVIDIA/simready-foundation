@@ -18,7 +18,7 @@ Use this workflow skill when the selected profile, validation report, or user re
 
 This is a material-organization repair skill, not a material-authoring skill. It should preserve existing materials, shader networks, texture paths, and visual appearance while changing where material prims live and what geometry bindings target.
 
-FET023 is not currently used by the default Robot-Body profiles in `profiles.toml`. When a profile does not include FET023, run this skill only when the user explicitly asks for robot material organization conformance or supplies a profile/workflow that includes `FET023_ROBOT_MATERIALS`.
+FET023 is not currently used by the default Robot-Body profiles in `profiles/`. When a profile does not include FET023, run this skill only when the user explicitly asks for robot material organization conformance or supplies a profile/workflow that includes `FET023_ROBOT_MATERIALS`.
 
 ## Prerequisites
 
@@ -130,7 +130,7 @@ uv run --python 3.12 validate-simready-profile <staged-usd> \
   --report <output-root>/simready-profile-after-fet023.json
 ```
 
-If no selected profile includes FET023, do not mutate `profiles.toml` just to test the skill. Run the available RobotMaterials capability validator directly if the local environment exposes it; otherwise report the USD inspection results and note that profile validation cannot exercise FET023 until a profile selects it.
+If no selected profile includes FET023, do not mutate any profile TOML in `profiles/` just to test the skill. Run the available RobotMaterials capability validator directly if the local environment exposes it; otherwise report the USD inspection results and note that profile validation cannot exercise FET023 until a profile selects it.
 
 Count this skill as successful when `FET023_ROBOT_MATERIALS` passes or when inspection proves there are no nested materials and every local material under the default prim is a direct child of `/<defaultPrim>/Looks`.
 

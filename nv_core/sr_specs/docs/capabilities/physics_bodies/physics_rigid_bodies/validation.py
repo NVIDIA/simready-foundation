@@ -12,10 +12,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from enum import Enum
-
-import omni.asset_validator
 import omni.capabilities as cap
+import usd_validation_nvidia
 from pxr import Gf, Sdf, Usd, UsdGeom, UsdPhysics
 
 try:
@@ -23,35 +21,12 @@ try:
 except ImportError:
     PhysxSchema = None
 
-from ... import Requirement
 from ..utils import BaseRuleCheckerWCache
 
 
-class MultibodyReqs(Requirement, Enum):
-    RB_MB_001 = (
-        "RB.MB.001",
-        "has-multiple-rigid-bodies",
-        "The asset must contain at least two physics rigid bodies.",
-    )
-
-
-class PhysxRigidBodyColliderReqs(Requirement, Enum):
-    PHYSX_COL_001 = (
-        "PHYSX.COL.001",
-        "physx-collider-capability",
-        "CollisionAPI may only be applied to a UsdGeom Gprim or to an Xform that has PhysxMeshMergeCollisionAPI and whose collisionmeshes collection includes at least one Gprim.",
-    )
-
-    PHYSX_COL_002 = (
-        "PHYSX.COL.002",
-        "physx-collider-mesh",
-        "MeshCollisionAPI may only be applied to a UsdGeom Mesh or to a prim that has PhysxMeshMergeCollisionAPI. CollisionAPI is required whenever MeshCollisionAPI is applied.",
-    )
-
-
-@omni.asset_validator.register_rule("PhysicsRigidBodies")
-@omni.asset_validator.register_requirements(cap.PhysicsRigidBodiesRequirements.RB_001, override=True)
-class RigidBodyCapabilityChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsRigidBodies")
+@usd_validation_nvidia.register_requirements(cap.PhysicsRigidBodiesRequirements.RB_001, override=True)
+class RigidBodyCapabilityChecker(usd_validation_nvidia.BaseRuleChecker):
     def CheckStage(self, stage: Usd.Stage) -> None:
         default_prim = stage.GetDefaultPrim()
         if not default_prim:
@@ -67,8 +42,8 @@ class RigidBodyCapabilityChecker(omni.asset_validator.BaseRuleChecker):
         )
 
 
-@omni.asset_validator.register_rule("PhysicsRigidBodies")
-@omni.asset_validator.register_requirements(
+@usd_validation_nvidia.register_rule("PhysicsRigidBodies")
+@usd_validation_nvidia.register_requirements(
     cap.PhysicsRigidBodiesRequirements.RB_003,
     cap.PhysicsRigidBodiesRequirements.RB_005,
     cap.PhysicsRigidBodiesRequirements.RB_006,
@@ -132,7 +107,10 @@ class RigidBodyChecker(BaseRuleCheckerWCache):
             tr = Gf.Transform(mat)
             sc = tr.GetScale()
 
-            if not self._scale_is_uniform(sc) and tr.GetPivotOrientation().GetQuaternion() != Gf.Quaternion.GetIdentity():
+            if (
+                not self._scale_is_uniform(sc)
+                and tr.GetPivotOrientation().GetQuaternion() != Gf.Quaternion.GetIdentity()
+            ):
                 self._AddFailedCheck(
                     message=self._RIGID_BODY_ORIENTATION_SCALE_MESSAGE,
                     at=usd_prim,
@@ -149,9 +127,9 @@ class RigidBodyChecker(BaseRuleCheckerWCache):
             )
 
 
-@omni.asset_validator.register_rule("PhysicsRigidBodies")
-@omni.asset_validator.register_requirements(cap.PhysicsRigidBodiesRequirements.RB_007, override=True)
-class RigidBodyMassChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsRigidBodies")
+@usd_validation_nvidia.register_requirements(cap.PhysicsRigidBodiesRequirements.RB_007, override=True)
+class RigidBodyMassChecker(usd_validation_nvidia.BaseRuleChecker):
     def has_mass(self, prim: Usd.Prim) -> bool:
         return prim.HasAPI(UsdPhysics.MassAPI) and prim.GetAttribute("physics:mass").Get() is not None
 
@@ -179,9 +157,9 @@ class RigidBodyMassChecker(omni.asset_validator.BaseRuleChecker):
                 self.check_rigid_body_mass_helper(prim)
 
 
-@omni.asset_validator.register_rule("PhysicsRigidBodies")
-@omni.asset_validator.register_requirements(cap.PhysicsRigidBodiesRequirements.RB_COL_001, override=True)
-class RigidBodyColliderCapabilityChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsRigidBodies")
+@usd_validation_nvidia.register_requirements(cap.PhysicsRigidBodiesRequirements.RB_COL_001, override=True)
+class RigidBodyColliderCapabilityChecker(usd_validation_nvidia.BaseRuleChecker):
     def CheckPrim(self, prim: Usd.Prim) -> None:
         if prim.HasAPI(UsdPhysics.CollisionAPI) and not prim.IsA(UsdGeom.Gprim):
             self._AddFailedCheck(
@@ -223,9 +201,9 @@ def _collisionmeshes_collection_has_gprim(prim: Usd.Prim) -> bool:
     return False
 
 
-@omni.asset_validator.register_rule("PhysicsRigidBodies")
-@omni.asset_validator.register_requirements(PhysxRigidBodyColliderReqs.PHYSX_COL_001, override=True)
-class PhysxRigidBodyColliderCapabilityChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsRigidBodies")
+@usd_validation_nvidia.register_requirements(cap.PhysicsRigidBodiesRequirements.PHYSX_COL_001, override=True)
+class PhysxRigidBodyColliderCapabilityChecker(usd_validation_nvidia.BaseRuleChecker):
     """CollisionAPI may only be applied to a Gprim or to an Xform with PhysxMeshMergeCollisionAPI whose collisionmeshes collection includes at least one Gprim."""
 
     def CheckPrim(self, prim: Usd.Prim) -> None:
@@ -241,7 +219,7 @@ class PhysxRigidBodyColliderCapabilityChecker(omni.asset_validator.BaseRuleCheck
             if _collisionmeshes_collection_has_gprim(prim):
                 return
             self._AddFailedCheck(
-                requirement=PhysxRigidBodyColliderReqs.PHYSX_COL_001,
+                requirement=cap.PhysicsRigidBodiesRequirements.PHYSX_COL_001,
                 message=(
                     f"Prim '{prim.GetPath()}' has CollisionAPI and PhysxMeshMergeCollisionAPI but its collisionmeshes "
                     "collection does not include any UsdGeom Gprim."
@@ -250,7 +228,7 @@ class PhysxRigidBodyColliderCapabilityChecker(omni.asset_validator.BaseRuleCheck
             )
             return
         self._AddFailedCheck(
-            requirement=PhysxRigidBodyColliderReqs.PHYSX_COL_001,
+            requirement=cap.PhysicsRigidBodiesRequirements.PHYSX_COL_001,
             message=(
                 f"Prim '{prim.GetPath()}' has CollisionAPI but is not a UsdGeom Gprim nor an Xform with "
                 "PhysxMeshMergeCollisionAPI (with at least one Gprim in its collisionmeshes collection)."
@@ -259,9 +237,9 @@ class PhysxRigidBodyColliderCapabilityChecker(omni.asset_validator.BaseRuleCheck
         )
 
 
-@omni.asset_validator.register_rule("PhysicsRigidBodies")
-@omni.asset_validator.register_requirements(cap.PhysicsRigidBodiesRequirements.RB_COL_002, override=True)
-class RigidBodyColliderMeshChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsRigidBodies")
+@usd_validation_nvidia.register_requirements(cap.PhysicsRigidBodiesRequirements.RB_COL_002, override=True)
+class RigidBodyColliderMeshChecker(usd_validation_nvidia.BaseRuleChecker):
     def CheckPrim(self, prim: Usd.Prim) -> None:
         if prim.HasAPI(UsdPhysics.MeshCollisionAPI) and not prim.IsA(UsdGeom.Mesh):
             self._AddFailedCheck(
@@ -277,9 +255,9 @@ class RigidBodyColliderMeshChecker(omni.asset_validator.BaseRuleChecker):
             )
 
 
-@omni.asset_validator.register_rule("PhysicsRigidBodies")
-@omni.asset_validator.register_requirements(cap.PhysicsRigidBodiesRequirements.PHYSX_COL_002, override=True)
-class PhysxRigidBodyColliderMeshChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsRigidBodies")
+@usd_validation_nvidia.register_requirements(cap.PhysicsRigidBodiesRequirements.PHYSX_COL_002, override=True)
+class PhysxRigidBodyColliderMeshChecker(usd_validation_nvidia.BaseRuleChecker):
     def CheckPrim(self, prim: Usd.Prim) -> None:
         is_mesh = prim.IsA(UsdGeom.Mesh)
         is_merge_mesh = PhysxSchema is not None and prim.HasAPI(PhysxSchema.PhysxMeshMergeCollisionAPI)
@@ -300,9 +278,9 @@ class PhysxRigidBodyColliderMeshChecker(omni.asset_validator.BaseRuleChecker):
             )
 
 
-@omni.asset_validator.register_rule("PhysicsRigidBodies")
-@omni.asset_validator.register_requirements(cap.PhysicsRigidBodiesRequirements.PHYSX_COL_002, override=True)
-class PhysxRigidBodyColliderMeshChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsRigidBodies")
+@usd_validation_nvidia.register_requirements(cap.PhysicsRigidBodiesRequirements.PHYSX_COL_002, override=True)
+class PhysxRigidBodyColliderMeshChecker(usd_validation_nvidia.BaseRuleChecker):
     def CheckPrim(self, prim: Usd.Prim) -> None:
         is_mesh = prim.IsA(UsdGeom.Mesh)
         is_merge_mesh = PhysxSchema is not None and prim.HasAPI(PhysxSchema.PhysxMeshMergeCollisionAPI)
@@ -323,9 +301,9 @@ class PhysxRigidBodyColliderMeshChecker(omni.asset_validator.BaseRuleChecker):
             )
 
 
-@omni.asset_validator.register_rule("PhysicsRigidBodies")
-@omni.asset_validator.register_requirements(cap.PhysicsRigidBodiesRequirements.RB_COL_003, override=True)
-class RigidBodyColliderNonUniformScaleChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsRigidBodies")
+@usd_validation_nvidia.register_requirements(cap.PhysicsRigidBodiesRequirements.RB_COL_003, override=True)
+class RigidBodyColliderNonUniformScaleChecker(usd_validation_nvidia.BaseRuleChecker):
 
     def is_uniform_scale_geoms(self, prim: Usd.Prim) -> bool:
         return (
@@ -365,8 +343,8 @@ class RigidBodyColliderNonUniformScaleChecker(omni.asset_validator.BaseRuleCheck
                 )
 
 
-@omni.asset_validator.register_rule("PhysicsRigidBodies")
-@omni.asset_validator.register_requirements(cap.PhysicsRigidBodiesRequirements.RB_COL_004, override=True)
+@usd_validation_nvidia.register_rule("PhysicsRigidBodies")
+@usd_validation_nvidia.register_requirements(cap.PhysicsRigidBodiesRequirements.RB_COL_004, override=True)
 class ColliderChecker(BaseRuleCheckerWCache):
     _COLLIDER_NON_UNIFORM_SCALE_REQUIREMENT = cap.PhysicsRigidBodiesRequirements.RB_COL_004
     _COLLIDER_NON_UNIFORM_SCALE_MESSAGE = "Non-uniform scale is not supported for {0} geometry."
@@ -396,9 +374,9 @@ class ColliderChecker(BaseRuleCheckerWCache):
                 )
 
 
-@omni.asset_validator.register_rule("PhysicsRigidBodies")
-@omni.asset_validator.register_requirements(cap.PhysicsRigidBodiesRequirements.RB_010, override=True)
-class InvisibleCollisionMeshHasPurposeGuide(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsRigidBodies")
+@usd_validation_nvidia.register_requirements(cap.PhysicsRigidBodiesRequirements.RB_010, override=True)
+class InvisibleCollisionMeshHasPurposeGuide(usd_validation_nvidia.BaseRuleChecker):
     """Validates that invisible collision meshes have purpose set to 'guide'.
 
     This rule checks that collision meshes with visibility set to 'invisible'
@@ -431,9 +409,9 @@ class InvisibleCollisionMeshHasPurposeGuide(omni.asset_validator.BaseRuleChecker
                 return
 
 
-@omni.asset_validator.register_rule("PhysicsRigidBodies")
-@omni.asset_validator.register_requirements(MultibodyReqs.RB_MB_001, override=True)
-class MultibodyChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsRigidBodies")
+@usd_validation_nvidia.register_requirements(cap.PhysicsRigidBodiesRequirements.RB_MB_001, override=True)
+class MultibodyChecker(usd_validation_nvidia.BaseRuleChecker):
     def CheckStage(self, stage: Usd.Stage) -> None:
         default_prim = stage.GetDefaultPrim()
         if not default_prim:
@@ -446,15 +424,15 @@ class MultibodyChecker(omni.asset_validator.BaseRuleChecker):
                     return
                 rigid_body_count += 1
         self._AddFailedCheck(
-            requirement=MultibodyReqs.RB_MB_001,
+            requirement=cap.PhysicsRigidBodiesRequirements.RB_MB_001,
             message=f"Not enough physics rigid bodies found under the default prim. Found {rigid_body_count}, expected at least 2.",
             at=stage,
         )
 
 
-@omni.asset_validator.register_rule("PhysicsRigidBodies")
-@omni.asset_validator.register_requirements(cap.PhysicsRigidBodiesRequirements.RB_011, override=True)
-class NestedRigidBodyMassChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsRigidBodies")
+@usd_validation_nvidia.register_requirements(cap.PhysicsRigidBodiesRequirements.RB_011, override=True)
+class NestedRigidBodyMassChecker(usd_validation_nvidia.BaseRuleChecker):
     def has_mass(self, prim: Usd.Prim) -> bool:
         return prim.HasAPI(UsdPhysics.MassAPI) and prim.GetAttribute("physics:mass").Get() is not None
 
@@ -526,9 +504,9 @@ class NestedRigidBodyMassChecker(omni.asset_validator.BaseRuleChecker):
                 self.check_rigid_body_mass_helper(prim)
 
 
-@omni.asset_validator.register_rule("PhysicsRigidBodies")
-@omni.asset_validator.register_requirements(cap.PhysicsRigidBodiesRequirements.RB_012, override=True)
-class NoNestedRigidBodyWithoutJointChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsRigidBodies")
+@usd_validation_nvidia.register_requirements(cap.PhysicsRigidBodiesRequirements.RB_012, override=True)
+class NoNestedRigidBodyWithoutJointChecker(usd_validation_nvidia.BaseRuleChecker):
     """Checks that nested rigid bodies are connected by a joint.
 
     When a rigid body is a descendant of another rigid body in the prim hierarchy,

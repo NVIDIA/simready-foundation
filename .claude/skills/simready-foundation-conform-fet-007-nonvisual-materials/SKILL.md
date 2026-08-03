@@ -18,7 +18,7 @@ Use this workflow skill when the selected profile, validation report, or user re
 
 This is a material-semantics repair skill, not a shader-generation skill. Work on a staged copy under the requested output directory, preserve existing visual material bindings, and stop at the first FET007 issue that needs material identity or user judgement.
 
-FET007 is not currently used by the default prop robotics profiles in `profiles.toml`. When a profile does not include FET007, run this skill only when the user explicitly asks for non-visual sensor material conformance or supplies a profile/workflow that includes `FET007_BASE_NEUTRAL`.
+FET007 is not currently used by the default prop robotics profiles in `profiles/`. When a profile does not include FET007, run this skill only when the user explicitly asks for non-visual sensor material conformance or supplies a profile/workflow that includes `FET007_BASE_NEUTRAL`.
 
 ## Prerequisites
 
@@ -150,7 +150,7 @@ uv run --python 3.12 validate-simready-profile <staged-usd> \
   --report <output-root>/simready-profile-after-fet007.json
 ```
 
-If no selected profile includes FET007, do not mutate `profiles.toml` just to test the skill. Run the available non-visual materials capability validator directly if the local environment exposes it; otherwise report the deterministic USD inspection and note that profile validation cannot exercise FET007 until a profile selects it.
+If no selected profile includes FET007, do not mutate any profile TOML in `profiles/` just to test the skill. Run the available non-visual materials capability validator directly if the local environment exposes it; otherwise report the deterministic USD inspection and note that profile validation cannot exercise FET007 until a profile selects it.
 
 ## Limitations
 

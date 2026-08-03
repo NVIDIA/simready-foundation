@@ -1,12 +1,17 @@
-# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-# SPDX-License-Identifier: LicenseRef-NvidiaProprietary
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 #
-# NVIDIA CORPORATION, its affiliates and licensors retain all intellectual
-# property and proprietary rights in and to this material, related
-# documentation and any modifications thereto. Any use, reproduction,
-# disclosure or distribution of this material and related documentation
-# without an express license agreement from NVIDIA CORPORATION or
-# its affiliates is strictly prohibited.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """
 Validation rules for Package Structure capability (PKG).
 
@@ -40,10 +45,9 @@ import re
 from pathlib import PurePosixPath
 from typing import Literal
 
-from pxr import Ar
-
-import omni.asset_validator
 import omni.capabilities as cap
+import usd_validation_nvidia
+from pxr import Ar
 
 # Gate the AssetFormat handler below on the presence of the AssetFormat API
 # (``register_format`` / ``FormatDependency`` / ``BaseRuleChecker.CheckFormatDependency``).
@@ -55,7 +59,7 @@ import omni.capabilities as cap
 # overrides are inert because the old engine has no ``AssetFormat`` to dispatch
 # from. ``validate_package.py`` short-circuits with a clear diagnostic before
 # attempting validation under that condition.
-_HAS_ASSET_FORMAT_API = hasattr(omni.asset_validator, "register_format")
+_HAS_ASSET_FORMAT_API = hasattr(usd_validation_nvidia, "register_format")
 
 
 def _sha256_hash(data: bytes) -> bytes:
@@ -84,6 +88,7 @@ ROOT_USDS_FILENAME = "com.nvidia.simready.root_usds.json"
 # ------------------------------------------------------------------
 # Shared helpers (consumed by packaging_introspection + conformance_metadata)
 # ------------------------------------------------------------------
+
 
 def _fmt_dep(dependency) -> str:
     """Human-readable label for a ``FormatDependency`` in diagnostic messages."""
@@ -185,9 +190,7 @@ def _load_bom(
     except json.JSONDecodeError as exc:
         return BOM_BROKEN, None, f"invalid JSON: {exc}"
     if not isinstance(bom, dict):
-        return BOM_BROKEN, None, (
-            f"top-level value must be a JSON object, got {type(bom).__name__}"
-        )
+        return BOM_BROKEN, None, (f"top-level value must be a JSON object, got {type(bom).__name__}")
     items = bom.get("items")
     if not isinstance(items, list):
         return BOM_BROKEN, None, "missing required 'items' array"
@@ -247,7 +250,7 @@ def _relative_uri(base_uri: str, child_uri: str) -> str:
     base = str(base_uri).replace("\\", "/").rstrip("/") + "/"
     child = str(child_uri).replace("\\", "/")
     if child.startswith(base):
-        return child[len(base):]
+        return child[len(base) :]
     return child
 
 
@@ -303,6 +306,7 @@ def _is_valid_hash_object(obj):
 
 try:
     import blake3 as _blake3_mod
+
     _BLAKE3_AVAILABLE = True
 except ImportError:
     _blake3_mod = None
@@ -453,7 +457,8 @@ def _package_hash_buffer(data: dict) -> bytes | None:
         if isinstance(metadata, list):
             sorted_entries = sorted(
                 (
-                    e for e in metadata
+                    e
+                    for e in metadata
                     if isinstance(e, dict)
                     and isinstance(e.get("name"), str)
                     and _is_valid_hash_object(e.get("hash", {}))
@@ -490,10 +495,7 @@ def _compare_digests_against_buffer(
             continue
         declared = hash_obj[key]
         if computed != declared:
-            report_failure(
-                f"{location}.{key} mismatch: declared '{declared}', "
-                f"computed '{computed}'"
-            )
+            report_failure(f"{location}.{key} mismatch: declared '{declared}', " f"computed '{computed}'")
 
 
 # ------------------------------------------------------------------
@@ -508,7 +510,7 @@ def _compare_digests_against_buffer(
 
 if _HAS_ASSET_FORMAT_API:
 
-    @omni.asset_validator.register_format()
+    @usd_validation_nvidia.register_format()
     class SimReadyPackageFormat:
         """Asset-format handler for ``com.nvidia.simready.packaging.json``.
 
@@ -565,9 +567,9 @@ if _HAS_ASSET_FORMAT_API:
             return [asset_path, *deps]
 
 
-@omni.asset_validator.register_rule("PackageStructure")
-@omni.asset_validator.register_requirements(cap.PackagingCoreRequirements.PKG_DEF_001)
-class PackageDefinitionChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PackageStructure")
+@usd_validation_nvidia.register_requirements(cap.PackagingCoreRequirements.PKG_DEF_001)
+class PackageDefinitionChecker(usd_validation_nvidia.BaseRuleChecker):
     """Checker for package definition validity (PKG.DEF.001)."""
 
     REQUIREMENT = cap.PackagingCoreRequirements.PKG_DEF_001
@@ -739,9 +741,9 @@ class PackageDefinitionChecker(omni.asset_validator.BaseRuleChecker):
             )
 
 
-@omni.asset_validator.register_rule("MetadataFiles")
-@omni.asset_validator.register_requirements(cap.PackagingCoreRequirements.PKG_META_001)
-class MetadataFilesChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("MetadataFiles")
+@usd_validation_nvidia.register_requirements(cap.PackagingCoreRequirements.PKG_META_001)
+class MetadataFilesChecker(usd_validation_nvidia.BaseRuleChecker):
     """Checker for metadata file format (PKG.META.001).
 
     Scans ``.metadata/`` for JSON files and validates reverse-domain
@@ -850,9 +852,9 @@ class MetadataFilesChecker(omni.asset_validator.BaseRuleChecker):
                 )
 
 
-@omni.asset_validator.register_rule("HashObjectFormat")
-@omni.asset_validator.register_requirements(cap.PackagingCoreRequirements.PKG_HASH_001)
-class HashObjectFormatChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("HashObjectFormat")
+@usd_validation_nvidia.register_requirements(cap.PackagingCoreRequirements.PKG_HASH_001)
+class HashObjectFormatChecker(usd_validation_nvidia.BaseRuleChecker):
     """Checker for hash object conformance (PKG.HASH.001).
 
     Validates the format of every hash object in the package definition
@@ -1095,7 +1097,11 @@ class HashObjectFormatChecker(omni.asset_validator.BaseRuleChecker):
             )
 
         _compare_digests_against_buffer(
-            data["content_hash"], buf, "content_hash", AGGREGATE_KEYS, report,
+            data["content_hash"],
+            buf,
+            "content_hash",
+            AGGREGATE_KEYS,
+            report,
         )
 
     # ------------------------------------------------------------------
@@ -1119,5 +1125,9 @@ class HashObjectFormatChecker(omni.asset_validator.BaseRuleChecker):
             )
 
         _compare_digests_against_buffer(
-            data["package_hash"], buf, "package_hash", AGGREGATE_KEYS, report,
+            data["package_hash"],
+            buf,
+            "package_hash",
+            AGGREGATE_KEYS,
+            report,
         )

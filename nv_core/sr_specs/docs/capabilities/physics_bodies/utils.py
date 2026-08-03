@@ -13,9 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from omni.asset_validator import BaseRuleChecker
-
 from pxr import Gf, Sdf, Usd, UsdGeom, UsdPhysics, UsdUtils
+from usd_validation_nvidia import BaseRuleChecker
 
 
 def get_stage_id(stage: Usd.Stage):

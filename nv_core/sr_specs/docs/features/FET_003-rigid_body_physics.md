@@ -144,9 +144,9 @@ Source file type:
 * [simready_usd/sm_coffee_cup_grasp_a01_01.usd](../../../../sample_content/common_assets/props_general/coffee_cup_grasp_a01/simready_usd/sm_coffee_cup_grasp_a01_01.usd)
 
 
-#### Test Process
+#### Benchmarks
 
-None
+None.
 
 </details>
 
@@ -191,26 +191,11 @@ None; Neutral Format is acceptable.
 * [simready_physx_usd/sm_obs_orange_a01_01.usd](../../../../sample_content/common_assets/props_general/obs_orange_a01/simready_physx_usd/sm_obs_orange_a01_01.usd)
 * [simready_physx_usd/sm_coffee_cup_grasp_a01_01.usd](../../../../sample_content/common_assets/props_general/coffee_cup_grasp_a01/simready_physx_usd/sm_coffee_cup_grasp_a01_01.usd)
 
-#### Test Process
+#### Benchmarks
 
-* Obtain Isaac Sim 5 (release build)
-* Launch Isaacsim.bat
-  * Launch isaacsim.bat
-  * In Isaac Sim, open this usd: [test stage](../../../testing_tools/testing_data/runtime_physics_tests.usda)
-    * Can be manually located here: ```nv_core/testing_tools/testing_data/runtime_physics_tests.usda```
-* Activate correct prim (right click + activate)
-  * Drop_On_Ground_Plane
-  * Drop_On_Tilted_Plane
-* Click on empty xform
-  * ```/World/Drop_On_Tilted_Plane/StartPoint```
-* Right click, add reference to (path), select Sample above.
-  * ```sample_content/common_assets/props_general/obs_small_sledge_hammer_a01/simready_physx_usd/sm_obs_small_sledge_hammer_a01_01.usd```
-* Hit play button in UI.
-    * Press play to start sim
-* Expected result:
-  * Item should fall down and stop and settle after 5 seconds.
-  * Video Examples:
-    * [Drop test results video link](../_static/videos/drop_test.mp4)
-    * [Slope test results video link](../_static/videos/slope_test.mp4)
+* Suite: [FET003 Physics](../guides/benchmark/tests/fet003-physics.md)
+  * Tests:
+    * [ground_drop](../guides/benchmark/tests/fet003/ground-drop.md)
+    * [slope_drop](../guides/benchmark/tests/fet003/slope-drop.md)
 
 </details>

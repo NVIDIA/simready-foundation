@@ -17,13 +17,60 @@ from collections import defaultdict
 from collections.abc import Generator, Iterator
 from dataclasses import dataclass, field
 
-import omni.asset_validator
 import omni.capabilities as cap
+import usd_validation_nvidia
 from pxr import Gf, Usd, UsdGeom, Vt
 
 # Tolerance for transformation comparisons
 # Used for checking if transforms are close to identity values
 TRANSFORM_TOLERANCE = 1e-4  # 0.0001
+
+# Quantization scale for mesh point comparisons
+MESH_POINT_PRECISION = 6
+
+
+def _quantize_matrix(matrix: Gf.Matrix4d, tolerance: float = TRANSFORM_TOLERANCE) -> tuple[float, ...]:
+    """Return a tolerance-quantized matrix suitable for grouping transforms."""
+    return tuple(round(float(matrix[i][j]) / tolerance) * tolerance for i in range(4) for j in range(4))
+
+
+def _mesh_has_static_topology(mesh: UsdGeom.Mesh) -> bool:
+    """Return True when mesh points and topology are not time-varying."""
+    points_attr = mesh.GetPointsAttr()
+    indices_attr = mesh.GetFaceVertexIndicesAttr()
+    counts_attr = mesh.GetFaceVertexCountsAttr()
+    return not any(attr.ValueMightBeTimeVarying() for attr in (points_attr, indices_attr, counts_attr))
+
+
+def _mesh_geometry_signature(mesh: UsdGeom.Mesh) -> tuple | None:
+    """Return a hashable signature for static local mesh geometry, or None if unsupported."""
+    if not _mesh_has_static_topology(mesh):
+        return None
+
+    points = mesh.GetPointsAttr().Get(Usd.TimeCode.EarliestTime())
+    indices = mesh.GetFaceVertexIndicesAttr().Get(Usd.TimeCode.EarliestTime())
+    counts = mesh.GetFaceVertexCountsAttr().Get(Usd.TimeCode.EarliestTime())
+    if not all((points, indices, counts)):
+        return None
+
+    point_sig = tuple(tuple(round(float(component), MESH_POINT_PRECISION) for component in point) for point in points)
+    return (point_sig, tuple(int(count) for count in counts), tuple(int(index) for index in indices))
+
+
+def _mesh_world_transform_signature(prim: Usd.Prim) -> tuple[float, ...] | None:
+    """Return a hashable composed world transform signature for a mesh prim."""
+    if not prim.IsA(UsdGeom.Xformable):
+        return None
+    matrix = UsdGeom.Xformable(prim).ComputeLocalToWorldTransform(Usd.TimeCode.Default())
+    return _quantize_matrix(matrix)
+
+
+def _is_visible_mesh(prim: Usd.Prim) -> bool:
+    """Return True when the mesh prim is not explicitly invisible."""
+    imageable = UsdGeom.Imageable(prim)
+    if not imageable:
+        return True
+    return imageable.ComputeVisibility(Usd.TimeCode.Default()) != UsdGeom.Tokens.invisible
 
 
 # Helper classes for graph operations
@@ -244,9 +291,9 @@ def check_manifold_elements(num_vertices: int, indices: Vt.IntArray, face_sizes:
     return num_nonmanifold_vertices, num_nonmanifold_edges, winding_consistent
 
 
-@omni.asset_validator.register_rule("Geometry")
-@omni.asset_validator.register_requirements(cap.GeometryRequirements.VG_001, override=True)
-class ImageableGeometryChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Geometry")
+@usd_validation_nvidia.register_requirements(cap.GeometryRequirements.VG_001, override=True)
+class ImageableGeometryChecker(usd_validation_nvidia.BaseRuleChecker):
     def CheckStage(self, stage: Usd.Stage) -> None:
         default_prim = stage.GetDefaultPrim()
         if not default_prim:
@@ -263,9 +310,9 @@ class ImageableGeometryChecker(omni.asset_validator.BaseRuleChecker):
         )
 
 
-@omni.asset_validator.register_rule("Geometry")
-@omni.asset_validator.register_requirements(cap.GeometryRequirements.VG_002, override=True)
-class UsdGeomExtentChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Geometry")
+@usd_validation_nvidia.register_requirements(cap.GeometryRequirements.VG_002, override=True)
+class UsdGeomExtentChecker(usd_validation_nvidia.BaseRuleChecker):
     """Validates that boundable geometry has valid extent values"""
 
     def CheckPrim(self, prim: Usd.Prim) -> None:
@@ -296,9 +343,9 @@ class UsdGeomExtentChecker(omni.asset_validator.BaseRuleChecker):
                     )
 
 
-@omni.asset_validator.register_rule("Geometry")
-@omni.asset_validator.register_requirements(cap.GeometryRequirements.VG_007, override=True)
-class ManifoldChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Geometry")
+@usd_validation_nvidia.register_requirements(cap.GeometryRequirements.VG_007, override=True)
+class ManifoldChecker(usd_validation_nvidia.BaseRuleChecker):
     """
     Counts the number of non-manifold edges and vertices. A non-manifold edge has more than two adjacent faces. A
     non-manifold vertex as more than two adjacent border edges, where a border edge is an edge with only one adjacent
@@ -362,9 +409,9 @@ class ManifoldChecker(omni.asset_validator.BaseRuleChecker):
             self._validate_mesh(mesh)
 
 
-# @omni.asset_validator.register_rule("Geometry")
-# @omni.asset_validator.register_requirements(cap.GeometryRequirements.VG_012, override=True)
-# class UsdGeomMeshSmallChecker(omni.asset_validator.BaseRuleChecker):
+# @usd_validation_nvidia.register_rule("Geometry")
+# @usd_validation_nvidia.register_requirements(cap.GeometryRequirements.VG_012, override=True)
+# class UsdGeomMeshSmallChecker(usd_validation_nvidia.BaseRuleChecker):
 #     mesh_extent_threshold = 0.002
 #     SMALL_USDMESH_REQUIREMENT = cap.GeometryRequirements.VG_012
 
@@ -397,9 +444,9 @@ class ManifoldChecker(omni.asset_validator.BaseRuleChecker):
 #                 "More than one small UsdGeomMesh found.", at=stage, requirement=self.SMALL_USDMESH_REQUIREMENT)
 
 
-@omni.asset_validator.register_rule("Geometry")
-@omni.asset_validator.register_requirements(cap.GeometryRequirements.VG_023, override=True)
-class MeshXformPositioningChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Geometry")
+@usd_validation_nvidia.register_requirements(cap.GeometryRequirements.VG_023, override=True)
+class MeshXformPositioningChecker(usd_validation_nvidia.BaseRuleChecker):
     """Validates that meshes use xform ops instead of baked transformations"""
 
     def CheckPrim(self, prim: Usd.Prim) -> None:
@@ -438,9 +485,9 @@ class MeshXformPositioningChecker(omni.asset_validator.BaseRuleChecker):
             )
 
 
-@omni.asset_validator.register_rule("Geometry")
-@omni.asset_validator.register_requirements(cap.GeometryRequirements.VG_025, override=True)
-class AssetOriginPositioningChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Geometry")
+@usd_validation_nvidia.register_requirements(cap.GeometryRequirements.VG_025, override=True)
+class AssetOriginPositioningChecker(usd_validation_nvidia.BaseRuleChecker):
     """
     Validates that assets are positioned at origin.
 
@@ -518,9 +565,9 @@ class AssetOriginPositioningChecker(omni.asset_validator.BaseRuleChecker):
                     )
 
 
-@omni.asset_validator.register_rule("Geometry")
-@omni.asset_validator.register_requirements(cap.GeometryRequirements.VG_026, override=True)
-class AssetPivotPlacementChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Geometry")
+@usd_validation_nvidia.register_requirements(cap.GeometryRequirements.VG_026, override=True)
+class AssetPivotPlacementChecker(usd_validation_nvidia.BaseRuleChecker):
     """Validates appropriate pivot placement for assets"""
 
     def CheckStage(self, stage: Usd.Stage) -> None:
@@ -571,9 +618,9 @@ class AssetPivotPlacementChecker(omni.asset_validator.BaseRuleChecker):
             )
 
 
-@omni.asset_validator.register_rule("Geometry")
-@omni.asset_validator.register_requirements(cap.GeometryRequirements.VG_028, override=True)
-class NormalsShouldBeCorrectChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Geometry")
+@usd_validation_nvidia.register_requirements(cap.GeometryRequirements.VG_028, override=True)
+class NormalsShouldBeCorrectChecker(usd_validation_nvidia.BaseRuleChecker):
     """
     Check that all normals have unit length, and that there are no non-finite values.
     Also checks that the supplied number of normal values agrees with the interpolation.
@@ -674,9 +721,9 @@ class NormalsShouldBeCorrectChecker(omni.asset_validator.BaseRuleChecker):
                 break
 
 
-@omni.asset_validator.register_rule("Geometry")
-@omni.asset_validator.register_requirements(cap.GeometryRequirements.VG_029, override=True)
-class NormalsWindingsChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Geometry")
+@usd_validation_nvidia.register_requirements(cap.GeometryRequirements.VG_029, override=True)
+class NormalsWindingsChecker(usd_validation_nvidia.BaseRuleChecker):
     """
     Check that the mesh has normals that are consistent with the face windings,
     taking into account the 'orientation' attribute.
@@ -734,9 +781,9 @@ class NormalsWindingsChecker(omni.asset_validator.BaseRuleChecker):
             )
 
 
-@omni.asset_validator.register_rule("Geometry")
-@omni.asset_validator.register_requirements(cap.GeometryRequirements.VG_014, override=True)
-class ValidateTopologyChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Geometry")
+@usd_validation_nvidia.register_requirements(cap.GeometryRequirements.VG_014, override=True)
+class ValidateTopologyChecker(usd_validation_nvidia.BaseRuleChecker):
     """
     Validate the topology of a mesh on all time samples.
     """
@@ -832,9 +879,55 @@ class ValidateTopologyChecker(omni.asset_validator.BaseRuleChecker):
             self.validate(mesh)
 
 
-@omni.asset_validator.register_rule("Geometry")
-@omni.asset_validator.register_requirements(cap.GeometryRequirements.VG_MESH_001, override=True)
-class GeomShallBeMeshChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Geometry")
+@usd_validation_nvidia.register_requirements(cap.GeometryRequirements.VG_008, override=True)
+class CoincidentMeshChecker(usd_validation_nvidia.BaseRuleChecker):
+    """
+    Detect visible meshes with identical local geometry occupying the same composed
+    world transform. This catches accidental duplicate meshes left in place after
+    failed move/reference operations.
+    """
+
+    def CheckStage(self, stage: Usd.Stage) -> None:
+        coincident_groups: dict[tuple, list[Usd.Prim]] = defaultdict(list)
+
+        # Descend into instance proxies so duplicate meshes hidden inside
+        # instanced references (common for SimReady payload layouts) are
+        # still grouped against their non-instanced siblings.
+        for prim in stage.Traverse(Usd.TraverseInstanceProxies()):
+            if not prim.IsA(UsdGeom.Mesh):
+                continue
+            if not _is_visible_mesh(prim):
+                continue
+
+            mesh = UsdGeom.Mesh(prim)
+            geometry_signature = _mesh_geometry_signature(mesh)
+            if geometry_signature is None:
+                continue
+
+            transform_signature = _mesh_world_transform_signature(prim)
+            if transform_signature is None:
+                continue
+
+            coincident_groups[(geometry_signature, transform_signature)].append(prim)
+
+        for prims in coincident_groups.values():
+            if len(prims) < 2:
+                continue
+
+            paths = ", ".join(str(prim.GetPath()) for prim in prims)
+            self._AddFailedCheck(
+                requirement=cap.GeometryRequirements.VG_008,
+                message=(
+                    f"Found {len(prims)} coincident meshes with identical geometry at the same transform: {paths}"
+                ),
+                at=prims[0],
+            )
+
+
+@usd_validation_nvidia.register_rule("Geometry")
+@usd_validation_nvidia.register_requirements(cap.GeometryRequirements.VG_MESH_001, override=True)
+class GeomShallBeMeshChecker(usd_validation_nvidia.BaseRuleChecker):
     """
     Validates that the stage contains at least one mesh.
     Warns if other geometry is also present.
@@ -863,7 +956,8 @@ class GeomShallBeMeshChecker(omni.asset_validator.BaseRuleChecker):
             other_geom_prim = None
 
             # Traverse all prims on the stage
-            for prim in stage.Traverse():
+            for prim in stage.Traverse(Usd.TraverseInstanceProxies()):
+
                 # If we haven't found a mesh yet, check if this prim is a mesh
                 if not mesh_prim and prim.IsA(UsdGeom.Mesh):
                     mesh_prim = prim
@@ -894,9 +988,9 @@ class GeomShallBeMeshChecker(omni.asset_validator.BaseRuleChecker):
             )
 
 
-@omni.asset_validator.register_rule("Geometry")
-@omni.asset_validator.register_requirements(cap.GeometryRequirements.VG_027, override=True)
-class NormalsExistChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Geometry")
+@usd_validation_nvidia.register_requirements(cap.GeometryRequirements.VG_027, override=True)
+class NormalsExistChecker(usd_validation_nvidia.BaseRuleChecker):
     """
     Check that meshes have normals. All meshes should have normals
     unless they have the subdivision scheme set. Meshes cannot have

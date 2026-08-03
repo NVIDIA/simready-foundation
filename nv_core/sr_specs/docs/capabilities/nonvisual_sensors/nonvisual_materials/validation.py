@@ -19,12 +19,11 @@ __all__ = ["NonVisualMaterialsCapabilityChecker"]
 import dataclasses
 
 import omni.capabilities as cap
-from omni.asset_validator import (
+from pxr import Sdf, Usd, UsdGeom, UsdShade
+from usd_validation_nvidia import (
     BaseRuleChecker,
     register_requirements,
 )
-from pxr import Sdf, Usd, UsdGeom, UsdShade
-
 
 # Backward compatible
 
@@ -36,6 +35,8 @@ _OMNI_PRIM_PATHS = {
     Sdf.Path("/OmniKit_Viewport_LightRig"),
 }
 _OMNI_PRIM_NAMES = {"OmniverseKitViewportCameraMesh"}
+
+
 def is_omni_path(path: Sdf.Path) -> bool:
     return path in _OMNI_PRIM_PATHS or path.name in _OMNI_PRIM_NAMES
 

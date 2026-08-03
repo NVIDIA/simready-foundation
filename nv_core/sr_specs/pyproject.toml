@@ -23,9 +23,12 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.10,<3.13"
 dependencies = [
-    "omniverse-asset-validator",
+    "usd-validation-nvidia>=1.19.3",
     "numpy",
 ]
+
+[project.entry-points."usd_validation_nvidia"]
+simready-validate = "simready.foundation.core:SimReadyPlugin"
 
 [project.urls]
 Documentation = "https://docs.omniverse.nvidia.com/content-capabilities"

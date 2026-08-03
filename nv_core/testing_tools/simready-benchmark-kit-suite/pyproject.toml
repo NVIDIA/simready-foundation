@@ -1,0 +1,18 @@
+# Workspace-level tool configuration for the simready-benchmark-kit-suite repo.
+# Intentionally has no [project] table: the repo root is not a wheel.
+# The wheel lives under packages/simready_benchmark_kit_suite/pyproject.toml.
+
+[tool.pytest.ini_options]
+markers = [
+    "manual: Requires real Kit installation",
+]
+testpaths = [
+    "packages/simready_benchmark_kit_suite/tests",
+]
+
+# Ruff: __init__.py files re-export the package's public API. Those imports
+# look "unused" to ruff but are intentional public surface, so silence
+# F401 (unused-import) for __init__.py only. Regular .py files still get
+# the full rule set. Mirrors the simready-benchmark framework repo config.
+[tool.ruff.lint.per-file-ignores]
+"**/__init__.py" = ["F401"]

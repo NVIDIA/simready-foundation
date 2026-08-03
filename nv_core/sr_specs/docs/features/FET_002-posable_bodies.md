@@ -51,26 +51,8 @@ This version is not currently used in any profiles.
         
 #### Test Process
 
-
-* Obtain Isaac Sim
-    * 4.5 is public and can be downloaded [here](https://docs.isaacsim.omniverse.nvidia.com/4.5.0/installation/download.html)
-    * 5.0 requires users to build on their systems, you can follow the docs [here](https://docs.isaacsim.omniverse.nvidia.com/5.0.0/installation/download.html)
-* Find directory where Isaac Sim was installed
-    * Launch isaacsim.bat
-    * In Isaac Sim, open path to Sample Object (or your target)
-    * Click on xform's above each mesh.
-        * Rotate the parent
-        * Result: the whole object should move
-        * ![image1](./images/pose_testing_logical_root.png)
-    * Click in child xform (underneath parent)
-        * Rotate the child xform
-        * Result: the child's mesh should move
-        *![image2](./images/pose_testing_children.png)
-* Expected Result:
-    * Every mesh is affected by at least one Xform
-    * If nested hierarchy, the grandparent Xform will move entire group
-    * Video Examples:
-        * [Posing an asset link](../_static/videos/posable_bodies_test.mp4)
+This feature is verified by the `simready-benchmark` benchmark suite. Refer to the
+[SimReady Benchmark guide](../guides/benchmark/benchmark.md).
 
 </details>
 

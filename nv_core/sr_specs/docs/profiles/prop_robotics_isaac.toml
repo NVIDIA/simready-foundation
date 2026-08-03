@@ -1,0 +1,22 @@
+[Prop-Robotics-Isaac]
+"1.0.0" = {features = [
+    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Minimal"
+    {"FET003_BASE_PHYSX" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET004_BASE_PHYSX" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET100_BASE_ISAACSIM" = {version = "0.1.0"}}, # "Isaac composition
+]}
+"1.0.1" = {features = [
+    {"FET001_BASE_NEUTRAL" = {version = "1.0.1"}}, # "Minimal"
+    {"FET003_BASE_PHYSX" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET004_BASE_PHYSX" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET100_BASE_ISAACSIM" = {version = "0.1.0"}}, # "Isaac composition
+]}
+"1.1.0" = {features = [
+    {"FET001_BASE_NEUTRAL" = {version = "1.0.1"}}, # "Minimal"
+    {"FET003_BASE_PHYSX" = {version = "0.3.0"}}, # "RBD Physics"
+    {"FET004_BASE_PHYSX" = {version = "0.3.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET100_BASE_ISAACSIM" = {version = "0.2.0"}}, # "Isaac composition
+]}

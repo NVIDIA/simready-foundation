@@ -29,10 +29,6 @@
 | [Base Articulation](FET_024-base_articulation.md) | {bdg-success}`Done` | <details><summary>1</summary>[Robot-Neutral](../profiles/robot-body-neutral.md)</details> | - | 0.1.0 | - | - | - | FET024_BASE_ARTICULATION_NEUTRAL |
 | &emsp;&emsp;↳ Runnable (PhysX) | {bdg-success}`Done` | <details><summary>2</summary>[Robot-Runnable](../profiles/robot-body-runnable.md), [Robot-Isaac](../profiles/robot-body-isaac.md)</details> | PHYSX | 0.1.0 | - | - | - | FET024_BASE_ARTICULATION_PHYSX |
 | [IsaacSim Composition](FET_100-isaacsim-0.1.0-composition.md) | {bdg-success}`Done` | <details><summary>2</summary>[Prop-Isaac](../profiles/prop-robotics-isaac.md), [Robot-Isaac](../profiles/robot-body-isaac.md)</details> | ISAAC | 0.1.0 | - | - | - | FET100_BASE_ISAACSIM |
-| [Packaging Core](FET_030-packaging_core.md) | {bdg-success}`Done` | <details><summary>1</summary>Package</details> | PKG.CORE | 0.1.0 | ✓ | ✓ | - | FET030_PACKAGING_CORE |
-| [Self-contained Package Source](FET_031-package_self_contained.md) | {bdg-success}`Done` | <details><summary>1</summary>Package-Candidate</details> | PKG.CORE | 0.1.0 | ✓ | ✓ | - | FET031_PACKAGE_SELF_CONTAINED |
-| [Packaging Introspection](FET_032-packaging_introspection.md) | {bdg-success}`Done` | - | PKG.CORE | 0.1.0 | - | ✓ | - | FET032_PACKAGING_INTROSPECTION |
-| [SimReady Packaging](FET_033-simready_packaging.md) | {bdg-success}`Done` | <details><summary>1</summary>Package-Candidate</details> | PKG.CORE | 0.1.0 | - | ✓ | - | FET033_SIMREADY_PACKAGING |
 
 </div>
 

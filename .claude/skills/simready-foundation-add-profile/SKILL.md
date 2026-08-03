@@ -25,7 +25,7 @@ Before editing, read:
 - `nv_core/sr_specs/docs/guides/guides.md`
 - `nv_core/sr_specs/docs/guides/profiles/profiles.md`
 - `nv_core/sr_specs/docs/guides/feature_adapters/feature_adapters.md`
-- `nv_core/sr_specs/docs/profiles/profiles.toml`
+- `nv_core/sr_specs/docs/profiles/` (per-profile TOML files, one per profile)
 - `nv_core/sr_specs/docs/profiles/profiles.md`
 - nearby profile markdown files for the same asset class or runtime
 - `nv_core/sr_specs/docs/features/feature-dependency-graph.md`
@@ -49,10 +49,10 @@ Collect or infer:
 
 Use this checklist when changing the repository:
 
-1. Confirm the profile name is new in `profiles.toml`.
+1. Confirm the profile name is new across the per-profile TOML files in `profiles/`.
 2. Choose a feature bundle from exact existing feature JSON manifests. Do not reference a feature version that does not exist.
 3. Check feature dependencies. Avoid duplicating dependencies unless existing profiles do so intentionally for clarity.
-4. Add a new `[Profile-Name]` table to `profiles.toml` with the initial version and ordered feature list.
+4. Create a new per-profile TOML file under `profiles/` (e.g. `profiles/<profile_name>.toml`) containing a `[Profile-Name]` table with the initial version and ordered feature list.
 5. Create a profile markdown page under `nv_core/sr_specs/docs/profiles/`:
    - purpose and target asset class
    - target runtime/environment
@@ -67,7 +67,7 @@ Use this checklist when changing the repository:
 10. Validate consistency:
    - TOML parses
    - every referenced feature ID/version exists in `docs/features/*.json`
-   - profile markdown and `profiles.toml` feature lists agree
+   - profile markdown and the profile's TOML feature lists agree
    - `profiles.md` includes the new profile
 
 ## Examples
@@ -88,7 +88,7 @@ remaining_gaps: requirement, validator, adapter, profile, or runtime-test follow
 
 ## Policies
 
-- `profiles.toml` is the machine-readable source of truth.
+- The per-profile TOML files in `profiles/` are the machine-readable source of truth.
 - Keep the initial feature bundle focused. Do not add features that are merely nice to have.
 - A feature may be conditionally applicable only when the profile docs and validator behavior make that condition clear.
 - If new features are needed, create them with `simready-foundation-add-feature` before referencing them.

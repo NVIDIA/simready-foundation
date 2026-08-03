@@ -10,7 +10,7 @@ For single-rigid-body props, report FET004 as not applicable when the selected p
 
 Do not use mesh count as the deciding signal. A single physical object may be authored as many meshes for material assignment, LOD, CAD part boundaries, or rendering convenience. FET004 applies when there is evidence of multiple intended rigid bodies, joints, articulations, robot links, or source multibody structure.
 
-Before attempting repair, check profile docs such as `profiles.toml` comments for optional or conditional FET004 wording. If the profile says FET004 is optional/conditional and the asset is a one-body prop, summarize the gate as skipped/not applicable and continue to the next profile feature.
+Before attempting repair, check profile docs such as the profile's TOML file comments under `profiles/` for optional or conditional FET004 wording. If the profile says FET004 is optional/conditional and the asset is a one-body prop, summarize the gate as skipped/not applicable and continue to the next profile feature.
 
 ## No New Geometry Rule
 
@@ -32,13 +32,21 @@ If conformance requires geometry that is not already present in the USD, block a
 
 ## Variant Notes
 
+Load the manifest version the selected profile pins. The `2.1.0` prop and robot profiles pin the `0.3.0` PhysX variants, so do not repair a `2.1.0` failure against the `0.1.0`/`0.2.0` manifests.
+
 `FET004_BASE_NEUTRAL@0.1.0` depends on `FET003_BASE_NEUTRAL@0.1.0` and carries the joint/articulation/RB.MB requirements above.
+
+`FET004_BASE_NEUTRAL@0.2.0` depends on `FET003_BASE_NEUTRAL@0.2.0` and carries the same joint/articulation/RB.MB requirement set.
 
 `FET004_BASE_PHYSX@0.1.0` depends on `FET003_BASE_PHYSX@0.1.0` and `FET004_BASE_NEUTRAL@0.1.0`; it also includes the selected PhysX collision requirement from the manifest.
 
 `FET004_BASE_PHYSX@0.2.0` depends on `FET003_BASE_PHYSX@0.2.0` and `FET004_BASE_NEUTRAL@0.1.0`; it includes `PHYSX.COL.001` and `PHYSX.COL.002`.
 
-`FET004_ROBOT_PHYSX` uses a robot-specific manifest with rigid-body, joint, articulation, PhysX collider, and robot collision requirements. It intentionally omits RB.COL.001. Preserve robot link and joint semantics.
+`FET004_BASE_PHYSX@0.3.0` depends on `FET003_BASE_PHYSX@0.3.0` and `FET004_BASE_NEUTRAL@0.2.0`; it includes `PHYSX.COL.001` and `PHYSX.COL.002`. This is the variant pinned by Prop-Robotics-Physx `2.1.0` and Prop-Robotics-Isaac `2.1.0` (RB.006 deprecated at that profile version).
+
+`FET004_ROBOT_PHYSX@0.1.0` and `@0.2.0` use a robot-specific manifest with rigid-body, joint, articulation, PhysX collider, and robot collision requirements. They intentionally omit RB.COL.001. Preserve robot link and joint semantics.
+
+`FET004_ROBOT_PHYSX@0.3.0` is a self-contained robot manifest (no declared feature dependencies; it deliberately relaxes RB.COL.001 to allow nested `CollisionAPI`). Its requirement set is `RB.COL.003`, `RB.COL.004`, `RB.001`, `RB.003`, `RB.005`, `RB.007`, `RB.009`, `RB.010`, `JT.001`, `JT.002`, `JT.003`, `JT.ART.002`, `JT.ART.003`, `JT.ART.004`, `RB.MB.001`, `PHYSX.COL.001`, `PHYSX.COL.002`, `RB.011`, and `RB.012`. This is the variant pinned by Robot-Body-Runnable `2.1.0` and Robot-Body-Isaac `2.1.0`.
 
 ## Block Conditions
 

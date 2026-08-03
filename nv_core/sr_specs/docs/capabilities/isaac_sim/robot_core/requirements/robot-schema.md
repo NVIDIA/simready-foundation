@@ -1,4 +1,9 @@
-# Robot Schema
+# robot-schema
+
+| Code     | RC.007 |
+|----------|--------|
+
+## Summary
 
 Robot USDs declare and use the required schemas and physics attributes.
 

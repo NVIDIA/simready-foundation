@@ -1,4 +1,9 @@
-# Thumbnail Exist
+# thumbnail-exist
+
+| Code     | RC.004 |
+|----------|--------|
+
+## Summary
 
 The robot interface asset file should contain a thumbnail. The thumbnail should be representative of the robot.
 

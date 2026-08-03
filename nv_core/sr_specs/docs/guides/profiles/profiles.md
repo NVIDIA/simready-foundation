@@ -102,7 +102,7 @@ Before creating a profile, you need to understand:
 
 ### Step 3: Create the Profile Configuration
 
-Create a new profile entry in the `profiles.toml` file:
+Create a new profile TOML file in `profiles/` (one file per profile):
 
 ```toml
 [Your-Profile-Name]

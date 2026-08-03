@@ -11,4 +11,4 @@ Hierarchy <hierarchy/hierarchy>
 Non-Visual Sensors <nonvisual_sensors/nonvisual_sensors>
 Semantic Labels <semantic_labels/capability-semantic_labels>
 Packaging <packaging/packaging>
-Example <example/example>
+Example <example/capability-example>

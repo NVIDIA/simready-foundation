@@ -147,7 +147,7 @@ A Feature Card should include:
   who benefits (e.g. "robot gripper assets need grasp-vector metadata so
   planners can align approach trajectories").
 - **Existing feature survey** — review current features in `features/` and
-  profiles in `profiles.toml` to identify overlap, dependencies, or features
+  the profile TOMLs in `profiles/` to identify overlap, dependencies, or features
   that the new work should extend rather than duplicate.
 - **Proposed requirements** — a preliminary list of the USD properties or
   structures the feature will check, informed by the gap analysis.
@@ -185,7 +185,7 @@ categories of deliverables:
 | **Specs** | New or updated capability requirements, feature definitions (JSON + markdown), and profile entries. |
 | **Samples** | Reference OpenUSD assets in `sample_content/` that demonstrate compliant structure for the new domain. |
 | **Validators** | Rule implementations (`validation.py`) registered against the corresponding capability. |
-| **Tests** | Runtime tests that prove the feature works in a reference simulation runtime. Each test loads a sample asset into the runtime (e.g. Isaac Sim), exercises the behavior the feature claims to enable (physics drop, joint articulation, grasp planning), and asserts an expected outcome. A feature is not considered complete until it has at least one passing runtime test that demonstrates the claimed capability end-to-end. |
+| **Tests** | Benchmarks that prove the feature works in a reference simulation runtime. Each test loads a sample asset into the runtime (for example Isaac Sim), exercises the behavior the feature claims to enable (physics drop, joint articulation, grasp planning), and asserts an expected outcome. A feature is not considered complete until it has at least one passing benchmark that demonstrates the claimed capability end-to-end. |
 | **Pipeline Blueprint** | CI job definitions, batch-maker configurations, or pipeline templates that exercise the new validators at scale. |
 
 ### iBeta and QA testing
@@ -281,7 +281,7 @@ fully delivered while others are still in prototyping or testing.
 
 | Indicator | What it means |
 |-----------|---------------|
-| A profile lists the feature in `profiles.toml` with a pinned version. | The feature has completed the full standardization workflow and is safe to validate against. |
+| A profile lists the feature in its TOML file under `profiles/` with a pinned version. | The feature has completed the full standardization workflow and is safe to validate against. |
 | A feature JSON exists but is not yet referenced by any profile. | The feature is in late prototyping or testing. It may change before delivery. |
 | A capability directory contains requirements but no `validation.py`. | The requirements are defined but validators are still in progress. Treat the requirements as directional, not enforceable. |
 | Sample assets exist in `sample_content/` for the domain. | Reference implementations are available; check the corresponding profile version to confirm they are up to date. |

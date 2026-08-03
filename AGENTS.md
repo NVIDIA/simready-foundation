@@ -40,7 +40,8 @@ workflow. It links the four guide areas that should shape spec work:
   markdown file, a JSON manifest, requirement links, samples where useful, a
   validation strategy, and an entry in `docs/features/features.md`.
 - **Profiles** (`guides/profiles/profiles.md`): a profile is a named, versioned
-  list of exact feature versions in `docs/profiles/profiles.toml`. Existing
+  list of exact feature versions in a per-profile TOML file under
+  `docs/profiles/` (one file per profile, e.g. `docs/profiles/prop_robotics_neutral.toml`). Existing
   profile versions are immutable. To adopt new feature behavior, add a new
   profile version and update the related profile markdown/index docs.
 - **Feature adapters** (`guides/feature_adapters/feature_adapters.md`): adapters
@@ -71,7 +72,7 @@ use this read order before changing specs, profiles, validators, or skills:
 3. `nv_core/sr_specs/docs/guides/features/features.md` - feature structure,
    versioning, dependencies, and feature expansion.
 4. `nv_core/sr_specs/docs/guides/profiles/profiles.md` - profile structure,
-   `profiles.toml`, profile versioning, and feature bundles.
+   the per-profile TOML files in `docs/profiles/`, profile versioning, and feature bundles.
 5. `nv_core/sr_specs/docs/guides/feature_adapters/feature_adapters.md` - how
    assets are mutated between feature/profile contracts.
 6. `nv_core/sr_specs/docs/guides/runtime_testing/runtime_testing.md` - runtime
@@ -79,9 +80,11 @@ use this read order before changing specs, profiles, validators, or skills:
 7. The specific profile, feature, requirement, and validator files touched by
    the task.
 
-Treat `nv_core/sr_specs/docs/profiles/profiles.toml` as the machine-readable
-profile source of truth. Profile markdown is an authoring guide and must stay
-in sync with `profiles.toml`, but validators consume the TOML feature list.
+Treat the per-profile TOML files in `nv_core/sr_specs/docs/profiles/` (one file
+per profile) as the machine-readable profile source of truth. There is no single
+aggregate `profiles.toml`; the validator loads every `*.toml` in that directory.
+Profile markdown is an authoring guide and must stay in sync with the profile
+TOML files, but validators consume the TOML feature list.
 
 ## Prop-Robotics Profile Workflow
 
@@ -101,7 +104,7 @@ The prop robotics profiles are the main current workflow targets:
 
 When reasoning about a prop profile, inspect these files together:
 
-- `nv_core/sr_specs/docs/profiles/profiles.toml`
+- `nv_core/sr_specs/docs/profiles/` (per-profile TOML files, e.g. `prop_robotics_neutral.toml`)
 - `nv_core/sr_specs/docs/profiles/prop-robotics-neutral.md`
 - `nv_core/sr_specs/docs/profiles/prop-robotics-physx.md`
 - `nv_core/sr_specs/docs/profiles/prop-robotics-isaac.md`
@@ -189,7 +192,7 @@ Repo-local spec authoring skills also live in `skills`:
 | `simready-foundation-update-validator` | Repair validator behavior, failure messages, edge cases, and doc drift without changing contracts silently. |
 | `simready-foundation-add-feature` | Add a brand-new feature markdown page, JSON manifest, requirement mapping, feature index entry, dependency notes, and optional profile adoption plan. |
 | `simready-foundation-update-feature` | Add a new version of an existing feature or make safe editorial fixes while preserving published feature versions. |
-| `simready-foundation-add-profile` | Add a brand-new profile with an initial `profiles.toml` feature bundle, profile markdown, index entry, and adapter/validation notes. |
+| `simready-foundation-add-profile` | Add a brand-new profile with an initial per-profile TOML file under `docs/profiles/`, profile markdown, index entry, and adapter/validation notes. |
 | `simready-foundation-update-profile` | Add a new version of an existing profile while preserving old profile versions and synchronizing TOML, profile docs, and index docs. |
 | `simready-foundation-add-feature-adapter` | Add a direct asset mutation path between exact feature/profile versions under `nv_core/cip_specs/asset_handler_modules`. |
 | `simready-foundation-update-feature-adapter` | Repair or extend existing feature adapters while preserving published upgrade paths. |
@@ -281,7 +284,7 @@ schemas, metadata, relationships, or composition arcs.
 - `nv_core/sr_specs/docs/capabilities/` - capability docs, requirement pages,
   and Python validators.
 - `nv_core/sr_specs/docs/features/` - feature docs and JSON manifests.
-- `nv_core/sr_specs/docs/profiles/profiles.toml` - profile-to-feature bundles.
+- `nv_core/sr_specs/docs/profiles/*.toml` - per-profile feature bundles (one file per profile).
 - `nv_core/sr_specs/docs/profiles/*.md` - authoring guides for profiles.
 - `nv_core/sr_specs/docs/specifications/` - formal specification documents.
 - `nv_core/sr_specs/docs/guides/guides.md` - entrypoint for feature, profile,
@@ -321,7 +324,6 @@ Some parts of the docs appear to be drafts or in-progress:
 
 - Several capability statuses are Draft or Development.
 - Some feature pages include `TBD`, TODOs, or placeholder sections.
-- Some filenames contain typos such as `phyics`.
 - Some requirement pages, especially newer robot-oriented ones, do not yet use
   the same metadata table style as the older requirement pages.
 - `capabilities/__init__.py` contains duplicate imports.

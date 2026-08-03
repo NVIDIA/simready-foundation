@@ -8,7 +8,7 @@ This guide walks through creating, validating, and managing profiles in the SimR
 
 A **profile** is a named, versioned collection of features that represents a complete simulation scenario. When you validate an asset, you validate it *against a profile*. The profile determines which features are active, which in turn determines which requirements (and their backing rules) actually execute.
 
-Profiles are defined in TOML (`profiles/profiles.toml`) and each profile version lists features by id and version:
+Profiles are defined in TOML files under `profiles/` (one file per profile, e.g. `profiles/prop_robotics_neutral.toml`) and each profile version lists features by id and version:
 
 ```toml
 [Prop-Robotics-Neutral]
@@ -78,9 +78,9 @@ Every feature referenced by a profile must exist as a registered JSON file under
 
 ## 2. Create the profile entry
 
-### 2a. Add the profile to `profiles.toml`
+### 2a. Add the profile TOML file
 
-Edit `profiles/profiles.toml` and add a new TOML table section for your profile:
+Create a new TOML file in `profiles/` (e.g. `profiles/prop_robotics_labeled.toml`) with a TOML table section for your profile:
 
 ```toml
 [Prop-Robotics-Labeled]
@@ -163,24 +163,24 @@ Production assets declare their profile in `customLayerData`:
 )
 ```
 
-The validator reads this metadata and automatically selects the correct profile.
+This metadata records the asset's intended profile for downstream tooling. The `simready-validate` CLI validates against the profile you pass explicitly (see below); when you stamp results back into the asset, they are written into this same `SimReady_Metadata`.
 
 ### 3b. Run validation
 
-From the repository root:
+Install the validator (`pip install -r requirements.txt`) and run the `simready-validate` CLI from the repository root, pointing it at the rule, feature, and profile source directories:
 
 ```bash
-python -m simready.foundation.core asset.usda
+simready-validate \
+    --rules-path nv_core/sr_specs/docs/capabilities \
+    --features-path nv_core/sr_specs/docs/features \
+    --profiles-path nv_core/sr_specs/docs/profiles \
+    --profile Prop-Robotics-Labeled --version 1.0.0 \
+    asset.usda
 ```
 
-The validator reads the asset's `SimReady_Metadata`, looks up the profile, resolves all features and requirements, and runs every matching rule.
+The validator resolves all features and requirements for the named profile version and runs every matching rule. On Windows, use `python -m simready.validate` if the `simready-validate` entry point is not on your `PATH`.
 
-To override or specify a profile explicitly:
-
-```bash
-python -m simready.foundation.core --feature FET000_CORE asset.usda
-python -m simready.foundation.core --capability Hierarchy asset.usda
-```
+Add `--output results.json` to write a machine-readable report, or `--stamp-asset-validation` to write the outcome into the asset's `SimReady_Metadata`. See the [Validation Workflow](validate_workflow.md) guide for the full CLI reference.
 
 ### 3c. Interpret results
 
@@ -207,7 +207,7 @@ Profile versions are **immutable** — once a version is released, it must not b
 
 ### Add the new version
 
-Add a new version entry under the same profile table in `profiles.toml`:
+Add a new version entry under the same profile table in the profile's TOML file (e.g. `profiles/prop_robotics_labeled.toml`):
 
 ```toml
 [Prop-Robotics-Labeled]
@@ -296,10 +296,10 @@ For each feature that differs between the neutral and runtime profiles, a featur
 
 1. **Requirements analysis:** Identify the asset type, target runtime, and required features.
 2. **Feature availability:** Verify all feature ids and versions exist as JSON files under `features/`.
-3. **Profile TOML:** Add the profile entry to `profiles/profiles.toml` with all features and versions.
+3. **Profile TOML:** Add the profile entry to a new TOML file under `profiles/` with all features and versions.
 4. **Documentation:** Create a profile markdown file in `profiles/` and add it to the profiles index.
 5. **Asset metadata:** Ensure target assets include `SimReady_Metadata` with the profile name and version in `customLayerData`.
-6. **Validate:** Run `python -m simready.foundation.core` against test assets and confirm the correct features and requirements execute.
+6. **Validate:** Run `simready-validate --profile <Name> --version <X.Y.Z>` against test assets and confirm the correct features and requirements execute.
 7. **Version control:** Never modify a released profile version — create a new version instead.
 
 ## Tips
@@ -317,7 +317,7 @@ For each feature that differs between the neutral and runtime profiles, a featur
 When the validator processes an asset, the resolution works as follows:
 
 1. **Read metadata.** The root layer's `customLayerData["SimReady_Metadata"]` is read to find `profile` and `profile_version`.
-2. **Look up profile.** The profile name and version are matched against registered entries in `profiles.toml`.
+2. **Look up profile.** The profile name and version are matched against registered entries loaded from the profile TOML files in `profiles/`.
 3. **Resolve features.** Each feature entry is looked up by id and version in the registered feature set.
 4. **Resolve dependencies.** If a feature declares dependencies, those are recursively resolved and their requirements are merged.
 5. **Collect requirements.** The union of all requirements across all resolved features forms the complete validation set.
@@ -352,7 +352,7 @@ Not every profile in the repository is at the same maturity level. The [SimReady
 
 | Indicator | What it means |
 | --- | --- |
-| A profile lists the feature in `profiles.toml` with a pinned version. | The feature has completed the full acceptance workflow and is safe to validate against. |
+| A profile lists the feature in its TOML file under `profiles/` with a pinned version. | The feature has completed the full acceptance workflow and is safe to validate against. |
 | A feature JSON exists but is not yet referenced by any profile. | The feature is in late prototyping or testing. It may change before delivery. |
 | A capability directory contains requirements but no `validation.py`. | The requirements are defined but validators are still in progress. |
 | Sample assets exist in `sample_content/` for the domain. | Reference implementations are available; check the corresponding profile version to confirm they are up to date. |

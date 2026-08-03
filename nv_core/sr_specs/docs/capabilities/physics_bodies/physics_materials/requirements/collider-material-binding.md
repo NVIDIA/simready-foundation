@@ -16,6 +16,8 @@ Physics materials define the surface properties that affect collision behavior, 
 
 The material:binding:physics relationship connects a collider prim (with PhysicsCollisionAPI) to a physics material prim (with PhysicsMaterialAPI), enabling the simulation engine to apply the correct material properties during collision detection and response.
 
+The `material:binding:physics` relationship is the recommended, explicit form. Because the `physics` binding purpose resolves with the standard USD fallback to the allPurpose `material:binding`, a collider that binds a physics material (with PhysicsMaterialAPI) through a plain `material:binding` relationship also satisfies this requirement. Validation resolves the bound material for the `physics` purpose and confirms it has PhysicsMaterialAPI applied.
+
 
 ## Examples
 

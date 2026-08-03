@@ -12,27 +12,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from enum import Enum
-
-import omni.asset_validator
+import omni.capabilities as cap
+import usd_validation_nvidia
 from pxr import Usd, UsdPhysics, UsdShade
 
-from ... import Requirement
 
+@usd_validation_nvidia.register_rule("PhysicsGraspable")
+@usd_validation_nvidia.register_requirements(cap.PhysicsGraspableRequirements.GSP_001, override=True)
+class GraspableVectorLineChecker(usd_validation_nvidia.BaseRuleChecker):
 
-class PhysicsGraspableCapReqs(Requirement, Enum):
-    GSP_001 = (
-        "GSP.001",
-        "graspable-vector-line",
-        "Graspable prim must have a vector line for grasping.",
-    )
-
-
-@omni.asset_validator.register_rule("PhysicsGraspable")
-@omni.asset_validator.register_requirements(PhysicsGraspableCapReqs.GSP_001, override=True)
-class GraspableVectorLineChecker(omni.asset_validator.BaseRuleChecker):
-
-    GRASP_VECTOR_LINE_REQUIREMENT = PhysicsGraspableCapReqs.GSP_001
+    GRASP_VECTOR_LINE_REQUIREMENT = cap.PhysicsGraspableRequirements.GSP_001
 
     def CheckStage(self, stage: Usd.Stage) -> None:
         default_prim = stage.GetDefaultPrim()

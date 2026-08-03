@@ -7,7 +7,7 @@
 		"features"
 	],
 	"profiles_paths": [
-		"profiles/profiles.toml"
+		"profiles"
 	],
   "adapter_modules_path": "../../cip_specs/asset_handler_modules",
   "spec_root": "../../sr_specs/docs",

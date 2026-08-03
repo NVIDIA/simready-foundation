@@ -15,85 +15,15 @@
 __all__ = ["PhysicsDrivenJointsValidation"]
 
 from collections import defaultdict
-from enum import Enum
 
-import omni.asset_validator
+import omni.capabilities as cap
+import usd_validation_nvidia
 from pxr import Gf, Usd, UsdGeom, UsdPhysics
 
 try:
     from pxr import PhysxSchema
 except ImportError:
     PhysxSchema = None
-
-from ... import Requirement
-
-
-class DrivenJointsCapReq(Requirement, Enum):
-    DJ_001 = (
-        "DJ.001",
-        "physics-drive-and-joint-state",
-        "Physics driven joints must have proper drive and state configuration for controlled simulation.",
-    )
-
-    DJ_002 = (
-        "DJ.002",
-        "joint-has-joint-state-api",
-        "Driven joints must implement proper joint state API for simulation state management.",
-    )
-
-    DJ_003 = (
-        "DJ.003",
-        "joint-has-correct-transform-and-state",
-        "Driven joints must maintain correct transform relationships and state consistency.",
-    )
-
-    DJ_004 = (
-        "DJ.004",
-        "physics-joint-has-drive-or-mimic-api",
-        "PhysX driven joints must implement drive API or mimic functionality for controlled motion.",
-    )
-
-    DJ_005 = (
-        "DJ.005",
-        "physics-joint-max-velocity",
-        "PhysX driven joints must have appropriate maximum velocity limits configured.",
-    )
-
-    DJ_006 = (
-        "DJ.006",
-        "drive-joint-value-reasonable",
-        "Drive joint parameters must be within reasonable ranges for stable simulation.",
-    )
-
-    DJ_007 = (
-        "DJ.007",
-        "mimic-api-check",
-        "Mimic API configuration must be properly validated for coordinated joint motion.",
-    )
-
-    DJ_008 = (
-        "DJ.008",
-        "robot-schema-joint-exist",
-        "Robot schema joints must exist and be properly defined for Isaac Sim integration.",
-    )
-
-    DJ_009 = (
-        "DJ.009",
-        "robot-schema-links-exist",
-        "Robot schema links must exist and be properly connected to joints for kinematic chain definition.",
-    )
-
-    DJ_010 = (
-        "DJ.010",
-        "check-robot-relationships",
-        "Robot joint and link relationships must be validated for proper kinematic tree structure.",
-    )
-
-    DJ_011 = (
-        "DJ.011",
-        "no-articulation-loops",
-        "Articulation must have no loops and at most one joint between any two bodies.",
-    )
 
 
 def get_world_body_transform(stage, cache, joint, body0base):
@@ -235,9 +165,9 @@ def get_prismatic_or_revolute_limits(joint_prim: Usd.Prim) -> tuple[float, float
         return None, None
 
 
-@omni.asset_validator.register_rule("PhysicsDrivenJoints")
-@omni.asset_validator.register_requirements(DrivenJointsCapReq.DJ_001, override=True)
-class PhysicsDriveAndJointState(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsDrivenJoints")
+@usd_validation_nvidia.register_requirements(cap.PhysicsDrivenJointsRequirements.DJ_001, override=True)
+class PhysicsDriveAndJointState(usd_validation_nvidia.BaseRuleChecker):
     """Validator to check physics driven joints for proper drive and joint state configuration."""
 
     def CheckPrim(self, prim: Usd.Prim) -> None:
@@ -265,7 +195,7 @@ class PhysicsDriveAndJointState(omni.asset_validator.BaseRuleChecker):
             force_attr = drive.GetMaxForceAttr()
             if not force_attr.IsDefined():
                 self._AddFailedCheck(
-                    requirement=DrivenJointsCapReq.DJ_001,
+                    requirement=cap.PhysicsDrivenJointsRequirements.DJ_001,
                     message=f"Drive Max Force is not set on <{prim.GetPath()}>",
                     at=force_attr,
                 )
@@ -273,13 +203,13 @@ class PhysicsDriveAndJointState(omni.asset_validator.BaseRuleChecker):
                 max_force = force_attr.Get()
                 if max_force <= 0:
                     self._AddFailedCheck(
-                        requirement=DrivenJointsCapReq.DJ_001,
+                        requirement=cap.PhysicsDrivenJointsRequirements.DJ_001,
                         message=f"Drive Max Force is zero <{force_attr.GetPath()}>",
                         at=force_attr,
                     )
                 if max_force >= float("inf"):
                     self._AddFailedCheck(
-                        requirement=DrivenJointsCapReq.DJ_001,
+                        requirement=cap.PhysicsDrivenJointsRequirements.DJ_001,
                         message=f"Drive Max Force is infinite <{force_attr.GetPath()}>",
                         at=force_attr,
                     )
@@ -295,7 +225,7 @@ class PhysicsDriveAndJointState(omni.asset_validator.BaseRuleChecker):
                     pos_diff = abs(drive_target_position.Get() - joint_state_position.Get())
                     if pos_diff > tolerance:
                         self._AddFailedCheck(
-                            requirement=DrivenJointsCapReq.DJ_001,
+                            requirement=cap.PhysicsDrivenJointsRequirements.DJ_001,
                             message=f"Joint state position is very different from drive target position <{drive_target_position.GetPath()}>: difference is {pos_diff}",
                             at=drive_target_position,
                         )
@@ -304,15 +234,15 @@ class PhysicsDriveAndJointState(omni.asset_validator.BaseRuleChecker):
                     vel_diff = abs(drive_target_velocity.Get() - joint_state_velocity.Get())
                     if vel_diff > tolerance:
                         self._AddFailedCheck(
-                            requirement=DrivenJointsCapReq.DJ_001,
+                            requirement=cap.PhysicsDrivenJointsRequirements.DJ_001,
                             message=f"Joint state velocity is very different from drive target velocity <{drive_target_velocity.GetPath()}>: difference is {vel_diff}",
                             at=drive_target_velocity,
                         )
 
 
-@omni.asset_validator.register_rule("PhysicsDrivenJoints")
-@omni.asset_validator.register_requirements(DrivenJointsCapReq.DJ_002, override=True)
-class JointHasJointStateAPI(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsDrivenJoints")
+@usd_validation_nvidia.register_requirements(cap.PhysicsDrivenJointsRequirements.DJ_002, override=True)
+class JointHasJointStateAPI(usd_validation_nvidia.BaseRuleChecker):
     """Validates that joints have the JointStateAPI applied.
 
     This rule checks that all joints (except fixed joints) have the PhysxSchema.JointStateAPI
@@ -368,20 +298,18 @@ class JointHasJointStateAPI(omni.asset_validator.BaseRuleChecker):
             return
         if not PhysxSchema.JointStateAPI(prim, actuator_type):
             self._AddFailedCheck(
-                requirement=DrivenJointsCapReq.DJ_002,
+                requirement=cap.PhysicsDrivenJointsRequirements.DJ_002,
                 message=f"{prim.GetPath()} Has no Joint State API",
                 at=prim,
-                suggestion=omni.asset_validator.Suggestion(
-                    message="Apply Joint State API", callable=self.apply_api
-                ),
+                suggestion=usd_validation_nvidia.Suggestion(message="Apply Joint State API", callable=self.apply_api),
             )
         else:
             return
 
 
-@omni.asset_validator.register_rule("PhysicsDrivenJoints")
-@omni.asset_validator.register_requirements(DrivenJointsCapReq.DJ_003, override=True)
-class JointHasCorrectTransformAndState(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsDrivenJoints")
+@usd_validation_nvidia.register_requirements(cap.PhysicsDrivenJointsRequirements.DJ_003, override=True)
+class JointHasCorrectTransformAndState(usd_validation_nvidia.BaseRuleChecker):
     """Validates that joint transforms and states are consistent with the connected bodies.
 
     This rule checks that the joint's transform and state values correctly define the
@@ -463,13 +391,13 @@ class JointHasCorrectTransformAndState(omni.asset_validator.BaseRuleChecker):
         if not Gf.IsClose(expected_state_pos_0, expected_pos_1, 1e-4):
             if not Gf.IsClose(expected_pos_0, expected_pos_1, 1e-4):
                 self._AddFailedCheck(
-                    requirement=DrivenJointsCapReq.DJ_003,
+                    requirement=cap.PhysicsDrivenJointsRequirements.DJ_003,
                     message=f"Joint {prim.GetPath()} position not well-defined ({(expected_pos_0 - expected_pos_1).GetLength()}). From body 0: {expected_pos_0}, from body 1: {expected_pos_1}",
                     at=prim,
                 )
             else:
                 self._AddFailedCheck(
-                    requirement=DrivenJointsCapReq.DJ_003,
+                    requirement=cap.PhysicsDrivenJointsRequirements.DJ_003,
                     message=f"Joint {prim.GetPath()} state not matching robot pose({(expected_state_pos_0 - expected_pos_1).GetLength()}). From body 0: {expected_state_pos_0}, from body 1: {expected_pos_1}",
                     at=prim,
                 )
@@ -485,21 +413,21 @@ class JointHasCorrectTransformAndState(omni.asset_validator.BaseRuleChecker):
         if not Gf.IsClose(expected_state_rot0_as_vec4d, expected_rot1_as_vec4d, 1e-3):
             if not Gf.IsClose(expected_rot0_as_vec4d, expected_rot1_as_vec4d, 1e-3):
                 self._AddFailedCheck(
-                    requirement=DrivenJointsCapReq.DJ_003,
+                    requirement=cap.PhysicsDrivenJointsRequirements.DJ_003,
                     message=f"Joint {prim.GetPath()} Rotation not well defined ({(expected_state_rot0_as_vec4d - expected_rot1_as_vec4d).GetLength()}), From body 0: {expected_rot_0}, From body 1: {expected_rot_1}",
                     at=prim,
                 )
             else:
                 self._AddFailedCheck(
-                    requirement=DrivenJointsCapReq.DJ_003,
+                    requirement=cap.PhysicsDrivenJointsRequirements.DJ_003,
                     message=f"Joint {prim.GetPath()} state not matching robot pose ({(expected_rot0_as_vec4d - expected_rot1_as_vec4d).GetLength()}). From body 0: {expected_state_rot_0}, from body 1: {expected_rot_1}",
                     at=prim,
                 )
 
 
-@omni.asset_validator.register_rule("PhysicsDrivenJoints")
-@omni.asset_validator.register_requirements(DrivenJointsCapReq.DJ_004, override=True)
-class PhysicsJointHasDriveOrMimicAPI(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsDrivenJoints")
+@usd_validation_nvidia.register_requirements(cap.PhysicsDrivenJointsRequirements.DJ_004, override=True)
+class PhysicsJointHasDriveOrMimicAPI(usd_validation_nvidia.BaseRuleChecker):
     """Validates that joints have a drive or mimic API.
 
     This rule ensures that all joints (except fixed joints) have either a drive API
@@ -523,7 +451,7 @@ class PhysicsJointHasDriveOrMimicAPI(omni.asset_validator.BaseRuleChecker):
         exclude_from_articulation = UsdPhysics.Joint(prim).GetExcludeFromArticulationAttr().Get()
         if not drives and not has_mimic and not exclude_from_articulation:
             self._AddFailedCheck(
-                requirement=DrivenJointsCapReq.DJ_004,
+                requirement=cap.PhysicsDrivenJointsRequirements.DJ_004,
                 message=f"Joint {prim.GetPath()} has no drive or mimic API",
                 at=prim,
             )
@@ -534,15 +462,15 @@ class PhysicsJointHasDriveOrMimicAPI(omni.asset_validator.BaseRuleChecker):
                 damping = drive.GetDampingAttr().Get()
                 if (stiffness and stiffness.Get() != 0.0) or (damping and damping.Get() != 0.0):
                     self._AddFailedCheck(
-                        requirement=DrivenJointsCapReq.DJ_004,
+                        requirement=cap.PhysicsDrivenJointsRequirements.DJ_004,
                         message=f"Joint {prim.GetPath()} has both drive and mimic API",
                         at=prim,
                     )
 
 
-@omni.asset_validator.register_rule("PhysicsDrivenJoints")
-@omni.asset_validator.register_requirements(DrivenJointsCapReq.DJ_005, override=True)
-class PhysicsJointMaxVelocity(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsDrivenJoints")
+@usd_validation_nvidia.register_requirements(cap.PhysicsDrivenJointsRequirements.DJ_005, override=True)
+class PhysicsJointMaxVelocity(usd_validation_nvidia.BaseRuleChecker):
     """Validates that joints have a positive max velocity set.
 
     This rule checks that joints with the PhysxJointAPI have a defined and positive
@@ -563,7 +491,7 @@ class PhysicsJointMaxVelocity(omni.asset_validator.BaseRuleChecker):
             attr = joint.GetMaxJointVelocityAttr()
             if not attr.IsDefined():
                 self._AddFailedCheck(
-                    requirement=DrivenJointsCapReq.DJ_005,
+                    requirement=cap.PhysicsDrivenJointsRequirements.DJ_005,
                     message=f"Max joint velocity is not set on <{prim.GetPath()}>",
                     at=prim,
                 )
@@ -571,15 +499,15 @@ class PhysicsJointMaxVelocity(omni.asset_validator.BaseRuleChecker):
                 max_joint_velocity = attr.Get()
                 if max_joint_velocity <= 0:
                     self._AddFailedCheck(
-                        requirement=DrivenJointsCapReq.DJ_005,
+                        requirement=cap.PhysicsDrivenJointsRequirements.DJ_005,
                         message=f"Max joint velocity is zero <{attr.GetPath()}>",
                         at=attr,
                     )
 
 
-@omni.asset_validator.register_rule("PhysicsDrivenJoints")
-@omni.asset_validator.register_requirements(DrivenJointsCapReq.DJ_006, override=True)
-class DriveJointValueReasonable(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsDrivenJoints")
+@usd_validation_nvidia.register_requirements(cap.PhysicsDrivenJointsRequirements.DJ_006, override=True)
+class DriveJointValueReasonable(usd_validation_nvidia.BaseRuleChecker):
     """Validates that joint drive stiffness values are within reasonable ranges.
 
     This rule checks that joint drive stiffness values are within defined minimum and
@@ -603,7 +531,7 @@ class DriveJointValueReasonable(omni.asset_validator.BaseRuleChecker):
             stiffness = drive.GetStiffnessAttr().Get()
             if not stiffness and not is_mimic:
                 self._AddFailedCheck(
-                    requirement=DrivenJointsCapReq.DJ_006,
+                    requirement=cap.PhysicsDrivenJointsRequirements.DJ_006,
                     message=f"Drive stiffness is not set on <{drive.GetPath()}>",
                     at=drive.GetStiffnessAttr(),
                 )
@@ -613,20 +541,20 @@ class DriveJointValueReasonable(omni.asset_validator.BaseRuleChecker):
                 if damping:
                     if damping.Get() != 0.0:
                         self._AddFailedCheck(
-                            requirement=DrivenJointsCapReq.DJ_006,
+                            requirement=cap.PhysicsDrivenJointsRequirements.DJ_006,
                             message=f"joint is mimic but has damping set <{drive.GetPath()}>",
                             at=drive.GetDampingAttr(),
                         )
                 if stiffness:
                     if stiffness.Get() != 0.0:
                         self._AddFailedCheck(
-                            requirement=DrivenJointsCapReq.DJ_006,
+                            requirement=cap.PhysicsDrivenJointsRequirements.DJ_006,
                             message=f"joint is mimic but has stiffness set <{drive.GetPath()}>",
                             at=drive.GetStiffnessAttr(),
                         )
             elif stiffness < self.DRIVE_STIFFNESS_MIN or stiffness > self.DRIVE_STIFFNESS_MAX:
                 self._AddFailedCheck(
-                    requirement=DrivenJointsCapReq.DJ_006,
+                    requirement=cap.PhysicsDrivenJointsRequirements.DJ_006,
                     message=f"Drive stiffness is out of range <{drive.GetPath()}>: {stiffness}",
                     at=prim,
                 )
@@ -634,9 +562,9 @@ class DriveJointValueReasonable(omni.asset_validator.BaseRuleChecker):
             # TODO: Work in progress for natural frequency
 
 
-@omni.asset_validator.register_rule("PhysicsDrivenJoints")
-@omni.asset_validator.register_requirements(DrivenJointsCapReq.DJ_007, override=True)
-class MimicAPICheck(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsDrivenJoints")
+@usd_validation_nvidia.register_requirements(cap.PhysicsDrivenJointsRequirements.DJ_007, override=True)
+class MimicAPICheck(usd_validation_nvidia.BaseRuleChecker):
     """Validates proper configuration of mimic joint APIs.
 
     This rule checks that mimic joints have proper reference joints, gear ratios,
@@ -672,7 +600,7 @@ class MimicAPICheck(omni.asset_validator.BaseRuleChecker):
                         mimic_api = PhysxSchema.PhysxMimicJointAPI(prim, UsdPhysics.Tokens.rotZ)
                     case _:
                         self._AddFailedCheck(
-                            requirement=DrivenJointsCapReq.DJ_007,
+                            requirement=cap.PhysicsDrivenJointsRequirements.DJ_007,
                             message=f"Joint {prim.GetPath()} has unknown mimic axis: {axis}, aborting checks",
                             at=prim,
                         )
@@ -684,7 +612,7 @@ class MimicAPICheck(omni.asset_validator.BaseRuleChecker):
                 reference_joint = mimic_api.GetReferenceJointRel().GetTargets()
                 if not reference_joint or len(reference_joint) > 1:
                     self._AddFailedCheck(
-                        requirement=DrivenJointsCapReq.DJ_007,
+                        requirement=cap.PhysicsDrivenJointsRequirements.DJ_007,
                         message=f"Joint {prim.GetPath()} has incorrect number of reference joints, expected: 1, actual: {len(reference_joint)}",
                         at=prim,
                     )
@@ -696,35 +624,35 @@ class MimicAPICheck(omni.asset_validator.BaseRuleChecker):
 
                 if gear_ratio is None:
                     self._AddFailedCheck(
-                        requirement=DrivenJointsCapReq.DJ_007,
+                        requirement=cap.PhysicsDrivenJointsRequirements.DJ_007,
                         message=f"Joint {prim.GetPath()} has no gear ratio",
                         at=prim,
                     )
 
                 if natural_frequency is None:
                     self._AddFailedCheck(
-                        requirement=DrivenJointsCapReq.DJ_007,
+                        requirement=cap.PhysicsDrivenJointsRequirements.DJ_007,
                         message=f"Joint {prim.GetPath()} has no natural frequency",
                         at=prim,
                     )
 
                 if damping_ratio is None:
                     self._AddFailedCheck(
-                        requirement=DrivenJointsCapReq.DJ_007,
+                        requirement=cap.PhysicsDrivenJointsRequirements.DJ_007,
                         message=f"Joint {prim.GetPath()} has no damping ratio",
                         at=prim,
                     )
 
                 if gear_ratio == 0:
                     self._AddFailedCheck(
-                        requirement=DrivenJointsCapReq.DJ_007,
+                        requirement=cap.PhysicsDrivenJointsRequirements.DJ_007,
                         message=f"Joint {prim.GetPath()} has gear ratio == 0",
                         at=prim,
                     )
 
                 if natural_frequency == 0:
                     self._AddFailedCheck(
-                        requirement=DrivenJointsCapReq.DJ_007,
+                        requirement=cap.PhysicsDrivenJointsRequirements.DJ_007,
                         message=f"Joint {prim.GetPath()} has natural frequency == 0",
                         at=prim,
                     )
@@ -736,7 +664,7 @@ class MimicAPICheck(omni.asset_validator.BaseRuleChecker):
                 self_joint_lower_limit, self_joint_upper_limit = get_prismatic_or_revolute_limits(prim)
                 if self_joint_lower_limit is None or self_joint_upper_limit is None:
                     self._AddFailedCheck(
-                        requirement=DrivenJointsCapReq.DJ_007,
+                        requirement=cap.PhysicsDrivenJointsRequirements.DJ_007,
                         message=f"Joint {prim.GetPath()} has no limits",
                         at=prim,
                     )
@@ -750,7 +678,7 @@ class MimicAPICheck(omni.asset_validator.BaseRuleChecker):
                 )
                 if reference_joint_lower_limit is None or reference_joint_upper_limit is None:
                     self._AddFailedCheck(
-                        requirement=DrivenJointsCapReq.DJ_007,
+                        requirement=cap.PhysicsDrivenJointsRequirements.DJ_007,
                         message=f"Joint {prim.GetPath()} has no limits",
                         at=prim,
                     )
@@ -759,14 +687,14 @@ class MimicAPICheck(omni.asset_validator.BaseRuleChecker):
                 # ensure the mimic joint and the reference joint are not excluded from articulation
                 if reference_joint_prim.GetAttribute("physics:excludeFromArticulation").Get():
                     self._AddFailedCheck(
-                        requirement=DrivenJointsCapReq.DJ_007,
+                        requirement=cap.PhysicsDrivenJointsRequirements.DJ_007,
                         message=f"Mimic joint {prim.GetPath()} has a reference joint {reference_joint_prim.GetPath()} that is excluded from articulation.. The mimic joint reference joint cannot be excluded from articulation.",
                         at=prim,
                     )
                     return
                 if prim.GetAttribute("physics:excludeFromArticulation").Get():
                     self._AddFailedCheck(
-                        requirement=DrivenJointsCapReq.DJ_007,
+                        requirement=cap.PhysicsDrivenJointsRequirements.DJ_007,
                         message=f"Mimic joint {prim.GetPath()} is excluded from articulation. The mimic joint cannot be excluded from articulation.",
                         at=prim,
                     )
@@ -784,36 +712,36 @@ class MimicAPICheck(omni.asset_validator.BaseRuleChecker):
                 if gear_ratio < 0:
                     if not reference_joint_lower_limit * gear_ratio > self_joint_lower_limit:
                         self._AddFailedCheck(
-                            requirement=DrivenJointsCapReq.DJ_007,
+                            requirement=cap.PhysicsDrivenJointsRequirements.DJ_007,
                             message=f"Joint {prim.GetPath()}'s lower limit ({self_joint_lower_limit}) should be > reference joint limits * gear ratio({reference_joint_lower_limit * gear_ratio})",
                             at=prim,
                         )
 
                     if not self_joint_upper_limit > reference_joint_upper_limit * gear_ratio:
                         self._AddFailedCheck(
-                            requirement=DrivenJointsCapReq.DJ_007,
+                            requirement=cap.PhysicsDrivenJointsRequirements.DJ_007,
                             message=f"Joint {prim.GetPath()}'s upper limit ({self_joint_upper_limit}) should be < reference joint limits * gear ratio({reference_joint_upper_limit * gear_ratio})",
                             at=prim,
                         )
                 else:
                     if not reference_joint_lower_limit * gear_ratio < self_joint_upper_limit:
                         self._AddFailedCheck(
-                            requirement=DrivenJointsCapReq.DJ_007,
+                            requirement=cap.PhysicsDrivenJointsRequirements.DJ_007,
                             message=f"Joint {prim.GetPath()}'s lower limit ({self_joint_upper_limit}) should be > reference joint limits * gear ratio({reference_joint_lower_limit * gear_ratio})",
                             at=prim,
                         )
 
                     if not self_joint_lower_limit < reference_joint_upper_limit * gear_ratio:
                         self._AddFailedCheck(
-                            requirement=DrivenJointsCapReq.DJ_007,
+                            requirement=cap.PhysicsDrivenJointsRequirements.DJ_007,
                             message=f"Joint {prim.GetPath()}'s upper limit ({self_joint_lower_limit}) should be < reference joint limits * gear ratio({reference_joint_upper_limit * gear_ratio})",
                             at=prim,
                         )
 
 
-@omni.asset_validator.register_rule("PhysicsDrivenJoints")
-@omni.asset_validator.register_requirements(DrivenJointsCapReq.DJ_008, override=True)
-class JointsExist(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsDrivenJoints")
+@usd_validation_nvidia.register_requirements(cap.PhysicsDrivenJointsRequirements.DJ_008, override=True)
+class JointsExist(usd_validation_nvidia.BaseRuleChecker):
     """Validates that robot assets contain at least one joint.
 
     This rule checks that robot assets have at least one prim with the JointAPI
@@ -828,15 +756,15 @@ class JointsExist(omni.asset_validator.BaseRuleChecker):
             if prim.HasAPI(robot_schema.Classes.JOINT_API.value):
                 return
         self._AddFailedCheck(
-            requirement=DrivenJointsCapReq.DJ_008,
+            requirement=cap.PhysicsDrivenJointsRequirements.DJ_008,
             message=f"No joints found in robot asset <{stage.GetRootLayer().realPath}>",
             at=stage,
         )
 
 
-@omni.asset_validator.register_rule("PhysicsDrivenJoints")
-@omni.asset_validator.register_requirements(DrivenJointsCapReq.DJ_009, override=True)
-class LinksExist(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsDrivenJoints")
+@usd_validation_nvidia.register_requirements(cap.PhysicsDrivenJointsRequirements.DJ_009, override=True)
+class LinksExist(usd_validation_nvidia.BaseRuleChecker):
     """Validates that robot assets contain at least one link.
 
     This rule checks that robot assets have at least one prim with the LinkAPI
@@ -851,7 +779,7 @@ class LinksExist(omni.asset_validator.BaseRuleChecker):
             if prim.HasAPI(robot_schema.Classes.LINK_API.value):
                 return
         self._AddFailedCheck(
-            requirement=DrivenJointsCapReq.DJ_009,
+            requirement=cap.PhysicsDrivenJointsRequirements.DJ_009,
             message=f"No links found in robot asset <{stage.GetRootLayer().realPath}>",
             at=stage,
         )
@@ -873,9 +801,9 @@ def is_relationship_prepended(relationship: Usd.Relationship) -> bool:
     return False
 
 
-@omni.asset_validator.register_rule("PhysicsDrivenJoints")
-@omni.asset_validator.register_requirements(DrivenJointsCapReq.DJ_010, override=True)
-class CheckRobotRelationships(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsDrivenJoints")
+@usd_validation_nvidia.register_requirements(cap.PhysicsDrivenJointsRequirements.DJ_010, override=True)
+class CheckRobotRelationships(usd_validation_nvidia.BaseRuleChecker):
     """Validates that robot relationships are properly defined and prepended.
 
     This rule checks that robot assets have the required robotLinks and robotJoints
@@ -939,7 +867,7 @@ class CheckRobotRelationships(omni.asset_validator.BaseRuleChecker):
         prim = stage.GetDefaultPrim()
         if not prim:
             self._AddFailedCheck(
-                requirement=DrivenJointsCapReq.DJ_010,
+                requirement=cap.PhysicsDrivenJointsRequirements.DJ_010,
                 message=f"DefaultPrim in robot asset <{stage.GetRootLayer().realPath}> is not set",
                 at=stage,
             )
@@ -956,10 +884,10 @@ class CheckRobotRelationships(omni.asset_validator.BaseRuleChecker):
                 relationship = prim.GetRelationship(relationship_name)
                 if not relationship:
                     self._AddFailedCheck(
-                        requirement=DrivenJointsCapReq.DJ_010,
+                        requirement=cap.PhysicsDrivenJointsRequirements.DJ_010,
                         message=f"DefaultPrim in robot asset <{stage.GetRootLayer().realPath}> does not have a {relationship_name} relationship",
                         at=prim,
-                        suggestion=omni.asset_validator.Suggestion(
+                        suggestion=usd_validation_nvidia.Suggestion(
                             message="Create relationship", callable=fix_method, at=AuthoringLayers(prim)
                         ),
                     )
@@ -969,18 +897,18 @@ class CheckRobotRelationships(omni.asset_validator.BaseRuleChecker):
                 is_prepended = is_relationship_prepended(relationship)
                 if not is_prepended:
                     self._AddFailedCheck(
-                        requirement=DrivenJointsCapReq.DJ_010,
+                        requirement=cap.PhysicsDrivenJointsRequirements.DJ_010,
                         message=f"Relationship {relationship_name} is not prepended",
                         at=prim,
-                        suggestion=omni.asset_validator.Suggestion(
+                        suggestion=usd_validation_nvidia.Suggestion(
                             message="Make relationship prepended", callable=make_method
                         ),
                     )
 
 
-@omni.asset_validator.register_rule("PhysicsDrivenJoints")
-@omni.asset_validator.register_requirements(DrivenJointsCapReq.DJ_011, override=True)
-class ArticulationNoLoopsOrMultiJoint(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("PhysicsDrivenJoints")
+@usd_validation_nvidia.register_requirements(cap.PhysicsDrivenJointsRequirements.DJ_011, override=True)
+class ArticulationNoLoopsOrMultiJoint(usd_validation_nvidia.BaseRuleChecker):
     """Validates that the articulation has no loops and at most one joint between any two bodies.
 
     Only joints that participate in the articulation (excludeFromArticulation is not true)
@@ -1024,7 +952,7 @@ class ArticulationNoLoopsOrMultiJoint(omni.asset_validator.BaseRuleChecker):
             if len(joints) > 1:
                 joint_paths = ", ".join(str(p.GetPath()) for p in joints)
                 self._AddFailedCheck(
-                    requirement=DrivenJointsCapReq.DJ_011,
+                    requirement=cap.PhysicsDrivenJointsRequirements.DJ_011,
                     message=f"Multiple joints connect the same body pair {key[0]} -- {key[1]}: {joint_paths}\nOnly one joint per body pair is allowed, remove the extra joints.",
                     at=joints[0],
                 )
@@ -1061,7 +989,7 @@ class ArticulationNoLoopsOrMultiJoint(omni.asset_validator.BaseRuleChecker):
                         if k in path_to_joint:
                             cycle_joints.append(path_to_joint[k].GetPath())
                     self._AddFailedCheck(
-                        requirement=DrivenJointsCapReq.DJ_011,
+                        requirement=cap.PhysicsDrivenJointsRequirements.DJ_011,
                         message=f"Articulation has a loop: bodies {cycle_bodies}; joints involved: {cycle_joints}\nEnable excludeFromArticulation on one of the joints in the loop to allow for loops.",
                         at=path_to_joint[
                             (min(cycle_bodies[0], cycle_bodies[1]), max(cycle_bodies[0], cycle_bodies[1]))

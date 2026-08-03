@@ -1,4 +1,9 @@
-# Clean Folder
+# clean-folder
+
+| Code     | RC.001 |
+|----------|--------|
+
+## Summary
 
 Robot asset folders contain only referenced, required files. No stray or unused content. At the main level of a robot asset, only the interface layer is present. All other required content is bundled on subfolders related to it specific usage.
 

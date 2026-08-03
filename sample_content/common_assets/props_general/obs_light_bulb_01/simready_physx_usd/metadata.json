@@ -4,18 +4,18 @@
     },
     "pipeline": {
         "asset_handler": "PropAssetHandler",
-        "timestamp": "2026-03-02 12:34:06",
-        "version": "1.4.25"
+        "timestamp": "2026-07-17 14:59:30",
+        "version": "2.0.0"
     },
     "input": {
         "asset_name": "sm_obs_light_bulb_01",
         "asset_type": "prop",
         "input_uri": "sample_content/common_assets/props_general/obs_light_bulb_01/simready_usd",
         "stage_filename": null,
-        "stage_modified": "2026-03-02 12:33:41.989980"
+        "stage_modified": "2026-03-09 10:21:18.917129"
     },
     "validator": {
-        "version": "1.1.6",
+        "version": "1.20.0-dev.6",
         "rules": []
     }
 }

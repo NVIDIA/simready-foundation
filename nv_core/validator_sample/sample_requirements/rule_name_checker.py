@@ -13,12 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import omni.capabilities as cap
-from omni.asset_validator import (
+from pxr import Usd
+from usd_validation_nvidia import (
     BaseRuleChecker,
     register_requirements,
     register_rule,
 )
-from pxr import Usd
 
 
 @register_rule("Sample")

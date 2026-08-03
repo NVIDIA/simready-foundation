@@ -1,0 +1,15 @@
+[Robot-Body-Neutral]
+"1.0.0" = {features = [
+    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Minimal"
+    {"FET003_BASE_NEUTRAL" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET004_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics"
+    {"FET022_DRIVEN_JOINTS_NEUTRAL" = {version = "0.1.0"}}, # "Driven Joints
+    {"FET024_BASE_ARTICULATION_NEUTRAL" = {version = "0.1.0"}}, # "Neutral Base Articulation"
+]}
+"1.1.0" = {features = [ # Deprecate RB.006
+    {"FET001_BASE_NEUTRAL" = {version = "1.0.1"}}, # "Minimal"
+    {"FET003_BASE_NEUTRAL" = {version = "0.2.0"}}, # "RBD Physics"
+    {"FET004_BASE_NEUTRAL" = {version = "0.2.0"}}, # "Simulate Multi-Body Physics"
+    {"FET022_DRIVEN_JOINTS_NEUTRAL" = {version = "0.2.0"}}, # "Driven Joints
+    {"FET024_BASE_ARTICULATION_NEUTRAL" = {version = "0.1.0"}}, # "Neutral Base Articulation"
+]}

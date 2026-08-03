@@ -12,15 +12,67 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import omni.asset_validator
 import omni.capabilities as cap
+import usd_validation_nvidia
 from pxr import Sdf, Usd, UsdGeom, UsdShade
+
+_RENDER_SETTINGS_TYPES = frozenset({"RenderSettings", "RenderProduct", "RenderVar"})
+_OV_RENDER_METADATA_KEYS = ("no_delete", "hide_in_stage_window")
+
+
+def _has_truthy_metadata(prim: Usd.Prim, key: str) -> bool:
+    """Return True when prim metadata or customData for key is present and truthy."""
+    try:
+        if prim.HasMetadata(key):
+            return bool(prim.GetMetadata(key))
+        if prim.HasCustomDataKey(key):
+            return bool(prim.GetCustomDataByKey(key))
+    except Exception:
+        return False
+    return False
+
+
+def _has_render_settings_type(prim: Usd.Prim) -> bool:
+    """Return True when prim or any descendant has an RTX render-settings schema type."""
+    for child in Usd.PrimRange(prim):
+        if child.GetTypeName() in _RENDER_SETTINGS_TYPES:
+            return True
+    return False
+
+
+def _has_asset_content_under_render(prim: Usd.Prim) -> bool:
+    """Return True when /Render contains asset geometry, transforms, or materials."""
+    for child in Usd.PrimRange(prim):
+        if child == prim:
+            continue
+        if child.IsA(UsdGeom.Xform) or child.IsA(UsdGeom.Gprim) or child.IsA(UsdShade.Material):
+            return True
+    return False
+
+
+def _is_render_settings_root(prim: Usd.Prim) -> bool:
+    """
+    Return True when prim is the Omniverse-generated /Render render-settings scope.
+
+    Excludes a root prim only when it is named Render, is not the default prim, and
+    looks like OV render settings (no_delete/hide_in_stage_window metadata or render
+    schema descendants) without asset Xforms, geometry, or materials underneath.
+    """
+    if prim.GetName() != "Render":
+        return False
+    if prim == prim.GetStage().GetDefaultPrim():
+        return False
+    if _has_asset_content_under_render(prim):
+        return False
+    if any(_has_truthy_metadata(prim, key) for key in _OV_RENDER_METADATA_KEYS):
+        return True
+    return _has_render_settings_type(prim)
 
 
 # TODO: Potential Refactor: Obtaining Hierarchy Root may be a common operation, do we want to move it to a helper function?
-@omni.asset_validator.register_rule("Hierarchy")
-@omni.asset_validator.register_requirements(cap.HierarchyRequirements.HI_001, override=True)
-class HierarchyHasRootChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Hierarchy")
+@usd_validation_nvidia.register_requirements(cap.HierarchyRequirements.HI_001, override=True)
+class HierarchyHasRootChecker(usd_validation_nvidia.BaseRuleChecker):
     """
     Validates that the prim hierarchy has a single root prim.
 
@@ -40,8 +92,9 @@ class HierarchyHasRootChecker(omni.asset_validator.BaseRuleChecker):
         Args:
             usdStage: The USD stage to validate
         """
-        # Check that stage has exactly one root prim (per HI.001 spec)
-        root_children = usdStage.GetPseudoRoot().GetChildren()
+        # Check that stage has exactly one root prim (per HI.001 spec).
+        # Exclude Omniverse-generated /Render render-settings scopes from the count.
+        root_children = [prim for prim in usdStage.GetPseudoRoot().GetChildren() if not _is_render_settings_root(prim)]
 
         if len(root_children) == 0:
             self._AddFailedCheck(
@@ -49,7 +102,10 @@ class HierarchyHasRootChecker(omni.asset_validator.BaseRuleChecker):
                 message="Prim hierarchy must have at least one root prim. Found no root prims.",
                 at=usdStage,
             )
-        elif len(root_children) > 1:
+            return
+
+        # Add a specific filter to account for OV specific
+        if len(root_children) > 1:
             # List the scattered root prims to help users identify the issue
             root_prim_names = [prim.GetName() for prim in root_children]
             self._AddFailedCheck(
@@ -59,9 +115,9 @@ class HierarchyHasRootChecker(omni.asset_validator.BaseRuleChecker):
             )
 
 
-@omni.asset_validator.register_rule("Hierarchy")
-@omni.asset_validator.register_requirements(cap.HierarchyRequirements.HI_002, override=True)
-class ExclusiveXFormParentChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Hierarchy")
+@usd_validation_nvidia.register_requirements(cap.HierarchyRequirements.HI_002, override=True)
+class ExclusiveXFormParentChecker(usd_validation_nvidia.BaseRuleChecker):
     EXCLUSIVE_XFORM_PARENT_REQUIREMENT = cap.HierarchyRequirements.HI_002
 
     def CheckPrim(self, prim: Usd.Prim) -> None:
@@ -104,9 +160,9 @@ class ExclusiveXFormParentChecker(omni.asset_validator.BaseRuleChecker):
                 )
 
 
-@omni.asset_validator.register_rule("Hierarchy")
-@omni.asset_validator.register_requirements(cap.HierarchyRequirements.HI_003, override=True)
-class RootPrimXformableChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Hierarchy")
+@usd_validation_nvidia.register_requirements(cap.HierarchyRequirements.HI_003, override=True)
+class RootPrimXformableChecker(usd_validation_nvidia.BaseRuleChecker):
     """
     Validates that the root prim of a placeable asset is strictly an Xformable prim.
 
@@ -165,9 +221,9 @@ class RootPrimXformableChecker(omni.asset_validator.BaseRuleChecker):
             )
 
 
-@omni.asset_validator.register_rule("Hierarchy")
-@omni.asset_validator.register_requirements(cap.HierarchyRequirements.HI_004, override=True)
-class StageHasDefaultPrimChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Hierarchy")
+@usd_validation_nvidia.register_requirements(cap.HierarchyRequirements.HI_004, override=True)
+class StageHasDefaultPrimChecker(usd_validation_nvidia.BaseRuleChecker):
     STAGE_HAS_DEFAULT_PRIM_REQUIREMENT = cap.HierarchyRequirements.HI_004
 
     def CheckStage(self, stage: Usd.Stage) -> None:
@@ -178,13 +234,13 @@ class StageHasDefaultPrimChecker(omni.asset_validator.BaseRuleChecker):
             )
 
 
-# @omni.asset_validator.register_rule("Hierarchy")
-# @omni.asset_validator.register_requirements(cap.HierarchyRequirements.HI_005, override=True)
+# @usd_validation_nvidia.register_rule("Hierarchy")
+# @usd_validation_nvidia.register_requirements(cap.HierarchyRequirements.HI_005, override=True)
 
 
-@omni.asset_validator.register_rule("Hierarchy")
-@omni.asset_validator.register_requirements(cap.HierarchyRequirements.HI_006, override=True)
-class PlaceablePosableXformableChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Hierarchy")
+@usd_validation_nvidia.register_requirements(cap.HierarchyRequirements.HI_006, override=True)
+class PlaceablePosableXformableChecker(usd_validation_nvidia.BaseRuleChecker):
     """Validates that all placeable/posable prims are Xformable"""
 
     def CheckPrim(self, prim: Usd.Prim) -> None:
@@ -229,9 +285,9 @@ class PlaceablePosableXformableChecker(omni.asset_validator.BaseRuleChecker):
             )
 
 
-@omni.asset_validator.register_rule("Hierarchy")
-@omni.asset_validator.register_requirements(cap.HierarchyRequirements.HI_008, override=True)
-class LogicalGeometryGroupingChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Hierarchy")
+@usd_validation_nvidia.register_requirements(cap.HierarchyRequirements.HI_008, override=True)
+class LogicalGeometryGroupingChecker(usd_validation_nvidia.BaseRuleChecker):
     """Validates logical grouping of geometry under parent Xforms"""
 
     def CheckPrim(self, prim: Usd.Prim) -> None:
@@ -283,9 +339,9 @@ class LogicalGeometryGroupingChecker(omni.asset_validator.BaseRuleChecker):
                 break
 
 
-@omni.asset_validator.register_rule("Hierarchy")
-@omni.asset_validator.register_requirements(cap.HierarchyRequirements.HI_009, override=True)
-class KinematicChainHierarchyChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Hierarchy")
+@usd_validation_nvidia.register_requirements(cap.HierarchyRequirements.HI_009, override=True)
+class KinematicChainHierarchyChecker(usd_validation_nvidia.BaseRuleChecker):
     """
     Validates that assets with articulated joints have proper kinematic chain hierarchy.
 
@@ -365,9 +421,9 @@ class KinematicChainHierarchyChecker(omni.asset_validator.BaseRuleChecker):
                 )
 
 
-@omni.asset_validator.register_rule("Hierarchy")
-@omni.asset_validator.register_requirements(cap.HierarchyRequirements.HI_010, override=True)
-class UndefinedPrimsChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("Hierarchy")
+@usd_validation_nvidia.register_requirements(cap.HierarchyRequirements.HI_010, override=True)
+class UndefinedPrimsChecker(usd_validation_nvidia.BaseRuleChecker):
     def CheckStage(self, stage: Usd.Stage) -> None:
         """
         Check HI.010: Look for 'over's of prims which are not defined in this stage.

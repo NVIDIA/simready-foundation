@@ -106,7 +106,7 @@ remaining_gaps: requirement, validator, adapter, profile, or runtime-test follow
 - Keep the feature focused on one runtime promise.
 - Do not include requirements just because they are nearby; include only what the feature needs.
 - If a technology-specific feature replaces a neutral/base requirement, list the full replacement requirement set explicitly instead of depending on the base feature for conflicting rules.
-- Treat `profiles.toml` as profile source of truth; feature docs should mention profile usage but not replace TOML.
+- Treat the per-profile TOML files in `profiles/` as profile source of truth; feature docs should mention profile usage but not replace the TOML.
 - Feature authoring and asset repair should evolve together. A new feature that introduces required authored USD data should normally ship with a conform skill for repairing or clearly blocking on that feature.
 
 ## Limitations

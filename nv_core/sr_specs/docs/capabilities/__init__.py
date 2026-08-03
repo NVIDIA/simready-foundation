@@ -54,8 +54,8 @@ from .isaac_sim.composition import validation
 from .isaac_sim.robot_core import validation
 from .isaac_sim.robot_materials import validation
 from .nonvisual_sensors.nonvisual_materials import validation
-from .packaging.packaging_core import validation
 from .packaging.conformance_metadata import validation
+from .packaging.packaging_core import validation
 from .packaging.packaging_introspection import validation
 from .physics_bodies.base_articulation import validation
 from .physics_bodies.physics_colliders import validation

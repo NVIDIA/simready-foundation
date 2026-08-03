@@ -414,12 +414,6 @@ create a new group folder and add a `<group>.md` landing page alongside it.
 > - `base_articulation/capability-base-articulation.md` — slug uses
 >   hyphens instead of underscores.
 >
-> Three Isaac Sim capabilities (`composition/`, `robot_core/`,
-> `robot_materials/`) are missing `capability-*.md` overview files
-> entirely. `core/robot/` is a stub containing only a placeholder
-> `validation.py`. These should be addressed as part of ongoing
-> documentation clean-up.
-
 ### Requirement document structure
 
 Each requirement `.md` file in `requirements/` must include a metadata
@@ -551,7 +545,7 @@ addressed* or *partial* represent future work.
 
 | Item | Status | Notes |
 | --- | --- | --- |
-| Each Requirement has a **corresponding validator** in `validation.py` using the `omni.asset_validator.core` framework and `@register_requirements()` pattern | Not addressed | No validators are created. Validators depend on formal requirement IDs, which do not yet exist. |
+| Each Requirement has a **corresponding validator** in `validation.py` using the `usd_validation_nvidia` framework and `@register_requirements()` pattern | Not addressed | No validators are created. Validators depend on formal requirement IDs, which do not yet exist. |
 | Validators detect: missing vendor prefix on IsA schemas, missing namespace prefix on properties, use of unstructured attributes where typed schemas should exist | Not addressed | Same dependency on formal requirements and a `core/naming_conventions` capability. |
 | Compatibility tier: **NEUTRAL** — no PhysX or Isaac dependency | N/A | No validators to tier. The guide itself is tier-neutral. |
 | All existing **sample_assets pass** the new naming validators | N/A | No validators to run. |

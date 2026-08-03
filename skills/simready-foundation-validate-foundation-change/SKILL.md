@@ -62,7 +62,7 @@ Use this checklist when changing the repository:
    - `features/features.md` and dependency graph are updated when needed
    - new or contract-changing features have a matching `skills/simready-foundation-conform-fet-###-<feature-name>` skill, or the change documents why no asset-repair skill is safe/applicable
 5. Profile checks:
-   - `profiles.toml` parses
+   - the per-profile TOML files in `profiles/` parse
    - existing profile versions are preserved unless explicitly editorial
    - every referenced feature ID/version exists
    - profile markdown and `profiles.md` agree with TOML

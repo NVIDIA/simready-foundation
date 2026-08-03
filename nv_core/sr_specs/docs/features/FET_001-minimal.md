@@ -90,17 +90,15 @@ Source file type:
 * [sample_content/common_assets/props_general/obs_lamp_revolute_a01/simready_usd/sm_obs_lamp_revolute_a01_01.usd](../../../../sample_content/common_assets/props_general/obs_lamp_revolute_a01/simready_usd/sm_obs_lamp_revolute_a01_01.usd)
 
 
-#### Test Process
+#### Benchmarks
 
-* Obtain the usd sdk
-  * [usd sdk link](https://developer.nvidia.com/usd?sortBy=developer_learning_library%2Fsort%2Ffeatured_in.usd_resources%3Adesc%2Ctitle%3Aasc&hitsPerPage=6#section-getting-started)
-* Confirm your asset in question has passed validation
-* In your commandline type:
-  * ```path/to/usdsdk/scripts/usdrecord <path to usdfile.usd> <path to output.png>```
-* Open up path/to/output.png
-* Expected Result:
-  * Confirm it is NOT empty or completely black
-  * Example image: ![image1](./images/obs_revolute_lamp_01.png)
+* Suite: [FET001 Visual](../guides/benchmark/tests/fet001-visual.md)
+  * Tests:
+    * [presence](../guides/benchmark/tests/fet001/presence.md)
+    * [normals_xz](../guides/benchmark/tests/fet001/normals-xz.md)
+    * [culling_xz](../guides/benchmark/tests/fet001/culling-xz.md)
+    * [light_response](../guides/benchmark/tests/fet001/light-response.md)
+    * [pivot](../guides/benchmark/tests/fet001/pivot.md)
 
 </details>
 
@@ -157,8 +155,8 @@ Source file type:
         * [Asset-transform-origin.md](../capabilities/visualization/geometry/requirements/asset-origin-positioning.md)
             * VG.025 | version 0.1.0
               * For objects that sit on a ground plane, the pivot should be at the center of the object's base.
-              * For objects that rotate around a specific point (e.g., a robot arm joint, a hinged door), the pivot should be at the center of rotation.
-              * For objects that are attached to other objects (e.g., a camera, a wheel), the pivot should be at the attachment point.
+              * For objects that rotate around a specific point (for example, a robot arm joint, a hinged door), the pivot should be at the center of rotation.
+              * For objects that are attached to other objects (for example, a camera, a wheel), the pivot should be at the attachment point.
             * [Rule | Implementation](../capabilities/visualization/geometry/validation.py)
 
 * Capability: [Hierarchy](../capabilities/hierarchy/hierarchy.md)
@@ -172,22 +170,38 @@ Source file type:
               * Requirement that the current Usd Stage has a defaultPrim.  Believe that this will help limit amount of errors for when we talk about assembly type features.
           * [Rule | Implementation](../capabilities/hierarchy/validation.py)
         * [Root-is-xformable](../capabilities/hierarchy/requirements/root-is-xformable.md)
-          * HI.003 - The root prim of an individual, placeable asset file shall be an Xformable (i.e., a prim that inherits UsdGeomXformable, such as Xform). This allows the entire asset to be easily transformed when instanced into a larger scene.
+          * HI.003 - The root prim of an individual, placeable asset file shall be an Xformable (that is, a prim that inherits UsdGeomXformable, such as Xform). This allows the entire asset to be easily transformed when instanced into a larger scene.
           * [Rule | Implementation](../capabilities/hierarchy/validation.py)
 
+</details>
+### Version 1.0.1
+<details>
+<summary><strong>Details</strong></summary>
+* Capability: [Visualization/Geometry](../capabilities/visualization/geometry/capability-geometry.md)
+    * Requirements
 
-
+        * [Geometry-cached-extent](../capabilities/visualization/geometry/requirements/usdgeom-extent.md)
+            * VG.008 | version 0.1.0
+            * [Rule | Implementation](../capabilities/visualization/geometry/validation.py)
 
 #### Samples
 
 * [sample_content/common_assets/props_general/obs_lamp_revolute_a01/simready_usd/sm_obs_lamp_revolute_a01_01.usd](../../../../sample_content/common_assets/props_general/obs_lamp_revolute_a01/simready_usd/sm_obs_lamp_revolute_a01_01.usd)
 
 
-#### Test Process
+#### Benchmarks
 
-##### Runtime Validation with SimReady Testing Framework
+* Suite: [FET001 Visual](../guides/benchmark/tests/fet001-visual.md)
+  * Tests:
+    * [presence](../guides/benchmark/tests/fet001/presence.md)
+    * [normals_xz](../guides/benchmark/tests/fet001/normals-xz.md)
+    * [culling_xz](../guides/benchmark/tests/fet001/culling-xz.md)
+    * [light_response](../guides/benchmark/tests/fet001/light-response.md)
+    * [pivot](../guides/benchmark/tests/fet001/pivot.md)
 
-The Minimal Placeable Visual feature includes automated runtime tests using the SimReady Foundation testing framework. The tests verify:
+##### Runtime Validation with SimReady Benchmark
+
+The Minimal Placeable Visual feature includes automated benchmarks run with SimReady Benchmark. The benchmarks verify:
 - Asset loads without warnings or errors (AA.002)
 - Proper camera framing of geometry (VG.002)
 - Correct transformation and positioning (HI.001, HI.003, HI.004)
@@ -195,62 +209,15 @@ The Minimal Placeable Visual feature includes automated runtime tests using the 
 - Correct winding order and normals (VG.028, VG.029)
 - Proper origin positioning (VG.025)
 
-**Prerequisites:**
-- Configure runner info in `local_run/runners_info.toml` with paths to Isaac Sim or Kit engine
-- See `local_run/runners_info_setup.md` for setup instructions
+**Running the tests:**
 
-**Configuring Test Segments:**
+Benchmarks for this feature run with the `simready-benchmark` tool and the bundled FET suite. Install and configure the tool, then run it against an asset:
 
-The runtime test is divided into segments that can be enabled/disabled in `nv_core/testing_tools/test_definitions/kit_test/feature_vis_fet_001.toml`:
-
-- **S0**: Presence check (verifies asset has visible geometry) - enabled by default
-- **S1**: Light response test (validates VG.027, VG.028, VG.029) - produces video
-- **S2**: Backface culling Z-axis test (validates VG.029 winding order) - produces videos
-- **S3**: Backface culling X-axis test (validates VG.029 winding order) - produces videos
-- **S4**: Pivot positioning test (validates VG.025 origin placement) - produces videos
-- **S5**: Normal direction test (validates VG.028 normals validity) - produces videos
-
-To enable all segments, edit the `[TestConfig]` section in the TOML file:
-```toml
-[TestConfig]
-# Enable all segments for full MPV validation
-segments = "S0,S1,S2,S3,S4,S5"
+```bash
+simready-benchmark --assets path/to/asset.usd --features FET001
 ```
 
-**Note**: S0 only validates presence and does not produce video outputs. To get visual validation videos, enable S1-S5.
-
-**To run runtime tests:**
-
-1. **Generate test batch** for specific assets (Manual mode):
-   ```bash
-   cd nv_core/testing_tools/testing_framework/source
-
-   # Test a specific asset
-   python batch_maker/batch_maker.py \
-     --project_root "C:\path\to\simready_foundation" \
-     --tests "feature_vis_fet_001" \
-     --manual_assets "sample_content/common_assets/props_general/my_asset/my_asset.usd"
-   ```
-
-   Or generate tests for all conforming assets (uses search functions):
-   ```bash
-   python batch_maker/batch_maker.py \
-     --project_root "C:\path\to\simready_foundation"
-   ```
-
-2. **Execute tests locally**:
-   ```bash
-   python job_runner/job_runner.py "..\..\..\..\..\_testing\batch_jobs\local_test_windows.json"
-   ```
-
-3. **Generate HTML report**:
-   ```bash
-   python report_generator/report_generator.py --output_dir "..\..\..\..\..\_testing"
-   ```
-
-4. **View results**: Open `_testing\index.html` in a web browser
-
-For detailed documentation, see `nv_core/testing_tools/testing_framework/source/REPORT_USAGE.md`
+`--features FET001` forces this feature's tests to run on the asset and bypasses the usual eligibility and validation gate, so you can check the feature directly. The framework runs the tests in the engine and writes an HTML and JSON report. For installation, configuration, and how to read the report, refer to the [SimReady Benchmark guide](../guides/benchmark/benchmark.md).
 
 
 

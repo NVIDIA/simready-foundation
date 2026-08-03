@@ -39,7 +39,7 @@ via Python API" section of ``README.md`` for a copy-paste example.
 
 ``FOUNDATIONS_DOCS_DIR`` is the on-disk root of the SimReady Foundation
 spec docs that ``simready.validate.initialize()`` consumes
-(``capabilities/`` + ``features/`` + ``profiles/profiles.toml``);
+(``capabilities/`` + ``features/`` + the per-profile TOMLs in ``profiles/``);
 exposed here so you don't have to recompute the path yourself.
 
 The :func:`create_package` symbol is loaded lazily on first access:
@@ -68,7 +68,7 @@ def _find_foundations_docs_dir() -> Path:
 
     for root in candidates:
         docs = root / "nv_core" / "sr_specs" / "docs"
-        if (docs / "profiles" / "profiles.toml").is_file():
+        if (docs / "profiles").is_dir() and any((docs / "profiles").glob("*.toml")):
             return docs
 
     # Preserve the old package_sample-relative fallback for direct reuse.

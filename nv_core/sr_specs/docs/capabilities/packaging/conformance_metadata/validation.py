@@ -1,12 +1,17 @@
-# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-# SPDX-License-Identifier: LicenseRef-NvidiaProprietary
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 #
-# NVIDIA CORPORATION, its affiliates and licensors retain all intellectual
-# property and proprietary rights in and to this material, related
-# documentation and any modifications thereto. Any use, reproduction,
-# disclosure or distribution of this material and related documentation
-# without an express license agreement from NVIDIA CORPORATION or
-# its affiliates is strictly prohibited.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """
 Validation rules for Conformance Metadata capability (PKG.CONF).
 
@@ -20,8 +25,8 @@ import json
 import re
 from urllib.parse import unquote
 
-import omni.asset_validator
 import omni.capabilities as cap
+import usd_validation_nvidia
 
 from ..packaging_core.validation import (
     AGGREGATE_KEYS,
@@ -38,9 +43,7 @@ from ..packaging_core.validation import (
 
 _CONF_PREFIX = "com.nvidia.simready.conformance"
 
-_QUALIFIED_RE = re.compile(
-    rf"^{re.escape(_CONF_PREFIX)}\.(?P<qualifier>.+@.+)\.json$"
-)
+_QUALIFIED_RE = re.compile(rf"^{re.escape(_CONF_PREFIX)}\.(?P<qualifier>.+@.+)\.json$")
 
 FORMAT_VERSION_RE = re.compile(r"\d+\.\d+$")
 
@@ -50,12 +53,12 @@ def _parse_qualifier(qualifier):
     idx = qualifier.rfind("@")
     if idx <= 0:
         return None, None
-    return unquote(qualifier[:idx]), unquote(qualifier[idx + 1:])
+    return unquote(qualifier[:idx]), unquote(qualifier[idx + 1 :])
 
 
-@omni.asset_validator.register_rule("ConformanceMetadata")
-@omni.asset_validator.register_requirements(cap.ConformanceMetadataRequirements.PKG_CONF_001)
-class ConformanceMetadataChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("ConformanceMetadata")
+@usd_validation_nvidia.register_requirements(cap.ConformanceMetadataRequirements.PKG_CONF_001)
+class ConformanceMetadataChecker(usd_validation_nvidia.BaseRuleChecker):
     """Checker for conformance metadata (PKG.CONF.001).
 
     Validates naming (``{profile}@{version}``), profile/version
@@ -94,11 +97,15 @@ class ConformanceMetadataChecker(omni.asset_validator.BaseRuleChecker):
             if match is None:
                 self._AddFailedCheck(
                     message=f"Conformance file '{filename}' does not match the expected naming pattern "
-                            f"'{_CONF_PREFIX}.{{profile}}@{{version}}.json'",
+                    f"'{_CONF_PREFIX}.{{profile}}@{{version}}.json'",
                     requirement=self.REQUIREMENT,
                 )
                 self._validate_conformance_content(
-                    file_uri, filename, None, None, dependency,
+                    file_uri,
+                    filename,
+                    None,
+                    None,
+                    dependency,
                 )
                 continue
 
@@ -109,12 +116,20 @@ class ConformanceMetadataChecker(omni.asset_validator.BaseRuleChecker):
                     requirement=self.REQUIREMENT,
                 )
                 self._validate_conformance_content(
-                    file_uri, filename, None, None, dependency,
+                    file_uri,
+                    filename,
+                    None,
+                    None,
+                    dependency,
                 )
                 continue
 
             self._validate_conformance_content(
-                file_uri, filename, profile, version, dependency,
+                file_uri,
+                filename,
+                profile,
+                version,
+                dependency,
             )
 
     # ------------------------------------------------------------------
@@ -122,7 +137,12 @@ class ConformanceMetadataChecker(omni.asset_validator.BaseRuleChecker):
     # ------------------------------------------------------------------
 
     def _validate_conformance_content(
-        self, file_uri, filename, expected_profile, expected_version, dependency,
+        self,
+        file_uri,
+        filename,
+        expected_profile,
+        expected_version,
+        dependency,
     ):
         """Validate JSON schema and profile/version consistency."""
         raw = _read_asset_bytes(file_uri)
@@ -251,7 +271,11 @@ class ConformanceMetadataChecker(omni.asset_validator.BaseRuleChecker):
             )
 
         _compare_digests_against_buffer(
-            content_hash, buf, "content_hash", AGGREGATE_KEYS, report,
+            content_hash,
+            buf,
+            "content_hash",
+            AGGREGATE_KEYS,
+            report,
         )
 
     def _validate_assets_array(self, assets, filename):

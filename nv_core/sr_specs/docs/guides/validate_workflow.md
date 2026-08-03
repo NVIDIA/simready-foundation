@@ -11,7 +11,7 @@ All commands run from the **repository root**.
 
 | Requirement | Minimum |
 |-------------|---------|
-| Python | 3.12+ |
+| Python | 3.12 |
 | Git LFS | Installed and initialised (`git lfs install`) |
 
 ## 1. Create a clean virtual environment
@@ -34,8 +34,11 @@ source .venv/bin/activate
 
 ## 2. Install dependencies
 
+The `simready-validate` package is hosted on the internal NVIDIA Artifactory
+registry:
+
 ```bash
-pip install -r nv_core/validator_sample/requirements.txt
+pip install -r requirements.txt
 ```
 
 This installs:
@@ -58,11 +61,11 @@ the `Prop-Robotics-Neutral` profile:
 
 ````{tab-set}
 ```{tab-item} Windows (PowerShell)
-simready-validate --rules-path nv_core/sr_specs/docs/capabilities --features-path nv_core/sr_specs/docs/features --profiles-path nv_core/sr_specs/docs/profiles/profiles.toml --profile Prop-Robotics-Neutral --version 1.0.0 sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
+simready-validate --rules-path nv_core/sr_specs/docs/capabilities --features-path nv_core/sr_specs/docs/features --profiles-path nv_core/sr_specs/docs/profiles --profile Prop-Robotics-Neutral --version 1.0.0 sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
 ```
 
 ```{tab-item} Linux
-simready-validate --rules-path nv_core/sr_specs/docs/capabilities --features-path nv_core/sr_specs/docs/features --profiles-path nv_core/sr_specs/docs/profiles/profiles.toml --profile Prop-Robotics-Neutral --version 1.0.0 sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
+simready-validate --rules-path nv_core/sr_specs/docs/capabilities --features-path nv_core/sr_specs/docs/features --profiles-path nv_core/sr_specs/docs/profiles --profile Prop-Robotics-Neutral --version 1.0.0 sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
 ```
 ````
 
@@ -72,7 +75,7 @@ What each flag does:
 |------|-------|---------|
 | `--rules-path` | `nv_core/sr_specs/docs/capabilities` | Directory containing the rule checkers (validation.py) and requirement definitions |
 | `--features-path` | `nv_core/sr_specs/docs/features` | Directory containing feature definitions (JSON) that group requirements into named features |
-| `--profiles-path` | `nv_core/sr_specs/docs/profiles/profiles.toml` | TOML file that assembles features into named profiles |
+| `--profiles-path` | `nv_core/sr_specs/docs/profiles` | Directory of per-profile TOML files that assemble features into named profiles |
 | `--profile` | `Prop-Robotics-Neutral` | Name of the profile to validate against |
 | `--version` | `1.0.0` | Version of the profile |
 
@@ -101,7 +104,7 @@ beyond what `requirements.txt` provides. If you hit import errors, see
 Add `--output` to write a machine-readable report:
 
 ```bash
-simready-validate --rules-path nv_core/sr_specs/docs/capabilities --features-path nv_core/sr_specs/docs/features --profiles-path nv_core/sr_specs/docs/profiles/profiles.toml --profile Prop-Robotics-Neutral --version 1.0.0 --output results.json sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
+simready-validate --rules-path nv_core/sr_specs/docs/capabilities --features-path nv_core/sr_specs/docs/features --profiles-path nv_core/sr_specs/docs/profiles --profile Prop-Robotics-Neutral --version 1.0.0 --output results.json sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
 ```
 
 Open `results.json` to see per-requirement pass/fail details, messages, and
@@ -113,7 +116,7 @@ The `--stamp-asset-validation` flag writes the validation outcome directly into
 the USD file's `customLayerData`:
 
 ```bash
-simready-validate --rules-path nv_core/sr_specs/docs/capabilities --features-path nv_core/sr_specs/docs/features --profiles-path nv_core/sr_specs/docs/profiles/profiles.toml --profile Prop-Robotics-Neutral --version 1.0.0 --stamp-asset-validation sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
+simready-validate --rules-path nv_core/sr_specs/docs/capabilities --features-path nv_core/sr_specs/docs/features --profiles-path nv_core/sr_specs/docs/profiles --profile Prop-Robotics-Neutral --version 1.0.0 --stamp-asset-validation sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
 ```
 
 After stamping, the USD file contains metadata like:

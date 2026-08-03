@@ -12,35 +12,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from enum import Enum
-
-import omni.asset_validator
+import omni.capabilities as cap
+import usd_validation_nvidia
 from pxr import Usd, UsdGeom, UsdShade
 
-from .. import Requirement
 
-
-class ExampleCapReqs(Requirement, Enum):
-    EX_01 = (
-        "EX.01",
-        "has-mesh",
-        "The asset must contain a mesh prim.",
-    )
-    EX_02 = (
-        "EX.02",
-        "basic-materials",
-        "All materials must be the 'basic_material'.",
-    )
-    EX_03 = (
-        "EX.03",
-        "test-prim-exists",
-        "The test prim 'TestBlob' must exist as a child of the default prim.",
-    )
-
-
-@omni.asset_validator.register_rule("EXAMPLE")
-@omni.asset_validator.register_requirements(ExampleCapReqs.EX_01)
-class HasMeshChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("EXAMPLE")
+@usd_validation_nvidia.register_requirements(cap.ExampleRequirements.EX_001, override=True)
+class HasMeshChecker(usd_validation_nvidia.BaseRuleChecker):
     def CheckStage(self, stage) -> None:
         default_prim = stage.GetDefaultPrim()
         if not default_prim:
@@ -49,16 +28,16 @@ class HasMeshChecker(omni.asset_validator.BaseRuleChecker):
         for prim in Usd.PrimRange(default_prim):
             if UsdGeom.Mesh(prim):
                 return
-        self._AddFailedCheck(requirement=ExampleCapReqs.EX_01, message="Stage has no mesh prims.", at=stage)
+        self._AddFailedCheck(requirement=cap.ExampleRequirements.EX_001, message="Stage has no mesh prims.", at=stage)
 
     @classmethod
     def GetDescription(cls) -> str:
         return "Should have at least one mesh."
 
 
-@omni.asset_validator.register_rule("EXAMPLE")
-@omni.asset_validator.register_requirements(ExampleCapReqs.EX_02)
-class BasicMaterialChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("EXAMPLE")
+@usd_validation_nvidia.register_requirements(cap.ExampleRequirements.EX_002, override=True)
+class BasicMaterialChecker(usd_validation_nvidia.BaseRuleChecker):
     def CheckStage(self, stage) -> None:
         default_prim = stage.GetDefaultPrim()
         if not default_prim:
@@ -71,7 +50,7 @@ class BasicMaterialChecker(omni.asset_validator.BaseRuleChecker):
                 material_path = material.GetPath().pathString
                 if material.GetName() != "basic_material":
                     self._AddFailedCheck(
-                        requirement=ExampleCapReqs.EX_02,
+                        requirement=cap.ExampleRequirements.EX_002,
                         message=f"Mesh {mesh_path} has the wrong material bound: {material_path}",
                         at=material,
                     )
@@ -81,9 +60,9 @@ class BasicMaterialChecker(omni.asset_validator.BaseRuleChecker):
         return "All meshes should have a material called basic_material bound to them."
 
 
-@omni.asset_validator.register_rule("EXAMPLE")
-@omni.asset_validator.register_requirements(ExampleCapReqs.EX_03)
-class TestPrimChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("EXAMPLE")
+@usd_validation_nvidia.register_requirements(cap.ExampleRequirements.EX_003, override=True)
+class TestPrimChecker(usd_validation_nvidia.BaseRuleChecker):
     def CheckStage(self, stage) -> None:
         default_prim = stage.GetDefaultPrim()
         if not default_prim:
@@ -92,7 +71,7 @@ class TestPrimChecker(omni.asset_validator.BaseRuleChecker):
         test_prim = default_prim.GetChild("TestBlob")
         if not test_prim:
             self._AddFailedCheck(
-                requirement=ExampleCapReqs.EX_03,
+                requirement=cap.ExampleRequirements.EX_003,
                 message="Test prim 'TestBlob' not found under default prim.",
                 at=default_prim,
             )

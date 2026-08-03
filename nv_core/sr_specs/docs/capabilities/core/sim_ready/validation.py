@@ -28,14 +28,14 @@ try:
 except ImportError:
     omni_client = None
 
-import omni.asset_validator
 import omni.capabilities as cap
+import usd_validation_nvidia
 from pxr import Ar, Sdf, Usd
 
 
-@omni.asset_validator.register_rule("SimReady")
-@omni.asset_validator.register_requirements(cap.SimReadyRequirements.SR_001)
-class SimReadyCapabilityChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("SimReady")
+@usd_validation_nvidia.register_requirements(cap.SimReadyRequirements.SR_001)
+class SimReadyCapabilityChecker(usd_validation_nvidia.BaseRuleChecker):
     """Checker for Sim Ready capability requirements."""
 
     def CheckStage(self, stage: Usd.Stage) -> None:
@@ -83,9 +83,9 @@ class SimReadyCapabilityChecker(omni.asset_validator.BaseRuleChecker):
         return errors
 
 
-@omni.asset_validator.register_rule("SimReady")
-@omni.asset_validator.register_requirements(cap.SimReadyRequirements.SR_002)
-class ThumbnailExists(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("SimReady")
+@usd_validation_nvidia.register_requirements(cap.SimReadyRequirements.SR_002)
+class ThumbnailExists(usd_validation_nvidia.BaseRuleChecker):
     """Validates that SimReady assets have a thumbnail image."""
 
     def CheckStage(self, stage: Usd.Stage) -> None:

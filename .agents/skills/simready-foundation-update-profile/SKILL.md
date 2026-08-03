@@ -14,7 +14,7 @@ metadata:
 # SimReady Update Profile
 
 ## Purpose
-Use this skill to change an existing profile. Profile versions are immutable, so the normal operation is to add a new version under the existing profile table in `profiles.toml` and update documentation to describe the new version.
+Use this skill to change an existing profile. Profile versions are immutable, so the normal operation is to add a new version under the existing profile table in the profile's TOML file under `profiles/` and update documentation to describe the new version.
 
 Edit an existing profile version in place only for a clear typo, comment correction, markdown-only clarification, or unpublished draft content that the user explicitly says may be changed in place.
 
@@ -25,7 +25,7 @@ Before editing, read:
 - `nv_core/sr_specs/docs/guides/guides.md`
 - `nv_core/sr_specs/docs/guides/profiles/profiles.md`
 - `nv_core/sr_specs/docs/guides/feature_adapters/feature_adapters.md`
-- `nv_core/sr_specs/docs/profiles/profiles.toml`
+- the target profile's TOML file under `nv_core/sr_specs/docs/profiles/`
 - target profile markdown
 - `nv_core/sr_specs/docs/profiles/profiles.md`
 - selected feature JSON manifests
@@ -51,7 +51,7 @@ Use this checklist when changing the repository:
 1. Classify the change.
    - Editorial changes may edit docs or comments in place.
    - Feature bundle changes require a new profile version.
-2. Confirm the profile and base version exist in `profiles.toml`.
+2. Confirm the profile and base version exist in the profile's TOML file under `profiles/`.
 3. Confirm every new feature ID/version exists as a JSON manifest before referencing it.
 4. Add the new profile version by copying the base version feature list and applying the requested changes.
 5. Preserve old profile versions exactly unless the user explicitly requested an editorial fix.
@@ -98,7 +98,7 @@ remaining_gaps: downstream feature, profile, adapter, or runtime-test follow-up
 
 ## Policies
 
-- Treat `profiles.toml` as source of truth.
+- Treat the per-profile TOML files in `profiles/` as source of truth.
 - Do not silently make a feature optional by changing prose only; machine-readable profile behavior must match.
 - Do not update only markdown when validators consume TOML.
 - Do not reference feature versions that do not exist.

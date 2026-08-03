@@ -1,0 +1,75 @@
+[project]
+name = "simready-benchmark-kit-suite"
+version = "2026.6.1"
+description = "Built-in FET test suite (FET001-FET022) targeting the Kit engine"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+# Floor is 3.11 because we use tomllib (stdlib TOML parser added in 3.11).
+requires-python = ">=3.11"
+authors = [
+    {name = "NVIDIA Corporation", email = "simready@nvidia.com"},
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Testing",
+]
+
+# Hard dependencies:
+#   * simready-benchmark       -- every FET test file does
+#                            `from simready_benchmark.core.decorator import test`
+#                            at module load. Loose floor: the suite
+#                            depends on the public API surface, which
+#                            is stable across patch releases. Bump the
+#                            floor when adopting a new framework feature.
+#   * usd-core            -- many test phases do
+#                            module-level `from pxr import ...`. Inside
+#                            Kit, pxr comes from the Kit runtime; for
+#                            plain-Python imports (unit tests, static
+#                            analysis, listing tests via the CLI on a
+#                            machine without Kit installed) the
+#                            ``usd-core`` PyPI distribution provides
+#                            the same ``pxr`` module. usd-core is
+#                            lightweight (no GPU / Hydra renderers) so
+#                            shipping it as a hard dep doesn't
+#                            meaningfully bloat installs that DO have
+#                            Kit available.
+#   * numpy               -- imported by articulation_phases (used by
+#                            FET022 tests) at module load.
+#                            Normally present transitively via the Kit
+#                            runtime; declaring it explicitly here so
+#                            plain-Python discovery (e.g. `--list-tests`
+#                            against the bundled Python) finds all the
+#                            FET tests rather than silently dropping the
+#                            ones that touch numpy.
+# The Kit plugin itself (simready-benchmark-engine-kit) is NOT a hard dependency
+# -- this suite has zero references to it (verified by grep). Tests
+# reach Kit-engine capabilities at runtime through the framework's
+# RunContext. Discovery / listing works without simready-benchmark-engine-kit
+# installed; running tests requires it (and Kit/Isaac Sim) but that
+# is a runtime check inside the framework.
+dependencies = [
+    "simready-benchmark>=2026.6.1",
+    "usd-core>=23.5",
+    "numpy",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-asyncio"]
+
+[project.urls]
+Documentation = "https://docs.omniverse.nvidia.com/simready"
+
+[project.entry-points."simready_benchmark.tests"]
+simready_benchmark_kit_suite = "simready_benchmark_kit_suite"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/simready_benchmark_kit_suite"]

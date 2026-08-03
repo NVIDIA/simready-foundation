@@ -116,11 +116,7 @@ if _switcher_url:
         "navbar-icon-links",
     ]
 
-html_title = (
-    f"{project} {_display_version}"
-    if _display_version
-    else f"{project} v{version}"
-)
+html_title = f"{project} {_display_version}" if _display_version else f"{project} v{version}"
 
 html_static_path = ["_static"]
 html_css_files = ["tags.css"]

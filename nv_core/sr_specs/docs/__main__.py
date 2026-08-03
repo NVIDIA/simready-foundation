@@ -1,12 +1,17 @@
-# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-# SPDX-License-Identifier: LicenseRef-NvidiaProprietary
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 #
-# NVIDIA CORPORATION, its affiliates and licensors retain all intellectual
-# property and proprietary rights in and to this material, related
-# documentation and any modifications thereto. Any use, reproduction,
-# disclosure or distribution of this material and related documentation
-# without an express license agreement from NVIDIA CORPORATION or
-# its affiliates is strictly prohibited.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """
 CLI entry point for simready.foundation.core.
 
@@ -14,40 +19,29 @@ Usage:
     python -m simready.foundation.core [options] ASSET
 
 Registers all SimReady capabilities, features and validation rules, then
-delegates to the omni.asset_validator CLI. All standard flags apply, e.g.:
+delegates to the usd_validation_nvidia CLI. All standard flags apply, e.g.:
 
     python -m simready.foundation.core --feature FET000_CORE asset.usda
     python -m simready.foundation.core --capability atomic_asset asset.usda
 """
 from __future__ import annotations
 
-import logging
+from usd_validation_nvidia import PluginManager, cli_main
 
-from omni.asset_validator import CapabilityRegistry, FeatureRegistry, cli_main
-from omni.capabilities import Capabilities, Features
-
-logger = logging.getLogger(__name__)
+from ._plugin import SimReadyPlugin
 
 
 def main() -> None:
-    # Import capabilities to trigger @register_rule / @register_requirements decorators.
-    from . import capabilities  # noqa: F401
-
-    cap_registry = CapabilityRegistry()
-    for capability in Capabilities:
-        try:
-            cap_registry.add(capability)
-        except Exception:
-            logger.debug(f"Capability {capability.name} already registered, skipping.")
-
-    feat_registry = FeatureRegistry()
-    for feature in Features:
-        try:
-            feat_registry.add(feature)
-        except Exception:
-            logger.debug(f"Feature {feature.name} already registered, skipping.")
-
-    cli_main()
+    """Register the SimReady plugin (if not already loaded) and run the CLI."""
+    plugin = None
+    if not PluginManager().is_plugin_loaded("simready.foundation.core:SimReadyPlugin"):
+        plugin = SimReadyPlugin()
+        plugin.on_startup()
+    try:
+        cli_main()
+    finally:
+        if plugin is not None:
+            plugin.on_shutdown()
 
 
 if __name__ == "__main__":

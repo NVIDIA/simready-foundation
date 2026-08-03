@@ -35,7 +35,7 @@ Before repairing FET004, read the target profile documentation and profile index
 
 - `nv_core/sr_specs/docs/profiles/profiles.md`
 - `nv_core/sr_specs/docs/profiles/<profile-slug>.md`
-- `nv_core/sr_specs/docs/profiles/profiles.toml`
+- the selected profile's TOML file under `nv_core/sr_specs/docs/profiles/`
 
 If the selected profile describes FET004 as optional or conditional, use that text as authoritative workflow guidance for the conforming stage. A TOML comment is human-readable guidance, not machine-readable validation policy, so also prefer explicit profile markdown or profile-index notes when available.
 
@@ -50,11 +50,16 @@ Read the source-of-truth files named below before editing. Work on staged output
 Before changing an asset, load the exact FET004 manifest selected by the profile:
 
 - `nv_core/sr_specs/docs/features/FET_004_base_neutral-0.1.0-simulate_multi_body_physics.json`
-- `nv_core/sr_specs/docs/features/FET_004_base_physx-0.1.0-simulate_multi_body_phyics.json`
-- `nv_core/sr_specs/docs/features/FET_004_base_physx-0.2.0-simulate_multi_body_phyics.json`
-- `nv_core/sr_specs/docs/features/FET_004_robot_physx-0.1.0-simulate_multi_body_phyics.json`
-- `nv_core/sr_specs/docs/features/FET_004_robot_physx-0.2.0-simulate_multi_body_phyics.json`
+- `nv_core/sr_specs/docs/features/FET_004_base_neutral-0.2.0-simulate_multi_body_physics.json`
+- `nv_core/sr_specs/docs/features/FET_004_base_physx-0.1.0-simulate_multi_body_physics.json`
+- `nv_core/sr_specs/docs/features/FET_004_base_physx-0.2.0-simulate_multi_body_physics.json`
+- `nv_core/sr_specs/docs/features/FET_004_base_physx-0.3.0-simulate_multi_body_physics.json`
+- `nv_core/sr_specs/docs/features/FET_004_robot_physx-0.1.0-simulate_multi_body_physics.json`
+- `nv_core/sr_specs/docs/features/FET_004_robot_physx-0.2.0-simulate_multi_body_physics.json`
+- `nv_core/sr_specs/docs/features/FET_004_robot_physx-0.3.0-simulate_multi_body_physics.json`
 - `nv_core/sr_specs/docs/features/FET_004-simulate_multi_body_physics.md`
+
+Load the exact manifest version the selected profile pins; do not assume the newest or oldest. The current `2.1.0` prop and robot profiles pin the `0.3.0` PhysX variants (`FET004_BASE_PHYSX@0.3.0` for Prop-Robotics-Physx and Prop-Robotics-Isaac; `FET004_ROBOT_PHYSX@0.3.0` for Robot-Body-Runnable and Robot-Body-Isaac), so a `2.1.0` validation failure should be repaired against the `0.3.0` manifest, not `0.1.0`/`0.2.0`. Earlier profile versions still pin the earlier manifests.
 
 Treat the selected JSON manifest as authoritative for requirement IDs. If the markdown, manifest, validator, or report disagree, follow the validation report for the current gate and call out the mismatch in the stage summary.
 
@@ -71,7 +76,7 @@ Collect these before editing:
 | `simready_profile` | Profile being validated, such as `prop-robotics-physx`, `robot-body-neutral`, `robot-body-runnable`, or another profile that includes FET004. |
 | `profile_version` | Profile version, if supplied by the user or validation command. |
 | `validation_report` | Preferred JSON or markdown report from the failing profile or feature validation gate. |
-| `fet004_variant` | Selected feature ID and version, such as `FET004_BASE_NEUTRAL@0.1.0`, `FET004_BASE_PHYSX@0.2.0`, or `FET004_ROBOT_PHYSX@0.2.0`. Infer from the profile when possible. |
+| `fet004_variant` | Selected feature ID and version, such as `FET004_BASE_NEUTRAL@0.2.0`, `FET004_BASE_PHYSX@0.3.0`, or `FET004_ROBOT_PHYSX@0.3.0`. Infer from the profile when possible, and use the exact version the profile pins rather than assuming `0.1.0`. |
 | `profile_condition_notes` | Any profile markdown, profile index, or TOML comments that mark FET004 optional, conditional, required, or not applicable. |
 | `multibody_intent` | Whether the asset is intentionally a multibody assembly, articulated prop, or robot body. Infer only from profile, existing rigid bodies/joints, source metadata, or user instruction. |
 | `body_map` | Existing prims that correspond to real physical bodies. Build this from current rigid-body APIs, existing xformable part roots, joint targets, robot links, or source hierarchy. |

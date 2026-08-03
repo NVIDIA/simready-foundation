@@ -101,7 +101,7 @@ Source file type:
 
 
 
-#### Test Process
+#### Benchmarks
 
 None.
 
@@ -147,40 +147,11 @@ Source file type:
 * [simready_physx_usd/sm_obs_joystick_a01_01.usd](../../../../sample_content/common_assets/props_general/obs_joystick_a01/simready_physx_usd/sm_obs_joystick_a01_01.usd)
 * [simready_physx_usd/sm_obs_lamp_revolute_a01_01.usd](../../../../sample_content/common_assets/props_general/obs_lamp_revolute_a01/simready_physx_usd/sm_obs_lamp_revolute_a01_01.usd)
 
-#### Test Process
+#### Benchmarks
 
-* Obtain Isaac Sim
-    * 4.5 is public and can be downloaded [here](https://docs.isaacsim.omniverse.nvidia.com/4.5.0/installation/download.html)
-    * 5.0 requires users to build on their systems, you can follow the docs [here](https://docs.isaacsim.omniverse.nvidia.com/5.0.0/installation/download.html)
-* Find directory where Isaac Sim was installed
-    * Launch isaacsim.bat
-    * In Isaac Sim, open this usd: [test stage](../../../testing_tools/testing_data/runtime_physics_tests.usda)
-        * Can be manually located here: ```nv_core/testing_tools/testing_data/runtime_physics_tests.usda```
-    * Activate correct prim (right click + activate)
-        * select on of these prims:
-            * ```/World/Drop_On_Ground_Plane```
-            * ```/World/Drop_On_Tilted_Plane```
-
-        * ![image1](./images/testing_stage_deactived_prims.png)
-        * Right-click on selected prim for context menu and click "Activate"
-        * ![image2](./images/testing_stage_right_click_and_activate.png)
-
-    * Drill down into activated hierarchy, there should be a prim called "StartPoint"
-        * or the direct prim path is: ```/World/Drop_On_Ground_Plane/StartPoint```
-    * Select that prim
-    * Right-click, add reference to (path/to/asset/in_question.usd)
-    * ![image3](./images/testing_stage_right_click_and_reference.png)
-* Hit play button in UI.
-    * Press play to start sim
-    * Warnings will occur based on collider schema, this is expected
-* Expected result:
-    * item should fall down and stop and settle after 5 seconds.
-    * Joints should move as expected
-        * Jointed assets should not disconnect
-        * Item should be splayed out in some form
-    * Video Examples:
-        * [Drop test results link](../_static/videos/multi_body_drop_test.mp4)
-        * [Sloped Drop test results link](../_static/videos/multi_body_slope_test.mp4)
+* Suite: [FET004 Multibody](../guides/benchmark/tests/fet004-multibody.md)
+  * Tests:
+    * [joint_movement](../guides/benchmark/tests/fet004/joint-movement.md)
 
 
 </details>
@@ -194,6 +165,12 @@ This variant is used in **Robot-Body** profiles (e.g. Robot-Body-Physx, Robot-Bo
 **RB.COL.001** (“Colliding Gprims must apply the Collision API”) is **not** enforced for FET004_ROBOT_PHYSX.
 
 - **Reason:** RB.COL.001 is too strict for Omniverse/Isaac Sim robot assets. In practice, **nesting for CollisionAPI** is allowed (e.g. collision shapes under non-Gprim hierarchy or applied in ways that RB.COL.001 would reject).
-- **Effect:** The Robot PhysX feature does **not** include RB.COL.001 in its requirement set. It does include **RB.COL.002**, **RB.COL.003**, and **RB.COL.004** (mesh collision API, collider mesh, uniform scale), plus the other rigid-body and joint requirements listed in the [feature JSON](FET_004_robot_physx-0.1.0-simulate_multi_body_phyics.json).
+- **Effect:** The Robot PhysX feature does **not** include RB.COL.001 in its requirement set. It does include **RB.COL.002**, **RB.COL.003**, and **RB.COL.004** (mesh collision API, collider mesh, uniform scale), plus the other rigid-body and joint requirements listed in the [feature JSON](FET_004_robot_physx-0.1.0-simulate_multi_body_physics.json).
 
 When authoring or validating robot USDs for Robot-Body profiles, do not require RB.COL.001 compliance; the validator configuration for this feature omits it by design.
+
+### Benchmarks
+
+* Suite: [FET004 Multibody](../guides/benchmark/tests/fet004-multibody.md)
+  * Tests:
+    * [joint_movement](../guides/benchmark/tests/fet004/joint-movement.md)

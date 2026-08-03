@@ -2,7 +2,7 @@
 
 Edges point from a feature to the feature(s) it **depends on** (e.g. `FET003_BASE_PHYSX` → `FET003_BASE_NEUTRAL`). Data is taken from `docs/features/*.json` `dependencies` arrays.
 
-## Mermaid diagram (top-down: dependency above → dependant below)
+## Mermaid diagram (top-down: dependency above → dependent below)
 ```{mermaid}
 flowchart TD
     FET003N["FET003_BASE_NEUTRAL 0.1.0"]
@@ -28,7 +28,7 @@ flowchart TD
     FET033["FET033_SIMREADY_PACKAGING 0.1.0"] --> FET031
 ```
 
-## Mermaid diagram (left-right: dependency left → dependant right)
+## Mermaid diagram (left-right: dependency left → dependent right)
 ```{mermaid}
 flowchart LR
     subgraph roots["Roots (no dependencies)"]

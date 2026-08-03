@@ -108,8 +108,9 @@ Steps to comply:
 5. Verify color space handling in your content creation tools
 
 ## Related Requirements
-- [Material PBR Textures](/capabilities/visualization/materials/requirements/material-pbr-textures.md)
-- [Material PBR Type](/capabilities/visualization/materials/requirements/material-pbr-type.md)
+- [Material Preview Surface](/capabilities/visualization/materials/requirements/material-preview-surface)
+- [Material Shader Inputs](/capabilities/visualization/materials/requirements/material-shader-inputs)
+- [Material Texture Max Size](/capabilities/visualization/materials/requirements/material-texture-maxsize)
 
 ## For More Information
 - [OpenUSD Preview Surface Core Nodes](https://openusd.org/release/spec_usdpreviewsurface.html#core-nodes)

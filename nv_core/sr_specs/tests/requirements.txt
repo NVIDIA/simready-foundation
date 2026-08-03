@@ -1,0 +1,15 @@
+# SimReady Foundation test suite requirements.
+#
+# Install with:
+#   pip install -r tests/requirements.txt
+
+# The SimReady validator: provides the ValidationEngine API and
+# RequirementsRegistry that the test harness uses.
+simready-validate
+
+# Rule checkers under docs/capabilities import usd_validation_nvidia and
+# omni.capabilities; simready-validate does not pull this in transitively.
+usd-validation-nvidia>=1.19.3
+
+# numpy is a foundations-side runtime requirement.
+numpy

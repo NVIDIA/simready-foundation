@@ -10,6 +10,7 @@ _*/
 !docs/capabilities/_includes
 !docs/_ext
 !docs/_static
+!docs/guides/benchmark/tests/_images
 docs/capabilities/_includes/tables
 
 # automatically generated files

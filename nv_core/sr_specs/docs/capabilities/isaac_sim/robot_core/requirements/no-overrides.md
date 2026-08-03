@@ -1,4 +1,9 @@
-# No Overrides
+# no-overrides
+
+| Code     | RC.002 |
+|----------|--------|
+
+## Summary
 
 Robot USDs avoid local override layers that mask upstream schemas or physics.
 

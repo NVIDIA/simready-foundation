@@ -1,4 +1,9 @@
-# Verify Robot Physics Attributes Source Layer
+# verify-robot-physics-attribute-source-layer
+
+| Code     | RC.005 |
+|----------|--------|
+
+## Summary
 
 Validates that physics attributes are authored in the physics layer.
 

@@ -6,7 +6,7 @@ properties, naming conventions, and robot-specific composition requirements.
 
 ## Profile definition
 
-The `Robot-Body-Isaac` profile includes the following feature set (see `profiles.toml` and the [feature dependency graph](../features/feature-dependency-graph)). Each feature's requirements and dependencies are defined in the feature specifications.
+The `Robot-Body-Isaac` profile includes the following feature set (see `profiles/robot_body_isaac.toml` and the [feature dependency graph](../features/feature-dependency-graph)). Each feature's requirements and dependencies are defined in the feature specifications.
 
 ```toml
 [Robot-Body-Isaac]
@@ -152,7 +152,7 @@ customLayerData = {
 ## References
 
 - [Feature dependency graph](../features/feature-dependency-graph) — requirements and dependencies for all features
-- `nv_core/sr_specs/docs/profiles/profiles.toml`
+- `nv_core/sr_specs/docs/profiles/robot_body_isaac.toml`
 - `nv_core/sr_specs/docs/features/FET_021-robot_core.md`
 - `nv_core/sr_specs/docs/features/FET_022-driven_joints.md`
 - `nv_core/sr_specs/docs/features/FET_024-base_articulation.md`

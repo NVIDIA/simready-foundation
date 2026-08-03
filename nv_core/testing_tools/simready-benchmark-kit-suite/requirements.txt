@@ -1,0 +1,6 @@
+# simready-benchmark-kit-suite editable install.
+# Requires the framework (simready-benchmark) to already be available --
+# pip resolves it from PyPI automatically, or from site-packages if the
+# framework was already installed editable from its own clone.
+
+-e ./packages/simready_benchmark_kit_suite[dev]

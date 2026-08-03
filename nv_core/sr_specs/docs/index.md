@@ -47,6 +47,6 @@ Capabilities <capabilities/capabilities>
 Features <features/features>
 Profiles <profiles/profiles>
 Indexes <indexes/indexes>
-Changelog <changelog>
+Changelist <changelist>
 
 ```

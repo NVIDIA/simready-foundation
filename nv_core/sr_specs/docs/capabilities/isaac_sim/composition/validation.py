@@ -13,27 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import os
-from enum import Enum
 from pathlib import Path
 
-import omni.asset_validator
+import omni.capabilities as cap
+import usd_validation_nvidia
 from pxr import Kind, Usd, UsdGeom, UsdPhysics, UsdShade
 
-from ... import Requirement
 
-
-class IsaacCompositionCapReqs(Requirement, Enum):
-    ISA_001 = (
-        "ISA.001",
-        "isaac-composition",
-        "The asset must be composed correctly for Isaac Sim using a structured payload and reference system with proper file organization.",
-    )
-
-
-@omni.asset_validator.register_rule("IsaacComposition")
-@omni.asset_validator.register_requirements(IsaacCompositionCapReqs.ISA_001, override=True)
-class IsaacCompositionCapabilityChecker(omni.asset_validator.BaseRuleChecker):
-    ISAAC_COMPOSITION_REQUIREMENT = IsaacCompositionCapReqs.ISA_001
+@usd_validation_nvidia.register_rule("IsaacComposition")
+@usd_validation_nvidia.register_requirements(cap.CompositionRequirements.ISA_001, override=True)
+class IsaacCompositionCapabilityChecker(usd_validation_nvidia.BaseRuleChecker):
+    ISAAC_COMPOSITION_REQUIREMENT = cap.CompositionRequirements.ISA_001
 
     def CheckStage(self, stage: Usd.Stage) -> None:
         default_prim = stage.GetDefaultPrim()
@@ -83,7 +73,7 @@ class IsaacCompositionCapabilityChecker(omni.asset_validator.BaseRuleChecker):
 
         # Check for expected payload files
         asset_name = Path(stage_path).stem
-        expected_files = [f"{asset_name}_meshes.usd", f"{asset_name}_base.usd", f"{asset_name}_physics.usd"]
+        expected_files = ["geometries.usd", "base.usda", "instances.usda", "materials.usda"]
 
         for expected_file in expected_files:
             if not (payloads_dir / expected_file).exists():
@@ -105,19 +95,11 @@ class IsaacCompositionCapabilityChecker(omni.asset_validator.BaseRuleChecker):
             return
 
         ref_list = prim_spec.referenceList.GetAddedOrExplicitItems()
-        has_base_ref = any("_base.usd" in str(ref.assetPath) for ref in ref_list)
+        has_base_ref = any(str(ref.assetPath) == "./payloads/base.usda" for ref in ref_list)
+
         if not has_base_ref:
             self._AddFailedCheck(
                 "Default prim missing reference to _base.usd payload file.",
-                at=default_prim,
-                requirement=self.ISAAC_COMPOSITION_REQUIREMENT,
-            )
-
-        payload_list = prim_spec.payloadList.GetAddedOrExplicitItems()
-        has_physics_payload = any("_physics.usd" in str(payload.assetPath) for payload in payload_list)
-        if not has_physics_payload:
-            self._AddFailedCheck(
-                "Default prim missing payload to _physics.usd file.",
                 at=default_prim,
                 requirement=self.ISAAC_COMPOSITION_REQUIREMENT,
             )

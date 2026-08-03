@@ -410,6 +410,7 @@ def mdl_type_to_usd_type(val: pymdl.ArgumentConstant):
 def is_mdl_helper_available() -> bool:
     return neuraylib is not None
 
+
 def get_mdl_module_parameter_descs(module_name: str, function: str) -> Optional[Dict[str, Sdf.ValueTypeName]]:
     # acquire neuray instance from OV
     if not is_mdl_helper_available():

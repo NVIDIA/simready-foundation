@@ -1,12 +1,17 @@
-# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-# SPDX-License-Identifier: LicenseRef-NvidiaProprietary
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 #
-# NVIDIA CORPORATION, its affiliates and licensors retain all intellectual
-# property and proprietary rights in and to this material, related
-# documentation and any modifications thereto. Any use, reproduction,
-# disclosure or distribution of this material and related documentation
-# without an express license agreement from NVIDIA CORPORATION or
-# its affiliates is strictly prohibited.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """
 Validation rules for Packaging Introspection capability (PKG.BOM).
 
@@ -15,8 +20,8 @@ The BOM is a metadata file identified by the name
 structure, content-file completeness, path format, and uniqueness.
 """
 
-import omni.asset_validator
 import omni.capabilities as cap
+import usd_validation_nvidia
 
 from ..packaging_core.validation import (
     BOM_ABSENT,
@@ -28,9 +33,9 @@ from ..packaging_core.validation import (
 )
 
 
-@omni.asset_validator.register_rule("BomStructure")
-@omni.asset_validator.register_requirements(cap.PackagingIntrospectionRequirements.PKG_BOM_001)
-class BomStructureChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("BomStructure")
+@usd_validation_nvidia.register_requirements(cap.PackagingIntrospectionRequirements.PKG_BOM_001)
+class BomStructureChecker(usd_validation_nvidia.BaseRuleChecker):
     """Checker for BOM presence and structural integrity (PKG.BOM.001).
 
     Verifies that a BOM file exists at
@@ -61,8 +66,6 @@ class BomStructureChecker(omni.asset_validator.BaseRuleChecker):
             )
         elif status == BOM_BROKEN:
             self._AddFailedCheck(
-                message=(
-                    f"BOM file '{BOM_FILENAME}' is present but unusable: {detail}"
-                ),
+                message=(f"BOM file '{BOM_FILENAME}' is present but unusable: {detail}"),
                 requirement=self.REQUIREMENT,
             )

@@ -21,15 +21,15 @@ import os
 import re
 from datetime import datetime
 from pathlib import Path
-from typing import List, Optional, Union
+from typing import Optional, Union
 
 try:
     import omni.client
 except ImportError:
     omni_client = None
 
-import omni.asset_validator
 import omni.capabilities as cap
+import usd_validation_nvidia
 from pxr import Sdf, Usd
 
 # Global caches for path validation
@@ -121,9 +121,9 @@ def is_absolute_path(path: str) -> bool:
     return False
 
 
-@omni.asset_validator.register_rule("NamingPaths")
-@omni.asset_validator.register_requirements(cap.NamingPathsRequirements.NP_001, override=True)
-class PrimNamingConventionChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("NamingPaths")
+@usd_validation_nvidia.register_requirements(cap.NamingPathsRequirements.NP_001, override=True)
+class PrimNamingConventionChecker(usd_validation_nvidia.BaseRuleChecker):
     """Check NP.001: Prim naming convention compliance."""
 
     def CheckPrim(self, prim: Usd.Prim) -> None:
@@ -155,9 +155,9 @@ class PrimNamingConventionChecker(omni.asset_validator.BaseRuleChecker):
             )
 
 
-@omni.asset_validator.register_rule("NamingPaths")
-@omni.asset_validator.register_requirements(cap.NamingPathsRequirements.NP_002, override=True)
-class FileNamingConventionChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("NamingPaths")
+@usd_validation_nvidia.register_requirements(cap.NamingPathsRequirements.NP_002, override=True)
+class FileNamingConventionChecker(usd_validation_nvidia.BaseRuleChecker):
     """Check NP.002: File naming convention compliance."""
 
     def CheckStage(self, stage: Usd.Stage) -> None:
@@ -203,19 +203,27 @@ class FileNamingConventionChecker(omni.asset_validator.BaseRuleChecker):
             )
 
 
-@omni.asset_validator.register_rule("NamingPaths")
-@omni.asset_validator.register_requirements(cap.NamingPathsRequirements.NP_003, override=True)
-class DirectoryStructureChecker(omni.asset_validator.BaseRuleChecker):
-    """Check NP.003: Directory structure compliance."""
+@usd_validation_nvidia.register_rule("NamingPaths")
+@usd_validation_nvidia.register_requirements(cap.NamingPathsRequirements.NP_003, override=True)
+class DirectoryStructureChecker(usd_validation_nvidia.BaseRuleChecker):
+    """Check NP.003: Directory naming and organization compliance.
+
+    NP.003 is scoped to *directory naming* only: each directory component in the
+    asset path must use valid characters and must not be a reserved name. It does
+    not enforce the overall asset folder layout (root folder, intermediate folder,
+    and main asset file placement) - that is owned by NP.005
+    (AssetFolderStructureChecker), which is the single source of truth for the
+    asset folder layout.
+    """
 
     def CheckStage(self, stage: Usd.Stage) -> None:
-        """Check directory structure."""
+        """Check directory naming for each folder in the asset path."""
         # Get the stage's file path
         stage_path = stage.GetRootLayer().identifier
         if not stage_path:
             return
 
-        # Check directory structure (skip filesystem root e.g. "C:\" on Windows so we only validate folder names)
+        # Validate directory names only (skip filesystem root e.g. "C:\" on Windows so we only validate folder names)
         dir_path = os.path.dirname(stage_path)
         if dir_path:
             path_obj = Path(dir_path)
@@ -237,9 +245,9 @@ class DirectoryStructureChecker(omni.asset_validator.BaseRuleChecker):
                     )
 
 
-@omni.asset_validator.register_rule("NamingPaths")
-@omni.asset_validator.register_requirements(cap.NamingPathsRequirements.NP_004, override=True)
-class PathLengthLimitsChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("NamingPaths")
+@usd_validation_nvidia.register_requirements(cap.NamingPathsRequirements.NP_004, override=True)
+class PathLengthLimitsChecker(usd_validation_nvidia.BaseRuleChecker):
     """Check NP.004: Path length limits compliance."""
 
     def CheckStage(self, stage: Usd.Stage) -> None:
@@ -258,19 +266,22 @@ class PathLengthLimitsChecker(omni.asset_validator.BaseRuleChecker):
                 at=stage,
             )
 
-        # Check relative path length
-        rel_path = os.path.relpath(stage_path)
-        if len(rel_path) > MAX_PATH_LENGTH:
-            self._AddFailedCheck(
-                requirement=cap.NamingPathsRequirements.NP_004,
-                message=f"Relative path exceeds maximum length ({MAX_PATH_LENGTH} characters): {rel_path}",
-                at=stage,
-            )
+        # Check relative path length (skip on Windows when stage is on a different drive than CWD)
+        try:
+            rel_path = os.path.relpath(stage_path)
+            if len(rel_path) > MAX_PATH_LENGTH:
+                self._AddFailedCheck(
+                    requirement=cap.NamingPathsRequirements.NP_004,
+                    message=f"Relative path exceeds maximum length ({MAX_PATH_LENGTH} characters): {rel_path}",
+                    at=stage,
+                )
+        except ValueError:
+            pass
 
 
-@omni.asset_validator.register_rule("NamingPaths")
-@omni.asset_validator.register_requirements(cap.NamingPathsRequirements.NP_005, override=True)
-class AssetFolderStructureChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("NamingPaths")
+@usd_validation_nvidia.register_requirements(cap.NamingPathsRequirements.NP_005, override=True)
+class AssetFolderStructureChecker(usd_validation_nvidia.BaseRuleChecker):
     """Check NP.005: Asset folder structure compliance."""
 
     def CheckStage(self, stage: Usd.Stage) -> None:
@@ -290,8 +301,16 @@ class AssetFolderStructureChecker(omni.asset_validator.BaseRuleChecker):
         main_usd_file = os.path.basename(stage_path)
         main_usd_name = os.path.splitext(main_usd_file)[0]
 
-        # Check 1: Asset file name must contain the asset folder name (grandparent folder)
+        # Check 1: The main asset file must live inside an intermediate folder whose
+        # parent (the asset root folder) is named after the asset.
         # Structure: asset_folder/intermediate_folder/asset_file.usd
+        #
+        # The intermediate folder is the file's immediate parent (current_dir); the
+        # asset root folder is its grandparent. Per NP.005 the main asset file name
+        # must contain the asset root folder name. Enforcing that containment is what
+        # distinguishes a correctly nested asset from a flat layout where the file
+        # sits directly in the asset root (no intermediate folder), is nested too
+        # deep, or is named inconsistently with its asset folder.
         path_obj = Path(current_dir)
         asset_folder_name = path_obj.parent.name if path_obj.parent else None
 
@@ -303,26 +322,44 @@ class AssetFolderStructureChecker(omni.asset_validator.BaseRuleChecker):
             )
             return
 
-        # Check 2: No other .usd or .usda files should exist in the same folder or below
-        other_usd_files = []
-        for root, dirs, files in os.walk(current_dir):
-            for file in files:
-                found_file = os.path.join(root, file).replace("\\", "/")
-                if file.endswith((".usd", ".usda")) and found_file != stage_path:
-                    relative_path = os.path.relpath(file, current_dir)
-                    other_usd_files.append(relative_path)
-
-        if other_usd_files:
+        if asset_folder_name.lower() not in main_usd_name.lower():
             self._AddFailedCheck(
                 requirement=cap.NamingPathsRequirements.NP_005,
-                message=f"No other USD files should exist in '{os.path.basename(current_dir)}' or its subfolders. Found: {', '.join(other_usd_files)}",
+                message=(
+                    f"Main asset file '{main_usd_file}' must reside in an intermediate folder "
+                    f"under an asset root folder whose name the file name contains. Expected the "
+                    f"file name to contain the asset root folder name '{asset_folder_name}' "
+                    f"(structure: {asset_folder_name}/<intermediate>/<name containing "
+                    f"'{asset_folder_name}'>.usd)."
+                ),
+                at=stage,
+            )
+            return
+
+        # Check 2: The intermediate folder must contain exactly one USD file:
+        # the main asset file. Subfolders may contain any number of USD files.
+        intermediate_usd_files = sorted(
+            f
+            for f in os.listdir(current_dir)
+            if os.path.isfile(os.path.join(current_dir, f)) and f.endswith((".usd", ".usda"))
+        )
+        if len(intermediate_usd_files) > 1:
+            intermediate_folder = os.path.basename(current_dir)
+            self._AddFailedCheck(
+                requirement=cap.NamingPathsRequirements.NP_005,
+                message=(
+                    f"Exactly one USD file is allowed in the intermediate folder "
+                    f"'{intermediate_folder}' (the main asset file). "
+                    f"Found {len(intermediate_usd_files)}: "
+                    f"{', '.join(intermediate_usd_files)}"
+                ),
                 at=stage,
             )
 
 
-@omni.asset_validator.register_rule("NamingPaths")
-@omni.asset_validator.register_requirements(cap.NamingPathsRequirements.NP_006, override=True)
-class MetadataLocationChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("NamingPaths")
+@usd_validation_nvidia.register_requirements(cap.NamingPathsRequirements.NP_006, override=True)
+class MetadataLocationChecker(usd_validation_nvidia.BaseRuleChecker):
     """Check NP.006: Metadata location compliance."""
 
     def CheckStage(self, stage: Usd.Stage) -> None:
@@ -388,9 +425,9 @@ def _extract_all_references_or_payload_lists(reference_or_payload_list):
     return items
 
 
-@omni.asset_validator.register_rule("NamingPaths")
-@omni.asset_validator.register_requirements(cap.NamingPathsRequirements.NP_007, override=True)
-class RelativePathsChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("NamingPaths")
+@usd_validation_nvidia.register_requirements(cap.NamingPathsRequirements.NP_007, override=True)
+class RelativePathsChecker(usd_validation_nvidia.BaseRuleChecker):
     """Check NP.007: Relative paths compliance."""
 
     def CheckStage(self, stage: Usd.Stage) -> None:
@@ -412,10 +449,8 @@ class RelativePathsChecker(omni.asset_validator.BaseRuleChecker):
                     if not primspec or not primspec.referenceList:
                         continue
 
-                    reference_prims_paths = _extract_all_references_or_payload_lists(
-                        primspec.referenceList
-                    )
-                    
+                    reference_prims_paths = _extract_all_references_or_payload_lists(primspec.referenceList)
+
                     for item in reference_prims_paths:
                         ref_path = item.assetPath
                         if ref_path and is_absolute_path(ref_path):
@@ -430,9 +465,7 @@ class RelativePathsChecker(omni.asset_validator.BaseRuleChecker):
                     if not primspec or not primspec.payloadList:
                         continue
 
-                    payload_prims_paths = _extract_all_references_or_payload_lists(
-                        primspec.payloadList
-                    )
+                    payload_prims_paths = _extract_all_references_or_payload_lists(primspec.payloadList)
 
                     for item in payload_prims_paths:
                         payload_path = item.assetPath
@@ -468,9 +501,9 @@ class RelativePathsChecker(omni.asset_validator.BaseRuleChecker):
                         )
 
 
-@omni.asset_validator.register_rule("NamingPaths")
-@omni.asset_validator.register_requirements(cap.NamingPathsRequirements.NP_008, override=True)
-class PathsExistChecker(omni.asset_validator.BaseRuleChecker):
+@usd_validation_nvidia.register_rule("NamingPaths")
+@usd_validation_nvidia.register_requirements(cap.NamingPathsRequirements.NP_008, override=True)
+class PathsExistChecker(usd_validation_nvidia.BaseRuleChecker):
     """
     Check NP.008: Verify all asset, reference and payload paths resolve to files that exist.
 
@@ -513,9 +546,7 @@ class PathsExistChecker(omni.asset_validator.BaseRuleChecker):
                     if not primspec or not primspec.referenceList:
                         continue
 
-                    reference_prims_paths = _extract_all_references_or_payload_lists(
-                        primspec.referenceList
-                    )
+                    reference_prims_paths = _extract_all_references_or_payload_lists(primspec.referenceList)
                     for item in reference_prims_paths:
                         if item.assetPath:
                             item_resolved_path = combine_paths(file_path(primspec.layer.identifier), item.assetPath)
@@ -532,9 +563,7 @@ class PathsExistChecker(omni.asset_validator.BaseRuleChecker):
                     if not primspec or not primspec.payloadList:
                         continue
 
-                    payload_prims_paths = _extract_all_references_or_payload_lists(
-                        primspec.payloadList
-                    )
+                    payload_prims_paths = _extract_all_references_or_payload_lists(primspec.payloadList)
                     for item in payload_prims_paths:
                         if item.assetPath:
                             item_resolved_path = combine_paths(file_path(primspec.layer.identifier), item.assetPath)

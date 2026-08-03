@@ -1,4 +1,9 @@
-# Verify Robot Physics Schema Source Layer
+# verify-robot-physics-schema-source-layer
+
+| Code     | RC.006 |
+|----------|--------|
+
+## Summary
 
 Validates that physics schema are authored in the physics layer.
 

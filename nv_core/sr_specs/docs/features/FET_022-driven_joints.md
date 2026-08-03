@@ -63,7 +63,7 @@ This version is used in the following profiles:
 
 None.
 
-#### Test Process
+#### Benchmarks
 
 None.
 
@@ -122,9 +122,19 @@ This version is used in the following profiles:
 
 None.
 
-#### Test Process
+#### Benchmarks
 
-None.
+* Suite: [FET022 Driven Joints](../guides/benchmark/tests/fet022-driven-joints.md)
+  * Tests:
+    * [drive_gain_validation](../guides/benchmark/tests/fet022/drive-gain-validation.md)
+    * [effort_limit](../guides/benchmark/tests/fet022/effort-limit.md)
+    * [full_range_sweep](../guides/benchmark/tests/fet022/full-range-sweep.md)
+    * [ik_target_reach](../guides/benchmark/tests/fet022/ik-target-reach.md)
+    * [jacobian_ik](../guides/benchmark/tests/fet022/jacobian-ik.md)
+    * [mimic_joint](../guides/benchmark/tests/fet022/mimic-joint.md)
+    * [multi_joint_coordination](../guides/benchmark/tests/fet022/multi-joint-coordination.md)
+    * [state_accuracy](../guides/benchmark/tests/fet022/state-accuracy.md)
+    * [velocity_limit](../guides/benchmark/tests/fet022/velocity-limit.md)
 
 </details>
 
@@ -166,8 +176,18 @@ This version is used in the following profiles:
 
 None.
 
-#### Test Process
+#### Benchmarks
 
-None.
+* Suite: [FET022 Driven Joints](../guides/benchmark/tests/fet022-driven-joints.md)
+  * Tests:
+    * [drive_gain_validation](../guides/benchmark/tests/fet022/drive-gain-validation.md)
+    * [effort_limit](../guides/benchmark/tests/fet022/effort-limit.md)
+    * [full_range_sweep](../guides/benchmark/tests/fet022/full-range-sweep.md)
+    * [ik_target_reach](../guides/benchmark/tests/fet022/ik-target-reach.md)
+    * [jacobian_ik](../guides/benchmark/tests/fet022/jacobian-ik.md)
+    * [mimic_joint](../guides/benchmark/tests/fet022/mimic-joint.md)
+    * [multi_joint_coordination](../guides/benchmark/tests/fet022/multi-joint-coordination.md)
+    * [state_accuracy](../guides/benchmark/tests/fet022/state-accuracy.md)
+    * [velocity_limit](../guides/benchmark/tests/fet022/velocity-limit.md)
 
 </details>

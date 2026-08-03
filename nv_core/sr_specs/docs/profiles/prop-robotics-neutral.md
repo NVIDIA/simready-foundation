@@ -6,7 +6,7 @@ properties, naming conventions, and composition expectations.
 
 ## Profile definition
 
-The `Prop-Robotics-Neutral` profile includes the following feature sets (see `profiles.toml` and the [feature dependency graph](../features/feature-dependency-graph)). Each feature's requirements and dependencies are defined in the feature specifications.
+The `Prop-Robotics-Neutral` profile includes the following feature sets (see `profiles/prop_robotics_neutral.toml` and the [feature dependency graph](../features/feature-dependency-graph)). Each feature's requirements and dependencies are defined in the feature specifications.
 
 ```toml
 [Prop-Robotics-Neutral]
@@ -103,7 +103,7 @@ customLayerData = {
 ## References
 
 - [Feature dependency graph](../features/feature-dependency-graph) — requirements and dependencies for all features
-- `nv_core/sr_specs/docs/profiles/profiles.toml`
+- `nv_core/sr_specs/docs/profiles/prop_robotics_neutral.toml`
 - `nv_core/sr_specs/docs/features/FET_001-minimal.md`
 - `nv_core/sr_specs/docs/features/FET_003-rigid_body_physics.md`
 - `nv_core/sr_specs/docs/features/FET_004-simulate_multi_body_physics.md`

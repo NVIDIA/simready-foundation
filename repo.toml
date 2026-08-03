@@ -91,6 +91,11 @@ maintain_legal_blurbs = true
 files.extensions = [".py"]
 files.include = [
     "nv_core/**",
+    # Kit-suite test code: keep its Apache-2.0 legal headers maintained by
+    # repo format. Matched by nv_core/** above; listed explicitly so the
+    # testing tree's license coverage is documented and survives any future
+    # narrowing of the include list.
+    "nv_core/testing_tools/**",
 ]
 
 files.exclude = [

@@ -6,7 +6,7 @@ properties, naming conventions, and composition expectations.
 
 ## Profile definition
 
-The `Robot-Body-Neutral` profile includes the following feature set (see `profiles.toml` and the [feature dependency graph](../features/feature-dependency-graph)). Each feature's requirements and dependencies are defined in the feature specifications.
+The `Robot-Body-Neutral` profile includes the following feature set (see `profiles/robot_body_neutral.toml` and the [feature dependency graph](../features/feature-dependency-graph)). Each feature's requirements and dependencies are defined in the feature specifications.
 
 ```toml
 [Robot-Body-Neutral]
@@ -96,7 +96,7 @@ customLayerData = {
 ## References
 
 - [Feature dependency graph](../features/feature-dependency-graph) — requirements and dependencies for all features
-- `nv_core/sr_specs/docs/profiles/profiles.toml`
+- `nv_core/sr_specs/docs/profiles/robot_body_neutral.toml`
 - `nv_core/sr_specs/docs/features/FET_003-rigid_body_physics.md`
 - `nv_core/sr_specs/docs/features/FET_004-simulate_multi_body_physics.md`
 - `nv_core/sr_specs/docs/features/FET_022-driven_joints.md`
