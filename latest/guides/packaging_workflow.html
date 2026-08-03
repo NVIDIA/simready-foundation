@@ -1,0 +1,1198 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SimReady Packaging Workflow &#8212; SimReady Foundation 2026.06.0</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/tags.css?v=f64b827a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+
+
+    <script src="../_static/documentation_options.js?v=2cffae76"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=fd10adb8"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'guides/packaging_workflow';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+
+    <link rel="canonical" href="https://nvidia.github.io/simready-foundation/2026.06.0/guides/packaging_workflow.html" />
+    <link rel="icon" href="../_static/favicon.png"/>
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SimReady Acceptance Workflow" href="acceptance_workflow.html" />
+    <link rel="prev" title="SimReady Validation Workflow" href="validate_workflow.html" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2026.06.0" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+
+
+  </head>
+
+  <body data-default-mode="">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="SimReady Foundation 2026.06.0 - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="SimReady Foundation 2026.06.0 - Home"/>
+  
+  
+    <p class="title logo__title">SimReady Foundation 2026.06.0</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-4"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-4"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-4"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-4">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="SimReady Foundation 2026.06.0 - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="SimReady Foundation 2026.06.0 - Home"/>
+  
+  
+    <p class="title logo__title">SimReady Foundation 2026.06.0</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-5"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-5"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-5"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-5">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-6"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-6"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-6"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-6">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="guides.html">Guides</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validate_workflow.html">SimReady Validation Workflow</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">SimReady Packaging Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acceptance_workflow.html">SimReady Acceptance Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_adapters/feature_adapters.html">Feature Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiles/profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmark/benchmark.html">SimReady Benchmark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SimReady_learning_workflow.html">SimReady Learning Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="naming_conventions.html">Naming Conventions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="development.html">Development Workflows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="features_expansion_workflow.html">Features Expansion Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../capabilities/capabilities.html">Capabilities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/core/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/visualization/visualization.html">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/isaac_sim/isaac_sim.html">Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/physics_bodies/physics_bodies.html">Physics Bodies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/hierarchy/hierarchy.html">Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/nonvisual_sensors/nonvisual_sensors.html">Non-Visual Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/semantic_labels/capability-semantic_labels.html">Semantic Labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/packaging/packaging.html">Packaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/example/capability-example.html">Example</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../features/features.html">Features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../features/feature-dependency-graph.html">Feature dependency graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_000-base_neutral-0.1.0-core.html">ID:000 - Core - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_001-minimal.html">ID:001 - Minimal - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_002-posable_bodies.html">ID:002 - Posable Bodies - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_003-rigid_body_physics.html">ID:003 - RBD Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_004-simulate_multi_body_physics.html">ID:004 - Simulate Multi-Body Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_005-simulate_grasp_physics.html">ID:005 - Simulate Grasp Physics - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_006-materials.html">ID:006 - Materials - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_007-nonvisual_materials.html">ID:007 - Non-Visual Materials - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_011-semantic_labels.html">ID:011 - Semantic Labels - Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_100-isaacsim-0.1.0-composition.html">ID:100 - IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_021-robot_core.html">ID:021 - Core Robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_022-driven_joints.html">ID:022 - Driven Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_023-robot_materials.html">ID:023 - Robot Materials - Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_024-base_articulation.html">ID:024 - Base Articulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_030-packaging_core.html">ID:030 - Packaging Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_031-package_self_contained.html">ID:031 - Package Self Contained</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_032-packaging_introspection.html">ID:032 - Packaging Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET_033-simready_packaging.html">ID:033 - SimReady Packaging</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../profiles/profiles.html">Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/prop-robotics-neutral.html">Prop Robotics Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/prop-robotics-physx.html">Prop Robotics Physx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/prop-robotics-isaac.html">Prop Robotics Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-body-neutral.html">Robot Body Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-body-runnable.html">Robot Body Runnable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-body-isaac.html">Robot Body Isaac</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../indexes/indexes.html">Indexes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../indexes/capability_status_index.html">Capability Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../indexes/requirements_index.html">Requirements Index</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelist.html">Changelist</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="guides.html" class="nav-link">End to End Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">SimReady Packaging Workflow</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="simready-packaging-workflow">
+<h1>SimReady Packaging Workflow<a class="headerlink" href="#simready-packaging-workflow" title="Link to this heading">#</a></h1>
+<p>This guide walks you through packaging a real asset — <strong><code class="docutils literal notranslate"><span class="pre">apple_a01</span></code></strong> — from a folder of USD files into a distributable SimReady package. You will learn the expected folder layout, pre-validate the asset, produce a package definition (with or without a Bill of Materials), and re-validate an existing package.</p>
+<p>We use the same apple asset from start to finish so the file paths line up across every step.</p>
+<p>Run all commands from the <strong>repository root</strong> unless stated otherwise.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<p>Environment setup (Python 3.12, virtual environment, LFS) is covered in the <a href="../../../../README.md">top-level README</a>. This guide assumes you have already:</p>
+<ul class="simple">
+<li><p>Created and activated a virtual environment.</p></li>
+<li><p>Installed the packaging dependencies from <code class="docutils literal notranslate"><span class="pre">nv_core/package_sample/requirements.txt</span></code>.</p></li>
+</ul>
+<p>Verify <code class="docutils literal notranslate"><span class="pre">simready-package</span></code> is on your PATH:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-package<span class="w"> </span>--help
+</pre></div>
+</div>
+<p>If the command is not found, re-check the venv activation and reinstall dependencies. See <a class="reference internal" href="#troubleshooting">Troubleshooting</a>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Requirement</p></th>
+<th class="head"><p>Minimum</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Python</p></td>
+<td><p>3.12</p></td>
+</tr>
+<tr class="row-odd"><td><p>Git LFS</p></td>
+<td><p>Installed and initialized (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">lfs</span> <span class="pre">install</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p>WRAPP (<code class="docutils literal notranslate"><span class="pre">omni-wrapp-minimal</span></code>)</p></td>
+<td><p>Only required for step 5 (full WRAPP packaging)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="meet-the-working-asset-apple-a01">
+<h2>1. Meet the working asset: <code class="docutils literal notranslate"><span class="pre">apple_a01</span></code><a class="headerlink" href="#meet-the-working-asset-apple-a01" title="Link to this heading">#</a></h2>
+<p>Our running example is the canonical apple asset at <a href="../../../../sample_content/common_assets/props_general/apple_a01/">sample_content/common_assets/props_general/apple_a01/</a>. Its <code class="docutils literal notranslate"><span class="pre">simready_usd/</span></code> subfolder holds everything the packager needs:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>apple_a01/
+└── simready_usd/                                    ← the SimReady-conformant content
+    ├── sm_apple_a01_01.usd                          ← root USD (entry point)
+    ├── sm_apple_a01_01.json                         ← optional asset-metadata sidecar
+    ├── materials/OmniPBR/*.mdl                      ← MDL material graphs
+    ├── textures/image0.png                          ← texture assets
+├── web/sm_apple_a01_01.glb                      ← optional web-preview glTF
+    └── .thumbs/
+        ├── sm_apple_a01_01_thumbnail.png            ← legacy thumbnail
+        └── 256x256/sm_apple_a01_01.usd.png          ← SR.002-compliant thumbnail (required for FET033)
+</pre></div>
+</div>
+<section id="what-makes-a-folder-a-simready-asset">
+<h3>What makes a folder a “SimReady asset”<a class="headerlink" href="#what-makes-a-folder-a-simready-asset" title="Link to this heading">#</a></h3>
+<p>The pre-validation stage checks that your source folder satisfies asset packaging structure constraints and requirements. In practice that means:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Expectation</p></th>
+<th class="head"><p>Where enforced</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Root USD sits under <code class="docutils literal notranslate"><span class="pre">simready_usd/</span></code> (or another sub-tree you point <code class="docutils literal notranslate"><span class="pre">--root-usd</span></code> at)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--root-usd</span></code> argument or the <a class="reference internal" href="#file-layout-summary">content-root layout</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>All USD references resolve to files <strong>inside</strong> the source folder — no absolute paths, no upward <code class="docutils literal notranslate"><span class="pre">..</span></code> escapes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FET031_PACKAGE_SELF_CONTAINED</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Each root USD has a matching thumbnail at <code class="docutils literal notranslate"><span class="pre">.thumbs/256x256/&lt;root&gt;.usd.png</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FET033</span></code> (SR.002)</p></td>
+</tr>
+<tr class="row-odd"><td><p>No stray files outside the packaging convention (materials, textures, thumbs, web, and USDs are recognized)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Package-Candidate</span></code> profile</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p>[!NOTE]
+The <code class="docutils literal notranslate"><span class="pre">apple_a01</span></code> folder already meets these expectations. When you start from a raw folder of USDs, you may need to move files into <code class="docutils literal notranslate"><span class="pre">simready_usd/</span></code>, resolve reference paths, and add a thumbnail. The pre-validation step in section 3 tells you exactly what is missing.</p>
+</div></blockquote>
+</section>
+<section id="file-layout-summary">
+<h3>File layout summary<a class="headerlink" href="#file-layout-summary" title="Link to this heading">#</a></h3>
+<p>The packager treats the <strong>source folder you pass as the positional <code class="docutils literal notranslate"><span class="pre">SOURCE</span></code> argument</strong> as the package root. All <code class="docutils literal notranslate"><span class="pre">--root-usd</span></code> paths are relative to it, and every file inside becomes a candidate for the Bill of Materials. Nested <code class="docutils literal notranslate"><span class="pre">simready_usd/</span></code> folders are a convention — the packager does not require them, but the SimReady tooling expects them and the sample packages follow this layout.</p>
+</section>
+</section>
+<section id="configuring-simready-package">
+<h2>2. Configuring <code class="docutils literal notranslate"><span class="pre">simready-package</span></code><a class="headerlink" href="#configuring-simready-package" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">simready-package</span></code> needs to know where to find validation <strong>rules</strong>, <strong>features</strong>, and <strong>profiles</strong>. There are two ways to tell it — one file-based, one all on the command line.</p>
+<section id="a-project-config-recommended">
+<h3>2a. Project config (recommended)<a class="headerlink" href="#a-project-config-recommended" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">sample_content/project_config.toml</span></code> is a project-level dispatcher. When you pass <code class="docutils literal notranslate"><span class="pre">--project-config</span> <span class="pre">&lt;path&gt;</span></code> to <code class="docutils literal notranslate"><span class="pre">simready-package</span></code>, it reads the <code class="docutils literal notranslate"><span class="pre">[validate]</span></code> section and resolves the three paths for you.</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[project_root]</span>
+<span class="n">setting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;..&quot;</span>
+
+<span class="k">[validate]</span>
+<span class="n">requirements_configs_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;nv_core/sr_specs/config&quot;</span>
+<span class="n">requirements_paths</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;nv_core/sr_specs/docs/capabilities&quot;</span><span class="p">]</span>
+<span class="n">features_paths</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;nv_core/sr_specs/docs/features&quot;</span><span class="p">]</span>
+<span class="n">profiles_paths</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;nv_core/sr_specs/docs/profiles&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>What it points at</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[project_root]</span> <span class="pre">setting</span></code></p></td>
+<td><p>The <strong>project root</strong> — resolved relative to the config file’s own directory. All <code class="docutils literal notranslate"><span class="pre">[validate]</span></code> paths below are then resolved relative to this project root.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">requirements_paths</span></code></p></td>
+<td><p>Directories containing capability + requirement definitions (<code class="docutils literal notranslate"><span class="pre">docs/capabilities/**</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">features_paths</span></code></p></td>
+<td><p>Directories containing feature manifest files (<code class="docutils literal notranslate"><span class="pre">FET*.md</span></code> + JSON)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">profiles_paths</span></code></p></td>
+<td><p>Directories or files containing profile TOMLs (e.g. the <code class="docutils literal notranslate"><span class="pre">profiles/</span></code> directory of per-profile TOMLs)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">requirements_configs_path</span></code></p></td>
+<td><p>Optional overrides for individual requirements</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Path resolution happens in two steps:</p>
+<ol class="arabic simple">
+<li><p><strong>Locate the project root.</strong> <code class="docutils literal notranslate"><span class="pre">[project_root]</span> <span class="pre">setting</span></code> is resolved relative to the directory of the config file itself. In <code class="docutils literal notranslate"><span class="pre">sample_content/project_config.toml</span></code>, <code class="docutils literal notranslate"><span class="pre">setting</span> <span class="pre">=</span> <span class="pre">&quot;..&quot;</span></code> climbs one directory up from <code class="docutils literal notranslate"><span class="pre">sample_content/</span></code>, landing at the repository root.</p></li>
+<li><p><strong>Resolve <code class="docutils literal notranslate"><span class="pre">[validate]</span></code> paths from that project root.</strong> So <code class="docutils literal notranslate"><span class="pre">nv_core/sr_specs/docs/capabilities</span></code> under <code class="docutils literal notranslate"><span class="pre">requirements_paths</span></code> becomes <code class="docutils literal notranslate"><span class="pre">&lt;repo_root&gt;/nv_core/sr_specs/docs/capabilities</span></code>.</p></li>
+</ol>
+<p>This two-step design lets a config live anywhere in the tree (in a sub-folder, next to sample content, etc.) while still pointing at repo-root-relative paths — just set <code class="docutils literal notranslate"><span class="pre">setting</span></code> to whatever hop is needed to reach the project root from the config file.</p>
+<p>Every command in this guide uses <code class="docutils literal notranslate"><span class="pre">--project-config</span> <span class="pre">sample_content/project_config.toml</span></code> for consistency. If your project has a similar config elsewhere, point at that one instead.</p>
+</section>
+<section id="b-direct-cli-flags-no-config-file">
+<h3>2b. Direct CLI flags (no config file)<a class="headerlink" href="#b-direct-cli-flags-no-config-file" title="Link to this heading">#</a></h3>
+<p>If you do not have a project config, pass the three paths directly. Every command that accepts <code class="docutils literal notranslate"><span class="pre">--project-config</span></code> also accepts <code class="docutils literal notranslate"><span class="pre">--rules-path</span></code>, <code class="docutils literal notranslate"><span class="pre">--features-path</span></code>, and <code class="docutils literal notranslate"><span class="pre">--profiles-path</span></code>:</p>
+<details open>
+<summary><strong>Windows (PowerShell)</strong></summary>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">simready-package</span> <span class="n">sample_content</span><span class="p">\</span><span class="n">common_assets</span><span class="p">\</span><span class="n">props_general</span><span class="p">\</span><span class="n">apple_a01</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-rules-path</span>    <span class="n">nv_core</span><span class="p">\</span><span class="n">sr_specs</span><span class="p">\</span><span class="n">docs</span><span class="p">\</span><span class="n">capabilities</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-features-path</span> <span class="n">nv_core</span><span class="p">\</span><span class="n">sr_specs</span><span class="p">\</span><span class="n">docs</span><span class="p">\</span><span class="n">features</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-profiles-path</span> <span class="n">nv_core</span><span class="p">\</span><span class="n">sr_specs</span><span class="p">\</span><span class="n">docs</span><span class="p">\</span><span class="n">profiles</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-root-usd</span> <span class="n">simready_usd</span><span class="p">\</span><span class="n">sm_apple_a01_01</span><span class="p">.</span><span class="n">usd</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-pre-validate-only</span>
+</pre></div>
+</div>
+</details>
+<details>
+<summary><strong>Linux</strong></summary>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-package<span class="w"> </span>sample_content/common_assets/props_general/apple_a01<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--rules-path<span class="w">    </span>nv_core/sr_specs/docs/capabilities<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--features-path<span class="w"> </span>nv_core/sr_specs/docs/features<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--profiles-path<span class="w"> </span>nv_core/sr_specs/docs/profiles<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--root-usd<span class="w"> </span>simready_usd/sm_apple_a01_01.usd<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--pre-validate-only
+</pre></div>
+</div>
+</details>
+<p>Each flag is repeatable — pass <code class="docutils literal notranslate"><span class="pre">--rules-path</span></code> twice, for example, to load rules from two directories. This is useful when you have both foundation rules and a private extension set.</p>
+<blockquote>
+<div><p>[!TIP]
+The two modes compose. If you pass <code class="docutils literal notranslate"><span class="pre">--project-config</span></code> <strong>and</strong> <code class="docutils literal notranslate"><span class="pre">--rules-path</span></code>, the CLI flag wins for that path. Use this when you want to override just one path from the config without rewriting the file.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="pre-validate-the-asset">
+<h2>3. Pre-validate the asset<a class="headerlink" href="#pre-validate-the-asset" title="Link to this heading">#</a></h2>
+<p>Pre-validation is a fast check on your source folder before you commit to a longer build. It runs and exits without writing packaging artifacts.</p>
+<details open>
+<summary><strong>Windows (PowerShell)</strong></summary>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">simready-package</span> <span class="n">sample_content</span><span class="p">\</span><span class="n">common_assets</span><span class="p">\</span><span class="n">props_general</span><span class="p">\</span><span class="n">apple_a01</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-project-config</span> <span class="n">sample_content</span><span class="p">\</span><span class="n">project_config</span><span class="p">.</span><span class="n">toml</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-root-usd</span> <span class="n">simready_usd</span><span class="p">\</span><span class="n">sm_apple_a01_01</span><span class="p">.</span><span class="n">usd</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-pre-validate-only</span>
+</pre></div>
+</div>
+</details>
+<details>
+<summary><strong>Linux</strong></summary>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-package<span class="w"> </span>sample_content/common_assets/props_general/apple_a01<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--project-config<span class="w"> </span>sample_content/project_config.toml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--root-usd<span class="w"> </span>simready_usd/sm_apple_a01_01.usd<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--pre-validate-only
+</pre></div>
+</div>
+</details>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Argument</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SOURCE</span></code> (positional)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">.../apple_a01</span></code></p></td>
+<td><p>Folder to validate</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--project-config</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sample_content/project_config.toml</span></code></p></td>
+<td><p>Load rules/features/profiles from <code class="docutils literal notranslate"><span class="pre">[validate]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--root-usd</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simready_usd/sm_apple_a01_01.usd</span></code></p></td>
+<td><p>Top-level USD entry point (repeatable for multi-USD packages)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--pre-validate-only</span></code></p></td>
+<td><p>—</p></td>
+<td><p>Run pre-validation only; do not build</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Pre-validation: [PASSED]
+</pre></div>
+</div>
+<p>When pre-validation passes, <code class="docutils literal notranslate"><span class="pre">Package-Candidate</span></code> has confirmed:</p>
+<ul class="simple">
+<li><p>All USD references resolve to files inside the folder (<code class="docutils literal notranslate"><span class="pre">FET031</span></code>).</p></li>
+<li><p>Each root USD meets SimReady packaging prerequisites (<code class="docutils literal notranslate"><span class="pre">FET033</span></code>), such as an SR.002-compliant thumbnail.</p></li>
+</ul>
+<p>If something is missing (typically the <code class="docutils literal notranslate"><span class="pre">256x256</span></code> thumbnail), the failure message names the exact requirement so you know what to fix.</p>
+</section>
+<section id="local-packaging-no-bom">
+<h2>4. Local packaging (no BOM)<a class="headerlink" href="#local-packaging-no-bom" title="Link to this heading">#</a></h2>
+<p>Choose this path when you want a minimal manifest for prototyping or when WRAPP is unavailable. <code class="docutils literal notranslate"><span class="pre">simready-package</span></code> writes a <code class="docutils literal notranslate"><span class="pre">com.nvidia.simready.packaging.json</span></code> directly into your source folder. No BOM, no content hash — just the three required fields.</p>
+<details open>
+<summary><strong>Windows (PowerShell)</strong></summary>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">simready-package</span> <span class="n">sample_content</span><span class="p">\</span><span class="n">common_assets</span><span class="p">\</span><span class="n">props_general</span><span class="p">\</span><span class="n">apple_a01</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-project-config</span> <span class="n">sample_content</span><span class="p">\</span><span class="n">project_config</span><span class="p">.</span><span class="n">toml</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-name</span> <span class="n">apple_a01</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-version</span> <span class="n">1</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-license</span> <span class="n">Apache</span><span class="p">-</span><span class="n">2</span><span class="p">.</span><span class="n">0</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-root-usd</span> <span class="n">simready_usd</span><span class="p">\</span><span class="n">sm_apple_a01_01</span><span class="p">.</span><span class="n">usd</span>
+</pre></div>
+</div>
+</details>
+<details>
+<summary><strong>Linux</strong></summary>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-package<span class="w"> </span>sample_content/common_assets/props_general/apple_a01<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--project-config<span class="w"> </span>sample_content/project_config.toml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--name<span class="w"> </span>apple_a01<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--version<span class="w"> </span><span class="m">1</span>.0.0<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--license<span class="w"> </span>Apache-2.0<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--root-usd<span class="w"> </span>simready_usd/sm_apple_a01_01.usd
+</pre></div>
+</div>
+</details>
+<p>Post-validation uses the <code class="docutils literal notranslate"><span class="pre">Package-NoBOM</span></code> profile automatically, checking manifest structure only (<code class="docutils literal notranslate"><span class="pre">FET030_PACKAGING_CORE</span></code>: <code class="docutils literal notranslate"><span class="pre">format_version</span></code>, <code class="docutils literal notranslate"><span class="pre">package_id</span></code>, <code class="docutils literal notranslate"><span class="pre">license</span></code>). The full <code class="docutils literal notranslate"><span class="pre">Package</span></code> profile — which adds <code class="docutils literal notranslate"><span class="pre">FET032</span></code> BOM introspection — applies only in step 5.</p>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Pre-validation: [PASSED]
+
+Post-validation: [PASSED]
+
+Package definition: sample_content/common_assets/props_general/apple_a01/com.nvidia.simready.packaging.json
+</pre></div>
+</div>
+<p>The generated file contains only the required fields:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;format_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;package_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;com.nvidia.simready.apple_a01.1.0.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;license&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Apache-2.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>[!NOTE]
+If your source folder already contains a <code class="docutils literal notranslate"><span class="pre">com.nvidia.simready.packaging.json</span></code>, this command overwrites it. If it also contains a stale <code class="docutils literal notranslate"><span class="pre">.metadata/</span></code> folder from a previous run, delete it first — see the note in section 5.</p>
+</div></blockquote>
+</section>
+<section id="full-wrapp-packaging-with-bom">
+<h2>5. Full WRAPP packaging (with BOM)<a class="headerlink" href="#full-wrapp-packaging-with-bom" title="Link to this heading">#</a></h2>
+<p>Use this path when you need a versioned, distributable package with a Bill of Materials, content hash, and conformance metadata. Pre- and post-validation are <strong>mandatory</strong> — <code class="docutils literal notranslate"><span class="pre">--skip-pre-validation</span></code> and <code class="docutils literal notranslate"><span class="pre">--skip-post-validation</span></code> are rejected in this mode.</p>
+<p>For a local test run, use a local directory as the target repository:</p>
+<details open>
+<summary><strong>Windows (PowerShell)</strong></summary>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">simready-package</span> <span class="n">sample_content</span><span class="p">\</span><span class="n">common_assets</span><span class="p">\</span><span class="n">props_general</span><span class="p">\</span><span class="n">apple_a01</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-project-config</span> <span class="n">sample_content</span><span class="p">\</span><span class="n">project_config</span><span class="p">.</span><span class="n">toml</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-name</span> <span class="n">apple_a01</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-version</span> <span class="n">1</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-license</span> <span class="n">Apache</span><span class="p">-</span><span class="n">2</span><span class="p">.</span><span class="n">0</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-root-usd</span> <span class="n">simready_usd</span><span class="p">\</span><span class="n">sm_apple_a01_01</span><span class="p">.</span><span class="n">usd</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-repo</span> <span class="n">C</span><span class="p">:\</span><span class="n">temp</span><span class="p">\</span><span class="n">my_repo</span>
+</pre></div>
+</div>
+</details>
+<details>
+<summary><strong>Linux</strong></summary>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-package<span class="w"> </span>sample_content/common_assets/props_general/apple_a01<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--project-config<span class="w"> </span>sample_content/project_config.toml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--name<span class="w"> </span>apple_a01<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--version<span class="w"> </span><span class="m">1</span>.0.0<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--license<span class="w"> </span>Apache-2.0<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--root-usd<span class="w"> </span>simready_usd/sm_apple_a01_01.usd<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--repo<span class="w"> </span>/tmp/my_repo
+</pre></div>
+</div>
+</details>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Pre-validation: [PASSED]
+
+Post-validation: [PASSED]
+
+Package definition: &lt;repo&gt;/.packages/apple_a01/1.0.0/com.nvidia.simready.packaging.json
+BOM:                &lt;repo&gt;/.packages/apple_a01/1.0.0/.metadata/com.nvidia.simready.packaging.bom.json
+</pre></div>
+</div>
+<section id="the-packages-folder">
+<h3>The <code class="docutils literal notranslate"><span class="pre">.packages/</span></code> folder<a class="headerlink" href="#the-packages-folder" title="Link to this heading">#</a></h3>
+<p>Your target repo — the directory you passed to <code class="docutils literal notranslate"><span class="pre">--repo</span></code> — is treated as a package store. Every published package lands at <code class="docutils literal notranslate"><span class="pre">&lt;repo&gt;/.packages/&lt;name&gt;/&lt;version&gt;/</span></code>. For our apple:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;repo&gt;/.packages/apple_a01/1.0.0/
+├── com.nvidia.simready.packaging.json    ← top-level manifest (metadata[] + content_hash + package_hash)
+├── .metadata/                             ← sidecar artifacts referenced by the manifest
+│   ├── com.nvidia.simready.packaging.bom.json                        ← Bill of Materials: file list + per-file hashes
+│   ├── com.nvidia.simready.root_usds.json                            ← recorded root-USD entry points
+│   ├── com.nvidia.simready.conformance.Package-Candidate@1.0.0.json  ← pre-validation evidence
+│   └── com.nvidia.simready.conformance.Package@1.0.0.json            ← post-validation evidence (Package profile)
+└── simready_usd/                          ← the payload — same shape as the source
+    ├── sm_apple_a01_01.usd
+    ├── materials/…
+    ├── textures/…
+    └── .thumbs/…
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Artifact</p></th>
+<th class="head"><p>Contents</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">com.nvidia.simready.packaging.json</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">format_version</span></code>, <code class="docutils literal notranslate"><span class="pre">package_id</span></code>, <code class="docutils literal notranslate"><span class="pre">license</span></code>, <code class="docutils literal notranslate"><span class="pre">metadata[]</span></code> (hash of each sidecar), rolled-up <code class="docutils literal notranslate"><span class="pre">content_hash</span></code>, and <code class="docutils literal notranslate"><span class="pre">package_hash</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.metadata/…packaging.bom.json</span></code></p></td>
+<td><p>Every file in the payload with its <code class="docutils literal notranslate"><span class="pre">sha256</span></code> (and optionally <code class="docutils literal notranslate"><span class="pre">blake3</span></code>) hash, size, and relative path</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.metadata/…root_usds.json</span></code></p></td>
+<td><p>The set of <code class="docutils literal notranslate"><span class="pre">--root-usd</span></code> entry points recorded at build time</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.metadata/…conformance.Package-Candidate&#64;1.0.0.json</span></code></p></td>
+<td><p>Structured record of the pre-validation results (evidence for the <code class="docutils literal notranslate"><span class="pre">Package-Candidate</span></code> profile)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.metadata/…conformance.Package&#64;1.0.0.json</span></code></p></td>
+<td><p>Structured record of the post-validation results (evidence for the full <code class="docutils literal notranslate"><span class="pre">Package</span></code> profile)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p>[!IMPORTANT]
+<strong>Clean your source before re-running.</strong> A stale <code class="docutils literal notranslate"><span class="pre">.metadata/</span></code> folder from a previous pre-validation run can cause <code class="docutils literal notranslate"><span class="pre">content_hash</span> <span class="pre">mismatch</span></code> during the build step. Delete <code class="docutils literal notranslate"><span class="pre">.metadata/</span></code> from your source folder before you run full WRAPP packaging again.</p>
+</div></blockquote>
+</section>
+<section id="compare-against-the-reference-fixture">
+<h3>Compare against the reference fixture<a class="headerlink" href="#compare-against-the-reference-fixture" title="Link to this heading">#</a></h3>
+<p>Compare the layout under <code class="docutils literal notranslate"><span class="pre">&lt;repo&gt;/.packages/apple_a01/1.0.0/</span></code> against the pre-built reference at <a href="../../../../sample_content/packaging/simple_packages/apple_a01_usd_bom/">sample_content/packaging/simple_packages/apple_a01_usd_bom/</a>. You should see the same set of files (package definition with <code class="docutils literal notranslate"><span class="pre">metadata</span></code> / <code class="docutils literal notranslate"><span class="pre">content_hash</span></code> / <code class="docutils literal notranslate"><span class="pre">package_hash</span></code>, <code class="docutils literal notranslate"><span class="pre">.metadata/</span></code> folder with BOM, root-USDs, and conformance sidecars, plus the payload). Individual hash values will differ if your source content differs.</p>
+</section>
+</section>
+<section id="re-validate-an-existing-package">
+<h2>6. Re-validate an existing package<a class="headerlink" href="#re-validate-an-existing-package" title="Link to this heading">#</a></h2>
+<p>If you already have a <code class="docutils literal notranslate"><span class="pre">com.nvidia.simready.packaging.json</span></code> file — because you built it earlier, received it from someone else, or updated the profile definitions — you can post-validate it in place with <code class="docutils literal notranslate"><span class="pre">--post-validate-only</span></code>. This does not rebuild anything; it just re-checks that the recorded hashes still match the files on disk.</p>
+<section id="a-no-bom-package">
+<h3>6a. No-BOM package<a class="headerlink" href="#a-no-bom-package" title="Link to this heading">#</a></h3>
+<p>If your package was created in local mode (step 4), it has no BOM. Validate it with the <code class="docutils literal notranslate"><span class="pre">Package-NoBOM</span></code> profile, which checks manifest structure only:</p>
+<details open>
+<summary><strong>Windows (PowerShell)</strong></summary>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">simready-package</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-project-config</span> <span class="n">sample_content</span><span class="p">\</span><span class="n">project_config</span><span class="p">.</span><span class="n">toml</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-post-validate-only</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-package-def</span> <span class="n">sample_content</span><span class="p">\</span><span class="n">packaging</span><span class="p">\</span><span class="n">simple_packages</span><span class="p">\</span><span class="n">apple_a01_nobom</span><span class="p">\</span><span class="n">com</span><span class="p">.</span><span class="n">nvidia</span><span class="p">.</span><span class="n">simready</span><span class="p">.</span><span class="n">packaging</span><span class="p">.</span><span class="n">json</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-profile</span> <span class="n">Package-NoBOM</span>
+</pre></div>
+</div>
+</details>
+<details>
+<summary><strong>Linux</strong></summary>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-package<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--project-config<span class="w"> </span>sample_content/project_config.toml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--post-validate-only<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--package-def<span class="w"> </span>sample_content/packaging/simple_packages/apple_a01_nobom/com.nvidia.simready.packaging.json<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--profile<span class="w"> </span>Package-NoBOM
+</pre></div>
+</div>
+</details>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Post-validation: [PASSED]
+</pre></div>
+</div>
+</section>
+<section id="b-bom-enabled-package">
+<h3>6b. BOM-enabled package<a class="headerlink" href="#b-bom-enabled-package" title="Link to this heading">#</a></h3>
+<p>If your package was created with WRAPP (step 5), the manifest declares a BOM and content hash. Validate it with the default <code class="docutils literal notranslate"><span class="pre">Package</span></code> profile, which also checks BOM completeness (<code class="docutils literal notranslate"><span class="pre">FET032</span></code>):</p>
+<details open>
+<summary><strong>Windows (PowerShell)</strong></summary>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">simready-package</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-project-config</span> <span class="n">sample_content</span><span class="p">\</span><span class="n">project_config</span><span class="p">.</span><span class="n">toml</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-post-validate-only</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-package-def</span> <span class="n">sample_content</span><span class="p">\</span><span class="n">packaging</span><span class="p">\</span><span class="n">simple_packages</span><span class="p">\</span><span class="n">apple_a01_usd_bom</span><span class="p">\</span><span class="n">com</span><span class="p">.</span><span class="n">nvidia</span><span class="p">.</span><span class="n">simready</span><span class="p">.</span><span class="n">packaging</span><span class="p">.</span><span class="n">json</span>
+</pre></div>
+</div>
+</details>
+<details>
+<summary><strong>Linux</strong></summary>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-package<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--project-config<span class="w"> </span>sample_content/project_config.toml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--post-validate-only<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--package-def<span class="w"> </span>sample_content/packaging/simple_packages/apple_a01_usd_bom/com.nvidia.simready.packaging.json
+</pre></div>
+</div>
+</details>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Post-validation: [PASSED]
+</pre></div>
+</div>
+<p>The default profile for <code class="docutils literal notranslate"><span class="pre">--post-validate-only</span></code> is <code class="docutils literal notranslate"><span class="pre">Package</span></code>. Pass <code class="docutils literal notranslate"><span class="pre">--profile</span> <span class="pre">&lt;ID&gt;</span></code> to override it.</p>
+</section>
+</section>
+<section id="understanding-the-sample-packages">
+<h2>7. Understanding the sample packages<a class="headerlink" href="#understanding-the-sample-packages" title="Link to this heading">#</a></h2>
+<p>The repo ships pre-built packages under <code class="docutils literal notranslate"><span class="pre">sample_content/packaging/simple_packages/</span></code> that you can compare against:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Folder</p></th>
+<th class="head"><p>BOM?</p></th>
+<th class="head"><p>What it demonstrates</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">apple_a01_nobom/</span></code></p></td>
+<td><p>No</p></td>
+<td><p>Minimal package: <code class="docutils literal notranslate"><span class="pre">format_version</span></code>, <code class="docutils literal notranslate"><span class="pre">package_id</span></code>, <code class="docutils literal notranslate"><span class="pre">license</span></code> only. Output of local (no-WRAPP) mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">apple_a01_usd_bom/</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p>Full WRAPP package: BOM + <code class="docutils literal notranslate"><span class="pre">content_hash</span></code> + Package-Candidate conformance metadata.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">apple_a01_usd_bom_multi_hash/</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p>Same as <code class="docutils literal notranslate"><span class="pre">apple_a01_usd_bom/</span></code> with both <code class="docutils literal notranslate"><span class="pre">sha256</span></code> and <code class="docutils literal notranslate"><span class="pre">blake3</span></code> hashes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">apple_a01_materials/</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p>Materials/textures-only package with no USD content; demonstrates the BOM-only path.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fruit_f01_multi_usd/</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p>Multi-root-USD package with <code class="docutils literal notranslate"><span class="pre">apple_a01</span></code> and <code class="docutils literal notranslate"><span class="pre">orange_a01</span></code> entry points.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="exit-codes">
+<h2>Exit codes<a class="headerlink" href="#exit-codes" title="Link to this heading">#</a></h2>
+<p>Every <code class="docutils literal notranslate"><span class="pre">simready-package</span></code> command in this guide returns an exit code your pipeline can gate on:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Exit code</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p>Success. Every phase that ran completed without error (or was skipped).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+<td><p>Validation failure, build failure, or invalid arguments. Read the console output to tell them apart.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<section id="simready-package-command-not-found">
+<h3><code class="docutils literal notranslate"><span class="pre">simready-package</span></code> command not found<a class="headerlink" href="#simready-package-command-not-found" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Make sure the venv is activated.</p></li>
+<li><p>Reinstall dependencies: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">nv_core/package_sample/requirements.txt</span></code>.</p></li>
+<li><p>On Windows, try <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">simready.package</span></code> as a fallback.</p></li>
+</ul>
+</section>
+<section id="error-no-root-usd-files-specified">
+<h3><code class="docutils literal notranslate"><span class="pre">Error:</span> <span class="pre">no</span> <span class="pre">root</span> <span class="pre">USD</span> <span class="pre">files</span> <span class="pre">specified</span></code><a class="headerlink" href="#error-no-root-usd-files-specified" title="Link to this heading">#</a></h3>
+<p>Pass <code class="docutils literal notranslate"><span class="pre">--root-usd</span> <span class="pre">&lt;relative-path&gt;</span></code> to name the entry-point USD file inside your source folder. The path is relative to <code class="docutils literal notranslate"><span class="pre">SOURCE</span></code>, for example <code class="docutils literal notranslate"><span class="pre">--root-usd</span> <span class="pre">simready_usd/sm_apple_a01_01.usd</span></code>.</p>
+</section>
+<section id="packaging-failed-wrapp-build-failed-content-hash-mismatch">
+<h3><code class="docutils literal notranslate"><span class="pre">Packaging</span> <span class="pre">failed:</span> <span class="pre">WRAPP</span> <span class="pre">build</span> <span class="pre">failed:</span> <span class="pre">content_hash</span> <span class="pre">mismatch</span></code><a class="headerlink" href="#packaging-failed-wrapp-build-failed-content-hash-mismatch" title="Link to this heading">#</a></h3>
+<p>A stale <code class="docutils literal notranslate"><span class="pre">.metadata/</span></code> folder inside your source folder contains a <code class="docutils literal notranslate"><span class="pre">content_hash</span></code> computed from a different file set. Delete <code class="docutils literal notranslate"><span class="pre">.metadata/</span></code> and re-run.</p>
+</section>
+<section id="validation-failed-engine-error">
+<h3><code class="docutils literal notranslate"><span class="pre">Validation</span> <span class="pre">failed:</span> <span class="pre">&lt;engine-error&gt;</span></code><a class="headerlink" href="#validation-failed-engine-error" title="Link to this heading">#</a></h3>
+<p>Profile definitions were not loaded. Pass <code class="docutils literal notranslate"><span class="pre">--project-config</span> <span class="pre">sample_content/project_config.toml</span></code> on every invocation outside a Kit environment, or the three <code class="docutils literal notranslate"><span class="pre">--rules-path</span></code> / <code class="docutils literal notranslate"><span class="pre">--features-path</span></code> / <code class="docutils literal notranslate"><span class="pre">--profiles-path</span></code> flags. See section 2.</p>
+</section>
+<section id="git-lfs-pointer-files">
+<h3>Git LFS pointer files<a class="headerlink" href="#git-lfs-pointer-files" title="Link to this heading">#</a></h3>
+<p>If your USD files are tiny text stubs starting with <code class="docutils literal notranslate"><span class="pre">version</span> <span class="pre">https://git-lfs.github.com/spec/v1</span></code>, LFS pointers were not resolved:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>lfs<span class="w"> </span>install
+git<span class="w"> </span>lfs<span class="w"> </span>pull
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="validate_workflow.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">SimReady Validation Workflow</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="acceptance_workflow.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">SimReady Acceptance Workflow</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#meet-the-working-asset-apple-a01">1. Meet the working asset: <code class="docutils literal notranslate"><span class="pre">apple_a01</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-makes-a-folder-a-simready-asset">What makes a folder a “SimReady asset”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-layout-summary">File layout summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-simready-package">2. Configuring <code class="docutils literal notranslate"><span class="pre">simready-package</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-project-config-recommended">2a. Project config (recommended)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-direct-cli-flags-no-config-file">2b. Direct CLI flags (no config file)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-validate-the-asset">3. Pre-validate the asset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-packaging-no-bom">4. Local packaging (no BOM)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-wrapp-packaging-with-bom">5. Full WRAPP packaging (with BOM)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-packages-folder">The <code class="docutils literal notranslate"><span class="pre">.packages/</span></code> folder</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-against-the-reference-fixture">Compare against the reference fixture</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#re-validate-an-existing-package">6. Re-validate an existing package</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-no-bom-package">6a. No-BOM package</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-bom-enabled-package">6b. BOM-enabled package</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-sample-packages">7. Understanding the sample packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exit-codes">Exit codes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simready-package-command-not-found"><code class="docutils literal notranslate"><span class="pre">simready-package</span></code> command not found</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-no-root-usd-files-specified"><code class="docutils literal notranslate"><span class="pre">Error:</span> <span class="pre">no</span> <span class="pre">root</span> <span class="pre">USD</span> <span class="pre">files</span> <span class="pre">specified</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#packaging-failed-wrapp-build-failed-content-hash-mismatch"><code class="docutils literal notranslate"><span class="pre">Packaging</span> <span class="pre">failed:</span> <span class="pre">WRAPP</span> <span class="pre">build</span> <span class="pre">failed:</span> <span class="pre">content_hash</span> <span class="pre">mismatch</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-failed-engine-error"><code class="docutils literal notranslate"><span class="pre">Validation</span> <span class="pre">failed:</span> <span class="pre">&lt;engine-error&gt;</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#git-lfs-pointer-files">Git LFS pointer files</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
