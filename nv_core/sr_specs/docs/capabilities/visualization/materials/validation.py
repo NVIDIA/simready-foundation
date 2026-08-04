@@ -74,10 +74,27 @@ class VisualMaterialsCapabilityChecker(BaseRuleChecker):
     }
 
     # Color space requirements (VM.TEX.002)
+    # Inputs carrying *color* data, which must be sRGB-encoded.
     colorspace_srgb_list = [
         "inputs:UV_VertexColor",
         "inputs:Set1SuperAlbedo",
         "inputs:Set2SuperAlbedo",
+        # OmniPBR color inputs
+        "inputs:diffuse_texture",
+        "inputs:emissive_color_texture",
+    ]
+
+    # Inputs carrying *non-color* data, which must be linear/raw.
+    colorspace_raw_list = [
+        "inputs:normalmap_texture",
+        "inputs:detail_normalmap_texture",
+        "inputs:clearcoat_normalmap_texture",
+        "inputs:ORM_texture",
+        "inputs:ao_texture",
+        "inputs:metallic_texture",
+        "inputs:reflectionroughness_texture",
+        "inputs:opacity_texture",
+        "inputs:emissive_mask_texture",
     ]
 
     # Texture size limit (VM.TEX.001)
@@ -486,7 +503,7 @@ class VisualMaterialsCapabilityChecker(BaseRuleChecker):
                 color_space = attr.GetColorSpace()
                 attr_name = attr.GetName()
 
-                # Check if this attribute requires sRGB color space
+                # Color inputs must be sRGB-encoded
                 if attr_name in self.colorspace_srgb_list:
                     if color_space != "sRGB":
                         self._AddFailedCheck(
@@ -495,8 +512,8 @@ class VisualMaterialsCapabilityChecker(BaseRuleChecker):
                             requirement=cap.MaterialsRequirements.VM_TEX_002,
                         )
                         errors.append(f"Incorrect color space for {attr_name}: {color_space} (expected sRGB)")
-                else:
-                    # All other attributes should use 'raw' color space
+                # Non-color data inputs must be linear/raw
+                elif attr_name in self.colorspace_raw_list:
                     if color_space != "raw":
                         self._AddFailedCheck(
                             message=f"Attribute '{attr_name}' has color space '{color_space}', expected 'raw'",
@@ -504,6 +521,16 @@ class VisualMaterialsCapabilityChecker(BaseRuleChecker):
                             requirement=cap.MaterialsRequirements.VM_TEX_002,
                         )
                         errors.append(f"Incorrect color space for {attr_name}: {color_space} (expected raw)")
+                else:
+                    # Unclassified input: warn rather than guess. Assuming 'raw'
+                    # here would fail correctly-authored color inputs.
+                    self._AddWarning(
+                        message=(
+                            f"Attribute '{attr_name}' has color space '{color_space}' but is not "
+                            f"classified as color or non-color data; skipping VM.TEX.002 check"
+                        ),
+                        at=prim,
+                    )
 
         return errors
 
