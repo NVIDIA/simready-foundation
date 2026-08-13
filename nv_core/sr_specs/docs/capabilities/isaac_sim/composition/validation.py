@@ -12,12 +12,58 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import os
-from pathlib import Path
+import re
 
 import omni.capabilities as cap
 import usd_validation_nvidia
-from pxr import Kind, Usd, UsdGeom, UsdPhysics, UsdShade
+from pxr import Kind, Usd, UsdGeom
+
+# Payload layers are identified by *role* rather than by an exact filename, and the
+# roles are grouped into the two payload layouts that ISA.001 governs:
+#
+#   "prop"  - SimReady prop content, per this requirement's "How to comply" section:
+#             payloads/{asset_name}_base.usd + _meshes.usd + _physics.usd
+#             (packaged assets conventionally prefix the stem with an underscore)
+#   "robot" - the robot layout shared with RC.001, used by Robot-Body-Isaac:
+#             payloads/base.usda + geometries.usd + instances.usda + materials.usda
+#
+# An asset satisfies the payload-structure check when it completely matches either
+# layout. The two are disjoint: the prop patterns require an underscore before the
+# role word, so "payloads/base.usda" never matches the prop "base" role.
+#
+# The trailing ``(\]|$)`` makes every pattern match BOTH forms of layer identifier:
+#   on disk   ".../payloads/myasset_base.usd"
+#   in a usdz ".../myasset.usdz[payloads/myasset_base.usd]"
+_SUFFIX = r"\.usd[ac]?(\]|$)"
+
+_LAYOUTS = {
+    "prop": {
+        role: re.compile(rf"payloads/[^/]*_{role}{_SUFFIX}", re.IGNORECASE)
+        for role in ("base", "meshes", "physics")
+    },
+    "robot": {
+        role: re.compile(rf"payloads/{role}{_SUFFIX}", re.IGNORECASE)
+        for role in ("base", "geometries", "instances", "materials")
+    },
+}
+
+_LAYOUT_DESCRIPTIONS = {
+    "prop": "payloads/{asset_name}_base.usd + _meshes.usd + _physics.usd",
+    "robot": "payloads/base.usda + geometries.usd + instances.usda + materials.usda",
+}
+
+# Either layout's base layer is an acceptable target for the default prim's arc.
+_BASE_PATTERNS = (_LAYOUTS["prop"]["base"], _LAYOUTS["robot"]["base"])
+
+
+def _normalize(identifier: str) -> str:
+    """Normalize a layer identifier or asset path for role matching.
+
+    On-disk identifiers may use OS-native separators; usdz-internal layers are
+    always reported with forward slashes inside square brackets. Normalizing to
+    forward slashes lets one pattern match both.
+    """
+    return identifier.replace("\\", "/")
 
 
 @usd_validation_nvidia.register_rule("IsaacComposition")
@@ -53,40 +99,77 @@ class IsaacCompositionCapabilityChecker(usd_validation_nvidia.BaseRuleChecker):
         # Check for proper hierarchy organization
         self._check_hierarchy_organization(stage, default_prim)
 
+    @staticmethod
+    def _root_arc_asset_paths(default_prim: Usd.Prim) -> list:
+        """Asset paths of the reference and payload arcs authored on the default prim.
+
+        Read from the root layer's prim spec, so this reflects what the asset
+        itself declares rather than what composition happened to resolve.
+        """
+        root_layer = default_prim.GetStage().GetRootLayer()
+        prim_spec = root_layer.GetPrimAtPath(default_prim.GetPath())
+        if not prim_spec:
+            return []
+
+        arcs = prim_spec.referenceList.GetAddedOrExplicitItems()
+        arcs += prim_spec.payloadList.GetAddedOrExplicitItems()
+        return [_normalize(str(arc.assetPath)) for arc in arcs]
+
     def _check_payload_structure(self, stage: Usd.Stage, default_prim: Usd.Prim):
-        """Check if the asset has proper payload structure"""
-        stage_path = stage.GetRootLayer().identifier
-        if not stage_path:
+        """Check if the asset has proper payload structure.
+
+        Driven by the composed layer stack rather than the OS filesystem, so a
+        `.usdz` package -- whose ``payloads/`` layers live inside the archive and
+        therefore have no sibling directory on disk -- is validated the same way
+        as an unpacked asset.
+        """
+        # Union the composed layer stack with the arcs authored on the default
+        # prim. GetUsedLayers() alone would miss an unloaded payload when the
+        # stage was opened with a load rule other than LoadAll.
+        candidates = [_normalize(layer.identifier) for layer in stage.GetUsedLayers()]
+        candidates += self._root_arc_asset_paths(default_prim)
+
+        missing_by_layout = {
+            layout: [
+                role
+                for role, pattern in roles.items()
+                if not any(pattern.search(candidate) for candidate in candidates)
+            ]
+            for layout, roles in _LAYOUTS.items()
+        }
+
+        # The asset passes if it completely matches either recognized layout.
+        if any(not missing for missing in missing_by_layout.values()):
             return
 
-        stage_dir = Path(stage_path).parent
-        payloads_dir = stage_dir / "payloads"
+        # Otherwise report against the closest layout, so a nearly-complete asset
+        # gets told which layer it is actually missing rather than a generic error.
+        closest = min(missing_by_layout, key=lambda layout: len(missing_by_layout[layout]))
+        missing = missing_by_layout[closest]
 
-        # Check if payloads directory exists
-        if not payloads_dir.exists():
+        if len(missing) == len(_LAYOUTS[closest]):
+            accepted = " or ".join(
+                f"{layout} ({_LAYOUT_DESCRIPTIONS[layout]})" for layout in _LAYOUTS
+            )
             self._AddFailedCheck(
-                "Missing 'payloads/' directory for Isaac Sim composition.",
+                f"No recognized Isaac Sim payload structure found. Expected {accepted}.",
                 at=default_prim,
                 requirement=self.ISAAC_COMPOSITION_REQUIREMENT,
             )
             return
 
-        # Check for expected payload files
-        asset_name = Path(stage_path).stem
-        expected_files = ["geometries.usd", "base.usda", "instances.usda", "materials.usda"]
-
-        for expected_file in expected_files:
-            if not (payloads_dir / expected_file).exists():
-                self._AddFailedCheck(
-                    f"Missing expected payload file: payloads/{expected_file}",
-                    at=default_prim,
-                    requirement=self.ISAAC_COMPOSITION_REQUIREMENT,
-                )
+        for role in missing:
+            self._AddFailedCheck(
+                f"Incomplete {closest} Isaac Sim payload structure: no '{role}' layer is "
+                f"composed into the stage. Expected {_LAYOUT_DESCRIPTIONS[closest]}.",
+                at=default_prim,
+                requirement=self.ISAAC_COMPOSITION_REQUIREMENT,
+            )
 
     def _check_reference_structure(self, default_prim: Usd.Prim):
-        """Check if default prim has proper references and payloads"""
-        prim_spec = default_prim.GetStage().GetRootLayer().GetPrimAtPath(default_prim.GetPath())
-        if not prim_spec:
+        """Check if default prim has proper references and payloads."""
+        root_layer = default_prim.GetStage().GetRootLayer()
+        if not root_layer.GetPrimAtPath(default_prim.GetPath()):
             self._AddFailedCheck(
                 "Could not resolve prim spec for default prim.",
                 at=default_prim,
@@ -94,53 +177,34 @@ class IsaacCompositionCapabilityChecker(usd_validation_nvidia.BaseRuleChecker):
             )
             return
 
-        ref_list = prim_spec.referenceList.GetAddedOrExplicitItems()
-        has_base_ref = any(str(ref.assetPath) == "./payloads/base.usda" for ref in ref_list)
-
-        if not has_base_ref:
+        arc_paths = self._root_arc_asset_paths(default_prim)
+        if not any(pattern.search(path) for pattern in _BASE_PATTERNS for path in arc_paths):
             self._AddFailedCheck(
-                "Default prim missing reference to _base.usd payload file.",
+                "Default prim must reference or payload the base layer "
+                "(payloads/{asset_name}_base.usd or payloads/base.usda).",
                 at=default_prim,
                 requirement=self.ISAAC_COMPOSITION_REQUIREMENT,
             )
 
     def _check_hierarchy_organization(self, stage: Usd.Stage, default_prim: Usd.Prim):
-        """Check for proper Isaac Sim hierarchy organization"""
-        # Look for common Isaac Sim structure indicators
-        found_looks = False
-        found_meshes = False
-        found_visuals = False
-
-        # Check entire stage for expected scopes
+        """Check for proper Isaac Sim hierarchy organization."""
+        # The "Looks", "Meshes" and "Visuals" scopes may legitimately live inside a
+        # payload, so their absence is not an error here; only assert invisibility
+        # on the scopes that are actually present in the composed stage.
         for prim in Usd.PrimRange(stage.GetPseudoRoot()):
-            if prim.GetName() == "Looks" and prim.GetTypeName() == "Scope":
-                found_looks = True
-            elif prim.GetName() == "Meshes" and prim.GetTypeName() == "Scope":
-                found_meshes = True
-                # Check if Meshes scope is invisible
-                imageable = UsdGeom.Imageable(prim)
-                if imageable.GetVisibilityAttr():
-                    visibility = imageable.GetVisibilityAttr().Get()
-                    if visibility != UsdGeom.Tokens.invisible:
-                        self._AddFailedCheck(
-                            "Meshes scope should be invisible for proper Isaac Sim composition.",
-                            at=prim,
-                            requirement=self.ISAAC_COMPOSITION_REQUIREMENT,
-                        )
-            elif prim.GetName() == "Visuals" and prim.GetTypeName() == "Scope":
-                found_visuals = True
-                # Check if Visuals scope is invisible
-                imageable = UsdGeom.Imageable(prim)
-                if imageable.GetVisibilityAttr():
-                    visibility = imageable.GetVisibilityAttr().Get()
-                    if visibility != UsdGeom.Tokens.invisible:
-                        self._AddFailedCheck(
-                            "Visuals scope should be invisible for proper Isaac Sim composition.",
-                            at=prim,
-                            requirement=self.ISAAC_COMPOSITION_REQUIREMENT,
-                        )
+            if prim.GetName() not in ("Meshes", "Visuals") or prim.GetTypeName() != "Scope":
+                continue
 
-        # Warning if expected scopes are not found (may be in payloads)
-        if not (found_looks or found_meshes or found_visuals):
-            # This is a soft warning since these might be in payload files
-            pass  # Could add informational message if needed
+            visibility_attr = UsdGeom.Imageable(prim).GetVisibilityAttr()
+            if not visibility_attr:
+                continue
+
+            visibility = visibility_attr.Get()
+            # An unauthored visibility attribute resolves to None; treat only an
+            # explicitly visible scope as a failure.
+            if visibility is not None and visibility != UsdGeom.Tokens.invisible:
+                self._AddFailedCheck(
+                    f"{prim.GetName()} scope should be invisible for proper Isaac Sim composition.",
+                    at=prim,
+                    requirement=self.ISAAC_COMPOSITION_REQUIREMENT,
+                )
