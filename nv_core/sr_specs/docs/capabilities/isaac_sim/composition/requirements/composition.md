@@ -2,7 +2,7 @@
 
 | Code     | ISA.001 |
 |----------|---------|
-| Validator| |
+| Validator| CheckStage |
 | Compatibility | {compatibility}`OpenUSD` |
 | Tags     | {tag}`essential` |
 
@@ -115,6 +115,16 @@ def Xform "MyAsset" {
    - `{asset_name}_meshes.usd`: Contains geometry, materials (as "Looks"), and visual hierarchy
    - `{asset_name}_base.usd`: References the meshes file
    - `{asset_name}_physics.usd`: Contains physics materials, joints, and physics attributes
+
+   All three layers must end up composed into the stage. They are identified by their
+   `_base` / `_meshes` / `_physics` role suffix, so the `{asset_name}` stem does not have to
+   match the main asset file name exactly, and any of the `.usd`, `.usda`, or `.usdc` formats
+   may be used.
+
+   Robot assets validated under `Robot-Body-Isaac` use the robot payload layout described by
+   `RC.001` instead — `payloads/base.usda` plus `geometries.usd`, `instances.usda` and
+   `materials.usda`. Either layout satisfies this requirement, but an asset must match one of
+   them completely; a partial structure is a failure.
 3. **File Structure**: Organize the asset with the following directory structure:
    .. code-block:: text
 
@@ -134,6 +144,10 @@ def Xform "MyAsset" {
 7. **Reference Paths**: Use relative paths for all references and payloads to maintain portability
 8. **Default Prim**: Each USD file must have a properly set default prim
 9. **Metadata**: Set appropriate stage metadata including `upAxis = "Z"` and `metersPerUnit = 1.0`
+10. **Packaging**: The asset may be delivered either as an unpacked directory tree or as a single
+    `.usdz` package. Both are validated identically, from the composed stage rather than from the
+    surrounding directory listing: inside a `.usdz` the payload layers are archive members
+    (`myasset.usdz[payloads/myasset_base.usd]`) and there is no `payloads/` directory on disk.
 
 ## For More Information
 
