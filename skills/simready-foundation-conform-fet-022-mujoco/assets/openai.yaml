@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform FET_022_MUJOCO"
+  short_description: "Repair FET_022_MUJOCO conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-022-mujoco to repair FET_022_MUJOCO SimReady conformance failures."

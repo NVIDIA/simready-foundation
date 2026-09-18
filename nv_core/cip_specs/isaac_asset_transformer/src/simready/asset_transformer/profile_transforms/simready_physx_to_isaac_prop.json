@@ -1,0 +1,287 @@
+{
+  "profile_name": "SimReady PhysX to Isaac Prop",
+  "version": "1.0",
+  "rules": [
+    {
+      "name": "Route Variants",
+      "type": "simready.asset_transformer.rules.structure.variants.VariantRoutingRule",
+      "destination": "payloads",
+      "params": {
+        "excluded_variants": [
+          "none",
+          "default",
+          "physx"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "name": "Flatten Base",
+      "type": "simready.asset_transformer.rules.structure.flatten.FlattenRule",
+      "destination": "payloads",
+      "params": {
+        "output_path": "base.usd",
+        "selected_variants": {
+          "PhysX": "Disabled",
+          "Newton": "Disabled",
+          "MuJoCo": "Disabled"
+        },
+        "clear_variants": false,
+        "case_insensitive": true
+      },
+      "enabled": true
+    },
+    {
+      "name": "Apply Joint State APIs",
+      "type": "simready.asset_transformer.rules.isaac_sim.joint_state_api.JointStateAPIRule",
+      "destination": "payloads",
+      "params": {},
+      "enabled": true
+    },
+    {
+      "name": "Route Geometries",
+      "type": "simready.asset_transformer.rules.perf.geometries.GeometriesRoutingRule",
+      "destination": "payloads",
+      "params": {
+        "geometries_layer": "geometries.usd",
+        "instance_layer": "instances.usda",
+        "deduplicate": true
+      },
+      "enabled": true
+    },
+    {
+      "name": "Fix Physics Joint Poses",
+      "type": "simready.asset_transformer.rules.isaac_sim.physics_joint_pose_fix.PhysicsJointPoseFixRule",
+      "destination": "payloads",
+      "params": {},
+      "enabled": true
+    },
+    {
+      "name": "Route Materials",
+      "type": "simready.asset_transformer.rules.perf.materials.MaterialsRoutingRule",
+      "destination": "payloads",
+      "params": {
+        "materials_layer": "materials.usda",
+        "assets_folder": "Textures",
+        "download_textures": true
+      },
+      "enabled": true
+    },
+    {
+      "name": "Route Runtime Instance Opinions",
+      "type": "simready.asset_transformer.rules.perf.runtime_instances.RuntimeInstanceRoutingRule",
+      "destination": "",
+      "params": {
+        "instances_layer": "payloads/instances.usda",
+        "runtimes": [
+          {
+            "folder": "PhysX",
+            "instances_layer": "payloads/instances_physx.usda"
+          },
+          {
+            "folder": "Newton",
+            "instances_layer": "payloads/instances_newton.usda"
+          },
+          {
+            "folder": "MuJoCo",
+            "instances_layer": "payloads/instances_mujoco.usda"
+          }
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "name": "Route PhysX Schemas",
+      "type": "simready.asset_transformer.rules.core.schemas.SchemaRoutingRule",
+      "destination": "payloads/Physics",
+      "params": {
+        "stage_name": "physx.usda",
+        "schemas": [
+          "Physx.*",
+          "physx.*"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "name": "Route PhysX Prims",
+      "type": "simready.asset_transformer.rules.core.prims.PrimRoutingRule",
+      "destination": "payloads/Physics",
+      "params": {
+        "stage_name": "physx.usda",
+        "prim_types": [
+          "Physx.*",
+          "physx.*"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "name": "Route PhysX Properties",
+      "type": "simready.asset_transformer.rules.core.properties.PropertyRoutingRule",
+      "destination": "payloads/Physics",
+      "params": {
+        "stage_name": "physx.usda",
+        "properties": [
+          "Physx.*",
+          "physx.*"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "name": "Route MuJoCo Schemas",
+      "type": "simready.asset_transformer.rules.core.schemas.SchemaRoutingRule",
+      "destination": "payloads/Physics",
+      "params": {
+        "stage_name": "mujoco.usda",
+        "schemas": [
+          "Mjc.*",
+          "mjc.*"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "name": "Route MuJoCo Prims",
+      "type": "simready.asset_transformer.rules.core.prims.PrimRoutingRule",
+      "destination": "payloads/Physics",
+      "params": {
+        "stage_name": "mujoco.usda",
+        "prim_types": [
+          "Mjc.*",
+          "mjc.*"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "name": "Route MuJoCo Properties",
+      "type": "simready.asset_transformer.rules.core.properties.PropertyRoutingRule",
+      "destination": "payloads/Physics",
+      "params": {
+        "stage_name": "mujoco.usda",
+        "properties": [
+          "Mjc.*",
+          "mjc.*"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "name": "Route Physics Schemas",
+      "type": "simready.asset_transformer.rules.core.schemas.SchemaRoutingRule",
+      "destination": "payloads/Physics",
+      "params": {
+        "stage_name": "physics.usda",
+        "schemas": [
+          "Physics.*",
+          "Newton.*"
+        ],
+        "ignore_schemas": [
+          "PhysicsCollisionAPI"
+        ],
+        "prim_names": [
+          ".*"
+        ],
+        "ignore_prim_names": []
+      },
+      "enabled": true
+    },
+    {
+      "name": "Route Physics Prims",
+      "type": "simready.asset_transformer.rules.core.prims.PrimRoutingRule",
+      "destination": "payloads/Physics",
+      "params": {
+        "stage_name": "physics.usda",
+        "prim_types": [
+          "Physics.*",
+          "Newton.*"
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "name": "Make API Schemas Non-Explicit",
+      "type": "simready.asset_transformer.rules.isaac_sim.make_lists_non_explicit.MakeListsNonExplicitRule",
+      "destination": "payloads",
+      "params": {
+        "metadata_names": [
+          "apiSchemas"
+        ],
+        "property_names": [],
+        "list_op_type": "prepend"
+      },
+      "enabled": true
+    },
+    {
+      "name": "Generate Interface",
+      "type": "simready.asset_transformer.rules.structure.interface.InterfaceConnectionRule",
+      "destination": "",
+      "params": {
+        "base_layer": "payloads/base.usda",
+        "base_connection_type": "Reference",
+        "generate_folder_variants": true,
+        "payloads_folder": "payloads",
+        "connections": [
+          {
+            "asset_path": "payloads/base.usda",
+            "target_path": "payloads/Physics/physics.usda",
+            "connection_type": "Sublayer"
+          }
+        ],
+        "default_variant_selections": {
+          "PhysX": "Enabled",
+          "Newton": "Disabled",
+          "MuJoCo": "Disabled"
+        },
+        "clear_default_variant_sets": [],
+        "excluded_variant_sets": [
+          "Physics"
+        ],
+        "include_none_variant": false,
+        "capitalize_variant_names": true
+      },
+      "enabled": true
+    },
+    {
+      "name": "Delete Physics Drive and Joint State APIs",
+      "type": "simready.asset_transformer.rules.core.remove_schema.RemoveSchemaRule",
+      "destination": "payloads/MuJoCo",
+      "params": {
+        "stage_name": "enabled.usda",
+        "schema_patterns": [
+          "PhysicsDriveAPI.*",
+          "PhysicsJointStateAPI.*"
+        ],
+        "prim_path_patterns": [
+          ".*"
+        ],
+        "clear_properties": false
+      },
+      "enabled": true
+    },
+    {
+      "name": "Clean Prop Package",
+      "type": "simready.asset_transformer.rules.structure.prop_cleanup.PropCleanupRule",
+      "destination": "",
+      "params": {
+        "root_prim_patterns": [
+          "Render",
+          "OmniverseKit_*",
+          "PhysicsScene"
+        ],
+        "custom_layer_data_keys": [
+          "cameraSettings",
+          "omni_layer",
+          "renderSettings"
+        ]
+      },
+      "enabled": true
+    }
+  ],
+  "interface_asset_name": null,
+  "output_package_root": null,
+  "flatten_source": false,
+  "base_name": "base.usd"
+}

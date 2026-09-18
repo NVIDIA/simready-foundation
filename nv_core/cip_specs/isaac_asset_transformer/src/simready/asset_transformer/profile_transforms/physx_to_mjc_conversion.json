@@ -1,0 +1,17 @@
+{
+  "profile_name": "PhysX to MJC Conversion",
+  "version": "1.0",
+  "rules": [
+    {
+      "name": "Convert PhysX to MJC",
+      "type": "simready.asset_transformer.rules.isaac_sim.physx_to_mjc_conversion.PhysxToMjcConversionRule",
+      "destination": "",
+      "params": {},
+      "enabled": true
+    }
+  ],
+  "interface_asset_name": null,
+  "output_package_root": null,
+  "flatten_source": false,
+  "base_name": "mujoco.usda"
+}

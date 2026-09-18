@@ -1,0 +1,12 @@
+{
+    "id": "FET_028_STANDARD",
+    "version": "0.1.0",
+    "display_name": "Gripper",
+    "path": "features/FET_028_STANDARD.html",
+    "requirements": [
+        "GR.001",
+        "GR.002",
+        "GR.003",
+        "GR.004"
+    ]
+}

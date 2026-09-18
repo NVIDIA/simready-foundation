@@ -154,7 +154,7 @@ If your feature builds on an existing feature, you can declare a dependency to i
     "display_name": "Has Foo Prim",
     "path": "features/FET_099-has_foo_prim.html",
     "dependencies": [
-        {"FET003_BASE_NEUTRAL": {"version": "0.1.0"}}
+        {"FET_003_STANDARD": {"version": "0.1.0"}}
     ],
     "requirements": [
         "FOO.001"
@@ -189,6 +189,7 @@ Create `features/FET_099-has_foo_prim.md`:
 
 ## Neutral Format
 ### Version 0.1.0
+
 <details>
 <summary><strong>Details</strong></summary>
 
@@ -216,12 +217,12 @@ Add your feature to the `Prop-Robotics-Neutral` profile in `profiles/prop_roboti
 ```toml
 [Prop-Robotics-Neutral]
 "1.0.0" = {features = [
-    {"FET000_CORE" = {version = "0.1.0"}},            # "Core"
-    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}},     # "Minimal"
-    {"FET003_BASE_NEUTRAL" = {version = "0.1.0"}},     # "RBD Physics"
-    {"FET004_BASE_NEUTRAL" = {version = "0.1.0"}},     # "Simulate Multi-Body Physics"
-    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}},     # "Simulate Grasp Physics"
-    {"FET006_BASE_MDL" = {version = "0.1.0"}},         # "Materials"
+    {"FET_000_STANDARD" = {version = "0.1.0"}},           # "Core"
+    {"FET_001_STANDARD" = {version = "0.1.0"}},     # "Minimal"
+    {"FET_003_STANDARD" = {version = "0.1.0"}},            # "RBD Physics"
+    {"FET_004_STANDARD" = {version = "0.1.0"}},            # "Simulate Multi-Body Physics"
+    {"FET_005_STANDARD" = {version = "0.1.0"}},            # "Simulate Grasp Physics"
+    {"FET_006_MDL" = {version = "0.1.0"}},         # "Materials"
     {"FET099_BASE_NEUTRAL" = {version = "0.1.0"}},     # "Has Foo Prim"   <-- add this line
 ]}
 ```
@@ -238,13 +239,21 @@ pip install simready-validate
 
 ### 5b. Confirm it fails on a non-conforming asset
 
+```{note}
+If you have installed the published tier wheels, `simready-validate` can load
+rules, features, and profiles by auto-discovery and you can omit the path flags
+below. See [SimReady Foundation PyPI Packages](foundation_pypi.md). The commands
+here use `--rules-path` / `--features-path` / `--profiles-path` so you can
+verify against the **local** tier source trees in this repository clone.
+```
+
 From the root of this repository (`simready_foundations/`), run the following. The sample asset `sm_apple_a01_01.usd` has no prim named "Foo", so it should fail `FOO.001`:
 
 ```bash
 simready-validate \
-  --rules-path nv_core/sr_specs/docs/capabilities \
-  --features-path nv_core/sr_specs/docs/features \
-  --profiles-path nv_core/sr_specs/docs/profiles \
+  --rules-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities \
+  --features-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features \
+  --profiles-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles \
   --profile Prop-Robotics-Neutral --version 1.0.0 \
   sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
 ```
@@ -290,9 +299,9 @@ Re-run validation against the fixed asset:
 
 ```bash
 simready-validate \
-  --rules-path nv_core/sr_specs/docs/capabilities \
-  --features-path nv_core/sr_specs/docs/features \
-  --profiles-path nv_core/sr_specs/docs/profiles \
+  --rules-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities \
+  --features-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features \
+  --profiles-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles \
   --profile Prop-Robotics-Neutral --version 1.0.0 \
   fixed_asset.usd
 ```
@@ -351,12 +360,14 @@ The `simready-validate` CLI is backed by the `simready.validate` Python library,
 from pathlib import Path
 import simready.validate as sv
 
-FOUNDATIONS_DOCS_DIR = Path("nv_core/sr_specs/docs")
+TIER_CORE = Path(
+    "nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core"
+)
 
 sv.initialize(
-    rules_and_requirements_paths=[FOUNDATIONS_DOCS_DIR / "capabilities"],
-    features_paths=[FOUNDATIONS_DOCS_DIR / "features"],
-    profiles_paths=[FOUNDATIONS_DOCS_DIR / "profiles"],
+    rules_and_requirements_paths=[TIER_CORE / "capabilities"],
+    features_paths=[TIER_CORE / "features"],
+    profiles_paths=[TIER_CORE / "profiles"],
 )
 
 result = sv.validate_asset(sv.AssetValidationConfig(

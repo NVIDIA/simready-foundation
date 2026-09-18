@@ -1,0 +1,21 @@
+{
+    "id": "FET_000_MUJOCO",
+    "version": "0.1.0",
+    "display_name": "Core (MuJoCo)",
+    "path": "features/FET_000_MUJOCO.html",
+    "runtime": "MuJoCo",
+    "dependencies": [
+        {
+            "FET_000_STANDARD": {
+                "version": "0.1.0"
+            }
+        }
+    ],
+    "requirements": [
+        "RV.007",
+        "RV.008",
+        "RV.009",
+        "RV.010",
+        "RV.011"
+    ]
+}

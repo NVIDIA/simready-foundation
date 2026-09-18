@@ -1,0 +1,1062 @@
+{
+  "instance_name": "ade20k",
+  "taxonomy_slug": "ade20k",
+  "taxonomy_name": "ADE20K semantic segmentation 150",
+  "dataset_name": "ADE20K",
+  "dataset_slug": "ade20k",
+  "taxonomy_version": "ADE20K-150",
+  "source_url": "https://raw.githubusercontent.com/open-mmlab/mmsegmentation/main/mmseg/datasets/ade.py",
+  "label_count": 150,
+  "labels": [
+    {
+      "name": "wall",
+      "display_name": "Wall",
+      "class_id": 1,
+      "color_rgb": "120,120,120",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "building",
+      "display_name": "Building",
+      "class_id": 2,
+      "color_rgb": "180,120,120",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "sky",
+      "display_name": "Sky",
+      "class_id": 3,
+      "color_rgb": "6,230,230",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "floor",
+      "display_name": "Floor",
+      "class_id": 4,
+      "color_rgb": "80,50,50",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "tree",
+      "display_name": "Tree",
+      "class_id": 5,
+      "color_rgb": "4,200,3",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "ceiling",
+      "display_name": "Ceiling",
+      "class_id": 6,
+      "color_rgb": "120,120,80",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "road",
+      "display_name": "Road",
+      "class_id": 7,
+      "color_rgb": "140,140,140",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "bed",
+      "display_name": "Bed",
+      "class_id": 8,
+      "color_rgb": "204,5,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "windowpane",
+      "display_name": "Windowpane",
+      "class_id": 9,
+      "color_rgb": "230,230,230",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "grass",
+      "display_name": "Grass",
+      "class_id": 10,
+      "color_rgb": "4,250,7",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "cabinet",
+      "display_name": "Cabinet",
+      "class_id": 11,
+      "color_rgb": "224,5,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "sidewalk",
+      "display_name": "Sidewalk",
+      "class_id": 12,
+      "color_rgb": "235,255,7",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "person",
+      "display_name": "Person",
+      "class_id": 13,
+      "color_rgb": "150,5,61",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "earth",
+      "display_name": "Earth",
+      "class_id": 14,
+      "color_rgb": "120,120,70",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "door",
+      "display_name": "Door",
+      "class_id": 15,
+      "color_rgb": "8,255,51",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "table",
+      "display_name": "Table",
+      "class_id": 16,
+      "color_rgb": "255,6,82",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "mountain",
+      "display_name": "Mountain",
+      "class_id": 17,
+      "color_rgb": "143,255,140",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "plant",
+      "display_name": "Plant",
+      "class_id": 18,
+      "color_rgb": "204,255,4",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "curtain",
+      "display_name": "Curtain",
+      "class_id": 19,
+      "color_rgb": "255,51,7",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "chair",
+      "display_name": "Chair",
+      "class_id": 20,
+      "color_rgb": "204,70,3",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "car",
+      "display_name": "Car",
+      "class_id": 21,
+      "color_rgb": "0,102,200",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "water",
+      "display_name": "Water",
+      "class_id": 22,
+      "color_rgb": "61,230,250",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "painting",
+      "display_name": "Painting",
+      "class_id": 23,
+      "color_rgb": "255,6,51",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "sofa",
+      "display_name": "Sofa",
+      "class_id": 24,
+      "color_rgb": "11,102,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "shelf",
+      "display_name": "Shelf",
+      "class_id": 25,
+      "color_rgb": "255,7,71",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "house",
+      "display_name": "House",
+      "class_id": 26,
+      "color_rgb": "255,9,224",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "sea",
+      "display_name": "Sea",
+      "class_id": 27,
+      "color_rgb": "9,7,230",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "mirror",
+      "display_name": "Mirror",
+      "class_id": 28,
+      "color_rgb": "220,220,220",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "rug",
+      "display_name": "Rug",
+      "class_id": 29,
+      "color_rgb": "255,9,92",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "field",
+      "display_name": "Field",
+      "class_id": 30,
+      "color_rgb": "112,9,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "armchair",
+      "display_name": "Armchair",
+      "class_id": 31,
+      "color_rgb": "8,255,214",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "seat",
+      "display_name": "Seat",
+      "class_id": 32,
+      "color_rgb": "7,255,224",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "fence",
+      "display_name": "Fence",
+      "class_id": 33,
+      "color_rgb": "255,184,6",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "desk",
+      "display_name": "Desk",
+      "class_id": 34,
+      "color_rgb": "10,255,71",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "rock",
+      "display_name": "Rock",
+      "class_id": 35,
+      "color_rgb": "255,41,10",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "wardrobe",
+      "display_name": "Wardrobe",
+      "class_id": 36,
+      "color_rgb": "7,255,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "lamp",
+      "display_name": "Lamp",
+      "class_id": 37,
+      "color_rgb": "224,255,8",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "bathtub",
+      "display_name": "Bathtub",
+      "class_id": 38,
+      "color_rgb": "102,8,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "railing",
+      "display_name": "Railing",
+      "class_id": 39,
+      "color_rgb": "255,61,6",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "cushion",
+      "display_name": "Cushion",
+      "class_id": 40,
+      "color_rgb": "255,194,7",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "base",
+      "display_name": "Base",
+      "class_id": 41,
+      "color_rgb": "255,122,8",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "box",
+      "display_name": "Box",
+      "class_id": 42,
+      "color_rgb": "0,255,20",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "column",
+      "display_name": "Column",
+      "class_id": 43,
+      "color_rgb": "255,8,41",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "signboard",
+      "display_name": "Signboard",
+      "class_id": 44,
+      "color_rgb": "255,5,153",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "chest of drawers",
+      "display_name": "Chest Of Drawers",
+      "class_id": 45,
+      "color_rgb": "6,51,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "counter",
+      "display_name": "Counter",
+      "class_id": 46,
+      "color_rgb": "235,12,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "sand",
+      "display_name": "Sand",
+      "class_id": 47,
+      "color_rgb": "160,150,20",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "sink",
+      "display_name": "Sink",
+      "class_id": 48,
+      "color_rgb": "0,163,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "skyscraper",
+      "display_name": "Skyscraper",
+      "class_id": 49,
+      "color_rgb": "140,140,140",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "fireplace",
+      "display_name": "Fireplace",
+      "class_id": 50,
+      "color_rgb": "250,10,15",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "refrigerator",
+      "display_name": "Refrigerator",
+      "class_id": 51,
+      "color_rgb": "20,255,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "grandstand",
+      "display_name": "Grandstand",
+      "class_id": 52,
+      "color_rgb": "31,255,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "path",
+      "display_name": "Path",
+      "class_id": 53,
+      "color_rgb": "255,31,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "stairs",
+      "display_name": "Stairs",
+      "class_id": 54,
+      "color_rgb": "255,224,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "runway",
+      "display_name": "Runway",
+      "class_id": 55,
+      "color_rgb": "153,255,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "case",
+      "display_name": "Case",
+      "class_id": 56,
+      "color_rgb": "0,0,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "pool table",
+      "display_name": "Pool Table",
+      "class_id": 57,
+      "color_rgb": "255,71,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "pillow",
+      "display_name": "Pillow",
+      "class_id": 58,
+      "color_rgb": "0,235,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "screen door",
+      "display_name": "Screen Door",
+      "class_id": 59,
+      "color_rgb": "0,173,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "stairway",
+      "display_name": "Stairway",
+      "class_id": 60,
+      "color_rgb": "31,0,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "river",
+      "display_name": "River",
+      "class_id": 61,
+      "color_rgb": "11,200,200",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "bridge",
+      "display_name": "Bridge",
+      "class_id": 62,
+      "color_rgb": "255,82,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "bookcase",
+      "display_name": "Bookcase",
+      "class_id": 63,
+      "color_rgb": "0,255,245",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "blind",
+      "display_name": "Blind",
+      "class_id": 64,
+      "color_rgb": "0,61,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "coffee table",
+      "display_name": "Coffee Table",
+      "class_id": 65,
+      "color_rgb": "0,255,112",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "toilet",
+      "display_name": "Toilet",
+      "class_id": 66,
+      "color_rgb": "0,255,133",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "flower",
+      "display_name": "Flower",
+      "class_id": 67,
+      "color_rgb": "255,0,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "book",
+      "display_name": "Book",
+      "class_id": 68,
+      "color_rgb": "255,163,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "hill",
+      "display_name": "Hill",
+      "class_id": 69,
+      "color_rgb": "255,102,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "bench",
+      "display_name": "Bench",
+      "class_id": 70,
+      "color_rgb": "194,255,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "countertop",
+      "display_name": "Countertop",
+      "class_id": 71,
+      "color_rgb": "0,143,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "stove",
+      "display_name": "Stove",
+      "class_id": 72,
+      "color_rgb": "51,255,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "palm",
+      "display_name": "Palm",
+      "class_id": 73,
+      "color_rgb": "0,82,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "kitchen island",
+      "display_name": "Kitchen Island",
+      "class_id": 74,
+      "color_rgb": "0,255,41",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "computer",
+      "display_name": "Computer",
+      "class_id": 75,
+      "color_rgb": "0,255,173",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "swivel chair",
+      "display_name": "Swivel Chair",
+      "class_id": 76,
+      "color_rgb": "10,0,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "boat",
+      "display_name": "Boat",
+      "class_id": 77,
+      "color_rgb": "173,255,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "bar",
+      "display_name": "Bar",
+      "class_id": 78,
+      "color_rgb": "0,255,153",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "arcade machine",
+      "display_name": "Arcade Machine",
+      "class_id": 79,
+      "color_rgb": "255,92,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "hovel",
+      "display_name": "Hovel",
+      "class_id": 80,
+      "color_rgb": "255,0,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "bus",
+      "display_name": "Bus",
+      "class_id": 81,
+      "color_rgb": "255,0,245",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "towel",
+      "display_name": "Towel",
+      "class_id": 82,
+      "color_rgb": "255,0,102",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "light",
+      "display_name": "Light",
+      "class_id": 83,
+      "color_rgb": "255,173,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "truck",
+      "display_name": "Truck",
+      "class_id": 84,
+      "color_rgb": "255,0,20",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "tower",
+      "display_name": "Tower",
+      "class_id": 85,
+      "color_rgb": "255,184,184",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "chandelier",
+      "display_name": "Chandelier",
+      "class_id": 86,
+      "color_rgb": "0,31,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "awning",
+      "display_name": "Awning",
+      "class_id": 87,
+      "color_rgb": "0,255,61",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "streetlight",
+      "display_name": "Streetlight",
+      "class_id": 88,
+      "color_rgb": "0,71,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "booth",
+      "display_name": "Booth",
+      "class_id": 89,
+      "color_rgb": "255,0,204",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "television receiver",
+      "display_name": "Television Receiver",
+      "class_id": 90,
+      "color_rgb": "0,255,194",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "airplane",
+      "display_name": "Airplane",
+      "class_id": 91,
+      "color_rgb": "0,255,82",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "dirt track",
+      "display_name": "Dirt Track",
+      "class_id": 92,
+      "color_rgb": "0,10,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "apparel",
+      "display_name": "Apparel",
+      "class_id": 93,
+      "color_rgb": "0,112,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "pole",
+      "display_name": "Pole",
+      "class_id": 94,
+      "color_rgb": "51,0,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "land",
+      "display_name": "Land",
+      "class_id": 95,
+      "color_rgb": "0,194,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "bannister",
+      "display_name": "Bannister",
+      "class_id": 96,
+      "color_rgb": "0,122,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "escalator",
+      "display_name": "Escalator",
+      "class_id": 97,
+      "color_rgb": "0,255,163",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "ottoman",
+      "display_name": "Ottoman",
+      "class_id": 98,
+      "color_rgb": "255,153,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "bottle",
+      "display_name": "Bottle",
+      "class_id": 99,
+      "color_rgb": "0,255,10",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "buffet",
+      "display_name": "Buffet",
+      "class_id": 100,
+      "color_rgb": "255,112,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "poster",
+      "display_name": "Poster",
+      "class_id": 101,
+      "color_rgb": "143,255,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "stage",
+      "display_name": "Stage",
+      "class_id": 102,
+      "color_rgb": "82,0,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "van",
+      "display_name": "Van",
+      "class_id": 103,
+      "color_rgb": "163,255,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "ship",
+      "display_name": "Ship",
+      "class_id": 104,
+      "color_rgb": "255,235,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "fountain",
+      "display_name": "Fountain",
+      "class_id": 105,
+      "color_rgb": "8,184,170",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "conveyer belt",
+      "display_name": "Conveyer Belt",
+      "class_id": 106,
+      "color_rgb": "133,0,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "canopy",
+      "display_name": "Canopy",
+      "class_id": 107,
+      "color_rgb": "0,255,92",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "washer",
+      "display_name": "Washer",
+      "class_id": 108,
+      "color_rgb": "184,0,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "plaything",
+      "display_name": "Plaything",
+      "class_id": 109,
+      "color_rgb": "255,0,31",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "swimming pool",
+      "display_name": "Swimming Pool",
+      "class_id": 110,
+      "color_rgb": "0,184,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "stool",
+      "display_name": "Stool",
+      "class_id": 111,
+      "color_rgb": "0,214,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "barrel",
+      "display_name": "Barrel",
+      "class_id": 112,
+      "color_rgb": "255,0,112",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "basket",
+      "display_name": "Basket",
+      "class_id": 113,
+      "color_rgb": "92,255,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "waterfall",
+      "display_name": "Waterfall",
+      "class_id": 114,
+      "color_rgb": "0,224,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "tent",
+      "display_name": "Tent",
+      "class_id": 115,
+      "color_rgb": "112,224,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "bag",
+      "display_name": "Bag",
+      "class_id": 116,
+      "color_rgb": "70,184,160",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "minibike",
+      "display_name": "Minibike",
+      "class_id": 117,
+      "color_rgb": "163,0,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "cradle",
+      "display_name": "Cradle",
+      "class_id": 118,
+      "color_rgb": "153,0,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "oven",
+      "display_name": "Oven",
+      "class_id": 119,
+      "color_rgb": "71,255,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "ball",
+      "display_name": "Ball",
+      "class_id": 120,
+      "color_rgb": "255,0,163",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "food",
+      "display_name": "Food",
+      "class_id": 121,
+      "color_rgb": "255,204,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "step",
+      "display_name": "Step",
+      "class_id": 122,
+      "color_rgb": "255,0,143",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "tank",
+      "display_name": "Tank",
+      "class_id": 123,
+      "color_rgb": "0,255,235",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "trade name",
+      "display_name": "Trade Name",
+      "class_id": 124,
+      "color_rgb": "133,255,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "microwave",
+      "display_name": "Microwave",
+      "class_id": 125,
+      "color_rgb": "255,0,235",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "pot",
+      "display_name": "Pot",
+      "class_id": 126,
+      "color_rgb": "245,0,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "animal",
+      "display_name": "Animal",
+      "class_id": 127,
+      "color_rgb": "255,0,122",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "bicycle",
+      "display_name": "Bicycle",
+      "class_id": 128,
+      "color_rgb": "255,245,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "lake",
+      "display_name": "Lake",
+      "class_id": 129,
+      "color_rgb": "10,190,212",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "dishwasher",
+      "display_name": "Dishwasher",
+      "class_id": 130,
+      "color_rgb": "214,255,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "screen",
+      "display_name": "Screen",
+      "class_id": 131,
+      "color_rgb": "0,204,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "blanket",
+      "display_name": "Blanket",
+      "class_id": 132,
+      "color_rgb": "20,0,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "sculpture",
+      "display_name": "Sculpture",
+      "class_id": 133,
+      "color_rgb": "255,255,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "hood",
+      "display_name": "Hood",
+      "class_id": 134,
+      "color_rgb": "0,153,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "sconce",
+      "display_name": "Sconce",
+      "class_id": 135,
+      "color_rgb": "0,41,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "vase",
+      "display_name": "Vase",
+      "class_id": 136,
+      "color_rgb": "0,255,204",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "traffic light",
+      "display_name": "Traffic Light",
+      "class_id": 137,
+      "color_rgb": "41,0,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "tray",
+      "display_name": "Tray",
+      "class_id": 138,
+      "color_rgb": "41,255,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "ashcan",
+      "display_name": "Ashcan",
+      "class_id": 139,
+      "color_rgb": "173,0,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "fan",
+      "display_name": "Fan",
+      "class_id": 140,
+      "color_rgb": "0,245,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "pier",
+      "display_name": "Pier",
+      "class_id": 141,
+      "color_rgb": "71,0,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "crt screen",
+      "display_name": "Crt Screen",
+      "class_id": 142,
+      "color_rgb": "122,0,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "plate",
+      "display_name": "Plate",
+      "class_id": 143,
+      "color_rgb": "0,255,184",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "monitor",
+      "display_name": "Monitor",
+      "class_id": 144,
+      "color_rgb": "0,92,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "bulletin board",
+      "display_name": "Bulletin Board",
+      "class_id": 145,
+      "color_rgb": "184,255,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "shower",
+      "display_name": "Shower",
+      "class_id": 146,
+      "color_rgb": "0,133,255",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "radiator",
+      "display_name": "Radiator",
+      "class_id": 147,
+      "color_rgb": "255,214,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "glass",
+      "display_name": "Glass",
+      "class_id": 148,
+      "color_rgb": "25,194,194",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "clock",
+      "display_name": "Clock",
+      "class_id": 149,
+      "color_rgb": "102,255,0",
+      "task_type": "semantic_segmentation"
+    },
+    {
+      "name": "flag",
+      "display_name": "Flag",
+      "class_id": 150,
+      "color_rgb": "92,0,255",
+      "task_type": "semantic_segmentation"
+    }
+  ]
+}

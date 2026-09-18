@@ -1,0 +1,73 @@
+[Robotics-Prop]
+"3.0.0" = {features = [
+    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
+    {"FET_001_STANDARD" = {version = "1.0.1"}}, # "Minimal"
+    {"FET_003_STANDARD" = {version = "0.2.0"}}, # "RBD Physics"
+    {"FET_004_STANDARD" = {version = "0.2.0"}, optional=true}, # "Simulate Multi-Body Physics"
+    {"FET_005_STANDARD" = {version = "0.1.0"}, optional=true}, # "Simulate Grasp Physics"
+    {"FET_006_STANDARD" = {version = "0.1.0"}, optional=true}, # "Materials (USDPreview)"
+    {"FET_006_MDL" = {version = "0.1.0"}, optional=true}, # "Materials (MDL)"
+    {"FET_007_STANDARD" = {version = "0.2.0"}, optional=true}, # "Non-Visual Materials"
+
+    {"FET_004_PHYSX" = {version = "0.4.0"}, optional=true}, # "Simulate Multi-Body Physics and SDF collision approximation"
+
+    {"FET_004_NEWTON" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (Newton)"
+]}
+"3.1.0" = {features = [ # Add optional runtime physics variant scaffolding (FET_000_* / FET_003_* / FET_004_*)
+    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
+    {"FET_001_STANDARD" = {version = "1.0.1"}}, # "Minimal"
+    {"FET_003_STANDARD" = {version = "0.2.0"}}, # "RBD Physics"
+    {"FET_004_STANDARD" = {version = "0.2.0"}, optional=true}, # "Simulate Multi-Body Physics"
+    {"FET_005_STANDARD" = {version = "0.1.0"}, optional=true}, # "Simulate Grasp Physics"
+    {"FET_006_STANDARD" = {version = "0.1.0"}, optional=true}, # "Materials (USDPreview)"
+    {"FET_006_MDL" = {version = "0.1.0"}, optional=true}, # "Materials (MDL)"
+    {"FET_007_STANDARD" = {version = "0.2.0"}, optional=true}, # "Non-Visual Materials"
+
+    # PhysX runtime variant (Core -> Rigid Body -> Multibody)
+    {"FET_000_PHYSX" = {version = "0.1.0"}, optional=true}, # "Core PhysX runtime variant"
+    {"FET_003_PHYSX" = {version = "0.4.0"}, optional=true}, # "Rigid Body Physics (PhysX)"
+    {"FET_004_PHYSX" = {version = "0.4.0"}, optional=true}, # "Simulate Multi-Body Physics and SDF collision approximation"
+
+    # Newton runtime variant (Core -> Rigid Body -> Multibody)
+    {"FET_000_NEWTON" = {version = "0.1.0"}, optional=true}, # "Core Newton runtime variant"
+    {"FET_003_NEWTON" = {version = "0.1.0"}, optional=true}, # "Rigid Body Physics (Newton)"
+    {"FET_004_NEWTON" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (Newton)"
+
+    # MuJoCo runtime variant (Core -> Rigid Body -> Multibody)
+    {"FET_000_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Core MuJoCo runtime variant"
+    {"FET_003_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Rigid Body Physics (MuJoCo)"
+    {"FET_004_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (MuJoCo)"
+]}
+"3.2.0" = {features = [ # Add required SimReady packaging + provenance metadata (FET_031_STANDARD, FET_033_STANDARD@0.3.0 / SR.003)
+    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
+    {"FET_001_STANDARD" = {version = "1.0.1"}}, # "Minimal"
+    {"FET_003_STANDARD" = {version = "0.2.0"}}, # "RBD Physics"
+    {"FET_004_STANDARD" = {version = "0.2.0"}, optional=true}, # "Simulate Multi-Body Physics"
+    {"FET_005_STANDARD" = {version = "0.1.0"}, optional=true}, # "Simulate Grasp Physics"
+    {"FET_006_STANDARD" = {version = "0.1.0"}, optional=true}, # "Materials (USDPreview)"
+    {"FET_006_MDL" = {version = "0.1.0"}, optional=true}, # "Materials (MDL)"
+    {"FET_007_STANDARD" = {version = "0.2.0"}, optional=true}, # "Non-Visual Materials"
+    {"FET_011_STANDARD" = {version = "0.2.0"}}, # "Semantic Labels"
+    {"FET_011_RTX" = {version = "0.1.0"}}, # "Semantic Labels (RTX)"
+    {"FET_046_STANDARD" = {version = "0.1.0"}}, # "Wikidata Q-Code"
+
+    # SimReady packaging + provenance metadata (required)
+    {"FET_031_STANDARD" = {version = "0.1.0"}}, # "Self-contained Package Source"
+    {"FET_033_STANDARD" = {version = "0.3.0"}}, # "Metadata (thumbnail + nested provenance metadata)"
+
+    # PhysX runtime variant (Core -> Rigid Body -> Multibody)
+    {"FET_000_PHYSX" = {version = "0.1.0"}, optional=true}, # "Core PhysX runtime variant"
+    {"FET_003_PHYSX" = {version = "0.4.0"}, optional=true}, # "Rigid Body Physics (PhysX)"
+    {"FET_004_PHYSX" = {version = "0.4.0"}, optional=true}, # "Simulate Multi-Body Physics and SDF collision approximation"
+
+    # Newton runtime variant (Core -> Rigid Body -> Multibody)
+    {"FET_000_NEWTON" = {version = "0.1.0"}, optional=true}, # "Core Newton runtime variant"
+    {"FET_003_NEWTON" = {version = "0.1.0"}, optional=true}, # "Rigid Body Physics (Newton)"
+    {"FET_004_NEWTON" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (Newton)"
+
+    # MuJoCo runtime variant (Core -> Rigid Body -> Multibody)
+    {"FET_000_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Core MuJoCo runtime variant"
+    {"FET_003_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Rigid Body Physics (MuJoCo)"
+    {"FET_004_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (MuJoCo)"
+
+]}

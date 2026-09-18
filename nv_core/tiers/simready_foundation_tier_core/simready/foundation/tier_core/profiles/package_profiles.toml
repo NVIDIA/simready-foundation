@@ -1,0 +1,24 @@
+[Package]
+"1.0.0" = {features = [
+    {"FET_030_STANDARD" = {version = "0.1.0"}}, # "Packaging Core"
+    {"FET_032_STANDARD" = {version = "0.1.0"}}, # "Packaging Introspection (BOM)"
+]}
+
+[Package-NoBOM]
+"1.0.0" = {features = [
+    {"FET_030_STANDARD" = {version = "0.1.0"}}, # "Packaging Core (no BOM)"
+]}
+
+[Package-Candidate]
+"1.0.0" = {features = [
+    {"FET_031_STANDARD" = {version = "0.1.0"}}, # "Self-contained Package Source"
+    {"FET_033_STANDARD" = {version = "0.1.0"}}, # "Metadata (thumbnail)"
+]}
+"1.1.0" = {features = [ # Adopt FET_033_STANDARD@0.2.0 (SR.003 nested SimReady metadata)
+    {"FET_031_STANDARD" = {version = "0.1.0"}}, # "Self-contained Package Source"
+    {"FET_033_STANDARD" = {version = "0.2.0"}}, # "Metadata (thumbnail + nested metadata)"
+]}
+"1.2.0" = {features = [ # Adopt FET_033_STANDARD@0.3.0 (stricter SR.003: qcode, rigid_body_count, asset_extents, mass)
+    {"FET_031_STANDARD" = {version = "0.1.0"}}, # "Self-contained Package Source"
+    {"FET_033_STANDARD" = {version = "0.3.0"}}, # "Metadata (thumbnail + nested provenance metadata)"
+]}

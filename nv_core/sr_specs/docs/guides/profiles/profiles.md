@@ -42,20 +42,20 @@ Each profile consists of:
 ```toml
 [Prop-Robotics-Neutral]
 "1.0.0" = {features = [
-    {"FET000_CORE" = {version = "0.1.0"}}, # "Core"
-    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Minimal"
-    {"FET003_BASE_NEUTRAL" = {version = "0.1.0"}}, # "RBD Physics"
-    {"FET004_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics"
-    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
-    {"FET006_BASE_MDL" = {version = "0.1.0"}}, # "Materials (MDL)"
+    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
+    {"FET_001_STANDARD" = {version = "0.1.0"}}, # "Minimal"
+    {"FET_003_STANDARD" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET_004_STANDARD" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics"
+    {"FET_005_STANDARD" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET_006_MDL" = {version = "0.1.0"}}, # "Materials (MDL)"
 ]}
 "2.0.0" = {features = [
-    {"FET000_CORE" = {version = "0.1.0"}}, # "Core"
-    {"FET001_BASE_NEUTRAL" = {version = "1.0.0"}}, # "Minimal"
-    {"FET003_BASE_NEUTRAL" = {version = "0.1.0"}}, # "RBD Physics"
-    {"FET004_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics"
-    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
-    {"FET006_BASE_MDL" = {version = "0.1.0"}}, # "Materials (MDL)"
+    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
+    {"FET_001_STANDARD" = {version = "1.0.0"}}, # "Minimal"
+    {"FET_003_STANDARD" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET_004_STANDARD" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics"
+    {"FET_005_STANDARD" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET_006_MDL" = {version = "0.1.0"}}, # "Materials (MDL)"
 ]}
 ```
 
@@ -64,20 +64,20 @@ Each profile consists of:
 ```toml
 [Prop-Robotics-Physx]
 "1.0.0" = {features = [
-    {"FET000_CORE" = {version = "0.1.0"}}, # "Core"
-    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Minimal"
-    {"FET003_BASE_PHYSX" = {version = "0.1.0"}}, # "RBD Physics"
-    {"FET004_BASE_PHYSX" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
-    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
-    {"FET006_BASE_MDL" = {version = "0.1.0"}}, # "Materials (MDL)"
+    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
+    {"FET_001_STANDARD" = {version = "0.1.0"}}, # "Minimal"
+    {"FET_003_PHYSX" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET_004_PHYSX" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET_005_STANDARD" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET_006_MDL" = {version = "0.1.0"}}, # "Materials (MDL)"
 ]}
 "2.0.0" = {features = [
-    {"FET000_CORE" = {version = "0.1.0"}}, # "Core"
-    {"FET001_BASE_NEUTRAL" = {version = "1.0.0"}}, # "Minimal"
-    {"FET003_BASE_PHYSX" = {version = "0.1.0"}}, # "RBD Physics"
-    {"FET004_BASE_PHYSX" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
-    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
-    {"FET006_BASE_MDL" = {version = "0.1.0"}}, # "Materials (MDL)"
+    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
+    {"FET_001_STANDARD" = {version = "1.0.0"}}, # "Minimal"
+    {"FET_003_PHYSX" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET_004_PHYSX" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET_005_STANDARD" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET_006_MDL" = {version = "0.1.0"}}, # "Materials (MDL)"
 ]}
 ```
 
@@ -102,23 +102,28 @@ Before creating a profile, you need to understand:
 
 ### Step 3: Create the Profile Configuration
 
-Create a new profile TOML file in `profiles/` (one file per profile):
+Create a new profile TOML file in the owning [tier](../tiers.md)'s `profiles/`
+directory. There
+is one file per profile and no consolidated `profiles.toml` — the validator
+loads every `*.toml` in each configured directory. Name the file after the
+profile, lowercased with underscores, so `Prop-Robotics-Neutral` lives in
+`prop_robotics_neutral.toml`:
 
 ```toml
 [Your-Profile-Name]
 "1.0.0" = {features = [
-    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Minimal"
-    {"FET003_BASE_NEUTRAL" = {version = "0.1.0"}}, # "RBD Physics"
-    {"FET004_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics"
+    {"FET_001_STANDARD" = {version = "0.1.0"}}, # "Minimal"
+    {"FET_003_STANDARD" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET_004_STANDARD" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics"
     # Add more features as needed
 ]}
 ```
 
 ### Step 4: Validate Feature Availability
 
-Ensure all referenced feature IDs and versions exist as JSON files under
-`nv_core/sr_specs/docs/features/`. Each feature variant+version has a
-corresponding file (e.g. `FET_003_base_physx-0.1.0-rigid_body_physics.json`).
+Ensure all referenced feature IDs and versions exist as JSON files under the
+configured tier `features/` directories. Each feature variant+version has a
+corresponding file (e.g. `FET_003_PHYSX-0.1.0.json`).
 The `"id"` and `"version"` fields in the JSON must match what the profile
 references.
 
@@ -126,13 +131,15 @@ references.
 
 Create a test asset and validate it against the new profile, see "SimReady - Feature Docs":
 
-```bash 
+```bash
 workspace validate <path to usd asset>
 ```
 
 ### Step 6: Create documentation
 
-In `nv_core/sr_specs/docs/profiles/` each profile should have its own markdown file, that should also be referred to in `profiles.md`.
+Each profile should have its own markdown file beside its TOML in the owning
+tier and should also be referenced by
+`nv_core/sr_specs/docs/shared/profiles/profiles.md`.
 
 ## Creating a New Profile Version
 
@@ -158,16 +165,16 @@ Identify which features need version updates:
 ```toml
 [Prop-Robotics-Neutral]
 "1.0.0" = {features = [
-    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Minimal"
-    {"FET003_BASE_NEUTRAL" = {version = "0.1.0"}}, # "RBD Physics"
-    {"FET004_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics"
-    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET_001_STANDARD" = {version = "0.1.0"}}, # "Minimal"
+    {"FET_003_STANDARD" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET_004_STANDARD" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics"
+    {"FET_005_STANDARD" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
 ]}
 "2.0.0" = {features = [
-    {"FET001_BASE_NEUTRAL" = {version = "1.0.0"}}, # "Minimal" - UPDATED
-    {"FET003_BASE_NEUTRAL" = {version = "0.1.0"}}, # "RBD Physics" - SAME
-    {"FET004_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics" - SAME
-    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Grasp Physics" - SAME
+    {"FET_001_STANDARD" = {version = "1.0.0"}}, # "Minimal" - UPDATED
+    {"FET_003_STANDARD" = {version = "0.1.0"}}, # "RBD Physics" - SAME
+    {"FET_004_STANDARD" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics" - SAME
+    {"FET_005_STANDARD" = {version = "0.1.0"}}, # "Simulate Grasp Physics" - SAME
 ]}
 ```
 
@@ -176,11 +183,11 @@ Identify which features need version updates:
 ```toml
 [Your-Profile-Name]
 "1.0.0" = {features = [
-    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}},
+    {"FET_001_STANDARD" = {version = "0.1.0"}},
     {"FET002_MATERIAL_BASIC" = {version = "0.1.0"}},
 ]}
 "2.0.0" = {features = [
-    {"FET001_BASE_NEUTRAL" = {version = "1.0.0"}}, # Updated feature version
+    {"FET_001_STANDARD" = {version = "1.0.0"}}, # Updated feature version
     {"FET002_MATERIAL_BASIC" = {version = "0.1.0"}},
     {"FET100_ANIMATION_BASIC" = {version = "0.1.0"}}, # New feature added
 ]}
@@ -194,7 +201,7 @@ Create a changelog entry:
 ## Profile Version 2.0.0
 
 ### Changes
-- Updated FET001_BASE_NEUTRAL from version 0.1.0 to 1.0.0
+- Updated FET_001_STANDARD from version 0.1.0 to 1.0.0
 - Added FET100_ANIMATION_BASIC version 0.1.0
 - Improved asset validation for animation properties
 
@@ -217,20 +224,20 @@ When creating a second profile, identify the differences from existing profiles:
 
 | Feature | Neutral Version | Physx Version | Difference |
 |---------|----------------|---------------|------------|
-| FET001_BASE_NEUTRAL | 0.1.0 | 0.1.0 | Same |
-| FET003_BASE_NEUTRAL | 0.1.0 | - | Neutral physics |
-| FET003_BASE_PHYSX | - | 0.1.0 | PhysX physics |
-| FET004_BASE_NEUTRAL | 0.1.0 | - | Neutral multi-body |
-| FET004_BASE_PHYSX | - | 0.1.0 | PhysX multi-body |
-| FET005_BASE_NEUTRAL | 0.1.0 | 0.1.0 | Same |
+| FET_001_STANDARD | 0.1.0 | 0.1.0 | Same |
+| FET_003_STANDARD | 0.1.0 | - | Standard physics |
+| FET_003_PHYSX | - | 0.1.0 | PhysX physics |
+| FET_004_STANDARD | 0.1.0 | - | Standard multi-body |
+| FET_004_PHYSX | - | 0.1.0 | PhysX multi-body |
+| FET_005_STANDARD | 0.1.0 | 0.1.0 | Same |
 
 ### Step 2: Plan Required Feature Adapters
 
 Based on the differences, identify required adapters:
 
 **Required Adapters:**
-1. `FET003_BASE_NEUTRAL` → `FET003_BASE_PHYSX`
-2. `FET004_BASE_NEUTRAL` → `FET004_BASE_PHYSX`
+1. `FET_003_STANDARD` → `FET_003_PHYSX`
+2. `FET_004_STANDARD` -> `FET_004_PHYSX`
 
 
 ### Step 4: Implement Missing Adapters

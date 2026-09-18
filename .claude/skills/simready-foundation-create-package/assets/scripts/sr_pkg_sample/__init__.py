@@ -37,10 +37,9 @@ Before calling any of the validation functions, initialise
 ``simready.validate`` once per process — see the "Advanced: integrate
 via Python API" section of ``README.md`` for a copy-paste example.
 
-``FOUNDATIONS_DOCS_DIR`` is the on-disk root of the SimReady Foundation
-spec docs that ``simready.validate.initialize()`` consumes
-(``capabilities/`` + ``features/`` + the per-profile TOMLs in ``profiles/``);
-exposed here so you don't have to recompute the path yourself.
+``FOUNDATIONS_RULES_PATHS``, ``FOUNDATIONS_FEATURES_PATHS``, and
+``FOUNDATIONS_PROFILES_PATHS`` are the ordered tier content sources that
+``simready.validate.initialize()`` consumes.
 
 The :func:`create_package` symbol is loaded lazily on first access:
 importing :mod:`sr_pkg_sample` does not import ``wrapp``, so the no-WRAPP
@@ -58,8 +57,8 @@ from typing import TYPE_CHECKING
 _PACKAGE_SAMPLE_DIR = Path(__file__).resolve().parent.parent
 
 
-def _find_foundations_docs_dir() -> Path:
-    """Locate the SimReady Foundation docs from the bundled skill scripts."""
+def _find_foundations_root() -> Path:
+    """Locate the SimReady Foundation repository from the bundled skill scripts."""
     env_root = os.environ.get("SIMREADY_FOUNDATIONS_ROOT")
     candidates: list[Path] = []
     if env_root:
@@ -67,15 +66,27 @@ def _find_foundations_docs_dir() -> Path:
     candidates.extend(_PACKAGE_SAMPLE_DIR.parents)
 
     for root in candidates:
-        docs = root / "nv_core" / "sr_specs" / "docs"
-        if (docs / "profiles").is_dir() and any((docs / "profiles").glob("*.toml")):
-            return docs
+        tiers = root / "nv_core" / "tiers"
+        if (tiers / "simready_foundation_tier_core" / "pyproject.toml").is_file():
+            return root
 
     # Preserve the old package_sample-relative fallback for direct reuse.
-    return _PACKAGE_SAMPLE_DIR.parent.parent / "nv_core" / "sr_specs" / "docs"
+    return _PACKAGE_SAMPLE_DIR.parent.parent
 
 
-FOUNDATIONS_DOCS_DIR: Path = _find_foundations_docs_dir()
+FOUNDATIONS_ROOT: Path = _find_foundations_root()
+_TIER_CONTENT_DIRS = (
+    FOUNDATIONS_ROOT
+    / "nv_core"
+    / "tiers"
+    / "simready_foundation_tier_core"
+    / "simready"
+    / "foundation"
+    / "tier_core",
+)
+FOUNDATIONS_RULES_PATHS = tuple(path / "capabilities" for path in _TIER_CONTENT_DIRS)
+FOUNDATIONS_FEATURES_PATHS = tuple(path / "features" for path in _TIER_CONTENT_DIRS)
+FOUNDATIONS_PROFILES_PATHS = tuple(path / "profiles" for path in _TIER_CONTENT_DIRS)
 
 from ._package_def import CreatedPackage  # noqa: E402
 from .create_package_definition import create_package_definition  # noqa: E402
@@ -110,7 +121,10 @@ def __getattr__(name: str):
 __all__ = [
     "BuildFailed",
     "CreatedPackage",
-    "FOUNDATIONS_DOCS_DIR",
+    "FOUNDATIONS_FEATURES_PATHS",
+    "FOUNDATIONS_PROFILES_PATHS",
+    "FOUNDATIONS_ROOT",
+    "FOUNDATIONS_RULES_PATHS",
     "PackagingError",
     "PostValidationResult",
     "PreValidationResult",

@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform FET_006_STANDARD"
+  short_description: "Repair FET_006_STANDARD conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-006-standard to repair FET_006_STANDARD SimReady conformance failures."

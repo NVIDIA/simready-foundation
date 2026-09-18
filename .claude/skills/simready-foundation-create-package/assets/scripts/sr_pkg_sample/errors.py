@@ -58,7 +58,7 @@ class ValidationFailed(PackagingError):
         Human-readable summary.
     failures:
         Sorted list of failing feature IDs (e.g.
-        ``["FET030_PACKAGING_CORE", "FET032_PACKAGING_INTROSPECTION"]``)
+        ``["FET_030_STANDARD", "FET_032_STANDARD"]``)
         so callers can introspect the outcome without scraping stdout.
     result:
         The full :class:`~sr_pkg_sample.results.PreValidationResult` or

@@ -1,13 +1,24 @@
 [
     {
         "id":  "simready-foundation-add-feature-positive-trigger",
-        "question":  "Add a new SimReady Foundation feature FET025 for factory connection points and wire it into feature docs and manifests.",
+        "question":  "Add a new SimReady Foundation feature FET_025_STANDARD for factory connection points and wire it into feature docs and manifests.",
         "expected_skill":  "simready-foundation-add-feature",
         "ground_truth":  "The agent should activate simready-foundation-add-feature and follow its workflow.",
         "expected_behavior":  [
                                   "Load the simready-foundation-add-feature skill.",
                                   "Create a new feature markdown page and JSON manifest, update feature indexes/dependency graph, and plan the matching conform skill when asset validation can fail.",
                                   "Report changed files, validation performed, and any remaining release or validation gaps."
+                              ]
+    },
+    {
+        "id":  "simready-foundation-add-feature-template-trigger",
+        "question":  "Create a new SimReady feature FET_025_STANDARD for factory connection points using the feature template.",
+        "expected_skill":  "simready-foundation-add-feature",
+        "ground_truth":  "The agent should activate simready-foundation-add-feature and follow the template-driven feature workflow.",
+        "expected_behavior":  [
+                                  "Load the simready-foundation-add-feature skill.",
+                                  "Read feature-template.md and create a feature markdown page plus matching JSON manifest using FET_###_<RUNTIME> naming and semantic versions.",
+                                  "Update feature index/dependency docs as needed and report validation plus any profile, adapter, benchmark, sample, or conform-skill follow-up."
                               ]
     },
     {

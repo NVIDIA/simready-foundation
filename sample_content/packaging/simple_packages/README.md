@@ -39,6 +39,6 @@ pass/fail shape:
 - `apple_a01_materials/`, `apple_a01_usd_bom/`,
   `apple_a01_usd_bom_multi_hash/`, `fruit_f01_multi_usd/` —
   every feature must pass.
-- `apple_a01_nobom/` — `FET030_PACKAGING_CORE` passes, but
-  `FET032_PACKAGING_INTROSPECTION` fails (no BOM to introspect).
+- `apple_a01_nobom/` — `FET_030_STANDARD` passes, but
+  `FET_032_STANDARD` fails (no BOM to introspect).
   This is the canonical "partial failure" fixture.

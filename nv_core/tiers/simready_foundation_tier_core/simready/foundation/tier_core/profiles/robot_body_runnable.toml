@@ -1,0 +1,15 @@
+[Robot-Body-Runnable]
+"1.0.0" = {features = [
+    {"FET_001_STANDARD" = {version = "0.1.0"}}, # "Minimal"
+    {"FET_004_ROBOT_PHYSX" = {version = "0.2.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET_021_ISAAC" = {version = "0.3.0"}}, # "Robot Core"
+    {"FET_022_PHYSX" = {version = "0.1.0"}}, # "Physx Driven Joints
+    {"FET_024_PHYSX" = {version = "0.1.0"}}, # "Physx Base Articulation"
+]}
+"1.1.0" = {features = [ # Deprecate RB.006
+    {"FET_001_STANDARD" = {version = "1.0.1"}}, # "Minimal"
+    {"FET_004_ROBOT_PHYSX" = {version = "0.2.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET_021_ISAAC" = {version = "0.3.0"}}, # "Robot Core"
+    {"FET_022_PHYSX" = {version = "0.2.0"}}, # "Physx Driven Joints
+    {"FET_024_PHYSX" = {version = "0.1.0"}}, # "Physx Base Articulation"
+]}

@@ -1,0 +1,123 @@
+# Feature: `FET_000_STANDARD`
+
+| **Property**            | **Value**         |
+|-------------------------|-------------------|
+| Feature Name            | `FET_000_STANDARD` |
+| Runtime                 | `STANDARD` |
+| Proprietary Techs       | `None` |
+| Latest Version          | `0.1.0` |
+
+## Description
+
+The Core feature defines the minimum standard structure for a portable SimReady
+USD asset. It covers asset file naming, directory layout, path portability,
+metadata location, resolvable asset paths, SimReady metadata, and undefined
+prim cleanup.
+
+This is the neutral, OpenUSD-only Core contract and does not require any
+physics runtime variants or Isaac packaging rules. Runtime-specific physics
+variant scaffolding is provided by the runtime Core features
+[`FET_000_PHYSX`](FET_000_PHYSX.md), [`FET_000_NEWTON`](FET_000_NEWTON.md),
+and [`FET_000_MUJOCO`](FET_000_MUJOCO.md). Isaac packaging and physics-layer
+placement are provided by [`FET_000_ISAAC`](FET_000_ISAAC.md). Each of those
+features depends on this feature.
+
+An asset that satisfies this feature can be discovered, loaded, packaged, and
+validated as a well-formed SimReady USD asset before additional visual,
+material, physics, robot, or runtime-specific feature contracts are applied.
+
+## Dependency Graph
+
+This feature has no dependencies and no other features depend on it directly.
+
+## Use Cases
+
+- Baseline SimReady asset validation.
+- USD asset packaging and portability checks.
+- Shared prerequisite checks for higher-level SimReady profiles.
+- Early validation of exported assets before runtime-specific feature authoring.
+
+## Requirements
+
+### Version 0.1.0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+This version is used in the following profiles:
+
+- **[Prop Robotics Neutral Profile](../profiles/prop-robotics-neutral.md)** (`v1.0.0`, `v2.0.0`, `v2.0.1`, `v2.1.0`) - Provides the shared Core feature gate for neutral prop profiles.
+- **[Prop Robotics PhysX Profile](../profiles/prop-robotics-physx.md)** (`v1.0.0`, `v2.0.0`, `v2.0.1`, `v2.1.0`) - Provides the shared Core feature gate for PhysX prop profiles.
+- **[Robotics Prop Profile](../profiles/profiles.md)** (`v3.0.0`) - Provides the Standard Core feature gate for the consolidated prop profile.
+
+#### Feature Dependencies
+
+None.
+
+#### Requirement List
+
+* Capability: [Core/Naming Paths](../capabilities/core/naming_paths/capability-naming_paths.md)
+    * Requirements:
+        * [File-Naming-Convention](../capabilities/core/naming_paths/requirements/file-naming-convention.md)
+            * NP.002 | Version 0.1.0
+            * [Rule | Implementation](../capabilities/core/naming_paths/validation.py)
+        * [Directory-Structure](../capabilities/core/naming_paths/requirements/directory-structure.md)
+            * NP.003 | Version 0.1.0
+            * [Rule | Implementation](../capabilities/core/naming_paths/validation.py)
+        * [Path-Length-Limits](../capabilities/core/naming_paths/requirements/path-length-limits.md)
+            * NP.004 | Version 0.1.0
+            * [Rule | Implementation](../capabilities/core/naming_paths/validation.py)
+        * [Asset-Folder-Structure](../capabilities/core/naming_paths/requirements/asset-folder-structure.md)
+            * NP.005 | Version 0.1.0
+            * [Rule | Implementation](../capabilities/core/naming_paths/validation.py)
+        * [Metadata-Location](../capabilities/core/naming_paths/requirements/metadata-location.md)
+            * NP.006 | Version 0.1.0
+            * [Rule | Implementation](../capabilities/core/naming_paths/validation.py)
+        * [Relative-Paths](../capabilities/core/naming_paths/requirements/relative-paths.md)
+            * NP.007 | Version 0.1.0
+            * [Rule | Implementation](../capabilities/core/naming_paths/validation.py)
+        * [AssetPath-Validation](../capabilities/core/naming_paths/requirements/assetpath-validation.md)
+            * NP.008 | Version 0.1.0
+            * [Rule | Implementation](../capabilities/core/naming_paths/validation.py)
+* Capability: [Core/SimReady](../capabilities/core/sim_ready/capability-sim_ready.md)
+    * Requirements:
+        * [Metadata-Whitelist](../capabilities/core/sim_ready/requirements/metadata-whitelist.md)
+            * SR.001 | Version 0.1.0
+            * [Rule | Implementation](../capabilities/core/sim_ready/validation.py)
+* Capability: [Hierarchy](../capabilities/hierarchy/requirements.md)
+    * Requirements:
+        * [Undefined-Prims](../capabilities/hierarchy/requirements/undefined-prims.md)
+            * HI.010 | Version 0.1.0
+            * [Rule | Implementation](../capabilities/hierarchy/validation.py)
+
+</details>
+
+## Pipelines
+
+Source file type:
+
+- `.blend`
+  - Via Blender SimReady Add-ons
+- `.mjcf`
+  - Via Blender SimReady Add-ons and MJCF2USD Tool
+- `.step`
+  - Via Blender SimReady Add-ons and CAD Converter
+
+Validation or runtime pipeline:
+
+- SimReady validation - verifies the Core requirement IDs listed in the feature
+  manifest.
+
+## Samples
+
+- [sample_content/common_assets/props_general/obs_lamp_revolute_a01/simready_usd/sm_obs_lamp_revolute_a01_01.usda](../../../../sample_content/common_assets/props_general/obs_lamp_revolute_a01/simready_usd/sm_obs_lamp_revolute_a01_01.usda)
+
+## Benchmarks
+
+- None.
+
+## Adapters
+
+None.

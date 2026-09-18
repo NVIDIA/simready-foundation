@@ -1,0 +1,18 @@
+{
+    "id": "FET_022_ISAAC",
+    "version": "0.1.0",
+    "display_name": "Driven Joints (Isaac)",
+    "path": "features/FET_022_ISAAC.html",
+    "dependencies": [
+        {
+            "FET_022_PHYSX": {
+                "version": "0.1.0"
+            }
+        }
+    ],
+    "requirements": [
+        "DJ.008",
+        "DJ.009",
+        "DJ.010"
+    ]
+}

@@ -1,0 +1,24 @@
+[
+    {
+        "id": "simready-foundation-conform-fet-025-ros-positive-trigger",
+        "question": "Repair FET_025_ROS@0.1.0 validation failures on a SimReady asset or package.",
+        "expected_skill": "simready-foundation-conform-fet-025-ros",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-025-ros and follow the exact FET_025_ROS workflow.",
+        "expected_behavior": [
+            "Load the simready-foundation-conform-fet-025-ros skill.",
+            "Use the selected FET_025_ROS manifest as the authoritative feature contract.",
+            "Report changed files, validation performed, and any remaining blockers."
+        ]
+    },
+    {
+        "id": "simready-foundation-conform-fet-025-ros-negative-nontrigger",
+        "question": "Summarize the difference between a SimReady feature and capability without editing files.",
+        "expected_skill": null,
+        "ground_truth": "The agent should answer from repo documentation or local context without activating this specific skill.",
+        "expected_behavior": [
+            "Do not activate simready-foundation-conform-fet-025-ros.",
+            "Do not modify files.",
+            "Provide a concise conceptual answer or choose a more appropriate skill if one is explicitly requested."
+        ]
+    }
+]

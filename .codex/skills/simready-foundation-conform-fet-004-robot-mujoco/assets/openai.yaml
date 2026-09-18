@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform FET_004_ROBOT_MUJOCO"
+  short_description: "Repair FET_004_ROBOT_MUJOCO conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-004-robot-mujoco to repair FET_004_ROBOT_MUJOCO SimReady conformance failures."

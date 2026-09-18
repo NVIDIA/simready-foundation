@@ -1,0 +1,22 @@
+{
+    "id": "FET_028_MUJOCO",
+    "version": "0.1.0",
+    "display_name": "Gripper (MuJoCo)",
+    "path": "features/FET_028_MUJOCO.html",
+    "runtime": "MuJoCo",
+    "dependencies": [
+        {
+            "FET_028_STANDARD": {
+                "version": "0.1.0"
+            }
+        },
+        {
+            "FET_022_MUJOCO": {
+                "version": "0.1.0"
+            }
+        }
+    ],
+    "requirements": [
+        "MUJOCO.GR.001"
+    ]
+}

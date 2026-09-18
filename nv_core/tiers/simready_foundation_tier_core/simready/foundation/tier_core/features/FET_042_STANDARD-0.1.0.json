@@ -1,0 +1,16 @@
+{
+    "id": "FET_042_STANDARD",
+    "version": "0.1.0",
+    "display_name": "Semantic Labels - ADE20K",
+    "path": "features/FET_042_STANDARD.html",
+    "requirements": [
+        "ADE.001"
+    ],
+    "dependencies": [
+        {
+            "FET_011_STANDARD": {
+                "version": "0.2.0"
+            }
+        }
+    ]
+}

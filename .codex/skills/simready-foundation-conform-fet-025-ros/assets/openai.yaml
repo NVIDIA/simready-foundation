@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform FET_025_ROS"
+  short_description: "Repair FET_025_ROS conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-025-ros to repair FET_025_ROS SimReady conformance failures."

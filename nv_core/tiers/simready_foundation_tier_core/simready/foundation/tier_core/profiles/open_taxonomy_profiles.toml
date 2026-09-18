@@ -1,0 +1,43 @@
+# Optional example profiles for validating one closed-vocabulary dataset taxonomy at a time.
+
+[Open-Taxonomy-COCO]
+"0.1.0" = {features = [
+    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
+    {"FET_011_STANDARD" = {version = "0.2.0"}}, # "Semantic Labels"
+    {"FET_040_STANDARD" = {version = "0.1.0"}}, # "COCO Labels"
+]}
+
+[Open-Taxonomy-Cityscapes]
+"0.1.0" = {features = [
+    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
+    {"FET_011_STANDARD" = {version = "0.2.0"}}, # "Semantic Labels"
+    {"FET_041_STANDARD" = {version = "0.1.0"}}, # "Cityscapes Labels"
+]}
+
+[Open-Taxonomy-ADE20K]
+"0.1.0" = {features = [
+    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
+    {"FET_011_STANDARD" = {version = "0.2.0"}}, # "Semantic Labels"
+    {"FET_042_STANDARD" = {version = "0.1.0"}}, # "ADE20K Labels"
+]}
+
+[Open-Taxonomy-PascalVOC]
+"0.1.0" = {features = [
+    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
+    {"FET_011_STANDARD" = {version = "0.2.0"}}, # "Semantic Labels"
+    {"FET_043_STANDARD" = {version = "0.1.0"}}, # "PASCAL VOC Labels"
+]}
+
+[Open-Taxonomy-SUNRGBD]
+"0.1.0" = {features = [
+    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
+    {"FET_011_STANDARD" = {version = "0.2.0"}}, # "Semantic Labels"
+    {"FET_044_STANDARD" = {version = "0.1.0"}}, # "SUN RGB-D Labels"
+]}
+
+[Open-Taxonomy-ImageNet1K]
+"0.1.0" = {features = [
+    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
+    {"FET_011_STANDARD" = {version = "0.2.0"}}, # "Semantic Labels"
+    {"FET_045_STANDARD" = {version = "0.1.0"}}, # "ImageNet-1K Labels"
+]}

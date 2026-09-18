@@ -1,0 +1,84 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+[project]
+name = "simready-foundation-tier-core"
+version = "2026.7.1rc3"
+description = "SimReady Foundation base tier: the foundation profiles, features, requirements, and validators, including the Isaac Sim capabilities and the isaac features/profiles"
+authors = [
+    {name = "NVIDIA"},
+]
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "usd-validation-nvidia==1.20.0",
+    "physx-usd-schemas>=25.11.1,<26",
+    "numpy",
+]
+
+# Framework discovery: the asset validator / usd-validation auto-discovers this
+# tier's validators (rules + their requirements) through its own plugin group.
+[project.entry-points."usd_validation_nvidia"]
+simready-validate-tier-core = "simready.foundation.tier_core:SimReadyPlugin"
+
+# SimReady tier discovery: the SimReady loader enumerates this (deliberately
+# non-validation-specific) group to find installed tiers and their per-layer
+# content sources (requirements module + features/profiles dirs).
+[project.entry-points."simready.tier"]
+tier_core = "simready.foundation.tier_core:tier"
+
+[project.urls]
+Documentation = "https://nvidia.github.io/simready-foundation/"
+
+[project.optional-dependencies]
+usd = ["usd-core>=22.11"]
+test = ["pytest"]
+# Standalone Kit-free Isaac asset transformer used by the CIP prop composition
+# adapter (FET_001_STANDARD@1.0.1 -> FET_100_ISAAC@0.4.0). Optional so base
+# validator installs are unaffected; resolved locally via the workspace source
+# mapping in ../pyproject.toml during development.
+isaac-transform = ["simready-isaac-asset-transformer==0.1.0"]
+benchmark = [
+    "simready-benchmark[kit]>=2026.6.6",
+    # Enables plain-Python test discovery outside Kit. Isaac Sim supplies pxr
+    # at runtime, while this dependency lets --list-tests inspect the bundled
+    # suite before an engine is launched.
+    "usd-core>=23.5",
+]
+
+# This tier's package lives committed under ./simready/foundation/... and ships
+# as-is. The ONLY build step is generating the requirements-enum module from the
+# committed capability markdown; the shared hook reads `module`/`reverse_domain`
+# below to know what to generate and where.
+[tool.hatch.build.hooks.custom]
+path = "../_tooling/build_hook.py"
+module = "simready.foundation.tier_core"
+reverse_domain = "com.nvidia.simready"
+
+# Ship the committed package tree (respects default excludes, so __pycache__ /
+# the git-ignored generated requirements/ are skipped here)...
+[tool.hatch.build.targets.wheel]
+packages = ["simready", "simready_benchmark_kit_suite"]
+
+# ...and add the build-time generated requirements enums.
+[tool.hatch.build.targets.wheel.force-include]
+"_build/python/simready/foundation/tier_core/requirements" = "simready/foundation/tier_core/requirements"
+
+[build-system]
+# The shared build hook (../_tooling/build_hook.py) generates this tier's
+# requirements enums at build time, so the codegen package must be importable in
+# the (isolated) build env.
+requires = ["hatchling", "usd-profiles-nvidia"]
+build-backend = "hatchling.build"

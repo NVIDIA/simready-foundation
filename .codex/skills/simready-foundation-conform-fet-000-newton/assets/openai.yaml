@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform FET_000_NEWTON"
+  short_description: "Repair FET_000_NEWTON Newton runtime variant scaffolding"
+  default_prompt: "Use $simready-foundation-conform-fet-000-newton to repair FET_000_NEWTON SimReady Newton runtime variant conformance on a USD asset."

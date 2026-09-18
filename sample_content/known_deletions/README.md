@@ -7,9 +7,10 @@ change. Every asset intentionally removed from `sample_content/manifest.csv`
 must have one TOML record in this directory.
 
 `nv_core/sr_specs/tests/validate_sample_content.py` compares the current branch
-with the default branch. When an asset from the default branch is absent from
-the current manifest and validation results, the test passes only if a valid
-record identifies the exact deleted asset path.
+with the MR target branch when present, otherwise the default branch. When an
+asset from that compare branch is absent from the current manifest and
+validation results, the test passes only if a valid record identifies the exact
+deleted asset path.
 
 ## Required format
 
@@ -79,7 +80,7 @@ A well-formed record must also agree with the current repository state:
 
 - the asset must be absent from `sample_content/manifest.csv`;
 - the asset path must not exist on disk; and
-- a default-branch asset removed from the current manifest must have a matching
+- a compare-branch asset removed from the current manifest must have a matching
   record.
 
 Therefore:

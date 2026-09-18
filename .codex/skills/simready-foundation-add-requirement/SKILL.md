@@ -34,7 +34,7 @@ Collect or infer:
 
 | Input | Requirement |
 |---|---|
-| `capability_path` | Existing capability folder under `nv_core/sr_specs/docs/capabilities/`. |
+| `capability_path` | Existing capability folder under its owning tier's `capabilities/` directory. |
 | `requirement_slug` | Kebab-case filename without `.md`. |
 | `requirement_code` | Stable code such as `RB.011` or `NVM.006`; must not already exist. |
 | `summary` | One-sentence rule statement. |
@@ -48,7 +48,7 @@ Collect or infer:
 
 Use this checklist when changing the repository:
 
-1. Confirm the target capability exists and the requirement code is unused across `nv_core/sr_specs/docs`.
+1. Confirm the target capability exists and the requirement code is unused across all tier capability sources.
 2. Create `requirements/<requirement_slug>.md` using the repository's requirement metadata table style: `Code`, `Validator`, `Compatibility`, and `Tags`.
 3. Include `Summary`, `Description`, `Why`, `Examples`, `How to comply`, and relevant USD or runtime references.
 4. Add valid and invalid examples that show the smallest meaningful pass/fail distinction.

@@ -13,7 +13,7 @@ The result is a SimReady-conformant package skeleton with no BOM, no
 ``.metadata/`` folder, and no file hashes.  The package will satisfy
 the package-definition required-fields rule and nothing more — most
 notably, post-validation features that rely on a BOM (e.g.
-``FET032_PACKAGING_INTROSPECTION``) will FAIL against it.  That's
+``FET_032_STANDARD``) will FAIL against it.  That's
 expected.
 """
 

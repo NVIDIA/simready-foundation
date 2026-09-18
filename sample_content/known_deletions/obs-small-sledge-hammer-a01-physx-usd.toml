@@ -1,0 +1,3 @@
+[deletion]
+asset_path = "sample_content/common_assets/props_general/obs_small_sledge_hammer_a01/simready_physx_usd/sm_obs_small_sledge_hammer_a01_01.usd"
+reason = "The standalone PhysX variant was consolidated into the asset's simready_usd layer, which now exposes PhysX/Newton/MuJoCo physics through runtime variant sets. The separate simready_physx_usd asset was removed."

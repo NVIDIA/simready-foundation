@@ -1,0 +1,29 @@
+[Prop-Robotics-Isaac]
+"1.0.0" = {features = [
+    {"FET_001_STANDARD" = {version = "0.1.0"}}, # "Minimal"
+    {"FET_003_PHYSX" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET_004_PHYSX" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET_005_STANDARD" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET_100_ISAAC" = {version = "0.1.0"}}, # "Isaac composition
+]}
+"1.0.1" = {features = [
+    {"FET_001_STANDARD" = {version = "1.0.1"}}, # "Minimal"
+    {"FET_003_PHYSX" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET_004_PHYSX" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET_005_STANDARD" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET_100_ISAAC" = {version = "0.1.0"}}, # "Isaac composition
+]}
+"1.1.0" = {features = [
+    {"FET_001_STANDARD" = {version = "1.0.1"}}, # "Minimal"
+    {"FET_003_PHYSX" = {version = "0.3.0"}}, # "RBD Physics"
+    {"FET_004_PHYSX" = {version = "0.3.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET_005_STANDARD" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET_100_ISAAC" = {version = "0.2.0"}}, # "Isaac composition
+]}
+"1.2.0" = {features = [ # Adopt standalone-transformer Isaac composition (FET_100_ISAAC@0.4.0) and PhysX@0.4.0 pins
+    {"FET_001_STANDARD" = {version = "1.0.1"}}, # "Minimal"
+    {"FET_003_PHYSX" = {version = "0.4.0"}}, # "RBD Physics"
+    {"FET_004_PHYSX" = {version = "0.4.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET_005_STANDARD" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET_100_ISAAC" = {version = "0.4.0"}}, # "Isaac composition
+]}

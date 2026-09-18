@@ -1,0 +1,12 @@
+# Local repo_man tool registrations for this project.
+#
+# repo_man discovers commands from repo_tools.toml files (the repo root + sys.path),
+# NOT from repo.toml -- so a brand-new `repo <command>` must be declared here. The
+# command's tunable settings live in repo.toml under the matching [repo_<name>]
+# table (the two are merged), so day-to-day configuration stays in repo.toml.
+
+# `repo build_tiers` -- build the SimReady validation tier wheels (nv_core/tiers/*).
+[repo_build_tiers]
+command = "build_tiers"
+entry_point = "${config_root}/tools/repoman/build_tiers.py:setup_repo_tool"
+enabled = true

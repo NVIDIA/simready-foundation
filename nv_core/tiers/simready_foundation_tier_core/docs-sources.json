@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "simready_benchmark_kit_suite/docs",
+      "destination": "guides/benchmark/tests"
+    }
+  ]
+}

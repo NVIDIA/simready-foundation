@@ -77,7 +77,9 @@ import simready.validate as sv
 from omni.asset_validator import to_identifier
 
 from sr_pkg_sample import (
-    FOUNDATIONS_DOCS_DIR,
+    FOUNDATIONS_FEATURES_PATHS,
+    FOUNDATIONS_PROFILES_PATHS,
+    FOUNDATIONS_RULES_PATHS,
     BuildFailed,
     UsageError,
     ValidationFailed,
@@ -489,9 +491,9 @@ def _validate_args(args: argparse.Namespace, parser: argparse.ArgumentParser) ->
 def _initialize_runtime() -> None:
     """Initialise simready.validate exactly once."""
     sv.initialize(
-        rules_and_requirements_paths=[FOUNDATIONS_DOCS_DIR / "capabilities"],
-        features_paths=[FOUNDATIONS_DOCS_DIR / "features"],
-        profiles_paths=[FOUNDATIONS_DOCS_DIR / "profiles"],
+        rules_and_requirements_paths=FOUNDATIONS_RULES_PATHS,
+        features_paths=FOUNDATIONS_FEATURES_PATHS,
+        profiles_paths=FOUNDATIONS_PROFILES_PATHS,
     )
 
 

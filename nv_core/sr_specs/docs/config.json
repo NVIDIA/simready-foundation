@@ -1,16 +1,16 @@
 {
 	"requirements_configs_path": "../config",
 	"requirements_paths": [
-		"capabilities"
+		"../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities"
 	],
 	"features_paths": [
-		"features"
+		"../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/features"
 	],
 	"profiles_paths": [
-		"profiles"
+		"../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles"
 	],
-  "adapter_modules_path": "../../cip_specs/asset_handler_modules",
-  "spec_root": "../../sr_specs/docs",
+	"adapter_modules_path": "../../cip_specs/asset_handler_modules",
+	"spec_root": "../../sr_specs/docs",
 	"recipes":
 	{
 		"recipe_test":

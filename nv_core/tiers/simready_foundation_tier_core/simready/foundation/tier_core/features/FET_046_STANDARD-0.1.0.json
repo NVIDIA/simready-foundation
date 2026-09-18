@@ -1,0 +1,16 @@
+{
+    "id": "FET_046_STANDARD",
+    "version": "0.1.0",
+    "display_name": "Semantic Labels - Wikidata",
+    "path": "features/FET_046_STANDARD.html",
+    "dependencies": [
+        {
+            "FET_011_STANDARD": {
+                "version": "0.2.0"
+            }
+        }
+    ],
+    "requirements": [
+        "SL.QCODE.001"
+    ]
+}

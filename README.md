@@ -166,6 +166,26 @@ Profiles are the top-level contracts between asset creators and consumers. Each 
 
 The full SimReady specifications—capabilities, features, profiles, and guides—are in `nv_core/sr_specs/docs/`.
 
+### Published packages
+
+The specification and its tooling are published on PyPI. The Foundation ships as a *tier*: an installable package owning a coherent slice of capabilities, features, and profiles.
+
+| Package | Purpose |
+|---------|---------|
+| [`simready-foundation-tier-core`](https://pypi.org/project/simready-foundation-tier-core/) | The Foundation core tier — requirements, capabilities, features, profiles, validators, and the bundled runtime tests |
+| [`simready-validate`](https://pypi.org/project/simready-validate/) | Static asset validation, as a CLI and a Python API |
+| [`simready-benchmark`](https://pypi.org/project/simready-benchmark/) | Runtime and behavioral testing |
+| [`simready-package`](https://pypi.org/project/simready-package/) | Asset packaging |
+
+Once a tier is installed, `simready-validate` discovers its rules, features, and profiles from the wheel, so you do not need the `--rules-path`, `--features-path`, or `--profiles-path` flags:
+
+```bash
+pip install simready-validate simready-foundation-tier-core
+simready-validate --profile Prop-Robotics-Neutral --version 1.0.0 path/to/asset.usd
+```
+
+For tier discovery, the `[benchmark]` extra, and how to build your own tier, see [SimReady Foundation PyPI Packages](nv_core/sr_specs/docs/guides/foundation_pypi.md).
+
 ## Next steps
 
 Once you have the environment set up, explore the guides in [`nv_core/sr_specs/docs/guides/`](nv_core/sr_specs/docs/guides/guides.md):
@@ -176,6 +196,8 @@ Once you have the environment set up, explore the guides in [`nv_core/sr_specs/d
 | [SimReady Packaging Workflow](nv_core/sr_specs/docs/guides/packaging_workflow.md) | Package a SimReady asset — pre-validate, local mode, full WRAPP build, and troubleshooting |
 | [SimReady Benchmark](nv_core/sr_specs/docs/guides/benchmark/benchmark.md) | Run benchmarks with `simready-benchmark`, covering install, the pipeline stages, and reading reports |
 | [Getting Started](nv_core/sr_specs/docs/guides/getting_started.md) | Orientation — who SimReady is for, choosing a profile, and where to go next |
+| [SimReady Foundation Tiers](nv_core/sr_specs/docs/guides/tiers.md) | How the specification is divided into installable tiers, who owns each one, and which tier a profile comes from |
+| [SimReady Foundation PyPI Packages](nv_core/sr_specs/docs/guides/foundation_pypi.md) | Install Foundation tiers from PyPI, validate against installed tiers, and build your own tier |
 | [SimReady Acceptance Workflow](nv_core/sr_specs/docs/guides/acceptance_workflow.md) | How new requirements, features, and profiles move through review |
 | [Features Expansion Workflow](nv_core/sr_specs/docs/guides/features_expansion_workflow.md) | Create technology-specific feature variants (e.g. neutral to PhysX) |
 | [Profiles Validation Workflow](nv_core/sr_specs/docs/guides/profiles_validation_workflow.md) | Create, version, and validate assets against profiles |
@@ -203,9 +225,11 @@ Skill categories:
 
 How skills relate to the spec:
 
-- Capabilities and requirements live under `nv_core/sr_specs/docs/capabilities/`.
-- Features live under `nv_core/sr_specs/docs/features/` and bundle exact requirement IDs and dependencies.
-- Profiles live under `nv_core/sr_specs/docs/profiles/` and pin exact feature versions.
+- Capabilities and requirements live under each owning package in `nv_core/tiers/`.
+- Features live under each owning tier's `features/` directory and bundle exact requirement IDs and dependencies.
+- Profiles live under each owning tier's `profiles/` directory and pin exact feature versions.
+- Cross-tier documentation hubs live under `nv_core/sr_specs/docs/shared/`; the
+  docs build assembles all sources into `nv_core/sr_specs/_build/docs-src/`.
 - Add/update skills help maintain those spec files.
 - Conform skills help staged USD assets pass, skip, or block on feature-specific validation gates.
 

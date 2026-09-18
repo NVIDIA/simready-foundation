@@ -6,7 +6,7 @@
         "ground_truth":  "The agent should activate simready-foundation-add-capability and follow its workflow.",
         "expected_behavior":  [
                                   "Load the simready-foundation-add-capability skill.",
-                                  "Add a new capability under docs/capabilities, register it in indexes, and identify follow-up requirements, validators, features, and conform skills.",
+                                  "Add a new capability under its owning tier, register it in shared indexes, and identify follow-up requirements, validators, features, and conform skills.",
                                   "Report changed files, validation performed, and any remaining release or validation gaps."
                               ]
     },

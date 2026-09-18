@@ -1,5 +1,3 @@
---extra-index-url https://pypi.nvidia.com
-
 # Runtime -- required by simready-validate
 numpy
 

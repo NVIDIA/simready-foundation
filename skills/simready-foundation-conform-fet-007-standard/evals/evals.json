@@ -1,0 +1,24 @@
+[
+    {
+        "id":  "simready-foundation-conform-fet-007-standard-positive-trigger",
+        "question":  "Repair FET_007_STANDARD nonvisual sensor material attributes on a USD asset.",
+        "expected_skill":  "simready-foundation-conform-fet-007-standard",
+        "ground_truth":  "The agent should activate simready-foundation-conform-fet-007-standard and follow its workflow.",
+        "expected_behavior":  [
+                                  "Load the simready-foundation-conform-fet-007-standard skill.",
+                                  "Confirm FET_007_STANDARD is in scope, repair nonvisual material attributes on bound materials, and rerun the FET_007_STANDARD validation gate.",
+                                  "Report changed files, validation performed, and any remaining release or validation gaps."
+                              ]
+    },
+    {
+        "id":  "simready-foundation-conform-fet-007-standard-negative-nontrigger",
+        "question":  "Summarize the difference between a SimReady feature and capability without editing files.",
+        "expected_skill":  null,
+        "ground_truth":  "The agent should answer from repo documentation or local context without activating this specific skill.",
+        "expected_behavior":  [
+                                  "Do not activate simready-foundation-conform-fet-007-standard.",
+                                  "Do not modify files.",
+                                  "Provide a concise conceptual answer or choose a more appropriate skill if one is explicitly requested."
+                              ]
+    }
+]

@@ -1,0 +1,75 @@
+# Feature: `FET_028_STANDARD`
+
+| **Property** | **Value** |
+|--------------|-----------|
+| Feature Name | `FET_028_STANDARD` |
+| Runtime | `STANDARD` |
+| Proprietary Techs | `None` |
+| Latest Version | `1` |
+
+## Description
+
+Defines the Standard gripper-site contract: socket type, forward approach axis, grip-line axis, and maximum opening for a gripper end-effector.
+
+## Dependency Graph
+
+This feature has no dependencies and no other features depend on it directly.
+
+## Use Cases
+
+Products or workflows that consume this feature:
+
+- SimReady validation verifies FET_028_STANDARD gripper-site requirements.
+- FET028 benchmark phases consume the authored gripper-site data.
+
+## Requirements
+
+### Version 0.1.0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+- Robot Gripper Neutral v0.1.0, v0.2.0
+- Robot Gripper v2.0.0 optional
+
+#### Feature Dependencies
+
+None.
+
+#### Requirement List
+
+* Capability: [Physics Bodies/Physics Grippers](../capabilities/physics_bodies/physics_grippers/capability-physics_grippers.md)
+
+| Requirement | Requirement Doc | Rule |
+|-------------|-----------------|------|
+| `GR.001` | [GR.001](../capabilities/physics_bodies/physics_grippers/requirements/gripper-socket-type.md) | [Implementation](../capabilities/physics_bodies/physics_grippers/validation.py) |
+| `GR.002` | [GR.002](../capabilities/physics_bodies/physics_grippers/requirements/gripper-forward-axis.md) | [Implementation](../capabilities/physics_bodies/physics_grippers/validation.py) |
+| `GR.003` | [GR.003](../capabilities/physics_bodies/physics_grippers/requirements/gripper-grip-line.md) | [Implementation](../capabilities/physics_bodies/physics_grippers/validation.py) |
+| `GR.004` | [GR.004](../capabilities/physics_bodies/physics_grippers/requirements/gripper-max-opening.md) | [Implementation](../capabilities/physics_bodies/physics_grippers/validation.py) |
+
+</details>
+
+## Pipelines
+
+Source file type:
+
+- `.usd`, `.usda`, `.usdc`, package source folder, or package root as applicable.
+
+Validation or runtime pipeline:
+
+- SimReady validation verifies FET_028_STANDARD gripper-site requirements.
+- FET028 benchmark phases consume the authored gripper-site data.
+
+## Samples
+
+- [`Robotiq 2F-85` gripper](../../../../sample_content/common_assets/robots_general/Robotiq/2F-85/simready_usd/2F-85.usda)
+
+## Benchmarks
+
+- FET028 gripper close-and-lift benchmark suite
+
+## Adapters
+
+None.

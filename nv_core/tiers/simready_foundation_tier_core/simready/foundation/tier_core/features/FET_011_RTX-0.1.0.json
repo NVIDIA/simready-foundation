@@ -1,0 +1,17 @@
+{
+    "id": "FET_011_RTX",
+    "version": "0.1.0",
+    "display_name": "Semantic Labels (RTX)",
+    "path": "features/FET_011_RTX.html",
+    "dependencies": [
+        {
+            "FET_011_STANDARD": {
+                "version": "0.2.0"
+            }
+        }
+    ],
+    "requirements": [
+        "SL.MAT.001",
+        "SL.TIME.001"
+    ]
+}

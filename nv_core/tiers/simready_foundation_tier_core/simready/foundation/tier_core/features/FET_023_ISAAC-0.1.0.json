@@ -1,0 +1,10 @@
+{
+    "id": "FET_023_ISAAC",
+    "version": "0.1.0",
+    "display_name": "Robot Materials",
+    "path": "features/FET_023_ISAAC.html",
+    "requirements": [
+        "RM.001",
+        "RM.002"
+    ]
+}

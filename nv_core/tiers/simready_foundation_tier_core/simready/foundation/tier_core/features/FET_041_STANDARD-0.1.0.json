@@ -1,0 +1,16 @@
+{
+    "id": "FET_041_STANDARD",
+    "version": "0.1.0",
+    "display_name": "Semantic Labels - Cityscapes",
+    "path": "features/FET_041_STANDARD.html",
+    "requirements": [
+        "CITY.001"
+    ],
+    "dependencies": [
+        {
+            "FET_011_STANDARD": {
+                "version": "0.2.0"
+            }
+        }
+    ]
+}

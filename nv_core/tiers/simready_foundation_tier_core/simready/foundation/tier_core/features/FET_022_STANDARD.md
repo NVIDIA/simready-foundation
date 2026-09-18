@@ -1,0 +1,112 @@
+# Feature: `FET_022_STANDARD`
+
+| **Property** | **Value** |
+|--------------|-----------|
+| Feature Name | `FET_022_STANDARD` |
+| Runtime | `STANDARD` |
+| Proprietary Techs | `None` |
+| Latest Version | `0.2.0` |
+
+## Description
+
+Defines the Standard OpenUSD driven-joint contract for articulated robot mechanisms using joint drive/state APIs, consistent joint transforms and states, and loop-free articulation graphs.
+
+## Dependency Graph
+
+```{mermaid}
+flowchart LR
+    FET_004_STANDARD_0_1_0["FET_004_STANDARD\n0.1.0"]
+    FET_004_STANDARD_0_2_0["FET_004_STANDARD\n0.2.0"]
+    FET_022_STANDARD_0_1_0["FET_022_STANDARD\n0.1.0"]
+    FET_022_STANDARD_0_2_0["FET_022_STANDARD\n0.2.0"]
+    FET_022_STANDARD_0_1_0 --> FET_004_STANDARD_0_1_0
+    FET_022_STANDARD_0_2_0 --> FET_004_STANDARD_0_2_0
+
+    classDef current fill:#90EE90,stroke:#333
+```
+
+## Use Cases
+
+Products or workflows that consume this feature:
+
+- SimReady validation verifies the selected FET_022_STANDARD manifest.
+- Runtime-specific FET022 features extend this authoring for engine execution.
+
+## Requirements
+
+### Version 0.1.0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+- Robot Body Neutral v1.0.0
+- Robot Gripper Neutral v0.1.0
+
+#### Feature Dependencies
+
+| **Property** | **Value** |
+|--------------|-----------|
+| Dependency | `FET_004_STANDARD@0.1.0` |
+
+#### Requirement List
+
+* Capability: [Physics Bodies/Physics Driven Joints](../capabilities/physics_bodies/physics_driven_joints/capability-physics_driven_joints.md)
+
+| Requirement | Requirement Doc | Rule |
+|-------------|-----------------|------|
+| `DJ.001` | [DJ.001](../capabilities/physics_bodies/physics_driven_joints/requirements/physics-drive-and-joint-state.md) | [Implementation](../capabilities/physics_bodies/physics_driven_joints/validation.py) |
+| `DJ.002` | [DJ.002](../capabilities/physics_bodies/physics_driven_joints/requirements/joint-has-joint-state-api.md) | [Implementation](../capabilities/physics_bodies/physics_driven_joints/validation.py) |
+| `DJ.003` | [DJ.003](../capabilities/physics_bodies/physics_driven_joints/requirements/joint-has-correct-transform-and-state.md) | [Implementation](../capabilities/physics_bodies/physics_driven_joints/validation.py) |
+| `DJ.011` | [DJ.011](../capabilities/physics_bodies/physics_driven_joints/requirements/no-articulation-loops.md) | [Implementation](../capabilities/physics_bodies/physics_driven_joints/validation.py) |
+
+</details>
+
+### Version 0.2.0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+- Robot Body Neutral v1.1.0
+- Robot Body v2.0.0 optional
+- Robot Gripper Neutral v0.2.0
+- Robot Gripper v2.0.0 optional
+
+#### Feature Dependencies
+
+| **Property** | **Value** |
+|--------------|-----------|
+| Dependency | `FET_004_STANDARD@0.2.0` |
+
+#### Changes From Version 0.1.0
+
+Keeps Version 0.1.0 requirements and updates the dependency to FET_004_STANDARD@2.
+
+</details>
+
+## Pipelines
+
+Source file type:
+
+- `.usd`, `.usda`, `.usdc`, package source folder, or package root as applicable.
+
+Validation or runtime pipeline:
+
+- SimReady validation verifies the selected FET_022_STANDARD manifest.
+- Runtime-specific FET022 features extend this authoring for engine execution.
+
+## Samples
+
+- [`ur10` PhysX robot demonstrating the Standard driven-joint contract](../../../../sample_content/common_assets/robots_general/ur10/simready_usd/ur10.usd)
+
+## Benchmarks
+
+- None. The bundled driven-joint tests register against the PhysX and Isaac
+  runtime variants, not the Standard authoring feature.
+
+## Adapters
+
+None.

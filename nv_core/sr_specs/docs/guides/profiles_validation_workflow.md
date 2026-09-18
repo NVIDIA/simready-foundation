@@ -13,12 +13,12 @@ Profiles are defined in TOML files under `profiles/` (one file per profile, e.g.
 ```toml
 [Prop-Robotics-Neutral]
 "1.0.0" = {features = [
-    {"FET000_CORE" = {version = "0.1.0"}},
-    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}},
-    {"FET003_BASE_NEUTRAL" = {version = "0.1.0"}},
-    {"FET004_BASE_NEUTRAL" = {version = "0.1.0"}},
-    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}},
-    {"FET006_BASE_MDL" = {version = "0.1.0"}},
+    {"FET_000_STANDARD" = {version = "0.1.0"}},
+    {"FET_001_STANDARD" = {version = "0.1.0"}},
+    {"FET_003_STANDARD" = {version = "0.1.0"}},
+    {"FET_004_STANDARD" = {version = "0.1.0"}},
+    {"FET_005_STANDARD" = {version = "0.1.0"}},
+    {"FET_006_MDL" = {version = "0.1.0"}},
 ]}
 ```
 
@@ -65,7 +65,7 @@ Before creating a profile, answer these questions:
 
 Browse the existing feature JSON files under `features/` to find features that match your needs. Each feature has:
 
-- An `id` (e.g. `FET003_BASE_NEUTRAL`)
+- An `id` (e.g. `FET_003_STANDARD`)
 - A `version` (e.g. `0.1.0`)
 - A `display_name` (e.g. "Rigid Body Physics")
 - A list of `requirements` it enforces
@@ -74,7 +74,7 @@ Use the [feature dependency graph](../features/feature-dependency-graph) to unde
 
 ### Check feature availability
 
-Every feature referenced by a profile must exist as a registered JSON file under `features/`. Verify that the feature id and version in your profile match an existing file's `"id"` and `"version"` fields. For example, `{"FET003_BASE_PHYSX" = {version = "0.1.0"}}` requires a file with `"id": "FET003_BASE_PHYSX"` and `"version": "0.1.0"`.
+Every feature referenced by a profile must exist as a registered JSON file under `features/`. Verify that the feature id and version in your profile match an existing file's `"id"` and `"version"` fields. For example, `{"FET_003_PHYSX" = {version = "0.1.0"}}` requires a file with `"id": "FET_003_PHYSX"` and `"version": "0.1.0"`.
 
 ## 2. Create the profile entry
 
@@ -85,13 +85,13 @@ Create a new TOML file in `profiles/` (e.g. `profiles/prop_robotics_labeled.toml
 ```toml
 [Prop-Robotics-Labeled]
 "1.0.0" = {features = [
-    {"FET000_CORE" = {version = "0.1.0"}},                # "Core"
-    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}},        # "Minimal"
-    {"FET003_BASE_NEUTRAL" = {version = "0.1.0"}},        # "RBD Physics"
-    {"FET004_BASE_NEUTRAL" = {version = "0.1.0"}},        # "Simulate Multi-Body Physics"
-    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}},        # "Simulate Grasp Physics"
-    {"FET006_BASE_MDL" = {version = "0.1.0"}},            # "Materials (MDL)"
-    {"FET011_BASE_NEUTRAL" = {version = "0.2.0"}},        # "Semantic Labels"
+    {"FET_000_STANDARD" = {version = "0.1.0"}},               # "Core"
+    {"FET_001_STANDARD" = {version = "0.1.0"}},        # "Minimal"
+    {"FET_003_STANDARD" = {version = "0.1.0"}},               # "RBD Physics"
+    {"FET_004_STANDARD" = {version = "0.1.0"}},               # "Simulate Multi-Body Physics"
+    {"FET_005_STANDARD" = {version = "0.1.0"}},               # "Simulate Grasp Physics"
+    {"FET_006_MDL" = {version = "0.1.0"}},            # "Materials (MDL)"
+    {"FET_011_STANDARD" = {version = "0.2.0"}},               # "Semantic Labels"
 ]}
 ```
 
@@ -128,17 +128,17 @@ data generation systems that rely on semantic labels.
 
 | Feature | Version | Description |
 | --- | --- | --- |
-| FET000_CORE | 0.1.0 | Core asset structure |
-| FET001_BASE_NEUTRAL | 0.1.0 | Minimal editor requirements |
-| FET003_BASE_NEUTRAL | 0.1.0 | Rigid body physics |
-| FET004_BASE_NEUTRAL | 0.1.0 | Multi-body physics |
-| FET005_BASE_NEUTRAL | 0.1.0 | Grasp physics |
-| FET006_BASE_MDL | 0.1.0 | MDL materials |
-| FET011_BASE_NEUTRAL | 0.2.0 | Semantic labels |
+| FET_000_STANDARD | 0.1.0 | Core asset structure |
+| FET_001_STANDARD | 0.1.0 | Minimal editor requirements |
+| FET_003_STANDARD | 0.1.0 | Rigid body physics |
+| FET_004_STANDARD | 0.1.0 | Multi-body physics |
+| FET_005_STANDARD | 0.1.0 | Grasp physics |
+| FET_006_MDL | 0.1.0 | MDL materials |
+| FET_011_STANDARD | 0.2.0 | Semantic labels |
 
 ### Differences from Prop-Robotics-Neutral
 
-- Adds `FET011_BASE_NEUTRAL` for semantic label validation
+- Adds `FET_011_STANDARD` for semantic label validation
 - All other features are identical
 ```
 
@@ -163,31 +163,31 @@ Production assets declare their profile in `customLayerData`:
 )
 ```
 
-This metadata records the asset's intended profile for downstream tooling. The `simready-validate` CLI validates against the profile you pass explicitly (see below); when you stamp results back into the asset, they are written into this same `SimReady_Metadata`.
+The validator reads this metadata and automatically selects the correct profile.
 
 ### 3b. Run validation
 
-Install the validator (`pip install -r requirements.txt`) and run the `simready-validate` CLI from the repository root, pointing it at the rule, feature, and profile source directories:
+From the repository root:
 
 ```bash
-simready-validate \
-    --rules-path nv_core/sr_specs/docs/capabilities \
-    --features-path nv_core/sr_specs/docs/features \
-    --profiles-path nv_core/sr_specs/docs/profiles \
-    --profile Prop-Robotics-Labeled --version 1.0.0 \
-    asset.usda
+simready-validate asset.usda
 ```
 
-The validator resolves all features and requirements for the named profile version and runs every matching rule. On Windows, use `python -m simready.validate` if the `simready-validate` entry point is not on your `PATH`.
+The validator reads the asset's `SimReady_Metadata`, looks up the profile, resolves all features and requirements, and runs every matching rule. With the SimReady tier wheels installed, `simready-validate` auto-discovers their rules, requirements, features, and profiles.
 
-Add `--output results.json` to write a machine-readable report, or `--stamp-asset-validation` to write the outcome into the asset's `SimReady_Metadata`. See the [Validation Workflow](validate_workflow.md) guide for the full CLI reference.
+To override or specify a profile explicitly:
+
+```bash
+simready-validate --feature FET_000_STANDARD asset.usda
+simready-validate --capability Hierarchy asset.usda
+```
 
 ### 3c. Interpret results
 
 The validation report shows:
 
 - **Per-requirement results:** Each requirement code (e.g. `HI.004`) with pass/fail and any error messages.
-- **Per-feature results:** Each feature (e.g. `FET000_CORE`) passes only when all of its requirements pass.
+- **Per-feature results:** Each feature (e.g. `FET_000_STANDARD`) passes only when all of its requirements pass.
 - **Profile result:** The overall profile passes only when all features pass.
 
 A failed requirement traces directly to the rule that detected the violation and the USD prim/attribute at fault.
@@ -212,22 +212,22 @@ Add a new version entry under the same profile table in the profile's TOML file 
 ```toml
 [Prop-Robotics-Labeled]
 "1.0.0" = {features = [
-    {"FET000_CORE" = {version = "0.1.0"}},
-    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}},
-    {"FET003_BASE_NEUTRAL" = {version = "0.1.0"}},
-    {"FET004_BASE_NEUTRAL" = {version = "0.1.0"}},
-    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}},
-    {"FET006_BASE_MDL" = {version = "0.1.0"}},
-    {"FET011_BASE_NEUTRAL" = {version = "0.2.0"}},
+    {"FET_000_STANDARD" = {version = "0.1.0"}},
+    {"FET_001_STANDARD" = {version = "0.1.0"}},
+    {"FET_003_STANDARD" = {version = "0.1.0"}},
+    {"FET_004_STANDARD" = {version = "0.1.0"}},
+    {"FET_005_STANDARD" = {version = "0.1.0"}},
+    {"FET_006_MDL" = {version = "0.1.0"}},
+    {"FET_011_STANDARD" = {version = "0.2.0"}},
 ]}
 "2.0.0" = {features = [
-    {"FET000_CORE" = {version = "0.1.0"}},
-    {"FET001_BASE_NEUTRAL" = {version = "1.0.0"}},        # Updated
-    {"FET003_BASE_NEUTRAL" = {version = "0.1.0"}},
-    {"FET004_BASE_NEUTRAL" = {version = "0.1.0"}},
-    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}},
-    {"FET006_BASE_MDL" = {version = "0.1.0"}},
-    {"FET011_BASE_NEUTRAL" = {version = "0.2.0"}},
+    {"FET_000_STANDARD" = {version = "0.1.0"}},
+    {"FET_001_STANDARD" = {version = "1.0.0"}},        # Updated
+    {"FET_003_STANDARD" = {version = "0.1.0"}},
+    {"FET_004_STANDARD" = {version = "0.1.0"}},
+    {"FET_005_STANDARD" = {version = "0.1.0"}},
+    {"FET_006_MDL" = {version = "0.1.0"}},
+    {"FET_011_STANDARD" = {version = "0.2.0"}},
 ]}
 ```
 
@@ -239,7 +239,7 @@ Document the version change in the profile's markdown file:
 ## Version 2.0.0
 
 ### Changes from 1.0.0
-- Updated FET001_BASE_NEUTRAL from 0.1.0 to 1.0.0
+- Updated FET_001_STANDARD from 0.1.0 to 1.0.0
 
 ### Migration notes
 - Assets validated against 1.0.0 may need updates for FET001 1.0.0 requirements
@@ -268,23 +268,23 @@ Compare the base profile's features with the runtime's needs:
 
 | Feature area | Neutral | PhysX |
 | --- | --- | --- |
-| Colliders | `FET003_BASE_NEUTRAL` (RB.COL.001) | `FET003_BASE_PHYSX` (COL.001) |
-| Multi-body | `FET004_BASE_NEUTRAL` | `FET004_BASE_PHYSX` |
-| Grasp | `FET005_BASE_NEUTRAL` | `FET005_BASE_NEUTRAL` (same) |
-| Materials | `FET006_BASE_MDL` | `FET006_BASE_MDL` (same) |
+| Colliders | `FET_003_STANDARD` (RB.COL.001) | `FET_003_PHYSX` (COL.001) |
+| Multi-body | `FET_004_STANDARD` | `FET_004_PHYSX` |
+| Grasp | `FET_005_STANDARD` | `FET_005_STANDARD` (same) |
+| Materials | `FET_006_MDL` | `FET_006_MDL` (same) |
 
 ### 5b. Create the runtime profile
 
 ```toml
 [Prop-Robotics-Labeled-Physx]
 "1.0.0" = {features = [
-    {"FET000_CORE" = {version = "0.1.0"}},
-    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}},
-    {"FET003_BASE_PHYSX" = {version = "0.1.0"}},          # PhysX variant
-    {"FET004_BASE_PHYSX" = {version = "0.1.0"}},          # PhysX variant
-    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}},
-    {"FET006_BASE_MDL" = {version = "0.1.0"}},
-    {"FET011_BASE_NEUTRAL" = {version = "0.2.0"}},
+    {"FET_000_STANDARD" = {version = "0.1.0"}},
+    {"FET_001_STANDARD" = {version = "0.1.0"}},
+    {"FET_003_PHYSX" = {version = "0.1.0"}},                  # PhysX variant
+    {"FET_004_PHYSX" = {version = "0.1.0"}},                  # PhysX variant
+    {"FET_005_STANDARD" = {version = "0.1.0"}},
+    {"FET_006_MDL" = {version = "0.1.0"}},
+    {"FET_011_STANDARD" = {version = "0.2.0"}},
 ]}
 ```
 
@@ -299,7 +299,7 @@ For each feature that differs between the neutral and runtime profiles, a featur
 3. **Profile TOML:** Add the profile entry to a new TOML file under `profiles/` with all features and versions.
 4. **Documentation:** Create a profile markdown file in `profiles/` and add it to the profiles index.
 5. **Asset metadata:** Ensure target assets include `SimReady_Metadata` with the profile name and version in `customLayerData`.
-6. **Validate:** Run `simready-validate --profile <Name> --version <X.Y.Z>` against test assets and confirm the correct features and requirements execute.
+6. **Validate:** Run `simready-validate` against test assets and confirm the correct features and requirements execute.
 7. **Version control:** Never modify a released profile version — create a new version instead.
 
 ## Tips
@@ -328,19 +328,19 @@ When the validator processes an asset, the resolution works as follows:
 
 ```text
 Prop-Robotics-Neutral 1.0.0
-├── FET000_CORE 0.1.0
+├── FET_000_STANDARD 0.1.0
 │   ├── NP.002, NP.003, NP.004, NP.005, NP.006, NP.007, NP.008
 │   ├── SR.001
 │   └── HI.010
-├── FET001_BASE_NEUTRAL 0.1.0
+├── FET_001_STANDARD 0.1.0
 │   └── AA.001, AA.002, UN.001, UN.002
-├── FET003_BASE_NEUTRAL 0.1.0
+├── FET_003_STANDARD 0.1.0
 │   └── RB.COL.001, RB.COL.002, RB.COL.003, RB.COL.004, RB.001, ...
-├── FET004_BASE_NEUTRAL 0.1.0
+├── FET_004_STANDARD 0.1.0
 │   └── JT.001, JT.002, RB.MB.001
-├── FET005_BASE_NEUTRAL 0.1.0
+├── FET_005_STANDARD 0.1.0
 │   └── (grasp requirements)
-└── FET006_BASE_MDL 0.1.0
+└── FET_006_MDL 0.1.0
     └── (material requirements)
 ```
 

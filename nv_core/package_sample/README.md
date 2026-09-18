@@ -238,7 +238,7 @@ They are mutually exclusive with each other and with the default flow
 
 - `--only-pre-validation --source <folder>` — pre-flight a candidate
   source folder. The headline check is
-  [AA.001 — anchored-asset-paths](../sr_specs/docs/capabilities/core/atomic_asset/requirements/anchored-asset-paths.md):
+  [AA.001 — anchored-asset-paths](../tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/core/atomic_asset/requirements/anchored-asset-paths.md):
   every reference in every USD has to be written as a relative path
   (e.g. `./materials/wood.mdl`), not an absolute path or a search-path
   token. Useful while iterating on a folder before you're ready to
@@ -309,7 +309,7 @@ python create_simready_package.py apple_a01 1.0.0 Apache-2.0 \
 
 Pre-validation still runs by default, and so does post-validation —
 but the resulting package will FAIL post-validation features that
-look for a BOM (e.g. `FET032_PACKAGING_INTROSPECTION`). That's
+look for a BOM (e.g. `FET_032_STANDARD`). That's
 expected. If you want a clean exit code in this mode, also pass
 `--skip-post-validation`.
 
@@ -331,7 +331,9 @@ import asyncio
 import simready.validate as sv
 
 from sr_pkg_sample import (
-    FOUNDATIONS_DOCS_DIR,
+    FOUNDATIONS_FEATURES_PATHS,
+    FOUNDATIONS_PROFILES_PATHS,
+    FOUNDATIONS_RULES_PATHS,
     PackagingError,
     ValidationFailed,
     create_simready_package,
@@ -341,9 +343,9 @@ from sr_pkg_sample._asset_validator_kit_shim import install_kit_shim
 # One-time setup (once per process).
 install_kit_shim()
 sv.initialize(
-    rules_and_requirements_paths=[FOUNDATIONS_DOCS_DIR / "capabilities"],
-    features_paths=[FOUNDATIONS_DOCS_DIR / "features"],
-    profiles_paths=[FOUNDATIONS_DOCS_DIR / "profiles"],
+    rules_and_requirements_paths=FOUNDATIONS_RULES_PATHS,
+    features_paths=FOUNDATIONS_FEATURES_PATHS,
+    profiles_paths=FOUNDATIONS_PROFILES_PATHS,
 )
 
 async def main():

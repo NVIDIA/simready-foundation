@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform FET_000_ISAAC"
+  short_description: "Repair FET_000_ISAAC Isaac packaging Core"
+  default_prompt: "Use $simready-foundation-conform-fet-000-isaac to repair FET_000_ISAAC SimReady Isaac packaging Core conformance on a USD asset."

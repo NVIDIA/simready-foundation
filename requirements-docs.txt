@@ -3,3 +3,8 @@ sphinx-copybutton>=0.5,<0.6
 sphinx-design>=0.7,<0.8
 sphinxcontrib-mermaid>=2.0,<3
 myst-parser>=5.1,<6
+# Provides the ``usd_profiles_nvidia.sphinx.ext`` Sphinx extension used by the
+# requirement/feature/profile pages (tag role, generated tables, per-page
+# {{profile}}/{{version}} substitutions). Kept in step with the version the
+# internal repoman docs build resolves. Public on PyPI.
+usd-profiles-nvidia>=1.16,<2

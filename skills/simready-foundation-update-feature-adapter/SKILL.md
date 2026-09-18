@@ -14,7 +14,7 @@ metadata:
 # SimReady Update Feature Adapter
 
 ## Purpose
-Use this skill when an existing feature adapter no longer matches source/target feature contracts, produces invalid USD, misses a required mutation, or needs new profile-version support.
+Use this skill when an existing feature adapter no longer matches exact source/target `FET_###_<RUNTIME>` feature contracts, produces invalid USD, misses a required mutation, or needs new profile-version support.
 
 ## Prerequisites
 Before editing, read:
@@ -33,17 +33,17 @@ Collect or infer:
 | Input | Requirement |
 |---|---|
 | `adapter_path` | Existing adapter file. |
-| `source_feature` | Input feature ID/version currently supported. |
-| `target_feature` | Output feature ID/version currently supported. |
+| `source_feature` | Input feature name / manifest `id` and integer version currently supported. |
+| `target_feature` | Output feature name / manifest `id` and integer version currently supported. |
 | `bug_or_gap` | Missing mutation, bad metadata, invalid output, non-idempotence, crash, or profile drift. |
-| `new_feature_versions` | Updated feature versions if the adapter should support a new path. |
+| `new_feature_versions` | Updated integer feature versions if the adapter should support a new path. |
 | `test_assets` | Assets or reports that show the problem. |
 
 ## Instructions
 
 Use this checklist when changing the repository:
 
-1. Compare adapter metadata with actual source/target manifests and profile versions.
+1. Compare adapter metadata with actual source/target manifests and profile versions. Confirm feature names use `FET_###_<RUNTIME>` and feature versions are exact integers.
 2. Reproduce or inspect the failed upgrade when possible.
 3. Determine whether to update the existing adapter or add a new adapter for a new exact version path. Prefer adding a new path when published source/target versions must keep their old behavior.
 4. Patch transformation logic narrowly:
@@ -103,7 +103,7 @@ Report:
 | Field | Meaning |
 |---|---|
 | `adapter_path` | Adapter changed. |
-| `feature_path` | Input and output feature IDs/versions. |
+| `feature_path` | Input and output feature names and integer versions. |
 | `change_type` | Bug fix, new version path, or docs/test update. |
 | `mutation_summary` | USD behavior changed. |
 | `tests` | Tests/assets run. |

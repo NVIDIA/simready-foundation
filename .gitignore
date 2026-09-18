@@ -21,6 +21,7 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
+.venv*/
 
 # PyInstaller
 *.manifest
@@ -76,3 +77,14 @@ _*/
 _repo
 _build
 source/apps/exts.deps.generated.kit
+
+# Local working notes (agent scratchpad; not part of the repo)
+/MEMORY.md
+/NEWTON.md
+
+# Local-only sample asset (not part of the repo)
+/sample_content/common_assets/props_general/sm_obs_orange_a03/
+
+# Local tool run artifacts (not part of the repo)
+/outputs/
+.simready_diagnostics/

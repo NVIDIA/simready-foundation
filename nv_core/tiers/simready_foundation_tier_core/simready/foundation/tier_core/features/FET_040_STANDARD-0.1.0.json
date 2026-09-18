@@ -1,0 +1,16 @@
+{
+    "id": "FET_040_STANDARD",
+    "version": "0.1.0",
+    "display_name": "Semantic Labels - COCO",
+    "path": "features/FET_040_STANDARD.html",
+    "requirements": [
+        "COCO.001"
+    ],
+    "dependencies": [
+        {
+            "FET_011_STANDARD": {
+                "version": "0.2.0"
+            }
+        }
+    ]
+}

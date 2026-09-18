@@ -1,0 +1,152 @@
+{
+  "instance_name": "pascal_voc",
+  "taxonomy_slug": "pascal_voc",
+  "taxonomy_name": "PASCAL VOC 20 object classes",
+  "dataset_name": "PASCAL Visual Object Classes",
+  "dataset_slug": "pascal_voc",
+  "taxonomy_version": "VOC-2007/2012",
+  "source_url": "https://raw.githubusercontent.com/pjreddie/darknet/master/data/voc.names",
+  "label_count": 20,
+  "labels": [
+    {
+      "name": "aeroplane",
+      "display_name": "Aeroplane",
+      "class_id": 0,
+      "is_thing": true,
+      "task_type": "object_detection,semantic_segmentation"
+    },
+    {
+      "name": "bicycle",
+      "display_name": "Bicycle",
+      "class_id": 1,
+      "is_thing": true,
+      "task_type": "object_detection,semantic_segmentation"
+    },
+    {
+      "name": "bird",
+      "display_name": "Bird",
+      "class_id": 2,
+      "is_thing": true,
+      "task_type": "object_detection,semantic_segmentation"
+    },
+    {
+      "name": "boat",
+      "display_name": "Boat",
+      "class_id": 3,
+      "is_thing": true,
+      "task_type": "object_detection,semantic_segmentation"
+    },
+    {
+      "name": "bottle",
+      "display_name": "Bottle",
+      "class_id": 4,
+      "is_thing": true,
+      "task_type": "object_detection,semantic_segmentation"
+    },
+    {
+      "name": "bus",
+      "display_name": "Bus",
+      "class_id": 5,
+      "is_thing": true,
+      "task_type": "object_detection,semantic_segmentation"
+    },
+    {
+      "name": "car",
+      "display_name": "Car",
+      "class_id": 6,
+      "is_thing": true,
+      "task_type": "object_detection,semantic_segmentation"
+    },
+    {
+      "name": "cat",
+      "display_name": "Cat",
+      "class_id": 7,
+      "is_thing": true,
+      "task_type": "object_detection,semantic_segmentation"
+    },
+    {
+      "name": "chair",
+      "display_name": "Chair",
+      "class_id": 8,
+      "is_thing": true,
+      "task_type": "object_detection,semantic_segmentation"
+    },
+    {
+      "name": "cow",
+      "display_name": "Cow",
+      "class_id": 9,
+      "is_thing": true,
+      "task_type": "object_detection,semantic_segmentation"
+    },
+    {
+      "name": "diningtable",
+      "display_name": "Diningtable",
+      "class_id": 10,
+      "is_thing": true,
+      "task_type": "object_detection,semantic_segmentation"
+    },
+    {
+      "name": "dog",
+      "display_name": "Dog",
+      "class_id": 11,
+      "is_thing": true,
+      "task_type": "object_detection,semantic_segmentation"
+    },
+    {
+      "name": "horse",
+      "display_name": "Horse",
+      "class_id": 12,
+      "is_thing": true,
+      "task_type": "object_detection,semantic_segmentation"
+    },
+    {
+      "name": "motorbike",
+      "display_name": "Motorbike",
+      "class_id": 13,
+      "is_thing": true,
+      "task_type": "object_detection,semantic_segmentation"
+    },
+    {
+      "name": "person",
+      "display_name": "Person",
+      "class_id": 14,
+      "is_thing": true,
+      "task_type": "object_detection,semantic_segmentation"
+    },
+    {
+      "name": "pottedplant",
+      "display_name": "Pottedplant",
+      "class_id": 15,
+      "is_thing": true,
+      "task_type": "object_detection,semantic_segmentation"
+    },
+    {
+      "name": "sheep",
+      "display_name": "Sheep",
+      "class_id": 16,
+      "is_thing": true,
+      "task_type": "object_detection,semantic_segmentation"
+    },
+    {
+      "name": "sofa",
+      "display_name": "Sofa",
+      "class_id": 17,
+      "is_thing": true,
+      "task_type": "object_detection,semantic_segmentation"
+    },
+    {
+      "name": "train",
+      "display_name": "Train",
+      "class_id": 18,
+      "is_thing": true,
+      "task_type": "object_detection,semantic_segmentation"
+    },
+    {
+      "name": "tvmonitor",
+      "display_name": "Tvmonitor",
+      "class_id": 19,
+      "is_thing": true,
+      "task_type": "object_detection,semantic_segmentation"
+    }
+  ]
+}

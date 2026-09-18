@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform FET_028_ISAAC"
+  short_description: "Repair FET_028_ISAAC conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-028-isaac to repair FET_028_ISAAC SimReady conformance failures."

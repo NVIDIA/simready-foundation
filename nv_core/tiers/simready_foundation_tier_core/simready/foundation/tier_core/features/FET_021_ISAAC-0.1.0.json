@@ -1,0 +1,15 @@
+{
+    "id": "FET_021_ISAAC",
+    "version": "0.1.0",
+    "display_name": "Robot Core (Isaac)",
+    "path": "features/FET_021_ISAAC.html",
+    "dependencies": [],
+    "requirements": [
+        "RC.001",
+        "RC.003",
+        "RC.004",
+        "RC.005",
+        "RC.006",
+        "RC.007"
+    ]
+}

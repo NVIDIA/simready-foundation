@@ -1,0 +1,84 @@
+# Feature: `FET_024_PHYSX`
+
+| **Property** | **Value** |
+|--------------|-----------|
+| Feature Name | `FET_024_PHYSX` |
+| Runtime | `PHYSX` |
+| Proprietary Techs | `PhysX` |
+| Latest Version | `0.1.0` |
+
+## Description
+
+Defines the PhysX base-articulation contract. It depends on Standard articulation root authoring and adds PhysX evidence that non-adjacent collision meshes do not clash.
+
+## Dependency Graph
+
+```{mermaid}
+flowchart LR
+    FET_024_PHYSX_0_1_0["FET_024_PHYSX\n0.1.0"]
+    FET_024_STANDARD_0_1_0["FET_024_STANDARD\n0.1.0"]
+    FET_024_PHYSX_0_1_0 --> FET_024_STANDARD_0_1_0
+
+    classDef current fill:#90EE90,stroke:#333
+```
+
+## Use Cases
+
+Products or workflows that consume this feature:
+
+- SimReady validation verifies FET_024_PHYSX requirements.
+- `simready-foundation-conform-fet-024-physx` repairs root placement and records PhysX clearance limitations.
+
+## Requirements
+
+### Version 0.1.0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+- Robot Body Runnable v1.0.0, v1.1.0
+- Robot Body Isaac v1.0.0, v1.1.0
+- Robot Body v2.0.0 optional
+- Robot Gripper Isaac v0.1.0, v0.2.0
+- Robot Gripper v2.0.0 optional
+
+#### Feature Dependencies
+
+| **Property** | **Value** |
+|--------------|-----------|
+| Dependency | `FET_024_STANDARD@0.1.0` |
+
+#### Requirement List
+
+* Capability: [Physics Bodies/Base Articulation](../capabilities/physics_bodies/base_articulation/capability-base-articulation.md)
+
+| Requirement | Requirement Doc | Rule |
+|-------------|-----------------|------|
+| `BA.002` | [BA.002](../capabilities/physics_bodies/base_articulation/requirements/non-adjacent-collision-meshes-do-not-clash.md) | [Implementation](../capabilities/physics_bodies/base_articulation/validation.py) |
+
+</details>
+
+## Pipelines
+
+Source file type:
+
+- `.usd`, `.usda`, `.usdc`, package source folder, or package root as applicable.
+
+Validation or runtime pipeline:
+
+- SimReady validation verifies FET_024_PHYSX requirements.
+- `simready-foundation-conform-fet-024-physx` repairs root placement and records PhysX clearance limitations.
+
+## Samples
+
+- [`ur10` PhysX robot](../../../../sample_content/common_assets/robots_general/ur10/simready_usd/ur10.usd)
+
+## Benchmarks
+
+- None.
+
+## Adapters
+
+None.

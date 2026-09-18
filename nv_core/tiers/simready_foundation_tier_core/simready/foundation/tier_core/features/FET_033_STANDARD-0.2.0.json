@@ -1,0 +1,17 @@
+{
+    "id": "FET_033_STANDARD",
+    "version": "0.2.0",
+    "display_name": "Metadata",
+    "path": "features/FET_033_STANDARD.html",
+    "dependencies": [
+        {
+            "FET_031_STANDARD": {
+                "version": "0.1.0"
+            }
+        }
+    ],
+    "requirements": [
+        "SR.002",
+        "SR.003"
+    ]
+}

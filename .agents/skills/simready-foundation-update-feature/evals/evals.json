@@ -1,12 +1,12 @@
 [
     {
         "id":  "simready-foundation-update-feature-positive-trigger",
-        "question":  "Update an existing SimReady feature and add a new version when the contract changes.",
+        "question":  "Update FET_003_PHYSX and add the next integer feature version when the contract changes.",
         "expected_skill":  "simready-foundation-update-feature",
         "ground_truth":  "The agent should activate simready-foundation-update-feature and follow its workflow.",
         "expected_behavior":  [
                                   "Load the simready-foundation-update-feature skill.",
-                                  "Preserve published versions, update feature markdown/manifests/indexes, and update or add the matching conform skill when asset validation can fail.",
+                                  "Preserve published versions, update template-aligned feature markdown/manifests/indexes using integer feature versions, and update or add the matching conform skill when asset validation can fail.",
                                   "Report changed files, validation performed, and any remaining release or validation gaps."
                               ]
     },

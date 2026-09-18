@@ -17,23 +17,26 @@ A **Feature** is a collection of related requirements that work together to prov
 
 Each feature consists of:
 
-- **ID**: Unique identifier (e.g., `FET001_BASE_NEUTRAL`)
-- **Version**: Semantic versioning (e.g., `1.0.0`)
+- **Feature Name**: Unique feature name (e.g., `FET_001_STANDARD`)
+- **Version**: Semantic version string (e.g., `0.1.0`)
 - **Display Name**: Human-readable name (e.g., "Minimal Editor")
 - **Path**: File path for documentation
+- **Runtime** (optional): For physics runtime features, the USD physics variant
+  set the validator must enable before checking the feature (see
+  [Runtime Variant Field](#runtime-variant-field-runtime))
 - **Requirements**: List of requirement IDs that the feature depends on
 
 ### Example Feature Definition
 
 ```json
 {
-    "id": "FET001_BASE_NEUTRAL",
-    "version": "1.0.0",
+    "id": "FET_001_STANDARD",
+    "version": "0.1.0",
     "display_name": "Minimal Editor",
-    "path": "features/FET_001-minimal_editor.html",
+    "path": "features/FET_001_STANDARD.html",
     "dependencies": [
         {
-            "FET000_CORE": {
+            "FET_000_STANDARD": {
                 "version": "0.1.0"
             }
         }
@@ -47,6 +50,39 @@ Each feature consists of:
 }
 ```
 
+### Runtime Variant Field (`runtime`)
+
+Physics runtime features (those authored against a specific physics engine, e.g.
+`FET_003_PHYSX`, `FET_004_NEWTON`, `FET_022_MUJOCO`) declare an optional
+`runtime` field. It names the USD physics variant set the standalone validator
+enables before checking that feature's runtime-specific requirements:
+
+```json
+{
+    "id": "FET_003_PHYSX",
+    "version": "0.4.0",
+    "display_name": "Rigid Body Physics (PhysX)",
+    "path": "features/FET_003_PHYSX.html",
+    "runtime": "PhysX",
+    "requirements": ["RB.001", "PHYSX.COL.001", "PHYSX.COL.002"]
+}
+```
+
+- The value is the exact variant-set name to Enable on the asset's default prim
+  (`PhysX`, `Newton`, or `MuJoCo`), matching the variant sets defined by the
+  Runtime Variants capability (`RV.*`).
+- Omit the field for neutral / OpenUSD features (`FET_*_STANDARD`), Isaac
+  composition features, MDL, and packaging features. Those are validated against
+  the neutral base (all physics variants Disabled).
+- The validator groups a profile's features by this field and validates each
+  runtime group with only its variant Enabled, so runtime-specific schemas and
+  attributes (which compose only when the variant is Enabled) are visible to
+  their rules. Requirements that also appear in a neutral feature are validated
+  once against the neutral base.
+- Adding a new physics engine is a data-only change: give its features a new
+  `runtime` value matching the new variant-set name; no validator change is
+  required.
+
 ## Creating a New Feature
 
 Follow these 6 steps to create a new feature:
@@ -55,21 +91,26 @@ Follow these 6 steps to create a new feature:
 
 Start by copying the sample files and customizing them for your new feature:
 
-#### Sample Feature JSON (`FET_000_base_neutral-new_feature.json`)
+Use [feature-template.md](feature-template.md) as the canonical
+feature markdown template. It follows the same high-level structure as
+`FET_001_STANDARD.md` and includes the required sections for feature authors and
+AI agents.
+
+#### Sample Feature JSON (`FET_000_STANDARD-0.1.0.json`)
 
 ```json
 {
-    "id": "FET000_NEW_FEATURE",
+    "id": "FET_000_STANDARD",
     "version": "0.1.0",
     "display_name": "example new feature",
     "path": "features/FET_000-new_feature.html",
     "dependencies": [
         {
-            "FET001_BASE_NEUTRAL": {
+            "FET_001_STANDARD": {
                 "version": "0.1.0"
             }
         }
-    ],    
+    ],
     "requirements": [
         "AA.001"
     ]
@@ -97,7 +138,8 @@ This is a sample feature documentation that demonstrates the proper structure an
 This sample feature showcases the standard format and structure that should be followed when documenting new features. It includes all the necessary sections and demonstrates proper markdown formatting.
 
 ## Neutral Format
-### Version 1.0.0
+### Version 0.1.0
+
 <details>
 <summary><strong>Details</strong></summary>
 
@@ -106,14 +148,14 @@ This sample feature showcases the standard format and structure that should be f
 * Capability: [Sample_Capability](../capabilities/sample/sample_capability.md)
   * Requirements:
     * [Sample-Requirement](../capabilities/sample/requirements/sample-requirement.md)
-      * SPL.001 | Version 1.0.0
+        * SPL.001 | Version 0.1.0
 
 ### Comments
 * This is a sample comment section
 * Add relevant notes, considerations, or future work items here
 * Use bullet points for clarity
 
-### Samples 
+### Samples
 
 * Sample asset or reference material
 * Additional examples as needed
@@ -151,32 +193,34 @@ This feature serves as a documentation template and should not be implemented in
 
 ### Step 2: Generate Feature ID and Version
 
-#### Feature ID Convention
+#### Feature Name Convention
 
-Feature IDs follow the pattern `FET<NNN>_<VARIANT>` where the variant
-suffix encodes scope, domain, and compatibility tier. Common examples:
+Feature names follow the pattern `FET_###_<RUNTIME>` where the runtime suffix
+identifies the runtime contract for the feature. Common examples:
 
-- `FET001_BASE_NEUTRAL` — core OpenUSD only
-- `FET003_BASE_PHYSX` — uses PhysxSchema extensions
-- `FET021_ROBOT_CORE_ISAAC` — robot core using IsaacSim schemas
-- `FET022_DRIVEN_JOINTS_PHYSX` — driven joints using PhysX
+- `FET_001_STANDARD` - OpenUSD only, no runtime-specific schemas or attributes
+- `FET_001_NEWTON` - Newton runtime behavior, schemas, or attributes
+- `FET_001_PHYSX` - PhysX runtime behavior, schemas, or attributes
+- `FET_001_ISAAC` - Isaac runtime behavior, schemas, or attributes
 
-The authoritative list of valid variant suffixes is the set of `"id"`
-values in the feature JSON files under `features/`.
+Use `STANDARD` when the feature is pure OpenUSD and has no additional
+runtime-specific attributes, schemas, validators, or behavior. The
+authoritative list of existing feature names is the set of `"id"` values in the
+feature JSON files under `features/`.
 
 #### Versioning Strategy
 
-Use semantic versioning:
-- **Major.Minor.Patch** (e.g., `1.0.0`)
-- **Major**: Breaking changes
-- **Minor**: New functionality (backward compatible)
-- **Patch**: Bug fixes (backward compatible)
+Use semantic feature versions:
+
+- Start new feature contracts at `0.1.0`.
+- Increment the semantic version (for example `0.2.0`, `1.0.0`, `1.0.1`) for new published feature contracts.
+- Do not use bare integer versions such as `1` or `2` for feature versions.
 
 ### Step 3: Add Requirements
 
 Identify and list all requirements your feature depends on:
 
-1. **Browse existing capabilities** in `nv_core/sr_specs/docs/capabilities/`
+1. **Browse existing capabilities** in the tier `capabilities/` directories
 2. **Select relevant requirements** from each capability
 3. **List requirement IDs** in the JSON file
 4. **Document requirement details** in the markdown file
@@ -184,7 +228,7 @@ Identify and list all requirements your feature depends on:
 #### Example Requirements Section
 
 ```markdown
-#### Requirements 
+#### Requirements
 * Capability: [Core/Atomic_Asset](../capabilities/core/atomic_asset/capability-atomic_asset.md)
     * Requirements
         * [Anchored-Asset-Paths](../capabilities/core/atomic_asset/requirements/anchored-asset-paths.md)
@@ -197,22 +241,25 @@ Identify and list all requirements your feature depends on:
 
 ### Step 4: Place into Feature Folder
 
-Place your feature files in:
+Place your feature files in the owning [tier](../tiers.md):
 ```
-simready_foundation/nv_core/sr_specs/docs/features/
+nv_core/tiers/<owning-tier>/simready/foundation/<tier-module>/features/
 ```
 
 **File naming convention:**
-- JSON: `FET_###_base_[tech]-[version]-[description].json`
-- Markdown: `FET_###-[description].md`
+- JSON: `FET_###_<RUNTIME>-<version>.json`
+- Markdown: `FET_###_<RUNTIME>.md`
 
 **Examples:**
-- `FET_001_base_neutral-1.0.0-minimal.json`
-- `FET_001-minimal.md`
+- `FET_001_STANDARD-0.1.0.json`
+- `FET_001_STANDARD.md`
 
 ### Step 5: Add New Feature to Features Index
 
-Update `nv_core/sr_specs/docs/features/features.md`:
+Update `nv_core/sr_specs/docs/shared/features/features.md`; cross-tier feature
+family pages also live in that shared directory.
+
+Update `nv_core/sr_specs/docs/shared/features/features.md`:
 
 ```markdown
 # Features
@@ -220,11 +267,17 @@ Update `nv_core/sr_specs/docs/features/features.md`:
 ```{toctree}
 :maxdepth: 1
 
-ID:001 - Minimal - Base <FET_001-minimal>
-ID:002 - Posable Bodies - Base <FET_002-posable_bodies>
-ID:003 - RBD Physics - Base <FET_003-rigid_body_physics>
-ID:004 - Simulate Multi-Body Physics - Base <FET_004-simulate_multi_body_physics>
-ID:005 - Simulate Grasp Physics - Base <FET_005-simulate_grasp_physics>
+ID:001 - Minimal - Standard <FET_001_STANDARD>
+ID:002 - Posable Bodies - Standard <FET_002_STANDARD>
+ID:003 - RBD Physics - Standard <FET_003_STANDARD>
+ID:003 - RBD Physics - PhysX <FET_003_PHYSX>
+ID:003 - RBD Physics - Newton <FET_003_NEWTON>
+ID:004 - Simulate Multi-Body Physics - Standard <FET_004_STANDARD>
+ID:004 - Simulate Multi-Body Physics - PhysX <FET_004_PHYSX>
+ID:004 - Simulate Multi-Body Physics - Newton <FET_004_NEWTON>
+ID:004 - Simulate Multi-Body Physics - Robot PhysX <FET_004_ROBOT_PHYSX>
+ID:004 - Simulate Multi-Body Physics - Robot Newton <FET_004_ROBOT_NEWTON>
+ID:005 - Simulate Grasp Physics - Standard <FET_005_STANDARD>
 ID:000 - Sample Feature - Base <FET_000-new_feature>
 ```
 
@@ -235,12 +288,12 @@ Features are used in profiles to define what capabilities an asset must have. He
 ```toml
 [Prop-Robotics-Physx]
 "1.0.0" = {features = [
-    {"FET001_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Minimal"
-    {"FET003_BASE_PHYSX" = {version = "0.1.0"}}, # "RBD Physics"
-    {"FET004_BASE_PHYSX" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
-    {"FET005_BASE_NEUTRAL" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
+    {"FET_001_STANDARD" = {version = "0.1.0"}}, # "Minimal"
+    {"FET_003_PHYSX" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET_004_PHYSX" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
+    {"FET_005_STANDARD" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
 
-    {"FET000_NEW_FEATURE" = {version = "0.1.0"}}, # "New Feature"
+    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "New Feature"
 ]}
 ```
 
@@ -265,22 +318,22 @@ Assets using a merged mesh collider would fail RB.COL.001 (no per-shape collider
 
 #### How to implement an expansion
 
-1. **Add the new requirement**  
+1. **Add the new requirement**
    Create the capability and requirement documentation (e.g. `physx-collider-capability.md` for PHYSX.COL.001) that states the expanded rule and its exceptions.
 
-2. **Define the tech-specific feature requirement list**  
-   In the technology-specific feature (e.g. `FET003_BASE_PHYSX`), start from the base feature’s full requirement list. Then:
+2. **Define the tech-specific feature requirement list**
+   In the technology-specific feature (e.g. `FET_003_PHYSX`), start from the base feature's full requirement list. Then:
    - **Remove** the base requirement(s) being replaced (e.g. RB.COL.001, and if applicable RB.COL.002).
    - **Add** the new requirement(s) (e.g. PHYSX.COL.001, PHYSX.COL.002).
 
    The tech feature then carries an explicit, full list of requirements; it does not depend on the base feature for those requirements so that the expanded rule replaces the base rule rather than adding to it.
 
-3. **Wire profiles**  
+3. **Wire profiles**
    Profiles choose which feature (and thus which requirement) applies:
-   - **Neutral profile** (e.g. Prop-Robotics-Neutral): uses the base feature (e.g. `FET003_BASE_NEUTRAL`) and therefore RB.COL.001.
-   - **PhysX profile** (e.g. Prop-Robotics-Physx): uses the tech feature (e.g. `FET003_BASE_PHYSX`) and therefore PHYSX.COL.001.
+   - **Neutral profile** (e.g. Prop-Robotics-Neutral): uses the standard feature (e.g. `FET_003_STANDARD`) and therefore RB.COL.001.
+   - **PhysX profile** (e.g. Prop-Robotics-Physx): uses the tech feature (e.g. `FET_003_PHYSX`) and therefore PHYSX.COL.001.
 
-**Concrete example:** `FET_003_base_neutral-0.1.0-rigid_body_physics.json` includes `RB.COL.001` in its requirements. `FET_003_base_physx-0.2.0-rigid_body_physics.json` lists all other rigid-body requirements from the base feature but omits `RB.COL.001` (and RB.COL.002) and adds `PHYSX.COL.001` and `PHYSX.COL.002` so that both per-shape and merged-mesh colliders are valid under the PhysX spec.
+**Concrete example:** `FET_003_STANDARD-0.1.0.json` includes `RB.COL.001` in its requirements. `FET_003_PHYSX-0.2.0.json` lists all other rigid-body requirements from the standard feature but omits `RB.COL.001` (and RB.COL.002) and adds `PHYSX.COL.001` and `PHYSX.COL.002` so that both per-shape and merged-mesh colliders are valid under the PhysX spec.
 
 
 ## Feature Dependencies
@@ -301,12 +354,12 @@ Dependencies are defined in the JSON file as an array of objects:
 ```json
 "dependencies": [
     {
-        "FET001_BASE_NEUTRAL": {
+        "FET_001_STANDARD": {
             "version": "0.1.0"
         }
     },
     {
-        "FET_003_BASE_PHYSX": {
+        "FET_003_PHYSX": {
             "version": "0.1.0"
         }
     }
@@ -315,7 +368,7 @@ Dependencies are defined in the JSON file as an array of objects:
 
 **Format:**
 - **Feature ID**: The ID of the dependent feature (e.g., `FET_001`)
-- **Version**: Specific version requirement (e.g., `"0.1.0"`)
+- **Version**: Specific semantic version requirement (e.g., `"0.1.0"`)
 - **Multiple Dependencies**: Can specify multiple features in the array
 
 ### How Dependencies Work
@@ -345,7 +398,7 @@ When a feature has dependencies, the validation system automatically:
 
 // Feature B depends on Feature C
 {
-    "id": "FET_B", 
+    "id": "FET_B",
     "dependencies": [
         {
             "FET_C": {"version": "0.1.0"}
@@ -373,20 +426,20 @@ Dependencies specify exact version requirements to ensure compatibility:
 ```json
 "dependencies": [
     {
-        "FET001_BASE_NEUTRAL": {
+        "FET_001_STANDARD": {
             "version": "0.1.0"
         }
     },
     {
-        "FET003_BASE_PHYSX": {
+        "FET_003_PHYSX": {
             "version": "0.1.0"
         }
     }
 ]
 ```
 
-Version values must be exact semantic versions (e.g. `"0.1.0"`) matching
-an existing feature JSON file's `"version"` field.
+Version values must be exact semantic versions (e.g. `"0.1.0"`) matching an
+existing feature JSON file's `"version"` field.
 
 ### Benefits of Using Dependencies
 
@@ -417,16 +470,16 @@ an existing feature JSON file's `"version"` field.
 // Good: Only depend on what you actually need
 "dependencies": [
     {
-        "FET001_BASE_NEUTRAL": {"version": "0.1.0"}  // Core minimal requirements
+        "FET_001_STANDARD": {"version": "0.1.0"}  // Core minimal requirements
     }
 ]
 
 // Avoid: Don't depend on features you don't actually use
 "dependencies": [
     {
-        "FET001_BASE_NEUTRAL": {"version": "0.1.0"},
-        "FET002_BASE_NEUTRAL": {"version": "0.1.0"},  // Unused dependency
-        "FET003_BASE_NEUTRAL": {"version": "0.1.0"}   // Unused dependency
+        "FET_001_STANDARD": {"version": "0.1.0"},
+        "FET_002_STANDARD": {"version": "0.1.0"},  // Unused dependency
+        "FET_003_STANDARD": {"version": "0.1.0"}   // Unused dependency
     }
 ]
 ```
@@ -436,14 +489,14 @@ an existing feature JSON file's `"version"` field.
 // Good: Specify exact versions for stability
 "dependencies": [
     {
-        "FET001_BASE_NEUTRAL": {"version": "0.1.0"}
+        "FET_001_STANDARD": {"version": "0.1.0"}
     }
 ]
 
 // Avoid: Using version ranges that could cause instability
 "dependencies": [
     {
-        "FET001_BASE_NEUTRAL": {"version": ">=0.1.0"}  // Could break with future changes
+        "FET_001_STANDARD": {"version": ">=1"}  // Version ranges are not allowed
     }
 ]
 ```
@@ -453,10 +506,10 @@ an existing feature JSON file's `"version"` field.
 // Good: Add comments explaining why dependencies are needed
 "dependencies": [
     {
-        "FET001_BASE_NEUTRAL": {"version": "0.1.0"}  // Provides core asset validation
+        "FET_001_STANDARD": {"version": "0.1.0"}  // Provides core asset validation
     },
     {
-        "FET_003_BASE_PHYSX": {"version": "0.1.0"}  // Provides physics requirements
+        "FET_003_PHYSX": {"version": "0.1.0"}  // Provides physics requirements
     }
 ]
 ```
@@ -503,14 +556,14 @@ Common dependency validation errors:
 // Error: Version doesn't exist
 "dependencies": [
     {
-        "FET001_BASE_NEUTRAL": {"version": "99.99.99"}
+        "FET_001_STANDARD": {"version": "0.99.0"}
     }
 ]
 
 // Error: Circular dependency detected
 "dependencies": [
     {
-        "FET001_BASE_NEUTRAL": {"version": "0.1.0"}  // Creates circular reference
+        "FET_001_STANDARD": {"version": "0.1.0"}  // Creates circular reference
     }
 ]
 ```
@@ -519,13 +572,13 @@ Common dependency validation errors:
 
 ```json
 {
-    "id": "FET004_BASE_PHYSX",
+    "id": "FET_004_PHYSX",
     "version": "0.1.0",
     "display_name": "Simulate Multi-Body Physics",
-    "path": "features/FET_004-simulate_multi_body_physics.html",
+    "path": "features/FET_004_PHYSX.html",
     "dependencies": [
         {
-            "FET003_BASE_PHYSX": {
+            "FET_003_PHYSX": {
                 "version": "0.1.0"
             }
         }
@@ -539,8 +592,8 @@ Common dependency validation errors:
 ```
 
 **What this means:**
-- `FET004_BASE_PHYSX` automatically includes all requirements from:
-  - `FET003_BASE_PHYSX` (rigid body physics requirements)
+- `FET_004_PHYSX` automatically includes all requirements from:
+  - `FET_003_PHYSX` (rigid body physics requirements)
 - Plus its own specific requirements: `JT.001`, `JT.002`, `RB.MB.001`
 - Total validation set: All requirements from both features
 
@@ -590,7 +643,7 @@ Common dependency validation errors:
 ### Avoid These Mistakes
 
 1. **Missing Requirements**: Ensure all dependencies are listed
-2. **Incorrect Versioning**: Use semantic versioning consistently
+2. **Incorrect Versioning**: Use semantic feature versions consistently
 3. **Poor Documentation**: Write clear, comprehensive descriptions
 4. **Missing Tests**: Include both manual and automated testing
 5. **Broken Links**: Verify all internal links work correctly

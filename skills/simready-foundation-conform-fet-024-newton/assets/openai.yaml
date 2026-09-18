@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform FET_024_NEWTON"
+  short_description: "Repair FET_024_NEWTON conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-024-newton to repair FET_024_NEWTON SimReady conformance failures."
