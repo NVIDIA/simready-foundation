@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform FET_006_MDL"
+  short_description: "Repair FET_006_MDL conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-006-mdl to repair FET_006_MDL SimReady conformance failures."

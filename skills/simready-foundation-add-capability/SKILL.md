@@ -15,7 +15,9 @@ metadata:
 
 ## Purpose
 
-Use this skill when a new requirement does not fit an existing capability. A capability groups related requirements and their validators under `nv_core/sr_specs/docs/capabilities/`.
+Use this skill when a new requirement does not fit an existing capability. A
+capability groups related requirements and validators under its owning package
+in `nv_core/tiers/`.
 
 After creating the capability, use `simready-foundation-add-requirement` for each requirement and `simready-foundation-add-validator` for executable checks.
 
@@ -28,8 +30,8 @@ Before editing, read:
 - `nv_core/sr_specs/docs/guides/naming_conventions.md`
 - `nv_core/sr_specs/docs/guides/features_expansion_workflow.md`
 - existing neighboring capability folders
-- `nv_core/sr_specs/docs/capabilities/capabilities.md`
-- `nv_core/sr_specs/docs/capabilities/__init__.py`
+- `nv_core/sr_specs/docs/shared/capabilities/capabilities.md`
+- the owning tier's `capabilities/__init__.py`
 
 No network access, API key, or external service is required for the authoring pass.
 
@@ -40,6 +42,7 @@ Collect or infer:
 | Input | Requirement |
 |---|---|
 | `capability_group` | Existing top-level group such as `physics_bodies`, `visualization`, or a new group if justified. |
+| `owning_tier` | Tier package that owns the capability, requirements, and validators. |
 | `capability_slug` | Snake_case folder name. |
 | `display_name` | Human-readable capability name. |
 | `scope` | What requirement family belongs here. |
@@ -62,8 +65,11 @@ Use this checklist when changing the repository:
 5. Add `requirements.md` with `{requirements-table}` and a toctree for requirement docs.
 6. Add an empty or initial `requirements/` folder content only for real requirements.
 7. Add `validation.py` with imports and placeholder structure only when validators are planned; otherwise document deferred validation in the capability overview.
-8. Update parent group toctrees, group landing pages, and global capability indexes, including `capabilities.md` when needed.
-9. Update `capabilities/__init__.py` imports when a new validation module must be registered.
+8. Update parent group toctrees, group landing pages, and the shared global
+   capability hub when needed.
+9. Update the owning tier's `capabilities/__init__.py` when a new validation
+   module must be registered. Keep the shared legacy aggregate import hub in
+   sync until `simready-foundation-core` is retired.
 10. Validate consistency:
     - folder and overview names match
     - requirements index builds conceptually
@@ -81,7 +87,7 @@ Add a SimReady capability for factory connection points, with requirement index 
 Expected result summary:
 
 ```text
-capability_path: nv_core/sr_specs/docs/capabilities/<group>/<capability_slug>
+capability_path: nv_core/tiers/<owning-tier>/simready/foundation/<tier-module>/capabilities/<group>/<capability_slug>
 overview_doc: capability-<capability_slug>.md
 requirements_index: requirements.md
 validation_module: validation.py or deferred

@@ -29,6 +29,10 @@ This Document tracks the status of each capability.
 ### **Units** (55 points) ![Status](https://img.shields.io/badge/Status-Development-yellow)
 - ✅ **Core OpenUSD Schema** (45 points)
 - ✅ **List of Requirements** (10 points)
+(capability-runtime-variants)=
+### **Runtime Variants** (55 points) ![Status](https://img.shields.io/badge/Status-Development-yellow)
+- ✅ **Core OpenUSD Schema** (45 points)
+- ✅ **List of Requirements** (10 points)
 (capability-nonvisual-materials)=
 ### **Nonvisual Materials** (0 points) ![Status](https://img.shields.io/badge/Status-Draft-red)
 (capability-physics-colliders)=

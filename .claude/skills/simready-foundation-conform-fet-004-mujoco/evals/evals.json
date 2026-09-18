@@ -1,0 +1,13 @@
+[
+    {
+        "id": "simready-foundation-conform-fet-004-mujoco-positive-trigger",
+        "question": "Repair FET_004_MUJOCO@0.1.0 validation failures on a SimReady asset or package.",
+        "expected_skill": "simready-foundation-conform-fet-004-mujoco",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-004-mujoco and follow the exact FET_004_MUJOCO workflow.",
+        "expected_behavior": [
+            "Load the simready-foundation-conform-fet-004-mujoco skill.",
+            "Use the selected FET_004_MUJOCO manifest as the authoritative feature contract.",
+            "Report changed files, validation performed, and any remaining blockers."
+        ]
+    }
+]

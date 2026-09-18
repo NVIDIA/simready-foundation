@@ -1,0 +1,9 @@
+{
+    "id": "FET_024_STANDARD",
+    "version": "0.1.0",
+    "display_name": "Base Articulation",
+    "path": "features/FET_024_STANDARD.html",
+    "requirements": [
+        "BA.001"
+    ]
+}

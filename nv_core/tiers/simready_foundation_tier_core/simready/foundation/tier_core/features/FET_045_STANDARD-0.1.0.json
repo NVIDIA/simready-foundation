@@ -1,0 +1,16 @@
+{
+    "id": "FET_045_STANDARD",
+    "version": "0.1.0",
+    "display_name": "Semantic Labels - ImageNet-1K",
+    "path": "features/FET_045_STANDARD.html",
+    "requirements": [
+        "IN1K.001"
+    ],
+    "dependencies": [
+        {
+            "FET_011_STANDARD": {
+                "version": "0.2.0"
+            }
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+[
+    {
+        "id": "simready-foundation-conform-fet-000-isaac-positive-trigger",
+        "question": "Repair FET_000_ISAAC failures on a USD asset: clean folder, thumbnail, and physics source-layer placement.",
+        "expected_skill": "simready-foundation-conform-fet-000-isaac",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-000-isaac and follow its workflow.",
+        "expected_behavior": [
+            "Load the simready-foundation-conform-fet-000-isaac skill.",
+            "Repair RC.001, RC.004, RC.005, and RC.006, then rerun the relevant validation gate.",
+            "Report changed files, validation performed, and any remaining packaging gaps."
+        ]
+    },
+    {
+        "id": "simready-foundation-conform-fet-000-isaac-negative-nontrigger",
+        "question": "Repair robot naming and RobotAPI schema on an Isaac robot asset.",
+        "expected_skill": null,
+        "ground_truth": "The agent should use the FET_021_ISAAC conform skill, not FET_000_ISAAC.",
+        "expected_behavior": [
+            "Do not activate simready-foundation-conform-fet-000-isaac for robot identity repairs.",
+            "Prefer simready-foundation-conform-fet-021-isaac for RC.003/RC.007/RC.008/RC.009."
+        ]
+    }
+]

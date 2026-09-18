@@ -109,7 +109,7 @@ async def post_validate(
         create step (or any other SimReady-conformant packager).
     profiles:
         Profile IDs to validate against.  Defaults to ``["Package"]``
-        (which includes FET030 core and FET032 introspection/BOM).
+        (which includes FET_030_STANDARD core and FET_032_STANDARD introspection/BOM).
         Use ``["Package-NoBOM"]`` for packages without a BOM.
     write_evidence:
         When ``True``, write a conformance JSON into ``.metadata/``

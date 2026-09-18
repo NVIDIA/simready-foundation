@@ -6,7 +6,7 @@
         "ground_truth":  "The agent should activate simready-foundation-add-profile and follow its workflow.",
         "expected_behavior":  [
                                   "Load the simready-foundation-add-profile skill.",
-                                  "Add a new profile markdown and TOML entries that pin exact feature versions and document profile purpose, conditionality, and validation expectations.",
+                                  "Add a new profile markdown and TOML entries that pin exact feature names and integer feature versions, then document profile purpose, conditionality, and validation expectations.",
                                   "Report changed files, validation performed, and any remaining release or validation gaps."
                               ]
     },

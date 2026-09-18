@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform FET_000_MUJOCO"
+  short_description: "Repair FET_000_MUJOCO MuJoCo runtime variant scaffolding"
+  default_prompt: "Use $simready-foundation-conform-fet-000-mujoco to repair FET_000_MUJOCO SimReady MuJoCo runtime variant conformance on a USD asset."

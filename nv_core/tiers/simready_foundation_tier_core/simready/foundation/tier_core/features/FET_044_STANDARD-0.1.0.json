@@ -1,0 +1,16 @@
+{
+    "id": "FET_044_STANDARD",
+    "version": "0.1.0",
+    "display_name": "Semantic Labels - SUN RGB-D",
+    "path": "features/FET_044_STANDARD.html",
+    "requirements": [
+        "SUN.001"
+    ],
+    "dependencies": [
+        {
+            "FET_011_STANDARD": {
+                "version": "0.2.0"
+            }
+        }
+    ]
+}

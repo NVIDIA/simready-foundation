@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "simready-isaac-asset-transformer"
+version = "0.1.0"
+description = "Standalone USD asset transformer for SimReady Isaac packages"
+readme = "README.md"
+requires-python = ">=3.10,<3.14"
+license = "Apache-2.0"
+authors = [{ name = "NVIDIA Corporation" }]
+dependencies = ["numpy>=1.24,<3"]
+
+[project.optional-dependencies]
+usd = ["usd-core>=23.5"]
+test = ["pytest>=8"]
+full = [
+    "isaacsim-asset-importer-utils==1.0.0",
+    "isaacsim-robot-schema==1.0.0",
+]
+
+[project.scripts]
+simready-transform-asset = "simready.asset_transformer.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["simready", "simready.*"]
+# `simready` is a PEP 420 namespace package (no top-level __init__.py) so the
+# standalone transformer can coexist with the tier-core `simready.foundation`
+# namespace when both are installed or added to sys.path.
+namespaces = true
+
+[tool.setuptools.package-data]
+"simready.asset_transformer" = ["profile_transforms/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

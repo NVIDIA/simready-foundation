@@ -8,7 +8,7 @@
       "asset": "com.nvidia.simready.packaging.json",
       "features": [
         {
-          "FET030_PACKAGING_CORE": {
+          "FET_030_STANDARD": {
             "version": "0.1.0",
             "passed": true,
             "failing_requirements": [],
@@ -16,13 +16,13 @@
           }
         },
         {
-          "FET032_PACKAGING_INTROSPECTION": {
+          "FET_032_STANDARD": {
             "version": "0.1.0",
             "passed": true,
             "failing_requirements": [],
             "dependencies": [
               {
-                "FET030_PACKAGING_CORE": {
+                "FET_030_STANDARD": {
                   "version": "0.1.0"
                 }
               }

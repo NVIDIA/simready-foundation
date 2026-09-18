@@ -1,0 +1,22 @@
+{
+    "id": "FET_004_STANDARD",
+    "version": "0.1.0",
+    "display_name": "Simulate Multi-Body Physics",
+    "path": "features/FET_004_STANDARD.html",
+    "dependencies": [
+        {
+            "FET_003_STANDARD": {
+                "version": "0.1.0"
+            }
+        }
+    ],
+    "requirements": [
+        "JT.001",
+        "JT.002",
+        "JT.003",
+        "JT.ART.002",
+        "JT.ART.003",
+        "JT.ART.004",
+        "RB.MB.001"
+    ]
+}

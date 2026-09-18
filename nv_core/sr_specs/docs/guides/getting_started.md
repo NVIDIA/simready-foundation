@@ -91,6 +91,25 @@ To understand how new capabilities, features, and profiles move from an idea to
 an accepted part of the specification, see the
 [SimReady Acceptance Workflow](acceptance_workflow.md).
 
+### How the specification is distributed
+
+Those three concepts describe how the specification is *layered*. **Tiers**
+describe how it is *divided and shipped*. A tier is a slice of the
+specification that is owned, versioned, and installed as a unit, and it holds
+its own capabilities, features, and profiles.
+
+Tiers exist because simulation domains mature at different rates. The core
+tier holds specification content that is broadly agreed on, while other tiers
+hold content that is real and validated but scoped to a particular runtime,
+vendor, or domain. That way a solver-specific convention can be formally
+specified and machine-checked without changing the meaning of the shared core,
+and it has a path toward the core as it gains wider agreement.
+
+Today all Foundation content ships in a single core tier, so most users
+install one package and get the complete specification. See
+[Tiers](tiers.md) for the full picture and
+[SimReady Foundation PyPI Packages](foundation_pypi.md) for installation.
+
 ### Problems SimReady Foundation solves
 
 
@@ -144,7 +163,7 @@ applies to your situation and exactly where to go next.
 | Asset type                                                               | Recommended profile                                                                                                                                                                                             | What it covers                                                                                                                                                               |
 | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **A robot arm, mobile robot, or articulated agent**                      | [Robot-Body-Neutral](../profiles/robot-body-neutral.md) or [Robot-Body-Runnable](../profiles/robot-body-runnable.md)                                                                                                  | Rigid-body physics, articulation, driven joints, base hierarchy. See the [UR10 sample](../../../../sample_content/common_assets/robots_general/ur10/simready_usd/ur10.usd). |
-| **A prop or object in a robotics scene** (box, shelf, tool, etc.)        | [Prop-Robotics-Neutral](../profiles/prop-robotics-neutral.md) or [Prop-Robotics-PhysX](../profiles/prop-robotics-physx.md)                                                                                      | Rigid-body physics, multi-body simulation, grasp-ready colliders.                                                                                                            |
+| **A prop or object in a robotics scene** (box, shelf, tool, etc.)        | [Prop-Robotics-Neutral](../profiles/prop-robotics-neutral.md), [Prop-Robotics-PhysX](../profiles/prop-robotics-physx.md), or [Robotics-Prop](../profiles/robotics-prop.md)                                      | Rigid-body physics, multi-body simulation, grasp-ready colliders. For PhysX + Newton (+ MuJoCo) on one asset, see [Multiple Physics Solvers](multiphysics_solvers.md).       |
 | **A robot or prop targeting a specific runtime** (e.g. NVIDIA Isaac Sim) | [Robot-Body-Isaac](../profiles/robot-body-isaac.md) or [Prop-Robotics-Isaac](../profiles/prop-robotics-isaac.md)                                                                                                | Everything above plus runtime-specific composition and adaptation.                                                                                                           |
 | **Something else** (vehicle, deformable, environment)                    | Start with the [full profile list](../profiles/profiles.md) to see if an existing profile fits. If not, the spec is extensible — see the [Features Guide](features/features.md) for how to define new features. |                                                                                                                                                                              |
 
@@ -172,7 +191,7 @@ applies to your situation and exactly where to go next.
 | -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Single asset, single runtime**                         | Validation rules catch USD-level mistakes before you discover them in the simulator. Even for one asset, that saves debugging time.           |
 | **Multiple assets, single runtime**                      | Every asset validates against the same profile, so you get consistency across your scene or dataset without manual spot-checks.               |
-| **Same assets, multiple runtimes**                       | Author against a base (Neutral) profile and use feature adapters to produce runtime-specific variants. One source of truth, multiple outputs. |
+| **Same assets, multiple runtimes**                       | Author a neutral base and layer PhysX, Newton, and/or MuJoCo through runtime physics variants. See [Multiple Physics Solvers](multiphysics_solvers.md). Feature adapters fill solver-specific payload deltas. |
 | **Large-scale pipelines** (synthetic data, world models) | Pin a profile version for your production pipeline. New features or rules extend the spec without breaking your validated asset set.          |
 
 

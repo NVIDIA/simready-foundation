@@ -1,0 +1,92 @@
+{
+  "instance_name": "sunrgbd",
+  "taxonomy_slug": "sunrgbd",
+  "taxonomy_name": "SUN RGB-D 3D detection 10",
+  "dataset_name": "SUN RGB-D",
+  "dataset_slug": "sunrgbd",
+  "taxonomy_version": "MMDetection3D-main",
+  "source_url": "https://raw.githubusercontent.com/open-mmlab/mmdetection3d/main/mmdet3d/datasets/sunrgbd_dataset.py",
+  "label_count": 10,
+  "labels": [
+    {
+      "name": "bed",
+      "display_name": "Bed",
+      "class_id": 0,
+      "is_thing": true,
+      "color_rgb": "255,187,120",
+      "task_type": "3d_object_detection"
+    },
+    {
+      "name": "table",
+      "display_name": "Table",
+      "class_id": 1,
+      "is_thing": true,
+      "color_rgb": "255,152,150",
+      "task_type": "3d_object_detection"
+    },
+    {
+      "name": "sofa",
+      "display_name": "Sofa",
+      "class_id": 2,
+      "is_thing": true,
+      "color_rgb": "140,86,75",
+      "task_type": "3d_object_detection"
+    },
+    {
+      "name": "chair",
+      "display_name": "Chair",
+      "class_id": 3,
+      "is_thing": true,
+      "color_rgb": "188,189,34",
+      "task_type": "3d_object_detection"
+    },
+    {
+      "name": "toilet",
+      "display_name": "Toilet",
+      "class_id": 4,
+      "is_thing": true,
+      "color_rgb": "44,160,44",
+      "task_type": "3d_object_detection"
+    },
+    {
+      "name": "desk",
+      "display_name": "Desk",
+      "class_id": 5,
+      "is_thing": true,
+      "color_rgb": "247,182,210",
+      "task_type": "3d_object_detection"
+    },
+    {
+      "name": "dresser",
+      "display_name": "Dresser",
+      "class_id": 6,
+      "is_thing": true,
+      "color_rgb": "196,156,148",
+      "task_type": "3d_object_detection"
+    },
+    {
+      "name": "night_stand",
+      "display_name": "Night Stand",
+      "class_id": 7,
+      "is_thing": true,
+      "color_rgb": "23,190,207",
+      "task_type": "3d_object_detection"
+    },
+    {
+      "name": "bookshelf",
+      "display_name": "Bookshelf",
+      "class_id": 8,
+      "is_thing": true,
+      "color_rgb": "148,103,189",
+      "task_type": "3d_object_detection"
+    },
+    {
+      "name": "bathtub",
+      "display_name": "Bathtub",
+      "class_id": 9,
+      "is_thing": true,
+      "color_rgb": "227,119,194",
+      "task_type": "3d_object_detection"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+    "id": "FET_004_ROBOT_NEWTON",
+    "version": "0.1.0",
+    "display_name": "Simulate Multi-Body Physics (Robot Newton)",
+    "path": "features/FET_004_ROBOT_NEWTON.html",
+    "runtime": "Newton",
+    "_comment": "Intentionally omits RB.COL.001 because robot Newton assets allow nested CollisionAPI authoring that the base rule rejects.",
+    "requirements": [
+        "RB.COL.003",
+        "RB.COL.004",
+        "RB.001",
+        "RB.003",
+        "RB.005",
+        "RB.007",
+        "RB.009",
+        "RB.010",
+        "JT.001",
+        "JT.002",
+        "JT.003",
+        "JT.ART.002",
+        "JT.ART.003",
+        "JT.ART.004",
+        "RB.MB.001",
+        "NEWTON.COL.001",
+        "NEWTON.COL.002",
+        "NEWTON.MAS.001",
+        "NEWTON.MAT.001",
+        "RB.011",
+        "RB.012"
+    ]
+}

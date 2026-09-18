@@ -14,7 +14,7 @@ metadata:
 # SimReady Add Feature Adapter
 
 ## Purpose
-Use this skill to add a direct asset mutation path between feature versions or profile feature bundles. Feature adapters live under `nv_core/cip_specs/asset_handler_modules/` and modify an output USD stage so an asset can move from an input feature/profile contract to a target one.
+Use this skill to add a direct asset mutation path between exact `FET_###_<RUNTIME>` feature names with integer feature versions, or between profile feature bundles. Feature adapters live under `nv_core/cip_specs/asset_handler_modules/` and modify an output USD stage so an asset can move from an input feature/profile contract to a target one.
 
 Use this after feature/profile differences are known. If no USD mutation is needed, document that no adapter is required.
 
@@ -33,10 +33,10 @@ Collect or infer:
 
 | Input | Requirement |
 |---|---|
-| `input_feature_id` | Source feature ID. |
-| `input_feature_version` | Source feature version. |
-| `output_feature_id` | Target feature ID. |
-| `output_feature_version` | Target feature version. |
+| `input_feature_name` | Source feature name / manifest `id`, such as `FET_003_STANDARD`. |
+| `input_feature_version` | Source integer feature version. |
+| `output_feature_name` | Target feature name / manifest `id`, such as `FET_003_PHYSX`. |
+| `output_feature_version` | Target integer feature version. |
 | `profile_path` | Optional source/target profile upgrade path. |
 | `mutation` | Exact USD data changes required. |
 | `module_path` | Asset handler module directory. |
@@ -46,10 +46,10 @@ Collect or infer:
 
 Use this checklist when changing the repository:
 
-1. Compare source and target manifests. Identify only the requirements that differ.
+1. Compare source and target manifests. Confirm names use `FET_###_<RUNTIME>` and versions are exact integers, then identify only the requirements that differ.
 2. Decide whether a direct adapter is necessary. For profile transformations, every feature difference must have a direct adapter path or a documented blocker. If target requirements are documentation-only or already satisfied by source assets, document no-op behavior.
 3. Choose or create the asset handler module path.
-4. Add a Python adapter file with `@feature_adapter` metadata using exact feature IDs and versions.
+4. Add a Python adapter file with `@feature_adapter` metadata using exact feature names and integer versions.
 5. Implement `modify_stage(input_stage, output_stage)`:
    - read source stage only when needed
    - mutate output stage deterministically
@@ -110,8 +110,8 @@ Report:
 |---|---|
 | `adapter_name` | Adapter identifier. |
 | `adapter_path` | Python file path. |
-| `input_feature` | Source feature ID/version. |
-| `output_feature` | Target feature ID/version. |
+| `input_feature` | Source feature name and integer version. |
+| `output_feature` | Target feature name and integer version. |
 | `mutation_summary` | USD opinions changed. |
 | `profile_upgrade` | Profile path supported, if any. |
 | `validation` | Tests/assets run and remaining gaps. |

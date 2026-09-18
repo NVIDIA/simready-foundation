@@ -23,7 +23,8 @@ Before validating, read:
 - the changed files
 - relevant guides for the changed surface
 - affected feature manifests and profiles
-- runtime-testing subguides when runtime evidence or `_testing/` artifacts are involved
+- `nv_core/sr_specs/docs/guides/benchmark/benchmark.md` and its linked pages
+  when runtime evidence or `_testing/` artifacts are involved
 
 ## Inputs
 
@@ -33,7 +34,7 @@ Collect or infer:
 |---|---|
 | `changed_files` | Git diff or explicit file list. |
 | `change_type` | Requirement, capability, validator, feature, profile, adapter, runtime test, or skill change. |
-| `target_feature_profile` | Affected feature/profile IDs and versions. |
+| `target_feature_profile` | Affected `FET_###_<RUNTIME>` feature names, semantic feature versions, profile names, and profile versions. |
 | `available_tools` | `simready-validate`, USD/PXR, OAV, Kit runtime, or docs-only. |
 
 ## Instructions
@@ -53,28 +54,45 @@ Use this checklist when changing the repository:
    - imports/registration paths are updated
 4. Feature checks:
    - JSON manifests parse
+   - feature names use `FET_###_<RUNTIME>`
+   - feature versions are dotted semantic versions; do not reintroduce the
+     reverted bare-integer version experiment
+   - JSON manifest filenames match `FET_###_<RUNTIME>-<semantic-version>.json`
+   - feature markdown filenames match `FET_###_<RUNTIME>.md`
    - `id`, `version`, `display_name`, `path`, `dependencies`, and `requirements` are present as expected
    - every requirement ID exists
    - every dependency feature/version exists
    - dependency versions are exact and dependency chains are not circular
    - feature expansion removes conflicting base requirements instead of stacking mutually exclusive rules
-   - feature markdown documents the same version and requirements
+   - feature markdown keeps the canonical `feature-template.md` sections: Feature, Description, Dependency Graph, Use Cases, Requirements, Pipelines, Samples, Benchmarks, and Adapters
+   - feature markdown documents the same semantic versions and requirements as the JSON manifests
    - `features/features.md` and dependency graph are updated when needed
-   - new or contract-changing features have a matching `skills/simready-foundation-conform-fet-###-<feature-name>` skill, or the change documents why no asset-repair skill is safe/applicable
+   - new or contract-changing features have a matching `skills/simready-foundation-conform-fet-###-<runtime>` skill, or the change documents why no asset-repair skill is safe/applicable
 5. Profile checks:
    - the per-profile TOML files in `profiles/` parse
    - existing profile versions are preserved unless explicitly editorial
-   - every referenced feature ID/version exists
+   - every referenced feature name/semantic feature version exists
    - profile markdown and `profiles.md` agree with TOML
 6. Adapter checks:
-   - adapter metadata references existing feature IDs/versions
+   - adapter metadata references existing feature names and semantic feature versions
    - every changed profile feature difference has an adapter path or documented blocker
 7. Runtime test checks:
-   - source test/search config changed, not generated job JSON
-   - test definitions include `TestInfo`, `RunnerTags`, and `TestConfig` when applicable
-   - search function file and function names align
-   - runner assumptions are documented
-   - expected artifacts and pass/fail signals are clear
+   - Python test sources changed, not generated plans, result JSON, or reports
+   - tier-owned tests live under
+     `nv_core/tiers/<tier>/<test-package>/`, where `<test-package>` is the
+     importable package declared by that tier's descriptor; retired
+     `nv_core/runtime_tests` and `nv_core/testing_tools` trees are not recreated
+   - the tier wheel includes the test package and its descriptor's
+     `runtime_tests_path` points directly to that importable directory
+   - independent test-only wheels use `simready_benchmark.tests`; unpublished
+     development packs remain discoverable through `--tests-path`
+   - each independently reportable test has its own module and `@test` registration
+   - feature mappings, name/version, engine requirements, configuration defaults,
+     `description`, and `expected_video` are complete; do not add the removed
+     `requirement` decorator keyword
+   - focused unit and registration tests cover non-runtime behavior
+   - engine assumptions and reproduction commands are documented
+   - expected pass/fail/skip signals and report artifacts are clear
 8. Skill/layout checks:
    - `skills` is source of truth
    - `.codex/skills` and `.claude/skills` remain compatibility links/placeholders

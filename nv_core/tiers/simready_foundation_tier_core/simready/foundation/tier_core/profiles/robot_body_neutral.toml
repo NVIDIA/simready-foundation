@@ -1,0 +1,23 @@
+[Robot-Body-Neutral]
+"1.0.0" = {features = [
+    {"FET_001_STANDARD" = {version = "0.1.0"}}, # "Minimal"
+    {"FET_003_STANDARD" = {version = "0.1.0"}}, # "RBD Physics"
+    {"FET_004_STANDARD" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics"
+    {"FET_022_STANDARD" = {version = "0.1.0"}}, # "Driven Joints
+    {"FET_024_STANDARD" = {version = "0.1.0"}}, # "Neutral Base Articulation"
+]}
+"1.1.0" = {features = [ # Deprecate RB.006
+    {"FET_001_STANDARD" = {version = "1.0.1"}}, # "Minimal"
+    {"FET_003_STANDARD" = {version = "0.2.0"}}, # "RBD Physics"
+    {"FET_004_STANDARD" = {version = "0.2.0"}}, # "Simulate Multi-Body Physics"
+    {"FET_022_STANDARD" = {version = "0.2.0"}}, # "Driven Joints
+    {"FET_024_STANDARD" = {version = "0.1.0"}}, # "Neutral Base Articulation"
+]}
+"1.2.0" = {features = [ # Add semantic labels
+    {"FET_001_STANDARD" = {version = "1.0.1"}}, # "Minimal"
+    {"FET_003_STANDARD" = {version = "0.2.0"}}, # "RBD Physics"
+    {"FET_004_STANDARD" = {version = "0.2.0"}}, # "Simulate Multi-Body Physics"
+    {"FET_022_STANDARD" = {version = "0.2.0"}}, # "Driven Joints
+    {"FET_024_STANDARD" = {version = "0.1.0"}}, # "Neutral Base Articulation"
+    {"FET_011_STANDARD" = {version = "0.2.0"}}, # "Semantic Labels"
+]}

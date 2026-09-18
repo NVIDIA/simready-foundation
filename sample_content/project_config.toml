@@ -9,10 +9,16 @@ subconfigs = []
 subconfigs_priority = ["sample_content"]
 
 [validate]
-requirements_configs_path = "nv_core/sr_specs/config"
-requirements_paths = ["nv_core/sr_specs/docs/capabilities"]
-features_paths = ["nv_core/sr_specs/docs/features"]
-profiles_paths = ["nv_core/sr_specs/docs/profiles"]
+# Validation content is owned by the tiers.
+requirements_paths = [
+    "nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities",
+]
+features_paths = [
+    "nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features",
+]
+profiles_paths = [
+    "nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles",
+]
 
 [cip]
 adapter_modules_path = "nv_core/cip_specs/asset_handler_modules"
@@ -27,8 +33,8 @@ url = "http://example.com:8001"
 nv_core_wrapp_repo_url = "omniverse://example.com/simready_foundations/.wrapp_publish"
 
 [action_default_profiles]
-add = "Prop-Robotics-Neutral"
-generate = "Prop-Robotics-Physx"
+add = "Robotics-Prop"
+generate = "Robotics-Prop"
 
 [docs]
 url = "https://nvidia.github.io/simready-foundation/latest/"

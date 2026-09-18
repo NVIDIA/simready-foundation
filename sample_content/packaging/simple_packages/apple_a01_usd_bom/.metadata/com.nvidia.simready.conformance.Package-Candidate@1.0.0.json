@@ -8,7 +8,7 @@
       "asset": "apple_a01/simready_usd/sm_apple_a01_01.usd",
       "features": [
         {
-          "FET031_PACKAGE_SELF_CONTAINED": {
+          "FET_031_STANDARD": {
             "version": "0.1.0",
             "passed": true,
             "failing_requirements": [],
@@ -16,13 +16,13 @@
           }
         },
         {
-          "FET033_SIMREADY_PACKAGING": {
+          "FET_033_STANDARD": {
             "version": "0.1.0",
             "passed": true,
             "failing_requirements": [],
             "dependencies": [
               {
-                "FET031_PACKAGE_SELF_CONTAINED": {
+                "FET_031_STANDARD": {
                   "version": "0.1.0"
                 }
               }

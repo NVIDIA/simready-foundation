@@ -1,0 +1,15 @@
+{
+    "id": "FET_001_STANDARD",
+    "version": "0.1.0",
+    "display_name": "Minimal Placeable Visual",
+    "path": "features/FET_001_STANDARD.html",
+    "requirements": [
+        "AA.001",
+        "AA.002",
+        "UN.001",
+        "UN.002",
+        "UN.007",
+        "VG.001",
+        "HI.004"
+    ]
+}

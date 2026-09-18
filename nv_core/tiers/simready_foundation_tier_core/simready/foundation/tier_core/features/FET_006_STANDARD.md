@@ -1,0 +1,72 @@
+# Feature: `FET_006_STANDARD`
+
+| **Property** | **Value** |
+|--------------|-----------|
+| Feature Name | `FET_006_STANDARD` |
+| Runtime | `STANDARD` |
+| Proprietary Techs | `None` |
+| Latest Version | `0.1.0` |
+
+## Description
+
+Defines the Standard OpenUSD material contract for assets that use UsdPreviewSurface materials. Assets have material bindings in valid scopes and renderable geometry bound to valid preview-surface shader networks.
+
+## Dependency Graph
+
+This feature has no dependencies and no other features depend on it directly.
+
+## Use Cases
+
+Products or workflows that consume this feature:
+
+- SimReady validation verifies material binding and USDPreviewSurface requirements.
+- `simready-foundation-conform-fet-006-standard` repairs USDPreviewSurface material conformance on staged assets.
+
+## Requirements
+
+### Version 0.1.0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+- Robotics Prop v3.0.0 optional Standard material gate
+
+#### Feature Dependencies
+
+None.
+
+#### Requirement List
+
+* Capability: [Visualization/Materials](../capabilities/visualization/materials/capability-materials.md)
+
+| Requirement | Requirement Doc | Rule |
+|-------------|-----------------|------|
+| `VM.BIND.001` | [VM.BIND.001](../capabilities/visualization/materials/requirements/material-bind-scope.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
+| `VM.PS.001` | [VM.PS.001](../capabilities/visualization/materials/requirements/material-preview-surface.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
+
+</details>
+
+## Pipelines
+
+Source file type:
+
+- `.usd`, `.usda`, `.usdc`, package source folder, or package root as applicable.
+
+Validation or runtime pipeline:
+
+- SimReady validation verifies material binding and USDPreviewSurface requirements.
+- `simready-foundation-conform-fet-006-standard` repairs USDPreviewSurface material conformance on staged assets.
+
+## Samples
+
+- [`obs_lamp_revolute_a01`](../../../../sample_content/common_assets/props_general/obs_lamp_revolute_a01/simready_usd/sm_obs_lamp_revolute_a01_01.usda)
+
+## Benchmarks
+
+- None.
+
+## Adapters
+
+None.

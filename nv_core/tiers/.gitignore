@@ -1,0 +1,4 @@
+# The repo-root .gitignore has a broad "_*/" rule, so we need a couple of
+# exemptions for things that should be tracked:
+!_tooling/
+!*/simready/foundation/*/capabilities/_includes

@@ -259,7 +259,8 @@ documentation.
 
 ### Delivery
 
-Accepted artifacts are merged into the specification:
+Accepted artifacts are merged into the specification, in the
+[tier](tiers.md) that owns them:
 
 - Requirement markdown and `validation.py` land under `capabilities/`.
 - Feature JSON and markdown land under `features/`.
@@ -270,6 +271,12 @@ Accepted artifacts are merged into the specification:
 
 Version numbers are assigned (or bumped) according to the scope of change.
 Existing profiles that do not reference the new features remain unaffected.
+
+Which tier receives the content depends on how broadly it applies. Content
+that is agreed on across runtimes and vendors belongs in the core tier;
+content scoped to a single runtime, vendor, or domain belongs in a tier of its
+own, where it is specified and validated the same way without changing the
+shared core. See [Tiers](tiers.md).
 
 ---
 
@@ -285,6 +292,13 @@ fully delivered while others are still in prototyping or testing.
 | A feature JSON exists but is not yet referenced by any profile. | The feature is in late prototyping or testing. It may change before delivery. |
 | A capability directory contains requirements but no `validation.py`. | The requirements are defined but validators are still in progress. Treat the requirements as directional, not enforceable. |
 | Sample assets exist in `sample_content/` for the domain. | Reference implementations are available; check the corresponding profile version to confirm they are up to date. |
+| A [tier](tiers.md) other than core owns the feature or profile. | The contract is scoped to that tier's runtime, vendor, or domain rather than the shared core. It is validated the same way, but it is less portable across runtimes. |
+
+These indicators answer two different questions, and it is worth reading them
+together. The first four tell you how *complete* a piece of the specification
+is — whether it has finished the lifecycle above. The tier tells you how
+*widely shared* it is. A feature can be fully delivered and still live outside
+the core tier, and that combination means the contract is stable but scoped.
 
 When in doubt, check the feature version and the profile that references it.
 Pinned versions in a profile represent the accepted, stable contract.

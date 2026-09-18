@@ -1,0 +1,25 @@
+[
+    {
+        "id": "simready-foundation-conform-fet-022-mujoco-positive-trigger",
+        "question": "Repair FET_022_MUJOCO@0.1.0 validation failures on a SimReady robot asset or package.",
+        "expected_skill": "simready-foundation-conform-fet-022-mujoco",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-022-mujoco and follow the exact FET_022_MUJOCO workflow.",
+        "expected_behavior": [
+            "Load the simready-foundation-conform-fet-022-mujoco skill.",
+            "Use the selected FET_022_MUJOCO manifest as the authoritative feature contract.",
+            "Repair MuJoCo joint and actuator conformance without adding sibling runtime requirements.",
+            "Report changed files, validation performed, and any remaining blockers."
+        ]
+    },
+    {
+        "id": "simready-foundation-conform-fet-022-mujoco-negative-nontrigger",
+        "question": "Summarize the difference between a SimReady feature and capability without editing files.",
+        "expected_skill": null,
+        "ground_truth": "The agent should answer from repo documentation or local context without activating this specific skill.",
+        "expected_behavior": [
+            "Do not activate simready-foundation-conform-fet-022-mujoco.",
+            "Do not modify files.",
+            "Provide a concise conceptual answer or choose a more appropriate skill if one is explicitly requested."
+        ]
+    }
+]

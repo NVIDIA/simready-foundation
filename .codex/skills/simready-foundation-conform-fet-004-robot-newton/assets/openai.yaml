@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform FET_004_ROBOT_NEWTON"
+  short_description: "Repair FET_004_ROBOT_NEWTON conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-004-robot-newton to repair FET_004_ROBOT_NEWTON SimReady conformance failures."

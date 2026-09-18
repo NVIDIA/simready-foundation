@@ -1,0 +1,11 @@
+{
+    "id": "FET_002_STANDARD",
+    "version": "0.1.0",
+    "display_name": "Posable Bodies",
+    "path": "features/FET_002_STANDARD.html",
+    "requirements": [
+        "HI.002",
+        "HI.004",
+        "VG.001"
+    ]
+}

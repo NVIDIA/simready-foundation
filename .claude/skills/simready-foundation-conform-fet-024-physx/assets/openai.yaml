@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform FET_024_PHYSX"
+  short_description: "Repair FET_024_PHYSX conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-024-physx to repair FET_024_PHYSX SimReady conformance failures."

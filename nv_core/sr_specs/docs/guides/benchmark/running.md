@@ -1,11 +1,9 @@
 # Running Tests
 
 This page walks through installing the `simready-benchmark` tool, configuring an
-engine, and running tests against an asset. You do not need a SimReady Foundation
-clone before you start; the configure step acquires one by default. If you
-already have a SimReady Foundation clone, for example, this repository, refer to
-[Configure the Engine](#configure-the-engine) for flags that point the wizard at
-your existing clone.
+engine, and running tests against an asset. The installed-tier workflow does not
+require a SimReady Foundation clone: the tier supplies both specifications and
+runtime tests, while its optional Benchmark extra supplies execution dependencies.
 
 ## Prerequisites
 
@@ -32,44 +30,89 @@ source .venv/bin/activate
 ```
 ````
 
-Install the framework and the NVIDIA Kit and NVIDIA Isaac Sim engine plugin from the public NVIDIA PyPI index. The `[kit]` extra brings the engine plugin (`simready-benchmark-engine-kit`), which is required to run tests in the engine:
+Install the core tier with its optional `benchmark` extra. The command respects
+the package index and mirror already configured for `pip`:
 
 ```bash
-pip install simready-benchmark[kit] --extra-index-url https://pypi.nvidia.com
+pip install "simready-foundation-tier-core[benchmark]==2026.7.1" "simready-validate>=2026.7.0.dev1"
 ```
 
-The FET test families themselves are part of the SimReady Foundation, so there is nothing else to install. The next step points the framework at the foundation, and the tests are discovered from there.
+The extra installs `simready-benchmark[kit]>=2026.6.6`; the runtime-test modules
+already ship in the tier. The validator is installed explicitly so Benchmark's
+static validation gate uses the 7.1-compatible library. Benchmark discovers
+both specification catalogs and the runtime-test directory through
+`simready.tier`, so neither `--sr-specs` nor `--tests-path` is required for
+published content. See the [Foundation 7.1 library set](../foundation_pypi.md#foundation-71-library-set)
+for the complete compatibility matrix.
 
-## Configure the Engine
+Use `--tests-path` only to add an unpublished test package during development.
+Explicit paths are loaded in addition to installed test providers.
 
-Run the setup wizard once to record an engine and write the configuration:
+## Set Up the Engine
+
+Validate installed providers and install pip Isaac Sim into the active Python
+3.12 environment when it is not already present:
 
 ```bash
-simready-benchmark --init-engines-toml
-```
-
-The wizard acquires the SimReady Foundation, which contains the FET test families, detects or installs Isaac Sim, and writes a complete `engines.toml`. The framework discovers the FET test families from the foundation automatically. Confirm the result with:
-
-```bash
+simready-benchmark --setup --install-isaac
 simready-benchmark --show-config
+simready-benchmark --list-tests
 ```
 
-If you already have a SimReady Foundation clone and an Isaac Sim install, for
-example, when working from this repository, pass their paths to the wizard so it
-skips cloning the foundation and downloading Isaac Sim:
+`--setup` validates installed tier and runtime-test providers and detects the
+pip Isaac launcher. It does not create configuration files or persist a source
+checkout. Use `--setup --no-install-isaac` when setup should diagnose only.
+
+For an existing standalone Isaac Sim installation, create `engines.toml` in
+the working directory or user configuration directory and point it at the
+launcher:
+
+```toml
+[kit.isaac_sim]
+executable_path = "PATH_TO_ISAAC_LAUNCHER"
+tags = ["isaac", "kit"]
+
+[kit.isaac_sim_newton]
+executable_path = "PATH_TO_ISAAC_LAUNCHER"
+tags = ["isaac", "kit"]
+experience = "isaacsim.exp.full.newton"
+```
+
+The standalone launcher is `isaac-sim.bat` on Windows or `isaac-sim.sh` on
+Linux. `--engines-toml FILE` selects an explicit configuration for one command.
+An explicit file replaces automatic local pip-Isaac discovery.
+
+## Use a Foundation Source Checkout
+
+Use a checkout without rebuilding its tier wheel by passing the checkout root:
 
 ```bash
-simready-benchmark --init-engines-toml --foundations-path PATH_TO_FOUNDATIONS --no-clone-foundations --executable-path PATH_TO_ISAAC_LAUNCHER --no-install-isaac
+simready-benchmark --foundations-path PATH_TO_FOUNDATIONS --show-config
+simready-benchmark --foundations-path PATH_TO_FOUNDATIONS --list-tests
 ```
 
-The Isaac Sim launcher is `isaac-sim.bat` on Windows or `isaac-sim.sh` on Linux. The relevant flags are:
+`--foundations-path` selects the checkout's project configuration, tier
+catalogs, and tier-owned runtime tests. It cannot be combined with
+`--project-config`.
+
+To make a checkout persistent, set its project configuration in the user
+`engines.toml` instead of repeating the flag:
+
+```toml
+[paths]
+project_config = "PATH_TO_FOUNDATIONS/sample_content/project_config.toml"
+```
+
+The `SIMREADY_PROJECT_CONFIG` environment variable provides the same override.
+
+Discovery inputs have distinct purposes:
 
 | Flag | Effect |
 |---|---|
-| `--foundations-path <DIR>` | Use an existing SimReady Foundation clone instead of cloning. |
-| `--no-clone-foundations` | Do not clone SimReady Foundation. |
-| `--executable-path <PATH>` | Use a specific Isaac Sim launcher and skip detection and installation. |
-| `--no-install-isaac` | Do not install Isaac Sim. |
+| `--foundations-path <DIR>` | Use one Foundation source checkout for catalogs, project configuration, and tier-owned tests. |
+| `--project-config <FILE>` | Use an explicit project configuration; mutually exclusive with `--foundations-path`. |
+| `--tests-path <DIR> [...]` | Add one or more trusted unpublished test packages. Installed providers remain active. |
+| `--engines-toml <FILE>` | Use one explicit engine configuration for this command. |
 
 ## Run
 
@@ -79,23 +122,28 @@ Run the tests against an asset by path:
 simready-benchmark --assets path/to/asset.usd
 ```
 
-By default, the stamp stage also writes a benchmark receipt into the
-asset. Specify `--no-stamp` to skip it. Refer to
-[The Runtime Stamp](reading-reports.md#the-runtime-stamp) for what is written.
+By default, the stamp stage copies the root USD into the run's `results/`
+mirror and writes the benchmark receipt to that copy and its sibling
+`.simready/validation.json`. It never modifies the source asset. Specify
+`--no-stamp` to skip this step. Refer to
+[The Runtime Stamp](reading-reports.md#the-runtime-stamp) for the output contract.
 
 To force a specific feature's tests to run, regardless of the asset's validation status, add `--features`:
 
 ```bash
-simready-benchmark --assets path/to/asset.usd --features FET003
+simready-benchmark --assets path/to/asset.usd --features FET_003_STANDARD
 ```
 
 To list the tests available before a run, use `simready-benchmark --list-tests`.
-By default, results land under `_testing/` at the project root configured for
-`simready-benchmark`. Refer to [Pipeline and Stages](pipeline.md) for
-stage flow and flags such as `--plan-only` and `--no-stamp`. Refer to
-[Next Steps](#next-steps) to interpret results.
+By default, the requested output location is `_testing/` at the configured
+project root. Benchmark never clears an existing directory: it allocates a
+fresh `benchmark_testing`, `benchmark_testing_1`, and so on beneath an existing
+location and prints the resolved path. `--output-dir DIR` requests a different
+location. Refer to [Pipeline and Stages](pipeline.md) for stage flow and flags
+such as `--plan-only` and `--no-stamp`, and to [Reading Reports](reading-reports.md)
+for the output contract.
 
 ## Next Steps
 
 - [Pipeline and Stages](pipeline.md): plan, run, stamp, and report stages
-- [Reading Reports](reading-reports.md): interpret results, exit codes, and [verify a clean pass](reading-reports.md#verify-a-clean-pass)
+- [Reading Reports](reading-reports.md): interpret results, exit codes, and [verify a clean run](reading-reports.md#verify-a-clean-run)

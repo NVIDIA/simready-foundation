@@ -96,12 +96,12 @@ python create_simready_package.py apple_a01 1.0.0 MIT \
 
 ## Failure Handling
 
-- Pre-validation `FET031_PACKAGE_SELF_CONTAINED` or `AA.001`: report the offending anchored-path failure and ask before editing USD references.
+- Pre-validation `FET_031_STANDARD` or `AA.001`: report the offending anchored-path failure and ask before editing USD references.
 - Pre-validation usage error: collect the missing `--root-usd`, missing `--source`, or invalid folder path.
 - Create error about an existing root `.wrapp` marker: ask whether to reuse that package name or remove the marker.
 - Create error about nested packages: ask the user to remove nested `.wrapp` files before retrying.
-- Post-validation `FET030_PACKAGING_CORE`: cite the failing package-core requirement and keep the generated package for inspection.
-- Post-validation `FET032_PACKAGING_INTROSPECTION`: check whether BOM metadata was written and rerun the full flow if the source did not change.
+- Post-validation `FET_030_STANDARD`: cite the failing package-core requirement and keep the generated package for inspection.
+- Post-validation `FET_032_STANDARD`: check whether BOM metadata was written and rerun the full flow if the source did not change.
 
 ## Policies
 

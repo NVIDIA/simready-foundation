@@ -3,7 +3,7 @@
 This guide covers benchmarking with `simready-benchmark`. It explains how to plan
 benchmarks, run them in the engine, stamp results on the asset, and read
 reports. For concepts, test families, and how benchmarking relates to
-[schema validation](../validate_workflow.md), start with Overview in the table
+[schema validation](../validate_workflow.md), start with [Overview](overview.md) in the table
 of contents below.
 
 Read the pages below in order, or jump to [Running Tests](running.md) if you are already set up.
@@ -18,7 +18,6 @@ Reading Reports <reading-reports>
 Tests Reference <tests/tests>
 ```
 
-For verifying a `simready-benchmark` release, the command-line QA test plan
-(every command, exit-code gating, and the list-tests against plan against report
-consistency gate) lives in the `simready-explorer` repository at
-`docs/qa-cli-test-plan.md`.
+Use `simready-benchmark --list-tests` as the authoritative inventory for the
+installed environment. The Foundation runtime-test reference documents the
+tests shipped by this tier; independently installed test packs can add more.

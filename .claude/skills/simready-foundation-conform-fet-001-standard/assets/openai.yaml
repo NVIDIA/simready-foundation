@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform FET_001_STANDARD Minimal"
+  short_description: "Repair FET_001_STANDARD failures, latest by default"
+  default_prompt: "Use $simready-foundation-conform-fet-001-standard to repair FET_001_STANDARD@1.0.1 SimReady validation failures on a USD asset unless a profile, report, or user request selects another version."

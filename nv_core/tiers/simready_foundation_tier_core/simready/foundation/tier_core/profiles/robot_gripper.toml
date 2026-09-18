@@ -1,0 +1,57 @@
+[Robot-Gripper]
+"2.0.0" = {features = [
+    {"FET_001_STANDARD" = {version = "1.0.1"}}, # "Minimal"
+    {"FET_003_STANDARD" = {version = "0.2.0"}}, # "RBD Physics"
+    {"FET_004_STANDARD" = {version = "0.2.0"}, optional=true}, # "Simulate Multi-Body Physics"
+    {"FET_022_STANDARD" = {version = "0.2.0"}, optional=true}, # "Driven Joints"
+    {"FET_024_STANDARD" = {version = "0.1.0"}, optional=true}, # "Articulation"
+    {"FET_028_STANDARD" = {version = "0.1.0"}, optional=true}, # "Gripper"
+
+    {"FET_004_PHYSX" = {version = "0.4.0"}, optional=true}, # "Simulate Multi-Body Physics (PhysX)"
+    {"FET_022_PHYSX" = {version = "0.2.0"}, optional=true}, # "Driven Joints (PhysX)"
+    {"FET_024_PHYSX" = {version = "0.1.0"}, optional=true}, # "Articulation (PhysX)"
+    {"FET_021_ISAAC" = {version = "0.2.0"}, optional=true}, # "Robot Core (Isaac)"
+
+    {"FET_022_ISAAC" = {version = "0.2.0"}, optional=true}, # "Driven Joints (Isaac)"
+    {"FET_028_ISAAC" = {version = "0.1.0"}, optional=true}, # "Gripper (Isaac)"
+    {"FET_100_ISAAC" = {version = "0.3.0"}, optional=true}, # "Isaac composition"
+]}
+"2.1.0" = {features = [ # Add required SimReady packaging + provenance metadata (FET_031_STANDARD, FET_033_STANDARD@0.3.0 / SR.003); add optional Newton/MuJoCo multiphysics runtime features and per-runtime Core scaffolding (FET_000_PHYSX/NEWTON/MUJOCO)
+    {"FET_001_STANDARD" = {version = "1.0.1"}}, # "Minimal"
+    {"FET_003_STANDARD" = {version = "0.2.0"}}, # "RBD Physics"
+    {"FET_004_STANDARD" = {version = "0.2.0"}, optional=true}, # "Simulate Multi-Body Physics"
+    {"FET_022_STANDARD" = {version = "0.2.0"}, optional=true}, # "Driven Joints"
+    {"FET_024_STANDARD" = {version = "0.1.0"}, optional=true}, # "Articulation"
+    {"FET_028_STANDARD" = {version = "0.1.0"}, optional=true}, # "Gripper"
+
+    # SimReady packaging + provenance metadata (required)
+    {"FET_031_STANDARD" = {version = "0.1.0"}}, # "Self-contained Package Source"
+    {"FET_033_STANDARD" = {version = "0.3.0"}}, # "Metadata (thumbnail + nested provenance metadata)"
+
+    # PhysX runtime core / rbd / multibody / driven joints / articulation
+    {"FET_000_PHYSX" = {version = "0.1.0"}, optional=true}, # "Core PhysX runtime variant"
+    {"FET_003_PHYSX" = {version = "0.4.0"}, optional=true}, # "RBD Physics (PhysX)"
+    {"FET_004_PHYSX" = {version = "0.4.0"}, optional=true}, # "Simulate Multi-Body Physics (PhysX)"
+    {"FET_022_PHYSX" = {version = "0.2.0"}, optional=true}, # "Driven Joints (PhysX)"
+    {"FET_024_PHYSX" = {version = "0.1.0"}, optional=true}, # "Articulation (PhysX)"
+    {"FET_021_ISAAC" = {version = "0.2.0"}, optional=true}, # "Robot Core (Isaac)"
+
+    # Newton runtime core / rbd / multibody / driven joints / articulation
+    {"FET_000_NEWTON" = {version = "0.1.0"}, optional=true}, # "Core Newton runtime variant"
+    {"FET_003_NEWTON" = {version = "0.1.0"}, optional=true}, # "RBD Physics (Newton)"
+    {"FET_004_NEWTON" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (Newton)"
+    {"FET_022_NEWTON" = {version = "0.1.0"}, optional=true}, # "Driven Joints (Newton)"
+    {"FET_024_NEWTON" = {version = "0.1.0"}, optional=true}, # "Articulation (Newton)"
+
+    # MuJoCo runtime core / rbd / multibody / driven joints / articulation / gripper
+    {"FET_000_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Core MuJoCo runtime variant"
+    {"FET_003_MUJOCO" = {version = "0.1.0"}, optional=true}, # "RBD Physics (MuJoCo)"
+    {"FET_004_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (MuJoCo)"
+    {"FET_022_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Driven Joints (MuJoCo)"
+    {"FET_024_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Articulation (MuJoCo)"
+    {"FET_028_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Gripper (MuJoCo)"
+
+    {"FET_022_ISAAC" = {version = "0.2.0"}, optional=true}, # "Driven Joints (Isaac)"
+    {"FET_028_ISAAC" = {version = "0.1.0"}, optional=true}, # "Gripper (Isaac)"
+    {"FET_100_ISAAC" = {version = "0.3.0"}, optional=true}, # "Isaac composition"
+]}

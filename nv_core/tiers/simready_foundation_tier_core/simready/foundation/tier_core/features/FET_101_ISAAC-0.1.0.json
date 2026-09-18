@@ -1,0 +1,16 @@
+{
+    "id": "FET_101_ISAAC",
+    "version": "0.1.0",
+    "display_name": "Robot IsaacSim Composition",
+    "path": "features/FET_101_ISAAC.html",
+    "dependencies": [
+        {
+            "FET_004_PHYSX": {
+                "version": "0.4.0"
+            }
+        }
+    ],
+    "requirements": [
+        "ISA.001"
+    ]
+}

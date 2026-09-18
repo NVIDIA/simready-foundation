@@ -1,0 +1,327 @@
+{
+  "instance_name": "cityscapes",
+  "taxonomy_slug": "cityscapes",
+  "taxonomy_name": "Cityscapes fine semantic labels",
+  "dataset_name": "Cityscapes",
+  "dataset_slug": "cityscapes",
+  "taxonomy_version": "cityscapesScripts-master",
+  "source_url": "https://raw.githubusercontent.com/mcordts/cityscapesScripts/master/cityscapesscripts/helpers/labels.py",
+  "label_count": 35,
+  "labels": [
+    {
+      "name": "unlabeled",
+      "display_name": "Unlabeled",
+      "class_id": 0,
+      "supercategory": "void",
+      "is_thing": false,
+      "color_rgb": "0,0,0",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "ego vehicle",
+      "display_name": "Ego Vehicle",
+      "class_id": 1,
+      "supercategory": "void",
+      "is_thing": false,
+      "color_rgb": "0,0,0",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "rectification border",
+      "display_name": "Rectification Border",
+      "class_id": 2,
+      "supercategory": "void",
+      "is_thing": false,
+      "color_rgb": "0,0,0",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "out of roi",
+      "display_name": "Out Of Roi",
+      "class_id": 3,
+      "supercategory": "void",
+      "is_thing": false,
+      "color_rgb": "0,0,0",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "static",
+      "display_name": "Static",
+      "class_id": 4,
+      "supercategory": "void",
+      "is_thing": false,
+      "color_rgb": "0,0,0",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "dynamic",
+      "display_name": "Dynamic",
+      "class_id": 5,
+      "supercategory": "void",
+      "is_thing": false,
+      "color_rgb": "111,74,0",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "ground",
+      "display_name": "Ground",
+      "class_id": 6,
+      "supercategory": "void",
+      "is_thing": false,
+      "color_rgb": "81,0,81",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "road",
+      "display_name": "Road",
+      "class_id": 7,
+      "supercategory": "flat",
+      "is_thing": false,
+      "color_rgb": "128,64,128",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "sidewalk",
+      "display_name": "Sidewalk",
+      "class_id": 8,
+      "supercategory": "flat",
+      "is_thing": false,
+      "color_rgb": "244,35,232",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "parking",
+      "display_name": "Parking",
+      "class_id": 9,
+      "supercategory": "flat",
+      "is_thing": false,
+      "color_rgb": "250,170,160",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "rail track",
+      "display_name": "Rail Track",
+      "class_id": 10,
+      "supercategory": "flat",
+      "is_thing": false,
+      "color_rgb": "230,150,140",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "building",
+      "display_name": "Building",
+      "class_id": 11,
+      "supercategory": "construction",
+      "is_thing": false,
+      "color_rgb": "70,70,70",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "wall",
+      "display_name": "Wall",
+      "class_id": 12,
+      "supercategory": "construction",
+      "is_thing": false,
+      "color_rgb": "102,102,156",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "fence",
+      "display_name": "Fence",
+      "class_id": 13,
+      "supercategory": "construction",
+      "is_thing": false,
+      "color_rgb": "190,153,153",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "guard rail",
+      "display_name": "Guard Rail",
+      "class_id": 14,
+      "supercategory": "construction",
+      "is_thing": false,
+      "color_rgb": "180,165,180",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "bridge",
+      "display_name": "Bridge",
+      "class_id": 15,
+      "supercategory": "construction",
+      "is_thing": false,
+      "color_rgb": "150,100,100",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "tunnel",
+      "display_name": "Tunnel",
+      "class_id": 16,
+      "supercategory": "construction",
+      "is_thing": false,
+      "color_rgb": "150,120,90",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "pole",
+      "display_name": "Pole",
+      "class_id": 17,
+      "supercategory": "object",
+      "is_thing": false,
+      "color_rgb": "153,153,153",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "polegroup",
+      "display_name": "Polegroup",
+      "class_id": 18,
+      "supercategory": "object",
+      "is_thing": false,
+      "color_rgb": "153,153,153",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "traffic light",
+      "display_name": "Traffic Light",
+      "class_id": 19,
+      "supercategory": "object",
+      "is_thing": false,
+      "color_rgb": "250,170,30",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "traffic sign",
+      "display_name": "Traffic Sign",
+      "class_id": 20,
+      "supercategory": "object",
+      "is_thing": false,
+      "color_rgb": "220,220,0",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "vegetation",
+      "display_name": "Vegetation",
+      "class_id": 21,
+      "supercategory": "nature",
+      "is_thing": false,
+      "color_rgb": "107,142,35",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "terrain",
+      "display_name": "Terrain",
+      "class_id": 22,
+      "supercategory": "nature",
+      "is_thing": false,
+      "color_rgb": "152,251,152",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "sky",
+      "display_name": "Sky",
+      "class_id": 23,
+      "supercategory": "sky",
+      "is_thing": false,
+      "color_rgb": "70,130,180",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "person",
+      "display_name": "Person",
+      "class_id": 24,
+      "supercategory": "human",
+      "is_thing": true,
+      "color_rgb": "220,20,60",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "rider",
+      "display_name": "Rider",
+      "class_id": 25,
+      "supercategory": "human",
+      "is_thing": true,
+      "color_rgb": "255,0,0",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "car",
+      "display_name": "Car",
+      "class_id": 26,
+      "supercategory": "vehicle",
+      "is_thing": true,
+      "color_rgb": "0,0,142",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "truck",
+      "display_name": "Truck",
+      "class_id": 27,
+      "supercategory": "vehicle",
+      "is_thing": true,
+      "color_rgb": "0,0,70",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "bus",
+      "display_name": "Bus",
+      "class_id": 28,
+      "supercategory": "vehicle",
+      "is_thing": true,
+      "color_rgb": "0,60,100",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "caravan",
+      "display_name": "Caravan",
+      "class_id": 29,
+      "supercategory": "vehicle",
+      "is_thing": true,
+      "color_rgb": "0,0,90",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "trailer",
+      "display_name": "Trailer",
+      "class_id": 30,
+      "supercategory": "vehicle",
+      "is_thing": true,
+      "color_rgb": "0,0,110",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "train",
+      "display_name": "Train",
+      "class_id": 31,
+      "supercategory": "vehicle",
+      "is_thing": true,
+      "color_rgb": "0,80,100",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "motorcycle",
+      "display_name": "Motorcycle",
+      "class_id": 32,
+      "supercategory": "vehicle",
+      "is_thing": true,
+      "color_rgb": "0,0,230",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "bicycle",
+      "display_name": "Bicycle",
+      "class_id": 33,
+      "supercategory": "vehicle",
+      "is_thing": true,
+      "color_rgb": "119,11,32",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    },
+    {
+      "name": "license plate",
+      "display_name": "License Plate",
+      "class_id": -1,
+      "supercategory": "vehicle",
+      "is_thing": false,
+      "color_rgb": "0,0,142",
+      "task_type": "semantic_segmentation,instance_segmentation"
+    }
+  ]
+}

@@ -1,8 +1,7 @@
 [[dependency]]
 python = "../_build/target-deps/python"
 packages = [
-    "nv_core/sr_specs",
-    "usd-validation-nvidia==1.19.3"
+    "usd-validation-nvidia==1.20.0"
 ]
 extra_args = ["--upgrade", "--no-cache-dir"]
 target = "../_build/target-deps/pip_prebundle"

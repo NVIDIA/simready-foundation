@@ -1,0 +1,20 @@
+{
+    "id": "FET_022_NEWTON",
+    "version": "0.1.0",
+    "display_name": "Driven Joints (Newton)",
+    "path": "features/FET_022_NEWTON.html",
+    "runtime": "Newton",
+    "dependencies": [
+        {
+            "FET_004_ROBOT_NEWTON": {
+                "version": "0.1.0"
+            }
+        }
+    ],
+    "requirements": [
+        "DJ.011",
+        "NEWTON.DJ.001",
+        "NEWTON.DJ.002",
+        "NEWTON.DJ.003"
+    ]
+}

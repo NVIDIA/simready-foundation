@@ -1,0 +1,25 @@
+{
+    "id": "FET_004_PHYSX",
+    "version": "0.4.0",
+    "display_name": "Simulate Multi-Body Physics (PhysX)",
+    "path": "features/FET_004_PHYSX.html",
+    "runtime": "PhysX",
+    "dependencies": [
+        {
+            "FET_003_PHYSX": {
+                "version": "0.4.0"
+            }
+        }
+    ],
+    "requirements": [
+        "JT.001",
+        "JT.002",
+        "JT.003",
+        "JT.ART.002",
+        "JT.ART.003",
+        "JT.ART.004",
+        "RB.MB.001",
+        "RB.011",
+        "RB.012"
+    ]
+}

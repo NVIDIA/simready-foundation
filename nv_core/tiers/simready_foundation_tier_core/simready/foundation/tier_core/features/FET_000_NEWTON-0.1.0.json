@@ -1,0 +1,21 @@
+{
+    "id": "FET_000_NEWTON",
+    "version": "0.1.0",
+    "display_name": "Core (Newton)",
+    "path": "features/FET_000_NEWTON.html",
+    "runtime": "Newton",
+    "dependencies": [
+        {
+            "FET_000_STANDARD": {
+                "version": "0.1.0"
+            }
+        }
+    ],
+    "requirements": [
+        "RV.004",
+        "RV.005",
+        "RV.006",
+        "RV.010",
+        "RV.011"
+    ]
+}

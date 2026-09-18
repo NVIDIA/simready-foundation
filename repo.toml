@@ -13,12 +13,13 @@ version_token = "${file:${root}/VERSION.md}"
 [repo_build.build]
 
 [repo_build.fetch]
-before_pull_commands."++" = [
-    ["${root}/nv_core/sr_specs/codegen${shell_ext}"],
-]
+# (No pre-pull codegen: the legacy omni.capabilities codegen is retired. Tiers
+# generate their own requirement enums at wheel-build time, and the docs build
+# assembles its staged source via nv_core/sr_specs/prep_docs.)
 
 [repo_build.fetch.pip]
 publish_pip_cache = false
+
 
 [repo_package]
 
@@ -91,11 +92,6 @@ maintain_legal_blurbs = true
 files.extensions = [".py"]
 files.include = [
     "nv_core/**",
-    # Kit-suite test code: keep its Apache-2.0 legal headers maintained by
-    # repo format. Matched by nv_core/** above; listed explicitly so the
-    # testing tree's license coverage is documented and survives any future
-    # narrowing of the include list.
-    "nv_core/testing_tools/**",
 ]
 
 files.exclude = [

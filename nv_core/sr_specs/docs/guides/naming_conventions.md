@@ -40,7 +40,7 @@ vendorToken:submodule:group:
 
 - The **outermost token** identifies the vendor, organisation, or umbrella
   ecosystem (e.g. `omni`, `physx`, `acmeCable`).
-- **Inner tokens** identify a tier, submodule, or semantic grouping (e.g.
+- **Inner tokens** identify a submodule or semantic grouping (e.g.
   `simready`, `nonvisual`, `flex`).
 
 ### Examples
@@ -48,8 +48,8 @@ vendorToken:submodule:group:
 | Prefix | Owner |
 | --- | --- |
 | `simready:` | SimReady Foundation core tier |
-| `physx:` | PhysX tier |
-| `isaac:` | Isaac Sim tier |
+| `isaac:` | Isaac Sim schemas, defined by the core tier's Isaac Sim capabilities |
+| `physx:` | PhysX schemas |
 | `acmeCable:` | Hypothetical third-party vendor |
 | `acmeCable:flex:` | Submodule within that vendor |
 
@@ -320,22 +320,23 @@ def Xform "CableAssembly" (
 ## Naming across tiers and packages
 
 SimReady Foundation validation rules are delivered as separate Python wheels
-grouped by their dependency footprint. Each tier owns a namespace for its
-rules and introduces USD-attribute prefixes for the schemas it defines:
+grouped by their dependency footprint. Each [tier](tiers.md) owns a namespace
+for its rules and introduces USD-attribute prefixes for the schemas it
+defines:
 
 | Tier | Wheel | Rule namespace | USD-attribute prefix |
 | --- | --- | --- | --- |
 | USD | `nvidia-usd-validators` | `com.nvidia.usd` | (upstream standard — no prefix) |
-| Core | `simready-foundation-core` | `com.nvidia.simready` | `simready:` |
-| PhysX | `simready-foundation-physx` | `com.nvidia.simready` (PhysX rules) | `physx:` |
-| Newton (planned) | `simready-foundation-newton` | TBD | TBD |
-| Isaac Sim (planned) | `isaacsim-foundation.core` | TBD | `isaac:` |
+| Core | `simready-foundation-tier-core` | `com.nvidia.simready` | `simready:`, and `isaac:` for the Isaac Sim capabilities |
 
 ### Key principles
 
 1. **Attribute prefix aligns with the tier that introduces the schema.**
-   A schema added by the PhysX tier uses `physx:` prefixes, not
-   `simready:`. A schema added by SimReady core uses `simready:`.
+   A schema added by SimReady core uses `simready:`. A schema introduced by
+   another tier uses that tier's own prefix instead — a PhysX-specific schema
+   would use `physx:`, not `simready:`. The prefix follows whichever tier
+   defines the schema, so a downstream tier never publishes attributes under
+   an upstream tier's prefix.
 
 2. **Rule-ID namespacing and USD-attribute namespacing are independent.**
    A rule identifier like `com.nvidia.simready.NP.001` names a *rule* in
@@ -354,15 +355,15 @@ rules and introduces USD-attribute prefixes for the schemas it defines:
 ## Capabilities folder layout
 
 When adding a new capability or requirement to the specs, files must be
-placed in the correct location under `nv_core/sr_specs/docs/capabilities/`.
-The folder structure mirrors the layered hierarchy described above.
+placed in the owning tier's `capabilities/` directory under `nv_core/tiers/`.
+The shared Sphinx hub and generated includes live under
+`nv_core/sr_specs/docs/shared/capabilities/`. The assembled folder structure
+mirrors the layered hierarchy described above.
 
 ### Directory structure
 
 ```text
 capabilities/
-├── _includes/                         # Shared Sphinx snippets (badges, etc.)
-│   └── badges/
 ├── <group>/                           # snake_case group folder
 │   ├── <group>.md                     # Group landing page
 │   ├── <capability>/                  # snake_case capability folder
@@ -373,6 +374,10 @@ capabilities/
 │   │   │   └── ...
 │   │   └── validation.py              # Validator classes for the capability
 │   └── ...
+
+docs/shared/capabilities/
+├── _includes/                         # Shared Sphinx snippets (badges, etc.)
+│   └── badges/
 └── capabilities.md                    # Top-level Sphinx entrypoint
 ```
 
@@ -444,7 +449,7 @@ hierarchy, `RB` for rigid bodies, `VG` for visualization/geometry).
 After creating the folder and files:
 
 1. Add the capability's `validation.py` import to
-   `nv_core/sr_specs/docs/capabilities/__init__.py` so validators are
+   `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/__init__.py` so validators are
    discovered at package import time.
 2. Add the capability overview page to the parent group's `{toctree}`.
 3. Add any badge snippets to `_includes/badges/` if the requirement tables

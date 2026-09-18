@@ -17,9 +17,9 @@ A **Feature Adapter** is a mechanism that mutates an asset with a particular pro
 
 ### How Feature Adapters Work
 
-1. **Input Profile**: Asset starts with one set of features (e.g., `FET003_BASE_NEUTRAL`)
+1. **Input Profile**: Asset starts with one set of features (e.g., `FET_003_STANDARD`)
 2. **Transformation Logic**: Adapter applies specific mutations to the asset
-3. **Output Profile**: Asset now conforms to new features (e.g., `FET003_BASE_PHYSX`)
+3. **Output Profile**: Asset now conforms to new features (e.g., `FET_003_PHYSX`)
 4. **Validation**: Asset can now be validated against the new feature set
 
 ## Feature Adapter Structure
@@ -48,9 +48,9 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
 
 @feature_adapter(
     name="_rigid_body_neutral_to_physx_sample",
-    input_feature_id="FET003_BASE_NEUTRAL",
+    input_feature_id="FET_003_STANDARD",
     input_feature_version="0.1.0",
-    output_feature_id="FET003_BASE_PHYSX",
+    output_feature_id="FET_003_PHYSX",
     output_feature_version="0.1.0"
 )
 def modify_stage(input_stage: Usd.Stage, output_stage: Usd.Stage):
@@ -133,7 +133,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
 def modify_stage(input_stage: Usd.Stage, output_stage: Usd.Stage):
     """
     Transform asset from input_feature_id to output_feature_id.
-    
+
     Args:
         input_stage: Source USD stage with input features
         output_stage: Target USD stage to be modified
@@ -145,7 +145,7 @@ def modify_stage(input_stage: Usd.Stage, output_stage: Usd.Stage):
 def _helper_function(prim: Usd.Prim):
     """
     Helper function for specific transformation tasks.
-    
+
     Args:
         prim: USD prim to modify
     """
@@ -166,7 +166,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
 
 @feature_adapter(
     name="minimal_to_material_basic",
-    input_feature_id="FET001_BASE_NEUTRAL",
+    input_feature_id="FET_001_STANDARD",
     input_feature_version="0.1.0",
     output_feature_id="FET002_MATERIAL_BASIC",
     output_feature_version="0.1.0"
@@ -180,10 +180,10 @@ def modify_stage(input_stage: Usd.Stage, output_stage: Usd.Stage):
     default_prim = output_stage.GetDefaultPrim()
     if not default_prim:
         return
-    
+
     # Add materials to all mesh prims
     _add_basic_materials_to_meshes(default_prim)
-    
+
     # Save the modified stage
     output_stage.Save()
 
@@ -191,7 +191,7 @@ def modify_stage(input_stage: Usd.Stage, output_stage: Usd.Stage):
 def _add_basic_materials_to_meshes(prim: Usd.Prim):
     """
     Add basic material properties to mesh prims.
-    
+
     Args:
         prim: Root prim to traverse
     """
@@ -199,19 +199,19 @@ def _add_basic_materials_to_meshes(prim: Usd.Prim):
         if child.IsA(UsdGeom.Mesh):
             # Create a basic material binding
             material_binding = UsdShade.MaterialBindingAPI.Apply(child)
-            
+
             # Create a simple material
             material_path = f"{child.GetPath()}/Material"
             material = UsdShade.Material.Define(child.GetStage(), material_path)
-            
+
             # Create a basic shader
             shader_path = f"{material_path}/Shader"
             shader = UsdShade.Shader.Define(child.GetStage(), shader_path)
             shader.CreateIdAttr("UsdPreviewSurface")
-            
+
             # Connect shader to material
             material.CreateSurfaceOutput().ConnectToSource(shader.ConnectableAPI(), "surface")
-            
+
             # Bind material to mesh
             material_binding.Bind(material)
 ```
@@ -223,7 +223,7 @@ The `@feature_adapter` decorator requires specific parameters:
 #### Required Parameters
 
 - **name**: Unique identifier for the adapter
-- **input_feature_id**: Source feature ID (e.g., `FET001_BASE_NEUTRAL`)
+- **input_feature_id**: Source feature ID (e.g., `FET_001_STANDARD`)
 - **input_feature_version**: Source feature version (e.g., `"0.1.0"`)
 - **output_feature_id**: Target feature ID (e.g., `FET002_MATERIAL_BASIC`)
 - **output_feature_version**: Target feature version (e.g., `"0.1.0"`)
@@ -250,10 +250,10 @@ def modify_stage(input_stage: Usd.Stage, output_stage: Usd.Stage):
     """
     # Read input stage properties
     input_props = _read_input_properties(input_stage)
-    
+
     # Apply transformations to output stage
     _apply_transformations(output_stage, input_props)
-    
+
     # Save the modified output stage
     output_stage.Save()
 ```
@@ -267,7 +267,7 @@ def _add_property_to_prim(prim: Usd.Prim, property_name: str, value):
     """Add a new property to a prim."""
     if not prim.HasAttribute(property_name):
         prim.CreateAttribute(property_name, Sdf.ValueTypeNames.String, "default_value")
-    
+
     attr = prim.GetAttribute(property_name)
     attr.Set(value)
 ```
@@ -317,13 +317,13 @@ def test_adapter_transformation():
     """Test the adapter transformation logic."""
     # Create test input stage
     input_stage = Usd.Stage.CreateInMemory()
-    
+
     # Create test output stage
     output_stage = Usd.Stage.CreateInMemory()
-    
+
     # Run the adapter
     modify_stage(input_stage, output_stage)
-    
+
     # Validate the transformation
     assert _validate_transformation(output_stage)
 ```
@@ -337,11 +337,11 @@ def modify_stage(input_stage: Usd.Stage, output_stage: Usd.Stage):
     # Check if transformation is needed
     if not _needs_transformation(input_stage):
         return
-    
+
     # Apply conditional transformations
     if _has_physics_properties(input_stage):
         _transform_physics_properties(output_stage)
-    
+
     if _has_material_properties(input_stage):
         _transform_material_properties(output_stage)
 ```
@@ -355,7 +355,7 @@ def modify_stage(input_stage: Usd.Stage, output_stage: Usd.Stage):
     for prim in output_stage.Traverse():
         if _should_transform(prim):
             prims_to_transform.append(prim)
-    
+
     # Process in batches for efficiency
     for batch in _create_batches(prims_to_transform, batch_size=100):
         _process_batch(batch)
@@ -373,7 +373,7 @@ def modify_stage(input_stage: Usd.Stage, output_stage: Usd.Stage):
         # Perform transformation
         _apply_transformations(output_stage)
         logger.info("Successfully transformed asset")
-        
+
     except Exception as e:
         logger.error(f"Failed to transform asset: {e}")
         # Optionally, revert changes or provide fallback
@@ -390,11 +390,11 @@ def _add_physics_properties(prim: Usd.Prim):
     # Add collision API
     if not prim.HasAPI(UsdPhysics.CollisionAPI):
         UsdPhysics.CollisionAPI.Apply(prim)
-    
+
     # Add rigid body API
     if not prim.HasAPI(UsdPhysics.RigidBodyAPI):
         UsdPhysics.RigidBodyAPI.Apply(prim)
-    
+
     # Set mass
     rigid_body = UsdPhysics.RigidBodyAPI(prim)
     rigid_body.CreateMassAttr(1.0)
@@ -407,10 +407,10 @@ def _add_material_properties(prim: Usd.Prim):
     """Add basic material properties to a prim."""
     # Create material binding
     material_binding = UsdShade.MaterialBindingAPI.Apply(prim)
-    
+
     # Create material
     material = _create_basic_material(prim.GetStage())
-    
+
     # Bind material
     material_binding.Bind(material)
 ```
@@ -423,7 +423,7 @@ def _add_animation_properties(prim: Usd.Prim):
     # Add animation API
     if not prim.HasAPI(UsdGeom.Xformable):
         UsdGeom.Xformable.Apply(prim)
-    
+
     # Add animation attributes
     xformable = UsdGeom.Xformable(prim)
     xformable.CreateXformOpOrderAttr()

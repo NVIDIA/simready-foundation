@@ -1,0 +1,23 @@
+[
+    {
+        "id": "simready-foundation-conform-fet-023-isaac-positive-trigger",
+        "question": "Repair FET_023_ISAAC failures on a robot asset: nested materials and materials not on the top-level Looks scope.",
+        "expected_skill": "simready-foundation-conform-fet-023-isaac",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-023-isaac and follow its workflow.",
+        "expected_behavior": [
+            "Load the simready-foundation-conform-fet-023-isaac skill.",
+            "Repair RM.001 and RM.002, then rerun the relevant validation gate.",
+            "Report changed files, validation performed, and any remaining material organization gaps."
+        ]
+    },
+    {
+        "id": "simready-foundation-conform-fet-023-isaac-negative-nontrigger",
+        "question": "Repair FET_006_STANDARD PreviewSurface material binding failures on a prop asset.",
+        "expected_skill": null,
+        "ground_truth": "The agent should use the FET_006 material skill, not FET_023_ISAAC.",
+        "expected_behavior": [
+            "Do not activate simready-foundation-conform-fet-023-isaac.",
+            "Prefer simready-foundation-conform-fet-006-standard for PreviewSurface material repairs."
+        ]
+    }
+]

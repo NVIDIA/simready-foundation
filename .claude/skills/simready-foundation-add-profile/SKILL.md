@@ -14,7 +14,9 @@ metadata:
 # SimReady Add Profile
 
 ## Purpose
-Use this skill to add a brand-new profile under `nv_core/sr_specs/docs/profiles/`. A profile is a named, versioned bundle of exact feature IDs and versions for a target asset class or runtime.
+Use this skill to add a brand-new profile under the owning tier package in `nv_core/tiers/`. A profile is a named, versioned bundle of exact `FET_###_<RUNTIME>` feature names and semantic feature versions for a target asset class or runtime.
+
+Each profile lives in its own TOML file in that tier's `profiles/` directory, such as `prop_robotics_neutral.toml`. There is no consolidated `profiles.toml`; the validator loads every `*.toml` in each configured directory.
 
 Do not use this skill for a new version of an existing profile. Use `simready-foundation-update-profile` for that.
 
@@ -25,10 +27,10 @@ Before editing, read:
 - `nv_core/sr_specs/docs/guides/guides.md`
 - `nv_core/sr_specs/docs/guides/profiles/profiles.md`
 - `nv_core/sr_specs/docs/guides/feature_adapters/feature_adapters.md`
-- `nv_core/sr_specs/docs/profiles/` (per-profile TOML files, one per profile)
-- `nv_core/sr_specs/docs/profiles/profiles.md`
+- existing per-profile TOML files in the tier `profiles/` directories, such as `prop_robotics_neutral.toml`
+- `nv_core/sr_specs/docs/shared/profiles/profiles.md`
 - nearby profile markdown files for the same asset class or runtime
-- `nv_core/sr_specs/docs/features/feature-dependency-graph.md`
+- `nv_core/sr_specs/docs/shared/features/feature-dependency-graph.md`
 
 ## Inputs
 
@@ -37,11 +39,13 @@ Collect or infer:
 | Input | Requirement |
 |---|---|
 | `profile_name` | New profile name, such as `Prop-Robotics-Neutral`. Use title-case words separated by hyphens. |
+| `owning_tier` | Tier package that owns the profile TOML and narrative page. |
 | `profile_version` | Initial version, usually `1.0.0` unless the user states otherwise. |
 | `target_asset_class` | Prop, robot body, scene, material library, or another concrete class. |
 | `target_runtime` | Neutral OpenUSD, PhysX, Isaac, or another runtime target. |
-| `feature_bundle` | Exact feature IDs and versions. |
-| `profile_markdown_name` | Markdown file path under `docs/profiles/`. |
+| `feature_bundle` | Exact `FET_###_<RUNTIME>` feature names and semantic feature versions. |
+| `profile_toml_name` | TOML filename under the owning tier's `profiles/` directory, named as the lowercase snake_case form of `profile_name`, such as `prop_robotics_neutral.toml`. |
+| `profile_markdown_name` | Markdown filename under the owning tier's `profiles/` directory. |
 | `adapter_plan` | Required adapters from related profiles, or `none`. |
 | `validation_strategy` | Example assets, validator command, runtime test, or documented gap. |
 
@@ -49,25 +53,25 @@ Collect or infer:
 
 Use this checklist when changing the repository:
 
-1. Confirm the profile name is new across the per-profile TOML files in `profiles/`.
-2. Choose a feature bundle from exact existing feature JSON manifests. Do not reference a feature version that does not exist.
+1. Confirm the profile name is not already declared in any `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles/*.toml` file.
+2. Choose a feature bundle from exact existing feature JSON manifests. Do not reference a feature name or semantic feature version that does not exist.
 3. Check feature dependencies. Avoid duplicating dependencies unless existing profiles do so intentionally for clarity.
-4. Create a new per-profile TOML file under `profiles/` (e.g. `profiles/<profile_name>.toml`) containing a `[Profile-Name]` table with the initial version and ordered feature list.
-5. Create a profile markdown page under `nv_core/sr_specs/docs/profiles/`:
+4. Create a new `<profile_toml_name>` file under the owning tier's `profiles/` directory containing a single `[Profile-Name]` table with the initial version and ordered feature list.
+5. Create a profile markdown page beside that TOML:
    - purpose and target asset class
    - target runtime/environment
    - exact feature list and versions
    - authoring requirements and known conditional features
    - validation and runtime-test guidance
    - references to feature docs and related profiles
-6. Update `nv_core/sr_specs/docs/profiles/profiles.md` with the new profile row and toctree entry if the index uses one.
+6. Update `nv_core/sr_specs/docs/shared/profiles/profiles.md` with the new profile row and toctree entry if the index uses one.
 7. Add feature adapter notes when this profile is expected to be an upgrade or conversion target from another profile.
 8. When the new profile differs from an existing related profile, identify every feature difference and whether a direct adapter path exists or is intentionally blocked.
 9. When validation tooling is available, run `workspace validate` or the equivalent `simready-validate` command against a representative asset.
 10. Validate consistency:
    - TOML parses
-   - every referenced feature ID/version exists in `docs/features/*.json`
-   - profile markdown and the profile's TOML feature lists agree
+   - every referenced feature name/semantic version exists in one of the tier `features/*.json` sources
+   - profile markdown and the new profile TOML feature lists agree
    - `profiles.md` includes the new profile
 
 ## Examples
@@ -88,7 +92,7 @@ remaining_gaps: requirement, validator, adapter, profile, or runtime-test follow
 
 ## Policies
 
-- The per-profile TOML files in `profiles/` are the machine-readable source of truth.
+- The per-profile TOML files under `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles/` are the machine-readable source of truth. Add one file per profile rather than combining profiles into a shared file.
 - Keep the initial feature bundle focused. Do not add features that are merely nice to have.
 - A feature may be conditionally applicable only when the profile docs and validator behavior make that condition clear.
 - If new features are needed, create them with `simready-foundation-add-feature` before referencing them.
@@ -118,9 +122,9 @@ Report:
 |---|---|
 | `profile_name` | New profile. |
 | `profile_version` | Initial version. |
-| `profiles_toml` | TOML path changed. |
+| `profile_toml` | TOML path added. |
 | `profile_markdown` | Profile docs path. |
-| `features` | Exact feature IDs and versions. |
+| `features` | Exact feature names and semantic feature versions. |
 | `adapters` | Adapter plan or none. |
 | `validation` | Checks run and remaining gaps. |
 | `next_step` | Feature creation, adapter work, runtime test, or review. |

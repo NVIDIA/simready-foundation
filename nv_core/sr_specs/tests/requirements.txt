@@ -9,7 +9,7 @@ simready-validate
 
 # Rule checkers under docs/capabilities import usd_validation_nvidia and
 # omni.capabilities; simready-validate does not pull this in transitively.
-usd-validation-nvidia>=1.19.3
+usd-validation-nvidia>=1.20.0
 
 # numpy is a foundations-side runtime requirement.
 numpy

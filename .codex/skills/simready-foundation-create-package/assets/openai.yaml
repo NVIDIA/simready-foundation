@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Create Package"
+  short_description: "Create SimReady packages with the sample workflow"
+  default_prompt: "Use $simready-foundation-create-package to turn a folder of USD assets into a SimReady package with the bundled package sample workflow."

@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# uv workspace root for the SimReady validation tiers. Intentionally has no
+# [project] table: the tiers root is not a wheel. Each tier is a member with its
+# own pyproject.toml, and `_tooling/` is not a member (it ships no package).
+#
+# `_tooling/build_tiers.py` builds the members with `uv build --all-packages`,
+# so adding a tier here is all that is needed for it to be built and published.
+#
+# Note: because this file makes the tiers root a workspace, a bare
+# `uv build <tier>` now resolves its default output directory to the workspace
+# root (`nv_core/tiers/dist/`) rather than the tier's own `dist/`. The builder
+# passes an explicit `--out-dir`, so it is unaffected.
+
+[tool.uv.workspace]
+members = [
+    "simready_foundation_tier_core",
+]
+
+# The standalone Isaac asset transformer lives outside this workspace root (under
+# nv_core/cip_specs/), so it cannot be a uv workspace member. Map it as an
+# editable path source so tiers that declare it (tier-core's optional
+# `isaac-transform` extra) resolve it locally in this repo. Publishing resolves
+# the released `simready-isaac-asset-transformer` wheel from the configured index.
+[tool.uv.sources]
+simready-isaac-asset-transformer = { path = "../cip_specs/isaac_asset_transformer", editable = true }

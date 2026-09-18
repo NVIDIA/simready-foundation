@@ -1,0 +1,13 @@
+[
+    {
+        "id": "simready-foundation-conform-fet-028-mujoco-positive-trigger",
+        "question": "Repair FET_028_MUJOCO@1 validation failures on a SimReady gripper asset or package.",
+        "expected_skill": "simready-foundation-conform-fet-028-mujoco",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-028-mujoco and follow the exact FET_028_MUJOCO workflow.",
+        "expected_behavior": [
+            "Load the simready-foundation-conform-fet-028-mujoco skill.",
+            "Use the selected FET_028_MUJOCO manifest as the authoritative feature contract.",
+            "Report changed files, validation performed, and any remaining blockers."
+        ]
+    }
+]

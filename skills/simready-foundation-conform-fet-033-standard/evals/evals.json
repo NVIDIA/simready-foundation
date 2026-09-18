@@ -1,0 +1,24 @@
+[
+    {
+        "id": "simready-foundation-conform-fet-033-standard-positive-trigger",
+        "question": "Repair FET_033_STANDARD@0.1.0 validation failures on a SimReady asset or package.",
+        "expected_skill": "simready-foundation-conform-fet-033-standard",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-033-standard and follow the exact FET_033_STANDARD workflow.",
+        "expected_behavior": [
+            "Load the simready-foundation-conform-fet-033-standard skill.",
+            "Use the selected FET_033_STANDARD manifest as the authoritative feature contract.",
+            "Report changed files, validation performed, and any remaining blockers."
+        ]
+    },
+    {
+        "id": "simready-foundation-conform-fet-033-standard-negative-nontrigger",
+        "question": "Summarize the difference between a SimReady feature and capability without editing files.",
+        "expected_skill": null,
+        "ground_truth": "The agent should answer from repo documentation or local context without activating this specific skill.",
+        "expected_behavior": [
+            "Do not activate simready-foundation-conform-fet-033-standard.",
+            "Do not modify files.",
+            "Provide a concise conceptual answer or choose a more appropriate skill if one is explicitly requested."
+        ]
+    }
+]

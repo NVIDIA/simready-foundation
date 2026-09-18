@@ -1,0 +1,3 @@
+[deletion]
+asset_path = "sample_content/common_assets/props_general/obs_lamp_revolute_a01/simready_usd/sm_obs_lamp_revolute_a01_01.usd"
+reason = "The text-authored root layer was renamed from .usd to .usda; the replacement remains published at the same asset location with the explicit ASCII USD extension."

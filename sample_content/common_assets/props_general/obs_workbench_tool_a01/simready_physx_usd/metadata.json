@@ -4,18 +4,18 @@
     },
     "pipeline": {
         "asset_handler": "PropAssetHandler",
-        "timestamp": "2026-07-17 15:00:48",
-        "version": "2.0.0"
+        "timestamp": "2026-09-01 16:50:55",
+        "version": "1.4.25"
     },
     "input": {
         "asset_name": "sm_obs_workbench_tool_a01_01",
         "asset_type": "prop",
-        "input_uri": "sample_content/common_assets/props_general/obs_workbench_tool_a01/simready_usd",
+        "input_uri": "D:/Nvidia/omniverse/gitlab/simready_foundations/sample_content/common_assets/props_general/obs_workbench_tool_a01/simready_usd",
         "stage_filename": null,
-        "stage_modified": "2026-07-17 11:41:58.613645"
+        "stage_modified": "2026-09-01 16:49:59.373901"
     },
     "validator": {
-        "version": "1.20.0-dev.6",
+        "version": "1.1.6",
         "rules": []
     }
 }

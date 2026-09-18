@@ -1,0 +1,200 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import simready.foundation.tier_core.requirements as cap
+import usd_validation_nvidia
+from pxr import Sdf, Usd, UsdPhysics
+
+from ..utils import BaseRuleCheckerWCache
+
+
+@usd_validation_nvidia.register_rule("PhysicsJoints")
+@usd_validation_nvidia.register_requirements(cap.PhysicsJointsRequirements.JT_001, override=True)
+class PhysicsJointCapabilityChecker(usd_validation_nvidia.BaseRuleChecker):
+    """Flags joints that are not connected to anything.
+
+    A joint is dangling when either (a) no body relationships are specified at all,
+    or (b) body relationships are specified but none of the targeted prims exist in
+    the scene. A joint attached to the implicit world (exactly one body specified)
+    is considered connected and passes.
+    """
+
+    def CheckStage(self, stage: Usd.Stage) -> None:
+        default_prim = stage.GetDefaultPrim()
+        if not default_prim:
+            self._AddFailedCheck("Stage has no default prim. Unable to validate.", at=stage)
+            return
+
+        for prim in Usd.PrimRange(default_prim):
+            if not prim.IsA(UsdPhysics.Joint):
+                continue
+
+            joint = UsdPhysics.Joint(prim)
+            body0_rel = joint.GetBody0Rel()
+            body1_rel = joint.GetBody1Rel()
+            targets = []
+            if body0_rel:
+                targets.extend(body0_rel.GetTargets())
+            if body1_rel:
+                targets.extend(body1_rel.GetTargets())
+
+            # (a) No connected bodies specified at all -> dangling joint.
+            if not targets:
+                self._AddFailedCheck(
+                    requirement=cap.PhysicsJointsRequirements.JT_001,
+                    message=f"Joint <{prim.GetPath()}> is not connected to any body (no body relationships specified).",
+                    at=prim,
+                )
+                continue
+
+            # (b) Bodies specified but none of the targeted prims exist in the scene.
+            existing_targets = [t for t in targets if stage.GetPrimAtPath(t).IsValid()]
+            if not existing_targets:
+                missing = ", ".join(str(t) for t in targets)
+                self._AddFailedCheck(
+                    requirement=cap.PhysicsJointsRequirements.JT_001,
+                    message=(
+                        f"Joint <{prim.GetPath()}> references body targets that do not exist in the scene: [{missing}]."
+                    ),
+                    at=prim,
+                )
+
+
+@usd_validation_nvidia.register_rule("PhysicsJoints")
+@usd_validation_nvidia.register_requirements(
+    cap.PhysicsJointsRequirements.JT_002, cap.PhysicsJointsRequirements.JT_003, override=True
+)
+class PhysicsJointChecker(usd_validation_nvidia.BaseRuleChecker):
+    _JOINT_INVALID_PRIM_REL_REQUIREMENT = cap.PhysicsJointsRequirements.JT_002
+    _JOINT_MULTIPLE_PRIMS_REL_REQUIREMENT = cap.PhysicsJointsRequirements.JT_003
+
+    _JOINT_INVALID_PRIM_REL_MESSAGE = (
+        "Joint's Body{0} relationship points to a non-existent prim {1}, joint will not be parsed."
+    )
+    _JOINT_MULTIPLE_PRIMS_REL_MESSAGE = (
+        "Joint prim does have a Body{0} relationship to multiple bodies and this is not supported."
+    )
+
+    def CheckPrim(self, usd_prim: Usd.Prim):
+        physics_joint = UsdPhysics.Joint(usd_prim)
+
+        if not physics_joint:
+            return
+
+        # Check valid relationship prims
+        rel0path = _get_rel(physics_joint.GetBody0Rel())
+        rel1path = _get_rel(physics_joint.GetBody1Rel())
+
+        # Check relationship validity
+        if not _check_joint_rel(rel0path, usd_prim):
+            self._AddFailedCheck(
+                message=self._JOINT_INVALID_PRIM_REL_MESSAGE.format(0, rel0path),
+                at=usd_prim,
+                requirement=self._JOINT_INVALID_PRIM_REL_REQUIREMENT,
+            )
+
+        if not _check_joint_rel(rel1path, usd_prim):
+            self._AddFailedCheck(
+                message=self._JOINT_INVALID_PRIM_REL_MESSAGE.format(1, rel1path),
+                at=usd_prim,
+                requirement=self._JOINT_INVALID_PRIM_REL_REQUIREMENT,
+            )
+
+        # Check multiple relationship prims
+        targets0 = physics_joint.GetBody0Rel().GetTargets()
+        targets1 = physics_joint.GetBody1Rel().GetTargets()
+
+        # Check relationship validity
+        if len(targets0) > 1:
+            self._AddFailedCheck(
+                message=self._JOINT_MULTIPLE_PRIMS_REL_MESSAGE.format(0),
+                at=usd_prim,
+                requirement=self._JOINT_MULTIPLE_PRIMS_REL_REQUIREMENT,
+            )
+
+        if len(targets1) > 1:
+            self._AddFailedCheck(
+                message=self._JOINT_MULTIPLE_PRIMS_REL_MESSAGE.format(1),
+                at=usd_prim,
+                requirement=self._JOINT_MULTIPLE_PRIMS_REL_REQUIREMENT,
+            )
+
+
+@usd_validation_nvidia.register_rule("PhysicsJoints")
+@usd_validation_nvidia.register_requirements(
+    cap.PhysicsJointsRequirements.JT_ART_002,
+    cap.PhysicsJointsRequirements.JT_ART_003,
+    cap.PhysicsJointsRequirements.JT_ART_004,
+    override=True,
+)
+class ArticulationChecker(BaseRuleCheckerWCache):
+    _NESTED_ARTICULATION_REQUIREMENT = cap.PhysicsJointsRequirements.JT_ART_002
+    _ARTICULATION_ON_STATIC_BODY_REQUIREMENT = cap.PhysicsJointsRequirements.JT_ART_003
+    _ARTICULATION_ON_KINEMATIC_BODY_REQUIREMENT = cap.PhysicsJointsRequirements.JT_ART_004
+
+    _NESTED_ARTICULATION_MESSAGE = "Nested ArticulationRootAPI not supported."
+    _ARTICULATION_ON_STATIC_BODY_MESSAGE = "ArticulationRootAPI definition on a static rigid body is not allowed."
+    _ARTICULATION_ON_KINEMATIC_BODY_MESSAGE = "ArticulationRootAPI definition on a kinematic rigid body is not allowed."
+
+    def CheckPrim(self, usd_prim: Usd.Prim):
+        art_api = UsdPhysics.ArticulationRootAPI(usd_prim)
+
+        if not art_api:
+            return
+
+        # Check for nested articulation roots
+        if self._is_under_articulation_root(usd_prim):
+            self._AddFailedCheck(
+                message=self._NESTED_ARTICULATION_MESSAGE,
+                at=usd_prim,
+                requirement=self._NESTED_ARTICULATION_REQUIREMENT,
+            )
+
+        # Check rigid body static or kinematic errors
+        rbo_api = UsdPhysics.RigidBodyAPI(usd_prim)
+        if rbo_api:
+            # Check if rigid body is enabled
+            body_enabled = rbo_api.GetRigidBodyEnabledAttr().Get()
+            if not body_enabled:
+                self._AddFailedCheck(
+                    message=self._ARTICULATION_ON_STATIC_BODY_MESSAGE,
+                    at=usd_prim,
+                    requirement=self._ARTICULATION_ON_STATIC_BODY_REQUIREMENT,
+                )
+
+            # Check if kinematic is enabled
+            kinematic_enabled = rbo_api.GetKinematicEnabledAttr().Get()
+            if kinematic_enabled:
+                self._AddFailedCheck(
+                    message=self._ARTICULATION_ON_KINEMATIC_BODY_MESSAGE,
+                    at=usd_prim,
+                    requirement=self._ARTICULATION_ON_KINEMATIC_BODY_REQUIREMENT,
+                )
+
+
+def _get_rel(ref: Usd.Relationship) -> Sdf.Path:
+    targets = ref.GetTargets()
+
+    if not targets:
+        return Sdf.Path()
+
+    return targets[0]
+
+
+def _check_joint_rel(rel_path: Sdf.Path, joint_prim: Usd.Prim) -> bool:
+    if rel_path == Sdf.Path():
+        return True
+
+    rel_prim = joint_prim.GetStage().GetPrimAtPath(rel_path)
+    return rel_prim.IsValid()

@@ -1,0 +1,21 @@
+{
+    "output": {
+        "sm_obs_workbench_tool_a01_01": "sm_obs_workbench_tool_a01_01.usd"
+    },
+    "pipeline": {
+        "asset_handler": "PropAssetHandler",
+        "timestamp": "2026-07-17 15:00:48",
+        "version": "2.0.0"
+    },
+    "input": {
+        "asset_name": "sm_obs_workbench_tool_a01_01",
+        "asset_type": "prop",
+        "input_uri": "sample_content/common_assets/props_general/obs_workbench_tool_a01/simready_usd",
+        "stage_filename": null,
+        "stage_modified": "2026-07-17 11:41:58.613645"
+    },
+    "validator": {
+        "version": "1.20.0-dev.6",
+        "rules": []
+    }
+}

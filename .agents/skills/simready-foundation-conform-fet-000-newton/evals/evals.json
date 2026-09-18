@@ -1,0 +1,23 @@
+[
+    {
+        "id":  "simready-foundation-conform-fet-000-newton-positive-trigger",
+        "question":  "Repair FET_000_NEWTON failures on a USD asset: the Newton variant set, runnables/physics/newton payload, and SimReady variant metadata.",
+        "expected_skill":  "simready-foundation-conform-fet-000-newton",
+        "ground_truth":  "The agent should activate simready-foundation-conform-fet-000-newton and follow its workflow.",
+        "expected_behavior":  [
+                                  "Load the simready-foundation-conform-fet-000-newton skill.",
+                                  "Repair RV.004-RV.006 (Newton variant set, runnables/physics/newton payload, SimReady variant metadata) plus RV.010/RV.011 (pure variant sections and strict Newton-only composed isolation), then rerun the relevant validation gate.",
+                                  "Report changed files, validation performed, and any remaining Newton override or validation gaps."
+                              ]
+    },
+    {
+        "id":  "simready-foundation-conform-fet-000-newton-negative-nontrigger",
+        "question":  "Repair the PhysX physics runtime variant on an asset.",
+        "expected_skill":  null,
+        "ground_truth":  "The agent should use the PhysX conform skill, not the Newton one.",
+        "expected_behavior":  [
+                                  "Do not activate simready-foundation-conform-fet-000-newton.",
+                                  "Prefer simready-foundation-conform-fet-000-physx for PhysX runtime variant repairs."
+                              ]
+    }
+]

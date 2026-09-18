@@ -11,8 +11,11 @@ before the asset reaches a production pipeline.
 
 Benchmarking is driven by the `simready-benchmark` tool. The bundled FET test
 families are part of the SimReady Foundation and target NVIDIA Kit and NVIDIA
-Isaac Sim. The `simready-benchmark` command discovers them from the foundation
-automatically, so you do not need to install a separate test suite.
+Isaac Sim. An installed Foundation tier advertises its catalogs and bundled
+runtime-test package through the `simready.tier` entry point. During source
+development, `--foundations-path` selects a Foundation checkout; `--tests-path`
+is reserved for adding an independent unpublished test package.
+[Running Tests](running.md) shows each workflow.
 
 ## Test Families
 
@@ -20,23 +23,38 @@ Each asset runs only the tests that its features and profiles call for.
 
 The bundled suite groups tests into families by feature, as shown in the following table:
 
+Family labels such as `FET001` are compact reporting groups and CLI filter
+prefixes, not feature manifest IDs. Runtime results are attributed through the
+canonical IDs declared by each test, such as `FET_001_STANDARD`. Some families
+map to multiple runtime variants, so tools must read the test declarations
+rather than derive a manifest name from the family label.
+
 :::{list-table}
 :header-rows: 1
 :widths: 12 88
 
 * - Family
   - Validates
-* - [FET001](../../features/FET_001-minimal.md)
+* - [FET001](tests/fet001-visual.md)
   - Visual presence, normals, back-face culling, and lighting.
-* - [FET003](../../features/FET_003-rigid_body_physics.md)
-  - Physics ground and slope drop, and resting stability.
-* - [FET004](../../features/FET_004-simulate_multi_body_physics.md)
+* - [FET003](tests/fet003-physics.md)
+  - Ground drop with settling and slope drop for Standard, PhysX, and Newton rigid bodies.
+* - [FET004](tests/fet004-multibody.md)
   - Multi-body and joint discovery and movement.
-* - [FET005](../../features/FET_005-simulate_grasp_physics.md)
+* - [FET005](tests/fet005-grasp.md)
   - Grasp and lift, where a gripper grasps the asset and raises it.
-* - [FET022](../../features/FET_022-driven_joints.md)
+* - [FET011](tests/fet011-semantic-labels.md)
+  - Semantic-label behavior in the RTX segmentation pipeline.
+* - [FET022](tests/fet022-driven-joints.md)
   - Driven joints: range, velocity, mimic behavior, coordination, and inverse kinematics (IK).
+* - [FET028](tests/fet028-gripper.md)
+  - Gripper close, lift, shake, and drop.
 :::
+
+Only enabled tests registered by the bundled tier suite are documented here.
+Use `simready-benchmark --list-tests` to inspect the tests available in the
+current environment, including tests contributed by other installed tiers or
+independent test packs.
 
 ## Relationship to Features and Profiles
 
@@ -49,4 +67,4 @@ features, and each feature maps to the benchmarks that confirm it. Refer to
 
 - [Pipeline and Stages](pipeline.md): how features and profiles become a test plan
 - [Running Tests](running.md): set up `simready-benchmark`, configure the engine, and run tests
-- [Reading Reports](reading-reports.md): interpret results, exit codes, and [verify a clean pass](reading-reports.md#verify-a-clean-pass)
+- [Reading Reports](reading-reports.md): interpret results, exit codes, and [verify a clean run](reading-reports.md#verify-a-clean-run)

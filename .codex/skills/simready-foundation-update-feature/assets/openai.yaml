@@ -1,4 +1,4 @@
 interface:
   display_name: "SimReady Update Feature"
-  short_description: "Version and revise existing SimReady features"
-  default_prompt: "Use $simready-foundation-update-feature to update an existing SimReady Foundation feature while preserving published versions and coordinating profile adoption."
+  short_description: "Revise features with semantic versions"
+  default_prompt: "Use $simready-foundation-update-feature to update an existing SimReady Foundation feature with integer feature versions, template-aligned docs, matching manifests, and coordinated profile/conform-skill follow-up."
