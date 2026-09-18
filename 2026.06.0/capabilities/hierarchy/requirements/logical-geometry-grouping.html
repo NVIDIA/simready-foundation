@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'capabilities/hierarchy/requirements/logical-geometry-grouping';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -559,61 +559,61 @@
 <div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1">#usda 1.0</span>
 
 <span class="c1"># Valid: Logical grouping of chair components</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Chair&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Chair"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Seat&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Seat"</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;SeatSurface&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"SeatSurface"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1"># Seat geometry</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;SeatCushion&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"SeatCushion"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1"># Cushion geometry</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Backrest&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Backrest"</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;BackrestFrame&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"BackrestFrame"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1"># Backrest frame geometry</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;BackrestCushion&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"BackrestCushion"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1"># Backrest cushion geometry</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Legs&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Legs"</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;FrontLeftLeg&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"FrontLeftLeg"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1"># Leg geometry</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;FrontRightLeg&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"FrontRightLeg"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1"># Leg geometry</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;BackLeftLeg&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"BackLeftLeg"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1"># Leg geometry</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;BackRightLeg&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"BackRightLeg"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1"># Leg geometry</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1"># Invalid: Poor grouping with unnecessary complexity</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Chair&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Chair"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Parts&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Parts"</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Group1&quot;</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Group1"</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;SubGroup&quot;</span>
+<span class="w">            </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"SubGroup"</span>
 <span class="w">            </span><span class="p">{</span>
-<span class="w">                </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;SeatSurface&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"SeatSurface"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                    </span><span class="c1"># Overly nested structure</span>
 <span class="w">                </span><span class="p">}</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;BackrestFrame&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"BackrestFrame"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1"># Inconsistent grouping - some parts grouped, others not</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
@@ -713,8 +713,8 @@
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

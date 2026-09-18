@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'capabilities/isaac_sim/composition/requirements/composition';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -548,23 +548,23 @@
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
 <div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># Invalid: Simple asset without proper Isaac Sim composition structure</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;MyAsset&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n n-Builtins">kind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;component&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"MyAsset"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n n-Builtins">kind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"component"</span>
 <span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1"># All geometry, materials, and physics mixed together</span>
 <span class="w">    </span><span class="c1"># No payload structure for efficient loading</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;mesh_01&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"mesh_01"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1"># geometry data...</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">&quot;material_01&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">"material_01"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1"># material data...</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1"># Valid: Isaac Sim composition with proper payload structure</span>
 <span class="c1"># Main asset file (myasset.usd)</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;MyAsset&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n n-Builtins">kind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;component&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"MyAsset"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n n-Builtins">kind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"component"</span>
 <span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">references</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./payloads/myasset_base.usd@</span>
 <span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">payload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./payloads/myasset_physics.usd@</span>
 <span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -572,36 +572,36 @@
 <span class="p">}</span>
 
 <span class="c1"># Base payload file (payloads/myasset_base.usd)</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;MyAsset&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"MyAsset"</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">references</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./myasset_meshes.usd@</span>
 <span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1"># References to mesh data</span>
 <span class="p">}</span>
 
 <span class="c1"># Meshes payload file (payloads/myasset_meshes.usd)</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;MyAsset&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">&quot;Looks&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"MyAsset"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"Looks"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1"># Materials organized under Looks</span>
-<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">&quot;material_01&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">"material_01"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1"># Material definitions...</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">&quot;Meshes&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">        </span>visibility<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;invisible&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"Meshes"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span>visibility<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"invisible"</span>
 <span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1"># Raw mesh data (invisible)</span>
-<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;mesh_obj_01&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"mesh_obj_01"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1"># Geometry data without physics schemas</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">&quot;Visuals&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">        </span>visibility<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;invisible&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"Visuals"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span>visibility<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"invisible"</span>
 <span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1"># Visual hierarchy with references</span>
-<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;mesh_trans_01&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;mesh_obj_01&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"mesh_trans_01"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"mesh_obj_01"</span><span class="w"> </span><span class="p">(</span>
 <span class="w">                </span><span class="kt">prepend</span><span class="w"> </span><span class="na">references</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/Meshes/mesh_obj_01&gt;</span>
 <span class="w">            </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="p">}</span>
@@ -609,8 +609,8 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span>
 <span class="w">    </span><span class="c1"># Main asset hierarchy with visual references</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;mesh_obj_01&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;mesh_trans_01&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"mesh_obj_01"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"mesh_trans_01"</span><span class="w"> </span><span class="p">(</span>
 <span class="w">            </span><span class="kt">prepend</span><span class="w"> </span><span class="na">references</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/Visuals/mesh_trans_01&gt;</span>
 <span class="w">        </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="p">}</span>
@@ -618,20 +618,20 @@
 <span class="p">}</span>
 
 <span class="c1"># Physics payload file (payloads/myasset_physics.usd)</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;MyAsset&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">&quot;PhysicsMaterials&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"MyAsset"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"PhysicsMaterials"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1"># Physics materials</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">&quot;Joints&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"Joints"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1"># Joint definitions with corrected body paths</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span>
 <span class="w">    </span><span class="c1"># Physics attributes applied to mesh hierarchy</span>
-<span class="w">    </span><span class="k k-Tokens">over</span><span class="w"> </span><span class="s">&quot;mesh_obj_01/mesh_trans_01/mesh_obj_01&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">over</span><span class="w"> </span><span class="s">"mesh_obj_01/mesh_trans_01/mesh_obj_01"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1"># Physics schemas and attributes applied here</span>
-<span class="w">        </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;PhysicsCollisionAPI&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;PhysicsRigidBodyAPI&quot;</span><span class="p">]</span>
-<span class="w">        </span><span class="na">physics:approximation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sdf&quot;</span>
+<span class="w">        </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"PhysicsCollisionAPI"</span><span class="p">,</span><span class="w"> </span><span class="s">"PhysicsRigidBodyAPI"</span><span class="p">]</span>
+<span class="w">        </span><span class="na">physics:approximation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"sdf"</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -755,8 +755,8 @@ configuration/
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

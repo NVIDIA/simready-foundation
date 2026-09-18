@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'capabilities/hierarchy/requirements/kinematic-chain-hierarchy';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -557,46 +557,46 @@
 <div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1">#usda 1.0</span>
 
 <span class="c1"># Valid: Robot arm with kinematic chain hierarchy</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;RobotArm&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"RobotArm"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Base&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Base"</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;BaseMesh&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"BaseMesh"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1"># Base geometry</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">        </span>
-<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Shoulder&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Shoulder"</span><span class="w"> </span><span class="p">(</span>
 <span class="w">        </span><span class="p">)</span>
 <span class="w">        </span><span class="p">{</span>
 <span class="w">            </span><span class="kt">float3</span><span class="w"> </span><span class="na">xformOp:rotateXYZ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w">  </span><span class="c1"># Shoulder joint rotation</span>
-<span class="w">            </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token[]</span><span class="w"> </span><span class="na">xformOpOrder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;xformOp:rotateXYZ&quot;</span><span class="p">]</span>
+<span class="w">            </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token[]</span><span class="w"> </span><span class="na">xformOpOrder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"xformOp:rotateXYZ"</span><span class="p">]</span>
 <span class="w">            </span>
-<span class="w">            </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;ShoulderMesh&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"ShoulderMesh"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="c1"># Shoulder link geometry</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">            </span>
-<span class="w">            </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Elbow&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">                </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;GeomXformCommonAPI&quot;</span><span class="p">]</span>
+<span class="w">            </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Elbow"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">                </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"GeomXformCommonAPI"</span><span class="p">]</span>
 <span class="w">            </span><span class="p">)</span>
 <span class="w">            </span><span class="p">{</span>
 <span class="w">                </span><span class="kt">float3</span><span class="w"> </span><span class="na">xformOp:translate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.3</span><span class="p">)</span><span class="w">  </span><span class="c1"># Link offset</span>
 <span class="w">                </span><span class="kt">float3</span><span class="w"> </span><span class="na">xformOp:rotateXYZ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w">   </span><span class="c1"># Elbow joint rotation</span>
-<span class="w">                </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token[]</span><span class="w"> </span><span class="na">xformOpOrder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;xformOp:translate&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;xformOp:rotateXYZ&quot;</span><span class="p">]</span>
+<span class="w">                </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token[]</span><span class="w"> </span><span class="na">xformOpOrder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"xformOp:translate"</span><span class="p">,</span><span class="w"> </span><span class="s">"xformOp:rotateXYZ"</span><span class="p">]</span>
 <span class="w">                </span>
-<span class="w">                </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;ElbowMesh&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"ElbowMesh"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                    </span><span class="c1"># Elbow link geometry</span>
 <span class="w">                </span><span class="p">}</span>
 <span class="w">                </span>
-<span class="w">                </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Wrist&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">                    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;GeomXformCommonAPI&quot;</span><span class="p">]</span>
+<span class="w">                </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Wrist"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">                    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"GeomXformCommonAPI"</span><span class="p">]</span>
 <span class="w">                </span><span class="p">)</span>
 <span class="w">                </span><span class="p">{</span>
 <span class="w">                    </span><span class="kt">float3</span><span class="w"> </span><span class="na">xformOp:translate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.25</span><span class="p">)</span>
 <span class="w">                    </span><span class="kt">float3</span><span class="w"> </span><span class="na">xformOp:rotateXYZ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
-<span class="w">                    </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token[]</span><span class="w"> </span><span class="na">xformOpOrder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;xformOp:translate&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;xformOp:rotateXYZ&quot;</span><span class="p">]</span>
+<span class="w">                    </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token[]</span><span class="w"> </span><span class="na">xformOpOrder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"xformOp:translate"</span><span class="p">,</span><span class="w"> </span><span class="s">"xformOp:rotateXYZ"</span><span class="p">]</span>
 <span class="w">                    </span>
-<span class="w">                    </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;WristMesh&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"WristMesh"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                        </span><span class="c1"># Wrist geometry</span>
 <span class="w">                    </span><span class="p">}</span>
 <span class="w">                </span><span class="p">}</span>
@@ -606,14 +606,14 @@
 <span class="p">}</span>
 
 <span class="c1"># Not recommended: Flat hierarchy ignoring kinematic relationships</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;RobotArm&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"RobotArm"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;ShoulderMesh&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"ShoulderMesh"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;ElbowMesh&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"ElbowMesh"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1"># Unaffected by the Shoulder</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;WristMesh&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"WristMesh"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1"># Unaffected by the Wrist</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
@@ -712,8 +712,8 @@
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

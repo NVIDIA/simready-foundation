@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'capabilities/visualization/materials/requirements/material-texture-maxsize';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -576,13 +576,13 @@
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
 <div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># Invalid: Texture exceeds maximum size</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">&quot;OversizedTextureMaterial&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">"OversizedTextureMaterial"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;Shader&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"Shader"</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:implementationSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sourceAsset&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:implementationSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"sourceAsset"</span>
 <span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">asset</span><span class="w"> </span><span class="na">info:mdl:sourceAsset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./SimPBR.mdl@</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:mdl:sourceAsset:subIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SimPBR&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:mdl:sourceAsset:subIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"SimPBR"</span>
 <span class="w">        </span>
 <span class="w">        </span><span class="c1"># This texture is 32768x32768 pixels - exceeds 16K limit</span>
 <span class="w">        </span><span class="kt">asset</span><span class="w"> </span><span class="na">inputs:diffuse_texture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./textures/huge_albedo_32k.png@</span>
@@ -590,13 +590,13 @@
 <span class="p">}</span>
 
 <span class="c1"># Invalid: One dimension exceeds limit</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">&quot;WideTextureMaterial&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">"WideTextureMaterial"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;Shader&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"Shader"</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:implementationSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sourceAsset&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:implementationSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"sourceAsset"</span>
 <span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">asset</span><span class="w"> </span><span class="na">info:mdl:sourceAsset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./SimPBR.mdl@</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:mdl:sourceAsset:subIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SimPBR&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:mdl:sourceAsset:subIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"SimPBR"</span>
 <span class="w">        </span>
 <span class="w">        </span><span class="c1"># This texture is 20000x8000 pixels - width exceeds 16K limit</span>
 <span class="w">        </span><span class="kt">asset</span><span class="w"> </span><span class="na">inputs:diffuse_texture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./textures/wide_albedo.png@</span>
@@ -604,13 +604,13 @@
 <span class="p">}</span>
 
 <span class="c1"># Valid: Texture within size limits</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">&quot;ValidTextureMaterial&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">"ValidTextureMaterial"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;Shader&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"Shader"</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:implementationSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sourceAsset&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:implementationSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"sourceAsset"</span>
 <span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">asset</span><span class="w"> </span><span class="na">info:mdl:sourceAsset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./SimPBR.mdl@</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:mdl:sourceAsset:subIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SimPBR&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:mdl:sourceAsset:subIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"SimPBR"</span>
 <span class="w">        </span>
 <span class="w">        </span><span class="c1"># 8192x8192 pixels - within 16K limit</span>
 <span class="w">        </span><span class="kt">asset</span><span class="w"> </span><span class="na">inputs:diffuse_texture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./textures/albedo_8k.png@</span>
@@ -624,13 +624,13 @@
 <span class="p">}</span>
 
 <span class="c1"># Valid: Maximum allowed size</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">&quot;MaxSizeTextureMaterial&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">"MaxSizeTextureMaterial"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;Shader&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"Shader"</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:implementationSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sourceAsset&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:implementationSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"sourceAsset"</span>
 <span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">asset</span><span class="w"> </span><span class="na">info:mdl:sourceAsset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./SimPBR.mdl@</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:mdl:sourceAsset:subIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SimPBR&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:mdl:sourceAsset:subIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"SimPBR"</span>
 <span class="w">        </span>
 <span class="w">        </span><span class="c1"># 16384x16384 pixels - exactly at 16K limit (valid)</span>
 <span class="w">        </span><span class="kt">asset</span><span class="w"> </span><span class="na">inputs:diffuse_texture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./textures/albedo_16k.png@</span>
@@ -765,8 +765,8 @@
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

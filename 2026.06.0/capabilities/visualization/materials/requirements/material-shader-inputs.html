@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'capabilities/visualization/materials/requirements/material-shader-inputs';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -571,16 +571,16 @@
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
 <div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># Invalid: Type mismatch in shader input</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">&quot;InvalidMaterial&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">"InvalidMaterial"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;Shader&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"Shader"</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:implementationSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sourceAsset&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:implementationSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"sourceAsset"</span>
 <span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">asset</span><span class="w"> </span><span class="na">info:mdl:sourceAsset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./SimPBR.mdl@</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:mdl:sourceAsset:subIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SimPBR&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:mdl:sourceAsset:subIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"SimPBR"</span>
 <span class="w">        </span>
 <span class="w">        </span><span class="c1"># Incorrect: diffuse_texture expects asset type, not string</span>
-<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">inputs:diffuse_texture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;./textures/albedo.png&quot;</span>
+<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">inputs:diffuse_texture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"./textures/albedo.png"</span>
 <span class="w">        </span>
 <span class="w">        </span><span class="c1"># Incorrect: metallic expects float, not int</span>
 <span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="na">inputs:metallic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
@@ -588,13 +588,13 @@
 <span class="p">}</span>
 
 <span class="c1"># Invalid: NaN or Inf values in float inputs</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">&quot;InvalidFloatMaterial&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">"InvalidFloatMaterial"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;Shader&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"Shader"</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:implementationSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sourceAsset&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:implementationSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"sourceAsset"</span>
 <span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">asset</span><span class="w"> </span><span class="na">info:mdl:sourceAsset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./SimPBR.mdl@</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:mdl:sourceAsset:subIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SimPBR&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:mdl:sourceAsset:subIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"SimPBR"</span>
 <span class="w">        </span>
 <span class="w">        </span><span class="c1"># Incorrect: Invalid float value</span>
 <span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="na">inputs:roughness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>nan
@@ -602,13 +602,13 @@
 <span class="p">}</span>
 
 <span class="c1"># Valid: Correct types matching specification</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">&quot;ValidMaterial&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">"ValidMaterial"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;Shader&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"Shader"</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:implementationSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sourceAsset&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:implementationSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"sourceAsset"</span>
 <span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">asset</span><span class="w"> </span><span class="na">info:mdl:sourceAsset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./SimPBR.mdl@</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:mdl:sourceAsset:subIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SimPBR&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:mdl:sourceAsset:subIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"SimPBR"</span>
 <span class="w">        </span>
 <span class="w">        </span><span class="c1"># Correct: asset type for texture</span>
 <span class="w">        </span><span class="kt">asset</span><span class="w"> </span><span class="na">inputs:diffuse_texture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./textures/albedo.png@</span>
@@ -622,11 +622,11 @@
 <span class="p">}</span>
 
 <span class="c1"># Valid: Built-in UsdPreviewSurface shader</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">&quot;PreviewMaterial&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">"PreviewMaterial"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;Surface&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"Surface"</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;UsdPreviewSurface&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"UsdPreviewSurface"</span>
 <span class="w">        </span>
 <span class="w">        </span><span class="c1"># Correct types according to UsdPreviewSurface spec</span>
 <span class="w">        </span><span class="kt">color3f</span><span class="w"> </span><span class="na">inputs:diffuseColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span>
@@ -755,8 +755,8 @@
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'capabilities/visualization/geometry/requirements/usdgeom-mesh-transparent-is-watertight';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -571,11 +571,11 @@
 <section id="material-transparency-detection">
 <h3>Material Transparency Detection<a class="headerlink" href="#material-transparency-detection" title="Link to this heading">#</a></h3>
 <div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: Glass material with transparency properties</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">&quot;GlassWindow&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;GlassShader&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:implementationSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sourceAsset&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">"GlassWindow"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"GlassShader"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:implementationSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"sourceAsset"</span>
 <span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">asset</span><span class="w"> </span><span class="na">info:mdl:sourceAsset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./glass_base.mdl@</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:mdl:sourceAsset:subIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Glass_base&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:mdl:sourceAsset:subIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Glass_base"</span>
 <span class="w">        </span>
 <span class="w">        </span><span class="c1"># Transparency indicators</span>
 <span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="na">inputs:thin_walled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>true
@@ -585,11 +585,11 @@
 <span class="p">}</span>
 
 <span class="c1"># Example 2: SimPBR material with transmission enabled</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">&quot;TransparentPlastic&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;SimPBRShader&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:implementationSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sourceAsset&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">"TransparentPlastic"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"SimPBRShader"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:implementationSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"sourceAsset"</span>
 <span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">asset</span><span class="w"> </span><span class="na">info:mdl:sourceAsset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./SimPBR.mdl@</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:mdl:sourceAsset:subIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SimPBR&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:mdl:sourceAsset:subIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"SimPBR"</span>
 <span class="w">        </span>
 <span class="w">        </span><span class="c1"># Transparency indicators</span>
 <span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="na">inputs:enable_transmission</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>true
@@ -600,11 +600,11 @@
 <span class="p">}</span>
 
 <span class="c1"># Example 3: Opaque material (no transparency)</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">&quot;OpaqueMetal&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;SimPBRShader&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:implementationSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sourceAsset&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">"OpaqueMetal"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"SimPBRShader"</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:implementationSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"sourceAsset"</span>
 <span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">asset</span><span class="w"> </span><span class="na">info:mdl:sourceAsset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./SimPBR.mdl@</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:mdl:sourceAsset:subIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SimPBR&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:mdl:sourceAsset:subIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"SimPBR"</span>
 <span class="w">        </span>
 <span class="w">        </span><span class="c1"># No transparency indicators</span>
 <span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="na">inputs:enable_transmission</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>false
@@ -619,7 +619,7 @@
 <section id="mesh-topology-examples">
 <h3>Mesh Topology Examples<a class="headerlink" href="#mesh-topology-examples" title="Link to this heading">#</a></h3>
 <div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># Invalid: Non-watertight transparent mesh with holes</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;TransparentCube&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"TransparentCube"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kt">int[]</span><span class="w"> </span><span class="na">faceVertexCounts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]</span><span class="w">  </span><span class="c1"># Missing one face</span>
 <span class="w">    </span><span class="kt">int[]</span><span class="w"> </span><span class="na">faceVertexIndices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]</span>
 <span class="w">    </span><span class="kt">point3f[]</span><span class="w"> </span><span class="na">points</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">)]</span>
@@ -628,7 +628,7 @@
 <span class="p">}</span>
 
 <span class="c1"># Valid: Watertight transparent mesh</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;TransparentCube&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"TransparentCube"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kt">int[]</span><span class="w"> </span><span class="na">faceVertexCounts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]</span><span class="w">  </span><span class="c1"># All 6 faces present</span>
 <span class="w">    </span><span class="kt">int[]</span><span class="w"> </span><span class="na">faceVertexIndices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="m">7</span><span class="p">]</span>
 <span class="w">    </span><span class="kt">point3f[]</span><span class="w"> </span><span class="na">points</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">)]</span>
@@ -737,8 +737,8 @@
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

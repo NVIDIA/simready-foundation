@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'capabilities/core/naming_paths/requirements/assetpath-validation';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -558,7 +558,7 @@
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
 <div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># Valid: All referenced files exist</span>
 <span class="c1"># chair.usd</span>
-<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">&quot;Chair&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Chair"</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k k-Tokens">references</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./geometry/chair_geometry.usd@</span><span class="w">  </span><span class="c1"># File exists at this path</span>
 <span class="w">    </span>payloads<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./materials/chair_materials.usd@</span><span class="w">  </span><span class="c1"># File exists at this path</span>
 <span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -567,7 +567,7 @@
 
 <span class="c1"># Invalid: Referenced file does not exist</span>
 <span class="c1"># chair.usd</span>
-<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">&quot;Chair&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Chair"</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="k k-Tokens">references</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./geometry/chair_geometry.usd@</span><span class="w">  </span><span class="c1"># File does NOT exist</span>
 <span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1"># Asset content...</span>
@@ -575,13 +575,13 @@
 
 <span class="c1"># Invalid: Missing texture file</span>
 <span class="c1"># chair.usd</span>
-<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">&quot;Chair&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Chair"</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kt">asset</span><span class="w"> </span><span class="na">inputs:diffuseTexture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./textures/missing_texture.png@</span><span class="w">  </span><span class="c1"># File does NOT exist</span>
 <span class="p">}</span>
 
 <span class="c1"># Invalid: Missing payload file</span>
 <span class="c1"># chair.usd</span>
-<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">&quot;Chair&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Chair"</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span>payloads<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./materials/nonexistent_materials.usd@</span><span class="w">  </span><span class="c1"># File does NOT exist</span>
 <span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1"># Asset content...</span>
@@ -589,7 +589,7 @@
 
 <span class="c1"># Invalid: Absolute path</span>
 <span class="c1"># chair.usd</span>
-<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">&quot;Chair&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Chair"</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span>payloads<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@c:/local_user_content/materials/nonexistent_materials.usd@</span><span class="w">  </span><span class="c1"># File exists only found if the local user has that path, not deployable</span>
 <span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1"># Asset content...</span>
@@ -691,8 +691,8 @@
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'capabilities/physics_bodies/physics_joints/requirements/joint-body-target-exists';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -552,20 +552,20 @@
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
-<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># Invalid: Joint prim&#39;s target does not exist in the stage</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>PhysicsFixedJoint<span class="w"> </span><span class="s">&quot;FixedJoint&quot;</span>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># Invalid: Joint prim's target does not exist in the stage</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>PhysicsFixedJoint<span class="w"> </span><span class="s">"FixedJoint"</span>
 <span class="p">{</span>
 <span class="w">   </span><span class="kt">rel</span><span class="w"> </span><span class="na">physics:body1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/Cube&gt;</span>
 <span class="p">}</span>
 
-<span class="c1"># Valid: Joint prim&#39;s target exists in the stage</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Cube<span class="w"> </span><span class="s">&quot;Cube&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">   </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;PhysicsRigidBodyAPI&quot;</span><span class="p">]</span>
+<span class="c1"># Valid: Joint prim's target exists in the stage</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Cube<span class="w"> </span><span class="s">"Cube"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">   </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"PhysicsRigidBodyAPI"</span><span class="p">]</span>
 <span class="p">)</span>
 <span class="p">{</span>
 <span class="p">}</span>
 
-<span class="k k-Tokens">def</span><span class="w"> </span>PhysicsFixedJoint<span class="w"> </span><span class="s">&quot;FixedJoint&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>PhysicsFixedJoint<span class="w"> </span><span class="s">"FixedJoint"</span>
 <span class="p">{</span>
 <span class="w">   </span><span class="kt">rel</span><span class="w"> </span><span class="na">physics:body1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/Cube&gt;</span>
 <span class="p">}</span>
@@ -657,8 +657,8 @@
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

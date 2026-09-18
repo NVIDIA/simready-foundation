@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'capabilities/physics_bodies/physics_driven_joints/requirements/physics-drive-and-joint-state';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -558,24 +558,24 @@
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
 <div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># Valid: Angular drive and state schemas applied to revolute joint</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>PhysicsRevoluteJoint<span class="w"> </span><span class="s">&quot;RevoluteJoint&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="p">[</span><span class="s">&quot;PhysxJointAPI&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;PhysicsDriveAPI:angular&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;PhysicsJointStateAPI:angular&quot;</span><span class="p">]</span><span class="w"> </span><span class="c1"># apply angular drive and state schemas to angular joints</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>PhysicsRevoluteJoint<span class="w"> </span><span class="s">"RevoluteJoint"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="p">[</span><span class="s">"PhysxJointAPI"</span><span class="p">,</span><span class="w"> </span><span class="s">"PhysicsDriveAPI:angular"</span><span class="p">,</span><span class="w"> </span><span class="s">"PhysicsJointStateAPI:angular"</span><span class="p">]</span><span class="w"> </span><span class="c1"># apply angular drive and state schemas to angular joints</span>
 <span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="kt">rel</span><span class="w"> </span><span class="na">physics:body0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/link_0&gt;</span>
 <span class="w">    </span><span class="kt">rel</span><span class="w"> </span><span class="na">physics:body1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/link_1&gt;</span>
-<span class="w">    </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">physics:axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Y&quot;</span>
+<span class="w">    </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">physics:axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Y"</span>
 <span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="na">drive:angular:physics:maxForce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="c1"># Newton</span>
 <span class="p">}</span>
 
 <span class="c1"># Invalid: Angular drive and state schemas applied to a physics prismatic joint</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>PhysicsPrismaticJoint<span class="w"> </span><span class="s">&quot;PrismaticJoint&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="p">[</span><span class="s">&quot;PhysxJointAPI&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;PhysicsDriveAPI:angular&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;PhysicsJointStateAPI:angular&quot;</span><span class="p">]</span><span class="w"> </span><span class="c1"># apply angular drive and state schemas to prismatic joints</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>PhysicsPrismaticJoint<span class="w"> </span><span class="s">"PrismaticJoint"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="p">[</span><span class="s">"PhysxJointAPI"</span><span class="p">,</span><span class="w"> </span><span class="s">"PhysicsDriveAPI:angular"</span><span class="p">,</span><span class="w"> </span><span class="s">"PhysicsJointStateAPI:angular"</span><span class="p">]</span><span class="w"> </span><span class="c1"># apply angular drive and state schemas to prismatic joints</span>
 <span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="kt">rel</span><span class="w"> </span><span class="na">physics:body0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/link_0&gt;</span>
 <span class="w">    </span><span class="kt">rel</span><span class="w"> </span><span class="na">physics:body1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/link_1&gt;</span>
-<span class="w">    </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">physics:axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Y&quot;</span>
+<span class="w">    </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">physics:axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Y"</span>
 <span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="na">drive:linear:physics:maxForce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="c1"># Invalid, max force is 0N</span>
 <span class="p">}</span>
 </pre></div>
@@ -679,8 +679,8 @@
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

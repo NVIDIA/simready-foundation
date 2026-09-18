@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'capabilities/isaac_sim/robot_core/requirements/root-joint-pinned';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -558,28 +558,28 @@
 <h3>Passing — Manipulator pinned via empty <code class="docutils literal notranslate"><span class="pre">body0</span></code> (world)<a class="headerlink" href="#passing-manipulator-pinned-via-empty-body0-world" title="Link to this heading">#</a></h3>
 <p>A <code class="docutils literal notranslate"><span class="pre">UsdPhysics.Joint</span></code> with no <code class="docutils literal notranslate"><span class="pre">physics:body0</span></code> target is implicitly connected to the
 world frame. This is the most common way to pin a fixed-base robot.</p>
-<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">over</span><span class="w"> </span><span class="s">&quot;Robot&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;IsaacRobotAPI&quot;</span><span class="p">]</span>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">over</span><span class="w"> </span><span class="s">"Robot"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"IsaacRobotAPI"</span><span class="p">]</span>
 <span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="kt">token</span><span class="w"> </span><span class="na">isaac:robotType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Manipulator&quot;</span>
+<span class="w">    </span><span class="kt">token</span><span class="w"> </span><span class="na">isaac:robotType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Manipulator"</span>
 <span class="w">    </span><span class="kt">rel</span><span class="w"> </span><span class="na">isaac:physics:robotJoints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="nn">&lt;/Robot/joints/root&gt;</span><span class="p">,</span><span class="w"> </span><span class="nn">&lt;/Robot/joints/joint_1&gt;</span><span class="w"> </span><span class="p">]</span>
 <span class="w">    </span><span class="kt">rel</span><span class="w"> </span><span class="na">isaac:physics:robotLinks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="nn">&lt;/Robot/links/base&gt;</span><span class="p">,</span><span class="w"> </span><span class="nn">&lt;/Robot/links/link_1&gt;</span><span class="w"> </span><span class="p">]</span>
 <span class="p">}</span>
 
-<span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">&quot;joints&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"joints"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>PhysicsJoint<span class="w"> </span><span class="s">&quot;root&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>PhysicsJoint<span class="w"> </span><span class="s">"root"</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="c1"># body0 has no target — interpreted as the world (pinned)</span>
 <span class="w">        </span><span class="kt">rel</span><span class="w"> </span><span class="na">physics:body1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/Robot/links/base&gt;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">&quot;links&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"links"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;base&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">        </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;PhysicsRigidBodyAPI&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"base"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"PhysicsRigidBodyAPI"</span><span class="p">]</span>
 <span class="w">    </span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">    </span><span class="p">}</span>
@@ -590,9 +590,9 @@ world frame. This is the most common way to pin a fixed-base robot.</p>
 <section id="passing-manipulator-pinned-via-empty-body1-world">
 <h3>Passing — Manipulator pinned via empty <code class="docutils literal notranslate"><span class="pre">body1</span></code> (world)<a class="headerlink" href="#passing-manipulator-pinned-via-empty-body1-world" title="Link to this heading">#</a></h3>
 <p>The world side can be on either relationship. Here <code class="docutils literal notranslate"><span class="pre">body1</span></code> is left empty instead.</p>
-<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">&quot;joints&quot;</span>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"joints"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>PhysicsJoint<span class="w"> </span><span class="s">&quot;root&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>PhysicsJoint<span class="w"> </span><span class="s">"root"</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="kt">rel</span><span class="w"> </span><span class="na">physics:body0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/Robot/links/base&gt;</span>
 <span class="w">        </span><span class="c1"># body1 has no target — interpreted as the world (pinned)</span>
@@ -605,14 +605,14 @@ world frame. This is the most common way to pin a fixed-base robot.</p>
 <h3>Passing — Manipulator pinned via non-rigid body prim<a class="headerlink" href="#passing-manipulator-pinned-via-non-rigid-body-prim" title="Link to this heading">#</a></h3>
 <p>Instead of leaving a body relationship empty, you can point it at a prim that does
 <strong>not</strong> have <code class="docutils literal notranslate"><span class="pre">PhysicsRigidBodyAPI</span></code>. The validator treats this the same as the world.</p>
-<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;world_anchor&quot;</span>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"world_anchor"</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1"># No PhysicsRigidBodyAPI — acts as a fixed anchor</span>
 <span class="p">}</span>
 
-<span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">&quot;joints&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"joints"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>PhysicsJoint<span class="w"> </span><span class="s">&quot;root&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>PhysicsJoint<span class="w"> </span><span class="s">"root"</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="kt">rel</span><span class="w"> </span><span class="na">physics:body0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/Robot/world_anchor&gt;</span>
 <span class="w">        </span><span class="kt">rel</span><span class="w"> </span><span class="na">physics:body1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/Robot/links/base&gt;</span>
@@ -625,18 +625,18 @@ world frame. This is the most common way to pin a fixed-base robot.</p>
 <h3>Passing — End Effector pinned (same rules as Manipulator)<a class="headerlink" href="#passing-end-effector-pinned-same-rules-as-manipulator" title="Link to this heading">#</a></h3>
 <p>End Effectors follow the same pinning requirement. Any of the pinning
 methods above apply.</p>
-<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">over</span><span class="w"> </span><span class="s">&quot;Gripper&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;IsaacRobotAPI&quot;</span><span class="p">]</span>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">over</span><span class="w"> </span><span class="s">"Gripper"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"IsaacRobotAPI"</span><span class="p">]</span>
 <span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="kt">token</span><span class="w"> </span><span class="na">isaac:robotType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;End Effector&quot;</span>
+<span class="w">    </span><span class="kt">token</span><span class="w"> </span><span class="na">isaac:robotType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"End Effector"</span>
 <span class="w">    </span><span class="kt">rel</span><span class="w"> </span><span class="na">isaac:physics:robotJoints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="nn">&lt;/Gripper/joints/root&gt;</span><span class="p">,</span><span class="w"> </span><span class="nn">&lt;/Gripper/joints/finger_1&gt;</span><span class="w"> </span><span class="p">]</span>
 <span class="w">    </span><span class="kt">rel</span><span class="w"> </span><span class="na">isaac:physics:robotLinks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="nn">&lt;/Gripper/links/base&gt;</span><span class="p">,</span><span class="w"> </span><span class="nn">&lt;/Gripper/links/finger_1&gt;</span><span class="w"> </span><span class="p">]</span>
 <span class="p">}</span>
 
-<span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">&quot;joints&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"joints"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>PhysicsJoint<span class="w"> </span><span class="s">&quot;root&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>PhysicsJoint<span class="w"> </span><span class="s">"root"</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="c1"># Pinned: body0 is empty (world)</span>
 <span class="w">        </span><span class="kt">rel</span><span class="w"> </span><span class="na">physics:body1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/Gripper/links/base&gt;</span>
@@ -649,34 +649,34 @@ methods above apply.</p>
 <h3>Passing — Mobile robot with root joint <strong>not</strong> pinned<a class="headerlink" href="#passing-mobile-robot-with-root-joint-not-pinned" title="Link to this heading">#</a></h3>
 <p>For robot types other than Manipulator and End Effector, the root joint must have
 <strong>both</strong> bodies targeting prims with <code class="docutils literal notranslate"><span class="pre">PhysicsRigidBodyAPI</span></code>.</p>
-<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">over</span><span class="w"> </span><span class="s">&quot;MobileBot&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;IsaacRobotAPI&quot;</span><span class="p">]</span>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">over</span><span class="w"> </span><span class="s">"MobileBot"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"IsaacRobotAPI"</span><span class="p">]</span>
 <span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="kt">token</span><span class="w"> </span><span class="na">isaac:robotType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Mobile&quot;</span>
+<span class="w">    </span><span class="kt">token</span><span class="w"> </span><span class="na">isaac:robotType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Mobile"</span>
 <span class="w">    </span><span class="kt">rel</span><span class="w"> </span><span class="na">isaac:physics:robotJoints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="nn">&lt;/MobileBot/joints/root&gt;</span><span class="p">,</span><span class="w"> </span><span class="nn">&lt;/MobileBot/joints/wheel_1&gt;</span><span class="w"> </span><span class="p">]</span>
 <span class="w">    </span><span class="kt">rel</span><span class="w"> </span><span class="na">isaac:physics:robotLinks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="nn">&lt;/MobileBot/links/chassis&gt;</span><span class="p">,</span><span class="w"> </span><span class="nn">&lt;/MobileBot/links/wheel_1&gt;</span><span class="w"> </span><span class="p">]</span>
 <span class="p">}</span>
 
-<span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">&quot;joints&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"joints"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>PhysicsJoint<span class="w"> </span><span class="s">&quot;root&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>PhysicsJoint<span class="w"> </span><span class="s">"root"</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="kt">rel</span><span class="w"> </span><span class="na">physics:body0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/MobileBot/links/chassis&gt;</span>
 <span class="w">        </span><span class="kt">rel</span><span class="w"> </span><span class="na">physics:body1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/MobileBot/links/body&gt;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">&quot;links&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"links"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;chassis&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">        </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;PhysicsRigidBodyAPI&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"chassis"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"PhysicsRigidBodyAPI"</span><span class="p">]</span>
 <span class="w">    </span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;body&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">        </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;PhysicsRigidBodyAPI&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"body"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"PhysicsRigidBodyAPI"</span><span class="p">]</span>
 <span class="w">    </span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">    </span><span class="p">}</span>
@@ -688,9 +688,9 @@ methods above apply.</p>
 <h3>Failing — Manipulator with both bodies rigid (not pinned)<a class="headerlink" href="#failing-manipulator-with-both-bodies-rigid-not-pinned" title="Link to this heading">#</a></h3>
 <div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># FAILS: Both body0 and body1 are rigid bodies, so the root joint is not pinned.</span>
 <span class="c1"># Manipulators require a pinned root joint.</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">&quot;joints&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"joints"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>PhysicsJoint<span class="w"> </span><span class="s">&quot;root&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>PhysicsJoint<span class="w"> </span><span class="s">"root"</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="kt">rel</span><span class="w"> </span><span class="na">physics:body0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/Robot/links/chassis&gt;</span><span class="w">   </span><span class="c1"># has PhysicsRigidBodyAPI</span>
 <span class="w">        </span><span class="kt">rel</span><span class="w"> </span><span class="na">physics:body1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/Robot/links/base&gt;</span><span class="w">      </span><span class="c1"># has PhysicsRigidBodyAPI</span>
@@ -703,16 +703,16 @@ methods above apply.</p>
 <h3>Failing — Mobile robot with a pinned root joint<a class="headerlink" href="#failing-mobile-robot-with-a-pinned-root-joint" title="Link to this heading">#</a></h3>
 <div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># FAILS: body0 is empty (world), making the root joint pinned.</span>
 <span class="c1"># Non-manipulator types must not have a pinned root joint.</span>
-<span class="k k-Tokens">over</span><span class="w"> </span><span class="s">&quot;MobileBot&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;IsaacRobotAPI&quot;</span><span class="p">]</span>
+<span class="k k-Tokens">over</span><span class="w"> </span><span class="s">"MobileBot"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"IsaacRobotAPI"</span><span class="p">]</span>
 <span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="kt">token</span><span class="w"> </span><span class="na">isaac:robotType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Mobile&quot;</span>
+<span class="w">    </span><span class="kt">token</span><span class="w"> </span><span class="na">isaac:robotType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Mobile"</span>
 <span class="p">}</span>
 
-<span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">&quot;joints&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"joints"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>PhysicsJoint<span class="w"> </span><span class="s">&quot;root&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>PhysicsJoint<span class="w"> </span><span class="s">"root"</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="c1"># body0 is empty — pinned to world, which is wrong for Mobile</span>
 <span class="w">        </span><span class="kt">rel</span><span class="w"> </span><span class="na">physics:body1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/MobileBot/links/chassis&gt;</span>
@@ -829,8 +829,8 @@ methods above apply.</p>
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

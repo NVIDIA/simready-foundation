@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'guides/features_expansion_workflow';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -552,12 +552,12 @@
 
 <span class="gu">## Summary</span>
 
-The stage must contain a prim named &quot;Foo&quot;.
+The stage must contain a prim named "Foo".
 
 <span class="gu">## Description</span>
 
-The stage&#39;s default prim hierarchy must include at least one prim named
-&quot;Foo&quot;. This is a structural requirement that downstream tools depend on
+The stage's default prim hierarchy must include at least one prim named
+"Foo". This is a structural requirement that downstream tools depend on
 to locate the primary content root.
 
 <span class="gu">### Valid USDA</span>
@@ -565,11 +565,11 @@ to locate the primary content root.
 <span class="sb">```usda</span>
 <span class="c1">#usda 1.0</span>
 <span class="p">(</span>
-<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Root&quot;</span>
+<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Root"</span>
 <span class="p">)</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Root&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Root"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Foo&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Foo"</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
@@ -580,11 +580,11 @@ to locate the primary content root.
 <span class="sb">```usda</span>
 <span class="c1">#usda 1.0</span>
 <span class="p">(</span>
-<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Root&quot;</span>
+<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Root"</span>
 <span class="p">)</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Root&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Root"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Bar&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Bar"</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
@@ -592,7 +592,7 @@ to locate the primary content root.
 
 <span class="gu">## How to comply</span>
 
-<span class="k">-</span><span class="w"> </span>Add an Xform prim named &quot;Foo&quot; under the default prim hierarchy.
+<span class="k">-</span><span class="w"> </span>Add an Xform prim named "Foo" under the default prim hierarchy.
 </pre></div>
 </div>
 </section>
@@ -617,20 +617,20 @@ requirements/has-foo-prim                        &lt;-- add this line
 <section id="c-implement-the-rule">
 <h3>1c. Implement the rule<a class="headerlink" href="#c-implement-the-rule" title="Link to this heading">#</a></h3>
 <p>Add the checker class to <code class="docutils literal notranslate"><span class="pre">capabilities/hierarchy/validation.py</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@usd_validation_nvidia</span><span class="o">.</span><span class="n">register_rule</span><span class="p">(</span><span class="s2">&quot;Hierarchy&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@usd_validation_nvidia</span><span class="o">.</span><span class="n">register_rule</span><span class="p">(</span><span class="s2">"Hierarchy"</span><span class="p">)</span>
 <span class="nd">@usd_validation_nvidia</span><span class="o">.</span><span class="n">register_requirements</span><span class="p">(</span><span class="n">cap</span><span class="o">.</span><span class="n">HierarchyRequirements</span><span class="o">.</span><span class="n">FOO_001</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">HasFooPrimChecker</span><span class="p">(</span><span class="n">usd_validation_nvidia</span><span class="o">.</span><span class="n">BaseRuleChecker</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Stage must contain a prim named &#39;Foo&#39;.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Stage must contain a prim named 'Foo'."""</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CheckStage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">default_prim</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetDefaultPrim</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">default_prim</span><span class="p">:</span>
             <span class="k">return</span>
         <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">default_prim</span><span class="o">.</span><span class="n">GetAllChildren</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">GetName</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Foo&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">GetName</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"Foo"</span><span class="p">:</span>
                 <span class="k">return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_AddFailedCheck</span><span class="p">(</span>
             <span class="n">requirement</span><span class="o">=</span><span class="n">cap</span><span class="o">.</span><span class="n">HierarchyRequirements</span><span class="o">.</span><span class="n">FOO_001</span><span class="p">,</span>
-            <span class="n">message</span><span class="o">=</span><span class="s2">&quot;No prim named &#39;Foo&#39; found under the default prim.&quot;</span><span class="p">,</span>
+            <span class="n">message</span><span class="o">=</span><span class="s2">"No prim named 'Foo' found under the default prim."</span><span class="p">,</span>
         <span class="p">)</span>
 </pre></div>
 </div>
@@ -640,27 +640,27 @@ requirements/has-foo-prim                        &lt;-- add this line
 <h2>2. Define the feature<a class="headerlink" href="#define-the-feature" title="Link to this heading">#</a></h2>
 <p>Create <code class="docutils literal notranslate"><span class="pre">features/FET_099_base_neutral-0.1.0-has_foo_prim.json</span></code>:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FET099_BASE_NEUTRAL&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;display_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Has Foo Prim&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;features/FET_099-has_foo_prim.html&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="s2">&quot;FOO.001&quot;</span>
+<span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FET099_BASE_NEUTRAL"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Has Foo Prim"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"features/FET_099-has_foo_prim.html"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"FOO.001"</span>
 <span class="w">    </span><span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>If your feature builds on an existing feature, you can declare a dependency to inherit its requirements and only list <strong>additional</strong> ones:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FET099_BASE_NEUTRAL&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;display_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Has Foo Prim&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;features/FET_099-has_foo_prim.html&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="p">{</span><span class="nt">&quot;FET003_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}}</span>
+<span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FET099_BASE_NEUTRAL"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Has Foo Prim"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"features/FET_099-has_foo_prim.html"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">"FET003_BASE_NEUTRAL"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}}</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="s2">&quot;FOO.001&quot;</span>
+<span class="w">    </span><span class="nt">"requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"FOO.001"</span>
 <span class="w">    </span><span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
@@ -731,14 +731,14 @@ ID:099 - Has Foo Prim - Base &lt;FET_099-has_foo_prim&gt;
 <h2>4. Wire profiles<a class="headerlink" href="#wire-profiles" title="Link to this heading">#</a></h2>
 <p>Add your feature to the <code class="docutils literal notranslate"><span class="pre">Prop-Robotics-Neutral</span></code> profile in <code class="docutils literal notranslate"><span class="pre">profiles/prop_robotics_neutral.toml</span></code>:</p>
 <div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[Prop-Robotics-Neutral]</span>
-<span class="s2">&quot;1.0.0&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET000_CORE&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w">            </span><span class="c1"># &quot;Core&quot;</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w">     </span><span class="c1"># &quot;Minimal&quot;</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET003_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w">     </span><span class="c1"># &quot;RBD Physics&quot;</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET004_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w">     </span><span class="c1"># &quot;Simulate Multi-Body Physics&quot;</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET005_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w">     </span><span class="c1"># &quot;Simulate Grasp Physics&quot;</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET006_BASE_MDL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w">         </span><span class="c1"># &quot;Materials&quot;</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET099_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w">     </span><span class="c1"># &quot;Has Foo Prim&quot;   &lt;-- add this line</span>
+<span class="s2">"1.0.0"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">"FET000_CORE"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w">            </span><span class="c1"># "Core"</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">"FET001_BASE_NEUTRAL"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w">     </span><span class="c1"># "Minimal"</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">"FET003_BASE_NEUTRAL"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w">     </span><span class="c1"># "RBD Physics"</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">"FET004_BASE_NEUTRAL"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w">     </span><span class="c1"># "Simulate Multi-Body Physics"</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">"FET005_BASE_NEUTRAL"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w">     </span><span class="c1"># "Simulate Grasp Physics"</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">"FET006_BASE_MDL"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w">         </span><span class="c1"># "Materials"</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">"FET099_BASE_NEUTRAL"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w">     </span><span class="c1"># "Has Foo Prim"   &lt;-- add this line</span>
 <span class="p">]}</span>
 </pre></div>
 </div>
@@ -766,7 +766,7 @@ ID:099 - Has Foo Prim - Base &lt;FET_099-has_foo_prim&gt;
 <p>Expected output:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Asset: sample_content/.../sm_apple_a01_01.usd
   [FAILED] Prop-Robotics-Neutral v1.0.0
-           FET099_BASE_NEUTRAL: failing requirements: [&#39;FOO.001&#39;]
+           FET099_BASE_NEUTRAL: failing requirements: ['FOO.001']
 </pre></div>
 </div>
 </section>
@@ -776,17 +776,17 @@ ID:099 - Has Foo Prim - Base &lt;FET_099-has_foo_prim&gt;
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">Usd</span><span class="p">,</span> <span class="n">UsdGeom</span>
 
 <span class="n">stage</span> <span class="o">=</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span>
-    <span class="s2">&quot;sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd&quot;</span>
+    <span class="s2">"sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd"</span>
 <span class="p">)</span>
 <span class="n">default_prim</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetDefaultPrim</span><span class="p">()</span>
-<span class="n">UsdGeom</span><span class="o">.</span><span class="n">Xform</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">default_prim</span><span class="o">.</span><span class="n">GetPath</span><span class="p">()</span><span class="o">.</span><span class="n">AppendChild</span><span class="p">(</span><span class="s2">&quot;Foo&quot;</span><span class="p">))</span>
-<span class="n">stage</span><span class="o">.</span><span class="n">Export</span><span class="p">(</span><span class="s2">&quot;fixed_asset.usd&quot;</span><span class="p">)</span>
+<span class="n">UsdGeom</span><span class="o">.</span><span class="n">Xform</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">default_prim</span><span class="o">.</span><span class="n">GetPath</span><span class="p">()</span><span class="o">.</span><span class="n">AppendChild</span><span class="p">(</span><span class="s2">"Foo"</span><span class="p">))</span>
+<span class="n">stage</span><span class="o">.</span><span class="n">Export</span><span class="p">(</span><span class="s2">"fixed_asset.usd"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The exported <code class="docutils literal notranslate"><span class="pre">fixed_asset.usd</span></code> now contains the required prim:</p>
-<div class="highlight-usda notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Root&quot;</span>
+<div class="highlight-usda notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Root"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Foo&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Foo"</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="c1"># ... existing geometry ...</span>
@@ -858,18 +858,18 @@ ID:099 - Has Foo Prim - Base &lt;FET_099-has_foo_prim&gt;
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">simready.validate</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sv</span>
 
-<span class="n">FOUNDATIONS_DOCS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;nv_core/sr_specs/docs&quot;</span><span class="p">)</span>
+<span class="n">FOUNDATIONS_DOCS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"nv_core/sr_specs/docs"</span><span class="p">)</span>
 
 <span class="n">sv</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span>
-    <span class="n">rules_and_requirements_paths</span><span class="o">=</span><span class="p">[</span><span class="n">FOUNDATIONS_DOCS_DIR</span> <span class="o">/</span> <span class="s2">&quot;capabilities&quot;</span><span class="p">],</span>
-    <span class="n">features_paths</span><span class="o">=</span><span class="p">[</span><span class="n">FOUNDATIONS_DOCS_DIR</span> <span class="o">/</span> <span class="s2">&quot;features&quot;</span><span class="p">],</span>
-    <span class="n">profiles_paths</span><span class="o">=</span><span class="p">[</span><span class="n">FOUNDATIONS_DOCS_DIR</span> <span class="o">/</span> <span class="s2">&quot;profiles&quot;</span><span class="p">],</span>
+    <span class="n">rules_and_requirements_paths</span><span class="o">=</span><span class="p">[</span><span class="n">FOUNDATIONS_DOCS_DIR</span> <span class="o">/</span> <span class="s2">"capabilities"</span><span class="p">],</span>
+    <span class="n">features_paths</span><span class="o">=</span><span class="p">[</span><span class="n">FOUNDATIONS_DOCS_DIR</span> <span class="o">/</span> <span class="s2">"features"</span><span class="p">],</span>
+    <span class="n">profiles_paths</span><span class="o">=</span><span class="p">[</span><span class="n">FOUNDATIONS_DOCS_DIR</span> <span class="o">/</span> <span class="s2">"profiles"</span><span class="p">],</span>
 <span class="p">)</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="n">sv</span><span class="o">.</span><span class="n">validate_asset</span><span class="p">(</span><span class="n">sv</span><span class="o">.</span><span class="n">AssetValidationConfig</span><span class="p">(</span>
-    <span class="n">asset_path</span><span class="o">=</span><span class="s2">&quot;fixed_asset.usd&quot;</span><span class="p">,</span>
-    <span class="n">profile_id</span><span class="o">=</span><span class="s2">&quot;Prop-Robotics-Neutral&quot;</span><span class="p">,</span>
-    <span class="n">profile_version</span><span class="o">=</span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+    <span class="n">asset_path</span><span class="o">=</span><span class="s2">"fixed_asset.usd"</span><span class="p">,</span>
+    <span class="n">profile_id</span><span class="o">=</span><span class="s2">"Prop-Robotics-Neutral"</span><span class="p">,</span>
+    <span class="n">profile_version</span><span class="o">=</span><span class="s2">"1.0.0"</span><span class="p">,</span>
 <span class="p">))</span>
 
 <span class="k">assert</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
@@ -979,8 +979,8 @@ ID:099 - Has Foo Prim - Base &lt;FET_099-has_foo_prim&gt;
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

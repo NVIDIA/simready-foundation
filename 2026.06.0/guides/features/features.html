@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'guides/features/features';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -535,22 +535,22 @@
 <section id="example-feature-definition">
 <h3>Example Feature Definition<a class="headerlink" href="#example-feature-definition" title="Link to this heading">#</a></h3>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;display_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Minimal Editor&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;features/FET_001-minimal_editor.html&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FET001_BASE_NEUTRAL"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Minimal Editor"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"features/FET_001-minimal_editor.html"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;FET000_CORE&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="w">            </span><span class="nt">"FET000_CORE"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="s2">&quot;AA.001&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;AA.002&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;UN.001&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;UN.002&quot;</span>
+<span class="w">    </span><span class="nt">"requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"AA.001"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"AA.002"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"UN.001"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"UN.002"</span>
 <span class="w">    </span><span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
@@ -566,19 +566,19 @@
 <section id="sample-feature-json-fet-000-base-neutral-new-feature-json">
 <h4>Sample Feature JSON (<code class="docutils literal notranslate"><span class="pre">FET_000_base_neutral-new_feature.json</span></code>)<a class="headerlink" href="#sample-feature-json-fet-000-base-neutral-new-feature-json" title="Link to this heading">#</a></h4>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FET000_NEW_FEATURE&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;display_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;example new feature&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;features/FET_000-new_feature.html&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FET000_NEW_FEATURE"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example new feature"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"features/FET_000-new_feature.html"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="w">            </span><span class="nt">"FET001_BASE_NEUTRAL"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">],</span><span class="w">    </span>
-<span class="w">    </span><span class="nt">&quot;requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="s2">&quot;AA.001&quot;</span>
+<span class="w">    </span><span class="nt">"requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"AA.001"</span>
 <span class="w">    </span><span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
@@ -746,13 +746,13 @@ ID:000 - Sample Feature - Base &lt;FET_000-new_feature&gt;
 <h3>Step 6: Use in a Profile<a class="headerlink" href="#step-6-use-in-a-profile" title="Link to this heading">#</a></h3>
 <p>Features are used in profiles to define what capabilities an asset must have. Here’s an example profile:</p>
 <div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[Prop-Robotics-Physx]</span>
-<span class="s2">&quot;1.0.0&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Minimal&quot;</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET003_BASE_PHYSX&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;RBD Physics&quot;</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET004_BASE_PHYSX&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Simulate Multi-Body Physics and SDF collision approximation&quot;</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET005_BASE_NEUTRAL&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;Simulate Grasp Physics&quot;</span>
+<span class="s2">"1.0.0"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">"FET001_BASE_NEUTRAL"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Minimal"</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">"FET003_BASE_PHYSX"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "RBD Physics"</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">"FET004_BASE_PHYSX"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Simulate Multi-Body Physics and SDF collision approximation"</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">"FET005_BASE_NEUTRAL"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Simulate Grasp Physics"</span>
 
-<span class="w">    </span><span class="p">{</span><span class="s2">&quot;FET000_NEW_FEATURE&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;New Feature&quot;</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">"FET000_NEW_FEATURE"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "New Feature"</span>
 <span class="p">]}</span>
 </pre></div>
 </div>
@@ -817,15 +817,15 @@ Profiles choose which feature (and thus which requirement) applies:</p>
 <section id="dependency-structure">
 <h3>Dependency Structure<a class="headerlink" href="#dependency-structure" title="Link to this heading">#</a></h3>
 <p>Dependencies are defined in the JSON file as an array of objects:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="w">        </span><span class="nt">"FET001_BASE_NEUTRAL"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;FET_003_BASE_PHYSX&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="w">        </span><span class="nt">"FET_003_BASE_PHYSX"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">]</span>
@@ -854,30 +854,30 @@ Profiles choose which feature (and thus which requirement) applies:</p>
 <h4>Example: Dependency Chain<a class="headerlink" href="#example-dependency-chain" title="Link to this heading">#</a></h4>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="c1">// Feature A depends on Feature B</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FET_A&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FET_A"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;FET_B&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}</span>
+<span class="w">            </span><span class="nt">"FET_B"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;REQ_A.001&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">"requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"REQ_A.001"</span><span class="p">]</span>
 <span class="p">}</span>
 
 <span class="c1">// Feature B depends on Feature C</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FET_B&quot;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FET_B"</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;FET_C&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}</span>
+<span class="w">            </span><span class="nt">"FET_C"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;REQ_B.001&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">"requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"REQ_B.001"</span><span class="p">]</span>
 <span class="p">}</span>
 
 <span class="c1">// Feature C has no dependencies</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FET_C&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;REQ_C.001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;REQ_C.002&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FET_C"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"REQ_C.001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"REQ_C.002"</span><span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -891,15 +891,15 @@ Profiles choose which feature (and thus which requirement) applies:</p>
 <section id="version-compatibility">
 <h4>Version Compatibility<a class="headerlink" href="#version-compatibility" title="Link to this heading">#</a></h4>
 <p>Dependencies specify exact version requirements to ensure compatibility:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="w">        </span><span class="nt">"FET001_BASE_NEUTRAL"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;FET003_BASE_PHYSX&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="w">        </span><span class="nt">"FET003_BASE_PHYSX"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">]</span>
@@ -949,18 +949,18 @@ an existing feature JSON file’s <code class="docutils literal notranslate"><sp
 <section id="keep-dependencies-minimal">
 <h4>1. <strong>Keep Dependencies Minimal</strong><a class="headerlink" href="#keep-dependencies-minimal" title="Link to this heading">#</a></h4>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="c1">// Good: Only depend on what you actually need</span>
-<span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}</span><span class="w">  </span><span class="c1">// Core minimal requirements</span>
+<span class="w">        </span><span class="nt">"FET001_BASE_NEUTRAL"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}</span><span class="w">  </span><span class="c1">// Core minimal requirements</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">]</span>
 
-<span class="c1">// Avoid: Don&#39;t depend on features you don&#39;t actually use</span>
-<span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="c1">// Avoid: Don't depend on features you don't actually use</span>
+<span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">},</span>
-<span class="w">        </span><span class="nt">&quot;FET002_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">},</span><span class="w">  </span><span class="c1">// Unused dependency</span>
-<span class="w">        </span><span class="nt">&quot;FET003_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}</span><span class="w">   </span><span class="c1">// Unused dependency</span>
+<span class="w">        </span><span class="nt">"FET001_BASE_NEUTRAL"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">"FET002_BASE_NEUTRAL"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">},</span><span class="w">  </span><span class="c1">// Unused dependency</span>
+<span class="w">        </span><span class="nt">"FET003_BASE_NEUTRAL"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}</span><span class="w">   </span><span class="c1">// Unused dependency</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">]</span>
 </pre></div>
@@ -969,16 +969,16 @@ an existing feature JSON file’s <code class="docutils literal notranslate"><sp
 <section id="use-specific-versions">
 <h4>2. <strong>Use Specific Versions</strong><a class="headerlink" href="#use-specific-versions" title="Link to this heading">#</a></h4>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="c1">// Good: Specify exact versions for stability</span>
-<span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}</span>
+<span class="w">        </span><span class="nt">"FET001_BASE_NEUTRAL"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">]</span>
 
 <span class="c1">// Avoid: Using version ranges that could cause instability</span>
-<span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;=0.1.0&quot;</span><span class="p">}</span><span class="w">  </span><span class="c1">// Could break with future changes</span>
+<span class="w">        </span><span class="nt">"FET001_BASE_NEUTRAL"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&gt;=0.1.0"</span><span class="p">}</span><span class="w">  </span><span class="c1">// Could break with future changes</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">]</span>
 </pre></div>
@@ -987,12 +987,12 @@ an existing feature JSON file’s <code class="docutils literal notranslate"><sp
 <section id="document-dependency-purpose">
 <h4>3. <strong>Document Dependency Purpose</strong><a class="headerlink" href="#document-dependency-purpose" title="Link to this heading">#</a></h4>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="c1">// Good: Add comments explaining why dependencies are needed</span>
-<span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}</span><span class="w">  </span><span class="c1">// Provides core asset validation</span>
+<span class="w">        </span><span class="nt">"FET001_BASE_NEUTRAL"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}</span><span class="w">  </span><span class="c1">// Provides core asset validation</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;FET_003_BASE_PHYSX&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}</span><span class="w">  </span><span class="c1">// Provides physics requirements</span>
+<span class="w">        </span><span class="nt">"FET_003_BASE_PHYSX"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}</span><span class="w">  </span><span class="c1">// Provides physics requirements</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">]</span>
 </pre></div>
@@ -1002,16 +1002,16 @@ an existing feature JSON file’s <code class="docutils literal notranslate"><sp
 <h4>4. <strong>Avoid Circular Dependencies</strong><a class="headerlink" href="#avoid-circular-dependencies" title="Link to this heading">#</a></h4>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="c1">// BAD: This creates a circular dependency that will cause errors</span>
 <span class="c1">// Feature A depends on Feature B</span>
-<span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;FET_B&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}</span>
+<span class="w">        </span><span class="nt">"FET_B"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">]</span>
 
 <span class="c1">// Feature B depends on Feature A (circular!)</span>
-<span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;FET_A&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}</span>
+<span class="w">        </span><span class="nt">"FET_A"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">]</span>
 </pre></div>
@@ -1030,24 +1030,24 @@ an existing feature JSON file’s <code class="docutils literal notranslate"><sp
 <section id="validation-errors">
 <h4>Validation Errors<a class="headerlink" href="#validation-errors" title="Link to this heading">#</a></h4>
 <p>Common dependency validation errors:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="c1">// Error: Feature doesn&#39;t exist</span>
-<span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="c1">// Error: Feature doesn't exist</span>
+<span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;NONEXISTENT_FEATURE&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}</span>
+<span class="w">        </span><span class="nt">"NONEXISTENT_FEATURE"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">]</span>
 
-<span class="c1">// Error: Version doesn&#39;t exist</span>
-<span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="c1">// Error: Version doesn't exist</span>
+<span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;99.99.99&quot;</span><span class="p">}</span>
+<span class="w">        </span><span class="nt">"FET001_BASE_NEUTRAL"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"99.99.99"</span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">]</span>
 
 <span class="c1">// Error: Circular dependency detected</span>
-<span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">}</span><span class="w">  </span><span class="c1">// Creates circular reference</span>
+<span class="w">        </span><span class="nt">"FET001_BASE_NEUTRAL"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}</span><span class="w">  </span><span class="c1">// Creates circular reference</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">]</span>
 </pre></div>
@@ -1057,21 +1057,21 @@ an existing feature JSON file’s <code class="docutils literal notranslate"><sp
 <section id="example-complete-feature-with-dependencies">
 <h3>Example: Complete Feature with Dependencies<a class="headerlink" href="#example-complete-feature-with-dependencies" title="Link to this heading">#</a></h3>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FET004_BASE_PHYSX&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;display_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Simulate Multi-Body Physics&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;features/FET_004-simulate_multi_body_physics.html&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;dependencies&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FET004_BASE_PHYSX"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Simulate Multi-Body Physics"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"features/FET_004-simulate_multi_body_physics.html"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;FET003_BASE_PHYSX&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="w">            </span><span class="nt">"FET003_BASE_PHYSX"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="s2">&quot;JT.001&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;JT.002&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;RB.MB.001&quot;</span>
+<span class="w">    </span><span class="nt">"requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"JT.001"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"JT.002"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"RB.MB.001"</span>
 <span class="w">    </span><span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
@@ -1327,8 +1327,8 @@ an existing feature JSON file’s <code class="docutils literal notranslate"><sp
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

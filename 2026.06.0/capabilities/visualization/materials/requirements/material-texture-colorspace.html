@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'capabilities/visualization/materials/requirements/material-texture-colorspace';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -564,13 +564,13 @@
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
 <section id="valid-example-correct-color-spaces-and-normal-map-settings">
 <h3>✅ Valid Example - Correct Color Spaces and Normal Map Settings<a class="headerlink" href="#valid-example-correct-color-spaces-and-normal-map-settings" title="Link to this heading">#</a></h3>
-<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">&quot;ValidMaterial&quot;</span>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">"ValidMaterial"</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="kt">token</span><span class="w"> </span><span class="na">outputs:surface</span><span class="p">.</span>connect<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/ValidMaterial/PBRShader.outputs:surface&gt;</span>
 <span class="w">    </span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;PBRShader&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"PBRShader"</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;UsdPreviewSurface&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"UsdPreviewSurface"</span>
 <span class="w">        </span><span class="kt">color3f</span><span class="w"> </span><span class="na">inputs:diffuseColor</span><span class="p">.</span>connect<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/ValidMaterial/diffuseTexture.outputs:rgb&gt;</span>
 <span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="na">inputs:metallic</span><span class="p">.</span>connect<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/ValidMaterial/metallicTexture.outputs:r&gt;</span>
 <span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="na">inputs:roughness</span><span class="p">.</span>connect<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/ValidMaterial/roughnessTexture.outputs:r&gt;</span>
@@ -578,36 +578,36 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span>
 <span class="w">    </span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;metallicTexture&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"metallicTexture"</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;UsdUVTexture&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"UsdUVTexture"</span>
 <span class="w">        </span><span class="kt">asset</span><span class="w"> </span><span class="na">inputs:file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@textures/metallic.png@</span>
-<span class="w">        </span><span class="kt">token</span><span class="w"> </span><span class="na">inputs:sourceColorSpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;raw&quot;</span><span class="w">  </span><span class="c1"># Metallic in linear/raw</span>
+<span class="w">        </span><span class="kt">token</span><span class="w"> </span><span class="na">inputs:sourceColorSpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"raw"</span><span class="w">  </span><span class="c1"># Metallic in linear/raw</span>
 <span class="w">        </span><span class="kt">float2</span><span class="w"> </span><span class="na">inputs:st</span><span class="p">.</span>connect<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/ValidMaterial/PrimvarReader_st.outputs:result&gt;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;roughnessTexture&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"roughnessTexture"</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;UsdUVTexture&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"UsdUVTexture"</span>
 <span class="w">        </span><span class="kt">asset</span><span class="w"> </span><span class="na">inputs:file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@textures/roughness.png@</span>
-<span class="w">        </span><span class="kt">token</span><span class="w"> </span><span class="na">inputs:sourceColorSpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;raw&quot;</span><span class="w">  </span><span class="c1"># Roughness in linear/raw</span>
+<span class="w">        </span><span class="kt">token</span><span class="w"> </span><span class="na">inputs:sourceColorSpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"raw"</span><span class="w">  </span><span class="c1"># Roughness in linear/raw</span>
 <span class="w">        </span><span class="kt">float2</span><span class="w"> </span><span class="na">inputs:st</span><span class="p">.</span>connect<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/ValidMaterial/PrimvarReader_st.outputs:result&gt;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;normalTexture&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"normalTexture"</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;UsdUVTexture&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"UsdUVTexture"</span>
 <span class="w">        </span><span class="kt">asset</span><span class="w"> </span><span class="na">inputs:file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@textures/normal.png@</span><span class="w">  </span><span class="c1"># 8-bit normal map texture</span>
-<span class="w">        </span><span class="kt">token</span><span class="w"> </span><span class="na">inputs:sourceColorSpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;raw&quot;</span><span class="w">      </span><span class="c1"># Prevent SRGB transformation</span>
+<span class="w">        </span><span class="kt">token</span><span class="w"> </span><span class="na">inputs:sourceColorSpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"raw"</span><span class="w">      </span><span class="c1"># Prevent SRGB transformation</span>
 <span class="w">        </span><span class="kt">float4</span><span class="w"> </span><span class="na">inputs:scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">        </span><span class="c1"># Required for 8-bit textures</span>
 <span class="w">        </span><span class="kt">float4</span><span class="w"> </span><span class="na">inputs:bias</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w">      </span><span class="c1"># Required for 8-bit textures</span>
 <span class="w">        </span><span class="kt">float2</span><span class="w"> </span><span class="na">inputs:st</span><span class="p">.</span>connect<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/ValidMaterial/PrimvarReader_st.outputs:result&gt;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;PrimvarReader_st&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"PrimvarReader_st"</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;UsdPrimvarReader_float2&quot;</span>
-<span class="w">        </span><span class="kt">token</span><span class="w"> </span><span class="na">inputs:varname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;st&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"UsdPrimvarReader_float2"</span>
+<span class="w">        </span><span class="kt">token</span><span class="w"> </span><span class="na">inputs:varname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"st"</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -620,7 +620,7 @@
 <span class="o">-</span> <span class="n">Metallic</span><span class="p">:</span> <span class="n">Raw</span><span class="o">/</span><span class="n">Linear</span>
 <span class="o">-</span> <span class="n">Roughness</span><span class="p">:</span> <span class="n">Raw</span><span class="o">/</span><span class="n">Linear</span>
 <span class="o">-</span> <span class="n">Normal</span> <span class="n">Maps</span> <span class="p">(</span><span class="mi">8</span><span class="o">-</span><span class="n">bit</span> <span class="n">textures</span><span class="p">):</span> 
-  <span class="o">-</span> <span class="n">Must</span> <span class="n">use</span> <span class="s2">&quot;raw&quot;</span> <span class="n">sourceColorSpace</span>
+  <span class="o">-</span> <span class="n">Must</span> <span class="n">use</span> <span class="s2">"raw"</span> <span class="n">sourceColorSpace</span>
   <span class="o">-</span> <span class="n">Must</span> <span class="nb">set</span> <span class="n">scale</span> <span class="n">to</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
   <span class="o">-</span> <span class="n">Must</span> <span class="nb">set</span> <span class="n">bias</span> <span class="n">to</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
   <span class="o">-</span> <span class="n">These</span> <span class="n">settings</span> <span class="n">convert</span> <span class="mi">8</span><span class="o">-</span><span class="n">bit</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="nb">range</span> <span class="n">to</span> <span class="n">tangent</span> <span class="n">space</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="nb">range</span>
@@ -632,7 +632,7 @@
 <span class="n">Steps</span> <span class="n">to</span> <span class="n">comply</span><span class="p">:</span>
 <span class="mf">1.</span> <span class="n">Set</span> <span class="n">appropriate</span> <span class="n">sourceColorSpace</span> <span class="n">on</span> <span class="n">UsdUVTexture</span> <span class="n">nodes</span>
 <span class="mf">2.</span> <span class="n">For</span> <span class="mi">8</span><span class="o">-</span><span class="n">bit</span> <span class="n">normal</span> <span class="n">maps</span><span class="p">:</span>
-   <span class="o">-</span> <span class="n">Always</span> <span class="nb">set</span> <span class="n">sourceColorSpace</span> <span class="n">to</span> <span class="s2">&quot;raw&quot;</span>
+   <span class="o">-</span> <span class="n">Always</span> <span class="nb">set</span> <span class="n">sourceColorSpace</span> <span class="n">to</span> <span class="s2">"raw"</span>
    <span class="o">-</span> <span class="n">Always</span> <span class="nb">set</span> <span class="n">scale</span> <span class="n">to</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
    <span class="o">-</span> <span class="n">Always</span> <span class="nb">set</span> <span class="n">bias</span> <span class="n">to</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="mf">3.</span> <span class="n">Ensure</span> <span class="n">texture</span> <span class="n">files</span> <span class="n">are</span> <span class="n">saved</span> <span class="ow">in</span> <span class="n">correct</span> <span class="n">color</span> <span class="n">spaces</span>
@@ -727,8 +727,8 @@
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

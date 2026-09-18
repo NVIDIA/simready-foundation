@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'capabilities/visualization/materials/requirements/material-preview-surface';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -560,48 +560,48 @@
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
 <div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># Invalid: Non-compliant attributes</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">&quot;mtl_cube&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">"mtl_cube"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;PreviewSurfaceTexture&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"PreviewSurfaceTexture"</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="c1"># Invalid: &#39;specular&#39; connection not in specification</span>
+<span class="w">        </span><span class="c1"># Invalid: 'specular' connection not in specification</span>
 <span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="na">inputs:specular</span><span class="p">.</span>connect<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/World/Looks/mtl_cube/SpecularTex.outputs:r&gt;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;diffuseColorTex&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"diffuseColorTex"</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="c1"># Invalid: &#39;bad&#39; not in allowed tokens [&#39;raw&#39;, &#39;sRGB&#39;, &#39;auto&#39;]</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">inputs:sourceColorSpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bad&quot;</span>
+<span class="w">        </span><span class="c1"># Invalid: 'bad' not in allowed tokens ['raw', 'sRGB', 'auto']</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">inputs:sourceColorSpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"bad"</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1"># Invalid: Wrong type and time-sampled tokens</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">&quot;mtl_sphere&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">"mtl_sphere"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;Shader&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"Shader"</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="c1"># Invalid: Wrong type (color3f instead of float)</span>
 <span class="w">        </span><span class="kt">color3f</span><span class="w"> </span><span class="na">inputs:metallic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;roughnessTex&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"roughnessTex"</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="c1"># Invalid: Token attribute should not have time samples</span>
 <span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">inputs:wrapT</span>.<span class="n n-Keyword n-Keyword-Tokens">timeSamples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="m">0</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;invalid_wrap&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="m">1</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;another_invalid&quot;</span>
+<span class="w">            </span><span class="m">0</span><span class="p">:</span><span class="w"> </span><span class="s">"invalid_wrap"</span><span class="p">,</span>
+<span class="w">            </span><span class="m">1</span><span class="p">:</span><span class="w"> </span><span class="s">"another_invalid"</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1"># Valid: Compliant attributes</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">&quot;mtl_cube&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">"mtl_cube"</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="kt">token</span><span class="w"> </span><span class="na">outputs:surface</span><span class="p">.</span>connect<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/World/Looks/mtl_cube/PreviewSurfaceTexture.outputs:surface&gt;</span>
 
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;PreviewSurfaceTexture&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"PreviewSurfaceTexture"</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;UsdPreviewSurface&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"UsdPreviewSurface"</span>
 <span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="na">inputs:clearcoat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
 <span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="na">inputs:clearcoatRoughness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
 <span class="w">        </span><span class="kt">color3f</span><span class="w"> </span><span class="na">inputs:diffuseColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">0.18</span><span class="p">,</span><span class="w"> </span><span class="m">0.18</span><span class="p">,</span><span class="w"> </span><span class="m">0.18</span><span class="p">)</span>
@@ -613,18 +613,18 @@
 <span class="w">        </span><span class="kt">token</span><span class="w"> </span><span class="na">outputs:surface</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;diffuseColorTex&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"diffuseColorTex"</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;UsdUVTexture&quot;</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"UsdUVTexture"</span>
 <span class="w">        </span><span class="kt">asset</span><span class="w"> </span><span class="na">inputs:file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./textures/color.jpg@</span>
-<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">inputs:sourceColorSpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;auto&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">            </span>allowedTokens<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;auto&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;raw&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;sRGB&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">inputs:sourceColorSpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"auto"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">            </span>allowedTokens<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"auto"</span><span class="p">,</span><span class="w"> </span><span class="s">"raw"</span><span class="p">,</span><span class="w"> </span><span class="s">"sRGB"</span><span class="p">]</span>
 <span class="w">        </span><span class="p">)</span>
-<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">inputs:wrapS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;useMetadata&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">            </span>allowedTokens<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;black&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;clamp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;repeat&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;mirror&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;useMetadata&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">inputs:wrapS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"useMetadata"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">            </span>allowedTokens<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"black"</span><span class="p">,</span><span class="w"> </span><span class="s">"clamp"</span><span class="p">,</span><span class="w"> </span><span class="s">"repeat"</span><span class="p">,</span><span class="w"> </span><span class="s">"mirror"</span><span class="p">,</span><span class="w"> </span><span class="s">"useMetadata"</span><span class="p">]</span>
 <span class="w">        </span><span class="p">)</span>
-<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">inputs:wrapT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;useMetadata&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">            </span>allowedTokens<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;black&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;clamp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;repeat&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;mirror&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;useMetadata&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">inputs:wrapT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"useMetadata"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">            </span>allowedTokens<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"black"</span><span class="p">,</span><span class="w"> </span><span class="s">"clamp"</span><span class="p">,</span><span class="w"> </span><span class="s">"repeat"</span><span class="p">,</span><span class="w"> </span><span class="s">"mirror"</span><span class="p">,</span><span class="w"> </span><span class="s">"useMetadata"</span><span class="p">]</span>
 <span class="w">        </span><span class="p">)</span>
 <span class="w">        </span><span class="kt">float2</span><span class="w"> </span><span class="na">inputs:st</span><span class="p">.</span>connect<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/World/Looks/mtl_cube/st.outputs:result&gt;</span>
 <span class="w">        </span><span class="kt">color3f</span><span class="w"> </span><span class="na">outputs:rgb</span>
@@ -721,8 +721,8 @@
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

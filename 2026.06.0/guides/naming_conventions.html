@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'guides/naming_conventions';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -614,8 +614,8 @@ a recognisable namespace prefix.</p>
 <section id="valid-single-apply">
 <h4>Valid (single-apply)<a class="headerlink" href="#valid-single-apply" title="Link to this heading">#</a></h4>
 <div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># Single-apply applied API — properties carry the acmeCable:flex: prefix.</span>
-<span class="k k-Tokens">over</span><span class="w"> </span><span class="s">&quot;Cable&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;AcmeCableFlexAPI&quot;</span><span class="p">]</span>
+<span class="k k-Tokens">over</span><span class="w"> </span><span class="s">"Cable"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"AcmeCableFlexAPI"</span><span class="p">]</span>
 <span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="na">acmeCable:flex:stiffness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.85</span>
@@ -626,11 +626,11 @@ a recognisable namespace prefix.</p>
 </section>
 <section id="valid-multi-apply">
 <h4>Valid (multi-apply)<a class="headerlink" href="#valid-multi-apply" title="Link to this heading">#</a></h4>
-<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># Multi-apply API schema — instance name &quot;front&quot; is interpolated between</span>
-<span class="c1"># the schema&#39;s propertyNamespacePrefix and each property name, producing</span>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># Multi-apply API schema — instance name "front" is interpolated between</span>
+<span class="c1"># the schema's propertyNamespacePrefix and each property name, producing</span>
 <span class="c1"># the final attribute names shown.</span>
-<span class="k k-Tokens">over</span><span class="w"> </span><span class="s">&quot;Wheel&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;AcmeBrakeAPI:front&quot;</span><span class="p">]</span>
+<span class="k k-Tokens">over</span><span class="w"> </span><span class="s">"Wheel"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"AcmeBrakeAPI:front"</span><span class="p">]</span>
 <span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="na">acmeBrake:front:torque</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">250.0</span>
@@ -642,11 +642,11 @@ a recognisable namespace prefix.</p>
 <section id="invalid">
 <h4>Invalid<a class="headerlink" href="#invalid" title="Link to this heading">#</a></h4>
 <div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># BAD: no namespace prefix — impossible to tell who owns these properties.</span>
-<span class="k k-Tokens">over</span><span class="w"> </span><span class="s">&quot;Sensor&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;SimReadyNonvisualAPI&quot;</span><span class="p">]</span>
+<span class="k k-Tokens">over</span><span class="w"> </span><span class="s">"Sensor"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"SimReadyNonvisualAPI"</span><span class="p">]</span>
 <span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="kt">token</span><span class="w"> </span><span class="na">sensorType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lidar&quot;</span>
+<span class="w">    </span><span class="kt">token</span><span class="w"> </span><span class="na">sensorType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"lidar"</span>
 <span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="na">updateRate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10.0</span>
 <span class="p">}</span>
 </pre></div>
@@ -688,7 +688,7 @@ because the schema already makes ownership clear.</p></li>
 <section id="valid">
 <h4>Valid<a class="headerlink" href="#valid" title="Link to this heading">#</a></h4>
 <div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adding a custom property to a standard UsdGeomMesh prim</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;Cable&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"Cable"</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1"># Standard USD property — no prefix needed</span>
 <span class="w">    </span><span class="kt">float3[]</span><span class="w"> </span><span class="na">extent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[(</span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">)]</span>
@@ -701,7 +701,7 @@ because the schema already makes ownership clear.</p></li>
 </section>
 <section id="id1">
 <h4>Invalid<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
-<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;Cable&quot;</span>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"Cable"</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="kt">float3[]</span><span class="w"> </span><span class="na">extent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[(</span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">)]</span>
 
@@ -728,7 +728,7 @@ seems unique today, another team or vendor may introduce the same name
 tomorrow.</p>
 <section id="id3">
 <h4>Valid<a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
-<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;ConveyorBelt&quot;</span>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"ConveyorBelt"</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1"># Well-formed: vendor prefix + semantic grouping</span>
 <span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="na">acmeCable:flex:stiffness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.85</span>
@@ -739,9 +739,9 @@ tomorrow.</p>
 </section>
 <section id="id4">
 <h4>Invalid<a class="headerlink" href="#id4" title="Link to this heading">#</a></h4>
-<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;ConveyorBelt&quot;</span>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"ConveyorBelt"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="c1"># BAD: no prefix — who owns &quot;rig_blob&quot;? what are the four floats?</span>
+<span class="w">    </span><span class="c1"># BAD: no prefix — who owns "rig_blob"? what are the four floats?</span>
 <span class="w">    </span><span class="k k-Token">custom</span><span class="w"> </span><span class="kt">float4[]</span><span class="w"> </span><span class="na">rig_blob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)]</span>
 <span class="p">}</span>
 </pre></div>
@@ -767,14 +767,14 @@ ownership clear.</p>
 <div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># AcmeCableHarness is a hypothetical IsA schema that inherits from</span>
 <span class="c1"># UsdGeomXformable. The vendor prefix on its own properties keeps them</span>
 <span class="c1"># distinguishable from the inherited xformOp:* properties.</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>AcmeCableHarness<span class="w"> </span><span class="s">&quot;MainPower&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>AcmeCableHarness<span class="w"> </span><span class="s">"MainPower"</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1"># Inherited from Xformable — no prefix needed</span>
 <span class="w">    </span><span class="kt">token</span><span class="w"> </span><span class="na">xformOp:translate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
 
 <span class="w">    </span><span class="c1"># Vendor properties — namespaced to avoid confusion</span>
 <span class="w">    </span><span class="kt">asset</span><span class="w"> </span><span class="na">acmeCable:routingPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./harness_path.usda@</span>
-<span class="w">    </span><span class="kt">token</span><span class="w"> </span><span class="na">acmeCable:wireGauge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;AWG-12&quot;</span>
+<span class="w">    </span><span class="kt">token</span><span class="w"> </span><span class="na">acmeCable:wireGauge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"AWG-12"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -785,9 +785,9 @@ ownership clear.</p>
 <span class="c1"># inherits only from UsdTyped, not from a standard typed base like</span>
 <span class="c1"># UsdGeomXformable, so its properties are already scoped by the prim</span>
 <span class="c1"># type name and the prefix may be omitted.</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>AcmePartManifest<span class="w"> </span><span class="s">&quot;EngineParts&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>AcmePartManifest<span class="w"> </span><span class="s">"EngineParts"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="kt">string[]</span><span class="w"> </span><span class="na">partIds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;pn-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;pn-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;pn-003&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="kt">string[]</span><span class="w"> </span><span class="na">partIds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"pn-001"</span><span class="p">,</span><span class="w"> </span><span class="s">"pn-002"</span><span class="p">,</span><span class="w"> </span><span class="s">"pn-003"</span><span class="p">]</span>
 <span class="w">    </span><span class="kt">float[]</span><span class="w"> </span><span class="na">partWeights</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="m">2.3</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
@@ -803,7 +803,7 @@ cable-simulation attribute on a prim. Over time the attribute evolves from
 an unstructured convention to a well-formed one.</p>
 <section id="before-poorly-formed">
 <h3>Before — poorly formed<a class="headerlink" href="#before-poorly-formed" title="Link to this heading">#</a></h3>
-<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;CableAssembly&quot;</span>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"CableAssembly"</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1"># Single opaque attribute — no namespace, no semantic meaning,</span>
 <span class="w">    </span><span class="c1"># no way to tell which vendor or tool created it.</span>
@@ -822,8 +822,8 @@ must guess which float means what.</p></li>
 </section>
 <section id="after-well-formed">
 <h3>After — well formed<a class="headerlink" href="#after-well-formed" title="Link to this heading">#</a></h3>
-<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;CableAssembly&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;AcmeCableFlexAPI&quot;</span><span class="p">]</span>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"CableAssembly"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"AcmeCableFlexAPI"</span><span class="p">]</span>
 <span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1"># Each property is individually named, typed, and vendor-prefixed.</span>
@@ -1363,8 +1363,8 @@ addressed</em> or <em>partial</em> represent future work.</p>
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'capabilities/isaac_sim/robot_core/requirements/robot-type';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -556,29 +556,29 @@ Allowed values are : “End Effector”, “Manipulator”, “Humanoid”, “W
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
 <div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># Valid: Robot type set to a schema-allowed value (e.g. Manipulator)</span>
-<span class="k k-Tokens">over</span><span class="w"> </span><span class="s">&quot;Robot&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;IsaacRobotAPI&quot;</span><span class="p">]</span>
+<span class="k k-Tokens">over</span><span class="w"> </span><span class="s">"Robot"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"IsaacRobotAPI"</span><span class="p">]</span>
 <span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="kt">token</span><span class="w"> </span><span class="na">isaac:robotType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Manipulator&quot;</span>
+<span class="w">    </span><span class="kt">token</span><span class="w"> </span><span class="na">isaac:robotType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Manipulator"</span>
 <span class="w">    </span><span class="kt">rel</span><span class="w"> </span><span class="na">isaac:physics:robotJoints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="nn">&lt;/joints/root&gt;</span><span class="p">,</span><span class="w"> </span><span class="nn">&lt;/joints/joint_1&gt;</span><span class="w"> </span><span class="p">]</span>
 <span class="w">    </span><span class="kt">rel</span><span class="w"> </span><span class="na">isaac:physics:robotLinks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="nn">&lt;/links/base&gt;</span><span class="p">,</span><span class="w"> </span><span class="nn">&lt;/links/link_1&gt;</span><span class="w"> </span><span class="p">]</span>
 <span class="p">}</span>
 
 <span class="c1"># Invalid: Missing isaac:robotType</span>
-<span class="c1"># over &quot;Robot&quot; (</span>
-<span class="c1">#     prepend apiSchemas = [&quot;IsaacRobotAPI&quot;]</span>
+<span class="c1"># over "Robot" (</span>
+<span class="c1">#     prepend apiSchemas = ["IsaacRobotAPI"]</span>
 <span class="c1"># )</span>
 <span class="c1"># {</span>
 <span class="c1">#     rel isaac:physics:robotJoints = [ &lt;/joints/root&gt; ]</span>
 <span class="c1">#     rel isaac:physics:robotLinks = [ &lt;/links/base&gt; ]</span>
 <span class="c1"># }</span>
 
-<span class="c1"># Invalid: Placeholder value &quot;Default&quot; is not allowed</span>
-<span class="c1"># token isaac:robotType = &quot;Default&quot;</span>
+<span class="c1"># Invalid: Placeholder value "Default" is not allowed</span>
+<span class="c1"># token isaac:robotType = "Default"</span>
 
 <span class="c1"># Invalid: Value not in schema allowedTokens</span>
-<span class="c1"># token isaac:robotType = &quot;CustomType&quot;</span>
+<span class="c1"># token isaac:robotType = "CustomType"</span>
 </pre></div>
 </div>
 </section>
@@ -680,8 +680,8 @@ Allowed values are : “End Effector”, “Manipulator”, “Humanoid”, “W
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'guides/SimReady_learning_workflow';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -563,38 +563,38 @@
 <p>To see how the pieces fit together concretely, trace the existing sample through its files.</p>
 <p><strong>Profile</strong> (<code class="docutils literal notranslate"><span class="pre">sample_profiles/profiles.toml</span></code>):</p>
 <div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[Sample-Profile]</span>
-<span class="s2">&quot;1.0.0&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">&quot;Feat_1&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;ProperlyNamed&quot;</span>
+<span class="s2">"1.0.0"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">"Feat_1"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "ProperlyNamed"</span>
 <span class="p">]}</span>
 </pre></div>
 </div>
 <p><strong>Feature</strong> (<code class="docutils literal notranslate"><span class="pre">sample_features/feat_1_properly_named.json</span></code>):</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Feat_1&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;display_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ProperlyNamed&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sample_features/feat_1_properly_named.json&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;requirements&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feat_1"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ProperlyNamed"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sample_features/feat_1_properly_named.json"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"requirements"</span><span class="p">:</span>
 <span class="w">    </span><span class="p">[</span>
-<span class="w">        </span><span class="s2">&quot;SAMP.001&quot;</span>
+<span class="w">        </span><span class="s2">"SAMP.001"</span>
 <span class="w">    </span><span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p><strong>Rule</strong> (<code class="docutils literal notranslate"><span class="pre">sample_requirements/rule_name_checker.py</span></code>):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@register_rule</span><span class="p">(</span><span class="s2">&quot;Sample&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@register_rule</span><span class="p">(</span><span class="s2">"Sample"</span><span class="p">)</span>
 <span class="nd">@register_requirements</span><span class="p">(</span><span class="n">cap</span><span class="o">.</span><span class="n">SampleRequirements</span><span class="o">.</span><span class="n">SAMP_001</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">SampleNameChecker</span><span class="p">(</span><span class="n">BaseRuleChecker</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    The default prim must be named &quot;Foo&quot;.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    The default prim must be named "Foo".</span>
+<span class="sd">    """</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CheckStage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">):</span>
         <span class="n">default_prim</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetDefaultPrim</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">default_prim</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_AddFailedCheck</span><span class="p">(</span><span class="s2">&quot;Stage has no default prim.&quot;</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="n">stage</span><span class="p">,</span> <span class="n">requirement</span><span class="o">=</span><span class="n">cap</span><span class="o">.</span><span class="n">SampleRequirements</span><span class="o">.</span><span class="n">SAMP_001</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_AddFailedCheck</span><span class="p">(</span><span class="s2">"Stage has no default prim."</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="n">stage</span><span class="p">,</span> <span class="n">requirement</span><span class="o">=</span><span class="n">cap</span><span class="o">.</span><span class="n">SampleRequirements</span><span class="o">.</span><span class="n">SAMP_001</span><span class="p">)</span>
             <span class="k">return</span>
-        <span class="k">if</span> <span class="n">default_prim</span><span class="o">.</span><span class="n">GetName</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;Foo&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_AddFailedCheck</span><span class="p">(</span><span class="s2">&quot;Root prim must be named &#39;Foo&#39;.&quot;</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="n">default_prim</span><span class="p">,</span> <span class="n">requirement</span><span class="o">=</span><span class="n">cap</span><span class="o">.</span><span class="n">SampleRequirements</span><span class="o">.</span><span class="n">SAMP_001</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">default_prim</span><span class="o">.</span><span class="n">GetName</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">"Foo"</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_AddFailedCheck</span><span class="p">(</span><span class="s2">"Root prim must be named 'Foo'."</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="n">default_prim</span><span class="p">,</span> <span class="n">requirement</span><span class="o">=</span><span class="n">cap</span><span class="o">.</span><span class="n">SampleRequirements</span><span class="o">.</span><span class="n">SAMP_001</span><span class="p">)</span>
             <span class="k">return</span>
 </pre></div>
 </div>
@@ -602,16 +602,16 @@
 <p><strong>Asset</strong> (<code class="docutils literal notranslate"><span class="pre">sample_assets/sample1.usda</span></code>):</p>
 <div class="highlight-usda notranslate"><div class="highlight"><pre><span></span><span class="c1">#usda 1.0</span>
 <span class="p">(</span>
-<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Foo&quot;</span>
+<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Foo"</span>
 <span class="p">)</span>
 
-<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Foo&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Foo"</span>
 <span class="p">{</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p><strong>Script</strong> (<code class="docutils literal notranslate"><span class="pre">validate_asset.py</span></code>):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">issues</span> <span class="o">=</span> <span class="n">validate_asset_with_profile</span><span class="p">(</span><span class="s2">&quot;sample_assets/sample1.usda&quot;</span><span class="p">,</span> <span class="s2">&quot;Sample-Profile&quot;</span><span class="p">,</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">issues</span> <span class="o">=</span> <span class="n">validate_asset_with_profile</span><span class="p">(</span><span class="s2">"sample_assets/sample1.usda"</span><span class="p">,</span> <span class="s2">"Sample-Profile"</span><span class="p">,</span> <span class="s2">"1.0.0"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>In this sample the profile is passed directly in the script call. The script passes <code class="docutils literal notranslate"><span class="pre">&quot;Sample-Profile&quot;</span></code> and version <code class="docutils literal notranslate"><span class="pre">&quot;1.0.0&quot;</span></code> to <code class="docutils literal notranslate"><span class="pre">validate_asset_with_profile</span></code>, which looks up that profile in the registry, finds its features (Feat_1), resolves their requirements (SAMP.001), and runs the matching rule against the stage. In production, assets carry their profile in USD metadata so the validator can detect it automatically; see <a class="reference internal" href="#appendix-profile-metadata-in-production-assets">Appendix: Profile metadata in production assets</a> for details.</p>
@@ -621,7 +621,7 @@
 <p>The sample ships with a single requirement, <strong>SAMP.001</strong>: the stage must have a default prim named exactly <code class="docutils literal notranslate"><span class="pre">&quot;Foo&quot;</span></code>. Nothing else is checked. The rule that enforces this is <code class="docutils literal notranslate"><span class="pre">SampleNameChecker</span></code> in <code class="docutils literal notranslate"><span class="pre">sample_requirements/rule_name_checker.py</span></code>; the requirement is documented in <code class="docutils literal notranslate"><span class="pre">sample_requirements/requirement-name.md</span></code>.</p>
 <p><strong>Valid USDA</strong> — the asset passes when the stage has a default prim named “Foo”:</p>
 <div class="highlight-usda notranslate"><div class="highlight"><pre><span></span><span class="c1">#usda 1.0</span>
-<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">&quot;Foo&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Foo"</span>
 <span class="p">{</span>
 <span class="p">}</span>
 </pre></div>
@@ -629,9 +629,9 @@
 <p>Or with explicit defaultPrim:</p>
 <div class="highlight-usda notranslate"><div class="highlight"><pre><span></span><span class="c1">#usda 1.0</span>
 <span class="p">(</span>
-<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Foo&quot;</span>
+<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Foo"</span>
 <span class="p">)</span>
-<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">&quot;Foo&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Foo"</span>
 <span class="p">{</span>
 <span class="p">}</span>
 </pre></div>
@@ -641,7 +641,7 @@
 <li><p><strong>No default prim</strong> — the stage has no default prim set:</p></li>
 </ul>
 <div class="highlight-usda notranslate"><div class="highlight"><pre><span></span><span class="c1">#usda 1.0</span>
-<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">&quot;SomePrim&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"SomePrim"</span>
 <span class="p">{</span>
 <span class="p">}</span>
 </pre></div>
@@ -651,9 +651,9 @@
 </ul>
 <div class="highlight-usda notranslate"><div class="highlight"><pre><span></span><span class="c1">#usda 1.0</span>
 <span class="p">(</span>
-<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Bar&quot;</span>
+<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Bar"</span>
 <span class="p">)</span>
-<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">&quot;Bar&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Bar"</span>
 <span class="p">{</span>
 <span class="p">}</span>
 </pre></div>
@@ -685,33 +685,33 @@
 
 <span class="gu">## Summary</span>
 
-The stage must contain at least one prim named &quot;Bar&quot;.
+The stage must contain at least one prim named "Bar".
 
 <span class="gu">## Description</span>
 
-This requirement ensures that the USD stage has at least one prim whose name is exactly &quot;Bar&quot;, anywhere in the hierarchy. It is independent of the default prim (SAMP.001). The prim may be at root or under another prim.
+This requirement ensures that the USD stage has at least one prim whose name is exactly "Bar", anywhere in the hierarchy. It is independent of the default prim (SAMP.001). The prim may be at root or under another prim.
 
 <span class="gu">### Valid USDA</span>
 
-The asset passes SAMP.002 when the stage contains at least one prim named &quot;Bar&quot;. For example:
+The asset passes SAMP.002 when the stage contains at least one prim named "Bar". For example:
 
 <span class="sb">```usda</span>
 <span class="c1">#usda 1.0</span>
-<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">&quot;Foo&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Foo"</span>
 <span class="p">{</span>
 <span class="p">}</span>
-<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">&quot;Bar&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Bar"</span>
 <span class="p">{</span>
 <span class="p">}</span>
 <span class="sb">```</span>
 
-&quot;Bar&quot; may also be nested; the rule traverses the stage:
+"Bar" may also be nested; the rule traverses the stage:
 
 <span class="sb">```usda</span>
 <span class="c1">#usda 1.0</span>
-<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">&quot;Foo&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Foo"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span><span class="s">&quot;Bar&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Bar"</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
@@ -721,19 +721,19 @@ The asset passes SAMP.002 when the stage contains at least one prim named &quot;
 
 The asset fails SAMP.002 if:
 
-<span class="k">-</span><span class="w"> </span><span class="gs">**No prim named &quot;Bar&quot;**</span> — the stage has no prim with that name:
+<span class="k">-</span><span class="w"> </span><span class="gs">**No prim named "Bar"**</span> — the stage has no prim with that name:
 
 <span class="sb">```usda</span>
 <span class="c1">#usda 1.0</span>
-<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">&quot;Foo&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Foo"</span>
 <span class="p">{</span>
 <span class="p">}</span>
-<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">&quot;Baz&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Baz"</span>
 <span class="p">{</span>
 <span class="p">}</span>
 <span class="sb">```</span>
 
-<span class="k">-</span><span class="w"> </span><span class="gs">**Only similar names**</span> — &quot;Bar&quot; must match exactly (e.g. &quot;bar&quot;, &quot;BarChild&quot; do not satisfy the requirement).
+<span class="k">-</span><span class="w"> </span><span class="gs">**Only similar names**</span> — "Bar" must match exactly (e.g. "bar", "BarChild" do not satisfy the requirement).
 </pre></div>
 </div>
 <p>Important:</p>
@@ -784,15 +784,15 @@ requirement-name
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">Usd</span>
 
-<span class="nd">@register_rule</span><span class="p">(</span><span class="s2">&quot;Sample&quot;</span><span class="p">)</span>
+<span class="nd">@register_rule</span><span class="p">(</span><span class="s2">"Sample"</span><span class="p">)</span>
 <span class="nd">@register_requirements</span><span class="p">(</span><span class="n">cap</span><span class="o">.</span><span class="n">SampleRequirements</span><span class="o">.</span><span class="n">SAMP_002</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">SampleHasBarChecker</span><span class="p">(</span><span class="n">BaseRuleChecker</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Stage must contain a prim named &#39;Bar&#39;.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Stage must contain a prim named 'Bar'."""</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">CheckStage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">prim</span> <span class="ow">in</span> <span class="n">stage</span><span class="o">.</span><span class="n">Traverse</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">prim</span><span class="o">.</span><span class="n">GetName</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Bar&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">prim</span><span class="o">.</span><span class="n">GetName</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"Bar"</span><span class="p">:</span>
                 <span class="k">return</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_AddFailedCheck</span><span class="p">(</span><span class="s2">&quot;Stage must contain a prim named &#39;Bar&#39;.&quot;</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="n">stage</span><span class="p">,</span> <span class="n">requirement</span><span class="o">=</span><span class="n">cap</span><span class="o">.</span><span class="n">SampleRequirements</span><span class="o">.</span><span class="n">SAMP_002</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_AddFailedCheck</span><span class="p">(</span><span class="s2">"Stage must contain a prim named 'Bar'."</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="n">stage</span><span class="p">,</span> <span class="n">requirement</span><span class="o">=</span><span class="n">cap</span><span class="o">.</span><span class="n">SampleRequirements</span><span class="o">.</span><span class="n">SAMP_002</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -806,18 +806,18 @@ requirement-name
 <p>The rule is now defined, but it is not part of any feature — so nothing will know about it. Now we add it to Feat_1.</p>
 <p>Keep the new rule on the same feature as SAMP.001. Edit the existing feature file <code class="docutils literal notranslate"><span class="pre">sample_features/feat_1_properly_named.json</span></code> and add your requirement code to the <code class="docutils literal notranslate"><span class="pre">requirements</span></code> array:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Feat_1&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;display_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ProperlyNamed&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sample_features/feat_1_properly_named.json&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;SAMP.001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAMP.002&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feat_1"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ProperlyNamed"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sample_features/feat_1_properly_named.json"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"SAMP.001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SAMP.002"</span><span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>The profile already references Feat_1, so no profile or TOML change is needed. The existing <code class="docutils literal notranslate"><span class="pre">sample_profiles/profiles.toml</span></code>:</p>
 <div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[Sample-Profile]</span>
-<span class="s2">&quot;1.0.0&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">&quot;Feat_1&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1"># &quot;ProperlyNamed&quot;</span>
+<span class="s2">"1.0.0"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">"Feat_1"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "ProperlyNamed"</span>
 <span class="p">]}</span>
 </pre></div>
 </div>
@@ -862,11 +862,11 @@ requirement-name
 <p><strong>1. Add a new feature JSON file</strong></p>
 <p>Create a new file under <code class="docutils literal notranslate"><span class="pre">sample_features/</span></code> with a unique <code class="docutils literal notranslate"><span class="pre">id</span></code>, <code class="docutils literal notranslate"><span class="pre">version</span></code>, and a <code class="docutils literal notranslate"><span class="pre">requirements</span></code> array listing the requirement code(s) that define this feature. The loader picks up every <code class="docutils literal notranslate"><span class="pre">.json</span></code> in the features path. Example for a feature that only checks SAMP.002:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Feat_2&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;display_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HasBar&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sample_features/feat_2_has_bar.json&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;SAMP.002&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feat_2"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HasBar"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sample_features/feat_2_has_bar.json"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"SAMP.002"</span><span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -881,9 +881,9 @@ requirement-name
 <p><strong>2. Add the feature to the profile (TOML)</strong></p>
 <p>Profiles list which features are validated for each profile version. Edit <code class="docutils literal notranslate"><span class="pre">sample_profiles/profiles.toml</span></code> and add the new feature to the <code class="docutils literal notranslate"><span class="pre">features</span></code> array for the relevant profile version. Each entry is <code class="docutils literal notranslate"><span class="pre">{&quot;&lt;FeatureId&gt;&quot;</span> <span class="pre">=</span> <span class="pre">{version</span> <span class="pre">=</span> <span class="pre">&quot;&lt;version&gt;&quot;}}</span></code>. Example with both Feat_1 and Feat_2:</p>
 <div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[Sample-Profile]</span>
-<span class="s2">&quot;1.0.0&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">&quot;Feat_1&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">}},</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">&quot;Feat_2&quot;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">}},</span>
+<span class="s2">"1.0.0"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">"Feat_1"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">}},</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">"Feat_2"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">}},</span>
 <span class="p">]}</span>
 </pre></div>
 </div>
@@ -909,11 +909,11 @@ requirement-name
 <span class="p">(</span>
 <span class="w">    </span>customLayerData<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kt">dictionary</span><span class="w"> </span><span class="na">SimReady_Metadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="kt">string</span><span class="w"> </span><span class="na">profile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Prop-Robotics-Neutral&quot;</span>
-<span class="w">            </span><span class="kt">string</span><span class="w"> </span><span class="na">profile_version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;1.0.0&quot;</span>
+<span class="w">            </span><span class="kt">string</span><span class="w"> </span><span class="na">profile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Prop-Robotics-Neutral"</span>
+<span class="w">            </span><span class="kt">string</span><span class="w"> </span><span class="na">profile_version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"1.0.0"</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;MyAsset&quot;</span>
+<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"MyAsset"</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -1017,8 +1017,8 @@ requirement-name
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

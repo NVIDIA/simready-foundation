@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'capabilities/core/sim_ready/requirements/metadata-whitelist';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -575,18 +575,18 @@
 <div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># Valid: Metadata at top level</span>
 <span class="c1">#usda 1.0</span>
 <span class="p">(</span>
-<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Chair&quot;</span>
+<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Chair"</span>
 <span class="w">    </span>customLayerData<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kt">dictionary</span><span class="w"> </span><span class="na">SimReady_Metadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">asset_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;office_chair_01&quot;</span>
-<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">asset_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;furniture&quot;</span>
-<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">source_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;office_chair_01.blend&quot;</span>
-<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">usd_date_generated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;2025-10-09&quot;</span>
+<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">asset_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"office_chair_01"</span>
+<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">asset_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"furniture"</span>
+<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">source_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"office_chair_01.blend"</span>
+<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">usd_date_generated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"2025-10-09"</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">)</span>
 
-<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Chair&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Chair"</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1"># Asset content...</span>
 <span class="p">}</span>
@@ -594,20 +594,20 @@
 <span class="c1"># Valid: Additional custom metadata fields are allowed</span>
 <span class="c1">#usda 1.0</span>
 <span class="p">(</span>
-<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Chair&quot;</span>
+<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Chair"</span>
 <span class="w">    </span>customLayerData<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kt">dictionary</span><span class="w"> </span><span class="na">SimReady_Metadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">asset_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;office_chair_01&quot;</span>
-<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">asset_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;furniture&quot;</span>
-<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">source_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;office_chair_01.blend&quot;</span>
-<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">usd_date_generated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;2025-10-09&quot;</span>
-<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">custom_field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;custom_value&quot;</span><span class="w">  </span><span class="c1"># Additional fields are allowed</span>
+<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">asset_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"office_chair_01"</span>
+<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">asset_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"furniture"</span>
+<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">source_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"office_chair_01.blend"</span>
+<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">usd_date_generated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"2025-10-09"</span>
+<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">custom_field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"custom_value"</span><span class="w">  </span><span class="c1"># Additional fields are allowed</span>
 <span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="na">another_field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">123</span><span class="w">  </span><span class="c1"># Additional fields are allowed</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">)</span>
 
-<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Chair&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Chair"</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1"># Asset content...</span>
 <span class="p">}</span>
@@ -615,14 +615,14 @@
 <span class="c1"># Invalid: Missing required metadata</span>
 <span class="c1">#usda 1.0</span>
 <span class="p">(</span>
-<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Chair&quot;</span>
+<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Chair"</span>
 <span class="w">    </span>customLayerData<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">asset_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;office_chair_01&quot;</span>
+<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="na">asset_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"office_chair_01"</span>
 <span class="w">        </span><span class="c1"># Missing asset_type, source_file, and usd_date_generated</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">)</span>
 
-<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Chair&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Chair"</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1"># Asset content...</span>
 <span class="p">}</span>
@@ -726,8 +726,8 @@
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

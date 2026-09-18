@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'capabilities/packaging/packaging_core/requirements/metadata-files';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -576,24 +576,24 @@
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="c1">// Valid: metadata file with required format_version and reverse domain name</span>
 <span class="c1">// File: .metadata/com.acme.physics.json</span>
 <span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;format_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Physical properties for simulation&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;mass_kg&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">12.5</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;friction_coefficient&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.6</span>
+<span class="w">  </span><span class="nt">"format_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Physical properties for simulation"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"mass_kg"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.5</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"friction_coefficient"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.6</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invalid: metadata file missing format_version</span>
 <span class="c1">// File: .metadata/com.acme.physics.json</span>
 <span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;mass_kg&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">12.5</span>
+<span class="w">  </span><span class="nt">"mass_kg"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.5</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="c1">// Invalid: metadata file with non-reverse-domain name</span>
 <span class="c1">// File: .metadata/physics.json</span>
 <span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;format_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span>
+<span class="w">  </span><span class="nt">"format_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -696,8 +696,8 @@
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

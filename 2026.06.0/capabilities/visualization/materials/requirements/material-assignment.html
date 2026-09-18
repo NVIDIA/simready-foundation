@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'capabilities/visualization/materials/requirements/material-assignment';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -558,26 +558,26 @@
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
 <section id="valid-example">
 <h3>✅ Valid Example<a class="headerlink" href="#valid-example" title="Link to this heading">#</a></h3>
-<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span><span class="s">&quot;MyAsset&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n n-Builtins">kind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;component&quot;</span>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"MyAsset"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n n-Builtins">kind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"component"</span>
 <span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">&quot;Materials&quot;</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">&quot;DefaultMat&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"Materials"</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">"DefaultMat"</span>
 <span class="w">        </span><span class="p">{</span>
 <span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">outputs:surface</span><span class="p">.</span>connect<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/MyAsset/Materials/DefaultMat/PBRShader.outputs:surface&gt;</span>
 <span class="w">            </span>
-<span class="w">            </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">&quot;PreviewSurface&quot;</span>
+<span class="w">            </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"PreviewSurface"</span>
 <span class="w">            </span><span class="p">{</span>
-<span class="w">                </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;UsdPreviewSurface&quot;</span>
+<span class="w">                </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"UsdPreviewSurface"</span>
 <span class="w">                </span><span class="kt">color3f</span><span class="w"> </span><span class="na">inputs:diffuseColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="m">0.18</span><span class="p">,</span><span class="w"> </span><span class="m">0.18</span><span class="p">,</span><span class="w"> </span><span class="m">0.18</span><span class="p">)</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">&quot;Geometry&quot;</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;Cube&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">            </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;MaterialBindingAPI&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"Geometry"</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"Cube"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">            </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"MaterialBindingAPI"</span><span class="p">]</span>
 <span class="w">        </span><span class="p">)</span>
 <span class="w">        </span><span class="p">{</span>
 <span class="w">            </span><span class="kt">rel</span><span class="w"> </span><span class="na">material:binding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/MyAsset/Materials/DefaultMat&gt;</span>
@@ -589,11 +589,11 @@
 </section>
 <section id="invalid-example">
 <h3>❌ Invalid Example<a class="headerlink" href="#invalid-example" title="Link to this heading">#</a></h3>
-<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span><span class="s">&quot;MyAsset&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n n-Builtins">kind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;component&quot;</span>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"MyAsset"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n n-Builtins">kind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"component"</span>
 <span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;Cube&quot;</span><span class="w">  </span><span class="c1"># No material binding</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"Cube"</span><span class="w">  </span><span class="c1"># No material binding</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="c1"># Missing material assignment</span>
 <span class="w">    </span><span class="p">}</span>
@@ -697,8 +697,8 @@
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

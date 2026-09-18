@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'guides/validate_workflow';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -623,8 +623,8 @@ Linux</label><div class="sd-tab-content docutils">
 <p>You should see output like:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Asset: sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
   [FAILED] Prop-Robotics-Neutral v1.0.0
-           FET006_BASE_MDL: failing requirements: [&#39;VM.TEX.002&#39;]
-           FET004_BASE_NEUTRAL: failing requirements: [&#39;RB.MB.001&#39;]
+           FET006_BASE_MDL: failing requirements: ['VM.TEX.002']
+           FET004_BASE_NEUTRAL: failing requirements: ['RB.MB.001']
 </pre></div>
 </div>
 <p>The core features — hierarchy, units, rigid-body physics, and grasp physics —
@@ -656,15 +656,15 @@ the USD file’s <code class="docutils literal notranslate"><span class="pre">cu
 </div>
 <p>After stamping, the USD file contains metadata like:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">customLayerData</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;SimReady_Metadata&quot;</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;validation&quot;</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;profile&quot;</span> <span class="o">=</span> <span class="s2">&quot;Prop-Robotics-Neutral&quot;</span>
-            <span class="s2">&quot;validated_features&quot;</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s2">&quot;&lt;YYYY-MM-DD&gt;&quot;</span> <span class="o">=</span> <span class="p">{</span>
-                    <span class="s2">&quot;FET001_BASE_NEUTRAL&quot;</span> <span class="o">=</span> <span class="p">{</span>
-                        <span class="s2">&quot;version&quot;</span> <span class="o">=</span> <span class="s2">&quot;0.1.0&quot;</span>
-                        <span class="s2">&quot;dependencies&quot;</span> <span class="o">=</span> <span class="s2">&quot;[]&quot;</span>
-                        <span class="s2">&quot;passed&quot;</span> <span class="o">=</span> <span class="n">true</span>
+    <span class="s2">"SimReady_Metadata"</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"validation"</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"profile"</span> <span class="o">=</span> <span class="s2">"Prop-Robotics-Neutral"</span>
+            <span class="s2">"validated_features"</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">"&lt;YYYY-MM-DD&gt;"</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">"FET001_BASE_NEUTRAL"</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s2">"version"</span> <span class="o">=</span> <span class="s2">"0.1.0"</span>
+                        <span class="s2">"dependencies"</span> <span class="o">=</span> <span class="s2">"[]"</span>
+                        <span class="s2">"passed"</span> <span class="o">=</span> <span class="n">true</span>
                     <span class="p">}</span>
                 <span class="p">}</span>
             <span class="p">}</span>
@@ -686,8 +686,8 @@ requirement, feature, and profile you can read end-to-end:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>validator_sample/
 ├── requirements.txt
 ├── sample_assets/
-│   ├── sample1.usda          # passes SAMP.001 (defaultPrim = &quot;Foo&quot;)
-│   └── sample_fail.usda      # fails  SAMP.001 (defaultPrim = &quot;NotFoo&quot;)
+│   ├── sample1.usda          # passes SAMP.001 (defaultPrim = "Foo")
+│   └── sample_fail.usda      # fails  SAMP.001 (defaultPrim = "NotFoo")
 ├── sample_features/
 │   └── feat_1_properly_named.json
 ├── sample_profiles/
@@ -728,10 +728,10 @@ requirement, feature, and profile you can read end-to-end:</p>
 controlled pass/fail cycle:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>nv_core/validator_sample
 
-<span class="c1"># Passing — sample1.usda has defaultPrim = &quot;Foo&quot;</span>
+<span class="c1"># Passing — sample1.usda has defaultPrim = "Foo"</span>
 simready-validate<span class="w"> </span>--rules-path<span class="w"> </span>sample_requirements<span class="w"> </span>--features-path<span class="w"> </span>sample_features<span class="w"> </span>--profiles-path<span class="w"> </span>sample_profiles/profiles.toml<span class="w"> </span>--profile<span class="w"> </span>Sample-Profile<span class="w"> </span>--version<span class="w"> </span><span class="m">1</span>.0.0<span class="w"> </span>sample_assets/sample1.usda
 
-<span class="c1"># Failing — sample_fail.usda has defaultPrim = &quot;NotFoo&quot;</span>
+<span class="c1"># Failing — sample_fail.usda has defaultPrim = "NotFoo"</span>
 simready-validate<span class="w"> </span>--rules-path<span class="w"> </span>sample_requirements<span class="w"> </span>--features-path<span class="w"> </span>sample_features<span class="w"> </span>--profiles-path<span class="w"> </span>sample_profiles/profiles.toml<span class="w"> </span>--profile<span class="w"> </span>Sample-Profile<span class="w"> </span>--version<span class="w"> </span><span class="m">1</span>.0.0<span class="w"> </span>sample_assets/sample_fail.usda
 </pre></div>
 </div>
@@ -843,8 +843,8 @@ git<span class="w"> </span>lfs<span class="w"> </span>pull
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

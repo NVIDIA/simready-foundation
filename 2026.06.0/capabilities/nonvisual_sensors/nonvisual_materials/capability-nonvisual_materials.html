@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'capabilities/nonvisual_sensors/nonvisual_materials/capability-nonvisual_materials';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -538,17 +538,17 @@
 <section id="usda-sample">
 <h2>USDA Sample<a class="headerlink" href="#usda-sample" title="Link to this heading">#</a></h2>
 <p>Below is an example of how non-visual sensor attributes are authored on a material prim:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">Material</span> <span class="s2">&quot;Aluminum&quot;</span> <span class="p">(</span>
-    <span class="n">prepend</span> <span class="n">apiSchemas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;MaterialBindingAPI&quot;</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">Material</span> <span class="s2">"Aluminum"</span> <span class="p">(</span>
+    <span class="n">prepend</span> <span class="n">apiSchemas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"MaterialBindingAPI"</span><span class="p">]</span>
 <span class="p">)</span>
 <span class="p">{</span>
-    <span class="n">token</span> <span class="n">omni</span><span class="p">:</span><span class="n">simready</span><span class="p">:</span><span class="n">nonvisual</span><span class="p">:</span><span class="n">base</span> <span class="o">=</span> <span class="s2">&quot;aluminum&quot;</span>
-    <span class="n">token</span> <span class="n">omni</span><span class="p">:</span><span class="n">simready</span><span class="p">:</span><span class="n">nonvisual</span><span class="p">:</span><span class="n">coating</span> <span class="o">=</span> <span class="s2">&quot;paint&quot;</span>
-    <span class="n">token</span><span class="p">[]</span> <span class="n">omni</span><span class="p">:</span><span class="n">simready</span><span class="p">:</span><span class="n">nonvisual</span><span class="p">:</span><span class="n">attributes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;none&quot;</span><span class="p">]</span>
+    <span class="n">token</span> <span class="n">omni</span><span class="p">:</span><span class="n">simready</span><span class="p">:</span><span class="n">nonvisual</span><span class="p">:</span><span class="n">base</span> <span class="o">=</span> <span class="s2">"aluminum"</span>
+    <span class="n">token</span> <span class="n">omni</span><span class="p">:</span><span class="n">simready</span><span class="p">:</span><span class="n">nonvisual</span><span class="p">:</span><span class="n">coating</span> <span class="o">=</span> <span class="s2">"paint"</span>
+    <span class="n">token</span><span class="p">[]</span> <span class="n">omni</span><span class="p">:</span><span class="n">simready</span><span class="p">:</span><span class="n">nonvisual</span><span class="p">:</span><span class="n">attributes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"none"</span><span class="p">]</span>
 <span class="p">}</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">Mesh</span> <span class="s2">&quot;AluminumSurface&quot;</span> <span class="p">(</span>
-    <span class="n">apiSchemas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;MaterialBindingAPI&quot;</span><span class="p">]</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">Mesh</span> <span class="s2">"AluminumSurface"</span> <span class="p">(</span>
+    <span class="n">apiSchemas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"MaterialBindingAPI"</span><span class="p">]</span>
 <span class="p">)</span>
 <span class="p">{</span>
     <span class="n">rel</span> <span class="n">material</span><span class="p">:</span><span class="n">binding</span><span class="p">:</span><span class="n">full</span> <span class="o">=</span> <span class="o">&lt;/</span><span class="n">World</span><span class="o">/</span><span class="n">Looks</span><span class="o">/</span><span class="n">Aluminum</span><span class="o">&gt;</span>
@@ -637,8 +637,8 @@
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

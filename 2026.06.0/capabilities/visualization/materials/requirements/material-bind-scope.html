@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'capabilities/visualization/materials/requirements/material-bind-scope';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -558,25 +558,25 @@
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
 <div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># Invalid setup:</span>
 <span class="c1"># Main file (asset.usda):</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;World&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"World"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Scene&quot;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Scene"</span><span class="w"> </span><span class="p">(</span>
 <span class="w">        </span><span class="k k-Tokens">payload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="si">@./payload.usda@</span><span class="w">  </span><span class="c1"># Loads payload with mesh</span>
 <span class="w">    </span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">&quot;Material&quot;</span><span class="w">  </span><span class="c1"># Material defined outside payload</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">"Material"</span><span class="w">  </span><span class="c1"># Material defined outside payload</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="c1"># ... material definition ...</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1"># Payload file (payload.usda):</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Root&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Root"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;Mesh&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">        </span><span class="n n-Builtins">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;MaterialBindingAPI&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"Mesh"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="n n-Builtins">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"MaterialBindingAPI"</span><span class="p">]</span>
 <span class="w">    </span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="kt">rel</span><span class="w"> </span><span class="na">material:binding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/Material&gt;</span><span class="w">  </span><span class="c1"># Invalid: References material outside payload scope</span>
@@ -585,15 +585,15 @@
 
 <span class="c1"># Valid setup:</span>
 <span class="c1"># Payload file (payload.usda) should include its own materials or reference materials within its scope:</span>
-<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">&quot;Root&quot;</span>
+<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Root"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">&quot;Material&quot;</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">"Material"</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="c1"># ... material definition ...</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">&quot;Mesh&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">        </span><span class="n n-Builtins">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;MaterialBindingAPI&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Mesh<span class="w"> </span><span class="s">"Mesh"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="n n-Builtins">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"MaterialBindingAPI"</span><span class="p">]</span>
 <span class="w">    </span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="kt">rel</span><span class="w"> </span><span class="na">material:binding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/Root/Material&gt;</span><span class="w">  </span><span class="c1"># Valid: References material within payload scope</span>
@@ -692,8 +692,8 @@
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

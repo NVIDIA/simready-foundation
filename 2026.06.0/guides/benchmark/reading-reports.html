@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'guides/benchmark/reading-reports';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -640,17 +640,17 @@ pass/fail fields.</p>
 <p><strong>Plan</strong> (<code class="docutils literal notranslate"><span class="pre">batch_jobs/local_test_&lt;platform&gt;.json</span></code>): each job lists its assets and
 output folder names. A multi-asset run uses sibling folders such as <code class="docutils literal notranslate"><span class="pre">asset_0000</span></code> and
 <code class="docutils literal notranslate"><span class="pre">asset_0001</span></code>:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;job_output_dir&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;runner_name&gt;/job_00001&quot;</span><span class="p">,</span>
-<span class="nt">&quot;assets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">"job_output_dir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;runner_name&gt;/job_00001"</span><span class="p">,</span>
+<span class="nt">"assets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;asset&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;assets/apple.usd&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;asset_output_dir&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;asset_0000&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;matched_features&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FET001&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="w"> </span><span class="p">}]</span>
+<span class="w">    </span><span class="nt">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assets/apple.usd"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"asset_output_dir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asset_0000"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"matched_features"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FET001"</span><span class="p">,</span><span class="w"> </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="w"> </span><span class="p">}]</span>
 <span class="w">  </span><span class="p">},</span>
 <span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;asset&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;assets/orange.usd&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;asset_output_dir&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;asset_0001&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;matched_features&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FET001&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="w"> </span><span class="p">}]</span>
+<span class="w">    </span><span class="nt">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assets/orange.usd"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"asset_output_dir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asset_0001"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"matched_features"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FET001"</span><span class="p">,</span><span class="w"> </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="w"> </span><span class="p">}]</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">]</span>
 </pre></div>
@@ -667,13 +667,13 @@ writes results here. The report generator looks for <code class="docutils litera
 built from the XML in each artifact folder. The <code class="docutils literal notranslate"><span class="pre">output_folder</span></code> field points back
 to that folder:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;asset_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;assets/apple.usd&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;tests&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="nt">"asset_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assets/apple.usd"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"tests"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;test_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FET001 Visual Pivot&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;test_passed&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;output_folder&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;job_outputs/&lt;runner_name&gt;/job_00001/asset_0000&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;features&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FET001&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="w"> </span><span class="p">}]</span>
+<span class="w">      </span><span class="nt">"test_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FET001 Visual Pivot"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"test_passed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"output_folder"</span><span class="p">:</span><span class="w"> </span><span class="s2">"job_outputs/&lt;runner_name&gt;/job_00001/asset_0000"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FET001"</span><span class="p">,</span><span class="w"> </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="w"> </span><span class="p">}]</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
@@ -810,14 +810,14 @@ that key, each feature entry includes:</p>
 </table>
 </div>
 <p>Example (one feature, one run):</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&quot;runtime_testing&quot; = {
-    &quot;tested_features&quot; = {
-        &quot;2026-06-10T14:30:00.123456&quot; = {
-            &quot;FET001&quot; = {
-                &quot;passed&quot; = true
-                &quot;version&quot; = &quot;1.0&quot;
-                &quot;tests&quot; = {
-                    &quot;fet001_visual.toml&quot; = { &quot;passed&quot; = true }
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>"runtime_testing" = {
+    "tested_features" = {
+        "2026-06-10T14:30:00.123456" = {
+            "FET001" = {
+                "passed" = true
+                "version" = "1.0"
+                "tests" = {
+                    "fet001_visual.toml" = { "passed" = true }
                 }
             }
         }
@@ -857,12 +857,12 @@ exercised in that run. If the newest stamp run tested a different feature set,
 a feature omitted from that run keeps the status recorded under its own most
 recent timestamp until it is tested again.</p>
 <p>Example with two runs on the same feature:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&quot;tested_features&quot; = {
-    &quot;2026-06-01T10:00:00&quot; = {
-        &quot;FET001&quot; = { &quot;passed&quot; = true  ... }
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>"tested_features" = {
+    "2026-06-01T10:00:00" = {
+        "FET001" = { "passed" = true  ... }
     }
-    &quot;2026-06-10T14:30:00&quot; = {
-        &quot;FET001&quot; = { &quot;passed&quot; = false ... }
+    "2026-06-10T14:30:00" = {
+        "FET001" = { "passed" = false ... }
     }
 }
 </pre></div>
@@ -870,12 +870,12 @@ recent timestamp until it is tested again.</p>
 <p>Current status for <code class="docutils literal notranslate"><span class="pre">FET001</span></code>: <strong>failed</strong> (use <code class="docutils literal notranslate"><span class="pre">2026-06-10T14:30:00</span></code>, not the
 June 1 entry).</p>
 <p>Example with two runs on different features:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&quot;tested_features&quot; = {
-    &quot;2026-06-01T10:00:00&quot; = {
-        &quot;FET001&quot; = { &quot;passed&quot; = true  ... }
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>"tested_features" = {
+    "2026-06-01T10:00:00" = {
+        "FET001" = { "passed" = true  ... }
     }
-    &quot;2026-06-10T14:30:00&quot; = {
-        &quot;FET002&quot; = { &quot;passed&quot; = false ... }
+    "2026-06-10T14:30:00" = {
+        "FET002" = { "passed" = false ... }
     }
 }
 </pre></div>
@@ -999,8 +999,8 @@ downstream.</p>
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">

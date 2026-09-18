@@ -28,8 +28,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/tags.css?v=f64b827a" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
 
 
@@ -53,7 +53,7 @@
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'guides/feature_adapters/feature_adapters';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.20.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.06.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -555,14 +555,14 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">omni.cip.configurable.feature_adapter</span><span class="w"> </span><span class="kn">import</span> <span class="n">feature_adapter</span>
 
 <span class="c1"># Add the root directory to the Python path</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">'..'</span><span class="p">,</span> <span class="s1">'..'</span><span class="p">))</span>
 
 <span class="nd">@feature_adapter</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;_rigid_body_neutral_to_physx_sample&quot;</span><span class="p">,</span>
-    <span class="n">input_feature_id</span><span class="o">=</span><span class="s2">&quot;FET003_BASE_NEUTRAL&quot;</span><span class="p">,</span>
-    <span class="n">input_feature_version</span><span class="o">=</span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
-    <span class="n">output_feature_id</span><span class="o">=</span><span class="s2">&quot;FET003_BASE_PHYSX&quot;</span><span class="p">,</span>
-    <span class="n">output_feature_version</span><span class="o">=</span><span class="s2">&quot;0.1.0&quot;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"_rigid_body_neutral_to_physx_sample"</span><span class="p">,</span>
+    <span class="n">input_feature_id</span><span class="o">=</span><span class="s2">"FET003_BASE_NEUTRAL"</span><span class="p">,</span>
+    <span class="n">input_feature_version</span><span class="o">=</span><span class="s2">"0.1.0"</span><span class="p">,</span>
+    <span class="n">output_feature_id</span><span class="o">=</span><span class="s2">"FET003_BASE_PHYSX"</span><span class="p">,</span>
+    <span class="n">output_feature_version</span><span class="o">=</span><span class="s2">"0.1.0"</span>
 <span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">modify_stage</span><span class="p">(</span><span class="n">input_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">,</span> <span class="n">output_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">):</span>
     <span class="c1"># compute extent for all meshes</span>
@@ -588,14 +588,14 @@
             <span class="n">collider</span> <span class="o">=</span> <span class="n">UsdPhysics</span><span class="o">.</span><span class="n">MeshCollisionAPI</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
             <span class="n">approx_attr</span> <span class="o">=</span> <span class="n">collider</span><span class="o">.</span><span class="n">GetApproximationAttr</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">approx_attr</span><span class="p">:</span>
-                <span class="n">approx_attr</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="s2">&quot;sdf&quot;</span><span class="p">)</span>
+                <span class="n">approx_attr</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="s2">"sdf"</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">child</span><span class="o">.</span><span class="n">HasAPI</span><span class="p">(</span><span class="n">UsdPhysics</span><span class="o">.</span><span class="n">CollisionAPI</span><span class="p">):</span>
             <span class="n">collider</span> <span class="o">=</span> <span class="n">UsdPhysics</span><span class="o">.</span><span class="n">MeshCollisionAPI</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
-            <span class="n">approx_attr</span> <span class="o">=</span> <span class="n">child</span><span class="o">.</span><span class="n">GetAttribute</span><span class="p">(</span><span class="s2">&quot;physics:approximation&quot;</span><span class="p">)</span>
+            <span class="n">approx_attr</span> <span class="o">=</span> <span class="n">child</span><span class="o">.</span><span class="n">GetAttribute</span><span class="p">(</span><span class="s2">"physics:approximation"</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">approx_attr</span><span class="p">:</span>
-                <span class="n">child</span><span class="o">.</span><span class="n">CreateAttribute</span><span class="p">(</span><span class="s2">&quot;physics:approximation&quot;</span><span class="p">,</span> <span class="n">Sdf</span><span class="o">.</span><span class="n">ValueTypeNames</span><span class="o">.</span><span class="n">Token</span><span class="p">,</span> <span class="s2">&quot;sdf&quot;</span><span class="p">)</span>
-                <span class="n">approx_attr</span> <span class="o">=</span> <span class="n">child</span><span class="o">.</span><span class="n">GetAttribute</span><span class="p">(</span><span class="s2">&quot;physics:approximation&quot;</span><span class="p">)</span>
-            <span class="n">approx_attr</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="s2">&quot;sdf&quot;</span><span class="p">)</span>
+                <span class="n">child</span><span class="o">.</span><span class="n">CreateAttribute</span><span class="p">(</span><span class="s2">"physics:approximation"</span><span class="p">,</span> <span class="n">Sdf</span><span class="o">.</span><span class="n">ValueTypeNames</span><span class="o">.</span><span class="n">Token</span><span class="p">,</span> <span class="s2">"sdf"</span><span class="p">)</span>
+                <span class="n">approx_attr</span> <span class="o">=</span> <span class="n">child</span><span class="o">.</span><span class="n">GetAttribute</span><span class="p">(</span><span class="s2">"physics:approximation"</span><span class="p">)</span>
+            <span class="n">approx_attr</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="s2">"sdf"</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -634,34 +634,34 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">omni.cip.configurable.feature_adapter</span><span class="w"> </span><span class="kn">import</span> <span class="n">feature_adapter</span>
 
 <span class="c1"># Add the root directory to the Python path</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">'..'</span><span class="p">,</span> <span class="s1">'..'</span><span class="p">))</span>
 
 <span class="nd">@feature_adapter</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;[adapter_name]&quot;</span><span class="p">,</span>
-    <span class="n">input_feature_id</span><span class="o">=</span><span class="s2">&quot;[INPUT_FEATURE_ID]&quot;</span><span class="p">,</span>
-    <span class="n">input_feature_version</span><span class="o">=</span><span class="s2">&quot;[input_version]&quot;</span><span class="p">,</span>
-    <span class="n">output_feature_id</span><span class="o">=</span><span class="s2">&quot;[OUTPUT_FEATURE_ID]&quot;</span><span class="p">,</span>
-    <span class="n">output_feature_version</span><span class="o">=</span><span class="s2">&quot;[output_version]&quot;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"[adapter_name]"</span><span class="p">,</span>
+    <span class="n">input_feature_id</span><span class="o">=</span><span class="s2">"[INPUT_FEATURE_ID]"</span><span class="p">,</span>
+    <span class="n">input_feature_version</span><span class="o">=</span><span class="s2">"[input_version]"</span><span class="p">,</span>
+    <span class="n">output_feature_id</span><span class="o">=</span><span class="s2">"[OUTPUT_FEATURE_ID]"</span><span class="p">,</span>
+    <span class="n">output_feature_version</span><span class="o">=</span><span class="s2">"[output_version]"</span>
 <span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">modify_stage</span><span class="p">(</span><span class="n">input_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">,</span> <span class="n">output_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Transform asset from input_feature_id to output_feature_id.</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
 <span class="sd">        input_stage: Source USD stage with input features</span>
 <span class="sd">        output_stage: Target USD stage to be modified</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># TODO: Implement transformation logic</span>
     <span class="k">pass</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_helper_function</span><span class="p">(</span><span class="n">prim</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Prim</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Helper function for specific transformation tasks.</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
 <span class="sd">        prim: USD prim to modify</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># TODO: Implement helper logic</span>
     <span class="k">pass</span>
 </pre></div>
@@ -675,20 +675,20 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">omni.cip.configurable.feature_adapter</span><span class="w"> </span><span class="kn">import</span> <span class="n">feature_adapter</span>
 
 <span class="c1"># Add the root directory to the Python path</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">'..'</span><span class="p">,</span> <span class="s1">'..'</span><span class="p">))</span>
 
 <span class="nd">@feature_adapter</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;minimal_to_material_basic&quot;</span><span class="p">,</span>
-    <span class="n">input_feature_id</span><span class="o">=</span><span class="s2">&quot;FET001_BASE_NEUTRAL&quot;</span><span class="p">,</span>
-    <span class="n">input_feature_version</span><span class="o">=</span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
-    <span class="n">output_feature_id</span><span class="o">=</span><span class="s2">&quot;FET002_MATERIAL_BASIC&quot;</span><span class="p">,</span>
-    <span class="n">output_feature_version</span><span class="o">=</span><span class="s2">&quot;0.1.0&quot;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"minimal_to_material_basic"</span><span class="p">,</span>
+    <span class="n">input_feature_id</span><span class="o">=</span><span class="s2">"FET001_BASE_NEUTRAL"</span><span class="p">,</span>
+    <span class="n">input_feature_version</span><span class="o">=</span><span class="s2">"0.1.0"</span><span class="p">,</span>
+    <span class="n">output_feature_id</span><span class="o">=</span><span class="s2">"FET002_MATERIAL_BASIC"</span><span class="p">,</span>
+    <span class="n">output_feature_version</span><span class="o">=</span><span class="s2">"0.1.0"</span>
 <span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">modify_stage</span><span class="p">(</span><span class="n">input_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">,</span> <span class="n">output_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Transform asset from minimal features to basic material features.</span>
 <span class="sd">    Adds basic material properties to all mesh prims.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Get the default prim</span>
     <span class="n">default_prim</span> <span class="o">=</span> <span class="n">output_stage</span><span class="o">.</span><span class="n">GetDefaultPrim</span><span class="p">()</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">default_prim</span><span class="p">:</span>
@@ -702,28 +702,28 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_add_basic_materials_to_meshes</span><span class="p">(</span><span class="n">prim</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Prim</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Add basic material properties to mesh prims.</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
 <span class="sd">        prim: Root prim to traverse</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">Usd</span><span class="o">.</span><span class="n">PrimRange</span><span class="p">(</span><span class="n">prim</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">IsA</span><span class="p">(</span><span class="n">UsdGeom</span><span class="o">.</span><span class="n">Mesh</span><span class="p">):</span>
             <span class="c1"># Create a basic material binding</span>
             <span class="n">material_binding</span> <span class="o">=</span> <span class="n">UsdShade</span><span class="o">.</span><span class="n">MaterialBindingAPI</span><span class="o">.</span><span class="n">Apply</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
             
             <span class="c1"># Create a simple material</span>
-            <span class="n">material_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">child</span><span class="o">.</span><span class="n">GetPath</span><span class="p">()</span><span class="si">}</span><span class="s2">/Material&quot;</span>
+            <span class="n">material_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">child</span><span class="o">.</span><span class="n">GetPath</span><span class="p">()</span><span class="si">}</span><span class="s2">/Material"</span>
             <span class="n">material</span> <span class="o">=</span> <span class="n">UsdShade</span><span class="o">.</span><span class="n">Material</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">GetStage</span><span class="p">(),</span> <span class="n">material_path</span><span class="p">)</span>
             
             <span class="c1"># Create a basic shader</span>
-            <span class="n">shader_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">material_path</span><span class="si">}</span><span class="s2">/Shader&quot;</span>
+            <span class="n">shader_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">material_path</span><span class="si">}</span><span class="s2">/Shader"</span>
             <span class="n">shader</span> <span class="o">=</span> <span class="n">UsdShade</span><span class="o">.</span><span class="n">Shader</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">GetStage</span><span class="p">(),</span> <span class="n">shader_path</span><span class="p">)</span>
-            <span class="n">shader</span><span class="o">.</span><span class="n">CreateIdAttr</span><span class="p">(</span><span class="s2">&quot;UsdPreviewSurface&quot;</span><span class="p">)</span>
+            <span class="n">shader</span><span class="o">.</span><span class="n">CreateIdAttr</span><span class="p">(</span><span class="s2">"UsdPreviewSurface"</span><span class="p">)</span>
             
             <span class="c1"># Connect shader to material</span>
-            <span class="n">material</span><span class="o">.</span><span class="n">CreateSurfaceOutput</span><span class="p">()</span><span class="o">.</span><span class="n">ConnectToSource</span><span class="p">(</span><span class="n">shader</span><span class="o">.</span><span class="n">ConnectableAPI</span><span class="p">(),</span> <span class="s2">&quot;surface&quot;</span><span class="p">)</span>
+            <span class="n">material</span><span class="o">.</span><span class="n">CreateSurfaceOutput</span><span class="p">()</span><span class="o">.</span><span class="n">ConnectToSource</span><span class="p">(</span><span class="n">shader</span><span class="o">.</span><span class="n">ConnectableAPI</span><span class="p">(),</span> <span class="s2">"surface"</span><span class="p">)</span>
             
             <span class="c1"># Bind material to mesh</span>
             <span class="n">material_binding</span><span class="o">.</span><span class="n">Bind</span><span class="p">(</span><span class="n">material</span><span class="p">)</span>
@@ -759,12 +759,12 @@
 <h4>Core Transformation Function<a class="headerlink" href="#core-transformation-function" title="Link to this heading">#</a></h4>
 <p>The main function <code class="docutils literal notranslate"><span class="pre">modify_stage()</span></code> receives two USD stages:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">modify_stage</span><span class="p">(</span><span class="n">input_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">,</span> <span class="n">output_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    This function should:</span>
 <span class="sd">    1. Read from input_stage (if needed)</span>
 <span class="sd">    2. Modify output_stage to meet new feature requirements</span>
 <span class="sd">    3. Save output_stage when complete</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Read input stage properties</span>
     <span class="n">input_props</span> <span class="o">=</span> <span class="n">_read_input_properties</span><span class="p">(</span><span class="n">input_stage</span><span class="p">)</span>
     
@@ -781,9 +781,9 @@
 <section id="adding-properties">
 <h5>1. <strong>Adding Properties</strong><a class="headerlink" href="#adding-properties" title="Link to this heading">#</a></h5>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_add_property_to_prim</span><span class="p">(</span><span class="n">prim</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span> <span class="n">property_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add a new property to a prim.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Add a new property to a prim."""</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">prim</span><span class="o">.</span><span class="n">HasAttribute</span><span class="p">(</span><span class="n">property_name</span><span class="p">):</span>
-        <span class="n">prim</span><span class="o">.</span><span class="n">CreateAttribute</span><span class="p">(</span><span class="n">property_name</span><span class="p">,</span> <span class="n">Sdf</span><span class="o">.</span><span class="n">ValueTypeNames</span><span class="o">.</span><span class="n">String</span><span class="p">,</span> <span class="s2">&quot;default_value&quot;</span><span class="p">)</span>
+        <span class="n">prim</span><span class="o">.</span><span class="n">CreateAttribute</span><span class="p">(</span><span class="n">property_name</span><span class="p">,</span> <span class="n">Sdf</span><span class="o">.</span><span class="n">ValueTypeNames</span><span class="o">.</span><span class="n">String</span><span class="p">,</span> <span class="s2">"default_value"</span><span class="p">)</span>
     
     <span class="n">attr</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">GetAttribute</span><span class="p">(</span><span class="n">property_name</span><span class="p">)</span>
     <span class="n">attr</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
@@ -793,7 +793,7 @@
 <section id="modifying-existing-properties">
 <h5>2. <strong>Modifying Existing Properties</strong><a class="headerlink" href="#modifying-existing-properties" title="Link to this heading">#</a></h5>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_modify_existing_property</span><span class="p">(</span><span class="n">prim</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span> <span class="n">property_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">new_value</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Modify an existing property on a prim.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Modify an existing property on a prim."""</span>
     <span class="k">if</span> <span class="n">prim</span><span class="o">.</span><span class="n">HasAttribute</span><span class="p">(</span><span class="n">property_name</span><span class="p">):</span>
         <span class="n">attr</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">GetAttribute</span><span class="p">(</span><span class="n">property_name</span><span class="p">)</span>
         <span class="n">attr</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">new_value</span><span class="p">)</span>
@@ -803,7 +803,7 @@
 <section id="adding-apis">
 <h5>3. <strong>Adding APIs</strong><a class="headerlink" href="#adding-apis" title="Link to this heading">#</a></h5>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_add_api_to_prim</span><span class="p">(</span><span class="n">prim</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Prim</span><span class="p">,</span> <span class="n">api_class</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add an API to a prim.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Add an API to a prim."""</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">prim</span><span class="o">.</span><span class="n">HasAPI</span><span class="p">(</span><span class="n">api_class</span><span class="p">):</span>
         <span class="n">api_class</span><span class="o">.</span><span class="n">Apply</span><span class="p">(</span><span class="n">prim</span><span class="p">)</span>
 </pre></div>
@@ -812,7 +812,7 @@
 <section id="traversing-prims">
 <h5>4. <strong>Traversing Prims</strong><a class="headerlink" href="#traversing-prims" title="Link to this heading">#</a></h5>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_process_all_meshes</span><span class="p">(</span><span class="n">prim</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Prim</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Process all mesh prims in the hierarchy.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Process all mesh prims in the hierarchy."""</span>
     <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">Usd</span><span class="o">.</span><span class="n">PrimRange</span><span class="p">(</span><span class="n">prim</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">IsA</span><span class="p">(</span><span class="n">UsdGeom</span><span class="o">.</span><span class="n">Mesh</span><span class="p">):</span>
             <span class="n">_process_single_mesh</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
@@ -835,7 +835,7 @@
 <section id="automated-testing">
 <h4>Automated Testing<a class="headerlink" href="#automated-testing" title="Link to this heading">#</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_adapter_transformation</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test the adapter transformation logic.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Test the adapter transformation logic."""</span>
     <span class="c1"># Create test input stage</span>
     <span class="n">input_stage</span> <span class="o">=</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="o">.</span><span class="n">CreateInMemory</span><span class="p">()</span>
     
@@ -895,10 +895,10 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="c1"># Perform transformation</span>
         <span class="n">_apply_transformations</span><span class="p">(</span><span class="n">output_stage</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Successfully transformed asset&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Successfully transformed asset"</span><span class="p">)</span>
         
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to transform asset: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Failed to transform asset: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
         <span class="c1"># Optionally, revert changes or provide fallback</span>
         <span class="k">raise</span>
 </pre></div>
@@ -910,7 +910,7 @@
 <section id="adding-physics-properties">
 <h3>1. <strong>Adding Physics Properties</strong><a class="headerlink" href="#adding-physics-properties" title="Link to this heading">#</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_add_physics_properties</span><span class="p">(</span><span class="n">prim</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Prim</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add basic physics properties to a prim.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Add basic physics properties to a prim."""</span>
     <span class="c1"># Add collision API</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">prim</span><span class="o">.</span><span class="n">HasAPI</span><span class="p">(</span><span class="n">UsdPhysics</span><span class="o">.</span><span class="n">CollisionAPI</span><span class="p">):</span>
         <span class="n">UsdPhysics</span><span class="o">.</span><span class="n">CollisionAPI</span><span class="o">.</span><span class="n">Apply</span><span class="p">(</span><span class="n">prim</span><span class="p">)</span>
@@ -928,7 +928,7 @@
 <section id="adding-material-properties">
 <h3>2. <strong>Adding Material Properties</strong><a class="headerlink" href="#adding-material-properties" title="Link to this heading">#</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_add_material_properties</span><span class="p">(</span><span class="n">prim</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Prim</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add basic material properties to a prim.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Add basic material properties to a prim."""</span>
     <span class="c1"># Create material binding</span>
     <span class="n">material_binding</span> <span class="o">=</span> <span class="n">UsdShade</span><span class="o">.</span><span class="n">MaterialBindingAPI</span><span class="o">.</span><span class="n">Apply</span><span class="p">(</span><span class="n">prim</span><span class="p">)</span>
     
@@ -943,7 +943,7 @@
 <section id="adding-animation-properties">
 <h3>3. <strong>Adding Animation Properties</strong><a class="headerlink" href="#adding-animation-properties" title="Link to this heading">#</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">_add_animation_properties</span><span class="p">(</span><span class="n">prim</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Prim</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add animation properties to a prim.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Add animation properties to a prim."""</span>
     <span class="c1"># Add animation API</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">prim</span><span class="o">.</span><span class="n">HasAPI</span><span class="p">(</span><span class="n">UsdGeom</span><span class="o">.</span><span class="n">Xformable</span><span class="p">):</span>
         <span class="n">UsdGeom</span><span class="o">.</span><span class="n">Xformable</span><span class="o">.</span><span class="n">Apply</span><span class="p">(</span><span class="n">prim</span><span class="p">)</span>
@@ -1004,7 +1004,7 @@
 <span class="c1"># Solution: Ensure proper path setup</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">'..'</span><span class="p">,</span> <span class="s1">'..'</span><span class="p">))</span>
 </pre></div>
 </div>
 </section>
@@ -1022,7 +1022,7 @@
 <span class="c1"># Solution: Call output_stage.Save() at the end</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">modify_stage</span><span class="p">(</span><span class="n">input_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">,</span> <span class="n">output_stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">):</span>
     <span class="c1"># ... transformation logic ...</span>
-    <span class="n">output_stage</span><span class="o">.</span><span class="n">Save</span><span class="p">()</span>  <span class="c1"># Don&#39;t forget this!</span>
+    <span class="n">output_stage</span><span class="o">.</span><span class="n">Save</span><span class="p">()</span>  <span class="c1"># Don't forget this!</span>
 </pre></div>
 </div>
 </section>
@@ -1197,8 +1197,8 @@
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
 
   <footer class="bd-footer">
