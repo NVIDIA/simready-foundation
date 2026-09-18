@@ -1,0 +1,19 @@
+{
+    "feature": {
+        "display_name": "Packaging Core",
+        "id": "FET_030_STANDARD",
+        "version": "0.1.0",
+        "requirements": [
+            "PKG.DEF.001",
+            "PKG.META.001",
+            "PKG.HASH.001",
+            "PKG.CONF.001",
+            "AA.001"
+        ],
+        "dependencies": [],
+        "metadata": {
+            "path": "features/FET_030_STANDARD.html",
+            "internal_path": "features/FET_030_STANDARD.md"
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "feature": {
+        "display_name": "Gripper (Isaac)",
+        "id": "FET_028_ISAAC",
+        "version": "0.1.0",
+        "requirements": [
+            "GR.ISA.001"
+        ],
+        "dependencies": [
+            "FET_028_STANDARD@0.1.0",
+            "FET_022_ISAAC@0.1.0"
+        ],
+        "metadata": {
+            "path": "features/FET_028_ISAAC.html",
+            "internal_path": "features/FET_028_ISAAC.md"
+        }
+    }
+}

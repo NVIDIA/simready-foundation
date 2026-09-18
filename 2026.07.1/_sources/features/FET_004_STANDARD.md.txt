@@ -1,0 +1,132 @@
+# Feature: `FET_004_STANDARD`
+
+| **Property**            | **Value**         |
+|-------------------------|-------------------|
+| Feature Name            | `FET_004_STANDARD` |
+| Runtime                 | `STANDARD` |
+| Proprietary Techs       | `None` |
+| Latest Version          | `0.2.0` |
+
+## Description
+
+The Standard Multi-Body Physics feature defines the OpenUSD contract for assets
+that intentionally contain more than one rigid body connected by joints or
+articulation structure.
+
+An asset that satisfies this feature has multiple intended rigid bodies, valid
+joint relationships, a valid articulation-root arrangement, and no static or
+kinematic articulation-root body violations.
+
+## Dependency Graph
+
+```{mermaid}
+flowchart LR
+    FET003S1["FET_003_STANDARD\n0.1.0"]
+    FET003S2["FET_003_STANDARD\n0.2.0"]
+    FET004S1["FET_004_STANDARD\n0.1.0"]
+    FET004S2["FET_004_STANDARD\n0.2.0"]
+    FET022S["FET_022_STANDARD\n0.2.0"]
+
+    FET004S1 --> FET003S1
+    FET004S2 --> FET003S2
+    FET022S --> FET004S2
+
+    classDef current fill:#90EE90,stroke:#333
+    classDef other fill:#fff,stroke:#333
+    class FET004S1,FET004S2 current
+    class FET003S1,FET003S2,FET022S other
+```
+
+## Use Cases
+
+- Standard OpenUSD multibody props and robot link structures.
+- Baseline multibody validation before runtime-specific PhysX or Newton
+  variants.
+- Assets with existing rigid-body parts, joints, or articulation intent.
+
+## Requirements
+
+### Version 0.1.0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+- **[Prop Robotics Neutral Profile](../profiles/prop-robotics-neutral.md)** (`v1.0.0`, `v2.0.0`, `v2.0.1`) - Multibody prop physics when the prop has more than one intended rigid body.
+- **[Robot Body Neutral Profile](../profiles/robot-body-neutral.md)** (`v1.0.0`) - Neutral robot multibody physics.
+
+#### Feature Dependencies
+
+| **Property** | **Value** |
+|--------------|-----------|
+| Dependency | [Rigid Body Physics Standard](FET_003_STANDARD.md#version-010) (`FET_003_STANDARD@0.1.0`) |
+
+#### Requirement List
+
+| Capability | Requirements |
+|------------|--------------|
+| Physics Joints | `JT.001`, `JT.002`, `JT.003`, `JT.ART.002`, `JT.ART.003`, `JT.ART.004` |
+| Physics Rigid Bodies | `RB.MB.001` |
+
+</details>
+
+### Version 0.2.0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+- **[Prop Robotics Neutral Profile](../profiles/prop-robotics-neutral.md)** (`v2.1.0`) - Standard multibody physics with the updated FET003 dependency.
+- **[Robot Body Neutral Profile](../profiles/robot-body-neutral.md)** (`v1.1.0`) - Standard multibody physics with the updated FET003 dependency.
+- **[Robotics Prop Profile](../profiles/profiles.md)** (`v3.0.0`) - Optional consolidated Standard multibody feature.
+- **[Robot Body Profile](../profiles/profiles.md)** (`v3.0.0`) - Optional consolidated Standard multibody feature.
+
+#### Feature Dependencies
+
+| **Property** | **Value** |
+|--------------|-----------|
+| Dependency | [Rigid Body Physics Standard](FET_003_STANDARD.md#version-020) (`FET_003_STANDARD@0.2.0`) |
+
+#### Changes From Version 0.1.0
+
+Version 0.2.0 keeps the Version 0.1.0 requirement list and updates the dependency to
+`FET_003_STANDARD@0.2.0`.
+
+</details>
+
+## Pipelines
+
+Source file type:
+
+- `.blend`
+  - Via Blender SimReady Add-ons.
+- `.mjcf`
+  - Via Blender SimReady Add-ons and MJCF2USD Tool.
+- `.step`
+  - Via Blender SimReady Add-ons and CAD Converter.
+
+Validation or runtime pipeline:
+
+- SimReady validation - verifies the selected `FET_004_STANDARD` manifest.
+
+## Samples
+
+- [sample_content/common_assets/props_general/obs_workbench_tool_a01/simready_usd/sm_obs_workbench_tool_a01_01.usda](../../../../../sample_content/common_assets/props_general/obs_workbench_tool_a01/simready_usd/sm_obs_workbench_tool_a01_01.usda)
+- [sample_content/common_assets/props_general/obs_electricians_large_tool_box_a01/simready_usd/sm_obs_electricians_large_tool_box_a01_01.usd](../../../../../sample_content/common_assets/props_general/obs_electricians_large_tool_box_a01/simready_usd/sm_obs_electricians_large_tool_box_a01_01.usd)
+- [sample_content/common_assets/props_general/obs_joystick_a01/simready_usd/sm_obs_joystick_a01_01.usd](../../../../../sample_content/common_assets/props_general/obs_joystick_a01/simready_usd/sm_obs_joystick_a01_01.usd)
+- [sample_content/common_assets/props_general/obs_lamp_revolute_a01/simready_usd/sm_obs_lamp_revolute_a01_01.usda](../../../../../sample_content/common_assets/props_general/obs_lamp_revolute_a01/simready_usd/sm_obs_lamp_revolute_a01_01.usda)
+
+## Benchmarks
+
+- [FET004 Multibody](../guides/benchmark/tests/fet004-multibody.md)
+  - [joint_movement](../guides/benchmark/tests/fet004/joint-movement.md)
+
+## Adapters
+
+| From Feature | To Feature | Adapter | Status | Notes |
+|--------------|------------|---------|--------|-------|
+| `FET_004_STANDARD@0.1.0` | `FET_004_PHYSX@0.1.0` | `nv_core/cip_specs/asset_handler_modules/neutral_to_physx` | Done | Sets PhysX SDF collider approximation on existing collider prims. |
+| `FET_004_STANDARD@0.1.0` | `FET_004_NEWTON@0.1.0` | `nv_core/cip_specs/asset_handler_modules/neutral_to_newton` | Done | Applies Newton mesh-collision schemas (`newton:contactGap`) on existing collider prims. |
+| `FET_004_STANDARD@0.1.0` | `FET_004_MUJOCO@0.1.0` | `nv_core/cip_specs/asset_handler_modules/neutral_to_mujoco` | Done | Applies MuJoCo mesh-collision schemas (`convexHull`) on existing collider prims. |

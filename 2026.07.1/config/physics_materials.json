@@ -1,0 +1,46 @@
+{
+    "capability": {
+        "id": "physics_materials",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "PMT.001",
+                "version": null,
+                "name": "collider-material-binding",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_materials/requirements/collider-material-binding.html",
+                    "internal_path": "capabilities/physics_bodies/physics_materials/requirements/collider-material-binding.md"
+                },
+                "message": "Every collider (prim with PhysicsCollisionAPI) must have a material:binding:physics relationship to a physics material.",
+                "examples": []
+            },
+            {
+                "code": "NEWTON.MAT.001",
+                "version": null,
+                "name": "newton-material-attributes",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "NewtonMaterialAttributesChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_materials/requirements/newton-material-attributes.html",
+                    "internal_path": "capabilities/physics_bodies/physics_materials/requirements/newton-material-attributes.md"
+                },
+                "message": "`NewtonMaterialAPI` must be applied on a physics `Material` \u2014 a `UsdShade.Material` that also carries `PhysicsMaterialAPI`.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "capabilities/physics_bodies/physics_materials/capability-physics_materials.html",
+            "internal_path": "capabilities/physics_bodies/physics_materials/capability-physics_materials.md"
+        }
+    }
+}

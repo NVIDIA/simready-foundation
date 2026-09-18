@@ -1,0 +1,1494 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" data-theme="auto">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Semantic Labels Workflow &#8212; Content Capabilities</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/_style.css?v=e1c02e80" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tags.css?v=f64b827a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+
+
+    <script src="../../_static/documentation_options.js?v=f9526036"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'guides/semantic_labels/semantic_labels';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.07.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+
+    <link rel="icon" href="../../_static/favicon.png"/>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Adding a Custom Taxonomy" href="../adding_a_custom_taxonomy.html" />
+    <link rel="prev" title="SimReady Validation Workflow" href="../validate_workflow.html" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2026.07.1" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+
+
+  </head>
+
+  <body data-default-mode="auto">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Content Capabilities - Home"/>
+    <img src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Content Capabilities - Home"/>
+  
+  
+    <p class="title logo__title">Content Capabilities</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-4"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-4"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-4"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-4">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Content Capabilities - Home"/>
+    <img src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Content Capabilities - Home"/>
+  
+  
+    <p class="title logo__title">Content Capabilities</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-5"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-5"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-5"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-5">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-6"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-6"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-6"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-6">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../changelist.html">Release notes</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../guides.html">Guides</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tiers.html">SimReady Foundation Tiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../foundation_pypi.html">SimReady Foundation PyPI Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validate_workflow.html">SimReady Validation Workflow</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Semantic Labels Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../adding_a_custom_taxonomy.html">Adding a Custom Taxonomy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../packaging_workflow.html">SimReady Packaging Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../acceptance_workflow.html">SimReady Acceptance Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multiphysics_solvers.html">Multiple Physics Solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../feature_adapters/feature_adapters.html">Feature Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/profiles.html">Profiles</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../benchmark/benchmark.html">SimReady Benchmark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../benchmark/overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../benchmark/pipeline.html">Pipeline and Stages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../benchmark/running.html">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../benchmark/reading-reports.html">Reading Reports</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../benchmark/tests/tests.html">Tests Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet001-visual.html">FET001 Visual</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet003-physics.html">FET003 Physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet004-multibody.html">FET004 Multibody</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet005-grasp.html">FET005 Grasp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet011-semantic-labels.html">FET011 Semantic Labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet022-driven-joints.html">FET022 Driven Joints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet028-gripper.html">FET028 Gripper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/authoring.html">Authoring runtime tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/experimental.html">Experimental and disabled tests</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../SimReady_learning_workflow.html">SimReady Learning Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../naming_conventions.html">Naming Conventions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../development.html">Development Workflows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../features_expansion_workflow.html">Features Expansion Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../capabilities/capabilities.html">Capabilities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/core/core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/core/sim_ready/capability-sim_ready.html">SimReady</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/sim_ready/requirements.html">SimReady Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/sim_ready/requirements/metadata-whitelist.html">metadata-whitelist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/sim_ready/requirements/thumbnail-exist.html">Thumbnail Exist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/sim_ready/requirements/nested-simready-metadata.html">nested-simready-metadata</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/core/units/capability-units.html">Units</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/units/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/core/atomic_asset/capability-atomic_asset.html">Atomic Asset</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/atomic_asset/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/atomic_asset/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/core/naming_paths/capability-naming_paths.html">Naming and Paths</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements.html">Naming and Paths Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements/prim-naming-convention.html">prim-naming-convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements/file-naming-convention.html">file-naming-convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements/directory-structure.html">directory-structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements/path-length-limits.html">path-length-limits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements/asset-folder-structure.html">asset-folder-structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements/metadata-location.html">metadata-location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements/relative-paths.html">relative-paths</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/core/runtime_variants/capability-runtime_variants.html">Runtime Variants</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements.html">Runtime Variants Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/physx-variant-set.html">physx-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/physx-runtime-payload.html">physx-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/physx-variant-metadata.html">physx-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/newton-variant-set.html">newton-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/newton-runtime-payload.html">newton-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/newton-variant-metadata.html">newton-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/mujoco-variant-set.html">mujoco-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/mujoco-runtime-payload.html">mujoco-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/mujoco-variant-metadata.html">mujoco-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/runtime-variant-section-purity.html">runtime-variant-section-purity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/runtime-physics-isolation.html">runtime-physics-isolation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/runtime-physics-isolation-matrix.html">Runtime Physics Isolation Matrix</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/visualization/visualization.html">Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/visualization/geometry/capability-geometry.html">Geometry</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/visualization/geometry/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/visualization/geometry/creators_overview.html">Creators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/visualization/geometry/developers_overview.html">Developers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/visualization/materials/capability-materials.html">Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/visualization/materials/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/visualization/materials/developers.html">Developers</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/isaac_sim/isaac_sim.html">Isaac Sim</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/isaac_sim/composition/capability-composition.html">Composition</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/isaac_sim/composition/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/isaac_sim/ros_bridge/capability-ros_bridge.html">ROS Bridge</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/isaac_sim/ros_bridge/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/isaac_sim/robot_materials/capability-robot_materials.html">Robot Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/isaac_sim/robot_materials/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/isaac_sim/robot_core/capability-robot_core.html">Robot Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/isaac_sim/robot_core/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_bodies.html">Physics Bodies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/physics_bodies/base_articulation/capability-base-articulation.html">Base Articulation</a></li>
+
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_rigid_bodies/capability-physics_rigid_bodies.html">Rigid Bodies and Colliders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_rigid_bodies/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_rigid_bodies/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_colliders/capability-collider_approximations.html">Collider Approximations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_colliders/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_colliders/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_joints/capability-physics_joints.html">Joints and Articulations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_joints/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_joints/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_driven_joints/capability-physics_driven_joints.html">Driven Joints</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_driven_joints/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_materials/capability-physics_materials.html">Physics Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_materials/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_materials/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_graspable/capability-physics_graspable.html">Graspable Vectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_graspable/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_graspable/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_grippers/capability-physics_grippers.html">Grippers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_grippers/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/hierarchy/hierarchy.html">Hierarchy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/hierarchy/capability-hierarchy.html">Hierarchy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/hierarchy/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/hierarchy/creators_overview.html">Creators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/hierarchy/developers_overview.html">Developers</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_sensors.html">Non-Visual Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/capability-nonvisual_materials.html">Non-Visual Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/requirements.html">Non-Visual Materials Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/nonvisual_attributes_table.html">Non-Visual Sensor Attributes Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-base.html">material-base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-coating.html">material-coating</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-attributes.html">material-attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-time.html">material-time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-binding.html">material-binding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-consistency.html">material-consistency</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/semantic_labels/capability-semantic_labels.html">Semantic Labels</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/semantic_labels/requirements.html">Semantic Labels Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-capability.html">semantic-label-capability</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-deprecated-schema.html">semantic-label-deprecated-schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-qcode-valid.html">semantic-label-qcode-valid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-schema.html">semantic-label-schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-time.html">semantic-label-time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-material.html">semantic-label-material</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-capability.html">semantic-label-capability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-deprecated-schema.html">semantic-label-deprecated-schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-qcode-valid.html">semantic-label-qcode-valid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-schema.html">semantic-label-schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-time.html">semantic-label-time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-material.html">semantic-label-material</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/dataset_taxonomies/capability-dataset_taxonomies.html">Dataset Taxonomies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements.html">Dataset Taxonomies Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/coco-labels.html">coco-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/cityscapes-labels.html">cityscapes-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/ade20k-labels.html">ade20k-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/pascal-voc-labels.html">pascal-voc-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/sunrgbd-labels.html">sunrgbd-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/imagenet-labels.html">imagenet-labels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/coco-labels.html">coco-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/cityscapes-labels.html">cityscapes-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/ade20k-labels.html">ade20k-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/pascal-voc-labels.html">pascal-voc-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/sunrgbd-labels.html">sunrgbd-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/imagenet-labels.html">imagenet-labels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/packaging/packaging.html">Packaging</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/packaging/packaging_core/capability-packaging_core.html">Packaging Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/packaging/packaging_core/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/packaging/conformance_metadata/capability-conformance_metadata.html">Conformance Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/packaging/conformance_metadata/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/packaging/packaging_introspection/capability-packaging_introspection.html">Packaging Introspection</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/packaging/packaging_introspection/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../features/features.html">Features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../features/feature-dependency-graph.html">Feature dependency graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_000_STANDARD.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_000_PHYSX.html">Core (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_000_NEWTON.html">Core (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_000_MUJOCO.html">Core (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_000_ISAAC.html">Core (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_001_STANDARD.html">Minimal Placeable Visual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_002_STANDARD.html">Posable Bodies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_003_STANDARD.html">Rigid Body Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_003_PHYSX.html">Rigid Body Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_003_NEWTON.html">Rigid Body Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_003_MUJOCO.html">Rigid Body Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004_STANDARD.html">Simulate Multi-Body Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004_PHYSX.html">Simulate Multi-Body Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004_NEWTON.html">Simulate Multi-Body Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004_MUJOCO.html">Simulate Multi-Body Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004_ROBOT_PHYSX.html">Simulate Multi-Body Physics (Robot PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004_ROBOT_NEWTON.html">Simulate Multi-Body Physics (Robot Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004_ROBOT_MUJOCO.html">Simulate Multi-Body Physics (Robot MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_005_STANDARD.html">Simulate Grasp Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_006_STANDARD.html">Materials (USDPreviewSurface)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_006_MDL.html">Materials (MDL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_007_STANDARD.html">Non-Visual Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_011_STANDARD.html">Semantic Labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_011_RTX.html">Semantic Labels (RTX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_046_STANDARD.html">Wikidata Q-Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_040_STANDARD.html">Open Taxonomy COCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_041_STANDARD.html">Open Taxonomy Cityscapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_042_STANDARD.html">Open Taxonomy ADE20K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_043_STANDARD.html">Open Taxonomy PASCAL VOC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_044_STANDARD.html">Open Taxonomy SUN RGB-D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_045_STANDARD.html">Open Taxonomy ImageNet-1K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_021_ISAAC.html">Robot Core (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_022_STANDARD.html">Driven Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_022_PHYSX.html">Driven Joints (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_022_NEWTON.html">Driven Joints (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_022_MUJOCO.html">Driven Joints (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_022_ISAAC.html">Driven Joints (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_023_ISAAC.html">Robot Materials (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_024_STANDARD.html">Base Articulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_024_PHYSX.html">Base Articulation (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_024_NEWTON.html">Base Articulation (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_024_MUJOCO.html">Base Articulation (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_025_ROS.html">ROS Ready (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_028_STANDARD.html">Gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_028_ISAAC.html">Gripper (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_028_MUJOCO.html">Gripper (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_030_STANDARD.html">Packaging Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_031_STANDARD.html">Self-contained Package Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_032_STANDARD.html">Packaging Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_033_STANDARD.html">Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_100_ISAAC.html">IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_101_ISAAC.html">Robot IsaacSim Composition</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../profiles/profiles.html">Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/prop-robotics-neutral.html">Prop Robotics Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/prop-robotics-physx.html">Prop Robotics Physx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/prop-robotics-isaac.html">Prop Robotics Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robotics-prop.html">Robotics Prop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-body-neutral.html">Robot Body Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-body-runnable.html">Robot Body Runnable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-body-isaac.html">Robot Body Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-body.html">Robot Body</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-gripper-neutral.html">Robot Gripper Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-gripper-isaac.html">Robot Gripper Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/open-taxonomy-coco.html">Open Taxonomy COCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/open-taxonomy-cityscapes.html">Open Taxonomy Cityscapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/open-taxonomy-ade20k.html">Open Taxonomy ADE20K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/open-taxonomy-pascal_voc.html">Open Taxonomy PASCAL VOC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/open-taxonomy-sunrgbd.html">Open Taxonomy SUN RGB-D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/open-taxonomy-imagenet_1k.html">Open Taxonomy ImageNet-1K</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../indexes/indexes.html">Indexes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../indexes/capability_status_index.html">Capability Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../indexes/requirements_index.html">Requirements Index</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../guides.html" class="nav-link">End to End Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Semantic Labels Workflow</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="semantic-labels-workflow">
+<h1>Semantic Labels Workflow<a class="headerlink" href="#semantic-labels-workflow" title="Link to this heading">#</a></h1>
+<p>End to end guide for applying and validating Semantic Labels.</p>
+<p>You will learn what the label spec asks for, assign labels either from
+Python or from inside Blender, check the result with <code class="docutils literal notranslate"><span class="pre">simready-validate</span></code>, and
+then confirm with <code class="docutils literal notranslate"><span class="pre">simready-benchmark</span></code> that those labels reach the
+renderer. It is the reference pipeline for
+<a class="reference internal" href="../../capabilities/semantic_labels/capability-semantic_labels.html"><span class="std std-doc">Semantic Labels</span></a>.</p>
+<p>All commands run from the <strong>repository root</strong> unless stated otherwise.</p>
+<section id="what-you-end-up-with">
+<h2>What you end up with<a class="headerlink" href="#what-you-end-up-with" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Stage</p></th>
+<th class="head"><p>Tool</p></th>
+<th class="head"><p>Outcome</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Learn</p></td>
+<td><p>this guide</p></td>
+<td><p>You know how many labels the asset needs and where they go.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Baseline</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simready-validate</span></code></p></td>
+<td><p>The unlabeled asset fails <code class="docutils literal notranslate"><span class="pre">SL.001</span></code>, and the report names the prims it looked at.</p></td>
+</tr>
+<tr class="row-even"><td><p>Conform</p></td>
+<td><p>Python or Blender</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SemanticsLabelsAPI</span></code> applied, with real values.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Validate</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simready-validate</span></code></p></td>
+<td><p>The semantic-labels feature drops off the failing list.</p></td>
+</tr>
+<tr class="row-even"><td><p>Verify</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simready-benchmark</span></code></p></td>
+<td><p>The segmentation render shows the object while labels are present, and nothing once they are stripped.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Validation tells you the labels are well-formed. Only the benchmark tells you
+the renderer honors them: a single label on the root prim should produce
+segmentation coverage across the whole asset, and that coverage should vanish
+when you remove the label.</p>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Requirement</p></th>
+<th class="head"><p>Minimum</p></th>
+<th class="head"><p>Needed for</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Python</p></td>
+<td><p>3.12</p></td>
+<td><p>All paths</p></td>
+</tr>
+<tr class="row-odd"><td><p>Git LFS</p></td>
+<td><p>Installed and initialised (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">lfs</span> <span class="pre">install</span></code>)</p></td>
+<td><p>Sample assets</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">simready-validate</span></code></p></td>
+<td><p>see <a class="reference internal" href="../validate_workflow.html"><span class="std std-doc">SimReady Validation Workflow</span></a></p></td>
+<td><p>Validation</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">simready-benchmark[kit]</span></code></p></td>
+<td><p>see <a class="reference internal" href="../benchmark/running.html"><span class="std std-doc">Running Tests</span></a></p></td>
+<td><p>Runtime verification</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/NVIDIA/simready-blender-add-on">SimReady Blender add-on</a></p></td>
+<td><p>Blender 5.2, Windows 10/11</p></td>
+<td><p>Blender path only</p></td>
+</tr>
+<tr class="row-odd"><td><p>NVIDIA Isaac Sim</p></td>
+<td><p>6.0 or later</p></td>
+<td><p>Runtime verification</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Isaac Sim 6.0 reads <code class="docutils literal notranslate"><span class="pre">SemanticsLabelsAPI</span></code> natively. Earlier versions do not
+resolve this schema in the segmentation pass.</p>
+</div>
+</section>
+<section id="the-label-contract">
+<h2>1. The label contract<a class="headerlink" href="#the-label-contract" title="Link to this heading">#</a></h2>
+<section id="one-label-is-the-minimum">
+<h3>One label is the minimum<a class="headerlink" href="#one-label-is-the-minimum" title="Link to this heading">#</a></h3>
+<p>Labels are inherited. A single <code class="docutils literal notranslate"><span class="pre">SemanticsLabelsAPI</span></code> label on a common ancestor,
+usually the asset’s <code class="docutils literal notranslate"><span class="pre">defaultPrim</span></code>, satisfies the requirement for every mesh
+beneath it. One label per asset is the floor.</p>
+<p>Start by labeling the asset as a whole: <code class="docutils literal notranslate"><span class="pre">toaster</span></code>, <code class="docutils literal notranslate"><span class="pre">forklift</span></code>, <code class="docutils literal notranslate"><span class="pre">pedestrian</span></code>.
+Labels on the parts inside it, such as <code class="docutils literal notranslate"><span class="pre">handle</span></code>, <code class="docutils literal notranslate"><span class="pre">lever</span></code> or <code class="docutils literal notranslate"><span class="pre">heating</span> <span class="pre">element</span></code>,
+are optional, and give a perception model more to tell apart. Any renderable
+geometry sitting outside a labeled subtree will need its own label.</p>
+<p>The requirement is evaluated over the <code class="docutils literal notranslate"><span class="pre">defaultPrim</span></code> and everything beneath it.
+Prims outside that subtree are not checked.</p>
+</section>
+<section id="the-taxonomy-is-the-instance-name">
+<h3>The taxonomy is the instance name<a class="headerlink" href="#the-taxonomy-is-the-instance-name" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">SemanticsLabelsAPI</span></code> is a <em>multiple-apply</em> schema. A multiple-apply schema can
+be applied several times over, and each application is given a name to tell it
+apart from the others.
+That name is called the <strong>instance name</strong>, and you can see it in two places: it
+follows a colon in <code class="docutils literal notranslate"><span class="pre">apiSchemas</span></code>, and it becomes the last part of the attribute
+name.</p>
+<p>Here the instance name is <code class="docutils literal notranslate"><span class="pre">class</span></code>:</p>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Vehicle"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"SemanticsLabelsAPI:class"</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">token[]</span><span class="w"> </span><span class="na">semantics:labels:class</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"car"</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For semantic labels, the instance name is how you say which taxonomy a label
+belongs to. Any name is valid, because the capability is taxonomy-agnostic, and
+because each one is a separate application several taxonomies can sit on the
+same prim without conflicting:</p>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Vehicle"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"SemanticsLabelsAPI:class"</span><span class="p">,</span><span class="w"> </span><span class="s">"SemanticsLabelsAPI:wikidata_qcode"</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">token[]</span><span class="w"> </span><span class="na">semantics:labels:class</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"car"</span><span class="p">]</span>
+<span class="w">    </span><span class="kt">token[]</span><span class="w"> </span><span class="na">semantics:labels:wikidata_qcode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"Q1420"</span><span class="p">]</span><span class="w">   </span><span class="c1"># Q1420 = motor car</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>NVIDIA’s Omniverse asset libraries use the Wikidata Q-code taxonomy, under the
+instance name <code class="docutils literal notranslate"><span class="pre">wikidata_qcode</span></code>, so assets meant to ship alongside them should
+use it too.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The instance name and the value are two different things. Writing the taxonomy
+name into the value is the most common authoring error. See
+<a class="reference internal" href="#common-mistakes">Common mistakes</a>.</p>
+</div>
+</section>
+<section id="what-gets-checked">
+<h3>What gets checked<a class="headerlink" href="#what-gets-checked" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Requirement</p></th>
+<th class="head"><p>Applies when</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-capability.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">SL.001</span></code></span></a></p></td>
+<td><p>Every renderable prim resolves a label, whether from itself, an ancestor, its bound material, or <code class="docutils literal notranslate"><span class="pre">GeomSubset</span></code> membership.</p></td>
+<td><p>Always</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-deprecated-schema.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">SL.002</span></code></span></a></p></td>
+<td><p>A deprecated <code class="docutils literal notranslate"><span class="pre">SemanticsAPI</span></code> label has been migrated to <code class="docutils literal notranslate"><span class="pre">SemanticsLabelsAPI</span></code>.</p></td>
+<td><p>Only on prims that still carry legacy labels</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-schema.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">SL.003</span></code></span></a></p></td>
+<td><p>Labels use the <code class="docutils literal notranslate"><span class="pre">SemanticsLabelsAPI</span></code> schema.</p></td>
+<td><p>Always</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-time.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">SL.TIME.001</span></code></span></a></p></td>
+<td><p>Labels have no time samples.</p></td>
+<td><p>RTX perception pipelines</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-material.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">SL.MAT.001</span></code></span></a></p></td>
+<td><p>Each <code class="docutils literal notranslate"><span class="pre">Material</span></code> prim has a non-empty <code class="docutils literal notranslate"><span class="pre">SemanticsLabelsAPI:material</span></code> label.</p></td>
+<td><p>NVIDIA convention</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-qcode-valid.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">SL.QCODE.001</span></code></span></a></p></td>
+<td><p>Wikidata Q-codes are well-formed: <code class="docutils literal notranslate"><span class="pre">Q</span></code> followed by digits.</p></td>
+<td><p>Opt-in, Wikidata only</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Applying the schema without authoring a value does not satisfy <code class="docutils literal notranslate"><span class="pre">SL.001</span></code>: an
+empty label counts as no label.</p>
+<p>These rules are split across three features, so you only take on the ones that
+apply to your work:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Holds</p></th>
+<th class="head"><p>Select it when</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FET_011_STANDARD</span></code> 0.2.0</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SL.001</span></code>, <code class="docutils literal notranslate"><span class="pre">SL.002</span></code>, <code class="docutils literal notranslate"><span class="pre">SL.003</span></code></p></td>
+<td><p>Always. Any taxonomy, any runtime.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">FET_011_RTX</span></code> 0.1.0</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SL.TIME.001</span></code>, <code class="docutils literal notranslate"><span class="pre">SL.MAT.001</span></code></p></td>
+<td><p>You are targeting the NVIDIA RTX perception pipeline. Depends on <code class="docutils literal notranslate"><span class="pre">FET_011_STANDARD</span></code> 0.2.0.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FET_046_STANDARD</span></code> 0.1.0</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SL.QCODE.001</span></code></p></td>
+<td><p>You are labeling with Wikidata Q-codes. Depends on <code class="docutils literal notranslate"><span class="pre">FET_011_STANDARD</span></code> 0.2.0.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">FET_011_STANDARD</span></code> 0.2.0 is selected by <code class="docutils literal notranslate"><span class="pre">Prop-Robotics-Neutral</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Prop-Robotics-Physx</span></code> at 2.3.0, and by <code class="docutils literal notranslate"><span class="pre">Prop-Robotics-Isaac</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Robot-Body-Neutral</span></code>, <code class="docutils literal notranslate"><span class="pre">Robot-Body-Runnable</span></code> and <code class="docutils literal notranslate"><span class="pre">Robot-Body-Isaac</span></code> at 1.2.0.
+<code class="docutils literal notranslate"><span class="pre">Prop-Robotics-Physx</span></code> 2.3.0 also selects <code class="docutils literal notranslate"><span class="pre">FET_011_RTX</span></code> 0.1.0.</p>
+</section>
+</section>
+<section id="establish-a-baseline">
+<h2>2. Establish a baseline<a class="headerlink" href="#establish-a-baseline" title="Link to this heading">#</a></h2>
+<p>Start from an asset with no labels at all, so you can see the failure before you
+fix it.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-validate<span class="w"> </span>--rules-path<span class="w"> </span>nv_core/sr_specs/docs/capabilities<span class="w"> </span>--features-path<span class="w"> </span>nv_core/sr_specs/docs/features<span class="w"> </span>--profiles-path<span class="w"> </span>nv_core/sr_specs/docs/profiles<span class="w"> </span>--profile<span class="w"> </span>Prop-Robotics-Neutral<span class="w"> </span>--version<span class="w"> </span><span class="m">2</span>.3.0<span class="w"> </span>ASSET
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The capability validators import <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, which <code class="docutils literal notranslate"><span class="pre">simready-validate</span></code> does not
+install itself. If this first run stops with
+<code class="docutils literal notranslate"><span class="pre">ModuleNotFoundError:</span> <span class="pre">No</span> <span class="pre">module</span> <span class="pre">named</span> <span class="pre">'numpy'</span></code>, add it to the same environment
+and run again.</p>
+</div>
+<p>The line to look for:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Asset: toaster.usda
+  [FAILED] Prop-Robotics-Neutral v2.3.0
+           FET_011_STANDARD: failing requirements: ['com.nvidia.simready.SL.001']
+</pre></div>
+</div>
+<p>Requirement codes appear fully qualified in the report, so <code class="docutils literal notranslate"><span class="pre">SL.001</span></code> shows up as
+<code class="docutils literal notranslate"><span class="pre">com.nvidia.simready.SL.001</span></code>. Other features may fail on the same asset for
+reasons that have nothing to do with labels; this guide only follows the
+<code class="docutils literal notranslate"><span class="pre">FET_011_STANDARD</span></code> line.</p>
+<p>The validator looks for a label on the prim itself, its ancestors, its bound
+material, and its <code class="docutils literal notranslate"><span class="pre">GeomSubset</span></code>s. Those are also the places where a fix can go.</p>
+</section>
+<section id="assign-labels-in-python">
+<h2>3. Assign labels in Python<a class="headerlink" href="#assign-labels-in-python" title="Link to this heading">#</a></h2>
+<p>The Python route needs <code class="docutils literal notranslate"><span class="pre">usd-core</span></code> and nothing else. No Kit, no Isaac Sim. This
+is how a data-augmentation vendor would label a batch of assets.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">Usd</span><span class="p">,</span> <span class="n">UsdSemantics</span>
+
+<span class="n">stage</span> <span class="o">=</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="s2">"asset.usda"</span><span class="p">)</span>
+<span class="n">prim</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetDefaultPrim</span><span class="p">()</span>
+
+<span class="n">labels</span> <span class="o">=</span> <span class="n">UsdSemantics</span><span class="o">.</span><span class="n">LabelsAPI</span><span class="o">.</span><span class="n">Apply</span><span class="p">(</span><span class="n">prim</span><span class="p">,</span> <span class="s2">"class"</span><span class="p">)</span>
+<span class="n">labels</span><span class="o">.</span><span class="n">CreateLabelsAttr</span><span class="p">([</span><span class="s2">"toaster"</span><span class="p">])</span>
+
+<span class="n">stage</span><span class="o">.</span><span class="n">GetRootLayer</span><span class="p">()</span><span class="o">.</span><span class="n">Save</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Which gives you:</p>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Toaster"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"SemanticsLabelsAPI:class"</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">token[]</span><span class="w"> </span><span class="na">semantics:labels:class</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"toaster"</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>That is one label on the <code class="docutils literal notranslate"><span class="pre">defaultPrim</span></code>, exactly what the contract asks for. Run
+the validation command from step 2 again and the semantic-labels feature will
+drop off the failing list.</p>
+<section id="labeling-subcomponents">
+<h3>Labeling subcomponents<a class="headerlink" href="#labeling-subcomponents" title="Link to this heading">#</a></h3>
+<p>The root label satisfies the requirement. Labels on the parts inside an asset
+give a model more to work with: something learning to grasp a toaster benefits
+from knowing which mesh is the lever and which is the slot.</p>
+<p>Parts continue to inherit the root label, so a labeled part ends up with both.
+Walk the imageable prims and label the ones you have names for:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">Usd</span><span class="p">,</span> <span class="n">UsdGeom</span><span class="p">,</span> <span class="n">UsdSemantics</span>
+
+<span class="n">stage</span> <span class="o">=</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="s2">"toaster.usda"</span><span class="p">)</span>
+
+<span class="n">PART_LABELS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"Lever"</span><span class="p">:</span> <span class="s2">"lever"</span><span class="p">,</span>
+    <span class="s2">"Slot"</span><span class="p">:</span> <span class="s2">"slot"</span><span class="p">,</span>
+    <span class="s2">"Handle"</span><span class="p">:</span> <span class="s2">"handle"</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">prim</span> <span class="ow">in</span> <span class="n">stage</span><span class="o">.</span><span class="n">Traverse</span><span class="p">():</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">prim</span><span class="o">.</span><span class="n">IsA</span><span class="p">(</span><span class="n">UsdGeom</span><span class="o">.</span><span class="n">Imageable</span><span class="p">):</span>
+        <span class="k">continue</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">PART_LABELS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">prim</span><span class="o">.</span><span class="n">GetName</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">label</span><span class="p">:</span>
+        <span class="n">UsdSemantics</span><span class="o">.</span><span class="n">LabelsAPI</span><span class="o">.</span><span class="n">Apply</span><span class="p">(</span><span class="n">prim</span><span class="p">,</span> <span class="s2">"class"</span><span class="p">)</span><span class="o">.</span><span class="n">CreateLabelsAttr</span><span class="p">([</span><span class="n">label</span><span class="p">])</span>
+
+<span class="n">stage</span><span class="o">.</span><span class="n">GetRootLayer</span><span class="p">()</span><span class="o">.</span><span class="n">Save</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Label the things a consumer would want to tell apart. Giving every mesh
+its own label is rarely what you want, since a mesh that exists for modeling
+convenience has no semantic meaning and only adds noise to a segmentation mask.</p>
+<p><strong>When one mesh holds several parts.</strong> <code class="docutils literal notranslate"><span class="pre">SL.001</span></code> will also resolve a label
+through <code class="docutils literal notranslate"><span class="pre">GeomSubset</span></code> membership, so a single mesh divided into subsets can hold
+a label per region without being split into separate prims. This comes up often
+with CAD conversions, where geometry tends to arrive as one mesh per material
+rather than one mesh per part.</p>
+</section>
+<section id="checking-what-a-prim-resolves-to">
+<h3>Checking what a prim resolves to<a class="headerlink" href="#checking-what-a-prim-resolves-to" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">UsdSemantics.LabelsQuery</span></code> tells you what a prim resolves to, using only
+<code class="docutils literal notranslate"><span class="pre">usd-core</span></code>, without a validator run:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">Usd</span><span class="p">,</span> <span class="n">UsdSemantics</span>
+
+<span class="n">stage</span> <span class="o">=</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="s2">"toaster.usda"</span><span class="p">)</span>
+<span class="n">query</span> <span class="o">=</span> <span class="n">UsdSemantics</span><span class="o">.</span><span class="n">LabelsQuery</span><span class="p">(</span><span class="s2">"class"</span><span class="p">,</span> <span class="n">Usd</span><span class="o">.</span><span class="n">TimeCode</span><span class="o">.</span><span class="n">Default</span><span class="p">())</span>
+
+<span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"/Toaster"</span><span class="p">,</span> <span class="s2">"/Toaster/Lever"</span><span class="p">,</span> <span class="s2">"/Toaster/Bracket"</span><span class="p">]:</span>
+    <span class="n">prim</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetPrimAtPath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">query</span><span class="o">.</span><span class="n">ComputeUniqueInheritedLabels</span><span class="p">(</span><span class="n">prim</span><span class="p">)))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/Toaster ['toaster']
+/Toaster/Lever ['lever', 'toaster']
+/Toaster/Bracket ['toaster']
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Bracket</span></code> has no label of its own and still resolves to <code class="docutils literal notranslate"><span class="pre">toaster</span></code>, inherited
+from the root. <code class="docutils literal notranslate"><span class="pre">Lever</span></code> resolves to two labels: the one you gave it and the one
+it inherits.</p>
+</section>
+<section id="labeling-materials">
+<h3>Labeling materials<a class="headerlink" href="#labeling-materials" title="Link to this heading">#</a></h3>
+<p>Object labels answer <em>what is this</em>. Material labels answer <em>what is it made
+of</em>. Because they answer different questions they use different taxonomy
+instance names and live side by side on the same asset.</p>
+<p><code class="docutils literal notranslate"><span class="pre">SL.MAT.001</span></code> asks that every <code class="docutils literal notranslate"><span class="pre">Material</span></code> prim has a non-empty
+<code class="docutils literal notranslate"><span class="pre">SemanticsLabelsAPI:material</span></code> label:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">Usd</span><span class="p">,</span> <span class="n">UsdShade</span><span class="p">,</span> <span class="n">UsdSemantics</span>
+
+<span class="n">stage</span> <span class="o">=</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="s2">"toaster.usda"</span><span class="p">)</span>
+
+<span class="n">MATERIAL_LABELS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"ChromeBody"</span><span class="p">:</span> <span class="s2">"metal"</span><span class="p">,</span>
+    <span class="s2">"PlasticBase"</span><span class="p">:</span> <span class="s2">"plastic"</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">prim</span> <span class="ow">in</span> <span class="n">stage</span><span class="o">.</span><span class="n">Traverse</span><span class="p">():</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">prim</span><span class="o">.</span><span class="n">IsA</span><span class="p">(</span><span class="n">UsdShade</span><span class="o">.</span><span class="n">Material</span><span class="p">):</span>
+        <span class="k">continue</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">MATERIAL_LABELS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">prim</span><span class="o">.</span><span class="n">GetName</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">label</span><span class="p">:</span>
+        <span class="n">UsdSemantics</span><span class="o">.</span><span class="n">LabelsAPI</span><span class="o">.</span><span class="n">Apply</span><span class="p">(</span><span class="n">prim</span><span class="p">,</span> <span class="s2">"material"</span><span class="p">)</span><span class="o">.</span><span class="n">CreateLabelsAttr</span><span class="p">([</span><span class="n">label</span><span class="p">])</span>
+
+<span class="n">stage</span><span class="o">.</span><span class="n">GetRootLayer</span><span class="p">()</span><span class="o">.</span><span class="n">Save</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Both taxonomies then sit on the asset without conflicting:</p>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Toaster"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"SemanticsLabelsAPI:class"</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">token[]</span><span class="w"> </span><span class="na">semantics:labels:class</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"toaster"</span><span class="p">]</span>
+
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">"ChromeBody"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"SemanticsLabelsAPI:material"</span><span class="p">]</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">token[]</span><span class="w"> </span><span class="na">semantics:labels:material</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"metal"</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>A prim can resolve its label through its bound material, so a material label
+also satisfies <code class="docutils literal notranslate"><span class="pre">SL.001</span></code> for any geometry bound to that material. If some
+geometry is awkward to reach directly, label the material it uses instead.</p>
+<p><code class="docutils literal notranslate"><span class="pre">SL.MAT.001</span></code> belongs to <code class="docutils literal notranslate"><span class="pre">FET_011_RTX</span></code>, so it only applies once you have
+selected the NVIDIA conventions.</p>
+</section>
+<section id="using-wikidata-q-codes">
+<h3>Using Wikidata Q-codes<a class="headerlink" href="#using-wikidata-q-codes" title="Link to this heading">#</a></h3>
+<p>Everything so far has used free-text labels, which the contract allows. NVIDIA’s
+Omniverse asset libraries label with
+<a class="reference external" href="https://www.wikidata.org">Wikidata</a> Q-codes, under the instance name
+<code class="docutils literal notranslate"><span class="pre">wikidata_qcode</span></code>. If your assets will sit alongside those libraries, use the same
+taxonomy.</p>
+<p>A Q-code is a stable identifier for one Wikidata item. <code class="docutils literal notranslate"><span class="pre">Q1420</span></code> is “motor car”,
+<code class="docutils literal notranslate"><span class="pre">Q89</span></code> is “apple”. To find one, search wikidata.org for the term and read the
+Q-code off the item’s URL.</p>
+<p>Four things a code gives you that a free-text string cannot:</p>
+<ul class="simple">
+<li><p><strong>It survives renaming.</strong> The code stays the same even when the
+human-readable name is edited or the item is retitled.</p></li>
+<li><p><strong>It resolves in any language.</strong> Every item comes with labels, descriptions
+and aliases in hundreds of languages, so one code serves consumers reading
+English, Japanese, German or Hindi. You maintain no translation table.</p></li>
+<li><p><strong>It sits in a hierarchy.</strong> Items are linked by <em>instance of</em> and <em>subclass
+of</em>, so you can walk up from a leaf label to a broader category, from
+<code class="docutils literal notranslate"><span class="pre">aluminium</span></code> to <code class="docutils literal notranslate"><span class="pre">metal</span></code> to <code class="docutils literal notranslate"><span class="pre">chemical</span> <span class="pre">substance</span></code>. That lets you coarsen labels
+for training without re-annotating anything.</p></li>
+<li><p><strong>It disambiguates.</strong> Each item has a short description and a list of
+aliases, which is how you confirm you mean the animal and not the car brand.</p></li>
+</ul>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Apple"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"SemanticsLabelsAPI:wikidata_qcode"</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">token[]</span><span class="w"> </span><span class="na">semantics:labels:wikidata_qcode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"Q89"</span><span class="p">]</span><span class="w">   </span><span class="c1"># Q89 = apple</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Always comment the code.</strong> Nobody reading a diff can tell that <code class="docutils literal notranslate"><span class="pre">Q11426</span></code> means
+“metal”.</p>
+<p><code class="docutils literal notranslate"><span class="pre">SL.QCODE.001</span></code> only checks the format: <code class="docutils literal notranslate"><span class="pre">Q</span></code> followed by one or more digits. It
+never contacts wikidata.org, since a USD validator should not depend on network
+access. A well-formed code pointing at nothing real will still pass, so
+checking that a code means what you think it means is your job.</p>
+<p>This rule lives in <code class="docutils literal notranslate"><span class="pre">FET_046_STANDARD</span></code>, which you select only if you have
+committed to the Wikidata taxonomy.</p>
+</section>
+</section>
+<section id="assign-labels-in-blender">
+<h2>4. Assign labels in Blender<a class="headerlink" href="#assign-labels-in-blender" title="Link to this heading">#</a></h2>
+<p>The <a class="reference external" href="https://github.com/NVIDIA/simready-blender-add-on">SimReady Blender add-on</a>
+(CORE Artist Tools) searches Wikidata and applies labels from inside Blender,
+either to the asset as a whole or to individual objects. Its own reference
+documents the panels and how to reach them:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://nvidia.github.io/simready-blender-add-on/Blender_CORE_Addon_reference.html#simready-metadata">SimReady Metadata</a>
+for the asset-root label</p></li>
+<li><p><a class="reference external" href="https://nvidia.github.io/simready-blender-add-on/Blender_CORE_Addon_reference.html#object-data-wikidata-metadata">Object Data &gt; Wikidata Metadata</a>
+for per-object labels</p></li>
+</ul>
+<p>The add-on’s exporter writes the <code class="docutils literal notranslate"><span class="pre">SemanticsLabelsAPI</span></code> schemas as it saves.</p>
+<p>Labels applied to individual objects are re-authored from Blender’s own data
+during export, because Blender’s USD exporter does not carry the string arrays
+they are stored in. That happens inside the add-on; nothing is required of you.</p>
+<p>To export from a script or headless, take the add-on’s export path rather than
+Blender’s bare <code class="docutils literal notranslate"><span class="pre">wm.usd_export</span></code>, which does not run the hook and so writes no
+semantics:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">CORE_ArtistTools.addon.library.run_export_gui</span><span class="w"> </span><span class="kn">import</span> <span class="n">simready_usd_hook_active</span>
+
+<span class="k">with</span> <span class="n">simready_usd_hook_active</span><span class="p">():</span>
+    <span class="n">bpy</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">wm</span><span class="o">.</span><span class="n">usd_export</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="s2">"asset.usd"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Both need add-on 2026.8.0 or later.</p>
+</section>
+<section id="validate">
+<h2>5. Validate<a class="headerlink" href="#validate" title="Link to this heading">#</a></h2>
+<p>Run the same command as step 2, this time against the labeled asset:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-validate<span class="w"> </span>--rules-path<span class="w"> </span>nv_core/sr_specs/docs/capabilities<span class="w"> </span>--features-path<span class="w"> </span>nv_core/sr_specs/docs/features<span class="w"> </span>--profiles-path<span class="w"> </span>nv_core/sr_specs/docs/profiles<span class="w"> </span>--profile<span class="w"> </span>Prop-Robotics-Neutral<span class="w"> </span>--version<span class="w"> </span><span class="m">2</span>.3.0<span class="w"> </span>ASSET
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">FET_011_STANDARD</span></code> drops off the failing list. Nothing replaces it in the output;
+the feature stops being reported.</p>
+<p>Add <code class="docutils literal notranslate"><span class="pre">--output</span> <span class="pre">results.json</span></code> if you want a machine-readable report, or
+<code class="docutils literal notranslate"><span class="pre">--stamp-asset-validation</span></code> to record the outcome in the asset’s
+<code class="docutils literal notranslate"><span class="pre">customLayerData</span></code>. The
+<a class="reference internal" href="../validate_workflow.html"><span class="std std-doc">SimReady Validation Workflow</span></a> covers both.</p>
+</section>
+<section id="verify-at-runtime">
+<h2>6. Verify at runtime<a class="headerlink" href="#verify-at-runtime" title="Link to this heading">#</a></h2>
+<p>Two benchmarks work as a pair. The first renders the RTX semantic-segmentation
+pass, an extra render output recording which object each pixel belongs to, and
+measures how much of the frame carries a label. The second removes every
+semantics schema from the asset and renders the same frame again, which should
+come back empty.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-benchmark<span class="w"> </span>--assets<span class="w"> </span>ASSET<span class="w"> </span>--features<span class="w"> </span>FET_011
+</pre></div>
+</div>
+<p>Measured on the sample toaster, Isaac Sim 6.0.1:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>semantic_labels_seg_labelled   PASS
+  semantic_labels_on_coverage        0.280968
+
+semantic_labels_seg_stripped   PASS
+  semantic_labels_off_coverage       0.000022
+  semantic_labels_stripped_prims     8
+</pre></div>
+</div>
+<p>The toaster carries one label on its root prim, and 28% of the frame came back
+segmented, which is the whole silhouette of the asset. Every mesh beneath that
+root inherited the label, and you authored none of
+them. Removing the labels from all 8 label sources dropped coverage to
+0.002%, so nothing else in the scene was producing that segmentation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The two run as separate tests because Replicator’s orchestrator can only be
+stepped once per engine session, so a single test cannot render the same asset
+twice. Both tests need Isaac Sim 6.0 or later.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Do not try to verify labels by matching segmentation colors. The color assigned
+to each object is not stable between runs, which is why these benchmarks measure
+coverage instead.</p>
+</div>
+</section>
+<section id="common-mistakes">
+<h2>Common mistakes<a class="headerlink" href="#common-mistakes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Symptom</p></th>
+<th class="head"><p>Cause</p></th>
+<th class="head"><p>Fix</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SL.001</span></code> fails on an asset that visibly has labels</p></td>
+<td><p>The schema is applied but no value was authored.</p></td>
+<td><p>Author at least one value in <code class="docutils literal notranslate"><span class="pre">semantics:labels:&lt;taxonomy&gt;</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SL.001</span></code> fails on some meshes only</p></td>
+<td><p>Renderable geometry sits outside the labeled subtree.</p></td>
+<td><p>Label the outlying prims, or move the label up to a common ancestor.</p></td>
+</tr>
+<tr class="row-even"><td><p>Labels resolve to nonsense downstream</p></td>
+<td><p>The taxonomy name was written into the value.</p></td>
+<td><p>See below.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SL.002</span></code> fails</p></td>
+<td><p>A deprecated <code class="docutils literal notranslate"><span class="pre">SemanticsAPI</span></code> label has no modern equivalent.</p></td>
+<td><p>Add the equivalent <code class="docutils literal notranslate"><span class="pre">SemanticsLabelsAPI</span></code> label. The validator offers this as a suggestion.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SL.002</span></code> warns</p></td>
+<td><p>Both schemas hold the same value.</p></td>
+<td><p>Remove the deprecated schema and its <code class="docutils literal notranslate"><span class="pre">semantic:&lt;instance&gt;:params:*</span></code> attributes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SL.TIME.001</span></code> fails</p></td>
+<td><p>Labels are time-sampled.</p></td>
+<td><p>Author a static value. Time-varying labels are valid OpenUSD, but the RTX static-label pipeline does not read them.</p></td>
+</tr>
+<tr class="row-even"><td><p>Segmentation blank in the benchmark, though validation passed</p></td>
+<td><p>Isaac Sim earlier than 6.0 does not read <code class="docutils literal notranslate"><span class="pre">SemanticsLabelsAPI</span></code>.</p></td>
+<td><p>Run on 6.0 or later.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="the-instance-name-as-value-mistake">
+<h3>The instance-name-as-value mistake<a class="headerlink" href="#the-instance-name-as-value-mistake" title="Link to this heading">#</a></h3>
+<p>This pattern turns up in some shipped content, and it is wrong:</p>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># Wrong: the taxonomy name is sitting in the value slot</span>
+<span class="kt">token[]</span><span class="w"> </span><span class="na">semantics:labels:wikidata_qcode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"wikidata_qcode"</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The instance name after the last colon already says which taxonomy this is. The
+value is for what the thing <em>is</em>:</p>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="c1"># Right</span>
+<span class="kt">token[]</span><span class="w"> </span><span class="na">semantics:labels:wikidata_qcode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"Q89"</span><span class="p">]</span><span class="w">   </span><span class="c1"># Q89 = apple</span>
+</pre></div>
+</div>
+<p>No validator will catch the wrong version, because <code class="docutils literal notranslate"><span class="pre">&quot;wikidata_qcode&quot;</span></code> is a
+valid label string as far as <code class="docutils literal notranslate"><span class="pre">SL.001</span></code> is concerned. Only a human
+reading the file, or a downstream consumer getting nonsense back, will spot it.</p>
+<p>Current CORE Artist Tools writes the correct form, and its exporter migrates the
+broken pattern wherever it finds it. Assets made with older tooling may still
+have it, so check before you trust an inherited <code class="docutils literal notranslate"><span class="pre">.blend</span></code>.</p>
+</section>
+</section>
+<section id="where-to-go-next">
+<h2>Where to go next<a class="headerlink" href="#where-to-go-next" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../capabilities/semantic_labels/capability-semantic_labels.html"><span class="std std-doc">Semantic Labels capability</span></a> for the contract in full.</p></li>
+<li><p><a class="reference internal" href="../validate_workflow.html"><span class="std std-doc">SimReady Validation Workflow</span></a> for validator setup, JSON reports and stamping.</p></li>
+<li><p><a class="reference internal" href="../benchmark/benchmark.html"><span class="std std-doc">SimReady Benchmark</span></a> for the runtime test framework.</p></li>
+<li><p><a class="reference internal" href="../profiles/profiles.html"><span class="std std-doc">Profiles</span></a> for which profiles select the semantic-labels feature.</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../validate_workflow.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">SimReady Validation Workflow</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../adding_a_custom_taxonomy.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Adding a Custom Taxonomy</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-end-up-with">What you end up with</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-label-contract">1. The label contract</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-label-is-the-minimum">One label is the minimum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-taxonomy-is-the-instance-name">The taxonomy is the instance name</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-gets-checked">What gets checked</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#establish-a-baseline">2. Establish a baseline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assign-labels-in-python">3. Assign labels in Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#labeling-subcomponents">Labeling subcomponents</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-what-a-prim-resolves-to">Checking what a prim resolves to</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#labeling-materials">Labeling materials</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-wikidata-q-codes">Using Wikidata Q-codes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assign-labels-in-blender">4. Assign labels in Blender</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validate">5. Validate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-at-runtime">6. Verify at runtime</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-mistakes">Common mistakes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-instance-name-as-value-mistake">The instance-name-as-value mistake</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-to-go-next">Where to go next</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2025-2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

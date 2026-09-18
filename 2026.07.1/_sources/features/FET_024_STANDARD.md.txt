@@ -1,0 +1,74 @@
+# Feature: `FET_024_STANDARD`
+
+| **Property** | **Value** |
+|--------------|-----------|
+| Feature Name | `FET_024_STANDARD` |
+| Runtime | `STANDARD` |
+| Proprietary Techs | `None` |
+| Latest Version | `0.1.0` |
+
+## Description
+
+Defines the Standard base-articulation contract: the articulated asset must have exactly one UsdPhysics.ArticulationRootAPI application for the mechanism.
+
+## Dependency Graph
+
+This feature has no dependencies and no other features depend on it directly.
+
+## Use Cases
+
+Products or workflows that consume this feature:
+
+- SimReady validation verifies FET_024_STANDARD articulation-root requirements.
+- `simready-foundation-conform-fet-024-standard` repairs articulation-root placement on staged robot assets.
+
+## Requirements
+
+### Version 0.1.0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+- Robot Body Neutral v1.0.0, v1.1.0
+- Robot Body v2.0.0 optional
+- Robot Gripper Neutral v0.1.0, v0.2.0
+- Robot Gripper v2.0.0 optional
+
+#### Feature Dependencies
+
+None.
+
+#### Requirement List
+
+* Capability: [Physics Bodies/Base Articulation](../capabilities/physics_bodies/base_articulation/capability-base-articulation.md)
+
+| Requirement | Requirement Doc | Rule |
+|-------------|-----------------|------|
+| `BA.001` | [BA.001](../capabilities/physics_bodies/base_articulation/requirements/has-articulation-root.md) | [Implementation](../capabilities/physics_bodies/base_articulation/validation.py) |
+
+</details>
+
+## Pipelines
+
+Source file type:
+
+- `.usd`, `.usda`, `.usdc`, package source folder, or package root as applicable.
+
+Validation or runtime pipeline:
+
+- SimReady validation verifies FET_024_STANDARD articulation-root requirements.
+- `simready-foundation-conform-fet-024-standard` repairs articulation-root placement on staged robot assets.
+
+## Samples
+
+- [`ur10` PhysX robot demonstrating the Standard base-articulation contract](../../../../../sample_content/common_assets/robots_general/ur10/simready_usd/ur10.usd)
+
+## Benchmarks
+
+- None.
+
+## Adapters
+
+None.

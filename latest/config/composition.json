@@ -1,0 +1,29 @@
+{
+    "capability": {
+        "id": "composition",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "ISA.001",
+                "version": null,
+                "name": "composition",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/isaac_sim/composition/requirements/composition.html",
+                    "internal_path": "capabilities/isaac_sim/composition/requirements/composition.md"
+                },
+                "message": "The asset must be composed correctly for Isaac Sim using one of the supported\nlayer layouts and a reference or payload arc to its base layer.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "capabilities/isaac_sim/composition/capability-composition.html",
+            "internal_path": "capabilities/isaac_sim/composition/capability-composition.md"
+        }
+    }
+}

@@ -1,0 +1,1206 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" data-theme="auto">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Runtime Physics Isolation Matrix &#8212; Content Capabilities</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/_style.css?v=e1c02e80" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tags.css?v=f64b827a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+
+
+    <script src="../../../_static/documentation_options.js?v=f9526036"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'capabilities/core/runtime_variants/runtime-physics-isolation-matrix';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.07.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+
+    <link rel="icon" href="../../../_static/favicon.png"/>
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Visualization" href="../../visualization/visualization.html" />
+    <link rel="prev" title="runtime-physics-isolation" href="requirements/runtime-physics-isolation.html" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2026.07.1" />
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+
+
+  </head>
+
+  <body data-default-mode="auto">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Content Capabilities - Home"/>
+    <img src="../../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Content Capabilities - Home"/>
+  
+  
+    <p class="title logo__title">Content Capabilities</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-4"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-4"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-4"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-4">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Content Capabilities - Home"/>
+    <img src="../../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Content Capabilities - Home"/>
+  
+  
+    <p class="title logo__title">Content Capabilities</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-5"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-5"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-5"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-5">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-6"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-6"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-6"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-6">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../changelist.html">Release notes</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../guides/guides.html">Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../guides/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../guides/tiers.html">SimReady Foundation Tiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../guides/foundation_pypi.html">SimReady Foundation PyPI Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../guides/validate_workflow.html">SimReady Validation Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../guides/semantic_labels/semantic_labels.html">Semantic Labels Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../guides/adding_a_custom_taxonomy.html">Adding a Custom Taxonomy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../guides/packaging_workflow.html">SimReady Packaging Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../guides/acceptance_workflow.html">SimReady Acceptance Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../guides/multiphysics_solvers.html">Multiple Physics Solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../guides/features/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../guides/feature_adapters/feature_adapters.html">Feature Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../guides/profiles/profiles.html">Profiles</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../guides/benchmark/benchmark.html">SimReady Benchmark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../guides/benchmark/overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../guides/benchmark/pipeline.html">Pipeline and Stages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../guides/benchmark/running.html">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../guides/benchmark/reading-reports.html">Reading Reports</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../guides/benchmark/tests/tests.html">Tests Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../guides/benchmark/tests/fet001-visual.html">FET001 Visual</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../guides/benchmark/tests/fet003-physics.html">FET003 Physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../guides/benchmark/tests/fet004-multibody.html">FET004 Multibody</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../guides/benchmark/tests/fet005-grasp.html">FET005 Grasp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../guides/benchmark/tests/fet011-semantic-labels.html">FET011 Semantic Labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../guides/benchmark/tests/fet022-driven-joints.html">FET022 Driven Joints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../guides/benchmark/tests/fet028-gripper.html">FET028 Gripper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../guides/benchmark/tests/authoring.html">Authoring runtime tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../guides/benchmark/tests/experimental.html">Experimental and disabled tests</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../guides/SimReady_learning_workflow.html">SimReady Learning Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../guides/naming_conventions.html">Naming Conventions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../guides/development.html">Development Workflows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../guides/features_expansion_workflow.html">Features Expansion Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../guides/profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../capabilities.html">Capabilities</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../core.html">Core</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="../sim_ready/capability-sim_ready.html">SimReady</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../sim_ready/requirements.html">SimReady Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sim_ready/requirements/metadata-whitelist.html">metadata-whitelist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sim_ready/requirements/thumbnail-exist.html">Thumbnail Exist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sim_ready/requirements/nested-simready-metadata.html">nested-simready-metadata</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../units/capability-units.html">Units</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../units/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../atomic_asset/capability-atomic_asset.html">Atomic Asset</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../atomic_asset/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../atomic_asset/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../naming_paths/capability-naming_paths.html">Naming and Paths</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../naming_paths/requirements.html">Naming and Paths Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../naming_paths/requirements/prim-naming-convention.html">prim-naming-convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../naming_paths/requirements/file-naming-convention.html">file-naming-convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../naming_paths/requirements/directory-structure.html">directory-structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../naming_paths/requirements/path-length-limits.html">path-length-limits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../naming_paths/requirements/asset-folder-structure.html">asset-folder-structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../naming_paths/requirements/metadata-location.html">metadata-location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../naming_paths/requirements/relative-paths.html">relative-paths</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="capability-runtime_variants.html">Runtime Variants</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="requirements.html">Runtime Variants Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="requirements/physx-variant-set.html">physx-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="requirements/physx-runtime-payload.html">physx-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="requirements/physx-variant-metadata.html">physx-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="requirements/newton-variant-set.html">newton-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="requirements/newton-runtime-payload.html">newton-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="requirements/newton-variant-metadata.html">newton-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="requirements/mujoco-variant-set.html">mujoco-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="requirements/mujoco-runtime-payload.html">mujoco-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="requirements/mujoco-variant-metadata.html">mujoco-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="requirements/runtime-variant-section-purity.html">runtime-variant-section-purity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="requirements/runtime-physics-isolation.html">runtime-physics-isolation</a></li>
+<li class="toctree-l4 current active"><a class="current reference internal" href="#">Runtime Physics Isolation Matrix</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../visualization/visualization.html">Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../visualization/geometry/capability-geometry.html">Geometry</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../visualization/geometry/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../visualization/geometry/creators_overview.html">Creators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../visualization/geometry/developers_overview.html">Developers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../visualization/materials/capability-materials.html">Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../visualization/materials/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../visualization/materials/developers.html">Developers</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../isaac_sim/isaac_sim.html">Isaac Sim</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../isaac_sim/composition/capability-composition.html">Composition</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../isaac_sim/composition/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../isaac_sim/ros_bridge/capability-ros_bridge.html">ROS Bridge</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../isaac_sim/ros_bridge/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../isaac_sim/robot_materials/capability-robot_materials.html">Robot Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../isaac_sim/robot_materials/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../isaac_sim/robot_core/capability-robot_core.html">Robot Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../isaac_sim/robot_core/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../physics_bodies/physics_bodies.html">Physics Bodies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../physics_bodies/base_articulation/capability-base-articulation.html">Base Articulation</a></li>
+
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../physics_bodies/physics_rigid_bodies/capability-physics_rigid_bodies.html">Rigid Bodies and Colliders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../physics_bodies/physics_rigid_bodies/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../physics_bodies/physics_rigid_bodies/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../physics_bodies/physics_colliders/capability-collider_approximations.html">Collider Approximations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../physics_bodies/physics_colliders/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../physics_bodies/physics_colliders/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../physics_bodies/physics_joints/capability-physics_joints.html">Joints and Articulations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../physics_bodies/physics_joints/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../physics_bodies/physics_joints/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../physics_bodies/physics_driven_joints/capability-physics_driven_joints.html">Driven Joints</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../physics_bodies/physics_driven_joints/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../physics_bodies/physics_materials/capability-physics_materials.html">Physics Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../physics_bodies/physics_materials/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../physics_bodies/physics_materials/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../physics_bodies/physics_graspable/capability-physics_graspable.html">Graspable Vectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../physics_bodies/physics_graspable/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../physics_bodies/physics_graspable/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../physics_bodies/physics_grippers/capability-physics_grippers.html">Grippers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../physics_bodies/physics_grippers/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../hierarchy/hierarchy.html">Hierarchy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../hierarchy/capability-hierarchy.html">Hierarchy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../hierarchy/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hierarchy/creators_overview.html">Creators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../hierarchy/developers_overview.html">Developers</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../nonvisual_sensors/nonvisual_sensors.html">Non-Visual Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../nonvisual_sensors/nonvisual_materials/capability-nonvisual_materials.html">Non-Visual Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../nonvisual_sensors/nonvisual_materials/requirements.html">Non-Visual Materials Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../nonvisual_sensors/nonvisual_materials/nonvisual_attributes_table.html">Non-Visual Sensor Attributes Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../nonvisual_sensors/nonvisual_materials/requirements/material-base.html">material-base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../nonvisual_sensors/nonvisual_materials/requirements/material-coating.html">material-coating</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../nonvisual_sensors/nonvisual_materials/requirements/material-attributes.html">material-attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../nonvisual_sensors/nonvisual_materials/requirements/material-time.html">material-time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../nonvisual_sensors/nonvisual_materials/requirements/material-binding.html">material-binding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../nonvisual_sensors/nonvisual_materials/requirements/material-consistency.html">material-consistency</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../semantic_labels/capability-semantic_labels.html">Semantic Labels</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../semantic_labels/requirements.html">Semantic Labels Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../semantic_labels/requirements/semantic-label-capability.html">semantic-label-capability</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../semantic_labels/requirements/semantic-label-deprecated-schema.html">semantic-label-deprecated-schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../semantic_labels/requirements/semantic-label-qcode-valid.html">semantic-label-qcode-valid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../semantic_labels/requirements/semantic-label-schema.html">semantic-label-schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../semantic_labels/requirements/semantic-label-time.html">semantic-label-time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../semantic_labels/requirements/semantic-label-material.html">semantic-label-material</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../../semantic_labels/requirements/semantic-label-capability.html">semantic-label-capability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../semantic_labels/requirements/semantic-label-deprecated-schema.html">semantic-label-deprecated-schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../semantic_labels/requirements/semantic-label-qcode-valid.html">semantic-label-qcode-valid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../semantic_labels/requirements/semantic-label-schema.html">semantic-label-schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../semantic_labels/requirements/semantic-label-time.html">semantic-label-time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../semantic_labels/requirements/semantic-label-material.html">semantic-label-material</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../dataset_taxonomies/capability-dataset_taxonomies.html">Dataset Taxonomies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../dataset_taxonomies/requirements.html">Dataset Taxonomies Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../dataset_taxonomies/requirements/coco-labels.html">coco-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../dataset_taxonomies/requirements/cityscapes-labels.html">cityscapes-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../dataset_taxonomies/requirements/ade20k-labels.html">ade20k-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../dataset_taxonomies/requirements/pascal-voc-labels.html">pascal-voc-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../dataset_taxonomies/requirements/sunrgbd-labels.html">sunrgbd-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../dataset_taxonomies/requirements/imagenet-labels.html">imagenet-labels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset_taxonomies/requirements/coco-labels.html">coco-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset_taxonomies/requirements/cityscapes-labels.html">cityscapes-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset_taxonomies/requirements/ade20k-labels.html">ade20k-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset_taxonomies/requirements/pascal-voc-labels.html">pascal-voc-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset_taxonomies/requirements/sunrgbd-labels.html">sunrgbd-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dataset_taxonomies/requirements/imagenet-labels.html">imagenet-labels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../packaging/packaging.html">Packaging</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../packaging/packaging_core/capability-packaging_core.html">Packaging Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../packaging/packaging_core/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../packaging/conformance_metadata/capability-conformance_metadata.html">Conformance Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../packaging/conformance_metadata/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../packaging/packaging_introspection/capability-packaging_introspection.html">Packaging Introspection</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../packaging/packaging_introspection/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../features/features.html">Features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/feature-dependency-graph.html">Feature dependency graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_000_STANDARD.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_000_PHYSX.html">Core (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_000_NEWTON.html">Core (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_000_MUJOCO.html">Core (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_000_ISAAC.html">Core (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_001_STANDARD.html">Minimal Placeable Visual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_002_STANDARD.html">Posable Bodies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_003_STANDARD.html">Rigid Body Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_003_PHYSX.html">Rigid Body Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_003_NEWTON.html">Rigid Body Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_003_MUJOCO.html">Rigid Body Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_004_STANDARD.html">Simulate Multi-Body Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_004_PHYSX.html">Simulate Multi-Body Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_004_NEWTON.html">Simulate Multi-Body Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_004_MUJOCO.html">Simulate Multi-Body Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_004_ROBOT_PHYSX.html">Simulate Multi-Body Physics (Robot PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_004_ROBOT_NEWTON.html">Simulate Multi-Body Physics (Robot Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_004_ROBOT_MUJOCO.html">Simulate Multi-Body Physics (Robot MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_005_STANDARD.html">Simulate Grasp Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_006_STANDARD.html">Materials (USDPreviewSurface)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_006_MDL.html">Materials (MDL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_007_STANDARD.html">Non-Visual Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_011_STANDARD.html">Semantic Labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_011_RTX.html">Semantic Labels (RTX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_046_STANDARD.html">Wikidata Q-Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_040_STANDARD.html">Open Taxonomy COCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_041_STANDARD.html">Open Taxonomy Cityscapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_042_STANDARD.html">Open Taxonomy ADE20K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_043_STANDARD.html">Open Taxonomy PASCAL VOC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_044_STANDARD.html">Open Taxonomy SUN RGB-D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_045_STANDARD.html">Open Taxonomy ImageNet-1K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_021_ISAAC.html">Robot Core (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_022_STANDARD.html">Driven Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_022_PHYSX.html">Driven Joints (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_022_NEWTON.html">Driven Joints (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_022_MUJOCO.html">Driven Joints (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_022_ISAAC.html">Driven Joints (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_023_ISAAC.html">Robot Materials (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_024_STANDARD.html">Base Articulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_024_PHYSX.html">Base Articulation (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_024_NEWTON.html">Base Articulation (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_024_MUJOCO.html">Base Articulation (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_025_ROS.html">ROS Ready (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_028_STANDARD.html">Gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_028_ISAAC.html">Gripper (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_028_MUJOCO.html">Gripper (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_030_STANDARD.html">Packaging Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_031_STANDARD.html">Self-contained Package Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_032_STANDARD.html">Packaging Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_033_STANDARD.html">Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_100_ISAAC.html">IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/FET_101_ISAAC.html">Robot IsaacSim Composition</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../profiles/profiles.html">Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles/prop-robotics-neutral.html">Prop Robotics Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles/prop-robotics-physx.html">Prop Robotics Physx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles/prop-robotics-isaac.html">Prop Robotics Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles/robotics-prop.html">Robotics Prop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles/robot-body-neutral.html">Robot Body Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles/robot-body-runnable.html">Robot Body Runnable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles/robot-body-isaac.html">Robot Body Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles/robot-body.html">Robot Body</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles/robot-gripper-neutral.html">Robot Gripper Neutral</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles/robot-gripper-isaac.html">Robot Gripper Isaac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles/open-taxonomy-coco.html">Open Taxonomy COCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles/open-taxonomy-cityscapes.html">Open Taxonomy Cityscapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles/open-taxonomy-ade20k.html">Open Taxonomy ADE20K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles/open-taxonomy-pascal_voc.html">Open Taxonomy PASCAL VOC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles/open-taxonomy-sunrgbd.html">Open Taxonomy SUN RGB-D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles/open-taxonomy-imagenet_1k.html">Open Taxonomy ImageNet-1K</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../indexes/indexes.html">Indexes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../indexes/capability_status_index.html">Capability Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../indexes/requirements_index.html">Requirements Index</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../capabilities.html" class="nav-link">Capabilities</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../core.html" class="nav-link">Core</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="capability-runtime_variants.html" class="nav-link">Runtime Variants</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Runtime Physics Isolation Matrix</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="runtime-physics-isolation-matrix">
+<h1>Runtime Physics Isolation Matrix<a class="headerlink" href="#runtime-physics-isolation-matrix" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p><strong>Status: enforced.</strong> This document is the policy guide for the runtime
+physics isolation rules <code class="docutils literal notranslate"><span class="pre">RV.010</span></code> (variant-section purity) and <code class="docutils literal notranslate"><span class="pre">RV.011</span></code>
+(composed-stage isolation), implemented in
+<code class="docutils literal notranslate"><span class="pre">runtime_variants/validation.py</span></code> and required by the <code class="docutils literal notranslate"><span class="pre">FET_000_PHYSX</span></code>,
+<code class="docutils literal notranslate"><span class="pre">FET_000_NEWTON</span></code>, and <code class="docutils literal notranslate"><span class="pre">FET_000_MUJOCO</span></code> features. The allow / require / forbid
+table below is the authoritative policy those checkers apply.</p>
+</div></blockquote>
+<section id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Link to this heading">#</a></h2>
+<p>When a single physics runtime variant is selected on a SimReady asset, the
+<strong>composed</strong> stage must contain only the schemas and attributes that the
+selected runtime can consume, plus the runtime-neutral base. Anything else is a
+leak that can silently break the runtime (for example a stray
+<code class="docutils literal notranslate"><span class="pre">physics:approximation</span> <span class="pre">=</span> <span class="pre">&quot;sdf&quot;</span></code> under Newton, or a value other than
+<code class="docutils literal notranslate"><span class="pre">convexHull</span></code> under MuJoCo).</p>
+<p>The variant scaffolding rules (<code class="docutils literal notranslate"><span class="pre">RV.001</span></code>–<code class="docutils literal notranslate"><span class="pre">RV.009</span></code>) only check the variant set,
+payload location, and metadata; they never inspect what the composed stage
+actually carries. This matrix is the missing policy: the authoritative
+allow / require / forbid table, per runtime, at the composed-stage level.</p>
+</section>
+<section id="scope-and-model">
+<h2>Scope and model<a class="headerlink" href="#scope-and-model" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Evaluated on the composed stage, per selection.</strong> For each declared physics
+variant <code class="docutils literal notranslate"><span class="pre">V</span></code>, compose with <code class="docutils literal notranslate"><span class="pre">V</span> <span class="pre">=</span> <span class="pre">Enabled</span></code> and every other physics variant set
+<code class="docutils literal notranslate"><span class="pre">=</span> <span class="pre">Disabled</span></code>. The <em>target runtime</em> is <code class="docutils literal notranslate"><span class="pre">V</span></code>. Classify every authored
+physics-domain schema/attribute on the composed prims.</p></li>
+<li><p><strong>Neutral / all-Disabled</strong> is treated as its own target (“Standard”): no
+runtime is selected, so only runtime-neutral data may be present.</p></li>
+<li><p>Composition strength (LIVRPS) matters: a value can leak from the neutral base,
+from another variant set left <code class="docutils literal notranslate"><span class="pre">Disabled</span></code>, or from a payload. This check does
+not care <em>where</em> the opinion came from, only what the composed result is.</p></li>
+</ul>
+<section id="classification-legend">
+<h3>Classification legend<a class="headerlink" href="#classification-legend" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Symbol</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>REQ</strong></p></td>
+<td><p>Required for a conforming asset of this runtime (where applicable to the prim).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>OK</strong></p></td>
+<td><p>Allowed to be present.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>N/A</strong></p></td>
+<td><p>Not consumed by this runtime; expected absent. Presence is a warning (leak), not necessarily fatal.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>FORBID</strong></p></td>
+<td><p>Must not be present under this selection; presence is a failure (pollution / conflict).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="namespace-legend">
+<h2>Namespace legend<a class="headerlink" href="#namespace-legend" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Group</p></th>
+<th class="head"><p>Identifies by</p></th>
+<th class="head"><p>Examples</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Neutral (OpenUSD)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">UsdPhysics.*</span></code> schemas, <code class="docutils literal notranslate"><span class="pre">physics:</span></code> attribute namespace, <code class="docutils literal notranslate"><span class="pre">UsdGeom</span></code> collider geometry</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PhysicsCollisionAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">PhysicsMeshCollisionAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">PhysicsRigidBodyAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">PhysicsMassAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">PhysicsArticulationRootAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">PhysicsScene</span></code>, <code class="docutils literal notranslate"><span class="pre">PhysicsJoint</span></code>, <code class="docutils literal notranslate"><span class="pre">PhysicsDriveAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">PhysicsMaterialAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">physics:mass</span></code>, <code class="docutils literal notranslate"><span class="pre">physics:density</span></code>, <code class="docutils literal notranslate"><span class="pre">physics:collisionEnabled</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>PhysX</p></td>
+<td><p>schema prefix <code class="docutils literal notranslate"><span class="pre">Physx</span></code>, attribute prefixes <code class="docutils literal notranslate"><span class="pre">physx*:</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PhysxCollisionAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">PhysxSDFMeshCollisionAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">PhysxMeshMergeCollisionAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">PhysxSceneAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">physxCollision:*</span></code>, <code class="docutils literal notranslate"><span class="pre">physxScene:*</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Newton</p></td>
+<td><p>schema prefix <code class="docutils literal notranslate"><span class="pre">Newton</span></code>, attribute prefix <code class="docutils literal notranslate"><span class="pre">newton:</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NewtonCollisionAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">NewtonMeshCollisionAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">NewtonSDFCollisionAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">NewtonArticulationRootAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">NewtonSceneAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">newton:contactGap</span></code>, <code class="docutils literal notranslate"><span class="pre">newton:sdf*</span></code>, <code class="docutils literal notranslate"><span class="pre">newton:selfCollisionEnabled</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>MuJoCo</p></td>
+<td><p>schema prefix <code class="docutils literal notranslate"><span class="pre">Mjc</span></code>, attribute prefix <code class="docutils literal notranslate"><span class="pre">mjc:</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MjcCollisionAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">MjcMeshCollisionAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">MjcSceneAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">MjcJointAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">mjc:group</span></code>, <code class="docutils literal notranslate"><span class="pre">mjc:inertia</span></code>, <code class="docutils literal notranslate"><span class="pre">mjc:option:*</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="master-matrix">
+<h2>Master matrix<a class="headerlink" href="#master-matrix" title="Link to this heading">#</a></h2>
+<p>Rows are namespace groups; columns are the target runtime of the composed
+stage.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Namespace group</p></th>
+<th class="head"><p>Standard (neutral)</p></th>
+<th class="head"><p>PhysX</p></th>
+<th class="head"><p>Newton</p></th>
+<th class="head"><p>MuJoCo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Neutral <code class="docutils literal notranslate"><span class="pre">UsdPhysics.*</span></code> / <code class="docutils literal notranslate"><span class="pre">physics:*</span></code></p></td>
+<td><p>REQ/OK</p></td>
+<td><p>OK</p></td>
+<td><p>OK</p></td>
+<td><p>OK</p></td>
+</tr>
+<tr class="row-odd"><td><p>PhysX schemas / <code class="docutils literal notranslate"><span class="pre">physx*:</span></code> attrs</p></td>
+<td><p>FORBID</p></td>
+<td><p>REQ/OK</p></td>
+<td><p>FORBID</p></td>
+<td><p>FORBID</p></td>
+</tr>
+<tr class="row-even"><td><p>Newton collision (<code class="docutils literal notranslate"><span class="pre">NewtonCollisionAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">newton:contact*</span></code>)</p></td>
+<td><p>FORBID</p></td>
+<td><p>FORBID</p></td>
+<td><p>REQ/OK</p></td>
+<td><p>OK (inherited by <code class="docutils literal notranslate"><span class="pre">MjcCollisionAPI</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Newton mesh/SDF (<code class="docutils literal notranslate"><span class="pre">NewtonMeshCollisionAPI</span></code> / <code class="docutils literal notranslate"><span class="pre">NewtonSDFCollisionAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">newton:sdf*</span></code>)</p></td>
+<td><p>FORBID</p></td>
+<td><p>FORBID</p></td>
+<td><p>REQ/OK (exactly one per mesh)</p></td>
+<td><p>FORBID (not inherited by <code class="docutils literal notranslate"><span class="pre">MjcCollisionAPI</span></code>; MuJoCo uses <code class="docutils literal notranslate"><span class="pre">MjcMeshCollisionAPI</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p>Newton scene / articulation (<code class="docutils literal notranslate"><span class="pre">NewtonSceneAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">NewtonArticulationRootAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">newton:selfCollisionEnabled</span></code>)</p></td>
+<td><p>FORBID</p></td>
+<td><p>FORBID</p></td>
+<td><p>OK</p></td>
+<td><p>FORBID</p></td>
+</tr>
+<tr class="row-odd"><td><p>MuJoCo collision (<code class="docutils literal notranslate"><span class="pre">MjcCollisionAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">MjcMeshCollisionAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">mjc:group</span></code>, <code class="docutils literal notranslate"><span class="pre">mjc:*</span></code> collider)</p></td>
+<td><p>FORBID</p></td>
+<td><p>FORBID</p></td>
+<td><p>FORBID (strict; see Resolved Decision 1)</p></td>
+<td><p>REQ/OK</p></td>
+</tr>
+<tr class="row-even"><td><p>MuJoCo scene (<code class="docutils literal notranslate"><span class="pre">MjcSceneAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">mjc:option:*</span></code>)</p></td>
+<td><p>FORBID</p></td>
+<td><p>FORBID</p></td>
+<td><p>FORBID</p></td>
+<td><p>OK</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MjcArticulationRootAPI</span></code> / <code class="docutils literal notranslate"><span class="pre">MjcArticulationRoot</span></code> type</p></td>
+<td><p>FORBID</p></td>
+<td><p>FORBID</p></td>
+<td><p>FORBID</p></td>
+<td><p>FORBID (<code class="docutils literal notranslate"><span class="pre">MUJOCO.BA.001</span></code>; MuJoCo has no such schema)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">NewtonJointAPI</span></code></p></td>
+<td><p>FORBID</p></td>
+<td><p>FORBID</p></td>
+<td><p>FORBID (<code class="docutils literal notranslate"><span class="pre">NEWTON.DJ.002</span></code>; Newton defines no such API)</p></td>
+<td><p>FORBID</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Notes:</p>
+<ul class="simple">
+<li><p>“REQ” applies only where the prim role makes it required (e.g. a mesh collider
+or the articulation root). A prop with no articulation does not require
+articulation-root schemas. A <code class="docutils literal notranslate"><span class="pre">UsdPhysics.Scene</span></code> is a scenario-level concern and
+is not required for a single asset, so its runtime scene APIs are <code class="docutils literal notranslate"><span class="pre">OK</span></code> (allowed)
+rather than required.</p></li>
+<li><p>Neutral data is always OK because every runtime layers on top of it.</p></li>
+</ul>
+</section>
+<section id="value-level-attribute-rules">
+<h2>Value-level attribute rules<a class="headerlink" href="#value-level-attribute-rules" title="Link to this heading">#</a></h2>
+<p>Some attributes are neutral by <em>name</em> but runtime-sensitive by <em>value</em>. These
+need value checks, not just presence checks.</p>
+<section id="physics-approximation">
+<h3><code class="docutils literal notranslate"><span class="pre">physics:approximation</span></code><a class="headerlink" href="#physics-approximation" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Target</p></th>
+<th class="head"><p>Rule</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Standard (neutral)</p></td>
+<td><p>Unauthored, or a neutral OpenUSD token (<code class="docutils literal notranslate"><span class="pre">none</span></code>, <code class="docutils literal notranslate"><span class="pre">convexHull</span></code>, <code class="docutils literal notranslate"><span class="pre">convexDecomposition</span></code>, <code class="docutils literal notranslate"><span class="pre">boundingSphere</span></code>, <code class="docutils literal notranslate"><span class="pre">boundingCube</span></code>, <code class="docutils literal notranslate"><span class="pre">meshSimplification</span></code>). <code class="docutils literal notranslate"><span class="pre">sdf</span></code> is a PhysX extension token and should not appear on the neutral base.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PhysX</p></td>
+<td><p>Any valid PhysX approximation token. When <code class="docutils literal notranslate"><span class="pre">sdf</span></code>, pair with <code class="docutils literal notranslate"><span class="pre">PhysxSDFMeshCollisionAPI</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>Newton</p></td>
+<td><p><strong>Not consumed by Newton.</strong> Newton selects its representation from <code class="docutils literal notranslate"><span class="pre">NewtonMeshCollisionAPI</span></code> / <code class="docutils literal notranslate"><span class="pre">NewtonSDFCollisionAPI</span></code> + <code class="docutils literal notranslate"><span class="pre">newton:sdf*</span></code>. Expected absent; <code class="docutils literal notranslate"><span class="pre">sdf</span></code> here is misleading and should FORBID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MuJoCo</p></td>
+<td><p><strong>Must equal <code class="docutils literal notranslate"><span class="pre">convexHull</span></code></strong> when <code class="docutils literal notranslate"><span class="pre">MjcCollisionAPI</span></code> + <code class="docutils literal notranslate"><span class="pre">PhysicsMeshCollisionAPI</span></code> are present (<code class="docutils literal notranslate"><span class="pre">MUJOCO.COL.002</span></code>).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>This attribute is the canonical example of why the neutral base must not carry
+runtime-interpreted attributes: promoting a single <code class="docutils literal notranslate"><span class="pre">physics:approximation</span></code> to
+the base forces every runnable to override it to a runtime-valid value, and
+Newton would have to override an attribute it does not even consume. Preferred
+design: leave <code class="docutils literal notranslate"><span class="pre">physics:approximation</span></code> off the neutral base and author it only in
+the runnables that consume it (PhysX <code class="docutils literal notranslate"><span class="pre">sdf</span></code>, MuJoCo <code class="docutils literal notranslate"><span class="pre">convexHull</span></code>; Newton none).</p>
+</section>
+</section>
+<section id="documented-sharing-inheritance-why-some-cross-runtime-cells-are-ok">
+<h2>Documented sharing / inheritance (why some cross-runtime cells are OK)<a class="headerlink" href="#documented-sharing-inheritance-why-some-cross-runtime-cells-are-ok" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">MjcCollisionAPI</span></code> prepends <code class="docutils literal notranslate"><span class="pre">NewtonCollisionAPI</span></code></strong> in the official MuJoCo USD
+schema (see <code class="docutils literal notranslate"><span class="pre">physics_bodies/physics_rigid_bodies/requirements/mujoco-collider-api.md</span></code>).
+MuJoCo collision <em>is-a</em> Newton collision, so under MuJoCo the inherited
+<code class="docutils literal notranslate"><span class="pre">NewtonCollisionAPI</span></code> and its <code class="docutils literal notranslate"><span class="pre">newton:contact*</span></code> attributes are legitimately
+present. This inheritance is one-directional (Mjc → Newton); it does <strong>not</strong>
+by itself justify a Newton layer carrying MuJoCo collision data.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">NewtonSDFCollisionAPI</span></code> and <code class="docutils literal notranslate"><span class="pre">NewtonMeshCollisionAPI</span></code> inherit
+<code class="docutils literal notranslate"><span class="pre">NewtonCollisionAPI</span></code></strong> (see <code class="docutils literal notranslate"><span class="pre">newton-collider-api.md</span></code>). Listing
+<code class="docutils literal notranslate"><span class="pre">NewtonCollisionAPI</span></code> alongside the SDF variant is redundant, and a single mesh
+must not carry both mesh and SDF representations.</p></li>
+</ul>
+</section>
+<section id="negative-rules-already-in-force-encode-as-is">
+<h2>Negative rules already in force (encode as-is)<a class="headerlink" href="#negative-rules-already-in-force-encode-as-is" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MUJOCO.BA.001</span></code>: no prim may apply <code class="docutils literal notranslate"><span class="pre">MjcArticulationRootAPI</span></code> or use the
+<code class="docutils literal notranslate"><span class="pre">MjcArticulationRoot</span></code> type; MuJoCo articulation roots stay on
+<code class="docutils literal notranslate"><span class="pre">UsdPhysics.ArticulationRootAPI</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NEWTON.DJ.002</span></code>: <code class="docutils literal notranslate"><span class="pre">NewtonJointAPI</span></code> must not be applied; Newton has no such
+schema.</p></li>
+</ul>
+</section>
+<section id="resolved-decisions">
+<h2>Resolved Decisions<a class="headerlink" href="#resolved-decisions" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Strict Newton isolation.</strong> A Newton runtime layer uses only <code class="docutils literal notranslate"><span class="pre">Newton*</span></code>
+collision schemas and <code class="docutils literal notranslate"><span class="pre">newton:*</span></code> attributes. <code class="docutils literal notranslate"><span class="pre">Mjc*</span></code> schemas and <code class="docutils literal notranslate"><span class="pre">mjc:*</span></code>
+attributes under a Newton selection are <strong>FORBID</strong>. The one-directional
+inheritance (<code class="docutils literal notranslate"><span class="pre">Mjc</span> <span class="pre">→</span> <span class="pre">Newton</span></code>) does not license a Newton layer to carry the
+more-specific MuJoCo schema. <em>Applied:</em> <code class="docutils literal notranslate"><span class="pre">obs_orange_a02/runnables/physics/newton.usda</span></code>
+was updated to drop <code class="docutils literal notranslate"><span class="pre">MjcCollisionAPI</span></code> and <code class="docutils literal notranslate"><span class="pre">mjc:group</span></code>, leaving
+<code class="docutils literal notranslate"><span class="pre">[&quot;NewtonCollisionAPI&quot;,</span> <span class="pre">&quot;PhysicsMeshCollisionAPI&quot;,</span> <span class="pre">&quot;NewtonMeshCollisionAPI&quot;]</span></code></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">newton:contactGap</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Severity: warn on inert leaks, fail on conflicts and foreign schemas.</strong></p>
+<ul class="simple">
+<li><p><strong>Warning (<code class="docutils literal notranslate"><span class="pre">N/A</span></code>):</strong> a not-consumed but harmless attribute, e.g. a neutral
+<code class="docutils literal notranslate"><span class="pre">physics:approximation</span></code> token appearing under Newton.</p></li>
+<li><p><strong>Failure (<code class="docutils literal notranslate"><span class="pre">FORBID</span></code>):</strong> any foreign-runtime schema/attribute for the
+selected runtime, and any value conflict (e.g. <code class="docutils literal notranslate"><span class="pre">physics:approximation=&quot;sdf&quot;</span></code>
+under Newton, or any non-<code class="docutils literal notranslate"><span class="pre">convexHull</span></code> value under MuJoCo).</p></li>
+</ul>
+</li>
+<li><p><strong>Neutral base is strictly runtime-agnostic.</strong> The neutral base
+(all variants <code class="docutils literal notranslate"><span class="pre">Disabled</span></code>) may carry only neutral <code class="docutils literal notranslate"><span class="pre">UsdPhysics</span></code> / <code class="docutils literal notranslate"><span class="pre">physics:*</span></code>
+data and geometry. <code class="docutils literal notranslate"><span class="pre">Physx*</span></code>, <code class="docutils literal notranslate"><span class="pre">Newton*</span></code>, and <code class="docutils literal notranslate"><span class="pre">Mjc*</span></code> schemas/attributes on the
+base are <strong>FORBID</strong>.</p></li>
+</ol>
+</section>
+<section id="mapping-to-the-validators">
+<h2>Mapping to the validators<a class="headerlink" href="#mapping-to-the-validators" title="Link to this heading">#</a></h2>
+<p>This matrix is the data table behind two implemented rules in
+<code class="docutils literal notranslate"><span class="pre">runtime_variants/validation.py</span></code>:</p>
+<ul class="simple">
+<li><p><strong>Structural (<code class="docutils literal notranslate"><span class="pre">RV.010</span></code>, cheap, static):</strong> each physics variant’s <code class="docutils literal notranslate"><span class="pre">Enabled</span></code>
+option contains only the <code class="docutils literal notranslate"><span class="pre">prepend</span> <span class="pre">payload</span></code> arc and no inline prim overrides;
+the <code class="docutils literal notranslate"><span class="pre">Disabled</span></code> option is empty. (Prevents the variant-opinion leak class fixed
+in <code class="docutils literal notranslate"><span class="pre">obs_orange_a02</span></code>.) Implemented by <code class="docutils literal notranslate"><span class="pre">RuntimeVariantSectionPurityChecker</span></code>.</p></li>
+<li><p><strong>Semantic (<code class="docutils literal notranslate"><span class="pre">RV.011</span></code>, composed-per-variant):</strong> for each declared physics
+variant (and the neutral base), compose that selection and evaluate authored
+physics schemas/attributes against the matrix above, including the
+<code class="docutils literal notranslate"><span class="pre">physics:approximation</span></code> value rules. Reports foreign-schema pollution and
+value conflicts against the selected runtime. Implemented by
+<code class="docutils literal notranslate"><span class="pre">RuntimePhysicsIsolationChecker</span></code>.</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="requirements/runtime-physics-isolation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">runtime-physics-isolation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../visualization/visualization.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Visualization</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#purpose">Purpose</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scope-and-model">Scope and model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-legend">Classification legend</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#namespace-legend">Namespace legend</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#master-matrix">Master matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#value-level-attribute-rules">Value-level attribute rules</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physics-approximation"><code class="docutils literal notranslate"><span class="pre">physics:approximation</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documented-sharing-inheritance-why-some-cross-runtime-cells-are-ok">Documented sharing / inheritance (why some cross-runtime cells are OK)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#negative-rules-already-in-force-encode-as-is">Negative rules already in force (encode as-is)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resolved-decisions">Resolved Decisions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-to-the-validators">Mapping to the validators</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../../../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../../../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2025-2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

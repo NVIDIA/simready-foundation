@@ -1,0 +1,92 @@
+#usda 1.0
+(
+    customLayerData = {
+        dictionary SimReady_Metadata = {
+            dictionary Variants = {
+                dictionary Physics = {
+                    dictionary MuJoCo = {
+                        string activateOption = "Enabled"
+                        string prim = "/RootNode"
+                        string variantSetName = "MuJoCo"
+                    }
+                    dictionary Newton = {
+                        string activateOption = "Enabled"
+                        string prim = "/RootNode"
+                        string variantSetName = "Newton"
+                    }
+                    dictionary PhysX = {
+                        string activateOption = "Enabled"
+                        string prim = "/RootNode"
+                        string variantSetName = "PhysX"
+                    }
+                }
+            }
+            float3 asset_extents = (0.05194036, 0.07333821, 0.10271016)
+            string asset_license = "CC-BY 4.0"
+            string asset_location = "sample_content/common_assets/props_general/obs_lamp_revolute_a01/simready_usd/sm_obs_lamp_revolute_a01_01.usda"
+            string asset_name = "obs_lamp_revolute_a01"
+            string asset_type = "prop"
+            string author = "Nvidia"
+            string category = "lamp"
+            double mass = 0.36541161872446537
+            string qcode = "Q1138737"
+            int rigid_body_count = 4
+            string source_file = "../dcc_source/working/model/blender/obs_lamp_revolute_a01.blend"
+            string usd_date_generated = "2026-09-11 09:03:29"
+            dictionary validation = {
+                string profile = "Robotics-Prop"
+                string profile_version = "3.2.0"
+            }
+        }
+        string asset_name = "obs_lamp_revolute_a01"
+        string asset_type = "prop"
+        string source_file = "../dcc_source/working/model/blender/obs_lamp_revolute_a01.blend"
+        string usd_date_generated = "2026-09-11 09:03:29"
+    }
+    defaultPrim = "RootNode"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "RootNode" (
+    prepend references = @./payloads/base.usda@
+    variants = {
+        string MuJoCo = "Disabled"
+        string Newton = "Disabled"
+        string PhysX = "Disabled"
+    }
+    append variantSets = ["MuJoCo", "Newton", "PhysX"]
+)
+{
+    variantSet "MuJoCo" = {
+        "Disabled" {
+
+        }
+        "Enabled" (
+            prepend payload = @./runnables/physics/mujoco.usd@
+        ) {
+
+        }
+    }
+    variantSet "Newton" = {
+        "Disabled" {
+
+        }
+        "Enabled" (
+            prepend payload = @./runnables/physics/newton.usd@
+        ) {
+
+        }
+    }
+    variantSet "PhysX" = {
+        "Disabled" {
+
+        }
+        "Enabled" (
+            prepend payload = @./runnables/physics/physx.usd@
+        ) {
+
+        }
+    }
+}
+

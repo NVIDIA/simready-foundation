@@ -1,0 +1,29 @@
+{
+    "feature": {
+        "display_name": "Rigid Body Physics (Newton)",
+        "runtime": "Newton",
+        "id": "FET_003_NEWTON",
+        "version": "0.1.0",
+        "requirements": [
+            "RB.COL.001",
+            "RB.COL.002",
+            "RB.COL.003",
+            "RB.COL.004",
+            "RB.001",
+            "RB.003",
+            "RB.005",
+            "RB.007",
+            "RB.009",
+            "RB.010",
+            "NEWTON.COL.001",
+            "NEWTON.COL.002",
+            "NEWTON.MAS.001",
+            "NEWTON.MAT.001"
+        ],
+        "dependencies": [],
+        "metadata": {
+            "path": "features/FET_003_NEWTON.html",
+            "internal_path": "features/FET_003_NEWTON.md"
+        }
+    }
+}

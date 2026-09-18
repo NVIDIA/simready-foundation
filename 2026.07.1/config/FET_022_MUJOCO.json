@@ -1,0 +1,20 @@
+{
+    "feature": {
+        "display_name": "Driven Joints (MuJoCo)",
+        "runtime": "MuJoCo",
+        "id": "FET_022_MUJOCO",
+        "version": "0.1.0",
+        "requirements": [
+            "DJ.011",
+            "MUJOCO.DJ.001",
+            "MUJOCO.DJ.002"
+        ],
+        "dependencies": [
+            "FET_004_ROBOT_MUJOCO@0.1.0"
+        ],
+        "metadata": {
+            "path": "features/FET_022_MUJOCO.html",
+            "internal_path": "features/FET_022_MUJOCO.md"
+        }
+    }
+}

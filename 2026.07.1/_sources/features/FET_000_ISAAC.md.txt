@@ -1,0 +1,107 @@
+# Feature: `FET_000_ISAAC`
+
+| **Property**            | **Value**         |
+|-------------------------|-------------------|
+| Feature Name            | `FET_000_ISAAC` |
+| Runtime                 | `ISAAC` |
+| Proprietary Techs       | `Isaac Sim` |
+| Latest Version          | `0.1.0` |
+
+## Description
+
+This feature defines the Isaac packaging and physics-layer Core contract on top
+of neutral Core. An asset that satisfies this feature keeps a clean Isaac-style
+package folder, provides a representative thumbnail, and authors physics
+schemas and attributes in the expected physics source layer.
+
+This is the Isaac packaging companion to the solver Core variants
+(`FET_000_PHYSX`, `FET_000_NEWTON`, `FET_000_MUJOCO`). It does not define robot
+identity, naming, type, or root-joint policy; those requirements live in
+`FET_021_ISAAC`.
+
+## Dependency Graph
+
+```{mermaid}
+flowchart LR
+    FET000I["FET_000_ISAAC\n0.1.0"]
+    FET000S["FET_000_STANDARD\n0.1.0"]
+
+    FET000I --> FET000S
+
+    classDef current fill:#90EE90,stroke:#333
+    classDef other fill:#fff,stroke:#333
+    class FET000I current
+    class FET000S other
+```
+
+## Use Cases
+
+Products or workflows that consume this feature:
+
+- Robot-Body-Isaac profile validation for Isaac package cleanliness and physics-layer separation.
+- Isaac robot packaging workflows that keep physics opinions out of the base layer.
+- Combined with `FET_021_ISAAC` when both Isaac packaging and robot identity are required.
+
+## Requirements
+
+### Version 0.1.0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+This version is used in the following profiles:
+
+- **[Robot Body Profile](../profiles/robot-body.md)** (`v2.0.0`) - Optional Isaac packaging Core gate.
+
+#### Feature Dependencies
+
+| **Property**            | **Value**         |
+|-------------------------|-------------------|
+| Dependency              | [Core](FET_000_STANDARD.md) (`FET_000_STANDARD@0.1.0`) |
+
+#### Requirement List
+
+* Capability: [Isaac Sim/Robot Core](../capabilities/isaac_sim/robot_core/requirements.md)
+    * Requirements:
+        * [Clean Folder](../capabilities/isaac_sim/robot_core/requirements/clean-folder.md)
+            * `RC.001` | Version `0.1.0`
+            * [Rule | Implementation](../capabilities/isaac_sim/robot_core/validation.py)
+        * [Thumbnail Exists](../capabilities/isaac_sim/robot_core/requirements/thumbnail-exist.md)
+            * `RC.004` | Version `0.1.0`
+            * [Rule | Implementation](../capabilities/isaac_sim/robot_core/validation.py)
+        * [Robot Physics Attribute Source Layer](../capabilities/isaac_sim/robot_core/requirements/verify-robot-physics-attribute-source-layer.md)
+            * `RC.005` | Version `0.1.0`
+            * [Rule | Implementation](../capabilities/isaac_sim/robot_core/validation.py)
+        * [Robot Physics Schema Source Layer](../capabilities/isaac_sim/robot_core/requirements/verify-robot-physics-schema-source-layer.md)
+            * `RC.006` | Version `0.1.0`
+            * [Rule | Implementation](../capabilities/isaac_sim/robot_core/validation.py)
+
+</details>
+
+## Pipelines
+
+Source file type:
+
+- `.usd`, `.usda`, `.usdc`
+  - Author or repair Isaac package layout, thumbnails, and physics source-layer placement.
+- `.urdf`, `.mjcf`
+  - Via Isaac-oriented conversion workflows that split physics opinions into the physics layer.
+
+Validation or runtime pipeline:
+
+- SimReady validation - verifies the selected `FET_000_ISAAC` manifest.
+- `simready-foundation-conform-fet-000-isaac` - repairs clean-folder, thumbnail, and physics-layer placement on staged Isaac outputs.
+
+## Samples
+
+- [`ur10` Isaac robot](../../../../../sample_content/common_assets/robots_general/ur10/simready_usd/ur10.usd)
+
+## Benchmarks
+
+- None.
+
+## Adapters
+
+None.

@@ -1,0 +1,35 @@
+{
+    "feature": {
+        "display_name": "Simulate Multi-Body Physics (Robot PhysX)",
+        "runtime": "PhysX",
+        "_comment": "Intentionally omits RB.COL.001 because robot PhysX assets allow nested CollisionAPI authoring that the base rule rejects.",
+        "id": "FET_004_ROBOT_PHYSX",
+        "version": "0.4.0",
+        "requirements": [
+            "RB.COL.003",
+            "RB.COL.004",
+            "RB.001",
+            "RB.003",
+            "RB.005",
+            "RB.007",
+            "RB.009",
+            "RB.010",
+            "JT.001",
+            "JT.002",
+            "JT.003",
+            "JT.ART.002",
+            "JT.ART.003",
+            "JT.ART.004",
+            "RB.MB.001",
+            "PHYSX.COL.001",
+            "PHYSX.COL.002",
+            "RB.011",
+            "RB.012"
+        ],
+        "dependencies": [],
+        "metadata": {
+            "path": "features/FET_004_ROBOT_PHYSX.html",
+            "internal_path": "features/FET_004_ROBOT_PHYSX.md"
+        }
+    }
+}

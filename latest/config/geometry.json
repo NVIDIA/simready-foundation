@@ -1,0 +1,698 @@
+{
+    "capability": {
+        "id": "geometry",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "VG.017",
+                "version": null,
+                "name": "usdgeom-mesh-primitive-tessellation",
+                "compatibility": "core-usd",
+                "tags": [
+                    "performance"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-primitive-tessellation.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-primitive-tessellation.md"
+                },
+                "message": "Avoid tessellating primitive shapes",
+                "examples": []
+            },
+            {
+                "code": "VG.002",
+                "version": null,
+                "name": "usdgeom-extent",
+                "compatibility": "open-usd",
+                "tags": [
+                    "performance"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-extent.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-extent.md"
+                },
+                "message": "Boundable geometry primitives must have valid extent values.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n\ndef Mesh \"MeshWithIncorrectExtent\" {\n    point3f[] points = [(0,0,0), (1,1,1)]\n    float3[] extent = [(-1,-1,-1), (1,1,1)]\n}"
+                        },
+                        "name": "Incorrect extent on static geometry",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n\ndef Mesh \"MeshWithoutExtent\" {\n    float[] times = [0, 1]\n    point3f[] points.timeSamples = {\n        0: [(0,0,0), (1,1,1)],\n        1: [(0,0,0), (2,2,2)]\n    }\n    # Missing extent attribute\n}"
+                        },
+                        "name": "Missing extent on time-varying geometry",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n\ndef Mesh \"MeshWithExtent\" {\n    float[] times = [0, 1]\n    point3f[] points.timeSamples = {\n        0: [(0,0,0), (1,1,1)],\n        1: [(0,0,0), (2,2,2)]\n    }\n    float3[] extent.timeSamples = {\n        0: [(0,0,0), (1,1,1)],  # Initial extent\n        1: [(0,0,0), (2,2,2)]   # Extent changes with geometry\n    }\n}"
+                        },
+                        "name": "Extent authored only when it changes",
+                        "result": "success"
+                    }
+                ]
+            },
+            {
+                "code": "VG.029",
+                "version": null,
+                "name": "usdgeom-mesh-winding-order",
+                "compatibility": "core-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-winding-order.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-winding-order.md"
+                },
+                "message": "The winding order of faces in a mesh must correctly represent the orientation (front/back) of the face.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "# Invalid: Cube with flipped winding order for the top face\n#usda 1.0\n(\n    metersPerUnit = 1.0\n    upAxis = \"Z\"\n)\n\ndef Xform \"World\"\n{\n    def Mesh \"Cube\"\n    {\n        point3f[] points = [(-0.5, -0.5, -0.5), (0.5, -0.5, -0.5), (0.5, 0.5, -0.5), (-0.5, 0.5, -0.5), (-0.5, -0.5, 0.5), (0.5, -0.5, 0.5), (0.5, 0.5, 0.5), (-0.5, 0.5, 0.5)]\n        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]\n\n        # Indices for each quad face, CCW by default\n        # Let's flip the winding order for the top face (face 5)\n        int[] faceVertexIndices = [\n            0, 1, 2, 3,      # Bottom (-Z)\n            3, 2, 6, 7,      # Front (+Y)\n            2, 1, 5, 6,      # Right (+X)\n            1, 0, 4, 5,      # Back (-Y)\n            0, 3, 7, 4,      # Left (-X)\n            4, 7, 6, 5       # Top (+Z) -- FLIPPED WINDING\n        ]\n    }\n}"
+                        },
+                        "name": "Inconsistent winding order",
+                        "result": "failure"
+                    }
+                ]
+            },
+            {
+                "code": "VG.011",
+                "version": null,
+                "name": "usdgeom-mesh-primvar-usage",
+                "compatibility": "core-usd",
+                "tags": [
+                    "performance"
+                ],
+                "validator": "vg-011",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-primvar-usage.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-primvar-usage.md"
+                },
+                "message": "Only include primvars that are actively used",
+                "examples": []
+            },
+            {
+                "code": "VG.008",
+                "version": null,
+                "name": "usdgeom-mesh-coincident",
+                "compatibility": "core-usd",
+                "tags": [
+                    "performance"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-coincident.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-coincident.md"
+                },
+                "message": "Meshes should not share the exact same space",
+                "examples": []
+            },
+            {
+                "code": "VG.021",
+                "version": null,
+                "name": "usdgeom-mesh-triangulation",
+                "compatibility": "core-usd",
+                "tags": [
+                    "performance"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-triangulation.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-triangulation.md"
+                },
+                "message": "Meshes must be triangulated for optimal rendering performance and compatibility when considering automatic collider creation (convex-hull, convex-decomposition, etc...). Triangulating mesh will provide predictable results versus n-gons.",
+                "examples": []
+            },
+            {
+                "code": "VG.001",
+                "version": null,
+                "name": "at-least-one-imageable-geometry",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/at-least-one-imageable-geometry.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/at-least-one-imageable-geometry.md"
+                },
+                "message": "Assets must contain at least one Imageable Geometry",
+                "examples": []
+            },
+            {
+                "code": "VG.012",
+                "version": null,
+                "name": "usdgeom-mesh-small",
+                "compatibility": "core-usd",
+                "tags": [
+                    "performance"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-small.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-small.md"
+                },
+                "message": "Combine small meshes into larger ones where appropriate",
+                "examples": []
+            },
+            {
+                "code": "VG.014",
+                "version": null,
+                "name": "usdgeom-mesh-topology",
+                "compatibility": "core-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "vg-014",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-topology.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-topology.md"
+                },
+                "message": "Mesh topology must be valid",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n\ndef Mesh \"BadTopology\" {\n    int[] faceVertexCounts = [4, 3]\n    int[] faceVertexIndices = [\n        0, 0, 0, 0,  # Degenerate face (all vertices same)\n        0, 1, 99     # Invalid index (99 > number of points)\n    ]\n    point3f[] points = [(0,0,0), (1,0,0)]\n}"
+                        },
+                        "name": "Degenerate faces and invalid indices",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n\ndef Mesh \"GoodTopology\" {\n    int[] faceVertexCounts = [4, 3]\n    int[] faceVertexIndices = [\n        0, 1, 2, 3,  # Proper quad\n        0, 1, 2      # Proper triangle\n    ]\n    point3f[] points = [(0,0,0), (1,0,0), (1,1,0), (0,1,0)]\n}"
+                        },
+                        "name": "Proper topology",
+                        "result": "success"
+                    }
+                ]
+            },
+            {
+                "code": "VG.022",
+                "version": "0.1.0",
+                "name": "usdgeom-mesh-transparent-is-watertight",
+                "compatibility": "core-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-transparent-is-watertight.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-transparent-is-watertight.md"
+                },
+                "message": "Transparent physical bodies should be watertight to allow for simulation of light transmission and refraction.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "# Example 1: Glass material with transparency properties\ndef Material \"GlassWindow\" {\n    def Shader \"GlassShader\" {\n        uniform token info:implementationSource = \"sourceAsset\"\n        uniform asset info:mdl:sourceAsset = @./glass_base.mdl@\n        uniform token info:mdl:sourceAsset:subIdentifier = \"Glass_base\"\n        \n        # Transparency indicators\n        bool inputs:thin_walled = true\n        float inputs:glass_ior = 1.491\n        float inputs:cutout_opacity = 0.8\n    }\n}\n\n# Example 2: SimPBR material with transmission enabled\ndef Material \"TransparentPlastic\" {\n    def Shader \"SimPBRShader\" {\n        uniform token info:implementationSource = \"sourceAsset\"\n        uniform asset info:mdl:sourceAsset = @./SimPBR.mdl@\n        uniform token info:mdl:sourceAsset:subIdentifier = \"SimPBR\"\n        \n        # Transparency indicators\n        bool inputs:enable_transmission = true\n        bool inputs:enable_opacity = true\n        float inputs:alpha_constant = 0.7\n        float inputs:opacity_ratio = 0.5\n    }\n}\n\n# Example 3: Opaque material (no transparency)\ndef Material \"OpaqueMetal\" {\n    def Shader \"SimPBRShader\" {\n        uniform token info:implementationSource = \"sourceAsset\"\n        uniform asset info:mdl:sourceAsset = @./SimPBR.mdl@\n        uniform token info:mdl:sourceAsset:subIdentifier = \"SimPBR\"\n        \n        # No transparency indicators\n        bool inputs:enable_transmission = false\n        bool inputs:enable_opacity = false\n        float inputs:alpha_constant = 1.0\n        bool inputs:thin_walled = false\n    }\n}"
+                        },
+                        "name": "Material Transparency Detection",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "# Invalid: Non-watertight transparent mesh with holes\ndef Mesh \"TransparentCube\" {\n    int[] faceVertexCounts = [4, 4, 4, 4, 4]  # Missing one face\n    int[] faceVertexIndices = [0, 1, 2, 3, 4, 5, 6, 7, 0, 4, 7, 3, 1, 5, 6, 2, 0, 1, 5, 4]\n    point3f[] points = [(0,0,0), (1,0,0), (1,1,0), (0,1,0), (0,0,1), (1,0,1), (1,1,1), (0,1,1)]\n    # Missing top face: [3, 2, 6, 7]\n    # This mesh has a hole and should not be used with transparent materials\n}\n\n# Valid: Watertight transparent mesh\ndef Mesh \"TransparentCube\" {\n    int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]  # All 6 faces present\n    int[] faceVertexIndices = [0, 1, 2, 3, 4, 5, 6, 7, 0, 4, 7, 3, 1, 5, 6, 2, 0, 1, 5, 4, 3, 2, 6, 7]\n    point3f[] points = [(0,0,0), (1,0,0), (1,1,0), (0,1,0), (0,0,1), (1,0,1), (1,1,1), (0,1,1)]\n    # All faces present - watertight\n}"
+                        },
+                        "name": "Mesh Topology Examples",
+                        "result": "success"
+                    }
+                ]
+            },
+            {
+                "code": "VG.006",
+                "version": null,
+                "name": "usdgeom-mesh-overlap",
+                "compatibility": "core-usd",
+                "tags": [
+                    "performance"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-overlap.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-overlap.md"
+                },
+                "message": "Meshes should not overlap unnecessarily",
+                "examples": []
+            },
+            {
+                "code": "VG.009",
+                "version": null,
+                "name": "usdgeom-mesh-primvar-indexing",
+                "compatibility": "core-usd",
+                "tags": [
+                    "performance"
+                ],
+                "validator": "vg-009",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-primvar-indexing.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-primvar-indexing.md"
+                },
+                "message": "Use indexed primvars when values are repeated",
+                "examples": []
+            },
+            {
+                "code": "VG.026",
+                "version": null,
+                "name": "asset-pivot-placement",
+                "compatibility": "core-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/asset-pivot-placement.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/asset-pivot-placement.md"
+                },
+                "message": "The pivot point of an asset should be positioned logically: at the center of the object's base for ground plane objects, and at the center of rotation for objects that rotate around specific points.",
+                "examples": []
+            },
+            {
+                "code": "VG.025",
+                "version": null,
+                "name": "asset-origin-positioning",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/asset-origin-positioning.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/asset-origin-positioning.md"
+                },
+                "message": "Geometry shall be defined as such that the asset is correctly positioned and oriented at the origin (0,0,0).",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n\ndef Xform \"Table_Valid\" ()\n{\n    float3 xformOp:translate = (0, 0, 0)\n    float3 xformOp:rotateXYZ = (0, 0, 0)\n    float3 xformOp:scale = (1, 1, 1)\n    uniform token[] xformOpOrder = [\"xformOp:translate\", \"xformOp:rotateXYZ\", \"xformOp:scale\"]\n\n    def Cube \"TableTop\" {\n        float3 xformOp:translate = (0, 0, 0.6)\n        float3 xformOp:scale = (1, 1, 0.2)\n        uniform token[] xformOpOrder = [\"xformOp:translate\", \"xformOp:scale\"]\n    }\n}"
+                        },
+                        "name": "Asset positioned correctly at origin",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n\ndef Xform \"Table_Invalid\" (\n)\n{\n    float3 xformOp:translate = (0, 0, 0.6)  # Asset offset from origin by default\n    uniform token[] xformOpOrder = [\"xformOp:translate\"]\n\n    def Cube \"TableTop\" {\n        float3 xformOp:scale = (1, 1, 0.2)\n        uniform token[] xformOpOrder = [\"xformOp:scale\"]\n    }\n}"
+                        },
+                        "name": "Asset with non-identity default transforms",
+                        "result": "failure"
+                    }
+                ]
+            },
+            {
+                "code": "VG.003",
+                "version": null,
+                "name": "usdgeom-mesh-internal-geometry",
+                "compatibility": "open-usd",
+                "tags": [
+                    "performance"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-internal-geometry.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-internal-geometry.md"
+                },
+                "message": "Only include geometry that contributes to visualization or simulation",
+                "examples": []
+            },
+            {
+                "code": "VG.015",
+                "version": null,
+                "name": "usdgeom-mesh-identical-timesamples",
+                "compatibility": "core-usd",
+                "tags": [
+                    "performance"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-identical-timesamples.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-identical-timesamples.md"
+                },
+                "message": "Use time samples only when attribute values change",
+                "examples": []
+            },
+            {
+                "code": "VG.005",
+                "version": null,
+                "name": "usdgeom-boundable-size",
+                "compatibility": "rtx",
+                "tags": [
+                    "performance"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-boundable-size.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-boundable-size.md"
+                },
+                "message": "Meshes should maintain appropriate scale and boundary volumes",
+                "examples": []
+            },
+            {
+                "code": "VG.024",
+                "version": null,
+                "name": "identical-mesh-consistency",
+                "compatibility": "core-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "manual-validation-required",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/identical-mesh-consistency.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/identical-mesh-consistency.md"
+                },
+                "message": "Repeated occurrences of identically shaped objects should have identical mesh connectivity",
+                "examples": []
+            },
+            {
+                "code": "VG.028",
+                "version": null,
+                "name": "usdgeom-mesh-normals-must-be-valid",
+                "compatibility": "core-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-normals-must-be-valid.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-normals-must-be-valid.md"
+                },
+                "message": "Mesh normals values must be valid to produce correct shading.",
+                "examples": []
+            },
+            {
+                "code": "VG.027",
+                "version": null,
+                "name": "usdgeom-mesh-normals-exist",
+                "compatibility": "core-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "vg-027",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-normals-exist.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-normals-exist.md"
+                },
+                "message": "All non-subdivided meshes must have normals.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n(\n    metersPerUnit = 1\n    upAxis = \"Z\"\n)\n\ndef Mesh \"soft\"\n{\n    float3[] extent = [(-0.05, -0.05, -0.025), (0.05, 0.05, 0)]\n    int[] faceVertexCounts = [4, 4]\n    int[] faceVertexIndices = [0, 3, 4, 1, 1, 4, 5, 2]\n    point3f[] points = [(-0.05, 0.05, -0.025), (0, 0.05, 0), (0.05, 0.05, -0.025), (-0.05, -0.05, -0.025), (0, -0.05, 0), (0.05, -0.05, -0.025)]\n    normal3f[] primvars:normals = [(-0.447, 0, 0.894), (-0.447, 0, 0.894), (0, 0, 1), (0, 0, 1), (0, 0, 1), (0, 0, 1), (0.447, 0, 0.894), (0.447, 0, 0.894)] (\n        interpolation = \"faceVarying\"\n    )\n    uniform token subdivisionScheme = \"none\"\n}"
+                        },
+                        "name": "Soft edge between two faces",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n\ndef Mesh \"sharp\"\n{\n    float3[] extent = [(-0.05, -0.05, -0.025), (0.05, 0.05, 0)]\n    int[] faceVertexCounts = [4, 4]\n    int[] faceVertexIndices = [0, 3, 4, 1, 1, 4, 5, 2]\n    point3f[] points = [(-0.05, 0.05, -0.025), (0, 0.05, 0), (0.05, 0.05, -0.025), (-0.05, -0.05, -0.025), (0, -0.05, 0), (0.05, -0.05, -0.025)]\n    normal3f[] primvars:normals = [(-0.447, 0, 0.894), (-0.447, 0, 0.894), (-0.447, 0, 0.894), (-0.447, 0, 0.894), (0.447, 0, 0.894), (0.447, 0, 0.894), (0.447, 0, 0.894), (0.447, 0, 0.894)] (\n        interpolation = \"faceVarying\"\n    )\n    uniform token subdivisionScheme = \"none\"\n}"
+                        },
+                        "name": "Hard edge between two faces",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n\ndef Mesh \"none\"\n{\n    float3[] extent = [(-0.05, -0.05, -0.025), (0.05, 0.05, 0)]\n    int[] faceVertexCounts = [4, 4]\n    int[] faceVertexIndices = [0, 3, 4, 1, 1, 4, 5, 2]\n    point3f[] points = [(-0.05, 0.05, -0.025), (0, 0.05, 0), (0.05, 0.05, -0.025), (-0.05, -0.05, -0.025), (0, -0.05, 0), (0.05, -0.05, -0.025)]\n    uniform token subdivisionScheme = \"none\"\n}"
+                        },
+                        "name": "No normals to define soft or hard edge",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n\ndef Mesh \"both\"\n{\n    float3[] extent = [(-0.05, -0.05, -0.025), (0.05, 0.05, 0)]\n    int[] faceVertexCounts = [4, 4]\n    int[] faceVertexIndices = [0, 3, 4, 1, 1, 4, 5, 2]\n    point3f[] points = [(-0.05, 0.05, -0.025), (0, 0.05, 0), (0.05, 0.05, -0.025), (-0.05, -0.05, -0.025), (0, -0.05, 0), (0.05, -0.05, -0.025)]\n    normal3f[] normals = [(-0.447, 0, 0.894), (-0.447, 0, 0.894), (0, 0, 1), (0, 0, 1), (0, 0, 1), (0, 0, 1), (0.447, 0, 0.894), (0.447, 0, 0.894)] (\n        interpolation = \"faceVarying\"\n    )\n    point3f[] points = [(-0.05, 0.05, -0.025), (0, 0.05, 0), (0.05, 0.05, -0.025), (-0.05, -0.05, -0.025), (0, -0.05, 0), (0.05, -0.05, -0.025)]\n    normal3f[] primvars:normals = [(-0.447, 0, 0.894), (0, 0, 1), (0.447, 0, 0.894)] (\n        interpolation = \"faceVarying\"\n    )\n    int[] primvars:normals:indices = [0, 0, 1, 1, 1, 1, 2, 2]\n    uniform token subdivisionScheme = \"none\"\n}"
+                        },
+                        "name": "Both `normals` and `primvars:normals` exist",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n\ndef Mesh \"only\"\n{\n    float3[] extent = [(-0.05, -0.05, -0.025), (0.05, 0.05, 0)]\n    int[] faceVertexCounts = [4, 4]\n    int[] faceVertexIndices = [0, 3, 4, 1, 1, 4, 5, 2]\n    point3f[] points = [(-0.05, 0.05, -0.025), (0, 0.05, 0), (0.05, 0.05, -0.025), (-0.05, -0.05, -0.025), (0, -0.05, 0), (0.05, -0.05, -0.025)]\n    normal3f[] primvars:normals = [(-0.447, 0, 0.894), (0, 0, 1), (0.447, 0, 0.894)] (\n        interpolation = \"faceVarying\"\n    )\n    int[] primvars:normals:indices = [0, 0, 1, 1, 1, 1, 2, 2]\n    uniform token subdivisionScheme = \"none\"\n}"
+                        },
+                        "name": "Only `primvars:normals` exists",
+                        "result": "success"
+                    }
+                ]
+            },
+            {
+                "code": "VG.023",
+                "version": null,
+                "name": "mesh-xform-positioning",
+                "compatibility": "core-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/mesh-xform-positioning.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/mesh-xform-positioning.md"
+                },
+                "message": "Meshes should be positioned with xform ops rather than by \"baking\" transformations into point positions.",
+                "examples": []
+            },
+            {
+                "code": "VG.007",
+                "version": null,
+                "name": "usdgeom-mesh-manifold",
+                "compatibility": "core-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "vg-007",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-manifold.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-manifold.md"
+                },
+                "message": "Mesh geometry must be manifold",
+                "examples": []
+            },
+            {
+                "code": "VG.RTX.001",
+                "version": null,
+                "name": "usdgeom-boundable-size-rtx-limit",
+                "compatibility": "rtx",
+                "tags": [
+                    "limitation"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-boundable-size-rtx-limit.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-boundable-size-rtx-limit.md"
+                },
+                "message": "World space bounds must not exceed RTX limit.",
+                "examples": []
+            },
+            {
+                "code": "VG.018",
+                "version": null,
+                "name": "usdgeom-mesh-unused-topology",
+                "compatibility": "core-usd",
+                "tags": [
+                    "performance"
+                ],
+                "validator": "vg-018",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-unused-topology.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-unused-topology.md"
+                },
+                "message": "Mesh topology should be without unused vertices, edges, or faces.",
+                "examples": []
+            },
+            {
+                "code": "VG.013",
+                "version": null,
+                "name": "usdgeom-mesh-tessellation-density",
+                "compatibility": "core-usd",
+                "tags": [
+                    "performance"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-tessellation-density.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-tessellation-density.md"
+                },
+                "message": "Use appropriate tessellation density for geometry",
+                "examples": []
+            },
+            {
+                "code": "VG.019",
+                "version": null,
+                "name": "usdgeom-mesh-zero-area",
+                "compatibility": "core-usd",
+                "tags": [
+                    "performance"
+                ],
+                "validator": "vg-019",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-zero-area.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-zero-area.md"
+                },
+                "message": "Faces should have non-zero area.Faces where all vertices are co-linear or coincident waste memory and can cause rendering artifacts.",
+                "examples": []
+            },
+            {
+                "code": "VG.MESH.001",
+                "version": null,
+                "name": "geom-shall-be-mesh",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/geom-shall-be-mesh.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/geom-shall-be-mesh.md"
+                },
+                "message": "All geometry shall be represented as non-subdivided mesh primitives using the UsdGeomMesh schema.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n\ndef Mesh \"ValidGeometry\" {\n    point3f[] points = [(0,0,0), (1,0,0), (1,1,0), (0,1,0)]\n    int[] faceVertexCounts = [4]\n    int[] faceVertexIndices = [0, 1, 2, 3]\n    normal3f[] primvars:normals = [(0, 0, 1)]\n    uniform token primvars:normals:interpolation = \"uniform\"\n}"
+                        },
+                        "name": "Standard mesh geometry",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n\ndef Mesh \"TriangulatedMesh\" {\n    point3f[] points = [(0,0,0), (1,0,0), (1,1,0), (0,1,0)]\n    int[] faceVertexCounts = [3, 3]\n    int[] faceVertexIndices = [0, 1, 2, 0, 2, 3]\n    normal3f[] primvars:normals = [(0, 0, 1), (0, 0, 1)]\n    uniform token primvars:normals:interpolation = \"uniform\"\n}"
+                        },
+                        "name": "Triangulated mesh",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n\ndef Points \"InvalidPointCloud\" {\n    point3f[] points = [(0,0,0), (1,0,0), (1,1,0), (0,1,0)]\n}"
+                        },
+                        "name": "Point cloud (not supported)",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n\ndef Sphere \"InvalidImplicit\" {\n    double radius = 1.0\n}"
+                        },
+                        "name": "Implicit surface (not supported)",
+                        "result": "failure"
+                    }
+                ]
+            },
+            {
+                "code": "VG.010",
+                "version": null,
+                "name": "usdgeom-mesh-subdivision",
+                "compatibility": "core-usd",
+                "tags": [
+                    "performance"
+                ],
+                "validator": "vg-010",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-subdivision.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-subdivision.md"
+                },
+                "message": "Use subdivision only when needed for smooth surfaces or displacement",
+                "examples": []
+            },
+            {
+                "code": "VG.004",
+                "version": null,
+                "name": "usdgeom-mesh-empty-spaces",
+                "compatibility": "rtx",
+                "tags": [
+                    "performance"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-empty-spaces.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-empty-spaces.md"
+                },
+                "message": "Use efficient mesh boundaries for performance",
+                "examples": []
+            },
+            {
+                "code": "VG.016",
+                "version": null,
+                "name": "usdgeom-mesh-colocated-points",
+                "compatibility": "core-usd",
+                "tags": [
+                    "performance"
+                ],
+                "validator": "vg-016",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-colocated-points.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-mesh-colocated-points.md"
+                },
+                "message": "Each vertex position should be unique",
+                "examples": []
+            },
+            {
+                "code": "VG.020",
+                "version": null,
+                "name": "usdgeom-pointbased-points-precision",
+                "compatibility": "core-usd",
+                "tags": [
+                    "performance"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/geometry/requirements/usdgeom-pointbased-points-precision.html",
+                    "internal_path": "capabilities/visualization/geometry/requirements/usdgeom-pointbased-points-precision.md"
+                },
+                "message": "The values of `points` must not exceed the limit at which a given precision can be represented using 32-bit floats.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "capabilities/visualization/geometry/capability-geometry.html",
+            "internal_path": "capabilities/visualization/geometry/capability-geometry.md"
+        }
+    }
+}

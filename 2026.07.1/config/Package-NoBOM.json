@@ -1,0 +1,20 @@
+{
+    "profile": {
+        "id": "Package-NoBOM",
+        "version": "1.0.0",
+        "name": null,
+        "description": null,
+        "requirements": [],
+        "capabilities": [],
+        "features": [
+            {
+                "feature": "FET_030_STANDARD@0.1.0",
+                "optional": false
+            }
+        ],
+        "metadata": {
+            "path": "profiles/package_profiles.html",
+            "internal_path": "profiles/package_profiles.md"
+        }
+    }
+}

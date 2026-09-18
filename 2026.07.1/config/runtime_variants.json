@@ -1,0 +1,199 @@
+{
+    "capability": {
+        "id": "runtime_variants",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "RV.003",
+                "version": null,
+                "name": "physx-variant-metadata",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/runtime_variants/requirements/physx-variant-metadata.html",
+                    "internal_path": "capabilities/core/runtime_variants/requirements/physx-variant-metadata.md"
+                },
+                "message": "The `PhysX` variant set must be documented in `customLayerData.SimReady_Metadata.Variants.Physics.PhysX`, declaring its `prim`, `variantSetName`, and `activateOption`.",
+                "examples": []
+            },
+            {
+                "code": "RV.004",
+                "version": null,
+                "name": "newton-variant-set",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/runtime_variants/requirements/newton-variant-set.html",
+                    "internal_path": "capabilities/core/runtime_variants/requirements/newton-variant-set.md"
+                },
+                "message": "The asset's default prim must expose a `Newton` physics runtime variant set with `Disabled` and `Enabled` options, defaulting to `Disabled`.",
+                "examples": []
+            },
+            {
+                "code": "RV.011",
+                "version": null,
+                "name": "runtime-physics-isolation",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/runtime_variants/requirements/runtime-physics-isolation.html",
+                    "internal_path": "capabilities/core/runtime_variants/requirements/runtime-physics-isolation.md"
+                },
+                "message": "When a single physics runtime variant is selected, the composed stage must contain only that runtime's physics schemas and attributes plus the runtime-neutral base. Foreign-runtime schemas and conflicting attribute values are not allowed.",
+                "examples": []
+            },
+            {
+                "code": "RV.006",
+                "version": null,
+                "name": "newton-variant-metadata",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/runtime_variants/requirements/newton-variant-metadata.html",
+                    "internal_path": "capabilities/core/runtime_variants/requirements/newton-variant-metadata.md"
+                },
+                "message": "The `Newton` variant set must be documented in `customLayerData.SimReady_Metadata.Variants.Physics.Newton`, declaring its `prim`, `variantSetName`, and `activateOption`.",
+                "examples": []
+            },
+            {
+                "code": "RV.001",
+                "version": null,
+                "name": "physx-variant-set",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/runtime_variants/requirements/physx-variant-set.html",
+                    "internal_path": "capabilities/core/runtime_variants/requirements/physx-variant-set.md"
+                },
+                "message": "The asset's default prim must expose a `PhysX` physics runtime variant set with `Disabled` and `Enabled` options, defaulting to `Disabled`.",
+                "examples": []
+            },
+            {
+                "code": "RV.008",
+                "version": null,
+                "name": "mujoco-runtime-payload",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/runtime_variants/requirements/mujoco-runtime-payload.html",
+                    "internal_path": "capabilities/core/runtime_variants/requirements/mujoco-runtime-payload.md"
+                },
+                "message": "The `MuJoCo` variant set's `Enabled` option must compose its runtime layer with an anchored `prepend payload` that resolves to `./runnables/physics/mujoco.usd(a)`.",
+                "examples": []
+            },
+            {
+                "code": "RV.009",
+                "version": null,
+                "name": "mujoco-variant-metadata",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/runtime_variants/requirements/mujoco-variant-metadata.html",
+                    "internal_path": "capabilities/core/runtime_variants/requirements/mujoco-variant-metadata.md"
+                },
+                "message": "The `MuJoCo` variant set must be documented in `customLayerData.SimReady_Metadata.Variants.Physics.MuJoCo`, declaring its `prim`, `variantSetName`, and `activateOption`.",
+                "examples": []
+            },
+            {
+                "code": "RV.002",
+                "version": null,
+                "name": "physx-runtime-payload",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/runtime_variants/requirements/physx-runtime-payload.html",
+                    "internal_path": "capabilities/core/runtime_variants/requirements/physx-runtime-payload.md"
+                },
+                "message": "The `PhysX` variant set's `Enabled` option must compose its runtime layer with an anchored `prepend payload` that resolves to `./runnables/physics/physx.usd(a)`.",
+                "examples": []
+            },
+            {
+                "code": "RV.005",
+                "version": null,
+                "name": "newton-runtime-payload",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/runtime_variants/requirements/newton-runtime-payload.html",
+                    "internal_path": "capabilities/core/runtime_variants/requirements/newton-runtime-payload.md"
+                },
+                "message": "The `Newton` variant set's `Enabled` option must compose its runtime layer with an anchored `prepend payload` that resolves to `./runnables/physics/newton.usd(a)`.",
+                "examples": []
+            },
+            {
+                "code": "RV.007",
+                "version": null,
+                "name": "mujoco-variant-set",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/runtime_variants/requirements/mujoco-variant-set.html",
+                    "internal_path": "capabilities/core/runtime_variants/requirements/mujoco-variant-set.md"
+                },
+                "message": "The asset's default prim must expose a `MuJoCo` physics runtime variant set with `Disabled` and `Enabled` options, defaulting to `Disabled`.",
+                "examples": []
+            },
+            {
+                "code": "RV.010",
+                "version": null,
+                "name": "runtime-variant-section-purity",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/runtime_variants/requirements/runtime-variant-section-purity.html",
+                    "internal_path": "capabilities/core/runtime_variants/requirements/runtime-variant-section-purity.md"
+                },
+                "message": "Each physics runtime variant set must isolate all runtime data in its payload: the `Enabled` option may compose the runtime only through the `prepend payload` arc and must author no inline prim overrides, and the `Disabled` option must be empty.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "capabilities/core/runtime_variants/capability-runtime_variants.html",
+            "internal_path": "capabilities/core/runtime_variants/capability-runtime_variants.md"
+        }
+    }
+}

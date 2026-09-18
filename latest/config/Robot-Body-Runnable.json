@@ -1,0 +1,36 @@
+{
+    "profile": {
+        "id": "Robot-Body-Runnable",
+        "version": "1.1.0",
+        "name": null,
+        "description": null,
+        "requirements": [],
+        "capabilities": [],
+        "features": [
+            {
+                "feature": "FET_001_STANDARD@1.0.1",
+                "optional": false
+            },
+            {
+                "feature": "FET_004_ROBOT_PHYSX@0.2.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_021_ISAAC@0.3.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_022_PHYSX@0.2.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_024_PHYSX@0.1.0",
+                "optional": false
+            }
+        ],
+        "metadata": {
+            "path": "profiles/robot_body_runnable.html",
+            "internal_path": "profiles/robot_body_runnable.md"
+        }
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "feature": {
+        "display_name": "Rigid Body Physics (MuJoCo)",
+        "runtime": "MuJoCo",
+        "id": "FET_003_MUJOCO",
+        "version": "0.1.0",
+        "requirements": [
+            "RB.COL.001",
+            "RB.COL.002",
+            "RB.COL.003",
+            "RB.COL.004",
+            "RB.001",
+            "RB.003",
+            "RB.005",
+            "RB.007",
+            "RB.009",
+            "RB.010",
+            "MUJOCO.COL.001",
+            "MUJOCO.COL.002"
+        ],
+        "dependencies": [],
+        "metadata": {
+            "path": "features/FET_003_MUJOCO.html",
+            "internal_path": "features/FET_003_MUJOCO.md"
+        }
+    }
+}

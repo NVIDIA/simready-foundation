@@ -1,0 +1,174 @@
+{
+    "capability": {
+        "id": "materials",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "VM.TEX.001",
+                "version": null,
+                "name": "material-texture-maxsize",
+                "compatibility": "open-usd",
+                "tags": [
+                    "performance"
+                ],
+                "validator": "vm-tex-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-texture-maxsize.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-texture-maxsize.md"
+                },
+                "message": "Texture dimensions must not exceed 16,384 pixels on either axis to ensure optimal performance and memory usage in simulation environments.",
+                "examples": []
+            },
+            {
+                "code": "VM.MAT.001",
+                "version": null,
+                "name": "material-assignment",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-assignment.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-assignment.md"
+                },
+                "message": "Each renderable GPrim must have a computed material bound to it",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def \"MyAsset\" (\n    kind = \"component\"\n)\n{\n    def Scope \"Materials\" () {\n        def Material \"DefaultMat\"\n        {\n            token outputs:surface.connect = </MyAsset/Materials/DefaultMat/PBRShader.outputs:surface>\n            \n            def Shader \"PreviewSurface\"\n            {\n                uniform token info:id = \"UsdPreviewSurface\"\n                color3f inputs:diffuseColor = (0.18, 0.18, 0.18)\n            }\n        }\n    }\n\n    def Scope \"Geometry\" () {\n        def Mesh \"Cube\" (\n            prepend apiSchemas = [\"MaterialBindingAPI\"]\n        )\n        {\n            rel material:binding = </MyAsset/Materials/DefaultMat>\n        }\n    }\n}"
+                        },
+                        "name": "\u2705 Valid Example",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def \"MyAsset\" (\n    kind = \"component\"\n)\n{\n    def Mesh \"Cube\"  # No material binding\n    {\n        # Missing material assignment\n    }\n}"
+                        },
+                        "name": "\u274c Invalid Example",
+                        "result": "success"
+                    }
+                ]
+            },
+            {
+                "code": "VM.BIND.002",
+                "version": null,
+                "name": "material-shader-inputs",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "vm-bind-002",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-shader-inputs.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-shader-inputs.md"
+                },
+                "message": "Shader inputs must have correct types matching their shader specification to ensure proper material behavior and prevent runtime errors.",
+                "examples": []
+            },
+            {
+                "code": "VM.MDL.002",
+                "version": null,
+                "name": "material-mdl-schema",
+                "compatibility": "kit-107+",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "vm-mdl-002",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-mdl-schema.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-mdl-schema.md"
+                },
+                "message": "MDL Shaders must standard OpenUSD shader source attributes to ensure compatibility.",
+                "examples": []
+            },
+            {
+                "code": "VM.TEX.002",
+                "version": null,
+                "name": "material-texture-colorspace",
+                "compatibility": "core-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-texture-colorspace.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-texture-colorspace.md"
+                },
+                "message": "Each PBR texture channel must use the correct color space.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"ValidMaterial\"\n{\n    token outputs:surface.connect = </ValidMaterial/PBRShader.outputs:surface>\n    \n    def Shader \"PBRShader\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        color3f inputs:diffuseColor.connect = </ValidMaterial/diffuseTexture.outputs:rgb>\n        float inputs:metallic.connect = </ValidMaterial/metallicTexture.outputs:r>\n        float inputs:roughness.connect = </ValidMaterial/roughnessTexture.outputs:r>\n        normal3f inputs:normal.connect = </ValidMaterial/normalTexture.outputs:rgb>\n    }\n    \n    \n    def Shader \"metallicTexture\"\n    {\n        uniform token info:id = \"UsdUVTexture\"\n        asset inputs:file = @textures/metallic.png@\n        token inputs:sourceColorSpace = \"raw\"  # Metallic in linear/raw\n        float2 inputs:st.connect = </ValidMaterial/PrimvarReader_st.outputs:result>\n    }\n    \n    def Shader \"roughnessTexture\"\n    {\n        uniform token info:id = \"UsdUVTexture\"\n        asset inputs:file = @textures/roughness.png@\n        token inputs:sourceColorSpace = \"raw\"  # Roughness in linear/raw\n        float2 inputs:st.connect = </ValidMaterial/PrimvarReader_st.outputs:result>\n    }\n    \n    def Shader \"normalTexture\"\n    {\n        uniform token info:id = \"UsdUVTexture\"\n        asset inputs:file = @textures/normal.png@  # 8-bit normal map texture\n        token inputs:sourceColorSpace = \"raw\"      # Prevent SRGB transformation\n        float4 inputs:scale = (2, 2, 2, 1)        # Required for 8-bit textures\n        float4 inputs:bias = (-1, -1, -1, 0)      # Required for 8-bit textures\n        float2 inputs:st.connect = </ValidMaterial/PrimvarReader_st.outputs:result>\n    }\n    \n    def Shader \"PrimvarReader_st\"\n    {\n        uniform token info:id = \"UsdPrimvarReader_float2\"\n        token inputs:varname = \"st\"\n    }\n}"
+                        },
+                        "name": "\u2705 Valid Example - Correct Color Spaces and Normal Map Settings",
+                        "result": "success"
+                    }
+                ]
+            },
+            {
+                "code": "VM.PS.001",
+                "version": null,
+                "name": "material-preview-surface",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "vm-ps-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-preview-surface.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-preview-surface.md"
+                },
+                "message": "Material attributes must comply with the UsdPreviewSurface specification to ensure consistent rendering and viewer compatibility.",
+                "examples": []
+            },
+            {
+                "code": "VM.MDL.001",
+                "version": null,
+                "name": "material-mdl-source-asset",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "vm-mdl-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-mdl-source-asset.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-mdl-source-asset.md"
+                },
+                "message": "MDL material source assets must be properly referenced and accessible to ensure material loading and rendering.",
+                "examples": []
+            },
+            {
+                "code": "VM.BIND.001",
+                "version": null,
+                "name": "material-bind-scope",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "vm-bind-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-bind-scope.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-bind-scope.md"
+                },
+                "message": "Material bindings must use appropriate scope to ensure proper material assignment and inheritance.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "capabilities/visualization/materials/capability-materials.html",
+            "internal_path": "capabilities/visualization/materials/capability-materials.md"
+        }
+    }
+}

@@ -1,0 +1,222 @@
+{
+    "capability": {
+        "id": "robot_core",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "RC.009",
+                "version": null,
+                "name": "root-joint-pinned",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "CheckStage",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/root-joint-pinned.html",
+                    "internal_path": "capabilities/isaac_sim/robot_core/requirements/root-joint-pinned.md"
+                },
+                "message": "The root joint (the first target of `isaac:physics:robotJoints`) must be pinned for robot types that require a fixed base (e.g. Manipulator, End Effector) and must not be pinned for other robot types.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "over \"Robot\" (\n    prepend apiSchemas = [\"IsaacRobotAPI\"]\n)\n{\n    token isaac:robotType = \"Manipulator\"\n    rel isaac:physics:robotJoints = [ </Robot/joints/root>, </Robot/joints/joint_1> ]\n    rel isaac:physics:robotLinks = [ </Robot/links/base>, </Robot/links/link_1> ]\n}\n\ndef Scope \"joints\"\n{\n    def PhysicsJoint \"root\"\n    {\n        # body0 has no target \u2014 interpreted as the world (pinned)\n        rel physics:body1 = </Robot/links/base>\n    }\n}\n\ndef Scope \"links\"\n{\n    def Xform \"base\" (\n        prepend apiSchemas = [\"PhysicsRigidBodyAPI\"]\n    )\n    {\n    }\n}"
+                        },
+                        "name": "Passing \u2014 Manipulator pinned via empty `body0` (world)",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Scope \"joints\"\n{\n    def PhysicsJoint \"root\"\n    {\n        rel physics:body0 = </Robot/links/base>\n        # body1 has no target \u2014 interpreted as the world (pinned)\n    }\n}"
+                        },
+                        "name": "Passing \u2014 Manipulator pinned via empty `body1` (world)",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"world_anchor\"\n{\n    # No PhysicsRigidBodyAPI \u2014 acts as a fixed anchor\n}\n\ndef Scope \"joints\"\n{\n    def PhysicsJoint \"root\"\n    {\n        rel physics:body0 = </Robot/world_anchor>\n        rel physics:body1 = </Robot/links/base>\n    }\n}"
+                        },
+                        "name": "Passing \u2014 Manipulator pinned via non-rigid body prim",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "over \"Gripper\" (\n    prepend apiSchemas = [\"IsaacRobotAPI\"]\n)\n{\n    token isaac:robotType = \"End Effector\"\n    rel isaac:physics:robotJoints = [ </Gripper/joints/root>, </Gripper/joints/finger_1> ]\n    rel isaac:physics:robotLinks = [ </Gripper/links/base>, </Gripper/links/finger_1> ]\n}\n\ndef Scope \"joints\"\n{\n    def PhysicsJoint \"root\"\n    {\n        # Pinned: body0 is empty (world)\n        rel physics:body1 = </Gripper/links/base>\n    }\n}"
+                        },
+                        "name": "Passing \u2014 End Effector pinned (same rules as Manipulator)",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "over \"MobileBot\" (\n    prepend apiSchemas = [\"IsaacRobotAPI\"]\n)\n{\n    token isaac:robotType = \"Mobile\"\n    rel isaac:physics:robotJoints = [ </MobileBot/joints/root>, </MobileBot/joints/wheel_1> ]\n    rel isaac:physics:robotLinks = [ </MobileBot/links/chassis>, </MobileBot/links/wheel_1> ]\n}\n\ndef Scope \"joints\"\n{\n    def PhysicsJoint \"root\"\n    {\n        rel physics:body0 = </MobileBot/links/chassis>\n        rel physics:body1 = </MobileBot/links/body>\n    }\n}\n\ndef Scope \"links\"\n{\n    def Xform \"chassis\" (\n        prepend apiSchemas = [\"PhysicsRigidBodyAPI\"]\n    )\n    {\n    }\n\n    def Xform \"body\" (\n        prepend apiSchemas = [\"PhysicsRigidBodyAPI\"]\n    )\n    {\n    }\n}"
+                        },
+                        "name": "Passing \u2014 Mobile robot with root joint **not** pinned",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "# FAILS: Both body0 and body1 are rigid bodies, so the root joint is not pinned.\n# Manipulators require a pinned root joint.\ndef Scope \"joints\"\n{\n    def PhysicsJoint \"root\"\n    {\n        rel physics:body0 = </Robot/links/chassis>   # has PhysicsRigidBodyAPI\n        rel physics:body1 = </Robot/links/base>      # has PhysicsRigidBodyAPI\n    }\n}"
+                        },
+                        "name": "Failing \u2014 Manipulator with both bodies rigid (not pinned)",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "# FAILS: body0 is empty (world), making the root joint pinned.\n# Non-manipulator types must not have a pinned root joint.\nover \"MobileBot\" (\n    prepend apiSchemas = [\"IsaacRobotAPI\"]\n)\n{\n    token isaac:robotType = \"Mobile\"\n}\n\ndef Scope \"joints\"\n{\n    def PhysicsJoint \"root\"\n    {\n        # body0 is empty \u2014 pinned to world, which is wrong for Mobile\n        rel physics:body1 = </MobileBot/links/chassis>\n    }\n}"
+                        },
+                        "name": "Failing \u2014 Mobile robot with a pinned root joint",
+                        "result": "success"
+                    }
+                ]
+            },
+            {
+                "code": "RC.002",
+                "version": null,
+                "name": "no-overrides",
+                "compatibility": "other",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/no-overrides.html",
+                    "internal_path": "capabilities/isaac_sim/robot_core/requirements/no-overrides.md"
+                },
+                "message": "Robot USDs avoid local override layers that mask upstream schemas or physics.",
+                "examples": []
+            },
+            {
+                "code": "RC.003",
+                "version": null,
+                "name": "robot-naming",
+                "compatibility": "other",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/robot-naming.html",
+                    "internal_path": "capabilities/isaac_sim/robot_core/requirements/robot-naming.md"
+                },
+                "message": "Canonical robot and prim naming conventions for stable references and tools.",
+                "examples": []
+            },
+            {
+                "code": "RC.007",
+                "version": null,
+                "name": "robot-schema",
+                "compatibility": "other",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/robot-schema.html",
+                    "internal_path": "capabilities/isaac_sim/robot_core/requirements/robot-schema.md"
+                },
+                "message": "Robot USDs declare and use the required schemas and physics attributes.",
+                "examples": []
+            },
+            {
+                "code": "RC.005",
+                "version": null,
+                "name": "verify-robot-physics-attribute-source-layer",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/verify-robot-physics-attribute-source-layer.html",
+                    "internal_path": "capabilities/isaac_sim/robot_core/requirements/verify-robot-physics-attribute-source-layer.md"
+                },
+                "message": "Validates that physics attributes are authored in the physics layer.",
+                "examples": []
+            },
+            {
+                "code": "RC.001",
+                "version": null,
+                "name": "clean-folder",
+                "compatibility": "other",
+                "tags": [
+                    "high-quality"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/clean-folder.html",
+                    "internal_path": "capabilities/isaac_sim/robot_core/requirements/clean-folder.md"
+                },
+                "message": "Robot asset folders contain only referenced, required files. No stray or unused content. At the main level of a robot asset, only the interface layer is present. All other required content is bundled on subfolders related to it specific usage.",
+                "examples": []
+            },
+            {
+                "code": "RC.006",
+                "version": null,
+                "name": "verify-robot-physics-schema-source-layer",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/verify-robot-physics-schema-source-layer.html",
+                    "internal_path": "capabilities/isaac_sim/robot_core/requirements/verify-robot-physics-schema-source-layer.md"
+                },
+                "message": "Validates that physics schema are authored in the physics layer.",
+                "examples": []
+            },
+            {
+                "code": "RC.004",
+                "version": null,
+                "name": "thumbnail-exist",
+                "compatibility": "other",
+                "tags": [
+                    "high-quality"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/thumbnail-exist.html",
+                    "internal_path": "capabilities/isaac_sim/robot_core/requirements/thumbnail-exist.md"
+                },
+                "message": "The robot interface asset file should contain a thumbnail. The thumbnail should be representative of the robot.",
+                "examples": []
+            },
+            {
+                "code": "RC.008",
+                "version": null,
+                "name": "robot-type",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "CheckStage",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/robot-type.html",
+                    "internal_path": "capabilities/isaac_sim/robot_core/requirements/robot-type.md"
+                },
+                "message": "Robot assets must declare a valid robot type on the default prim. The `isaac:robotType` attribute must be present, must be one of the schema-defined allowed tokens, and must not be `\"Default\"`.\nAllowed values are : \"End Effector\", \"Manipulator\", \"Humanoid\", \"Wheeled\", \"Holonomic\", \"Quadruped\", \"Mobile Manipulators\", \"Aerial\"",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "capabilities/isaac_sim/robot_core/capability-robot_core.html",
+            "internal_path": "capabilities/isaac_sim/robot_core/capability-robot_core.md"
+        }
+    }
+}

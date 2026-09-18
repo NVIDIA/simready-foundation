@@ -1,0 +1,92 @@
+#usda 1.0
+(
+    customLayerData = {
+        dictionary SimReady_Metadata = {
+            dictionary Variants = {
+                dictionary Physics = {
+                    dictionary MuJoCo = {
+                        string activateOption = "Enabled"
+                        string prim = "/RootNode"
+                        string variantSetName = "MuJoCo"
+                    }
+                    dictionary Newton = {
+                        string activateOption = "Enabled"
+                        string prim = "/RootNode"
+                        string variantSetName = "Newton"
+                    }
+                    dictionary PhysX = {
+                        string activateOption = "Enabled"
+                        string prim = "/RootNode"
+                        string variantSetName = "PhysX"
+                    }
+                }
+            }
+            float3 asset_extents = (1.8300002, 0.7620002, 0.91263264)
+            string asset_license = "CC-BY 4.0"
+            string asset_location = "sample_content/common_assets/props_general/obs_workbench_tool_a01/simready_usd/sm_obs_workbench_tool_a01_01.usda"
+            string asset_name = "obs_workbench_tool_a01"
+            string asset_type = "prop"
+            string author = "Nvidia"
+            string category = "woodworking workbench"
+            double mass = 701.8307189941406
+            string qcode = "Q1621597"
+            int rigid_body_count = 11
+            string source_file = "../dcc_source/working/model/blender/obs_workbench_tool_a01.blend"
+            string usd_date_generated = "2026-09-11 12:30:07"
+            dictionary validation = {
+                string profile = "Robotics-Prop"
+                string profile_version = "3.2.0"
+            }
+        }
+        string asset_name = "obs_workbench_tool_a01"
+        string asset_type = "prop"
+        string source_file = "../dcc_source/working/model/blender/obs_workbench_tool_a01.blend"
+        string usd_date_generated = "2026-09-11 12:30:07"
+    }
+    defaultPrim = "RootNode"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "RootNode" (
+    prepend references = @./payloads/base.usda@
+    variants = {
+        string MuJoCo = "Disabled"
+        string Newton = "Disabled"
+        string PhysX = "Disabled"
+    }
+    append variantSets = ["MuJoCo", "Newton", "PhysX"]
+)
+{
+    variantSet "MuJoCo" = {
+        "Disabled" {
+
+        }
+        "Enabled" (
+            prepend payload = @./runnables/physics/mujoco.usd@
+        ) {
+
+        }
+    }
+    variantSet "Newton" = {
+        "Disabled" {
+
+        }
+        "Enabled" (
+            prepend payload = @./runnables/physics/newton.usd@
+        ) {
+
+        }
+    }
+    variantSet "PhysX" = {
+        "Disabled" {
+
+        }
+        "Enabled" (
+            prepend payload = @./runnables/physics/physx.usd@
+        ) {
+
+        }
+    }
+}
+

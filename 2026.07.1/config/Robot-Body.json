@@ -1,0 +1,128 @@
+{
+    "profile": {
+        "id": "Robot-Body",
+        "version": "2.2.0",
+        "name": null,
+        "description": null,
+        "requirements": [],
+        "capabilities": [],
+        "features": [
+            {
+                "feature": "FET_001_STANDARD@1.0.1",
+                "optional": false
+            },
+            {
+                "feature": "FET_003_STANDARD@0.2.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_004_STANDARD@0.2.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_021_ISAAC@0.3.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_022_STANDARD@0.2.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_024_STANDARD@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_025_ROS@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_031_STANDARD@0.1.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_033_STANDARD@0.3.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_000_PHYSX@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_003_PHYSX@0.4.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_004_PHYSX@0.4.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_022_PHYSX@0.2.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_024_PHYSX@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_000_NEWTON@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_003_NEWTON@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_004_NEWTON@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_022_NEWTON@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_024_NEWTON@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_000_MUJOCO@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_003_MUJOCO@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_004_MUJOCO@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_022_MUJOCO@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_024_MUJOCO@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_000_ISAAC@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_022_ISAAC@0.2.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_023_ISAAC@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_100_ISAAC@0.3.0",
+                "optional": true
+            }
+        ],
+        "metadata": {
+            "path": "profiles/robot_body.html",
+            "internal_path": "profiles/robot_body.md"
+        }
+    }
+}

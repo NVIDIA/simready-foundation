@@ -1,0 +1,36 @@
+{
+    "profile": {
+        "id": "Prop-Robotics-Isaac",
+        "version": "1.2.0",
+        "name": null,
+        "description": null,
+        "requirements": [],
+        "capabilities": [],
+        "features": [
+            {
+                "feature": "FET_001_STANDARD@1.0.1",
+                "optional": false
+            },
+            {
+                "feature": "FET_003_PHYSX@0.4.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_004_PHYSX@0.4.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_005_STANDARD@0.1.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_100_ISAAC@0.4.0",
+                "optional": false
+            }
+        ],
+        "metadata": {
+            "path": "profiles/prop_robotics_isaac.html",
+            "internal_path": "profiles/prop_robotics_isaac.md"
+        }
+    }
+}

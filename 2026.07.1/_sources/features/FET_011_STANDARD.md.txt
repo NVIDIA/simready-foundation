@@ -1,0 +1,114 @@
+# Feature: `FET_011_STANDARD`
+
+| **Property**            | **Value**         |
+|-------------------------|-------------------|
+| Feature Name            | `FET_011_STANDARD` |
+| Runtime                 | `STANDARD` |
+| Proprietary Techs       | `None` |
+| Latest Version          | `0.2.0` |
+
+## Description
+
+This feature defines the Standard OpenUSD semantic-label contract for assets
+that need ground-truth object identity for perception, synthetic data
+generation, or sensor validation workflows. An asset that satisfies this
+feature has semantic labels authored with the modern `SemanticsLabelsAPI`
+schema. The contract is taxonomy-agnostic: any `SemanticsLabelsAPI` instance
+name may be used.
+
+Static validation verifies that render/default geometry is semantically
+labeled, that labels use the modern `SemanticsLabelsAPI` schema, and that any
+deprecated `SemanticsAPI` labels have been migrated. Labels may be authored
+directly on a renderable geometric prim, inherited from an ancestor, or provided
+through a bound material.
+
+OpenUSD permits time-varying labels, so this neutral feature allows them.
+NVIDIA-specific rules are separate features: static labels and material labels
+belong to [`FET_011_RTX`](FET_011_RTX.md), and Wikidata Q-code formatting to
+[`FET_046_STANDARD`](FET_046_STANDARD.md).
+
+## Dependency Graph
+
+This feature has no dependencies. Taxonomy features such as
+`FET_040_STANDARD`–`FET_045_STANDARD` and `FET_046_STANDARD` may depend on it.
+
+## Use Cases
+
+Products or workflows that consume this feature:
+
+- NDAS SDG / Stargate
+- MEGA
+- Lightwheel SOW1
+- Isaac Sim semantic-label runtime checks
+- Synthetic data generation and ML ground-truth workflows
+
+## Requirements
+
+### Version 0.2.0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+This version is used in the following profiles:
+
+- **[Prop-Robotics-Neutral](../profiles/prop-robotics-neutral.md)** (`v2.3.0`) - Ground-truth object identity for neutral robotics props.
+- **[Prop-Robotics-Physx](../profiles/prop-robotics-physx.md)** (`v2.3.0`) - Ground-truth object identity for PhysX robotics props.
+- **[Prop-Robotics-Isaac](../profiles/prop-robotics-isaac.md)** (`v2.3.0`) - Ground-truth object identity for Isaac robotics props.
+- **[Robot-Body-Neutral](../profiles/robot-body-neutral.md)** (`v1.2.0`) - Ground-truth object identity for neutral robot bodies.
+- **[Robot-Body-Runnable](../profiles/robot-body-runnable.md)** (`v1.2.0`) - Ground-truth object identity for runnable robot bodies.
+- **[Robot-Body-Isaac](../profiles/robot-body-isaac.md)** (`v1.2.0`) - Ground-truth object identity for Isaac robot bodies.
+
+#### Feature Dependencies
+
+None.
+
+#### Requirement List
+
+* Capability: [Semantic Labels](../capabilities/semantic_labels/capability-semantic_labels.md)
+    * Requirements:
+        * [Semantic Label Capability](../capabilities/semantic_labels/requirements/semantic-label-capability.md)
+            * `SL.001` | Version `0.1.0`
+            * [Rule | Implementation](../capabilities/semantic_labels/validation.py)
+        * [Semantic Label Deprecated Schema](../capabilities/semantic_labels/requirements/semantic-label-deprecated-schema.md)
+            * `SL.002` | Version `0.1.0`
+            * [Rule | Implementation](../capabilities/semantic_labels/validation.py)
+        * [Semantic Label Schema](../capabilities/semantic_labels/requirements/semantic-label-schema.md)
+            * `SL.003` | Version `0.1.0`
+            * [Rule | Implementation](../capabilities/semantic_labels/validation.py)
+
+</details>
+
+## Pipelines
+
+Source file type:
+
+- `.usd`, `.usda`, `.usdc`
+  - Author semantic labels with `SemanticsLabelsAPI:<instance>` and `semantics:labels:<instance>`.
+- `.blend`
+  - Via Blender SimReady Add-ons.
+- `.mjcf`
+  - Via Blender SimReady Add-ons and MJCF2USD tooling.
+- `.step`
+  - Via Blender SimReady Add-ons and CAD Converter tooling.
+
+Validation or runtime pipeline:
+
+- SimReady validation - verifies the `SL.001`, `SL.002`, and `SL.003` semantic-label contract.
+- Semantic Labels Check - renders semantic-label validation evidence and highlights missing labels.
+
+## Samples
+
+- [`obs_orange_a02`](../../../../../sample_content/common_assets/props_general/obs_orange_a02/simready_usd/sm_obs_orange_a02_01.usd)
+- [`obs_electricians_large_tool_box_a01`](../../../../../sample_content/common_assets/props_general/obs_electricians_large_tool_box_a01/simready_usd/sm_obs_electricians_large_tool_box_a01_01.usd)
+
+## Benchmarks
+
+- Suite: [FET011 Semantic Labels](../guides/benchmark/tests/fet011-semantic-labels.md)
+  - Tests:
+    - [semantic_labels_seg](../guides/benchmark/tests/fet011/semantic-labels-seg.md)
+
+## Adapters
+
+None.

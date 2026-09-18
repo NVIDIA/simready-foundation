@@ -1,0 +1,104 @@
+{
+    "profile": {
+        "id": "Robotics-Prop",
+        "version": "3.2.0",
+        "name": null,
+        "description": null,
+        "requirements": [],
+        "capabilities": [],
+        "features": [
+            {
+                "feature": "FET_000_STANDARD@0.1.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_001_STANDARD@1.0.1",
+                "optional": false
+            },
+            {
+                "feature": "FET_003_STANDARD@0.2.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_004_STANDARD@0.2.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_005_STANDARD@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_006_STANDARD@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_006_MDL@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_007_STANDARD@0.2.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_011_STANDARD@0.2.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_011_RTX@0.1.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_046_STANDARD@0.1.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_031_STANDARD@0.1.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_033_STANDARD@0.3.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_000_PHYSX@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_003_PHYSX@0.4.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_004_PHYSX@0.4.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_000_NEWTON@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_003_NEWTON@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_004_NEWTON@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_000_MUJOCO@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_003_MUJOCO@0.1.0",
+                "optional": true
+            },
+            {
+                "feature": "FET_004_MUJOCO@0.1.0",
+                "optional": true
+            }
+        ],
+        "metadata": {
+            "path": "profiles/robotics_prop.html",
+            "internal_path": "profiles/robotics_prop.md"
+        }
+    }
+}

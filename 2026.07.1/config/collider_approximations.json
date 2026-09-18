@@ -1,0 +1,29 @@
+{
+    "capability": {
+        "id": "collider_approximations",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "COL.001",
+                "version": null,
+                "name": "collider-approximation-sdf",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_colliders/requirements/collider-approximation-sdf.html",
+                    "internal_path": "capabilities/physics_bodies/physics_colliders/requirements/collider-approximation-sdf.md"
+                },
+                "message": "Every mesh collider (Mesh prim with USDPhysics.CollisionAPI and USDPhysics.MeshCollisionAPI) must have an SDF (Signed Distance Field) approximation for efficient collision detection.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "capabilities/physics_bodies/physics_colliders/capability-collider_approximations.html",
+            "internal_path": "capabilities/physics_bodies/physics_colliders/capability-collider_approximations.md"
+        }
+    }
+}

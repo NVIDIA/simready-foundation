@@ -1,0 +1,44 @@
+{
+    "profile": {
+        "id": "Robot-Body-Isaac",
+        "version": "1.2.0",
+        "name": null,
+        "description": null,
+        "requirements": [],
+        "capabilities": [],
+        "features": [
+            {
+                "feature": "FET_001_STANDARD@0.1.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_003_PHYSX@0.4.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_004_PHYSX@0.4.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_021_ISAAC@0.2.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_022_ISAAC@0.2.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_024_PHYSX@0.1.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_101_ISAAC@0.1.0",
+                "optional": false
+            }
+        ],
+        "metadata": {
+            "path": "profiles/robot_body_isaac.html",
+            "internal_path": "profiles/robot_body_isaac.md"
+        }
+    }
+}

@@ -1,0 +1,114 @@
+{
+    "capability": {
+        "id": "semantic_labels",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "SL.003",
+                "version": null,
+                "name": "semantic-label-schema",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "sl-003",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/semantic_labels/requirements/semantic-label-schema.html",
+                    "internal_path": "capabilities/semantic_labels/requirements/semantic-label-schema.md"
+                },
+                "message": "Semantic labels must use the SemanticsLabelsAPI schema",
+                "examples": []
+            },
+            {
+                "code": "SL.001",
+                "version": null,
+                "name": "semantic-label-capability",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "sl-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/semantic_labels/requirements/semantic-label-capability.html",
+                    "internal_path": "capabilities/semantic_labels/requirements/semantic-label-capability.md"
+                },
+                "message": "All renderable geometry must be semantically labeled.",
+                "examples": []
+            },
+            {
+                "code": "SL.TIME.001",
+                "version": null,
+                "name": "semantic-label-time",
+                "compatibility": "rtx",
+                "tags": [
+                    "limitation"
+                ],
+                "validator": "sl-time-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/semantic_labels/requirements/semantic-label-time.html",
+                    "internal_path": "capabilities/semantic_labels/requirements/semantic-label-time.md"
+                },
+                "message": "For the NVIDIA RTX perception pipeline, semantic label attributes must use static (non-time-varying) values.",
+                "examples": []
+            },
+            {
+                "code": "SL.MAT.001",
+                "version": null,
+                "name": "semantic-label-material",
+                "compatibility": "omniverse",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "sl-mat-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/semantic_labels/requirements/semantic-label-material.html",
+                    "internal_path": "capabilities/semantic_labels/requirements/semantic-label-material.md"
+                },
+                "message": "Material prims must be labeled with a non-empty `SemanticsLabelsAPI:material` label.",
+                "examples": []
+            },
+            {
+                "code": "SL.QCODE.001",
+                "version": null,
+                "name": "semantic-label-qcode-valid",
+                "compatibility": "omniverse",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "sl-qcode-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/semantic_labels/requirements/semantic-label-qcode-valid.html",
+                    "internal_path": "capabilities/semantic_labels/requirements/semantic-label-qcode-valid.md"
+                },
+                "message": "If the Wikidata ontology is used, Q-Codes must be well-formed (`Q` followed by one or more digits). Values should reference a real Wikidata entity, but the validator checks format only \u2014 it does not contact wikidata.org.",
+                "examples": []
+            },
+            {
+                "code": "SL.002",
+                "version": null,
+                "name": "semantic-label-deprecated-schema",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "sl-002",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/semantic_labels/requirements/semantic-label-deprecated-schema.html",
+                    "internal_path": "capabilities/semantic_labels/requirements/semantic-label-deprecated-schema.md"
+                },
+                "message": "Deprecated SemanticsAPI labels must be migrated to the SemanticsLabelsAPI schema.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "capabilities/semantic_labels/capability-semantic_labels.html",
+            "internal_path": "capabilities/semantic_labels/capability-semantic_labels.md"
+        }
+    }
+}

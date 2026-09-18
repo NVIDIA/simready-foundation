@@ -1,0 +1,22 @@
+{
+    "feature": {
+        "display_name": "Core (PhysX)",
+        "runtime": "PhysX",
+        "id": "FET_000_PHYSX",
+        "version": "0.1.0",
+        "requirements": [
+            "RV.001",
+            "RV.002",
+            "RV.003",
+            "RV.010",
+            "RV.011"
+        ],
+        "dependencies": [
+            "FET_000_STANDARD@0.1.0"
+        ],
+        "metadata": {
+            "path": "features/FET_000_PHYSX.html",
+            "internal_path": "features/FET_000_PHYSX.md"
+        }
+    }
+}

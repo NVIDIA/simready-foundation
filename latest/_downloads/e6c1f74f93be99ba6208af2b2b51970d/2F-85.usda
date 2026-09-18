@@ -1,0 +1,339 @@
+#usda 1.0
+(
+    customLayerData = {
+        dictionary SimReady_Metadata = {
+            dictionary Variants = {
+                dictionary Physics = {
+                    dictionary MuJoCo = {
+                        string activateOption = "Enabled"
+                        string prim = "/Robotiq_2F_85"
+                        string variantSetName = "MuJoCo"
+                    }
+                    dictionary Newton = {
+                        string activateOption = "Enabled"
+                        string prim = "/Robotiq_2F_85"
+                        string variantSetName = "Newton"
+                    }
+                    dictionary PhysX = {
+                        dictionary Formulations = {
+                            string default = "Mimic"
+                            string note = "Nested PhysX finger-loop coupling authored in runnables/physics/physx.usda. 'Mimic' (default) couples the passive knuckles to finger_joint via PhysxMimicJointAPI; 'Loop' uses the explicit loop-closure formulation (promotes the two outer FixedJoints to RevoluteJoints and adds left/right_inner_knuckle_joint closures)."
+                            string[] options = ["Mimic", "Loop"]
+                            string prim = "/Robotiq_2F_85"
+                            string variantSetName = "PhysX_Formulation"
+                        }
+                        string activateOption = "Enabled"
+                        string prim = "/Robotiq_2F_85"
+                        string variantSetName = "PhysX"
+                    }
+                }
+            }
+            float3 asset_extents = (0.075, 0.15448326, 0.15177661)
+            string asset_license = "MIT"
+            string asset_name = "Robotiq_2F_85"
+            string asset_type = "gripper"
+            string author = "Robotiq"
+            string category = "robot_gripper"
+            double mass = 0.211481723934412
+            string qcode = "Q1340324"
+            int rigid_body_count = 9
+            string source_file = "robotiq_arg2f_85_model.urdf"
+            string usd_date_generated = "2026-08-26"
+            dictionary validation = {
+                string profile = "Robot-Gripper"
+                string profile_version = "2.1.0"
+                dictionary validated_features = {
+                    dictionary "2026-08-27" = {
+                        dictionary FET_000_MUJOCO = {
+                            string dependencies = "[{'FET_000_STANDARD': {'version': '0.1.0'}}]"
+                            bool passed = 1
+                            string version = "0.1.0"
+                        }
+                        dictionary FET_000_NEWTON = {
+                            string dependencies = "[{'FET_000_STANDARD': {'version': '0.1.0'}}]"
+                            bool passed = 1
+                            string version = "0.1.0"
+                        }
+                        dictionary FET_000_PHYSX = {
+                            string dependencies = "[{'FET_000_STANDARD': {'version': '0.1.0'}}]"
+                            bool passed = 1
+                            string version = "0.1.0"
+                        }
+                        dictionary FET_000_STANDARD = {
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0.1.0"
+                        }
+                        dictionary FET_001_STANDARD = {
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "1.0.1"
+                        }
+                        dictionary FET_003_MUJOCO = {
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0.1.0"
+                        }
+                        dictionary FET_003_NEWTON = {
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0.1.0"
+                        }
+                        dictionary FET_003_PHYSX = {
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0.4.0"
+                        }
+                        dictionary FET_003_STANDARD = {
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0.2.0"
+                        }
+                        dictionary FET_004_MUJOCO = {
+                            string dependencies = "[{'FET_003_MUJOCO': {'version': '0.1.0'}}]"
+                            bool passed = 1
+                            string version = "0.1.0"
+                        }
+                        dictionary FET_004_NEWTON = {
+                            string dependencies = "[{'FET_003_NEWTON': {'version': '0.1.0'}}]"
+                            bool passed = 1
+                            string version = "0.1.0"
+                        }
+                        dictionary FET_004_PHYSX = {
+                            string dependencies = "[{'FET_003_PHYSX': {'version': '0.4.0'}}]"
+                            bool passed = 1
+                            string version = "0.4.0"
+                        }
+                        dictionary FET_004_ROBOT_MUJOCO = {
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0.1.0"
+                        }
+                        dictionary FET_004_ROBOT_NEWTON = {
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0.1.0"
+                        }
+                        dictionary FET_004_ROBOT_PHYSX = {
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0.1.0"
+                        }
+                        dictionary FET_004_STANDARD = {
+                            string dependencies = "[{'FET_003_STANDARD': {'version': '0.2.0'}}]"
+                            bool passed = 1
+                            string version = "0.2.0"
+                        }
+                        dictionary FET_021_ISAAC = {
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0.2.0"
+                        }
+                        dictionary FET_022_ISAAC = {
+                            string dependencies = "[{'FET_022_PHYSX': {'version': '0.1.0'}}]"
+                            bool passed = 1
+                            string version = "0.1.0"
+                        }
+                        dictionary FET_022_MUJOCO = {
+                            string dependencies = "[{'FET_004_ROBOT_MUJOCO': {'version': '0.1.0'}}]"
+                            bool passed = 1
+                            string version = "0.1.0"
+                        }
+                        dictionary FET_022_NEWTON = {
+                            string dependencies = "[{'FET_004_ROBOT_NEWTON': {'version': '0.1.0'}}]"
+                            bool passed = 1
+                            string version = "0.1.0"
+                        }
+                        dictionary FET_022_PHYSX = {
+                            string dependencies = "[{'FET_004_PHYSX': {'version': '0.4.0'}}]"
+                            bool passed = 1
+                            string version = "0.2.0"
+                        }
+                        dictionary FET_022_STANDARD = {
+                            string dependencies = "[{'FET_004_STANDARD': {'version': '0.2.0'}}]"
+                            bool passed = 1
+                            string version = "0.2.0"
+                        }
+                        dictionary FET_024_MUJOCO = {
+                            string dependencies = "[{'FET_024_STANDARD': {'version': '0.1.0'}}]"
+                            bool passed = 1
+                            string version = "0.1.0"
+                        }
+                        dictionary FET_024_NEWTON = {
+                            string dependencies = "[{'FET_024_STANDARD': {'version': '0.1.0'}}]"
+                            bool passed = 1
+                            string version = "0.1.0"
+                        }
+                        dictionary FET_024_PHYSX = {
+                            string dependencies = "[{'FET_024_STANDARD': {'version': '0.1.0'}}]"
+                            bool passed = 1
+                            string version = "0.1.0"
+                        }
+                        dictionary FET_024_STANDARD = {
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0.1.0"
+                        }
+                        dictionary FET_028_ISAAC = {
+                            string dependencies = "[{'FET_028_STANDARD': {'version': '0.1.0'}}, {'FET_022_ISAAC': {'version': '0.1.0'}}]"
+                            bool passed = 1
+                            string version = "0.1.0"
+                        }
+                        dictionary FET_028_MUJOCO = {
+                            string dependencies = "[{'FET_028_STANDARD': {'version': '0.1.0'}}, {'FET_022_MUJOCO': {'version': '0.1.0'}}]"
+                            bool passed = 1
+                            string version = "0.1.0"
+                        }
+                        dictionary FET_028_STANDARD = {
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0.1.0"
+                        }
+                        dictionary FET_031_STANDARD = {
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0.1.0"
+                        }
+                        dictionary FET_033_STANDARD = {
+                            string dependencies = "[{'FET_031_STANDARD': {'version': '0.1.0'}}]"
+                            bool passed = 1
+                            string version = "0.3.0"
+                        }
+                        dictionary FET_100_ISAAC = {
+                            string dependencies = "[{'FET_003_PHYSX': {'version': '0.4.0'}}]"
+                            bool passed = 1
+                            string version = "0.3.0"
+                        }
+                    }
+                }
+            }
+        }
+        dictionary cameraSettings = {
+            dictionary Front = {
+                double3 position = (5, 0, 0)
+                double radius = 5
+            }
+            dictionary Perspective = {
+                double3 position = (0.18173853819298824, -0.1889297963908149, 0.24230409941838207)
+                double3 target = (0.07693172486486197, -0.0829886743371815, 0.14494076254417107)
+            }
+            dictionary Right = {
+                double3 position = (0, -5, 0)
+                double radius = 5
+            }
+            dictionary Top = {
+                double3 position = (0, 0, 5)
+                double radius = 5
+            }
+            string boundCamera = "/OmniverseKit_Persp"
+        }
+        dictionary omni_layer = {
+            string authoring_layer = "./2F-85.usda"
+        }
+        dictionary renderSettings = {
+        }
+    }
+    defaultPrim = "Robotiq_2F_85"
+    endTimeCode = 0
+    metersPerUnit = 1
+    startTimeCode = -1
+    upAxis = "Z"
+)
+
+def Xform "Robotiq_2F_85" (
+    kind = "component"
+    prepend references = @./payloads/base.usda@
+    variants = {
+        string MuJoCo = "Disabled"
+        string Newton = "Disabled"
+        string PhysX = "Disabled"
+    }
+    prepend variantSets = ["PhysX", "Newton", "MuJoCo"]
+)
+{
+    string isaac:namespace (
+        displayName = "Namespace"
+        doc = "Namespace of the prim in Isaac Sim"
+    )
+    custom rel isaac:physics:robotJoints = [
+        </Robotiq_2F_85/root_joint>,
+        </Robotiq_2F_85/Joints/finger_joint>,
+        </Robotiq_2F_85/Joints/right_outer_knuckle_joint>,
+        </Robotiq_2F_85/Joints/right_outer_finger_joint>,
+        </Robotiq_2F_85/Joints/right_inner_finger_joint>,
+        </Robotiq_2F_85/Joints/right_inner_finger_knuckle_joint>,
+        </Robotiq_2F_85/Joints/left_outer_finger_joint>,
+        </Robotiq_2F_85/Joints/left_inner_finger_knuckle_joint>,
+        </Robotiq_2F_85/Joints/left_inner_finger_joint>,
+    ]
+    custom uniform token isaac:robotType = "End Effector"
+    quatd xformOp:orient = (1, 0, 0, 0)
+    float3 xformOp:scale = (1, 1, 1)
+    double3 xformOp:translate = (0, 0, 0)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    over "base_link"
+    {
+        def Xform "gripper_01" (
+            prepend apiSchemas = ["IsaacSiteAPI"]
+        )
+        {
+            custom float gripper_maxOpening = 0.085
+            custom float gripper_maxPayload = 5
+            string isaac:Description = "Parallel-jaw grasp center between the two finger pads (Robotiq 2F-85)."
+            custom token simready:attachment:socketType = "Gripper"
+            quatd xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, 0, 0.16)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            def BasisCurves "gripper_forward_axis"
+            {
+                int[] curveVertexCounts = [2]
+                float3[] extent = [(0, 0, 0), (0, 0, 0.05)]
+                point3f[] points = [(0, 0, 0), (0, 0, 0.05)]
+                uniform token purpose = "guide"
+                uniform token type = "linear"
+            }
+
+            def BasisCurves "gripper_grip_line"
+            {
+                int[] curveVertexCounts = [2]
+                float3[] extent = [(-0.0425, 0, 0), (0.0425, 0, 0)]
+                point3f[] points = [(-0.0425, 0, 0), (0.0425, 0, 0)]
+                uniform token purpose = "guide"
+                uniform token type = "linear"
+            }
+        }
+    }
+    variantSet "PhysX" = {
+        "Disabled" {
+
+        }
+        "Enabled" (
+            prepend payload = @./runnables/physics/physx.usda@
+        ) {
+
+        }
+    }
+    variantSet "Newton" = {
+        "Disabled" {
+
+        }
+        "Enabled" (
+            prepend payload = @./runnables/physics/newton.usda@
+        ) {
+
+        }
+    }
+    variantSet "MuJoCo" = {
+        "Disabled" {
+
+        }
+        "Enabled" (
+            prepend payload = @./runnables/physics/mujoco.usda@
+        ) {
+
+        }
+    }
+}

@@ -1,0 +1,114 @@
+{
+    "capability": {
+        "id": "physics_grippers",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "GR.004",
+                "version": null,
+                "name": "gripper-max-opening",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "CheckPrim",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_grippers/requirements/gripper-max-opening.html",
+                    "internal_path": "capabilities/physics_bodies/physics_grippers/requirements/gripper-max-opening.md"
+                },
+                "message": "Every gripper site prim must declare a `gripper_maxOpening` float attribute with a positive value (in meters) recording the maximum jaw separation.",
+                "examples": []
+            },
+            {
+                "code": "GR.002",
+                "version": null,
+                "name": "gripper-forward-axis",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "CheckPrim",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_grippers/requirements/gripper-forward-axis.html",
+                    "internal_path": "capabilities/physics_bodies/physics_grippers/requirements/gripper-forward-axis.md"
+                },
+                "message": "Every gripper site prim must contain a child `BasisCurves` prim named `gripper_forward_axis` with at least 2 points defining the gripper approach direction.",
+                "examples": []
+            },
+            {
+                "code": "GR.003",
+                "version": null,
+                "name": "gripper-grip-line",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "CheckPrim",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_grippers/requirements/gripper-grip-line.html",
+                    "internal_path": "capabilities/physics_bodies/physics_grippers/requirements/gripper-grip-line.md"
+                },
+                "message": "Every gripper site prim must contain a child `BasisCurves` prim named `gripper_grip_line` with at least 2 points defining the axis of the imaginary tube the gripper can grasp.",
+                "examples": []
+            },
+            {
+                "code": "GR.ISA.001",
+                "version": null,
+                "name": "gripper-site-api",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "IsaacGripperSiteAPI",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_grippers/requirements/gripper-site-api.html",
+                    "internal_path": "capabilities/physics_bodies/physics_grippers/requirements/gripper-site-api.md"
+                },
+                "message": "Every gripper site prim must have `IsaacSiteAPI` applied and `isaac:Description` authored so Isaac Sim tooling can discover and configure it automatically.",
+                "examples": []
+            },
+            {
+                "code": "MUJOCO.GR.001",
+                "version": null,
+                "name": "mujoco-gripper-site-api",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "MuJoCoGripperSiteAPI",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_grippers/requirements/mujoco-gripper-site-api.html",
+                    "internal_path": "capabilities/physics_bodies/physics_grippers/requirements/mujoco-gripper-site-api.md"
+                },
+                "message": "MuJoCo gripper site prims must apply `MjcSiteAPI`.",
+                "examples": []
+            },
+            {
+                "code": "GR.001",
+                "version": null,
+                "name": "gripper-socket-type",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "CheckPrim",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_grippers/requirements/gripper-socket-type.html",
+                    "internal_path": "capabilities/physics_bodies/physics_grippers/requirements/gripper-socket-type.md"
+                },
+                "message": "Every gripper site prim must be an `Xform` with `token simready:attachment:socketType = \"Gripper\"` authored, positioned at the grasp center between the finger pads.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "capabilities/physics_bodies/physics_grippers/capability-physics_grippers.html",
+            "internal_path": "capabilities/physics_bodies/physics_grippers/capability-physics_grippers.md"
+        }
+    }
+}

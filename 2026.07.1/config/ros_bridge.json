@@ -1,0 +1,29 @@
+{
+    "capability": {
+        "id": "ros_bridge",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "ROS.001",
+                "version": null,
+                "name": "ros2-bridge-nodes-present",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "Ros2BridgeNodesPresent",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/isaac_sim/ros_bridge/requirements/ros2-bridge-nodes-present.html",
+                    "internal_path": "capabilities/isaac_sim/ros_bridge/requirements/ros2-bridge-nodes-present.md"
+                },
+                "message": "The stage must contain at least one OmniGraph node whose `node:type` starts with `isaacsim.ros2.bridge.`.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "capabilities/isaac_sim/ros_bridge/capability-ros_bridge.html",
+            "internal_path": "capabilities/isaac_sim/ros_bridge/capability-ros_bridge.md"
+        }
+    }
+}

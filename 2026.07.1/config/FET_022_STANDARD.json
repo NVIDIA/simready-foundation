@@ -1,0 +1,20 @@
+{
+    "feature": {
+        "display_name": "Driven Joints",
+        "id": "FET_022_STANDARD",
+        "version": "0.2.0",
+        "requirements": [
+            "DJ.001",
+            "DJ.002",
+            "DJ.003",
+            "DJ.011"
+        ],
+        "dependencies": [
+            "FET_004_STANDARD@0.2.0"
+        ],
+        "metadata": {
+            "path": "features/FET_022_STANDARD.html",
+            "internal_path": "features/FET_022_STANDARD.md"
+        }
+    }
+}

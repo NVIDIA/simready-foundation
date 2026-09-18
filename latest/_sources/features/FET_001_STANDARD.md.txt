@@ -1,0 +1,200 @@
+# Feature: `FET_001_STANDARD`
+
+| **Property**            | **Value**         |
+|-------------------------|-------------------|
+| Feature Name            | `FET_001_STANDARD` |
+| Runtime                 | `STANDARD` |
+| Proprietary Techs       | `None` |
+| Latest Version          | `1.0.1` |
+
+## Description
+
+The Minimal Placeable Visual feature defines the standard OpenUSD contract for
+an asset that can be loaded, placed, transformed, and rendered as a visible
+object in a broad range of applications.
+
+An asset that satisfies this feature has supported asset paths and file types,
+known stage units and up axis, a valid default prim, a single xformable root for
+placement, mesh-based visible geometry, authored extents, valid mesh topology,
+valid normals and winding, and an origin placement suitable for aggregation
+into scenes.
+
+## Dependency Graph
+
+This feature has no JSON feature dependencies. In normal profile workflows it
+is validated after `FET_000_STANDARD` because Core establishes the asset layout,
+metadata, and path contract that Minimal builds on.
+
+## Use Cases
+
+- Synthetic data generation and scene assembly.
+- Robotics and simulation asset placement.
+- Visual inspection of converted CAD, DCC, MJCF, or USD assets.
+- Baseline renderability checks before physics, materials, grasp, robot, or
+  runtime-specific features are applied.
+
+## Requirements
+
+### Version 0.1.0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+This version is used in the following profiles:
+
+- **[Prop Robotics Neutral Profile](../profiles/prop-robotics-neutral.md)** (`v1.0.0`) - Provides the original Minimal feature gate for neutral prop assets.
+- **[Prop Robotics PhysX Profile](../profiles/prop-robotics-physx.md)** (`v1.0.0`) - Provides the original Minimal feature gate for PhysX prop assets.
+- **[Prop Robotics Isaac Profile](../profiles/prop-robotics-isaac.md)** (`v1.0.0`) - Provides the original Minimal feature gate for Isaac prop assets.
+- **[Robot Body Neutral Profile](../profiles/robot-body-neutral.md)** (`v1.0.0`) - Provides the original Minimal feature gate for neutral robot bodies.
+- **[Robot Body Runnable Profile](../profiles/robot-body-runnable.md)** (`v1.0.0`, `v2.0.0`) - Provides the original Minimal feature gate for runnable robot bodies.
+- **[Robot Body Isaac Profile](../profiles/robot-body-isaac.md)** (`v1.0.0`, `v1.1.0`) - Provides the original Minimal feature gate for Isaac robot bodies.
+
+#### Feature Dependencies
+
+None.
+
+#### Requirement List
+
+* Capability: [Core/Atomic Asset](../capabilities/core/atomic_asset/capability-atomic_asset.md)
+    * Requirements:
+        * [Anchored-Asset-Paths](../capabilities/core/atomic_asset/requirements/anchored-asset-paths.md)
+            * `AA.001` | Version `0.1.0`
+            * [Rule | Implementation](../capabilities/core/atomic_asset/validation.py)
+        * [Supported-File-Types](../capabilities/core/atomic_asset/requirements/supported-file-types.md)
+            * `AA.002` | Version `0.1.0`
+            * [Rule | Implementation](../capabilities/core/atomic_asset/validation.py)
+* Capability: [Core/Units](../capabilities/core/units/capability-units.md)
+    * Requirements:
+        * [UpAxis](../capabilities/core/units/requirements/upaxis.md)
+            * `UN.001` | Version `0.1.0`
+            * [Rule | Implementation](../capabilities/core/units/validation.py)
+        * [Meters-Per-Unit](../capabilities/core/units/requirements/meters-per-unit.md)
+            * `UN.002` | Version `0.1.0`
+            * [Rule | Implementation](../capabilities/core/units/validation.py)
+        * [Meters-Per-Unit-1](../capabilities/core/units/requirements/meters-per-unit-1.md)
+            * `UN.007` | Version `0.1.0`
+            * [Rule | Implementation](../capabilities/core/units/validation.py)
+* Capability: [Visualization/Geometry](../capabilities/visualization/geometry/capability-geometry.md)
+    * Requirements:
+        * [At-Least-One-Imageable-Geometry](../capabilities/visualization/geometry/requirements/at-least-one-imageable-geometry.md)
+            * `VG.001` | Version `0.1.0`
+            * [Rule | Implementation](../capabilities/visualization/geometry/validation.py)
+* Capability: [Hierarchy](../capabilities/hierarchy/hierarchy.md)
+    * Requirements:
+        * [Stage-Has-Default-Prim](../capabilities/hierarchy/requirements/stage-has-default-prim.md)
+            * `HI.004` | Version `0.1.0`
+            * [Rule | Implementation](../capabilities/hierarchy/validation.py)
+
+</details>
+
+### Version 1.0.0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+This version is used in the following profiles:
+
+- **[Prop Robotics Neutral Profile](../profiles/prop-robotics-neutral.md)** (`v2.0.0`) - Updates Minimal from the original visual presence contract to the mesh-quality contract.
+- **[Prop Robotics PhysX Profile](../profiles/prop-robotics-physx.md)** (`v2.0.0`) - Updates Minimal from the original visual presence contract to the mesh-quality contract.
+
+#### Feature Dependencies
+
+None.
+
+#### Changes From Version 0.1.0
+
+Version 1.0.0 keeps `AA.001`, `AA.002`, `UN.007`, and `HI.004`.
+
+| Change | Requirement | Reason |
+|--------|-------------|--------|
+| Removed | `UN.001` | Replaced by the stricter Z-up requirement. |
+| Removed | `UN.002` | The feature now requires meter units through `UN.007`. |
+| Removed | `VG.001` | Replaced by explicit mesh representation and mesh-quality requirements. |
+| Added | `UN.006` | Requires the stage up axis to be `Z`. |
+| Added | `VG.MESH.001` | Requires visible geometry to be represented as mesh geometry. |
+| Added | `VG.002` | Requires authored extents on boundable geometry. |
+| Added | `VG.014` | Requires valid mesh topology. |
+| Added | `VG.029` | Requires correct mesh winding order. |
+| Added | `VG.025` | Requires asset origin placement suitable for the asset type. |
+| Added | `VG.027` | Requires surface normals on non-subdivided meshes. |
+| Added | `VG.028` | Requires valid mesh normals. |
+| Added | `HI.001` | Requires all asset content under one root hierarchy. |
+| Added | `HI.003` | Requires the root prim to be xformable. |
+
+</details>
+
+### Version 1.0.1
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+This version is used in the following profiles:
+
+- **[Prop Robotics Neutral Profile](../profiles/prop-robotics-neutral.md)** (`v2.0.1`, `v2.1.0`) - Uses the latest Minimal Standard mesh and extent contract.
+- **[Prop Robotics PhysX Profile](../profiles/prop-robotics-physx.md)** (`v2.0.1`, `v2.1.0`) - Uses the latest Minimal Standard mesh and extent contract.
+- **[Prop Robotics Isaac Profile](../profiles/prop-robotics-isaac.md)** (`v1.0.1`, `v1.1.0`) - Uses the latest Minimal Standard mesh and extent contract.
+- **[Robotics Prop Profile](../profiles/profiles.md)** (`v3.0.0`) - Uses the consolidated Standard Minimal feature gate.
+- **[Robot Body Neutral Profile](../profiles/robot-body-neutral.md)** (`v1.1.0`) - Uses the latest Minimal Standard mesh and extent contract.
+- **[Robot Body Runnable Profile](../profiles/robot-body-runnable.md)** (`v1.1.0`, `v2.1.0`) - Uses the latest Minimal Standard mesh and extent contract.
+- **[Robot Body Profile](../profiles/profiles.md)** (`v3.0.0`) - Uses the consolidated Standard Minimal feature gate.
+
+#### Feature Dependencies
+
+None.
+
+#### Changes From Version 1.0.0
+
+Version 1.0.1 keeps all Version 1.0.0 requirements and adds:
+
+| Change | Requirement | Reason |
+|--------|-------------|--------|
+| Added | `VG.008` | Requires geometry cached extent conformance used by the latest Minimal visual validation. |
+
+</details>
+
+## Pipelines
+
+Source file type:
+
+- `.blend`
+  - Via Blender SimReady Add-ons
+- `.mjcf`
+  - Via Blender SimReady Add-ons and MJCF2USD Tool
+- `.step`
+  - Via Blender SimReady Add-ons and CAD Converter
+
+Validation or runtime pipeline:
+
+- SimReady validation - verifies the Minimal requirement IDs listed in the
+  selected `FET_001_STANDARD` manifest.
+- SimReady Benchmark FET001 Visual - verifies visible pixels, lighting
+  response, normals, culling, winding, and pivot behavior in a runtime render
+  pipeline.
+
+## Samples
+
+- [sample_content/common_assets/props_general/obs_lamp_revolute_a01/simready_usd/sm_obs_lamp_revolute_a01_01.usda](../../../../../sample_content/common_assets/props_general/obs_lamp_revolute_a01/simready_usd/sm_obs_lamp_revolute_a01_01.usda)
+
+## Benchmarks
+
+- Suite: [FET001 Visual](../guides/benchmark/tests/fet001-visual.md)
+  - Tests:
+    - [presence](../guides/benchmark/tests/fet001/presence.md)
+    - [normals_xz](../guides/benchmark/tests/fet001/normals-xz.md)
+    - [culling_xz](../guides/benchmark/tests/fet001/culling-xz.md)
+    - [light_response](../guides/benchmark/tests/fet001/light-response.md)
+    - [pivot](../guides/benchmark/tests/fet001/pivot.md)
+
+## Adapters
+
+| From Feature | To Feature | Adapter | Status | Notes |
+|--------------|------------|---------|--------|-------|
+| `FET_001_STANDARD@0.1.0` | `FET_100_ISAAC@0.1.0` | `nv_core/cip_specs/asset_handler_modules/physx_to_isaacsim` | Done | Converts a Minimal Standard asset into the Isaac Sim composition feature through the legacy Kit-extension Isaac asset transformer. |
+| `FET_001_STANDARD@1.0.1` | `FET_100_ISAAC@0.4.0` | `nv_core/cip_specs/asset_handler_modules/physx_to_isaacsim` | Done | Converts a Minimal Standard asset into the Isaac Sim composition feature through the standalone `simready.asset_transformer` prop transform. |
+| `FET_001_STANDARD@1.0.1` | `FET_101_ISAAC@0.1.0` | `nv_core/cip_specs/asset_handler_modules/physx_to_isaacsim` | Done | Converts a Minimal Standard asset into the robot Isaac Sim composition feature through the standalone `simready.asset_transformer` robot transform. |

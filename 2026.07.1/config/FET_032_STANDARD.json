@@ -1,0 +1,17 @@
+{
+    "feature": {
+        "display_name": "Packaging Introspection",
+        "id": "FET_032_STANDARD",
+        "version": "0.1.0",
+        "requirements": [
+            "PKG.BOM.001"
+        ],
+        "dependencies": [
+            "FET_030_STANDARD@0.1.0"
+        ],
+        "metadata": {
+            "path": "features/FET_032_STANDARD.html",
+            "internal_path": "features/FET_032_STANDARD.md"
+        }
+    }
+}

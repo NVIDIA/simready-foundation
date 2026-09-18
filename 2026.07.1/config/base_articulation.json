@@ -1,0 +1,80 @@
+{
+    "capability": {
+        "id": "base_articulation",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "BA.002",
+                "version": null,
+                "name": "non-adjacent-collision-meshes-do-not-clash",
+                "compatibility": "physx",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/base_articulation/requirements/non-adjacent-collision-meshes-do-not-clash.html",
+                    "internal_path": "capabilities/physics_bodies/base_articulation/requirements/non-adjacent-collision-meshes-do-not-clash.md"
+                },
+                "message": "Collision meshes on non-adjacent links in the articulation hierarchy must not overlap or intersect.",
+                "examples": []
+            },
+            {
+                "code": "NEWTON.BA.001",
+                "version": null,
+                "name": "newton-articulation-root-config",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "CheckStage",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/base_articulation/requirements/newton-articulation-root-config.html",
+                    "internal_path": "capabilities/physics_bodies/base_articulation/requirements/newton-articulation-root-config.md"
+                },
+                "message": "Newton articulation roots must use standard `UsdPhysics.ArticulationRootAPI` and author explicit Newton self-collision configuration.",
+                "examples": []
+            },
+            {
+                "code": "MUJOCO.BA.001",
+                "version": null,
+                "name": "mujoco-standard-articulation-root",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "CheckPrim",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/base_articulation/requirements/mujoco-standard-articulation-root.html",
+                    "internal_path": "capabilities/physics_bodies/base_articulation/requirements/mujoco-standard-articulation-root.md"
+                },
+                "message": "MuJoCo articulations must use standard `UsdPhysics.ArticulationRootAPI` and must not author unsupported MuJoCo-specific articulation-root schemas.",
+                "examples": []
+            },
+            {
+                "code": "BA.001",
+                "version": null,
+                "name": "has-articulation-root",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/base_articulation/requirements/has-articulation-root.html",
+                    "internal_path": "capabilities/physics_bodies/base_articulation/requirements/has-articulation-root.md"
+                },
+                "message": "An articulated USD stage must contain exactly one prim with the\nUsdPhysicsArticulationRootAPI applied.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "capabilities/physics_bodies/base_articulation/capability-base-articulation.html",
+            "internal_path": "capabilities/physics_bodies/base_articulation/capability-base-articulation.md"
+        }
+    }
+}

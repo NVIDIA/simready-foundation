@@ -1,0 +1,46 @@
+{
+    "capability": {
+        "id": "robot_materials",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "RM.001",
+                "version": null,
+                "name": "no-nested-materials",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_materials/requirements/no-nested-materials.html",
+                    "internal_path": "capabilities/isaac_sim/robot_materials/requirements/no-nested-materials.md"
+                },
+                "message": "Materials must not contain nested materials to avoid unexpected rendering behavior.",
+                "examples": []
+            },
+            {
+                "code": "RM.002",
+                "version": null,
+                "name": "materials-on-top-level-only",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_materials/requirements/materials-on-top-level-only.html",
+                    "internal_path": "capabilities/isaac_sim/robot_materials/requirements/materials-on-top-level-only.md"
+                },
+                "message": "Materials must only be defined in the top-level Looks prim following USD best practices for material organization.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "capabilities/isaac_sim/robot_materials/capability-robot_materials.html",
+            "internal_path": "capabilities/isaac_sim/robot_materials/capability-robot_materials.md"
+        }
+    }
+}

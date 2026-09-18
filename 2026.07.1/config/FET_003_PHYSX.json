@@ -1,0 +1,25 @@
+{
+    "feature": {
+        "display_name": "Rigid Body Physics (PhysX)",
+        "runtime": "PhysX",
+        "id": "FET_003_PHYSX",
+        "version": "0.4.0",
+        "requirements": [
+            "RB.COL.003",
+            "RB.COL.004",
+            "RB.001",
+            "RB.003",
+            "RB.005",
+            "RB.007",
+            "RB.009",
+            "RB.010",
+            "PHYSX.COL.001",
+            "PHYSX.COL.002"
+        ],
+        "dependencies": [],
+        "metadata": {
+            "path": "features/FET_003_PHYSX.html",
+            "internal_path": "features/FET_003_PHYSX.md"
+        }
+    }
+}
