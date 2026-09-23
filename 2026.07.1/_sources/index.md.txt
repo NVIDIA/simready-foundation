@@ -5,12 +5,7 @@
 This documentation is a collection of guidelines and requirements for OpenUSD content. It provides a framework to author OpenUSD content that is suitable for use cases such as rendering, simulation, robotics, and AI training. 
 
 ```{important}
-These are the SimReady Foundation 7.1 docs. Foundation releases use a
-`major.minor` product version, and major or minor releases are not
-backward-compatible with older Foundation releases. Keep the documentation,
-tier content, and supporting tool versions aligned with Foundation 7.1. Assets,
-custom tiers, and validation stamps from 7.0 or earlier must be migrated as
-needed and validated again before being treated as 7.1-conformant. See the
+Please note: older SimReady Libraries (simready.validate, etc) are not compatible with SimReady Foundation 7.1; you must use library versions 2026.7.1 or higher. See the
 [7.1 release notes](changelist.md#release-notes) for details and the
 [Foundation 7.1 library set](guides/foundation_pypi.md#foundation-71-library-set)
 for compatible validation, Benchmark, and packaging versions.
