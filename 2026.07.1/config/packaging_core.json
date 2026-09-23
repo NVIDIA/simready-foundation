@@ -4,23 +4,6 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "PKG.DEF.001",
-                "version": null,
-                "name": "package-definition",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "_Not yet implemented_",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/packaging/packaging_core/requirements/package-definition.html",
-                    "internal_path": "capabilities/packaging/packaging_core/requirements/package-definition.md"
-                },
-                "message": "Each package MUST have exactly one valid package definition with a globally unique, case-insensitive, immutable identity, placed at the package root alongside a `.metadata/` folder",
-                "examples": []
-            },
-            {
                 "code": "PKG.META.001",
                 "version": null,
                 "name": "metadata-files",
@@ -35,6 +18,23 @@
                     "internal_path": "capabilities/packaging/packaging_core/requirements/metadata-files.md"
                 },
                 "message": "Metadata files MUST be JSON with UTF-8 encoding, use reverse domain naming, and follow write-once semantics",
+                "examples": []
+            },
+            {
+                "code": "PKG.DEF.001",
+                "version": null,
+                "name": "package-definition",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "_Not yet implemented_",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/packaging/packaging_core/requirements/package-definition.html",
+                    "internal_path": "capabilities/packaging/packaging_core/requirements/package-definition.md"
+                },
+                "message": "Each package MUST have exactly one valid package definition with a globally unique, case-insensitive, immutable identity, placed at the package root alongside a `.metadata/` folder",
                 "examples": []
             },
             {

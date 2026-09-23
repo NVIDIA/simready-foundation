@@ -4,37 +4,20 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "NP.001",
+                "code": "NP.008",
                 "version": null,
-                "name": "prim-naming-convention",
+                "name": "assetpath-validation",
                 "compatibility": "core-usd",
                 "tags": [
                     "essential"
                 ],
-                "validator": "np-001",
+                "validator": "np-008",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/core/naming_paths/requirements/prim-naming-convention.html",
-                    "internal_path": "capabilities/core/naming_paths/requirements/prim-naming-convention.md"
+                    "path": "capabilities/core/naming_paths/requirements/assetpath-validation.html",
+                    "internal_path": "capabilities/core/naming_paths/requirements/assetpath-validation.md"
                 },
-                "message": "Prims shall follow consistent naming conventions",
-                "examples": []
-            },
-            {
-                "code": "NP.004",
-                "version": null,
-                "name": "path-length-limits",
-                "compatibility": "core-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "np-004",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/core/naming_paths/requirements/path-length-limits.html",
-                    "internal_path": "capabilities/core/naming_paths/requirements/path-length-limits.md"
-                },
-                "message": "File and directory paths shall not exceed platform limits",
+                "message": "All asset, reference, and payload paths must resolve to files that exist",
                 "examples": []
             },
             {
@@ -72,6 +55,57 @@
                 "examples": []
             },
             {
+                "code": "NP.002",
+                "version": null,
+                "name": "file-naming-convention",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "np-002",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/naming_paths/requirements/file-naming-convention.html",
+                    "internal_path": "capabilities/core/naming_paths/requirements/file-naming-convention.md"
+                },
+                "message": "USD files shall follow consistent naming conventions",
+                "examples": []
+            },
+            {
+                "code": "NP.004",
+                "version": null,
+                "name": "path-length-limits",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "np-004",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/naming_paths/requirements/path-length-limits.html",
+                    "internal_path": "capabilities/core/naming_paths/requirements/path-length-limits.md"
+                },
+                "message": "File and directory paths shall not exceed platform limits",
+                "examples": []
+            },
+            {
+                "code": "NP.001",
+                "version": null,
+                "name": "prim-naming-convention",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "np-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/naming_paths/requirements/prim-naming-convention.html",
+                    "internal_path": "capabilities/core/naming_paths/requirements/prim-naming-convention.md"
+                },
+                "message": "Prims shall follow consistent naming conventions",
+                "examples": []
+            },
+            {
                 "code": "NP.005",
                 "version": null,
                 "name": "asset-folder-structure",
@@ -103,40 +137,6 @@
                     "internal_path": "capabilities/core/naming_paths/requirements/directory-structure.md"
                 },
                 "message": "Asset directories shall use consistent naming and logical organization",
-                "examples": []
-            },
-            {
-                "code": "NP.002",
-                "version": null,
-                "name": "file-naming-convention",
-                "compatibility": "core-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "np-002",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/core/naming_paths/requirements/file-naming-convention.html",
-                    "internal_path": "capabilities/core/naming_paths/requirements/file-naming-convention.md"
-                },
-                "message": "USD files shall follow consistent naming conventions",
-                "examples": []
-            },
-            {
-                "code": "NP.008",
-                "version": null,
-                "name": "assetpath-validation",
-                "compatibility": "core-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "np-008",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/core/naming_paths/requirements/assetpath-validation.html",
-                    "internal_path": "capabilities/core/naming_paths/requirements/assetpath-validation.md"
-                },
-                "message": "All asset, reference, and payload paths must resolve to files that exist",
                 "examples": []
             }
         ],

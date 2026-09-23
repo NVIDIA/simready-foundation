@@ -4,23 +4,6 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "VM.TEX.001",
-                "version": null,
-                "name": "material-texture-maxsize",
-                "compatibility": "open-usd",
-                "tags": [
-                    "performance"
-                ],
-                "validator": "vm-tex-001",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/visualization/materials/requirements/material-texture-maxsize.html",
-                    "internal_path": "capabilities/visualization/materials/requirements/material-texture-maxsize.md"
-                },
-                "message": "Texture dimensions must not exceed 16,384 pixels on either axis to ensure optimal performance and memory usage in simulation environments.",
-                "examples": []
-            },
-            {
                 "code": "VM.MAT.001",
                 "version": null,
                 "name": "material-assignment",
@@ -55,20 +38,37 @@
                 ]
             },
             {
-                "code": "VM.BIND.002",
+                "code": "VM.PS.001",
                 "version": null,
-                "name": "material-shader-inputs",
+                "name": "material-preview-surface",
                 "compatibility": "open-usd",
                 "tags": [
                     "correctness"
                 ],
-                "validator": "vm-bind-002",
+                "validator": "vm-ps-001",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/visualization/materials/requirements/material-shader-inputs.html",
-                    "internal_path": "capabilities/visualization/materials/requirements/material-shader-inputs.md"
+                    "path": "capabilities/visualization/materials/requirements/material-preview-surface.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-preview-surface.md"
                 },
-                "message": "Shader inputs must have correct types matching their shader specification to ensure proper material behavior and prevent runtime errors.",
+                "message": "Material attributes must comply with the UsdPreviewSurface specification to ensure consistent rendering and viewer compatibility.",
+                "examples": []
+            },
+            {
+                "code": "VM.TEX.001",
+                "version": null,
+                "name": "material-texture-maxsize",
+                "compatibility": "open-usd",
+                "tags": [
+                    "performance"
+                ],
+                "validator": "vm-tex-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-texture-maxsize.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-texture-maxsize.md"
+                },
+                "message": "Texture dimensions must not exceed 16,384 pixels on either axis to ensure optimal performance and memory usage in simulation environments.",
                 "examples": []
             },
             {
@@ -86,6 +86,40 @@
                     "internal_path": "capabilities/visualization/materials/requirements/material-mdl-schema.md"
                 },
                 "message": "MDL Shaders must standard OpenUSD shader source attributes to ensure compatibility.",
+                "examples": []
+            },
+            {
+                "code": "VM.BIND.001",
+                "version": null,
+                "name": "material-bind-scope",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "vm-bind-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-bind-scope.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-bind-scope.md"
+                },
+                "message": "Material bindings must use appropriate scope to ensure proper material assignment and inheritance.",
+                "examples": []
+            },
+            {
+                "code": "VM.BIND.002",
+                "version": null,
+                "name": "material-shader-inputs",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "vm-bind-002",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-shader-inputs.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-shader-inputs.md"
+                },
+                "message": "Shader inputs must have correct types matching their shader specification to ensure proper material behavior and prevent runtime errors.",
                 "examples": []
             },
             {
@@ -115,23 +149,6 @@
                 ]
             },
             {
-                "code": "VM.PS.001",
-                "version": null,
-                "name": "material-preview-surface",
-                "compatibility": "open-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": "vm-ps-001",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/visualization/materials/requirements/material-preview-surface.html",
-                    "internal_path": "capabilities/visualization/materials/requirements/material-preview-surface.md"
-                },
-                "message": "Material attributes must comply with the UsdPreviewSurface specification to ensure consistent rendering and viewer compatibility.",
-                "examples": []
-            },
-            {
                 "code": "VM.MDL.001",
                 "version": null,
                 "name": "material-mdl-source-asset",
@@ -146,23 +163,6 @@
                     "internal_path": "capabilities/visualization/materials/requirements/material-mdl-source-asset.md"
                 },
                 "message": "MDL material source assets must be properly referenced and accessible to ensure material loading and rendering.",
-                "examples": []
-            },
-            {
-                "code": "VM.BIND.001",
-                "version": null,
-                "name": "material-bind-scope",
-                "compatibility": "open-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": "vm-bind-001",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/visualization/materials/requirements/material-bind-scope.html",
-                    "internal_path": "capabilities/visualization/materials/requirements/material-bind-scope.md"
-                },
-                "message": "Material bindings must use appropriate scope to ensure proper material assignment and inheritance.",
                 "examples": []
             }
         ],

@@ -4,23 +4,6 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "SR.001",
-                "version": null,
-                "name": "metadata-whitelist",
-                "compatibility": "core-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "sr-001",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/core/sim_ready/requirements/metadata-whitelist.html",
-                    "internal_path": "capabilities/core/sim_ready/requirements/metadata-whitelist.md"
-                },
-                "message": "The asset stage must contain all required metadata fields",
-                "examples": []
-            },
-            {
                 "code": "SR.003",
                 "version": null,
                 "name": "nested-simready-metadata",
@@ -35,6 +18,23 @@
                     "internal_path": "capabilities/core/sim_ready/requirements/nested-simready-metadata.md"
                 },
                 "message": "Required SimReady provenance fields must be authored inside the root-layer `SimReady_Metadata` dictionary.",
+                "examples": []
+            },
+            {
+                "code": "SR.001",
+                "version": null,
+                "name": "metadata-whitelist",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "sr-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/sim_ready/requirements/metadata-whitelist.html",
+                    "internal_path": "capabilities/core/sim_ready/requirements/metadata-whitelist.md"
+                },
+                "message": "The asset stage must contain all required metadata fields",
                 "examples": []
             },
             {

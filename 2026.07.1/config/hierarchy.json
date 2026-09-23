@@ -4,54 +4,20 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "HI.009",
+                "code": "HI.007",
                 "version": null,
-                "name": "kinematic-chain-hierarchy",
-                "compatibility": "open-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/hierarchy/requirements/kinematic-chain-hierarchy.html",
-                    "internal_path": "capabilities/hierarchy/requirements/kinematic-chain-hierarchy.md"
-                },
-                "message": "For assets (e.g., a robot with multiple articulated joints), the hierarchy should reflect the kinematic chain, with appropriate Xforms for each transformable link.",
-                "examples": []
-            },
-            {
-                "code": "HI.004",
-                "version": null,
-                "name": "stage-has-default-prim",
+                "name": "dummy-requirement",
                 "compatibility": "other",
                 "tags": [
-                    "essential"
+                    "unknown"
                 ],
                 "validator": null,
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/hierarchy/requirements/stage-has-default-prim.html",
-                    "internal_path": "capabilities/hierarchy/requirements/stage-has-default-prim.md"
+                    "path": "capabilities/hierarchy/requirements/dummy-requirement.html",
+                    "internal_path": "capabilities/hierarchy/requirements/dummy-requirement.md"
                 },
-                "message": "Stage must specify a default prim to define the root entry point.",
-                "examples": []
-            },
-            {
-                "code": "HI.002",
-                "version": null,
-                "name": "exclusive-xform-parent-for-usdgeom",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/hierarchy/requirements/exclusive-xform-parent-for-usdgeom.html",
-                    "internal_path": "capabilities/hierarchy/requirements/exclusive-xform-parent-for-usdgeom.md"
-                },
-                "message": "Every UsdGeomGprim must have a parent Xform with specific transform operations and hierarchy constraints.",
+                "message": "This is a placeholder requirement to maintain sequential numbering in the hierarchy requirements.",
                 "examples": []
             },
             {
@@ -72,37 +38,54 @@
                 "examples": []
             },
             {
-                "code": "HI.007",
+                "code": "HI.002",
                 "version": null,
-                "name": "dummy-requirement",
+                "name": "exclusive-xform-parent-for-usdgeom",
                 "compatibility": "other",
                 "tags": [
-                    "unknown"
+                    "essential"
                 ],
                 "validator": null,
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/hierarchy/requirements/dummy-requirement.html",
-                    "internal_path": "capabilities/hierarchy/requirements/dummy-requirement.md"
+                    "path": "capabilities/hierarchy/requirements/exclusive-xform-parent-for-usdgeom.html",
+                    "internal_path": "capabilities/hierarchy/requirements/exclusive-xform-parent-for-usdgeom.md"
                 },
-                "message": "This is a placeholder requirement to maintain sequential numbering in the hierarchy requirements.",
+                "message": "Every UsdGeomGprim must have a parent Xform with specific transform operations and hierarchy constraints.",
                 "examples": []
             },
             {
-                "code": "HI.005",
+                "code": "HI.009",
                 "version": null,
-                "name": "xform-common-api-usage",
-                "compatibility": "core-usd",
+                "name": "kinematic-chain-hierarchy",
+                "compatibility": "open-usd",
                 "tags": [
                     "correctness"
                 ],
                 "validator": null,
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/hierarchy/requirements/xform-common-api-usage.html",
-                    "internal_path": "capabilities/hierarchy/requirements/xform-common-api-usage.md"
+                    "path": "capabilities/hierarchy/requirements/kinematic-chain-hierarchy.html",
+                    "internal_path": "capabilities/hierarchy/requirements/kinematic-chain-hierarchy.md"
                 },
-                "message": "Transformations (translate, rotate, scale, pivot) on prims that are intended to be translated, rotated or scaled by users (e.g. the root prim of an asset) should conform to the UsdGeomXformCommonAPI.",
+                "message": "For assets (e.g., a robot with multiple articulated joints), the hierarchy should reflect the kinematic chain, with appropriate Xforms for each transformable link.",
+                "examples": []
+            },
+            {
+                "code": "HI.001",
+                "version": null,
+                "name": "hierarchy-has-root",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/hierarchy/requirements/hierarchy-has-root.html",
+                    "internal_path": "capabilities/hierarchy/requirements/hierarchy-has-root.md"
+                },
+                "message": "All prims in the hierarchy must be direct or indirect descendents of a single root root prim, preventing scattered or disconnected Xform hierarchies.",
                 "examples": []
             },
             {
@@ -123,20 +106,20 @@
                 "examples": []
             },
             {
-                "code": "HI.010",
+                "code": "HI.005",
                 "version": null,
-                "name": "undefined-prims",
-                "compatibility": "other",
+                "name": "xform-common-api-usage",
+                "compatibility": "core-usd",
                 "tags": [
-                    "essential"
+                    "correctness"
                 ],
-                "validator": "hi-010",
+                "validator": null,
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/hierarchy/requirements/undefined-prims.html",
-                    "internal_path": "capabilities/hierarchy/requirements/undefined-prims.md"
+                    "path": "capabilities/hierarchy/requirements/xform-common-api-usage.html",
+                    "internal_path": "capabilities/hierarchy/requirements/xform-common-api-usage.md"
                 },
-                "message": "Assets must not contain undefined prims (overs)",
+                "message": "Transformations (translate, rotate, scale, pivot) on prims that are intended to be translated, rotated or scaled by users (e.g. the root prim of an asset) should conform to the UsdGeomXformCommonAPI.",
                 "examples": []
             },
             {
@@ -157,9 +140,9 @@
                 "examples": []
             },
             {
-                "code": "HI.001",
+                "code": "HI.004",
                 "version": null,
-                "name": "hierarchy-has-root",
+                "name": "stage-has-default-prim",
                 "compatibility": "other",
                 "tags": [
                     "essential"
@@ -167,10 +150,27 @@
                 "validator": null,
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/hierarchy/requirements/hierarchy-has-root.html",
-                    "internal_path": "capabilities/hierarchy/requirements/hierarchy-has-root.md"
+                    "path": "capabilities/hierarchy/requirements/stage-has-default-prim.html",
+                    "internal_path": "capabilities/hierarchy/requirements/stage-has-default-prim.md"
                 },
-                "message": "All prims in the hierarchy must be direct or indirect descendents of a single root root prim, preventing scattered or disconnected Xform hierarchies.",
+                "message": "Stage must specify a default prim to define the root entry point.",
+                "examples": []
+            },
+            {
+                "code": "HI.010",
+                "version": null,
+                "name": "undefined-prims",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "hi-010",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/hierarchy/requirements/undefined-prims.html",
+                    "internal_path": "capabilities/hierarchy/requirements/undefined-prims.md"
+                },
+                "message": "Assets must not contain undefined prims (overs)",
                 "examples": []
             }
         ],

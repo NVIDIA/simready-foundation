@@ -4,6 +4,23 @@
         "version": "1.0.0",
         "requirements": [
             {
+                "code": "MUJOCO.BA.001",
+                "version": null,
+                "name": "mujoco-standard-articulation-root",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "CheckPrim",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/base_articulation/requirements/mujoco-standard-articulation-root.html",
+                    "internal_path": "capabilities/physics_bodies/base_articulation/requirements/mujoco-standard-articulation-root.md"
+                },
+                "message": "MuJoCo articulations must use standard `UsdPhysics.ArticulationRootAPI` and must not author unsupported MuJoCo-specific articulation-root schemas.",
+                "examples": []
+            },
+            {
                 "code": "BA.002",
                 "version": null,
                 "name": "non-adjacent-collision-meshes-do-not-clash",
@@ -35,23 +52,6 @@
                     "internal_path": "capabilities/physics_bodies/base_articulation/requirements/newton-articulation-root-config.md"
                 },
                 "message": "Newton articulation roots must use standard `UsdPhysics.ArticulationRootAPI` and author explicit Newton self-collision configuration.",
-                "examples": []
-            },
-            {
-                "code": "MUJOCO.BA.001",
-                "version": null,
-                "name": "mujoco-standard-articulation-root",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "CheckPrim",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/base_articulation/requirements/mujoco-standard-articulation-root.html",
-                    "internal_path": "capabilities/physics_bodies/base_articulation/requirements/mujoco-standard-articulation-root.md"
-                },
-                "message": "MuJoCo articulations must use standard `UsdPhysics.ArticulationRootAPI` and must not author unsupported MuJoCo-specific articulation-root schemas.",
                 "examples": []
             },
             {

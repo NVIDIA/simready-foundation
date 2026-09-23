@@ -4,6 +4,40 @@
         "version": "1.0.0",
         "requirements": [
             {
+                "code": "VOC.001",
+                "version": null,
+                "name": "pascal-voc-labels",
+                "compatibility": "core-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "voc-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/dataset_taxonomies/requirements/pascal-voc-labels.html",
+                    "internal_path": "capabilities/dataset_taxonomies/requirements/pascal-voc-labels.md"
+                },
+                "message": "Every `SemanticsLabelsAPI:pascal_voc` label value must be a member of the PASCAL VOC (20) taxonomy.",
+                "examples": []
+            },
+            {
+                "code": "CITY.001",
+                "version": null,
+                "name": "cityscapes-labels",
+                "compatibility": "core-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "city-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/dataset_taxonomies/requirements/cityscapes-labels.html",
+                    "internal_path": "capabilities/dataset_taxonomies/requirements/cityscapes-labels.md"
+                },
+                "message": "Every `SemanticsLabelsAPI:cityscapes` label value must be a member of the Cityscapes (fine) taxonomy.",
+                "examples": []
+            },
+            {
                 "code": "ADE.001",
                 "version": null,
                 "name": "ade20k-labels",
@@ -38,23 +72,6 @@
                 "examples": []
             },
             {
-                "code": "COCO.001",
-                "version": null,
-                "name": "coco-labels",
-                "compatibility": "core-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": "coco-001",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/dataset_taxonomies/requirements/coco-labels.html",
-                    "internal_path": "capabilities/dataset_taxonomies/requirements/coco-labels.md"
-                },
-                "message": "Every `SemanticsLabelsAPI:coco` label value must be a member of the COCO (instances) taxonomy.",
-                "examples": []
-            },
-            {
                 "code": "SUN.001",
                 "version": null,
                 "name": "sunrgbd-labels",
@@ -72,37 +89,20 @@
                 "examples": []
             },
             {
-                "code": "VOC.001",
+                "code": "COCO.001",
                 "version": null,
-                "name": "pascal-voc-labels",
+                "name": "coco-labels",
                 "compatibility": "core-usd",
                 "tags": [
                     "correctness"
                 ],
-                "validator": "voc-001",
+                "validator": "coco-001",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/dataset_taxonomies/requirements/pascal-voc-labels.html",
-                    "internal_path": "capabilities/dataset_taxonomies/requirements/pascal-voc-labels.md"
+                    "path": "capabilities/dataset_taxonomies/requirements/coco-labels.html",
+                    "internal_path": "capabilities/dataset_taxonomies/requirements/coco-labels.md"
                 },
-                "message": "Every `SemanticsLabelsAPI:pascal_voc` label value must be a member of the PASCAL VOC (20) taxonomy.",
-                "examples": []
-            },
-            {
-                "code": "CITY.001",
-                "version": null,
-                "name": "cityscapes-labels",
-                "compatibility": "core-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": "city-001",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/dataset_taxonomies/requirements/cityscapes-labels.html",
-                    "internal_path": "capabilities/dataset_taxonomies/requirements/cityscapes-labels.md"
-                },
-                "message": "Every `SemanticsLabelsAPI:cityscapes` label value must be a member of the Cityscapes (fine) taxonomy.",
+                "message": "Every `SemanticsLabelsAPI:coco` label value must be a member of the COCO (instances) taxonomy.",
                 "examples": []
             }
         ],

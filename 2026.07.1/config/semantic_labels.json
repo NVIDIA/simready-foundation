@@ -4,40 +4,6 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "SL.003",
-                "version": null,
-                "name": "semantic-label-schema",
-                "compatibility": "open-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": "sl-003",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/semantic_labels/requirements/semantic-label-schema.html",
-                    "internal_path": "capabilities/semantic_labels/requirements/semantic-label-schema.md"
-                },
-                "message": "Semantic labels must use the SemanticsLabelsAPI schema",
-                "examples": []
-            },
-            {
-                "code": "SL.001",
-                "version": null,
-                "name": "semantic-label-capability",
-                "compatibility": "core-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "sl-001",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/semantic_labels/requirements/semantic-label-capability.html",
-                    "internal_path": "capabilities/semantic_labels/requirements/semantic-label-capability.md"
-                },
-                "message": "All renderable geometry must be semantically labeled.",
-                "examples": []
-            },
-            {
                 "code": "SL.TIME.001",
                 "version": null,
                 "name": "semantic-label-time",
@@ -55,20 +21,37 @@
                 "examples": []
             },
             {
-                "code": "SL.MAT.001",
+                "code": "SL.003",
                 "version": null,
-                "name": "semantic-label-material",
-                "compatibility": "omniverse",
+                "name": "semantic-label-schema",
+                "compatibility": "open-usd",
                 "tags": [
                     "correctness"
                 ],
-                "validator": "sl-mat-001",
+                "validator": "sl-003",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/semantic_labels/requirements/semantic-label-material.html",
-                    "internal_path": "capabilities/semantic_labels/requirements/semantic-label-material.md"
+                    "path": "capabilities/semantic_labels/requirements/semantic-label-schema.html",
+                    "internal_path": "capabilities/semantic_labels/requirements/semantic-label-schema.md"
                 },
-                "message": "Material prims must be labeled with a non-empty `SemanticsLabelsAPI:material` label.",
+                "message": "Semantic labels must use the SemanticsLabelsAPI schema",
+                "examples": []
+            },
+            {
+                "code": "SL.002",
+                "version": null,
+                "name": "semantic-label-deprecated-schema",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "sl-002",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/semantic_labels/requirements/semantic-label-deprecated-schema.html",
+                    "internal_path": "capabilities/semantic_labels/requirements/semantic-label-deprecated-schema.md"
+                },
+                "message": "Deprecated SemanticsAPI labels must be migrated to the SemanticsLabelsAPI schema.",
                 "examples": []
             },
             {
@@ -89,20 +72,37 @@
                 "examples": []
             },
             {
-                "code": "SL.002",
+                "code": "SL.001",
                 "version": null,
-                "name": "semantic-label-deprecated-schema",
-                "compatibility": "open-usd",
+                "name": "semantic-label-capability",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "sl-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/semantic_labels/requirements/semantic-label-capability.html",
+                    "internal_path": "capabilities/semantic_labels/requirements/semantic-label-capability.md"
+                },
+                "message": "All renderable geometry must be semantically labeled.",
+                "examples": []
+            },
+            {
+                "code": "SL.MAT.001",
+                "version": null,
+                "name": "semantic-label-material",
+                "compatibility": "omniverse",
                 "tags": [
                     "correctness"
                 ],
-                "validator": "sl-002",
+                "validator": "sl-mat-001",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/semantic_labels/requirements/semantic-label-deprecated-schema.html",
-                    "internal_path": "capabilities/semantic_labels/requirements/semantic-label-deprecated-schema.md"
+                    "path": "capabilities/semantic_labels/requirements/semantic-label-material.html",
+                    "internal_path": "capabilities/semantic_labels/requirements/semantic-label-material.md"
                 },
-                "message": "Deprecated SemanticsAPI labels must be migrated to the SemanticsLabelsAPI schema.",
+                "message": "Material prims must be labeled with a non-empty `SemanticsLabelsAPI:material` label.",
                 "examples": []
             }
         ],

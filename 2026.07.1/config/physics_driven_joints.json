@@ -4,20 +4,156 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "MUJOCO.DJ.001",
+                "code": "DJ.001",
                 "version": null,
-                "name": "mujoco-joint-api",
+                "name": "physics-drive-and-joint-state",
+                "compatibility": "physx",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "CheckPrim",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/physics-drive-and-joint-state.html",
+                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/physics-drive-and-joint-state.md"
+                },
+                "message": "Validate that each driven joint has correct drive configuration and joint state, including required limits and consistency checks against the current joint state values.",
+                "examples": []
+            },
+            {
+                "code": "DJ.004",
+                "version": null,
+                "name": "physics-joint-has-drive-or-mimic-api",
+                "compatibility": "physx",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "CheckPrim",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/physics-joint-has-drive-or-mimic-api.html",
+                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/physics-joint-has-drive-or-mimic-api.md"
+                },
+                "message": "PhysX driven joints must implement drive API or mimic functionality for controlled motion.",
+                "examples": []
+            },
+            {
+                "code": "MUJOCO.DJ.002",
+                "version": null,
+                "name": "mujoco-actuator-targets",
                 "compatibility": "other",
                 "tags": [
                     "essential"
                 ],
-                "validator": "MuJoCoJointAPIChecker",
+                "validator": "MuJoCoActuatorTargetsChecker",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/mujoco-joint-api.html",
-                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/mujoco-joint-api.md"
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/mujoco-actuator-targets.html",
+                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/mujoco-actuator-targets.md"
                 },
-                "message": "MuJoCo driven joints must use standard `UsdPhysics.Joint` prims with `MjcJointAPI` applied to every non-fixed articulation joint.",
+                "message": "MuJoCo actuator prims must target valid MuJoCo-driven USD physics joints and author valid actuator parameter values.",
+                "examples": []
+            },
+            {
+                "code": "DJ.006",
+                "version": null,
+                "name": "drive-joint-value-reasonable",
+                "compatibility": "physx",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "CheckPrim",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/drive-joint-value-reasonable.html",
+                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/drive-joint-value-reasonable.md"
+                },
+                "message": "Drive joint parameters must be within reasonable ranges for stable simulation. The joint parameters should not be excessively big and should be natural numbers.",
+                "examples": []
+            },
+            {
+                "code": "NEWTON.DJ.001",
+                "version": null,
+                "name": "newton-joint-drive-api",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "NewtonJointDriveAPIChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/newton-joint-drive-api.html",
+                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/newton-joint-drive-api.md"
+                },
+                "message": "Every actuated Newton articulation joint must be driven by a standard `UsdPhysics.DriveAPI`, by a `NewtonActuator`, or be coupled to a leader joint by `NewtonMimicAPI`, and those actuation values must be valid.",
+                "examples": []
+            },
+            {
+                "code": "DJ.010",
+                "version": null,
+                "name": "check-robot-relationships",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "CheckStage",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/check-robot-relationships.html",
+                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/check-robot-relationships.md"
+                },
+                "message": "Robot joint and link relationships must be validated for proper kinematic tree structure.",
+                "examples": []
+            },
+            {
+                "code": "DJ.007",
+                "version": null,
+                "name": "mimic-api-check",
+                "compatibility": "physx",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "CheckPrim",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/mimic-api-check.html",
+                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/mimic-api-check.md"
+                },
+                "message": "Mimic API configuration must be properly validated for coordinated joint motion.",
+                "examples": []
+            },
+            {
+                "code": "NEWTON.DJ.003",
+                "version": null,
+                "name": "newton-mimic-api",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "NewtonMimicAPIChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/newton-mimic-api.html",
+                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/newton-mimic-api.md"
+                },
+                "message": "When `NewtonMimicAPI` is applied, it must be on a `UsdPhysics.Joint`, target a valid leader joint,\nand author valid mimic coefficients.",
+                "examples": []
+            },
+            {
+                "code": "DJ.008",
+                "version": null,
+                "name": "robot-schema-joint-exist",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "CheckStage",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/robot-schema-joint-exist.html",
+                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/robot-schema-joint-exist.md"
+                },
+                "message": "Robot schema joints must exist and be properly defined for Isaac Sim integration.",
                 "examples": []
             },
             {
@@ -63,54 +199,37 @@
                 ]
             },
             {
-                "code": "DJ.005",
+                "code": "NEWTON.DJ.002",
                 "version": null,
-                "name": "physics-joint-max-velocity",
-                "compatibility": "physx",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "CheckPrim",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/physics-joint-max-velocity.html",
-                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/physics-joint-max-velocity.md"
-                },
-                "message": "PhysX driven joints must have appropriate maximum velocity limits configured.",
-                "examples": []
-            },
-            {
-                "code": "DJ.006",
-                "version": null,
-                "name": "drive-joint-value-reasonable",
-                "compatibility": "physx",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "CheckPrim",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/drive-joint-value-reasonable.html",
-                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/drive-joint-value-reasonable.md"
-                },
-                "message": "Drive joint parameters must be within reasonable ranges for stable simulation. The joint parameters should not be excessively big and should be natural numbers.",
-                "examples": []
-            },
-            {
-                "code": "DJ.009",
-                "version": null,
-                "name": "robot-schema-links-exist",
+                "name": "newton-joint-attributes",
                 "compatibility": "other",
                 "tags": [
                     "essential"
                 ],
-                "validator": "CheckStage",
+                "validator": "NewtonJointAttributesChecker",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/robot-schema-links-exist.html",
-                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/robot-schema-links-exist.md"
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/newton-joint-attributes.html",
+                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/newton-joint-attributes.md"
                 },
-                "message": "Robot schema links must exist and be properly connected to joints for kinematic chain definition.",
+                "message": "Authored Newton joint tuning must use `NewtonJointAPI` (or the equivalent `newton:*` attributes) on `UsdPhysics.Joint` prims with valid values.",
+                "examples": []
+            },
+            {
+                "code": "MUJOCO.DJ.001",
+                "version": null,
+                "name": "mujoco-joint-api",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "MuJoCoJointAPIChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/mujoco-joint-api.html",
+                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/mujoco-joint-api.md"
+                },
+                "message": "MuJoCo driven joints must use standard `UsdPhysics.Joint` prims with `MjcJointAPI` applied to every non-fixed articulation joint.",
                 "examples": []
             },
             {
@@ -131,54 +250,20 @@
                 "examples": []
             },
             {
-                "code": "NEWTON.DJ.003",
+                "code": "DJ.009",
                 "version": null,
-                "name": "newton-mimic-api",
+                "name": "robot-schema-links-exist",
                 "compatibility": "other",
                 "tags": [
                     "essential"
                 ],
-                "validator": "NewtonMimicAPIChecker",
+                "validator": "CheckStage",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/newton-mimic-api.html",
-                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/newton-mimic-api.md"
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/robot-schema-links-exist.html",
+                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/robot-schema-links-exist.md"
                 },
-                "message": "When `NewtonMimicAPI` is applied, it must be on a `UsdPhysics.Joint`, target a valid leader joint,\nand author valid mimic coefficients.",
-                "examples": []
-            },
-            {
-                "code": "DJ.004",
-                "version": null,
-                "name": "physics-joint-has-drive-or-mimic-api",
-                "compatibility": "physx",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "CheckPrim",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/physics-joint-has-drive-or-mimic-api.html",
-                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/physics-joint-has-drive-or-mimic-api.md"
-                },
-                "message": "PhysX driven joints must implement drive API or mimic functionality for controlled motion.",
-                "examples": []
-            },
-            {
-                "code": "NEWTON.DJ.001",
-                "version": null,
-                "name": "newton-joint-drive-api",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "NewtonJointDriveAPIChecker",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/newton-joint-drive-api.html",
-                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/newton-joint-drive-api.md"
-                },
-                "message": "Every actuated Newton articulation joint must be driven by a standard `UsdPhysics.DriveAPI`, by a `NewtonActuator`, or be coupled to a leader joint by `NewtonMimicAPI`, and those actuation values must be valid.",
+                "message": "Robot schema links must exist and be properly connected to joints for kinematic chain definition.",
                 "examples": []
             },
             {
@@ -199,43 +284,9 @@
                 "examples": []
             },
             {
-                "code": "DJ.008",
+                "code": "DJ.005",
                 "version": null,
-                "name": "robot-schema-joint-exist",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "CheckStage",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/robot-schema-joint-exist.html",
-                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/robot-schema-joint-exist.md"
-                },
-                "message": "Robot schema joints must exist and be properly defined for Isaac Sim integration.",
-                "examples": []
-            },
-            {
-                "code": "MUJOCO.DJ.002",
-                "version": null,
-                "name": "mujoco-actuator-targets",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "MuJoCoActuatorTargetsChecker",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/mujoco-actuator-targets.html",
-                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/mujoco-actuator-targets.md"
-                },
-                "message": "MuJoCo actuator prims must target valid MuJoCo-driven USD physics joints and author valid actuator parameter values.",
-                "examples": []
-            },
-            {
-                "code": "DJ.001",
-                "version": null,
-                "name": "physics-drive-and-joint-state",
+                "name": "physics-joint-max-velocity",
                 "compatibility": "physx",
                 "tags": [
                     "essential"
@@ -243,61 +294,10 @@
                 "validator": "CheckPrim",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/physics-drive-and-joint-state.html",
-                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/physics-drive-and-joint-state.md"
+                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/physics-joint-max-velocity.html",
+                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/physics-joint-max-velocity.md"
                 },
-                "message": "Validate that each driven joint has correct drive configuration and joint state, including required limits and consistency checks against the current joint state values.",
-                "examples": []
-            },
-            {
-                "code": "DJ.010",
-                "version": null,
-                "name": "check-robot-relationships",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "CheckStage",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/check-robot-relationships.html",
-                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/check-robot-relationships.md"
-                },
-                "message": "Robot joint and link relationships must be validated for proper kinematic tree structure.",
-                "examples": []
-            },
-            {
-                "code": "DJ.007",
-                "version": null,
-                "name": "mimic-api-check",
-                "compatibility": "physx",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "CheckPrim",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/mimic-api-check.html",
-                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/mimic-api-check.md"
-                },
-                "message": "Mimic API configuration must be properly validated for coordinated joint motion.",
-                "examples": []
-            },
-            {
-                "code": "NEWTON.DJ.002",
-                "version": null,
-                "name": "newton-joint-attributes",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "NewtonJointAttributesChecker",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_driven_joints/requirements/newton-joint-attributes.html",
-                    "internal_path": "capabilities/physics_bodies/physics_driven_joints/requirements/newton-joint-attributes.md"
-                },
-                "message": "Authored Newton joint tuning must use `NewtonJointAPI` (or the equivalent `newton:*` attributes) on `UsdPhysics.Joint` prims with valid values.",
+                "message": "PhysX driven joints must have appropriate maximum velocity limits configured.",
                 "examples": []
             }
         ],

@@ -4,20 +4,54 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "JT.ART.004",
+                "code": "JT.002",
                 "version": null,
-                "name": "articulation-not-on-static-body",
+                "name": "joint-body-target-exists",
                 "compatibility": "open-usd",
                 "tags": [
                     "correctness"
                 ],
-                "validator": "jt-art-004",
+                "validator": "jt-002",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/physics_bodies/physics_joints/requirements/articulation-not-on-static-body.html",
-                    "internal_path": "capabilities/physics_bodies/physics_joints/requirements/articulation-not-on-static-body.md"
+                    "path": "capabilities/physics_bodies/physics_joints/requirements/joint-body-target-exists.html",
+                    "internal_path": "capabilities/physics_bodies/physics_joints/requirements/joint-body-target-exists.md"
                 },
-                "message": "Articulations are not allowed on static bodies.",
+                "message": "Targets set to Body0 and Body1 relationships must exist.",
+                "examples": []
+            },
+            {
+                "code": "JT.001",
+                "version": null,
+                "name": "joint-capability",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_joints/requirements/joint-capability.html",
+                    "internal_path": "capabilities/physics_bodies/physics_joints/requirements/joint-capability.md"
+                },
+                "message": "Rigid bodies which are not free floating should be connected using joints.",
+                "examples": []
+            },
+            {
+                "code": "JT.ART.002",
+                "version": null,
+                "name": "articulation-no-nesting",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "jt-art-002",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_joints/requirements/articulation-no-nesting.html",
+                    "internal_path": "capabilities/physics_bodies/physics_joints/requirements/articulation-no-nesting.md"
+                },
+                "message": "Articulation roots cannot be nested.",
                 "examples": []
             },
             {
@@ -55,23 +89,6 @@
                 "examples": []
             },
             {
-                "code": "JT.001",
-                "version": null,
-                "name": "joint-capability",
-                "compatibility": "open-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_joints/requirements/joint-capability.html",
-                    "internal_path": "capabilities/physics_bodies/physics_joints/requirements/joint-capability.md"
-                },
-                "message": "Rigid bodies which are not free floating should be connected using joints.",
-                "examples": []
-            },
-            {
                 "code": "JT.ART.003",
                 "version": null,
                 "name": "articulation-not-on-kinematic-body",
@@ -89,37 +106,20 @@
                 "examples": []
             },
             {
-                "code": "JT.002",
+                "code": "JT.ART.004",
                 "version": null,
-                "name": "joint-body-target-exists",
+                "name": "articulation-not-on-static-body",
                 "compatibility": "open-usd",
                 "tags": [
                     "correctness"
                 ],
-                "validator": "jt-002",
+                "validator": "jt-art-004",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/physics_bodies/physics_joints/requirements/joint-body-target-exists.html",
-                    "internal_path": "capabilities/physics_bodies/physics_joints/requirements/joint-body-target-exists.md"
+                    "path": "capabilities/physics_bodies/physics_joints/requirements/articulation-not-on-static-body.html",
+                    "internal_path": "capabilities/physics_bodies/physics_joints/requirements/articulation-not-on-static-body.md"
                 },
-                "message": "Targets set to Body0 and Body1 relationships must exist.",
-                "examples": []
-            },
-            {
-                "code": "JT.ART.002",
-                "version": null,
-                "name": "articulation-no-nesting",
-                "compatibility": "open-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": "jt-art-002",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_joints/requirements/articulation-no-nesting.html",
-                    "internal_path": "capabilities/physics_bodies/physics_joints/requirements/articulation-no-nesting.md"
-                },
-                "message": "Articulation roots cannot be nested.",
+                "message": "Articulations are not allowed on static bodies.",
                 "examples": []
             }
         ],
