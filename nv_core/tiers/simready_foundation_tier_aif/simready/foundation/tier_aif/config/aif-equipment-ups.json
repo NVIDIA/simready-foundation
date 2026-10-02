@@ -1,0 +1,47 @@
+{
+  "class": "ups",
+  "displayName": "Uninterruptible Power Supply",
+  "assetClassTokens": [
+    "ups"
+  ],
+  "thermalCooling": {
+    "applies": false
+  },
+  "electricalAC": {
+    "applies": true,
+    "nominalVoltage": "aif:spec:electricalInputVoltage",
+    "powerRating": "aif:spec:upsRating",
+    "frequency": "aif:spec:electricalInputFrequency"
+  },
+  "attributes": [
+    "aif:spec:batteryFloatVoltage",
+    "aif:spec:batteryType",
+    "aif:spec:cardCompatibility",
+    "aif:spec:color",
+    "aif:spec:communicationOptions",
+    "aif:spec:dcRippleVoltage",
+    "aif:spec:electricalCurrent",
+    "aif:spec:electricalInputFrequency",
+    "aif:spec:electricalInputPhase",
+    "aif:spec:electricalInputVoltage",
+    "aif:spec:electricalOutputFrequency",
+    "aif:spec:electricalOutputPhase",
+    "aif:spec:electricalPowerWalkIn",
+    "aif:spec:inputCurrentDistortion",
+    "aif:spec:inputPowerFactor",
+    "aif:spec:loadPowerFactor",
+    "aif:spec:nominalBatteryBus",
+    "aif:spec:operatingAltitude",
+    "aif:spec:operatingTemperature",
+    "aif:spec:outputActivePower",
+    "aif:spec:outputThdNominalVoltage",
+    "aif:spec:outputThdNominalVoltageWithNonLinearLoad",
+    "aif:spec:outputVoltage",
+    "aif:spec:overloadAtNominalVoltage",
+    "aif:spec:protocolsAvailable",
+    "aif:spec:relativeHumidity",
+    "aif:spec:transientRecoveryLoad",
+    "aif:spec:upsEnclosureClass",
+    "aif:spec:upsRating"
+  ]
+}

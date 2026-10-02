@@ -29,7 +29,7 @@ def Xform "gripper_01" (
     prepend apiSchemas = ["MjcSiteAPI"]
 )
 {
-    string simready:attachment:socketType = "Gripper"
+    string simready:attactment:socketType = "Gripper"
     int mjc:group = 0
 }
 ```

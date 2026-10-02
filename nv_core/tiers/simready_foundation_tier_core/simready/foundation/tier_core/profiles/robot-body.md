@@ -13,6 +13,9 @@ Newton and MuJoCo multiphysics runtime features (`FET_004_*`, `FET_022_*`,
 `FET_024_*`) alongside the existing PhysX variants. Version `2.2.0` keeps the
 `2.1.0` set (including the Newton and MuJoCo multiphysics features) and adds
 optional `FET_025_ROS@0.1.0` for Isaac ROS-Ready bridge wiring.
+Version `2.3.0` adopts `FET_033_STANDARD@0.4.0` for the SR.004 USD/sidecar
+provenance union. Version `3.0.0` adds the visual-material baseline: required
+UsdPreviewSurface plus optional display colour, OpenPBR, and MDL features.
 
 ## Profile definition
 
@@ -53,20 +56,23 @@ specifications.
     {"FET_031_STANDARD" = {version = "0.1.0"}}, # "Self-contained Package Source"
     {"FET_033_STANDARD" = {version = "0.3.0"}}, # "Metadata (thumbnail + nested provenance metadata)"
 
-    # PhysX runtime core / multibody / driven joints / articulation
+    # PhysX runtime core / rbd / multibody / driven joints / articulation
     {"FET_000_PHYSX" = {version = "0.1.0"}, optional=true}, # "Core PhysX runtime variant"
+    {"FET_003_PHYSX" = {version = "0.4.0"}, optional=true}, # "RBD Physics (PhysX)"
     {"FET_004_PHYSX" = {version = "0.4.0"}, optional=true}, # "Simulate Multi-Body Physics (PhysX)"
     {"FET_022_PHYSX" = {version = "0.2.0"}, optional=true}, # "Driven Joints (PhysX)"
     {"FET_024_PHYSX" = {version = "0.1.0"}, optional=true}, # "Articulation (PhysX)"
 
-    # Newton runtime core / multibody / driven joints / articulation
+    # Newton runtime core / rbd / multibody / driven joints / articulation
     {"FET_000_NEWTON" = {version = "0.1.0"}, optional=true}, # "Core Newton runtime variant"
+    {"FET_003_NEWTON" = {version = "0.1.0"}, optional=true}, # "RBD Physics (Newton)"
     {"FET_004_NEWTON" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (Newton)"
     {"FET_022_NEWTON" = {version = "0.1.0"}, optional=true}, # "Driven Joints (Newton)"
     {"FET_024_NEWTON" = {version = "0.1.0"}, optional=true}, # "Articulation (Newton)"
 
-    # MuJoCo runtime core / multibody / driven joints / articulation
+    # MuJoCo runtime core / rbd / multibody / driven joints / articulation
     {"FET_000_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Core MuJoCo runtime variant"
+    {"FET_003_MUJOCO" = {version = "0.1.0"}, optional=true}, # "RBD Physics (MuJoCo)"
     {"FET_004_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (MuJoCo)"
     {"FET_022_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Driven Joints (MuJoCo)"
     {"FET_024_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Articulation (MuJoCo)"
@@ -89,20 +95,23 @@ specifications.
     {"FET_031_STANDARD" = {version = "0.1.0"}}, # "Self-contained Package Source"
     {"FET_033_STANDARD" = {version = "0.3.0"}}, # "Metadata (thumbnail + nested provenance metadata)"
 
-    # PhysX runtime core / multibody / driven joints / articulation
+    # PhysX runtime core / rbd / multibody / driven joints / articulation
     {"FET_000_PHYSX" = {version = "0.1.0"}, optional=true}, # "Core PhysX runtime variant"
+    {"FET_003_PHYSX" = {version = "0.4.0"}, optional=true}, # "RBD Physics (PhysX)"
     {"FET_004_PHYSX" = {version = "0.4.0"}, optional=true}, # "Simulate Multi-Body Physics (PhysX)"
     {"FET_022_PHYSX" = {version = "0.2.0"}, optional=true}, # "Driven Joints (PhysX)"
     {"FET_024_PHYSX" = {version = "0.1.0"}, optional=true}, # "Articulation (PhysX)"
 
-    # Newton runtime core / multibody / driven joints / articulation
+    # Newton runtime core / rbd / multibody / driven joints / articulation
     {"FET_000_NEWTON" = {version = "0.1.0"}, optional=true}, # "Core Newton runtime variant"
+    {"FET_003_NEWTON" = {version = "0.1.0"}, optional=true}, # "RBD Physics (Newton)"
     {"FET_004_NEWTON" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (Newton)"
     {"FET_022_NEWTON" = {version = "0.1.0"}, optional=true}, # "Driven Joints (Newton)"
     {"FET_024_NEWTON" = {version = "0.1.0"}, optional=true}, # "Articulation (Newton)"
 
-    # MuJoCo runtime core / multibody / driven joints / articulation
+    # MuJoCo runtime core / rbd / multibody / driven joints / articulation
     {"FET_000_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Core MuJoCo runtime variant"
+    {"FET_003_MUJOCO" = {version = "0.1.0"}, optional=true}, # "RBD Physics (MuJoCo)"
     {"FET_004_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (MuJoCo)"
     {"FET_022_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Driven Joints (MuJoCo)"
     {"FET_024_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Articulation (MuJoCo)"
@@ -112,20 +121,75 @@ specifications.
     {"FET_023_ISAAC" = {version = "0.1.0"}, optional=true}, # "Robot Materials (Isaac)"
     {"FET_100_ISAAC" = {version = "0.3.0"}, optional=true}, # "Isaac composition"
 ]}
+
+"2.3.0" = {features = [ # Adopt FET_033_STANDARD@0.4.0 (SR.004 USD/sidecar union)
+    {"FET_001_STANDARD" = {version = "1.0.1"}}, # "Minimal"
+    {"FET_003_STANDARD" = {version = "0.2.0"}}, # "RBD Physics"
+    {"FET_004_STANDARD" = {version = "0.2.0"}, optional=true}, # "Simulate Multi-Body Physics"
+    {"FET_021_ISAAC" = {version = "0.3.0"}, optional=true}, # "Robot Core (Isaac identity)"
+    {"FET_022_STANDARD" = {version = "0.2.0"}, optional=true}, # "Driven Joints"
+    {"FET_024_STANDARD" = {version = "0.1.0"}, optional=true}, # "Articulation"
+    {"FET_025_ROS" = {version = "0.1.0"}, optional=true}, # "ROS Ready (Isaac)"
+
+    # SimReady packaging + provenance metadata (required)
+    {"FET_031_STANDARD" = {version = "0.1.0"}}, # "Self-contained Package Source"
+    {"FET_033_STANDARD" = {version = "0.4.0"}}, # "Metadata (thumbnail + USD/sidecar provenance union / SR.004)"
+
+    {"FET_004_PHYSX" = {version = "0.4.0"}, optional=true}, # "Simulate Multi-Body Physics (PhysX)"
+    {"FET_022_PHYSX" = {version = "0.2.0"}, optional=true}, # "Driven Joints (PhysX)"
+    {"FET_024_PHYSX" = {version = "0.1.0"}, optional=true}, # "Articulation (PhysX)"
+
+    {"FET_000_ISAAC" = {version = "0.1.0"}, optional=true}, # "Core (Isaac) packaging"
+    {"FET_022_ISAAC" = {version = "0.2.0"}, optional=true}, # "Driven Joints (Isaac)"
+    {"FET_023_ISAAC" = {version = "0.1.0"}, optional=true}, # "Robot Materials (Isaac)"
+    {"FET_100_ISAAC" = {version = "0.3.0"}, optional=true}, # "Isaac composition"
+]}
+"3.0.0" = {features = [ # SimReady Foundations 8.0 release. Same feature contract as 2.3.0
+    {"FET_001_STANDARD" = {version = "1.0.1"}}, # "Minimal"
+    {"FET_003_STANDARD" = {version = "0.2.0"}}, # "RBD Physics"
+    {"FET_004_STANDARD" = {version = "0.2.0"}, optional=true}, # "Simulate Multi-Body Physics"
+    {"FET_021_ISAAC" = {version = "0.3.0"}, optional=true}, # "Robot Core (Isaac identity)"
+    {"FET_022_STANDARD" = {version = "0.2.0"}, optional=true}, # "Driven Joints"
+    {"FET_024_STANDARD" = {version = "0.1.0"}, optional=true}, # "Articulation"
+    {"FET_006_STANDARD" = {version = "0.2.0"}}, # "Materials - UsdPreviewSurface (required)"
+    {"FET_006_OPENPBR" = {version = "0.1.0"}, optional=true}, # "Materials - OpenPBR (optional)"
+    {"FET_006_MDL" = {version = "0.2.0"}, optional=true}, # "Materials - MDL (optional)"
+    {"FET_010_STANDARD" = {version = "0.1.0"}, optional=true}, # "Display Color (optional)"
+    {"FET_025_ROS" = {version = "0.1.0"}, optional=true}, # "ROS Ready (Isaac)"
+
+    # SimReady packaging + provenance metadata (required)
+    {"FET_031_STANDARD" = {version = "0.1.0"}}, # "Self-contained Package Source"
+    {"FET_033_STANDARD" = {version = "0.4.0"}}, # "Metadata (thumbnail + USD/sidecar provenance union / SR.004)"
+
+    {"FET_004_PHYSX" = {version = "0.4.0"}, optional=true}, # "Simulate Multi-Body Physics (PhysX)"
+    {"FET_022_PHYSX" = {version = "0.2.0"}, optional=true}, # "Driven Joints (PhysX)"
+    {"FET_024_PHYSX" = {version = "0.1.0"}, optional=true}, # "Articulation (PhysX)"
+
+    {"FET_000_ISAAC" = {version = "0.1.0"}, optional=true}, # "Core (Isaac) packaging"
+    {"FET_022_ISAAC" = {version = "0.2.0"}, optional=true}, # "Driven Joints (Isaac)"
+    {"FET_023_ISAAC" = {version = "0.1.0"}, optional=true}, # "Robot Materials (Isaac)"
+    {"FET_100_ISAAC" = {version = "0.3.0"}, optional=true}, # "Isaac composition"
+]}
+
 ```
 
 ### Required versus optional features
 
 On `2.0.0` only two features are required, and from `2.1.0` the packaging and
-provenance features join them. Every robot-specific feature is marked
-`optional=true` and is validated only when the asset selects it.
+provenance features join them. Version `3.0.0` also requires
+`FET_006_STANDARD`; the alternative visual-material and robot-specific features
+remain optional and are validated only when the asset selects them.
 
 | Feature | Version | Status | Purpose |
 |---|---|---|---|
 | `FET_001_STANDARD` | 1.0.1 | Required | Minimal OpenUSD asset: units, hierarchy, mesh geometry |
 | `FET_003_STANDARD` | 0.2.0 | Required | Neutral rigid-body physics and colliders |
 | `FET_031_STANDARD` | 0.1.0 | Required (`2.1.0`+) | Self-contained package source |
-| `FET_033_STANDARD` | 0.3.0 | Required (`2.1.0`+) | Thumbnail and nested provenance metadata |
+| `FET_033_STANDARD` | 0.3.0 (`2.1.0`-`2.2.0`); 0.4.0 (`2.3.0`+) | Required (`2.1.0`+) | Thumbnail plus nested provenance or the SR.004 USD/sidecar union |
+| `FET_006_STANDARD` | 0.2.0 (from profile `3.0.0`) | Required | `UsdPreviewSurface` materials |
+| `FET_010_STANDARD` | 0.1.0 (from profile `3.0.0`) | Optional | Display colour and opacity |
+| `FET_006_OPENPBR` | 0.1.0 (from profile `3.0.0`) | Optional | OpenPBR materials |
+| `FET_006_MDL` | 0.2.0 (from profile `3.0.0`) | Optional | MDL materials |
 | `FET_004_STANDARD` | 0.2.0 | Optional | Neutral multibody joints |
 | `FET_021_ISAAC` | 0.3.0 | Optional | Robot identity: robot schema, robot type, root joint |
 | `FET_022_STANDARD` | 0.2.0 | Optional | Neutral driven joints |
@@ -169,8 +233,14 @@ present runtime must pass its rules. See
 [Multiple Physics Solvers](../guides/multiphysics_solvers.md).
 
 Feature versions in this profile pin the Standard/PhysX families rather than the
-legacy `FET_004_ROBOT_PHYSX` feature. Rigid-body work stays in the FET_003
-family and multibody joint work stays in the FET_004 family.
+deprecated `FET_004_ROBOT_PHYSX` feature, which must not be used by new profile
+versions. Rigid-body work stays in the FET_003 family and multibody joint work
+stays in the FET_004 family.
+
+Version `3.0.0` makes the baseline appearance mandatory: every conforming robot
+body carries a `UsdPreviewSurface` material (`FET_006_STANDARD`). Display colour
+(`FET_010_STANDARD`), OpenPBR, and MDL remain optional, so an asset selects only
+the alternative surface contracts its runtime needs.
 
 ## Required USD properties and schemas
 
@@ -336,6 +406,22 @@ includes OmniGraph nodes whose `node:type` starts with `isaacsim.ros2.bridge.`
 (`ROS.001`). Repair with `simready-foundation-conform-fet-025-ros` after Isaac
 composition when ROS bridge wiring is in scope.
 
+### Metadata union (version 2.3.0)
+
+Version `2.3.0` keeps the `2.2.0` feature set and adopts
+`FET_033_STANDARD@0.4.0`. Provenance uses `SR.004` instead of `SR.003`: the
+same field set is read from the union of root-layer `customLayerData`
+(including optional nested `SimReady_Metadata`) and an optional same-directory
+`<usd_stem>.json` sidecar. Nested `SimReady_Metadata` is no longer required on
+its own. Assets that already passed `2.2.0` still satisfy `2.3.0`; no feature
+adapter is required.
+
+### SimReady Foundations 8.0 release (version 3.0.0)
+
+Version `3.0.0` is the SimReady Foundations 8.0 release pin. It keeps the full `2.3.0`
+feature set with no contract changes. Assets that already passed `2.3.0` satisfy
+`3.0.0`; no feature adapter is required.
+
 ## Naming conventions
 
 ### Prim naming
@@ -362,7 +448,7 @@ customLayerData = {
     dictionary SimReady_Metadata = {
         dictionary validation = {
             string profile = "Robot-Body"
-            string profile_version = "2.2.0"
+            string profile_version = "3.0.0"
         }
     }
 }

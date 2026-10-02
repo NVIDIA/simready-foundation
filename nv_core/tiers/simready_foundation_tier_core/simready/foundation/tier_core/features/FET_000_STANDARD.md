@@ -5,14 +5,14 @@
 | Feature Name            | `FET_000_STANDARD` |
 | Runtime                 | `STANDARD` |
 | Proprietary Techs       | `None` |
-| Latest Version          | `0.1.0` |
+| Latest Version          | `0.2.0` |
 
 ## Description
 
 The Core feature defines the minimum standard structure for a portable SimReady
 USD asset. It covers asset file naming, directory layout, path portability,
-metadata location, resolvable asset paths, SimReady metadata, and undefined
-prim cleanup.
+resolvable asset paths, and undefined prim cleanup. Version `0.1.0` also
+requires SimReady identity metadata (`SR.001`).
 
 This is the neutral, OpenUSD-only Core contract and does not require any
 physics runtime variants or Isaac packaging rules. Runtime-specific physics
@@ -48,9 +48,8 @@ This feature has no dependencies and no other features depend on it directly.
 
 This version is used in the following profiles:
 
-- **[Prop Robotics Neutral Profile](../profiles/prop-robotics-neutral.md)** (`v1.0.0`, `v2.0.0`, `v2.0.1`, `v2.1.0`) - Provides the shared Core feature gate for neutral prop profiles.
-- **[Prop Robotics PhysX Profile](../profiles/prop-robotics-physx.md)** (`v1.0.0`, `v2.0.0`, `v2.0.1`, `v2.1.0`) - Provides the shared Core feature gate for PhysX prop profiles.
-- **[Robotics Prop Profile](../profiles/profiles.md)** (`v3.0.0`) - Provides the Standard Core feature gate for the consolidated prop profile.
+- **[Robotics Prop Profile](../profiles/robotics-prop.md)** (`v3.0.0`, `v3.1.0`, `v3.2.0`) - Standard Core feature gate before the `0.2.0` NP.006 drop.
+- **Open Taxonomy profiles** (`v0.1.0`) - Provides the shared Core gate for COCO, Cityscapes, ADE20K, PASCAL VOC, SUN RGB-D, and ImageNet-1K taxonomy validation.
 
 #### Feature Dependencies
 
@@ -91,6 +90,59 @@ None.
         * [Undefined-Prims](../capabilities/hierarchy/requirements/undefined-prims.md)
             * HI.010 | Version 0.1.0
             * [Rule | Implementation](../capabilities/hierarchy/validation.py)
+
+</details>
+
+### Version 0.2.0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+This version is used in the following profiles:
+
+- **[Robotics Prop Profile](../profiles/robotics-prop.md)** (`v3.3.0`, `v4.0.0`) - Core without `NP.006` or `SR.001`. Provenance union lives on `FET_033_STANDARD` (`SR.004`).
+
+#### Feature Dependencies
+
+None.
+
+#### Requirement List
+
+Same as version `0.1.0`, except `NP.006` and `SR.001` are omitted.
+
+* Capability: [Core/Naming Paths](../capabilities/core/naming_paths/capability-naming_paths.md)
+    * Requirements:
+        * [File-Naming-Convention](../capabilities/core/naming_paths/requirements/file-naming-convention.md)
+            * NP.002 | Version 0.1.0
+            * [Rule | Implementation](../capabilities/core/naming_paths/validation.py)
+        * [Directory-Structure](../capabilities/core/naming_paths/requirements/directory-structure.md)
+            * NP.003 | Version 0.1.0
+            * [Rule | Implementation](../capabilities/core/naming_paths/validation.py)
+        * [Path-Length-Limits](../capabilities/core/naming_paths/requirements/path-length-limits.md)
+            * NP.004 | Version 0.1.0
+            * [Rule | Implementation](../capabilities/core/naming_paths/validation.py)
+        * [Asset-Folder-Structure](../capabilities/core/naming_paths/requirements/asset-folder-structure.md)
+            * NP.005 | Version 0.1.0
+            * [Rule | Implementation](../capabilities/core/naming_paths/validation.py)
+        * [Relative-Paths](../capabilities/core/naming_paths/requirements/relative-paths.md)
+            * NP.007 | Version 0.1.0
+            * [Rule | Implementation](../capabilities/core/naming_paths/validation.py)
+        * [AssetPath-Validation](../capabilities/core/naming_paths/requirements/assetpath-validation.md)
+            * NP.008 | Version 0.1.0
+            * [Rule | Implementation](../capabilities/core/naming_paths/validation.py)
+* Capability: [Hierarchy](../capabilities/hierarchy/requirements.md)
+    * Requirements:
+        * [Undefined-Prims](../capabilities/hierarchy/requirements/undefined-prims.md)
+            * HI.010 | Version 0.1.0
+            * [Rule | Implementation](../capabilities/hierarchy/validation.py)
+
+#### Changes From Version 0.1.0
+
+Version `0.2.0` drops `NP.006` and `SR.001`. Nested provenance is `SR.003` on
+`FET_033_STANDARD@0.3.0`; USD/sidecar union is `SR.004` on
+`FET_033_STANDARD@0.4.0` for profiles that pin packaging.
 
 </details>
 

@@ -354,16 +354,13 @@ class MetadataLocationChecker(usd_validation_nvidia.BaseRuleChecker):
         if not stage_path:
             return
 
-        # Get the directory containing the USD file
         current_dir = os.path.dirname(stage_path)
         if not current_dir:
             return
 
-        # Get the main USD file name (without extension)
         main_usd_file = os.path.basename(stage_path)
         main_usd_name = os.path.splitext(main_usd_file)[0]
 
-        # Check for simready_metadata in custom layer data
         has_simready_metadata = False
         root_layer = stage.GetRootLayer()
         if root_layer:
@@ -391,11 +388,13 @@ class MetadataLocationChecker(usd_validation_nvidia.BaseRuleChecker):
                 )
                 has_sidecar_metadata = False
 
-        # Check if at least one metadata source exists
         if not has_sidecar_metadata and not has_simready_metadata:
             self._AddFailedCheck(
                 requirement=cap.NamingPathsRequirements.NP_006,
-                message=f"Asset '{main_usd_name}' has no metadata. Metadata must be stored in custom layer data as 'simready_metadata' or a sidecar JSON file.",
+                message=(
+                    f"Asset '{main_usd_name}' has no metadata. Metadata must be stored in custom "
+                    "layer data as 'SimReady_Metadata' or a sidecar JSON file."
+                ),
                 at=stage,
             )
 

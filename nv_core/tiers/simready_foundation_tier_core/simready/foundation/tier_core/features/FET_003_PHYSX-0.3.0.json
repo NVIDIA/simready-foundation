@@ -6,12 +6,12 @@
     "runtime": "PhysX",
     "requirements": [
         "RB.COL.003",
-        "RB.COL.004",
+        "com.nvidia.usd.RB.COL.004",
         "RB.001",
-        "RB.003",
-        "RB.005",
+        "com.nvidia.usd.RB.003",
+        "com.nvidia.usd.RB.005",
         "RB.007",
-        "RB.009",
+        "com.nvidia.usd.RB.009",
         "RB.010",
         "PHYSX.COL.001",
         "PHYSX.COL.002"

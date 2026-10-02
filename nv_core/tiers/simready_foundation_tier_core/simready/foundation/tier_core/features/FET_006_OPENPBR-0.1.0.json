@@ -1,0 +1,16 @@
+{
+    "id": "FET_006_OPENPBR",
+    "version": "0.1.0",
+    "display_name": "Materials (OpenPBR)",
+    "path": "features/FET_006_OPENPBR.html",
+    "requirements": [
+        "com.nvidia.usd.VM.BIND.001",
+        "VM.BIND.002",
+        "VM.MAT.001",
+        "VM.PBR.001",
+        "VM.PBR.002",
+        "VM.PBR.003",
+        "VM.TEX.001",
+        "VM.TEX.004"
+    ]
+}

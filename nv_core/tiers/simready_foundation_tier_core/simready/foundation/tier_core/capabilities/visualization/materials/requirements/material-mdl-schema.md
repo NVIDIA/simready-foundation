@@ -8,34 +8,45 @@
 
 ## Summary
 
-MDL Shaders must standard OpenUSD shader source attributes to ensure compatibility.
+An MDL shader must use the current schema attributes, not the deprecated `mdlMaterial` form.
+
+This requirement is implemented by `usd-validation-nvidia`, which registers it as
+`com.nvidia.usd.VM.MDL.002` and binds it to `MaterialOldMdlSchemaChecker`. A feature manifest references that
+code. The unprefixed code is not bound to a rule in this repository.
 
 ## Description
 
 Materials must use the current MDL shader schema format. The old schema format where `info:implementationSource = "mdlMaterial"` is used with separate `module` and `name` attributes is deprecated and should not be used.
 
 ## Why is it required?
-- Compatibility issues in applications that support MDL materials with OpenUSD
+- An application reading the current schema finds no shader source on a prim using the deprecated form
 
 
 ## Examples
 
+### Invalid: the deprecated MDL schema
+
 ```usd
-# Invalid: Using deprecated MDL schema format
 def Material "mtl_test"
 {
     token outputs:surface.connect = </mtl_test/Shader.outputs:out>
 
     def Shader "Shader"
     {
-        uniform token info:implementationSource = "mdlMaterial"  # Deprecated
-        custom asset module = @OmniPBR.mdl@  # Old way of specifying MDL module
-        custom string name = "OmniPBR"  # Old way of specifying material name
+        uniform token info:implementationSource = "mdlMaterial"
+        custom asset module = @./OmniPBR.mdl@
+        custom string name = "OmniPBR"
         token outputs:out
     }
 }
+```
 
-# Valid: Using current MDL schema format
+`module` and `name` are custom attributes the deprecated schema used to name the MDL module
+and the material inside it.
+
+### Valid: the current MDL schema
+
+```usd
 def Material "mtl_test"
 {
     token outputs:surface.connect = </mtl_test/Shader.outputs:out>
@@ -44,7 +55,7 @@ def Material "mtl_test"
     {
         uniform token info:implementationSource = "sourceAsset"
         uniform asset info:mdl:sourceAsset = @./OmniPBR.mdl@
-        uniform token info:mdl:materialType = "OmniPBR"
+        uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
         token outputs:out
     }
 }

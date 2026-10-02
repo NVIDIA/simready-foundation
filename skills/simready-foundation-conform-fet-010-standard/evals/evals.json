@@ -1,0 +1,80 @@
+[
+    {
+        "id": "simready-foundation-conform-fet-010-standard-positive-trigger",
+        "question": "Repair FET_010_STANDARD@0.1.0 validation failures on a SimReady asset or package.",
+        "expected_skill": "simready-foundation-conform-fet-010-standard",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-010-standard and follow the exact FET_010_STANDARD workflow.",
+        "expected_behavior": [
+            "Load the simready-foundation-conform-fet-010-standard skill.",
+            "Use the selected FET_010_STANDARD manifest as the authoritative feature contract.",
+            "Run the bundled author_display_color.py with --verify before editing.",
+            "Report changed files, validation performed, and any remaining blockers."
+        ]
+    },
+    {
+        "id": "simready-foundation-conform-fet-010-standard-dc-001-trigger",
+        "question": "The validator says these meshes do not resolve a primvars:displayColor. Fix DISP.001 on this asset.",
+        "expected_skill": "simready-foundation-conform-fet-010-standard",
+        "ground_truth": "DISP.001 is a Display Color capability requirement carried by FET_010_STANDARD, so the display colour skill owns the repair even though the request names a requirement rather than a feature.",
+        "expected_behavior": [
+            "Load the simready-foundation-conform-fet-010-standard skill.",
+            "Author primvars:displayColor on the renderable Gprims rather than editing a shaded surface.",
+            "Confirm the repair with --verify, which resolves the primvar with inheritance the way DISP.001 defines conformance."
+        ]
+    },
+    {
+        "id": "simready-foundation-conform-fet-010-standard-derived-not-invented",
+        "question": "Just set displayColor to a neutral grey everywhere so the asset passes DISP.001.",
+        "expected_skill": "simready-foundation-conform-fet-010-standard",
+        "ground_truth": "The colour is derived from the bound material's base colour, sampled over the faces bound to it, so it approximates the albedo DISP.002's guidance asks for. A flat grey would pass the validator while telling a consumer nothing, and geometry with nothing to derive from is reported rather than filled in.",
+        "expected_behavior": [
+            "Derive the colour from the bound material rather than authoring a fixed value.",
+            "Explain that a uniform grey satisfies DISP.001 without approximating the albedo DISP.002 describes.",
+            "Report any Gprim with no material or no resolvable base colour as skipped, and say it still fails DISP.001."
+        ]
+    },
+    {
+        "id": "simready-foundation-conform-fet-010-standard-linear-not-srgb",
+        "question": "The albedo textures are sRGB PNGs. Can I average them and write the result straight into displayColor?",
+        "expected_skill": "simready-foundation-conform-fet-010-standard",
+        "ground_truth": "No. displayColor resolves to linear Rec.709 with a D65 white point unless a colour space says otherwise, so each texel is decoded through the sRGB transfer function before it enters the mean. Averaging the encoded bytes and writing the result as linear reads far too bright and desaturates the asset; on the orange's map the byte mean is 6.2 times too high in blue.",
+        "expected_behavior": [
+            "Decode sRGB to linear before averaging, not after.",
+            "State that sRGB and Rec.709 share primaries and a D65 white point, so the transfer function is the whole conversion.",
+            "Do not treat the source's declared colour space as authoritative where it contradicts the map's role."
+        ]
+    },
+    {
+        "id": "simready-foundation-conform-fet-010-standard-verify-excludes-dry-run",
+        "question": "Run the display colour script with --verify --dry-run so it reports conformance without touching anything.",
+        "expected_skill": "simready-foundation-conform-fet-010-standard",
+        "ground_truth": "--verify already changes nothing, so --dry-run adds no guard on top of it. The script rejects the pair with a message naming which flag to drop rather than accepting both and ignoring one, which would let a run look guarded when the guard was doing nothing.",
+        "expected_behavior": [
+            "Run --verify on its own to report DISP.001, DISP.002 and DISP.003.",
+            "State that --dry-run has no meaning with --verify because --verify never writes.",
+            "Use --dry-run only to preview authoring, which is the mode that would otherwise write."
+        ]
+    },
+    {
+        "id": "simready-foundation-conform-fet-010-standard-no-textures-authors-nothing",
+        "question": "numpy and Pillow are not installed here. Just run the display colour script with --no-textures and it will fall back to the material constants.",
+        "expected_skill": "simready-foundation-conform-fet-010-standard",
+        "ground_truth": "There is no constant to fall back to. Every texture-driven material in this library reaches its base colour through a UsdPreviewSurface whose diffuseColor is connected, with no inputs:fallback on the reader and no diffuse_color_constant on the MDL surface beside it, so --no-textures authors nothing for them and the file is never saved. The OpenPBR migration's reader default is the one usable fallback, and it is usually the nodedef default rather than a colour the material shows.",
+        "expected_behavior": [
+            "Install numpy and Pillow and sample the maps rather than accepting --no-textures as equivalent.",
+            "State that a texture-driven material with no constant beside its texture is skipped, so DISP.001 still fails on those Gprims.",
+            "Do not report a conformance pass from a --no-textures run that authored nothing."
+        ]
+    },
+    {
+        "id": "simready-foundation-conform-fet-010-standard-negative-sibling-feature",
+        "question": "Repair the OpenPBR final surface on a SimReady asset.",
+        "expected_skill": "simready-foundation-conform-fet-006-openpbr",
+        "ground_truth": "The OpenPBR surface is FET_006_OPENPBR, a sibling contract, so the agent should switch to that feature's skill.",
+        "expected_behavior": [
+            "Do not activate simready-foundation-conform-fet-010-standard.",
+            "Select the skill matching the named feature instead.",
+            "Do not author display colour while repairing a shaded surface."
+        ]
+    }
+]

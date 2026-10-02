@@ -4,9 +4,9 @@ This capability defines structured gripper interaction points on end-effector ro
 
 ## Summary
 
-Gripper sites encode the approach direction, graspable-tube axis, and maximum jaw separation needed by grasp planning and robot control systems. This capability defines the Neutral level (plain OpenUSD, discovery via the `simready:attachment:socketType = "Gripper"` attribute) plus the MuJoCo and Isaac site variants.
+Gripper sites encode the approach direction, graspable-tube axis, and maximum jaw separation needed by grasp planning and robot control systems. This capability defines the Neutral level (plain OpenUSD, discovery via the `simready:attactment:socketType = "Gripper"` attribute) plus the MuJoCo and Isaac site variants.
 
-The Isaac level is a superset of the Neutral level: a gripper site keeps the `simready:attachment:socketType = "Gripper"` discovery attribute and the approach, grip-line, and jaw-opening data, and additionally applies `IsaacSiteAPI` with an authored `isaac:Description` so Isaac Sim tooling can discover and configure the site automatically.
+The Isaac level is a superset of the Neutral level: a gripper site keeps the `simready:attactment:socketType = "Gripper"` discovery attribute and the approach, grip-line, and jaw-opening data, and additionally applies `IsaacSiteAPI` with an authored `isaac:Description` so Isaac Sim tooling can discover and configure the site automatically.
 
 ## Schema / OpenUSD Specification
 

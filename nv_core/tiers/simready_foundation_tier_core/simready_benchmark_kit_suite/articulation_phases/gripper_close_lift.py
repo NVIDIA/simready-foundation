@@ -146,7 +146,7 @@ def _fix_message_no_rigidbody_ancestor(site_prim_path: str) -> str:
         '            prepend apiSchemas = ["IsaacSiteAPI"]\n'
         "        )\n"
         "        {{\n"
-        '            token simready:attachment:socketType = "Gripper"\n'
+        '            token simready:attactment:socketType = "Gripper"\n'
         "            custom float custom:maxOpening = 0.085\n"
         "            # ... forward_axis, grip_line BasisCurves ...\n"
         "        }}\n"
@@ -187,7 +187,7 @@ def _fix_message_open_mapping_wrong(
         "\n"
         "FET028 convention: lowerLimit == OPEN, upperLimit == CLOSED.\n"
         "This matches typical industrial parallel-jaw grippers (Robotiq,\n"
-        "Robotiq, etc.) where the closing motion drives the joint toward\n"
+        "etc.) where the closing motion drives the joint toward\n"
         "larger positive angles.\n"
         "\n"
         "ASSET-AUTHORING FIXES to inspect on the joint prim driving\n"
@@ -667,8 +667,8 @@ def _compute_approach_orientation(stage, gripper_base_path, site, approach_world
     FixedJoint then cooks locking that down orientation.
 
     The returned quaternion is ``rot`` itself, scalar-first ``(w, x, y, z)``, as
-    Isaac's ``set_default_state`` expects. For a centric gripper, forward
-    (+Z) -> -Z makes ``rot`` a -90 degree rotation about X, and the grasp center
+    Isaac's ``set_default_state`` expects. For the centric ezu_35, forward
+    (+Z) -> -Z makes ``rot`` a -90 deg rotation about X, and the grasp center
     moves from 0.13 m in front to 0.13 m below the base (the gripper descends
     straight onto the object instead of driving its body sideways into the floor).
     """
@@ -2627,7 +2627,7 @@ def _pad_world_tips(robot, stage, paths, approach_world):
 def _link_world_scale(stage, path):
     """Accumulated world scale of a link (mean basis-vector length of its
     local-to-world transform). ~1.0 for unscaled assets, ~0.001 for a
-    millimeter-modelled asset under a 0.001 root scale."""
+    mm-modelled asset under a 0.001 root scale."""
     from pxr import UsdGeom
 
     prim = stage.GetPrimAtPath(path)
@@ -2723,7 +2723,7 @@ async def _detect_open_closed_positions(ctx, robot, fingertip_set, stage, config
     every downstream measurement uses the real contact pads.
 
     Asset-agnostic: no assumption about which limit is open (some grippers author
-    lower=open while others author upper=open) and no reliance
+    lower=open, others upper=open) and no reliance
     on static USD link xforms.
     """
     import itertools

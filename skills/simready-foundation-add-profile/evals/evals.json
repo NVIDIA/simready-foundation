@@ -1,7 +1,7 @@
 [
     {
         "id":  "simready-foundation-add-profile-positive-trigger",
-        "question":  "Create a new prop-factory-neutral SimReady profile similar to prop-robotics-neutral.",
+        "question":  "Create a new vehicle-simulation SimReady profile using the current profile conventions.",
         "expected_skill":  "simready-foundation-add-profile",
         "ground_truth":  "The agent should activate simready-foundation-add-profile and follow its workflow.",
         "expected_behavior":  [

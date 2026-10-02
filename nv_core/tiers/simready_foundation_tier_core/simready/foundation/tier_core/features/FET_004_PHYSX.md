@@ -53,8 +53,7 @@ flowchart LR
 
 #### Used in Profiles
 
-- **[Prop Robotics PhysX Profile](../profiles/prop-robotics-physx.md)** (`v1.0.0`, `v2.0.0`, `v2.0.1`) - Original PhysX multibody prop contract.
-- **[Prop Robotics Isaac Profile](../profiles/prop-robotics-isaac.md)** (`v1.0.0`, `v1.0.1`) - Original Isaac composition with PhysX multibody contract.
+- None documented.
 
 #### Feature Dependencies
 
@@ -100,8 +99,7 @@ Version 0.2.0 replaces `COL.001` with `PHYSX.COL.001` and `PHYSX.COL.002`.
 
 #### Used in Profiles
 
-- **[Prop Robotics PhysX Profile](../profiles/prop-robotics-physx.md)** (`v2.1.0`) - Updated PhysX multibody prop contract.
-- **[Prop Robotics Isaac Profile](../profiles/prop-robotics-isaac.md)** (`v1.1.0`) - Updated Isaac composition with PhysX multibody contract.
+- None documented.
 
 #### Feature Dependencies
 
@@ -124,11 +122,9 @@ newer Standard and PhysX rigid-body contracts.
 
 #### Used in Profiles
 
-- **[Robot Body Runnable Profile](../profiles/robot-body-runnable.md)** (`v2.1.0`) - PhysX multibody contract after FET003 PhysX `4`.
-- **[Robot Body Isaac Profile](../profiles/robot-body-isaac.md)** (`v1.1.0`, `v1.2.0`) - PhysX multibody contract for Isaac robot workflows; also the dependency of `FET_101_ISAAC@0.1.0` robot composition at `v1.2.0`.
-- **[Prop Robotics Isaac Profile](../profiles/prop-robotics-isaac.md)** (`v1.2.0`) - PhysX multibody contract under the standalone-transformer Isaac composition path.
-- **[Robotics Prop Profile](../profiles/profiles.md)** (`v3.0.0`) - Optional PhysX multibody feature.
-- **[Robot Body Profile](../profiles/profiles.md)** (`v3.0.0`) - Optional PhysX multibody feature.
+- **[Robotics Prop Profile](../profiles/robotics-prop.md)** (`v3.0.0`, `v3.1.0`, `v3.2.0`) - Optional PhysX multibody feature.
+- **[Robot Body Profile](../profiles/robot-body.md)** (`v2.0.0`, `v2.1.0`, `v2.2.0`) - Optional PhysX multibody feature.
+- **[Robot Gripper Profile](../profiles/profiles.md)** (`v2.0.0`, `v2.1.0`) - Optional PhysX multibody feature.
 
 #### Feature Dependencies
 

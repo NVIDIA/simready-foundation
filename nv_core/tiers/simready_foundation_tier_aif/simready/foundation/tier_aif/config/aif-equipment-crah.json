@@ -1,0 +1,53 @@
+{
+  "class": "crah",
+  "displayName": "Computer Room Air Handler",
+  "assetClassTokens": [
+    "crah"
+  ],
+  "thermalCooling": {
+    "applies": true,
+    "connectionPointPrefixes": [
+      "liq_supply",
+      "liq_return"
+    ]
+  },
+  "electricalAC": {
+    "applies": true,
+    "nominalVoltage": "aif:spec:electricalNominalVoltage",
+    "powerRating": "aif:spec:electricalPowerRating",
+    "frequency": "aif:spec:electricalFrequency"
+  },
+  "attributes": [
+    "aif:spec:airFilter",
+    "aif:spec:coil",
+    "aif:spec:electricalCurrent",
+    "aif:spec:electricalFrequency",
+    "aif:spec:electricalNominalVoltage",
+    "aif:spec:electricalPanelAccess",
+    "aif:spec:electricalPanelOptions",
+    "aif:spec:electricalPhase",
+    "aif:spec:electricalPowerRating",
+    "aif:spec:externalStaticUnitPressure",
+    "aif:spec:faceArea",
+    "aif:spec:faceVelocity",
+    "aif:spec:fanMotorPowerMax",
+    "aif:spec:flowRate",
+    "aif:spec:highVoltageOptions",
+    "aif:spec:humidification",
+    "aif:spec:maximumHp",
+    "aif:spec:monitoring",
+    "aif:spec:nominalAirVolume",
+    "aif:spec:nominalCoolingCapacity",
+    "aif:spec:numberOfFans",
+    "aif:spec:numberOfRows",
+    "aif:spec:pipingConnection",
+    "aif:spec:powerSupply",
+    "aif:spec:primaryControl",
+    "aif:spec:primaryPipeDiameter",
+    "aif:spec:returnAirVolume",
+    "aif:spec:secondaryPipeDiameter",
+    "aif:spec:sensibleCapacity",
+    "aif:spec:totalCapacity",
+    "aif:spec:unitPressureDrop"
+  ]
+}

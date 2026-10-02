@@ -20,7 +20,7 @@ This feature has no dependencies and no other features depend on it directly.
 Products or workflows that consume this feature:
 
 - Package validation verifies the selected package feature manifest.
-- Package creation workflows use package profiles for preflight/create/validate phases.
+- Package creation workflows use the package feature contracts for create and validation phases.
 
 ## Requirements
 
@@ -32,7 +32,7 @@ Products or workflows that consume this feature:
 #### Used in Profiles
 
 - Package v1.0.0
-- Package-No-BOM v1.0.0
+- Package-NoBOM v1.0.0
 
 #### Feature Dependencies
 
@@ -61,7 +61,7 @@ Source file type:
 Validation or runtime pipeline:
 
 - Package validation verifies the selected package feature manifest.
-- Package creation workflows use package profiles for preflight/create/validate phases.
+- Package creation workflows use package feature contracts for create and validation phases.
 
 ## Samples
 

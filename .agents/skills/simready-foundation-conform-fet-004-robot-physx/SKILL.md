@@ -1,6 +1,6 @@
 ---
 name: simready-foundation-conform-fet-004-robot-physx
-description: "Use for repairing exact FET_004_ROBOT_PHYSX SimReady conformance for simulate multi-body physics (robot physx) conformance. Use when a profile, validation report, or user request names FET_004_ROBOT_PHYSX; default to version `0.4.0` unless a profile or report pins another version."
+description: "Use for compatibility repair of deprecated FET_004_ROBOT_PHYSX SimReady conformance. Use only when a historical or external profile, validation report, asset stamp, or user request explicitly names FET_004_ROBOT_PHYSX; never select it for a new profile version."
 license: Apache-2.0
 metadata:
   author: "Shaad Boochoon <sboochoon@nvidia.com>"
@@ -15,6 +15,11 @@ metadata:
 ## Purpose
 
 Use this exact feature skill when the selected profile, validation report, or user request names `FET_004_ROBOT_PHYSX`. It repairs or stages simulate multi-body physics (robot physx) conformance without drifting into another runtime contract.
+
+`FET_004_ROBOT_PHYSX` is deprecated. This skill exists only to preserve
+compatibility with historical or external contracts and assets that explicitly
+name the feature. Never select or recommend it for a new profile version; use
+`FET_003_PHYSX@0.4.0` and `FET_004_PHYSX@0.4.0` instead.
 
 Default to `FET_004_ROBOT_PHYSX@0.4.0` when the user asks for this feature without a version. Use an older integer version only when the profile, validation report, or user explicitly pins it. If the report names a different `FET_###_RUNTIME` feature, switch to that feature's matching skill before editing.
 

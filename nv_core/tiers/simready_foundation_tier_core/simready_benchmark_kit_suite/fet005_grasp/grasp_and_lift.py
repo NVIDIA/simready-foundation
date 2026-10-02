@@ -25,6 +25,7 @@ Fresh scene per identifier for PhysX safety.
 import os
 
 from simready_benchmark.core.decorator import test
+from simready_benchmark_kit_suite.engine_guard import NewtonSceneInitializationError
 
 _RUNTIME_PHYSICS_FEATURES = {
     "newton": "FET_003_NEWTON",
@@ -37,6 +38,52 @@ def _required_physics_feature(runtime):
     # type: (str) -> str | None
     """Return the exact FET003 dependency for a recognized runtime."""
     return _RUNTIME_PHYSICS_FEATURES.get(runtime.strip().lower())
+
+
+def _all_identifiers_failed_message(total: int, failures: list[tuple[str, str, str]]) -> str:
+    """Build remediation that matches the phase that actually failed."""
+    lines = ["All %d grasp identifier(s) failed." % total]
+    for path, _phase, reason in failures:
+        lines.append("  %s: %s" % (path, reason))
+    lines.extend(("", "How to fix:"))
+
+    setup_phases = {"FixtureSetup", "Exception"}
+    if failures and all(phase in setup_phases for _path, phase, _reason in failures):
+        lines.extend(
+            (
+                "- The test stopped during fixture setup, before grasp behavior was evaluated. "
+                "Use the per-identifier exception above as the primary cause.",
+                "- For an import or backend exception, repair the Isaac/Kit environment; "
+                "asset mass and friction cannot fix a suite dependency failure.",
+                "- For body-resolution or bound errors, confirm the grasp segment crosses "
+                "one intended rigid body with finite default-purpose geometry. A separate "
+                "grasp annotation scope is valid and does not need to be reparented.",
+            )
+        )
+        return "\n".join(lines)
+
+    lines.extend(
+        (
+            "- The per-identifier reason above identifies which grasp phase failed "
+            "(gripper-positioning, grasping, lifting, hold, dropping, shake, "
+            "stability, opening). Treat each phase failure independently.",
+            "- Verify `physxRigidBody:mass` and `physxRigidBody:diagonalInertia` on "
+            "the asset -- objects with zero or NaN mass cannot be grasped.",
+            "- Check `physxMaterial:dynamicFriction` / `staticFriction` on the asset "
+            "-- low friction prevents the gripper from holding under gravity.",
+            "- Confirm the grasp identifier (USD prim path/name) actually points at a "
+            "graspable surface; missing or mis-targeted identifiers fail across all "
+            "phases consistently.",
+            "- Inspect the captured video for each identifier; common visual cues: "
+            "gripper passes through asset (collider missing), asset slips out of "
+            "fingers (friction too low), asset shoots away on contact (penetration "
+            "depth misconfigured).",
+            "- If the asset is intentionally not graspable for some identifiers, "
+            "remove those identifiers from the asset's grasp metadata rather than "
+            "tuning physics to make them pass.",
+        )
+    )
+    return "\n".join(lines)
 
 
 @test(
@@ -214,6 +261,10 @@ async def test_grasp_and_lift(ctx):
         # Fresh scene per identifier
         try:
             scene_result = await _test_one_identifier(ctx, cfg, id_path, safe_name, asset_prim_path)
+        except (ImportError, NewtonSceneInitializationError):
+            # Missing/broken runtime dependencies are suite environment errors,
+            # not evidence that this asset failed to be graspable.
+            raise
         except Exception as exc:
             scene_result = {
                 "phase_name": "Exception",
@@ -236,7 +287,13 @@ async def test_grasp_and_lift(ctx):
 
         if not passed:
             num_failed += 1
-            failures.append((id_path, scene_result.get("message", "unknown")))
+            failures.append(
+                (
+                    id_path,
+                    scene_result.get("phase_name", "Unknown"),
+                    scene_result.get("message", "unknown"),
+                )
+            )
             ctx.log("FAILED: %s -- %s" % (id_path, scene_result["message"]))
         else:
             ctx.log("PASSED: %s" % id_path)
@@ -252,45 +309,11 @@ async def test_grasp_and_lift(ctx):
     # identifier failed. Per-identifier failures are still logged above
     # and captured in metrics.
     if num_passed == 0:
-        lines = ["All %d grasp identifier(s) failed." % total]
-        for path, reason in failures:
-            lines.append("  %s: %s" % (path, reason))
-        lines.append("")
-        lines.append("How to fix:")
-        lines.append(
-            "- The per-identifier reason above identifies which grasp phase failed "
-            "(gripper-positioning, grasping, lifting, hold, dropping, shake, "
-            "stability, opening). Treat each phase failure independently."
-        )
-        lines.append(
-            "- Verify `physxRigidBody:mass` and `physxRigidBody:diagonalInertia` on "
-            "the asset -- objects with zero or NaN mass cannot be grasped."
-        )
-        lines.append(
-            "- Check `physxMaterial:dynamicFriction` / `staticFriction` on the asset "
-            "-- low friction prevents the gripper from holding under gravity."
-        )
-        lines.append(
-            "- Confirm the grasp identifier (USD prim path/name) actually points at a "
-            "graspable surface; missing or mis-targeted identifiers fail across all "
-            "phases consistently."
-        )
-        lines.append(
-            "- Inspect the captured video for each identifier; common visual cues: "
-            "gripper passes through asset (collider missing), asset slips out of "
-            "fingers (friction too low), asset shoots away on contact (penetration "
-            "depth misconfigured)."
-        )
-        lines.append(
-            "- If the asset is intentionally not graspable for some identifiers, "
-            "remove those identifiers from the asset's grasp metadata rather than "
-            "tuning physics to make them pass."
-        )
-        ctx.fail("\n".join(lines))
+        ctx.fail(_all_identifiers_failed_message(total, failures))
     elif num_failed > 0:
         summary = "Grasp passed on %d of %d identifier(s); %d failed." % (num_passed, total, num_failed)
         ctx.log(summary)
-        for path, reason in failures:
+        for path, _phase, reason in failures:
             ctx.warn("%s: %s" % (path, reason))
 
 
@@ -301,17 +324,24 @@ async def _test_one_identifier(ctx, cfg, identifier_path, safe_name, asset_prim_
     Builds the gripper, runs simulation, encodes video.
     Returns the final result dict.
     """
-    import omni.usd
-    from isaacsim.core.utils.stage import update_stage_async
-    from simready_benchmark_engine_kit.physics_utils import (
-        active_physics_engine,
-        configure_physx_determinism,
-    )
-    from simready_benchmark_kit_suite.fet005_grasp.grasp_scene import GraspScene
-    from simready_benchmark_kit_suite.fet005_grasp.newton_articulation import (
-        apply_temporary_newton_articulations,
-        remove_temporary_newton_articulations,
-    )
+    try:
+        import omni.usd
+        from isaacsim.core.utils.stage import update_stage_async
+        from simready_benchmark_engine_kit.physics_utils import (
+            active_physics_engine,
+            configure_physx_determinism,
+        )
+        from simready_benchmark_kit_suite.fet005_grasp.grasp_scene import GraspScene
+        from simready_benchmark_kit_suite.fet005_grasp.newton_articulation import (
+            apply_temporary_newton_articulations,
+            remove_temporary_newton_articulations,
+        )
+    except Exception as exc:
+        # Binary ABI conflicts can raise ValueError while Python is importing a
+        # C extension. Normalize every exception raised inside this import-only
+        # boundary so the engine reports a suite/environment error instead of
+        # an asset grasp failure with physics remediation advice.
+        raise ImportError("FET_005 runtime dependency import failed (%s): %s" % (type(exc).__name__, exc)) from exc
 
     stage = omni.usd.get_context().get_stage()
     temporary_articulations = []
@@ -376,12 +406,13 @@ async def _test_one_identifier(ctx, cfg, identifier_path, safe_name, asset_prim_
             # broken simulation.
             await ctx.settle(count=3)
             from simready_benchmark_kit_suite.engine_guard import (
-                NEWTON_SCENE_SKIP,
+                NEWTON_SCENE_ERROR,
+                NewtonSceneInitializationError,
                 newton_scene_initialized,
             )
 
             if not newton_scene_initialized():
-                return {"skip": NEWTON_SCENE_SKIP}
+                raise NewtonSceneInitializationError(NEWTON_SCENE_ERROR)
 
         ctx.step("Running 9-phase grasp simulation")
         return await grasp_scene.run_simulation(cfg, safe_name, physics)

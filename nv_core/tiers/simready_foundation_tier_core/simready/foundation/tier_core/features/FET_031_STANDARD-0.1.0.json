@@ -4,6 +4,6 @@
     "display_name": "Self-contained Package Source",
     "path": "features/FET_031_STANDARD.html",
     "requirements": [
-        "AA.001"
+        "com.nvidia.usd.AA.001"
     ]
 }

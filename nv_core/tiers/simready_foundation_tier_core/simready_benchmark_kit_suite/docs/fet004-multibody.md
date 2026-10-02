@@ -34,7 +34,7 @@ articulation.
   - Discovers movable joints and verifies that at least one joint produces
     measurable relative motion between its connected bodies.
   - FET_004_STANDARD, FET_004_PHYSX, FET_004_NEWTON,
-    FET_004_ROBOT_PHYSX, FET_004_ROBOT_NEWTON
+    FET_004_ROBOT_PHYSX (deprecated compatibility), FET_004_ROBOT_NEWTON
 :::
 
 ## Relationship to the Feature

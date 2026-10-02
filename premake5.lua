@@ -1,3 +1,5 @@
+-- SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+-- SPDX-License-Identifier: Apache-2.0
 -- Shared build scripts from repo_build package
 repo_build = require("omni/repo/build")
 

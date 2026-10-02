@@ -190,6 +190,6 @@ def Xform "Chair"
 ## For More Information
 
 - [metadata-whitelist](metadata-whitelist.md) (SR.001)
-- [USD Metadata and Custom Data](https://openusd.org/release/api/class_sdf_layer.html#a8c6e8b8b8c8e8b8b8c8e8b8b8c8e8b8b)
+- [metadata-union](metadata-union.md) (SR.004)
 - [USD Layer Metadata](https://openusd.org/release/glossary.html#usdglossary-metadata)
 - [SimReady Asset Standards](https://docs.omniverse.nvidia.com/materials-and-rendering/latest/simready.html)

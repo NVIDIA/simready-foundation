@@ -59,7 +59,7 @@ Collect these before editing:
 |---|---|
 | `usd_asset` | Required `.usd`, `.usda`, or `.usdc` asset to repair. |
 | `output_root` | Required or inferred folder for staged assets and reports. |
-| `simready_profile` | Profile being validated, such as `prop-robotics-neutral`. |
+| `simready_profile` | Profile being validated, such as `Robotics-Prop`. |
 | `profile_version` | Profile version, if supplied by the user or validation command. |
 | `validation_report` | Preferred JSON or markdown report from the failing profile or feature validation gate. |
 | `visual_evidence` | Required renders, screenshots, viewport captures, or generated previews from enough angles to identify the graspable region. |
@@ -78,6 +78,8 @@ Use this checklist when changing the repository:
    - name starts with `grasp_identifier`
    - `points` has at least two points
    - curve is under the asset default prim
+   - it may be below a clear annotation scope rather than below the rigid body;
+     do not reparent a valid line solely to satisfy the runtime test
 4. Generate or collect visual evidence before choosing points. Prefer real renders from `render-usd`, Kit, Omniverse viewport screenshots, or existing preview images when available. If no renderer is available, use `assets/scripts/render_grasp_preview.py` to generate a four-panel point-cloud PNG with top, front, side, and isometric views. If the staged USD opens but has no renderable mesh triangles, use the nearest source visual asset from conversion context or the asset fixture/source tree, then record that fallback explicitly. If the current agent cannot inspect the generated or collected images with vision, write a first-class `BLOCKED` report and stop.
 5. Use visual reasoning to choose a grasp region:
    - Prefer stable, rigid, central body geometry with enough contact area for opposing gripper fingers.
@@ -95,6 +97,9 @@ Use this checklist when changing the repository:
    - a small display width
    - `purpose = "guide"`
    - visible display color for review
+   A clear grasp annotation scope below the default prim is valid. When using
+   one, verify that the line's world-space segment crosses the intended rigid
+   body so runtime body resolution is unambiguous.
 9. Render or inspect the repaired asset again. Confirm the line is visible, intersects the intended region, and is not accidentally placed through an avoided region. When possible, save overlay images or a small decision JSON beside the staged output.
 10. Rerun the same profile validation gate, or the narrowest available FET_005_STANDARD validation gate. Stop when FET_005_STANDARD passes or when the remaining FET_005_STANDARD issue requires user or runtime-gripper judgement. If the full profile still fails on another feature, report the first remaining failing gate separately from the FET_005_STANDARD result.
 
@@ -212,6 +217,10 @@ Count this skill as successful when `FET_005_STANDARD@0.1.0` passes, even if the
 - Error: validation tooling is unavailable. Solution: run the narrowest available USD or static check and report the gap.
 - Error: a repair would change asset intent. Solution: stop and ask for direction or stage the smallest reversible edit.
 - Error: later profile gates still fail. Solution: report the next failing feature and hand off to the matching conformance skill.
+- Error: runtime reports `Gripper rebuild failed`. Solution: preserve the
+  original setup exception. Import/backend failures belong to the environment;
+  body-resolution or empty-bound errors require inspecting the grasp segment
+  and rigid-body geometry. Do not respond with generic mass/friction tuning.
 
 ## Resources
 

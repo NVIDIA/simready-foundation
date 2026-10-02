@@ -5,7 +5,7 @@
 1. Create requirement markdown + validation rule under an existing `capabilities/` folder.
 2. Create a feature JSON under `features/` that lists the requirement codes.
 3. Document the feature and add it to `features/features.md`.
-4. Add the feature to `Prop-Robotics-Neutral` in `profiles/prop_robotics_neutral.toml`.
+4. Add a new `Robotics-Prop` version in `profiles/robotics_prop.toml` that selects the feature.
 5. `pip install simready-validate`, then run `simready-validate` to verify.
 
 ---
@@ -212,11 +212,15 @@ ID:099 - Has Foo Prim - Base <FET_099-has_foo_prim>
 
 ## 4. Wire profiles
 
-Add your feature to the `Prop-Robotics-Neutral` profile in `profiles/prop_robotics_neutral.toml`:
+For this local exercise, assume `Robotics-Prop@3.2.0` is still an unpublished
+draft and add the feature to its entry in `profiles/robotics_prop.toml`. Published
+profile versions are immutable; for production work, create the next semantic
+profile version instead and substitute that version throughout the commands
+below.
 
 ```toml
-[Prop-Robotics-Neutral]
-"1.0.0" = {features = [
+[Robotics-Prop]
+"3.2.0" = {features = [
     {"FET_000_STANDARD" = {version = "0.1.0"}},           # "Core"
     {"FET_001_STANDARD" = {version = "0.1.0"}},     # "Minimal"
     {"FET_003_STANDARD" = {version = "0.1.0"}},            # "RBD Physics"
@@ -254,7 +258,7 @@ simready-validate \
   --rules-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities \
   --features-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features \
   --profiles-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles \
-  --profile Prop-Robotics-Neutral --version 1.0.0 \
+  --profile Robotics-Prop --version 3.2.0 \
   sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
 ```
 
@@ -262,7 +266,7 @@ Expected output:
 
 ```text
 Asset: sample_content/.../sm_apple_a01_01.usd
-  [FAILED] Prop-Robotics-Neutral v1.0.0
+  [FAILED] Robotics-Prop v3.2.0
            FET099_BASE_NEUTRAL: failing requirements: ['FOO.001']
 ```
 
@@ -302,7 +306,7 @@ simready-validate \
   --rules-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities \
   --features-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features \
   --profiles-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles \
-  --profile Prop-Robotics-Neutral --version 1.0.0 \
+  --profile Robotics-Prop --version 3.2.0 \
   fixed_asset.usd
 ```
 
@@ -310,7 +314,7 @@ Expected output:
 
 ```text
 Asset: fixed_asset.usd
-  [PASSED] Prop-Robotics-Neutral v1.0.0
+  [PASSED] Robotics-Prop v3.2.0
 ```
 
 ## Checklist
@@ -319,7 +323,7 @@ Asset: fixed_asset.usd
 2. **Validation rule:** Implement the checker class in the capability's `validation.py`.
 3. **Feature JSON:** Create under `features/`.
 4. **Feature documentation:** Create the feature markdown under `features/`. Add to `features/features.md`.
-5. **Profile wiring:** Add the feature to `Prop-Robotics-Neutral` in `profiles/prop_robotics_neutral.toml`.
+5. **Profile wiring:** Add a new `Robotics-Prop` version in `profiles/robotics_prop.toml` that selects the feature.
 6. **Install:** `pip install simready-validate`
 7. **Verify:** Run `simready-validate` against a sample asset and confirm pass/fail behavior.
 
@@ -372,8 +376,8 @@ sv.initialize(
 
 result = sv.validate_asset(sv.AssetValidationConfig(
     asset_path="fixed_asset.usd",
-    profile_id="Prop-Robotics-Neutral",
-    profile_version="1.0.0",
+    profile_id="Robotics-Prop",
+    profile_version="3.2.0",
 ))
 
 assert result is not None

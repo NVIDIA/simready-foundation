@@ -12,7 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .core.atomic_asset import validation
 from .core.naming_paths import validation
 from .core.runtime_variants import validation
 from .core.sim_ready import validation
@@ -36,5 +35,6 @@ from .physics_bodies.physics_joints import validation
 from .physics_bodies.physics_materials import validation
 from .physics_bodies.physics_rigid_bodies import validation
 from .semantic_labels import validation
+from .visualization.display_color import validation
 from .visualization.geometry import validation
 from .visualization.materials import validation

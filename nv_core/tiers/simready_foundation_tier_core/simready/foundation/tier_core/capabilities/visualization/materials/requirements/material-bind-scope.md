@@ -8,7 +8,11 @@
 
 ## Summary
 
-Material bindings must use appropriate scope to ensure proper material assignment and inheritance.
+A material binding inside a payload must target a material inside that payload.
+
+This requirement is implemented by `usd-validation-nvidia`, which registers it as
+`com.nvidia.usd.VM.BIND.001` and binds it to `MaterialOutOfScopeChecker`. A feature manifest references that
+code. The unprefixed code is not bound to a rule in this repository.
 
 ## Description
 
@@ -17,55 +21,54 @@ Material bindings must be applied at the appropriate scope in the scene hierarch
 When a material binding relationship is defined within a payload, it must target materials that exist within that payload's scope. Bindings to materials outside the payload scope break encapsulation and can cause issues with composition.
 
 ## Why is it required?
-- Broken material references
-- Composition issues
-- Reduced asset portability
-- Unreliable material assignments
+- A binding target outside the payload resolves to nothing when the payload is loaded on its own
+- The material a prim renders with depends on what else is composed into the stage
+- An asset that cannot be moved without its surrounding layers is not portable
 
 ## Examples
 
+Both blocks are the payload layer, `payload.usda`, which a main layer composes under
+`</World/Scene>`.
+
+### Invalid: a binding whose target is outside the payload
+
 ```usd
-# Invalid setup:
-# Main file (asset.usda):
-def Xform "World"
-{
-    def Xform "Scene" (
-        payload = @./payload.usda@  # Loads payload with mesh
-    )
-    {
-    }
-
-    def Material "Material"  # Material defined outside payload
-    {
-        # ... material definition ...
-    }
-}
-
-# Payload file (payload.usda):
 def Xform "Root"
 {
     def Mesh "Mesh" (
-        apiSchemas = ["MaterialBindingAPI"]
+        prepend apiSchemas = ["MaterialBindingAPI"]
     )
     {
-        rel material:binding = </Material>  # Invalid: References material outside payload scope
+        rel material:binding = </Material>
     }
 }
+```
 
-# Valid setup:
-# Payload file (payload.usda) should include its own materials or reference materials within its scope:
+`</Material>` is authored in the main layer, not here. Load this payload on its own and the
+binding resolves to nothing.
+
+### Valid: a binding whose target is inside the payload
+
+```usd
 def Xform "Root"
 {
     def Material "Material"
     {
-        # ... material definition ...
+        token outputs:surface.connect = </Root/Material/Preview.outputs:surface>
+
+        def Shader "Preview"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor = (0.18, 0.18, 0.18)
+            token outputs:surface
+        }
     }
 
     def Mesh "Mesh" (
-        apiSchemas = ["MaterialBindingAPI"]
+        prepend apiSchemas = ["MaterialBindingAPI"]
     )
     {
-        rel material:binding = </Root/Material>  # Valid: References material within payload scope
+        rel material:binding = </Root/Material>
     }
 }
 ```
@@ -73,7 +76,7 @@ def Xform "Root"
 ## How to comply
 - Move material definitions into the payload
 - Update material bindings to reference materials within the payload scope
-- Ensure material paths are relative to the payload root
+- Author material paths relative to the payload root
 
 ## For More Information
 - [USD Payloads](https://openusd.org/release/api/usd_page_front.html#Usd_Payloads)

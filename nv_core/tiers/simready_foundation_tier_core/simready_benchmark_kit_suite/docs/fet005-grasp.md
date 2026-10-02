@@ -6,6 +6,11 @@ Tests in this family verify that a robot gripper can grasp the asset, lift it of
 
 This family places a standardized parallel-jaw gripper at each declared grasp point on the asset, closes the jaws onto the asset under real gravity, and lifts the gripper to confirm that the asset follows the motion. The gripper then holds the asset in the air, applies a circular horizontal orbit to stress the grip, and finally opens to release. The test uses the active configured physics runtime.
 
+A grasp identifier may be parented directly below its rigid body or placed in
+a sibling annotation scope below the asset default prim. The runtime resolves
+the body crossed by the authored grasp segment and uses that same body for
+settling, fixture sizing, and motion tracking.
+
 ## What a Passing Family Means
 
 A reviewer, PM, or OEM can trust that at least one declared grasp point on the asset produces a physically achievable hold in the selected physics runtime under standard gravity (9.81 m/s²). An overall pass does not guarantee that every identifier succeeds; refer to the per-identifier results in the test metrics to confirm which grasp points are usable in a pick-and-place workflow.

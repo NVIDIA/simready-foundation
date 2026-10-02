@@ -40,8 +40,7 @@ when Isaac packaging is also required.
 
 Products or workflows that consume this feature:
 
-- Robot-Body-Isaac profile validation for robot identity and schema.
-- Robot-Body-Runnable profile validation for robot naming, schema, type, and root-joint policy.
+- Robot-Body profile validation for robot identity, naming, schema, type, and root-joint policy.
 - Robot conversion workflows that preserve robot link and joint topology.
 
 ## Requirements
@@ -92,10 +91,7 @@ None.
 
 #### Used in Profiles
 
-This version remains pinned by older Robot-Body-Isaac profile versions that have
-not yet opted into the packaging/identity split.
-
-- **[Robot Body Isaac Profile](../profiles/robot-body-isaac.md)** (`v1.0.0`, `v1.1.0`)
+- **[Robot Gripper Profile](../profiles/profiles.md)** (`v2.0.0`, `v2.1.0`) - Optional Isaac robot-core identity gate.
 
 #### Feature Dependencies
 
@@ -125,8 +121,7 @@ None. Packaging and identity requirements are listed explicitly on this version.
 
 This version is used in the following profiles:
 
-- **[Robot Body Runnable Profile](../profiles/robot-body-runnable.md)** (`v1.0.0`, `v1.1.0`) - Robot naming, schema, type, and root-joint gate.
-- **[Robot Body Profile](../profiles/robot-body.md)** (`v2.0.0`) - Optional robot-core identity gate.
+- **[Robot Body Profile](../profiles/robot-body.md)** (`v2.0.0`, `v2.1.0`, `v2.2.0`) - Optional robot-core identity gate.
 
 #### Feature Dependencies
 

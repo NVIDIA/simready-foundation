@@ -15,9 +15,24 @@
 import pytest
 from simready_benchmark_kit_suite.fet005_grasp.grasp_phases import GraspPhaseManager
 from simready_benchmark_kit_suite.fet005_grasp.phase_dropping import DroppingPhase
-from simready_benchmark_kit_suite.fet005_grasp.phase_grasping import GraspingPhase
+from simready_benchmark_kit_suite.fet005_grasp.phase_grasping import (
+    GraspingPhase,
+    _empty_grasp_failure_message,
+)
 from simready_benchmark_kit_suite.fet005_grasp.phase_opening import OpeningPhase
 from simready_benchmark_kit_suite.fet005_grasp.phase_shake import ShakePhase
+
+
+def test_empty_grasp_uses_scene_runtime_diagnostic():
+    class Scene:
+        def empty_grasp_failure_message(self):
+            return "Newton exact mesh has no dynamic contact"
+
+    assert _empty_grasp_failure_message(Scene()) == "Newton exact mesh has no dynamic contact"
+
+
+def test_empty_grasp_diagnostic_is_backward_compatible():
+    assert _empty_grasp_failure_message(object()) == "Grasping failed: pads touched (no object)"
 
 
 @pytest.mark.parametrize(

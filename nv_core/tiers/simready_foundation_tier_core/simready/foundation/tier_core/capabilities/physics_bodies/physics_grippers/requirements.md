@@ -2,7 +2,7 @@
 
 ## Summary
 
-Gripper sites provide the grasp interaction metadata needed by planning and control systems: an Xform prim identified by `simready:attachment:socketType = "Gripper"`, with approach axis, graspable-tube axis, and maximum jaw opening.
+Gripper sites provide the grasp interaction metadata needed by planning and control systems: an Xform prim identified by `simready:attactment:socketType = "Gripper"`, with approach axis, graspable-tube axis, and maximum jaw opening.
 
 ## Requirements
 

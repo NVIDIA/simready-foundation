@@ -19,6 +19,8 @@ the per-frame simulation loop with phase checking and frame capture.
 Raycasting symmetrization ensures pads contact the surface evenly.
 """
 
+from typing import Any, List, Optional
+
 import carb
 import numpy as np
 import omni.kit.app
@@ -26,6 +28,7 @@ import omni.usd
 from isaacsim.core.utils.stage import update_stage_async
 from omni.physx import get_physx_scene_query_interface
 from pxr import Gf, Usd, UsdGeom
+from simready_benchmark_kit_suite.fet005_grasp.grasp_body import resolve_grasp_body
 from simready_benchmark_kit_suite.fet005_grasp.grasp_geometry import (
     post_failure_stop_frame,
 )
@@ -75,21 +78,55 @@ class GraspScene:
         # type: () -> str
         return self._identifier_path
 
+    def empty_grasp_failure_message(self) -> str:
+        """Explain a Newton empty grasp when the asset lacks a dynamic-contact shape."""
+        message = "Grasping failed: pads touched (no object)"
+        try:
+            from simready_benchmark_engine_kit.physics_utils import (
+                active_physics_engine,
+            )
+
+            if active_physics_engine() != "newton":
+                return message
+            asset_root = self.stage.GetPrimAtPath(self._asset_mount_path)
+            if not asset_root or not asset_root.IsValid():
+                return message
+            for prim in Usd.PrimRange(
+                asset_root,
+                Usd.TraverseInstanceProxies(Usd.PrimDefaultPredicate),
+            ):
+                if prim.GetTypeName() != "Mesh":
+                    continue
+                schemas = {str(schema) for schema in prim.GetAppliedSchemas()}
+                if "PhysicsCollisionAPI" not in schemas:
+                    continue
+                approximation = prim.GetAttribute("physics:approximation")
+                approximation_value = approximation.Get() if approximation and approximation.IsValid() else None
+                if str(approximation_value or "").lower() != "none":
+                    continue
+                if "NewtonSDFCollisionAPI" in schemas:
+                    continue
+                return (
+                    message + "; Newton generated no dynamic contact for exact mesh collider %s "
+                    "(physics:approximation=none, no NewtonSDFCollisionAPI). "
+                    "Ground drop only proves dynamic-versus-static contact. Author a "
+                    "dynamic-contact representation such as a convex approximation or "
+                    "Newton SDF and rerun." % prim.GetPath()
+                )
+        except Exception as exc:
+            carb.log_warn("[grasp-scene] Could not inspect Newton collider diagnostics: %s" % exc)
+        return message
+
     # ------------------------------------------------------------------
     # Grasp point extraction
     # ------------------------------------------------------------------
 
-    def compute_local_grasp_points(self):
-        # type: () -> Optional[List[Any]]
-        """Extract grasp points from grasp_identifier BasisCurves children."""
+    def _extract_world_grasp_points(self) -> Optional[List[Gf.Vec3d]]:
+        """Extract the authored grasp segment in world space."""
         stage = self.stage
         id_prim = stage.GetPrimAtPath(self._identifier_path)
         if not id_prim or not id_prim.IsValid():
             return None
-        parent = id_prim.GetParent()
-        if not parent:
-            return None
-
         gp1_world = None  # type: Optional[Gf.Vec3d]
         gp2_world = None  # type: Optional[Gf.Vec3d]
         xform_cache = UsdGeom.XformCache()
@@ -109,18 +146,29 @@ class GraspScene:
 
         if gp1_world is None or gp2_world is None:
             return None
+        return [gp1_world, gp2_world]
 
-        body_xf = xform_cache.GetLocalToWorldTransform(parent).RemoveScaleShear()
+    def compute_local_grasp_points(self, body_path: Optional[str] = None) -> Optional[List[Any]]:
+        """Extract grasp points in the resolved grasp body's local space."""
+        world_points = self._extract_world_grasp_points()
+        if world_points is None:
+            return None
+        if body_path is None:
+            id_prim = self.stage.GetPrimAtPath(self._identifier_path)
+            if not id_prim or not id_prim.IsValid():
+                return None
+            body_path = str(id_prim.GetParent().GetPath())
+        body = self.stage.GetPrimAtPath(body_path)
+        if not body or not body.IsValid():
+            return None
+        body_xf = UsdGeom.XformCache().GetLocalToWorldTransform(body).RemoveScaleShear()
         inv = body_xf.GetInverse()
-        return [inv.Transform(gp1_world), inv.Transform(gp2_world)]
+        return [inv.Transform(world_points[0]), inv.Transform(world_points[1])]
 
     def compute_world_grasp_points(self, local_gp1, local_gp2):
         # type: (Any, Any) -> List[Gf.Vec3d]
         """Convert local grasp points to world space."""
-        id_prim = self.stage.GetPrimAtPath(self._identifier_path)
-        body_xf = None
-        if id_prim and id_prim.IsValid():
-            body_xf = self._body_world_matrix(str(id_prim.GetParent().GetPath()))
+        body_xf = self._body_world_matrix(self._parent_body_path) if self._parent_body_path else None
         if body_xf is None:
             raise RuntimeError("Cannot resolve the live grasp-body transform")
         return [
@@ -162,8 +210,7 @@ class GraspScene:
         axis_n = axis / max(1e-9, dist)
         midpoint = (gp1 + gp2) / 2.0
 
-        id_prim = self.stage.GetPrimAtPath(self._identifier_path)
-        target_body = str(id_prim.GetParent().GetPath())
+        target_body = self._parent_body_path or self._asset_mount_path
 
         hit1 = get_physx_scene_query_interface().raycast_closest(
             carb.Float3(*gp1),
@@ -209,13 +256,22 @@ class GraspScene:
         Call this before physics starts. The gripper will be built later
         (after stability) via rebuild_gripper_at_settled_position().
         """
-        local_pts = self.compute_local_grasp_points()
+        world_pts = self._extract_world_grasp_points()
+        if world_pts is None or len(world_pts) < 2:
+            raise RuntimeError("Failed to extract grasp points from " + self._identifier_path)
+        self._parent_body_path = resolve_grasp_body(
+            self.stage,
+            self._identifier_path,
+            self._asset_mount_path,
+            world_pts[0],
+            world_pts[1],
+        )
+        local_pts = self.compute_local_grasp_points(self._parent_body_path)
         if local_pts is None or len(local_pts) < 2:
             raise RuntimeError("Failed to extract grasp points from " + self._identifier_path)
         self._local_gp1 = local_pts[0]
         self._local_gp2 = local_pts[1]
-        id_prim = self.stage.GetPrimAtPath(self._identifier_path)
-        self._parent_body_path = str(id_prim.GetParent().GetPath())
+        self._ctx.log("[tracker] resolved_grasp_body=%s" % self._parent_body_path)
 
     async def build_robot(self):
         # type: () -> None
@@ -293,8 +349,8 @@ class GraspScene:
 
         stage = self.stage
         for cube_path in [
-            GraspRobot.LEFT_PAD + "/Cube",
-            GraspRobot.RIGHT_PAD + "/Cube",
+            GraspRobot.LEFT_PAD,
+            GraspRobot.RIGHT_PAD,
         ]:
             prim = stage.GetPrimAtPath(cube_path)
             if not prim or not prim.IsValid():
@@ -613,6 +669,11 @@ class GraspScene:
                     return tensor_drive_skip_result(exc)
                 except Exception as exc:
                     ctx.log("[rebuild] FAILED: %s" % exc)
+                    return {
+                        "failed": True,
+                        "phase_name": "FixtureSetup",
+                        "message": "Gripper rebuild failed: %s" % exc,
+                    }
 
             # Diagnostic logging every second (all phases, not just tracking)
             if frame % log_interval == 0 and self._robot is not None:

@@ -12,7 +12,7 @@ Every gripper site prim must have `IsaacSiteAPI` applied and `isaac:Description`
 
 ## Description
 
-In the Isaac Format, gripper site prims are discovered by Isaac Sim via `IsaacSiteAPI` in addition to the `simready:attachment:socketType` attribute required by the Neutral Format (see [gripper-socket-type](gripper-socket-type.md)). Each such prim must carry `IsaacSiteAPI` and a non-empty `isaac:Description` string.
+In the Isaac Format, gripper site prims are discovered by Isaac Sim via `IsaacSiteAPI` in addition to the `simready:attactment:socketType` attribute required by the Neutral Format (see [gripper-socket-type](gripper-socket-type.md)). Each such prim must carry `IsaacSiteAPI` and a non-empty `isaac:Description` string.
 
 Without `IsaacSiteAPI` the prim is not visible to Isaac Sim's gripper discovery pipeline and site-dependent runtime features (Robot Poser, IK visualization, state reporting) will not function.
 
@@ -28,7 +28,7 @@ Without `IsaacSiteAPI` the prim is not visible to Isaac Sim's gripper discovery 
 # Invalid: missing IsaacSiteAPI (Neutral format only — not valid for Isaac format)
 def Xform "gripper_01"
 {
-    token simready:attachment:socketType = "Gripper"
+    token simready:attactment:socketType = "Gripper"
     double3 xformOp:translate = (0, 0.15, 0)
     uniform token[] xformOpOrder = ["xformOp:translate"]
     float gripper_maxOpening = 0.085
@@ -54,7 +54,7 @@ def Xform "gripper_01" (
 )
 {
     string isaac:Description = "Grasp approach point"
-    token simready:attachment:socketType = "Gripper"
+    token simready:attactment:socketType = "Gripper"
     double3 xformOp:translate = (0, 0.15, 0)
     uniform token[] xformOpOrder = ["xformOp:translate"]
     float gripper_maxOpening = 0.085

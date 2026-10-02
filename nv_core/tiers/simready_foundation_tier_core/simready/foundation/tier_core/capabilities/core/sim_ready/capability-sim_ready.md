@@ -23,6 +23,7 @@ requirements
 requirements/metadata-whitelist
 requirements/thumbnail-exist
 requirements/nested-simready-metadata
+requirements/metadata-union
 ```
 
 <!-- SIM_READY_REQUIREMENTS_LIST_END -->

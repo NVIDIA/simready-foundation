@@ -29,3 +29,9 @@ For a SimReady asset located at `Assets/Manufacturer/Asset_Name/Asset.usd`, the 
 - Add a PNG thumbnail under `.thumbs/256x256/` next to the asset file
 - Name the thumbnail after the asset file with `.png` appended, for example `Asset.usd.png`
 - Ensure the thumbnail is representative of the asset's visible content
+
+## Authoring guidance
+
+See the [Thumbnail Guidelines](../../../../guides/thumbnail_guidelines.md)
+for the `simready.thumbnail` generation workflow, composition, lighting,
+background variants, and rendering guidance.

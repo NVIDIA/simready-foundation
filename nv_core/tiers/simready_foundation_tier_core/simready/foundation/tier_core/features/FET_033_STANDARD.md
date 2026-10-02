@@ -5,23 +5,29 @@
 | Feature Name | `FET_033_STANDARD` |
 | Runtime | `STANDARD` |
 | Proprietary Techs | `None` |
-| Latest Version | `0.3.0` |
+| Latest Version | `0.4.0` |
 
 ## Description
 
 Defines the Standard SimReady package overlay. It adds SimReady-specific
-root-asset expectations — thumbnail presence and nested package provenance
-metadata — on top of self-contained package source validation.
+root-asset expectations — thumbnail presence and package provenance
+metadata — on top of self-contained package source validation. Versions
+`0.2.0` and `0.3.0` use nested `SimReady_Metadata` (`SR.003`). Version
+`0.4.0` replaces `SR.003` with the USD/sidecar provenance union (`SR.004`).
+
+See the [Thumbnail Guidelines](../guides/thumbnail_guidelines.md)
+for the `simready.thumbnail` generation workflow and authoring guidance
+associated with `SR.002`.
 
 ## Dependency Graph
 
 ```{mermaid}
 flowchart LR
     FET_031_STANDARD_0_1_0["FET_031_STANDARD\n0.1.0"]
-    FET_033_STANDARD_0_3_0["FET_033_STANDARD\n0.3.0"]
-    FET_033_STANDARD_0_3_0 --> FET_031_STANDARD_0_1_0
+    FET_033_STANDARD_0_4_0["FET_033_STANDARD\n0.4.0"]
+    FET_033_STANDARD_0_4_0 --> FET_031_STANDARD_0_1_0
 
-    class FET_033_STANDARD_0_3_0 current
+    class FET_033_STANDARD_0_4_0 current
     classDef current fill:#90EE90,stroke:#333
 ```
 
@@ -29,7 +35,7 @@ flowchart LR
 
 Products or workflows that consume this feature:
 
-- Package candidate validation verifies thumbnails and nested SimReady provenance
+- Package candidate validation verifies thumbnails and SimReady provenance
   metadata next to intended SimReady root assets.
 
 ## Requirements
@@ -99,10 +105,10 @@ provenance fields inside the root-layer `SimReady_Metadata` dictionary
 
 #### Used in Profiles
 
+- [Robotics-Prop](../profiles/robotics-prop.md) v3.2.0
+- [Robot-Body](../profiles/robot-body.md) v2.1.0 and v2.2.0
+- [Robot-Gripper](../profiles/profiles.md#profile-comparison) v2.1.0
 - Package-Candidate v1.2.0
-- Robotics-Prop v3.2.0
-- Robot-Body v2.1.0
-- Robot-Gripper v2.1.0
 
 #### Feature Dependencies
 
@@ -131,6 +137,47 @@ original provenance fields must add the new fields to satisfy `0.3.0`.
 
 </details>
 
+### Version 0.4.0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+- Package-Candidate v1.3.0
+- Robotics-Prop v3.3.0, v4.0.0
+- Robot-Body v2.3.0, v3.0.0
+- Robot-Gripper v2.2.0, v3.0.0
+
+#### Feature Dependencies
+
+| **Property** | **Value** |
+|--------------|-----------|
+| Dependency | `FET_031_STANDARD@0.1.0` |
+
+#### Requirement List
+
+* Capability: [Core/SimReady](../capabilities/core/sim_ready/capability-sim_ready.md)
+
+| Requirement | Requirement Doc | Rule |
+|-------------|-----------------|------|
+| `SR.002` | [SR.002](../capabilities/core/sim_ready/requirements/thumbnail-exist.md) | [Implementation](../capabilities/core/sim_ready/validation.py) |
+| `SR.004` | [SR.004](../capabilities/core/sim_ready/requirements/metadata-union.md) | [Implementation](../capabilities/core/sim_ready/validation.py) |
+
+#### Changes From Version 0.3.0
+
+Version 0.4.0 keeps `SR.002` and the `0.3.0` provenance field set, but replaces
+`SR.003` with `SR.004`. Provenance fields are read from the union of root-layer
+`customLayerData` (including optional nested `SimReady_Metadata`) and an optional
+same-directory `<usd_stem>.json` sidecar. Neither the nested dictionary nor the
+sidecar is required on its own. A field must not be authored in both locations.
+The required fields remain `author`, `asset_name`, `asset_type`, `asset_license`,
+`category`, `source_file`, `usd_date_generated`, `qcode`, `rigid_body_count`,
+`asset_extents`, and `mass`. Nested-only assets that already passed `0.3.0`
+still satisfy `SR.004`.
+
+</details>
+
 ## Pipelines
 
 Source file type:
@@ -139,7 +186,7 @@ Source file type:
 
 Validation or runtime pipeline:
 
-- Package candidate validation verifies thumbnails and nested SimReady provenance
+- Package candidate validation verifies thumbnails and SimReady provenance
   metadata next to intended SimReady root assets.
 
 ## Samples

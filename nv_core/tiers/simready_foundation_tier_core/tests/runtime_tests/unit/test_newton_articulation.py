@@ -18,6 +18,7 @@ from simready_benchmark_kit_suite.fet005_grasp.newton_articulation import (
     NEWTON_TENSOR_DRIVE_SKIP,
     NewtonTensorDriveUnavailable,
     apply_temporary_newton_articulations,
+    author_newton_fixture_collision,
     author_newton_pd_actuator,
     compute_newton_pd_parameters,
     infer_articulation_roots,
@@ -52,6 +53,9 @@ class _FakePrim:
 
     def IsValid(self):
         return True
+
+    def GetPath(self) -> str:
+        return self.path
 
     def ApplyAPI(self, name):
         self.apis.append(name)
@@ -117,6 +121,20 @@ def test_newton_actuator_rejects_missing_target_joint(monkeypatch):
         author_newton_pd_actuator(_FakeStage("/other"), "/actuator", "/missing", 1.0, 1.0, 1.0, 1.0)
 
 
+def test_authors_newton_contact_on_generated_fixture(monkeypatch):
+    import sys
+    import types
+
+    monkeypatch.setitem(sys.modules, "newton_usd_schemas", types.ModuleType("newton_usd_schemas"))
+    prim = _FakePrim("/World/grasp_robot/left_pad/Cube")
+
+    author_newton_fixture_collision(prim, 0.002)
+
+    assert prim.apis == ["NewtonCollisionAPI"]
+    assert prim.attributes["newton:contactMargin"].value == 0.0
+    assert prim.attributes["newton:contactGap"].value == 0.002
+
+
 def test_newton_pd_parameters_caps_high_friction_credit():
     params = compute_newton_pd_parameters(
         required_grip_force=100.0,
@@ -131,6 +149,7 @@ def test_newton_pd_parameters_caps_high_friction_credit():
         "max_effort": 50.0,
         "max_velocity": 0.2,
     }
+
 
 try:
     from pxr import PhysxSchema  # noqa: F401

@@ -48,7 +48,7 @@ Products or workflows that consume this feature:
 
 #### Used in Profiles
 
-- Robot Body Isaac v1.2.0
+- None.
 
 #### Feature Dependencies
 

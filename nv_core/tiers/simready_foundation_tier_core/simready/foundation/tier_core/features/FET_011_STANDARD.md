@@ -53,12 +53,8 @@ Products or workflows that consume this feature:
 
 This version is used in the following profiles:
 
-- **[Prop-Robotics-Neutral](../profiles/prop-robotics-neutral.md)** (`v2.3.0`) - Ground-truth object identity for neutral robotics props.
-- **[Prop-Robotics-Physx](../profiles/prop-robotics-physx.md)** (`v2.3.0`) - Ground-truth object identity for PhysX robotics props.
-- **[Prop-Robotics-Isaac](../profiles/prop-robotics-isaac.md)** (`v2.3.0`) - Ground-truth object identity for Isaac robotics props.
-- **[Robot-Body-Neutral](../profiles/robot-body-neutral.md)** (`v1.2.0`) - Ground-truth object identity for neutral robot bodies.
-- **[Robot-Body-Runnable](../profiles/robot-body-runnable.md)** (`v1.2.0`) - Ground-truth object identity for runnable robot bodies.
-- **[Robot-Body-Isaac](../profiles/robot-body-isaac.md)** (`v1.2.0`) - Ground-truth object identity for Isaac robot bodies.
+- **[Robotics Prop Profile](../profiles/robotics-prop.md)** (`v3.2.0`) - Ground-truth object identity for robotics props.
+- **Open Taxonomy profiles** (`v0.1.0`) - Shared semantic-label gate for all six closed-vocabulary taxonomy profiles.
 
 #### Feature Dependencies
 

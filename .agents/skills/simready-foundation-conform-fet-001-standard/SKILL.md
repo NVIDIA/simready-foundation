@@ -43,7 +43,7 @@ Collect these before editing:
 |---|---|
 | `usd_asset` | Required `.usd`, `.usda`, `.usdc`, or unpacked USD-family asset to repair. |
 | `output_root` | Required or inferred folder for staged assets and reports. |
-| `simready_profile` | Profile being validated, such as `Prop-Robotics-Neutral`. |
+| `simready_profile` | Profile being validated, such as `Robotics-Prop`. |
 | `profile_version` | Profile version, if supplied by the user or validation command. |
 | `fet001_version` | Optional explicit `FET_001_STANDARD` version. Default to latest checked-in version `1.0.1` when neither the user nor the selected profile/report specifies a version. |
 | `validation_report` | Preferred JSON or markdown report from the failing profile/feature validation gate. |

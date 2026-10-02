@@ -23,13 +23,19 @@ The SimReady Foundation repository organizes tier package sources as follows.
 
 ```text
 nv_core/tiers/
-|-- _tooling/
-`-- simready_foundation_tier_core/
-    |-- pyproject.toml
-    `-- simready/foundation/tier_core/
-        |-- capabilities/
-        |-- features/
-        `-- profiles/
+├── _tooling/
+├── simready_foundation_tier_core/
+│   ├── pyproject.toml
+│   └── simready/foundation/tier_core/
+│       ├── capabilities/
+│       ├── features/
+│       └── profiles/
+└── simready_foundation_tier_sensors/
+    ├── pyproject.toml
+    └── simready/foundation/sensors/
+        ├── capabilities/
+        ├── features/
+        └── profiles/
 ```
 
 Additional tiers are siblings of `simready_foundation_tier_core/` with the same internal shape, each in its own `simready/foundation/<tier>/` package.
@@ -44,99 +50,100 @@ to execute those bundled tests.
 This layout illustrates the SimReady Foundation repository; it does not prescribe the source layout for third-party tiers. A third-party tier must provide the entry points, plugin, and tier descriptor described later in this guide. If it uses the generic descriptor, it also needs `capabilities/`, `features/`, and `profiles/` directories under its package. Repository directories and Python modules use underscores; PyPI distribution names use hyphens.
 ```
 
-The Foundation currently publishes a single tier:
+The Foundation currently publishes three tiers:
 
 | Package | Contents | Depends on |
 |---|---|---|
-| [`simready-foundation-tier-core`](https://pypi.org/project/simready-foundation-tier-core/) | Core, Hierarchy, Visualization, Physics Bodies, Isaac Sim, Non-Visual Sensors, Semantic Labels, Dataset Taxonomies, and Packaging capabilities; the neutral, PhysX, and Isaac prop profiles, the robot and gripper profiles, the package profiles, and the Open Taxonomy profiles | |
+| `simready-foundation-tier-core` | Core, Hierarchy, Visualization, Physics Bodies, Isaac Sim, Non-Visual Sensors, Semantic Labels, Dataset Taxonomies, and Packaging capabilities; the neutral, PhysX, and Isaac prop profiles, the robot and gripper profiles, the package profiles, and the Open Taxonomy profiles | |
+| `simready-foundation-tier-aif` | AI Factory equipment capabilities (class metadata, connection points, thermal cooling, electrical) and the `AIF-Entity` profile for CDU, CRAH, UPS and compute-rack assets | `simready-foundation-tier-core` |
+| `simready-foundation-tier-sensors` | Physics Sensors, RTX Sensors / LiDAR, and Camera and Render Products capabilities; IMU, camera, LiDAR and joint sensor profiles | |
 
 ## Prerequisites
 
-This guide requires Python 3.11 or 3.12.
+Validator-only tier installs support Python 3.11 or 3.12. The optional
+`benchmark` extra and its runtime require Python 3.12.
 
 ## Installation
 
-First, install or upgrade `simready-validate`. Then install `simready-foundation-tier-core`, which provides the core, neutral, PhysX, Isaac Sim, and package content.
+### Foundation and Library Compatibility
 
 ```{important}
-Foundation releases use a `major.minor` product version; the Python
-distribution prefixes it with the release year (Foundation 7.1 is
-`2026.7.1`). Major and minor Foundation releases are not backward-compatible
-with older Foundation releases. When following these 7.1 docs, install the
-7.1 core tier and use validator, Benchmark, and packaging tool versions that
-support Foundation 7.1. Do not combine 7.1 tier content with requirements,
-features, profiles, custom tiers, or validation stamps from 7.0 or earlier.
-Migrate older assets and custom tiers as needed, then validate them again
-against a 7.1 profile.
+Foundation 8.0 requires the 8.0 releases of the SimReady libraries
+(`simready-validate`, `simready-benchmark`, `simready-package`, etc.).
+Foundation 8.0 does not work with older library releases.
+
+The 8.0 SimReady libraries (`simready-validate`, `simready-benchmark`,
+`simready-package`, etc.) are backward-compatible with earlier Foundation
+releases, including 6.0 and 7.1.
 ```
 
-### Foundation 7.1 Library Set
+When using the 8.0 SimReady libraries with an older Foundation release, use that
+release's tier content and selected profile versions. Library compatibility
+does not change the requirements of the selected profile: adopting an 8.0
+profile still requires validation against that profile's contract.
 
-The SimReady libraries use independent release numbers. The supported 7.1
-set is:
-
-| Library | Foundation 7.1 version | When it is needed |
-|---|---|---|
-| `simready-foundation-tier-core` | `2026.7.1` | Always. Supplies the 7.1 requirements, features, profiles, validators, and bundled runtime tests. |
-| `simready-validate` | `>=2026.7.0.dev1` | Static validation and the `simready.validate` Python API. |
-| `simready-benchmark[kit]` | `>=2026.6.6` | Runtime and behavioral tests in Kit or Isaac Sim. Installed by the core tier's `benchmark` extra. |
-| `simready-package` | `>=2026.6.0a1` | Package creation and pre/post validation. Use `simready-package[publish]` when WRAPP publishing is required. |
-
-The tier and tool version numbers are intentionally different; do not replace
-the tool versions above with `2026.7.1`. Pip resolves supporting libraries such
-as `usd-validation-nvidia>=1.20.0`, `usd-core>=23.5` for Benchmark, and `numpy`
-through these direct dependencies. Install those transitive libraries manually
-only when developing or diagnosing the Foundation itself.
+First, install or upgrade `simready-validate`. Then install the Foundation tiers. Install both tiers to enable sensor validation rules and the Robot-Body profile's sensor features.
 
 ```{note}
 The Isaac Sim capabilities, features, and profiles used to ship in a separate `simready-foundation-tier-isaac` package. They are now part of `simready-foundation-tier-core`, and the Isaac package is no longer published. If you have it installed, run `pip uninstall simready-foundation-tier-isaac` before upgrading: leaving both in one environment registers the Isaac requirement IDs twice.
 ```
 
-### Public PyPI
-
-For static validation, install the 7.1 tier and its compatible validator:
+````{note}
+Foundation runtime tests previously shipped in the standalone
+`simready-benchmark-kit-suite` and experimental
+`simready-foundation-runtime-tests-kit` distributions. Before upgrading an
+existing Benchmark environment, uninstall either legacy distribution if it is
+present:
 
 ```bash
-pip install "simready-foundation-tier-core==2026.7.1" "simready-validate>=2026.7.0.dev1"
+pip uninstall simready-benchmark-kit-suite simready-foundation-runtime-tests-kit
+```
+
+Both legacy distributions can own files in the same top-level
+`simready_benchmark_kit_suite` package now bundled by
+`simready-foundation-tier-core`. A clean virtual environment does not need this
+migration step.
+````
+
+### Public PyPI
+
+Install or upgrade `simready-validate`:
+
+```bash
+pip install --upgrade simready-validate
+```
+
+Then install both tiers:
+
+```bash
+pip install simready-foundation-tier-core simready-foundation-tier-sensors
 ```
 
 To install the core tier together with Benchmark, its Kit engine, and the
 published Foundation runtime tests:
 
 ```bash
-pip install "simready-foundation-tier-core[benchmark]==2026.7.1" "simready-validate>=2026.7.0.dev1"
-```
-
-Add packaging support when required:
-
-```bash
-pip install "simready-package>=2026.6.0a1"
-
-# Include the publish extra only for WRAPP publishing.
-pip install "simready-package[publish]>=2026.6.0a1"
+pip install "simready-foundation-tier-core[benchmark]"
 ```
 
 ### NVIDIA Internal Artifactory
 
-Confirm the internal index URL and authentication requirements for your environment before running these commands. The package names and version constraints are the same as for public PyPI.
+Confirm the internal index URL and authentication requirements for your environment before running these commands.
 
 ```bash
-pip install "simready-foundation-tier-core==2026.7.1" "simready-validate>=2026.7.0.dev1"
+pip install --upgrade simready-validate
+```
+
+Then install both tiers:
+
+```bash
+pip install simready-foundation-tier-core simready-foundation-tier-sensors
 ```
 
 For the complete Benchmark environment:
 
 ```bash
-pip install "simready-foundation-tier-core[benchmark]==2026.7.1" "simready-validate>=2026.7.0.dev1"
-```
-
-For packaging, add:
-
-```bash
-pip install "simready-package>=2026.6.0a1"
-
-# Include the publish extra only for WRAPP publishing.
-pip install "simready-package[publish]>=2026.6.0a1"
+pip install "simready-foundation-tier-core[benchmark]"
 ```
 
 ## How Tier Discovery Works
@@ -194,7 +201,7 @@ tiers = entry_points(group="simready.tier")
 print([ep.name for ep in tiers])
 ```
 
-For example, after installing the core tier, the output includes `tier_core`.
+For example, after installing both tiers, the output includes `['tier_core', 'sensors']`.
 
 ## Validating an Asset
 
@@ -203,7 +210,7 @@ Validate an asset to determine whether it conforms to the contract defined by a 
 To validate an asset, pass a profile, its version, and the asset path. Because the installed tiers supply the rules, features, and profiles, you do not need the `--rules-path`, `--features-path`, or `--profiles-path` flags:
 
 ```bash
-simready-validate --profile Prop-Robotics-Neutral --version 1.0.0 path/to/asset.usd
+simready-validate --profile Robotics-Prop --version 3.2.0 path/to/asset.usd
 ```
 
 Or from Python:
@@ -217,8 +224,8 @@ sv.initialize(rules_and_requirements_paths=[], features_paths=[], profiles_paths
 result = sv.validate_asset(
     sv.AssetValidationConfig(
         asset_path="path/to/asset.usd",
-        profile_id="Prop-Robotics-Neutral",
-        profile_version="1.0.0",
+        profile_id="Robotics-Prop",
+        profile_version="3.2.0",
     )
 )
 print(result)
@@ -305,7 +312,7 @@ __all__ = ["SimReadyPlugin", "tier"]
 
 ### 3. Expose the Tier Descriptor
 
-The `tier` object is discovered through the `simready.tier` entry point and tells SimReady consumers where to find the tier's content. `TierContent` records the tier name, importable validator package, generated requirements module, bundled paths for capabilities and requirements, features, and profiles, plus an optional runtime-test container. The generic descriptor derives the tier name and module from its package, so a conventional tier can use it without modification.
+The `tier` object is discovered through the `simready.tier` entry point and tells SimReady consumers where to find the tier's content. `TierContent` records the tier name, importable validator package, generated requirements module, bundled paths for capabilities and requirements, features, and profiles, plus an optional runtime-test package. The generic descriptor derives the tier name and module from its package, so a conventional tier can use it without modification.
 
 ```python
 # my_org/simready/tier_foo/_tier.py

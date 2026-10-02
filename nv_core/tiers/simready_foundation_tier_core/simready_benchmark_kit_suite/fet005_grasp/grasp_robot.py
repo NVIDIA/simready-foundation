@@ -25,15 +25,15 @@ import math
 import carb
 import numpy as np
 from isaacsim.core.api.materials.physics_material import PhysicsMaterial
-from isaacsim.core.api.objects.cuboid import FixedCuboid
 from isaacsim.core.utils.stage import update_stage_async
 from omni.physx import get_physx_scene_query_interface
-from pxr import Gf, PhysxSchema, Usd, UsdGeom, UsdPhysics
+from pxr import Gf, PhysxSchema, Usd, UsdGeom, UsdPhysics, UsdShade
 from simready_benchmark_kit_suite.fet005_grasp.grasp_geometry import (
     pad_ground_clearance_offset,
     resolve_test_fixture_mass,
 )
 from simready_benchmark_kit_suite.fet005_grasp.newton_articulation import (
+    author_newton_fixture_collision,
     author_newton_pd_actuator,
     compute_newton_pd_parameters,
 )
@@ -264,13 +264,23 @@ class GraspRobot:
         """Create gripper pads, finger joints, runtime controls, and collision."""
         stage = self._stage
 
-        # Create pad Xforms and apply physics
+        # Put the rigid body and collision geometry on the same typed prim.
+        # Newton does not reliably compile a generated collider nested below
+        # an Xform rigid body, which allowed the old ``left_pad/Cube`` and
+        # ``right_pad/Cube`` fixtures to move through an asset without contact.
         for pad_path, world_pos in [
             (self.LEFT_PAD, grip_info["left_joint_world_pos"]),
             (self.RIGHT_PAD, grip_info["right_joint_world_pos"]),
         ]:
-            prim = stage.DefinePrim(pad_path, "Xform")
-            set_pose_from_transform(prim, world_pos, grip_info["gripper_orientation"])
+            cube = UsdGeom.Cube.Define(stage, pad_path)
+            cube.CreateSizeAttr(1.0)
+            prim = cube.GetPrim()
+            set_pose_from_transform(
+                prim,
+                world_pos,
+                grip_info["gripper_orientation"],
+                Gf.Vec3d(*(float(value) for value in pad_props["dimensions"])),
+            )
             UsdPhysics.RigidBodyAPI.Apply(prim)
             mass_api = UsdPhysics.MassAPI.Apply(prim)
             mass_api.CreateMassAttr(pad_mass)
@@ -389,6 +399,9 @@ class GraspRobot:
     def _create_pad_cubes(self, pad_props):
         # type: (Dict[str, Any]) -> None
         """Create the visual/collision pad cubes with physics material."""
+        from simready_benchmark_engine_kit.physics_utils import active_physics_engine
+
+        physics_engine = active_physics_engine()
         material_path = "/World/GripperMaterial"
         gripper_material = PhysicsMaterial(
             material_path,
@@ -396,14 +409,20 @@ class GraspRobot:
             dynamic_friction=pad_props["dynamic_friction"],
             restitution=0.0,
         )
-        for cube_path in [self.LEFT_PAD + "/Cube", self.RIGHT_PAD + "/Cube"]:
-            cube = FixedCuboid(
-                prim_path=cube_path,
-                scale=list(pad_props["dimensions"]),
-                color=np.array([255, 0, 0]) if "left" in cube_path else np.array([0, 255, 0]),
-                physics_material=gripper_material,
+        for cube_path in [self.LEFT_PAD, self.RIGHT_PAD]:
+            prim = self._stage.GetPrimAtPath(cube_path)
+            cube = UsdGeom.Cube(prim)
+            cube.CreateDisplayColorAttr([Gf.Vec3f(1.0, 0.0, 0.0) if "left" in cube_path else Gf.Vec3f(0.0, 1.0, 0.0)])
+            UsdPhysics.CollisionAPI.Apply(prim)
+            UsdShade.MaterialBindingAPI.Apply(prim).Bind(
+                gripper_material.material,
+                UsdShade.Tokens.weakerThanDescendants,
+                "physics",
             )
-            cube.set_collision_approximation("convexHull")
+            if physics_engine == "newton":
+                # Keep the gap at zero so the
+                # contact surface matches the pad dimensions used by closure.
+                author_newton_fixture_collision(prim, 0.0)
 
     # ------------------------------------------------------------------
     # Public API
@@ -694,7 +713,14 @@ class GraspRobot:
         # A hammer head, for example, is much wider than its grasped handle.
         world_bound = bbox_cache.ComputeWorldBound(geometry_prim)
         aligned = world_bound.ComputeAlignedBox()
+        if aligned.IsEmpty():
+            raise ValueError("grasp body has no default-purpose geometry: " + str(geometry_prim.GetPath()))
         size = aligned.GetSize()
+        dimensions = tuple(float(value) for value in size)
+        if not all(math.isfinite(value) and value > 0.0 for value in dimensions):
+            raise ValueError(
+                "grasp body bound must have finite positive dimensions: %s (%s)" % (geometry_prim.GetPath(), dimensions)
+            )
         dimension = max(size[0], size[1], size[2])
         volume = size[0] * size[1] * size[2]
 
@@ -738,8 +764,7 @@ class GraspRobot:
         required_force = total_mass * 9.81 * 5.0
         carb.log_info(
             "[grasp-robot] fixture load source=%s authored_mass_count=%d "
-            "mass=%.6fkg max_force=%.6fN"
-            % (mass_source, authored_mass_count, total_mass, required_force)
+            "mass=%.6fkg max_force=%.6fN" % (mass_source, authored_mass_count, total_mass, required_force)
         )
         try:
             max_velocity = min(0.5, 0.1 * float(dimension))
@@ -761,6 +786,13 @@ class GraspRobot:
     def _check_pad_overlap(self, grip_info, pad_dimensions, target_asset_path):
         # type: (Dict[str, Any], Tuple[float, float, float], str) -> bool
         """Return True if either pad cube overlaps the target object."""
+        from simready_benchmark_engine_kit.physics_utils import active_physics_engine
+
+        # This query is provided by the PhysX scene and does not represent a
+        # Newton scene. Newton validates contact while closing the gripper.
+        if active_physics_engine() == "newton":
+            return False
+
         extent = carb.Float3(*(float(value) / 2.0 for value in pad_dimensions))
         orientation = grip_info["gripper_orientation"]
         rotation = carb.Float4(*orientation)

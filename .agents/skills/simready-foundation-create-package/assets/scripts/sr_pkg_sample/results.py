@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 """Structured result types returned by the packaging-step API.
 
 :class:`PreValidationResult` and :class:`PostValidationResult` wrap

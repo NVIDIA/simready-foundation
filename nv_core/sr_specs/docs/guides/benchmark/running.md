@@ -34,16 +34,13 @@ Install the core tier with its optional `benchmark` extra. The command respects
 the package index and mirror already configured for `pip`:
 
 ```bash
-pip install "simready-foundation-tier-core[benchmark]==2026.7.1" "simready-validate>=2026.7.0.dev1"
+pip install "simready-foundation-tier-core[benchmark]"
 ```
 
-The extra installs `simready-benchmark[kit]>=2026.6.6`; the runtime-test modules
-already ship in the tier. The validator is installed explicitly so Benchmark's
-static validation gate uses the 7.1-compatible library. Benchmark discovers
-both specification catalogs and the runtime-test directory through
-`simready.tier`, so neither `--sr-specs` nor `--tests-path` is required for
-published content. See the [Foundation 7.1 library set](../foundation_pypi.md#foundation-71-library-set)
-for the complete compatibility matrix.
+The extra installs `simready-benchmark[kit]`; the runtime-test modules already
+ship in the tier. Benchmark discovers both specification catalogs and the
+runtime-test directory through `simready.tier`, so neither `--sr-specs` nor
+`--tests-path` is required for published content.
 
 Use `--tests-path` only to add an unpublished test package during development.
 Explicit paths are loaded in addition to installed test providers.

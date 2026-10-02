@@ -47,10 +47,10 @@ def "Chair" (
 #usda 1.0
 (
     customLayerData = {
-        string simready_metadata = """{
-            "geometry_path": "./geometry/chair_geometry.usd",
-            "materials_path": "./materials/chair_materials.usd"
-        }"""
+        dictionary SimReady_Metadata = {
+            string geometry_path = "./geometry/chair_geometry.usd"
+            string materials_path = "./materials/chair_materials.usd"
+        }
     }
 )
 {
@@ -71,10 +71,10 @@ def "Chair" (
 #usda 1.0
 (
     customLayerData = {
-        string simready_metadata = """{
-            "geometry_path": "/Users/john/Projects/Assets/chair/geometry/chair_geometry.usd",
-            "materials_path": "/Users/john/Projects/Assets/chair/materials/chair_materials.usd"
-        }"""
+        dictionary SimReady_Metadata = {
+            string geometry_path = "/Users/john/Projects/Assets/chair/geometry/chair_geometry.usd"
+            string materials_path = "/Users/john/Projects/Assets/chair/materials/chair_materials.usd"
+        }
     }
 )
 {

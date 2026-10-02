@@ -55,10 +55,7 @@ flowchart LR
 
 #### Used in Profiles
 
-This version is used in the following profiles:
-
-- **[Prop Robotics Neutral Profile](../profiles/prop-robotics-neutral.md)** (`v1.0.0`, `v2.0.0`, `v2.0.1`) - Provides the original Standard rigid-body gate for neutral prop assets.
-- **[Robot Body Neutral Profile](../profiles/robot-body-neutral.md)** (`v1.0.0`) - Provides the original Standard rigid-body gate for neutral robot bodies.
+This version is not selected by any current profile.
 
 #### Feature Dependencies
 
@@ -113,10 +110,9 @@ None.
 
 This version is used in the following profiles:
 
-- **[Prop Robotics Neutral Profile](../profiles/prop-robotics-neutral.md)** (`v2.1.0`) - Uses the Standard rigid-body contract after `RB.006` was removed.
-- **[Robotics Prop Profile](../profiles/profiles.md)** (`v3.0.0`) - Uses the consolidated Standard rigid-body feature gate.
-- **[Robot Body Neutral Profile](../profiles/robot-body-neutral.md)** (`v1.1.0`) - Uses the Standard rigid-body contract after `RB.006` was removed.
-- **[Robot Body Profile](../profiles/profiles.md)** (`v3.0.0`) - Uses the consolidated Standard rigid-body feature gate.
+- **[Robotics Prop Profile](../profiles/robotics-prop.md)** (`v3.0.0`, `v3.1.0`, `v3.2.0`) - Uses the consolidated Standard rigid-body feature gate.
+- **[Robot Body Profile](../profiles/robot-body.md)** (`v2.0.0`, `v2.1.0`, `v2.2.0`) - Uses the consolidated Standard rigid-body feature gate.
+- **[Robot Gripper Profile](../profiles/profiles.md)** (`v2.0.0`, `v2.1.0`) - Uses the consolidated Standard rigid-body feature gate.
 
 #### Feature Dependencies
 

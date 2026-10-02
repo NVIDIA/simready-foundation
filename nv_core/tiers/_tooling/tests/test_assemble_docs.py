@@ -82,6 +82,7 @@ def test_source_mapping_merges_tiers_shared_and_residual(tmp_path):
     _write(core / "capabilities" / "core" / "core.md", "# Core cap\n")
     _write(core / "features" / "FET_001-minimal.md", "# Minimal\n")
     _write(core / "features" / "FET_001-minimal.json", "{}\n")  # non-doc travels along
+    _write(core / "features" / "known_edits" / "fet-001-0-1-0.toml", '[edit]\nfeature = "FET_001"\n')
     _write(core / "profiles" / "prop-neutral.md", "# Neutral\n")
 
     isaac = _make_tier(tiers, "tier_isaac", "isaac")
@@ -109,6 +110,7 @@ def test_source_mapping_merges_tiers_shared_and_residual(tmp_path):
 
     # non-doc payload travels with the section
     assert (out / "features" / "FET_001-minimal.json").is_file()
+    assert not (out / "features" / "known_edits").exists()
     # package scaffolding is dropped
     assert not (out / "__init__.py").exists()
     assert not (out / "_plugin.py").exists()
@@ -118,6 +120,14 @@ def test_source_mapping_merges_tiers_shared_and_residual(tmp_path):
     assert manifest["capabilities/isaac_sim/isaac_sim.md"]["source"] == "tier:tier_isaac"
     assert manifest["capabilities/capabilities.md"]["source"] == "shared"
     assert manifest["index.md"]["source"] == "site"
+
+
+def test_tier_module_discovery_ignores_cache_directories(tmp_path):
+    tiers = tmp_path / "tiers"
+    module_root = _make_tier(tiers, "tier_core", "tier_core")
+    (module_root.parent / "__pycache__").mkdir()
+
+    assert ad.tier_docs_module_root(module_root.parents[2]) == module_root
 
 
 def test_declarative_tier_docs_source_maps_without_tier_specific_code(tmp_path):

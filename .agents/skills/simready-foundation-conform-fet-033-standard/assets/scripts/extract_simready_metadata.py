@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 """Derive SimReady_Metadata provenance fields from a USD asset (FET_033_STANDARD / SR.003).
 
 This helper only computes the fields that can be derived deterministically from

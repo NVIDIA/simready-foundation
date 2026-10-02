@@ -35,6 +35,11 @@ Treat the selected JSON manifest as authoritative for dependencies and requireme
 | `0.1.0` | FET_004_ROBOT_PHYSX@0.1.0 | `DJ.001`, `DJ.002`, `DJ.003`, `DJ.004`, `DJ.005`, `DJ.006`, `DJ.007`, `DJ.011` |
 | `0.2.0` | FET_004_PHYSX@0.4.0 | `DJ.001`, `DJ.002`, `DJ.003`, `DJ.004`, `DJ.005`, `DJ.006`, `DJ.007`, `DJ.011` |
 
+Version `0.1.0` is retained for compatibility with historical or external
+contracts that pin the deprecated `FET_004_ROBOT_PHYSX` feature. New profile
+versions must select `FET_022_PHYSX@0.2.0` and its canonical
+`FET_004_PHYSX@0.4.0` dependency.
+
 ## Workflow
 
 1. Confirm the input exists and identify the exact selected feature/version from the profile TOML, validation report, or user request.

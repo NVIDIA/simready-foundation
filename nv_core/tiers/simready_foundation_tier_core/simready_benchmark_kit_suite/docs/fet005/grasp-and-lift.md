@@ -17,7 +17,7 @@ A reviewer, PM, or OEM can trust that at least one declared grasp point on the a
 
 ## What It Checks
 
-The test iterates every `grasp_identifier_*` prim authored on the asset. For each identifier, it runs a fresh simulation scene, positions a standardized parallel-jaw gripper at the identifier pose, and drives the gripper through nine sequential phases. The test confirms that the asset rises when the gripper lifts, remains in the jaws during a static hold and a circular horizontal orbit, and falls freely after the jaws open.
+The test iterates every `grasp_identifier_*` prim authored on the asset. For each identifier, it runs a fresh simulation scene, positions a standardized parallel-jaw gripper at the identifier pose, and drives the gripper through nine sequential phases. The identifier may live under the rigid body or in a separate annotation scope. The test first uses a nearest rigid-body ancestor when one exists; otherwise it selects the rigid body whose world bound contains the largest portion of the authored grasp segment, with the complete mounted asset as a compatibility fallback. The selected body is used consistently for stability tracking, fixture sizing, and later motion checks. The test confirms that the asset rises when the gripper lifts, remains in the jaws during a static hold and a circular horizontal orbit, and falls freely after the jaws open.
 
 The test skips the asset entirely when no `grasp_identifier_*` prims are found, because there is no grasp metadata to evaluate. An asset whose physics setup cannot be loaded triggers a precheck failure rather than a per-phase result. If at least one identifier passes all nine phases, the overall test result is a pass; the test fails only when every identifier fails. Partial failures are logged as warnings and recorded in metrics.
 
@@ -38,7 +38,7 @@ The nine phases run in order, stopping at the first failure within each identifi
 
 2. The GripperPositioning phase moves the gripper gantry to the grasp midpoint. The phase waits until the gantry converges within 5 mm of the target or 2.0 s elapses, whichever comes first. A timeout here fails the identifier.
 
-3. The Grasping phase sizes the fixture from the rigid body that owns the grasp identifier, then closes the gripper smoothly at no more than 0.04 m/s. The commanded aperture includes 0.005 m of contact preload per jaw so a position drive develops holding force against the real collider rather than stopping at a zero-load analytical bounding-box width. After convergence, the jaws preserve the stable target for another 0.3 s before lifting. If the pads meet each other, meaning the selected body has no collider at the grasp line, the phase fails.
+3. The Grasping phase sizes the fixture from the resolved rigid body, then closes the gripper smoothly at no more than 0.04 m/s. Empty or non-finite body bounds stop fixture setup with the concrete setup error; they are never used in pad-scale arithmetic. The commanded aperture includes 0.005 m of contact preload per jaw so a position drive develops holding force against the real collider rather than stopping at a zero-load analytical bounding-box width. After convergence, the jaws preserve the stable target for another 0.3 s before lifting. If the pads meet each other, meaning the selected body has no collider at the grasp line, the phase fails.
 
 4. The Lifting phase freezes the gantry's final horizontal target from GripperPositioning, stops following the authored grasp line, and raises the gantry over 1.0 s with a smoothstep motion profile. The requested height is twice the longest edge of the grasped body, clamped to 0.3–0.5 m so large or eccentric assets do not receive an artificial high-speed lift. The phase passes when the grasped body's centroid has risen at least 0.02 m from its position at lift start.
 
@@ -95,10 +95,17 @@ prevents motion of an ungrasped joint from being mistaken for grip instability.
 | Shake fails: object left the jaws | The authored grasp midpoint separated from the live jaw midpoint by the configured tolerance, or the selected body reached the floor during the 0.01 m circular orbit; inspect mass, friction, collision, and grasp placement |
 | Dropping fails: object did not fall after release | The asset is constrained in the scene or the physics configuration prevents free fall after the jaws open |
 | Newton jaws do not close, or only one jaw is commanded | Verify that both generated `NewtonActuator` targets compiled and inspect the engine log for the explicit tensor-control diagnostic; ordinary contact can still produce different measured jaw positions while both targets remain symmetric |
+| FixtureSetup reports `Gripper rebuild failed` | The message contains the original setup exception. Treat an import/runtime dependency error as a suite or environment problem; inspect a body-resolution or invalid-bound error before changing mass or friction. |
 
 ## How to Fix
 
 If the gripper cannot converge on a grasp identifier, inspect the identifier prim path and pose to confirm that it targets a surface on the asset rather than empty space or an interior point.
+
+Do not reparent a valid identifier merely because it lives in a `/Grasp`
+annotation scope. Confirm that its world-space segment crosses the intended
+rigid body's bound. If fixture setup fails, use the reported exception and Kit
+log to distinguish a runtime dependency problem from ambiguous body selection;
+mass and friction tuning cannot repair either setup failure.
 
 If grasping reports that the pads touched with no object, the asset is missing a collision mesh at the grasped region. Add or extend the collision approximation to cover the surfaces the pads are expected to contact.
 

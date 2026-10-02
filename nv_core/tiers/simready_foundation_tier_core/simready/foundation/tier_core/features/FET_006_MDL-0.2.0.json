@@ -1,0 +1,16 @@
+{
+    "id": "FET_006_MDL",
+    "version": "0.2.0",
+    "display_name": "Materials (MDL)",
+    "path": "features/FET_006_MDL.html",
+    "requirements": [
+        "com.nvidia.usd.VM.BIND.001",
+        "VM.BIND.002",
+        "VM.MAT.001",
+        "VM.MDL.001",
+        "com.nvidia.usd.VM.MDL.002",
+        "VM.MDL.003",
+        "VM.TEX.001",
+        "VM.TEX.005"
+    ]
+}

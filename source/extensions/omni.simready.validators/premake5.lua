@@ -1,3 +1,5 @@
+-- SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+-- SPDX-License-Identifier: Apache-2.0
 -- Use folder name to build extension name and tag. Version is specified explicitly.
 local ext = get_current_extension_info()
 

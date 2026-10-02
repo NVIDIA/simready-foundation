@@ -5,7 +5,7 @@
 | Feature Name | `FET_006_STANDARD` |
 | Runtime | `STANDARD` |
 | Proprietary Techs | `None` |
-| Latest Version | `0.1.0` |
+| Latest Version | `0.2.0` |
 
 ## Description
 
@@ -19,7 +19,7 @@ This feature has no dependencies and no other features depend on it directly.
 
 Products or workflows that consume this feature:
 
-- SimReady validation verifies material binding and USDPreviewSurface requirements.
+- SimReady validation verifies material binding, USDPreviewSurface, and texture colour space and size requirements.
 - `simready-foundation-conform-fet-006-standard` repairs USDPreviewSurface material conformance on staged assets.
 
 ## Requirements
@@ -43,8 +43,44 @@ None.
 
 | Requirement | Requirement Doc | Rule |
 |-------------|-----------------|------|
-| `VM.BIND.001` | [VM.BIND.001](../capabilities/visualization/materials/requirements/material-bind-scope.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
-| `VM.PS.001` | [VM.PS.001](../capabilities/visualization/materials/requirements/material-preview-surface.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
+| `com.nvidia.usd.VM.BIND.001` | Defined by `usd-validation-nvidia` | `MaterialOutOfScopeChecker` |
+| `com.nvidia.usd.VM.PS.001` | Defined by `usd-validation-nvidia` | `MaterialUsdPreviewSurfaceChecker` |
+
+</details>
+
+### Version 0.2.0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+States the binding and texture-size requirements the checker already enforces for this format
+(`VM.MAT.001`, `VM.TEX.001`), so the manifest matches what validation applies. Adds
+`VM.TEX.003`, which checks a texture's colour space against the UsdPreviewSurface input it
+feeds; nothing checked that for this format before.
+
+#### Used in Profiles
+
+Required:
+
+- Robotics Prop v4.0.0
+- Robot Body v3.0.0
+- Robot Gripper v3.0.0
+
+#### Feature Dependencies
+
+None.
+
+#### Requirement List
+
+* Capability: [Visualization/Materials](../capabilities/visualization/materials/capability-materials.md)
+
+| Requirement | Requirement Doc | Rule |
+|-------------|-----------------|------|
+| `com.nvidia.usd.VM.BIND.001` | Defined by `usd-validation-nvidia` | `MaterialOutOfScopeChecker` |
+| `VM.MAT.001` | [VM.MAT.001](../capabilities/visualization/materials/requirements/material-assignment.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
+| `com.nvidia.usd.VM.PS.001` | Defined by `usd-validation-nvidia` | `MaterialUsdPreviewSurfaceChecker` |
+| `VM.TEX.001` | [VM.TEX.001](../capabilities/visualization/materials/requirements/material-texture-maxsize.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
+| `VM.TEX.003` | [VM.TEX.003](../capabilities/visualization/materials/requirements/material-texture-colorspace-preview.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
 
 </details>
 
@@ -56,7 +92,7 @@ Source file type:
 
 Validation or runtime pipeline:
 
-- SimReady validation verifies material binding and USDPreviewSurface requirements.
+- SimReady validation verifies material binding, USDPreviewSurface, and texture colour space and size requirements.
 - `simready-foundation-conform-fet-006-standard` repairs USDPreviewSurface material conformance on staged assets.
 
 ## Samples

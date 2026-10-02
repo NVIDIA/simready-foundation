@@ -82,8 +82,10 @@ workflow. It links the four guide areas that should shape spec work:
   markdown file, a JSON manifest, requirement links, samples where useful, a
   validation strategy, and an entry in `docs/shared/features/features.md`.
 - **Profiles** (`guides/profiles/profiles.md`): a profile is a named, versioned
-  list of exact feature versions in a per-profile TOML file under its owning
-  tier's `profiles/` directory. Existing profile versions are immutable. To
+  list of exact feature versions in a tier-owned TOML file under its owning
+  tier's `profiles/` directory. New profiles use one TOML per profile; the
+  restored taxonomy and packaging catalogs group related legacy profiles.
+  Existing profile versions are immutable. To
   adopt new feature behavior, add a new profile version and update the related
   profile markdown and shared profile index.
 - **Feature adapters** (`guides/feature_adapters/feature_adapters.md`): adapters
@@ -120,10 +122,9 @@ and users are expected to install and drive these libraries directly:
   test suite.
 - **`simready-package`** - asset packaging. Provides the `simready-package` CLI
   and the `simready.package` Python module (`Packager`, `PackageSpec`,
-  `package()`). It runs a pre-validate -> build -> post-validate pipeline
-  (pre-validation against the `Package-Candidate` profile, post-validation
-  against the `Package` profile) and writes a `com.nvidia.simready.packaging.json`
-  package definition. WRAPP publishing needs the `publish` extra
+  `package()`). It runs a pre-validate -> build -> post-validate pipeline and
+  writes a `com.nvidia.simready.packaging.json` package definition. WRAPP
+  publishing needs the `publish` extra
   (`pip install "simready-package[publish]"`). The repo-local
   `simready-foundation-create-package` skill documents this workflow.
 
@@ -143,7 +144,7 @@ Add flags only when needed:
 A typical validation call, once the tier is installed:
 
 ```bash
-simready-validate --profile Prop-Robotics-Neutral --version 1.0.0 path/to/asset.usd
+simready-validate --profile Robotics-Prop --version 3.2.0 path/to/asset.usd
 ```
 
 These libraries ship their own agent skills. Treat them as first-class, on par
@@ -205,43 +206,37 @@ use this read order before changing specs, profiles, validators, or skills:
 7. The specific profile, feature, requirement, and validator files touched by
    the task.
 
-Treat the per-profile TOML files under
+Treat the profile TOML files under
 `nv_core/tiers/*/simready/foundation/tier_*/profiles/` as the machine-readable
-profile source of truth. Each profile has its own TOML file, such as
-`prop_robotics_neutral.toml`, `robotics_prop.toml`, and `robot_body.toml`;
+profile source of truth. The Core tier currently ships 12 profiles from
+`robotics_prop.toml`, `robot_body.toml`, `robot_gripper.toml`,
+`open_taxonomy_profiles.toml`, and `package_profiles.toml`;
 there is no single aggregate `profiles.toml`, and the validator loads every
 configured tier profile directory. Profile markdown is an authoring guide and
 must stay in sync with the profile TOML files, but validators consume the TOML
 feature list.
 
-## Prop-Robotics Profile Workflow
+## Robotics-Prop Profile Workflow
 
-The prop robotics profiles are the main current workflow targets:
-
-- `Prop-Robotics-Neutral`: OpenUSD-neutral prop assets for robotics pipelines.
-  The base profile validates Core, Minimal, rigid-body physics, grasp physics,
-  and materials. Single-rigid-body props satisfy prop physics through
-  `FET_003_STANDARD`; `FET_004_STANDARD` is separate multibody work and
-  should be validated only for props intentionally authored with multiple rigid
-  bodies and joints.
-- `Prop-Robotics-Physx`: PhysX prop assets. This profile uses PhysX rigid-body
-  and multibody feature variants, including PhysX collider and joint behavior.
-- `Prop-Robotics-Isaac`: Isaac Sim composition plus PhysX prop physics. This
-  profile adds Isaac composition requirements on top of the prop physics and
-  grasp expectations.
-- `Robotics-Prop` version `3.0.0`: consolidated prop profile that uses
-  `FET_003_STANDARD`, `FET_004_STANDARD`, and optional `FET_004_PHYSX@0.4.0`.
-  At `FET_003_PHYSX@0.4.0` and `FET_004_PHYSX@0.4.0`, rigid-body work stays in the
-  FET_003 feature family and multibody joint work stays in the FET_004 feature
-  family.
+`Robotics-Prop` is the current prop workflow target. Version `3.0.0` uses
+`FET_003_STANDARD`, `FET_004_STANDARD`, and optional `FET_004_PHYSX@0.4.0`.
+Version `3.2.0` adds required packaging (`FET_031_STANDARD`,
+`FET_033_STANDARD@0.3.0`) and optional Isaac composition (`FET_100_ISAAC@0.4.0`).
+Version `3.3.0` adopts `FET_000_STANDARD@0.2.0` and `FET_033_STANDARD@0.4.0`.
+Version `4.0.0` is the SimReady Foundations 8.0 release of that same `3.3.0`
+contract.
+At `FET_003_PHYSX@0.4.0` and `FET_004_PHYSX@0.4.0`, rigid-body work stays in the
+FET_003 feature family and multibody joint work stays in the FET_004 feature
+family. Single-rigid-body props satisfy prop physics through
+`FET_003_STANDARD`; `FET_004_STANDARD` is separate multibody work and should be
+validated only for props intentionally authored with multiple rigid bodies and
+joints.
 
 When reasoning about a prop profile, inspect these files together:
 
 - the per-profile TOML in its owning tier's `profiles/` directory
 - `nv_core/sr_specs/docs/shared/profiles/profiles.md`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles/prop-robotics-neutral.md`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles/prop-robotics-physx.md`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles/prop-robotics-isaac.md`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles/robotics-prop.md`
 - `nv_core/sr_specs/docs/shared/features/feature-dependency-graph.md`
 - the selected feature JSON manifests in the core tier `features/` directory
 
@@ -268,28 +263,39 @@ relationships. For single-rigid-body props, FET_004 is not applicable unless the
 user or selected profile explicitly requires a multibody assembly.
 
 When a selected profile or user request explicitly includes FET_007_STANDARD non-visual
-sensor materials, run `simready-foundation-conform-fet-007-standard` after the selected exact FET_006 material skill. FET_007_STANDARD is not
-currently part of the default prop robotics profile list.
+sensor materials, run `simready-foundation-conform-fet-007-standard` after the selected exact FET_006 material skill. FET_007_STANDARD is optional in
+the `Robotics-Prop` profile.
 
 Run the SimReady packaging gates only when the selected profile pins
 `FET_033_STANDARD`, which now includes `Robotics-Prop` version `3.2.0`,
-`Robot-Body` version `2.1.0` and later (`2.2.0`), `Robot-Gripper` version `2.1.0`, and
-`Package-Candidate` version `1.2.0`. Run these packaging gates after material
+`3.3.0`, and `4.0.0`, `Robot-Body` version `2.1.0` and later (`2.2.0`, `2.3.0`,
+`3.0.0`), `Robot-Gripper` version `2.1.0`, `2.2.0`, and `3.0.0`, and
+`Package-Candidate` version `1.2.0` and
+`1.3.0`. Run these packaging gates after material
 conformance and in dependency order: `simready-foundation-conform-fet-031-standard`
 (self-contained package source, `AA.001`) first, then
 `simready-foundation-conform-fet-033-standard` (`FET_033_STANDARD`, which depends
-on `FET_031_STANDARD`). `FET_033_STANDARD` covers the thumbnail (`SR.002`) and the
-nested provenance metadata (`SR.003`). At `FET_033_STANDARD@0.3.0` the `SR.003`
+on `FET_031_STANDARD`). `FET_033_STANDARD` covers the thumbnail (`SR.002`) and
+provenance metadata. At `FET_033_STANDARD@0.3.0` provenance is `SR.003`
+(nested root-layer `SimReady_Metadata`). At `FET_033_STANDARD@0.4.0` provenance
+is `SR.004`: the union of root-layer `customLayerData` (including optional nested
+`SimReady_Metadata`) and an optional same-directory `<usd_stem>.json` sidecar;
+neither location is required on its own, but a field must not be authored in both.
+`SR.001` preserves the earlier root-layer-only Core identity contract.
+At `FET_033_STANDARD@0.3.0` the `SR.003`
 contract is stricter: in addition to the string provenance fields (`author`,
 `asset_name`, `asset_type`, `asset_license`, `category`, `source_file`,
 `usd_date_generated`), it also requires `qcode` (Wikidata Q-Code), `rigid_body_count`
 (non-negative int), `asset_extents` (float3 meters, XYZ), and `mass` (positive
-kilograms). Derive the physical fields from the actual asset rather than fabricating
+kilograms). `FET_033_STANDARD@0.4.0` keeps that field set but reads it through
+`SR.004` from the USD/sidecar union. `Robotics-Prop` `3.3.0` and `4.0.0`,
+`Robot-Body` `2.3.0` and `3.0.0`, `Robot-Gripper` `2.2.0` and `3.0.0`, and
+`Package-Candidate` `1.3.0` pin `0.4.0`. Derive the physical fields from the actual asset rather than fabricating
 them, and report a blocker if a value cannot be derived. Earlier profile versions
 that do not pin `FET_033_STANDARD` skip the packaging gates entirely.
 
-For Robot-Body-Runnable, Robot-Body-Isaac, `Robot-Body` version `2.0.0`, or
-`Robot-Gripper` version `2.0.0` workflows, use `simready-foundation-conform-fet-000-isaac`
+For `Robot-Body` version `2.0.0` or `Robot-Gripper` version `2.0.0` workflows,
+use `simready-foundation-conform-fet-000-isaac`
 for Isaac packaging when selected, then `simready-foundation-conform-fet-021-isaac`
 for the robot identity gate after the multibody physics gate is in shape and before
 driven-joint, articulation, or Isaac-composition follow-up work.
@@ -298,9 +304,11 @@ Consolidated robot profiles should prefer `FET_021_ISAAC@0.3.0` for robot
 identity and `FET_000_ISAAC@0.1.0` for Isaac packaging, thumbnail, and
 physics-layer requirements.
 
-Newer PhysX profile pins should prefer `FET_003_PHYSX@0.4.0` plus
-`FET_004_PHYSX@0.4.0` instead of legacy `FET_004_ROBOT_PHYSX` when the selected
-profile version exposes those Standard/PhysX feature IDs.
+`FET_004_ROBOT_PHYSX` is deprecated and has no current in-repository profile
+consumer. It is retained only for compatibility with historical or external
+contracts. Never add it to a new profile version. New PhysX profile versions
+must use `FET_003_PHYSX@0.4.0` plus
+`FET_004_PHYSX@0.4.0`.
 
 Use the exact FET_024 base articulation skill once the robot body/joint topology
 is in shape: `simready-foundation-conform-fet-024-standard`,
@@ -313,7 +321,7 @@ checks Newton articulation-root configuration.
 When an Isaac robot workflow explicitly includes FET_023_ISAAC robot material
 organization, use `simready-foundation-conform-fet-023-isaac` after visual material conformance and before
 final Robot-Body validation. FET_023_ISAAC is optional on `Robot-Body` version
-`2.0.0` and is not required by Robot-Body-Runnable.
+`2.0.0`.
 
 When `Robot-Body` version `2.2.0` selects optional `FET_025_ROS@0.1.0`, run
 `simready-foundation-conform-fet-025-ros` after Isaac composition and before the
@@ -331,15 +339,21 @@ Consolidated robot profiles at version `2.0.0` use Standard and Isaac feature ID
   Version `2.1.0` keeps that menu and adds required `FET_031_STANDARD@0.1.0`
   and `FET_033_STANDARD@0.3.0` (self-contained package source plus thumbnail
   and nested provenance metadata). Version `2.2.0` keeps the `2.1.0` set and
-  adds optional `FET_025_ROS@0.1.0` (ROS-Ready Isaac bridge nodes).
+  adds optional `FET_025_ROS@0.1.0` (ROS-Ready Isaac bridge nodes). Version
+  `2.3.0` keeps the `2.2.0` set and adopts `FET_033_STANDARD@0.4.0` (`SR.004` USD/sidecar
+  provenance union). Version `3.0.0` is the SimReady Foundations 8.0 release of that same
+  `2.3.0` contract.
 - `Robot-Gripper` version `2.0.0`: `robot_gripper.toml` adds
   `FET_028_STANDARD` and the same optional PhysX/Isaac runnable features.
+  Version `2.1.0` adds required `FET_031_STANDARD@0.1.0` and
+  `FET_033_STANDARD@0.3.0`. Version `2.2.0` keeps that set and adopts
+  `FET_033_STANDARD@0.4.0` (`SR.004` USD/sidecar provenance union). Version
+  `3.0.0` is the SimReady Foundations 8.0 release of that same `2.2.0` contract.
 
-Earlier robot profile versions remain available, but their TOML pins should use
-the canonical `FET_###_<RUNTIME>` feature IDs and semantic `#.#.#` feature
-versions. An earlier experiment with bare integer feature versions was reverted;
-never reintroduce them. Inspect `robot_body_runnable.toml`, `robot_body_isaac.toml`,
-and `robot_gripper.toml` for exact version pins.
+Robot profile TOML pins should use the canonical `FET_###_<RUNTIME>` feature
+IDs and semantic `#.#.#` feature versions. An earlier experiment with bare
+integer feature versions was reverted; never reintroduce them. Inspect
+`robot_body.toml` and `robot_gripper.toml` for exact version pins.
 
 Stop at the first failing feature gate unless the user explicitly asks for a
 broader best-effort pass. Count a feature skill as successful when its selected
@@ -377,7 +391,7 @@ does not treat tool helpers as top-level skill structure.
 | `simready-foundation-conform-fet-004-physx` | Repair exact `FET_004_PHYSX` multibody conformance without creating geometry. |
 | `simready-foundation-conform-fet-004-robot-mujoco` | Repair exact `FET_004_ROBOT_MUJOCO` robot MuJoCo multibody conformance. |
 | `simready-foundation-conform-fet-004-robot-newton` | Repair exact `FET_004_ROBOT_NEWTON` robot Newton multibody conformance. |
-| `simready-foundation-conform-fet-004-robot-physx` | Repair exact `FET_004_ROBOT_PHYSX` legacy robot PhysX multibody conformance. |
+| `simready-foundation-conform-fet-004-robot-physx` | Repair deprecated `FET_004_ROBOT_PHYSX` conformance for compatibility with historical or external contracts only. |
 | `simready-foundation-conform-fet-004-standard` | Repair exact `FET_004_STANDARD` multibody conformance without creating geometry. |
 | `simready-foundation-conform-fet-005-standard` | Repair exact `FET_005_STANDARD` vision-guided grasp conformance. |
 | `simready-foundation-conform-fet-006-mdl` | Repair exact `FET_006_MDL` MDL material conformance. |
@@ -402,7 +416,7 @@ does not treat tool helpers as top-level skill structure.
 | `simready-foundation-conform-fet-030-standard` | Repair exact `FET_030_STANDARD` packaging core conformance. |
 | `simready-foundation-conform-fet-031-standard` | Repair exact `FET_031_STANDARD` self-contained package source conformance. |
 | `simready-foundation-conform-fet-032-standard` | Repair exact `FET_032_STANDARD` packaging introspection/BOM conformance. |
-| `simready-foundation-conform-fet-033-standard` | Repair exact `FET_033_STANDARD` Metadata conformance (thumbnail + nested provenance metadata). |
+| `simready-foundation-conform-fet-033-standard` | Repair exact `FET_033_STANDARD` Metadata conformance (thumbnail + nested `SR.003` or USD/sidecar `SR.004`). |
 | `simready-foundation-conform-fet-100-isaac` | Repair exact `FET_100_ISAAC` Isaac composition conformance. |
 
 Repo-local spec authoring skills also live in `skills`:
@@ -509,11 +523,11 @@ schemas, metadata, relationships, or composition arcs.
 - `nv_core/tiers/*/simready/foundation/tier_*/capabilities/` - capability docs,
   requirement pages, and Python validators.
 - `nv_core/tiers/*/simready/foundation/tier_*/features/` - tier-owned feature
-  docs and JSON manifests. There is one TOML file per profile, each holding
-  that profile's version-to-feature bundles, and no consolidated
-  `profiles.toml`.
+  docs and JSON manifests.
 - `nv_core/tiers/*/simready/foundation/tier_*/profiles/` - tier-owned profile
-  TOMLs and authoring guides.
+  TOMLs and authoring guides. New profiles use one TOML each; the legacy
+  `open_taxonomy_profiles.toml` and `package_profiles.toml` catalogs group
+  related profiles. There is no single consolidated `profiles.toml`.
 - `nv_core/sr_specs/docs/shared/` - cross-tier section hubs (capabilities,
   features, profiles) and the feature dependency graph. Per-tier badge includes
   live under each tier's `capabilities/_includes/`.
@@ -564,15 +578,10 @@ Parts of the repository are still in progress. Verified as of 2026-08-18:
   `VG.003`-`VG.006`, `VG.009`-`VG.011`, `VG.013`, `VG.015`-`VG.022`, `VG.024`,
   `VG.RTX.001`) plus a few such as `AA.OV.001`, `JT.ART.001`, `PKG.CONF.002`,
   `RB.008`, and `HI.007`, which is an intentional numbering placeholder.
-- Profile markdown guides drift from their TOML. Several omit published
-  versions, and `robot-body-runnable.md` version `1.0.0` contradicts
-  `robot_body_runnable.toml` on which features the version pins. The TOML wins.
-- `Robotics-Prop` and `Robot-Body` now have authoring markdown
-  (`robotics-prop.md`, `robot-body.md`), and `Robotics-Prop`, `Robot-Body`,
-  `Robot-Gripper`, and the three package profiles (`Package`, `Package-NoBOM`,
-  `Package-Candidate`) all have `profiles.md` index entries. The consolidated
-  `Robot-Gripper` profile and the three package profiles still lack a dedicated
-  authoring markdown page under the tier `profiles/` directory.
+- `Robotics-Prop`, `Robot-Body`, and `Robot-Gripper` are the only Core-tier
+  profiles. `Robotics-Prop` and `Robot-Body` have authoring markdown
+  (`robotics-prop.md`, `robot-body.md`); `Robot-Gripper` is documented in the
+  shared profile index but does not yet have a dedicated authoring page.
 - Feature adapters in `nv_core/cip_specs/asset_handler_modules` still reference
   pre-underscore legacy feature IDs (`FET001_BASE_NEUTRAL`,
   `FET004_BASE_NEUTRAL`, `FET004_ROBOT_PHYSX`, `FET100_BASE_ISAACSIM`) alongside

@@ -1,0 +1,72 @@
+# Feature: `FET_037_ISAAC`
+
+| **Property** | **Value** |
+|--------------|-----------|
+| Feature Name | `FET_037_ISAAC` |
+| Runtime | `ISAAC` |
+| Proprietary Techs | `None` |
+| Latest Version | `0.1.0` |
+
+## Description
+
+Defines the simulation-readiness contract for joint sensor prims on robot assets. A joint sensor prim must also have PhysicsArticulationRootAPI applied so that the articulation is correctly initialized for joint state data output.
+
+## Dependency Graph
+
+This feature has no dependencies and no other features depend on it directly.
+
+## Use Cases
+
+Products or workflows that consume this feature:
+
+- SimReady validation verifies joint sensor wiring requirements at asset authoring time.
+- Isaac Sim runtime benchmark tests (`joint_sensor_data`) verify live joint state data output.
+
+## Requirements
+
+### Version 0.1.0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+- Sensor-Joint v1.0.0 (required)
+
+#### Feature Dependencies
+
+None.
+
+#### Requirement List
+
+* Capability: [Physics Bodies/Physics Sensors](../capabilities/physics_bodies/physics_sensors/capability-physics_sensors.md)
+
+| Requirement | Requirement Doc | Rule |
+|-------------|-----------------|------|
+| `PS.002` | [PS.002](../capabilities/physics_bodies/physics_sensors/requirements/joint-sensor-articulation-root.md) | [Implementation](../capabilities/physics_bodies/physics_sensors/validation.py) |
+
+</details>
+
+## Pipelines
+
+Source file type:
+
+- `.usd`, `.usda`, `.usdc`
+
+Validation or runtime pipeline:
+
+- `simready-validate` verifies FET_037_ISAAC requirements at asset authoring time.
+- `simready-benchmark --features FET_037_ISAAC` runs runtime joint sensor data verification in Isaac Sim.
+
+## Samples
+
+- [sample_content/common_assets/sensors/physics_sensors/JointSensorCheckerPass.usda](../../../../sample_content/common_assets/sensors/physics_sensors/JointSensorCheckerPass.usda)
+- [sample_content/common_assets/sensors_fails/physics_sensors/JointSensorCheckerFail.usda](../../../../sample_content/common_assets/sensors_fails/physics_sensors/JointSensorCheckerFail.usda)
+
+## Benchmarks
+
+- `joint_sensor_data` — verifies joint sensor reports valid joint positions after drive target movement.
+
+## Adapters
+
+None.

@@ -44,18 +44,18 @@
     },
     {
       "relative_path": "apple_a01/simready_usd/sm_apple_a01_01.json",
-      "size": 541,
+      "size": 221,
       "hash": {
-        "sha256-flat-1mb": "8cfe1623d627ace6c44f7f21d4a7ff01a54f4c886014540524e37252520818b5",
-        "sha256": "d8d956786c2f460e0bd0b3681b77e5a163fc8664d1cde4e0f0f209f7663e4a03"
+        "sha256-flat-1mb": "435456103eefe560d19ae769233c3d1dc3780895ad70185eb600065efd4a7ed3",
+        "sha256": "55e587c9b894b53ec1f739aa9d3aefafbf62cafc9bafdbbb197468b09a5b2924"
       }
     },
     {
       "relative_path": "apple_a01/simready_usd/sm_apple_a01_01.usd",
-      "size": 986139,
+      "size": 990162,
       "hash": {
-        "sha256-flat-1mb": "d150f126f1053e11b16bc25055d8b267892da9843a404a7278b09c1c04d2a43a",
-        "sha256": "9a37dbbfa9cda8b441d574f9e7c3d6333acc67b76a58f929eb6b9d2377591933"
+        "sha256-flat-1mb": "57112600eb747d0f7cc00a54283cbbaecb0b1440a5235186970e5ba7b9bb3866",
+        "sha256": "2d41e1d9343c081be2e57ffe901d7914c6e399cd4d8fdb019a6b8ada2474efa3"
       }
     },
     {
@@ -108,18 +108,18 @@
     },
     {
       "relative_path": "orange_a01/simready_usd/sm_obs_orange_a01_01.json",
-      "size": 561,
+      "size": 226,
       "hash": {
-        "sha256-flat-1mb": "2dcb051ddebbf0bd847d957108d1e953fd3283e670278d263d62a0591e96cf29",
-        "sha256": "e4a75cc4a3b29476070319c9ef90088deefa881369e40171f709383652a41355"
+        "sha256-flat-1mb": "a827d5c78e4d25c2e6b12d902838ca72848756faf3ad170ed036b10cd3c06dcd",
+        "sha256": "1044b838bed790d93bde2010db9eaede740cad7e924e723640e37137b0434ebd"
       }
     },
     {
       "relative_path": "orange_a01/simready_usd/sm_obs_orange_a01_01.usd",
-      "size": 425684,
+      "size": 429831,
       "hash": {
-        "sha256-flat-1mb": "f2fdfae3f516c729217eb802ba202de5321d7d50f86ccb204dfd08521c7db218",
-        "sha256": "5d6e124fe633a7fe1531a66d7c08ed401dccd8c431d1ed542a9f3124bf846c9c"
+        "sha256-flat-1mb": "0973f03ba1b92b7bb17611a6f1c49f579294564b45aca46d85b9318d4080722f",
+        "sha256": "ca70f3943e20f7c76e89d46533a4ad9b537297ca1e1f3124127ed4aa846bec1f"
       }
     },
     {

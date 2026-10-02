@@ -1,0 +1,6 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+[edit]
+feature = "FET_006_STANDARD"
+version = "0.1.0"
+reason = "VM.BIND.001 and VM.PS.001 moved to usd-validation-nvidia, which registers them as com.nvidia.usd.VM.BIND.001 and com.nvidia.usd.VM.PS.001. The unprefixed codes are bound to no rule in this repository, so leaving them here would make the feature unregistered and the loader would drop Robotics-Prop 3.0.0 and 3.1.0 whole. This version lists only those two requirements, so it cannot be emptied instead. The rules are the same; both codes are optional wherever 0.1.0 is referenced, so nothing that passed can now fail."

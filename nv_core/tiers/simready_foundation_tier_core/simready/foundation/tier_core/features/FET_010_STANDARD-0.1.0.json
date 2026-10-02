@@ -1,0 +1,11 @@
+{
+	"id": "FET_010_STANDARD",
+	"version": "0.1.0",
+	"display_name": "Display Color",
+	"path": "features/FET_010_STANDARD.html",
+	"requirements": [
+		"DISP.001",
+		"DISP.002",
+		"DISP.003"
+	]
+}

@@ -10,7 +10,7 @@ A **Profile** is a named collection of features that defines the complete set of
 
 ### Key Components
 
-- **Profile Name (ID)**: Unique identifier for the profile (e.g., `Prop-Robotics-Neutral`)
+- **Profile Name (ID)**: Unique identifier for the profile (e.g., `Robotics-Prop`)
 - **Version**: Specific version of the profile (e.g., `"1.0.0"`, `"2.0.0"`)
 - **Feature Requirements**: List of required features with their specific versions
 - **Version Locking**: Profile versions are immutable - changes require creating a new version
@@ -37,10 +37,10 @@ Each profile consists of:
 
 ## Profile Examples
 
-### Example 1: Prop-Robotics-Neutral Profile
+### Example 1: Robotics-Prop Profile
 
 ```toml
-[Prop-Robotics-Neutral]
+[Robotics-Prop]
 "1.0.0" = {features = [
     {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
     {"FET_001_STANDARD" = {version = "0.1.0"}}, # "Minimal"
@@ -59,10 +59,10 @@ Each profile consists of:
 ]}
 ```
 
-### Example 2: Prop-Robotics-Physx Profile
+### Example 2: Robot-Body Profile
 
 ```toml
-[Prop-Robotics-Physx]
+[Robot-Body]
 "1.0.0" = {features = [
     {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
     {"FET_001_STANDARD" = {version = "0.1.0"}}, # "Minimal"
@@ -98,7 +98,7 @@ Before creating a profile, you need to understand:
 - Use descriptive names that indicate the target environment
 - Use hyphens and title case for multi-word names
 - Include the primary use case or environment
-- Examples: `Prop-Robotics-Neutral`, `Prop-Robotics-Physx`, `Vehicle-Simulation`
+- Examples: `Robotics-Prop`, `Robot-Body`, `Vehicle-Simulation`
 
 ### Step 3: Create the Profile Configuration
 
@@ -106,8 +106,11 @@ Create a new profile TOML file in the owning [tier](../tiers.md)'s `profiles/`
 directory. There
 is one file per profile and no consolidated `profiles.toml` — the validator
 loads every `*.toml` in each configured directory. Name the file after the
-profile, lowercased with underscores, so `Prop-Robotics-Neutral` lives in
-`prop_robotics_neutral.toml`:
+profile, lowercased with underscores, so `Robotics-Prop` lives in
+`robotics_prop.toml`. The restored legacy catalogs
+`open_taxonomy_profiles.toml` and `package_profiles.toml` group related
+profiles; they are exceptions and should not be used as the pattern for new
+profile work:
 
 ```toml
 [Your-Profile-Name]
@@ -163,7 +166,7 @@ Create a new profile version when:
 Identify which features need version updates:
 
 ```toml
-[Prop-Robotics-Neutral]
+[Your-Profile-Name]
 "1.0.0" = {features = [
     {"FET_001_STANDARD" = {version = "0.1.0"}}, # "Minimal"
     {"FET_003_STANDARD" = {version = "0.1.0"}}, # "RBD Physics"
@@ -220,7 +223,7 @@ Its possible to "upgrade" assets that support a particular profile version to a 
 
 When creating a second profile, identify the differences from existing profiles:
 
-**Example: Prop-Robotics-Neutral vs Prop-Robotics-Physx**
+**Example: a Standard profile versus a PhysX-specific profile**
 
 | Feature | Neutral Version | Physx Version | Difference |
 |---------|----------------|---------------|------------|

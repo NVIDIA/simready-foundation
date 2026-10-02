@@ -8,4 +8,5 @@ This page contains all requirements for the SimReady capability.
 requirements/metadata-whitelist
 requirements/thumbnail-exist
 requirements/nested-simready-metadata
+requirements/metadata-union
 ```

@@ -68,7 +68,6 @@ customLayerData = {
 ## Related Requirements
 
 - [physx-variant-set](physx-variant-set) (RV.001)
-- [metadata-whitelist](../../sim_ready/requirements/metadata-whitelist.md) (SR.001)
 
 ## For More Information
 

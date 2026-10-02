@@ -20,7 +20,8 @@ WHAT: Drop the asset from N x its height onto a flat ground plane, verify
       into one simulation to avoid paying the setup + boot cost twice.
 
 HOW:  1. Load asset in blue room with collision ground.
-      2. Place asset at drop_height_factor * bbox_height above ground.
+      2. Place asset at drop_height_factor * bbox_height above ground while
+         guaranteeing minimum_drop_distance above the contact threshold.
       3. Run pre-simulation safeguards (world-anchor, rigid body checks).
       4. Simulate at 240 fps with camera follow.
       5. Each frame:
@@ -50,8 +51,6 @@ FALSE POSITIVE AVOIDANCE:
     still detected (a spinning object is not at rest).
 """
 
-import time
-
 from simready_benchmark.core.decorator import test
 from simready_benchmark_kit_suite.fet003_physics.stability import (
     bounds_to_history_entry,
@@ -59,6 +58,7 @@ from simready_benchmark_kit_suite.fet003_physics.stability import (
     check_position_stable,
     check_rest_window,
 )
+from simready_benchmark_kit_suite.placement_compat import place_with_minimum_clearance
 
 
 def _apply_ground_physics_material(ground_path="/World/GroundPlane"):
@@ -78,7 +78,9 @@ def _apply_ground_physics_material(ground_path="/World/GroundPlane"):
             _phys_mat.CreateDynamicFrictionAttr(0.4)
             _phys_mat.CreateRestitutionAttr(0.0)
             UsdShade.MaterialBindingAPI.Apply(gp_prim).Bind(
-                UsdShade.Material(_mat_prim), UsdShade.Tokens.weakerThanDescendants, "physics"
+                UsdShade.Material(_mat_prim),
+                UsdShade.Tokens.weakerThanDescendants,
+                "physics",
             )
     except Exception:
         pass
@@ -202,8 +204,9 @@ def _report_result(
         "tunnels through the floor or never settles indicates broken "
         "collision or unrealistic mass parameters."
     ),
-    version="3.1.0",
+    version="3.2.0",
     engine={"tags": ["kit"], "version": ">=2024.2.0"},
+    max_duration=300,
     config_defaults={
         # simulation_seconds is now a hard upper cap; the loop exits as
         # soon as rest is detected so typical runs finish much sooner.
@@ -218,6 +221,9 @@ def _report_result(
         # size (for example, about 11.5 m/s for a 0.91 m-tall workbench) and
         # could tunnel through an otherwise functional Newton collision scene.
         "drop_height_factor": 2.0,
+        # Tiny assets must still begin far enough above the 0.1 m contact
+        # tolerance to produce an observable free fall.
+        "minimum_drop_distance": 0.1,
         "floor_level": 0.0,
         "floor_margin": 0.1,
         "penetration_check_seconds": 1.0,
@@ -265,7 +271,18 @@ async def test_ground_drop(ctx):
     room.auto_size(ctx.scene.asset)
     room.set_color(0.3, 0.4, 0.7)  # saturated blue walls
     room.show_ground(color=(0.25, 0.35, 0.6))  # darker blue ground
-    room.place_asset_above_ground(height_factor=ctx.config["drop_height_factor"])
+    minimum_clearance = touch_threshold + float(ctx.config["minimum_drop_distance"])
+    clearance_supported = place_with_minimum_clearance(
+        room.place_asset_above_ground,
+        minimum_clearance,
+        height_factor=ctx.config["drop_height_factor"],
+    )
+    if not clearance_supported:
+        ctx.log(
+            "The installed simready-benchmark-engine-kit does not support minimum drop clearance; "
+            "using legacy height-based placement. Upgrade the Benchmark wheels to 2026.8.0rc3 or newer "
+            "to enable size-safe placement."
+        )
 
     # --- Pre-simulation safeguards ---
     from simready_benchmark_kit_suite.fet003_physics.physics_checks import (
@@ -303,7 +320,8 @@ async def test_ground_drop(ctx):
         cook_skip_message,
     )
     from simready_benchmark_kit_suite.engine_guard import (
-        NEWTON_SCENE_SKIP,
+        NEWTON_SCENE_ERROR,
+        NewtonSceneInitializationError,
         articulationize_loose_joints,
         newton_scene_initialized,
     )
@@ -326,16 +344,15 @@ async def test_ground_drop(ctx):
 
     # Newton scene-init guard (Newton only; PhysX untouched). Newton aborts scene
     # init on USD composition errors PhysX tolerates; stepping the un-built sim
-    # would crash the session, so skip honestly instead. No-op under PhysX.
+    # would crash the session, so report that the requested test did not run.
+    # No-op under PhysX.
     if active_physics_engine() != "physx":
         physics.play()
         await ctx.settle(count=3)
         newton_ready = newton_scene_initialized()
         physics.stop()
         if not newton_ready:
-            ctx.skip(NEWTON_SCENE_SKIP)
-            ctx.add_metric("ground_drop_passed", 0)
-            return
+            raise NewtonSceneInitializationError(NEWTON_SCENE_ERROR)
 
     physics.play()
 
@@ -363,26 +380,9 @@ async def test_ground_drop(ctx):
     rest_frame = -1
     result_frame = -1
     prev_z_min = None
-    deadline = time.monotonic() + 120.0  # 120 second watchdog
-
     for frame in range(total_frames):
         # 1. Process physics (next_update_async, pauses after first call)
         await ctx.physics_step()
-        if time.monotonic() > deadline:
-            ctx.fail(
-                "Physics simulation hung (exceeded 120s watchdog).\n"
-                "\n"
-                "How to fix:\n"
-                "- Asset likely has unstable physics: check for self-penetrating geometry, "
-                "missing or zero-volume colliders, and overlapping rigid bodies.\n"
-                "- Inspect `physxRigidBody:mass` and `physxRigidBody:diagonalInertia` -- "
-                "NaN, zero, or extreme values can stall PhysX cooking and stepping.\n"
-                "- Verify every dynamic mesh has a valid `UsdPhysics.CollisionAPI` + "
-                "`UsdPhysics.MeshCollisionAPI` with a non-empty approximation.\n"
-                "- Open the asset in Kit standalone and step physics manually; the engine "
-                "log will surface the specific PhysX error that the watchdog is hiding here."
-            )
-            break
 
         # 2. Read current state
         bounds = ctx.get_asset_bounds()

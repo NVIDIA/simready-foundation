@@ -31,7 +31,7 @@ Treat the selected JSON manifest as authoritative for dependencies and requireme
 
 | Version | Dependencies | Requirements |
 |---|---|---|
-| `0.1.0` | None | `VM.BIND.001`, `VM.BIND.002`, `VM.MAT.001`, `VM.MDL.001`, `VM.MDL.002`, `VM.TEX.001`, `VM.TEX.002` |
+| `0.1.0` | None | `com.nvidia.usd.VM.BIND.001`, `VM.BIND.002`, `VM.MAT.001`, `VM.MDL.001`, `com.nvidia.usd.VM.MDL.002`, `VM.TEX.001`, `VM.TEX.002` |
 
 ## Workflow
 

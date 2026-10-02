@@ -53,8 +53,7 @@ flowchart LR
 
 #### Used in Profiles
 
-- **[Prop Robotics Neutral Profile](../profiles/prop-robotics-neutral.md)** (`v1.0.0`, `v2.0.0`, `v2.0.1`) - Multibody prop physics when the prop has more than one intended rigid body.
-- **[Robot Body Neutral Profile](../profiles/robot-body-neutral.md)** (`v1.0.0`) - Neutral robot multibody physics.
+- None.
 
 #### Feature Dependencies
 
@@ -78,10 +77,9 @@ flowchart LR
 
 #### Used in Profiles
 
-- **[Prop Robotics Neutral Profile](../profiles/prop-robotics-neutral.md)** (`v2.1.0`) - Standard multibody physics with the updated FET003 dependency.
-- **[Robot Body Neutral Profile](../profiles/robot-body-neutral.md)** (`v1.1.0`) - Standard multibody physics with the updated FET003 dependency.
-- **[Robotics Prop Profile](../profiles/profiles.md)** (`v3.0.0`) - Optional consolidated Standard multibody feature.
-- **[Robot Body Profile](../profiles/profiles.md)** (`v3.0.0`) - Optional consolidated Standard multibody feature.
+- **[Robotics Prop Profile](../profiles/robotics-prop.md)** (`v3.0.0`, `v3.1.0`, `v3.2.0`) - Optional consolidated Standard multibody feature.
+- **[Robot Body Profile](../profiles/robot-body.md)** (`v2.0.0`, `v2.1.0`, `v2.2.0`) - Optional consolidated Standard multibody feature.
+- **[Robot Gripper Profile](../profiles/profiles.md)** (`v2.0.0`, `v2.1.0`) - Optional consolidated Standard multibody feature.
 
 #### Feature Dependencies
 

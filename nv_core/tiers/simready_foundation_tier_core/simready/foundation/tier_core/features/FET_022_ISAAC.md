@@ -41,7 +41,6 @@ Products or workflows that consume this feature:
 
 #### Used in Profiles
 
-- Robot Body Isaac v1.0.0
 - Robot Gripper Isaac v0.1.0
 
 #### Feature Dependencies
@@ -69,7 +68,6 @@ Products or workflows that consume this feature:
 
 #### Used in Profiles
 
-- Robot Body Isaac v1.1.0
 - Robot Body v2.0.0 optional
 - Robot Gripper Isaac v0.2.0
 - Robot Gripper v2.0.0 optional

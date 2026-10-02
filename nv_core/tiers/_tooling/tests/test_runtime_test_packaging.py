@@ -48,7 +48,7 @@ def test_core_benchmark_extra_installs_runtime_dependencies():
 
     assert all("simready-benchmark" not in dependency for dependency in project["dependencies"])
     benchmark = project["optional-dependencies"]["benchmark"]
-    assert "simready-benchmark[kit]>=2026.6.6" in benchmark
+    assert "simready-benchmark[kit]>=2026.8.0,<2026.9.0" in benchmark
     assert "usd-core>=23.5" in benchmark
 
 
@@ -86,6 +86,49 @@ def test_source_descriptor_resolves_importable_runtime_test_package(monkeypatch)
     assert module.tier.runtime_tests_path.is_dir()
     assert module._owned_package_directory("package_that_does_not_exist_for_simready_tests") is None
     assert module._owned_package_directory("pytest") is None
+
+
+def test_installed_descriptor_ignores_unrelated_parent_project(tmp_path, monkeypatch):
+    root = _foundation_root()
+    source_module = (
+        root
+        / "nv_core"
+        / "tiers"
+        / "simready_foundation_tier_core"
+        / "simready"
+        / "foundation"
+        / "tier_core"
+        / "_tier.py"
+    )
+    unrelated_project = tmp_path / "unrelated-project"
+    unrelated_project.mkdir()
+    (unrelated_project / "pyproject.toml").write_text("[project]\nname='unrelated'\nversion='1'\n", encoding="utf-8")
+
+    install_root = unrelated_project / "target"
+    module_path = install_root / "simready" / "foundation" / "tier_core" / "_tier.py"
+    module_path.parent.mkdir(parents=True)
+    module_path.write_text(source_module.read_text(encoding="utf-8"), encoding="utf-8")
+    package_root = install_root / "simready_benchmark_kit_suite"
+    package_root.mkdir()
+    (package_root / "__init__.py").write_text("", encoding="utf-8")
+
+    module_name = "simready.foundation.tier_core._installed_contract_test"
+    spec = importlib.util.spec_from_file_location(module_name, module_path)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    monkeypatch.setitem(sys.modules, module_name, module)
+    spec.loader.exec_module(module)
+
+    descriptor_record = module.PurePosixPath("simready", "foundation", "tier_core", "_tier.py")
+    package_record = module.PurePosixPath("simready_benchmark_kit_suite", "__init__.py")
+    distribution = SimpleNamespace(
+        files=(descriptor_record, package_record),
+        locate_file=lambda record: install_root / Path(record),
+    )
+    monkeypatch.setattr(module.importlib.metadata, "packages_distributions", lambda: {"simready": ("test-tier",)})
+    monkeypatch.setattr(module.importlib.metadata, "distribution", lambda _name: distribution)
+
+    assert module._owned_package_directory("simready_benchmark_kit_suite") == package_root.resolve()
 
 
 def test_built_core_tier_wheel_contains_runtime_test_contract():

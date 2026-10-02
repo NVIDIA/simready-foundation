@@ -1,0 +1,2904 @@
+{
+  "Generic_CDU": {
+    "asset": "samples/Generic_CDU/asset/Generic_CDU.usda",
+    "root_prim": "_2192025_Generic_CDU_V1",
+    "layer": "samples/Generic_CDU/asset/layers/Generic_CDU_ConnectionPoints.usd",
+    "ports": {
+      "generic_tcs_supply_piping_connection_primary": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "thermal",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "supply",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "TCS",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "flanged",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:thermal:portDiameter": [
+            "float",
+            0.101,
+            "Data centre thermal review: CDU secondary connections are 101 mm."
+          ],
+          "simready:connectionPoint:thermal:matingDepth": [
+            "float",
+            0.025,
+            "Selected 25 mm engagement envelope for the simplified fixture flange."
+          ],
+          "simready:connectionPoint:thermal:designFlowRate": [
+            "float",
+            30.0,
+            "Data centre thermal review: a CDU covers 0.6-1.5 LPM/kW, 12-30 L/s at 1200 kW. The fixture sits at the top of that band on a single supply and return."
+          ],
+          "simready:connectionPoint:thermal:maxFlowRate": [
+            "float",
+            30.0,
+            "Data centre thermal review: a CDU covers 0.6-1.5 LPM/kW, 12-30 L/s at 1200 kW. The fixture sits at the top of that band on a single supply and return."
+          ],
+          "simready:connectionPoint:thermal:designTemperature": [
+            "float",
+            44.85,
+            "Supply reference 308 K FWS / 318 K TCS. TCS return uses 1200 kW / (18 L/s * assumed glycol volumetric heat capacity 3.9 kJ/L/K); FWS rise is 6 K."
+          ],
+          "simready:connectionPoint:thermal:maxTemperature": [
+            "float",
+            70.0,
+            "Assumed fixture temperature ceiling; not a manufacturer rating."
+          ],
+          "simready:connectionPoint:thermal:operatingPressure": [
+            "float",
+            400000.0,
+            "Assumed 4 bar supply / 3.5 bar return gauge reference pressure."
+          ],
+          "simready:connectionPoint:thermal:maxPressure": [
+            "float",
+            1000000.0,
+            "Assumed fixture pressure ceiling, Pa gauge; not derived from flange class."
+          ],
+          "simready:connectionPoint:thermal:fluidType": [
+            "token",
+            "glycol_water_25",
+            "Data centre thermal review: 25% propylene-glycol/water is the usual CDU secondary coolant, with the same heat capacity as the 30% mixture. Water elsewhere."
+          ],
+          "simready:connectionPoint:thermal:flangeRating": [
+            "token",
+            "ANSI_150",
+            "Selected nominal fixture flange designation; no certified pressure rating is inferred."
+          ],
+          "simready:connectionPoint:thermal:flangeSize": [
+            "token",
+            "NPS4",
+            "Data centre thermal review: CDU secondary connections are 101 mm."
+          ]
+        },
+        "position": [
+          -0.9371800280872155,
+          1.0398316914321202,
+          2.4134953241128323
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "placement_basis": "Retained original NVIDIA fixture port center; local +Z is the outward interface normal; removed guide-mesh scale."
+      },
+      "generic_tcs_return_piping_connection_primary": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "thermal",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "return",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "TCS",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "flanged",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:thermal:portDiameter": [
+            "float",
+            0.101,
+            "Data centre thermal review: CDU secondary connections are 101 mm."
+          ],
+          "simready:connectionPoint:thermal:matingDepth": [
+            "float",
+            0.025,
+            "Selected 25 mm engagement envelope for the simplified fixture flange."
+          ],
+          "simready:connectionPoint:thermal:designFlowRate": [
+            "float",
+            30.0,
+            "Data centre thermal review: a CDU covers 0.6-1.5 LPM/kW, 12-30 L/s at 1200 kW. The fixture sits at the top of that band on a single supply and return."
+          ],
+          "simready:connectionPoint:thermal:maxFlowRate": [
+            "float",
+            30.0,
+            "Data centre thermal review: a CDU covers 0.6-1.5 LPM/kW, 12-30 L/s at 1200 kW. The fixture sits at the top of that band on a single supply and return."
+          ],
+          "simready:connectionPoint:thermal:designTemperature": [
+            "float",
+            55.10641,
+            "1200 kW / (30 L/s * assumed glycol volumetric heat capacity 3.9 kJ/L/K) gives a 10.256 K rise. The review quotes about 11 K at this flow."
+          ],
+          "simready:connectionPoint:thermal:maxTemperature": [
+            "float",
+            70.0,
+            "Assumed fixture temperature ceiling; not a manufacturer rating."
+          ],
+          "simready:connectionPoint:thermal:operatingPressure": [
+            "float",
+            350000.0,
+            "Assumed 4 bar supply / 3.5 bar return gauge reference pressure."
+          ],
+          "simready:connectionPoint:thermal:maxPressure": [
+            "float",
+            1000000.0,
+            "Assumed fixture pressure ceiling, Pa gauge; not derived from flange class."
+          ],
+          "simready:connectionPoint:thermal:fluidType": [
+            "token",
+            "glycol_water_25",
+            "Data centre thermal review: 25% propylene-glycol/water is the usual CDU secondary coolant, with the same heat capacity as the 30% mixture. Water elsewhere."
+          ],
+          "simready:connectionPoint:thermal:flangeRating": [
+            "token",
+            "ANSI_150",
+            "Selected nominal fixture flange designation; no certified pressure rating is inferred."
+          ],
+          "simready:connectionPoint:thermal:flangeSize": [
+            "token",
+            "NPS4",
+            "Data centre thermal review: CDU secondary connections are 101 mm."
+          ]
+        },
+        "position": [
+          -0.9371800280872155,
+          0.8596979250995948,
+          2.413495324112831
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "placement_basis": "Retained original NVIDIA fixture port center; local +Z is the outward interface normal; removed guide-mesh scale."
+      },
+      "generic_fws_supply_piping_connection_primary": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "thermal",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "supply",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "FWS",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "flanged",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:thermal:portDiameter": [
+            "float",
+            0.154,
+            "Data centre thermal review: CDU facility connections are 154 mm."
+          ],
+          "simready:connectionPoint:thermal:matingDepth": [
+            "float",
+            0.025,
+            "Selected 25 mm engagement envelope for the simplified fixture flange."
+          ],
+          "simready:connectionPoint:thermal:designFlowRate": [
+            "float",
+            28.50359,
+            "1222 kW / (4.18 kJ/L/K * 10.256 K). A 4 K heat-exchanger approach at both ends makes the facility rise equal the secondary rise. The assumed maximum is 1.4x nominal."
+          ],
+          "simready:connectionPoint:thermal:maxFlowRate": [
+            "float",
+            39.90503,
+            "1222 kW / (4.18 kJ/L/K * 10.256 K). A 4 K heat-exchanger approach at both ends makes the facility rise equal the secondary rise. The assumed maximum is 1.4x nominal."
+          ],
+          "simready:connectionPoint:thermal:designTemperature": [
+            "float",
+            40.85,
+            "Facility supply is 4 K below secondary supply; facility return is 4 K below secondary return."
+          ],
+          "simready:connectionPoint:thermal:maxTemperature": [
+            "float",
+            70.0,
+            "Assumed fixture temperature ceiling; not a manufacturer rating."
+          ],
+          "simready:connectionPoint:thermal:operatingPressure": [
+            "float",
+            400000.0,
+            "Assumed 4 bar supply / 3.5 bar return gauge reference pressure."
+          ],
+          "simready:connectionPoint:thermal:maxPressure": [
+            "float",
+            1000000.0,
+            "Assumed fixture pressure ceiling, Pa gauge; not derived from flange class."
+          ],
+          "simready:connectionPoint:thermal:fluidType": [
+            "token",
+            "water",
+            "Selected fixture coolant: 30% propylene-glycol/water on CDU secondary; water elsewhere."
+          ],
+          "simready:connectionPoint:thermal:flangeRating": [
+            "token",
+            "ANSI_150",
+            "Selected nominal fixture flange designation; no certified pressure rating is inferred."
+          ],
+          "simready:connectionPoint:thermal:flangeSize": [
+            "token",
+            "NPS6",
+            "Data centre thermal review: CDU facility connections are 154 mm."
+          ]
+        },
+        "position": [
+          -0.3,
+          0.85,
+          2.414
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "placement_basis": "New facility port on cabinet top, separated from the retained TCS port centers."
+      },
+      "generic_fws_return_piping_connection_primary": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "thermal",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "return",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "FWS",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "flanged",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:thermal:portDiameter": [
+            "float",
+            0.154,
+            "Data centre thermal review: CDU facility connections are 154 mm."
+          ],
+          "simready:connectionPoint:thermal:matingDepth": [
+            "float",
+            0.025,
+            "Selected 25 mm engagement envelope for the simplified fixture flange."
+          ],
+          "simready:connectionPoint:thermal:designFlowRate": [
+            "float",
+            28.50359,
+            "1222 kW / (4.18 kJ/L/K * 10.256 K). A 4 K heat-exchanger approach at both ends makes the facility rise equal the secondary rise. The assumed maximum is 1.4x nominal."
+          ],
+          "simready:connectionPoint:thermal:maxFlowRate": [
+            "float",
+            39.90503,
+            "1222 kW / (4.18 kJ/L/K * 10.256 K). A 4 K heat-exchanger approach at both ends makes the facility rise equal the secondary rise. The assumed maximum is 1.4x nominal."
+          ],
+          "simready:connectionPoint:thermal:designTemperature": [
+            "float",
+            51.10641,
+            "Facility supply is 4 K below secondary supply; facility return is 4 K below secondary return."
+          ],
+          "simready:connectionPoint:thermal:maxTemperature": [
+            "float",
+            70.0,
+            "Assumed fixture temperature ceiling; not a manufacturer rating."
+          ],
+          "simready:connectionPoint:thermal:operatingPressure": [
+            "float",
+            350000.0,
+            "Assumed 4 bar supply / 3.5 bar return gauge reference pressure."
+          ],
+          "simready:connectionPoint:thermal:maxPressure": [
+            "float",
+            1000000.0,
+            "Assumed fixture pressure ceiling, Pa gauge; not derived from flange class."
+          ],
+          "simready:connectionPoint:thermal:fluidType": [
+            "token",
+            "water",
+            "Selected fixture coolant: 30% propylene-glycol/water on CDU secondary; water elsewhere."
+          ],
+          "simready:connectionPoint:thermal:flangeRating": [
+            "token",
+            "ANSI_150",
+            "Selected nominal fixture flange designation; no certified pressure rating is inferred."
+          ],
+          "simready:connectionPoint:thermal:flangeSize": [
+            "token",
+            "NPS6",
+            "Data centre thermal review: CDU facility connections are 154 mm."
+          ]
+        },
+        "position": [
+          -0.3,
+          0.35,
+          2.414
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "placement_basis": "New facility port on cabinet top, separated from the retained TCS port centers."
+      },
+      "generic_electrical_nominal_voltage_main": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "electrical",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "input",
+            "Chosen fixture role: UPS load output; all other equipment ports are inputs."
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "power",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "hardwired",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:electrical:matingDepth": [
+            "float",
+            0.0,
+            "hardwired connections have no plug to insert"
+          ],
+          "simready:connectionPoint:electrical:nominalVoltage": [
+            "float",
+            400.0,
+            "aif:spec electrical voltage for this class"
+          ],
+          "simready:connectionPoint:electrical:maxCurrent": [
+            "float",
+            35.0,
+            "Rated connection power / (sqrt(3) * line-line voltage * power factor), rounded upward to whole A; not normal loading."
+          ],
+          "simready:connectionPoint:electrical:phases": [
+            "int",
+            3,
+            "three-phase supply"
+          ],
+          "simready:connectionPoint:electrical:frequency": [
+            "float",
+            60.0,
+            "aif:spec electrical frequency for this class"
+          ],
+          "simready:connectionPoint:electrical:connectorType": [
+            "token",
+            "hardwired",
+            "fixed installation on this equipment class"
+          ],
+          "simready:connectionPoint:electrical:ratedPower": [
+            "float",
+            22000.0,
+            "aif:spec power rating 22.0 kW -> W"
+          ],
+          "simready:connectionPoint:electrical:breakerRating": [
+            "float",
+            50.0,
+            "Fixture device selection: smallest listed frame >= 1.25x rounded maximum current; no installation-code compliance claim."
+          ],
+          "simready:connectionPoint:electrical:powerFactor": [
+            "float",
+            0.92,
+            "aif:spec power factor"
+          ]
+        },
+        "position": [
+          -0.3,
+          0,
+          1.8
+        ],
+        "normal": [
+          0,
+          -1,
+          0
+        ],
+        "placement_basis": "New front service-panel terminal; the one fixture port represents aggregate input capacity."
+      }
+    }
+  },
+  "gb300": {
+    "asset": "samples/gb300/asset/gb300.usda",
+    "root_prim": "GB300",
+    "layer": "samples/gb300/asset/layers/GB300_ConnectionPoints.usd",
+    "ports": {
+      "spt_liq_return": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "thermal",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "return",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "TCS",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "flanged",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:thermal:portDiameter": [
+            "float",
+            0.053,
+            "Data centre thermal review: CRAH and rack connections are 53 mm."
+          ],
+          "simready:connectionPoint:thermal:matingDepth": [
+            "float",
+            0.025,
+            "Selected 25 mm engagement envelope for the simplified fixture flange."
+          ],
+          "simready:connectionPoint:thermal:designFlowRate": [
+            "float",
+            2.77512,
+            "116 kW liquid duty / (water 4.18 kJ/L/K * assumed 10 K rise)."
+          ],
+          "simready:connectionPoint:thermal:maxFlowRate": [
+            "float",
+            3.88517,
+            "Assumed 1.4x nominal fixture flow limit."
+          ],
+          "simready:connectionPoint:thermal:designTemperature": [
+            "float",
+            42.0,
+            "Independent rack fixture warm-water operating point; not a proposed mating to the CDU fixture."
+          ],
+          "simready:connectionPoint:thermal:maxTemperature": [
+            "float",
+            60.0,
+            "Assumed fixture temperature ceiling; not a manufacturer rating."
+          ],
+          "simready:connectionPoint:thermal:operatingPressure": [
+            "float",
+            350000.0,
+            "Assumed 4 bar supply / 3.5 bar return gauge reference pressure."
+          ],
+          "simready:connectionPoint:thermal:maxPressure": [
+            "float",
+            1000000.0,
+            "Assumed fixture pressure ceiling, Pa gauge; not derived from flange class."
+          ],
+          "simready:connectionPoint:thermal:fluidType": [
+            "token",
+            "water",
+            "Selected fixture coolant: 30% propylene-glycol/water on CDU secondary; water elsewhere."
+          ],
+          "simready:connectionPoint:thermal:flangeRating": [
+            "token",
+            "ANSI_150",
+            "Selected nominal fixture flange designation; no certified pressure rating is inferred."
+          ],
+          "simready:connectionPoint:thermal:flangeSize": [
+            "token",
+            "NPS2",
+            "Data centre thermal review: CRAH and rack connections are 53 mm."
+          ]
+        },
+        "position": [
+          -0.595911431796254,
+          0.11126230425287083,
+          2.2787207147207065
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "placement_basis": "Retained original NVIDIA fixture port center; local +Z is the outward interface normal; removed guide-mesh scale."
+      },
+      "spt_liq_supply": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "thermal",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "supply",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "TCS",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "flanged",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:thermal:portDiameter": [
+            "float",
+            0.053,
+            "Data centre thermal review: CRAH and rack connections are 53 mm."
+          ],
+          "simready:connectionPoint:thermal:matingDepth": [
+            "float",
+            0.025,
+            "Selected 25 mm engagement envelope for the simplified fixture flange."
+          ],
+          "simready:connectionPoint:thermal:designFlowRate": [
+            "float",
+            2.77512,
+            "116 kW liquid duty / (water 4.18 kJ/L/K * assumed 10 K rise)."
+          ],
+          "simready:connectionPoint:thermal:maxFlowRate": [
+            "float",
+            3.88517,
+            "Assumed 1.4x nominal fixture flow limit."
+          ],
+          "simready:connectionPoint:thermal:designTemperature": [
+            "float",
+            32.0,
+            "Independent rack fixture warm-water operating point; not a proposed mating to the CDU fixture."
+          ],
+          "simready:connectionPoint:thermal:maxTemperature": [
+            "float",
+            60.0,
+            "Assumed fixture temperature ceiling; not a manufacturer rating."
+          ],
+          "simready:connectionPoint:thermal:operatingPressure": [
+            "float",
+            400000.0,
+            "Assumed 4 bar supply / 3.5 bar return gauge reference pressure."
+          ],
+          "simready:connectionPoint:thermal:maxPressure": [
+            "float",
+            1000000.0,
+            "Assumed fixture pressure ceiling, Pa gauge; not derived from flange class."
+          ],
+          "simready:connectionPoint:thermal:fluidType": [
+            "token",
+            "water",
+            "Selected fixture coolant: 30% propylene-glycol/water on CDU secondary; water elsewhere."
+          ],
+          "simready:connectionPoint:thermal:flangeRating": [
+            "token",
+            "ANSI_150",
+            "Selected nominal fixture flange designation; no certified pressure rating is inferred."
+          ],
+          "simready:connectionPoint:thermal:flangeSize": [
+            "token",
+            "NPS2",
+            "Data centre thermal review: CRAH and rack connections are 53 mm."
+          ]
+        },
+        "position": [
+          -0.5959114317962539,
+          -0.11136600157797882,
+          2.2787207147207065
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "placement_basis": "Retained original NVIDIA fixture port center; local +Z is the outward interface normal; removed guide-mesh scale."
+      },
+      "spt_airvent_intake": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "airflow",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "input",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "equipment_cooling",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "open_vent",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            1.0,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:airflow:interfaceWidth": [
+            "float",
+            0.49,
+            "Chosen aggregate interface within cabinet face; matches original rack guide envelope approximately, not a measured perforation pattern."
+          ],
+          "simready:connectionPoint:airflow:interfaceHeight": [
+            "float",
+            1.8,
+            "Chosen aggregate interface within cabinet face; matches original rack guide envelope approximately, not a measured perforation pattern."
+          ],
+          "simready:connectionPoint:airflow:freeAreaRatio": [
+            "float",
+            0.7,
+            "typical perforated panel"
+          ],
+          "simready:connectionPoint:airflow:designAirflowRate": [
+            "float",
+            1.06583,
+            "CRAH: authored 11000 CFM. Rack: 19.3 kW / (1.006 kJ/kg/K * 1.2 kg/m3 * 15 K)."
+          ],
+          "simready:connectionPoint:airflow:maxAirflowRate": [
+            "float",
+            1.27899,
+            "Assumed 1.2x design airflow limit."
+          ],
+          "simready:connectionPoint:airflow:designTemperature": [
+            "float",
+            24,
+            "CRAH net sensible duty 100 kW gross minus 9 kW fan/electrical heat = 91 kW; supply 24 C. Rack warms 24 C air by 15 K."
+          ],
+          "simready:connectionPoint:airflow:maxTemperature": [
+            "float",
+            45.0,
+            "Fictional interface temperature ceiling, not an ASHRAE exhaust rating."
+          ],
+          "simready:connectionPoint:airflow:staticPressure": [
+            "float",
+            50.0,
+            "Assumed 50 Pa across intake filter/rack grille; CRAH outlet retains authored externalStaticUnitPressure 0.5 Pa. External pressure is not fan total pressure."
+          ],
+          "simready:connectionPoint:airflow:filterType": [
+            "token",
+            "none",
+            "Filter on CRAH intake only; no filter on rack or CRAH outlet."
+          ]
+        },
+        "position": [
+          0.35578785397360185,
+          0.0,
+          1.2332206910087609
+        ],
+        "normal": [
+          1,
+          0,
+          0
+        ],
+        "placement_basis": "Retained original NVIDIA fixture port center; local +Z is the outward interface normal; removed guide-mesh scale."
+      },
+      "spt_airvent_outflow": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "airflow",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "output",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "equipment_cooling",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "open_vent",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            1.0,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:airflow:interfaceWidth": [
+            "float",
+            0.49,
+            "Chosen aggregate interface within cabinet face; matches original rack guide envelope approximately, not a measured perforation pattern."
+          ],
+          "simready:connectionPoint:airflow:interfaceHeight": [
+            "float",
+            1.8,
+            "Chosen aggregate interface within cabinet face; matches original rack guide envelope approximately, not a measured perforation pattern."
+          ],
+          "simready:connectionPoint:airflow:freeAreaRatio": [
+            "float",
+            0.7,
+            "typical perforated panel"
+          ],
+          "simready:connectionPoint:airflow:designAirflowRate": [
+            "float",
+            1.06583,
+            "CRAH: authored 11000 CFM. Rack: 19.3 kW / (1.006 kJ/kg/K * 1.2 kg/m3 * 15 K)."
+          ],
+          "simready:connectionPoint:airflow:maxAirflowRate": [
+            "float",
+            1.27899,
+            "Assumed 1.2x design airflow limit."
+          ],
+          "simready:connectionPoint:airflow:designTemperature": [
+            "float",
+            39,
+            "CRAH net sensible duty 100 kW gross minus 9 kW fan/electrical heat = 91 kW; supply 24 C. Rack warms 24 C air by 15 K."
+          ],
+          "simready:connectionPoint:airflow:maxTemperature": [
+            "float",
+            45.0,
+            "Fictional interface temperature ceiling, not an ASHRAE exhaust rating."
+          ],
+          "simready:connectionPoint:airflow:staticPressure": [
+            "float",
+            50.0,
+            "Assumed 50 Pa across intake filter/rack grille; CRAH outlet retains authored externalStaticUnitPressure 0.5 Pa. External pressure is not fan total pressure."
+          ],
+          "simready:connectionPoint:airflow:filterType": [
+            "token",
+            "none",
+            "Filter on CRAH intake only; no filter on rack or CRAH outlet."
+          ]
+        },
+        "position": [
+          -0.5996979930114583,
+          0.0,
+          1.2332206910087598
+        ],
+        "normal": [
+          -1,
+          0,
+          0
+        ],
+        "placement_basis": "Retained original NVIDIA fixture port center; local +Z is the outward interface normal; removed guide-mesh scale."
+      },
+      "spt_electrical_nominal_voltage_01": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "electrical",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "input",
+            "Chosen fixture role: UPS load output; all other equipment ports are inputs."
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "power",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "hardwired",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:electrical:matingDepth": [
+            "float",
+            0.0,
+            "hardwired connections have no plug to insert"
+          ],
+          "simready:connectionPoint:electrical:nominalVoltage": [
+            "float",
+            415.0,
+            "three-phase rack PDU feed"
+          ],
+          "simready:connectionPoint:electrical:maxCurrent": [
+            "float",
+            50.0,
+            "Rated connection power / (sqrt(3) * line-line voltage * power factor), rounded upward to whole A; not normal loading."
+          ],
+          "simready:connectionPoint:electrical:phases": [
+            "int",
+            3,
+            "three-phase supply"
+          ],
+          "simready:connectionPoint:electrical:frequency": [
+            "float",
+            60.0,
+            "site frequency of the reference deployment"
+          ],
+          "simready:connectionPoint:electrical:connectorType": [
+            "token",
+            "hardwired",
+            "fixed installation on this equipment class"
+          ],
+          "simready:connectionPoint:electrical:ratedPower": [
+            "float",
+            34000.0,
+            "Two independent banks of four feeds. Each bank supports 136 kW: 34 kW capacity per feed; normal eight-feed loading is 17 kW/feed."
+          ],
+          "simready:connectionPoint:electrical:breakerRating": [
+            "float",
+            63.0,
+            "Fixture device selection: smallest listed frame >= 1.25x rounded maximum current; no installation-code compliance claim."
+          ],
+          "simready:connectionPoint:electrical:powerFactor": [
+            "float",
+            0.95,
+            "typical for this equipment class"
+          ]
+        },
+        "position": [
+          -0.5072187074139025,
+          0.11200999999998648,
+          1.9528441050000882
+        ],
+        "normal": [
+          -1,
+          0,
+          0
+        ],
+        "placement_basis": "Retained original NVIDIA fixture port center; local +Z is the outward interface normal; removed guide-mesh scale."
+      },
+      "spt_electrical_nominal_voltage_02": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "electrical",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "input",
+            "Chosen fixture role: UPS load output; all other equipment ports are inputs."
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "power",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "hardwired",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:electrical:matingDepth": [
+            "float",
+            0.0,
+            "hardwired connections have no plug to insert"
+          ],
+          "simready:connectionPoint:electrical:nominalVoltage": [
+            "float",
+            415.0,
+            "three-phase rack PDU feed"
+          ],
+          "simready:connectionPoint:electrical:maxCurrent": [
+            "float",
+            50.0,
+            "Rated connection power / (sqrt(3) * line-line voltage * power factor), rounded upward to whole A; not normal loading."
+          ],
+          "simready:connectionPoint:electrical:phases": [
+            "int",
+            3,
+            "three-phase supply"
+          ],
+          "simready:connectionPoint:electrical:frequency": [
+            "float",
+            60.0,
+            "site frequency of the reference deployment"
+          ],
+          "simready:connectionPoint:electrical:connectorType": [
+            "token",
+            "hardwired",
+            "fixed installation on this equipment class"
+          ],
+          "simready:connectionPoint:electrical:ratedPower": [
+            "float",
+            34000.0,
+            "Two independent banks of four feeds. Each bank supports 136 kW: 34 kW capacity per feed; normal eight-feed loading is 17 kW/feed."
+          ],
+          "simready:connectionPoint:electrical:breakerRating": [
+            "float",
+            63.0,
+            "Fixture device selection: smallest listed frame >= 1.25x rounded maximum current; no installation-code compliance claim."
+          ],
+          "simready:connectionPoint:electrical:powerFactor": [
+            "float",
+            0.95,
+            "typical for this equipment class"
+          ]
+        },
+        "position": [
+          -0.50722,
+          0.11200999999998586,
+          1.9083941050000863
+        ],
+        "normal": [
+          -1,
+          0,
+          0
+        ],
+        "placement_basis": "Retained original NVIDIA fixture port center; local +Z is the outward interface normal; removed guide-mesh scale."
+      },
+      "spt_electrical_nominal_voltage_03": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "electrical",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "input",
+            "Chosen fixture role: UPS load output; all other equipment ports are inputs."
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "power",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "hardwired",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:electrical:matingDepth": [
+            "float",
+            0.0,
+            "hardwired connections have no plug to insert"
+          ],
+          "simready:connectionPoint:electrical:nominalVoltage": [
+            "float",
+            415.0,
+            "three-phase rack PDU feed"
+          ],
+          "simready:connectionPoint:electrical:maxCurrent": [
+            "float",
+            50.0,
+            "Rated connection power / (sqrt(3) * line-line voltage * power factor), rounded upward to whole A; not normal loading."
+          ],
+          "simready:connectionPoint:electrical:phases": [
+            "int",
+            3,
+            "three-phase supply"
+          ],
+          "simready:connectionPoint:electrical:frequency": [
+            "float",
+            60.0,
+            "site frequency of the reference deployment"
+          ],
+          "simready:connectionPoint:electrical:connectorType": [
+            "token",
+            "hardwired",
+            "fixed installation on this equipment class"
+          ],
+          "simready:connectionPoint:electrical:ratedPower": [
+            "float",
+            34000.0,
+            "Two independent banks of four feeds. Each bank supports 136 kW: 34 kW capacity per feed; normal eight-feed loading is 17 kW/feed."
+          ],
+          "simready:connectionPoint:electrical:breakerRating": [
+            "float",
+            63.0,
+            "Fixture device selection: smallest listed frame >= 1.25x rounded maximum current; no installation-code compliance claim."
+          ],
+          "simready:connectionPoint:electrical:powerFactor": [
+            "float",
+            0.95,
+            "typical for this equipment class"
+          ]
+        },
+        "position": [
+          -0.50722,
+          0.11200999999998516,
+          1.8639441050000864
+        ],
+        "normal": [
+          -1,
+          0,
+          0
+        ],
+        "placement_basis": "Retained original NVIDIA fixture port center; local +Z is the outward interface normal; removed guide-mesh scale."
+      },
+      "spt_electrical_nominal_voltage_04": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "electrical",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "input",
+            "Chosen fixture role: UPS load output; all other equipment ports are inputs."
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "power",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "hardwired",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:electrical:matingDepth": [
+            "float",
+            0.0,
+            "hardwired connections have no plug to insert"
+          ],
+          "simready:connectionPoint:electrical:nominalVoltage": [
+            "float",
+            415.0,
+            "three-phase rack PDU feed"
+          ],
+          "simready:connectionPoint:electrical:maxCurrent": [
+            "float",
+            50.0,
+            "Rated connection power / (sqrt(3) * line-line voltage * power factor), rounded upward to whole A; not normal loading."
+          ],
+          "simready:connectionPoint:electrical:phases": [
+            "int",
+            3,
+            "three-phase supply"
+          ],
+          "simready:connectionPoint:electrical:frequency": [
+            "float",
+            60.0,
+            "site frequency of the reference deployment"
+          ],
+          "simready:connectionPoint:electrical:connectorType": [
+            "token",
+            "hardwired",
+            "fixed installation on this equipment class"
+          ],
+          "simready:connectionPoint:electrical:ratedPower": [
+            "float",
+            34000.0,
+            "Two independent banks of four feeds. Each bank supports 136 kW: 34 kW capacity per feed; normal eight-feed loading is 17 kW/feed."
+          ],
+          "simready:connectionPoint:electrical:breakerRating": [
+            "float",
+            63.0,
+            "Fixture device selection: smallest listed frame >= 1.25x rounded maximum current; no installation-code compliance claim."
+          ],
+          "simready:connectionPoint:electrical:powerFactor": [
+            "float",
+            0.95,
+            "typical for this equipment class"
+          ]
+        },
+        "position": [
+          -0.50722,
+          0.11200999999998448,
+          1.8194941050000863
+        ],
+        "normal": [
+          -1,
+          0,
+          0
+        ],
+        "placement_basis": "Retained original NVIDIA fixture port center; local +Z is the outward interface normal; removed guide-mesh scale."
+      },
+      "spt_electrical_nominal_voltage_05": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "electrical",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "input",
+            "Chosen fixture role: UPS load output; all other equipment ports are inputs."
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "power",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "hardwired",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:electrical:matingDepth": [
+            "float",
+            0.0,
+            "hardwired connections have no plug to insert"
+          ],
+          "simready:connectionPoint:electrical:nominalVoltage": [
+            "float",
+            415.0,
+            "three-phase rack PDU feed"
+          ],
+          "simready:connectionPoint:electrical:maxCurrent": [
+            "float",
+            50.0,
+            "Rated connection power / (sqrt(3) * line-line voltage * power factor), rounded upward to whole A; not normal loading."
+          ],
+          "simready:connectionPoint:electrical:phases": [
+            "int",
+            3,
+            "three-phase supply"
+          ],
+          "simready:connectionPoint:electrical:frequency": [
+            "float",
+            60.0,
+            "site frequency of the reference deployment"
+          ],
+          "simready:connectionPoint:electrical:connectorType": [
+            "token",
+            "hardwired",
+            "fixed installation on this equipment class"
+          ],
+          "simready:connectionPoint:electrical:ratedPower": [
+            "float",
+            34000.0,
+            "Two independent banks of four feeds. Each bank supports 136 kW: 34 kW capacity per feed; normal eight-feed loading is 17 kW/feed."
+          ],
+          "simready:connectionPoint:electrical:breakerRating": [
+            "float",
+            63.0,
+            "Fixture device selection: smallest listed frame >= 1.25x rounded maximum current; no installation-code compliance claim."
+          ],
+          "simready:connectionPoint:electrical:powerFactor": [
+            "float",
+            0.95,
+            "typical for this equipment class"
+          ]
+        },
+        "position": [
+          -0.50722,
+          0.11200999999996428,
+          0.4859941050000863
+        ],
+        "normal": [
+          -1,
+          0,
+          0
+        ],
+        "placement_basis": "Retained original NVIDIA fixture port center; local +Z is the outward interface normal; removed guide-mesh scale."
+      },
+      "spt_electrical_nominal_voltage_06": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "electrical",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "input",
+            "Chosen fixture role: UPS load output; all other equipment ports are inputs."
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "power",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "hardwired",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:electrical:matingDepth": [
+            "float",
+            0.0,
+            "hardwired connections have no plug to insert"
+          ],
+          "simready:connectionPoint:electrical:nominalVoltage": [
+            "float",
+            415.0,
+            "three-phase rack PDU feed"
+          ],
+          "simready:connectionPoint:electrical:maxCurrent": [
+            "float",
+            50.0,
+            "Rated connection power / (sqrt(3) * line-line voltage * power factor), rounded upward to whole A; not normal loading."
+          ],
+          "simready:connectionPoint:electrical:phases": [
+            "int",
+            3,
+            "three-phase supply"
+          ],
+          "simready:connectionPoint:electrical:frequency": [
+            "float",
+            60.0,
+            "site frequency of the reference deployment"
+          ],
+          "simready:connectionPoint:electrical:connectorType": [
+            "token",
+            "hardwired",
+            "fixed installation on this equipment class"
+          ],
+          "simready:connectionPoint:electrical:ratedPower": [
+            "float",
+            34000.0,
+            "Two independent banks of four feeds. Each bank supports 136 kW: 34 kW capacity per feed; normal eight-feed loading is 17 kW/feed."
+          ],
+          "simready:connectionPoint:electrical:breakerRating": [
+            "float",
+            63.0,
+            "Fixture device selection: smallest listed frame >= 1.25x rounded maximum current; no installation-code compliance claim."
+          ],
+          "simready:connectionPoint:electrical:powerFactor": [
+            "float",
+            0.95,
+            "typical for this equipment class"
+          ]
+        },
+        "position": [
+          -0.50722,
+          0.11200999999996361,
+          0.4415441050000863
+        ],
+        "normal": [
+          -1,
+          0,
+          0
+        ],
+        "placement_basis": "Retained original NVIDIA fixture port center; local +Z is the outward interface normal; removed guide-mesh scale."
+      },
+      "spt_electrical_nominal_voltage_07": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "electrical",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "input",
+            "Chosen fixture role: UPS load output; all other equipment ports are inputs."
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "power",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "hardwired",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:electrical:matingDepth": [
+            "float",
+            0.0,
+            "hardwired connections have no plug to insert"
+          ],
+          "simready:connectionPoint:electrical:nominalVoltage": [
+            "float",
+            415.0,
+            "three-phase rack PDU feed"
+          ],
+          "simready:connectionPoint:electrical:maxCurrent": [
+            "float",
+            50.0,
+            "Rated connection power / (sqrt(3) * line-line voltage * power factor), rounded upward to whole A; not normal loading."
+          ],
+          "simready:connectionPoint:electrical:phases": [
+            "int",
+            3,
+            "three-phase supply"
+          ],
+          "simready:connectionPoint:electrical:frequency": [
+            "float",
+            60.0,
+            "site frequency of the reference deployment"
+          ],
+          "simready:connectionPoint:electrical:connectorType": [
+            "token",
+            "hardwired",
+            "fixed installation on this equipment class"
+          ],
+          "simready:connectionPoint:electrical:ratedPower": [
+            "float",
+            34000.0,
+            "Two independent banks of four feeds. Each bank supports 136 kW: 34 kW capacity per feed; normal eight-feed loading is 17 kW/feed."
+          ],
+          "simready:connectionPoint:electrical:breakerRating": [
+            "float",
+            63.0,
+            "Fixture device selection: smallest listed frame >= 1.25x rounded maximum current; no installation-code compliance claim."
+          ],
+          "simready:connectionPoint:electrical:powerFactor": [
+            "float",
+            0.95,
+            "typical for this equipment class"
+          ]
+        },
+        "position": [
+          -0.50722,
+          0.11200999999996292,
+          0.3970941050000863
+        ],
+        "normal": [
+          -1,
+          0,
+          0
+        ],
+        "placement_basis": "Retained original NVIDIA fixture port center; local +Z is the outward interface normal; removed guide-mesh scale."
+      },
+      "spt_electrical_nominal_voltage_08": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "electrical",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "input",
+            "Chosen fixture role: UPS load output; all other equipment ports are inputs."
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "power",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "hardwired",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:electrical:matingDepth": [
+            "float",
+            0.0,
+            "hardwired connections have no plug to insert"
+          ],
+          "simready:connectionPoint:electrical:nominalVoltage": [
+            "float",
+            415.0,
+            "three-phase rack PDU feed"
+          ],
+          "simready:connectionPoint:electrical:maxCurrent": [
+            "float",
+            50.0,
+            "Rated connection power / (sqrt(3) * line-line voltage * power factor), rounded upward to whole A; not normal loading."
+          ],
+          "simready:connectionPoint:electrical:phases": [
+            "int",
+            3,
+            "three-phase supply"
+          ],
+          "simready:connectionPoint:electrical:frequency": [
+            "float",
+            60.0,
+            "site frequency of the reference deployment"
+          ],
+          "simready:connectionPoint:electrical:connectorType": [
+            "token",
+            "hardwired",
+            "fixed installation on this equipment class"
+          ],
+          "simready:connectionPoint:electrical:ratedPower": [
+            "float",
+            34000.0,
+            "Two independent banks of four feeds. Each bank supports 136 kW: 34 kW capacity per feed; normal eight-feed loading is 17 kW/feed."
+          ],
+          "simready:connectionPoint:electrical:breakerRating": [
+            "float",
+            63.0,
+            "Fixture device selection: smallest listed frame >= 1.25x rounded maximum current; no installation-code compliance claim."
+          ],
+          "simready:connectionPoint:electrical:powerFactor": [
+            "float",
+            0.95,
+            "typical for this equipment class"
+          ]
+        },
+        "position": [
+          -0.50722,
+          0.11200999999996224,
+          0.3526441050000863
+        ],
+        "normal": [
+          -1,
+          0,
+          0
+        ],
+        "placement_basis": "Retained original NVIDIA fixture port center; local +Z is the outward interface normal; removed guide-mesh scale."
+      }
+    }
+  },
+  "Synthetic_CDU": {
+    "asset": "synthetic/Synthetic_CDU/asset/Synthetic_CDU.usda",
+    "root_prim": "Synthetic_CDU",
+    "layer": "synthetic/Synthetic_CDU/asset/layers/Synthetic_CDU_ConnectionPoints.usd",
+    "ports": {
+      "acme_fws_supply_main": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "thermal",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "supply",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "FWS",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "flanged",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:thermal:portDiameter": [
+            "float",
+            0.154,
+            "Data centre thermal review: CDU facility connections are 154 mm."
+          ],
+          "simready:connectionPoint:thermal:matingDepth": [
+            "float",
+            0.025,
+            "Selected 25 mm engagement envelope for the simplified fixture flange."
+          ],
+          "simready:connectionPoint:thermal:designFlowRate": [
+            "float",
+            28.50359,
+            "1222 kW / (4.18 kJ/L/K * 10.256 K). A 4 K heat-exchanger approach at both ends makes the facility rise equal the secondary rise. The assumed maximum is 1.4x nominal."
+          ],
+          "simready:connectionPoint:thermal:maxFlowRate": [
+            "float",
+            39.90503,
+            "1222 kW / (4.18 kJ/L/K * 10.256 K). A 4 K heat-exchanger approach at both ends makes the facility rise equal the secondary rise. The assumed maximum is 1.4x nominal."
+          ],
+          "simready:connectionPoint:thermal:designTemperature": [
+            "float",
+            40.85,
+            "Facility supply is 4 K below secondary supply; facility return is 4 K below secondary return."
+          ],
+          "simready:connectionPoint:thermal:maxTemperature": [
+            "float",
+            70.0,
+            "Assumed fixture temperature ceiling; not a manufacturer rating."
+          ],
+          "simready:connectionPoint:thermal:operatingPressure": [
+            "float",
+            400000.0,
+            "Assumed 4 bar supply / 3.5 bar return gauge reference pressure."
+          ],
+          "simready:connectionPoint:thermal:maxPressure": [
+            "float",
+            1000000.0,
+            "Assumed fixture pressure ceiling, Pa gauge; not derived from flange class."
+          ],
+          "simready:connectionPoint:thermal:fluidType": [
+            "token",
+            "water",
+            "Selected fixture coolant: 30% propylene-glycol/water on CDU secondary; water elsewhere."
+          ],
+          "simready:connectionPoint:thermal:flangeRating": [
+            "token",
+            "ANSI_150",
+            "Selected nominal fixture flange designation; no certified pressure rating is inferred."
+          ],
+          "simready:connectionPoint:thermal:flangeSize": [
+            "token",
+            "NPS6",
+            "Data centre thermal review: CDU facility connections are 154 mm."
+          ]
+        },
+        "position": [
+          0.3,
+          -0.3,
+          2.4
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "placement_basis": "Authored fixture interface relative to fictional cabinet dimensions, not measured CAD hardware."
+      },
+      "acme_fws_return_main": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "thermal",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "return",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "FWS",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "flanged",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:thermal:portDiameter": [
+            "float",
+            0.154,
+            "Data centre thermal review: CDU facility connections are 154 mm."
+          ],
+          "simready:connectionPoint:thermal:matingDepth": [
+            "float",
+            0.025,
+            "Selected 25 mm engagement envelope for the simplified fixture flange."
+          ],
+          "simready:connectionPoint:thermal:designFlowRate": [
+            "float",
+            28.50359,
+            "1222 kW / (4.18 kJ/L/K * 10.256 K). A 4 K heat-exchanger approach at both ends makes the facility rise equal the secondary rise. The assumed maximum is 1.4x nominal."
+          ],
+          "simready:connectionPoint:thermal:maxFlowRate": [
+            "float",
+            39.90503,
+            "1222 kW / (4.18 kJ/L/K * 10.256 K). A 4 K heat-exchanger approach at both ends makes the facility rise equal the secondary rise. The assumed maximum is 1.4x nominal."
+          ],
+          "simready:connectionPoint:thermal:designTemperature": [
+            "float",
+            51.10641,
+            "Facility supply is 4 K below secondary supply; facility return is 4 K below secondary return."
+          ],
+          "simready:connectionPoint:thermal:maxTemperature": [
+            "float",
+            70.0,
+            "Assumed fixture temperature ceiling; not a manufacturer rating."
+          ],
+          "simready:connectionPoint:thermal:operatingPressure": [
+            "float",
+            350000.0,
+            "Assumed 4 bar supply / 3.5 bar return gauge reference pressure."
+          ],
+          "simready:connectionPoint:thermal:maxPressure": [
+            "float",
+            1000000.0,
+            "Assumed fixture pressure ceiling, Pa gauge; not derived from flange class."
+          ],
+          "simready:connectionPoint:thermal:fluidType": [
+            "token",
+            "water",
+            "Selected fixture coolant: 30% propylene-glycol/water on CDU secondary; water elsewhere."
+          ],
+          "simready:connectionPoint:thermal:flangeRating": [
+            "token",
+            "ANSI_150",
+            "Selected nominal fixture flange designation; no certified pressure rating is inferred."
+          ],
+          "simready:connectionPoint:thermal:flangeSize": [
+            "token",
+            "NPS6",
+            "Data centre thermal review: CDU facility connections are 154 mm."
+          ]
+        },
+        "position": [
+          0.3,
+          0.3,
+          2.4
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "placement_basis": "Authored fixture interface relative to fictional cabinet dimensions, not measured CAD hardware."
+      },
+      "acme_tcs_supply_main": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "thermal",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "supply",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "TCS",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "flanged",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:thermal:portDiameter": [
+            "float",
+            0.101,
+            "Data centre thermal review: CDU secondary connections are 101 mm."
+          ],
+          "simready:connectionPoint:thermal:matingDepth": [
+            "float",
+            0.025,
+            "Selected 25 mm engagement envelope for the simplified fixture flange."
+          ],
+          "simready:connectionPoint:thermal:designFlowRate": [
+            "float",
+            30.0,
+            "Data centre thermal review: a CDU covers 0.6-1.5 LPM/kW, 12-30 L/s at 1200 kW. The fixture sits at the top of that band on a single supply and return."
+          ],
+          "simready:connectionPoint:thermal:maxFlowRate": [
+            "float",
+            30.0,
+            "Data centre thermal review: a CDU covers 0.6-1.5 LPM/kW, 12-30 L/s at 1200 kW. The fixture sits at the top of that band on a single supply and return."
+          ],
+          "simready:connectionPoint:thermal:designTemperature": [
+            "float",
+            44.85,
+            "Supply reference 308 K FWS / 318 K TCS. TCS return uses 1200 kW / (18 L/s * assumed glycol volumetric heat capacity 3.9 kJ/L/K); FWS rise is 6 K."
+          ],
+          "simready:connectionPoint:thermal:maxTemperature": [
+            "float",
+            70.0,
+            "Assumed fixture temperature ceiling; not a manufacturer rating."
+          ],
+          "simready:connectionPoint:thermal:operatingPressure": [
+            "float",
+            400000.0,
+            "Assumed 4 bar supply / 3.5 bar return gauge reference pressure."
+          ],
+          "simready:connectionPoint:thermal:maxPressure": [
+            "float",
+            1000000.0,
+            "Assumed fixture pressure ceiling, Pa gauge; not derived from flange class."
+          ],
+          "simready:connectionPoint:thermal:fluidType": [
+            "token",
+            "glycol_water_25",
+            "Data centre thermal review: 25% propylene-glycol/water is the usual CDU secondary coolant, with the same heat capacity as the 30% mixture. Water elsewhere."
+          ],
+          "simready:connectionPoint:thermal:flangeRating": [
+            "token",
+            "ANSI_150",
+            "Selected nominal fixture flange designation; no certified pressure rating is inferred."
+          ],
+          "simready:connectionPoint:thermal:flangeSize": [
+            "token",
+            "NPS4",
+            "Data centre thermal review: CDU secondary connections are 101 mm."
+          ]
+        },
+        "position": [
+          -0.3,
+          -0.3,
+          2.4
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "placement_basis": "Authored fixture interface relative to fictional cabinet dimensions, not measured CAD hardware."
+      },
+      "acme_tcs_return_main": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "thermal",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "return",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "TCS",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "flanged",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:thermal:portDiameter": [
+            "float",
+            0.101,
+            "Data centre thermal review: CDU secondary connections are 101 mm."
+          ],
+          "simready:connectionPoint:thermal:matingDepth": [
+            "float",
+            0.025,
+            "Selected 25 mm engagement envelope for the simplified fixture flange."
+          ],
+          "simready:connectionPoint:thermal:designFlowRate": [
+            "float",
+            30.0,
+            "Data centre thermal review: a CDU covers 0.6-1.5 LPM/kW, 12-30 L/s at 1200 kW. The fixture sits at the top of that band on a single supply and return."
+          ],
+          "simready:connectionPoint:thermal:maxFlowRate": [
+            "float",
+            30.0,
+            "Data centre thermal review: a CDU covers 0.6-1.5 LPM/kW, 12-30 L/s at 1200 kW. The fixture sits at the top of that band on a single supply and return."
+          ],
+          "simready:connectionPoint:thermal:designTemperature": [
+            "float",
+            55.10641,
+            "1200 kW / (30 L/s * assumed glycol volumetric heat capacity 3.9 kJ/L/K) gives a 10.256 K rise. The review quotes about 11 K at this flow."
+          ],
+          "simready:connectionPoint:thermal:maxTemperature": [
+            "float",
+            70.0,
+            "Assumed fixture temperature ceiling; not a manufacturer rating."
+          ],
+          "simready:connectionPoint:thermal:operatingPressure": [
+            "float",
+            350000.0,
+            "Assumed 4 bar supply / 3.5 bar return gauge reference pressure."
+          ],
+          "simready:connectionPoint:thermal:maxPressure": [
+            "float",
+            1000000.0,
+            "Assumed fixture pressure ceiling, Pa gauge; not derived from flange class."
+          ],
+          "simready:connectionPoint:thermal:fluidType": [
+            "token",
+            "glycol_water_25",
+            "Data centre thermal review: 25% propylene-glycol/water is the usual CDU secondary coolant, with the same heat capacity as the 30% mixture. Water elsewhere."
+          ],
+          "simready:connectionPoint:thermal:flangeRating": [
+            "token",
+            "ANSI_150",
+            "Selected nominal fixture flange designation; no certified pressure rating is inferred."
+          ],
+          "simready:connectionPoint:thermal:flangeSize": [
+            "token",
+            "NPS4",
+            "Data centre thermal review: CDU secondary connections are 101 mm."
+          ]
+        },
+        "position": [
+          -0.3,
+          0.3,
+          2.4
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "placement_basis": "Authored fixture interface relative to fictional cabinet dimensions, not measured CAD hardware."
+      },
+      "acme_electrical_nominal_voltage_main": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "electrical",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "input",
+            "Chosen fixture role: UPS load output; all other equipment ports are inputs."
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "power",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "hardwired",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:electrical:matingDepth": [
+            "float",
+            0.0,
+            "hardwired connections have no plug to insert"
+          ],
+          "simready:connectionPoint:electrical:nominalVoltage": [
+            "float",
+            400.0,
+            "aif:spec electrical voltage for this class"
+          ],
+          "simready:connectionPoint:electrical:maxCurrent": [
+            "float",
+            35.0,
+            "Rated connection power / (sqrt(3) * line-line voltage * power factor), rounded upward to whole A; not normal loading."
+          ],
+          "simready:connectionPoint:electrical:phases": [
+            "int",
+            3,
+            "three-phase supply"
+          ],
+          "simready:connectionPoint:electrical:frequency": [
+            "float",
+            60.0,
+            "aif:spec electrical frequency for this class"
+          ],
+          "simready:connectionPoint:electrical:connectorType": [
+            "token",
+            "hardwired",
+            "fixed installation on this equipment class"
+          ],
+          "simready:connectionPoint:electrical:ratedPower": [
+            "float",
+            22000.0,
+            "aif:spec power rating 22.0 kW -> W"
+          ],
+          "simready:connectionPoint:electrical:breakerRating": [
+            "float",
+            50.0,
+            "Fixture device selection: smallest listed frame >= 1.25x rounded maximum current; no installation-code compliance claim."
+          ],
+          "simready:connectionPoint:electrical:powerFactor": [
+            "float",
+            0.92,
+            "aif:spec power factor"
+          ]
+        },
+        "position": [
+          0.36,
+          0.6,
+          1.92
+        ],
+        "normal": [
+          0,
+          1,
+          0
+        ],
+        "placement_basis": "Authored fixture interface relative to fictional cabinet dimensions, not measured CAD hardware."
+      }
+    }
+  },
+  "Synthetic_CRAH": {
+    "asset": "samples/Synthetic_CRAH/asset/Synthetic_CRAH.usda",
+    "root_prim": "Synthetic_CRAH",
+    "layer": "samples/Synthetic_CRAH/asset/layers/Synthetic_CRAH_ConnectionPoints.usd",
+    "ports": {
+      "acme_liq_supply_main": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "thermal",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "supply",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "FWS",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "flanged",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:thermal:portDiameter": [
+            "float",
+            0.053,
+            "Data centre thermal review: CRAH and rack connections are 53 mm."
+          ],
+          "simready:connectionPoint:thermal:matingDepth": [
+            "float",
+            0.025,
+            "Selected 25 mm engagement envelope for the simplified fixture flange."
+          ],
+          "simready:connectionPoint:thermal:designFlowRate": [
+            "float",
+            4.16395,
+            "Authored flowRate 66 US gallons/min converted to L/s."
+          ],
+          "simready:connectionPoint:thermal:maxFlowRate": [
+            "float",
+            5.82953,
+            "Assumed 1.4x nominal fixture flow limit."
+          ],
+          "simready:connectionPoint:thermal:designTemperature": [
+            "float",
+            18,
+            "18 C supply; 105 kW gross coil duty / (authored 66 US gpm * water 4.18 kJ/L/K) rise."
+          ],
+          "simready:connectionPoint:thermal:maxTemperature": [
+            "float",
+            60.0,
+            "Assumed fixture temperature ceiling; not a manufacturer rating."
+          ],
+          "simready:connectionPoint:thermal:operatingPressure": [
+            "float",
+            400000.0,
+            "Assumed inlet 4 bar gauge; outlet subtracts authored 12 ft-water unit pressure drop converted to Pa."
+          ],
+          "simready:connectionPoint:thermal:maxPressure": [
+            "float",
+            1000000.0,
+            "Assumed fixture pressure ceiling, Pa gauge; not derived from flange class."
+          ],
+          "simready:connectionPoint:thermal:fluidType": [
+            "token",
+            "water",
+            "Selected fixture coolant: 30% propylene-glycol/water on CDU secondary; water elsewhere."
+          ],
+          "simready:connectionPoint:thermal:flangeRating": [
+            "token",
+            "ANSI_150",
+            "Selected nominal fixture flange designation; no certified pressure rating is inferred."
+          ],
+          "simready:connectionPoint:thermal:flangeSize": [
+            "token",
+            "NPS2",
+            "Data centre thermal review: CRAH and rack connections are 53 mm."
+          ]
+        },
+        "position": [
+          -0.46,
+          0,
+          1.974
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "placement_basis": "Authored fixture interface relative to fictional cabinet dimensions, not measured CAD hardware."
+      },
+      "acme_liq_return_main": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "thermal",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "return",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "FWS",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "flanged",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:thermal:portDiameter": [
+            "float",
+            0.053,
+            "Data centre thermal review: CRAH and rack connections are 53 mm."
+          ],
+          "simready:connectionPoint:thermal:matingDepth": [
+            "float",
+            0.025,
+            "Selected 25 mm engagement envelope for the simplified fixture flange."
+          ],
+          "simready:connectionPoint:thermal:designFlowRate": [
+            "float",
+            4.16395,
+            "Authored flowRate 66 US gallons/min converted to L/s."
+          ],
+          "simready:connectionPoint:thermal:maxFlowRate": [
+            "float",
+            5.82953,
+            "Assumed 1.4x nominal fixture flow limit."
+          ],
+          "simready:connectionPoint:thermal:designTemperature": [
+            "float",
+            24.03264,
+            "18 C supply; 105 kW gross coil duty / (authored 66 US gpm * water 4.18 kJ/L/K) rise."
+          ],
+          "simready:connectionPoint:thermal:maxTemperature": [
+            "float",
+            60.0,
+            "Assumed fixture temperature ceiling; not a manufacturer rating."
+          ],
+          "simready:connectionPoint:thermal:operatingPressure": [
+            "float",
+            364131.197,
+            "Assumed inlet 4 bar gauge; outlet subtracts authored 12 ft-water unit pressure drop converted to Pa."
+          ],
+          "simready:connectionPoint:thermal:maxPressure": [
+            "float",
+            1000000.0,
+            "Assumed fixture pressure ceiling, Pa gauge; not derived from flange class."
+          ],
+          "simready:connectionPoint:thermal:fluidType": [
+            "token",
+            "water",
+            "Selected fixture coolant: 30% propylene-glycol/water on CDU secondary; water elsewhere."
+          ],
+          "simready:connectionPoint:thermal:flangeRating": [
+            "token",
+            "ANSI_150",
+            "Selected nominal fixture flange designation; no certified pressure rating is inferred."
+          ],
+          "simready:connectionPoint:thermal:flangeSize": [
+            "token",
+            "NPS2",
+            "Data centre thermal review: CRAH and rack connections are 53 mm."
+          ]
+        },
+        "position": [
+          0.46,
+          0,
+          1.974
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "placement_basis": "Authored fixture interface relative to fictional cabinet dimensions, not measured CAD hardware."
+      },
+      "acme_airvent_intake_front": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "airflow",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "input",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "equipment_cooling",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "open_vent",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            1.0,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:airflow:interfaceWidth": [
+            "float",
+            1.6,
+            "Chosen aggregate interface within cabinet face; matches original rack guide envelope approximately, not a measured perforation pattern."
+          ],
+          "simready:connectionPoint:airflow:interfaceHeight": [
+            "float",
+            1.2,
+            "Chosen aggregate interface within cabinet face; matches original rack guide envelope approximately, not a measured perforation pattern."
+          ],
+          "simready:connectionPoint:airflow:freeAreaRatio": [
+            "float",
+            0.7,
+            "typical perforated panel"
+          ],
+          "simready:connectionPoint:airflow:designAirflowRate": [
+            "float",
+            5.19142,
+            "CRAH: authored 11000 CFM. Rack: 19.3 kW / (1.006 kJ/kg/K * 1.2 kg/m3 * 15 K)."
+          ],
+          "simready:connectionPoint:airflow:maxAirflowRate": [
+            "float",
+            6.22971,
+            "Assumed 1.2x design airflow limit."
+          ],
+          "simready:connectionPoint:airflow:designTemperature": [
+            "float",
+            38.52031,
+            "CRAH net sensible duty 100 kW gross minus 9 kW fan/electrical heat = 91 kW; supply 24 C. Rack warms 24 C air by 15 K."
+          ],
+          "simready:connectionPoint:airflow:maxTemperature": [
+            "float",
+            45.0,
+            "Fictional interface temperature ceiling, not an ASHRAE exhaust rating."
+          ],
+          "simready:connectionPoint:airflow:staticPressure": [
+            "float",
+            50.0,
+            "Assumed 50 Pa across intake filter/rack grille; CRAH outlet retains authored externalStaticUnitPressure 0.5 Pa. External pressure is not fan total pressure."
+          ],
+          "simready:connectionPoint:airflow:filterType": [
+            "token",
+            "MERV_8",
+            "Filter on CRAH intake only; no filter on rack or CRAH outlet."
+          ]
+        },
+        "position": [
+          0,
+          -0.43,
+          1.15
+        ],
+        "normal": [
+          0,
+          -1,
+          0
+        ],
+        "placement_basis": "Authored fixture interface relative to fictional cabinet dimensions, not measured CAD hardware."
+      },
+      "acme_airvent_outflow_rear": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "airflow",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "output",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "equipment_cooling",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "open_vent",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            1.0,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:airflow:interfaceWidth": [
+            "float",
+            1.6,
+            "Chosen aggregate interface within cabinet face; matches original rack guide envelope approximately, not a measured perforation pattern."
+          ],
+          "simready:connectionPoint:airflow:interfaceHeight": [
+            "float",
+            1.2,
+            "Chosen aggregate interface within cabinet face; matches original rack guide envelope approximately, not a measured perforation pattern."
+          ],
+          "simready:connectionPoint:airflow:freeAreaRatio": [
+            "float",
+            0.7,
+            "typical perforated panel"
+          ],
+          "simready:connectionPoint:airflow:designAirflowRate": [
+            "float",
+            5.19142,
+            "CRAH: authored 11000 CFM. Rack: 19.3 kW / (1.006 kJ/kg/K * 1.2 kg/m3 * 15 K)."
+          ],
+          "simready:connectionPoint:airflow:maxAirflowRate": [
+            "float",
+            6.22971,
+            "Assumed 1.2x design airflow limit."
+          ],
+          "simready:connectionPoint:airflow:designTemperature": [
+            "float",
+            24,
+            "CRAH net sensible duty 100 kW gross minus 9 kW fan/electrical heat = 91 kW; supply 24 C. Rack warms 24 C air by 15 K."
+          ],
+          "simready:connectionPoint:airflow:maxTemperature": [
+            "float",
+            45.0,
+            "Fictional interface temperature ceiling, not an ASHRAE exhaust rating."
+          ],
+          "simready:connectionPoint:airflow:staticPressure": [
+            "float",
+            12.4544,
+            "Data centre thermal review: a CRAH holds about 0.05 in.water, 12.4544 Pa, into the white space."
+          ],
+          "simready:connectionPoint:airflow:filterType": [
+            "token",
+            "none",
+            "Filter on CRAH intake only; no filter on rack or CRAH outlet."
+          ]
+        },
+        "position": [
+          0,
+          0.43,
+          1.15
+        ],
+        "normal": [
+          0,
+          1,
+          0
+        ],
+        "placement_basis": "Authored fixture interface relative to fictional cabinet dimensions, not measured CAD hardware."
+      },
+      "acme_electrical_nominal_voltage_main": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "electrical",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "input",
+            "Chosen fixture role: UPS load output; all other equipment ports are inputs."
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "power",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "hardwired",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:electrical:matingDepth": [
+            "float",
+            0.0,
+            "hardwired connections have no plug to insert"
+          ],
+          "simready:connectionPoint:electrical:nominalVoltage": [
+            "float",
+            415.0,
+            "aif:spec electrical voltage for this class"
+          ],
+          "simready:connectionPoint:electrical:maxCurrent": [
+            "float",
+            14.0,
+            "Rated connection power / (sqrt(3) * line-line voltage * power factor), rounded upward to whole A; not normal loading."
+          ],
+          "simready:connectionPoint:electrical:phases": [
+            "int",
+            3,
+            "aif:spec electrical phase count"
+          ],
+          "simready:connectionPoint:electrical:frequency": [
+            "float",
+            50.0,
+            "aif:spec electrical frequency for this class"
+          ],
+          "simready:connectionPoint:electrical:connectorType": [
+            "token",
+            "hardwired",
+            "fixed installation on this equipment class"
+          ],
+          "simready:connectionPoint:electrical:ratedPower": [
+            "float",
+            9000.0,
+            "aif:spec power rating 9.0 kW -> W"
+          ],
+          "simready:connectionPoint:electrical:breakerRating": [
+            "float",
+            20.0,
+            "Fixture device selection: smallest listed frame >= 1.25x rounded maximum current; no installation-code compliance claim."
+          ],
+          "simready:connectionPoint:electrical:powerFactor": [
+            "float",
+            0.95,
+            "typical for this equipment class"
+          ]
+        },
+        "position": [
+          0.92,
+          0.0,
+          1.58
+        ],
+        "normal": [
+          1,
+          0,
+          0
+        ],
+        "placement_basis": "Selected side-panel electrical terminal, outside the front/rear airflow regions."
+      }
+    }
+  },
+  "Synthetic_UPS": {
+    "asset": "samples/Synthetic_UPS/asset/Synthetic_UPS.usda",
+    "root_prim": "Synthetic_UPS",
+    "layer": "samples/Synthetic_UPS/asset/layers/Synthetic_UPS_ConnectionPoints.usd",
+    "ports": {
+      "acme_electrical_nominal_voltage_main": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "electrical",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "output",
+            "Chosen fixture role: UPS load output; all other equipment ports are inputs."
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "power",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "hardwired",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            1.2,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:electrical:matingDepth": [
+            "float",
+            0.0,
+            "hardwired connections have no plug to insert"
+          ],
+          "simready:connectionPoint:electrical:nominalVoltage": [
+            "float",
+            400.0,
+            "UPS outputActivePower, outputVoltage, loadPowerFactor, electricalOutputFrequency and electricalOutputPhase; no input/charging model."
+          ],
+          "simready:connectionPoint:electrical:maxCurrent": [
+            "float",
+            1444.0,
+            "Rated connection power / (sqrt(3) * line-line voltage * power factor), rounded upward to whole A; not normal loading."
+          ],
+          "simready:connectionPoint:electrical:phases": [
+            "int",
+            3,
+            "UPS outputActivePower, outputVoltage, loadPowerFactor, electricalOutputFrequency and electricalOutputPhase; no input/charging model."
+          ],
+          "simready:connectionPoint:electrical:frequency": [
+            "float",
+            50.0,
+            "UPS outputActivePower, outputVoltage, loadPowerFactor, electricalOutputFrequency and electricalOutputPhase; no input/charging model."
+          ],
+          "simready:connectionPoint:electrical:connectorType": [
+            "token",
+            "hardwired",
+            "fixed installation on this equipment class"
+          ],
+          "simready:connectionPoint:electrical:ratedPower": [
+            "float",
+            1000000.0,
+            "UPS outputActivePower, outputVoltage, loadPowerFactor, electricalOutputFrequency and electricalOutputPhase; no input/charging model."
+          ],
+          "simready:connectionPoint:electrical:breakerRating": [
+            "float",
+            2000.0,
+            "Fixture device selection: smallest listed frame >= 1.25x rounded maximum current; no installation-code compliance claim."
+          ],
+          "simready:connectionPoint:electrical:powerFactor": [
+            "float",
+            1.0,
+            "UPS outputActivePower, outputVoltage, loadPowerFactor, electricalOutputFrequency and electricalOutputPhase; no input/charging model."
+          ]
+        },
+        "position": [
+          0.72,
+          0.45,
+          1.6
+        ],
+        "normal": [
+          0,
+          1,
+          0
+        ],
+        "placement_basis": "Authored fixture interface relative to fictional cabinet dimensions, not measured CAD hardware."
+      }
+    }
+  },
+  "Synthetic_ComputeRack": {
+    "asset": "synthetic/Synthetic_ComputeRack/asset/Synthetic_ComputeRack.usda",
+    "root_prim": "Synthetic_ComputeRack",
+    "layer": "synthetic/Synthetic_ComputeRack/asset/layers/Synthetic_ComputeRack_ConnectionPoints.usd",
+    "ports": {
+      "acme_liq_supply_main": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "thermal",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "supply",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "TCS",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "flanged",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:thermal:portDiameter": [
+            "float",
+            0.053,
+            "Data centre thermal review: CRAH and rack connections are 53 mm."
+          ],
+          "simready:connectionPoint:thermal:matingDepth": [
+            "float",
+            0.025,
+            "Selected 25 mm engagement envelope for the simplified fixture flange."
+          ],
+          "simready:connectionPoint:thermal:designFlowRate": [
+            "float",
+            2.77512,
+            "116 kW liquid duty / (water 4.18 kJ/L/K * assumed 10 K rise)."
+          ],
+          "simready:connectionPoint:thermal:maxFlowRate": [
+            "float",
+            3.88517,
+            "Assumed 1.4x nominal fixture flow limit."
+          ],
+          "simready:connectionPoint:thermal:designTemperature": [
+            "float",
+            32.0,
+            "Independent rack fixture warm-water operating point; not a proposed mating to the CDU fixture."
+          ],
+          "simready:connectionPoint:thermal:maxTemperature": [
+            "float",
+            60.0,
+            "Assumed fixture temperature ceiling; not a manufacturer rating."
+          ],
+          "simready:connectionPoint:thermal:operatingPressure": [
+            "float",
+            400000.0,
+            "Assumed 4 bar supply / 3.5 bar return gauge reference pressure."
+          ],
+          "simready:connectionPoint:thermal:maxPressure": [
+            "float",
+            1000000.0,
+            "Assumed fixture pressure ceiling, Pa gauge; not derived from flange class."
+          ],
+          "simready:connectionPoint:thermal:fluidType": [
+            "token",
+            "water",
+            "Selected fixture coolant: 30% propylene-glycol/water on CDU secondary; water elsewhere."
+          ],
+          "simready:connectionPoint:thermal:flangeRating": [
+            "token",
+            "ANSI_150",
+            "Selected nominal fixture flange designation; no certified pressure rating is inferred."
+          ],
+          "simready:connectionPoint:thermal:flangeSize": [
+            "token",
+            "NPS2",
+            "Data centre thermal review: CRAH and rack connections are 53 mm."
+          ]
+        },
+        "position": [
+          -0.15,
+          0,
+          2.3
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "placement_basis": "Authored fixture interface relative to fictional cabinet dimensions, not measured CAD hardware."
+      },
+      "acme_liq_return_main": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "thermal",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "return",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "TCS",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "flanged",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            0.6,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:thermal:portDiameter": [
+            "float",
+            0.053,
+            "Data centre thermal review: CRAH and rack connections are 53 mm."
+          ],
+          "simready:connectionPoint:thermal:matingDepth": [
+            "float",
+            0.025,
+            "Selected 25 mm engagement envelope for the simplified fixture flange."
+          ],
+          "simready:connectionPoint:thermal:designFlowRate": [
+            "float",
+            2.77512,
+            "116 kW liquid duty / (water 4.18 kJ/L/K * assumed 10 K rise)."
+          ],
+          "simready:connectionPoint:thermal:maxFlowRate": [
+            "float",
+            3.88517,
+            "Assumed 1.4x nominal fixture flow limit."
+          ],
+          "simready:connectionPoint:thermal:designTemperature": [
+            "float",
+            42.0,
+            "Independent rack fixture warm-water operating point; not a proposed mating to the CDU fixture."
+          ],
+          "simready:connectionPoint:thermal:maxTemperature": [
+            "float",
+            60.0,
+            "Assumed fixture temperature ceiling; not a manufacturer rating."
+          ],
+          "simready:connectionPoint:thermal:operatingPressure": [
+            "float",
+            350000.0,
+            "Assumed 4 bar supply / 3.5 bar return gauge reference pressure."
+          ],
+          "simready:connectionPoint:thermal:maxPressure": [
+            "float",
+            1000000.0,
+            "Assumed fixture pressure ceiling, Pa gauge; not derived from flange class."
+          ],
+          "simready:connectionPoint:thermal:fluidType": [
+            "token",
+            "water",
+            "Selected fixture coolant: 30% propylene-glycol/water on CDU secondary; water elsewhere."
+          ],
+          "simready:connectionPoint:thermal:flangeRating": [
+            "token",
+            "ANSI_150",
+            "Selected nominal fixture flange designation; no certified pressure rating is inferred."
+          ],
+          "simready:connectionPoint:thermal:flangeSize": [
+            "token",
+            "NPS2",
+            "Data centre thermal review: CRAH and rack connections are 53 mm."
+          ]
+        },
+        "position": [
+          0.15,
+          0,
+          2.3
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ],
+        "placement_basis": "Authored fixture interface relative to fictional cabinet dimensions, not measured CAD hardware."
+      },
+      "acme_airvent_intake_front": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "airflow",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "input",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "equipment_cooling",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "open_vent",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            1.0,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:airflow:interfaceWidth": [
+            "float",
+            0.49,
+            "Chosen aggregate interface within cabinet face; matches original rack guide envelope approximately, not a measured perforation pattern."
+          ],
+          "simready:connectionPoint:airflow:interfaceHeight": [
+            "float",
+            1.8,
+            "Chosen aggregate interface within cabinet face; matches original rack guide envelope approximately, not a measured perforation pattern."
+          ],
+          "simready:connectionPoint:airflow:freeAreaRatio": [
+            "float",
+            0.7,
+            "typical perforated panel"
+          ],
+          "simready:connectionPoint:airflow:designAirflowRate": [
+            "float",
+            1.06583,
+            "CRAH: authored 11000 CFM. Rack: 19.3 kW / (1.006 kJ/kg/K * 1.2 kg/m3 * 15 K)."
+          ],
+          "simready:connectionPoint:airflow:maxAirflowRate": [
+            "float",
+            1.27899,
+            "Assumed 1.2x design airflow limit."
+          ],
+          "simready:connectionPoint:airflow:designTemperature": [
+            "float",
+            24,
+            "CRAH net sensible duty 100 kW gross minus 9 kW fan/electrical heat = 91 kW; supply 24 C. Rack warms 24 C air by 15 K."
+          ],
+          "simready:connectionPoint:airflow:maxTemperature": [
+            "float",
+            45.0,
+            "Fictional interface temperature ceiling, not an ASHRAE exhaust rating."
+          ],
+          "simready:connectionPoint:airflow:staticPressure": [
+            "float",
+            50.0,
+            "Assumed 50 Pa across intake filter/rack grille; CRAH outlet retains authored externalStaticUnitPressure 0.5 Pa. External pressure is not fan total pressure."
+          ],
+          "simready:connectionPoint:airflow:filterType": [
+            "token",
+            "none",
+            "Filter on CRAH intake only; no filter on rack or CRAH outlet."
+          ]
+        },
+        "position": [
+          0,
+          -0.6,
+          1.15
+        ],
+        "normal": [
+          0,
+          -1,
+          0
+        ],
+        "placement_basis": "Authored fixture interface relative to fictional cabinet dimensions, not measured CAD hardware."
+      },
+      "acme_airvent_outflow_rear": {
+        "properties": {
+          "simready:connectionPoint:domain": [
+            "token",
+            "airflow",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:direction": [
+            "token",
+            "output",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:system": [
+            "token",
+            "equipment_cooling",
+            "CP.004 prim name"
+          ],
+          "simready:connectionPoint:disconnectType": [
+            "token",
+            "open_vent",
+            "typical for the domain on this equipment class"
+          ],
+          "simready:connectionPoint:serviceClearance": [
+            "float",
+            1.0,
+            "Assumed clear service distance in an unobstructed fixture scene; not a measured installation or code requirement."
+          ],
+          "simready:connectionPoint:airflow:interfaceWidth": [
+            "float",
+            0.49,
+            "Chosen aggregate interface within cabinet face; matches original rack guide envelope approximately, not a measured perforation pattern."
+          ],
+          "simready:connectionPoint:airflow:interfaceHeight": [
+            "float",
+            1.8,
+            "Chosen aggregate interface within cabinet face; matches original rack guide envelope approximately, not a measured perforation pattern."
+          ],
+          "simready:connectionPoint:airflow:freeAreaRatio": [
+            "float",
+            0.7,
+            "typical perforated panel"
+          ],
+          "simready:connectionPoint:airflow:designAirflowRate": [
+            "float",
+            1.06583,
+            "CRAH: authored 11000 CFM. Rack: 19.3 kW / (1.006 kJ/kg/K * 1.2 kg/m3 * 15 K)."
+          ],
+          "simready:connectionPoint:airflow:maxAirflowRate": [
+            "float",
+            1.27899,
+            "Assumed 1.2x design airflow limit."
+          ],
+          "simready:connectionPoint:airflow:designTemperature": [
+            "float",
+            39,
+            "CRAH net sensible duty 100 kW gross minus 9 kW fan/electrical heat = 91 kW; supply 24 C. Rack warms 24 C air by 15 K."
+          ],
+          "simready:connectionPoint:airflow:maxTemperature": [
+            "float",
+            45.0,
+            "Fictional interface temperature ceiling, not an ASHRAE exhaust rating."
+          ],
+          "simready:connectionPoint:airflow:staticPressure": [
+            "float",
+            50.0,
+            "Assumed 50 Pa across intake filter/rack grille; CRAH outlet retains authored externalStaticUnitPressure 0.5 Pa. External pressure is not fan total pressure."
+          ],
+          "simready:connectionPoint:airflow:filterType": [
+            "token",
+            "none",
+            "Filter on CRAH intake only; no filter on rack or CRAH outlet."
+          ]
+        },
+        "position": [
+          0,
+          0.6,
+          1.15
+        ],
+        "normal": [
+          0,
+          1,
+          0
+        ],
+        "placement_basis": "Authored fixture interface relative to fictional cabinet dimensions, not measured CAD hardware."
+      }
+    }
+  }
+}

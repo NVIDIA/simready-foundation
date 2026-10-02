@@ -114,8 +114,7 @@ if _docs_versions_json and _docs_version:
         "json_url": _docs_versions_json,
         "version_match": _docs_version,
     }
-    # versions.json is published after the docs build, so the theme's
-    # build-time validation cannot succeed on the first release deployment.
+    # versions.json is published after the build, so skip the theme's fetch here.
     html_theme_options["check_switcher"] = False
     html_theme_options["navbar_end"] = ["version-switcher", "theme-switcher"]
 

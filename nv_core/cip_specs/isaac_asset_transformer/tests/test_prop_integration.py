@@ -16,14 +16,17 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from conftest import REPOSITORY_ROOT
 from pxr import Sdf, Usd, UsdShade
 from simready.asset_transformer import transform_package
 
+# Pre-composition PhysX prop fixture. This is a pristine copy of the
+# obs_electricians_large_tool_box_a01 package as it existed before the
+# Robotics-Prop Isaac-composition migration replaced the live sample under
+# sample_content/ with the composed form. The transformer test must consume a
+# neutral multiphysics prop, so it owns its own fixture rather than depending on
+# the mutable (now migrated) sample.
 TOOLBOX = (
-    REPOSITORY_ROOT
-    / "sample_content/common_assets/props_general/obs_electricians_large_tool_box_a01"
-    / "simready_usd/sm_obs_electricians_large_tool_box_a01_01.usd"
+    Path(__file__).parent / "fixtures/prop_physx_toolbox" / "simready_usd/sm_obs_electricians_large_tool_box_a01_01.usd"
 )
 
 
@@ -121,3 +124,59 @@ def test_toolbox_prop_transform_is_clean_and_repeatable(tmp_path: Path) -> None:
     assert len(references) == 1
     assert references[0].assetPath == "../instances_physx.usda"
     assert not box_wrapper.attributes
+
+
+def test_toolbox_prop_transform_bundles_builtin_mdl_relative_with_import_closure(tmp_path: Path) -> None:
+    """A bundled built-in-named MDL (OmniPBR) must be emitted as a ``./``-relative
+    ``info:mdl:sourceAsset`` that resolves to an existing file (VM.MDL.001), with
+    its sibling MDL import modules co-located next to it so the module compiles
+    (VM.BIND.002).
+
+    This is a regression guard: a naive routing either rewrote the reference to a
+    bare Kit identifier (fails VM.MDL.001's ``./`` rule) or bundled only the
+    top-level ``OmniPBR.mdl`` under the package root (parent-relative ``../`` path
+    and missing ``import OmniPBR_ClearCoat::*`` / ``OmniPBRBase`` siblings, so Kit
+    could not load the module).
+    """
+    package = tmp_path / "pkg"
+    report = transform_package(
+        str(TOOLBOX),
+        package,
+        profile="simready_physx_to_isaac_prop",
+        interface_asset_name="toolbox.usda",
+    )
+    assert all(result.success for result in report.results)
+
+    materials_layer_path = package / "payloads/materials.usda"
+    assert materials_layer_path.is_file()
+    materials_dir = materials_layer_path.parent
+    layer = Sdf.Layer.FindOrOpen(str(materials_layer_path))
+
+    mdl_sources: list[str] = []
+
+    def collect(spec: Sdf.PrimSpec) -> None:
+        for child in spec.nameChildren:
+            attr = child.attributes.get("info:mdl:sourceAsset")
+            if attr is not None and attr.default is not None:
+                mdl_sources.append(attr.default.path)
+            collect(child)
+
+    materials_scope = layer.GetPrimAtPath("/Materials")
+    assert materials_scope is not None
+    collect(materials_scope)
+
+    omni_sources = [path for path in mdl_sources if path.endswith("OmniPBR.mdl")]
+    assert omni_sources, f"no OmniPBR.mdl sourceAsset authored; found {mdl_sources}"
+
+    for source_path in omni_sources:
+        # VM.MDL.001: explicit ./-relative, and resolvable to a real file.
+        assert source_path.startswith("./"), f"MDL sourceAsset must be ./-relative, got {source_path!r}"
+        resolved = (materials_dir / source_path).resolve()
+        assert resolved.is_file(), f"bundled MDL does not resolve to a file: {resolved}"
+        # VM.BIND.002: the whole local import closure travels co-located.
+        siblings = {p.name for p in resolved.parent.glob("*.mdl")}
+        assert {
+            "OmniPBR.mdl",
+            "OmniPBR_ClearCoat.mdl",
+            "OmniPBRBase.mdl",
+        } <= siblings, f"MDL import closure not co-located next to {resolved.name}; found {sorted(siblings)}"

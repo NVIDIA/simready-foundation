@@ -51,7 +51,7 @@ Products or workflows that consume this feature:
 
 This version is used in the following profiles:
 
-- **[Prop-Robotics-Physx](../profiles/prop-robotics-physx.md)** (`v2.3.0`) - Wikidata Q-code label values for NVIDIA asset libraries.
+- **[Robotics Prop Profile](../profiles/robotics-prop.md)** (`v3.2.0`) - Wikidata Q-code label values for NVIDIA asset libraries.
 
 #### Feature Dependencies
 

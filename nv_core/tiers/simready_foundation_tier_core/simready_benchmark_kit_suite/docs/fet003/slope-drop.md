@@ -5,11 +5,11 @@
 | Test name    | slope_drop                     |
 | Feature(s)   | FET_003_STANDARD, FET_003_PHYSX, FET_003_NEWTON |
 | Engine       | Kit / Isaac Sim (>=2024.2.0)   |
-| Test version | 3.0.0                          |
+| Test version | 3.3.0                          |
 
 ## Summary
 
-Places the asset on a 45-degree inclined plane, confirms that the asset slides down the slope by detecting cumulative horizontal displacement, and verifies that the asset does not tunnel through the surface.
+Places the asset on a 45-degree inclined plane, confirms contact followed by signed downhill movement, and verifies that the asset neither tunnels through nor launches away from the surface.
 
 ## What Pass Guarantees
 
@@ -19,15 +19,15 @@ A reviewer, PM, or OEM can trust that the asset's collision mesh registers conta
 
 The test verifies two conditions during a single simulation run on a tilted surface.
 
-First, sliding detection: the asset must accumulate a horizontal XY displacement from its starting position of at least 0.01 m. Horizontal movement is the direct signal that the collider is registering contact with the slope and that lateral forces are being transmitted correctly. An asset that does not move horizontally within the simulation time limit has not interacted with the slope surface.
+First, contact and sliding detection: the bounding box's signed-distance interval along the ramp normal must reach the analytic ramp surface, then its center must move at least 0.01 m in the ramp's downhill direction. Projecting the complete box onto the ramp normal avoids false gaps for curved bodies tangent to the incline. Sideways motion, uphill impulses, and airborne movement no longer count as a successful slide.
 
-Second, non-penetration: after sliding is detected, the test observes the asset's bounding-box minimum Z coordinate for a 3.0-second window. If Z drops below the floor level minus the 0.1 m tolerance during that window, the asset has tunneled through the slope-to-floor transition area. Penetration is only checked after sliding is detected, so a brief below-floor position during the initial fall before the asset contacts the slope does not cause a false failure.
+Second, non-penetration: while the complete bounding-box footprint is over the ramp, the test rejects an entire bounding box below the analytic ramp plane by more than 0.02 m. After sliding is detected, it also observes the asset's bounding-box minimum Z coordinate for a 3.0-second window. If Z drops below the floor level minus the 0.1 m tolerance during that window, the asset has tunneled through the slope-to-floor transition area.
 
 ## How It Works
 
-The test loads the asset in a blue room with a collision-enabled flat floor and a 45-degree slope. The asset is placed at the top of the slope. Physics is simulated at 240 fps with a camera following the asset from the side so the sliding motion is visible in the frame.
+The test loads the asset in a blue room with a collision-enabled flat floor and a 45-degree slope. The asset is placed near the top with at least 0.1 m of vertical clearance. Placement uses the full bounding-box footprint: its downhill position is clamped so the box remains within the finite ramp, and its height clears the highest slope point below the box. This prevents wide, short assets from starting inside the slope while ensuring they fall onto it. Physics is simulated at 240 fps with a camera following the asset from the side so the sliding motion is visible in the frame.
 
-Each simulation frame, the test computes the cumulative XY displacement from the initial bounding-box center position. When that displacement reaches 0.01 m, sliding is confirmed. The test then continues simulating for a 3.0-second post-sliding window, watching the floor clearance. If no penetration occurs during that window, the test passes and the simulation exits. If the displacement threshold is never reached within the 10-second hard cap, the test fails.
+Each simulation frame, the test projects all bounding-box corners onto the ramp's unit normal and uses the resulting minimum and maximum signed distances. The minimum detects contact or separation without a centre-point assumption; a negative maximum proves the complete box is below the ramp. After contact, it measures signed displacement toward the ramp's low edge. A launch is reported only when the complete bounding-box footprint remains over the finite ramp and its minimum signed distance exceeds the configured tolerance continuously for 0.1 seconds. Separation is no longer evaluated after the leading edge reaches the bottom of the ramp. The test then continues for a 3.0-second post-sliding window, watching the floor clearance.
 
 A 120-second watchdog terminates any simulation that hangs.
 
@@ -37,8 +37,13 @@ Key thresholds from `config_defaults`:
 
 - `slope_angle_deg`: 45.0 (slope angle in degrees)
 - `slope_friction`: 0.5 (static friction coefficient applied to the slope and flat floor; dynamic friction is 0.4)
+- `minimum_slope_clearance`: 0.1 m (minimum vertical bbox clearance above the highest covered slope point)
 - `floor_margin`: 0.1 m (penetration tolerance)
-- `horizontal_movement_threshold`: 0.01 m (minimum cumulative XY displacement to confirm sliding)
+- `horizontal_movement_threshold`: 0.01 m (minimum signed downhill displacement to confirm sliding)
+- `slope_contact_tolerance`: 0.02 m (minimum bbox-to-ramp signed distance used to recognize contact)
+- `slope_penetration_tolerance`: 0.02 m (permitted numerical distance below the ramp before the entire bbox is considered underneath it)
+- `maximum_slope_separation`: 0.05 m (maximum sustained minimum signed distance between the complete bbox and ramp plane)
+- `separation_confirmation_seconds`: 0.1 s (the separation must persist this long while the complete bbox footprint remains on the ramp)
 - `post_horiz_seconds`: 3.0 s (penetration observation window after sliding is detected)
 - `simulation_seconds`: 10.0 s (hard upper cap)
 - `physics_fps`: 240
@@ -48,6 +53,7 @@ Key thresholds from `config_defaults`:
 | Symptom | Likely cause |
 |---|---|
 | No horizontal movement detected within the time limit | `UsdPhysics.RigidBodyAPI` is not applied to the root prim, the collision mesh does not make contact with the slope surface, a FixedJoint anchors the asset, or friction values are so high that the asset cannot slide. |
+| Asset moves uphill or launches away from the ramp | Unstable contact settings, excessive restitution, or a missing runtime-specific collision/contact schema on the ramp. |
 | Asset penetrates the floor after sliding | The collision mesh approximation is incorrect at the slope-to-floor transition area. Thin geometry or gaps in the collision mesh at the base can cause tunneling as the asset transitions from the slope to the flat floor. |
 | Physics simulation hangs (120 s watchdog) | Self-penetrating geometry, missing or zero-volume colliders, or extreme mass or inertia values stall the active solver. |
 

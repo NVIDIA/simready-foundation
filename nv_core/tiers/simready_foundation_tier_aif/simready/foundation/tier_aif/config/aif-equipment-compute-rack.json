@@ -1,0 +1,46 @@
+{
+  "class": "compute-rack",
+  "displayName": "Compute Rack",
+  "assetClassTokens": [
+    "compute rack",
+    "compute-rack",
+    "compute_rack",
+    "gb300",
+    "gb300 rack",
+    "gb300_rack"
+  ],
+  "thermalCooling": {
+    "applies": false
+  },
+  "electricalAC": {
+    "applies": false
+  },
+  "attributes": [
+    "aif:spec:airCooling",
+    "aif:spec:doorsPerforations",
+    "aif:spec:heatCaptureRatio",
+    "aif:spec:idlePowerDefault30Pct",
+    "aif:spec:idlePowerSmoothing90Pct",
+    "aif:spec:liquidCooling",
+    "aif:spec:liquidSidePqCurve",
+    "aif:spec:maxPowerAcEdpp1",
+    "aif:spec:maxPowerDcEdpp1",
+    "aif:spec:maxPowerDcEdpp2",
+    "aif:spec:maxPowerDcTdp",
+    "aif:spec:namePlatePower",
+    "aif:spec:numGPUs",
+    "aif:spec:rampDownRateDefault",
+    "aif:spec:rampUpRateDefault",
+    "aif:spec:requiredAirFlowRate",
+    "aif:spec:requiredLiquidFlowRate",
+    "aif:spec:significantInternalStructure"
+  ],
+  "legacyAssetClassTokens": {
+    "tokens": [
+      "gb300",
+      "gb300 rack",
+      "gb300_rack"
+    ],
+    "reason": "Published as valid values by AIF-Entity v0.1.0. They name a product rather than an equipment class and are retained so assets authored against the published v0.1.0 specification keep validating. Author new assets with 'compute rack'."
+  }
+}

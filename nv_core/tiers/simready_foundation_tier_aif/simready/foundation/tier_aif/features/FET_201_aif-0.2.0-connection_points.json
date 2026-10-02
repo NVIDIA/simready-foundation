@@ -1,0 +1,16 @@
+{
+	"id": "FET201_AIF",
+	"version": "0.2.0",
+	"display_name": "Connection Points",
+	"path": "features/FET_201-connection_points.html",
+	"dependencies": [
+		{"FET200_AIF": {"version": "0.1.0"}}
+	],
+	"requirements": [
+		"CP.001",
+		"CP.005",
+		"CP.010",
+		"CP.011",
+		"CP.012"
+	]
+}

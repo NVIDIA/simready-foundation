@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 """WRAPP create + SimReady metadata emission.
 
 Orchestrates the sequence that WRAPP 2.3 would perform natively:

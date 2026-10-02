@@ -59,7 +59,7 @@ Products or workflows that consume this feature:
 
 This version is used in the following profiles:
 
-- **[Prop-Robotics-Physx](../profiles/prop-robotics-physx.md)** (`v2.3.0`) - Material-segmentation ground truth on prop materials.
+- **[Robotics Prop Profile](../profiles/robotics-prop.md)** (`v3.2.0`) - Material-segmentation ground truth on prop materials.
 
 #### Feature Dependencies
 

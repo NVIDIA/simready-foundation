@@ -1,0 +1,6 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+interface:
+  display_name: "SimReady Conform FET_010_STANDARD"
+  short_description: "Repair FET_010_STANDARD conformance by deriving display colour from the bound material"
+  default_prompt: "Use $simready-foundation-conform-fet-010-standard to repair FET_010_STANDARD SimReady conformance failures. The bundled author_display_color.py derives a constant primvars:displayColor per renderable Gprim from the bound material's base colour, sampling a base colour map only where the geometry lands on it and averaging in linear light; pass --verify to report DISP.001, DISP.002 and DISP.003 without editing. --no-textures derives from material constants alone, which on the current samples means almost nothing is authored, so install numpy and Pillow and sample the maps."

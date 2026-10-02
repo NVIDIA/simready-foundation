@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 [project_root]
 setting = ".."
 
@@ -12,12 +14,15 @@ subconfigs_priority = ["sample_content"]
 # Validation content is owned by the tiers.
 requirements_paths = [
     "nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities",
+    "nv_core/tiers/simready_foundation_tier_sensors/simready/foundation/sensors/capabilities",
 ]
 features_paths = [
     "nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features",
+    "nv_core/tiers/simready_foundation_tier_sensors/simready/foundation/sensors/features",
 ]
 profiles_paths = [
     "nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles",
+    "nv_core/tiers/simready_foundation_tier_sensors/simready/foundation/sensors/profiles",
 ]
 
 [cip]

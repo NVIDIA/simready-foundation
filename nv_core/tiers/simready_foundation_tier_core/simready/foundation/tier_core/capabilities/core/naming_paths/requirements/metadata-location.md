@@ -103,6 +103,12 @@ Chair Metadata:
 - Consider using USD's built-in metadata attributes when possible
 - For custom layer data, ensure the JSON string is properly escaped
 
+`FET_000_STANDARD@0.1.0` includes this requirement. `FET_000_STANDARD@0.2.0`
+omits it. Nested provenance presence is
+[SR.003](../../sim_ready/requirements/nested-simready-metadata.md).
+USD/sidecar union provenance is
+[SR.004](../../sim_ready/requirements/metadata-union.md).
+
 ## For More Information
 
 - [USD Asset Metadata Best Practices](https://openusd.org/release/tut_usd_best_practices.html#asset-metadata)

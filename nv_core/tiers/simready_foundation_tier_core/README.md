@@ -1,8 +1,15 @@
 # SimReady Foundation Core Tier
 
+## Purpose
+
 The `simready-foundation-tier-core` distribution contains the core SimReady
 profiles, features, requirements, validator rules, and tier-owned Benchmark
 runtime tests. It has no dependency on another Foundation tier.
+
+It is the baseline tier for general OpenUSD, visualization, physics, robotics,
+semantic-label, non-visual-sensor, Isaac Sim, and packaging workflows. See the
+[Core tier catalog](../../sr_specs/docs/shared/tiers/core.md) for the complete,
+hyperlinked profile and feature inventory.
 
 Install validation support:
 
@@ -11,11 +18,24 @@ pip install simready-validate simready-foundation-tier-core
 ```
 
 Install the optional Benchmark framework and Kit engine dependencies needed to
-execute this tier's bundled runtime tests:
+execute this tier's bundled runtime tests. This extra requires Python 3.12;
+validator-only tier installs also support Python 3.11.
 
 ```bash
 pip install "simready-foundation-tier-core[benchmark]"
 ```
+
+When upgrading an environment that used the earlier standalone runtime-test
+wheels, remove them before installing this extra:
+
+```bash
+pip uninstall simready-benchmark-kit-suite simready-foundation-runtime-tests-kit
+```
+
+Those retired distributions installed the same top-level
+`simready_benchmark_kit_suite` package now owned by this tier. Leaving either
+distribution installed can make a later uninstall remove files from the active
+tier package. A fresh virtual environment does not need this migration step.
 
 The runtime-test modules are inert until Benchmark discovers their path through
 the tier's `simready.tier` descriptor. Validator-only installs therefore do not

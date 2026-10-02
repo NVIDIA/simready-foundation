@@ -3,7 +3,7 @@
 | Property     | Value                                          |
 |--------------|------------------------------------------------|
 | Test name    | joint_movement                                 |
-| Feature(s)   | FET_004_STANDARD, FET_004_PHYSX, FET_004_NEWTON, FET_004_ROBOT_PHYSX, FET_004_ROBOT_NEWTON |
+| Feature(s)   | FET_004_STANDARD, FET_004_PHYSX, FET_004_NEWTON, FET_004_ROBOT_PHYSX (deprecated compatibility), FET_004_ROBOT_NEWTON |
 | Engine       | Kit / Isaac Sim (>=2024.2.0)                    |
 | Test version | 2.2.0                                          |
 

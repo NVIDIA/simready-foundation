@@ -29,7 +29,7 @@ Metadata files MUST NOT be modified or deleted once written. New metadata files 
 Metadata files fall into one of three registration tiers based on their relationship with the package definition's `metadata` array:
 
 - **Registered-immutable**: Listed in the `metadata` array at package creation time. These files are included in the package hash computation and MUST NOT change after package creation. Features that define registered-immutable metadata MUST specify that the file be listed in the `metadata` array when present. Example: `com.nvidia.simready.packaging.bom.json` (PKG.BOM.001).
-- **Post-creation**: Added to the `.metadata/` folder after package creation. These are NOT listed in the `metadata` array and are NOT covered by the package hash. Tools MUST still preserve these files when copying or mirroring. Example: `com.nvidia.simready.conformance.Prop-Robotics-Physx@1.0.0.json` (PKG.CONF.001) when added post-publish.
+- **Post-creation**: Added to the `.metadata/` folder after package creation. These are NOT listed in the `metadata` array and are NOT covered by the package hash. Tools MUST still preserve these files when copying or mirroring. Example: `com.nvidia.simready.conformance.Robotics-Prop@3.2.0.json` (PKG.CONF.001) when added post-publish.
 - **Either**: Some metadata files MAY be registered-immutable (added at creation) or post-creation (added later), depending on the use case. Example: conformance metadata can be pre-publish (in the `metadata` array, as publisher-declared conformance) or post-publish (added later as independent validation evidence).
 
 ## Why is it required?

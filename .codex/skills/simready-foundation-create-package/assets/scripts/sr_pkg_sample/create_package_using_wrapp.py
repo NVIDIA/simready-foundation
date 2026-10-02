@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 """Build a SimReady-conformant package using WRAPP.
 
 This is the create phase of the SimReady packaging workflow.  It

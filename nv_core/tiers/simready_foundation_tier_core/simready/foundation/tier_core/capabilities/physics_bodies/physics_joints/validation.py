@@ -14,7 +14,7 @@
 # limitations under the License.
 import simready.foundation.tier_core.requirements as cap
 import usd_validation_nvidia
-from pxr import Sdf, Usd, UsdPhysics
+from pxr import Usd, UsdPhysics
 
 from ..utils import BaseRuleCheckerWCache
 
@@ -73,78 +73,17 @@ class PhysicsJointCapabilityChecker(usd_validation_nvidia.BaseRuleChecker):
 
 @usd_validation_nvidia.register_rule("PhysicsJoints")
 @usd_validation_nvidia.register_requirements(
-    cap.PhysicsJointsRequirements.JT_002, cap.PhysicsJointsRequirements.JT_003, override=True
-)
-class PhysicsJointChecker(usd_validation_nvidia.BaseRuleChecker):
-    _JOINT_INVALID_PRIM_REL_REQUIREMENT = cap.PhysicsJointsRequirements.JT_002
-    _JOINT_MULTIPLE_PRIMS_REL_REQUIREMENT = cap.PhysicsJointsRequirements.JT_003
-
-    _JOINT_INVALID_PRIM_REL_MESSAGE = (
-        "Joint's Body{0} relationship points to a non-existent prim {1}, joint will not be parsed."
-    )
-    _JOINT_MULTIPLE_PRIMS_REL_MESSAGE = (
-        "Joint prim does have a Body{0} relationship to multiple bodies and this is not supported."
-    )
-
-    def CheckPrim(self, usd_prim: Usd.Prim):
-        physics_joint = UsdPhysics.Joint(usd_prim)
-
-        if not physics_joint:
-            return
-
-        # Check valid relationship prims
-        rel0path = _get_rel(physics_joint.GetBody0Rel())
-        rel1path = _get_rel(physics_joint.GetBody1Rel())
-
-        # Check relationship validity
-        if not _check_joint_rel(rel0path, usd_prim):
-            self._AddFailedCheck(
-                message=self._JOINT_INVALID_PRIM_REL_MESSAGE.format(0, rel0path),
-                at=usd_prim,
-                requirement=self._JOINT_INVALID_PRIM_REL_REQUIREMENT,
-            )
-
-        if not _check_joint_rel(rel1path, usd_prim):
-            self._AddFailedCheck(
-                message=self._JOINT_INVALID_PRIM_REL_MESSAGE.format(1, rel1path),
-                at=usd_prim,
-                requirement=self._JOINT_INVALID_PRIM_REL_REQUIREMENT,
-            )
-
-        # Check multiple relationship prims
-        targets0 = physics_joint.GetBody0Rel().GetTargets()
-        targets1 = physics_joint.GetBody1Rel().GetTargets()
-
-        # Check relationship validity
-        if len(targets0) > 1:
-            self._AddFailedCheck(
-                message=self._JOINT_MULTIPLE_PRIMS_REL_MESSAGE.format(0),
-                at=usd_prim,
-                requirement=self._JOINT_MULTIPLE_PRIMS_REL_REQUIREMENT,
-            )
-
-        if len(targets1) > 1:
-            self._AddFailedCheck(
-                message=self._JOINT_MULTIPLE_PRIMS_REL_MESSAGE.format(1),
-                at=usd_prim,
-                requirement=self._JOINT_MULTIPLE_PRIMS_REL_REQUIREMENT,
-            )
-
-
-@usd_validation_nvidia.register_rule("PhysicsJoints")
-@usd_validation_nvidia.register_requirements(
-    cap.PhysicsJointsRequirements.JT_ART_002,
     cap.PhysicsJointsRequirements.JT_ART_003,
-    cap.PhysicsJointsRequirements.JT_ART_004,
     override=True,
 )
 class ArticulationChecker(BaseRuleCheckerWCache):
-    _NESTED_ARTICULATION_REQUIREMENT = cap.PhysicsJointsRequirements.JT_ART_002
-    _ARTICULATION_ON_STATIC_BODY_REQUIREMENT = cap.PhysicsJointsRequirements.JT_ART_003
-    _ARTICULATION_ON_KINEMATIC_BODY_REQUIREMENT = cap.PhysicsJointsRequirements.JT_ART_004
+    # The nested-articulation (JT.ART.002) and static-body (JT.ART.004) checks were removed
+    # from this checker; they are covered by usd-validation-nvidia's ArticulationChecker (OMPE-99310).
+    # Note: this checker previously reported the static-body check as JT.ART.003 and the
+    # kinematic-body check as JT.ART.004, which was swapped relative to the requirement docs.
+    # Per the docs, JT.ART.003 is the kinematic-body check.
+    _ARTICULATION_ON_KINEMATIC_BODY_REQUIREMENT = cap.PhysicsJointsRequirements.JT_ART_003
 
-    _NESTED_ARTICULATION_MESSAGE = "Nested ArticulationRootAPI not supported."
-    _ARTICULATION_ON_STATIC_BODY_MESSAGE = "ArticulationRootAPI definition on a static rigid body is not allowed."
     _ARTICULATION_ON_KINEMATIC_BODY_MESSAGE = "ArticulationRootAPI definition on a kinematic rigid body is not allowed."
 
     def CheckPrim(self, usd_prim: Usd.Prim):
@@ -153,26 +92,9 @@ class ArticulationChecker(BaseRuleCheckerWCache):
         if not art_api:
             return
 
-        # Check for nested articulation roots
-        if self._is_under_articulation_root(usd_prim):
-            self._AddFailedCheck(
-                message=self._NESTED_ARTICULATION_MESSAGE,
-                at=usd_prim,
-                requirement=self._NESTED_ARTICULATION_REQUIREMENT,
-            )
-
-        # Check rigid body static or kinematic errors
+        # Check rigid body kinematic errors
         rbo_api = UsdPhysics.RigidBodyAPI(usd_prim)
         if rbo_api:
-            # Check if rigid body is enabled
-            body_enabled = rbo_api.GetRigidBodyEnabledAttr().Get()
-            if not body_enabled:
-                self._AddFailedCheck(
-                    message=self._ARTICULATION_ON_STATIC_BODY_MESSAGE,
-                    at=usd_prim,
-                    requirement=self._ARTICULATION_ON_STATIC_BODY_REQUIREMENT,
-                )
-
             # Check if kinematic is enabled
             kinematic_enabled = rbo_api.GetKinematicEnabledAttr().Get()
             if kinematic_enabled:
@@ -181,20 +103,3 @@ class ArticulationChecker(BaseRuleCheckerWCache):
                     at=usd_prim,
                     requirement=self._ARTICULATION_ON_KINEMATIC_BODY_REQUIREMENT,
                 )
-
-
-def _get_rel(ref: Usd.Relationship) -> Sdf.Path:
-    targets = ref.GetTargets()
-
-    if not targets:
-        return Sdf.Path()
-
-    return targets[0]
-
-
-def _check_joint_rel(rel_path: Sdf.Path, joint_prim: Usd.Prim) -> bool:
-    if rel_path == Sdf.Path():
-        return True
-
-    rel_prim = joint_prim.GetStage().GetPrimAtPath(rel_path)
-    return rel_prim.IsValid()

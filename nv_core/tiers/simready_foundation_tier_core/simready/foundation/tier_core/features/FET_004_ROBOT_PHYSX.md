@@ -6,6 +6,15 @@
 | Runtime                 | `ROBOT_PHYSX` |
 | Proprietary Techs       | `PhysX` |
 | Latest Version          | `0.4.0` |
+| Status                  | **Deprecated** |
+
+:::{warning}
+`FET_004_ROBOT_PHYSX` is deprecated. It is retained only so existing profile
+assets and external consumers can continue to resolve historical contracts. No
+current in-repository profile selects it. Do not add this feature to new profile
+versions. Use `FET_003_PHYSX@0.4.0` and
+`FET_004_PHYSX@0.4.0` instead.
+:::
 
 ## Description
 
@@ -14,8 +23,10 @@ multibody contract. It bundles rigid-body, joint, articulation, and PhysX
 collider requirements in one feature and intentionally does not require
 `RB.COL.001` because robot assets may use nested collision authoring patterns.
 
-Newer profile versions should prefer `FET_004_PHYSX@0.4.0` plus the selected FET003
-PhysX gate when the robot-specific collider exemption is not required.
+New profile versions must use `FET_004_PHYSX@0.4.0` plus
+`FET_003_PHYSX@0.4.0`. The deprecated robot-specific feature is not eligible
+for adoption by new profiles, even when preserving a legacy asset requires
+compatibility validation against it.
 
 ## Dependency Graph
 
@@ -37,9 +48,12 @@ flowchart LR
 
 ## Use Cases
 
-- Legacy Robot-Body-Runnable and Robot-Body-Isaac profiles that need the robot PhysX collider exemption.
-- Robot assets with nested collision opinions that base `RB.COL.001` would reject.
-- PhysX robot link and joint topology before driven-joint or articulation gates.
+- Compatibility validation for assets or external profiles whose published
+  contract already pins this feature.
+- Existing assets whose validation metadata includes the legacy
+  robot PhysX collider exemption.
+
+This feature is not a valid selection for a new profile or profile version.
 
 ## Requirements
 
@@ -72,8 +86,7 @@ None.
 
 #### Used in Profiles
 
-- **[Robot Body Runnable Profile](../profiles/robot-body-runnable.md)** (`v2.0.0`) - Legacy runnable robot PhysX multibody contract.
-- **[Robot Body Isaac Profile](../profiles/robot-body-isaac.md)** (`v1.0.0`) - Legacy Isaac robot PhysX multibody contract.
+- None. This feature is retained for compatibility only.
 
 #### Feature Dependencies
 
@@ -111,7 +124,7 @@ Version 0.3.0 removes `RB.006`.
 
 #### Used in Profiles
 
-- **[Robot Body Profile](../profiles/profiles.md)** (`v3.0.0`) - Optional legacy robot PhysX multibody feature.
+- None documented.
 
 #### Feature Dependencies
 

@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 # Optional example profiles for validating one closed-vocabulary dataset taxonomy at a time.
 
 [Open-Taxonomy-COCO]

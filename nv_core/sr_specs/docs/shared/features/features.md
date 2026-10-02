@@ -9,7 +9,7 @@ the feature.
 
 | Name | Runtime | Latest Version | ID |
 |---|---|---|---|
-| [Core](FET_000_STANDARD.md) | STANDARD | 0.1.0 | `FET_000_STANDARD` |
+| [Core](FET_000_STANDARD.md) | STANDARD | 0.2.0 | `FET_000_STANDARD` |
 | [Core (PhysX)](FET_000_PHYSX.md) | PHYSX | 0.1.0 | `FET_000_PHYSX` |
 | [Core (Newton)](FET_000_NEWTON.md) | NEWTON | 0.1.0 | `FET_000_NEWTON` |
 | [Core (MuJoCo)](FET_000_MUJOCO.md) | MUJOCO | 0.1.0 | `FET_000_MUJOCO` |
@@ -24,13 +24,15 @@ the feature.
 | [Simulate Multi-Body Physics (PhysX)](FET_004_PHYSX.md) | PHYSX | 0.4.0 | `FET_004_PHYSX` |
 | [Simulate Multi-Body Physics (Newton)](FET_004_NEWTON.md) | NEWTON | 0.1.0 | `FET_004_NEWTON` |
 | [Simulate Multi-Body Physics (MuJoCo)](FET_004_MUJOCO.md) | MUJOCO | 0.1.0 | `FET_004_MUJOCO` |
-| [Simulate Multi-Body Physics (Robot PhysX)](FET_004_ROBOT_PHYSX.md) | ROBOT_PHYSX | 0.4.0 | `FET_004_ROBOT_PHYSX` |
+| [Simulate Multi-Body Physics (Robot PhysX) — Deprecated](FET_004_ROBOT_PHYSX.md) | ROBOT_PHYSX | 0.4.0 | `FET_004_ROBOT_PHYSX` |
 | [Simulate Multi-Body Physics (Robot Newton)](FET_004_ROBOT_NEWTON.md) | ROBOT_NEWTON | 0.1.0 | `FET_004_ROBOT_NEWTON` |
 | [Simulate Multi-Body Physics (Robot MuJoCo)](FET_004_ROBOT_MUJOCO.md) | ROBOT_MUJOCO | 0.1.0 | `FET_004_ROBOT_MUJOCO` |
 | [Simulate Grasp Physics](FET_005_STANDARD.md) | STANDARD | 0.1.0 | `FET_005_STANDARD` |
-| [Materials (USDPreviewSurface)](FET_006_STANDARD.md) | STANDARD | 0.1.0 | `FET_006_STANDARD` |
+| [Materials (USDPreviewSurface)](FET_006_STANDARD.md) | STANDARD | 0.2.0 | `FET_006_STANDARD` |
 | [Materials (MDL)](FET_006_MDL.md) | MDL | 0.1.0 | `FET_006_MDL` |
+| [Materials (OpenPBR)](FET_006_OPENPBR.md) | OPENPBR | 0.1.0 | `FET_006_OPENPBR` |
 | [Non-Visual Materials](FET_007_STANDARD.md) | STANDARD | 0.2.0 | `FET_007_STANDARD` |
+| [Display Color](FET_010_STANDARD.md) | STANDARD | 0.1.0 | `FET_010_STANDARD` |
 | [Semantic Labels](FET_011_STANDARD.md) | STANDARD | 0.2.0 | `FET_011_STANDARD` |
 | [Robot Core (Isaac)](FET_021_ISAAC.md) | ISAAC | 0.3.0 | `FET_021_ISAAC` |
 | [Driven Joints](FET_022_STANDARD.md) | STANDARD | 0.2.0 | `FET_022_STANDARD` |
@@ -44,15 +46,23 @@ the feature.
 | [Base Articulation (Newton)](FET_024_NEWTON.md) | NEWTON | 0.1.0 | `FET_024_NEWTON` |
 | [Base Articulation (MuJoCo)](FET_024_MUJOCO.md) | MUJOCO | 0.1.0 | `FET_024_MUJOCO` |
 | [ROS Ready (Isaac)](FET_025_ROS.md) | ROS | 0.1.0 | `FET_025_ROS` |
+| [IMU Sensor](FET_034_ISAAC.md) | ISAAC | 0.1.0 | `FET_034_ISAAC` |
+| [Joint Sensor](FET_037_ISAAC.md) | ISAAC | 0.1.0 | `FET_037_ISAAC` |
+| [Camera and Render Products](FET_035_RTX.md) | ISAAC | 0.1.0 | `FET_035_RTX` |
+| [RTX Sensors](FET_036_RTX.md) | ISAAC | 0.1.0 | `FET_036_RTX` |
 | [Gripper](FET_028_STANDARD.md) | STANDARD | 0.1.0 | `FET_028_STANDARD` |
 | [Gripper (Isaac)](FET_028_ISAAC.md) | ISAAC | 0.1.0 | `FET_028_ISAAC` |
 | [Gripper (MuJoCo)](FET_028_MUJOCO.md) | MUJOCO | 0.1.0 | `FET_028_MUJOCO` |
 | [Packaging Core](FET_030_STANDARD.md) | STANDARD | 0.1.0 | `FET_030_STANDARD` |
 | [Self-contained Package Source](FET_031_STANDARD.md) | STANDARD | 0.1.0 | `FET_031_STANDARD` |
 | [Packaging Introspection](FET_032_STANDARD.md) | STANDARD | 0.1.0 | `FET_032_STANDARD` |
-| [SimReady Packaging](FET_033_STANDARD.md) | STANDARD | 0.3.0 | `FET_033_STANDARD` |
+| [SimReady Packaging](FET_033_STANDARD.md) | STANDARD | 0.4.0 | `FET_033_STANDARD` |
 | [IsaacSim Composition](FET_100_ISAAC.md) | ISAAC | 0.4.0 | `FET_100_ISAAC` |
 | [Robot IsaacSim Composition](FET_101_ISAAC.md) | ISAAC | 0.1.0 | `FET_101_ISAAC` |
+| [AIF Core Metadata](FET_200-aif_metadata.md) *(capability)* | AIF | 0.1.0 | `FET200_AIF` |
+| [Connection Points](FET_201-connection_points.md) *(capability)* | AIF | 0.1.0 / 0.2.0 | `FET201_AIF` |
+| [AIF Thermal Cooling](FET_202-thermal_cooling.md) | AIF | 0.1.0 / 0.2.0 | `FET202_AIF` |
+| [AIF Electrical](FET_203-electrical.md) | AIF | 0.1.0 / 0.2.0 | `FET203_AIF` |
 
 ```{toctree}
 :maxdepth: 1
@@ -74,13 +84,15 @@ Simulate Multi-Body Physics <FET_004_STANDARD>
 Simulate Multi-Body Physics (PhysX) <FET_004_PHYSX>
 Simulate Multi-Body Physics (Newton) <FET_004_NEWTON>
 Simulate Multi-Body Physics (MuJoCo) <FET_004_MUJOCO>
-Simulate Multi-Body Physics (Robot PhysX) <FET_004_ROBOT_PHYSX>
+Simulate Multi-Body Physics (Robot PhysX) — Deprecated <FET_004_ROBOT_PHYSX>
 Simulate Multi-Body Physics (Robot Newton) <FET_004_ROBOT_NEWTON>
 Simulate Multi-Body Physics (Robot MuJoCo) <FET_004_ROBOT_MUJOCO>
 Simulate Grasp Physics <FET_005_STANDARD>
 Materials (USDPreviewSurface) <FET_006_STANDARD>
 Materials (MDL) <FET_006_MDL>
+Materials (OpenPBR) <FET_006_OPENPBR>
 Non-Visual Materials <FET_007_STANDARD>
+Display Color <FET_010_STANDARD>
 Semantic Labels <FET_011_STANDARD>
 Semantic Labels (RTX) <FET_011_RTX>
 Wikidata Q-Code <FET_046_STANDARD>
@@ -102,6 +114,10 @@ Base Articulation (PhysX) <FET_024_PHYSX>
 Base Articulation (Newton) <FET_024_NEWTON>
 Base Articulation (MuJoCo) <FET_024_MUJOCO>
 ROS Ready (Isaac) <FET_025_ROS>
+IMU Sensor <FET_034_ISAAC>
+Joint Sensor <FET_037_ISAAC>
+Camera and Render Products <FET_035_RTX>
+RTX Sensors <FET_036_RTX>
 Gripper <FET_028_STANDARD>
 Gripper (Isaac) <FET_028_ISAAC>
 Gripper (MuJoCo) <FET_028_MUJOCO>
@@ -111,4 +127,11 @@ Packaging Introspection <FET_032_STANDARD>
 Metadata <FET_033_STANDARD>
 IsaacSim Composition <FET_100_ISAAC>
 Robot IsaacSim Composition <FET_101_ISAAC>
+AIF Core Metadata <FET_200-aif_metadata>
+Connection Points <FET_201-connection_points>
+AIF Thermal Cooling <FET_202-thermal_cooling>
+AIF Electrical <FET_203-electrical>
+Draft - Baseline Appearance Visualization <drafts/FET_006-baseline-appearance-visualization-feature-card>
+Draft - Physically Plausible Appearance Visualization <drafts/FET_006-physically-plausible-appearance-visualization-feature-card>
+Draft - Object Color Visualization <drafts/FET_010-object-color-visualization-feature-card>
 ```

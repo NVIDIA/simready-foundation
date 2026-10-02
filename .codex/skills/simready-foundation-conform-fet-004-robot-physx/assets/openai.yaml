@@ -1,4 +1,6 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 interface:
-  display_name: "SimReady Conform FET_004_ROBOT_PHYSX"
-  short_description: "Repair FET_004_ROBOT_PHYSX conformance"
-  default_prompt: "Use $simready-foundation-conform-fet-004-robot-physx to repair FET_004_ROBOT_PHYSX SimReady conformance failures."
+  display_name: "SimReady Conform FET_004_ROBOT_PHYSX (Deprecated)"
+  short_description: "Repair deprecated FET_004_ROBOT_PHYSX compatibility"
+  default_prompt: "Use $simready-foundation-conform-fet-004-robot-physx to repair deprecated FET_004_ROBOT_PHYSX SimReady conformance for a historical or external contract or asset."

@@ -27,16 +27,22 @@ otherwise crash the session:
 
 ``newton_scene_initialized`` lets a physics test verify, right after ``play()``,
 that the active engine actually built a simulation. Under PhysX it is always
-True. Under Newton it is False when init aborted, so the caller skips honestly
-(``NEWTON_SCENE_SKIP``) instead of stepping a broken sim and crashing.
+True. Under Newton it is False when init aborted, so the caller reports an
+incomplete/error result instead of stepping a broken sim and crashing. A
+requested test that never executed must not be counted as a non-blocking skip.
 """
 
-NEWTON_SCENE_SKIP = (
+NEWTON_SCENE_ERROR = (
     "Newton could not initialize this asset's physics scene (USD composition "
-    "errors, or a schema PhysX tolerates but Newton rejects). Skipped on Newton "
-    "to avoid stepping a broken simulation; PhysX runs this asset normally. This "
-    "is an engine-strictness / asset-authoring gap, not a runtime failure."
+    "errors, invalid collision geometry, or a schema Newton rejects). The "
+    "requested test did not execute; inspect kit_logs for the first Newton "
+    "initialization error. This is an incomplete/error result, not a "
+    "not-applicable skip."
 )
+
+
+class NewtonSceneInitializationError(RuntimeError):
+    """The requested Newton test could not build its physics scene."""
 
 
 def newton_scene_initialized():
@@ -87,7 +93,8 @@ def newton_scene_initialized():
 # an articulation root in the USD, every physics test wraps its loose joints in
 # an articulation on the LIVE stage before play() (the asset on disk is
 # unchanged). Only clean joint trees are wrapped; anything the wrapper cannot
-# safely represent is left loose and the scene-init guard skips it honestly.
+# safely represent is left loose and the scene-init guard reports the
+# incomplete execution as a blocking runtime error.
 
 _ARTICULATION_JOINT_TYPES = ("PhysicsRevoluteJoint", "PhysicsPrismaticJoint", "PhysicsFixedJoint")
 
@@ -133,7 +140,7 @@ def articulationize_loose_joints(ctx, stage):
     every joint connects exactly two links, no link has two parents, and every
     link traces back to a root. A joint to world, a shared child, a loop, or a
     spherical/D6 joint (driven by a velocity nudge an articulation ignores) is
-    left loose, and the scene-init guard skips such assets honestly.
+    left loose, and the scene-init guard reports a blocking runtime error.
     Already-articulated assets are left untouched. Returns True if the asset now
     carries an articulation.
     """

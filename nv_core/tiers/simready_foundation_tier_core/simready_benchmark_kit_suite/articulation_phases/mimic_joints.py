@@ -63,8 +63,8 @@ def detect_mimic_joints(stage, asset_prim, robot_prim_path, dof_names):
 
     # ``asset_prim`` (the articulation-root prim) may be a deep descendant
     # of the asset's wrapper -- e.g. when ``setup_robot_test_scene``
-    # normalizes a joint-rooted articulation into a body-rooted one,
-    # ``robot.prim_path`` ends up
+    # normalizes a joint-rooted articulation
+    # into a body-rooted one, ``robot.prim_path`` ends up
     # pointing at the housing body, while the driven joints with
     # ``PhysxMimicJointAPI`` are siblings of the housing under
     # ``/<asset>/joints/...``. ``PrimRange(housing)`` would never see them.

@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 [Robotics-Prop]
 "3.0.0" = {features = [
     {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
@@ -38,7 +40,7 @@
     {"FET_003_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Rigid Body Physics (MuJoCo)"
     {"FET_004_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (MuJoCo)"
 ]}
-"3.2.0" = {features = [ # Add required SimReady packaging + provenance metadata (FET_031_STANDARD, FET_033_STANDARD@0.3.0 / SR.003)
+"3.2.0" = {features = [ # Add required SimReady packaging + provenance metadata (FET_031_STANDARD, FET_033_STANDARD@0.3.0 / SR.003) and optional standalone Isaac Sim composition (FET_100_ISAAC@0.4.0 / ISA.001)
     {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
     {"FET_001_STANDARD" = {version = "1.0.1"}}, # "Minimal"
     {"FET_003_STANDARD" = {version = "0.2.0"}}, # "RBD Physics"
@@ -54,6 +56,13 @@
     # SimReady packaging + provenance metadata (required)
     {"FET_031_STANDARD" = {version = "0.1.0"}}, # "Self-contained Package Source"
     {"FET_033_STANDARD" = {version = "0.3.0"}}, # "Metadata (thumbnail + nested provenance metadata)"
+
+    # Standalone Isaac Sim composition (optional, produced by the
+    # simready_physx_to_isaac_prop transform). FET_100_ISAAC@0.4.0 depends on the
+    # PhysX rigid-body chain; when present it pulls its PhysX requirements in as
+    # dependencies during validation, but the PhysX features below and
+    # FET_100_ISAAC itself stay optional at the profile level.
+    {"FET_100_ISAAC" = {version = "0.4.0"}, optional=true}, # "Isaac composition"
 
     # PhysX runtime variant (Core -> Rigid Body -> Multibody)
     {"FET_000_PHYSX" = {version = "0.1.0"}, optional=true}, # "Core PhysX runtime variant"
@@ -71,3 +80,86 @@
     {"FET_004_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (MuJoCo)"
 
 ]}
+"3.3.0" = {features = [ # Adopt FET_000_STANDARD@0.2.0 (drop NP.006 and SR.001) and FET_033_STANDARD@0.4.0 (SR.004)
+    {"FET_000_STANDARD" = {version = "0.2.0"}}, # "Core"
+    {"FET_001_STANDARD" = {version = "1.0.1"}}, # "Minimal"
+    {"FET_003_STANDARD" = {version = "0.2.0"}}, # "RBD Physics"
+    {"FET_004_STANDARD" = {version = "0.2.0"}, optional=true}, # "Simulate Multi-Body Physics"
+    {"FET_005_STANDARD" = {version = "0.1.0"}, optional=true}, # "Simulate Grasp Physics"
+    {"FET_006_STANDARD" = {version = "0.1.0"}, optional=true}, # "Materials (USDPreview)"
+    {"FET_006_MDL" = {version = "0.1.0"}, optional=true}, # "Materials (MDL)"
+    {"FET_007_STANDARD" = {version = "0.2.0"}, optional=true}, # "Non-Visual Materials"
+    {"FET_011_STANDARD" = {version = "0.2.0"}}, # "Semantic Labels"
+    {"FET_011_RTX" = {version = "0.1.0"}}, # "Semantic Labels (RTX)"
+    {"FET_046_STANDARD" = {version = "0.1.0"}}, # "Wikidata Q-Code"
+
+    # SimReady packaging + provenance metadata (required)
+    {"FET_031_STANDARD" = {version = "0.1.0"}}, # "Self-contained Package Source"
+    {"FET_033_STANDARD" = {version = "0.4.0"}}, # "Metadata (thumbnail + USD/sidecar provenance union / SR.004)"
+
+    # Standalone Isaac Sim composition (optional, produced by the
+    # simready_physx_to_isaac_prop transform). FET_100_ISAAC@0.4.0 depends on the
+    # PhysX rigid-body chain; when present it pulls its PhysX requirements in as
+    # dependencies during validation, but the PhysX features below and
+    # FET_100_ISAAC itself stay optional at the profile level.
+    {"FET_100_ISAAC" = {version = "0.4.0"}, optional=true}, # "Isaac composition"
+
+    # PhysX runtime variant (Core -> Rigid Body -> Multibody)
+    {"FET_000_PHYSX" = {version = "0.1.0"}, optional=true}, # "Core PhysX runtime variant"
+    {"FET_003_PHYSX" = {version = "0.4.0"}, optional=true}, # "Rigid Body Physics (PhysX)"
+    {"FET_004_PHYSX" = {version = "0.4.0"}, optional=true}, # "Simulate Multi-Body Physics and SDF collision approximation"
+
+    # Newton runtime variant (Core -> Rigid Body -> Multibody)
+    {"FET_000_NEWTON" = {version = "0.1.0"}, optional=true}, # "Core Newton runtime variant"
+    {"FET_003_NEWTON" = {version = "0.1.0"}, optional=true}, # "Rigid Body Physics (Newton)"
+    {"FET_004_NEWTON" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (Newton)"
+
+    # MuJoCo runtime variant (Core -> Rigid Body -> Multibody)
+    {"FET_000_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Core MuJoCo runtime variant"
+    {"FET_003_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Rigid Body Physics (MuJoCo)"
+    {"FET_004_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (MuJoCo)"
+
+]}
+"4.0.0" = {features = [ # Require UsdPreviewSurface; display colour, OpenPBR and MDL stay optional
+    {"FET_000_STANDARD" = {version = "0.2.0"}}, # "Core"
+    {"FET_001_STANDARD" = {version = "1.0.1"}}, # "Minimal"
+    {"FET_003_STANDARD" = {version = "0.2.0"}}, # "RBD Physics"
+    {"FET_004_STANDARD" = {version = "0.2.0"}, optional=true}, # "Simulate Multi-Body Physics"
+    {"FET_005_STANDARD" = {version = "0.1.0"}, optional=true}, # "Simulate Grasp Physics"
+    {"FET_006_STANDARD" = {version = "0.2.0"}}, # "Materials - UsdPreviewSurface (required)"
+    {"FET_006_OPENPBR" = {version = "0.1.0"}, optional=true}, # "Materials - OpenPBR (optional)"
+    {"FET_006_MDL" = {version = "0.2.0"}, optional=true}, # "Materials - MDL (optional)"
+    {"FET_010_STANDARD" = {version = "0.1.0"}, optional=true}, # "Display Color (optional)"
+    {"FET_007_STANDARD" = {version = "0.2.0"}, optional=true}, # "Non-Visual Materials"
+    {"FET_011_STANDARD" = {version = "0.2.0"}}, # "Semantic Labels"
+    {"FET_011_RTX" = {version = "0.1.0"}}, # "Semantic Labels (RTX)"
+    {"FET_046_STANDARD" = {version = "0.1.0"}}, # "Wikidata Q-Code"
+
+    # SimReady packaging + provenance metadata (required)
+    {"FET_031_STANDARD" = {version = "0.1.0"}}, # "Self-contained Package Source"
+    {"FET_033_STANDARD" = {version = "0.4.0"}}, # "Metadata (thumbnail + USD/sidecar provenance union / SR.004)"
+
+    # Standalone Isaac Sim composition (optional, produced by the
+    # simready_physx_to_isaac_prop transform). FET_100_ISAAC@0.4.0 depends on the
+    # PhysX rigid-body chain; when present it pulls its PhysX requirements in as
+    # dependencies during validation, but the PhysX features below and
+    # FET_100_ISAAC itself stay optional at the profile level.
+    {"FET_100_ISAAC" = {version = "0.4.0"}, optional=true}, # "Isaac composition"
+
+    # PhysX runtime variant (Core -> Rigid Body -> Multibody)
+    {"FET_000_PHYSX" = {version = "0.1.0"}, optional=true}, # "Core PhysX runtime variant"
+    {"FET_003_PHYSX" = {version = "0.4.0"}, optional=true}, # "Rigid Body Physics (PhysX)"
+    {"FET_004_PHYSX" = {version = "0.4.0"}, optional=true}, # "Simulate Multi-Body Physics and SDF collision approximation"
+
+    # Newton runtime variant (Core -> Rigid Body -> Multibody)
+    {"FET_000_NEWTON" = {version = "0.1.0"}, optional=true}, # "Core Newton runtime variant"
+    {"FET_003_NEWTON" = {version = "0.1.0"}, optional=true}, # "Rigid Body Physics (Newton)"
+    {"FET_004_NEWTON" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (Newton)"
+
+    # MuJoCo runtime variant (Core -> Rigid Body -> Multibody)
+    {"FET_000_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Core MuJoCo runtime variant"
+    {"FET_003_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Rigid Body Physics (MuJoCo)"
+    {"FET_004_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (MuJoCo)"
+
+]}
+

@@ -36,6 +36,15 @@ from simready_benchmark_kit_suite.fet005_grasp.grasp_utils import (
 )
 
 
+def _empty_grasp_failure_message(scene):
+    # type: (Any) -> str
+    """Use a runtime-specific diagnostic when the scene can provide one."""
+    diagnostic = getattr(scene, "empty_grasp_failure_message", None)
+    if callable(diagnostic):
+        return diagnostic()
+    return "Grasping failed: pads touched (no object)"
+
+
 class GraspingPhase:
     """Close the gripper smoothly, hold for physical convergence, detect failure."""
 
@@ -311,7 +320,7 @@ class GraspingPhase:
                     "phase_name": "Grasping",
                     "frame": frame,
                     "time": time,
-                    "message": "Grasping failed: pads touched (no object)",
+                    "message": _empty_grasp_failure_message(scene),
                     "failed": True,
                     "pads_touching": True,
                 }
@@ -340,7 +349,7 @@ class GraspingPhase:
                 "phase_name": "Grasping",
                 "frame": frame,
                 "time": time,
-                "message": "Grasping failed: pads touched (no object)",
+                "message": _empty_grasp_failure_message(scene),
                 "failed": True,
                 "pads_touching": True,
             }

@@ -27,8 +27,8 @@ frameworks to act on those definitions:
 Everything else in the foundation is specification: versioned **features** (each
 backed by concrete **requirements** and rules), **capabilities** (the USD
 properties each requirement checks), and **profiles** that compose features
-into a complete simulation scenario (e.g. `Prop-Robotics-PhysX`,
-`Robot-Core`). The spec is modular and extensible — new domains such as
+into a complete simulation scenario (e.g. `Robotics-Prop`, `Robot-Body`, or
+`Open-Taxonomy-COCO`). The spec is modular and extensible — new domains such as
 deformable bodies, fluid interactions, or sensor models plug in as additional
 features without breaking existing ones.
 
@@ -63,7 +63,7 @@ simulation (e.g. "rigid-body physics," "grasp-ready colliders"). A feature
 lists the capability requirements it needs, giving every rule a traceable
 purpose. Features are versioned independently.
 - **Profiles** combine required features into a named, versioned set that
-represents a complete simulation scenario (e.g. `Prop-Robotics-PhysX`).
+represents a complete simulation scenario (e.g. `Robotics-Prop`).
 Validating an asset against a profile checks every feature — and therefore
 every requirement and rule — in one pass.
 
@@ -105,9 +105,10 @@ vendor, or domain. That way a solver-specific convention can be formally
 specified and machine-checked without changing the meaning of the shared core,
 and it has a path toward the core as it gains wider agreement.
 
-Today all Foundation content ships in a single core tier, so most users
-install one package and get the complete specification. See
-[Tiers](tiers.md) for the full picture and
+Most Foundation content ships in the core tier, so most users install one
+package and get the broadly-agreed-on specification; install the AIF or
+Sensors tiers alongside it for AI Factory equipment or physics-sensor
+contracts. See [Tiers](tiers.md) for the full picture and
 [SimReady Foundation PyPI Packages](foundation_pypi.md) for installation.
 
 ### Problems SimReady Foundation solves
@@ -162,9 +163,9 @@ applies to your situation and exactly where to go next.
 
 | Asset type                                                               | Recommended profile                                                                                                                                                                                             | What it covers                                                                                                                                                               |
 | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **A robot arm, mobile robot, or articulated agent**                      | [Robot-Body-Neutral](../profiles/robot-body-neutral.md) or [Robot-Body-Runnable](../profiles/robot-body-runnable.md)                                                                                                  | Rigid-body physics, articulation, driven joints, base hierarchy. See the [UR10 sample](../../../../sample_content/common_assets/robots_general/ur10/simready_usd/ur10.usd). |
-| **A prop or object in a robotics scene** (box, shelf, tool, etc.)        | [Prop-Robotics-Neutral](../profiles/prop-robotics-neutral.md), [Prop-Robotics-PhysX](../profiles/prop-robotics-physx.md), or [Robotics-Prop](../profiles/robotics-prop.md)                                      | Rigid-body physics, multi-body simulation, grasp-ready colliders. For PhysX + Newton (+ MuJoCo) on one asset, see [Multiple Physics Solvers](multiphysics_solvers.md).       |
-| **A robot or prop targeting a specific runtime** (e.g. NVIDIA Isaac Sim) | [Robot-Body-Isaac](../profiles/robot-body-isaac.md) or [Prop-Robotics-Isaac](../profiles/prop-robotics-isaac.md)                                                                                                | Everything above plus runtime-specific composition and adaptation.                                                                                                           |
+| **A robot arm, mobile robot, or articulated agent**                      | [Robot-Body](../profiles/robot-body.md)                                                                                                  | Rigid-body physics, articulation, driven joints, base hierarchy, and optional runtime variants. See the [UR10 sample](../../../../sample_content/common_assets/robots_general/ur10/simready_usd/ur10.usd). |
+| **A prop or object in a robotics scene** (box, shelf, tool, etc.)        | [Robotics-Prop](../profiles/robotics-prop.md)                                      | Rigid-body physics, multi-body simulation, grasp-ready colliders, and optional runtime variants. For PhysX + Newton (+ MuJoCo) on one asset, see [Multiple Physics Solvers](multiphysics_solvers.md).       |
+| **A robot gripper or end effector**                                      | [Robot-Gripper](../profiles/profiles.md#profile-comparison)                                                                                | Robot-body physics plus optional gripper-site and runtime-specific contracts.                                                                                                           |
 | **Something else** (vehicle, deformable, environment)                    | Start with the [full profile list](../profiles/profiles.md) to see if an existing profile fits. If not, the spec is extensible — see the [Features Guide](features/features.md) for how to define new features. |                                                                                                                                                                              |
 
 

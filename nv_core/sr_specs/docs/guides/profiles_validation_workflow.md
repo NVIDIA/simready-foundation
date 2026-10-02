@@ -8,17 +8,37 @@ This guide walks through creating, validating, and managing profiles in the SimR
 
 A **profile** is a named, versioned collection of features that represents a complete simulation scenario. When you validate an asset, you validate it *against a profile*. The profile determines which features are active, which in turn determines which requirements (and their backing rules) actually execute.
 
-Profiles are defined in TOML files under `profiles/` (one file per profile, e.g. `profiles/prop_robotics_neutral.toml`) and each profile version lists features by id and version:
+Profiles are defined in TOML files under `profiles/`. Most profiles have one file
+per profile (for example, `profiles/robotics_prop.toml`), while the related Open
+Taxonomy and package profiles are grouped in `open_taxonomy_profiles.toml` and
+`package_profiles.toml`. Each profile version lists features by id and version:
 
 ```toml
-[Prop-Robotics-Neutral]
-"1.0.0" = {features = [
+[Robotics-Prop]
+"3.2.0" = {features = [
     {"FET_000_STANDARD" = {version = "0.1.0"}},
-    {"FET_001_STANDARD" = {version = "0.1.0"}},
-    {"FET_003_STANDARD" = {version = "0.1.0"}},
-    {"FET_004_STANDARD" = {version = "0.1.0"}},
-    {"FET_005_STANDARD" = {version = "0.1.0"}},
-    {"FET_006_MDL" = {version = "0.1.0"}},
+    {"FET_001_STANDARD" = {version = "1.0.1"}},
+    {"FET_003_STANDARD" = {version = "0.2.0"}},
+    {"FET_004_STANDARD" = {version = "0.2.0"}, optional=true},
+    {"FET_005_STANDARD" = {version = "0.1.0"}, optional=true},
+    {"FET_006_STANDARD" = {version = "0.1.0"}, optional=true},
+    {"FET_006_MDL" = {version = "0.1.0"}, optional=true},
+    {"FET_007_STANDARD" = {version = "0.2.0"}, optional=true},
+    {"FET_011_STANDARD" = {version = "0.2.0"}},
+    {"FET_011_RTX" = {version = "0.1.0"}},
+    {"FET_046_STANDARD" = {version = "0.1.0"}},
+    {"FET_031_STANDARD" = {version = "0.1.0"}},
+    {"FET_033_STANDARD" = {version = "0.3.0"}},
+    {"FET_100_ISAAC" = {version = "0.4.0"}, optional=true},
+    {"FET_000_PHYSX" = {version = "0.1.0"}, optional=true},
+    {"FET_003_PHYSX" = {version = "0.4.0"}, optional=true},
+    {"FET_004_PHYSX" = {version = "0.4.0"}, optional=true},
+    {"FET_000_NEWTON" = {version = "0.1.0"}, optional=true},
+    {"FET_003_NEWTON" = {version = "0.1.0"}, optional=true},
+    {"FET_004_NEWTON" = {version = "0.1.0"}, optional=true},
+    {"FET_000_MUJOCO" = {version = "0.1.0"}, optional=true},
+    {"FET_003_MUJOCO" = {version = "0.1.0"}, optional=true},
+    {"FET_004_MUJOCO" = {version = "0.1.0"}, optional=true},
 ]}
 ```
 
@@ -42,12 +62,18 @@ The current spec ships these profiles:
 
 | Profile | Target | Key differences |
 | --- | --- | --- |
-| `Prop-Robotics-Neutral` | Props, runtime-neutral | Base features only (neutral physics, neutral colliders) |
-| `Prop-Robotics-Physx` | Props, PhysX runtime | PhysX-expanded physics and collider features |
-| `Prop-Robotics-Isaac` | Props, Isaac Sim | PhysX physics + Isaac composition |
-| `Robot-Body-Neutral` | Robots, runtime-neutral | Adds driven joints and base articulation |
-| `Robot-Body-Runnable` | Robots, PhysX runtime | PhysX physics, robot core runnable, PhysX joints |
-| `Robot-Body-Isaac` | Robots, Isaac Sim | Isaac robot core, Isaac joints, Isaac composition |
+| `Robotics-Prop` | Robotics props | Standard prop contract plus optional PhysX, Newton, MuJoCo, and Isaac features |
+| `Robot-Body` | Robot bodies | Standard robot body contract plus optional runtime, articulation, and ROS features |
+| `Robot-Gripper` | Robot grippers | Robot body contract plus optional gripper-site and runtime features |
+| `Package` | Published packages | Packaging core plus bill-of-materials introspection |
+| `Package-NoBOM` | Published packages without a BOM | Packaging core without bill-of-materials introspection |
+| `Package-Candidate` | Package source folders | Self-contained source plus thumbnail and provenance metadata |
+| `Open-Taxonomy-COCO` | COCO-labeled assets | Semantic labels constrained to the COCO vocabulary |
+| `Open-Taxonomy-Cityscapes` | Cityscapes-labeled assets | Semantic labels constrained to the Cityscapes vocabulary |
+| `Open-Taxonomy-ADE20K` | ADE20K-labeled assets | Semantic labels constrained to the ADE20K vocabulary |
+| `Open-Taxonomy-PascalVOC` | PASCAL VOC-labeled assets | Semantic labels constrained to the PASCAL VOC vocabulary |
+| `Open-Taxonomy-SUNRGBD` | SUN RGB-D-labeled assets | Semantic labels constrained to the SUN RGB-D vocabulary |
+| `Open-Taxonomy-ImageNet1K` | ImageNet-1K-labeled assets | Semantic labels constrained to the ImageNet-1K vocabulary |
 
 ## 1. Determine what the profile needs
 
@@ -59,7 +85,7 @@ Before creating a profile, answer these questions:
 | What **simulation runtime** does it target? | Neutral (any), PhysX, Isaac Sim |
 | Which **features** must the asset have? | Rigid-body physics, grasp physics, materials, semantic labels |
 | Which **feature variants** apply? | Neutral colliders vs. PhysX merged mesh colliders |
-| Are there **existing profiles** to base it on? | Extend `Prop-Robotics-Neutral` with semantic labels |
+| Are there **existing profiles** to base it on? | Extend `Robotics-Prop` for a specialized prop workflow |
 
 ### Identify required features
 
@@ -98,7 +124,7 @@ Create a new TOML file in `profiles/` (e.g. `profiles/prop_robotics_labeled.toml
 **Naming conventions:**
 
 - Use descriptive names that indicate the asset type and runtime: `<AssetType>-<Domain>-<Runtime>`.
-- Use hyphens and title case: `Prop-Robotics-Neutral`, `Robot-Body-Isaac`.
+- Use hyphens and title case: `Robotics-Prop`, `Robot-Body`.
 - The profile name is the TOML table key and must be unique.
 
 **Profile structure:**
@@ -136,7 +162,7 @@ data generation systems that rely on semantic labels.
 | FET_006_MDL | 0.1.0 | MDL materials |
 | FET_011_STANDARD | 0.2.0 | Semantic labels |
 
-### Differences from Prop-Robotics-Neutral
+### Differences from Robotics-Prop
 
 - Adds `FET_011_STANDARD` for semantic label validation
 - All other features are identical
@@ -326,22 +352,28 @@ When the validator processes an asset, the resolution works as follows:
 
 ## Appendix: Profile and feature relationship diagram
 
+A representative slice of the `3.2.0` contract shows how profile features map
+to their requirements. See `robotics_prop.toml` for the complete required and
+optional feature bundle.
+
 ```text
-Prop-Robotics-Neutral 1.0.0
+Robotics-Prop 3.2.0
 ├── FET_000_STANDARD 0.1.0
 │   ├── NP.002, NP.003, NP.004, NP.005, NP.006, NP.007, NP.008
 │   ├── SR.001
 │   └── HI.010
-├── FET_001_STANDARD 0.1.0
+├── FET_001_STANDARD 1.0.1
 │   └── AA.001, AA.002, UN.001, UN.002
-├── FET_003_STANDARD 0.1.0
+├── FET_003_STANDARD 0.2.0
 │   └── RB.COL.001, RB.COL.002, RB.COL.003, RB.COL.004, RB.001, ...
-├── FET_004_STANDARD 0.1.0
+├── FET_004_STANDARD 0.2.0 (optional)
 │   └── JT.001, JT.002, RB.MB.001
-├── FET_005_STANDARD 0.1.0
+├── FET_005_STANDARD 0.1.0 (optional)
 │   └── (grasp requirements)
-└── FET_006_MDL 0.1.0
-    └── (material requirements)
+├── FET_031_STANDARD 0.1.0
+│   └── AA.001
+└── FET_033_STANDARD 0.3.0
+    └── SR.002, SR.003
 ```
 
 Each requirement traces to a rule in `validation.py` inside the corresponding capability folder. Failures propagate upward: a failed requirement fails its feature, which fails the profile.

@@ -4,7 +4,7 @@
     "display_name": "Materials (USDPreviewSurface)",
     "path": "features/FET_006_STANDARD.html",
     "requirements": [
-        "VM.BIND.001",
-        "VM.PS.001"
+        "com.nvidia.usd.VM.BIND.001",
+        "com.nvidia.usd.VM.PS.001"
     ]
 }

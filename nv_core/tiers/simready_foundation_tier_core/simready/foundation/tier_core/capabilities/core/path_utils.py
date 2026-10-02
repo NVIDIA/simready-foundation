@@ -44,7 +44,20 @@ def combine_paths(base_path: str, relative_path: str) -> str:
 
 
 def file_exists(path: str) -> bool:
-    """Return whether a local or Omniverse path exists."""
+    """Return whether *path* exists on a local, Nucleus, or resolver-backed store.
+
+    Tries ``Ar.GetResolver().Resolve`` first so S3/HTTPS plugins work when
+    installed, then ``omni.client.stat`` for ``omniverse://``, then ``os.path``.
+    """
+    if not path:
+        return False
+    try:
+        from pxr import Ar
+
+        if Ar.GetResolver().Resolve(path):
+            return True
+    except Exception:
+        pass
     if "omniverse://" in path:
         if omni_client:
             result, _ = omni_client.stat(path)

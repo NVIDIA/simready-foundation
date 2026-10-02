@@ -328,6 +328,7 @@ defines:
 | --- | --- | --- | --- |
 | USD | `nvidia-usd-validators` | `com.nvidia.usd` | (upstream standard — no prefix) |
 | Core | `simready-foundation-tier-core` | `com.nvidia.simready` | `simready:`, and `isaac:` for the Isaac Sim capabilities |
+| Sensors | `simready-foundation-tier-sensors` | `com.nvidia.simready` | `omni:sensor:` for RTX sensor attributes |
 
 ### Key principles
 

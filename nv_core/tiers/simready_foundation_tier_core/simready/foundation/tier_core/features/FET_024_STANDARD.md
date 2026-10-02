@@ -31,7 +31,6 @@ Products or workflows that consume this feature:
 
 #### Used in Profiles
 
-- Robot Body Neutral v1.0.0, v1.1.0
 - Robot Body v2.0.0 optional
 - Robot Gripper Neutral v0.1.0, v0.2.0
 - Robot Gripper v2.0.0 optional

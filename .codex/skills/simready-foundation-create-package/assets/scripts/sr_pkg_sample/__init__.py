@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 """Python API for the SimReady packaging workflow.
 
 The ``create_simready_package.py`` script at the ``package_sample``

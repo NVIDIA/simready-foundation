@@ -33,6 +33,19 @@ class NewtonTensorDriveUnavailable(RuntimeError):
     """Raised when Newton cannot control the generated gripper articulation."""
 
 
+def author_newton_fixture_collision(prim, contact_gap):
+    """Add Newton contact authoring to generated test-only collision geometry."""
+    import newton_usd_schemas  # noqa: F401 -- registers Newton USD schemas
+    from pxr import Sdf
+
+    if not prim or not prim.IsValid():
+        raise ValueError("Newton fixture collision prim is missing")
+    if not prim.ApplyAPI("NewtonCollisionAPI"):
+        raise RuntimeError("Failed to apply NewtonCollisionAPI to " + str(prim.GetPath()))
+    prim.CreateAttribute("newton:contactMargin", Sdf.ValueTypeNames.Float).Set(0.0)
+    prim.CreateAttribute("newton:contactGap", Sdf.ValueTypeNames.Float).Set(float(contact_gap))
+
+
 def compute_newton_pd_parameters(
     required_grip_force,
     pad_mass,
@@ -219,8 +232,8 @@ def apply_temporary_newton_articulations(stage, asset_prim_path):
 
     # Unsupported graphs (unresolved child, cycle, shared-child/multiple-root
     # component) are not asset grasp failures. Leave the stage untouched; the
-    # post-play Newton scene guard will then skip if Newton cannot compile the
-    # loose topology.
+    # post-play Newton scene guard will then report a blocking runtime error if
+    # Newton cannot compile the loose topology.
     try:
         inferred_roots = infer_articulation_roots(joints)
     except ValueError:

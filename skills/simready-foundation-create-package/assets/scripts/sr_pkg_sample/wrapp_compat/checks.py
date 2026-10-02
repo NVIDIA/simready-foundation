@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 """Pre- and post-flight source-folder checks for the WRAPP create step.
 
 These guard against two WRAPP 2.2 behaviours that produce confusing

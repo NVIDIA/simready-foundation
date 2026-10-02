@@ -74,6 +74,10 @@ def BasisCurves "grasp_identifier_01"
 Good practice:
 
 - Author under the default prim or a clear grasp annotation scope under the default prim.
+- The annotation scope does not need to be a child of the rigid body. Runtime
+  testing first uses a rigid-body ancestor when present; otherwise it resolves
+  the body whose world bound is crossed most by the grasp segment. Make that
+  intersection unambiguous and do not reparent solely for the benchmark.
 - Use local coordinates relative to the authoring parent.
 - Check root and ancestor xform ops before authoring. Converted CAD assets may carry meter-normalization or source-unit scale, so source-space meter points may need conversion into authored local units.
 - Keep the line visible in review renders with a non-material display color.

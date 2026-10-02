@@ -35,10 +35,12 @@ advertise Benchmark runtime tests through its descriptor. Codegen needs
 `usd_profiles_nvidia` (+ `pxr`) at build time, so set `UV_EXTRA_INDEX_URL` (or
 your uv config) if that dependency isn't on the default index.
 
-The builder clears the output directory itself instead of using `uv build
---clear`. `--clear` is applied per package inside `uv build`, so pairing it with
-`--all-packages` and a shared `--out-dir` has every member racing to delete the
-directory they are all writing into.
+The builder writes every wheel to an owned temporary staging directory. Only
+after the complete build succeeds does it publish the staged artifacts to the
+shared output directory. During publication it replaces wheels for the exact
+distributions produced by the build and preserves unrelated files, directories,
+and wheel distributions. A failed build leaves the previously published output
+unchanged.
 
 ## How a tier build flows
 

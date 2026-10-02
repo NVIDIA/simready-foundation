@@ -14,7 +14,11 @@
 # limitations under the License.
 
 from pxr import Usd, UsdGeom, UsdPhysics
-from simready_benchmark_kit_suite.engine_guard import asset_has_articulation
+from simready_benchmark_kit_suite.engine_guard import (
+    NEWTON_SCENE_ERROR,
+    NewtonSceneInitializationError,
+    asset_has_articulation,
+)
 
 
 def test_asset_has_articulation_reports_authored_root_api():
@@ -26,3 +30,11 @@ def test_asset_has_articulation_reports_authored_root_api():
     UsdPhysics.ArticulationRootAPI.Apply(root.GetPrim())
 
     assert asset_has_articulation(stage)
+
+
+def test_newton_scene_initialization_is_an_error_not_a_skip():
+    error = NewtonSceneInitializationError(NEWTON_SCENE_ERROR)
+
+    assert isinstance(error, RuntimeError)
+    assert "did not execute" in str(error)
+    assert "not-applicable skip" in str(error)

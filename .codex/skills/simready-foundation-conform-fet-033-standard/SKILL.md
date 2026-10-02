@@ -1,6 +1,6 @@
 ---
 name: simready-foundation-conform-fet-033-standard
-description: "Use for repairing exact FET_033_STANDARD Metadata conformance (thumbnail and nested provenance metadata). Use when a profile, validation report, or user request names FET_033_STANDARD; default to version `0.3.0` unless a profile or report pins another version."
+description: "Use for repairing exact FET_033_STANDARD Metadata conformance (thumbnail and provenance metadata). Use when a profile, validation report, or user request names FET_033_STANDARD; default to version `0.4.0` unless a profile or report pins another version."
 license: Apache-2.0
 metadata:
   author: "Shaad Boochoon <sboochoon@nvidia.com>"
@@ -16,18 +16,20 @@ metadata:
 
 Use this exact feature skill when the selected profile, validation report, or user request names `FET_033_STANDARD`. It repairs or stages Metadata conformance (thumbnail and nested provenance metadata) without drifting into another runtime contract.
 
-Default to `FET_033_STANDARD@0.3.0` when the user asks for this feature without a version. Use an older version only when the profile, validation report, or user explicitly pins it. If the report names a different `FET_###_RUNTIME` feature, switch to that feature's matching skill before editing.
+Default to `FET_033_STANDARD@0.4.0` when the user asks for this feature without a version. Use an older version only when the profile, validation report, or user explicitly pins it. If the report names a different `FET_###_RUNTIME` feature, switch to that feature's matching skill before editing.
 
 ## Source of Truth
 
 Before changing an asset or package, read:
 
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_033_STANDARD-0.3.0.json` (latest)
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_033_STANDARD-0.4.0.json` (latest)
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_033_STANDARD-0.3.0.json` (preserved)
 - `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_033_STANDARD-0.2.0.json` (preserved)
 - `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_033_STANDARD-0.1.0.json` (preserved)
 - `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_033_STANDARD.md`
 - `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/core/sim_ready/requirements/thumbnail-exist.md` (`SR.002`)
 - `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/core/sim_ready/requirements/nested-simready-metadata.md` (`SR.003`)
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/core/sim_ready/requirements/metadata-union.md` (`SR.004`)
 
 Treat the selected JSON manifest as authoritative for dependencies and requirement IDs. Use the feature markdown for human-readable contract details, requirement links, samples, benchmarks, and adapters.
 
@@ -36,8 +38,9 @@ Treat the selected JSON manifest as authoritative for dependencies and requireme
 | Version | Dependencies | Requirements |
 |---|---|---|
 | `0.1.0` | FET_031_STANDARD@0.1.0 | `SR.002` |
-| `0.2.0` | FET_031_STANDARD@0.1.0 | `SR.002`, `SR.003` |
-| `0.3.0` | FET_031_STANDARD@0.1.0 | `SR.002`, `SR.003` (stricter provenance fields) |
+| `0.2.0` | FET_031_STANDARD@0.1.0 | `SR.002`, `SR.003` (nested `SimReady_Metadata`) |
+| `0.3.0` | FET_031_STANDARD@0.1.0 | `SR.002`, `SR.003` (stricter nested provenance fields) |
+| `0.4.0` | FET_031_STANDARD@0.1.0 | `SR.002`, `SR.004` (same 0.3.0 fields; USD/sidecar union) |
 
 ## Workflow
 
@@ -53,19 +56,23 @@ Treat the selected JSON manifest as authoritative for dependencies and requireme
 
 - Repair only the requirements listed by the selected `FET_033_STANDARD` manifest and its dependencies.
 - For `SR.002`, ensure a representative PNG thumbnail exists at `.thumbs/256x256/<asset_filename>.png` next to the root asset.
-- For `SR.003` (version `0.2.0+`), author required non-empty string provenance fields inside root-layer `customLayerData.SimReady_Metadata`: `author`, `asset_name`, `asset_type`, `asset_license`, `category`, `source_file`, and `usd_date_generated`.
-- For `SR.003` at version `0.3.0+`, also author these required asset-descriptive fields inside the same `customLayerData.SimReady_Metadata` dictionary:
+- For `SR.003` at `FET_033_STANDARD@0.2.0` / `@0.3.0`, the published feature contract places required fields inside root-layer `customLayerData.SimReady_Metadata`.
+- For `SR.004` at `FET_033_STANDARD@0.4.0`, author required provenance fields in the USD/sidecar metadata union: `author`, `asset_name`, `asset_type`, `asset_license`, `category`, `source_file`, and `usd_date_generated`. Fields may live in root-layer `customLayerData` (optionally inside `SimReady_Metadata`), in `<usd_stem>.json` beside the root USD, or split across both. Neither location is required on its own, but a field must not be authored in both.
+- For `SR.003` at version `0.3.0` and `SR.004` at version `0.4.0`, also author these required asset-descriptive fields (nested in `SimReady_Metadata` at `0.3.0`; in the USD/sidecar union at `0.4.0`):
   - `qcode` (string): Wikidata Q-Code for the asset's general category, a capital `Q` followed by one or more digits (for example `Q42177`).
   - `rigid_body_count` (int): non-negative count of rigid bodies in the asset.
   - `asset_extents` (float3): asset bounding-box size in meters as XYZ, with non-negative components.
   - `mass` (float): asset mass in kilograms, strictly positive.
-- Do not author `SR.003` `0.3.0+` descriptive fields with placeholder or fabricated physical values. Derive `rigid_body_count`, `asset_extents`, and `mass` from the actual asset (rigid-body prims, computed bounds, and authored mass); if a value cannot be derived, report it as a blocker instead of guessing.
+- Do not author `SR.003` `0.3.0` / `SR.004` `0.4.0` descriptive fields with placeholder or fabricated physical values. Derive `rigid_body_count`, `asset_extents`, and `mass` from the actual asset (rigid-body prims, computed bounds, and authored mass); if a value cannot be derived, report it as a blocker instead of guessing.
 
 ## How to Generate Metadata
 
-The `SR.003` requirement is declarative (it checks the end state), so use the
-bundled helper to populate the nested `SimReady_Metadata` dictionary. The helper
-only derives what the stage can prove and never fabricates values.
+The `SR.003` / `SR.004` requirements are declarative (they check the end state in
+nested `SimReady_Metadata` or the USD/sidecar union), so use the
+bundled helper to populate provenance fields. The helper
+only derives what the stage can prove and never fabricates values. You may
+write the helper output into `customLayerData.SimReady_Metadata`, into
+`<usd_stem>.json`, or split across both.
 
 Helper script: `assets/scripts/extract_simready_metadata.py` (run with a USD-core
 Python; the same interpreter used to run SimReady validation works).
@@ -150,7 +157,7 @@ let a human or the asset author correct the source value.
 
 | Field | Meaning |
 |---|---|
-| `feature` | Exact feature ID and version, for example `FET_033_STANDARD@0.3.0`. |
+| `feature` | Exact feature ID and version, for example `FET_033_STANDARD@0.4.0`. |
 | `input` | Source asset, package root, or package definition inspected. |
 | `output` | Staged output path, or `in-place` only when explicitly requested. |
 | `requirements_repaired` | Requirement IDs repaired in this pass. |

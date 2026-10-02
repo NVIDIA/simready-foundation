@@ -335,7 +335,7 @@ def _has_gripper_signals(stage, asset_prim):
     - Any joint prim has ``PhysxMimicJointAPI`` applied (a gripper / 4-bar
       linkage signature; bare arms don't typically use mimic), OR
     - Any descendant carries the spec-canonical
-      ``simready:attachment:socketType = "Gripper"`` attribute on an Xform
+      ``simready:attactment:socketType = "Gripper"`` attribute on an Xform
       (FET028 spec GR.001 -- the discovery rule used by
       ``gripper_sites._is_qualifying_gripper_site``), OR
     - Any descendant qualifies through the same schema-based gripper-site
@@ -371,8 +371,8 @@ def _has_gripper_signals(stage, asset_prim):
             # Multi-apply: "PhysxMimicJointAPI:rotZ" etc.
             if s_str.startswith("PhysxMimicJointAPI"):
                 return True
-        # Spec-canonical: simready:attachment:socketType = "Gripper"
-        sock = prim.GetAttribute("simready:attachment:socketType")
+        # Spec-canonical: simready:attactment:socketType = "Gripper"
+        sock = prim.GetAttribute("simready:attactment:socketType")
         if sock and sock.IsDefined():
             try:
                 if sock.Get() == "Gripper":
@@ -929,7 +929,11 @@ async def setup_robot_test_scene(ctx, config_overrides=None):
     # gain-reconfiguration path. PhysX retains the established World/reset
     # path.
     if active_engine == "newton":
-        from simready_benchmark_kit_suite.engine_guard import newton_scene_initialized
+        from simready_benchmark_kit_suite.engine_guard import (
+            NEWTON_SCENE_ERROR,
+            NewtonSceneInitializationError,
+            newton_scene_initialized,
+        )
 
         # Compile and verify the asset's native Newton scene before creating
         # the SingleArticulation tensor view.
@@ -938,17 +942,13 @@ async def setup_robot_test_scene(ctx, config_overrides=None):
             try:
                 await ctx.settle(count=3)
             except Exception as exc:
-                ctx.precheck_failure("Newton failed while compiling the native articulation scene: {}".format(exc))
-                return None, {}
+                raise NewtonSceneInitializationError(
+                    "Newton failed while compiling the native articulation scene: {}".format(exc)
+                ) from exc
         finally:
             _restore_newton_builder_hooks()
         if not newton_scene_initialized():
-            ctx.precheck_failure(
-                "Newton failed to initialize the asset's native physics scene. "
-                "Inspect the engine log for the first Newton schema or "
-                "articulation compilation error."
-            )
-            return (None, {})
+            raise NewtonSceneInitializationError(NEWTON_SCENE_ERROR)
         robot = RobotHandle(
             stage=stage,
             robot_prim_path=robot_root_path,

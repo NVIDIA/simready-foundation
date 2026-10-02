@@ -46,8 +46,10 @@ _MIM_SPEC_REFERENCE = (
     "REFERENCE:\n"
     "  Spec:      nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/physics_bodies/"
     "physics_driven_joints/requirements/mimic-api-check.md (DJ.007)\n"
-    "  Inspect the asset's physics payload for PhysxMimicJointAPI instances "
-    "and their referenceJoint relationships."
+    "  Example:   sample_content/common_assets/robots_general/Robotiq/"
+    "ezu_35/simready_isaac_usd/payloads/Physics/physx.usda\n"
+    "             (search for: PhysxMimicJointAPI:rotX on GBA2_TRANS_2 / "
+    "GBA3_TRANS_3 referencing Jaw_Drive with gearing = -1)"
 )
 
 
@@ -166,7 +168,7 @@ _UNRESOLVABLE_BODY = (
     "  1. Open the follower joint prim in USD and inspect the\n"
     "     `physxMimicJoint:<axis>:referenceJoint` relationship. The\n"
     "     target must be the FULL prim path of an existing joint on\n"
-    "     stage (e.g. </robot/joints/Jaw_Drive>, NOT just\n"
+    "     stage (e.g. </my_robot/joints/Jaw_Drive>, NOT just\n"
     '     "Jaw_Drive").\n'
     "  2. On both the follower and the reference joint, confirm\n"
     "     `physics:excludeFromArticulation` is unset or false.\n"
@@ -247,8 +249,9 @@ def _msg_drift_fix_hint():
         "frame yet the gripper still closes correctly.\n"
         "  - See spec DJ.007 (nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/"
         "physics_bodies/physics_driven_joints/requirements/mimic-api-check.md) "
-        "and inspect the asset's physics payload for correctly authored "
-        "PhysxMimicJointAPI instances and referenceJoint relationships."
+        "and the working example in sample_content/.../Robotiq/ezu_35/"
+        "simready_isaac_usd/payloads/Physics/physx.usda (gearing = -1 on "
+        "GBA2_TRANS_2 / GBA3_TRANS_3 referencing Jaw_Drive)."
     )
 
 

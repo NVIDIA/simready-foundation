@@ -68,6 +68,10 @@ to interpret a full report.
   - Multibody articulation and joint movement.
 * - [FET005 Grasp](fet005-grasp.md)
   - Grasp, lift, shake, and release.
+* - [FET006 Materials](fet006-materials.md)
+  - How much of what a viewer sees is shaded by the asset's own material, per render context: OpenPBR, MDL, and UsdPreviewSurface.
+* - [FET010 Display Color](fet010-display-color.md)
+  - Whether display color and display opacity reach the renderer.
 * - [FET011 Semantic Labels](fet011-semantic-labels.md)
   - Labelled and stripped semantic-segmentation evidence.
 * - [FET022 Driven Joints](fet022-driven-joints.md)
@@ -93,6 +97,8 @@ FET001 Visual <fet001-visual>
 FET003 Physics <fet003-physics>
 FET004 Multibody <fet004-multibody>
 FET005 Grasp <fet005-grasp>
+FET006 Materials <fet006-materials>
+FET010 Display Color <fet010-display-color>
 FET011 Semantic Labels <fet011-semantic-labels>
 FET022 Driven Joints <fet022-driven-joints>
 FET028 Gripper <fet028-gripper>

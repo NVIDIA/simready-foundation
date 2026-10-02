@@ -23,7 +23,7 @@ try:
 except ImportError:
     IsaacSensorSchema = None
 
-_SOCKET_TYPE_ATTR = "simready:attachment:socketType"
+_SOCKET_TYPE_ATTR = "simready:attactment:socketType"
 _SOCKET_TYPE_VALUE = "Gripper"
 _MUJOCO_SITE_API = "MjcSiteAPI"
 _ISAAC_SITE_API = "IsaacSiteAPI"
@@ -76,7 +76,7 @@ def _has_isaac_site_api(prim: Usd.Prim) -> bool:
 def _is_gripper_site(prim: Usd.Prim) -> bool:
     """Return True for prims that qualify as gripper sites.
 
-    A prim is a gripper site if it has simready:attachment:socketType = "Gripper".
+    A prim is a gripper site if it has simready:attactment:socketType = "Gripper".
     This covers both the Neutral and Isaac formats without requiring a specific prim name.
     """
     attr = prim.GetAttribute(_SOCKET_TYPE_ATTR)

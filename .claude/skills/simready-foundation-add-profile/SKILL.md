@@ -16,7 +16,7 @@ metadata:
 ## Purpose
 Use this skill to add a brand-new profile under the owning tier package in `nv_core/tiers/`. A profile is a named, versioned bundle of exact `FET_###_<RUNTIME>` feature names and semantic feature versions for a target asset class or runtime.
 
-Each profile lives in its own TOML file in that tier's `profiles/` directory, such as `prop_robotics_neutral.toml`. There is no consolidated `profiles.toml`; the validator loads every `*.toml` in each configured directory.
+Each profile lives in its own TOML file in that tier's `profiles/` directory, such as `robotics_prop.toml`. There is no consolidated `profiles.toml`; the validator loads every `*.toml` in each configured directory.
 
 Do not use this skill for a new version of an existing profile. Use `simready-foundation-update-profile` for that.
 
@@ -27,7 +27,7 @@ Before editing, read:
 - `nv_core/sr_specs/docs/guides/guides.md`
 - `nv_core/sr_specs/docs/guides/profiles/profiles.md`
 - `nv_core/sr_specs/docs/guides/feature_adapters/feature_adapters.md`
-- existing per-profile TOML files in the tier `profiles/` directories, such as `prop_robotics_neutral.toml`
+- existing per-profile TOML files in the tier `profiles/` directories, such as `robotics_prop.toml`
 - `nv_core/sr_specs/docs/shared/profiles/profiles.md`
 - nearby profile markdown files for the same asset class or runtime
 - `nv_core/sr_specs/docs/shared/features/feature-dependency-graph.md`
@@ -38,13 +38,13 @@ Collect or infer:
 
 | Input | Requirement |
 |---|---|
-| `profile_name` | New profile name, such as `Prop-Robotics-Neutral`. Use title-case words separated by hyphens. |
+| `profile_name` | New profile name, such as `Vehicle-Simulation`. Use title-case words separated by hyphens. |
 | `owning_tier` | Tier package that owns the profile TOML and narrative page. |
 | `profile_version` | Initial version, usually `1.0.0` unless the user states otherwise. |
 | `target_asset_class` | Prop, robot body, scene, material library, or another concrete class. |
 | `target_runtime` | Neutral OpenUSD, PhysX, Isaac, or another runtime target. |
 | `feature_bundle` | Exact `FET_###_<RUNTIME>` feature names and semantic feature versions. |
-| `profile_toml_name` | TOML filename under the owning tier's `profiles/` directory, named as the lowercase snake_case form of `profile_name`, such as `prop_robotics_neutral.toml`. |
+| `profile_toml_name` | TOML filename under the owning tier's `profiles/` directory, named as the lowercase snake_case form of `profile_name`, such as `robotics_prop.toml`. |
 | `profile_markdown_name` | Markdown filename under the owning tier's `profiles/` directory. |
 | `adapter_plan` | Required adapters from related profiles, or `none`. |
 | `validation_strategy` | Example assets, validator command, runtime test, or documented gap. |
@@ -79,7 +79,7 @@ Use this checklist when changing the repository:
 Example request:
 
 ```text
-Create a new prop-factory-neutral SimReady profile similar to prop-robotics-neutral.
+Create a new vehicle-simulation SimReady profile using the current profile conventions.
 ```
 
 Expected result summary:

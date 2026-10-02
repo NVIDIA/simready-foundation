@@ -13,11 +13,11 @@
     ],
     "requirements": [
         "JT.001",
-        "JT.002",
-        "JT.003",
-        "JT.ART.002",
+        "com.nvidia.usd.JT.002",
+        "com.nvidia.usd.JT.003",
+        "com.nvidia.usd.JT.ART.002",
         "JT.ART.003",
-        "JT.ART.004",
+        "com.nvidia.usd.JT.ART.004",
         "RB.MB.001",
         "RB.011",
         "RB.012"

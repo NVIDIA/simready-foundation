@@ -122,78 +122,24 @@ class RigidBodyCapabilityChecker(usd_validation_nvidia.BaseRuleChecker):
 
 @usd_validation_nvidia.register_rule("PhysicsRigidBodies")
 @usd_validation_nvidia.register_requirements(
-    cap.PhysicsRigidBodiesRequirements.RB_003,
-    cap.PhysicsRigidBodiesRequirements.RB_005,
     cap.PhysicsRigidBodiesRequirements.RB_006,
-    cap.PhysicsRigidBodiesRequirements.RB_009,
     override=True,
 )
 class RigidBodyChecker(BaseRuleCheckerWCache):
+    # RB.003, RB.005, and RB.009 are covered by usd-validation-nvidia's
+    # upstream rigid-body checker. RB.006 stays local for OMPE-99311.
     _NESTED_RIGID_BODY_REQUIREMENT = cap.PhysicsRigidBodiesRequirements.RB_006
-    _RIGID_BODY_ORIENTATION_SCALE_REQUIREMENT = cap.PhysicsRigidBodiesRequirements.RB_009
-    _RIGID_BODY_NON_XFORMABLE_REQUIREMENT = cap.PhysicsRigidBodiesRequirements.RB_003
-    _RIGID_BODY_NON_INSTANCEABLE_REQUIREMENT = cap.PhysicsRigidBodiesRequirements.RB_005
 
     _NESTED_RIGID_BODY_MESSAGE = (
         "Enabled rigid body is missing xformstack reset, when a child of a rigid body ({0}) in hierarchy. "
         "Simulation of multiple rigid bodies in a hierarchy will cause unpredicted results. Please fix the hierarchy "
         "or use XformStack reset."
     )
-    _RIGID_BODY_NON_XFORMABLE_MESSAGE = "Rigid body API has to be applied to an xformable prim."
-    _RIGID_BODY_NON_INSTANCEABLE_MESSAGE = "RigidBodyAPI on an instance proxy is not supported."
-    _RIGID_BODY_ORIENTATION_SCALE_MESSAGE = "ScaleOrientation is not supported for rigid bodies."
 
     def CheckPrim(self, usd_prim: Usd.Prim):
         rb_api = UsdPhysics.RigidBodyAPI(usd_prim)
         if not rb_api:
             return
-
-        # Check if rigid body is applied to xformable
-        xformable = UsdGeom.Xformable(usd_prim)
-        if not xformable:
-            self._AddFailedCheck(
-                message=self._RIGID_BODY_NON_XFORMABLE_MESSAGE,
-                at=usd_prim,
-                requirement=self._RIGID_BODY_NON_XFORMABLE_REQUIREMENT,
-            )
-
-        # Check instancing
-        if usd_prim.IsInstanceProxy():
-            report_instance_error = True
-
-            # Check kinematic state
-            kinematic = False
-            rb_api.GetKinematicEnabledAttr().Get(kinematic)
-            if kinematic:
-                report_instance_error = False
-
-            # Check if rigid body is enabled
-            enabled = rb_api.GetRigidBodyEnabledAttr().Get()
-            if not enabled:
-                report_instance_error = False
-
-            if report_instance_error:
-                self._AddFailedCheck(
-                    message=self._RIGID_BODY_NON_INSTANCEABLE_MESSAGE,
-                    at=usd_prim,
-                    requirement=self._RIGID_BODY_NON_INSTANCEABLE_REQUIREMENT,
-                )
-
-        # Check scale orientation
-        if xformable:
-            mat = self._xform_cache.GetLocalToWorldTransform(usd_prim)
-            tr = Gf.Transform(mat)
-            sc = tr.GetScale()
-
-            if (
-                not self._scale_is_uniform(sc)
-                and tr.GetPivotOrientation().GetQuaternion() != Gf.Quaternion.GetIdentity()
-            ):
-                self._AddFailedCheck(
-                    message=self._RIGID_BODY_ORIENTATION_SCALE_MESSAGE,
-                    at=usd_prim,
-                    requirement=self._RIGID_BODY_ORIENTATION_SCALE_REQUIREMENT,
-                )
 
         # Check nested rigid body
         has_dynamic_parent, body_parent = self._has_dynamic_body_parent(usd_prim, rb_api)
@@ -947,38 +893,6 @@ class RigidBodyColliderNonUniformScaleChecker(usd_validation_nvidia.BaseRuleChec
                     message=f"Prim '{prim.GetPath()}' has non-uniform scale but is a geometry type that requires uniform scale.",
                     at=prim,
                 )
-
-
-@usd_validation_nvidia.register_rule("PhysicsRigidBodies")
-@usd_validation_nvidia.register_requirements(cap.PhysicsRigidBodiesRequirements.RB_COL_004, override=True)
-class ColliderChecker(BaseRuleCheckerWCache):
-    _COLLIDER_NON_UNIFORM_SCALE_REQUIREMENT = cap.PhysicsRigidBodiesRequirements.RB_COL_004
-    _COLLIDER_NON_UNIFORM_SCALE_MESSAGE = "Non-uniform scale is not supported for {0} geometry."
-
-    def CheckPrim(self, usd_prim: Usd.Prim):
-        collision_api = UsdPhysics.CollisionAPI(usd_prim)
-        if not collision_api:
-            return
-
-        if not usd_prim.IsA(UsdGeom.Gprim):
-            return
-
-        # Note: Removed Capsule_1 and Cylinder_1 from this check as they are not supported by older USD versions
-        if (
-            usd_prim.IsA(UsdGeom.Sphere)
-            or usd_prim.IsA(UsdGeom.Capsule)
-            or usd_prim.IsA(UsdGeom.Cylinder)
-            or usd_prim.IsA(UsdGeom.Cone)
-            or usd_prim.IsA(UsdGeom.Points)
-        ):
-            xform = UsdGeom.Xformable(usd_prim)
-            if xform and not self._check_non_uniform_scale(xform):
-                self._AddFailedCheck(
-                    message=self._COLLIDER_NON_UNIFORM_SCALE_MESSAGE.format(usd_prim.GetTypeName()),
-                    at=usd_prim,
-                    requirement=self._COLLIDER_NON_UNIFORM_SCALE_REQUIREMENT,
-                )
-
 
 @usd_validation_nvidia.register_rule("PhysicsRigidBodies")
 @usd_validation_nvidia.register_requirements(cap.PhysicsRigidBodiesRequirements.RB_010, override=True)

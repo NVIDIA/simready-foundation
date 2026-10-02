@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 """Exceptions raised by the SimReady packaging-step API.
 
 The three step callables (:func:`sr_pkg_sample.pre_validate`,

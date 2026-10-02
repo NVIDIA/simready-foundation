@@ -46,7 +46,7 @@ Three layers enforce the contract:
 | --- | --- | --- |
 | Runtime Variants (RV) | Variant set names, payload paths, metadata, purity, isolation | [Runtime Variants](../capabilities/core/runtime_variants/capability-runtime_variants.md) |
 | Runtime features | Solver rigid-body and multibody rules (`FET_003_*`, `FET_004_*`) | Feature pages below |
-| Profiles | Which optional runtime features a prop profile accepts | [Robotics-Prop](../profiles/robotics-prop.md), [Prop-Robotics-Physx](../profiles/prop-robotics-physx.md) |
+| Profiles | Which optional runtime features a prop profile accepts | [Robotics-Prop](../profiles/robotics-prop.md) |
 
 ### Feature expansion pattern
 
@@ -133,13 +133,13 @@ Under root-layer `customLayerData.SimReady_Metadata.Variants.Physics`, record
 
 ### 5. Opt into features on a profile that allows them
 
-`Robotics-Prop@3.1.0` and `Prop-Robotics-Physx@2.2.0` (and later) list the
+`Robotics-Prop@3.2.0` lists the
 `FET_000_*` / `FET_003_*` / `FET_004_*` runtime features as **optional**. A
 missing runtime does not fail the profile; a present runtime must pass its
 rules.
 
 Stamp validation metadata with the profile name and version you target. See
-[Robotics-Prop runtime physics variants](../profiles/robotics-prop.md#runtime-physics-variants-version-310).
+[Robotics-Prop profile guidance](../profiles/robotics-prop.md).
 
 ### 6. Validate per runtime
 

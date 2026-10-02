@@ -26,9 +26,9 @@ Multiple conformance files allow declaration and post-creation evidence to coexi
 Conformance files MUST be named `com.nvidia.simready.conformance.{profile}@{profile_version}.json`. Any literal `@` or `%` in the profile name or version MUST be percent-encoded (`%40`, `%25`). Each conformance file records validation results for exactly one profile and version.
 
 Examples:
-- `com.nvidia.simready.conformance.Prop-Robotics-Physx@1.0.0.json`
-- `com.nvidia.simready.conformance.Package@1.0.0.json`
-- `com.nvidia.simready.conformance.Prop-Robotics-Neutral@1.0.0.json`
+- `com.nvidia.simready.conformance.Robotics-Prop@3.2.0.json`
+- `com.nvidia.simready.conformance.Robot-Body@2.2.0.json`
+- `com.nvidia.simready.conformance.Robot-Gripper@2.1.0.json`
 
 ### Consistency
 
@@ -63,11 +63,11 @@ A package may contain multiple assets validated independently — for example, a
 
 ```json
 // Valid: declaration with multiple assets — registered-immutable conformance (in metadata array)
-// File: .metadata/com.nvidia.simready.conformance.Prop-Robotics-Physx@1.0.0.json
+// File: .metadata/com.nvidia.simready.conformance.Robotics-Prop@3.2.0.json
 {
   "format_version": "1.0",
-  "profile": "Prop-Robotics-Physx",
-  "profile_version": "1.0.0",
+  "profile": "Robotics-Prop",
+  "profile_version": "3.2.0",
   "timestamp": "2026-03-02T00:00:00",
   "assets": [
     {
@@ -99,11 +99,11 @@ A package may contain multiple assets validated independently — for example, a
 
 ```json
 // Valid: declaration — single asset (in metadata array)
-// File: .metadata/com.nvidia.simready.conformance.Prop-Robotics-Neutral@1.0.0.json
+// File: .metadata/com.nvidia.simready.conformance.Robotics-Prop@3.2.0.json
 {
   "format_version": "1.0",
-  "profile": "Prop-Robotics-Neutral",
-  "profile_version": "1.0.0",
+  "profile": "Robotics-Prop",
+  "profile_version": "3.2.0",
   "timestamp": "2026-03-02T00:00:00",
   "assets": [
     {
@@ -151,11 +151,11 @@ A package may contain multiple assets validated independently — for example, a
 
 ```json
 // Valid: declaration with content_hash — proves results apply to a specific source snapshot
-// File: .metadata/com.nvidia.simready.conformance.Package-Candidate@1.0.0.json
+// File: .metadata/com.nvidia.simready.conformance.Robotics-Prop@3.2.0.json
 {
   "format_version": "1.0",
-  "profile": "Package-Candidate",
-  "profile_version": "1.0.0",
+  "profile": "Robotics-Prop",
+  "profile_version": "3.2.0",
   "timestamp": "2026-03-01T12:00:00",
   "content_hash": {
     "sha256": "a1b2c3d4e5f6..."
@@ -180,7 +180,7 @@ A package may contain multiple assets validated independently — for example, a
 
 ```json
 // Invalid: missing required profile, timestamp, and assets fields
-// File: .metadata/com.nvidia.simready.conformance.Prop-Robotics-Neutral@1.0.0.json
+// File: .metadata/com.nvidia.simready.conformance.Robotics-Prop@3.2.0.json
 {
   "format_version": "1.0"
 }
@@ -188,11 +188,11 @@ A package may contain multiple assets validated independently — for example, a
 
 ```json
 // Invalid: asset entry missing required asset path
-// File: .metadata/com.nvidia.simready.conformance.Prop-Robotics-Neutral@1.0.0.json
+// File: .metadata/com.nvidia.simready.conformance.Robotics-Prop@3.2.0.json
 {
   "format_version": "1.0",
-  "profile": "Prop-Robotics-Neutral",
-  "profile_version": "1.0.0",
+  "profile": "Robotics-Prop",
+  "profile_version": "3.2.0",
   "timestamp": "2026-03-02T00:00:00",
   "assets": [
     {

@@ -23,9 +23,29 @@ assert PATH_UTILS_SPEC and PATH_UTILS_SPEC.loader
 path_utils = importlib.util.module_from_spec(PATH_UTILS_SPEC)
 PATH_UTILS_SPEC.loader.exec_module(path_utils)
 
+sidecar_json_identifier = path_utils.sidecar_json_identifier
+thumbnail_png_identifier = path_utils.thumbnail_png_identifier
 resolve_existing_udim_template_path = path_utils.resolve_existing_udim_template_path
 resolve_udim_template_path = path_utils.resolve_udim_template_path
 udim_tiles_exist = path_utils.udim_tiles_exist
+
+
+class _UriLayer:
+    identifier = "omniverse://server/library/chair.usd"
+
+    def ComputeAbsolutePath(self, relative_path: str) -> str:
+        return "omniverse://server/library/" + relative_path
+
+
+def test_sidecar_json_identifier_keeps_uri_scheme():
+    assert sidecar_json_identifier(_UriLayer()) == "omniverse://server/library/chair.json"
+
+
+def test_thumbnail_png_identifier_keeps_uri_scheme():
+    assert (
+        thumbnail_png_identifier(_UriLayer())
+        == "omniverse://server/library/.thumbs/256x256/chair.usd.png"
+    )
 
 
 def test_resolve_udim_template_path_anchors_authored_path(tmp_path):

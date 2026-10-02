@@ -14,17 +14,17 @@
 # limitations under the License.
 """FET003 Slope Drop test (RB.COL.001 -- collider capability).
 
-WHAT: Place the asset on a 45-degree slope.  The defining signal that
-      the collider works on a slope is *horizontal* movement -- the
-      asset has to actually slide.  Once we observe sliding, we only
-      need to confirm the asset does not tunnel through the floor.
+WHAT: Place the asset on a 45-degree slope.  A valid result requires the
+      asset to contact the ramp, move downhill, and remain close to the
+      ramp after contact.  This rejects airborne motion and solver
+      impulses that previously looked like a successful slide.
 
 HOW:  1. Load asset in room with collision ground + slope.
       2. Place asset at the top of the slope.
       3. Run pre-simulation safeguards (world-anchor, rigid body checks).
       4. Simulate at 240fps with camera follow.
-      5. Watch the bbox centre XY each frame.  When cumulative XY
-         displacement from the start position exceeds
+      5. Watch the bbox centre Y each frame.  When downhill displacement
+         from the start position exceeds
          ``horizontal_movement_threshold`` (default 0.01m), the asset is
          sliding.
       6. Once sliding is detected, keep simulating for
@@ -45,7 +45,7 @@ WHY:  RB.COL.001 requires collider capability.  The slope introduces
 
 FALSE POSITIVE AVOIDANCE:
   - horizontal_movement_threshold (0.01m) ignores micro-jitter from solver.
-  - Cumulative displacement from the initial XY centre (not per-frame)
+  - Cumulative downhill displacement from the initial centre (not per-frame)
     works at high fps where per-frame deltas are tiny.
   - floor_margin (0.1m) tolerance for floating-point collision resolution.
   - 0.5s post-horizontal window catches transient vs sustained penetration.
@@ -57,9 +57,10 @@ FALSE POSITIVE AVOIDANCE:
 """
 
 import math
-import time
+from typing import Any
 
 from simready_benchmark.core.decorator import test
+from simready_benchmark_kit_suite.placement_compat import place_with_minimum_clearance
 
 
 def _apply_ground_friction():
@@ -85,25 +86,97 @@ def _apply_ground_friction():
             phys_mat.CreateDynamicFrictionAttr(0.4)
             phys_mat.CreateRestitutionAttr(0.0)
             UsdShade.MaterialBindingAPI.Apply(gp_prim).Bind(
-                UsdShade.Material(mat_prim), UsdShade.Tokens.weakerThanDescendants, "physics"
+                UsdShade.Material(mat_prim),
+                UsdShade.Tokens.weakerThanDescendants,
+                "physics",
             )
     except Exception:
         pass
 
 
-def _report_result(ctx, horiz_detected, penetrated, horiz_frame, physics_fps, sim_seconds):
-    # type: (object, bool, bool, int, int, float) -> None
-    """Emit metrics and pass/fail for the slope drop test."""
-    passed = horiz_detected and not penetrated
+def _slope_plane_distance_interval(
+    bounds: Any,
+    slope_center_z: float,
+    slope_tangent: float,
+) -> tuple[float, float]:
+    """Return the world AABB's signed-distance interval from the ramp plane.
 
+    The ramp plane is ``z + y * slope_tangent - slope_center_z = 0``.
+    Projecting all eight AABB corners onto its unit normal accounts for the
+    incline and avoids treating ``bbox.min.z`` at the centre Y as a contact
+    distance. The latter produces false gaps for curved bodies such as a
+    sphere tangent to a 45-degree ramp.
+    """
+    min_y = float(bounds.min[1])
+    max_y = float(bounds.max[1])
+    min_z = float(bounds.min[2])
+    max_z = float(bounds.max[2])
+    tangent = float(slope_tangent)
+    normal_length = math.sqrt(1.0 + tangent * tangent)
+    min_support_y = min_y if tangent >= 0.0 else max_y
+    max_support_y = max_y if tangent >= 0.0 else min_y
+    minimum_distance = (min_z + min_support_y * tangent - float(slope_center_z)) / normal_length
+    maximum_distance = (max_z + max_support_y * tangent - float(slope_center_z)) / normal_length
+    return minimum_distance, maximum_distance
+
+
+def _report_result(ctx: Any, state: dict, physics_fps: int, sim_seconds: float) -> None:
+    """Emit metrics and pass/fail for the slope drop test."""
+    contact_detected = state["contact_detected"]
+    horiz_detected = state["horiz_detected"]
+    horiz_frame = state["horiz_frame"]
+    penetrated = state["penetrated"]
+    slope_penetrated = state["slope_penetrated"]
+    excessive_separation = state["excessive_separation"]
+    uphill_motion = state["uphill_motion"]
+    passed = (
+        contact_detected and horiz_detected and not penetrated and not slope_penetrated and not excessive_separation
+    )
+
+    ctx.add_metric("slope_drop_contact_detected", 1 if contact_detected else 0)
     ctx.add_metric("slope_drop_horiz_detected", 1 if horiz_detected else 0)
     ctx.add_metric("slope_drop_penetrated", 1 if penetrated else 0)
+    ctx.add_metric("slope_drop_slope_penetrated", 1 if slope_penetrated else 0)
+    ctx.add_metric("slope_drop_excessive_separation", 1 if excessive_separation else 0)
+    ctx.add_metric("slope_drop_uphill_motion", 1 if uphill_motion else 0)
     ctx.add_metric("slope_drop_passed", 1 if passed else 0)
+    ctx.add_metric("slope_drop_max_clearance", round(state["max_clearance"], 4), unit="m")
+    ctx.add_metric("slope_drop_separation_frames", state["separation_frames"])
+    if state["separation_frame"] >= 0:
+        ctx.add_metric("slope_drop_separation_frame", state["separation_frame"])
+    if state["left_slope_frame"] >= 0:
+        ctx.add_metric("slope_drop_left_slope_frame", state["left_slope_frame"])
     if horiz_frame >= 0:
         ctx.add_metric("slope_drop_horiz_time", round(horiz_frame / float(physics_fps), 3))
 
     if not passed:
-        if not horiz_detected:
+        if slope_penetrated:
+            ctx.fail(
+                "Slope drop FAILED: The asset penetrated through the ramp surface. "
+                "Review its collider approximation, contact offsets, and the captured video."
+            )
+        elif not contact_detected:
+            ctx.fail(
+                "Slope drop FAILED: The asset never contacted the slope before moving or timing out. "
+                "Check the collision mesh and the generated ramp contact configuration."
+            )
+        elif excessive_separation:
+            ctx.fail(
+                "Slope drop FAILED: The asset remained too far from the ramp after contact "
+                "for %d consecutive frame(s); peak clearance %.4fm at frame %d. "
+                "Review collision contact gaps, restitution, and the video for an upward launch."
+                % (
+                    state["separation_frames"],
+                    state["max_clearance"],
+                    state["separation_frame"],
+                ),
+                details={
+                    "maximum_clearance_m": round(state["max_clearance"], 6),
+                    "separation_frame": state["separation_frame"],
+                    "consecutive_separation_frames": state["separation_frames"],
+                },
+            )
+        elif not horiz_detected:
             ctx.fail(
                 "Slope drop FAILED: No horizontal movement detected within "
                 "%.0f seconds (asset did not slide on the slope).\n"
@@ -147,47 +220,86 @@ async def _run_simulation(ctx, cfg):
         penetration.  Anything beyond that is wasted sim + capture time.
     """
     frames = []
-    initial_x = None
     initial_y = None
+    contact_detected = False
     horiz_detected = False
     horiz_frame = -1
     penetrated = False
-    deadline = time.monotonic() + 120.0  # 120 second watchdog
-
+    slope_penetrated = False
+    excessive_separation = False
+    separation_frames = 0
+    separation_frame = -1
+    left_slope_frame = -1
+    max_clearance = 0.0
+    uphill_motion = False
     for frame in range(cfg["total_frames"]):
         await ctx.physics_step()
-        if time.monotonic() > deadline:
-            ctx.fail(
-                "Physics simulation hung (exceeded 120s watchdog).\n"
-                "\n"
-                "How to fix:\n"
-                "- Asset likely has unstable physics: check for self-penetrating geometry, "
-                "missing or zero-volume colliders, and overlapping rigid bodies.\n"
-                "- Inspect `physxRigidBody:mass` and `physxRigidBody:diagonalInertia` -- "
-                "NaN, zero, or extreme values can stall PhysX cooking and stepping.\n"
-                "- Verify every dynamic mesh has a valid `UsdPhysics.CollisionAPI` + "
-                "`UsdPhysics.MeshCollisionAPI` with a non-empty approximation.\n"
-                "- Open the asset in Kit standalone and step physics manually; the engine "
-                "log will surface the specific PhysX error that the watchdog is hiding here."
-            )
-            break
         ctx.scene.update_camera_follow()
         bounds = ctx.get_asset_bounds()
         z_min = bounds.min[2]
-        cx = (bounds.min[0] + bounds.max[0]) / 2.0
-        cy = (bounds.min[1] + bounds.max[1]) / 2.0
+        min_y = bounds.min[1]
+        max_y = bounds.max[1]
+        cy = (min_y + max_y) / 2.0
 
-        if initial_x is None:
-            initial_x = cx
+        if initial_y is None:
             initial_y = cy
 
-        # Detect sliding via cumulative XY displacement from start.
-        if not horiz_detected:
-            disp = math.sqrt((cx - initial_x) ** 2 + (cy - initial_y) ** 2)
-            if disp >= cfg["horiz_threshold"]:
-                horiz_detected = True
-                horiz_frame = frame
-                ctx.step("Horizontal movement at frame %d (%.4fm)" % (frame, disp))
+        on_slope = cfg["slope_min_y"] <= cy <= cfg["slope_max_y"]
+        # The separation heuristic is meaningful only while the complete bbox
+        # footprint remains over the finite ramp. Near the downhill edge an
+        # object can be visibly sliding correctly while its centre is still on
+        # the ramp and its leading edge is already falling toward the floor.
+        fully_on_slope = cfg["slope_min_y"] <= min_y and max_y <= cfg["slope_max_y"]
+        # Project the complete AABB onto the ramp normal. This measures a
+        # geometry-aware separation interval in metres and correctly handles
+        # curved bodies whose minimum Z is not below the plane at centre Y.
+        clearance, maximum_plane_distance = _slope_plane_distance_interval(
+            bounds,
+            cfg["slope_center_z"],
+            cfg["slope_tangent"],
+        )
+        below_ramp = maximum_plane_distance < -cfg["slope_penetration_tolerance"]
+        if fully_on_slope and below_ramp:
+            slope_penetrated = True
+            ctx.step("Slope penetration at frame %d (maximum signed distance=%.4fm)" % (frame, maximum_plane_distance))
+            break
+        if on_slope and not below_ramp and clearance <= cfg["contact_tolerance"]:
+            contact_detected = True
+
+        # The ramp descends toward +Y. Require signed downhill motion so a
+        # sideways launch or Newton contact impulse cannot count as sliding.
+        downhill_disp = cy - initial_y
+        if contact_detected and downhill_disp <= -cfg["horiz_threshold"]:
+            uphill_motion = True
+            # A small first-impact rebound is valid. Record it for diagnostics,
+            # but do not count it as sliding and keep watching for downhill
+            # motion or an excessive launch away from the ramp.
+        if contact_detected and not horiz_detected and downhill_disp >= cfg["horiz_threshold"]:
+            horiz_detected = True
+            horiz_frame = frame
+            ctx.step("Downhill movement at frame %d (%.4fm)" % (frame, downhill_disp))
+
+        # A single AABB sample can spike while a tumbling body rotates. Require
+        # sustained separation before calling it a launch, and stop evaluating
+        # this signal as soon as any part of the bbox leaves the finite ramp.
+        if contact_detected and fully_on_slope:
+            max_clearance = max(max_clearance, clearance)
+            if clearance > cfg["max_slope_separation"]:
+                separation_frames += 1
+                if separation_frames >= cfg["separation_confirmation_frames"]:
+                    excessive_separation = True
+                    separation_frame = frame
+                    ctx.step(
+                        "Excessive slope separation confirmed at frame %d "
+                        "after %d consecutive frame(s) (%.4fm)" % (frame, separation_frames, clearance)
+                    )
+                    break
+            else:
+                separation_frames = 0
+        else:
+            separation_frames = 0
+            if contact_detected and not fully_on_slope and left_slope_frame < 0:
+                left_slope_frame = frame
 
         # Penetration is a hard fail any time after we start checking.
         # (We only start checking after horiz is detected so mid-fall
@@ -210,6 +322,14 @@ async def _run_simulation(ctx, cfg):
         "horiz_detected": horiz_detected,
         "horiz_frame": horiz_frame,
         "penetrated": penetrated,
+        "slope_penetrated": slope_penetrated,
+        "contact_detected": contact_detected,
+        "excessive_separation": excessive_separation,
+        "uphill_motion": uphill_motion,
+        "max_clearance": max_clearance,
+        "separation_frames": separation_frames,
+        "separation_frame": separation_frame,
+        "left_slope_frame": left_slope_frame,
     }
     return frames, state
 
@@ -225,7 +345,7 @@ async def _run_simulation(ctx, cfg):
         "Places the asset on a 45° inclined plane with collision; runs "
         "physics; verifies the asset slides downhill (positive horizontal "
         "velocity over time) and does not tunnel through the slope's "
-        "collision mesh. Sliding is the positive signal that the asset's "
+        "collision surface. Sliding is the positive signal that the asset's "
         "collider is registering contacts; tunneling proves it isn't."
     ),
     expected_video=(
@@ -235,8 +355,9 @@ async def _run_simulation(ctx, cfg):
         "through the ramp (tunnels) or that floats above it (collision "
         "in the wrong place) indicates a broken collision shape."
     ),
-    version="3.0.0",
+    version="3.3.0",
     engine={"tags": ["kit"], "version": ">=2024.2.0"},
+    max_duration=300,
     config_defaults={
         # simulation_seconds is a hard cap; the loop exits as soon as the
         # post-horizontal window completes.
@@ -247,11 +368,26 @@ async def _run_simulation(ctx, cfg):
         "asset_load_timeout": 30,
         "slope_angle_deg": 45.0,
         "slope_friction": 0.5,
+        # Preserve a useful fall for very short assets while the room helper
+        # also accounts for the full bbox footprint over the inclined plane.
+        "minimum_slope_clearance": 0.1,
         "floor_level": 0.0,
         "floor_margin": 0.1,
-        # Minimum cumulative XY displacement from the start position
+        # Minimum signed downhill displacement from the start position
         # (metres) to count as "sliding on the slope".
         "horizontal_movement_threshold": 0.01,
+        # Maximum bbox-to-ramp gap used to recognize initial contact, and the
+        # maximum allowed separation after contact before declaring a launch.
+        "slope_contact_tolerance": 0.02,
+        # Bbox bottom may sit slightly below the analytic lowest ramp height
+        # because of solver/contact tolerance. Larger negative clearance is
+        # treated as tunnelling through the ramp.
+        "slope_penetration_tolerance": 0.02,
+        "maximum_slope_separation": 0.05,
+        # Ignore isolated AABB spikes from tumbling bodies. Separation must
+        # persist for this duration while the complete bbox footprint remains
+        # over the finite ramp before it is classified as an upward launch.
+        "separation_confirmation_seconds": 0.1,
         # After horizontal movement is detected, keep simulating this
         # long while watching for a penetration event.  No penetration
         # during the window -> PASS. Also sets how much of the slide the
@@ -276,6 +412,9 @@ async def test_slope_drop(ctx):
         "pen_threshold": floor_level - floor_margin,
         "horiz_threshold": float(ctx.config["horizontal_movement_threshold"]),
         "post_horiz_frames": int(post_horiz_secs * physics_fps),
+        "separation_confirmation_frames": max(
+            1, int(float(ctx.config["separation_confirmation_seconds"]) * physics_fps)
+        ),
     }
 
     # --- Scene setup ---
@@ -286,7 +425,27 @@ async def test_slope_drop(ctx):
     room.set_color(0.3, 0.4, 0.7)  # saturated blue walls
     room.show_ground(color=(0.25, 0.35, 0.6))  # darker blue ground
     room.add_slope(angle=ctx.config["slope_angle_deg"], friction=ctx.config["slope_friction"])
-    room.place_asset_on_slope()
+    sim_cfg.update(
+        {
+            "slope_min_y": -room._slope_high_end_y,
+            "slope_max_y": room._slope_high_end_y,
+            "slope_center_z": room._slope_half_len * math.sin(room._slope_angle_rad) - room._slope_sink,
+            "slope_tangent": math.tan(room._slope_angle_rad),
+            "contact_tolerance": float(ctx.config["slope_contact_tolerance"]),
+            "slope_penetration_tolerance": float(ctx.config["slope_penetration_tolerance"]),
+            "max_slope_separation": float(ctx.config["maximum_slope_separation"]),
+        }
+    )
+    clearance_supported = place_with_minimum_clearance(
+        room.place_asset_on_slope,
+        ctx.config["minimum_slope_clearance"],
+    )
+    if not clearance_supported:
+        ctx.log(
+            "The installed simready-benchmark-engine-kit does not support bbox-safe slope clearance; "
+            "using legacy slope placement. Upgrade the Benchmark wheels to 2026.8.0rc3 or newer "
+            "to enable size-safe placement."
+        )
 
     # --- Pre-simulation safeguards ---
     from simready_benchmark_kit_suite.fet003_physics.physics_checks import (
@@ -328,7 +487,8 @@ async def test_slope_drop(ctx):
         cook_skip_message,
     )
     from simready_benchmark_kit_suite.engine_guard import (
-        NEWTON_SCENE_SKIP,
+        NEWTON_SCENE_ERROR,
+        NewtonSceneInitializationError,
         articulationize_loose_joints,
         newton_scene_initialized,
     )
@@ -348,18 +508,16 @@ async def test_slope_drop(ctx):
         articulationize_loose_joints(ctx, omni.usd.get_context().get_stage())
         await ctx.settle(count=1)
 
-    # Newton scene-init guard (Newton only; PhysX untouched). Skip honestly when
-    # Newton aborts scene init on composition errors PhysX tolerates, instead of
-    # stepping the un-built sim and crashing the session. No-op under PhysX.
+    # Newton scene-init guard (Newton only; PhysX untouched). Report an error
+    # when Newton aborts scene init instead of stepping the un-built simulation
+    # or counting the requested coverage as a non-blocking skip.
     if active_physics_engine() != "physx":
         physics.play()
         await ctx.settle(count=3)
         newton_ready = newton_scene_initialized()
         physics.stop()
         if not newton_ready:
-            ctx.skip(NEWTON_SCENE_SKIP)
-            ctx.add_metric("slope_drop_passed", 0)
-            return
+            raise NewtonSceneInitializationError(NEWTON_SCENE_ERROR)
 
     physics.play()
 
@@ -382,4 +540,4 @@ async def test_slope_drop(ctx):
     # --- Video + results ---
     if frames:
         ctx.encode_video(frames, fps=capture_fps, label="slope_drop", role="summary")
-    _report_result(ctx, state["horiz_detected"], state["penetrated"], state["horiz_frame"], physics_fps, sim_seconds)
+    _report_result(ctx, state, physics_fps, sim_seconds)

@@ -27,7 +27,9 @@
 
 [tool.uv.workspace]
 members = [
+    "simready_foundation_tier_aif",
     "simready_foundation_tier_core",
+    "simready_foundation_tier_sensors",
 ]
 
 # The standalone Isaac asset transformer lives outside this workspace root (under

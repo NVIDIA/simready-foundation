@@ -68,7 +68,6 @@ customLayerData = {
 ## Related Requirements
 
 - [mujoco-variant-set](mujoco-variant-set) (RV.007)
-- [metadata-whitelist](../../sim_ready/requirements/metadata-whitelist.md) (SR.001)
 
 ## For More Information
 

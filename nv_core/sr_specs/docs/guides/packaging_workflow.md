@@ -39,15 +39,11 @@ source .venv/bin/activate
 ### 2a. Core packages
 
 ```bash
-pip install "simready-foundation-tier-core==2026.7.1" "simready-validate>=2026.7.0.dev1" "simready-package[publish]>=2026.6.0a1"
+pip install -r nv_core/package_sample/requirements.txt
 ```
 
 This installs `simready-package` and its dependencies (`simready-validate`,
-`usd-validation-nvidia`, `usd-core`, `usd-profiles-nvidia`) together with the
-Foundation 7.1 tier content. The `publish` extra supplies the WRAPP integration;
-omit `[publish]` when only local package creation and validation are needed. See
-the [Foundation 7.1 library set](foundation_pypi.md#foundation-71-library-set)
-for the complete compatibility matrix.
+`usd-validation-nvidia`, `usd-core`, `usd-profiles-nvidia`).
 
 Verify the install:
 

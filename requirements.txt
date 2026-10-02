@@ -1,2 +1,14 @@
-simready-validate>=2026.4.8
+# Target the 2026.8 release series.
+simready-validate>=2026.8.0,<2026.9.0
 numpy>=1.24,<3
+
+# Source of the MaterialX nodedefs the OpenPBR requirements are checked against.
+# usd-core alone does not ship the usdMtlx plugin, so without this no ND_* identifier
+# resolves and VM.PBR.002 and VM.PBR.003 skip their nodedef-dependent checks. 1.39 is
+# the floor because it renamed nodedefs these requirements name: ND_normalmap became
+# ND_normalmap_float.
+MaterialX>=1.39
+
+# How VM.TEX.001 reads a texture's dimensions. Without it the check silently reports
+# nothing, which is indistinguishable from every texture being within the limit.
+pillow

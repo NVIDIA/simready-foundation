@@ -5,7 +5,7 @@
     "path": "features/FET_002_STANDARD.html",
     "requirements": [
         "HI.002",
-        "HI.004",
+        "com.nvidia.usd.HI.004",
         "VG.001"
     ]
 }

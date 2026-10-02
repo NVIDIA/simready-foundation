@@ -42,8 +42,6 @@ Products or workflows that consume this feature:
 
 #### Used in Profiles
 
-This version is used in the following profiles:
-
 - **[Open-Taxonomy-ImageNet1K](../profiles/open-taxonomy-imagenet_1k.md)** (`v0.1.0`) - Validates one closed-vocabulary taxonomy at a time.
 
 #### Feature Dependencies

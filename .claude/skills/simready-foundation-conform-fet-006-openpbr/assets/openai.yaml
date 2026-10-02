@@ -1,0 +1,6 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+interface:
+  display_name: "SimReady Conform FET_006_OPENPBR"
+  short_description: "Repair FET_006_OPENPBR conformance, textures included"
+  default_prompt: "Use $simready-foundation-conform-fet-006-openpbr to repair FET_006_OPENPBR SimReady conformance failures. The bundled migrate_to_openpbr.py carries source textures onto the OpenPBR surface by default; pass --no-textures to flatten them to constants instead, and --verify to report the surface contract, the VM.PBR.002 ranges and any texture that does not resolve on disk."

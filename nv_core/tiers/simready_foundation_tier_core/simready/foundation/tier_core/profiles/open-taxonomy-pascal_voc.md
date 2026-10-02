@@ -15,6 +15,7 @@ Each feature's requirements and dependencies are defined in the feature specific
 [Open-Taxonomy-PascalVOC]
 "0.1.0" = {features = [
     {"FET_000_STANDARD" = {version = "0.1.0"}}, # Core
+    {"FET_011_STANDARD" = {version = "0.2.0"}}, # Semantic Labels
     {"FET_043_STANDARD" = {version = "0.1.0"}}, # PASCAL VOC Labels
 ]}
 ```

@@ -1,0 +1,9 @@
+{
+	"id": "FET_034_ISAAC",
+	"version": "0.1.0",
+	"display_name": "IMU Sensor",
+	"path": "features/FET_034_ISAAC.html",
+	"requirements": [
+		"PS.001"
+	]
+}

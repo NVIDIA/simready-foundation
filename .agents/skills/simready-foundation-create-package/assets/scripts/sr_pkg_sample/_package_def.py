@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 """Lightweight types and constants shared by the package-creation paths.
 
 Lives in its own WRAPP-free module so the no-WRAPP fallback

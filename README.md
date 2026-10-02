@@ -1,5 +1,22 @@
 # SimReady Foundation
 
+## License
+
+This project's NVIDIA-authored content is licensed under the Apache License, Version 2.0. See [LICENSE.txt](LICENSE.txt).
+
+Included third-party files retain their own licenses:
+
+| Files | License and notice |
+| --- | --- |
+| `sample_content/common_assets/robots_general/Robotiq/2F-85/urdf/urdf/`, `urdf/meshes/`, and Robotiq geometry derived from them in `simready_usd/` | Robotiq model material from the URDF dataset (MIT) and the original ROS-Industrial package (BSD-3-Clause); see the [Robotiq notices](sample_content/common_assets/robots_general/Robotiq/2F-85/urdf/README.md). |
+| `sample_content/common_assets/robots_general/spot_boston_dynamics/dcc_source/working/model/urdf/` | Boston Dynamics Spot model files are distributed under the Boston Dynamics SDK license; dataset metadata also carries the dataset's MIT notice. See the [Spot notices](sample_content/common_assets/robots_general/spot_boston_dynamics/dcc_source/working/model/urdf/README.md). |
+| `sample_content/common_assets/robots_general/ur10/mjcf/` | BSD-3-Clause; see its [LICENSE](sample_content/common_assets/robots_general/ur10/mjcf/LICENSE). |
+| Bundled Python dependencies | See [PACKAGE-LICENSES](PACKAGE-LICENSES/). |
+
+## Contributing
+
+This project does currently not accept contributions. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Getting the repository
 
 This repository uses **Git LFS** to track binary and USD asset files (`.usda`, `.usdc`, `.usd`, `.usdz`, images, and others). You must have Git LFS installed before cloning, otherwise those files will check out as tiny pointer files instead of the real content.
@@ -110,6 +127,18 @@ source .venv/bin/activate
 
 ### 6. Install dependencies
 
+> [!IMPORTANT]
+> Foundation 8.0 requires the 8.0 releases of the SimReady libraries
+> (`simready-validate`, `simready-benchmark`, `simready-package`, etc.).
+> Foundation 8.0 does not work with older library releases.
+>
+> The 8.0 SimReady libraries (`simready-validate`, `simready-benchmark`,
+> `simready-package`, etc.) are backward-compatible with earlier Foundation
+> releases, including 6.0 and 7.1.
+>
+> See the [Foundation PyPI installation guide](nv_core/sr_specs/docs/guides/foundation_pypi.md#foundation-and-library-compatibility)
+> for guidance on selecting Foundation content and library versions.
+
 Choose the requirements file that matches your workflow:
 
 | Workflow | Requirements file | What gets installed |
@@ -143,7 +172,7 @@ The framework is built around a layered hierarchy:
 | **Requirement** | A single, testable rule an asset must satisfy | *"The stage must define a default prim"* (SAMP.001) |
 | **Capability** | A category that groups related requirements | *Sample* (`SAMP`), *Visualization/Geometry* (`VG`), *Units* (`UN`) |
 | **Feature** | A set of requirements that together describe a queryable property of an asset | *Minimal Placeable Visual*, *RBD Physics*, *Driven Joints* |
-| **Profile** | A bundle of features that defines what an asset must satisfy for a given use case | *Prop-Robotics-Neutral*, *Robot-Body-Isaac* |
+| **Profile** | A bundle of features that defines what an asset must satisfy for a given use case | *Robotics-Prop*, *Robot-Body* |
 
 ### Profiles
 
@@ -151,10 +180,11 @@ Profiles are the top-level contracts between asset creators and consumers. Each 
 
 | Profile | Description |
 |---------|-------------|
-| **Prop-Robotics-Neutral** | Neutral-format props suitable for robotics pipelines |
-| **Prop-Robotics-Physx** | Props with PhysX rigid-body physics |
-| **Robot-Body-Neutral** | Neutral robot body with physics |
-| **Robot-Body-Runnable** | PhysX robot body, runnable in simulation |
+| **Robotics-Prop** | Consolidated robotics prop contract with optional runtime variants |
+| **Robot-Body** | Consolidated robot body contract with optional runtime variants |
+| **Robot-Gripper** | Consolidated robot gripper contract with optional runtime variants |
+| **Open-Taxonomy-\*** | Closed-vocabulary semantic-label contracts for COCO, Cityscapes, ADE20K, PASCAL VOC, SUN RGB-D, and ImageNet-1K |
+| **Package / Package-NoBOM / Package-Candidate** | Package creation, package validation, and source-folder preflight contracts |
 
 ### Use cases
 
@@ -166,26 +196,6 @@ Profiles are the top-level contracts between asset creators and consumers. Each 
 
 The full SimReady specifications—capabilities, features, profiles, and guides—are in `nv_core/sr_specs/docs/`.
 
-### Published packages
-
-The specification and its tooling are published on PyPI. The Foundation ships as a *tier*: an installable package owning a coherent slice of capabilities, features, and profiles.
-
-| Package | Purpose |
-|---------|---------|
-| [`simready-foundation-tier-core`](https://pypi.org/project/simready-foundation-tier-core/) | The Foundation core tier — requirements, capabilities, features, profiles, validators, and the bundled runtime tests |
-| [`simready-validate`](https://pypi.org/project/simready-validate/) | Static asset validation, as a CLI and a Python API |
-| [`simready-benchmark`](https://pypi.org/project/simready-benchmark/) | Runtime and behavioral testing |
-| [`simready-package`](https://pypi.org/project/simready-package/) | Asset packaging |
-
-Once a tier is installed, `simready-validate` discovers its rules, features, and profiles from the wheel, so you do not need the `--rules-path`, `--features-path`, or `--profiles-path` flags:
-
-```bash
-pip install simready-validate simready-foundation-tier-core
-simready-validate --profile Prop-Robotics-Neutral --version 1.0.0 path/to/asset.usd
-```
-
-For tier discovery, the `[benchmark]` extra, and how to build your own tier, see [SimReady Foundation PyPI Packages](nv_core/sr_specs/docs/guides/foundation_pypi.md).
-
 ## Next steps
 
 Once you have the environment set up, explore the guides in [`nv_core/sr_specs/docs/guides/`](nv_core/sr_specs/docs/guides/guides.md):
@@ -196,8 +206,6 @@ Once you have the environment set up, explore the guides in [`nv_core/sr_specs/d
 | [SimReady Packaging Workflow](nv_core/sr_specs/docs/guides/packaging_workflow.md) | Package a SimReady asset — pre-validate, local mode, full WRAPP build, and troubleshooting |
 | [SimReady Benchmark](nv_core/sr_specs/docs/guides/benchmark/benchmark.md) | Run benchmarks with `simready-benchmark`, covering install, the pipeline stages, and reading reports |
 | [Getting Started](nv_core/sr_specs/docs/guides/getting_started.md) | Orientation — who SimReady is for, choosing a profile, and where to go next |
-| [SimReady Foundation Tiers](nv_core/sr_specs/docs/guides/tiers.md) | How the specification is divided into installable tiers, who owns each one, and which tier a profile comes from |
-| [SimReady Foundation PyPI Packages](nv_core/sr_specs/docs/guides/foundation_pypi.md) | Install Foundation tiers from PyPI, validate against installed tiers, and build your own tier |
 | [SimReady Acceptance Workflow](nv_core/sr_specs/docs/guides/acceptance_workflow.md) | How new requirements, features, and profiles move through review |
 | [Features Expansion Workflow](nv_core/sr_specs/docs/guides/features_expansion_workflow.md) | Create technology-specific feature variants (e.g. neutral to PhysX) |
 | [Profiles Validation Workflow](nv_core/sr_specs/docs/guides/profiles_validation_workflow.md) | Create, version, and validate assets against profiles |

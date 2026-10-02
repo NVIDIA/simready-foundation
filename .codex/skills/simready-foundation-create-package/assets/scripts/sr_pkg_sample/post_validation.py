@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 """Post-build validation: does this package conform to the SimReady standard?
 
 Drives :func:`simready.validate.validate_package` over a finished

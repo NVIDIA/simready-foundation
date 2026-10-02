@@ -44,18 +44,18 @@
     },
     {
       "relative_path": "apple_a01/simready_usd/sm_apple_a01_01.json",
-      "size": 541,
+      "size": 221,
       "hash": {
-        "sha256-flat-1mb": "8cfe1623d627ace6c44f7f21d4a7ff01a54f4c886014540524e37252520818b5",
-        "sha256": "d8d956786c2f460e0bd0b3681b77e5a163fc8664d1cde4e0f0f209f7663e4a03"
+        "sha256-flat-1mb": "435456103eefe560d19ae769233c3d1dc3780895ad70185eb600065efd4a7ed3",
+        "sha256": "55e587c9b894b53ec1f739aa9d3aefafbf62cafc9bafdbbb197468b09a5b2924"
       }
     },
     {
       "relative_path": "apple_a01/simready_usd/sm_apple_a01_01.usd",
-      "size": 986139,
+      "size": 990154,
       "hash": {
-        "sha256-flat-1mb": "d150f126f1053e11b16bc25055d8b267892da9843a404a7278b09c1c04d2a43a",
-        "sha256": "9a37dbbfa9cda8b441d574f9e7c3d6333acc67b76a58f929eb6b9d2377591933"
+        "sha256-flat-1mb": "0d689d60a5d2f0b61ba278ffad8f70e91d77eecc610526c70b975d8e3915a9ef",
+        "sha256": "bbf6436e584e5d1292f581f8a9139c685d70746028247fed605eb9bdce1c4241"
       }
     },
     {

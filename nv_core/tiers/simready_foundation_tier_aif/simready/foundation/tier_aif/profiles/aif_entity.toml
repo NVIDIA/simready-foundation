@@ -1,0 +1,32 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+# AIF-Entity profile definition. Authoring guidance lives in aif-entity.md.
+#
+# Equipment-class differentiation (CDU/CRAH/UPS/Rack) is driven by the
+# `aif:core:assetClass` property and data-driven validation, not by separate
+# profiles. Per Jason Batchkoff direction (May 27 2026):
+#   - thermal and electrical remain Features
+#   - core metadata and connection points are conceptually Capabilities
+#     (see capabilities/aif/), carried here as interim feature entries until
+#     SRF supports Profile-to-Capability referencing (dual-state tech debt).
+[AIF-Entity]
+"0.1.0" = {features = [
+    {"FET_000_STANDARD" = {version = "0.1.0"}},       # Core
+    {"FET_001_STANDARD" = {version = "1.0.0"}},       # Minimal Placeable Visual
+    {"FET200_AIF" = {version = "0.1.0"}},             # Core Metadata (capability; interim feature carrier)
+    {"FET201_AIF" = {version = "0.1.0"}},             # Connection Points (capability; interim feature carrier)
+    {"FET202_AIF" = {version = "0.1.0"}},             # Thermal Cooling (feature; assetClass-gated to CDU/CRAH)
+    {"FET203_AIF" = {version = "0.1.0"}},             # Electrical (feature; assetClass-gated)
+]}
+"0.2.0" = {features = [ # Connection Points v0.2.0 (CP.010-CP.012 replace the v0.1.0 CP.002/CP.004 geometry and naming rules) and SimReady Central publishing (FET_031/FET_033)
+    {"FET_000_STANDARD" = {version = "0.2.0"}},       # Core, without SR.001 and NP.006
+    {"FET_001_STANDARD" = {version = "1.0.0"}},       # Minimal Placeable Visual
+    {"FET200_AIF" = {version = "0.1.0"}},             # Core Metadata (capability; interim feature carrier)
+    {"FET201_AIF" = {version = "0.2.0"}},             # Connection Points (capability; interim feature carrier)
+    {"FET202_AIF" = {version = "0.2.0"}},             # Thermal Cooling (feature; assetClass-gated to CDU/CRAH)
+    {"FET203_AIF" = {version = "0.2.0"}},             # Electrical (feature; assetClass-gated)
+
+    # Publishing to SimReady Central, following Robotics-Prop 3.3.0 and 4.0.0
+    {"FET_031_STANDARD" = {version = "0.1.0"}},       # Self-contained Package Source (AA.001)
+    {"FET_033_STANDARD" = {version = "0.4.0"}},       # Thumbnail (SR.002) and USD/sidecar provenance union (SR.004)
+]}

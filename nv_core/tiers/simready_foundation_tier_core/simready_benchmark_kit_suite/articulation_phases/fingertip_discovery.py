@@ -658,7 +658,7 @@ def _group_actuated_joint_branches(records, parent_map):
 
 def _classify_independent_fingers(stage, robot, gripper_site, analysis_root=None, ignored_joint_paths=()):
     """Multi-finger hand: N independently-actuated finger DOFs with no single
-    mimic master (for example, an anthropomorphic hand).
+    mimic master.
 
     Returns a ``FingertipSet`` whose ``finger_chains`` is one list of actuated
     DOF indices per physical branch (grouped by driven-joint ancestry), and

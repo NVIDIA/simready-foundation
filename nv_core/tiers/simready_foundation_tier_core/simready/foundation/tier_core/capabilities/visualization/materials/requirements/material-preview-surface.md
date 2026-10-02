@@ -8,92 +8,106 @@
 
 ## Summary
 
-Material attributes must comply with the UsdPreviewSurface specification to ensure consistent rendering and viewer compatibility.
+UsdPreviewSurface inputs must use the types and token values the specification declares.
+
+This requirement is implemented by `usd-validation-nvidia`, which registers it as
+`com.nvidia.usd.VM.PS.001` and binds it to `MaterialUsdPreviewSurfaceChecker`. A feature manifest references that
+code. The unprefixed code is not bound to a rule in this repository.
 
 ## Description
 
-All material attributes must strictly follow the UsdPreviewSurface specification, including:
-- Parameter types must match the specification
-- Token values must be from the allowed set
-- Certain attributes must not contain time samples
+A `UsdPreviewSurface` shader and the nodes feeding it MUST follow the UsdPreviewSurface
+specification:
+
+- An input attribute's value type matches the type the specification declares for it
+- A token-valued input holds one of the values the specification lists
+- Attributes the specification declares `uniform` hold no time samples
 
 ## Why is it required?
-- Inconsistent material behavior
-- Rendering artifacts
-- Incompatibility with USD viewers
+- A type the specification does not declare is handled inconsistently across renderers
+- A token outside the allowed set falls back to a per-renderer default
+- A viewer implementing the specification cannot read the material
 
 ## Examples
 
+### Invalid: an input outside the specification, and a colour space outside the allowed tokens
+
 ```usd
-# Invalid: Non-compliant attributes
 def Material "mtl_cube"
 {
     def Shader "PreviewSurfaceTexture"
     {
-        # Invalid: 'specular' connection not in specification
-        float inputs:specular.connect = </World/Looks/mtl_cube/SpecularTex.outputs:r>
+        uniform token info:id = "UsdPreviewSurface"
+        float inputs:specular.connect = </mtl_cube/SpecularTex.outputs:r>
+        token outputs:surface
     }
 
-    def Shader "diffuseColorTex"
+    def Shader "SpecularTex"
     {
-        # Invalid: 'bad' not in allowed tokens ['raw', 'sRGB', 'auto']
+        uniform token info:id = "UsdUVTexture"
+        asset inputs:file = @./textures/specular.png@
         uniform token inputs:sourceColorSpace = "bad"
+        float outputs:r
     }
 }
+```
 
-# Invalid: Wrong type and time-sampled tokens
+`UsdPreviewSurface` declares no `specular` input, and `sourceColorSpace` takes `raw`, `sRGB`
+or `auto`.
+
+### Invalid: an input of the wrong type, and a token carrying time samples
+
+```usd
 def Material "mtl_sphere"
 {
     def Shader "Shader"
     {
-        # Invalid: Wrong type (color3f instead of float)
+        uniform token info:id = "UsdPreviewSurface"
         color3f inputs:metallic = (0.5, 0.5, 0.5)
+        token outputs:surface
     }
 
     def Shader "roughnessTex"
     {
-        # Invalid: Token attribute should not have time samples
+        uniform token info:id = "UsdUVTexture"
+        asset inputs:file = @./textures/roughness.png@
         uniform token inputs:wrapT.timeSamples = {
             0: "invalid_wrap",
             1: "another_invalid"
         }
+        float outputs:r
     }
 }
+```
 
-# Valid: Compliant attributes
+`UsdPreviewSurface` declares `metallic` as a `float`, and `wrapT` is uniform, so it takes a
+single value rather than time samples.
+
+### Valid: every input in the specification, with the declared type
+
+```usd
 def Material "mtl_cube"
 {
-    token outputs:surface.connect = </World/Looks/mtl_cube/PreviewSurfaceTexture.outputs:surface>
+    token outputs:surface.connect = </mtl_cube/PreviewSurfaceTexture.outputs:surface>
 
     def Shader "PreviewSurfaceTexture"
     {
         uniform token info:id = "UsdPreviewSurface"
         float inputs:clearcoat = 0
         float inputs:clearcoatRoughness = 0
-        color3f inputs:diffuseColor = (0.18, 0.18, 0.18)
-        color3f inputs:diffuseColor.connect = </World/Looks/mtl_cube/diffuseColorTex.outputs:rgb>
+        color3f inputs:diffuseColor.connect = </mtl_cube/diffuseColorTex.outputs:rgb>
         float inputs:displacement = 0
-        float inputs:metallic.connect = </World/Looks/mtl_cube/metallicTex.outputs:r>
-        normal3f inputs:normal.connect = </World/Looks/mtl_cube/normalTex.outputs:rgb>
-        float inputs:roughness.connect = </World/Looks/mtl_cube/roughnessTex.outputs:r>
         token outputs:surface
     }
 
     def Shader "diffuseColorTex"
     {
         uniform token info:id = "UsdUVTexture"
-        asset inputs:file = @./textures/color.jpg@
-        string inputs:sourceColorSpace = "auto" (
-            allowedTokens = ["auto", "raw", "sRGB"]
-        )
-        string inputs:wrapS = "useMetadata" (
-            allowedTokens = ["black", "clamp", "repeat", "mirror", "useMetadata"]
-        )
-        string inputs:wrapT = "useMetadata" (
-            allowedTokens = ["black", "clamp", "repeat", "mirror", "useMetadata"]
-        )
-        float2 inputs:st.connect = </World/Looks/mtl_cube/st.outputs:result>
-        color3f outputs:rgb
+        asset inputs:file = @./textures/color.png@
+        uniform token inputs:sourceColorSpace = "auto"
+        uniform token inputs:wrapS = "useMetadata"
+        uniform token inputs:wrapT = "useMetadata"
+        float3 outputs:rgb
     }
 }
 ```

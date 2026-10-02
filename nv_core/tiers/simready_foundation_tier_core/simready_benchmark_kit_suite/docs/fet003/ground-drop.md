@@ -5,11 +5,11 @@
 | Test name    | ground_drop                    |
 | Feature(s)   | FET_003_STANDARD, FET_003_PHYSX, FET_003_NEWTON |
 | Engine       | Kit / Isaac Sim (>=2024.2.0)   |
-| Test version | 3.1.0                          |
+| Test version | 3.2.0                          |
 
 ## Summary
 
-Drops the asset from 2 times its height above a flat collision-enabled floor, then confirms that it contacts the ground, does not penetrate the surface, and comes to rest within 8 seconds of first contact. This test covers both the drop and the settling check; there is no separate stability test.
+Drops the asset from 2 times its height above a flat collision-enabled floor, with at least 0.1 m of free fall above the contact threshold, then confirms that it contacts the ground, does not penetrate the surface, and comes to rest within 8 seconds of first contact. This test covers both the drop and the settling check; there is no separate stability test.
 
 ## What Pass Guarantees
 
@@ -27,7 +27,7 @@ Third, settling: the asset must come to rest within 8 seconds of first ground co
 
 ## How It Works
 
-The test loads the asset in a blue room with a collision-enabled ground plane. The asset is positioned at 2 times its bounding-box height above the floor (`drop_height_factor = 2.0`). Physics is simulated at 240 fps. A camera follows the asset throughout the fall and settling phases.
+The test loads the asset in a blue room with a collision-enabled ground plane. The asset is positioned at 2 times its bounding-box height above the floor (`drop_height_factor = 2.0`). For small assets, the placement is raised as needed so the bottom of the bounding box starts at least `minimum_drop_distance = 0.1` m above the contact threshold. Physics is simulated at 240 fps. A camera follows the asset throughout the fall and settling phases.
 
 The 2-times-height default provides a substantial free fall while keeping the check focused on ordinary collision response and settling. The previous 8-times-height default made impact velocity grow excessively for large assets and could turn this behavioral check into an engine-dependent high-speed tunnelling test. The same 2-times-height setup is used for PhysX and Newton so their verdicts remain directly comparable.
 
@@ -40,6 +40,7 @@ Before physics starts, the pre-simulation safeguards check whether the asset has
 Key thresholds from `config_defaults`:
 
 - `drop_height_factor`: 2.0 (drop height as a multiple of the asset bounding-box height)
+- `minimum_drop_distance`: 0.1 m (minimum free fall above the contact threshold for small assets)
 - `floor_margin`: 0.1 m (contact and penetration tolerance)
 - `penetration_check_seconds`: 1.0 s (post-contact delay before rest detection begins; penetration itself is flagged immediately)
 - `rest_tolerance`: 0.02 m (maximum movement allowed during the hold window)
@@ -83,6 +84,8 @@ The asset starts in mid-air above a flat blue floor. It falls under gravity, hit
 The 0.1 m floor margin accounts for floating-point imprecision in collision resolution and prevents false positives from micro-jitter at the moment of contact.
 
 Version 3.1.0 changed the default drop-height factor from 8.0 to 2.0 for both PhysX and Newton. This preserves the drop, contact, non-penetration, and settling contract while avoiding an unintended high-impact stress test whose severity scaled with the size of the asset.
+
+Version 3.2.0 added the absolute minimum drop distance. The scaled 2-times-height placement still controls normal-sized assets, while tiny assets can no longer start inside the 0.1 m contact tolerance and appear to touch the floor before falling.
 
 The `penetration_check_seconds` parameter (1.0 s) controls when rest detection begins after first contact, not when penetration is checked. Penetration is checked and flagged on every frame from the moment of first contact. Any frame where the bounding-box minimum Z drops below floor minus 0.1 m is an immediate failure, regardless of whether the asset recovers on subsequent frames.
 

@@ -13,6 +13,8 @@ Isaac Sim<isaac_sim/isaac_sim>
 Physics Bodies <physics_bodies/physics_bodies>
 Hierarchy <hierarchy/hierarchy>
 Non-Visual Sensors <nonvisual_sensors/nonvisual_sensors>
+Rendering <rendering/rendering>
 Semantic Labels <semantic_labels/capability-semantic_labels>
 Dataset Taxonomies <dataset_taxonomies/capability-dataset_taxonomies>
 Packaging <packaging/packaging>
+AIF <aif/aif>

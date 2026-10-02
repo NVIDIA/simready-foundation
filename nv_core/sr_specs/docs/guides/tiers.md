@@ -100,17 +100,20 @@ than one tier at a time.
 
 ## Tiers available today
 
-SimReady Foundation currently publishes a single tier.
+SimReady Foundation currently ships three tiers.
 
 | Tier | Package | Contents |
 |---|---|---|
 | Core | `simready-foundation-tier-core` | The Core, Hierarchy, Visualization, Physics Bodies, Isaac Sim, Non-Visual Sensors, Semantic Labels, Dataset Taxonomies, and Packaging capabilities; the neutral, PhysX, and Isaac prop profiles; the robot and gripper profiles; the package profiles; the Open Taxonomy profiles; and the Foundation runtime tests. |
+| AIF | `simready-foundation-tier-aif` | The AI Factory equipment capabilities (class metadata, connection points, thermal cooling, electrical) and the `AIF-Entity` profile for CDU, CRAH, UPS and compute-rack assets. An incubation tier owned by the AI Factory programme; depends on Core. |
+| Sensors | `simready-foundation-tier-sensors` | The Physics Sensors, RTX Sensors / LiDAR, and Camera and Render Products capabilities; the `Sensor-IMU`, `Sensor-Joint`, `Sensor-Camera`, and `Sensor-LiDAR` profiles; and their Foundation runtime tests. Sensor profiles apply alongside an asset's primary profile. |
 
 ```{note}
 Additional tiers are in development, including tiers contributed by teams
-outside the Foundation. Until they are published, all Foundation specification
-content ships in the core tier, and installing
-`simready-foundation-tier-core` gives you the complete specification.
+outside the Foundation. Installing `simready-foundation-tier-core` gives you
+the shared specification; install `simready-foundation-tier-aif` for the AI
+Factory equipment contracts, and `simready-foundation-tier-sensors` for
+physics sensor, LiDAR, and render-product contracts.
 ```
 
 Because tiers are ordinary Python packages, you can also create your own to

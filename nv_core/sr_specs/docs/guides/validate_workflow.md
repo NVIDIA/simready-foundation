@@ -63,32 +63,31 @@ auto-discovers rules, features, and profiles from that package, so you omit
 `--rules-path`, `--features-path`, and `--profiles-path`:
 
 ```bash
-pip install "simready-foundation-tier-core==2026.7.1" "simready-validate>=2026.7.0.dev1"
-```
-
-```bash
-simready-validate --profile Prop-Robotics-Neutral --version 1.0.0 path/to/asset.usd
+simready-validate --profile Robotics-Prop --version 3.2.0 path/to/asset.usd
 ```
 
 See [SimReady Foundation PyPI Packages](foundation_pypi.md) for install and
-discovery details and the complete 7.1 library compatibility matrix. The
-commands below are the **in-repo** alternative: they point
+discovery details. The commands below are the **in-repo** alternative: they point
 `simready-validate` at the tier source trees in this clone so you can exercise
 unpublished local changes without building and installing wheels.
 ````
 
 Use the `simready-validate` CLI to validate the included apple asset against
-the `Prop-Robotics-Neutral` profile. Spec content for that profile lives in the
+the `Robotics-Prop` profile. Spec content for that profile lives in the
 core tier under
-`nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/`:
+`nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/`.
+
+```{note}
+The commands below pass explicit `--rules-path`, `--features-path`, and `--profiles-path` flags pointing at the core tier. This is sufficient for prop profiles. For sensor-related profiles such as `Sensor-IMU v1.0.0`, also pass the sensors tier's capabilities path (`nv_core/tiers/simready_foundation_tier_sensors/simready/foundation/sensors/capabilities`) and features path (`nv_core/tiers/simready_foundation_tier_sensors/simready/foundation/sensors/features`). Alternatively, install both tiers with `pip install` and omit all three path flags — `simready-validate` will discover the installed tiers automatically via entry points.
+```
 
 ````{tab-set}
 ```{tab-item} Windows (PowerShell)
-simready-validate --rules-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities --features-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features --profiles-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles --profile Prop-Robotics-Neutral --version 1.0.0 sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
+simready-validate --rules-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities --features-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features --profiles-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles --profile Robotics-Prop --version 3.2.0 sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
 ```
 
 ```{tab-item} Linux
-simready-validate --rules-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities --features-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features --profiles-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles --profile Prop-Robotics-Neutral --version 1.0.0 sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
+simready-validate --rules-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities --features-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features --profiles-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles --profile Robotics-Prop --version 3.2.0 sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
 ```
 ````
 
@@ -98,15 +97,15 @@ What each flag does:
 |------|-------|---------|
 | `--rules-path` | `nv_core/tiers/.../tier_core/capabilities` | Directory containing the rule checkers (`validation.py`) and requirement definitions |
 | `--features-path` | `nv_core/tiers/.../tier_core/features` | Directory containing feature definitions (JSON) that group requirements into named features |
-| `--profiles-path` | `nv_core/tiers/.../tier_core/profiles` | Directory of per-profile TOML files that assemble features into named profiles |
-| `--profile` | `Prop-Robotics-Neutral` | Name of the profile to validate against |
+| `--profiles-path` | `nv_core/tiers/.../tier_core/profiles` | Directory of TOML catalogs that assemble features into named profiles |
+| `--profile` | `Robotics-Prop` | Name of the profile to validate against |
 | `--version` | `1.0.0` | Version of the profile |
 
 You should see output like:
 
 ```text
 Asset: sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
-  [FAILED] Prop-Robotics-Neutral v1.0.0
+  [FAILED] Robotics-Prop v3.2.0
            FET_006_MDL: failing requirements: ['VM.TEX.002']
            FET_004_STANDARD: failing requirements: ['RB.MB.001']
 ```
@@ -127,7 +126,7 @@ import errors, see [Troubleshooting](#troubleshooting) below.
 Add `--output` to write a machine-readable report:
 
 ```bash
-simready-validate --rules-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities --features-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features --profiles-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles --profile Prop-Robotics-Neutral --version 1.0.0 --output results.json sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
+simready-validate --rules-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities --features-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features --profiles-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles --profile Robotics-Prop --version 3.2.0 --output results.json sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
 ```
 
 Open `results.json` to see per-requirement pass/fail details, messages, and
@@ -139,7 +138,7 @@ The `--stamp-asset-validation` flag writes the validation outcome directly into
 the USD file's `customLayerData`:
 
 ```bash
-simready-validate --rules-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities --features-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features --profiles-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles --profile Prop-Robotics-Neutral --version 1.0.0 --stamp-asset-validation sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
+simready-validate --rules-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities --features-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features --profiles-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles --profile Robotics-Prop --version 3.2.0 --stamp-asset-validation sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
 ```
 
 After stamping, the USD file contains metadata like:
@@ -148,7 +147,7 @@ After stamping, the USD file contains metadata like:
 customLayerData = {
     "SimReady_Metadata" = {
         "validation" = {
-            "profile" = "Prop-Robotics-Neutral"
+            "profile" = "Robotics-Prop"
             "validated_features" = {
                 "<YYYY-MM-DD>" = {
                     "FET_001_STANDARD" = {

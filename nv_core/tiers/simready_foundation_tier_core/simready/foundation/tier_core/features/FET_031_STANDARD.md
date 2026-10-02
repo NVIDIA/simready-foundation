@@ -30,7 +30,10 @@ Products or workflows that consume this feature:
 
 #### Used in Profiles
 
-- Package-Candidate v1.0.0
+- [Robotics-Prop](../profiles/robotics-prop.md) v3.2.0
+- [Robot-Body](../profiles/robot-body.md) v2.1.0 and v2.2.0
+- [Robot-Gripper](../profiles/profiles.md#profile-comparison) v2.1.0
+- Package-Candidate v1.0.0, v1.1.0, and v1.2.0
 
 #### Feature Dependencies
 
@@ -42,7 +45,7 @@ None.
 
 | Requirement | Requirement Doc | Rule |
 |-------------|-----------------|------|
-| `AA.001` | [AA.001](../capabilities/core/atomic_asset/requirements/anchored-asset-paths.md) | [Implementation](../capabilities/core/atomic_asset/validation.py) |
+| `AA.001` | [AA.001](../capabilities/core/atomic_asset/requirements/anchored-asset-paths.md) | Provided by `usd-validation-nvidia` |
 
 </details>
 

@@ -59,10 +59,7 @@ flowchart LR
 
 #### Used in Profiles
 
-This version is used in the following profiles:
-
-- **[Prop Robotics PhysX Profile](../profiles/prop-robotics-physx.md)** (`v1.0.0`, `v2.0.0`, `v2.0.1`) - Provides the original PhysX rigid-body gate for prop assets.
-- **[Prop Robotics Isaac Profile](../profiles/prop-robotics-isaac.md)** (`v1.0.0`, `v1.0.1`) - Provides the original PhysX rigid-body gate under Isaac composition.
+No current profile selects this version.
 
 #### Feature Dependencies
 
@@ -86,9 +83,7 @@ This version is used in the following profiles:
 
 #### Used in Profiles
 
-This version is used in the following profiles:
-
-- **[Robot Body Runnable Profile](../profiles/robot-body-runnable.md)** (`v2.0.0`) - Provides the explicit PhysX rigid-body gate for runnable robot bodies.
+No current profile selects this version.
 
 #### Feature Dependencies
 
@@ -124,10 +119,7 @@ explicit PhysX rigid-body requirement list:
 
 #### Used in Profiles
 
-This version is used in the following profiles:
-
-- **[Prop Robotics PhysX Profile](../profiles/prop-robotics-physx.md)** (`v2.1.0`) - Uses the PhysX rigid-body contract after `RB.006` was removed.
-- **[Prop Robotics Isaac Profile](../profiles/prop-robotics-isaac.md)** (`v1.1.0`) - Uses the PhysX rigid-body contract after `RB.006` was removed.
+No current profile selects this version.
 
 #### Feature Dependencies
 
@@ -152,10 +144,9 @@ Version 0.3.0 keeps all Version 0.2.0 requirements except:
 
 This version is used in the following profiles:
 
-- **[Robot Body Runnable Profile](../profiles/robot-body-runnable.md)** (`v2.1.0`) - Uses the latest PhysX rigid-body gate before PhysX multibody validation.
-- **[Robot Body Isaac Profile](../profiles/robot-body-isaac.md)** (`v1.1.0`) - Uses the latest PhysX rigid-body gate before Isaac robot composition.
-- **[Prop Robotics Isaac Profile](../profiles/prop-robotics-isaac.md)** (`v1.2.0`) - Uses the latest PhysX rigid-body gate under the standalone-transformer Isaac composition path.
-- **[Robot Body Profile](../profiles/profiles.md)** (`v3.0.0`) - Used through optional `FET_004_PHYSX@0.4.0` and Isaac composition dependencies.
+- **[Robotics Prop Profile](../profiles/robotics-prop.md)** (`v3.1.0`, `v3.2.0`) - Optional PhysX rigid-body gate.
+- **[Robot Body Profile](../profiles/robot-body.md)** (`v2.1.0`, `v2.2.0`) - Optional PhysX rigid-body gate.
+- **[Robot Gripper Profile](../profiles/profiles.md)** (`v2.1.0`) - Optional PhysX rigid-body gate.
 
 #### Feature Dependencies
 

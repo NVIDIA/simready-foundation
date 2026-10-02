@@ -14,7 +14,7 @@ metadata:
 # SimReady Update Profile
 
 ## Purpose
-Use this skill to change an existing profile. Profile versions are immutable, so the normal operation is to add a new version under the existing profile table in that profile's own TOML file under `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles/`, such as `prop_robotics_neutral.toml`, and update documentation to describe the new version. There is no consolidated `profiles.toml`; the validator loads every `*.toml` in that directory.
+Use this skill to change an existing profile. Profile versions are immutable, so the normal operation is to add a new version under the existing profile table in its tier-owned TOML file under `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles/`, such as `robotics_prop.toml`, and update documentation to describe the new version. New profiles use one TOML each. The legacy `open_taxonomy_profiles.toml` and `package_profiles.toml` catalogs group related profiles; there is no single consolidated `profiles.toml`. The validator loads every `*.toml` in that directory.
 
 Edit an existing profile version in place only for a clear typo, comment correction, markdown-only clarification, or unpublished draft content that the user explicitly says may be changed in place.
 
@@ -25,7 +25,7 @@ Before editing, read:
 - `nv_core/sr_specs/docs/guides/guides.md`
 - `nv_core/sr_specs/docs/guides/profiles/profiles.md`
 - `nv_core/sr_specs/docs/guides/feature_adapters/feature_adapters.md`
-- the target profile's TOML file under its owning tier's `profiles/` directory, such as `prop_robotics_neutral.toml`
+- the target profile's TOML file or legacy grouped catalog under its owning tier's `profiles/` directory, such as `robotics_prop.toml` or `package_profiles.toml`
 - target profile markdown
 - `nv_core/sr_specs/docs/shared/profiles/profiles.md`
 - selected feature JSON manifests
@@ -85,7 +85,7 @@ When a profile adopts a new feature version created in the same change, include 
 Example request:
 
 ```text
-Update prop-robotics-neutral to include a conditional optional feature note.
+Update Robotics-Prop to include a conditional optional feature note.
 ```
 
 Expected result summary:
@@ -98,7 +98,7 @@ remaining_gaps: downstream feature, profile, adapter, or runtime-test follow-up
 
 ## Policies
 
-- Treat the profile's own TOML file as source of truth.
+- Treat the profile's tier-owned TOML table as source of truth, including when it lives in a legacy grouped catalog.
 - Do not silently make a feature optional by changing prose only; machine-readable profile behavior must match.
 - Do not update only markdown when validators consume TOML.
 - Do not reference feature names or semantic feature versions that do not exist.

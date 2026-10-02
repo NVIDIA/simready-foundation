@@ -42,14 +42,7 @@ metadata, and path contract that Minimal builds on.
 
 #### Used in Profiles
 
-This version is used in the following profiles:
-
-- **[Prop Robotics Neutral Profile](../profiles/prop-robotics-neutral.md)** (`v1.0.0`) - Provides the original Minimal feature gate for neutral prop assets.
-- **[Prop Robotics PhysX Profile](../profiles/prop-robotics-physx.md)** (`v1.0.0`) - Provides the original Minimal feature gate for PhysX prop assets.
-- **[Prop Robotics Isaac Profile](../profiles/prop-robotics-isaac.md)** (`v1.0.0`) - Provides the original Minimal feature gate for Isaac prop assets.
-- **[Robot Body Neutral Profile](../profiles/robot-body-neutral.md)** (`v1.0.0`) - Provides the original Minimal feature gate for neutral robot bodies.
-- **[Robot Body Runnable Profile](../profiles/robot-body-runnable.md)** (`v1.0.0`, `v2.0.0`) - Provides the original Minimal feature gate for runnable robot bodies.
-- **[Robot Body Isaac Profile](../profiles/robot-body-isaac.md)** (`v1.0.0`, `v1.1.0`) - Provides the original Minimal feature gate for Isaac robot bodies.
+This version is not selected by any current profile.
 
 #### Feature Dependencies
 
@@ -61,10 +54,10 @@ None.
     * Requirements:
         * [Anchored-Asset-Paths](../capabilities/core/atomic_asset/requirements/anchored-asset-paths.md)
             * `AA.001` | Version `0.1.0`
-            * [Rule | Implementation](../capabilities/core/atomic_asset/validation.py)
+            * Rule: provided by `usd-validation-nvidia`
         * [Supported-File-Types](../capabilities/core/atomic_asset/requirements/supported-file-types.md)
             * `AA.002` | Version `0.1.0`
-            * [Rule | Implementation](../capabilities/core/atomic_asset/validation.py)
+            * Rule: provided by `usd-validation-nvidia`
 * Capability: [Core/Units](../capabilities/core/units/capability-units.md)
     * Requirements:
         * [UpAxis](../capabilities/core/units/requirements/upaxis.md)
@@ -96,10 +89,7 @@ None.
 
 #### Used in Profiles
 
-This version is used in the following profiles:
-
-- **[Prop Robotics Neutral Profile](../profiles/prop-robotics-neutral.md)** (`v2.0.0`) - Updates Minimal from the original visual presence contract to the mesh-quality contract.
-- **[Prop Robotics PhysX Profile](../profiles/prop-robotics-physx.md)** (`v2.0.0`) - Updates Minimal from the original visual presence contract to the mesh-quality contract.
+No current profile selects this version.
 
 #### Feature Dependencies
 
@@ -136,13 +126,9 @@ Version 1.0.0 keeps `AA.001`, `AA.002`, `UN.007`, and `HI.004`.
 
 This version is used in the following profiles:
 
-- **[Prop Robotics Neutral Profile](../profiles/prop-robotics-neutral.md)** (`v2.0.1`, `v2.1.0`) - Uses the latest Minimal Standard mesh and extent contract.
-- **[Prop Robotics PhysX Profile](../profiles/prop-robotics-physx.md)** (`v2.0.1`, `v2.1.0`) - Uses the latest Minimal Standard mesh and extent contract.
-- **[Prop Robotics Isaac Profile](../profiles/prop-robotics-isaac.md)** (`v1.0.1`, `v1.1.0`) - Uses the latest Minimal Standard mesh and extent contract.
-- **[Robotics Prop Profile](../profiles/profiles.md)** (`v3.0.0`) - Uses the consolidated Standard Minimal feature gate.
-- **[Robot Body Neutral Profile](../profiles/robot-body-neutral.md)** (`v1.1.0`) - Uses the latest Minimal Standard mesh and extent contract.
-- **[Robot Body Runnable Profile](../profiles/robot-body-runnable.md)** (`v1.1.0`, `v2.1.0`) - Uses the latest Minimal Standard mesh and extent contract.
-- **[Robot Body Profile](../profiles/profiles.md)** (`v3.0.0`) - Uses the consolidated Standard Minimal feature gate.
+- **[Robotics Prop Profile](../profiles/robotics-prop.md)** (`v3.0.0`, `v3.1.0`, `v3.2.0`) - Uses the consolidated Standard Minimal feature gate.
+- **[Robot Body Profile](../profiles/robot-body.md)** (`v2.0.0`, `v2.1.0`, `v2.2.0`) - Uses the consolidated Standard Minimal feature gate.
+- **[Robot Gripper Profile](../profiles/profiles.md)** (`v2.0.0`, `v2.1.0`) - Uses the consolidated Standard Minimal feature gate.
 
 #### Feature Dependencies
 

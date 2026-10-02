@@ -68,7 +68,6 @@ customLayerData = {
 ## Related Requirements
 
 - [newton-variant-set](newton-variant-set) (RV.004)
-- [metadata-whitelist](../../sim_ready/requirements/metadata-whitelist.md) (SR.001)
 
 ## For More Information
 

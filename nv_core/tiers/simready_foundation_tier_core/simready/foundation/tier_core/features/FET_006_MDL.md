@@ -31,9 +31,14 @@ Products or workflows that consume this feature:
 
 #### Used in Profiles
 
-- Prop Robotics Neutral v1.0.0, v2.0.0, v2.0.1, v2.1.0
-- Prop Robotics PhysX v1.0.0, v2.0.0, v2.0.1, v2.1.0
-- Robotics Prop v3.0.0 optional MDL material gate
+Required:
+
+- Prop Robotics Neutral v1.0.0, v2.0.0, v2.0.1, v2.1.0, v2.2.0
+- Prop Robotics PhysX v1.0.0, v2.0.0, v2.0.1, v2.1.0, v2.2.0
+
+Optional MDL material gate:
+
+- Robotics Prop v3.0.0, v3.1.0
 
 #### Feature Dependencies
 
@@ -45,13 +50,52 @@ None.
 
 | Requirement | Requirement Doc | Rule |
 |-------------|-----------------|------|
-| `VM.BIND.001` | [VM.BIND.001](../capabilities/visualization/materials/requirements/material-bind-scope.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
 | `VM.BIND.002` | [VM.BIND.002](../capabilities/visualization/materials/requirements/material-shader-inputs.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
 | `VM.MAT.001` | [VM.MAT.001](../capabilities/visualization/materials/requirements/material-assignment.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
 | `VM.MDL.001` | [VM.MDL.001](../capabilities/visualization/materials/requirements/material-mdl-source-asset.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
-| `VM.MDL.002` | [VM.MDL.002](../capabilities/visualization/materials/requirements/material-mdl-schema.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
 | `VM.TEX.001` | [VM.TEX.001](../capabilities/visualization/materials/requirements/material-texture-maxsize.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
-| `VM.TEX.002` | [VM.TEX.002](../capabilities/visualization/materials/requirements/material-texture-colorspace.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
+| `VM.TEX.002` | [VM.TEX.002](../capabilities/visualization/materials/requirements/material-texture-colorspace-mdl.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
+
+</details>
+
+### Version 0.2.0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+Optional MDL material gate:
+
+- Robotics Prop v4.0.0, Robot Body v3.0.0, Robot Gripper v3.0.0
+
+#### Feature Dependencies
+
+None.
+
+#### Changes From Version 0.1.0
+
+`VM.TEX.002` is replaced by `VM.TEX.005`. Both state the color space a texture input
+declares; `VM.TEX.005` adds the input that declares nothing, which resolves to `auto` and
+decodes an 8-bit three- or four-channel file as sRGB. `VM.TEX.002` remains at 0.1.0 so an
+asset validated against that version keeps its result.
+
+`com.nvidia.usd.VM.BIND.001` and `com.nvidia.usd.VM.MDL.002` are added. Both are defined
+and enforced by `usd-validation-nvidia`.
+
+#### Requirement List
+
+* Capability: [Visualization/Materials](../capabilities/visualization/materials/capability-materials.md)
+
+| Requirement | Requirement Doc | Rule |
+|-------------|-----------------|------|
+| `com.nvidia.usd.VM.BIND.001` | Defined by `usd-validation-nvidia` | `MaterialOutOfScopeChecker` |
+| `VM.BIND.002` | [VM.BIND.002](../capabilities/visualization/materials/requirements/material-shader-inputs.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
+| `VM.MAT.001` | [VM.MAT.001](../capabilities/visualization/materials/requirements/material-assignment.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
+| `VM.MDL.001` | [VM.MDL.001](../capabilities/visualization/materials/requirements/material-mdl-source-asset.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
+| `com.nvidia.usd.VM.MDL.002` | Defined by `usd-validation-nvidia` | `MaterialOldMdlSchemaChecker` |
+| `VM.TEX.001` | [VM.TEX.001](../capabilities/visualization/materials/requirements/material-texture-maxsize.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
+| `VM.TEX.005` | [VM.TEX.005](../capabilities/visualization/materials/requirements/material-texture-colorspace-mdl.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
 
 </details>
 

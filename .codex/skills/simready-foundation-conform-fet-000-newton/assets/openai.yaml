@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 interface:
   display_name: "SimReady Conform FET_000_NEWTON"
   short_description: "Repair FET_000_NEWTON Newton runtime variant scaffolding"

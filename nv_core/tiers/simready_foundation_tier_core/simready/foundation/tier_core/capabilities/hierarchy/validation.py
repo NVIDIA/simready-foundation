@@ -69,52 +69,6 @@ def _is_render_settings_root(prim: Usd.Prim) -> bool:
     return _has_render_settings_type(prim)
 
 
-# TODO: Potential Refactor: Obtaining Hierarchy Root may be a common operation, do we want to move it to a helper function?
-@usd_validation_nvidia.register_rule("Hierarchy")
-@usd_validation_nvidia.register_requirements(cap.HierarchyRequirements.HI_001, override=True)
-class HierarchyHasRootChecker(usd_validation_nvidia.BaseRuleChecker):
-    """
-    Validates that the prim hierarchy has a single root prim.
-
-    This validator ensures that:
-    - The stage has exactly one root prim (preventing scattered/disconnected hierarchies)
-
-    This prevents scattered or disconnected prim hierarchies and ensures a clean,
-    organized asset structure with a single entry point for the entire hierarchy.
-
-    Note: Default prim validation is handled by HI.004 (stage-has-default-prim).
-    """
-
-    def CheckStage(self, usdStage: Usd.Stage) -> None:
-        """
-        Check that the stage has exactly one root prim.
-
-        Args:
-            usdStage: The USD stage to validate
-        """
-        # Check that stage has exactly one root prim (per HI.001 spec).
-        # Exclude Omniverse-generated /Render render-settings scopes from the count.
-        root_children = [prim for prim in usdStage.GetPseudoRoot().GetChildren() if not _is_render_settings_root(prim)]
-
-        if len(root_children) == 0:
-            self._AddFailedCheck(
-                requirement=cap.HierarchyRequirements.HI_001,
-                message="Prim hierarchy must have at least one root prim. Found no root prims.",
-                at=usdStage,
-            )
-            return
-
-        # Add a specific filter to account for OV specific
-        if len(root_children) > 1:
-            # List the scattered root prims to help users identify the issue
-            root_prim_names = [prim.GetName() for prim in root_children]
-            self._AddFailedCheck(
-                requirement=cap.HierarchyRequirements.HI_001,
-                message=f"Prim hierarchy must have a single root prim. Found {len(root_children)} root prims: {', '.join(root_prim_names)}",
-                at=usdStage,
-            )
-
-
 @usd_validation_nvidia.register_rule("Hierarchy")
 @usd_validation_nvidia.register_requirements(cap.HierarchyRequirements.HI_002, override=True)
 class ExclusiveXFormParentChecker(usd_validation_nvidia.BaseRuleChecker):
@@ -158,84 +112,6 @@ class ExclusiveXFormParentChecker(usd_validation_nvidia.BaseRuleChecker):
                 self._AddFailedCheck(
                     "Prim Parent has no xformOp:rotate.", at=parent, requirement=self.EXCLUSIVE_XFORM_PARENT_REQUIREMENT
                 )
-
-
-@usd_validation_nvidia.register_rule("Hierarchy")
-@usd_validation_nvidia.register_requirements(cap.HierarchyRequirements.HI_003, override=True)
-class RootPrimXformableChecker(usd_validation_nvidia.BaseRuleChecker):
-    """
-    Validates that the root prim of a placeable asset is strictly an Xformable prim.
-
-    This is a stricter version of DefaultPrimChecker that enforces HI.003 requirement:
-    The root prim must inherit UsdGeomXformable (such as Xform) and NOT be a Scope.
-
-    This ensures:
-    - The entire asset can be transformed as a single unit
-    - Easy positioning and orientation when referencing into scenes
-    - Consistent behavior for asset manipulation tools
-    - Facilitated automated scene composition and layout workflows
-    """
-
-    def CheckStage(self, usdStage):
-        """Check that the default prim is strictly Xformable."""
-        default_prim = usdStage.GetDefaultPrim()
-        if not default_prim:
-            self._AddFailedCheck(
-                "Stage has missing or invalid defaultPrim.",
-                at=usdStage,
-                requirement=cap.HierarchyRequirements.HI_003,
-            )
-            return
-
-        if not default_prim.GetParent().IsPseudoRoot():
-            self._AddFailedCheck(
-                "The default prim must be a root prim.",
-                at=default_prim,
-                requirement=cap.HierarchyRequirements.HI_003,
-            )
-            return
-
-        # Only Xformable prims are valid (Scope is NOT allowed for HI.003)
-        if not default_prim.IsA(UsdGeom.Xformable):
-            self._AddFailedCheck(
-                f'The root prim <{default_prim.GetName()}> of type "{default_prim.GetTypeName()}" '
-                "must be an Xformable prim (e.g., Xform) to allow transformation of the entire asset.",
-                at=default_prim,
-                requirement=cap.HierarchyRequirements.HI_003,
-            )
-            # Don't continue checking other conditions if not Xformable
-            return
-
-        if not default_prim.IsActive():
-            self._AddFailedCheck(
-                f"The default prim <{default_prim.GetName()}> should be active.",
-                at=default_prim,
-                requirement=cap.HierarchyRequirements.HI_003,
-            )
-
-        if default_prim.IsAbstract():
-            self._AddFailedCheck(
-                f"The default prim <{default_prim.GetName()}> should not be abstract.",
-                at=default_prim,
-                requirement=cap.HierarchyRequirements.HI_003,
-            )
-
-
-@usd_validation_nvidia.register_rule("Hierarchy")
-@usd_validation_nvidia.register_requirements(cap.HierarchyRequirements.HI_004, override=True)
-class StageHasDefaultPrimChecker(usd_validation_nvidia.BaseRuleChecker):
-    STAGE_HAS_DEFAULT_PRIM_REQUIREMENT = cap.HierarchyRequirements.HI_004
-
-    def CheckStage(self, stage: Usd.Stage) -> None:
-        default_prim = stage.GetDefaultPrim()
-        if not default_prim:
-            self._AddFailedCheck(
-                "Stage has no default prim.", at=stage, requirement=self.STAGE_HAS_DEFAULT_PRIM_REQUIREMENT
-            )
-
-
-# @usd_validation_nvidia.register_rule("Hierarchy")
-# @usd_validation_nvidia.register_requirements(cap.HierarchyRequirements.HI_005, override=True)
 
 
 @usd_validation_nvidia.register_rule("Hierarchy")

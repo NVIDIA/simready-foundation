@@ -125,10 +125,10 @@ def test_legacy_isaac_site_with_arbitrary_name_is_classified_as_gripper():
     assert _has_gripper_signals(stage, asset_prim)
 
 
-def test_discover_accepts_attachment_socket_without_isaac_api():
+def test_discover_accepts_intentional_attactment_socket_spelling_without_isaac_api():
     stage, asset_prim = _stage_with_asset()
     prim = _add_gripper_site(stage, "/World/Asset", apply_isaac_site_api=False)
-    prim.CreateAttribute("simready:attachment:socketType", Sdf.ValueTypeNames.Token).Set("Gripper")
+    prim.CreateAttribute("simready:attactment:socketType", Sdf.ValueTypeNames.Token).Set("Gripper")
 
     sites = discover_gripper_sites(stage, asset_prim)
 

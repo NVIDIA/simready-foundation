@@ -70,6 +70,7 @@ Thumbs.db
 
 # Folders starting with underscore
 _*/
+!**/docs/_artifacts/
 
 # Assets
 .blend1
@@ -82,9 +83,14 @@ source/apps/exts.deps.generated.kit
 /MEMORY.md
 /NEWTON.md
 
+# Generated validation and reconciliation artifacts
+/outputs/
+
+# Generated asset-tool caches and reports
+**/.workertron/
+**/.simready_diagnostics/
+**/transform_report.json
+**/simready_physx_usd/metadata.json
+
 # Local-only sample asset (not part of the repo)
 /sample_content/common_assets/props_general/sm_obs_orange_a03/
-
-# Local tool run artifacts (not part of the repo)
-/outputs/
-.simready_diagnostics/

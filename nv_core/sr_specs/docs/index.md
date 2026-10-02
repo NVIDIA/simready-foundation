@@ -4,13 +4,6 @@
 
 This documentation is a collection of guidelines and requirements for OpenUSD content. It provides a framework to author OpenUSD content that is suitable for use cases such as rendering, simulation, robotics, and AI training. 
 
-```{important}
-Please note: older SimReady Libraries (simready.validate, etc) are not compatible with SimReady Foundation 7.1; you must use library versions 2026.7.1 or higher. See the
-[7.1 release notes](changelist.md#release-notes) for details and the
-[Foundation 7.1 library set](guides/foundation_pypi.md#foundation-71-library-set)
-for compatible validation, Benchmark, and packaging versions.
-```
-
 ## Key Concepts
 
 
@@ -28,7 +21,7 @@ Features are collections of requirements tailored for specific use cases or soft
 
 ### Profiles
 
-Profiles are predefined bundles of features designed for common scenarios. Examples include the Prop Robotics Neutral profile. Profiles make it easy to test and validate complete asset workflows.
+Profiles are predefined bundles of features designed for common scenarios. The Core tier ships 15 profiles covering consolidated robotics assets, legacy robot-body workflows, packaging, and closed-vocabulary taxonomies. Profiles make it easy to test and validate complete asset workflows.
 
 ### Tiers
 
@@ -45,6 +38,7 @@ Tiers are the slices the specification is distributed in. Each tier owns a set o
 - **Tracking feature progress?** See the [Features Status Dashboard](features/features) for an at-a-glance view of all features, their readiness, versions, and profile membership.
 - **Implementing specific features?** Check out the [Features](features/features) section for detailed feature implementations and requirements.
 - **Building for a specific use case?** Check out the [Profiles](profiles/profiles) section to find predefined capability sets.
+- **Looking for installable specification catalogs?** Browse [Tiers](tiers/tiers) to see which profiles and features each tier owns.
 - **Comparing profiles?** See the {ref}`Profile Comparison <profile-comparison>` table for feature-level differences.
 - **Need to reference something?** Use the [Indexes](indexes/indexes) for quick access to all documentation content.
 
@@ -53,12 +47,13 @@ Tiers are the slices the specification is distributed in. Each tier owns a set o
 :maxdepth: 2
 :hidden:
 
-Release notes <changelist>
 Guides <guides/guides>
 Development Workflows <guides/development>
 Capabilities <capabilities/capabilities>
 Features <features/features>
 Profiles <profiles/profiles>
+Tiers <tiers/tiers>
 Indexes <indexes/indexes>
+Changelist <changelist>
 
 ```

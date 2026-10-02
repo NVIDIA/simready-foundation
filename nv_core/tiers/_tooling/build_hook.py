@@ -21,15 +21,17 @@ Every tier's ``pyproject.toml`` points at this one file
 A tier ships its content committed under ``<tier>/simready/foundation/<tier>/``
 (capabilities + features + profiles + scaffolding, with validators already
 importing the tier's own requirements module). The only thing missing from the
-committed tree is the generated requirements-enum package, so this hook's sole
-job is to generate it from the committed capability markdown into
+committed tree is the generated requirements-enum package, so this hook generates it
+from the committed capability markdown into
 ``_build/python/<module>/requirements``; the tier's ``pyproject.toml``
-force-includes that into the wheel.
+force-includes that into the wheel. It also includes the notices for the
+third-party packages listed by the tier's ``package_licenses`` setting.
 
 It reads two keys from its own ``[tool.hatch.build.hooks.custom]`` table:
 
 * ``module`` -- the tier's dotted package (e.g. ``simready.foundation.prop_robotics_neutral``)
 * ``reverse_domain`` -- requirement-code namespace (e.g. ``com.nvidia.simready``)
+* ``package_licenses`` -- filenames from the repository's ``PACKAGE-LICENSES`` directory
 
 Codegen needs ``usd_profiles_nvidia`` (and ``pxr``), so it runs in the build env.
 """
@@ -70,3 +72,14 @@ class CustomBuildHook(BuildHookInterface):
             package_name=requirements_module,
             reverse_domain=reverse_domain,
         ).generate()
+
+        notice_root = root / "PACKAGE-LICENSES"
+        if not notice_root.is_dir():
+            notice_root = root.parents[2] / "PACKAGE-LICENSES"
+        for filename in self.config.get("package_licenses", []):
+            if Path(filename).name != filename:
+                raise ValueError(f"Invalid package license filename: {filename}")
+            notice = notice_root / filename
+            if not notice.is_file():
+                raise FileNotFoundError(f"Package license not found: {notice}")
+            build_data["force_include"][str(notice)] = f"PACKAGE-LICENSES/{filename}"

@@ -43,10 +43,7 @@ Products or workflows that consume this feature:
 
 This version is used in the following profiles:
 
-- **[Prop Robotics Neutral Profile](../profiles/prop-robotics-neutral.md)** (`v1.0.0`, `v2.0.0`, `v2.0.1`, `v2.1.0`) - Requires grasp vectors and physics material bindings for graspable neutral props.
-- **[Prop Robotics PhysX Profile](../profiles/prop-robotics-physx.md)** (`v1.0.0`, `v2.0.0`, `v2.0.1`, `v2.1.0`) - Reuses the Standard grasp contract for PhysX prop workflows.
-- **[Prop Robotics Isaac Profile](../profiles/prop-robotics-isaac.md)** (`v1.0.0`, `v1.0.1`, `v1.1.0`) - Reuses the Standard grasp contract for Isaac Sim prop workflows.
-- **[Robotics Prop Profile](../profiles/profiles.md)** (`v3.0.0`) - Optional consolidated grasp feature.
+- **[Robotics Prop Profile](../profiles/robotics-prop.md)** (`v3.0.0`, `v3.1.0`, `v3.2.0`) - Optional consolidated grasp feature.
 
 #### Feature Dependencies
 

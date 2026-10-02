@@ -2,4 +2,4 @@
 numpy
 
 # Runtime
-simready-package[publish]>=2026.6.0a1
+simready-package[publish]>=2026.8.0,<2026.9.0

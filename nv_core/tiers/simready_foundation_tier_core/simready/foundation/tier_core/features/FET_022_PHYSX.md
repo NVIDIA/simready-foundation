@@ -41,13 +41,18 @@ Products or workflows that consume this feature:
 
 #### Used in Profiles
 
-- Robot Body Runnable v1.0.0
+- None.
 
 #### Feature Dependencies
 
 | **Property** | **Value** |
 |--------------|-----------|
 | Dependency | `FET_004_ROBOT_PHYSX@0.1.0` |
+
+This dependency is retained for compatibility with the published
+`FET_022_PHYSX@0.1.0` contract. New profile versions must use
+`FET_022_PHYSX@0.2.0`, which depends on the canonical
+`FET_004_PHYSX@0.4.0` feature.
 
 #### Requirement List
 
@@ -73,7 +78,6 @@ Products or workflows that consume this feature:
 
 #### Used in Profiles
 
-- Robot Body Runnable v1.1.0
 - Robot Body v2.0.0 optional
 - Robot Gripper v2.0.0 optional
 

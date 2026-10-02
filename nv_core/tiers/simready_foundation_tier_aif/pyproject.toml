@@ -1,0 +1,81 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+[project]
+name = "simready-foundation-tier-aif"
+version = "2026.8.0-rc2"
+description = "SimReady AI Factory (AIF) tier: AIF core metadata, connection points (v0.1.0 geometry + v0.2.0 property vocabulary, coexisting), thermal cooling, and electrical capabilities/features, and the aif-entity profile"
+authors = [
+    {name = "NVIDIA"},
+]
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE.txt"]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "usd-validation-nvidia>=1.20.0",
+    # The AIF-Entity profile selects FET_000_STANDARD and FET_001_STANDARD, which
+    # only tier_core provides. Without it the profile names features that are not
+    # registered and the loader skips it, so nothing validates.
+    #
+    # The 2026.8.0 release includes the FET_000_STANDARD and FET_001_STANDARD
+    # names used by the AIF-Entity profile.
+    "simready-foundation-tier-core>=2026.8.0,<2026.9.0",
+]
+
+# Framework discovery: the asset validator / usd-validation auto-discovers this
+# tier's validators (rules + their requirements) through its own plugin group.
+[project.entry-points."usd_validation_nvidia"]
+simready-validate-tier-aif = "simready.foundation.tier_aif:SimReadyPlugin"
+
+# SimReady tier discovery: the SimReady loader enumerates this (deliberately
+# non-validation-specific) group to find installed tiers and their per-layer
+# content sources (requirements module + features/profiles dirs).
+[project.entry-points."simready.tier"]
+tier_aif = "simready.foundation.tier_aif:tier"
+
+[project.optional-dependencies]
+usd = ["usd-core>=22.11"]
+test = ["pytest"]
+
+# This tier's package lives committed under ./simready/foundation/... and ships
+# as-is. The ONLY build step is generating the requirements-enum module from the
+# committed capability markdown; the shared hook reads `module`/`reverse_domain`
+# below to know what to generate and where.
+[tool.hatch.build.hooks.custom]
+path = "../_tooling/build_hook.py"
+module = "simready.foundation.tier_aif"
+reverse_domain = "com.nvidia.simready"
+package_licenses = [
+    "usd-validation-nvidia-LICENSE.txt",
+    "usd-validation-nvidia-THIRD_PARTY_NOTICES.md",
+    "usd-core-LICENSE.txt",
+]
+
+# Ship the committed package tree (respects default excludes, so __pycache__ /
+# the git-ignored generated requirements/ are skipped here).
+[tool.hatch.build.targets.wheel]
+packages = ["simready"]
+
+# ...and add the build-time generated requirements enums.
+[tool.hatch.build.targets.wheel.force-include]
+"_build/python/simready/foundation/tier_aif/requirements" = "simready/foundation/tier_aif/requirements"
+
+[build-system]
+# The shared build hook (../_tooling/build_hook.py) generates this tier's
+# requirements enums at build time, so the codegen package must be importable in
+# the (isolated) build env.
+requires = ["hatchling", "usd-profiles-nvidia"]
+build-backend = "hatchling.build"

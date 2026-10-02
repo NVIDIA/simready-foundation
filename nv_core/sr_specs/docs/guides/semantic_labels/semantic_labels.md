@@ -125,10 +125,9 @@ apply to your work:
 | `FET_011_RTX` 0.1.0 | `SL.TIME.001`, `SL.MAT.001` | You are targeting the NVIDIA RTX perception pipeline. Depends on `FET_011_STANDARD` 0.2.0. |
 | `FET_046_STANDARD` 0.1.0 | `SL.QCODE.001` | You are labeling with Wikidata Q-codes. Depends on `FET_011_STANDARD` 0.2.0. |
 
-`FET_011_STANDARD` 0.2.0 is selected by `Prop-Robotics-Neutral` and
-`Prop-Robotics-Physx` at 2.3.0, and by `Prop-Robotics-Isaac`,
-`Robot-Body-Neutral`, `Robot-Body-Runnable` and `Robot-Body-Isaac` at 1.2.0.
-`Prop-Robotics-Physx` 2.3.0 also selects `FET_011_RTX` 0.1.0.
+`FET_011_STANDARD` 0.2.0 is selected by `Robotics-Prop` 3.2.0 and every
+`Open-Taxonomy-*` profile.
+`FET_011_RTX` 0.1.0 is selected by `Robotics-Prop` 3.2.0.
 
 ## 2. Establish a baseline
 
@@ -136,7 +135,7 @@ Start from an asset with no labels at all, so you can see the failure before you
 fix it.
 
 ```bash
-simready-validate --rules-path nv_core/sr_specs/docs/capabilities --features-path nv_core/sr_specs/docs/features --profiles-path nv_core/sr_specs/docs/profiles --profile Prop-Robotics-Neutral --version 2.3.0 ASSET
+simready-validate --rules-path nv_core/sr_specs/docs/capabilities --features-path nv_core/sr_specs/docs/features --profiles-path nv_core/sr_specs/docs/profiles --profile Robotics-Prop --version 3.2.0 ASSET
 ```
 
 ```{note}
@@ -150,7 +149,7 @@ The line to look for:
 
 ```text
 Asset: toaster.usda
-  [FAILED] Prop-Robotics-Neutral v2.3.0
+  [FAILED] Robotics-Prop v3.2.0
            FET_011_STANDARD: failing requirements: ['com.nvidia.simready.SL.001']
 ```
 
@@ -396,7 +395,7 @@ Both need add-on 2026.8.0 or later.
 Run the same command as step 2, this time against the labeled asset:
 
 ```bash
-simready-validate --rules-path nv_core/sr_specs/docs/capabilities --features-path nv_core/sr_specs/docs/features --profiles-path nv_core/sr_specs/docs/profiles --profile Prop-Robotics-Neutral --version 2.3.0 ASSET
+simready-validate --rules-path nv_core/sr_specs/docs/capabilities --features-path nv_core/sr_specs/docs/features --profiles-path nv_core/sr_specs/docs/profiles --profile Robotics-Prop --version 3.2.0 ASSET
 ```
 
 `FET_011_STANDARD` drops off the failing list. Nothing replaces it in the output;

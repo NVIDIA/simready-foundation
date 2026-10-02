@@ -55,7 +55,7 @@ The `package_id` MUST be a non-empty UTF-8 string of at most 255 characters. It 
   "package_hash": { "sha256": "f6e5d4c3b2a1..." },
   "metadata": [
     {
-      "name": "com.nvidia.simready.conformance.Prop-Robotics-Physx@1.0.0.json",
+      "name": "com.nvidia.simready.conformance.Robotics-Prop@3.2.0.json",
       "hash": { "sha256": "1234abcd..." }
     }
   ]

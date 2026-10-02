@@ -1,0 +1,198 @@
+{
+  "aif:core:accessibilityRequirement": [
+    "float",
+    914.0
+  ],
+  "aif:core:assetClass": [
+    "string",
+    "CRAH"
+  ],
+  "aif:core:assetCreationDate": [
+    "string",
+    "2026-06-10"
+  ],
+  "aif:core:assetDescription": [
+    "string",
+    "Generic chilled-water Computer Room Air Handler (CRAH), downflow configuration with EC plug fans and a chilled-water coil. Plausible reference data for SimReady authoring training; not a real product."
+  ],
+  "aif:core:assetValidatorVersion": [
+    "string",
+    "(1, 11, 2, '', '')"
+  ],
+  "aif:core:assetVersion": [
+    "string",
+    "1.0.0"
+  ],
+  "aif:core:connectsToModelDocumentation": [
+    "string",
+    "https://example.com/generic-crah/datasheet"
+  ],
+  "aif:core:depth": [
+    "float",
+    860.0
+  ],
+  "aif:core:height": [
+    "float",
+    1974.0
+  ],
+  "aif:core:installationClearance": [
+    "float",
+    1000.0
+  ],
+  "aif:core:manufacturer": [
+    "string",
+    "Generic Cooling Systems"
+  ],
+  "aif:core:modelNumber": [
+    "string",
+    "GCS-CRAH-105D"
+  ],
+  "aif:core:overallGeometryDimensions": [
+    "float3",
+    [
+      1840.0,
+      860.0,
+      1974.0
+    ]
+  ],
+  "aif:core:sceneOptimizerVersion": [
+    "string",
+    "(110, 0, 4, '', '110.0.0.wx64.r.cp312.u7f4')"
+  ],
+  "aif:core:simreadyVersion": [
+    "string",
+    "0.1.0"
+  ],
+  "aif:core:weight": [
+    "float",
+    545.0
+  ],
+  "aif:core:width": [
+    "float",
+    1840.0
+  ],
+  "aif:spec:airFilter": [
+    "string",
+    "MERV 8 pleated"
+  ],
+  "aif:spec:coil": [
+    "string",
+    "Chilled water, 3-row"
+  ],
+  "aif:spec:electricalCurrent": [
+    "float",
+    14.0
+  ],
+  "aif:spec:electricalFrequency": [
+    "float",
+    50.0
+  ],
+  "aif:spec:electricalNominalVoltage": [
+    "float",
+    415.0
+  ],
+  "aif:spec:electricalPanelAccess": [
+    "float",
+    800.0
+  ],
+  "aif:spec:electricalPanelOptions": [
+    "string",
+    "Single point connection"
+  ],
+  "aif:spec:electricalPhase": [
+    "int",
+    3
+  ],
+  "aif:spec:electricalPowerRating": [
+    "float",
+    9.0
+  ],
+  "aif:spec:externalStaticUnitPressure": [
+    "float",
+    0.5
+  ],
+  "aif:spec:faceArea": [
+    "float",
+    2.4000000953674316
+  ],
+  "aif:spec:faceVelocity": [
+    "float",
+    500.0
+  ],
+  "aif:spec:fanMotorPowerMax": [
+    "float",
+    5.5
+  ],
+  "aif:spec:flowRate": [
+    "float",
+    66.0
+  ],
+  "aif:spec:highVoltageOptions": [
+    "float",
+    480.0
+  ],
+  "aif:spec:humidification": [
+    "string",
+    "None"
+  ],
+  "aif:spec:maximumHp": [
+    "float",
+    7.5
+  ],
+  "aif:spec:monitoring": [
+    "string",
+    "BMS via Modbus TCP"
+  ],
+  "aif:spec:nominalAirVolume": [
+    "float",
+    11000.0
+  ],
+  "aif:spec:nominalCoolingCapacity": [
+    "float",
+    105.0
+  ],
+  "aif:spec:numberOfFans": [
+    "int",
+    3
+  ],
+  "aif:spec:numberOfRows": [
+    "int",
+    3
+  ],
+  "aif:spec:pipingConnection": [
+    "string",
+    "Bottom"
+  ],
+  "aif:spec:powerSupply": [
+    "float",
+    415.0
+  ],
+  "aif:spec:primaryControl": [
+    "string",
+    "Modulating chilled-water valve"
+  ],
+  "aif:spec:primaryPipeDiameter": [
+    "float",
+    65.0
+  ],
+  "aif:spec:returnAirVolume": [
+    "float",
+    11000.0
+  ],
+  "aif:spec:secondaryPipeDiameter": [
+    "float",
+    50.0
+  ],
+  "aif:spec:sensibleCapacity": [
+    "float",
+    100.0
+  ],
+  "aif:spec:totalCapacity": [
+    "float",
+    105.0
+  ],
+  "aif:spec:unitPressureDrop": [
+    "float",
+    12.0
+  ]
+}

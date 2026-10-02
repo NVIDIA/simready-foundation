@@ -42,8 +42,6 @@ Products or workflows that consume this feature:
 
 #### Used in Profiles
 
-This version is used in the following profiles:
-
 - **[Open-Taxonomy-PascalVOC](../profiles/open-taxonomy-pascal_voc.md)** (`v0.1.0`) - Validates one closed-vocabulary taxonomy at a time.
 
 #### Feature Dependencies

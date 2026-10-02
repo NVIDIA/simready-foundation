@@ -38,7 +38,7 @@ flowchart LR
 
 Products or workflows that consume this feature:
 
-- Robot-Body-Isaac profile validation for Isaac package cleanliness and physics-layer separation.
+- Robot-Body profile validation for optional Isaac package cleanliness and physics-layer separation.
 - Isaac robot packaging workflows that keep physics opinions out of the base layer.
 - Combined with `FET_021_ISAAC` when both Isaac packaging and robot identity are required.
 
@@ -53,7 +53,7 @@ Products or workflows that consume this feature:
 
 This version is used in the following profiles:
 
-- **[Robot Body Profile](../profiles/robot-body.md)** (`v2.0.0`) - Optional Isaac packaging Core gate.
+- **[Robot Body Profile](../profiles/robot-body.md)** (`v2.0.0`, `v2.1.0`, `v2.2.0`) - Optional Isaac packaging Core gate.
 
 #### Feature Dependencies
 

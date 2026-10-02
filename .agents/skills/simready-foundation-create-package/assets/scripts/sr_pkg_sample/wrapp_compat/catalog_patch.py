@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 """Patch the ``.wrapp`` catalog to include SimReady metadata files.
 
 After ``wrapp.create``, the ``.wrapp`` catalog only lists files that

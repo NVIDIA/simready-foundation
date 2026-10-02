@@ -1,6 +1,6 @@
 ---
 name: simready-foundation-conform-fet-006-standard
-description: "Use for repairing exact FET_006_STANDARD SimReady conformance for USDPreviewSurface material conformance. Use when a profile, validation report, or user request names FET_006_STANDARD; default to version `0.1.0` unless a profile or report pins another version."
+description: "Use for repairing exact FET_006_STANDARD SimReady conformance for USDPreviewSurface material conformance. Use when a profile, validation report, or user request names FET_006_STANDARD; default to version `0.2.0` unless a profile or report pins another version."
 license: Apache-2.0
 metadata:
   author: "Shaad Boochoon <sboochoon@nvidia.com>"
@@ -16,13 +16,14 @@ metadata:
 
 Use this exact feature skill when the selected profile, validation report, or user request names `FET_006_STANDARD`. It repairs or stages USDPreviewSurface material conformance without drifting into another runtime contract.
 
-Default to `FET_006_STANDARD@0.1.0` when the user asks for this feature without a version. Use an older integer version only when the profile, validation report, or user explicitly pins it. If the report names a different `FET_###_RUNTIME` feature, switch to that feature's matching skill before editing.
+Default to `FET_006_STANDARD@0.2.0` when the user asks for this feature without a version. Use an older integer version only when the profile, validation report, or user explicitly pins it. If the report names a different `FET_###_RUNTIME` feature, switch to that feature's matching skill before editing.
 
 ## Source of Truth
 
 Before changing an asset or package, read:
 
 - `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_006_STANDARD-0.1.0.json`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_006_STANDARD-0.2.0.json`
 - `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_006_STANDARD.md`
 
 Treat the selected JSON manifest as authoritative for dependencies and requirement IDs. Use the feature markdown for human-readable contract details, requirement links, samples, benchmarks, and adapters.
@@ -31,7 +32,8 @@ Treat the selected JSON manifest as authoritative for dependencies and requireme
 
 | Version | Dependencies | Requirements |
 |---|---|---|
-| `0.1.0` | None | `VM.BIND.001`, `VM.PS.001` |
+| `0.1.0` | None | `com.nvidia.usd.VM.BIND.001`, `com.nvidia.usd.VM.PS.001` |
+| `0.2.0` | None | `com.nvidia.usd.VM.BIND.001`, `VM.MAT.001`, `com.nvidia.usd.VM.PS.001`, `VM.TEX.001`, `VM.TEX.003` |
 
 ## Workflow
 

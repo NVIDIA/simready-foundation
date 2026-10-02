@@ -36,7 +36,7 @@ Products or workflows that consume this feature:
 
 #### Used in Profiles
 
-- `Robot-Body` version `2.2.0` (optional)
+- `Robot-Body` version `2.2.0` and later (`2.3.0`, `3.0.0`) (optional)
 
 #### Feature Dependencies
 

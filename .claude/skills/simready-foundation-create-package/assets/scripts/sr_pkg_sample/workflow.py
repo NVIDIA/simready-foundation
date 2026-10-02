@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 """Top-level packaging workflow: pre-validate, create, post-validate.
 
 Two entry points mirror the CLI's two modes:

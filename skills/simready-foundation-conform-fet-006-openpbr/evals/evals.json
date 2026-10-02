@@ -1,0 +1,48 @@
+[
+    {
+        "id": "simready-foundation-conform-fet-006-openpbr-positive-trigger",
+        "question": "Repair FET_006_OPENPBR@0.1.0 validation failures on a SimReady asset or package.",
+        "expected_skill": "simready-foundation-conform-fet-006-openpbr",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-006-openpbr and follow the exact FET_006_OPENPBR workflow.",
+        "expected_behavior": [
+            "Load the simready-foundation-conform-fet-006-openpbr skill.",
+            "Use the selected FET_006_OPENPBR manifest as the authoritative feature contract.",
+            "Run the bundled migrate_to_openpbr.py with --verify before editing.",
+            "Report changed files, validation performed, and any remaining blockers."
+        ]
+    },
+    {
+        "id": "simready-foundation-conform-fet-006-openpbr-textures-by-default",
+        "question": "The OpenPBR materials on this asset render untextured. Carry the source textures onto the OpenPBR surface.",
+        "expected_skill": "simready-foundation-conform-fet-006-openpbr",
+        "ground_truth": "Textures are carried by default, so a plain run of the bundled script wires the MaterialX reader nodes. --textures is accepted but names the default rather than changing it, and --no-textures is the opt-out that flattens channels to constants.",
+        "expected_behavior": [
+            "Run migrate_to_openpbr.py without --no-textures, rather than looking for an opt-in flag.",
+            "Do not describe --textures as required to carry textures across.",
+            "Confirm with --verify, which reports any texture that does not resolve to a file on disk, MDL-named maps included.",
+            "State that VM.PBR.003 needs a source of MaterialX nodedefs, which the MaterialX Python package supplies without Kit, and that the rendered result needs a renderer, rather than claiming a visual pass from usd-core alone."
+        ]
+    },
+    {
+        "id": "simready-foundation-conform-fet-006-openpbr-no-inheritance-arc",
+        "question": "Should the migrated OpenPBR materials inherit from the PhysicalAI open_pbr_uber_base class the way NVIDIA's library does?",
+        "expected_skill": "simready-foundation-conform-fet-006-openpbr",
+        "ground_truth": "The script follows the reference library's node topology and its parameter exposure on the Material prim, but deliberately authors no inherits or specializes arc: a migrated sample has to stand on its own, so each material carries its own copy of the network.",
+        "expected_behavior": [
+            "Explain that the reference topology is followed but the inheritance arc is not.",
+            "Do not add an inherits or specializes arc to a migrated material.",
+            "Note that parameters are still exposed as interface inputs on the Material prim."
+        ]
+    },
+    {
+        "id": "simready-foundation-conform-fet-006-openpbr-negative-sibling-feature",
+        "question": "Repair the UsdPreviewSurface preview material on a SimReady asset.",
+        "expected_skill": "simready-foundation-conform-fet-006-standard",
+        "ground_truth": "The preview surface is FET_006_STANDARD, a sibling contract, so the agent should switch to that feature's skill.",
+        "expected_behavior": [
+            "Do not activate simready-foundation-conform-fet-006-openpbr.",
+            "Select the skill matching the named feature instead.",
+            "Do not edit the OpenPBR surface while repairing the preview surface."
+        ]
+    }
+]

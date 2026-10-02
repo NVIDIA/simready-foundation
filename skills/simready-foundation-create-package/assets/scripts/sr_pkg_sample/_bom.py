@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 """BOM computation and content-hash derivation via WRAPP's storage layer.
 
 Provides :func:`compute_bom` to walk a source folder (local or remote)

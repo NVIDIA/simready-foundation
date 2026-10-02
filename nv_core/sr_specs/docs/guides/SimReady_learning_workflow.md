@@ -447,8 +447,8 @@ A production asset typically includes a `SimReady_Metadata` dictionary in its la
 (
     customLayerData = {
         dictionary SimReady_Metadata = {
-            string profile = "Prop-Robotics-Neutral"
-            string profile_version = "1.0.0"
+            string profile = "Robotics-Prop"
+            string profile_version = "3.2.0"
         }
     }
     defaultPrim = "MyAsset"

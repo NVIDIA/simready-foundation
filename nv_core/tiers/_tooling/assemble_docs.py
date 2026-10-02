@@ -110,12 +110,15 @@ _OUTPUT_OWNER = "simready-tier-docs-assembler"
 SECTION_ROOTS: Tuple[str, ...] = ("capabilities", "features", "profiles")
 
 #: Directory/file names never copied from any source (build scratch, caches,
-#: compiled python, and Python package markers). ``__init__.py`` is validator-
+#: compiled python, and Python package markers). ``known_edits`` contains
+#: feature-version audit records, not feature descriptors; staging its TOML
+#: files makes the Sphinx feature parser reject them as malformed features.
+#: ``__init__.py`` is validator-
 #: registration scaffolding, not documentation: each tier ships its own, so
 #: merging them onto one logical ``capabilities/__init__.py`` would be a
 #: (meaningless) divergent duplicate. A Sphinx source tree never needs it.
 #: Matched by exact basename.
-_ALWAYS_IGNORE_NAMES = frozenset({"__pycache__", ".pytest_cache", ".mypy_cache", ".git", ".DS_Store", "__init__.py"})
+_ALWAYS_IGNORE_NAMES = frozenset({"__pycache__", ".pytest_cache", ".mypy_cache", ".git", ".DS_Store", "__init__.py", "known_edits"})
 _IGNORE_SUFFIXES = (".pyc", ".pyo")
 
 #: Top-level entries under the site docs root that are NOT residual site chrome:
@@ -351,17 +354,13 @@ def tier_docs_module_root(tier_dir: Path) -> Optional[Path]:
 
     Each tier commits its content under a single ``simready/foundation/<module>``
     package; that package directory is where ``capabilities``/``features``/
-    ``profiles`` live. Build scratch such as ``__pycache__`` is ignored, so a
-    tier that has been imported or tested in place still resolves to its one
-    module directory.
+    ``profiles`` live.
     """
     foundation = tier_dir / "simready" / "foundation"
     if not foundation.is_dir():
         return None
     module_dirs = sorted(
-        p
-        for p in foundation.iterdir()
-        if p.is_dir() and p.name not in _ALWAYS_IGNORE_NAMES and not p.name.startswith(".")
+        p for p in foundation.iterdir() if p.is_dir() and p.name not in _ALWAYS_IGNORE_NAMES
     )
     if len(module_dirs) != 1:
         return None
@@ -550,13 +549,6 @@ def assemble(
     for tier_dir in discover_tiers(str(tiers_root)):
         tier_dir_path = Path(tier_dir)
         module_root = tier_docs_module_root(tier_dir_path)
-        if module_root is None:
-            print(
-                f"[assemble_docs] WARNING: no single simready/foundation/<module> "
-                f"directory in {tier_dir_path}; its docs are not staged.",
-                file=sys.stderr,
-            )
-            continue
         tier_label = f"tier:{tier_dir_path.name}"
         if module_root is not None:
             for section in SECTION_ROOTS:

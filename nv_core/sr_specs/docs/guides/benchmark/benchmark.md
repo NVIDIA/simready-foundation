@@ -16,6 +16,7 @@ Pipeline and Stages <pipeline>
 Running Tests <running>
 Reading Reports <reading-reports>
 Tests Reference <tests/tests>
+Sensor Tests Reference <sensor-tests/tests>
 ```
 
 Use `simready-benchmark --list-tests` as the authoritative inventory for the

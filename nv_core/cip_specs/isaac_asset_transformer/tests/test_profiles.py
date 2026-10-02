@@ -29,7 +29,7 @@ def test_robot_profile_is_preserved() -> None:
 
     # The composed robot interface must default-select the PhysX physics variant
     # so the default composition carries rigid bodies and joints (otherwise the
-    # Robot-Body-Isaac physics validators see an empty stage).
+    # Robot-Body physics validators see an empty stage).
     interface = rules["Generate Interface"].params
     assert interface["default_variant_selections"] == {"Physics": "physx"}
     assert interface.get("clear_default_variant_sets", []) == []

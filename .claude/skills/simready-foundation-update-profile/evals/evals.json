@@ -1,7 +1,7 @@
 [
     {
         "id":  "simready-foundation-update-profile-positive-trigger",
-        "question":  "Update prop-robotics-neutral to include a conditional optional feature note.",
+        "question":  "Update Robotics-Prop to include a conditional optional feature note.",
         "expected_skill":  "simready-foundation-update-profile",
         "ground_truth":  "The agent should activate simready-foundation-update-profile and follow its workflow.",
         "expected_behavior":  [

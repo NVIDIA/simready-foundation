@@ -31,46 +31,6 @@ def get_external_prepended_items(prim: Usd.Prim) -> list:
 
 
 @usd_validation_nvidia.register_rule("Units")
-@usd_validation_nvidia.register_requirements(cap.UnitsRequirements.UN_001, cap.UnitsRequirements.UN_002, override=True)
-class StageMetadataChecker(usd_validation_nvidia.BaseRuleChecker):
-    """
-    All stages should declare their 'upAxis' and 'metersPerUnit'. Stages that can be consumed as referencable assets
-    should furthermore have a valid 'defaultPrim' declared, and stages meant for consumer-level packaging should
-    always have upAxis set to 'Y'
-    """
-
-    def __init__(self, verbose, consumerLevelChecks, assetLevelChecks):
-        super().__init__(verbose, consumerLevelChecks, assetLevelChecks)
-
-    def CheckStage(self, usdStage):
-        from pxr import UsdGeom
-
-        if not usdStage.HasAuthoredMetadata(UsdGeom.Tokens.upAxis):
-            self._AddFailedCheck(
-                message="Stage does not specify an upAxis.",
-                requirement=cap.UnitsRequirements.UN_001,
-            )
-        elif self._consumerLevelChecks:
-            up_axis = UsdGeom.GetStageUpAxis(usdStage)
-            if up_axis != UsdGeom.Tokens.y:
-                self._AddFailedCheck(
-                    f"Stage specifies upAxis '{up_axis}'. upAxis should be '{UsdGeom.Tokens.y}'.",
-                    requirement=cap.UnitsRequirements.UN_001,
-                )
-
-        if not usdStage.HasAuthoredMetadata(UsdGeom.Tokens.metersPerUnit):
-            self._AddFailedCheck(
-                message="Stage does not specify its linear scale " "in metersPerUnit.",
-                requirement=cap.UnitsRequirements.UN_002,
-            )
-
-        if self._assetLevelChecks:
-            default_prim = usdStage.GetDefaultPrim()
-            if not default_prim:
-                self._AddFailedCheck("Stage has missing or invalid defaultPrim.")
-
-
-@usd_validation_nvidia.register_rule("Units")
 @usd_validation_nvidia.register_requirements(cap.UnitsRequirements.UN_003, override=True)
 class KilogramsPerUnitChecker(usd_validation_nvidia.BaseRuleChecker):
     """Validates that stage has kilogramsPerUnit specified if physics objects are present"""

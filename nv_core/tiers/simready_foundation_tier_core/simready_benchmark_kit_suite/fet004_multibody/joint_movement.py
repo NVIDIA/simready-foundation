@@ -69,7 +69,8 @@ from simready_benchmark_engine_kit.physics_utils import (
     find_root_body,
 )
 from simready_benchmark_kit_suite.engine_guard import (
-    NEWTON_SCENE_SKIP,
+    NEWTON_SCENE_ERROR,
+    NewtonSceneInitializationError,
     articulationize_loose_joints,
     asset_has_articulation,
     newton_scene_initialized,
@@ -1408,7 +1409,9 @@ def _newton_link_force_view(asset_path, child_body_path, parent_body_path=None):
         from isaacsim.core.prims import SingleArticulation  # type: ignore
     except Exception:
         try:
-            from isaacsim.core.prims.single_articulation import SingleArticulation  # type: ignore
+            from isaacsim.core.prims.single_articulation import (
+                SingleArticulation,  # type: ignore
+            )
         except Exception:
             return None, "SingleArticulation is unavailable in this Isaac Sim build"
 
@@ -1511,9 +1514,7 @@ def _apply_newton_force_at_position(force_view, direction, magnitude, position):
         forces = backend_utils.convert(forces, device=device, dtype="float32")
         positions = backend_utils.convert(positions, device=device, dtype="float32")
         indices = backend_utils.convert(indices, device=device, dtype="int32")
-    force_view["physics_view"].apply_forces_and_torques_at_position(
-        forces, None, positions, indices, is_global=True
-    )
+    force_view["physics_view"].apply_forces_and_torques_at_position(forces, None, positions, indices, is_global=True)
 
 
 async def _run_newton_spherical_force_sim(
@@ -2040,16 +2041,15 @@ async def test_joint_movement(ctx):
     # errors (an unresolved reference, an unsupported schema) that PhysX
     # tolerates and simulates. timeline.play() still returns, but stepping the
     # un-built sim crashes the session, so verify the scene actually initialized
-    # before driving and skip honestly if not. active_physics_engine() gates
-    # this to Newton, so PhysX never plays here (no-op, unchanged behavior).
+    # before driving and report an incomplete/error result if not.
+    # active_physics_engine() gates this to Newton, so PhysX never plays here.
     if active_physics_engine() != "physx":
         physics.play()
         await ctx.settle(count=3)
         newton_ready = newton_scene_initialized()
         physics.stop()
         if not newton_ready:
-            ctx.skip(NEWTON_SCENE_SKIP)
-            return
+            raise NewtonSceneInitializationError(NEWTON_SCENE_ERROR)
 
     # --- Anchor the base body/bodies (make them kinematic) ---
     # A kinematic base is immovable: it absorbs the reaction force from
@@ -2488,9 +2488,7 @@ async def test_joint_movement(ctx):
     # Under Newton the tensor drive above exercised every scalar-drivable joint.
     if not any_joint_moved and not newton_engine:
         remaining = [
-            j
-            for j in joints
-            if j["name"] not in joint_moved and j.get("type_name") != "PhysicsSphericalJoint"
+            j for j in joints if j["name"] not in joint_moved and j.get("type_name") != "PhysicsSphericalJoint"
         ]
         if remaining:
             ctx.step("Drives failed. Pass 1 (search) - velocity nudges...")

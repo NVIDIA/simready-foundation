@@ -1,0 +1,14 @@
+{
+    "id": "FET_006_STANDARD",
+    "version": "0.2.0",
+    "display_name": "Materials (USDPreviewSurface)",
+    "path": "features/FET_006_STANDARD.html",
+    "requirements": [
+        "com.nvidia.usd.VM.BIND.001",
+        "VM.MAT.001",
+        "com.nvidia.usd.VM.PS.001",
+        "VM.PS.002",
+        "VM.TEX.001",
+        "VM.TEX.003"
+    ]
+}

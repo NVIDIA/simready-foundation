@@ -131,7 +131,7 @@ This is a sample feature documentation that demonstrates the proper structure an
 |-------------------------|---------------------------|
 | Proprietary Techs       | `Sample Tech`             |
 | Dependency              | `None`                    |
-| Profile                 | `Prop-Robotics-Neutral`   |
+| Profile                 | `Robotics-Prop`           |
 
 ## Detailed Description
 
@@ -233,10 +233,10 @@ Identify and list all requirements your feature depends on:
     * Requirements
         * [Anchored-Asset-Paths](../capabilities/core/atomic_asset/requirements/anchored-asset-paths.md)
             * AA.001 | version 0.1.0
-            * [Rule | Implementation](../capabilities/core/atomic_asset/validation.py)
+            * Rule: provided by `usd-validation-nvidia`
         * [Supported-File-Types](../capabilities/core/atomic_asset/requirements/supported-file-types.md)
             * AA.002 | version 0.1.0
-            * [Rule | Implementation](../capabilities/core/atomic_asset/validation.py)
+            * Rule: provided by `usd-validation-nvidia`
 ```
 
 ### Step 4: Place into Feature Folder
@@ -275,7 +275,7 @@ ID:003 - RBD Physics - Newton <FET_003_NEWTON>
 ID:004 - Simulate Multi-Body Physics - Standard <FET_004_STANDARD>
 ID:004 - Simulate Multi-Body Physics - PhysX <FET_004_PHYSX>
 ID:004 - Simulate Multi-Body Physics - Newton <FET_004_NEWTON>
-ID:004 - Simulate Multi-Body Physics - Robot PhysX <FET_004_ROBOT_PHYSX>
+ID:004 - Simulate Multi-Body Physics - Robot PhysX (Deprecated) <FET_004_ROBOT_PHYSX>
 ID:004 - Simulate Multi-Body Physics - Robot Newton <FET_004_ROBOT_NEWTON>
 ID:005 - Simulate Grasp Physics - Standard <FET_005_STANDARD>
 ID:000 - Sample Feature - Base <FET_000-new_feature>
@@ -286,8 +286,8 @@ ID:000 - Sample Feature - Base <FET_000-new_feature>
 Features are used in profiles to define what capabilities an asset must have. Here's an example profile:
 
 ```toml
-[Prop-Robotics-Physx]
-"1.0.0" = {features = [
+[Robotics-Prop]
+"3.1.0" = {features = [
     {"FET_001_STANDARD" = {version = "0.1.0"}}, # "Minimal"
     {"FET_003_PHYSX" = {version = "0.1.0"}}, # "RBD Physics"
     {"FET_004_PHYSX" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
@@ -330,8 +330,8 @@ Assets using a merged mesh collider would fail RB.COL.001 (no per-shape collider
 
 3. **Wire profiles**
    Profiles choose which feature (and thus which requirement) applies:
-   - **Neutral profile** (e.g. Prop-Robotics-Neutral): uses the standard feature (e.g. `FET_003_STANDARD`) and therefore RB.COL.001.
-   - **PhysX profile** (e.g. Prop-Robotics-Physx): uses the tech feature (e.g. `FET_003_PHYSX`) and therefore PHYSX.COL.001.
+   - **Standard contract**: the profile requires the standard feature (for example `FET_003_STANDARD`) and therefore RB.COL.001.
+   - **Optional PhysX contract**: the same consolidated profile may list the technology feature (for example `FET_003_PHYSX`) as optional and therefore apply PHYSX.COL.001 when that runtime variant is present.
 
 **Concrete example:** `FET_003_STANDARD-0.1.0.json` includes `RB.COL.001` in its requirements. `FET_003_PHYSX-0.2.0.json` lists all other rigid-body requirements from the standard feature but omits `RB.COL.001` (and RB.COL.002) and adds `PHYSX.COL.001` and `PHYSX.COL.002` so that both per-shape and merged-mesh colliders are valid under the PhysX spec.
 

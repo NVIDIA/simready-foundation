@@ -14,7 +14,7 @@
 # limitations under the License.
 """Runtime discovery and parsing of gripper sites for FET028.
 
-A gripper site is discovered via ``simready:attachment:socketType = "Gripper"``
+A gripper site is discovered via ``simready:attactment:socketType = "Gripper"``
 (or ``IsaacSiteAPI`` as a fallback), with child ``gripper_forward_axis`` and
 ``gripper_grip_line`` ``BasisCurves`` prims and a ``gripper_maxOpening`` float
 attribute. Optional ``gripper_maxPayload`` declares the rated max payload in
@@ -106,7 +106,7 @@ def diagnose_missing_sites(stage, asset_prim) -> str:
       drop under the gripper base link and adapt to their geometry.
 
     * **Mode B -- candidate exists but is incomplete**: at least one prim
-      qualifies (via ``simready:attachment:socketType`` or
+      qualifies (via ``simready:attactment:socketType`` or
       ``IsaacSiteAPI``) but lacks the required child BasisCurves or the
       ``custom:maxOpening`` attribute. Returns the path of the actual
       candidate prim, the specific pieces missing on it, and the
@@ -197,7 +197,7 @@ def _fix_message_no_candidates(asset_path) -> str:
         "    )\n"
         "    {{\n"
         "        # Spec-canonical discovery (preferred, OpenUSD-compatible)\n"
-        '        token simready:attachment:socketType = "Gripper"\n'
+        '        token simready:attactment:socketType = "Gripper"\n'
         "\n"
         "        # Isaac runtime metadata (recommended)\n"
         '        string isaac:Description = "Parallel-jaw grasp center"\n'
@@ -321,12 +321,12 @@ def _fix_message_incomplete_candidate(
 
 # Per FET028 spec (nv_core/sr_specs/.../physics_grippers/requirements/
 # gripper-socket-type.md GR.001), the discovery attribute for a gripper
-# site is ``simready:attachment:socketType = "Gripper"`` on an Xform
+# site is ``simready:attactment:socketType = "Gripper"`` on an Xform
 # prim. Prim NAME is explicitly unconstrained -- the spec example shows
 # ``grasp_site_left`` and ``site_a`` as valid -- and the canonical
 # validator at ``physics_grippers/validation.py`` keys discovery off
 # this attribute alone.
-_SOCKET_TYPE_ATTR = "simready:attachment:socketType"
+_SOCKET_TYPE_ATTR = "simready:attactment:socketType"
 _SOCKET_TYPE_VALUE = "Gripper"
 
 
@@ -335,7 +335,7 @@ def _is_qualifying_gripper_site(prim) -> bool:
 
     Discovery rules (in spec priority order):
 
-    1. ``simready:attachment:socketType = "Gripper"`` (Neutral format,
+    1. ``simready:attactment:socketType = "Gripper"`` (Neutral format,
        GR.001) -- prim name is unconstrained per the spec.
     2. ``IsaacSiteAPI`` applied to an Xform (Isaac format, GR.ISA.001) --
        kept as a backwards-compatibility path for assets that were
@@ -345,8 +345,8 @@ def _is_qualifying_gripper_site(prim) -> bool:
 
     The previous implementation also required the prim name to start
     with ``gripper_``; that requirement was never in the FET028 spec
-    and silently disqualified spec-compliant assets whose IsaacSiteAPI prims
-    have asset-specific names. Dropped.
+    and silently disqualified spec-compliant assets
+    whose IsaacSiteAPI prims have asset-specific names. Dropped.
     """
     if not prim.IsA(UsdGeom.Xform):
         return False
@@ -358,7 +358,7 @@ def _is_qualifying_gripper_site(prim) -> bool:
     parent = prim.GetParent()
     if parent and parent.IsValid() and _has_applied(parent, "IsaacSurfaceGripperAPI"):
         return False
-    # Spec-canonical discovery: simready:attachment:socketType = "Gripper".
+    # Spec-canonical discovery: simready:attactment:socketType = "Gripper".
     socket_attr = prim.GetAttribute(_SOCKET_TYPE_ATTR)
     if socket_attr and socket_attr.IsDefined():
         try:
@@ -396,7 +396,7 @@ def _has_applied(prim, schema_name) -> bool:
 
 
 # Preferred gripper_-prefixed names first; unprefixed spellings remain
-# accepted for existing assets. The sample assets author the gripper_ form.
+# accepted for existing assets. Sample assets all author the gripper_ form.
 _FORWARD_AXIS_NAMES = ("gripper_forward_axis", "forward_axis")
 _GRIP_LINE_NAMES = ("gripper_grip_line", "grip_line")
 _MAX_OPENING_NAMES = ("gripper_maxOpening", "custom:maxOpening")

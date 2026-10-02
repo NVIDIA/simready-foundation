@@ -96,9 +96,13 @@ def test_fet028_rollup_requires_both_shape_results_to_pass():
             requirement=None,
         ),
     ]
+    feature = SimpleNamespace(id=1, name="FET_028_ISAAC", version="0.1.0", tests=[1, 2], runtime=None)
+    asset = SimpleNamespace(tests=[1, 2], profile_features=[])
     plan = SimpleNamespace(
         tests=tests,
-        features=[SimpleNamespace(name="FET_028_ISAAC", version="0.1.0", tests=[1, 2])],
+        features=[feature],
+        assets=[asset],
+        engine_configs={},
     )
 
     one_failure = aggregate_feature_pass(

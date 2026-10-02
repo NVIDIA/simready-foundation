@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 """Serialise validation results and root-USD metadata to ``.metadata/``.
 
 Provides helpers for the two JSON artefacts pre-validation writes:

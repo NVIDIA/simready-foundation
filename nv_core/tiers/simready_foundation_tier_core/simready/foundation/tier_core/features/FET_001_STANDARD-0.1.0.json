@@ -4,12 +4,12 @@
     "display_name": "Minimal Placeable Visual",
     "path": "features/FET_001_STANDARD.html",
     "requirements": [
-        "AA.001",
-        "AA.002",
-        "UN.001",
-        "UN.002",
+        "com.nvidia.usd.AA.001",
+        "com.nvidia.usd.AA.002",
+        "com.nvidia.usd.UN.001",
+        "com.nvidia.usd.UN.002",
         "UN.007",
         "VG.001",
-        "HI.004"
+        "com.nvidia.usd.HI.004"
     ]
 }
