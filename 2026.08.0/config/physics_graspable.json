@@ -1,0 +1,29 @@
+{
+    "capability": {
+        "id": "physics_graspable",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "GSP.001",
+                "version": null,
+                "name": "graspable-vector-line",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_graspable/requirements/graspable-vector-line.html",
+                    "internal_path": "capabilities/physics_bodies/physics_graspable/requirements/graspable-vector-line.md"
+                },
+                "message": "In order for an asset to be considered graspable, an asset must have at least 1 line object defined within the asset. A line is at least 2 points in space, and this line must intersect the asset that needs to be grasped by the robotic grippers.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "capabilities/physics_bodies/physics_graspable/capability-physics_graspable.html",
+            "internal_path": "capabilities/physics_bodies/physics_graspable/capability-physics_graspable.md"
+        }
+    }
+}

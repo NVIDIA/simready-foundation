@@ -1,0 +1,48 @@
+{
+    "profile": {
+        "id": "AIF-Entity",
+        "version": "0.2.0",
+        "name": null,
+        "description": null,
+        "requirements": [],
+        "capabilities": [],
+        "features": [
+            {
+                "feature": "FET_000_STANDARD@0.2.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_001_STANDARD@1.0.0",
+                "optional": false
+            },
+            {
+                "feature": "FET200_AIF@0.1.0",
+                "optional": false
+            },
+            {
+                "feature": "FET201_AIF@0.2.0",
+                "optional": false
+            },
+            {
+                "feature": "FET202_AIF@0.2.0",
+                "optional": false
+            },
+            {
+                "feature": "FET203_AIF@0.2.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_031_STANDARD@0.1.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_033_STANDARD@0.4.0",
+                "optional": false
+            }
+        ],
+        "metadata": {
+            "path": "profiles/aif_entity.html",
+            "internal_path": "profiles/aif_entity.md"
+        }
+    }
+}

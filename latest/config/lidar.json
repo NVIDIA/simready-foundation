@@ -1,0 +1,80 @@
+{
+    "capability": {
+        "id": "lidar",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "LI.004",
+                "version": null,
+                "name": "lidar-solid-state-rays-per-line",
+                "compatibility": null,
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/nonvisual_sensors/lidar/requirements/lidar-solid-state-rays-per-line.html",
+                    "internal_path": "capabilities/nonvisual_sensors/lidar/requirements/lidar-solid-state-rays-per-line.md"
+                },
+                "message": "For solid-state OmniLidar prims, the sum of all elements in `omni:sensor:Core:numRaysPerLine` must equal `omni:sensor:Core:numberOfEmitters`.",
+                "examples": []
+            },
+            {
+                "code": "LI.003",
+                "version": null,
+                "name": "lidar-scan-rate-minimum",
+                "compatibility": null,
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/nonvisual_sensors/lidar/requirements/lidar-scan-rate-minimum.html",
+                    "internal_path": "capabilities/nonvisual_sensors/lidar/requirements/lidar-scan-rate-minimum.md"
+                },
+                "message": "The `omni:sensor:Core:scanRateBaseHz` attribute on an OmniLidar prim must be at least 0.466 Hz.",
+                "examples": []
+            },
+            {
+                "code": "LI.001",
+                "version": null,
+                "name": "lidar-omni-lidar-schema",
+                "compatibility": null,
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/nonvisual_sensors/lidar/requirements/lidar-omni-lidar-schema.html",
+                    "internal_path": "capabilities/nonvisual_sensors/lidar/requirements/lidar-omni-lidar-schema.md"
+                },
+                "message": "LiDAR sensors must be represented as OmniLidar prims with OmniSensorGenericLidarCoreAPI applied. The legacy UsdGeom.Camera with cameraSensorType=\"lidar\" pattern is not allowed.",
+                "examples": []
+            },
+            {
+                "code": "LI.002",
+                "version": null,
+                "name": "lidar-emitter-state-length",
+                "compatibility": null,
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/nonvisual_sensors/lidar/requirements/lidar-emitter-state-length.html",
+                    "internal_path": "capabilities/nonvisual_sensors/lidar/requirements/lidar-emitter-state-length.md"
+                },
+                "message": "Every emitter state array attribute on an OmniLidar prim must have the same length as `omni:sensor:Core:numberOfEmitters`, and all emitter state arrays must be mutually consistent in length.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "capabilities/nonvisual_sensors/lidar/capability-lidar.html",
+            "internal_path": "capabilities/nonvisual_sensors/lidar/capability-lidar.md"
+        }
+    }
+}

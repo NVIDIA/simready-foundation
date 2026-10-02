@@ -1,0 +1,18 @@
+{
+    "feature": {
+        "display_name": "Base Articulation (Newton)",
+        "runtime": "Newton",
+        "id": "FET_024_NEWTON",
+        "version": "0.1.0",
+        "requirements": [
+            "NEWTON.BA.001"
+        ],
+        "dependencies": [
+            "FET_024_STANDARD@0.1.0"
+        ],
+        "metadata": {
+            "path": "features/FET_024_NEWTON.html",
+            "internal_path": "features/FET_024_NEWTON.md"
+        }
+    }
+}

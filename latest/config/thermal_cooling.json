@@ -1,0 +1,46 @@
+{
+    "capability": {
+        "id": "thermal_cooling",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "TC.001",
+                "version": null,
+                "name": "nominal-cooling-capacity",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "tc-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/aif/thermal_cooling/requirements/nominal-cooling-capacity.html",
+                    "internal_path": "capabilities/aif/thermal_cooling/requirements/nominal-cooling-capacity.md"
+                },
+                "message": "CDUs and CRAHs must declare `aif:spec:nominalCoolingCapacity`: the rated cooling capacity of the unit.",
+                "examples": []
+            },
+            {
+                "code": "TC.002",
+                "version": null,
+                "name": "thermal-cooling-connection-points",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "tc-002",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/aif/thermal_cooling/requirements/thermal-cooling-connection-points.html",
+                    "internal_path": "capabilities/aif/thermal_cooling/requirements/thermal-cooling-connection-points.md"
+                },
+                "message": "Cooling equipment must have connection point prims matching its piping interface types: CDUs require FWS and TCS connection points; CRAHs require liquid supply and return connection points.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "capabilities/aif/thermal_cooling/capability-thermal_cooling.html",
+            "internal_path": "capabilities/aif/thermal_cooling/capability-thermal_cooling.md"
+        }
+    }
+}

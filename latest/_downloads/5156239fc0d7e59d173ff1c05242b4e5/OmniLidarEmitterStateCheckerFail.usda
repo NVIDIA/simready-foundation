@@ -1,0 +1,15 @@
+#usda 1.0
+(
+    defaultPrim = "Lidar"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def OmniLidar "Lidar" (
+    prepend apiSchemas = ["OmniSensorGenericLidarCoreAPI"]
+)
+{
+    uint omni:sensor:Core:numberOfEmitters = 2
+    float[] omni:sensor:Core:emitterState:s001:azimuthDeg = [0]
+    float[] omni:sensor:Core:emitterState:s001:elevationDeg = [0, 10]
+}

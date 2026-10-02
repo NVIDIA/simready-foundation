@@ -1,0 +1,15 @@
+{
+    "feature": {
+        "display_name": "ROS Ready (Isaac)",
+        "id": "FET_025_ROS",
+        "version": "0.1.0",
+        "requirements": [
+            "ROS.001"
+        ],
+        "dependencies": [],
+        "metadata": {
+            "path": "features/FET_025_ROS.html",
+            "internal_path": "features/FET_025_ROS.md"
+        }
+    }
+}

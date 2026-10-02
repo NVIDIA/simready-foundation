@@ -1,0 +1,16 @@
+{
+    "feature": {
+        "display_name": "Simulate Grasp Physics",
+        "id": "FET_005_STANDARD",
+        "version": "0.1.0",
+        "requirements": [
+            "PMT.001",
+            "GSP.001"
+        ],
+        "dependencies": [],
+        "metadata": {
+            "path": "features/FET_005_STANDARD.html",
+            "internal_path": "features/FET_005_STANDARD.md"
+        }
+    }
+}

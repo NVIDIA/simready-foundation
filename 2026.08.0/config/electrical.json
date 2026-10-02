@@ -1,0 +1,80 @@
+{
+    "capability": {
+        "id": "electrical",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "EL.003",
+                "version": null,
+                "name": "electrical-frequency-required",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "el-003",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/aif/electrical/requirements/electrical-frequency-required.html",
+                    "internal_path": "capabilities/aif/electrical/requirements/electrical-frequency-required.md"
+                },
+                "message": "AC-powered equipment must declare its input frequency. The attribute name varies by equipment class.",
+                "examples": []
+            },
+            {
+                "code": "EL.001",
+                "version": null,
+                "name": "nominal-voltage-required",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "el-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/aif/electrical/requirements/nominal-voltage-required.html",
+                    "internal_path": "capabilities/aif/electrical/requirements/nominal-voltage-required.md"
+                },
+                "message": "AC-powered equipment must declare its nominal input voltage. The attribute name varies by equipment class.",
+                "examples": []
+            },
+            {
+                "code": "EL.004",
+                "version": null,
+                "name": "electrical-connection-points",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "el-004",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/aif/electrical/requirements/electrical-connection-points.html",
+                    "internal_path": "capabilities/aif/electrical/requirements/electrical-connection-points.md"
+                },
+                "message": "AC-powered equipment must have at least one electrical connection point, identified by its name in AIF 0.1.0 or its domain property in AIF 0.2.0.",
+                "examples": []
+            },
+            {
+                "code": "EL.002",
+                "version": null,
+                "name": "power-rating-required",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "el-002",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/aif/electrical/requirements/power-rating-required.html",
+                    "internal_path": "capabilities/aif/electrical/requirements/power-rating-required.md"
+                },
+                "message": "AC-powered equipment must declare its power rating. The attribute name varies by equipment class.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "capabilities/aif/electrical/capability-electrical.html",
+            "internal_path": "capabilities/aif/electrical/capability-electrical.md"
+        }
+    }
+}

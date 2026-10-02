@@ -1,0 +1,46 @@
+{
+    "capability": {
+        "id": "physics_sensors",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "PS.001",
+                "version": null,
+                "name": "imu-sensor-rigid-body",
+                "compatibility": null,
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_sensors/requirements/imu-sensor-rigid-body.html",
+                    "internal_path": "capabilities/physics_bodies/physics_sensors/requirements/imu-sensor-rigid-body.md"
+                },
+                "message": "An `IsaacImuSensor` prim must be a descendant of a prim that has `PhysicsRigidBodyAPI` applied.",
+                "examples": []
+            },
+            {
+                "code": "PS.002",
+                "version": null,
+                "name": "joint-sensor-articulation-root",
+                "compatibility": null,
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_sensors/requirements/joint-sensor-articulation-root.html",
+                    "internal_path": "capabilities/physics_bodies/physics_sensors/requirements/joint-sensor-articulation-root.md"
+                },
+                "message": "An `IsaacJointStateSensor` prim must also have `PhysicsArticulationRootAPI` applied.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "capabilities/physics_bodies/physics_sensors/capability-physics_sensors.html",
+            "internal_path": "capabilities/physics_bodies/physics_sensors/capability-physics_sensors.md"
+        }
+    }
+}

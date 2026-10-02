@@ -1,0 +1,18 @@
+{
+    "feature": {
+        "display_name": "RTX Sensors",
+        "id": "FET_036_RTX",
+        "version": "0.1.0",
+        "requirements": [
+            "LI.001",
+            "LI.002",
+            "LI.003",
+            "LI.004"
+        ],
+        "dependencies": [],
+        "metadata": {
+            "path": "features/FET_036_RTX.html",
+            "internal_path": "features/FET_036_RTX.md"
+        }
+    }
+}

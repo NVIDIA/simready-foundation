@@ -1,0 +1,15 @@
+{
+    "feature": {
+        "display_name": "Joint Sensor",
+        "id": "FET_037_ISAAC",
+        "version": "0.1.0",
+        "requirements": [
+            "PS.002"
+        ],
+        "dependencies": [],
+        "metadata": {
+            "path": "features/FET_037_ISAAC.html",
+            "internal_path": "features/FET_037_ISAAC.md"
+        }
+    }
+}

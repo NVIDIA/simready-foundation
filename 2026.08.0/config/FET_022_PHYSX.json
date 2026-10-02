@@ -1,0 +1,25 @@
+{
+    "feature": {
+        "display_name": "Driven Joints (PhysX)",
+        "runtime": "PhysX",
+        "id": "FET_022_PHYSX",
+        "version": "0.2.0",
+        "requirements": [
+            "DJ.001",
+            "DJ.002",
+            "DJ.003",
+            "DJ.004",
+            "DJ.005",
+            "DJ.006",
+            "DJ.007",
+            "DJ.011"
+        ],
+        "dependencies": [
+            "FET_004_PHYSX@0.4.0"
+        ],
+        "metadata": {
+            "path": "features/FET_022_PHYSX.html",
+            "internal_path": "features/FET_022_PHYSX.md"
+        }
+    }
+}

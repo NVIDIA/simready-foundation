@@ -1,0 +1,20 @@
+{
+    "feature": {
+        "display_name": "Non-Visual Materials",
+        "id": "FET_007_STANDARD",
+        "version": "0.2.0",
+        "requirements": [
+            "NVM.001",
+            "NVM.002",
+            "NVM.003",
+            "NVM.004",
+            "NVM.005",
+            "NVM.006"
+        ],
+        "dependencies": [],
+        "metadata": {
+            "path": "features/FET_007_STANDARD.html",
+            "internal_path": "features/FET_007_STANDARD.md"
+        }
+    }
+}

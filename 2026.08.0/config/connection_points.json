@@ -1,0 +1,264 @@
+{
+    "capability": {
+        "id": "connection_points",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "CP.003",
+                "version": null,
+                "name": "connection-point-purpose-guide",
+                "compatibility": "other",
+                "tags": [
+                    "unknown"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/aif/connection_points/requirements/connection-point-purpose-guide.html",
+                    "internal_path": "capabilities/aif/connection_points/requirements/connection-point-purpose-guide.md"
+                },
+                "message": "All connection point prims must have their `purpose` attribute set to `\"guide\"`. The rule carries\nacross both vocabularies: under v0.2.0 CP.010 applies it to connection point Xforms.",
+                "examples": []
+            },
+            {
+                "code": "CP.010",
+                "version": null,
+                "name": "connection-point-prim-structure",
+                "compatibility": "other",
+                "tags": [
+                    "unknown"
+                ],
+                "validator": "cp-010",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/aif/connection_points/requirements/connection-point-prim-structure.html",
+                    "internal_path": "capabilities/aif/connection_points/requirements/connection-point-prim-structure.md"
+                },
+                "message": "Connection points must be Xform prims under the `ConnectionPoints` scope with `purpose = \"guide\"`, each carrying at least `simready:connectionPoint:domain` and `simready:connectionPoint:direction`.",
+                "examples": []
+            },
+            {
+                "code": "CP.002",
+                "version": null,
+                "name": "connection-point-geometry-type",
+                "compatibility": "other",
+                "tags": [
+                    "unknown"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/aif/connection_points/requirements/connection-point-geometry-type.html",
+                    "internal_path": "capabilities/aif/connection_points/requirements/connection-point-geometry-type.md"
+                },
+                "message": "Connection point prims must be Plane (rectangular) or Disk (circular) geometry only. The rule\nbelongs to the v0.1.0 vocabulary: a v0.1.0 profile authors Plane and Disk geometry, a v0.2.0\nprofile authors Xforms under CP.010.",
+                "examples": []
+            },
+            {
+                "code": "CP.006",
+                "version": null,
+                "name": "connection-point-alignment",
+                "compatibility": "other",
+                "tags": [
+                    "unknown"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/aif/connection_points/requirements/connection-point-alignment.html",
+                    "internal_path": "capabilities/aif/connection_points/requirements/connection-point-alignment.md"
+                },
+                "message": "Connection point geometry must be positioned and sized to match the actual physical openings on the equipment. The requirement is documented normatively and is listed by neither the v0.1.0 nor the v0.2.0 feature.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Generic_CRAH\"\n{\n    def Scope \"ConnectionPoints\"\n    {\n        def Xform \"acme_liq_supply_main\"\n        {\n            uniform token purpose = \"guide\"\n            double3 xformOp:translate = (0.42, -0.43, 0.31)\n            float3 xformOp:rotateXYZ = (90, 0, 0)\n            uniform token[] xformOpOrder = [\"xformOp:translate\", \"xformOp:rotateXYZ\"]\n\n            token simready:connectionPoint:domain = \"thermal\"\n            token simready:connectionPoint:direction = \"supply\"\n            token simready:connectionPoint:system = \"FWS\"\n            token simready:connectionPoint:disconnectType = \"flanged\"\n            float simready:connectionPoint:serviceClearance = 0.3\n        }\n    }\n}"
+                        },
+                        "name": "a liquid supply connection placed at its flange",
+                        "result": "success"
+                    }
+                ]
+            },
+            {
+                "code": "CP.004",
+                "version": null,
+                "name": "connection-point-naming-convention",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "cp-004",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/aif/connection_points/requirements/connection-point-naming-convention.html",
+                    "internal_path": "capabilities/aif/connection_points/requirements/connection-point-naming-convention.md"
+                },
+                "message": "All prims under the `ConnectionPoints` scope must follow the `<vendor>_<type>_<suffix>` naming pattern using a valid type prefix from the AIF connection point type table.",
+                "examples": []
+            },
+            {
+                "code": "CP.001",
+                "version": null,
+                "name": "connectionpoints-scope-structure",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "cp-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/aif/connection_points/requirements/connectionpoints-scope-structure.html",
+                    "internal_path": "capabilities/aif/connection_points/requirements/connectionpoints-scope-structure.md"
+                },
+                "message": "Connection point prims must be organized under a `ConnectionPoints` Scope prim that is a direct child of the default prim.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Generic_CRAH\"\n{\n    def Scope \"ConnectionPoints\"\n    {\n        def Mesh \"acme_liq_supply_main\"\n        {\n        }\n\n        def Mesh \"acme_liq_return_main\"\n        {\n        }\n\n        def Mesh \"acme_electrical_nominal_voltage_main\"\n        {\n        }\n    }\n}"
+                        },
+                        "name": "the scope is a direct child of the default prim",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Generic_CRAH\"\n{\n    def Xform \"Geometry\"\n    {\n        def Scope \"ConnectionPoints\"\n        {\n            def Mesh \"acme_liq_supply_main\"\n            {\n            }\n        }\n    }\n}"
+                        },
+                        "name": "the scope sits under a child of the default prim",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Generic_CRAH\"\n{\n    def Xform \"ConnectionPoints\"\n    {\n        def Mesh \"acme_liq_supply_main\"\n        {\n        }\n    }\n}"
+                        },
+                        "name": "`ConnectionPoints` is an Xform, not a Scope",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Generic_CRAH\"\n{\n    def Scope \"ConnectionPoints\"\n    {\n    }\n}"
+                        },
+                        "name": "the scope is empty",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Generic_CRAH\"\n{\n    def Scope \"Geometry\"\n    {\n    }\n}"
+                        },
+                        "name": "there is no `ConnectionPoints` prim",
+                        "result": "failure"
+                    }
+                ]
+            },
+            {
+                "code": "CP.012",
+                "version": null,
+                "name": "connection-point-domain-namespace",
+                "compatibility": "other",
+                "tags": [
+                    "unknown"
+                ],
+                "validator": "cp-012",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/aif/connection_points/requirements/connection-point-domain-namespace.html",
+                    "internal_path": "capabilities/aif/connection_points/requirements/connection-point-domain-namespace.md"
+                },
+                "message": "A connection point's domain-specific properties must sit in the namespace named by its `simready:connectionPoint:domain` value, and a production-complete connection point carries every property that namespace defines.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Generic_CDU\"\n{\n    def Scope \"ConnectionPoints\"\n    {\n        def Xform \"acme_thermal_main\"\n        {\n            uniform token purpose = \"guide\"\n            token simready:connectionPoint:domain = \"thermal\"\n            token simready:connectionPoint:direction = \"supply\"\n            token simready:connectionPoint:system = \"FWS\"\n            token simready:connectionPoint:disconnectType = \"flanged\"\n            float simready:connectionPoint:serviceClearance = 0.6\n\n            float simready:connectionPoint:thermal:portDiameter = 0.05\n            float simready:connectionPoint:thermal:matingDepth = 0.02\n            float simready:connectionPoint:thermal:designFlowRate = 12.5\n            float simready:connectionPoint:thermal:maxFlowRate = 15.0\n            float simready:connectionPoint:thermal:designTemperature = 18.0\n            float simready:connectionPoint:thermal:maxTemperature = 25.0\n            float simready:connectionPoint:thermal:operatingPressure = 400000\n            float simready:connectionPoint:thermal:maxPressure = 1000000\n            token simready:connectionPoint:thermal:fluidType = \"water\"\n            token simready:connectionPoint:thermal:flangeRating = \"ANSI_150\"\n            token simready:connectionPoint:thermal:flangeSize = \"NPS4\"\n        }\n    }\n}"
+                        },
+                        "name": "thermal, a facility-water supply flange on a CDU",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Generic_UPS\"\n{\n    def Scope \"ConnectionPoints\"\n    {\n        def Xform \"acme_electrical_main\"\n        {\n            uniform token purpose = \"guide\"\n            token simready:connectionPoint:domain = \"electrical\"\n            token simready:connectionPoint:direction = \"input\"\n            token simready:connectionPoint:system = \"power\"\n            token simready:connectionPoint:disconnectType = \"hardwired\"\n            float simready:connectionPoint:serviceClearance = 0.6\n\n            float simready:connectionPoint:electrical:matingDepth = 0.0\n            float simready:connectionPoint:electrical:nominalVoltage = 480.0\n            float simready:connectionPoint:electrical:maxCurrent = 1458.0\n            int simready:connectionPoint:electrical:phases = 3\n            float simready:connectionPoint:electrical:frequency = 60.0\n            token simready:connectionPoint:electrical:connectorType = \"hardwired\"\n            float simready:connectionPoint:electrical:ratedPower = 1200000.0\n            float simready:connectionPoint:electrical:breakerRating = 2000.0\n            float simready:connectionPoint:electrical:powerFactor = 0.99\n        }\n    }\n}"
+                        },
+                        "name": "electrical, a hardwired three-phase feed on a UPS",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Generic_ComputeRack\"\n{\n    def Scope \"ConnectionPoints\"\n    {\n        def Xform \"acme_network_main\"\n        {\n            uniform token purpose = \"guide\"\n            token simready:connectionPoint:domain = \"network\"\n            token simready:connectionPoint:direction = \"bidirectional\"\n            token simready:connectionPoint:system = \"high_speed_data\"\n            token simready:connectionPoint:disconnectType = \"OSFP\"\n            float simready:connectionPoint:serviceClearance = 0.6\n\n            float simready:connectionPoint:network:portWidth = 0.022\n            float simready:connectionPoint:network:portHeight = 0.009\n            float simready:connectionPoint:network:matingDepth = 0.015\n            token simready:connectionPoint:network:portType = \"OSFP\"\n            token simready:connectionPoint:network:protocol = \"Ethernet\"\n            token simready:connectionPoint:network:dataRate = \"800GbE\"\n            token simready:connectionPoint:network:medium = \"fiber\"\n            token simready:connectionPoint:network:fabricRole = \"compute\"\n            token[] simready:connectionPoint:network:supportedLineRates = [\"800GbE\", \"400GbE\"]\n            token[] simready:connectionPoint:network:supportedConfigurations = [\"1x800G\", \"2x400G\"]\n            token[] simready:connectionPoint:network:allowedTransceivers = [\"DR4\", \"FR4\"]\n            bool simready:connectionPoint:network:hotPlugCapable = 1\n        }\n    }\n}"
+                        },
+                        "name": "network, an OSFP port on a compute rack",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Generic_CRAH\"\n{\n    def Scope \"ConnectionPoints\"\n    {\n        def Xform \"acme_airflow_main\"\n        {\n            uniform token purpose = \"guide\"\n            token simready:connectionPoint:domain = \"airflow\"\n            token simready:connectionPoint:direction = \"input\"\n            token simready:connectionPoint:system = \"equipment_cooling\"\n            token simready:connectionPoint:disconnectType = \"open_vent\"\n            float simready:connectionPoint:serviceClearance = 0.6\n\n            float simready:connectionPoint:airflow:interfaceWidth = 0.6\n            float simready:connectionPoint:airflow:interfaceHeight = 2.0\n            float simready:connectionPoint:airflow:freeAreaRatio = 0.7\n            float simready:connectionPoint:airflow:designAirflowRate = 1.07\n            float simready:connectionPoint:airflow:maxAirflowRate = 1.28\n            float simready:connectionPoint:airflow:designTemperature = 24.0\n            float simready:connectionPoint:airflow:maxTemperature = 45.0\n            float simready:connectionPoint:airflow:staticPressure = 50.0\n            token simready:connectionPoint:airflow:filterType = \"none\"\n        }\n    }\n}"
+                        },
+                        "name": "airflow, the intake face of a CRAH",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Generic_CDU\"\n{\n    def Scope \"ConnectionPoints\"\n    {\n        def Xform \"acme_thermal_main\"\n        {\n            uniform token purpose = \"guide\"\n            token simready:connectionPoint:domain = \"thermal\"\n            token simready:connectionPoint:direction = \"supply\"\n            token simready:connectionPoint:system = \"FWS\"\n            token simready:connectionPoint:disconnectType = \"flanged\"\n            float simready:connectionPoint:serviceClearance = 0.6\n\n            float simready:connectionPoint:thermal:designFlowRate = 12.5\n        }\n    }\n}"
+                        },
+                        "name": "Warned: a draft connection, one domain property authored",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Generic_CDU\"\n{\n    def Scope \"ConnectionPoints\"\n    {\n        def Xform \"acme_thermal_main\"\n        {\n            uniform token purpose = \"guide\"\n            token simready:connectionPoint:domain = \"thermal\"\n            token simready:connectionPoint:direction = \"supply\"\n            token simready:connectionPoint:system = \"FWS\"\n            token simready:connectionPoint:disconnectType = \"flanged\"\n            float simready:connectionPoint:serviceClearance = 0.15\n\n            float simready:connectionPoint:electrical:nominalVoltage = 480.0\n        }\n    }\n}"
+                        },
+                        "name": "a property from another domain's namespace",
+                        "result": "failure"
+                    }
+                ]
+            },
+            {
+                "code": "CP.005",
+                "version": null,
+                "name": "connection-points-composition",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "cp-005",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/aif/connection_points/requirements/connection-points-composition.html",
+                    "internal_path": "capabilities/aif/connection_points/requirements/connection-points-composition.md"
+                },
+                "message": "Connection points must be saved as a separate `<AssetName>_ConnectionPoints.usd` file and composed into the main stage as a sublayer.",
+                "examples": []
+            },
+            {
+                "code": "CP.011",
+                "version": null,
+                "name": "connection-point-base-namespace",
+                "compatibility": "other",
+                "tags": [
+                    "unknown"
+                ],
+                "validator": "cp-011",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/aif/connection_points/requirements/connection-point-base-namespace.html",
+                    "internal_path": "capabilities/aif/connection_points/requirements/connection-point-base-namespace.md"
+                },
+                "message": "Every connection point must carry all five base namespace properties, which together state the semantic identity of the connection.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "capabilities/aif/connection_points/capability-connection_points.html",
+            "internal_path": "capabilities/aif/connection_points/capability-connection_points.md"
+        }
+    }
+}

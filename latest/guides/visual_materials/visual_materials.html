@@ -1,0 +1,2213 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" data-theme="auto">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Visual Materials Workflow &#8212; Content Capabilities</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/_style.css?v=e1c02e80" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tags.css?v=03faa5c8" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=64cc4de3f052d77215f0"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
+
+
+
+    <script src="../../_static/documentation_options.js?v=eb394bab"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'guides/visual_materials/visual_materials';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.22.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.08.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+
+    <link rel="icon" href="../../_static/favicon.png"/>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Extending the Validation Sample: Adding a New Demo Validator" href="../SimReady_learning_workflow.html" />
+    <link rel="prev" title="joint_sensor_data (FET037 Joint Sensors)" href="../benchmark/sensor-tests/fet037/joint-sensor-data.html" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2026.08.0" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+
+
+  </head>
+
+  <body data-default-mode="auto">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Content Capabilities - Home"/>
+    <img src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Content Capabilities - Home"/>
+  
+  
+    <p class="title logo__title">Content Capabilities</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-4"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-4"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-4"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-4">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button type="button" class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Content Capabilities - Home"/>
+    <img src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Content Capabilities - Home"/>
+  
+  
+    <p class="title logo__title">Content Capabilities</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-5"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-5"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-5"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-5">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-6"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-6"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-6"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-6">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../guides.html">Guides</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tiers.html">SimReady Foundation Tiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../foundation_pypi.html">SimReady Foundation PyPI Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validate_workflow.html">SimReady Validation Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../semantic_labels/semantic_labels.html">Semantic Labels Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../adding_a_custom_taxonomy.html">Adding a Custom Taxonomy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../packaging_workflow.html">SimReady Packaging Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../thumbnail_guidelines.html">Thumbnail Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../acceptance_workflow.html">SimReady Acceptance Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multiphysics_solvers.html">Multiple Physics Solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../feature_adapters/feature_adapters.html">Feature Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/profiles.html">Profiles</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../benchmark/benchmark.html">SimReady Benchmark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../benchmark/overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../benchmark/pipeline.html">Pipeline and Stages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../benchmark/running.html">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../benchmark/reading-reports.html">Reading Reports</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../benchmark/tests/tests.html">Tests Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet001-visual.html">FET001 Visual</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet003-physics.html">FET003 Physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet004-multibody.html">FET004 Multibody</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet005-grasp.html">FET005 Grasp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet006-materials.html">FET006 Materials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet010-display-color.html">FET010 Display Color</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet011-semantic-labels.html">FET011 Semantic Labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet022-driven-joints.html">FET022 Driven Joints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet028-gripper.html">FET028 Gripper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/authoring.html">Authoring runtime tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/experimental.html">Experimental and disabled tests</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../benchmark/sensor-tests/tests.html">Sensor Tests Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/sensor-tests/fet034-imu-sensors.html">FET034 IMU Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/sensor-tests/fet035-render-products.html">FET035 Render Products</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/sensor-tests/fet036-rtx-sensors.html">FET036 RTX Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../benchmark/sensor-tests/fet037-joint-sensors.html">FET037 Joint Sensors</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active"><a aria-current="page" class="current reference internal" href="#">Visual Materials Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../SimReady_learning_workflow.html">SimReady Learning Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../naming_conventions.html">Naming Conventions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../development.html">Development Workflows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../features_expansion_workflow.html">Features Expansion Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../capabilities/capabilities.html">Capabilities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/core/core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/core/sim_ready/capability-sim_ready.html">SimReady</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/sim_ready/requirements.html">SimReady Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/sim_ready/requirements/metadata-whitelist.html">metadata-whitelist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/sim_ready/requirements/thumbnail-exist.html">Thumbnail Exist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/sim_ready/requirements/nested-simready-metadata.html">nested-simready-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/sim_ready/requirements/metadata-union.html">metadata-union</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/core/units/capability-units.html">Units</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/units/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/core/atomic_asset/capability-atomic_asset.html">Atomic Asset</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/atomic_asset/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/atomic_asset/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/core/naming_paths/capability-naming_paths.html">Naming and Paths</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements.html">Naming and Paths Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements/prim-naming-convention.html">prim-naming-convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements/file-naming-convention.html">file-naming-convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements/directory-structure.html">directory-structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements/path-length-limits.html">path-length-limits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements/asset-folder-structure.html">asset-folder-structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements/metadata-location.html">metadata-location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements/relative-paths.html">relative-paths</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/core/runtime_variants/capability-runtime_variants.html">Runtime Variants</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements.html">Runtime Variants Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/physx-variant-set.html">physx-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/physx-runtime-payload.html">physx-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/physx-variant-metadata.html">physx-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/newton-variant-set.html">newton-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/newton-runtime-payload.html">newton-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/newton-variant-metadata.html">newton-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/mujoco-variant-set.html">mujoco-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/mujoco-runtime-payload.html">mujoco-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/mujoco-variant-metadata.html">mujoco-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/runtime-variant-section-purity.html">runtime-variant-section-purity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/runtime-physics-isolation.html">runtime-physics-isolation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/runtime-physics-isolation-matrix.html">Runtime Physics Isolation Matrix</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/visualization/visualization.html">Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/visualization/geometry/capability-geometry.html">Geometry</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/visualization/geometry/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/visualization/geometry/creators_overview.html">Creators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/visualization/geometry/developers_overview.html">Developers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/visualization/materials/capability-materials.html">Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/visualization/materials/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/visualization/materials/developers.html">Developers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/visualization/display_color/capability-display_color.html">Display Color</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/visualization/display_color/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/isaac_sim/isaac_sim.html">Isaac Sim</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/isaac_sim/composition/capability-composition.html">Composition</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/isaac_sim/composition/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/isaac_sim/ros_bridge/capability-ros_bridge.html">ROS Bridge</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/isaac_sim/ros_bridge/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/isaac_sim/robot_materials/capability-robot_materials.html">Robot Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/isaac_sim/robot_materials/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/isaac_sim/robot_core/capability-robot_core.html">Robot Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/isaac_sim/robot_core/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_bodies.html">Physics Bodies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/physics_bodies/base_articulation/capability-base-articulation.html">Base Articulation</a></li>
+
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_rigid_bodies/capability-physics_rigid_bodies.html">Rigid Bodies and Colliders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_rigid_bodies/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_rigid_bodies/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_colliders/capability-collider_approximations.html">Collider Approximations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_colliders/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_colliders/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_joints/capability-physics_joints.html">Joints and Articulations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_joints/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_joints/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_driven_joints/capability-physics_driven_joints.html">Driven Joints</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_driven_joints/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_materials/capability-physics_materials.html">Physics Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_materials/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_materials/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_graspable/capability-physics_graspable.html">Graspable Vectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_graspable/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_graspable/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_grippers/capability-physics_grippers.html">Grippers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_grippers/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_sensors/capability-physics_sensors.html">Physics Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_sensors/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/hierarchy/hierarchy.html">Hierarchy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/hierarchy/capability-hierarchy.html">Hierarchy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/hierarchy/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/hierarchy/creators_overview.html">Creators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/hierarchy/developers_overview.html">Developers</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_sensors.html">Non-Visual Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/capability-nonvisual_materials.html">Non-Visual Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/requirements.html">Non-Visual Materials Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/nonvisual_attributes_table.html">Non-Visual Sensor Attributes Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-base.html">material-base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-coating.html">material-coating</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-attributes.html">material-attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-time.html">material-time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-binding.html">material-binding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-consistency.html">material-consistency</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/nonvisual_sensors/lidar/capability-lidar.html">LiDAR Sensor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/lidar/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/rendering/rendering.html">Rendering</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/rendering/render_products/capability-render_products.html">Render Products</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/rendering/render_products/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/semantic_labels/capability-semantic_labels.html">Semantic Labels</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/semantic_labels/requirements.html">Semantic Labels Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-capability.html">semantic-label-capability</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-deprecated-schema.html">semantic-label-deprecated-schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-qcode-valid.html">semantic-label-qcode-valid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-schema.html">semantic-label-schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-time.html">semantic-label-time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-material.html">semantic-label-material</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-capability.html">semantic-label-capability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-deprecated-schema.html">semantic-label-deprecated-schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-qcode-valid.html">semantic-label-qcode-valid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-schema.html">semantic-label-schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-time.html">semantic-label-time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-material.html">semantic-label-material</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/dataset_taxonomies/capability-dataset_taxonomies.html">Dataset Taxonomies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements.html">Dataset Taxonomies Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/coco-labels.html">coco-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/cityscapes-labels.html">cityscapes-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/ade20k-labels.html">ade20k-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/pascal-voc-labels.html">pascal-voc-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/sunrgbd-labels.html">sunrgbd-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/imagenet-labels.html">imagenet-labels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/coco-labels.html">coco-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/cityscapes-labels.html">cityscapes-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/ade20k-labels.html">ade20k-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/pascal-voc-labels.html">pascal-voc-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/sunrgbd-labels.html">sunrgbd-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/imagenet-labels.html">imagenet-labels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/packaging/packaging.html">Packaging</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/packaging/packaging_core/capability-packaging_core.html">Packaging Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/packaging/packaging_core/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/packaging/conformance_metadata/capability-conformance_metadata.html">Conformance Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/packaging/conformance_metadata/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/packaging/packaging_introspection/capability-packaging_introspection.html">Packaging Introspection</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/packaging/packaging_introspection/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/aif/aif.html">AIF</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/aif/metadata/capability-metadata.html">Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/aif/metadata/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/aif/connection_points/capability-connection_points.html">Connection Points</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/aif/connection_points/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/aif/thermal_cooling/capability-thermal_cooling.html">Thermal Cooling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/aif/thermal_cooling/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/aif/electrical/capability-electrical.html">Electrical</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../capabilities/aif/electrical/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../features/features.html">Features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../features/feature-dependency-graph.html">Feature dependency graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_000_STANDARD.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_000_PHYSX.html">Core (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_000_NEWTON.html">Core (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_000_MUJOCO.html">Core (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_000_ISAAC.html">Core (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_001_STANDARD.html">Minimal Placeable Visual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_002_STANDARD.html">Posable Bodies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_003_STANDARD.html">Rigid Body Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_003_PHYSX.html">Rigid Body Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_003_NEWTON.html">Rigid Body Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_003_MUJOCO.html">Rigid Body Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004_STANDARD.html">Simulate Multi-Body Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004_PHYSX.html">Simulate Multi-Body Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004_NEWTON.html">Simulate Multi-Body Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004_MUJOCO.html">Simulate Multi-Body Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004_ROBOT_PHYSX.html">Simulate Multi-Body Physics (Robot PhysX) — Deprecated</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004_ROBOT_NEWTON.html">Simulate Multi-Body Physics (Robot Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004_ROBOT_MUJOCO.html">Simulate Multi-Body Physics (Robot MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_005_STANDARD.html">Simulate Grasp Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_006_STANDARD.html">Materials (USDPreviewSurface)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_006_MDL.html">Materials (MDL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_006_OPENPBR.html">Materials (OpenPBR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_007_STANDARD.html">Non-Visual Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_010_STANDARD.html">Display Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_011_STANDARD.html">Semantic Labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_011_RTX.html">Semantic Labels (RTX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_046_STANDARD.html">Wikidata Q-Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_040_STANDARD.html">Open Taxonomy COCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_041_STANDARD.html">Open Taxonomy Cityscapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_042_STANDARD.html">Open Taxonomy ADE20K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_043_STANDARD.html">Open Taxonomy PASCAL VOC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_044_STANDARD.html">Open Taxonomy SUN RGB-D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_045_STANDARD.html">Open Taxonomy ImageNet-1K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_021_ISAAC.html">Robot Core (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_022_STANDARD.html">Driven Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_022_PHYSX.html">Driven Joints (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_022_NEWTON.html">Driven Joints (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_022_MUJOCO.html">Driven Joints (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_022_ISAAC.html">Driven Joints (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_023_ISAAC.html">Robot Materials (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_024_STANDARD.html">Base Articulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_024_PHYSX.html">Base Articulation (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_024_NEWTON.html">Base Articulation (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_024_MUJOCO.html">Base Articulation (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_025_ROS.html">ROS Ready (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_034_ISAAC.html">IMU Sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_037_ISAAC.html">Joint Sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_035_RTX.html">Camera and Render Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_036_RTX.html">RTX Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_028_STANDARD.html">Gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_028_ISAAC.html">Gripper (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_028_MUJOCO.html">Gripper (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_030_STANDARD.html">Packaging Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_031_STANDARD.html">Self-contained Package Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_032_STANDARD.html">Packaging Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_033_STANDARD.html">Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_100_ISAAC.html">IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_101_ISAAC.html">Robot IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_200-aif_metadata.html">AIF Core Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_201-connection_points.html">Connection Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_202-thermal_cooling.html">AIF Thermal Cooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET_203-electrical.html">AIF Electrical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/drafts/FET_006-baseline-appearance-visualization-feature-card.html">Draft - Baseline Appearance Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/drafts/FET_006-physically-plausible-appearance-visualization-feature-card.html">Draft - Physically Plausible Appearance Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/drafts/FET_010-object-color-visualization-feature-card.html">Draft - Object Color Visualization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../profiles/profiles.html">Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robotics-prop.html">Robotics Prop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-body.html">Robot Body</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-gripper.html">Robot Gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/sensor-imu.html">Sensor IMU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/sensor-joint.html">Sensor Joint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/sensor-camera.html">Sensor Camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/sensor-lidar.html">Sensor LiDAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/open-taxonomy-coco.html">Open Taxonomy COCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/open-taxonomy-cityscapes.html">Open Taxonomy Cityscapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/open-taxonomy-ade20k.html">Open Taxonomy ADE20K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/open-taxonomy-pascal_voc.html">Open Taxonomy PASCAL VOC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/open-taxonomy-sunrgbd.html">Open Taxonomy SUN RGB-D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/open-taxonomy-imagenet_1k.html">Open Taxonomy ImageNet-1K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/aif-entity.html">AIF Entity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tiers/tiers.html">Tiers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tiers/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tiers/aif.html">AIF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tiers/sensors.html">Sensors</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../indexes/indexes.html">Indexes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../indexes/capability_status_index.html">Capability Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../indexes/requirements_index.html">Requirements Index</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelist.html">Changelist</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../guides.html" class="nav-link">End to End Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Visual Materials Workflow</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="visual-materials-workflow">
+<h1>Visual Materials Workflow<a class="headerlink" href="#visual-materials-workflow" title="Link to this heading">#</a></h1>
+<p>This guide takes one asset to demonstrable conformance on visual materials. You author an
+OpenPBR surface and a display colour, validate the result against a profile, render it in
+Kit, and work out what the render result is worth.</p>
+<p>Visual materials in SimReady cover two separate things. A material describes a shaded
+surface through a shading network. Display colour is a primvar holding a single colour per
+prim and no network at all, which is what makes it readable by consumers that never
+evaluate a material. Each gets its own tool here, because they are different contracts.</p>
+<p>There are two ways in, and both depend on the contract in step 1. Step 2 exports a
+conformant material from Blender. Step 3 upgrades an asset that already exists. All
+commands run from the repository root unless stated otherwise.</p>
+<section id="what-you-end-up-with">
+<h2>What you end up with<a class="headerlink" href="#what-you-end-up-with" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Stage</p></th>
+<th class="head"><p>Tool</p></th>
+<th class="head"><p>Outcome</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Baseline</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simready-validate</span></code></p></td>
+<td><p>A profile report, and a record of what it does not cover</p></td>
+</tr>
+<tr class="row-odd"><td><p>OpenPBR surfaces</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">migrate_to_openpbr.py</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">outputs:mtlx:surface</span></code> on every visual material, textures reconnected</p></td>
+</tr>
+<tr class="row-even"><td><p>Display colour</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">author_display_color.py</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">primvars:displayColor</span></code> on every renderable Gprim</p></td>
+</tr>
+<tr class="row-odd"><td><p>Re-validation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simready-validate</span></code></p></td>
+<td><p>The static contract, confirmed</p></td>
+</tr>
+<tr class="row-even"><td><p>Benchmark</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simready-benchmark</span></code></p></td>
+<td><p>Evidence that the geometry bound to each surface drew in the engine</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Static validation and the benchmark answer different questions. Validation inspects the
+authored scene description and confirms the file holds the right values. The benchmark loads
+the asset in Kit and confirms the engine resolved it. Neither establishes that the asset looks correct, and
+step 5 is about where that line falls.</p>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Requirement</p></th>
+<th class="head"><p>How to get it</p></th>
+<th class="head"><p>Needed for</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Python</p></td>
+<td><p>3.12</p></td>
+<td><p>All steps</p></td>
+</tr>
+<tr class="row-odd"><td><p>Git LFS</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">lfs</span> <span class="pre">install</span></code></p></td>
+<td><p>Sample assets</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">simready-validate</span></code> and the validator dependencies</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span></code></p></td>
+<td><p>Steps 2 and 3</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">simready-foundation-tier-core</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">simready-foundation-tier-core</span></code></p></td>
+<td><p>Steps 2 and 3</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">simready-benchmark</span></code></p></td>
+<td><p>Refer to <a class="reference internal" href="../benchmark/running.html"><span class="std std-doc">Running Tests</span></a></p></td>
+<td><p>Step 4</p></td>
+</tr>
+<tr class="row-odd"><td><p>Kit or Isaac Sim</p></td>
+<td><p>2024.2.0 or later</p></td>
+<td><p>Step 4</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>One environment covers steps 2 and 3. <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> lists <code class="docutils literal notranslate"><span class="pre">simready-validate</span></code> and
+<code class="docutils literal notranslate"><span class="pre">numpy</span></code>, and <code class="docutils literal notranslate"><span class="pre">usd-core</span></code> arrives behind them. Two more are needed and neither is in that
+file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"MaterialX&gt;=1.39"</span><span class="w"> </span>pillow
+</pre></div>
+</div>
+<p>MaterialX supplies the OpenPBR node definitions. A <code class="docutils literal notranslate"><span class="pre">usd-core</span></code> wheel ships no <code class="docutils literal notranslate"><span class="pre">usdMtlx</span></code>
+plugin, so in a pip environment the Python package is the only source of them. Without it
+VM.PBR.002 and VM.PBR.003 have nothing to compare an asset against and report nothing,
+which looks the same as a clean asset. The validator emits one line per run, <code class="docutils literal notranslate"><span class="pre">VM.PBR.002</span> <span class="pre">and</span> <span class="pre">VM.PBR.003</span> <span class="pre">did</span> <span class="pre">not</span> <span class="pre">run</span></code>. VM.PBR.001 matches one shader identifier, needs no node
+definition, and runs either way. <code class="docutils literal notranslate"><span class="pre">Pillow</span></code> is how VM.TEX.001 gets a texture’s dimensions,
+and the display-colour script uses it to sample texture maps.</p>
+<section id="the-core-tier">
+<h3>The core tier<a class="headerlink" href="#the-core-tier" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">simready-validate</span></code> checks an asset against the core tier: the capabilities, features,
+profiles and rule checkers that make up the spec. It is a separate package from the
+validator, so install it alongside:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>simready-foundation-tier-core
+</pre></div>
+</div>
+<p><a class="reference internal" href="../foundation_pypi.html"><span class="std std-doc">SimReady Foundation PyPI Packages</span></a> covers the tiers, the index to
+install from, and how content is discovered.</p>
+</section>
+<section id="the-benchmark">
+<h3>The benchmark<a class="headerlink" href="#the-benchmark" title="Link to this heading">#</a></h3>
+<p>Give <code class="docutils literal notranslate"><span class="pre">simready-benchmark</span></code> a virtual environment of its own: it installs a Kit engine plugin
+on top of its own USD build, and <a class="reference internal" href="../benchmark/running.html"><span class="std std-doc">Running Tests</span></a> covers the setup.</p>
+<p>The worked example uses the toaster sample. Both conform scripts write into an asset in
+place, so take a copy and work on that. The samples are LFS-tracked binaries and a rewrite
+moves the file hash even when nothing about the content changes.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>../vm-workflow
+cp<span class="w"> </span>-r<span class="w"> </span>sample_content/common_assets/props_general/gen_appliance_toaster_v01_01<span class="w"> </span>../vm-workflow/
+</pre></div>
+</div>
+<p>The shipped samples already have an OpenPBR surface and a display colour, so the worked
+example below confirms a conformant asset. Point the same commands at your own asset to see
+them repair one, and read each transcript for the shape of its output; the counts and colours
+belong to this sample.</p>
+</section>
+</section>
+<section id="the-material-contract">
+<h2>1. The material contract<a class="headerlink" href="#the-material-contract" title="Link to this heading">#</a></h2>
+<section id="three-surfaces-on-one-prim">
+<h3>Three surfaces on one prim<a class="headerlink" href="#three-surfaces-on-one-prim" title="Link to this heading">#</a></h3>
+<p>A SimReady <code class="docutils literal notranslate"><span class="pre">Material</span></code> prim can declare three surface outputs at once, one per render
+context. A render context is the token a renderer uses to choose which shader inside a
+material it evaluates.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Output</p></th>
+<th class="head"><p>Shader</p></th>
+<th class="head"><p>Render context</p></th>
+<th class="head"><p>Feature</p></th>
+<th class="head"><p>Requirement</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">outputs:surface</span></code></p></td>
+<td><p>UsdPreviewSurface</p></td>
+<td><p>universal</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FET_006_STANDARD</span></code></p></td>
+<td><p>com.nvidia.usd.VM.PS.001</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">outputs:mdl:surface</span></code></p></td>
+<td><p>OmniPBR</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mdl</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FET_006_MDL</span></code></p></td>
+<td><p>VM.MDL.001</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">outputs:mtlx:surface</span></code></p></td>
+<td><p>OpenPBR</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mtlx</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FET_006_OPENPBR</span></code></p></td>
+<td><p>VM.PBR.001</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>These are sibling contracts. An asset may declare any combination, and none of the three
+depends on another. OpenPBR is the recommended target for new assets because it is a
+portable format that needs no vendor-specific material; MDL stays permitted for existing
+content. Refer to <a class="reference internal" href="../../features/FET_006_OPENPBR.html"><span class="std std-doc">FET006 OpenPBR Materials</span></a> for the
+full contract.</p>
+</section>
+<section id="which-surface-the-renderer-picks">
+<h3>Which surface the renderer picks<a class="headerlink" href="#which-surface-the-renderer-picks" title="Link to this heading">#</a></h3>
+<p>Kit resolves one surface per material by walking an ordered list of render contexts and
+taking the first one the material has. The list is the carb setting
+<code class="docutils literal notranslate"><span class="pre">/persistent/app/hydra/material/renderContexts</span></code>, and Kit ships it as <code class="docutils literal notranslate"><span class="pre">[&quot;mdl&quot;,</span> <span class="pre">&quot;mtlx&quot;,</span> <span class="pre">&quot;&quot;]</span></code>.</p>
+<p>An asset with both an OmniPBR and an OpenPBR surface therefore renders the OmniPBR
+one. If you open a migrated asset in Kit and it looks unchanged, that is why: you are
+looking at MDL.</p>
+<p>The benchmark tests in step 4 pin the context themselves and verify the pin took, so you
+do not need to change the setting to see the OpenPBR surface rendered. Refer to
+<a class="reference internal" href="../benchmark/tests/fet006-materials.html#how-a-surface-is-measured"><span class="std std-ref">How a Surface Is Measured</span></a>
+for how they do it.</p>
+<p>Render context is a different mechanism from binding purpose. Render context selects which
+shader inside a material is evaluated. Binding purpose, authored as
+<code class="docutils literal notranslate"><span class="pre">material:binding:full</span></code> or <code class="docutils literal notranslate"><span class="pre">material:binding:preview</span></code>, selects which material is bound to a
+prim in the first place. This guide concerns render context.</p>
+</section>
+<section id="display-colour-is-a-primvar">
+<h3>Display colour is a primvar<a class="headerlink" href="#display-colour-is-a-primvar" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">primvars:displayColor</span></code> has no render context and no surface output, because it has no
+shading network. That is the point of it: it is the appearance layer available to a
+consumer that never evaluates a material, such as a low-fidelity or non-ray-traced render
+path. In Kit, the RTX default material takes it as its diffuse tint for geometry with no
+material bound.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Requirement</p></th>
+<th class="head"><p>Status</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../../capabilities/visualization/display_color/requirements/display-color-coverage.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">DISP.001</span></code></span></a></p></td>
+<td><p>Every renderable Gprim resolves a <code class="docutils literal notranslate"><span class="pre">primvars:displayColor</span></code></p></td>
+<td><p>Required</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../capabilities/visualization/display_color/requirements/display-color-values.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">DISP.002</span></code></span></a></p></td>
+<td><p>Every component is within <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code> and finite, and the element count agrees with the interpolation</p></td>
+<td><p>Required</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../capabilities/visualization/display_color/requirements/display-opacity-values.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">DISP.003</span></code></span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">primvars:displayOpacity</span></code>, where authored, is within <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code> and finite</p></td>
+<td><p>Optional</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Display opacity works differently. A material has to opt in to reading
+<code class="docutils literal notranslate"><span class="pre">displayOpacity</span></code>; <code class="docutils literal notranslate"><span class="pre">gltf/pbr.mdl</span></code> is one that does. Kit’s RTX default material has no
+opacity term, so geometry with no material bound picks up the colour and nothing else.
+Neither conform script in this guide authors display opacity.</p>
+</section>
+<section id="colour-space">
+<h3>Colour space<a class="headerlink" href="#colour-space" title="Link to this heading">#</a></h3>
+<p>Colours and data channels both need colour space information, and the rules differ. Constants are
+linear everywhere. Textures declare their own, and each of the three surfaces declares it
+somewhere else, with a different default and a different vocabulary.</p>
+<p><strong>Constants and display colour are linear.</strong> <code class="docutils literal notranslate"><span class="pre">primvars:displayColor</span></code>, and any constant you
+type onto a surface input, are Linear Rec.709 with a D65 white point. <code class="docutils literal notranslate"><span class="pre">0.18</span></code> is mid grey.
+USD resolves the colour space from the attribute’s own <code class="docutils literal notranslate"><span class="pre">colorSpace</span></code> metadata, then from
+<code class="docutils literal notranslate"><span class="pre">UsdColorSpaceAPI</span></code> on the prim, then from the nearest ancestor that authors one, and falls
+back to <code class="docutils literal notranslate"><span class="pre">lin_rec709_scene</span></code> when none is authored, so an asset that authors nothing still
+has a defined colour space.</p>
+<p>So a value taken from an sRGB colour picker needs converting before you write it. <code class="docutils literal notranslate"><span class="pre">0.5</span></code>
+picked as mid grey in sRGB is much lighter once interpreted as linear. The display-colour
+script in step 3 handles this by decoding every texel through the sRGB transfer function
+before it averages, so you only need to think about it when you author a value by hand.</p>
+<p><strong>Textures are where the three surfaces diverge.</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Surface</p></th>
+<th class="head"><p>Declared on</p></th>
+<th class="head"><p>No declaration means</p></th>
+<th class="head"><p>Requirement</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>UsdPreviewSurface</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">inputs:sourceColorSpace</span></code> on the <code class="docutils literal notranslate"><span class="pre">UsdUVTexture</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">auto</span></code></p></td>
+<td><p><a class="reference internal" href="../../capabilities/visualization/materials/requirements/material-texture-colorspace-preview.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">VM.TEX.003</span></code></span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>MDL</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">colorSpace</span></code> metadata on the shader’s own <code class="docutils literal notranslate"><span class="pre">asset</span> <span class="pre">inputs:*</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">auto</span></code></p></td>
+<td><p><a class="reference internal" href="../../capabilities/visualization/materials/requirements/material-texture-colorspace-mdl.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">VM.TEX.005</span></code></span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>OpenPBR</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">colorSpace</span></code> metadata on the image node’s <code class="docutils literal notranslate"><span class="pre">inputs:file</span></code></p></td>
+<td><p>no transform at all</p></td>
+<td><p><a class="reference internal" href="../../capabilities/visualization/materials/requirements/material-texture-colorspace-openpbr.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">VM.TEX.004</span></code></span></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">auto</span></code> reads the image file’s own colour-space metadata; where the file states nothing, it
+decodes any 8-bit three- or four-channel image as sRGB and treats everything else as raw.</p>
+<p>Two consequences follow, and they pull in opposite directions.</p>
+<p>On UsdPreviewSurface and MDL a colour texture can rely on the default, because <code class="docutils literal notranslate"><span class="pre">auto</span></code>
+decodes 8-bit RGB the way a colour texture needs. A data texture cannot: image editors
+write 8-bit RGB as a matter of course, so a roughness, metalness or occlusion map left
+undeclared is decoded as though it held colour and every value comes out low. Declare
+<code class="docutils literal notranslate"><span class="pre">raw</span></code> on data inputs. Single-channel and high-bit-depth files fall outside the sRGB branch,
+so <code class="docutils literal notranslate"><span class="pre">auto</span></code> is already correct for a single-channel mask.</p>
+<p>On OpenPBR there is no <code class="docutils literal notranslate"><span class="pre">auto</span></code>. An undeclared texture gets no transform whatever the file
+is, so a colour texture must declare <code class="docutils literal notranslate"><span class="pre">srgb_texture</span></code> or it is consumed undecoded and
+renders washed out. A data texture needs nothing, or <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p>
+<p>Author <code class="docutils literal notranslate"><span class="pre">srgb_texture</span></code>, not <code class="docutils literal notranslate"><span class="pre">srgb_rec709_scene</span></code>. The two name the same encoding, the sRGB
+transfer function over Rec.709 primaries, but only the MaterialX spelling resolves on an
+OpenPBR surface. OpenUSD adopted <code class="docutils literal notranslate"><span class="pre">srgb_rec709_scene</span></code> in 24.11; MaterialX defines its
+transform nodes under <code class="docutils literal notranslate"><span class="pre">srgb_texture</span></code>, and the mapping between the two vocabularies arrived
+in MaterialX 1.39.4, which no runtime SimReady targets ships. A texture tagged with the
+OpenUSD name is consumed undecoded and renders washed out with nothing reported. The MDL
+loader does resolve <code class="docutils literal notranslate"><span class="pre">srgb_rec709_scene</span></code>, so an asset with both surfaces can be correct on
+one and wrong on the other.</p>
+<p>Mid grey is <code class="docutils literal notranslate"><span class="pre">0.18</span></code> as a constant and code <code class="docutils literal notranslate"><span class="pre">118</span></code> in an 8-bit sRGB texture. Both are the 18%
+grey card; they differ because the texture is sRGB-encoded and the constant is linear. Code
+<code class="docutils literal notranslate"><span class="pre">128</span></code> is not mid grey in a colour texture: it is the middle of the <em>encoding</em> range and
+decodes to <code class="docutils literal notranslate"><span class="pre">0.216</span></code>, about 20% lighter than a grey card.</p>
+<p>The <a class="reference internal" href="../../capabilities/visualization/materials/requirements.html"><span class="std std-doc">materials requirements overview</span></a>
+states the conventions of all four appearance formats side by side, including display colour.</p>
+</section>
+</section>
+<section id="authoring-in-blender">
+<h2>2. Authoring in Blender<a class="headerlink" href="#authoring-in-blender" title="Link to this heading">#</a></h2>
+<p>Blender 5.2 LTS writes an OpenPBR surface with no add-on. One export puts both a
+UsdPreviewSurface and an OpenPBR surface on the same <code class="docutils literal notranslate"><span class="pre">Material</span></code> prim, which is the shape
+<a class="reference internal" href="../../features/FET_006_OPENPBR.html"><span class="std std-doc">FET006 OpenPBR Materials</span></a> describes. One thing stands
+between that and a conformant material: the setting that writes the OpenPBR network is off
+by default.</p>
+<p>This is the path for a material built from scratch. Step 3 is the other one, for an asset
+that already exists. This section covers the stock exporter only.</p>
+<p>The commands here run outside the repository, against Blender 5.2.0 LTS in headless mode:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>blender<span class="w"> </span>--background<span class="w"> </span>--factory-startup<span class="w"> </span>--python<span class="w"> </span>export.py
+</pre></div>
+</div>
+<p>The export operator is <code class="docutils literal notranslate"><span class="pre">bpy.ops.wm.usd_export</span></code>. It takes around seventy properties, so read
+them off the build in front of you instead of from a list that may have moved:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">bpy</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">wm</span><span class="o">.</span><span class="n">usd_export</span><span class="o">.</span><span class="n">get_rna_type</span><span class="p">()</span><span class="o">.</span><span class="n">properties</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">identifier</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">default</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="export-settings">
+<h3>Export settings<a class="headerlink" href="#export-settings" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Use</p></th>
+<th class="head"><p>What it does</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">generate_materialx_network</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td><p>Writes the OpenPBR network</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">generate_preview_surface</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td><p>leave on</p></td>
+<td><p>Derives the UsdPreviewSurface from the Principled BSDF</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">export_textures_mode</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NEW</span></code></p></td>
+<td><p>leave on <code class="docutils literal notranslate"><span class="pre">NEW</span></code></p></td>
+<td><p>Copies referenced maps into <code class="docutils literal notranslate"><span class="pre">textures/</span></code> beside the USD and points the asset paths at the copies</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">export_materials</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td><p>leave on</p></td>
+<td><p>Off writes no materials at all</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Nothing in the output flags <code class="docutils literal notranslate"><span class="pre">generate_materialx_network</span></code> being off. An export with it off
+is a complete, valid USD file with a working UsdPreviewSurface and no OpenPBR anywhere.</p>
+<p>Turning <code class="docutils literal notranslate"><span class="pre">generate_preview_surface</span></code> off does not remove the UsdPreviewSurface. It swaps the
+one derived from the Principled BSDF for a placeholder built from the material’s viewport
+display settings, and renames the prim from <code class="docutils literal notranslate"><span class="pre">Principled_BSDF</span></code> to <code class="docutils literal notranslate"><span class="pre">previewShader</span></code>. A material
+whose Principled BSDF base colour is <code class="docutils literal notranslate"><span class="pre">(0.11,</span> <span class="pre">0.12,</span> <span class="pre">0.13)</span></code> and whose viewport colour is left
+at Blender’s default exports <code class="docutils literal notranslate"><span class="pre">diffuseColor</span> <span class="pre">=</span> <span class="pre">(0.8,</span> <span class="pre">0.8,</span> <span class="pre">0.8)</span></code>. The terminal still satisfies
+com.nvidia.usd.VM.PS.001 while showing an appearance nobody authored, so leave the setting on.</p>
+</section>
+<section id="what-principled-bsdf-maps-to">
+<h3>What Principled BSDF maps to<a class="headerlink" href="#what-principled-bsdf-maps-to" title="Link to this heading">#</a></h3>
+<p>Principled BSDF is the route to OpenPBR. Blender translates its inputs to
+<code class="docutils literal notranslate"><span class="pre">ND_open_pbr_surface_surfaceshader</span></code> one at a time, and several do not survive the trip
+intact. The table covers every input the Principled BSDF panel exposes. It comes from giving
+each one a distinct constant, exporting once, and reading which value landed where. The three
+vector inputs need a node connected, so they were measured separately.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Principled BSDF input</p></th>
+<th class="head"><p>OpenPBR input</p></th>
+<th class="head"><p>Carried as</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Base Color</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">base_color</span></code>, <code class="docutils literal notranslate"><span class="pre">subsurface_color</span></code>, <code class="docutils literal notranslate"><span class="pre">transmission_color</span></code></p></td>
+<td><p>Copied to all three</p></td>
+</tr>
+<tr class="row-odd"><td><p>Metallic</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">base_metalness</span></code></p></td>
+<td><p>Unchanged</p></td>
+</tr>
+<tr class="row-even"><td><p>Roughness</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">specular_roughness</span></code></p></td>
+<td><p>Unchanged</p></td>
+</tr>
+<tr class="row-odd"><td><p>IOR</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">specular_ior</span></code></p></td>
+<td><p>Unchanged</p></td>
+</tr>
+<tr class="row-even"><td><p>Alpha</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">geometry_opacity</span></code></p></td>
+<td><p>Unchanged</p></td>
+</tr>
+<tr class="row-odd"><td><p>Thin Wall</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">geometry_thin_walled</span></code></p></td>
+<td><p>Unchanged</p></td>
+</tr>
+<tr class="row-even"><td><p>Diffuse Roughness</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">base_diffuse_roughness</span></code></p></td>
+<td><p>Unchanged</p></td>
+</tr>
+<tr class="row-odd"><td><p>Subsurface Weight</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">subsurface_weight</span></code></p></td>
+<td><p>Unchanged</p></td>
+</tr>
+<tr class="row-even"><td><p>Subsurface Scale</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">subsurface_radius</span></code></p></td>
+<td><p>Unchanged</p></td>
+</tr>
+<tr class="row-odd"><td><p>Subsurface Radius</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">subsurface_radius_scale</span></code></p></td>
+<td><p>Unchanged</p></td>
+</tr>
+<tr class="row-even"><td><p>Subsurface Anisotropy</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">subsurface_scatter_anisotropy</span></code></p></td>
+<td><p>Unchanged</p></td>
+</tr>
+<tr class="row-odd"><td><p>Specular Tint</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">specular_color</span></code></p></td>
+<td><p>Unchanged</p></td>
+</tr>
+<tr class="row-even"><td><p>Transmission Weight</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">transmission_weight</span></code></p></td>
+<td><p>Unchanged</p></td>
+</tr>
+<tr class="row-odd"><td><p>Coat Weight</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">coat_weight</span></code></p></td>
+<td><p>Unchanged</p></td>
+</tr>
+<tr class="row-even"><td><p>Coat Roughness</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">coat_roughness</span></code></p></td>
+<td><p>Unchanged</p></td>
+</tr>
+<tr class="row-odd"><td><p>Coat IOR</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">coat_ior</span></code></p></td>
+<td><p>Unchanged</p></td>
+</tr>
+<tr class="row-even"><td><p>Coat Tint</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">coat_color</span></code></p></td>
+<td><p>Unchanged</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sheen Weight</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fuzz_weight</span></code></p></td>
+<td><p>Unchanged</p></td>
+</tr>
+<tr class="row-even"><td><p>Sheen Roughness</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fuzz_roughness</span></code></p></td>
+<td><p>Unchanged</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sheen Tint</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fuzz_color</span></code></p></td>
+<td><p>Unchanged</p></td>
+</tr>
+<tr class="row-even"><td><p>Emission Color</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">emission_color</span></code></p></td>
+<td><p>Unchanged</p></td>
+</tr>
+<tr class="row-odd"><td><p>Thin Film IOR</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">thin_film_ior</span></code></p></td>
+<td><p>Unchanged</p></td>
+</tr>
+<tr class="row-even"><td><p>Normal</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">geometry_normal</span></code></p></td>
+<td><p>Through <code class="docutils literal notranslate"><span class="pre">ND_normalmap_float</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Coat Normal</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">geometry_coat_normal</span></code></p></td>
+<td><p>Through <code class="docutils literal notranslate"><span class="pre">ND_normalmap_float</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Specular IOR Level</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">specular_weight</span></code></p></td>
+<td><p>Doubled</p></td>
+</tr>
+<tr class="row-odd"><td><p>Anisotropic</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">specular_roughness_anisotropy</span></code></p></td>
+<td><p>Scaled by 0.7</p></td>
+</tr>
+<tr class="row-even"><td><p>Emission Strength</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">emission_luminance</span></code></p></td>
+<td><p>Number copied, meaning changed</p></td>
+</tr>
+<tr class="row-odd"><td><p>Thin Film Thickness</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">thin_film_thickness</span></code></p></td>
+<td><p>Nanometres to micrometres</p></td>
+</tr>
+<tr class="row-even"><td><p>Anisotropic Rotation</p></td>
+<td><p>none</p></td>
+<td><p>A rotation inside the tangent chain</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tangent</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">geometry_tangent</span></code></p></td>
+<td><p>Flattened to a world-space tangent</p></td>
+</tr>
+<tr class="row-even"><td><p>Subsurface IOR</p></td>
+<td><p>none</p></td>
+<td><p>Dropped</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Five are not straight copies, so know them before you tune a material in Blender and expect
+the numbers back.</p>
+<p><strong>Specular IOR Level is doubled.</strong> Blender’s 0.5 default becomes <code class="docutils literal notranslate"><span class="pre">specular_weight</span> <span class="pre">=</span> <span class="pre">1</span></code>, and
+1.0 becomes 2, above the node definition’s soft maximum of 1.</p>
+<p><strong>Anisotropic is scaled by 0.7.</strong> Blender’s full 1.0 reaches 0.7 of a range the node definition caps
+at 1, so the slider cannot reach the top of OpenPBR’s anisotropy.</p>
+<p><strong>Anisotropic Rotation never reaches an OpenPBR input.</strong> It becomes the <code class="docutils literal notranslate"><span class="pre">amount</span></code> on an
+<code class="docutils literal notranslate"><span class="pre">ND_rotate3d_vector3</span></code> node in the tangent chain, in degrees, as <code class="docutils literal notranslate"><span class="pre">-(turns</span> <span class="pre">*</span> <span class="pre">360</span> <span class="pre">+</span> <span class="pre">90)</span></code>: 0
+gives -90 and 0.25 gives -180. That chain only feeds <code class="docutils literal notranslate"><span class="pre">geometry_tangent</span></code> when Anisotropic is
+above zero. At zero the unrotated tangent is connected instead and the rotation node is left
+dangling in the graph.</p>
+<p><strong>Thin Film Thickness is divided by 1000</strong>, converting Blender’s nanometres to the
+micrometres the node definition asks for. Authoring any non-zero thickness also sets
+<code class="docutils literal notranslate"><span class="pre">thin_film_weight</span></code> to 1, which has no Blender input of its own.</p>
+<p><strong>Emission Strength is copied unchanged</strong> into <code class="docutils literal notranslate"><span class="pre">emission_luminance</span></code>, which the node definition
+defines as a luminance in nits. Blender treats the same number as a multiplier on Emission
+Color. The number survives and the brightness does not.</p>
+<p>Two inputs go nowhere useful. Subsurface IOR leaves no trace in the export. Tangent does
+reach the graph, and lands the same way whatever you feed it: a Blender Tangent node
+exports as <code class="docutils literal notranslate"><span class="pre">ND_tangent_vector3</span></code> with <code class="docutils literal notranslate"><span class="pre">space</span> <span class="pre">=</span> <span class="pre">&quot;world&quot;</span></code> whether it is set to a UV map or to
+radial around an axis, and with nothing connected the exporter emits that same node itself.
+So the OpenPBR tangent is the world-space one either way, and choosing a tangent in Blender
+changes nothing in the file.</p>
+<p>Going the other way, <code class="docutils literal notranslate"><span class="pre">base_weight</span></code> is written as 1 with no Blender input behind it, the same
+way <code class="docutils literal notranslate"><span class="pre">thin_film_weight</span></code> is. And eight OpenPBR inputs are declared with no value, because
+nothing on the Principled BSDF feeds them: <code class="docutils literal notranslate"><span class="pre">coat_darkening</span></code>,
+<code class="docutils literal notranslate"><span class="pre">coat_roughness_anisotropy</span></code>, <code class="docutils literal notranslate"><span class="pre">geometry_coat_tangent</span></code>, <code class="docutils literal notranslate"><span class="pre">transmission_depth</span></code>,
+<code class="docutils literal notranslate"><span class="pre">transmission_dispersion_abbe_number</span></code>, <code class="docutils literal notranslate"><span class="pre">transmission_dispersion_scale</span></code>,
+<code class="docutils literal notranslate"><span class="pre">transmission_scatter</span></code> and <code class="docutils literal notranslate"><span class="pre">transmission_scatter_anisotropy</span></code>.</p>
+<p>The UsdPreviewSurface written alongside is derived on its own terms, and it disagrees with
+the OpenPBR surface in one place. Alpha reaches <code class="docutils literal notranslate"><span class="pre">geometry_opacity</span></code> on the OpenPBR shader but
+never reaches <code class="docutils literal notranslate"><span class="pre">opacity</span></code> on the UsdPreviewSurface, which is set to <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">-</span> <span class="pre">Transmission</span> <span class="pre">Weight</span></code>
+instead. A material with Alpha 0.24 and no transmission exports <code class="docutils literal notranslate"><span class="pre">geometry_opacity</span> <span class="pre">=</span> <span class="pre">0.24</span></code>
+alongside <code class="docutils literal notranslate"><span class="pre">opacity</span> <span class="pre">=</span> <span class="pre">1</span></code>. Emission is combined instead of passed through: <code class="docutils literal notranslate"><span class="pre">emissiveColor</span></code> is
+Emission Color multiplied by Emission Strength and left unclamped, so strength 2 on a light
+colour writes components above 1.</p>
+</section>
+<section id="textures">
+<h3>Textures<a class="headerlink" href="#textures" title="Link to this heading">#</a></h3>
+<p>Wire an image texture to Base Color and the map crosses into the MaterialX network. The
+reader node is <code class="docutils literal notranslate"><span class="pre">ND_image_*</span></code>, one per Blender image node, all fed from a single shared
+<code class="docutils literal notranslate"><span class="pre">ND_texcoord_vector2</span></code>. Blender never emits <code class="docutils literal notranslate"><span class="pre">tiledimage</span></code>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Blender wiring</p></th>
+<th class="head"><p>MaterialX nodes</p></th>
+<th class="head"><p>Feeds</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Image Texture -&gt; Base Color</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ND_image_color4</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">ND_convert_color4_color3</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">base_color</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Image Texture -&gt; Roughness</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ND_image_vector4</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">ND_extract_vector4</span></code> (<code class="docutils literal notranslate"><span class="pre">index</span> <span class="pre">=</span> <span class="pre">0</span></code>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">specular_roughness</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Image Texture -&gt; Normal Map -&gt; Normal</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ND_image_vector4</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">ND_convert_vector4_vector3</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">ND_normalmap_float</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">geometry_normal</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Colour space lands in three places on a Blender export.</p>
+<p>On the MaterialX image node, a colour map gets <code class="docutils literal notranslate"><span class="pre">colorSpace</span> <span class="pre">=</span> <span class="pre">&quot;srgb_texture&quot;</span></code> on its
+<code class="docutils literal notranslate"><span class="pre">inputs:file</span></code>. A map set to Non-Color in Blender gets no colour space metadata there at all.</p>
+<p>On the UsdPreviewSurface side, Blender writes <code class="docutils literal notranslate"><span class="pre">inputs:sourceColorSpace</span></code> on the
+<code class="docutils literal notranslate"><span class="pre">UsdUVTexture</span></code> and gets it right both ways: a colour map exports <code class="docutils literal notranslate"><span class="pre">sRGB</span></code>, and a map set to
+Non-Color exports <code class="docutils literal notranslate"><span class="pre">raw</span></code>.</p>
+<p>Blender also writes <code class="docutils literal notranslate"><span class="pre">colorSpace:name</span></code> on the texture <code class="docutils literal notranslate"><span class="pre">Shader</span></code> prims themselves,
+<code class="docutils literal notranslate"><span class="pre">srgb_rec709_display</span></code> for a colour map and <code class="docutils literal notranslate"><span class="pre">data</span></code> for a Non-Color map.
+<code class="docutils literal notranslate"><span class="pre">srgb_rec709_display</span></code> is display-referred, where a texture needs the scene-referred
+<code class="docutils literal notranslate"><span class="pre">srgb_rec709_scene</span></code>. No renderer consults <code class="docutils literal notranslate"><span class="pre">UsdColorSpaceAPI</span></code> today, so it has no effect on
+what you see, but it would be wrong if one started.</p>
+<p><code class="docutils literal notranslate"><span class="pre">export_textures_mode</span></code> controls where the file itself lands, and it interacts with the
+MaterialX network in a way its three descriptions do not cover. Measured on one texture:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Mode</p></th>
+<th class="head"><p>Asset path written</p></th>
+<th class="head"><p>Copy in <code class="docutils literal notranslate"><span class="pre">textures/</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KEEP</span></code></p></td>
+<td><p>The original location, relative</p></td>
+<td><p>Written, referenced by nothing</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PRESERVE</span></code></p></td>
+<td><p>The original location, relative</p></td>
+<td><p>Written, referenced by nothing</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">NEW</span></code> (default)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">./textures/&lt;name&gt;</span></code></p></td>
+<td><p>Written and referenced</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>With <code class="docutils literal notranslate"><span class="pre">generate_materialx_network</span></code> off, <code class="docutils literal notranslate"><span class="pre">KEEP</span></code> and <code class="docutils literal notranslate"><span class="pre">PRESERVE</span></code> copy nothing, which is what
+their descriptions state. Turning the MaterialX network on copies them anyway while the
+asset paths still point at the originals, so the export ends up with a duplicate nothing
+uses and stays dependent on a path outside itself. Leave the mode on <code class="docutils literal notranslate"><span class="pre">NEW</span></code>, which is
+self-contained and leaves no stray file.</p>
+</section>
+<section id="what-the-export-looks-like">
+<h3>What the export looks like<a class="headerlink" href="#what-the-export-looks-like" title="Link to this heading">#</a></h3>
+<p>Both terminals sit on one <code class="docutils literal notranslate"><span class="pre">Material</span></code> prim, with the OpenPBR reader nodes gathered into a
+<code class="docutils literal notranslate"><span class="pre">NodeGraph</span></code> and the UsdPreviewSurface readers as siblings beside the shader:</p>
+<div class="highlight-usda notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Material<span class="w"> </span><span class="s">"ProbeMat"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"MaterialXConfigAPI"</span><span class="p">,</span><span class="w"> </span><span class="s">"ColorSpaceAPI"</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">colorSpace:name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"lin_rec709_scene"</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="na">config:mtlx:version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"1.39"</span>
+<span class="w">    </span><span class="kt">token</span><span class="w"> </span><span class="na">outputs:mtlx:surface</span><span class="p">.</span>connect<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/root/_materials/ProbeMat/bnode__Principled_BSDF.outputs:surface&gt;</span>
+<span class="w">    </span><span class="kt">token</span><span class="w"> </span><span class="na">outputs:surface</span><span class="p">.</span>connect<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/root/_materials/ProbeMat/Principled_BSDF.outputs:surface&gt;</span>
+
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"Principled_BSDF"</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"UsdPreviewSurface"</span>
+<span class="w">        </span><span class="kt">color3f</span><span class="w"> </span><span class="na">inputs:diffuseColor</span><span class="p">.</span>connect<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/root/_materials/ProbeMat/Image_Texture.outputs:rgb&gt;</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"Image_Texture"</span><span class="w"> </span><span class="p">...</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"uvmap"</span><span class="w"> </span><span class="p">...</span>
+
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Shader<span class="w"> </span><span class="s">"bnode__Principled_BSDF"</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">info:id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"ND_open_pbr_surface_surfaceshader"</span>
+<span class="w">        </span><span class="kt">color3f</span><span class="w"> </span><span class="na">inputs:base_color</span><span class="p">.</span>connect<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/root/_materials/ProbeMat/NodeGraphs.outputs:node_out&gt;</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>NodeGraph<span class="w"> </span><span class="s">"NodeGraphs"</span><span class="w"> </span><span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The OpenPBR shader’s output is named <code class="docutils literal notranslate"><span class="pre">surface</span></code> here, where the node definition declares
+<code class="docutils literal notranslate"><span class="pre">out</span></code>. Both names resolve, and VM.PBR.001 accepts either. Hydra derives the MaterialX
+terminal from the node definition’s type, through <code class="docutils literal notranslate"><span class="pre">HdMtlxGetMxTerminalName</span></code>, and never looks
+at the USD output property name. Both names are in circulation: <code class="docutils literal notranslate"><span class="pre">usdMtlx</span></code> normalises any
+<code class="docutils literal notranslate"><span class="pre">surfaceshader</span></code>-typed output to <code class="docutils literal notranslate"><span class="pre">surface</span></code> when it loads a MaterialX document, so a MaterialX
+file converted with no Blender in the picture lands the same way, while the shipped OpenPBR
+material library authors <code class="docutils literal notranslate"><span class="pre">out</span></code>. Expect either in an asset somebody else made, and author
+<code class="docutils literal notranslate"><span class="pre">out</span></code> to match the library.</p>
+<p>No MDL surface is written, and that determines what Kit draws. Kit walks
+<code class="docutils literal notranslate"><span class="pre">[&quot;mdl&quot;,</span> <span class="pre">&quot;mtlx&quot;,</span> <span class="pre">&quot;&quot;]</span></code> and takes the first context the material has, as step 1 describes.
+A Blender export has nothing ahead of <code class="docutils literal notranslate"><span class="pre">mtlx</span></code> in that list, so the OpenPBR surface is the
+one that resolves, with no setting changed. The migrated sample in step 3 goes the other
+way, with MDL in front.</p>
+</section>
+<section id="confirm-it-conforms">
+<h3>Confirm it conforms<a class="headerlink" href="#confirm-it-conforms" title="Link to this heading">#</a></h3>
+<p>The materials come out conformant, so the profile run is about what the rest of the export
+is missing. Copy <code class="docutils literal notranslate"><span class="pre">bl_probe.usda</span></code> and its <code class="docutils literal notranslate"><span class="pre">textures/</span></code> beside it into the repository root, or
+give the command an absolute path to where the export landed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-validate<span class="w"> </span>--project-config<span class="w"> </span>sample_content/project_config.toml<span class="w"> </span>--profile<span class="w"> </span>Robotics-Prop<span class="w"> </span>--version<span class="w"> </span><span class="m">3</span>.3.0<span class="w"> </span>--output<span class="w"> </span>results.json<span class="w"> </span>bl_probe.usda
+</pre></div>
+</div>
+<p>3.3.0 is the first Robotics-Prop version that requires <code class="docutils literal notranslate"><span class="pre">FET_006_STANDARD</span></code> instead of
+marking it optional, so it is the one that tests whether the UsdPreviewSurface half of the
+export holds up.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Asset: bl_probe.usda
+  [FAILED] Robotics-Prop v3.3.0
+           FET_000_STANDARD: failing requirements: ['com.nvidia.simready.NP.005', 'com.nvidia.simready.NP.006']
+           FET_003_STANDARD: failing requirements: ['com.nvidia.simready.RB.001']
+           FET_004_STANDARD: failing requirements: ['com.nvidia.simready.RB.001']
+           ...
+</pre></div>
+</div>
+<p>Twelve lines, three distinct requirements, each repeated once per runtime physics variant.
+RB.001 is <code class="docutils literal notranslate"><span class="pre">No</span> <span class="pre">physics</span> <span class="pre">rigid</span> <span class="pre">bodies</span> <span class="pre">found</span> <span class="pre">under</span> <span class="pre">the</span> <span class="pre">default</span> <span class="pre">prim</span></code>; NP.005 and NP.006 are
+naming and path requirements a bare export does not meet. Physics and naming are outside
+what this section covers.</p>
+<p>The material features are absent from that list. The <code class="docutils literal notranslate"><span class="pre">features_summary</span></code> in <code class="docutils literal notranslate"><span class="pre">results.json</span></code>
+gives them by name:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>FET_006_STANDARD      {"dependencies": "[]", "passed": true, "version": "0.2.0"}
+FET_006_OPENPBR       {"dependencies": "[]", "passed": true, "version": "0.1.0"}
+FET_006_MDL           {"dependencies": "[]", "passed": true, "version": "0.2.0"}
+FET_010_STANDARD {"dependencies": "[]", "optional requirements": "['com.nvidia.simready.DISP.001']", "passed": true, "version": "0.1.0"}
+</pre></div>
+</div>
+<p>The first three pass. The fourth is this export’s one gap on visual materials: the probe
+has no <code class="docutils literal notranslate"><span class="pre">primvars:displayColor</span></code>, so DISP.001 goes unsatisfied and shows up as an optional
+requirement instead of a failure. The next subsection closes it.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">migrate_to_openpbr.py</span> <span class="pre">--verify</span></code> and VM.PBR.001 both read <code class="docutils literal notranslate"><span class="pre">outputs:mtlx:surface</span></code>, so a
+material with only OmniPBR on <code class="docutils literal notranslate"><span class="pre">outputs:mdl:surface</span></code> is a problem to each of them. They differ
+in scope: <code class="docutils literal notranslate"><span class="pre">--verify</span></code> reads every material in the asset, while VM.PBR.001 resolves each
+renderable Gprim’s binding at the <code class="docutils literal notranslate"><span class="pre">full</span></code> purpose and judges only what comes back. A material
+nothing binds is a <code class="docutils literal notranslate"><span class="pre">--verify</span></code> problem and outside VM.PBR.001.</p>
+<p>Run the migration script over a Blender export and it leaves the material alone, reporting
+a conflict, because it owns a prim named <code class="docutils literal notranslate"><span class="pre">OpenPBR_Shader</span></code> and Blender names its shader after
+the Blender node.</p>
+</div>
+</section>
+<section id="display-colour">
+<h3>Display colour<a class="headerlink" href="#display-colour" title="Link to this heading">#</a></h3>
+<p>A Color Attribute named <code class="docutils literal notranslate"><span class="pre">displayColor</span></code> is what produces <code class="docutils literal notranslate"><span class="pre">primvars:displayColor</span></code>. The name
+does all the work. Three candidates measured on one export:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Authored in Blender</p></th>
+<th class="head"><p>Exported as</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Color Attribute named <code class="docutils literal notranslate"><span class="pre">Col</span></code>, Blender’s default</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">color4f[]</span> <span class="pre">primvars:Col</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Color Attribute named <code class="docutils literal notranslate"><span class="pre">displayColor</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">color3f[]</span> <span class="pre">primvars:displayColor</span></code>, <code class="docutils literal notranslate"><span class="pre">interpolation</span> <span class="pre">=</span> <span class="pre">&quot;faceVarying&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Viewport Display colour on the material</p></td>
+<td><p>nothing</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Only the rename gives both the right name and the right type, with alpha dropped on the
+way. The Viewport Display colour never reaches the file.</p>
+<p>For a mesh with no Color Attribute, step 3’s script reads the export and authors the primvar
+from the bound material instead:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>skills/simready-foundation-conform-fet-010-standard/assets/scripts/author_display_color.py<span class="w"> </span>bl_probe.usda<span class="w"> </span>--verify
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>FAIL bl_probe.usda
+  /root/ProbeCube/Cube: GPrim '/root/ProbeCube/Cube' does not resolve a 'primvars:displayColor', authored on the prim or inherited from an ancestor (DISP.001)
+
+1 problem(s) across 1 asset(s) checked
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>skills/simready-foundation-conform-fet-010-standard/assets/scripts/author_display_color.py<span class="w"> </span>bl_probe.usda
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>bl_probe.usda: 1 authored, 0 skipped
+  /root/ProbeCube/Cube: (0.3419, 0.1413, 0.0273)
+      ProbeMat -&gt; (0.3419, 0.1413, 0.0273)  UsdPreviewSurface diffuseColor &lt;- be_basecolor.png sampled over 12 triangle(s)
+
+Per-material area-weighted colour:
+  ./ProbeMat: (0.3419, 0.1413, 0.0273) across 1 Gprim(s)
+
+1 Gprim(s) given a display colour across 1 asset(s)
+</pre></div>
+</div>
+<p>Note which tier the value came from. The script resolves OpenPBR first and here it fell
+through to the UsdPreviewSurface, because on a Blender export the OpenPBR <code class="docutils literal notranslate"><span class="pre">base_color</span></code>
+arrives through a <code class="docutils literal notranslate"><span class="pre">NodeGraph</span></code> output instead of straight from an image reader. Both tiers
+hold the same map, so the value is the same either way.</p>
+</section>
+</section>
+<section id="upgrading-an-omniverse-asset-with-omnipbr">
+<h2>3. Upgrading an Omniverse asset with OmniPBR<a class="headerlink" href="#upgrading-an-omniverse-asset-with-omnipbr" title="Link to this heading">#</a></h2>
+<p>This path is for an asset that already exists and already has an OmniPBR (MDL) surface on
+<code class="docutils literal notranslate"><span class="pre">outputs:mdl:surface</span></code>. The job is to add an OpenPBR surface and a display colour beside it
+without disturbing what is there. It assumes an asset that already loads and passes the
+core SimReady features.</p>
+<p>Four passes follow: a baseline profile run, the OpenPBR conform, the display-colour
+conform, and a second profile run.</p>
+<section id="establish-a-baseline">
+<h3>Establish a baseline<a class="headerlink" href="#establish-a-baseline" title="Link to this heading">#</a></h3>
+<p>Run the profile the asset targets:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-validate<span class="w"> </span>--project-config<span class="w"> </span>sample_content/project_config.toml<span class="w"> </span>--profile<span class="w"> </span>Robotics-Prop<span class="w"> </span>--version<span class="w"> </span><span class="m">3</span>.3.0<span class="w"> </span>../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">--project-config</span></code> takes the capability, feature and profile directories from the
+<code class="docutils literal notranslate"><span class="pre">[validate]</span></code> section of that file, which the repository keeps pointed at the core tier.
+Spelling the three out with <code class="docutils literal notranslate"><span class="pre">--rules-path</span></code>, <code class="docutils literal notranslate"><span class="pre">--features-path</span></code> and <code class="docutils literal notranslate"><span class="pre">--profiles-path</span></code> does
+the same thing, and is the form
+<a class="reference internal" href="../validate_workflow.html"><span class="std std-doc">SimReady Validation Workflow</span></a> shows. This guide takes the short
+one because it runs the command four times.</p>
+<p>The run prints a page of capability-parsing warnings before it prints anything about your
+asset. The result is the last two lines, and the exit code is 0 for a pass and 1 for
+anything else:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Asset: ../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd
+  [PASSED] Robotics-Prop v3.3.0
+</pre></div>
+</div>
+<p>Name a profile version that does not exist and you get the <code class="docutils literal notranslate"><span class="pre">Asset:</span></code> line, no verdict, and
+exit 1. The reason is in the warnings above it, as <code class="docutils literal notranslate"><span class="pre">Profile</span> <span class="pre">...</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">registered</span> <span class="pre">—</span> <span class="pre">cannot</span> <span class="pre">validate</span></code>. Refer to <a class="reference internal" href="../../profiles/profiles.html"><span class="std std-doc">Profiles</span></a> for the versions on offer.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A green profile line establishes less about visual materials than it appears to.
+Robotics-Prop 3.3.0 requires the UsdPreviewSurface preview (<code class="docutils literal notranslate"><span class="pre">FET_006_STANDARD</span></code>) and marks
+display colour, OpenPBR and MDL optional. Three profiles list <code class="docutils literal notranslate"><span class="pre">FET_006_OPENPBR</span></code> and
+<code class="docutils literal notranslate"><span class="pre">FET_010_STANDARD</span></code>: Robotics-Prop, Robot-Body and Robot-Gripper. All three mark both
+optional. An optional feature’s requirements still run, and they are reported under
+<code class="docutils literal notranslate"><span class="pre">optional</span> <span class="pre">requirements</span></code> in the JSON report, but they cannot fail the profile. So no profile
+today fails an asset for shipping no OpenPBR surface or no display colour.</p>
+</div>
+<p>Two requirements ask for less than their names suggest:</p>
+<ul class="simple">
+<li><p>VM.PBR.001 asks for an OpenPBR surface on <code class="docutils literal notranslate"><span class="pre">outputs:mtlx:surface</span></code>, and nothing else on
+that terminal satisfies it. An MDL surface is <code class="docutils literal notranslate"><span class="pre">VM.MDL.003</span></code>, a separate requirement, so a
+profile that accepts either lists both. It resolves each renderable Gprim’s binding at
+the <code class="docutils literal notranslate"><span class="pre">full</span></code> purpose and judges the material that comes back, so an unused material in
+<code class="docutils literal notranslate"><span class="pre">/Looks</span></code> and one bound only for preview both fall outside it.</p></li>
+<li><p>VM.PBR.003 asks for a connected surface terminal in <em>some</em> render context. A preview plus
+an MDL surface satisfies it with no MaterialX anywhere.</p></li>
+</ul>
+<p>So a profile run covers everything except the OpenPBR and display-colour contracts. The
+next two subsections each open with the tool that covers one of those.</p>
+</section>
+<section id="conform-the-openpbr-surfaces">
+<h3>Conform the OpenPBR surfaces<a class="headerlink" href="#conform-the-openpbr-surfaces" title="Link to this heading">#</a></h3>
+<p>Use the skill at <code class="docutils literal notranslate"><span class="pre">skills/simready-foundation-conform-fet-006-openpbr/</span></code>. Its bundled script
+authors an OpenPBR surface on materials that already have a UsdPreviewSurface preview and an
+OmniPBR final surface, which is the shape every sample under
+<code class="docutils literal notranslate"><span class="pre">sample_content/common_assets/props_general/</span></code> has.</p>
+<p>The path argument takes a USD file, or a directory to search for <code class="docutils literal notranslate"><span class="pre">simready_usd</span></code> assets.</p>
+<p>Start with the state of the asset:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>skills/simready-foundation-conform-fet-006-openpbr/assets/scripts/migrate_to_openpbr.py<span class="w"> </span>../vm-workflow/gen_appliance_toaster_v01_01<span class="w"> </span>--verify
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ok   ../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd
+
+0 problem(s) across 1 asset(s)
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">--verify</span></code> reports VM.PBR.001, VM.PBR.002 and texture resolution, and exits 0 only when it
+finds nothing. On an asset with no OpenPBR surface it exits 1 and prints one line per
+material, each naming the prim, the problem and the requirement:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/RootNode/Geometry/body_obj_01/body_mesh_01/VisualMaterials/m_opaque__plastic__toaster_v01_01: no outputs:mtlx:surface (VM.PBR.001)
+</pre></div>
+</div>
+<p>Now see what a run would write, without writing anything:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>skills/simready-foundation-conform-fet-006-openpbr/assets/scripts/migrate_to_openpbr.py<span class="w"> </span>../vm-workflow/gen_appliance_toaster_v01_01<span class="w"> </span>--dry-run
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd: 6 migrated, 2 skipped (dry run)
+  /RootNode/Geometry/body_obj_01/body_mesh_01/VisualMaterials/m_opaque__plastic__toaster_v01_01: emission_color=(1, 1, 1), geometry_opacity=1.0, specular_ior=1.5
+      texture: base_color &lt;- t_gen_appliance_toaster_v01_01_a.png (rgb)
+      texture: base_metalness &lt;- t_gen_appliance_toaster_v01_01_orm.png (b)
+      texture: specular_roughness &lt;- t_gen_appliance_toaster_v01_01_orm.png (g)
+      texture: geometry_normal &lt;- t_gen_appliance_toaster_v01_01_n.png (rgb)
+  /RootNode/Geometry/body_obj_01/body_mesh_01/VisualMaterials/m_opaque__metal__toaster_v01_01: emission_color=(1, 1, 1), geometry_opacity=1.0, specular_ior=1.5
+      texture: base_color &lt;- t_gen_appliance_toaster_v01_01_a.png (rgb)
+      texture: base_metalness &lt;- t_gen_appliance_toaster_v01_01_orm.png (b)
+      texture: specular_roughness &lt;- t_gen_appliance_toaster_v01_01_orm.png (g)
+      texture: geometry_normal &lt;- t_gen_appliance_toaster_v01_01_n.png (rgb)
+  ...
+
+6 material(s) migrated across 1 asset(s)
+24 channel(s) carried across as textures.
+</pre></div>
+</div>
+<p>Those counts are what the run would author, whatever is there already. The script owns the
+prims it writes and rewrites them from scratch every pass, so a conformant asset reports
+the same six materials as a broken one. Each mesh has its own <code class="docutils literal notranslate"><span class="pre">VisualMaterials</span></code> scope, so a
+material shared by several meshes is authored once per mesh. The two skipped materials are
+the asset’s physics materials, which describe friction, so the script leaves them alone.</p>
+<p>Drop <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code> to write. The output is the same, without <code class="docutils literal notranslate"><span class="pre">(dry</span> <span class="pre">run)</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>skills/simready-foundation-conform-fet-006-openpbr/assets/scripts/migrate_to_openpbr.py<span class="w"> </span>../vm-workflow/gen_appliance_toaster_v01_01
+</pre></div>
+</div>
+<p>The four flags are <code class="docutils literal notranslate"><span class="pre">--verify</span></code>, <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code>, <code class="docutils literal notranslate"><span class="pre">--textures</span></code> and <code class="docutils literal notranslate"><span class="pre">--no-textures</span></code>. Textures are
+reconnected by default, so <code class="docutils literal notranslate"><span class="pre">--textures</span></code> names the default and changes nothing.
+<code class="docutils literal notranslate"><span class="pre">--no-textures</span></code> flattens texture-driven channels to constants instead; those materials
+still satisfy VM.PBR.001 and VM.PBR.002, and they will not look like the original. The
+before-and-after image in step 5 is exactly that difference.</p>
+<p>The prims the script owns are one <code class="docutils literal notranslate"><span class="pre">OpenPBR_Shader</span></code> per material plus the reader nodes named
+<code class="docutils literal notranslate"><span class="pre">OpenPBR_Shader_*</span></code> beside it. A material that already has an OpenPBR surface under a
+different prim name was authored by hand or by a DCC; the script reports it as a conflict
+and leaves it alone. Because these assets are LFS-tracked binaries that cannot be merged,
+re-running the script is the way to resolve a collision with someone else’s edit.</p>
+<p>A re-run rewrites the binary layer even when nothing changes, so the file hash moves. To
+confirm a re-run was inert, compare flattened USD instead of file hashes.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">--verify</span></code> checks authored scene description. It covers VM.PBR.001, VM.PBR.002 and whether
+each texture it names resolves to a file. VM.PBR.003, the structural check on the shading
+network, belongs to <code class="docutils literal notranslate"><span class="pre">simready-validate</span></code>.</p>
+<p>VM.PBR.002 and VM.PBR.003 need MaterialX installed, which the Prerequisites cover.</p>
+</div>
+</section>
+<section id="conform-display-colour">
+<h3>Conform display colour<a class="headerlink" href="#conform-display-colour" title="Link to this heading">#</a></h3>
+<p>Use the skill at <code class="docutils literal notranslate"><span class="pre">skills/simready-foundation-conform-fet-010-standard/</span></code>. Its script
+authors a constant <code class="docutils literal notranslate"><span class="pre">primvars:displayColor</span></code> on every renderable Gprim, derived from the
+material bound to that Gprim. It takes the same four flags as the OpenPBR script, with
+<code class="docutils literal notranslate"><span class="pre">--textures</span></code> and <code class="docutils literal notranslate"><span class="pre">--no-textures</span></code> controlling whether base colour maps are sampled.</p>
+<p>The script resolves base colour through OpenPBR first, then UsdPreviewSurface, then MDL, and
+reports which tier it used. On these samples the first two tiers hold the same map, so
+running this before or after the OpenPBR conform gives the same values.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>skills/simready-foundation-conform-fet-010-standard/assets/scripts/author_display_color.py<span class="w"> </span>../vm-workflow/gen_appliance_toaster_v01_01<span class="w"> </span>--verify
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>FAIL ../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd
+  /RootNode/Geometry/body_obj_01/body_mesh_01/body_mesh_01: GPrim '/RootNode/Geometry/body_obj_01/body_mesh_01/body_mesh_01' does not resolve a 'primvars:displayColor', authored on the prim or inherited from an ancestor (DISP.001)
+  /RootNode/Geometry/lever_obj_01/lever_mesh_01: GPrim '/RootNode/Geometry/lever_obj_01/lever_mesh_01' does not resolve a 'primvars:displayColor', authored on the prim or inherited from an ancestor (DISP.001)
+  ...
+
+5 problem(s) across 1 asset(s) checked
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">--verify</span></code> reports DISP.001 and DISP.002, one line per Gprim, and exits 1. None of the five
+meshes has a display colour yet, which is what the authoring step below fixes; re-run it
+afterwards and it reports <code class="docutils literal notranslate"><span class="pre">ok</span></code> and <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">problem(s)</span></code>.</p>
+<p>Then author. <code class="docutils literal notranslate"><span class="pre">--edit-target</span> <span class="pre">binding</span></code> puts each opinion in the layer holding that Gprim’s
+<code class="docutils literal notranslate"><span class="pre">material:binding</span></code>, which for these samples is <code class="docutils literal notranslate"><span class="pre">payloads/instances.usda</span></code>. The meshes are
+instanceable, and a primvar cannot be authored on an instance proxy at the path it appears
+on, so the default <code class="docutils literal notranslate"><span class="pre">--edit-target</span> <span class="pre">stage</span></code> reaches nothing here:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>skills/simready-foundation-conform-fet-010-standard/assets/scripts/author_display_color.py<span class="w"> </span>../vm-workflow/gen_appliance_toaster_v01_01<span class="w"> </span>--edit-target<span class="w"> </span>binding
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd: 5 authored, 0 skipped
+  /RootNode/Geometry/body_obj_01/body_mesh_01/body_mesh_01: (0.2469, 0.2459, 0.2434) -&gt; instances.usda/Instances/body_mesh_01/body_mesh_01
+      m_opaque__plastic__toaster_v01_01 -&gt; (0.0840, 0.0840, 0.0840)  OpenPBR base_color &lt;- t_gen_appliance_toaster_v01_01_a.png sampled over 13952 triangle(s)
+      m_opaque__metal__toaster_v01_01 -&gt; (0.3500, 0.3484, 0.3443)  OpenPBR base_color &lt;- t_gen_appliance_toaster_v01_01_a.png sampled over 20640 triangle(s)
+  /RootNode/Geometry/lever_obj_01/lever_mesh_01: (0.0123, 0.0123, 0.0123) -&gt; instances.usda/Instances/lever_mesh_01/lever_mesh_01
+      m_opaque__plastic__toaster_v01_01 -&gt; (0.0123, 0.0123, 0.0123)  OpenPBR base_color &lt;- t_gen_appliance_toaster_v01_01_a.png sampled over 940 triangle(s)
+  /RootNode/Geometry/tray_obj_01/tray_mesh_01: (0.3788, 0.3731, 0.3592) -&gt; instances.usda/Instances/tray_mesh_01/tray_mesh_01
+      m_opaque__metal__toaster_v01_01 -&gt; (0.3788, 0.3731, 0.3592)  OpenPBR base_color &lt;- t_gen_appliance_toaster_v01_01_a.png sampled over 2012 triangle(s)
+  ...
+  instances.usda: 5 colour(s) authored
+
+Per-material area-weighted colour:
+  gen_appliance_toaster_v01_01/m_opaque__metal__toaster_v01_01: (0.3506, 0.3489, 0.3446) across 2 Gprim(s)
+  gen_appliance_toaster_v01_01/m_opaque__plastic__toaster_v01_01: (0.0822, 0.0822, 0.0822) across 4 Gprim(s)
+
+5 Gprim(s) given a display colour across 1 asset(s)
+</pre></div>
+</div>
+<p>Read the per-material lines under each Gprim as well as the value. They name which material
+each contribution came from and how it was derived, and the same record goes into the
+primvar’s <code class="docutils literal notranslate"><span class="pre">customData</span></code> so it survives in the file:</p>
+<div class="highlight-usda notranslate"><div class="highlight"><pre><span></span><span class="kt">color3f[]</span><span class="w"> </span><span class="na">primvars:displayColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[(</span><span class="m">0.37882704</span><span class="p">,</span><span class="w"> </span><span class="m">0.3730906</span><span class="p">,</span><span class="w"> </span><span class="m">0.35922563</span><span class="p">)]</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span>colorSpace<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"lin_rec709_scene"</span>
+<span class="w">    </span><span class="k k-Tokens">customData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">dictionary</span><span class="w"> </span><span class="na">simready</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">string</span><span class="w"> </span><span class="na">displayColorSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"m_opaque__metal__toaster_v01_01: OpenPBR base_color &lt;- t_gen_appliance_toaster_v01_01_a.png sampled over 2012 triangle(s)"</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n n-Builtins">interpolation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"constant"</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The console rounds to four decimals for reading; the primvar holds the full value.</p>
+<p>Three properties of the derivation decide what its output is good for.</p>
+<p><strong>One colour per Gprim.</strong> The value is the area-weighted mean of the texels the bound
+geometry lands on, taken in linear light. Where a Gprim has several materials through
+<code class="docutils literal notranslate"><span class="pre">materialBind</span></code> GeomSubsets, they are blended. The toaster’s body mesh resolves
+<code class="docutils literal notranslate"><span class="pre">(0.2469,</span> <span class="pre">0.2459,</span> <span class="pre">0.2434)</span></code>, which matches neither its plastic <code class="docutils literal notranslate"><span class="pre">(0.0840,</span> <span class="pre">0.0840,</span> <span class="pre">0.0840)</span></code>
+nor its metal <code class="docutils literal notranslate"><span class="pre">(0.3500,</span> <span class="pre">0.3484,</span> <span class="pre">0.3443)</span></code>. A printed label or a painted stripe disappears
+into the mean.</p>
+<p><strong>Sampling only where the geometry lands.</strong> Five of the electricians toolbox’s materials
+share one atlas. Averaging the whole image would hand the same yellow to all five;
+sampling per material gives the locks <code class="docutils literal notranslate"><span class="pre">(0.011,</span> <span class="pre">0.010,</span> <span class="pre">0.007)</span></code> and the lid
+<code class="docutils literal notranslate"><span class="pre">(0.633,</span> <span class="pre">0.448,</span> <span class="pre">0.042)</span></code>.</p>
+<p><strong>Nothing is invented.</strong> A Gprim with no bound material, no base colour, or an unresolvable
+texture is listed as <code class="docutils literal notranslate"><span class="pre">SKIPPED</span></code> with its reason and left without a display colour, so
+DISP.001 still fails on it visibly. Out-of-range components are clamped; NaN and Inf are
+refused.</p>
+<p>The script is safe to re-run, and its sampling uses a fixed stratified point set instead of
+a random one, so a second pass over an unchanged asset produces the same values. Geometry
+that already has a display colour without the <code class="docutils literal notranslate"><span class="pre">simready:displayColorSource</span></code> record was
+authored by hand, and is reported as a conflict and left alone.</p>
+</section>
+<section id="re-validate">
+<h3>Re-validate<a class="headerlink" href="#re-validate" title="Link to this heading">#</a></h3>
+<p>Run the baseline command again, against the copy you have been working on:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-validate<span class="w"> </span>--project-config<span class="w"> </span>sample_content/project_config.toml<span class="w"> </span>--profile<span class="w"> </span>Robotics-Prop<span class="w"> </span>--version<span class="w"> </span><span class="m">3</span>.3.0<span class="w"> </span>../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Asset: ../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd
+  [PASSED] Robotics-Prop v3.3.0
+</pre></div>
+</div>
+<p>The console line is identical whatever the two conform scripts did, because the features
+they conform are optional in every profile that lists them. To see per-feature detail, write
+a JSON report:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-validate<span class="w"> </span>--project-config<span class="w"> </span>sample_content/project_config.toml<span class="w"> </span>--profile<span class="w"> </span>Robotics-Prop<span class="w"> </span>--version<span class="w"> </span><span class="m">3</span>.3.0<span class="w"> </span>--output<span class="w"> </span>results.json<span class="w"> </span>../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">results.json</span></code> is keyed by asset path, and each asset has a <code class="docutils literal notranslate"><span class="pre">features_summary</span></code> with one
+entry per feature holding <code class="docutils literal notranslate"><span class="pre">passed</span></code>, <code class="docutils literal notranslate"><span class="pre">version</span></code>, <code class="docutils literal notranslate"><span class="pre">dependencies</span></code> and, where they apply,
+<code class="docutils literal notranslate"><span class="pre">failing</span> <span class="pre">requirements</span></code> and <code class="docutils literal notranslate"><span class="pre">optional</span> <span class="pre">requirements</span></code>. The four visual-material features on
+the conformed toaster:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>FET_010_STANDARD {"dependencies": "[]", "passed": true, "version": "0.1.0"}
+FET_006_MDL           {"dependencies": "[]", "passed": true, "version": "0.2.0"}
+FET_006_OPENPBR       {"dependencies": "[]", "passed": true, "version": "0.1.0"}
+FET_006_STANDARD      {"dependencies": "[]", "passed": true, "version": "0.2.0"}
+</pre></div>
+</div>
+<p>This is where an unmet optional requirement shows up. An asset whose materials have no
+physically based final surface still reports <code class="docutils literal notranslate"><span class="pre">&quot;passed&quot;:</span> <span class="pre">true</span></code> for <code class="docutils literal notranslate"><span class="pre">FET_006_OPENPBR</span></code>, with
+the requirement it missed listed alongside:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>FET_006_OPENPBR       {"dependencies": "[]", "optional requirements": "['com.nvidia.simready.VM.PBR.001']", "passed": true, "version": "0.1.0"}
+</pre></div>
+</div>
+<p>Removing the OpenPBR surface produces that line even where an MDL surface remains, since
+VM.PBR.001 reads only <code class="docutils literal notranslate"><span class="pre">outputs:mtlx:surface</span></code>.</p>
+<p>So <code class="docutils literal notranslate"><span class="pre">optional</span> <span class="pre">requirements</span></code> lists what did not pass and did not block. For a visual-materials
+review that makes the JSON the interesting output, and it makes each conform script’s
+<code class="docutils literal notranslate"><span class="pre">--verify</span></code> your pass or fail gate for its own feature. <code class="docutils literal notranslate"><span class="pre">--verify</span></code> is the only place today
+where a missing OpenPBR surface or a missing display colour produces a non-zero exit code.</p>
+<p>Refer to <a class="reference internal" href="../validate_workflow.html"><span class="std std-doc">SimReady Validation Workflow</span></a> for stamping results into
+the asset with <code class="docutils literal notranslate"><span class="pre">--stamp-asset-validation</span></code>, which is what makes the benchmark plan these
+tests without <code class="docutils literal notranslate"><span class="pre">--features</span></code>.</p>
+</section>
+</section>
+<section id="benchmark">
+<h2>4. Benchmark<a class="headerlink" href="#benchmark" title="Link to this heading">#</a></h2>
+<p>Four tests cover visual materials. Each loads the asset in Kit and measures pixels.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Test</p></th>
+<th class="head"><p>What it renders</p></th>
+<th class="head"><p>Feature</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../benchmark/tests/fet006/openpbr-renders.html"><span class="std std-doc">openpbr_renders</span></a></p></td>
+<td><p>The OpenPBR surface on <code class="docutils literal notranslate"><span class="pre">outputs:mtlx:surface</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FET_006_OPENPBR</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../benchmark/tests/fet006/mdl-renders.html"><span class="std std-doc">mdl_renders</span></a></p></td>
+<td><p>The MDL surface on <code class="docutils literal notranslate"><span class="pre">outputs:mdl:surface</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FET_006_MDL</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../benchmark/tests/fet006/preview-surface-renders.html"><span class="std std-doc">preview_surface_renders</span></a></p></td>
+<td><p>The UsdPreviewSurface on <code class="docutils literal notranslate"><span class="pre">outputs:surface</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FET_006_STANDARD</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../benchmark/tests/fet010/display-color-response.html"><span class="std std-doc">display_color_response</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">primvars:displayColor</span></code> through the OpenPBR material DISP.001 nominates</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FET_010_STANDARD</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The first three share a room, a light rig and a camera framing, so a difference between them
+comes from the material. Each puts its own render context at the front of Kit’s list, checks
+the value took before it renders anything, and puts the list back afterwards. Nothing edits
+the asset’s materials. The number each one reports is what the geometry bound to a material
+with that context contributed, measured by hiding exactly that geometry and differencing, so
+on a partly migrated asset it is smaller than what the asset as a whole drew.</p>
+<p><code class="docutils literal notranslate"><span class="pre">display_color_response</span></code> works by substitution. It binds one material over the whole asset
+from a single relationship on the asset’s root prim, marked
+<code class="docutils literal notranslate"><span class="pre">bindMaterialAs</span> <span class="pre">=</span> <span class="pre">&quot;strongerThanDescendants&quot;</span></code>, which beats every binding the asset authors
+below it, including bindings inside prototypes. That material is the OpenPBR surface DISP.001’s
+guidance nominates, with a MaterialX primvar reader feeding <code class="docutils literal notranslate"><span class="pre">displayColor</span></code> into <code class="docutils literal notranslate"><span class="pre">base_color</span></code>.
+The test renders the asset through four variants of it and takes the answer from the
+differences:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variant</p></th>
+<th class="head"><p>What it changes</p></th>
+<th class="head"><p>What the difference answers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Read</p></td>
+<td><p>The reader, falling back to magenta</p></td>
+<td><p>The frame everything else is compared against</p></td>
+</tr>
+<tr class="row-odd"><td><p>Altered</p></td>
+<td><p>The same reader, falling back to green</p></td>
+<td><p>Whether any Gprim fell back, which is DISP.001</p></td>
+</tr>
+<tr class="row-even"><td><p>Removed</p></td>
+<td><p>No reader, flat magenta</p></td>
+<td><p>Whether the primvar drove the pixels, or a constant did</p></td>
+</tr>
+<tr class="row-odd"><td><p>Opacity</p></td>
+<td><p>The Read material with the <code class="docutils literal notranslate"><span class="pre">displayOpacity</span></code> fallback at 0</p></td>
+<td><p>DISP.003</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Nothing on the asset is edited and nothing is written to disk. <code class="docutils literal notranslate"><span class="pre">mtlx</span></code> has to be in Kit’s
+render-context list for the substituted material to resolve at all, so the test checks the
+list and fails the run when it is missing.</p>
+<p>The asset’s stamped profile drives planning, so an asset stamped against a profile without
+a feature will not pick its tests up. <code class="docutils literal notranslate"><span class="pre">--features</span></code> bypasses that gate while the plan is
+built:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-benchmark<span class="w"> </span>--assets<span class="w"> </span>../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd<span class="w"> </span>--features<span class="w"> </span>FET_006_OPENPBR
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-benchmark<span class="w"> </span>--assets<span class="w"> </span>../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd<span class="w"> </span>--features<span class="w"> </span>FET_010_STANDARD
+</pre></div>
+</div>
+<p>Pass one <code class="docutils literal notranslate"><span class="pre">--features</span></code> value per invocation. <code class="docutils literal notranslate"><span class="pre">--only-features</span></code> is a different flag: it
+narrows a plan that already exists, where <code class="docutils literal notranslate"><span class="pre">--features</span></code> acts while the plan is built. Refer
+to <a class="reference internal" href="../benchmark/running.html"><span class="std std-doc">Running Tests</span></a> for installation and engine configuration.</p>
+<p>A surface test can skip, fail or pass. It skips when no material on the asset has a surface
+for its context, because the asset never claimed that feature: an asset shipping only MDL
+skips the OpenPBR and UsdPreviewSurface tests instead of failing them. It fails in two
+cases: the asset has the surface but no material with it is bound to geometry the render
+draws, and the bound geometry draws too few pixels to measure. Otherwise it passes.</p>
+</section>
+<section id="read-the-report">
+<h2>5. Read the report<a class="headerlink" href="#read-the-report" title="Link to this heading">#</a></h2>
+<p>Results land under <code class="docutils literal notranslate"><span class="pre">_testing/</span></code>. Open <code class="docutils literal notranslate"><span class="pre">index.html</span></code> for the run, with a page per asset under
+<code class="docutils literal notranslate"><span class="pre">_testing/assets/</span></code>. Captured frames and the per-test <code class="docutils literal notranslate"><span class="pre">result.json</span></code> sit under
+<code class="docutils literal notranslate"><span class="pre">_testing/results/&lt;asset</span> <span class="pre">path&gt;/.simready/runtime/&lt;test</span> <span class="pre">name&gt;/</span></code>. Refer to
+<a class="reference internal" href="../benchmark/reading-reports.html"><span class="std std-doc">Reading Reports</span></a> for the full layout and exit codes.</p>
+<p>The frames are more informative than the counts, so open them. Each surface test keeps four: the
+asset hidden, that frame repeated to establish a noise floor, the asset shown with its
+supporting geometry hidden, and the asset shown. The number the test judges is the difference
+between the last two.</p>
+<p><img alt="openpbr_renders expected result" src="../../_images/openpbr-renders.png" /></p>
+<p>The toaster in the mid-grey room, shaded by the OpenPBR surface on <code class="docutils literal notranslate"><span class="pre">outputs:mtlx:surface</span></code>.
+One run of <code class="docutils literal notranslate"><span class="pre">openpbr_renders</span></code> on this sample reported five Gprims bound to a material with
+an OpenPBR surface, drawing 293,685 pixels against a 212 pixel noise floor, with the
+context list pinned to <code class="docutils literal notranslate"><span class="pre">[mtlx,</span> <span class="pre">mdl,</span> <span class="pre">universal]</span></code>. Two identical frames would mean that
+geometry contributed nothing.</p>
+<section id="what-a-pass-establishes">
+<h3>What a pass establishes<a class="headerlink" href="#what-a-pass-establishes" title="Link to this heading">#</a></h3>
+<p>Geometry bound to a material with the named surface drew the frame, with that context
+first in Kit’s list. That is a stronger claim than “the asset rendered”: the test resolves
+bindings before it measures, so an unbound MaterialX material sitting in <code class="docutils literal notranslate"><span class="pre">/Looks</span></code> cannot
+supply the pass while other materials supply the pixels.</p>
+<p><code class="docutils literal notranslate"><span class="pre">display_color_response</span></code> establishes that the display colours in the file reach the shader.
+Swapping the primvar reader’s fallback changes the frame only where a Gprim resolved no
+display colour, so a pass means none did. Taking the reader out entirely changes the frame
+wherever the primvar was driving the shading, so a pass means it was. The test also checks
+the file for coverage and reports both answers side by side. Their disagreement is the
+useful signal: a file that resolves everywhere and a render that does not means the primvar
+is not reaching the shader, which is a different defect from the asset not having one.</p>
+<p><img alt="display_color_response expected result" src="../../_images/display-color-response.png" /></p>
+</section>
+<section id="what-a-pass-does-not-establish">
+<h3>What a pass does not establish<a class="headerlink" href="#what-a-pass-does-not-establish" title="Link to this heading">#</a></h3>
+<p>That the surface network under test is the one Kit evaluated. The trailing render contexts
+stay in the list as fallbacks, deliberately, because without them everything with no surface
+for the pinned context renders as the default material. So geometry whose OpenPBR network
+fails to resolve still draws, through MDL, and still counts. Catching that needs a probe
+that writes a known value into the shader under test and looks for it, which means editing
+the material, and no test in this family does that today.</p>
+<p>Nor does a pass establish that the surface looks correct or has its intended textures. The clearest
+way to see the size of that gap is the same prop rendered through the same room, light rig
+and camera, before and after migration:</p>
+<p><img alt="OpenPBR surface before and after sample migration" src="../../_images/openpbr-migration-before-after.png" /></p>
+<p>Left, the OpenPBR surface with constant inputs and no textures wired: flat white, because
+<code class="docutils literal notranslate"><span class="pre">base_color</span></code> was unauthored and fell back to the node definition’s default. Right, the same
+prop after migration kept its maps. Both pass <code class="docutils literal notranslate"><span class="pre">openpbr_renders</span></code>. Everything
+separating those two frames is outside what the test judges, which is why the frames are
+kept instead of reduced to a number.</p>
+<p>The same boundary applies to display colour, and <code class="docutils literal notranslate"><span class="pre">display_color_response</span></code> is explicit about
+it. The test asserts nothing about which display colour is brighter than which, and no match
+between a pixel and an authored value. RTX tone-maps and the scene is dome-lit, so no
+absolute match is available, and DISP.002 sets no plausibility band to check a relative one
+against. Whether the shipped colours are the right colours is not something a render can
+settle: the conform script’s derivation approximates albedo without claiming to match what a
+path tracer produces for the same object.</p>
+<p>A full green run supports one narrow claim. The asset has the surfaces and primvars the
+features describe, the values are in range, and the geometry bound to each surface drew the
+frame with that context resolved first. Whether the asset looks right is a judgement a human
+still has to make by looking at the frames.</p>
+</section>
+</section>
+<section id="common-mistakes">
+<h2>Common mistakes<a class="headerlink" href="#common-mistakes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Symptom</p></th>
+<th class="head"><p>Cause</p></th>
+<th class="head"><p>Fix</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Migrated asset looks unchanged in Kit</p></td>
+<td><p>Kit resolved the MDL surface, which sits ahead of <code class="docutils literal notranslate"><span class="pre">mtlx</span></code> in the shipped context order</p></td>
+<td><p>Run the step 4 benchmark, which pins the context and confirms the pin took</p></td>
+</tr>
+<tr class="row-odd"><td><p>Display colours all come back <code class="docutils literal notranslate"><span class="pre">(0.8,</span> <span class="pre">0.8,</span> <span class="pre">0.8)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">numpy</span></code> or <code class="docutils literal notranslate"><span class="pre">Pillow</span></code> is missing, so the script fell back to material constants</p></td>
+<td><p>Install both and re-run; the log records when this happened</p></td>
+</tr>
+<tr class="row-even"><td><p>Display colour looks washed out</p></td>
+<td><p>An sRGB value was written without converting to linear</p></td>
+<td><p>Decode through the sRGB transfer function first</p></td>
+</tr>
+<tr class="row-odd"><td><p>A profile pass on an asset with no OpenPBR surface</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FET_006_OPENPBR</span></code> is <code class="docutils literal notranslate"><span class="pre">optional=true</span></code> in every shipped profile</p></td>
+<td><p>Use <code class="docutils literal notranslate"><span class="pre">migrate_to_openpbr.py</span> <span class="pre">--verify</span></code> as the gate</p></td>
+</tr>
+<tr class="row-even"><td><p>A Blender export has no <code class="docutils literal notranslate"><span class="pre">outputs:mtlx:surface</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">generate_materialx_network</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code> by default</p></td>
+<td><p>Set it to <code class="docutils literal notranslate"><span class="pre">True</span></code> and export again</p></td>
+</tr>
+<tr class="row-odd"><td><p>A Blender export has an unreferenced copy under <code class="docutils literal notranslate"><span class="pre">textures/</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">export_textures_mode</span></code> was set to <code class="docutils literal notranslate"><span class="pre">KEEP</span></code> or <code class="docutils literal notranslate"><span class="pre">PRESERVE</span></code> with the MaterialX network on</p></td>
+<td><p>Leave the mode on <code class="docutils literal notranslate"><span class="pre">NEW</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="where-to-go-next">
+<h2>Where to go next<a class="headerlink" href="#where-to-go-next" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../features/FET_006_OPENPBR.html"><span class="std std-doc">FET006 OpenPBR Materials</span></a> and <a class="reference internal" href="../../features/FET_010_STANDARD.html"><span class="std std-doc">FET010 Display Color</span></a> for the two contracts in full.</p></li>
+<li><p><a class="reference internal" href="../../capabilities/visualization/materials/requirements/material-final-surface.html"><span class="std std-doc">Visual Materials capability</span></a> for VM.PBR.001, and <a class="reference internal" href="../../capabilities/visualization/display_color/capability-display_color.html"><span class="std std-doc">Display Color capability</span></a> for DISP.001 to DISP.003.</p></li>
+<li><p><a class="reference internal" href="../benchmark/tests/fet006-materials.html"><span class="std std-doc">FET006 Materials</span></a> and <a class="reference internal" href="../benchmark/tests/fet010-display-color.html"><span class="std std-doc">FET010 Display Color</span></a> for the benchmark families and what each test guards against.</p></li>
+<li><p><a class="reference internal" href="../validate_workflow.html"><span class="std std-doc">SimReady Validation Workflow</span></a> for validator setup, JSON reports and stamping.</p></li>
+<li><p><a class="reference internal" href="../../profiles/profiles.html"><span class="std std-doc">Profiles</span></a> for which profiles select these features and at which version.</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../benchmark/sensor-tests/fet037/joint-sensor-data.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">joint_sensor_data  (FET037 Joint Sensors)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../SimReady_learning_workflow.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Extending the Validation Sample: Adding a New Demo Validator</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-end-up-with">What you end up with</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-core-tier">The core tier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-benchmark">The benchmark</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-material-contract">1. The material contract</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-surfaces-on-one-prim">Three surfaces on one prim</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#which-surface-the-renderer-picks">Which surface the renderer picks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#display-colour-is-a-primvar">Display colour is a primvar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#colour-space">Colour space</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#authoring-in-blender">2. Authoring in Blender</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#export-settings">Export settings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-principled-bsdf-maps-to">What Principled BSDF maps to</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#textures">Textures</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-the-export-looks-like">What the export looks like</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confirm-it-conforms">Confirm it conforms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#display-colour">Display colour</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#upgrading-an-omniverse-asset-with-omnipbr">3. Upgrading an Omniverse asset with OmniPBR</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#establish-a-baseline">Establish a baseline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conform-the-openpbr-surfaces">Conform the OpenPBR surfaces</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conform-display-colour">Conform display colour</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#re-validate">Re-validate</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark">4. Benchmark</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-report">5. Read the report</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-a-pass-establishes">What a pass establishes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-a-pass-does-not-establish">What a pass does not establish</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-mistakes">Common mistakes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-to-go-next">Where to go next</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0"></script>
+
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2025-2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+{
+    "capability": {
+        "id": "conformance_metadata",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "PKG.CONF.001",
+                "version": null,
+                "name": "conformance-metadata",
+                "compatibility": "other",
+                "tags": [
+                    "unknown"
+                ],
+                "validator": "_Not yet implemented_",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/packaging/conformance_metadata/requirements/conformance-metadata.html",
+                    "internal_path": "capabilities/packaging/conformance_metadata/requirements/conformance-metadata.md"
+                },
+                "message": "Packages MAY include conformance metadata files recording SimReady Foundations validation results, following defined naming and JSON schema conventions",
+                "examples": []
+            },
+            {
+                "code": "PKG.CONF.002",
+                "version": null,
+                "name": "root-usds",
+                "compatibility": "other",
+                "tags": [
+                    "unknown"
+                ],
+                "validator": "_Not yet implemented_",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/packaging/conformance_metadata/requirements/root-usds.html",
+                    "internal_path": "capabilities/packaging/conformance_metadata/requirements/root-usds.md"
+                },
+                "message": "Packages MAY include an OpenUSD root layers metadata file declaring the top-level USD entry points that should be validated as self-contained assets",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "capabilities/packaging/conformance_metadata/capability-conformance_metadata.html",
+            "internal_path": "capabilities/packaging/conformance_metadata/capability-conformance_metadata.md"
+        }
+    }
+}

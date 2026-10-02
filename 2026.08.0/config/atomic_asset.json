@@ -1,0 +1,63 @@
+{
+    "capability": {
+        "id": "atomic_asset",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "AA.002",
+                "version": null,
+                "name": "supported-file-types",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "aa-002",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/atomic_asset/requirements/supported-file-types.html",
+                    "internal_path": "capabilities/core/atomic_asset/requirements/supported-file-types.md"
+                },
+                "message": "Asset must use only supported file types",
+                "examples": []
+            },
+            {
+                "code": "AA.OV.001",
+                "version": null,
+                "name": "ov-usdz-udim-limitation",
+                "compatibility": "kit",
+                "tags": [
+                    "limitation"
+                ],
+                "validator": "aa-ov-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/atomic_asset/requirements/ov-usdz-udim-limitation.html",
+                    "internal_path": "capabilities/core/atomic_asset/requirements/ov-usdz-udim-limitation.md"
+                },
+                "message": "Texture UDIMs are not supported in USDZ files in NVIDIA Omniverse",
+                "examples": []
+            },
+            {
+                "code": "AA.001",
+                "version": null,
+                "name": "anchored-asset-paths",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "aa-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/atomic_asset/requirements/anchored-asset-paths.html",
+                    "internal_path": "capabilities/core/atomic_asset/requirements/anchored-asset-paths.md"
+                },
+                "message": "Asset references should use anchored paths",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "capabilities/core/atomic_asset/capability-atomic_asset.html",
+            "internal_path": "capabilities/core/atomic_asset/capability-atomic_asset.md"
+        }
+    }
+}

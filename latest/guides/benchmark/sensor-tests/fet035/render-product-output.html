@@ -1,0 +1,1405 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" data-theme="auto">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>render_product_output (FET035 Render Products) &#8212; Content Capabilities</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/_style.css?v=e1c02e80" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/tags.css?v=03faa5c8" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=64cc4de3f052d77215f0"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
+
+
+
+    <script src="../../../../_static/documentation_options.js?v=eb394bab"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'guides/benchmark/sensor-tests/fet035/render-product-output';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.22.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.08.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+
+    <link rel="icon" href="../../../../_static/favicon.png"/>
+
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="semantic_aov_output (FET035 Render Products)" href="semantic-aov-output.html" />
+    <link rel="prev" title="FET035 Render Products" href="../fet035-render-products.html" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2026.08.0" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
+
+
+  </head>
+
+  <body data-default-mode="auto">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Content Capabilities - Home"/>
+    <img src="../../../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Content Capabilities - Home"/>
+  
+  
+    <p class="title logo__title">Content Capabilities</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-4"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-4"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-4"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-4">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button type="button" class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Content Capabilities - Home"/>
+    <img src="../../../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Content Capabilities - Home"/>
+  
+  
+    <p class="title logo__title">Content Capabilities</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-5"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-5"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-5"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-5">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-6"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-6"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-6"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-6">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../../guides.html">Guides</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tiers.html">SimReady Foundation Tiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../foundation_pypi.html">SimReady Foundation PyPI Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../validate_workflow.html">SimReady Validation Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../semantic_labels/semantic_labels.html">Semantic Labels Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_a_custom_taxonomy.html">Adding a Custom Taxonomy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../packaging_workflow.html">SimReady Packaging Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../thumbnail_guidelines.html">Thumbnail Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../acceptance_workflow.html">SimReady Acceptance Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../multiphysics_solvers.html">Multiple Physics Solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../feature_adapters/feature_adapters.html">Feature Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles/profiles.html">Profiles</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../../benchmark.html">SimReady Benchmark</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pipeline.html">Pipeline and Stages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../running.html">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reading-reports.html">Reading Reports</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../tests/tests.html">Tests Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../tests/fet001-visual.html">FET001 Visual</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tests/fet003-physics.html">FET003 Physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tests/fet004-multibody.html">FET004 Multibody</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tests/fet005-grasp.html">FET005 Grasp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tests/fet006-materials.html">FET006 Materials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tests/fet010-display-color.html">FET010 Display Color</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tests/fet011-semantic-labels.html">FET011 Semantic Labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tests/fet022-driven-joints.html">FET022 Driven Joints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tests/fet028-gripper.html">FET028 Gripper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tests/authoring.html">Authoring runtime tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../tests/experimental.html">Experimental and disabled tests</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="../tests.html">Sensor Tests Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../fet034-imu-sensors.html">FET034 IMU Sensors</a></li>
+<li class="toctree-l4 current active"><a class="reference internal" href="../fet035-render-products.html">FET035 Render Products</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fet036-rtx-sensors.html">FET036 RTX Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fet037-joint-sensors.html">FET037 Joint Sensors</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../visual_materials/visual_materials.html">Visual Materials Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../SimReady_learning_workflow.html">SimReady Learning Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../naming_conventions.html">Naming Conventions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../development.html">Development Workflows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../features_expansion_workflow.html">Features Expansion Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../capabilities/capabilities.html">Capabilities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../capabilities/core/core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/core/sim_ready/capability-sim_ready.html">SimReady</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/sim_ready/requirements.html">SimReady Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/sim_ready/requirements/metadata-whitelist.html">metadata-whitelist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/sim_ready/requirements/thumbnail-exist.html">Thumbnail Exist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/sim_ready/requirements/nested-simready-metadata.html">nested-simready-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/sim_ready/requirements/metadata-union.html">metadata-union</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/core/units/capability-units.html">Units</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/units/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/core/atomic_asset/capability-atomic_asset.html">Atomic Asset</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/atomic_asset/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/atomic_asset/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/core/naming_paths/capability-naming_paths.html">Naming and Paths</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/naming_paths/requirements.html">Naming and Paths Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/naming_paths/requirements/prim-naming-convention.html">prim-naming-convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/naming_paths/requirements/file-naming-convention.html">file-naming-convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/naming_paths/requirements/directory-structure.html">directory-structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/naming_paths/requirements/path-length-limits.html">path-length-limits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/naming_paths/requirements/asset-folder-structure.html">asset-folder-structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/naming_paths/requirements/metadata-location.html">metadata-location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/naming_paths/requirements/relative-paths.html">relative-paths</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/core/runtime_variants/capability-runtime_variants.html">Runtime Variants</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/runtime_variants/requirements.html">Runtime Variants Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/runtime_variants/requirements/physx-variant-set.html">physx-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/runtime_variants/requirements/physx-runtime-payload.html">physx-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/runtime_variants/requirements/physx-variant-metadata.html">physx-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/runtime_variants/requirements/newton-variant-set.html">newton-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/runtime_variants/requirements/newton-runtime-payload.html">newton-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/runtime_variants/requirements/newton-variant-metadata.html">newton-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/runtime_variants/requirements/mujoco-variant-set.html">mujoco-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/runtime_variants/requirements/mujoco-runtime-payload.html">mujoco-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/runtime_variants/requirements/mujoco-variant-metadata.html">mujoco-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/runtime_variants/requirements/runtime-variant-section-purity.html">runtime-variant-section-purity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/runtime_variants/requirements/runtime-physics-isolation.html">runtime-physics-isolation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/core/runtime_variants/runtime-physics-isolation-matrix.html">Runtime Physics Isolation Matrix</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../capabilities/visualization/visualization.html">Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/visualization/geometry/capability-geometry.html">Geometry</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/visualization/geometry/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/visualization/geometry/creators_overview.html">Creators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/visualization/geometry/developers_overview.html">Developers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/visualization/materials/capability-materials.html">Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/visualization/materials/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/visualization/materials/developers.html">Developers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/visualization/display_color/capability-display_color.html">Display Color</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/visualization/display_color/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../capabilities/isaac_sim/isaac_sim.html">Isaac Sim</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/isaac_sim/composition/capability-composition.html">Composition</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/isaac_sim/composition/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/isaac_sim/ros_bridge/capability-ros_bridge.html">ROS Bridge</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/isaac_sim/ros_bridge/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/isaac_sim/robot_materials/capability-robot_materials.html">Robot Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/isaac_sim/robot_materials/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/isaac_sim/robot_core/capability-robot_core.html">Robot Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/isaac_sim/robot_core/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../capabilities/physics_bodies/physics_bodies.html">Physics Bodies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../capabilities/physics_bodies/base_articulation/capability-base-articulation.html">Base Articulation</a></li>
+
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/physics_bodies/physics_rigid_bodies/capability-physics_rigid_bodies.html">Rigid Bodies and Colliders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/physics_bodies/physics_rigid_bodies/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/physics_bodies/physics_rigid_bodies/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/physics_bodies/physics_colliders/capability-collider_approximations.html">Collider Approximations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/physics_bodies/physics_colliders/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/physics_bodies/physics_colliders/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/physics_bodies/physics_joints/capability-physics_joints.html">Joints and Articulations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/physics_bodies/physics_joints/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/physics_bodies/physics_joints/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/physics_bodies/physics_driven_joints/capability-physics_driven_joints.html">Driven Joints</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/physics_bodies/physics_driven_joints/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/physics_bodies/physics_materials/capability-physics_materials.html">Physics Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/physics_bodies/physics_materials/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/physics_bodies/physics_materials/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/physics_bodies/physics_graspable/capability-physics_graspable.html">Graspable Vectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/physics_bodies/physics_graspable/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/physics_bodies/physics_graspable/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/physics_bodies/physics_grippers/capability-physics_grippers.html">Grippers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/physics_bodies/physics_grippers/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/physics_bodies/physics_sensors/capability-physics_sensors.html">Physics Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/physics_bodies/physics_sensors/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../capabilities/hierarchy/hierarchy.html">Hierarchy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/hierarchy/capability-hierarchy.html">Hierarchy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/hierarchy/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/hierarchy/creators_overview.html">Creators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/hierarchy/developers_overview.html">Developers</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../capabilities/nonvisual_sensors/nonvisual_sensors.html">Non-Visual Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/nonvisual_sensors/nonvisual_materials/capability-nonvisual_materials.html">Non-Visual Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/nonvisual_sensors/nonvisual_materials/requirements.html">Non-Visual Materials Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/nonvisual_sensors/nonvisual_materials/nonvisual_attributes_table.html">Non-Visual Sensor Attributes Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-base.html">material-base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-coating.html">material-coating</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-attributes.html">material-attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-time.html">material-time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-binding.html">material-binding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-consistency.html">material-consistency</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/nonvisual_sensors/lidar/capability-lidar.html">LiDAR Sensor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/nonvisual_sensors/lidar/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../capabilities/rendering/rendering.html">Rendering</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/rendering/render_products/capability-render_products.html">Render Products</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/rendering/render_products/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../capabilities/semantic_labels/capability-semantic_labels.html">Semantic Labels</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/semantic_labels/requirements.html">Semantic Labels Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/semantic_labels/requirements/semantic-label-capability.html">semantic-label-capability</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/semantic_labels/requirements/semantic-label-deprecated-schema.html">semantic-label-deprecated-schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/semantic_labels/requirements/semantic-label-qcode-valid.html">semantic-label-qcode-valid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/semantic_labels/requirements/semantic-label-schema.html">semantic-label-schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/semantic_labels/requirements/semantic-label-time.html">semantic-label-time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/semantic_labels/requirements/semantic-label-material.html">semantic-label-material</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../capabilities/semantic_labels/requirements/semantic-label-capability.html">semantic-label-capability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../capabilities/semantic_labels/requirements/semantic-label-deprecated-schema.html">semantic-label-deprecated-schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../capabilities/semantic_labels/requirements/semantic-label-qcode-valid.html">semantic-label-qcode-valid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../capabilities/semantic_labels/requirements/semantic-label-schema.html">semantic-label-schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../capabilities/semantic_labels/requirements/semantic-label-time.html">semantic-label-time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../capabilities/semantic_labels/requirements/semantic-label-material.html">semantic-label-material</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../capabilities/dataset_taxonomies/capability-dataset_taxonomies.html">Dataset Taxonomies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/dataset_taxonomies/requirements.html">Dataset Taxonomies Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/dataset_taxonomies/requirements/coco-labels.html">coco-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/dataset_taxonomies/requirements/cityscapes-labels.html">cityscapes-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/dataset_taxonomies/requirements/ade20k-labels.html">ade20k-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/dataset_taxonomies/requirements/pascal-voc-labels.html">pascal-voc-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/dataset_taxonomies/requirements/sunrgbd-labels.html">sunrgbd-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/dataset_taxonomies/requirements/imagenet-labels.html">imagenet-labels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../capabilities/dataset_taxonomies/requirements/coco-labels.html">coco-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../capabilities/dataset_taxonomies/requirements/cityscapes-labels.html">cityscapes-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../capabilities/dataset_taxonomies/requirements/ade20k-labels.html">ade20k-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../capabilities/dataset_taxonomies/requirements/pascal-voc-labels.html">pascal-voc-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../capabilities/dataset_taxonomies/requirements/sunrgbd-labels.html">sunrgbd-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../capabilities/dataset_taxonomies/requirements/imagenet-labels.html">imagenet-labels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../capabilities/packaging/packaging.html">Packaging</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/packaging/packaging_core/capability-packaging_core.html">Packaging Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/packaging/packaging_core/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/packaging/conformance_metadata/capability-conformance_metadata.html">Conformance Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/packaging/conformance_metadata/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/packaging/packaging_introspection/capability-packaging_introspection.html">Packaging Introspection</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/packaging/packaging_introspection/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../capabilities/aif/aif.html">AIF</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/aif/metadata/capability-metadata.html">Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/aif/metadata/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/aif/connection_points/capability-connection_points.html">Connection Points</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/aif/connection_points/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/aif/thermal_cooling/capability-thermal_cooling.html">Thermal Cooling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/aif/thermal_cooling/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../capabilities/aif/electrical/capability-electrical.html">Electrical</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../capabilities/aif/electrical/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../features/features.html">Features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/feature-dependency-graph.html">Feature dependency graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_000_STANDARD.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_000_PHYSX.html">Core (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_000_NEWTON.html">Core (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_000_MUJOCO.html">Core (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_000_ISAAC.html">Core (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_001_STANDARD.html">Minimal Placeable Visual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_002_STANDARD.html">Posable Bodies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_003_STANDARD.html">Rigid Body Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_003_PHYSX.html">Rigid Body Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_003_NEWTON.html">Rigid Body Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_003_MUJOCO.html">Rigid Body Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_004_STANDARD.html">Simulate Multi-Body Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_004_PHYSX.html">Simulate Multi-Body Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_004_NEWTON.html">Simulate Multi-Body Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_004_MUJOCO.html">Simulate Multi-Body Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_004_ROBOT_PHYSX.html">Simulate Multi-Body Physics (Robot PhysX) — Deprecated</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_004_ROBOT_NEWTON.html">Simulate Multi-Body Physics (Robot Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_004_ROBOT_MUJOCO.html">Simulate Multi-Body Physics (Robot MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_005_STANDARD.html">Simulate Grasp Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_006_STANDARD.html">Materials (USDPreviewSurface)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_006_MDL.html">Materials (MDL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_006_OPENPBR.html">Materials (OpenPBR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_007_STANDARD.html">Non-Visual Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_010_STANDARD.html">Display Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_011_STANDARD.html">Semantic Labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_011_RTX.html">Semantic Labels (RTX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_046_STANDARD.html">Wikidata Q-Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_040_STANDARD.html">Open Taxonomy COCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_041_STANDARD.html">Open Taxonomy Cityscapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_042_STANDARD.html">Open Taxonomy ADE20K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_043_STANDARD.html">Open Taxonomy PASCAL VOC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_044_STANDARD.html">Open Taxonomy SUN RGB-D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_045_STANDARD.html">Open Taxonomy ImageNet-1K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_021_ISAAC.html">Robot Core (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_022_STANDARD.html">Driven Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_022_PHYSX.html">Driven Joints (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_022_NEWTON.html">Driven Joints (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_022_MUJOCO.html">Driven Joints (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_022_ISAAC.html">Driven Joints (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_023_ISAAC.html">Robot Materials (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_024_STANDARD.html">Base Articulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_024_PHYSX.html">Base Articulation (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_024_NEWTON.html">Base Articulation (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_024_MUJOCO.html">Base Articulation (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_025_ROS.html">ROS Ready (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_034_ISAAC.html">IMU Sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_037_ISAAC.html">Joint Sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_035_RTX.html">Camera and Render Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_036_RTX.html">RTX Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_028_STANDARD.html">Gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_028_ISAAC.html">Gripper (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_028_MUJOCO.html">Gripper (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_030_STANDARD.html">Packaging Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_031_STANDARD.html">Self-contained Package Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_032_STANDARD.html">Packaging Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_033_STANDARD.html">Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_100_ISAAC.html">IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_101_ISAAC.html">Robot IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_200-aif_metadata.html">AIF Core Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_201-connection_points.html">Connection Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_202-thermal_cooling.html">AIF Thermal Cooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_203-electrical.html">AIF Electrical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/drafts/FET_006-baseline-appearance-visualization-feature-card.html">Draft - Baseline Appearance Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/drafts/FET_006-physically-plausible-appearance-visualization-feature-card.html">Draft - Physically Plausible Appearance Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/drafts/FET_010-object-color-visualization-feature-card.html">Draft - Object Color Visualization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../profiles/profiles.html">Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/robotics-prop.html">Robotics Prop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/robot-body.html">Robot Body</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/robot-gripper.html">Robot Gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/sensor-imu.html">Sensor IMU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/sensor-joint.html">Sensor Joint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/sensor-camera.html">Sensor Camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/sensor-lidar.html">Sensor LiDAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/open-taxonomy-coco.html">Open Taxonomy COCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/open-taxonomy-cityscapes.html">Open Taxonomy Cityscapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/open-taxonomy-ade20k.html">Open Taxonomy ADE20K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/open-taxonomy-pascal_voc.html">Open Taxonomy PASCAL VOC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/open-taxonomy-sunrgbd.html">Open Taxonomy SUN RGB-D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/open-taxonomy-imagenet_1k.html">Open Taxonomy ImageNet-1K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/aif-entity.html">AIF Entity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../tiers/tiers.html">Tiers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tiers/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tiers/aif.html">AIF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tiers/sensors.html">Sensors</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../indexes/indexes.html">Indexes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../indexes/capability_status_index.html">Capability Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../indexes/requirements_index.html">Requirements Index</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelist.html">Changelist</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../guides.html" class="nav-link">End to End Guides</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../../benchmark.html" class="nav-link">SimReady Benchmark</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../tests.html" class="nav-link">Benchmark Reference — Sensors Tier</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../fet035-render-products.html" class="nav-link">FET035 Render Products</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">render_product_output  (FET035 Render Products)</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="render-product-output-fet035-render-products">
+<h1>render_product_output  (FET035 Render Products)<a class="headerlink" href="#render-product-output-fet035-render-products" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Test name</p></td>
+<td><p>render_product_output</p></td>
+</tr>
+<tr class="row-odd"><td><p>Feature(s)</p></td>
+<td><p>FET_035_RTX</p></td>
+</tr>
+<tr class="row-even"><td><p>Engine</p></td>
+<td><p>Kit / Isaac Sim (&gt;=2024.2.0)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Test version</p></td>
+<td><p>0.1.0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="running-with-simready-benchmark">
+<h2>Running with simready-benchmark<a class="headerlink" href="#running-with-simready-benchmark" title="Link to this heading">#</a></h2>
+<p>This test is implemented and available in the <code class="docutils literal notranslate"><span class="pre">simready-benchmark-kit-suite</span></code> package.
+Run it against an asset:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-benchmark<span class="w"> </span>--assets<span class="w"> </span>path/to/asset.usd<span class="w"> </span>--features<span class="w"> </span>FET035
+</pre></div>
+</div>
+<p>The test skips automatically if no authored <code class="docutils literal notranslate"><span class="pre">RenderProduct</span></code> prim is found (excluding OmniverseKit internal prims).</p>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>Reads the camera path, resolution, and AOV source names from each authored
+<code class="docutils literal notranslate"><span class="pre">RenderProduct</span></code> prim, then creates a matching Replicator render product and
+reads back AOV data to confirm each declared annotator produces non-empty
+output. Output images are saved per annotator for visual inspection.</p>
+</section>
+<section id="what-pass-guarantees">
+<h2>What Pass Guarantees<a class="headerlink" href="#what-pass-guarantees" title="Link to this heading">#</a></h2>
+<p>A reviewer, PM, or OEM can trust that every <code class="docutils literal notranslate"><span class="pre">RenderProduct</span></code> in the scene has
+a valid <code class="docutils literal notranslate"><span class="pre">camera</span></code> relationship, at least one declared AOV, and that each
+declared <code class="docutils literal notranslate"><span class="pre">sourceName</span></code> corresponds to a registered Replicator annotator that
+produces non-empty output at the authored resolution. The asset is ready for
+use in an SDG pipeline that expects these properties to be correctly authored.</p>
+</section>
+<section id="what-it-checks">
+<h2>What It Checks<a class="headerlink" href="#what-it-checks" title="Link to this heading">#</a></h2>
+<p>For each authored <code class="docutils literal notranslate"><span class="pre">RenderProduct</span></code> prim, the test reads the <code class="docutils literal notranslate"><span class="pre">camera</span></code> relationship,
+<code class="docutils literal notranslate"><span class="pre">resolution</span></code>, and <code class="docutils literal notranslate"><span class="pre">sourceName</span></code> values from <code class="docutils literal notranslate"><span class="pre">orderedVars</span></code>. If the camera or source
+names are absent the prim is silently skipped. For <code class="docutils literal notranslate"><span class="pre">RenderProduct</span></code> prims whose
+camera is a USD <code class="docutils literal notranslate"><span class="pre">Camera</span></code> prim, a Replicator render product is created with the same
+camera and resolution, annotators are attached matching each <code class="docutils literal notranslate"><span class="pre">sourceName</span></code>, one frame
+is triggered, and data is verified:</p>
+<ul class="simple">
+<li><p><strong>Color annotators</strong> (<code class="docutils literal notranslate"><span class="pre">LdrColor</span></code>, <code class="docutils literal notranslate"><span class="pre">HdrColor</span></code>, semantic annotators): pass on
+non-empty array alone. Color may be black when the scene has no materials —
+this is expected for minimal test fixtures.</p></li>
+<li><p><strong>Geometry annotators</strong> (<code class="docutils literal notranslate"><span class="pre">DepthLinearized</span></code>, <code class="docutils literal notranslate"><span class="pre">normals</span></code>, etc.): additionally
+require at least one non-zero value, confirming geometry is visible from
+the camera.</p></li>
+</ul>
+<p>A reference cube is placed 2 m in front of each camera along its world-space
+forward direction so geometry annotators have meaningful hits.</p>
+<p><code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code> prims are skipped — multiple RTX LiDAR sensors in the same
+Replicator pass cause a CUDA conflict. Their point cloud output is covered by
+the <code class="docutils literal notranslate"><span class="pre">lidar_point_cloud</span></code> test.</p>
+<p>Key thresholds from <code class="docutils literal notranslate"><span class="pre">config_defaults</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">warmup_frames</span></code>: 30 (physics + timeline frames before triggering the Replicator step)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">default_resolution</span></code>: (512, 512) (fallback if the authored RP has no <code class="docutils literal notranslate"><span class="pre">resolution</span></code> attribute)</p></li>
+</ul>
+</section>
+<section id="how-it-works">
+<h2>How It Works<a class="headerlink" href="#how-it-works" title="Link to this heading">#</a></h2>
+<p><strong>Stage traversal:</strong> <code class="docutils literal notranslate"><span class="pre">RenderProduct</span></code> prims are typically authored in a <code class="docutils literal notranslate"><span class="pre">/Render</span></code> scope that is a sibling of the asset’s <code class="docutils literal notranslate"><span class="pre">defaultPrim</span></code>. The framework’s <code class="docutils literal notranslate"><span class="pre">load_asset()</span></code> references only the <code class="docutils literal notranslate"><span class="pre">defaultPrim</span></code> subtree, making <code class="docutils literal notranslate"><span class="pre">/Render</span></code> invisible to the composed stage. The test opens the raw asset file via <code class="docutils literal notranslate"><span class="pre">Usd.Stage.Open(ctx.asset_path)</span></code> to traverse all prims including <code class="docutils literal notranslate"><span class="pre">/Render</span></code>.</p>
+<p><strong>Property reading:</strong> for each authored <code class="docutils literal notranslate"><span class="pre">RenderProduct</span></code> (excluding OmniverseKit internal prims), the test reads the <code class="docutils literal notranslate"><span class="pre">camera</span></code> relationship, <code class="docutils literal notranslate"><span class="pre">resolution</span></code>, and <code class="docutils literal notranslate"><span class="pre">sourceName</span></code> values from <code class="docutils literal notranslate"><span class="pre">orderedVars</span></code> directly from the raw asset stage. RenderProducts with a missing camera or no source names are silently skipped.</p>
+<p><strong>Camera path remapping:</strong> camera prim paths from the raw asset (e.g. <code class="docutils literal notranslate"><span class="pre">/Root/RGB_Camera</span></code>) are remapped to their equivalents in the composed stage (where cameras were loaded under the framework’s path prefix). Remapping uses a name-based lookup: all <code class="docutils literal notranslate"><span class="pre">Camera</span></code> prims in the composed stage are indexed by name, then matched by the last component of the raw camera path.</p>
+<p><strong>Replicator AOV check:</strong> for each <code class="docutils literal notranslate"><span class="pre">Camera</span></code>-typed render product:</p>
+<ol class="arabic simple">
+<li><p>A 0.4 m reference cube is placed 2 m along the camera’s world-space forward direction so depth and normals annotators have geometry to sample.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rep.create.render_product(cam_path,</span> <span class="pre">resolution)</span></code> creates a Replicator-managed render product mirroring the authored camera and resolution.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rep.annotators.get(source_name)</span></code> is called for each authored <code class="docutils literal notranslate"><span class="pre">sourceName</span></code>; an unrecognised name fails here.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rep.orchestrator.step_async()</span></code> triggers one Replicator frame, followed by 10 <code class="docutils literal notranslate"><span class="pre">next_update_async()</span></code> calls.</p></li>
+<li><p>Annotator data is validated: color annotators pass on non-empty array; geometry annotators additionally require at least one non-zero value.</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code> prims are identified by name lookup in the composed stage and skipped for the Replicator check (CUDA conflict). Their point cloud output is covered by the <code class="docutils literal notranslate"><span class="pre">lidar_point_cloud</span></code> test.</p>
+<p>Output images are saved to the run output directory (one PNG per annotator per Camera RenderProduct). Color annotators may appear black for minimal fixtures — the companion <code class="docutils literal notranslate"><span class="pre">_alpha.png</span></code> file confirms geometry hits. Depth and normals images are saved as normalized grayscale.</p>
+</section>
+<section id="failure-cases">
+<h2>Failure Cases<a class="headerlink" href="#failure-cases" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Symptom</p></th>
+<th class="head"><p>Likely cause</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rep.create.render_product()</span></code> failed</p></td>
+<td><p>The camera prim path does not exist in the composed stage or is not a renderable <code class="docutils literal notranslate"><span class="pre">Camera</span></code> prim.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Annotator not registered</p></td>
+<td><p>A <code class="docutils literal notranslate"><span class="pre">sourceName</span></code> value does not match any registered Replicator annotator name (RP.003 violation).</p></td>
+</tr>
+<tr class="row-even"><td><p>Geometry annotator all-zero</p></td>
+<td><p>No geometry is visible from the camera — check camera transform and cube placement.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Annotator returned empty array</p></td>
+<td><p>The render pipeline produced no output. Increase <code class="docutils literal notranslate"><span class="pre">warmup_frames</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>Test skipped (not applicable)</p></td>
+<td><p>No authored <code class="docutils literal notranslate"><span class="pre">RenderProduct</span></code> prim was found, or all cameras are <code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code> type, or all RenderProducts have missing camera/sourceNames.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Static validation failed</p></td>
+<td><p>The asset did not pass RP.001–RP.003. Fix the static issues first.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">/Render</span></code> scope prims not found</p></td>
+<td><p>This only affects the batch script (which opens the stage directly). The benchmark test uses <code class="docutils literal notranslate"><span class="pre">Usd.Stage.Open()</span></code> to avoid this.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="how-to-fix">
+<h2>How to Fix<a class="headerlink" href="#how-to-fix" title="Link to this heading">#</a></h2>
+<p>If an annotator is not registered, verify that the <code class="docutils literal notranslate"><span class="pre">sourceName</span></code> attribute on
+the <code class="docutils literal notranslate"><span class="pre">RenderVar</span></code> prim matches a name in the Replicator annotator registry.
+Common valid names include <code class="docutils literal notranslate"><span class="pre">LdrColor</span></code>, <code class="docutils literal notranslate"><span class="pre">HdrColor</span></code>, <code class="docutils literal notranslate"><span class="pre">DepthLinearized</span></code>,
+<code class="docutils literal notranslate"><span class="pre">normals</span></code>, <code class="docutils literal notranslate"><span class="pre">SemanticSegmentation</span></code>, and <code class="docutils literal notranslate"><span class="pre">GenericModelOutput</span></code>.</p>
+<p>If geometry annotators are all-zero, confirm that the camera prim’s world
+transform is correctly authored so the reference cube falls within the
+camera’s field of view.</p>
+</section>
+<section id="manual-testing-in-isaac-sim">
+<h2>Manual Testing in Isaac Sim<a class="headerlink" href="#manual-testing-in-isaac-sim" title="Link to this heading">#</a></h2>
+<section id="batch-script">
+<h3>Batch script<a class="headerlink" href="#batch-script" title="Link to this heading">#</a></h3>
+<p>Save the script below to a file (e.g. <code class="docutils literal notranslate"><span class="pre">batch_test_render_product_output.py</span></code>)
+under the repo root and run it with:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># Windows</span>
+<span class="n">isaac-sim</span><span class="p">.</span><span class="n">bat</span> <span class="p">-</span><span class="n">-no-window</span> <span class="p">-</span><span class="n">-exec</span> <span class="s2">"C:\Dev\simready_foundations\batch_test_render_product_output.py"</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Linux</span>
+./isaac-sim.sh<span class="w"> </span>--no-window<span class="w"> </span>--exec<span class="w"> </span><span class="s2">"/path/to/simready_foundations/batch_test_render_product_output.py"</span>
+</pre></div>
+</div>
+<p>Expected output summary:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Overall</span><span class="p">:</span> <span class="n">PASS</span> <span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span> <span class="n">checks</span> <span class="n">passed</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output images are written to <code class="docutils literal notranslate"><span class="pre">_batch_test_output/render_product/</span></code> with one
+file per annotator per Camera RenderProduct. The <code class="docutils literal notranslate"><span class="pre">LdrColor</span></code> image will appear
+black (no material on the reference cube) but the <code class="docutils literal notranslate"><span class="pre">_alpha.png</span></code> file confirms
+geometry hits. The <code class="docutils literal notranslate"><span class="pre">DepthLinearized</span></code> image shows a dark square (near cube)
+on a white background (far clip distance). The <code class="docutils literal notranslate"><span class="pre">normals</span></code> image shows the cube
+face as a coloured patch on a grey background.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">REPO_ROOT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+<span class="n">PASS_ASSET</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">REPO_ROOT</span><span class="p">,</span>
+    <span class="s2">"nv_core/sr_specs/tests/data/render_products/RenderProductsCheckerPass.usda"</span><span class="p">)</span>
+<span class="n">FAIL_ASSET</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">REPO_ROOT</span><span class="p">,</span>
+    <span class="s2">"nv_core/sr_specs/tests/data/render_products/RenderProductsCheckerFail.usda"</span><span class="p">)</span>
+<span class="n">OUTPUT_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">REPO_ROOT</span><span class="p">,</span> <span class="s2">"_batch_test_output"</span><span class="p">,</span> <span class="s2">"render_product"</span><span class="p">)</span>
+<span class="n">WARMUP_FRAMES</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">DEFAULT_RESOLUTION</span> <span class="o">=</span> <span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>
+<span class="n">COLOR_ANNOTATORS</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"LdrColor"</span><span class="p">,</span> <span class="s2">"HdrColor"</span><span class="p">,</span> <span class="s2">"SemanticSegmentation"</span><span class="p">,</span>
+                    <span class="s2">"SemanticBoundingBox2DLoose"</span><span class="p">,</span> <span class="s2">"SemanticBoundingBox2DTight"</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">is_kit_internal</span><span class="p">(</span><span class="n">p</span><span class="p">):</span> <span class="k">return</span> <span class="s2">"OmniverseKit"</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">place_cube_in_front_of_camera</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">cam_path</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="c1"># Place a 0.4 m cube 2 m in front of the camera along its world forward</span>
+    <span class="c1"># direction so depth and normals annotators have geometry to measure.</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">UsdGeom</span><span class="p">,</span> <span class="n">Gf</span><span class="p">,</span> <span class="n">Usd</span>
+    <span class="n">cam</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetPrimAtPath</span><span class="p">(</span><span class="n">cam_path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">cam</span><span class="o">.</span><span class="n">IsValid</span><span class="p">():</span> <span class="k">return</span>
+    <span class="n">xf</span> <span class="o">=</span> <span class="n">UsdGeom</span><span class="o">.</span><span class="n">XformCache</span><span class="p">(</span><span class="n">Usd</span><span class="o">.</span><span class="n">TimeCode</span><span class="o">.</span><span class="n">Default</span><span class="p">())</span>
+    <span class="n">world_xf</span> <span class="o">=</span> <span class="n">xf</span><span class="o">.</span><span class="n">GetLocalToWorldTransform</span><span class="p">(</span><span class="n">cam</span><span class="p">)</span>
+    <span class="n">fwd</span> <span class="o">=</span> <span class="n">world_xf</span><span class="o">.</span><span class="n">TransformDir</span><span class="p">(</span><span class="n">Gf</span><span class="o">.</span><span class="n">Vec3d</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">GetNormalized</span><span class="p">()</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">Gf</span><span class="o">.</span><span class="n">Vec3d</span><span class="p">(</span><span class="n">world_xf</span><span class="o">.</span><span class="n">ExtractTranslation</span><span class="p">())</span> <span class="o">+</span> <span class="n">fwd</span> <span class="o">*</span> <span class="mf">2.0</span>
+    <span class="n">cube</span> <span class="o">=</span> <span class="n">UsdGeom</span><span class="o">.</span><span class="n">Cube</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"/World/DepthCube_</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">cube</span><span class="o">.</span><span class="n">GetSizeAttr</span><span class="p">()</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="mf">0.4</span><span class="p">)</span>
+    <span class="n">UsdGeom</span><span class="o">.</span><span class="n">XformCommonAPI</span><span class="p">(</span><span class="n">cube</span><span class="o">.</span><span class="n">GetPrim</span><span class="p">())</span><span class="o">.</span><span class="n">SetTranslate</span><span class="p">((</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">pos</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">read_rp_properties</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">rp_prim</span><span class="p">):</span>
+    <span class="c1"># Read the authored camera path, resolution, and sourceName list from the RP.</span>
+    <span class="n">cam_rel</span>  <span class="o">=</span> <span class="n">rp_prim</span><span class="o">.</span><span class="n">GetRelationship</span><span class="p">(</span><span class="s2">"camera"</span><span class="p">)</span>
+    <span class="n">vars_rel</span> <span class="o">=</span> <span class="n">rp_prim</span><span class="o">.</span><span class="n">GetRelationship</span><span class="p">(</span><span class="s2">"orderedVars"</span><span class="p">)</span>
+    <span class="n">cam_path</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cam_rel</span><span class="o">.</span><span class="n">GetTargets</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">cam_rel</span><span class="o">.</span><span class="n">IsValid</span><span class="p">()</span> <span class="ow">and</span> <span class="n">cam_rel</span><span class="o">.</span><span class="n">GetTargets</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">res_attr</span> <span class="o">=</span> <span class="n">rp_prim</span><span class="o">.</span><span class="n">GetAttribute</span><span class="p">(</span><span class="s2">"resolution"</span><span class="p">)</span>
+    <span class="n">resolution</span> <span class="o">=</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">res_attr</span><span class="o">.</span><span class="n">Get</span><span class="p">())</span>
+                  <span class="k">if</span> <span class="n">res_attr</span><span class="o">.</span><span class="n">IsValid</span><span class="p">()</span> <span class="ow">and</span> <span class="n">res_attr</span><span class="o">.</span><span class="n">Get</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                  <span class="k">else</span> <span class="n">DEFAULT_RESOLUTION</span><span class="p">)</span>
+    <span class="n">source_names</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">vars_rel</span><span class="o">.</span><span class="n">IsValid</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">var_path</span> <span class="ow">in</span> <span class="n">vars_rel</span><span class="o">.</span><span class="n">GetTargets</span><span class="p">():</span>
+            <span class="n">var_prim</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetPrimAtPath</span><span class="p">(</span><span class="n">var_path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">var_prim</span><span class="o">.</span><span class="n">IsValid</span><span class="p">():</span> <span class="k">continue</span>
+            <span class="n">src_attr</span> <span class="o">=</span> <span class="n">var_prim</span><span class="o">.</span><span class="n">GetAttribute</span><span class="p">(</span><span class="s2">"sourceName"</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">src_attr</span><span class="o">.</span><span class="n">IsValid</span><span class="p">()</span> <span class="ow">and</span> <span class="n">src_attr</span><span class="o">.</span><span class="n">Get</span><span class="p">():</span>
+                <span class="n">source_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">src_attr</span><span class="o">.</span><span class="n">Get</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">cam_path</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span> <span class="n">source_names</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">save_image</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">rp_name</span><span class="p">,</span> <span class="n">src_name</span><span class="p">):</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">OUTPUT_DIR</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUTPUT_DIR</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">rp_name</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">src_name</span><span class="si">}</span><span class="s2">.png"</span><span class="p">)</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span>  <span class="c1"># 1-D buffers (e.g. point cloud) — skip</span>
+    <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+        <span class="n">rgb</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">mn</span><span class="p">,</span> <span class="n">mx</span> <span class="o">=</span> <span class="n">rgb</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">rgb</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">mn</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">rgb</span> <span class="o">=</span> <span class="p">(</span><span class="n">rgb</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="mi">255</span>  <span class="c1"># normals: remap [-1,1] to [0,255]</span>
+        <span class="k">elif</span> <span class="n">mx</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">:</span>
+            <span class="n">rgb</span> <span class="o">=</span> <span class="n">rgb</span> <span class="o">*</span> <span class="mi">255</span>                  <span class="c1"># float [0,1] to uint8 [0,255]</span>
+        <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">rgb</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">),</span> <span class="s2">"RGB"</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="c1"># Save alpha separately for color annotators — useful when RGB is black</span>
+        <span class="c1"># (no material) but alpha=255 confirms geometry was hit.</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">c</span> <span class="ow">in</span> <span class="n">path</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">COLOR_ANNOTATORS</span><span class="p">):</span>
+            <span class="n">alpha_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">".png"</span><span class="p">,</span> <span class="s2">"_alpha.png"</span><span class="p">)</span>
+            <span class="n">alpha</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+            <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="s2">"L"</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">alpha_path</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">arr</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="c1"># Normalize finite values to [0,255] grayscale; inf/nan pixels map to 0.</span>
+        <span class="n">finite</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+        <span class="n">vis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">finite</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+            <span class="n">mn</span><span class="p">,</span> <span class="n">mx</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">finite</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">arr</span><span class="p">[</span><span class="n">finite</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">mx</span> <span class="o">&gt;</span> <span class="n">mn</span><span class="p">:</span>
+                <span class="n">vis</span><span class="p">[</span><span class="n">finite</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">finite</span><span class="p">]</span> <span class="o">-</span> <span class="n">mn</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">mx</span> <span class="o">-</span> <span class="n">mn</span><span class="p">)</span>
+        <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">((</span><span class="n">vis</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">),</span> <span class="s2">"L"</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">check_structural</span><span class="p">(</span><span class="n">stage</span><span class="p">):</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">UsdRender</span>
+    <span class="n">rps</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">stage</span><span class="o">.</span><span class="n">Traverse</span><span class="p">()</span>
+           <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">IsA</span><span class="p">(</span><span class="n">UsdRender</span><span class="o">.</span><span class="n">Product</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_kit_internal</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">GetPath</span><span class="p">())]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"    Authored RenderProduct prims: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">rps</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">all_ok</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">rp</span> <span class="ow">in</span> <span class="n">rps</span><span class="p">:</span>
+        <span class="n">cam_rel</span>  <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">GetRelationship</span><span class="p">(</span><span class="s2">"camera"</span><span class="p">)</span>
+        <span class="n">vars_rel</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">GetRelationship</span><span class="p">(</span><span class="s2">"orderedVars"</span><span class="p">)</span>
+        <span class="n">cam_ok</span>  <span class="o">=</span> <span class="n">cam_rel</span><span class="o">.</span><span class="n">IsValid</span><span class="p">()</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">cam_rel</span><span class="o">.</span><span class="n">GetTargets</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="n">vars_ok</span> <span class="o">=</span> <span class="n">vars_rel</span><span class="o">.</span><span class="n">IsValid</span><span class="p">()</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">vars_rel</span><span class="o">.</span><span class="n">GetTargets</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"    </span><span class="si">{</span><span class="n">rp</span><span class="o">.</span><span class="n">GetPath</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"      camera    : </span><span class="si">{</span><span class="s1">'PASS'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">cam_ok</span><span class="w">  </span><span class="k">else</span><span class="w"> </span><span class="s1">'FAIL'</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"      orderedVars: </span><span class="si">{</span><span class="s1">'PASS'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">vars_ok</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'FAIL'</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">cam_ok</span> <span class="ow">and</span> <span class="n">vars_ok</span><span class="p">):</span> <span class="n">all_ok</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="n">all_ok</span><span class="p">,</span> <span class="n">rps</span>
+
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">check_replicator_aovs</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">rps</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">omni.kit.app</span><span class="o">,</span><span class="w"> </span><span class="nn">omni.replicator.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">rep</span>
+    <span class="n">all_ok</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">rp</span> <span class="ow">in</span> <span class="n">rps</span><span class="p">:</span>
+        <span class="n">rp_name</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">GetPath</span><span class="p">()</span><span class="o">.</span><span class="n">name</span>
+        <span class="n">cam_path</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span> <span class="n">source_names</span> <span class="o">=</span> <span class="n">read_rp_properties</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">rp</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">cam_path</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">source_names</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"      FAIL: </span><span class="si">{</span><span class="n">rp_name</span><span class="si">}</span><span class="s2"> — missing camera or sourceNames"</span><span class="p">)</span>
+            <span class="n">all_ok</span> <span class="o">=</span> <span class="kc">False</span><span class="p">;</span> <span class="k">continue</span>
+        <span class="n">cam_prim</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetPrimAtPath</span><span class="p">(</span><span class="n">cam_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">cam_prim</span><span class="o">.</span><span class="n">IsValid</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"      FAIL: </span><span class="si">{</span><span class="n">rp_name</span><span class="si">}</span><span class="s2"> — camera prim not found"</span><span class="p">)</span>
+            <span class="n">all_ok</span> <span class="o">=</span> <span class="kc">False</span><span class="p">;</span> <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">cam_prim</span><span class="o">.</span><span class="n">GetTypeName</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"OmniLidar"</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"      SKIP: </span><span class="si">{</span><span class="n">rp_name</span><span class="si">}</span><span class="s2"> — OmniLidar deferred to lidar test"</span><span class="p">)</span>
+            <span class="k">continue</span>
+        <span class="n">place_cube_in_front_of_camera</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">cam_path</span><span class="p">,</span>
+                                       <span class="nb">list</span><span class="p">(</span><span class="n">rps</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">rp</span><span class="p">))</span>
+        <span class="c1"># Copy-construct: create a Replicator RP mirroring the authored one.</span>
+        <span class="c1"># rep.create.render_product() uses the authored camera and resolution</span>
+        <span class="c1"># but creates its own internal RP rather than activating the authored</span>
+        <span class="c1"># prim — see Notes and Caveats for the scope limitation.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">rep_rp</span> <span class="o">=</span> <span class="n">rep</span><span class="o">.</span><span class="n">create</span><span class="o">.</span><span class="n">render_product</span><span class="p">(</span><span class="n">cam_path</span><span class="p">,</span> <span class="n">resolution</span><span class="p">)</span>
+            <span class="n">rep_rp_path</span> <span class="o">=</span> <span class="n">rep_rp</span><span class="o">.</span><span class="n">path</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">rep_rp</span><span class="p">,</span> <span class="s2">"path"</span><span class="p">)</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">rep_rp</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"      FAIL: </span><span class="si">{</span><span class="n">rp_name</span><span class="si">}</span><span class="s2"> — render product creation failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="n">all_ok</span> <span class="o">=</span> <span class="kc">False</span><span class="p">;</span> <span class="k">continue</span>
+        <span class="n">attached</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">src_name</span> <span class="ow">in</span> <span class="n">source_names</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">anno</span> <span class="o">=</span> <span class="n">rep</span><span class="o">.</span><span class="n">annotators</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">src_name</span><span class="p">)</span>
+                <span class="n">anno</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">rep_rp_path</span><span class="p">)</span>
+                <span class="n">attached</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">src_name</span><span class="p">,</span> <span class="n">anno</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"      PASS: </span><span class="si">{</span><span class="n">rp_name</span><span class="si">}</span><span class="s2"> — annotator '</span><span class="si">{</span><span class="n">src_name</span><span class="si">}</span><span class="s2">' attached"</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"      FAIL: </span><span class="si">{</span><span class="n">rp_name</span><span class="si">}</span><span class="s2"> — '</span><span class="si">{</span><span class="n">src_name</span><span class="si">}</span><span class="s2">' not registered: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+                <span class="n">all_ok</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">attached</span><span class="p">:</span> <span class="k">continue</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">rep</span><span class="o">.</span><span class="n">orchestrator</span><span class="o">.</span><span class="n">step_async</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">rep</span><span class="o">.</span><span class="n">orchestrator</span><span class="o">.</span><span class="n">run_async</span><span class="p">(</span><span class="n">num_frames</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+            <span class="k">await</span> <span class="n">omni</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get_app</span><span class="p">()</span><span class="o">.</span><span class="n">next_update_async</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">src_name</span><span class="p">,</span> <span class="n">anno</span> <span class="ow">in</span> <span class="n">attached</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">anno</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+                <span class="n">arr</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"data"</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">]))</span>
+                       <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"      FAIL: </span><span class="si">{</span><span class="n">rp_name</span><span class="si">}</span><span class="s2"> '</span><span class="si">{</span><span class="n">src_name</span><span class="si">}</span><span class="s2">' — empty"</span><span class="p">)</span>
+                    <span class="n">all_ok</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">nonzero</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">arr</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">))</span>
+                    <span class="n">is_color</span> <span class="o">=</span> <span class="n">src_name</span> <span class="ow">in</span> <span class="n">COLOR_ANNOTATORS</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_color</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">nonzero</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"      FAIL: </span><span class="si">{</span><span class="n">rp_name</span><span class="si">}</span><span class="s2"> '</span><span class="si">{</span><span class="n">src_name</span><span class="si">}</span><span class="s2">' — all-zero"</span><span class="p">)</span>
+                        <span class="n">all_ok</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"      PASS: </span><span class="si">{</span><span class="n">rp_name</span><span class="si">}</span><span class="s2"> '</span><span class="si">{</span><span class="n">src_name</span><span class="si">}</span><span class="s2">'"</span>
+                              <span class="sa">f</span><span class="s2">" shape=</span><span class="si">{</span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> nonzero=</span><span class="si">{</span><span class="n">nonzero</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+                    <span class="n">save_image</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">label</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">rp_name</span><span class="p">,</span> <span class="n">src_name</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"      SKIP: </span><span class="si">{</span><span class="n">rp_name</span><span class="si">}</span><span class="s2"> '</span><span class="si">{</span><span class="n">src_name</span><span class="si">}</span><span class="s2">' error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">all_ok</span>
+
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">run_test</span><span class="p">(</span><span class="n">asset_path</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">expect_pass</span><span class="p">):</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">omni.usd</span><span class="o">,</span><span class="w"> </span><span class="nn">omni.kit.app</span><span class="o">,</span><span class="w"> </span><span class="nn">omni.kit.commands</span><span class="o">,</span><span class="w"> </span><span class="nn">omni.physx</span><span class="o">,</span><span class="w"> </span><span class="nn">omni.timeline</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- </span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2"> ---"</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">omni</span><span class="o">.</span><span class="n">usd</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">open_stage_async</span><span class="p">(</span><span class="n">asset_path</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span> <span class="k">await</span> <span class="n">omni</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get_app</span><span class="p">()</span><span class="o">.</span><span class="n">next_update_async</span><span class="p">()</span>
+    <span class="n">omni</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"CreatePrimWithDefaultXform"</span><span class="p">,</span> <span class="n">prim_type</span><span class="o">=</span><span class="s2">"DistantLight"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span> <span class="k">await</span> <span class="n">omni</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get_app</span><span class="p">()</span><span class="o">.</span><span class="n">next_update_async</span><span class="p">()</span>
+    <span class="n">stage</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">usd</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">get_stage</span><span class="p">()</span>
+    <span class="n">struct_ok</span><span class="p">,</span> <span class="n">rps</span> <span class="o">=</span> <span class="k">await</span> <span class="n">check_structural</span><span class="p">(</span><span class="n">stage</span><span class="p">)</span>
+    <span class="n">omni</span><span class="o">.</span><span class="n">physx</span><span class="o">.</span><span class="n">get_physx_interface</span><span class="p">()</span><span class="o">.</span><span class="n">start_simulation</span><span class="p">()</span>
+    <span class="n">omni</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">get_timeline_interface</span><span class="p">()</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">WARMUP_FRAMES</span><span class="p">):</span> <span class="k">await</span> <span class="n">omni</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get_app</span><span class="p">()</span><span class="o">.</span><span class="n">next_update_async</span><span class="p">()</span>
+    <span class="n">aov_ok</span> <span class="o">=</span> <span class="k">await</span> <span class="n">check_replicator_aovs</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">rps</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+    <span class="n">omni</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">get_timeline_interface</span><span class="p">()</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+    <span class="n">passed</span> <span class="o">=</span> <span class="n">struct_ok</span> <span class="ow">and</span> <span class="n">aov_ok</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"    Structural  : </span><span class="si">{</span><span class="s1">'PASS'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">struct_ok</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'FAIL'</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"    Replicator  : </span><span class="si">{</span><span class="s1">'PASS'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">aov_ok</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'FAIL'</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">passed</span> <span class="k">if</span> <span class="n">expect_pass</span> <span class="k">else</span> <span class="ow">not</span> <span class="n">passed</span>
+
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Batch test: Render product output (FET035 RP.001/RP.002/RP.003)"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="k">await</span> <span class="n">run_test</span><span class="p">(</span><span class="n">PASS_ASSET</span><span class="p">,</span> <span class="s2">"Pass fixture (expect PASS)"</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+        <span class="k">await</span> <span class="n">run_test</span><span class="p">(</span><span class="n">FAIL_ASSET</span><span class="p">,</span> <span class="s2">"Fail fixture (expect FAIL)"</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+    <span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Overall: </span><span class="si">{</span><span class="s1">'PASS'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nb">all</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'FAIL'</span><span class="si">}</span><span class="s2">"</span>
+          <span class="sa">f</span><span class="s2">" (</span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2"> checks passed)"</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_os</span><span class="p">;</span> <span class="n">_os</span><span class="o">.</span><span class="n">_exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">ensure_future</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="expected-result">
+<h2>Expected Result<a class="headerlink" href="#expected-result" title="Link to this heading">#</a></h2>
+<p>The benchmark test writes one PNG per annotator per Camera RenderProduct to the
+run output directory. File names follow the pattern <code class="docutils literal notranslate"><span class="pre">{rp_name}_{src_name}.png</span></code>
+(e.g. <code class="docutils literal notranslate"><span class="pre">RGB_CameraRp_normals.png</span></code>). Color annotators (LdrColor, HdrColor) that
+have an alpha channel also produce a companion <code class="docutils literal notranslate"><span class="pre">_alpha.png</span></code> file.</p>
+<p><img alt="render-product-output expected result" src="../../../../_images/render-product-output.png" /></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">normals</span></code> annotator output for the <code class="docutils literal notranslate"><span class="pre">RGB_CameraRp</span></code> render product from the
+PASS fixture (<code class="docutils literal notranslate"><span class="pre">RenderProductsCheckerPass.usda</span></code>). The reference cube placed 2 m
+in front of the camera appears as a coloured patch — each colour encodes the
+surface normal direction. The surrounding grey background corresponds to the
+far-clip plane (no geometry hit). A non-grey patch confirms that the camera,
+render product wiring, and <code class="docutils literal notranslate"><span class="pre">normals</span></code> annotator are all functioning correctly.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">LdrColor</span></code> image will appear black for minimal fixtures (no material on the
+reference cube), but the <code class="docutils literal notranslate"><span class="pre">_alpha.png</span></code> companion image shows white pixels where
+the cube geometry was hit. The <code class="docutils literal notranslate"><span class="pre">DepthLinearized</span></code> image shows a dark square (near
+cube) on a white background (far clip plane).</p>
+</section>
+<section id="notes-and-caveats">
+<h2>Notes and Caveats<a class="headerlink" href="#notes-and-caveats" title="Link to this heading">#</a></h2>
+<p><strong>Scope limitation — Replicator creates its own render product:</strong>
+<code class="docutils literal notranslate"><span class="pre">rep.create.render_product()</span></code> creates a Replicator-managed render product
+rather than activating the authored <code class="docutils literal notranslate"><span class="pre">RenderProduct</span></code> prim in the stage. The
+test mirrors the authored configuration (camera path, resolution, sourceName
+values) but does not route output through the authored
+<code class="docutils literal notranslate"><span class="pre">RenderProduct</span> <span class="pre">→</span> <span class="pre">orderedVars</span> <span class="pre">→</span> <span class="pre">RenderVar</span></code> chain. Activating cold-authored
+RenderProduct prims with Hydra is a known API gap currently under development
+by the Replicator team (<code class="docutils literal notranslate"><span class="pre">#omni-rtx</span></code>, Avinash Devalla, March 2026).</p>
+<p><strong>Full pipeline verification — future work:</strong>
+End-to-end verification that the authored <code class="docutils literal notranslate"><span class="pre">RenderProduct</span> <span class="pre">→</span> <span class="pre">RenderVar</span></code> chain
+actually writes the declared AOVs to disk requires native Hydra activation of
+the authored prim, which is deferred. When the API becomes available, it would
+allow attaching annotators directly to the existing authored path rather than
+creating a new one.</p>
+<p><strong>Color annotator image appearance:</strong>
+The <code class="docutils literal notranslate"><span class="pre">LdrColor</span></code> image will appear black for the minimal test fixture because
+the reference cube has no material. The <code class="docutils literal notranslate"><span class="pre">_alpha.png</span></code> companion image confirms
+geometry is present (white pixels where the cube is hit). The depth and
+normals images are more informative for visual inspection.</p>
+<p><strong>OmniLidar RenderProducts:</strong>
+<code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code> prims are skipped for the Replicator check because running two
+RTX LiDAR sensors with the <code class="docutils literal notranslate"><span class="pre">GenericModelOutput</span></code> annotator in the same
+Replicator pass causes a CUDA memory conflict and crashes Isaac Sim. Point
+cloud output is verified by the <code class="docutils literal notranslate"><span class="pre">lidar_point_cloud</span></code> test.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../fet035-render-products.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">FET035 Render Products</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="semantic-aov-output.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">semantic_aov_output  (FET035 Render Products)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-with-simready-benchmark">Running with simready-benchmark</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-pass-guarantees">What Pass Guarantees</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-it-checks">What It Checks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How It Works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#failure-cases">Failure Cases</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-fix">How to Fix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-testing-in-isaac-sim">Manual Testing in Isaac Sim</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-script">Batch script</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-result">Expected Result</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes-and-caveats">Notes and Caveats</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0"></script>
+
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../../../../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../../../../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2025-2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

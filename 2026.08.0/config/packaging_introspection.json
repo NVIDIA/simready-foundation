@@ -1,0 +1,29 @@
+{
+    "capability": {
+        "id": "packaging_introspection",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "PKG.BOM.001",
+                "version": null,
+                "name": "bom-structure",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "_Not yet implemented_",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/packaging/packaging_introspection/requirements/bom-structure.html",
+                    "internal_path": "capabilities/packaging/packaging_introspection/requirements/bom-structure.md"
+                },
+                "message": "The BOM is a metadata file identified by the name `com.nvidia.simready.packaging.bom.json`. It MUST list all content files in the package with per-item fields, using forward-slash relative paths with no duplicates.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "capabilities/packaging/packaging_introspection/capability-packaging_introspection.html",
+            "internal_path": "capabilities/packaging/packaging_introspection/capability-packaging_introspection.md"
+        }
+    }
+}

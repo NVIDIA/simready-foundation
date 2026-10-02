@@ -1,0 +1,15 @@
+{
+    "feature": {
+        "display_name": "IMU Sensor",
+        "id": "FET_034_ISAAC",
+        "version": "0.1.0",
+        "requirements": [
+            "PS.001"
+        ],
+        "dependencies": [],
+        "metadata": {
+            "path": "features/FET_034_ISAAC.html",
+            "internal_path": "features/FET_034_ISAAC.md"
+        }
+    }
+}

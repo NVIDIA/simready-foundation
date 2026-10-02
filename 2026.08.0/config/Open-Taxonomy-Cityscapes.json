@@ -1,0 +1,28 @@
+{
+    "profile": {
+        "id": "Open-Taxonomy-Cityscapes",
+        "version": "0.1.0",
+        "name": null,
+        "description": null,
+        "requirements": [],
+        "capabilities": [],
+        "features": [
+            {
+                "feature": "FET_000_STANDARD@0.1.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_011_STANDARD@0.2.0",
+                "optional": false
+            },
+            {
+                "feature": "FET_041_STANDARD@0.1.0",
+                "optional": false
+            }
+        ],
+        "metadata": {
+            "path": "profiles/open_taxonomy_profiles.html",
+            "internal_path": "profiles/open_taxonomy_profiles.md"
+        }
+    }
+}

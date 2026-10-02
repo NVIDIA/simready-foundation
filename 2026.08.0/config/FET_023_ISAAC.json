@@ -1,0 +1,16 @@
+{
+    "feature": {
+        "display_name": "Robot Materials",
+        "id": "FET_023_ISAAC",
+        "version": "0.1.0",
+        "requirements": [
+            "RM.001",
+            "RM.002"
+        ],
+        "dependencies": [],
+        "metadata": {
+            "path": "features/FET_023_ISAAC.html",
+            "internal_path": "features/FET_023_ISAAC.md"
+        }
+    }
+}

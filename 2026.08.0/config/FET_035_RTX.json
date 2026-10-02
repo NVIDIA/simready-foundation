@@ -1,0 +1,20 @@
+{
+    "feature": {
+        "display_name": "Camera and Render Products",
+        "id": "FET_035_RTX",
+        "version": "0.1.0",
+        "requirements": [
+            "RP.001",
+            "RP.002",
+            "RP.003",
+            "RP.004",
+            "RP.005",
+            "RP.006"
+        ],
+        "dependencies": [],
+        "metadata": {
+            "path": "features/FET_035_RTX.html",
+            "internal_path": "features/FET_035_RTX.md"
+        }
+    }
+}

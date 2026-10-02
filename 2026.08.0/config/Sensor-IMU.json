@@ -1,0 +1,20 @@
+{
+    "profile": {
+        "id": "Sensor-IMU",
+        "version": "1.0.0",
+        "name": null,
+        "description": null,
+        "requirements": [],
+        "capabilities": [],
+        "features": [
+            {
+                "feature": "FET_034_ISAAC@0.1.0",
+                "optional": false
+            }
+        ],
+        "metadata": {
+            "path": "profiles/profiles.html",
+            "internal_path": "profiles/profiles.md"
+        }
+    }
+}

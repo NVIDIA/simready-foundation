@@ -1,0 +1,1508 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" data-theme="auto">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>connection-point-domain-namespace &#8212; Content Capabilities</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=64cc4de3f052d77215f0" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/_style.css?v=e1c02e80" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/tags.css?v=03faa5c8" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=64cc4de3f052d77215f0"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0" />
+
+
+
+    <script src="../../../../_static/documentation_options.js?v=eb394bab"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'capabilities/aif/connection_points/requirements/connection-point-domain-namespace';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.22.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.08.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+
+    <link rel="icon" href="../../../../_static/favicon.png"/>
+
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="AIF Thermal Cooling" href="../../thermal_cooling/capability-thermal_cooling.html" />
+    <link rel="prev" title="connection-point-base-namespace" href="connection-point-base-namespace.html" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2026.08.0" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
+
+
+  </head>
+
+  <body data-default-mode="auto">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Content Capabilities - Home"/>
+    <img src="../../../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Content Capabilities - Home"/>
+  
+  
+    <p class="title logo__title">Content Capabilities</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-4"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-4"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-4"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-4">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button type="button" class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Content Capabilities - Home"/>
+    <img src="../../../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Content Capabilities - Home"/>
+  
+  
+    <p class="title logo__title">Content Capabilities</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-5"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-5"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-5"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-5">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-6"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-6"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-6"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-6">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../guides/guides.html">Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../guides/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../guides/tiers.html">SimReady Foundation Tiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../guides/foundation_pypi.html">SimReady Foundation PyPI Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../guides/validate_workflow.html">SimReady Validation Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../guides/semantic_labels/semantic_labels.html">Semantic Labels Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../guides/adding_a_custom_taxonomy.html">Adding a Custom Taxonomy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../guides/packaging_workflow.html">SimReady Packaging Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../guides/thumbnail_guidelines.html">Thumbnail Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../guides/acceptance_workflow.html">SimReady Acceptance Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../guides/multiphysics_solvers.html">Multiple Physics Solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../guides/features/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../guides/feature_adapters/feature_adapters.html">Feature Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../guides/profiles/profiles.html">Profiles</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../guides/benchmark/benchmark.html">SimReady Benchmark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../guides/benchmark/overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../guides/benchmark/pipeline.html">Pipeline and Stages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../guides/benchmark/running.html">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../guides/benchmark/reading-reports.html">Reading Reports</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../guides/benchmark/tests/tests.html">Tests Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../guides/benchmark/tests/fet001-visual.html">FET001 Visual</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../guides/benchmark/tests/fet003-physics.html">FET003 Physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../guides/benchmark/tests/fet004-multibody.html">FET004 Multibody</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../guides/benchmark/tests/fet005-grasp.html">FET005 Grasp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../guides/benchmark/tests/fet006-materials.html">FET006 Materials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../guides/benchmark/tests/fet010-display-color.html">FET010 Display Color</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../guides/benchmark/tests/fet011-semantic-labels.html">FET011 Semantic Labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../guides/benchmark/tests/fet022-driven-joints.html">FET022 Driven Joints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../guides/benchmark/tests/fet028-gripper.html">FET028 Gripper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../guides/benchmark/tests/authoring.html">Authoring runtime tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../guides/benchmark/tests/experimental.html">Experimental and disabled tests</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../guides/benchmark/sensor-tests/tests.html">Sensor Tests Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../guides/benchmark/sensor-tests/fet034-imu-sensors.html">FET034 IMU Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../guides/benchmark/sensor-tests/fet035-render-products.html">FET035 Render Products</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../guides/benchmark/sensor-tests/fet036-rtx-sensors.html">FET036 RTX Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../guides/benchmark/sensor-tests/fet037-joint-sensors.html">FET037 Joint Sensors</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../guides/visual_materials/visual_materials.html">Visual Materials Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../guides/SimReady_learning_workflow.html">SimReady Learning Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../guides/naming_conventions.html">Naming Conventions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../guides/development.html">Development Workflows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../guides/features_expansion_workflow.html">Features Expansion Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../guides/profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../../capabilities.html">Capabilities</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../core/core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../core/sim_ready/capability-sim_ready.html">SimReady</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/sim_ready/requirements.html">SimReady Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/sim_ready/requirements/metadata-whitelist.html">metadata-whitelist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/sim_ready/requirements/thumbnail-exist.html">Thumbnail Exist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/sim_ready/requirements/nested-simready-metadata.html">nested-simready-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/sim_ready/requirements/metadata-union.html">metadata-union</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../core/units/capability-units.html">Units</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/units/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../core/atomic_asset/capability-atomic_asset.html">Atomic Asset</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/atomic_asset/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/atomic_asset/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../core/naming_paths/capability-naming_paths.html">Naming and Paths</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/naming_paths/requirements.html">Naming and Paths Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/naming_paths/requirements/prim-naming-convention.html">prim-naming-convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/naming_paths/requirements/file-naming-convention.html">file-naming-convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/naming_paths/requirements/directory-structure.html">directory-structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/naming_paths/requirements/path-length-limits.html">path-length-limits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/naming_paths/requirements/asset-folder-structure.html">asset-folder-structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/naming_paths/requirements/metadata-location.html">metadata-location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/naming_paths/requirements/relative-paths.html">relative-paths</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../core/runtime_variants/capability-runtime_variants.html">Runtime Variants</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/runtime_variants/requirements.html">Runtime Variants Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/runtime_variants/requirements/physx-variant-set.html">physx-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/runtime_variants/requirements/physx-runtime-payload.html">physx-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/runtime_variants/requirements/physx-variant-metadata.html">physx-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/runtime_variants/requirements/newton-variant-set.html">newton-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/runtime_variants/requirements/newton-runtime-payload.html">newton-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/runtime_variants/requirements/newton-variant-metadata.html">newton-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/runtime_variants/requirements/mujoco-variant-set.html">mujoco-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/runtime_variants/requirements/mujoco-runtime-payload.html">mujoco-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/runtime_variants/requirements/mujoco-variant-metadata.html">mujoco-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/runtime_variants/requirements/runtime-variant-section-purity.html">runtime-variant-section-purity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/runtime_variants/requirements/runtime-physics-isolation.html">runtime-physics-isolation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../core/runtime_variants/runtime-physics-isolation-matrix.html">Runtime Physics Isolation Matrix</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../visualization/visualization.html">Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../visualization/geometry/capability-geometry.html">Geometry</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../visualization/geometry/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../visualization/geometry/creators_overview.html">Creators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../visualization/geometry/developers_overview.html">Developers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../visualization/materials/capability-materials.html">Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../visualization/materials/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../visualization/materials/developers.html">Developers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../visualization/display_color/capability-display_color.html">Display Color</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../visualization/display_color/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../isaac_sim/isaac_sim.html">Isaac Sim</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../isaac_sim/composition/capability-composition.html">Composition</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../isaac_sim/composition/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../isaac_sim/ros_bridge/capability-ros_bridge.html">ROS Bridge</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../isaac_sim/ros_bridge/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../isaac_sim/robot_materials/capability-robot_materials.html">Robot Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../isaac_sim/robot_materials/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../isaac_sim/robot_core/capability-robot_core.html">Robot Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../isaac_sim/robot_core/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../physics_bodies/physics_bodies.html">Physics Bodies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../physics_bodies/base_articulation/capability-base-articulation.html">Base Articulation</a></li>
+
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../physics_bodies/physics_rigid_bodies/capability-physics_rigid_bodies.html">Rigid Bodies and Colliders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../physics_bodies/physics_rigid_bodies/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../physics_bodies/physics_rigid_bodies/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../physics_bodies/physics_colliders/capability-collider_approximations.html">Collider Approximations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../physics_bodies/physics_colliders/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../physics_bodies/physics_colliders/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../physics_bodies/physics_joints/capability-physics_joints.html">Joints and Articulations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../physics_bodies/physics_joints/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../physics_bodies/physics_joints/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../physics_bodies/physics_driven_joints/capability-physics_driven_joints.html">Driven Joints</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../physics_bodies/physics_driven_joints/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../physics_bodies/physics_materials/capability-physics_materials.html">Physics Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../physics_bodies/physics_materials/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../physics_bodies/physics_materials/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../physics_bodies/physics_graspable/capability-physics_graspable.html">Graspable Vectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../physics_bodies/physics_graspable/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../physics_bodies/physics_graspable/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../physics_bodies/physics_grippers/capability-physics_grippers.html">Grippers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../physics_bodies/physics_grippers/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../physics_bodies/physics_sensors/capability-physics_sensors.html">Physics Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../physics_bodies/physics_sensors/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../hierarchy/hierarchy.html">Hierarchy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../hierarchy/capability-hierarchy.html">Hierarchy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../hierarchy/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../hierarchy/creators_overview.html">Creators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../hierarchy/developers_overview.html">Developers</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../nonvisual_sensors/nonvisual_sensors.html">Non-Visual Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../nonvisual_sensors/nonvisual_materials/capability-nonvisual_materials.html">Non-Visual Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../nonvisual_sensors/nonvisual_materials/requirements.html">Non-Visual Materials Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../nonvisual_sensors/nonvisual_materials/nonvisual_attributes_table.html">Non-Visual Sensor Attributes Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../nonvisual_sensors/nonvisual_materials/requirements/material-base.html">material-base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../nonvisual_sensors/nonvisual_materials/requirements/material-coating.html">material-coating</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../nonvisual_sensors/nonvisual_materials/requirements/material-attributes.html">material-attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../nonvisual_sensors/nonvisual_materials/requirements/material-time.html">material-time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../nonvisual_sensors/nonvisual_materials/requirements/material-binding.html">material-binding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../nonvisual_sensors/nonvisual_materials/requirements/material-consistency.html">material-consistency</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../nonvisual_sensors/lidar/capability-lidar.html">LiDAR Sensor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../nonvisual_sensors/lidar/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../rendering/rendering.html">Rendering</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../rendering/render_products/capability-render_products.html">Render Products</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../rendering/render_products/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../semantic_labels/capability-semantic_labels.html">Semantic Labels</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../semantic_labels/requirements.html">Semantic Labels Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../semantic_labels/requirements/semantic-label-capability.html">semantic-label-capability</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../semantic_labels/requirements/semantic-label-deprecated-schema.html">semantic-label-deprecated-schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../semantic_labels/requirements/semantic-label-qcode-valid.html">semantic-label-qcode-valid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../semantic_labels/requirements/semantic-label-schema.html">semantic-label-schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../semantic_labels/requirements/semantic-label-time.html">semantic-label-time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../semantic_labels/requirements/semantic-label-material.html">semantic-label-material</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../semantic_labels/requirements/semantic-label-capability.html">semantic-label-capability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../semantic_labels/requirements/semantic-label-deprecated-schema.html">semantic-label-deprecated-schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../semantic_labels/requirements/semantic-label-qcode-valid.html">semantic-label-qcode-valid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../semantic_labels/requirements/semantic-label-schema.html">semantic-label-schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../semantic_labels/requirements/semantic-label-time.html">semantic-label-time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../semantic_labels/requirements/semantic-label-material.html">semantic-label-material</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../dataset_taxonomies/capability-dataset_taxonomies.html">Dataset Taxonomies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../dataset_taxonomies/requirements.html">Dataset Taxonomies Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../dataset_taxonomies/requirements/coco-labels.html">coco-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../dataset_taxonomies/requirements/cityscapes-labels.html">cityscapes-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../dataset_taxonomies/requirements/ade20k-labels.html">ade20k-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../dataset_taxonomies/requirements/pascal-voc-labels.html">pascal-voc-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../dataset_taxonomies/requirements/sunrgbd-labels.html">sunrgbd-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../dataset_taxonomies/requirements/imagenet-labels.html">imagenet-labels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dataset_taxonomies/requirements/coco-labels.html">coco-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dataset_taxonomies/requirements/cityscapes-labels.html">cityscapes-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dataset_taxonomies/requirements/ade20k-labels.html">ade20k-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dataset_taxonomies/requirements/pascal-voc-labels.html">pascal-voc-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dataset_taxonomies/requirements/sunrgbd-labels.html">sunrgbd-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../dataset_taxonomies/requirements/imagenet-labels.html">imagenet-labels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../packaging/packaging.html">Packaging</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../packaging/packaging_core/capability-packaging_core.html">Packaging Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../packaging/packaging_core/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../packaging/conformance_metadata/capability-conformance_metadata.html">Conformance Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../packaging/conformance_metadata/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../packaging/packaging_introspection/capability-packaging_introspection.html">Packaging Introspection</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../packaging/packaging_introspection/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../../aif.html">AIF</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../metadata/capability-metadata.html">Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../metadata/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="../capability-connection_points.html">Connection Points</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l4 current active"><a class="reference internal" href="../requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../thermal_cooling/capability-thermal_cooling.html">Thermal Cooling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../thermal_cooling/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../electrical/capability-electrical.html">Electrical</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../electrical/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../features/features.html">Features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/feature-dependency-graph.html">Feature dependency graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_000_STANDARD.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_000_PHYSX.html">Core (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_000_NEWTON.html">Core (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_000_MUJOCO.html">Core (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_000_ISAAC.html">Core (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_001_STANDARD.html">Minimal Placeable Visual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_002_STANDARD.html">Posable Bodies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_003_STANDARD.html">Rigid Body Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_003_PHYSX.html">Rigid Body Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_003_NEWTON.html">Rigid Body Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_003_MUJOCO.html">Rigid Body Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_004_STANDARD.html">Simulate Multi-Body Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_004_PHYSX.html">Simulate Multi-Body Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_004_NEWTON.html">Simulate Multi-Body Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_004_MUJOCO.html">Simulate Multi-Body Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_004_ROBOT_PHYSX.html">Simulate Multi-Body Physics (Robot PhysX) — Deprecated</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_004_ROBOT_NEWTON.html">Simulate Multi-Body Physics (Robot Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_004_ROBOT_MUJOCO.html">Simulate Multi-Body Physics (Robot MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_005_STANDARD.html">Simulate Grasp Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_006_STANDARD.html">Materials (USDPreviewSurface)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_006_MDL.html">Materials (MDL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_006_OPENPBR.html">Materials (OpenPBR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_007_STANDARD.html">Non-Visual Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_010_STANDARD.html">Display Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_011_STANDARD.html">Semantic Labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_011_RTX.html">Semantic Labels (RTX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_046_STANDARD.html">Wikidata Q-Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_040_STANDARD.html">Open Taxonomy COCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_041_STANDARD.html">Open Taxonomy Cityscapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_042_STANDARD.html">Open Taxonomy ADE20K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_043_STANDARD.html">Open Taxonomy PASCAL VOC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_044_STANDARD.html">Open Taxonomy SUN RGB-D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_045_STANDARD.html">Open Taxonomy ImageNet-1K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_021_ISAAC.html">Robot Core (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_022_STANDARD.html">Driven Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_022_PHYSX.html">Driven Joints (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_022_NEWTON.html">Driven Joints (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_022_MUJOCO.html">Driven Joints (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_022_ISAAC.html">Driven Joints (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_023_ISAAC.html">Robot Materials (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_024_STANDARD.html">Base Articulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_024_PHYSX.html">Base Articulation (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_024_NEWTON.html">Base Articulation (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_024_MUJOCO.html">Base Articulation (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_025_ROS.html">ROS Ready (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_034_ISAAC.html">IMU Sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_037_ISAAC.html">Joint Sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_035_RTX.html">Camera and Render Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_036_RTX.html">RTX Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_028_STANDARD.html">Gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_028_ISAAC.html">Gripper (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_028_MUJOCO.html">Gripper (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_030_STANDARD.html">Packaging Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_031_STANDARD.html">Self-contained Package Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_032_STANDARD.html">Packaging Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_033_STANDARD.html">Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_100_ISAAC.html">IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_101_ISAAC.html">Robot IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_200-aif_metadata.html">AIF Core Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_201-connection_points.html">Connection Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_202-thermal_cooling.html">AIF Thermal Cooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET_203-electrical.html">AIF Electrical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/drafts/FET_006-baseline-appearance-visualization-feature-card.html">Draft - Baseline Appearance Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/drafts/FET_006-physically-plausible-appearance-visualization-feature-card.html">Draft - Physically Plausible Appearance Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/drafts/FET_010-object-color-visualization-feature-card.html">Draft - Object Color Visualization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../profiles/profiles.html">Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/robotics-prop.html">Robotics Prop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/robot-body.html">Robot Body</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/robot-gripper.html">Robot Gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/sensor-imu.html">Sensor IMU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/sensor-joint.html">Sensor Joint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/sensor-camera.html">Sensor Camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/sensor-lidar.html">Sensor LiDAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/open-taxonomy-coco.html">Open Taxonomy COCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/open-taxonomy-cityscapes.html">Open Taxonomy Cityscapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/open-taxonomy-ade20k.html">Open Taxonomy ADE20K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/open-taxonomy-pascal_voc.html">Open Taxonomy PASCAL VOC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/open-taxonomy-sunrgbd.html">Open Taxonomy SUN RGB-D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/open-taxonomy-imagenet_1k.html">Open Taxonomy ImageNet-1K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/aif-entity.html">AIF Entity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../tiers/tiers.html">Tiers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tiers/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tiers/aif.html">AIF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tiers/sensors.html">Sensors</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../indexes/indexes.html">Indexes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../indexes/capability_status_index.html">Capability Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../indexes/requirements_index.html">Requirements Index</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelist.html">Changelist</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../capabilities.html" class="nav-link">Capabilities</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../../aif.html" class="nav-link">AIF</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../capability-connection_points.html" class="nav-link">Connection Points</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../requirements.html" class="nav-link">Requirements</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">connection-point-domain-namespace</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="connection-point-domain-namespace">
+<h1>connection-point-domain-namespace<a class="headerlink" href="#connection-point-domain-namespace" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>CP.012</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Validator</p></td>
+<td><p><a class="reference external" href="https://nvidia-omniverse.github.io/usd-validation-nvidia/validation/docs/requirements.html#cp-012"><span class="tag tag-nvidia">latest+</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Compatibility</p></td>
+<td><p><span class="tag tag-compatibility" title="Compatible with other software">other</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Tags</p></td>
+<td><p><span class="emoji-tag" title="Unknown Tag">❓</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>A connection point’s domain-specific properties must sit in the namespace named by its <code class="docutils literal notranslate"><span class="pre">simready:connectionPoint:domain</span></code> value, and a production-complete connection point carries every property that namespace defines.</p>
+</section>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading">#</a></h2>
+<p>Each domain namespace carries two kinds of property: the physical geometry of that class of connection, and the operating parameters a simulation tool needs to set up an analysis. A connection declaring <code class="docutils literal notranslate"><span class="pre">domain</span> <span class="pre">=</span> <span class="pre">&quot;thermal&quot;</span></code> carries <code class="docutils literal notranslate"><span class="pre">simready:connectionPoint:thermal:</span></code> properties; authoring <code class="docutils literal notranslate"><span class="pre">electrical:</span></code> properties on it is an error.</p>
+<p>Physical geometry lives in the domain namespaces rather than the base namespace because port dimensions differ in shape across domains. Thermal ports are circular and take a diameter; network ports are rectangular and take width and height; hardwired electrical connections have no port dimension at all.</p>
+<section id="thermal-domain-simready-connectionpoint-thermal">
+<h3>Thermal domain (<code class="docutils literal notranslate"><span class="pre">simready:connectionPoint:thermal:</span></code>)<a class="headerlink" href="#thermal-domain-simready-connectionpoint-thermal" title="Link to this heading">#</a></h3>
+<p>For piped fluid connections: cooling loops, condensate, chilled water. In datacenter usage “thermal” means liquid cooling. Air is the separate airflow domain.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">thermal:portDiameter</span></code></p></td>
+<td><p>float (meters)</p></td>
+<td><p>Internal pipe diameter</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">thermal:matingDepth</span></code></p></td>
+<td><p>float (meters)</p></td>
+<td><p>Flange engagement or coupling insertion depth</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">thermal:designFlowRate</span></code></p></td>
+<td><p>float (L/s)</p></td>
+<td><p>Nominal operating flow rate</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">thermal:maxFlowRate</span></code></p></td>
+<td><p>float (L/s)</p></td>
+<td><p>Rated maximum flow rate</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">thermal:designTemperature</span></code></p></td>
+<td><p>float (Celsius)</p></td>
+<td><p>Nominal operating temperature at this connection</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">thermal:maxTemperature</span></code></p></td>
+<td><p>float (Celsius)</p></td>
+<td><p>Rated temperature limit</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">thermal:operatingPressure</span></code></p></td>
+<td><p>float (Pa, gauge)</p></td>
+<td><p>Nominal operating pressure</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">thermal:maxPressure</span></code></p></td>
+<td><p>float (Pa, gauge)</p></td>
+<td><p>Rated pressure limit</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">thermal:fluidType</span></code></p></td>
+<td><p>token</p></td>
+<td><p>Working fluid, encoding concentration where relevant: <code class="docutils literal notranslate"><span class="pre">water</span></code>, <code class="docutils literal notranslate"><span class="pre">glycol_water_25</span></code>, <code class="docutils literal notranslate"><span class="pre">glycol_water_30</span></code>, <code class="docutils literal notranslate"><span class="pre">glycol_water_50</span></code>, <code class="docutils literal notranslate"><span class="pre">refrigerant_R410A</span></code>, <code class="docutils literal notranslate"><span class="pre">refrigerant_R134a</span></code>, <code class="docutils literal notranslate"><span class="pre">refrigerant_R454B</span></code>, <code class="docutils literal notranslate"><span class="pre">dielectric</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">thermal:flangeRating</span></code></p></td>
+<td><p>token</p></td>
+<td><p>Flange standard designation (e.g. <code class="docutils literal notranslate"><span class="pre">ANSI_150</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">thermal:flangeSize</span></code></p></td>
+<td><p>token</p></td>
+<td><p>Nominal pipe size designation (e.g. <code class="docutils literal notranslate"><span class="pre">NPS4</span></code>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">fluidType</span></code> is a single descriptive token rather than a fluid name plus a separate concentration. Emerging refrigerant blends make concentration a poor standalone property, and the fluid name is what a simulation tool looks up. New tokens follow the pattern <code class="docutils literal notranslate"><span class="pre">{fluid_category}_{specifier}</span></code>.</p>
+</section>
+<section id="electrical-domain-simready-connectionpoint-electrical">
+<h3>Electrical domain (<code class="docutils literal notranslate"><span class="pre">simready:connectionPoint:electrical:</span></code>)<a class="headerlink" href="#electrical-domain-simready-connectionpoint-electrical" title="Link to this heading">#</a></h3>
+<p>For power connections: mains feeds, PDU outputs, UPS bypass.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">electrical:matingDepth</span></code></p></td>
+<td><p>float (meters)</p></td>
+<td><p>Plug insertion depth; <code class="docutils literal notranslate"><span class="pre">0.0</span></code> for hardwired connections</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">electrical:nominalVoltage</span></code></p></td>
+<td><p>float (V)</p></td>
+<td><p>Site-specific nominal voltage</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">electrical:maxCurrent</span></code></p></td>
+<td><p>float (A)</p></td>
+<td><p>Rated maximum current draw</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">electrical:phases</span></code></p></td>
+<td><p>int</p></td>
+<td><p>Number of phases, typically 3 for datacenter equipment</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">electrical:frequency</span></code></p></td>
+<td><p>float (Hz)</p></td>
+<td><p>Line frequency, 50 or 60 Hz, site-specific</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">electrical:connectorType</span></code></p></td>
+<td><p>token</p></td>
+<td><p>Physical connection method (e.g. <code class="docutils literal notranslate"><span class="pre">hardwired</span></code>, <code class="docutils literal notranslate"><span class="pre">IEC_60309</span></code>, <code class="docutils literal notranslate"><span class="pre">NEMA_L21_30</span></code>, <code class="docutils literal notranslate"><span class="pre">dry_contact</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">electrical:ratedPower</span></code></p></td>
+<td><p>float (W)</p></td>
+<td><p>Rated power capacity of this connection</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">electrical:breakerRating</span></code></p></td>
+<td><p>float (A)</p></td>
+<td><p>Upstream breaker protection rating</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">electrical:powerFactor</span></code></p></td>
+<td><p>float (0-1)</p></td>
+<td><p>Manufacturer-specified power factor</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Dry contacts are the documented exception to completeness. A dry contact is a relay output with no voltage of its own that opens or closes a circuit to signal a condition. It uses <code class="docutils literal notranslate"><span class="pre">connectorType</span> <span class="pre">=</span> <span class="pre">&quot;dry_contact&quot;</span></code>, populates <code class="docutils literal notranslate"><span class="pre">nominalVoltage</span></code> and <code class="docutils literal notranslate"><span class="pre">maxCurrent</span></code> as switching limits, and omits <code class="docutils literal notranslate"><span class="pre">phases</span></code>, <code class="docutils literal notranslate"><span class="pre">frequency</span></code> and <code class="docutils literal notranslate"><span class="pre">powerFactor</span></code>, which describe power distribution and have no meaning here.</p>
+</section>
+<section id="network-domain-simready-connectionpoint-network">
+<h3>Network domain (<code class="docutils literal notranslate"><span class="pre">simready:connectionPoint:network:</span></code>)<a class="headerlink" href="#network-domain-simready-connectionpoint-network" title="Link to this heading">#</a></h3>
+<p>For data and control connections: high-speed compute fabric, management, building management.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">network:portWidth</span></code></p></td>
+<td><p>float (meters)</p></td>
+<td><p>Connector opening width</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">network:portHeight</span></code></p></td>
+<td><p>float (meters)</p></td>
+<td><p>Connector opening height</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">network:matingDepth</span></code></p></td>
+<td><p>float (meters)</p></td>
+<td><p>Plug insertion depth</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">network:portType</span></code></p></td>
+<td><p>token</p></td>
+<td><p>Physical connector type (e.g. <code class="docutils literal notranslate"><span class="pre">RJ45</span></code>, <code class="docutils literal notranslate"><span class="pre">SFP_plus</span></code>, <code class="docutils literal notranslate"><span class="pre">QSFP28</span></code>, <code class="docutils literal notranslate"><span class="pre">QSFP_DD</span></code>, <code class="docutils literal notranslate"><span class="pre">OSFP</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">network:protocol</span></code></p></td>
+<td><p>token</p></td>
+<td><p>Communication protocol (e.g. <code class="docutils literal notranslate"><span class="pre">BACnet_IP</span></code>, <code class="docutils literal notranslate"><span class="pre">Modbus_TCP</span></code>, <code class="docutils literal notranslate"><span class="pre">SNMP</span></code>, <code class="docutils literal notranslate"><span class="pre">Ethernet</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">network:dataRate</span></code></p></td>
+<td><p>token</p></td>
+<td><p>Maximum data rate (e.g. <code class="docutils literal notranslate"><span class="pre">100Mbps</span></code>, <code class="docutils literal notranslate"><span class="pre">25GbE</span></code>, <code class="docutils literal notranslate"><span class="pre">100GbE</span></code>, <code class="docutils literal notranslate"><span class="pre">400GbE</span></code>, <code class="docutils literal notranslate"><span class="pre">800GbE</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">network:medium</span></code></p></td>
+<td><p>token</p></td>
+<td><p>Physical medium (e.g. <code class="docutils literal notranslate"><span class="pre">copper</span></code>, <code class="docutils literal notranslate"><span class="pre">fiber</span></code>, <code class="docutils literal notranslate"><span class="pre">DAC</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">network:fabricRole</span></code></p></td>
+<td><p>token</p></td>
+<td><p>Role in the network fabric (e.g. <code class="docutils literal notranslate"><span class="pre">compute</span></code>, <code class="docutils literal notranslate"><span class="pre">storage</span></code>, <code class="docutils literal notranslate"><span class="pre">mgmt</span></code>, <code class="docutils literal notranslate"><span class="pre">bms</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">network:supportedLineRates</span></code></p></td>
+<td><p>token[]</p></td>
+<td><p>Supported line rate configurations</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">network:supportedConfigurations</span></code></p></td>
+<td><p>token[]</p></td>
+<td><p>Breakout configurations (e.g. <code class="docutils literal notranslate"><span class="pre">1x800G</span></code>, <code class="docutils literal notranslate"><span class="pre">2x400G</span></code>, <code class="docutils literal notranslate"><span class="pre">4x200G</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">network:allowedTransceivers</span></code></p></td>
+<td><p>token[]</p></td>
+<td><p>Compatible transceiver types (e.g. <code class="docutils literal notranslate"><span class="pre">DR4</span></code>, <code class="docutils literal notranslate"><span class="pre">FR4</span></code>, <code class="docutils literal notranslate"><span class="pre">LR4</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">network:hotPlugCapable</span></code></p></td>
+<td><p>bool</p></td>
+<td><p>Whether the port supports hot-plug</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="airflow-domain-simready-connectionpoint-airflow">
+<h3>Airflow domain (<code class="docutils literal notranslate"><span class="pre">simready:connectionPoint:airflow:</span></code>)<a class="headerlink" href="#airflow-domain-simready-connectionpoint-airflow" title="Link to this heading">#</a></h3>
+<p>For air intake and exhaust: equipment ventilation, hot and cold aisle faces, CRAH and CRAC supply and return. Most datacenter equipment rejects some heat to the surrounding air even when liquid-cooled, so a CFD tool modelling the data hall needs to know where air enters and leaves each unit, at what volume and temperature.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">airflow:interfaceWidth</span></code></p></td>
+<td><p>float (meters)</p></td>
+<td><p>Width of the contiguous airflow interface region</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">airflow:interfaceHeight</span></code></p></td>
+<td><p>float (meters)</p></td>
+<td><p>Height of the contiguous airflow interface region</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">airflow:freeAreaRatio</span></code></p></td>
+<td><p>float (0-1)</p></td>
+<td><p>Fraction of the interface area open to airflow, e.g. <code class="docutils literal notranslate"><span class="pre">0.7</span></code> for a 70% perforated panel</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">airflow:designAirflowRate</span></code></p></td>
+<td><p>float (m^3/s)</p></td>
+<td><p>Nominal airflow volume rate through this interface</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">airflow:maxAirflowRate</span></code></p></td>
+<td><p>float (m^3/s)</p></td>
+<td><p>Rated maximum airflow volume rate</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">airflow:designTemperature</span></code></p></td>
+<td><p>float (Celsius)</p></td>
+<td><p>Expected air temperature at this interface under nominal conditions</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">airflow:maxTemperature</span></code></p></td>
+<td><p>float (Celsius)</p></td>
+<td><p>Rated air temperature limit</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">airflow:staticPressure</span></code></p></td>
+<td><p>float (Pa, differential)</p></td>
+<td><p>Pressure differential across the interface or filter</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">airflow:filterType</span></code></p></td>
+<td><p>token</p></td>
+<td><p>Filter specification if present (e.g. <code class="docutils literal notranslate"><span class="pre">MERV_8</span></code>, <code class="docutils literal notranslate"><span class="pre">none</span></code>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="property-completeness">
+<h3>Property completeness<a class="headerlink" href="#property-completeness" title="Link to this heading">#</a></h3>
+<p>Every property defined in a domain namespace should be present on every connection of that domain, including where the value is zero. A hardwired electrical connection has no plug to insert, so it authors <code class="docutils literal notranslate"><span class="pre">matingDepth</span> <span class="pre">=</span> <span class="pre">0.0</span></code> rather than omitting the property.</p>
+<p>Zero is a measured value like any other: it says the quantity is zero. Omitting the property says nothing at all, and leaves a consumer unable to tell a property that does not apply to this connection from one nobody has authored yet.</p>
+</section>
+<section id="validation-profiles">
+<h3>Validation profiles<a class="headerlink" href="#validation-profiles" title="Link to this heading">#</a></h3>
+<p>Completeness is the target state, and assets reach it incrementally as engineering data arrives from datasheets, PLM systems and SME input. Validators report which of three profiles an asset satisfies:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Profile</p></th>
+<th class="head"><p>Content</p></th>
+<th class="head"><p>Validator behaviour</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Stub</strong></p></td>
+<td><p>All five base properties, no domain properties</p></td>
+<td><p>Reported as incomplete, with the number of properties outstanding</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Draft</strong></p></td>
+<td><p>All five base properties and at least one domain property</p></td>
+<td><p>Each missing domain property is named in a warning</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Production</strong></p></td>
+<td><p>All base properties and every domain property defined for the declared domain</p></td>
+<td><p>No issue reported</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Stub and draft let assets enter the pipeline before the engineering data exists. A connection point must reach production completeness before it is simulation-ready and before it enters the SimReady catalog. Validation reports which profile a connection point reaches; it does not fail on an incomplete one.</p>
+</section>
+</section>
+<section id="why-is-it-required">
+<h2>Why is it required?<a class="headerlink" href="#why-is-it-required" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>A simulation tool reads its boundary conditions straight from the connection point, so a partially populated namespace means a manual data-entry step per asset</p></li>
+<li><p>Namespacing by domain lets a consumer filter to the connections it cares about without knowing anything about the equipment class</p></li>
+<li><p>Per-connection values replace the v0.1.0 pattern of one unit-level number, so a CDU with four ports at different diameters can be described accurately</p></li>
+<li><p>The three profiles keep progressive authoring honest by naming what is missing, instead of an asset appearing complete because absent properties look like inapplicable ones</p></li>
+</ul>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
+<p>One production-complete connection per domain, each as a complete stage. The
+values are the ones the tier’s own <code class="docutils literal notranslate"><span class="pre">Synthetic_CP2_*</span></code> fixtures carry, so the
+examples and the fixtures cannot drift apart. The five base-namespace
+properties come first in each block; everything after them is the domain
+namespace.</p>
+<section id="valid-thermal-a-facility-water-supply-flange-on-a-cdu">
+<h3>Valid: thermal, a facility-water supply flange on a CDU<a class="headerlink" href="#valid-thermal-a-facility-water-supply-flange-on-a-cdu" title="Link to this heading">#</a></h3>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Generic_CDU"</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"ConnectionPoints"</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"acme_thermal_main"</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">purpose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"guide"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:domain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"thermal"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"supply"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"FWS"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:disconnectType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"flanged"</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:serviceClearance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span>
+
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:thermal:portDiameter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.05</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:thermal:matingDepth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.02</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:thermal:designFlowRate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12.5</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:thermal:maxFlowRate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">15.0</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:thermal:designTemperature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18.0</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:thermal:maxTemperature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">25.0</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:thermal:operatingPressure</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">400000</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:thermal:maxPressure</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1000000</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:thermal:fluidType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"water"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:thermal:flangeRating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"ANSI_150"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:thermal:flangeSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"NPS4"</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="valid-electrical-a-hardwired-three-phase-feed-on-a-ups">
+<h3>Valid: electrical, a hardwired three-phase feed on a UPS<a class="headerlink" href="#valid-electrical-a-hardwired-three-phase-feed-on-a-ups" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">matingDepth</span></code> is an explicit zero: a hardwired feed has no connector to mate.
+Omitting it instead would leave the connection at draft completeness.</p>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Generic_UPS"</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"ConnectionPoints"</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"acme_electrical_main"</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">purpose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"guide"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:domain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"electrical"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"input"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"power"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:disconnectType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"hardwired"</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:serviceClearance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span>
+
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:electrical:matingDepth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.0</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:electrical:nominalVoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">480.0</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:electrical:maxCurrent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1458.0</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="na">simready:connectionPoint:electrical:phases</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:electrical:frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">60.0</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:electrical:connectorType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"hardwired"</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:electrical:ratedPower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1200000.0</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:electrical:breakerRating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2000.0</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:electrical:powerFactor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.99</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="valid-network-an-osfp-port-on-a-compute-rack">
+<h3>Valid: network, an OSFP port on a compute rack<a class="headerlink" href="#valid-network-an-osfp-port-on-a-compute-rack" title="Link to this heading">#</a></h3>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Generic_ComputeRack"</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"ConnectionPoints"</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"acme_network_main"</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">purpose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"guide"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:domain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"network"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"bidirectional"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"high_speed_data"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:disconnectType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"OSFP"</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:serviceClearance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span>
+
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:network:portWidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.022</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:network:portHeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.009</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:network:matingDepth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.015</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:network:portType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"OSFP"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:network:protocol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Ethernet"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:network:dataRate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"800GbE"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:network:medium</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"fiber"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:network:fabricRole</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"compute"</span>
+<span class="w">            </span><span class="kt">token[]</span><span class="w"> </span><span class="na">simready:connectionPoint:network:supportedLineRates</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"800GbE"</span><span class="p">,</span><span class="w"> </span><span class="s">"400GbE"</span><span class="p">]</span>
+<span class="w">            </span><span class="kt">token[]</span><span class="w"> </span><span class="na">simready:connectionPoint:network:supportedConfigurations</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"1x800G"</span><span class="p">,</span><span class="w"> </span><span class="s">"2x400G"</span><span class="p">]</span>
+<span class="w">            </span><span class="kt">token[]</span><span class="w"> </span><span class="na">simready:connectionPoint:network:allowedTransceivers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"DR4"</span><span class="p">,</span><span class="w"> </span><span class="s">"FR4"</span><span class="p">]</span>
+<span class="w">            </span><span class="kt">bool</span><span class="w"> </span><span class="na">simready:connectionPoint:network:hotPlugCapable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="valid-airflow-the-intake-face-of-a-crah">
+<h3>Valid: airflow, the intake face of a CRAH<a class="headerlink" href="#valid-airflow-the-intake-face-of-a-crah" title="Link to this heading">#</a></h3>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Generic_CRAH"</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"ConnectionPoints"</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"acme_airflow_main"</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">purpose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"guide"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:domain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"airflow"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"input"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"equipment_cooling"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:disconnectType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"open_vent"</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:serviceClearance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span>
+
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:airflow:interfaceWidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:airflow:interfaceHeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2.0</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:airflow:freeAreaRatio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:airflow:designAirflowRate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.07</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:airflow:maxAirflowRate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.28</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:airflow:designTemperature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">24.0</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:airflow:maxTemperature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">45.0</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:airflow:staticPressure</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50.0</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:airflow:filterType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"none"</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="warned-a-draft-connection-one-domain-property-authored">
+<h3>Warned: a draft connection, one domain property authored<a class="headerlink" href="#warned-a-draft-connection-one-domain-property-authored" title="Link to this heading">#</a></h3>
+<p>The five base properties and a single thermal property. The validator reports
+the connection as draft and names the ten properties still missing. That is a
+warning, not a failure: the asset is in the pipeline, not yet simulation-ready.</p>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Generic_CDU"</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"ConnectionPoints"</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"acme_thermal_main"</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">purpose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"guide"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:domain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"thermal"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"supply"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"FWS"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:disconnectType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"flanged"</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:serviceClearance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span>
+
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:thermal:designFlowRate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12.5</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="invalid-a-property-from-another-domain-s-namespace">
+<h3>Invalid: a property from another domain’s namespace<a class="headerlink" href="#invalid-a-property-from-another-domain-s-namespace" title="Link to this heading">#</a></h3>
+<p>A thermal connection carrying an <code class="docutils literal notranslate"><span class="pre">electrical:</span></code> property. The namespace does not
+match the declared domain, and that is a failure regardless of completeness.</p>
+<div class="highlight-usd notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Generic_CDU"</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"ConnectionPoints"</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"acme_thermal_main"</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k k-Token">uniform</span><span class="w"> </span><span class="kt">token</span><span class="w"> </span><span class="na">purpose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"guide"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:domain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"thermal"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"supply"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"FWS"</span>
+<span class="w">            </span><span class="kt">token</span><span class="w"> </span><span class="na">simready:connectionPoint:disconnectType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"flanged"</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:serviceClearance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.15</span>
+
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="na">simready:connectionPoint:electrical:nominalVoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">480.0</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="how-to-comply">
+<h2>How to comply<a class="headerlink" href="#how-to-comply" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Read the <code class="docutils literal notranslate"><span class="pre">simready:connectionPoint:domain</span></code> value on the connection point</p></li>
+<li><p>Author properties from that domain’s namespace only</p></li>
+<li><p>Author every property the namespace defines, using an explicit zero where the value is not physically meaningful</p></li>
+<li><p>Convert datasheet values to SI at authoring time: meters, Celsius, Pascals, L/s, m^3/s, volts, amperes, watts, hertz</p></li>
+<li><p>Where engineering data is not yet available, expect the validator to report stub or draft and treat it as work outstanding</p></li>
+</ol>
+</section>
+<section id="related-requirements">
+<h2>Related requirements<a class="headerlink" href="#related-requirements" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>CP.010 <code class="docutils literal notranslate"><span class="pre">connection-point-prim-structure</span></code>: establishes the Xform and the mandatory <code class="docutils literal notranslate"><span class="pre">domain</span></code> property this requirement keys off</p></li>
+<li><p>CP.011 <code class="docutils literal notranslate"><span class="pre">connection-point-base-namespace</span></code>: the base namespace that a stub-profile connection point satisfies on its own</p></li>
+</ul>
+</section>
+<section id="for-more-information">
+<h2>For More Information<a class="headerlink" href="#for-more-information" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.omniverse.nvidia.com/usd/latest/learn-openusd/independent/asset-structure-principles.html">SimReady units and scale</a></p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="connection-point-base-namespace.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">connection-point-base-namespace</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../thermal_cooling/capability-thermal_cooling.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">AIF Thermal Cooling</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#description">Description</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermal-domain-simready-connectionpoint-thermal">Thermal domain (<code class="docutils literal notranslate"><span class="pre">simready:connectionPoint:thermal:</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#electrical-domain-simready-connectionpoint-electrical">Electrical domain (<code class="docutils literal notranslate"><span class="pre">simready:connectionPoint:electrical:</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#network-domain-simready-connectionpoint-network">Network domain (<code class="docutils literal notranslate"><span class="pre">simready:connectionPoint:network:</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#airflow-domain-simready-connectionpoint-airflow">Airflow domain (<code class="docutils literal notranslate"><span class="pre">simready:connectionPoint:airflow:</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#property-completeness">Property completeness</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-profiles">Validation profiles</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-it-required">Why is it required?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valid-thermal-a-facility-water-supply-flange-on-a-cdu">Valid: thermal, a facility-water supply flange on a CDU</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valid-electrical-a-hardwired-three-phase-feed-on-a-ups">Valid: electrical, a hardwired three-phase feed on a UPS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valid-network-an-osfp-port-on-a-compute-rack">Valid: network, an OSFP port on a compute rack</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valid-airflow-the-intake-face-of-a-crah">Valid: airflow, the intake face of a CRAH</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#warned-a-draft-connection-one-domain-property-authored">Warned: a draft connection, one domain property authored</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#invalid-a-property-from-another-domain-s-namespace">Invalid: a property from another domain’s namespace</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-comply">How to comply</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-requirements">Related requirements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-more-information">For More Information</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=64cc4de3f052d77215f0"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=64cc4de3f052d77215f0"></script>
+
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../../../../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../../../../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2025-2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

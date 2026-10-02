@@ -1,0 +1,20 @@
+{
+    "feature": {
+        "display_name": "Core (Isaac)",
+        "id": "FET_000_ISAAC",
+        "version": "0.1.0",
+        "requirements": [
+            "RC.001",
+            "RC.004",
+            "RC.005",
+            "RC.006"
+        ],
+        "dependencies": [
+            "FET_000_STANDARD@0.1.0"
+        ],
+        "metadata": {
+            "path": "features/FET_000_ISAAC.html",
+            "internal_path": "features/FET_000_ISAAC.md"
+        }
+    }
+}

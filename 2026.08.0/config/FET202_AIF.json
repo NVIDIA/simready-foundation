@@ -1,0 +1,18 @@
+{
+    "feature": {
+        "display_name": "AIF Thermal Cooling",
+        "id": "FET202_AIF",
+        "version": "0.2.0",
+        "requirements": [
+            "TC.001",
+            "TC.002"
+        ],
+        "dependencies": [
+            "FET201_AIF@0.2.0"
+        ],
+        "metadata": {
+            "path": "features/FET_202-thermal_cooling.html",
+            "internal_path": "features/FET_202-thermal_cooling.md"
+        }
+    }
+}

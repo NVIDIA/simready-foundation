@@ -1,0 +1,17 @@
+{
+    "feature": {
+        "display_name": "IsaacSim Composition",
+        "id": "FET_100_ISAAC",
+        "version": "0.4.0",
+        "requirements": [
+            "ISA.001"
+        ],
+        "dependencies": [
+            "FET_003_PHYSX@0.4.0"
+        ],
+        "metadata": {
+            "path": "features/FET_100_ISAAC.html",
+            "internal_path": "features/FET_100_ISAAC.md"
+        }
+    }
+}
