@@ -73,4 +73,4 @@ def Xform "ThingC" (
 ## For More Information
 
 - [ADE20K (150) dataset](https://groups.csail.mit.edu/vision/datasets/ADE20K/)
-- [USD Semantics Documentation](https://openusd.org/release/api/usd_semantics_page_front.html)
+- [USD Semantics Documentation](https://openusd.org/release/api/usd_semantics_overview.html)

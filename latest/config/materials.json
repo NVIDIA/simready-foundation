@@ -4,35 +4,67 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "VM.PS.002",
+                "code": "VM.PBR.003",
                 "version": null,
-                "name": "material-preview-surface-present",
+                "name": "material-shading-network-structure",
                 "compatibility": "open-usd",
                 "tags": [
                     "correctness"
                 ],
-                "validator": "vm-ps-002",
+                "validator": "vm-pbr-003",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/visualization/materials/requirements/material-preview-surface-present.html",
-                    "internal_path": "capabilities/visualization/materials/requirements/material-preview-surface-present.md"
+                    "path": "capabilities/visualization/materials/requirements/material-shading-network-structure.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-shading-network-structure.md"
                 },
-                "message": "A renderable GPrim's material must connect a UsdPreviewSurface on `outputs:surface`.",
+                "message": "Shader ids must name a declared node, connections must have an existing target, and the material must connect a surface terminal.",
                 "examples": [
                     {
                         "snippet": {
                             "language": "usd",
-                            "content": "def Material \"Chrome\"\n{\n    token outputs:surface.connect = </World/Looks/Chrome/Preview.outputs:surface>\n    token outputs:mtlx:surface.connect = </World/Looks/Chrome/OpenPBR.outputs:out>\n\n    def Shader \"Preview\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        color3f inputs:diffuseColor = (0.8, 0.8, 0.8)\n        float inputs:metallic = 1\n        float inputs:roughness = 0.2\n        token outputs:surface\n    }\n}"
+                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:mtlx:surface.connect = </mtl_bracket/OpenPBR.outputs:out>\n\n    def Shader \"Tex\"\n    {\n        uniform token info:id = \"ND_image_color3\"\n        asset inputs:file = @./textures/bracket_basecolor.png@\n        color3f outputs:out\n    }\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        color3f inputs:base_color.connect = </mtl_bracket/Tex.outputs:out>\n        token outputs:out\n    }\n}"
                         },
-                        "name": "a bound material connects the universal terminal",
+                        "name": "a declared id, an existing connection target, and a connected terminal",
                         "result": "success"
                     },
                     {
                         "snippet": {
                             "language": "usd",
-                            "content": "def Material \"Chrome\"\n{\n    token outputs:mtlx:surface.connect = </World/Looks/Chrome/OpenPBR.outputs:out>\n}"
+                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:mtlx:surface.connect = </mtl_bracket/OpenPBR.outputs:out>\n\n    def Shader \"Tex\"\n    {\n        uniform token info:id = \"ND_not_a_real_nodedef\"\n        color3f outputs:out\n    }\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        color3f inputs:base_color.connect = </mtl_bracket/Tex.outputs:out>\n        token outputs:out\n    }\n}"
                         },
-                        "name": "OpenPBR alone",
+                        "name": "an id that resolves to no nodedef",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:mtlx:surface.connect = </mtl_bracket/OpenPBR.outputs:out>\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        color3f inputs:base_color.connect = </mtl_bracket/Missing.outputs:out>\n        token outputs:out\n    }\n}"
+                        },
+                        "name": "an input connected to a prim that is not in the material",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:mtlx:surface.connect = </mtl_bracket/OpenPBR.outputs:out>\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        float inputs:base_color = 0.35\n        token outputs:out\n    }\n}"
+                        },
+                        "name": "an authored type the nodedef does not declare",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"mtl_bracket\"\n{\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        color3f inputs:base_color = (0.35, 0.36, 0.38)\n        token outputs:out\n    }\n}"
+                        },
+                        "name": "no surface terminal in any render context",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:mtlx:surface.connect = </mtl_bracket/Surface.outputs:out>\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        color3f inputs:base_color = (0.35, 0.36, 0.38)\n        token outputs:out\n    }\n}"
+                        },
+                        "name": "a surface terminal connected to a missing shader",
                         "result": "failure"
                     }
                 ]
@@ -88,286 +120,110 @@
                 ]
             },
             {
-                "code": "VM.PBR.001",
+                "code": "VM.PS.002",
                 "version": null,
-                "name": "material-final-surface",
+                "name": "material-preview-surface-present",
                 "compatibility": "open-usd",
                 "tags": [
                     "correctness"
                 ],
-                "validator": "vm-pbr-001",
+                "validator": "vm-ps-002",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/visualization/materials/requirements/material-final-surface.html",
-                    "internal_path": "capabilities/visualization/materials/requirements/material-final-surface.md"
+                    "path": "capabilities/visualization/materials/requirements/material-preview-surface-present.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-preview-surface-present.md"
                 },
-                "message": "A renderable GPrim's material must provide a physically based final surface.",
+                "message": "A renderable GPrim's material must connect a UsdPreviewSurface on `outputs:surface`.",
                 "examples": [
                     {
                         "snippet": {
                             "language": "usd",
-                            "content": "def Xform \"Bracket\" ( kind = \"component\" )\n{\n    def Mesh \"Geo\" ( prepend apiSchemas = [\"MaterialBindingAPI\"] )\n    {\n        rel material:binding = </Bracket/mtl_bracket>\n    }\n\n    def Material \"mtl_bracket\"\n    {\n        token outputs:mtlx:surface.connect = </Bracket/mtl_bracket/OpenPBR.outputs:out>\n\n        def Shader \"OpenPBR\"\n        {\n            uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n            color3f inputs:base_color = (0.4, 0.4, 0.42)\n            float inputs:base_metalness = 1\n            float inputs:specular_roughness = 0.35\n            token outputs:out\n        }\n    }\n}"
+                            "content": "def Material \"Chrome\"\n{\n    token outputs:surface.connect = </World/Looks/Chrome/Preview.outputs:surface>\n    token outputs:mtlx:surface.connect = </World/Looks/Chrome/OpenPBR.outputs:out>\n\n    def Shader \"Preview\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        color3f inputs:diffuseColor = (0.8, 0.8, 0.8)\n        float inputs:metallic = 1\n        float inputs:roughness = 0.2\n        token outputs:surface\n    }\n}"
                         },
-                        "name": "an OpenPBR (MaterialX) final surface",
+                        "name": "a bound material connects the universal terminal",
                         "result": "success"
                     },
                     {
                         "snippet": {
                             "language": "usd",
-                            "content": "def Xform \"Bracket\" ( kind = \"component\" )\n{\n    def Mesh \"Geo\" ( prepend apiSchemas = [\"MaterialBindingAPI\"] )\n    {\n        rel material:binding = </Bracket/mtl_bracket>\n    }\n\n    def Material \"mtl_bracket\"\n    {\n        token outputs:mdl:surface.connect = </Bracket/mtl_bracket/OmniPBR.outputs:out>\n\n        def Shader \"OmniPBR\"\n        {\n            uniform token info:implementationSource = \"sourceAsset\"\n            uniform asset info:mdl:sourceAsset = @./materials/OmniPBR/OmniPBR.mdl@\n            uniform token info:mdl:sourceAsset:subIdentifier = \"OmniPBR\"\n            token outputs:out\n        }\n    }\n}"
+                            "content": "def Material \"Chrome\"\n{\n    token outputs:mtlx:surface.connect = </World/Looks/Chrome/OpenPBR.outputs:out>\n}"
                         },
-                        "name": "an MDL final surface alone",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Xform \"Bracket\" ( kind = \"component\" )\n{\n    def Mesh \"Geo\" ( prepend apiSchemas = [\"MaterialBindingAPI\"] )\n    {\n        rel material:binding = </Bracket/mtl_bracket>\n    }\n\n    def Material \"mtl_bracket\"\n    {\n        token outputs:surface.connect = </Bracket/mtl_bracket/Preview.outputs:surface>\n\n        def Shader \"Preview\"\n        {\n            uniform token info:id = \"UsdPreviewSurface\"\n            color3f inputs:diffuseColor = (0.4, 0.4, 0.42)\n            token outputs:surface\n        }\n    }\n}"
-                        },
-                        "name": "the bound material has only a preview surface",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Xform \"Bracket\" ( kind = \"component\" )\n{\n    def Mesh \"Geo\" ( prepend apiSchemas = [\"MaterialBindingAPI\"] )\n    {\n        rel material:binding = </Bracket/mtl_bracket>\n    }\n\n    def Material \"mtl_bracket\"\n    {\n        token outputs:mtlx:surface.connect = </Bracket/mtl_bracket/StandardSurface.outputs:out>\n\n        def Shader \"StandardSurface\"\n        {\n            uniform token info:id = \"ND_standard_surface_surfaceshader\"\n            color3f inputs:base_color = (0.4, 0.4, 0.42)\n            token outputs:out\n        }\n    }\n}"
-                        },
-                        "name": "the mtlx surface is a MaterialX node other than OpenPBR",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "#usda 1.0\n\ndef Material \"Aging_Copper\"\n{\n    token outputs:surface.connect = </Aging_Copper/Preview.outputs:surface>\n    token outputs:mtlx:surface.connect = </Aging_Copper/OpenPBR.outputs:out>\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        token outputs:out\n    }\n\n    def Shader \"Preview\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        token outputs:surface\n    }\n}"
-                        },
-                        "name": "an asset that is a material, with no geometry",
-                        "result": "success"
-                    }
-                ]
-            },
-            {
-                "code": "VM.MDL.003",
-                "version": null,
-                "name": "material-mdl-surface-present",
-                "compatibility": "omniverse",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": "vm-mdl-003",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/visualization/materials/requirements/material-mdl-surface-present.html",
-                    "internal_path": "capabilities/visualization/materials/requirements/material-mdl-surface-present.md"
-                },
-                "message": "A renderable GPrim's material must connect an MDL surface on `outputs:mdl:surface`.",
-                "examples": [
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"Chrome\"\n{\n    token outputs:surface.connect = </World/Looks/Chrome/Preview.outputs:surface>\n    token outputs:mdl:surface.connect = </World/Looks/Chrome/Mdl.outputs:out>\n\n    def Shader \"Mdl\"\n    {\n        uniform token info:implementationSource = \"sourceAsset\"\n        uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@\n        uniform token info:mdl:sourceAsset:subIdentifier = \"OmniPBR\"\n        token outputs:out\n    }\n}"
-                        },
-                        "name": "a bound material connects the MDL terminal",
-                        "result": "success"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"Chrome\"\n{\n    token outputs:surface.connect = </World/Looks/Chrome/Preview.outputs:surface>\n}"
-                        },
-                        "name": "a preview surface alone",
+                        "name": "OpenPBR alone",
                         "result": "failure"
                     }
                 ]
             },
             {
-                "code": "VM.MAT.001",
+                "code": "VM.BIND.002",
                 "version": null,
-                "name": "material-assignment",
-                "compatibility": "open-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "vm-mat-001",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/visualization/materials/requirements/material-assignment.html",
-                    "internal_path": "capabilities/visualization/materials/requirements/material-assignment.md"
-                },
-                "message": "Each renderable GPrim must have a computed material bound to it",
-                "examples": [
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def \"MyAsset\" (\n    kind = \"component\"\n)\n{\n    def Scope \"Materials\" () {\n        def Material \"mtl_default\"\n        {\n            token outputs:surface.connect = </MyAsset/Materials/mtl_default/PreviewSurface.outputs:surface>\n            token outputs:mtlx:surface.connect = </MyAsset/Materials/mtl_default/OpenPBR.outputs:out>\n\n            def Shader \"PreviewSurface\"\n            {\n                uniform token info:id = \"UsdPreviewSurface\"\n                color3f inputs:diffuseColor = (0.18, 0.18, 0.18)\n                token outputs:surface\n            }\n\n            def Shader \"OpenPBR\"\n            {\n                uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n                color3f inputs:base_color = (0.18, 0.18, 0.18)\n                token outputs:out\n            }\n        }\n    }\n\n    def Scope \"Geometry\" () {\n        def Mesh \"Cube\" (\n            prepend apiSchemas = [\"MaterialBindingAPI\"]\n        )\n        {\n            rel material:binding = </MyAsset/Materials/mtl_default>\n        }\n    }\n}"
-                        },
-                        "name": "a mesh bound to a material in the same asset",
-                        "result": "success"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Xform \"Asset\" ( prepend apiSchemas = [\"MaterialBindingAPI\"] )\n{\n    # one shared material bound for preview across the whole asset, inherited below\n    rel material:binding:preview = </Asset/Looks/mtl_shared>\n\n    def Scope \"Looks\"\n    {\n        def Material \"mtl_shared\"\n        {\n            token outputs:surface.connect = </Asset/Looks/mtl_shared/Preview.outputs:surface>\n            token outputs:mtlx:surface.connect = </Asset/Looks/mtl_shared/OpenPBR.outputs:out>\n\n            def Shader \"Preview\"\n            {\n                uniform token info:id = \"UsdPreviewSurface\"\n                color3f inputs:diffuseColor = (0.18, 0.18, 0.18)\n                token outputs:surface\n            }\n\n            def Shader \"OpenPBR\"\n            {\n                uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n                color3f inputs:base_color = (0.18, 0.18, 0.18)\n                token outputs:out\n            }\n        }\n\n        def Material \"mtl_steel\"\n        {\n            token outputs:mtlx:surface.connect = </Asset/Looks/mtl_steel/OpenPBR.outputs:out>\n\n            def Shader \"OpenPBR\"\n            {\n                uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n                color3f inputs:base_color = (0.35, 0.36, 0.38)\n                float inputs:base_metalness = 1\n                float inputs:specular_roughness = 0.25\n                token outputs:out\n            }\n        }\n\n        def Material \"mtl_rubber\"\n        {\n            token outputs:mtlx:surface.connect = </Asset/Looks/mtl_rubber/OpenPBR.outputs:out>\n\n            def Shader \"OpenPBR\"\n            {\n                uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n                color3f inputs:base_color = (0.05, 0.05, 0.05)\n                float inputs:specular_roughness = 0.8\n                token outputs:out\n            }\n        }\n    }\n\n    def Mesh \"part_steel\" ( prepend apiSchemas = [\"MaterialBindingAPI\"] )\n    {\n        rel material:binding:full = </Asset/Looks/mtl_steel>\n    }\n\n    def Mesh \"part_rubber\" ( prepend apiSchemas = [\"MaterialBindingAPI\"] )\n    {\n        rel material:binding:full = </Asset/Looks/mtl_rubber>\n    }\n}"
-                        },
-                        "name": "separate preview and fidelity materials",
-                        "result": "success"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def \"MyAsset\" (\n    kind = \"component\"\n)\n{\n    def Mesh \"Cube\"\n    {\n        # no material:binding here or on any ancestor\n    }\n}"
-                        },
-                        "name": "a renderable mesh with no binding",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Xform \"Asset\" ()\n{\n    def Scope \"Looks\"\n    {\n        def Material \"mtl_steel\"\n        {\n            token outputs:mtlx:surface.connect = </Asset/Looks/mtl_steel/OpenPBR.outputs:out>\n\n            def Shader \"OpenPBR\"\n            {\n                uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n                color3f inputs:base_color = (0.35, 0.36, 0.38)\n                float inputs:base_metalness = 1\n                token outputs:out\n            }\n        }\n    }\n\n    def Mesh \"part\"\n    {\n        uniform token subsetFamily:materialBind:familyType = \"partition\"\n\n        def GeomSubset \"faces_steel\" ( prepend apiSchemas = [\"MaterialBindingAPI\"] )\n        {\n            uniform token elementType = \"face\"\n            uniform token familyName = \"materialBind\"\n            int[] indices = [0, 1]\n            rel material:binding = </Asset/Looks/mtl_steel>\n        }\n\n        def GeomSubset \"faces_rubber\"\n        {\n            uniform token elementType = \"face\"\n            uniform token familyName = \"materialBind\"\n            int[] indices = [2, 3]\n        }\n    }\n}"
-                        },
-                        "name": "a material-bind subset that resolves no material",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Xform \"Root\" ( prepend apiSchemas = [\"MaterialBindingAPI\"] )\n{\n    # reported: a collection-based binding\n    rel material:binding:collection:full:metals = [\n        </Root/Looks/mtl_steel>, </Root.collection:metals> ]\n\n    def Scope \"Looks\"\n    {\n        def Material \"mtl_steel\"\n        {\n            token outputs:mtlx:surface.connect = </Root/Looks/mtl_steel/OpenPBR.outputs:out>\n\n            def Shader \"OpenPBR\"\n            {\n                uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n                color3f inputs:base_color = (0.35, 0.36, 0.38)\n                float inputs:base_metalness = 1\n                token outputs:out\n            }\n        }\n    }\n\n    def Mesh \"part\" ( prepend apiSchemas = [\"MaterialBindingAPI\"] )\n    {\n        rel material:binding = </Root/Looks/mtl_steel>\n    }\n}"
-                        },
-                        "name": "a collection-based binding",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Xform \"Asset\" ( prepend apiSchemas = [\"MaterialBindingAPI\"] )\n{\n    rel material:binding = </Asset/Looks/mtl_steel> (\n        bindMaterialAs = \"strongerThanDescendants\"\n    )\n\n    def Scope \"Looks\"\n    {\n        def Material \"mtl_steel\"\n        {\n            token outputs:mtlx:surface.connect = </Asset/Looks/mtl_steel/OpenPBR.outputs:out>\n\n            def Shader \"OpenPBR\"\n            {\n                uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n                color3f inputs:base_color = (0.35, 0.36, 0.38)\n                float inputs:base_metalness = 1\n                token outputs:out\n            }\n        }\n    }\n\n    def Mesh \"part\"\n    {\n    }\n}"
-                        },
-                        "name": "a binding strength override, reported as a warning",
-                        "result": "failure"
-                    }
-                ]
-            },
-            {
-                "code": "VM.PS.001",
-                "version": null,
-                "name": "material-preview-surface",
+                "name": "material-shader-inputs",
                 "compatibility": "open-usd",
                 "tags": [
                     "correctness"
                 ],
-                "validator": "vm-ps-001",
+                "validator": "vm-bind-002",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/visualization/materials/requirements/material-preview-surface.html",
-                    "internal_path": "capabilities/visualization/materials/requirements/material-preview-surface.md"
+                    "path": "capabilities/visualization/materials/requirements/material-shader-inputs.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-shader-inputs.md"
                 },
-                "message": "UsdPreviewSurface inputs must use the types and token values the specification declares.This requirement is implemented by `usd-validation-nvidia`, which registers it as\n`com.nvidia.usd.VM.PS.001` and binds it to `MaterialUsdPreviewSurfaceChecker`. A feature manifest references that\ncode. The unprefixed code is not bound to a rule in this repository.",
+                "message": "Shader inputs must use the type their specification declares and hold a finite value.",
                 "examples": [
                     {
                         "snippet": {
                             "language": "usd",
-                            "content": "def Material \"mtl_cube\"\n{\n    def Shader \"PreviewSurfaceTexture\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        float inputs:specular.connect = </mtl_cube/SpecularTex.outputs:r>\n        token outputs:surface\n    }\n\n    def Shader \"SpecularTex\"\n    {\n        uniform token info:id = \"UsdUVTexture\"\n        asset inputs:file = @./textures/specular.png@\n        uniform token inputs:sourceColorSpace = \"bad\"\n        float outputs:r\n    }\n}"
+                            "content": "def Material \"ValidPreview\"\n{\n    token outputs:surface.connect = </ValidPreview/Surface.outputs:surface>\n\n    def Shader \"Surface\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        color3f inputs:diffuseColor = (0.8, 0.8, 0.8)\n        float inputs:metallic = 0.0\n        float inputs:roughness = 0.5\n        token outputs:surface\n    }\n}"
                         },
-                        "name": "an input outside the specification, and a colour space outside the allowed tokens",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"mtl_sphere\"\n{\n    def Shader \"Shader\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        color3f inputs:metallic = (0.5, 0.5, 0.5)\n        token outputs:surface\n    }\n\n    def Shader \"roughnessTex\"\n    {\n        uniform token info:id = \"UsdUVTexture\"\n        asset inputs:file = @./textures/roughness.png@\n        uniform token inputs:wrapT.timeSamples = {\n            0: \"invalid_wrap\",\n            1: \"another_invalid\"\n        }\n        float outputs:r\n    }\n}"
-                        },
-                        "name": "an input of the wrong type, and a token carrying time samples",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"mtl_cube\"\n{\n    token outputs:surface.connect = </mtl_cube/PreviewSurfaceTexture.outputs:surface>\n\n    def Shader \"PreviewSurfaceTexture\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        float inputs:clearcoat = 0\n        float inputs:clearcoatRoughness = 0\n        color3f inputs:diffuseColor.connect = </mtl_cube/diffuseColorTex.outputs:rgb>\n        float inputs:displacement = 0\n        token outputs:surface\n    }\n\n    def Shader \"diffuseColorTex\"\n    {\n        uniform token info:id = \"UsdUVTexture\"\n        asset inputs:file = @./textures/color.png@\n        uniform token inputs:sourceColorSpace = \"auto\"\n        uniform token inputs:wrapS = \"useMetadata\"\n        uniform token inputs:wrapT = \"useMetadata\"\n        float3 outputs:rgb\n    }\n}"
-                        },
-                        "name": "every input in the specification, with the declared type",
-                        "result": "success"
-                    }
-                ]
-            },
-            {
-                "code": "VM.TEX.001",
-                "version": null,
-                "name": "material-texture-maxsize",
-                "compatibility": "open-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": "vm-tex-001",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/visualization/materials/requirements/material-texture-maxsize.html",
-                    "internal_path": "capabilities/visualization/materials/requirements/material-texture-maxsize.md"
-                },
-                "message": "Texture dimensions must not exceed 16,384 pixels on either axis.",
-                "examples": [
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"opaque__metal__bracket\"\n{\n    token outputs:mdl:surface.connect = </opaque__metal__bracket/Shader.outputs:out>\n\n    def Shader \"Shader\"\n    {\n        uniform token info:implementationSource = \"sourceAsset\"\n        uniform asset info:mdl:sourceAsset = @./materials/OmniPBR/OmniPBR.mdl@\n        uniform token info:mdl:sourceAsset:subIdentifier = \"OmniPBR\"\n        asset inputs:diffuse_texture = @./textures/bracket_basecolor.png@              # 8192x8192\n        asset inputs:reflectionroughness_texture = @./textures/bracket_roughness.png@  # 4096x4096\n        asset inputs:normalmap_texture = @./textures/bracket_normal.png@               # 2048x2048\n        token outputs:out\n    }\n}"
-                        },
-                        "name": "three textures inside the limit",
+                        "name": "every input has its declared type and a finite value",
                         "result": "success"
                     },
                     {
                         "snippet": {
                             "language": "usd",
-                            "content": "def Material \"opaque__metal__bracket\"\n{\n    token outputs:mdl:surface.connect = </opaque__metal__bracket/Shader.outputs:out>\n\n    def Shader \"Shader\"\n    {\n        uniform token info:implementationSource = \"sourceAsset\"\n        uniform asset info:mdl:sourceAsset = @./materials/OmniPBR/OmniPBR.mdl@\n        uniform token info:mdl:sourceAsset:subIdentifier = \"OmniPBR\"\n        asset inputs:diffuse_texture = @./textures/bracket_basecolor_16k.png@  # 16384x16384\n        token outputs:out\n    }\n}"
+                            "content": "def Material \"ValidMdl\"\n{\n    token outputs:mdl:surface.connect = </ValidMdl/Shader.outputs:out>\n\n    def Shader \"Shader\"\n    {\n        uniform token info:implementationSource = \"sourceAsset\"\n        uniform asset info:mdl:sourceAsset = @./OmniPBR.mdl@\n        uniform token info:mdl:sourceAsset:subIdentifier = \"OmniPBR\"\n        asset inputs:diffuse_texture = @./textures/bracket_basecolor.png@\n        float inputs:metallic_constant = 1.0\n        float inputs:reflection_roughness_constant = 0.5\n        token outputs:out\n    }\n}"
                         },
-                        "name": "exactly at the limit",
+                        "name": "an MDL shader with the asset and float types its module declares",
                         "result": "success"
                     },
                     {
                         "snippet": {
                             "language": "usd",
-                            "content": "def Material \"opaque__metal__bracket\"\n{\n    token outputs:mdl:surface.connect = </opaque__metal__bracket/Shader.outputs:out>\n\n    def Shader \"Shader\"\n    {\n        uniform token info:implementationSource = \"sourceAsset\"\n        uniform asset info:mdl:sourceAsset = @./materials/OmniPBR/OmniPBR.mdl@\n        uniform token info:mdl:sourceAsset:subIdentifier = \"OmniPBR\"\n        asset inputs:diffuse_texture = @./textures/bracket_basecolor_32k.png@  # 32768x32768\n        token outputs:out\n    }\n}"
+                            "content": "def Material \"WrongType\"\n{\n    token outputs:surface.connect = </WrongType/Surface.outputs:surface>\n\n    def Shader \"Surface\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        color3f inputs:diffuseColor = (0.8, 0.8, 0.8)\n        color3f inputs:roughness = (0.5, 0.5, 0.5)\n        token outputs:surface\n    }\n}"
                         },
-                        "name": "both dimensions above the limit",
+                        "name": "an input with a type its declaration does not allow",
                         "result": "failure"
                     },
                     {
                         "snippet": {
                             "language": "usd",
-                            "content": "def Material \"opaque__metal__bracket\"\n{\n    token outputs:mdl:surface.connect = </opaque__metal__bracket/Shader.outputs:out>\n\n    def Shader \"Shader\"\n    {\n        uniform token info:implementationSource = \"sourceAsset\"\n        uniform asset info:mdl:sourceAsset = @./materials/OmniPBR/OmniPBR.mdl@\n        uniform token info:mdl:sourceAsset:subIdentifier = \"OmniPBR\"\n        asset inputs:diffuse_texture = @./textures/bracket_basecolor_wide.png@  # 20000x8000\n        token outputs:out\n    }\n}"
+                            "content": "def Material \"NonFinite\"\n{\n    float inputs:roughness = nan\n\n    token outputs:surface.connect = </NonFinite/Surface.outputs:surface>\n\n    def Shader \"Surface\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        color3f inputs:diffuseColor = (0.8, 0.8, 0.8)\n        float inputs:roughness.connect = </NonFinite.inputs:roughness>\n        token outputs:surface\n    }\n}"
                         },
-                        "name": "one dimension above the limit",
-                        "result": "failure"
-                    }
-                ]
-            },
-            {
-                "code": "VM.MDL.002",
-                "version": null,
-                "name": "material-mdl-schema",
-                "compatibility": "kit-107+",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": "vm-mdl-002",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/visualization/materials/requirements/material-mdl-schema.html",
-                    "internal_path": "capabilities/visualization/materials/requirements/material-mdl-schema.md"
-                },
-                "message": "An MDL shader must use the current schema attributes, not the deprecated `mdlMaterial` form.This requirement is implemented by `usd-validation-nvidia`, which registers it as\n`com.nvidia.usd.VM.MDL.002` and binds it to `MaterialOldMdlSchemaChecker`. A feature manifest references that\ncode. The unprefixed code is not bound to a rule in this repository.",
-                "examples": [
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"mtl_test\"\n{\n    token outputs:surface.connect = </mtl_test/Shader.outputs:out>\n\n    def Shader \"Shader\"\n    {\n        uniform token info:implementationSource = \"mdlMaterial\"\n        custom asset module = @./OmniPBR.mdl@\n        custom string name = \"OmniPBR\"\n        token outputs:out\n    }\n}"
-                        },
-                        "name": "the deprecated MDL schema",
+                        "name": "a NaN reaching the surface through the material interface",
                         "result": "failure"
                     },
                     {
                         "snippet": {
                             "language": "usd",
-                            "content": "def Material \"mtl_test\"\n{\n    token outputs:surface.connect = </mtl_test/Shader.outputs:out>\n\n    def Shader \"Shader\"\n    {\n        uniform token info:implementationSource = \"sourceAsset\"\n        uniform asset info:mdl:sourceAsset = @./OmniPBR.mdl@\n        uniform token info:mdl:sourceAsset:subIdentifier = \"OmniPBR\"\n        token outputs:out\n    }\n}"
+                            "content": "def Material \"NonFiniteNormal\"\n{\n    token outputs:mtlx:surface.connect = </NonFiniteNormal/OpenPBR.outputs:out>\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        float3 inputs:geometry_normal = (0, nan, 1)\n        token outputs:out\n    }\n}"
                         },
-                        "name": "the current MDL schema",
-                        "result": "success"
+                        "name": "a NaN in one component of a vector input",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"NonFiniteMdl\"\n{\n    token outputs:mdl:surface.connect = </NonFiniteMdl/Shader.outputs:out>\n\n    def Shader \"Shader\"\n    {\n        uniform token info:implementationSource = \"sourceAsset\"\n        uniform asset info:mdl:sourceAsset = @./OmniPBR.mdl@\n        uniform token info:mdl:sourceAsset:subIdentifier = \"OmniPBR\"\n        float inputs:reflection_roughness_constant = nan\n        token outputs:out\n    }\n}"
+                        },
+                        "name": "a NaN on an MDL shader input",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"EmptyMdl\"\n{\n    token outputs:mdl:surface.connect = </EmptyMdl/Shader.outputs:out>\n\n    def Shader \"Shader\"\n    {\n        uniform token info:implementationSource = \"sourceAsset\"\n        uniform asset info:mdl:sourceAsset = @@\n        token outputs:out\n    }\n}"
+                        },
+                        "name": "an MDL source asset with no value",
+                        "result": "failure"
                     }
                 ]
             },
@@ -454,230 +310,6 @@
                 ]
             },
             {
-                "code": "VM.BIND.001",
-                "version": null,
-                "name": "material-bind-scope",
-                "compatibility": "open-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": "vm-bind-001",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/visualization/materials/requirements/material-bind-scope.html",
-                    "internal_path": "capabilities/visualization/materials/requirements/material-bind-scope.md"
-                },
-                "message": "A material binding inside a payload must target a material inside that payload.This requirement is implemented by `usd-validation-nvidia`, which registers it as\n`com.nvidia.usd.VM.BIND.001` and binds it to `MaterialOutOfScopeChecker`. A feature manifest references that\ncode. The unprefixed code is not bound to a rule in this repository.",
-                "examples": [
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Xform \"Root\"\n{\n    def Mesh \"Mesh\" (\n        prepend apiSchemas = [\"MaterialBindingAPI\"]\n    )\n    {\n        rel material:binding = </Material>\n    }\n}"
-                        },
-                        "name": "a binding whose target is outside the payload",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Xform \"Root\"\n{\n    def Material \"Material\"\n    {\n        token outputs:surface.connect = </Root/Material/Preview.outputs:surface>\n\n        def Shader \"Preview\"\n        {\n            uniform token info:id = \"UsdPreviewSurface\"\n            color3f inputs:diffuseColor = (0.18, 0.18, 0.18)\n            token outputs:surface\n        }\n    }\n\n    def Mesh \"Mesh\" (\n        prepend apiSchemas = [\"MaterialBindingAPI\"]\n    )\n    {\n        rel material:binding = </Root/Material>\n    }\n}"
-                        },
-                        "name": "a binding whose target is inside the payload",
-                        "result": "success"
-                    }
-                ]
-            },
-            {
-                "code": "VM.TEX.003",
-                "version": null,
-                "name": "material-texture-colorspace-preview",
-                "compatibility": "open-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/visualization/materials/requirements/material-texture-colorspace-preview.html",
-                    "internal_path": "capabilities/visualization/materials/requirements/material-texture-colorspace-preview.md"
-                },
-                "message": "UsdPreviewSurface materials and textures must use correct color space conventions",
-                "examples": [
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:surface.connect = </mtl_bracket/Preview.outputs:surface>\n\n    def Shader \"BaseColorTex\"\n    {\n        uniform token info:id = \"UsdUVTexture\"\n        asset inputs:file = @./textures/bracket_basecolor.png@\n        token inputs:sourceColorSpace = \"sRGB\"\n        float3 outputs:rgb\n    }\n\n    def Shader \"RoughnessTex\"\n    {\n        uniform token info:id = \"UsdUVTexture\"\n        asset inputs:file = @./textures/bracket_roughness.png@\n        token inputs:sourceColorSpace = \"raw\"\n        float outputs:r\n    }\n\n    def Shader \"Preview\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        color3f inputs:diffuseColor.connect = </mtl_bracket/BaseColorTex.outputs:rgb>\n        float inputs:roughness.connect = </mtl_bracket/RoughnessTex.outputs:r>\n        token outputs:surface\n    }\n}"
-                        },
-                        "name": "a color texture and a data texture each declaring what its signal needs",
-                        "result": "success"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:surface.connect = </mtl_bracket/Preview.outputs:surface>\n\n    def Shader \"NormalTex\"\n    {\n        uniform token info:id = \"UsdUVTexture\"\n        asset inputs:file = @./textures/bracket_normal.png@\n        token inputs:sourceColorSpace = \"sRGB\"\n        float3 outputs:rgb\n    }\n\n    def Shader \"Preview\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        normal3f inputs:normal.connect = </mtl_bracket/NormalTex.outputs:rgb>\n        token outputs:surface\n    }\n}"
-                        },
-                        "name": "a texture reaching `normal` and declaring `sRGB`",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:surface.connect = </mtl_bracket/Preview.outputs:surface>\n\n    def Shader \"BaseColorTex\"\n    {\n        uniform token info:id = \"UsdUVTexture\"\n        asset inputs:file = @./textures/bracket_basecolor.png@\n        token inputs:sourceColorSpace = \"raw\"\n        float3 outputs:rgb\n    }\n\n    def Shader \"Preview\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        color3f inputs:diffuseColor.connect = </mtl_bracket/BaseColorTex.outputs:rgb>\n        token outputs:surface\n    }\n}"
-                        },
-                        "name": "linear albedo reaching `diffuseColor` and declaring `raw`",
-                        "result": "success"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:surface.connect = </mtl_bracket/Preview.outputs:surface>\n\n    def Shader \"RoughnessTex\"\n    {\n        uniform token info:id = \"UsdUVTexture\"\n        asset inputs:file = @./textures/bracket_roughness.png@\n        token inputs:sourceColorSpace = \"auto\"\n        float outputs:r\n    }\n\n    def Shader \"Preview\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        float inputs:roughness.connect = </mtl_bracket/RoughnessTex.outputs:r>\n        token outputs:surface\n    }\n}"
-                        },
-                        "name": "a three-channel roughness map left to `auto`",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:surface.connect = </mtl_bracket/Preview.outputs:surface>\n\n    def Shader \"RoughnessTex\"\n    {\n        uniform token info:id = \"UsdUVTexture\"\n        asset inputs:file = @./textures/bracket_roughness.png@\n        token inputs:sourceColorSpace = \"linear\"\n        float outputs:r\n    }\n\n    def Shader \"Preview\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        float inputs:roughness.connect = </mtl_bracket/RoughnessTex.outputs:r>\n        token outputs:surface\n    }\n}"
-                        },
-                        "name": "a token outside the `UsdUVTexture` vocabulary",
-                        "result": "failure"
-                    }
-                ]
-            },
-            {
-                "code": "VM.BIND.002",
-                "version": null,
-                "name": "material-shader-inputs",
-                "compatibility": "open-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": "vm-bind-002",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/visualization/materials/requirements/material-shader-inputs.html",
-                    "internal_path": "capabilities/visualization/materials/requirements/material-shader-inputs.md"
-                },
-                "message": "Shader inputs must use the type their specification declares and hold a finite value.",
-                "examples": [
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"ValidPreview\"\n{\n    token outputs:surface.connect = </ValidPreview/Surface.outputs:surface>\n\n    def Shader \"Surface\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        color3f inputs:diffuseColor = (0.8, 0.8, 0.8)\n        float inputs:metallic = 0.0\n        float inputs:roughness = 0.5\n        token outputs:surface\n    }\n}"
-                        },
-                        "name": "every input has its declared type and a finite value",
-                        "result": "success"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"ValidMdl\"\n{\n    token outputs:mdl:surface.connect = </ValidMdl/Shader.outputs:out>\n\n    def Shader \"Shader\"\n    {\n        uniform token info:implementationSource = \"sourceAsset\"\n        uniform asset info:mdl:sourceAsset = @./OmniPBR.mdl@\n        uniform token info:mdl:sourceAsset:subIdentifier = \"OmniPBR\"\n        asset inputs:diffuse_texture = @./textures/bracket_basecolor.png@\n        float inputs:metallic_constant = 1.0\n        float inputs:reflection_roughness_constant = 0.5\n        token outputs:out\n    }\n}"
-                        },
-                        "name": "an MDL shader with the asset and float types its module declares",
-                        "result": "success"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"WrongType\"\n{\n    token outputs:surface.connect = </WrongType/Surface.outputs:surface>\n\n    def Shader \"Surface\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        color3f inputs:diffuseColor = (0.8, 0.8, 0.8)\n        color3f inputs:roughness = (0.5, 0.5, 0.5)\n        token outputs:surface\n    }\n}"
-                        },
-                        "name": "an input with a type its declaration does not allow",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"NonFinite\"\n{\n    float inputs:roughness = nan\n\n    token outputs:surface.connect = </NonFinite/Surface.outputs:surface>\n\n    def Shader \"Surface\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        color3f inputs:diffuseColor = (0.8, 0.8, 0.8)\n        float inputs:roughness.connect = </NonFinite.inputs:roughness>\n        token outputs:surface\n    }\n}"
-                        },
-                        "name": "a NaN reaching the surface through the material interface",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"NonFiniteNormal\"\n{\n    token outputs:mtlx:surface.connect = </NonFiniteNormal/OpenPBR.outputs:out>\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        float3 inputs:geometry_normal = (0, nan, 1)\n        token outputs:out\n    }\n}"
-                        },
-                        "name": "a NaN in one component of a vector input",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"NonFiniteMdl\"\n{\n    token outputs:mdl:surface.connect = </NonFiniteMdl/Shader.outputs:out>\n\n    def Shader \"Shader\"\n    {\n        uniform token info:implementationSource = \"sourceAsset\"\n        uniform asset info:mdl:sourceAsset = @./OmniPBR.mdl@\n        uniform token info:mdl:sourceAsset:subIdentifier = \"OmniPBR\"\n        float inputs:reflection_roughness_constant = nan\n        token outputs:out\n    }\n}"
-                        },
-                        "name": "a NaN on an MDL shader input",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"EmptyMdl\"\n{\n    token outputs:mdl:surface.connect = </EmptyMdl/Shader.outputs:out>\n\n    def Shader \"Shader\"\n    {\n        uniform token info:implementationSource = \"sourceAsset\"\n        uniform asset info:mdl:sourceAsset = @@\n        token outputs:out\n    }\n}"
-                        },
-                        "name": "an MDL source asset with no value",
-                        "result": "failure"
-                    }
-                ]
-            },
-            {
-                "code": "VM.TEX.004",
-                "version": null,
-                "name": "material-texture-colorspace-openpbr",
-                "compatibility": "open-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/visualization/materials/requirements/material-texture-colorspace-openpbr.html",
-                    "internal_path": "capabilities/visualization/materials/requirements/material-texture-colorspace-openpbr.md"
-                },
-                "message": "OpenPBR materials and textures must use correct color space conventions",
-                "examples": [
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:mtlx:surface.connect = </mtl_bracket/OpenPBR.outputs:out>\n\n    def Shader \"BaseColorTex\"\n    {\n        uniform token info:id = \"ND_image_color3\"\n        asset inputs:file = @./textures/bracket_basecolor.png@ (\n            colorSpace = \"srgb_texture\"\n        )\n        color3f outputs:out\n    }\n\n    def Shader \"RoughnessTex\"\n    {\n        uniform token info:id = \"ND_image_float\"\n        asset inputs:file = @./textures/bracket_roughness.png@ (\n            colorSpace = \"none\"\n        )\n        float outputs:out\n    }\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        color3f inputs:base_color.connect = </mtl_bracket/BaseColorTex.outputs:out>\n        float inputs:specular_roughness.connect = </mtl_bracket/RoughnessTex.outputs:out>\n        token outputs:out\n    }\n}"
-                        },
-                        "name": "`srgb_texture` on the color texture, `none` on the data texture",
-                        "result": "success"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:mtlx:surface.connect = </mtl_bracket/OpenPBR.outputs:out>\n\n    def Shader \"UnusedTex\"\n    {\n        uniform token info:id = \"ND_image_color3\"\n        asset inputs:file = @./textures/bracket_spare.png@\n        color3f outputs:out\n    }\n\n    def Shader \"BaseColorTex\"\n    {\n        uniform token info:id = \"ND_image_color3\"\n        asset inputs:file = @./textures/bracket_basecolor.png@ (\n            colorSpace = \"srgb_texture\"\n        )\n        color3f outputs:out\n    }\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        color3f inputs:base_color.connect = </mtl_bracket/BaseColorTex.outputs:out>\n        token outputs:out\n    }\n}"
-                        },
-                        "name": "a texture in the same material that no surface input reaches",
-                        "result": "success"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:mtlx:surface.connect = </mtl_bracket/OpenPBR.outputs:out>\n\n    def Shader \"BaseColorTex\"\n    {\n        uniform token info:id = \"ND_image_color3\"\n        asset inputs:file = @./textures/bracket_basecolor.png@ (\n            colorSpace = \"srgb_rec709_scene\"\n        )\n        color3f outputs:out\n    }\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        color3f inputs:base_color.connect = </mtl_bracket/BaseColorTex.outputs:out>\n        token outputs:out\n    }\n}"
-                        },
-                        "name": "Warned: a color texture declaring `srgb_rec709_scene`, which is not resolved here",
-                        "result": "success"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:mtlx:surface.connect = </mtl_bracket/OpenPBR.outputs:out>\n\n    def Shader \"BaseColorTex\"\n    {\n        uniform token info:id = \"ND_image_color3\"\n        asset inputs:file = @./textures/bracket_basecolor.png@\n        color3f outputs:out\n    }\n\n    def Shader \"Tint\"\n    {\n        uniform token info:id = \"ND_multiply_color3\"\n        color3f inputs:in1.connect = </mtl_bracket/BaseColorTex.outputs:out>\n        color3f inputs:in2 = (0.9, 0.9, 1)\n        color3f outputs:out\n    }\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        color3f inputs:base_color.connect = </mtl_bracket/Tint.outputs:out>\n        token outputs:out\n    }\n}"
-                        },
-                        "name": "a color texture declaring no color space, reached through a multiply node",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:mtlx:surface.connect = </mtl_bracket/OpenPBR.outputs:out>\n\n    def Shader \"RoughnessTex\"\n    {\n        uniform token info:id = \"ND_image_float\"\n        asset inputs:file = @./textures/bracket_roughness.png@ (\n            colorSpace = \"srgb_texture\"\n        )\n        float outputs:out\n    }\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        float inputs:specular_roughness.connect = </mtl_bracket/RoughnessTex.outputs:out>\n        token outputs:out\n    }\n}"
-                        },
-                        "name": "a data texture declaring `srgb_texture`",
-                        "result": "failure"
-                    }
-                ]
-            },
-            {
                 "code": "VM.TEX.002",
                 "version": null,
                 "name": "material-texture-colorspace-mdl-deprecated",
@@ -693,6 +325,214 @@
                 },
                 "message": "Deprecated. See VM.TEX.005 for the current requirement.",
                 "examples": []
+            },
+            {
+                "code": "VM.MAT.001",
+                "version": null,
+                "name": "material-assignment",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "vm-mat-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-assignment.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-assignment.md"
+                },
+                "message": "Each renderable GPrim must have a computed material bound to it",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def \"MyAsset\" (\n    kind = \"component\"\n)\n{\n    def Scope \"Materials\" () {\n        def Material \"mtl_default\"\n        {\n            token outputs:surface.connect = </MyAsset/Materials/mtl_default/PreviewSurface.outputs:surface>\n            token outputs:mtlx:surface.connect = </MyAsset/Materials/mtl_default/OpenPBR.outputs:out>\n\n            def Shader \"PreviewSurface\"\n            {\n                uniform token info:id = \"UsdPreviewSurface\"\n                color3f inputs:diffuseColor = (0.18, 0.18, 0.18)\n                token outputs:surface\n            }\n\n            def Shader \"OpenPBR\"\n            {\n                uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n                color3f inputs:base_color = (0.18, 0.18, 0.18)\n                token outputs:out\n            }\n        }\n    }\n\n    def Scope \"Geometry\" () {\n        def Mesh \"Cube\" (\n            prepend apiSchemas = [\"MaterialBindingAPI\"]\n        )\n        {\n            rel material:binding = </MyAsset/Materials/mtl_default>\n        }\n    }\n}"
+                        },
+                        "name": "a mesh bound to a material in the same asset",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Asset\" ( prepend apiSchemas = [\"MaterialBindingAPI\"] )\n{\n    # one shared material bound for preview across the whole asset, inherited below\n    rel material:binding:preview = </Asset/Looks/mtl_shared>\n\n    def Scope \"Looks\"\n    {\n        def Material \"mtl_shared\"\n        {\n            token outputs:surface.connect = </Asset/Looks/mtl_shared/Preview.outputs:surface>\n            token outputs:mtlx:surface.connect = </Asset/Looks/mtl_shared/OpenPBR.outputs:out>\n\n            def Shader \"Preview\"\n            {\n                uniform token info:id = \"UsdPreviewSurface\"\n                color3f inputs:diffuseColor = (0.18, 0.18, 0.18)\n                token outputs:surface\n            }\n\n            def Shader \"OpenPBR\"\n            {\n                uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n                color3f inputs:base_color = (0.18, 0.18, 0.18)\n                token outputs:out\n            }\n        }\n\n        def Material \"mtl_steel\"\n        {\n            token outputs:mtlx:surface.connect = </Asset/Looks/mtl_steel/OpenPBR.outputs:out>\n\n            def Shader \"OpenPBR\"\n            {\n                uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n                color3f inputs:base_color = (0.35, 0.36, 0.38)\n                float inputs:base_metalness = 1\n                float inputs:specular_roughness = 0.25\n                token outputs:out\n            }\n        }\n\n        def Material \"mtl_rubber\"\n        {\n            token outputs:mtlx:surface.connect = </Asset/Looks/mtl_rubber/OpenPBR.outputs:out>\n\n            def Shader \"OpenPBR\"\n            {\n                uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n                color3f inputs:base_color = (0.05, 0.05, 0.05)\n                float inputs:specular_roughness = 0.8\n                token outputs:out\n            }\n        }\n    }\n\n    def Mesh \"part_steel\" ( prepend apiSchemas = [\"MaterialBindingAPI\"] )\n    {\n        rel material:binding:full = </Asset/Looks/mtl_steel>\n    }\n\n    def Mesh \"part_rubber\" ( prepend apiSchemas = [\"MaterialBindingAPI\"] )\n    {\n        rel material:binding:full = </Asset/Looks/mtl_rubber>\n    }\n}"
+                        },
+                        "name": "separate preview and fidelity materials",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def \"MyAsset\" (\n    kind = \"component\"\n)\n{\n    def Mesh \"Cube\"\n    {\n        # no material:binding here or on any ancestor\n    }\n}"
+                        },
+                        "name": "a renderable mesh with no binding",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Asset\" ()\n{\n    def Scope \"Looks\"\n    {\n        def Material \"mtl_steel\"\n        {\n            token outputs:mtlx:surface.connect = </Asset/Looks/mtl_steel/OpenPBR.outputs:out>\n\n            def Shader \"OpenPBR\"\n            {\n                uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n                color3f inputs:base_color = (0.35, 0.36, 0.38)\n                float inputs:base_metalness = 1\n                token outputs:out\n            }\n        }\n    }\n\n    def Mesh \"part\"\n    {\n        uniform token subsetFamily:materialBind:familyType = \"partition\"\n\n        def GeomSubset \"faces_steel\" ( prepend apiSchemas = [\"MaterialBindingAPI\"] )\n        {\n            uniform token elementType = \"face\"\n            uniform token familyName = \"materialBind\"\n            int[] indices = [0, 1]\n            rel material:binding = </Asset/Looks/mtl_steel>\n        }\n\n        def GeomSubset \"faces_rubber\"\n        {\n            uniform token elementType = \"face\"\n            uniform token familyName = \"materialBind\"\n            int[] indices = [2, 3]\n        }\n    }\n}"
+                        },
+                        "name": "a material-bind subset that resolves no material",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Root\" ( prepend apiSchemas = [\"MaterialBindingAPI\"] )\n{\n    # reported: a collection-based binding\n    rel material:binding:collection:full:metals = [\n        </Root/Looks/mtl_steel>, </Root.collection:metals> ]\n\n    def Scope \"Looks\"\n    {\n        def Material \"mtl_steel\"\n        {\n            token outputs:mtlx:surface.connect = </Root/Looks/mtl_steel/OpenPBR.outputs:out>\n\n            def Shader \"OpenPBR\"\n            {\n                uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n                color3f inputs:base_color = (0.35, 0.36, 0.38)\n                float inputs:base_metalness = 1\n                token outputs:out\n            }\n        }\n    }\n\n    def Mesh \"part\" ( prepend apiSchemas = [\"MaterialBindingAPI\"] )\n    {\n        rel material:binding = </Root/Looks/mtl_steel>\n    }\n}"
+                        },
+                        "name": "a collection-based binding",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Asset\" ( prepend apiSchemas = [\"MaterialBindingAPI\"] )\n{\n    rel material:binding = </Asset/Looks/mtl_steel> (\n        bindMaterialAs = \"strongerThanDescendants\"\n    )\n\n    def Scope \"Looks\"\n    {\n        def Material \"mtl_steel\"\n        {\n            token outputs:mtlx:surface.connect = </Asset/Looks/mtl_steel/OpenPBR.outputs:out>\n\n            def Shader \"OpenPBR\"\n            {\n                uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n                color3f inputs:base_color = (0.35, 0.36, 0.38)\n                float inputs:base_metalness = 1\n                token outputs:out\n            }\n        }\n    }\n\n    def Mesh \"part\"\n    {\n    }\n}"
+                        },
+                        "name": "a binding strength override, reported as a warning",
+                        "result": "failure"
+                    }
+                ]
+            },
+            {
+                "code": "VM.MDL.002",
+                "version": null,
+                "name": "material-mdl-schema",
+                "compatibility": "kit-107+",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "vm-mdl-002",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-mdl-schema.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-mdl-schema.md"
+                },
+                "message": "An MDL shader must use the current schema attributes, not the deprecated `mdlMaterial` form.This requirement is implemented by `usd-validation-nvidia`, which registers it as\n`com.nvidia.usd.VM.MDL.002` and binds it to `MaterialOldMdlSchemaChecker`. A feature manifest references that\ncode. The unprefixed code is not bound to a rule in this repository.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"mtl_test\"\n{\n    token outputs:surface.connect = </mtl_test/Shader.outputs:out>\n\n    def Shader \"Shader\"\n    {\n        uniform token info:implementationSource = \"mdlMaterial\"\n        custom asset module = @./OmniPBR.mdl@\n        custom string name = \"OmniPBR\"\n        token outputs:out\n    }\n}"
+                        },
+                        "name": "the deprecated MDL schema",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"mtl_test\"\n{\n    token outputs:surface.connect = </mtl_test/Shader.outputs:out>\n\n    def Shader \"Shader\"\n    {\n        uniform token info:implementationSource = \"sourceAsset\"\n        uniform asset info:mdl:sourceAsset = @./OmniPBR.mdl@\n        uniform token info:mdl:sourceAsset:subIdentifier = \"OmniPBR\"\n        token outputs:out\n    }\n}"
+                        },
+                        "name": "the current MDL schema",
+                        "result": "success"
+                    }
+                ]
+            },
+            {
+                "code": "VM.TEX.001",
+                "version": null,
+                "name": "material-texture-maxsize",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "vm-tex-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-texture-maxsize.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-texture-maxsize.md"
+                },
+                "message": "Texture dimensions must not exceed 16,384 pixels on either axis.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"opaque__metal__bracket\"\n{\n    token outputs:mdl:surface.connect = </opaque__metal__bracket/Shader.outputs:out>\n\n    def Shader \"Shader\"\n    {\n        uniform token info:implementationSource = \"sourceAsset\"\n        uniform asset info:mdl:sourceAsset = @./materials/OmniPBR/OmniPBR.mdl@\n        uniform token info:mdl:sourceAsset:subIdentifier = \"OmniPBR\"\n        asset inputs:diffuse_texture = @./textures/bracket_basecolor.png@              # 8192x8192\n        asset inputs:reflectionroughness_texture = @./textures/bracket_roughness.png@  # 4096x4096\n        asset inputs:normalmap_texture = @./textures/bracket_normal.png@               # 2048x2048\n        token outputs:out\n    }\n}"
+                        },
+                        "name": "three textures inside the limit",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"opaque__metal__bracket\"\n{\n    token outputs:mdl:surface.connect = </opaque__metal__bracket/Shader.outputs:out>\n\n    def Shader \"Shader\"\n    {\n        uniform token info:implementationSource = \"sourceAsset\"\n        uniform asset info:mdl:sourceAsset = @./materials/OmniPBR/OmniPBR.mdl@\n        uniform token info:mdl:sourceAsset:subIdentifier = \"OmniPBR\"\n        asset inputs:diffuse_texture = @./textures/bracket_basecolor_16k.png@  # 16384x16384\n        token outputs:out\n    }\n}"
+                        },
+                        "name": "exactly at the limit",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"opaque__metal__bracket\"\n{\n    token outputs:mdl:surface.connect = </opaque__metal__bracket/Shader.outputs:out>\n\n    def Shader \"Shader\"\n    {\n        uniform token info:implementationSource = \"sourceAsset\"\n        uniform asset info:mdl:sourceAsset = @./materials/OmniPBR/OmniPBR.mdl@\n        uniform token info:mdl:sourceAsset:subIdentifier = \"OmniPBR\"\n        asset inputs:diffuse_texture = @./textures/bracket_basecolor_32k.png@  # 32768x32768\n        token outputs:out\n    }\n}"
+                        },
+                        "name": "both dimensions above the limit",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"opaque__metal__bracket\"\n{\n    token outputs:mdl:surface.connect = </opaque__metal__bracket/Shader.outputs:out>\n\n    def Shader \"Shader\"\n    {\n        uniform token info:implementationSource = \"sourceAsset\"\n        uniform asset info:mdl:sourceAsset = @./materials/OmniPBR/OmniPBR.mdl@\n        uniform token info:mdl:sourceAsset:subIdentifier = \"OmniPBR\"\n        asset inputs:diffuse_texture = @./textures/bracket_basecolor_wide.png@  # 20000x8000\n        token outputs:out\n    }\n}"
+                        },
+                        "name": "one dimension above the limit",
+                        "result": "failure"
+                    }
+                ]
+            },
+            {
+                "code": "VM.PBR.001",
+                "version": null,
+                "name": "material-final-surface",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "vm-pbr-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-final-surface.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-final-surface.md"
+                },
+                "message": "A renderable GPrim's material must provide a physically based final surface.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Bracket\" ( kind = \"component\" )\n{\n    def Mesh \"Geo\" ( prepend apiSchemas = [\"MaterialBindingAPI\"] )\n    {\n        rel material:binding = </Bracket/mtl_bracket>\n    }\n\n    def Material \"mtl_bracket\"\n    {\n        token outputs:mtlx:surface.connect = </Bracket/mtl_bracket/OpenPBR.outputs:out>\n\n        def Shader \"OpenPBR\"\n        {\n            uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n            color3f inputs:base_color = (0.4, 0.4, 0.42)\n            float inputs:base_metalness = 1\n            float inputs:specular_roughness = 0.35\n            token outputs:out\n        }\n    }\n}"
+                        },
+                        "name": "an OpenPBR (MaterialX) final surface",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Bracket\" ( kind = \"component\" )\n{\n    def Mesh \"Geo\" ( prepend apiSchemas = [\"MaterialBindingAPI\"] )\n    {\n        rel material:binding = </Bracket/mtl_bracket>\n    }\n\n    def Material \"mtl_bracket\"\n    {\n        token outputs:mdl:surface.connect = </Bracket/mtl_bracket/OmniPBR.outputs:out>\n\n        def Shader \"OmniPBR\"\n        {\n            uniform token info:implementationSource = \"sourceAsset\"\n            uniform asset info:mdl:sourceAsset = @./materials/OmniPBR/OmniPBR.mdl@\n            uniform token info:mdl:sourceAsset:subIdentifier = \"OmniPBR\"\n            token outputs:out\n        }\n    }\n}"
+                        },
+                        "name": "an MDL final surface alone",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Bracket\" ( kind = \"component\" )\n{\n    def Mesh \"Geo\" ( prepend apiSchemas = [\"MaterialBindingAPI\"] )\n    {\n        rel material:binding = </Bracket/mtl_bracket>\n    }\n\n    def Material \"mtl_bracket\"\n    {\n        token outputs:surface.connect = </Bracket/mtl_bracket/Preview.outputs:surface>\n\n        def Shader \"Preview\"\n        {\n            uniform token info:id = \"UsdPreviewSurface\"\n            color3f inputs:diffuseColor = (0.4, 0.4, 0.42)\n            token outputs:surface\n        }\n    }\n}"
+                        },
+                        "name": "the bound material has only a preview surface",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Bracket\" ( kind = \"component\" )\n{\n    def Mesh \"Geo\" ( prepend apiSchemas = [\"MaterialBindingAPI\"] )\n    {\n        rel material:binding = </Bracket/mtl_bracket>\n    }\n\n    def Material \"mtl_bracket\"\n    {\n        token outputs:mtlx:surface.connect = </Bracket/mtl_bracket/StandardSurface.outputs:out>\n\n        def Shader \"StandardSurface\"\n        {\n            uniform token info:id = \"ND_standard_surface_surfaceshader\"\n            color3f inputs:base_color = (0.4, 0.4, 0.42)\n            token outputs:out\n        }\n    }\n}"
+                        },
+                        "name": "the mtlx surface is a MaterialX node other than OpenPBR",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n\ndef Material \"Aging_Copper\"\n{\n    token outputs:surface.connect = </Aging_Copper/Preview.outputs:surface>\n    token outputs:mtlx:surface.connect = </Aging_Copper/OpenPBR.outputs:out>\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        token outputs:out\n    }\n\n    def Shader \"Preview\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        token outputs:surface\n    }\n}"
+                        },
+                        "name": "an asset that is a material, with no geometry",
+                        "result": "success"
+                    }
+                ]
             },
             {
                 "code": "VM.MDL.001",
@@ -761,67 +601,227 @@
                 ]
             },
             {
-                "code": "VM.PBR.003",
+                "code": "VM.BIND.001",
                 "version": null,
-                "name": "material-shading-network-structure",
+                "name": "material-bind-scope",
                 "compatibility": "open-usd",
                 "tags": [
                     "correctness"
                 ],
-                "validator": "vm-pbr-003",
+                "validator": "vm-bind-001",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/visualization/materials/requirements/material-shading-network-structure.html",
-                    "internal_path": "capabilities/visualization/materials/requirements/material-shading-network-structure.md"
+                    "path": "capabilities/visualization/materials/requirements/material-bind-scope.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-bind-scope.md"
                 },
-                "message": "Shader ids must name a declared node, connections must have an existing target, and the material must connect a surface terminal.",
+                "message": "A material binding inside a payload must target a material inside that payload.This requirement is implemented by `usd-validation-nvidia`, which registers it as\n`com.nvidia.usd.VM.BIND.001` and binds it to `MaterialOutOfScopeChecker`. A feature manifest references that\ncode. The unprefixed code is not bound to a rule in this repository.",
                 "examples": [
                     {
                         "snippet": {
                             "language": "usd",
-                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:mtlx:surface.connect = </mtl_bracket/OpenPBR.outputs:out>\n\n    def Shader \"Tex\"\n    {\n        uniform token info:id = \"ND_image_color3\"\n        asset inputs:file = @./textures/bracket_basecolor.png@\n        color3f outputs:out\n    }\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        color3f inputs:base_color.connect = </mtl_bracket/Tex.outputs:out>\n        token outputs:out\n    }\n}"
+                            "content": "def Xform \"Root\"\n{\n    def Mesh \"Mesh\" (\n        prepend apiSchemas = [\"MaterialBindingAPI\"]\n    )\n    {\n        rel material:binding = </Material>\n    }\n}"
                         },
-                        "name": "a declared id, an existing connection target, and a connected terminal",
+                        "name": "a binding whose target is outside the payload",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Root\"\n{\n    def Material \"Material\"\n    {\n        token outputs:surface.connect = </Root/Material/Preview.outputs:surface>\n\n        def Shader \"Preview\"\n        {\n            uniform token info:id = \"UsdPreviewSurface\"\n            color3f inputs:diffuseColor = (0.18, 0.18, 0.18)\n            token outputs:surface\n        }\n    }\n\n    def Mesh \"Mesh\" (\n        prepend apiSchemas = [\"MaterialBindingAPI\"]\n    )\n    {\n        rel material:binding = </Root/Material>\n    }\n}"
+                        },
+                        "name": "a binding whose target is inside the payload",
+                        "result": "success"
+                    }
+                ]
+            },
+            {
+                "code": "VM.TEX.004",
+                "version": null,
+                "name": "material-texture-colorspace-openpbr",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-texture-colorspace-openpbr.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-texture-colorspace-openpbr.md"
+                },
+                "message": "OpenPBR materials and textures must use correct color space conventions",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:mtlx:surface.connect = </mtl_bracket/OpenPBR.outputs:out>\n\n    def Shader \"BaseColorTex\"\n    {\n        uniform token info:id = \"ND_image_color3\"\n        asset inputs:file = @./textures/bracket_basecolor.png@ (\n            colorSpace = \"srgb_texture\"\n        )\n        color3f outputs:out\n    }\n\n    def Shader \"RoughnessTex\"\n    {\n        uniform token info:id = \"ND_image_float\"\n        asset inputs:file = @./textures/bracket_roughness.png@ (\n            colorSpace = \"none\"\n        )\n        float outputs:out\n    }\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        color3f inputs:base_color.connect = </mtl_bracket/BaseColorTex.outputs:out>\n        float inputs:specular_roughness.connect = </mtl_bracket/RoughnessTex.outputs:out>\n        token outputs:out\n    }\n}"
+                        },
+                        "name": "`srgb_texture` on the color texture, `none` on the data texture",
                         "result": "success"
                     },
                     {
                         "snippet": {
                             "language": "usd",
-                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:mtlx:surface.connect = </mtl_bracket/OpenPBR.outputs:out>\n\n    def Shader \"Tex\"\n    {\n        uniform token info:id = \"ND_not_a_real_nodedef\"\n        color3f outputs:out\n    }\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        color3f inputs:base_color.connect = </mtl_bracket/Tex.outputs:out>\n        token outputs:out\n    }\n}"
+                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:mtlx:surface.connect = </mtl_bracket/OpenPBR.outputs:out>\n\n    def Shader \"UnusedTex\"\n    {\n        uniform token info:id = \"ND_image_color3\"\n        asset inputs:file = @./textures/bracket_spare.png@\n        color3f outputs:out\n    }\n\n    def Shader \"BaseColorTex\"\n    {\n        uniform token info:id = \"ND_image_color3\"\n        asset inputs:file = @./textures/bracket_basecolor.png@ (\n            colorSpace = \"srgb_texture\"\n        )\n        color3f outputs:out\n    }\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        color3f inputs:base_color.connect = </mtl_bracket/BaseColorTex.outputs:out>\n        token outputs:out\n    }\n}"
                         },
-                        "name": "an id that resolves to no nodedef",
+                        "name": "a texture in the same material that no surface input reaches",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:mtlx:surface.connect = </mtl_bracket/OpenPBR.outputs:out>\n\n    def Shader \"BaseColorTex\"\n    {\n        uniform token info:id = \"ND_image_color3\"\n        asset inputs:file = @./textures/bracket_basecolor.png@ (\n            colorSpace = \"srgb_rec709_scene\"\n        )\n        color3f outputs:out\n    }\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        color3f inputs:base_color.connect = </mtl_bracket/BaseColorTex.outputs:out>\n        token outputs:out\n    }\n}"
+                        },
+                        "name": "Warned: a color texture declaring `srgb_rec709_scene`, which is not resolved here",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:mtlx:surface.connect = </mtl_bracket/OpenPBR.outputs:out>\n\n    def Shader \"BaseColorTex\"\n    {\n        uniform token info:id = \"ND_image_color3\"\n        asset inputs:file = @./textures/bracket_basecolor.png@\n        color3f outputs:out\n    }\n\n    def Shader \"Tint\"\n    {\n        uniform token info:id = \"ND_multiply_color3\"\n        color3f inputs:in1.connect = </mtl_bracket/BaseColorTex.outputs:out>\n        color3f inputs:in2 = (0.9, 0.9, 1)\n        color3f outputs:out\n    }\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        color3f inputs:base_color.connect = </mtl_bracket/Tint.outputs:out>\n        token outputs:out\n    }\n}"
+                        },
+                        "name": "a color texture declaring no color space, reached through a multiply node",
                         "result": "failure"
                     },
                     {
                         "snippet": {
                             "language": "usd",
-                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:mtlx:surface.connect = </mtl_bracket/OpenPBR.outputs:out>\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        color3f inputs:base_color.connect = </mtl_bracket/Missing.outputs:out>\n        token outputs:out\n    }\n}"
+                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:mtlx:surface.connect = </mtl_bracket/OpenPBR.outputs:out>\n\n    def Shader \"RoughnessTex\"\n    {\n        uniform token info:id = \"ND_image_float\"\n        asset inputs:file = @./textures/bracket_roughness.png@ (\n            colorSpace = \"srgb_texture\"\n        )\n        float outputs:out\n    }\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        float inputs:specular_roughness.connect = </mtl_bracket/RoughnessTex.outputs:out>\n        token outputs:out\n    }\n}"
                         },
-                        "name": "an input connected to a prim that is not in the material",
+                        "name": "a data texture declaring `srgb_texture`",
+                        "result": "failure"
+                    }
+                ]
+            },
+            {
+                "code": "VM.PS.001",
+                "version": null,
+                "name": "material-preview-surface",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "vm-ps-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-preview-surface.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-preview-surface.md"
+                },
+                "message": "UsdPreviewSurface inputs must use the types and token values the specification declares.This requirement is implemented by `usd-validation-nvidia`, which registers it as\n`com.nvidia.usd.VM.PS.001` and binds it to `MaterialUsdPreviewSurfaceChecker`. A feature manifest references that\ncode. The unprefixed code is not bound to a rule in this repository.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"mtl_cube\"\n{\n    def Shader \"PreviewSurfaceTexture\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        float inputs:specular.connect = </mtl_cube/SpecularTex.outputs:r>\n        token outputs:surface\n    }\n\n    def Shader \"SpecularTex\"\n    {\n        uniform token info:id = \"UsdUVTexture\"\n        asset inputs:file = @./textures/specular.png@\n        uniform token inputs:sourceColorSpace = \"bad\"\n        float outputs:r\n    }\n}"
+                        },
+                        "name": "an input outside the specification, and a colour space outside the allowed tokens",
                         "result": "failure"
                     },
                     {
                         "snippet": {
                             "language": "usd",
-                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:mtlx:surface.connect = </mtl_bracket/OpenPBR.outputs:out>\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        float inputs:base_color = 0.35\n        token outputs:out\n    }\n}"
+                            "content": "def Material \"mtl_sphere\"\n{\n    def Shader \"Shader\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        color3f inputs:metallic = (0.5, 0.5, 0.5)\n        token outputs:surface\n    }\n\n    def Shader \"roughnessTex\"\n    {\n        uniform token info:id = \"UsdUVTexture\"\n        asset inputs:file = @./textures/roughness.png@\n        uniform token inputs:wrapT.timeSamples = {\n            0: \"invalid_wrap\",\n            1: \"another_invalid\"\n        }\n        float outputs:r\n    }\n}"
                         },
-                        "name": "an authored type the nodedef does not declare",
+                        "name": "an input of the wrong type, and a token carrying time samples",
                         "result": "failure"
                     },
                     {
                         "snippet": {
                             "language": "usd",
-                            "content": "def Material \"mtl_bracket\"\n{\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        color3f inputs:base_color = (0.35, 0.36, 0.38)\n        token outputs:out\n    }\n}"
+                            "content": "def Material \"mtl_cube\"\n{\n    token outputs:surface.connect = </mtl_cube/PreviewSurfaceTexture.outputs:surface>\n\n    def Shader \"PreviewSurfaceTexture\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        float inputs:clearcoat = 0\n        float inputs:clearcoatRoughness = 0\n        color3f inputs:diffuseColor.connect = </mtl_cube/diffuseColorTex.outputs:rgb>\n        float inputs:displacement = 0\n        token outputs:surface\n    }\n\n    def Shader \"diffuseColorTex\"\n    {\n        uniform token info:id = \"UsdUVTexture\"\n        asset inputs:file = @./textures/color.png@\n        uniform token inputs:sourceColorSpace = \"auto\"\n        uniform token inputs:wrapS = \"useMetadata\"\n        uniform token inputs:wrapT = \"useMetadata\"\n        float3 outputs:rgb\n    }\n}"
                         },
-                        "name": "no surface terminal in any render context",
+                        "name": "every input in the specification, with the declared type",
+                        "result": "success"
+                    }
+                ]
+            },
+            {
+                "code": "VM.TEX.003",
+                "version": null,
+                "name": "material-texture-colorspace-preview",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-texture-colorspace-preview.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-texture-colorspace-preview.md"
+                },
+                "message": "UsdPreviewSurface materials and textures must use correct color space conventions",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:surface.connect = </mtl_bracket/Preview.outputs:surface>\n\n    def Shader \"BaseColorTex\"\n    {\n        uniform token info:id = \"UsdUVTexture\"\n        asset inputs:file = @./textures/bracket_basecolor.png@\n        token inputs:sourceColorSpace = \"sRGB\"\n        float3 outputs:rgb\n    }\n\n    def Shader \"RoughnessTex\"\n    {\n        uniform token info:id = \"UsdUVTexture\"\n        asset inputs:file = @./textures/bracket_roughness.png@\n        token inputs:sourceColorSpace = \"raw\"\n        float outputs:r\n    }\n\n    def Shader \"Preview\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        color3f inputs:diffuseColor.connect = </mtl_bracket/BaseColorTex.outputs:rgb>\n        float inputs:roughness.connect = </mtl_bracket/RoughnessTex.outputs:r>\n        token outputs:surface\n    }\n}"
+                        },
+                        "name": "a color texture and a data texture each declaring what its signal needs",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:surface.connect = </mtl_bracket/Preview.outputs:surface>\n\n    def Shader \"NormalTex\"\n    {\n        uniform token info:id = \"UsdUVTexture\"\n        asset inputs:file = @./textures/bracket_normal.png@\n        token inputs:sourceColorSpace = \"sRGB\"\n        float3 outputs:rgb\n    }\n\n    def Shader \"Preview\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        normal3f inputs:normal.connect = </mtl_bracket/NormalTex.outputs:rgb>\n        token outputs:surface\n    }\n}"
+                        },
+                        "name": "a texture reaching `normal` and declaring `sRGB`",
                         "result": "failure"
                     },
                     {
                         "snippet": {
                             "language": "usd",
-                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:mtlx:surface.connect = </mtl_bracket/Surface.outputs:out>\n\n    def Shader \"OpenPBR\"\n    {\n        uniform token info:id = \"ND_open_pbr_surface_surfaceshader\"\n        color3f inputs:base_color = (0.35, 0.36, 0.38)\n        token outputs:out\n    }\n}"
+                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:surface.connect = </mtl_bracket/Preview.outputs:surface>\n\n    def Shader \"BaseColorTex\"\n    {\n        uniform token info:id = \"UsdUVTexture\"\n        asset inputs:file = @./textures/bracket_basecolor.png@\n        token inputs:sourceColorSpace = \"raw\"\n        float3 outputs:rgb\n    }\n\n    def Shader \"Preview\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        color3f inputs:diffuseColor.connect = </mtl_bracket/BaseColorTex.outputs:rgb>\n        token outputs:surface\n    }\n}"
                         },
-                        "name": "a surface terminal connected to a missing shader",
+                        "name": "linear albedo reaching `diffuseColor` and declaring `raw`",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:surface.connect = </mtl_bracket/Preview.outputs:surface>\n\n    def Shader \"RoughnessTex\"\n    {\n        uniform token info:id = \"UsdUVTexture\"\n        asset inputs:file = @./textures/bracket_roughness.png@\n        token inputs:sourceColorSpace = \"auto\"\n        float outputs:r\n    }\n\n    def Shader \"Preview\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        float inputs:roughness.connect = </mtl_bracket/RoughnessTex.outputs:r>\n        token outputs:surface\n    }\n}"
+                        },
+                        "name": "a three-channel roughness map left to `auto`",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"mtl_bracket\"\n{\n    token outputs:surface.connect = </mtl_bracket/Preview.outputs:surface>\n\n    def Shader \"RoughnessTex\"\n    {\n        uniform token info:id = \"UsdUVTexture\"\n        asset inputs:file = @./textures/bracket_roughness.png@\n        token inputs:sourceColorSpace = \"linear\"\n        float outputs:r\n    }\n\n    def Shader \"Preview\"\n    {\n        uniform token info:id = \"UsdPreviewSurface\"\n        float inputs:roughness.connect = </mtl_bracket/RoughnessTex.outputs:r>\n        token outputs:surface\n    }\n}"
+                        },
+                        "name": "a token outside the `UsdUVTexture` vocabulary",
+                        "result": "failure"
+                    }
+                ]
+            },
+            {
+                "code": "VM.MDL.003",
+                "version": null,
+                "name": "material-mdl-surface-present",
+                "compatibility": "omniverse",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "vm-mdl-003",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/materials/requirements/material-mdl-surface-present.html",
+                    "internal_path": "capabilities/visualization/materials/requirements/material-mdl-surface-present.md"
+                },
+                "message": "A renderable GPrim's material must connect an MDL surface on `outputs:mdl:surface`.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"Chrome\"\n{\n    token outputs:surface.connect = </World/Looks/Chrome/Preview.outputs:surface>\n    token outputs:mdl:surface.connect = </World/Looks/Chrome/Mdl.outputs:out>\n\n    def Shader \"Mdl\"\n    {\n        uniform token info:implementationSource = \"sourceAsset\"\n        uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@\n        uniform token info:mdl:sourceAsset:subIdentifier = \"OmniPBR\"\n        token outputs:out\n    }\n}"
+                        },
+                        "name": "a bound material connects the MDL terminal",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Material \"Chrome\"\n{\n    token outputs:surface.connect = </World/Looks/Chrome/Preview.outputs:surface>\n}"
+                        },
+                        "name": "a preview surface alone",
                         "result": "failure"
                     }
                 ]

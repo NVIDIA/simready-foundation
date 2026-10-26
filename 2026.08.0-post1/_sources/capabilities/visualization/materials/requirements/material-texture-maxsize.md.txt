@@ -138,4 +138,4 @@ Either axis is enough: 20,000 wide is reported although the height is well insid
 - [Direct3D 11 resource limits](https://learn.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-resources-limits)
 - [Vulkan required limits](https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-required)
 - [USD Asset Path Resolution](https://openusd.org/release/api/ar_page_front.html)
-- [Texture Optimization Best Practices](https://developer.nvidia.com/texture-optimization)
+- [RTX Texture Compression Settings](https://docs.omniverse.nvidia.com/materials-and-rendering/latest/rtx-renderer_common.html#texture-compression-settings)

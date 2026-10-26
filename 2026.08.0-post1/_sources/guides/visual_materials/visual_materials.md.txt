@@ -976,7 +976,7 @@ still has to make by looking at the frames.
 ## Where to go next
 
 - [FET006 OpenPBR Materials](../../features/FET_006_OPENPBR.md) and [FET010 Display Color](../../features/FET_010_STANDARD.md) for the two contracts in full.
-- [Visual Materials capability](../../capabilities/visualization/materials/requirements/material-final-surface.md) for VM.PBR.001, and [Display Color capability](../../capabilities/visualization/display_color/capability-display_color.md) for DISP.001 to DISP.003.
+- [Final Surface requirement](../../capabilities/visualization/materials/requirements/material-final-surface.md) for VM.PBR.001, and [Display Color capability](../../capabilities/visualization/display_color/capability-display_color.md) for DISP.001 to DISP.003.
 - [FET006 Materials](../benchmark/tests/fet006-materials.md) and [FET010 Display Color](../benchmark/tests/fet010-display-color.md) for the benchmark families and what each test guards against.
 - [SimReady Validation Workflow](../validate_workflow.md) for validator setup, JSON reports and stamping.
 - [Profiles](../../profiles/profiles.md) for which profiles select these features and at which version.

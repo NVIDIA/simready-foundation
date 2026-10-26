@@ -917,9 +917,9 @@ requires physics, grasp support, and semantic labels, but not articulated
 joints.</p>
 <p>Without explicit layers these concerns blur together and assets silently break
 across pipelines. See each concept in depth:
-<a class="reference internal" href="features/features.html"><span class="std std-doc">Features</span></a> |
+<a class="reference internal" href="../features/features.html"><span class="std std-doc">Features</span></a> |
 <a class="reference internal" href="../capabilities/capabilities.html"><span class="std std-doc">Capabilities</span></a> |
-<a class="reference internal" href="profiles/profiles.html"><span class="std std-doc">Profiles</span></a></p>
+<a class="reference internal" href="../profiles/profiles.html"><span class="std std-doc">Profiles</span></a></p>
 <p>Each layer references the one below it, so any failure traces to the exact USD
 property at fault — and new layers extend the spec without breaking existing
 profiles.</p>
@@ -1006,10 +1006,10 @@ domains are relevant.</p></li>
 <td><p>You can validate immediately. Jump to Q3.</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>URDF</strong> (common in robotics)</p></td>
-<td><p>Import into USD using the <a class="reference external" href="https://github.com/isaac-sim/urdf-importer-extension">URDF Importer Extension</a>. See the <a class="reference download internal" download="" href="../_downloads/dfd2e36da68c835395db2fe06ed69036/ur10.usd"><span class="xref download myst">UR10 sample</span></a> for the expected USD output, and <a class="reference internal" href="../capabilities/physics_bodies/physics_rigid_bodies/creators.html"><span class="std std-doc">rigid-body creators guide</span></a> for details. Convert first, then continue to Q3.</p></td>
+<td><p>Import into USD using the <a class="reference external" href="https://github.com/isaac-sim/IsaacSim/tree/main/source/extensions/isaacsim.asset.importer.urdf">URDF Importer Extension</a>. See the <a class="reference download internal" download="" href="../_downloads/dfd2e36da68c835395db2fe06ed69036/ur10.usd"><span class="xref download myst">UR10 sample</span></a> for the expected USD output, and <a class="reference internal" href="../capabilities/physics_bodies/physics_rigid_bodies/creators.html"><span class="std std-doc">rigid-body creators guide</span></a> for details. Convert first, then continue to Q3.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>MJCF</strong> (MuJoCo)</p></td>
-<td><p>See the <a class="reference download internal" download="" href="../_downloads/7081323ad44d9712fcb053342360cfe9/ur10.urdf"><span class="xref download myst">UR10 URDF source</span></a> alongside its <a class="reference download internal" download="" href="../_downloads/dfd2e36da68c835395db2fe06ed69036/ur10.usd"><span class="xref download myst">SimReady USD output</span></a> for the conversion pattern. Convert first, then continue to Q3.</p></td>
+<td><p>See the <a class="reference download internal" download="" href="../_downloads/92724c088e352e8229bad4efcb1a0019/ur10e.xml"><span class="xref download myst">UR10 MJCF sample</span></a> for a source model and the <a class="reference download internal" download="" href="../_downloads/dfd2e36da68c835395db2fe06ed69036/ur10.usd"><span class="xref download myst">SimReady USD sample</span></a> for the target asset structure. Convert first, then continue to Q3.</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>CAD (STEP, Fusion 360, etc.)</strong></p></td>
 <td><p>Export to OpenUSD via <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_cad-converter.html">Omniverse CAD Converter</a> or <a class="reference external" href="https://docs.blender.org/manual/en/latest/files/import_export/usd.html">Blender USD export</a>. See the <a class="reference internal" href="../capabilities/visualization/geometry/creators_overview.html"><span class="std std-doc">geometry creators guide</span></a> for supported CAD paths. Convert first, then continue to Q3.</p></td>
@@ -1041,7 +1041,7 @@ domains are relevant.</p></li>
 <td><p>Rigid-body physics, multi-body simulation, grasp-ready colliders, and optional runtime variants. For PhysX + Newton (+ MuJoCo) on one asset, see <a class="reference internal" href="multiphysics_solvers.html"><span class="std std-doc">Multiple Physics Solvers</span></a>.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>A robot gripper or end effector</strong></p></td>
-<td><p><a class="reference internal" href="../profiles/profiles.html#id1"><span class="std std-ref">Robot-Gripper</span></a></p></td>
+<td><p><a class="reference internal" href="../profiles/robot-gripper.html"><span class="std std-doc">Robot-Gripper</span></a></p></td>
 <td><p>Robot-body physics plus optional gripper-site and runtime-specific contracts.</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Something else</strong> (vehicle, deformable, environment)</p></td>
@@ -1063,7 +1063,7 @@ domains are relevant.</p></li>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>Validate</strong> that an existing USD asset meets a profile</p></td>
-<td><p>SimReady learning workflow — includes setup, running the validator, and reading results.</p></td>
+<td><p><a class="reference internal" href="validate_workflow.html"><span class="std std-doc">SimReady Validation Workflow</span></a> — includes setup, running the validator, and reading results.</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Author</strong> a new asset from scratch</p></td>
 <td><p>Study the sample assets in <code class="docutils literal notranslate"><span class="pre">sample_content/common_assets/</span></code> for structure, then validate against your target profile.</p></td>
@@ -1075,7 +1075,7 @@ domains are relevant.</p></li>
 <td><p><a class="reference internal" href="SimReady_learning_workflow.html"><span class="std std-doc">SimReady Learning Workflow</span></a> — walks through adding a requirement, rule, and feature end-to-end.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Integrate</strong> SimReady validation into a pipeline or CI system</p></td>
-<td><p>Start with the <a class="reference internal" href="SimReady_learning_workflow.html"><span class="std std-doc">SimReady Learning Workflow</span></a> to understand the validator, then integrate the validation step into your build.</p></td>
+<td><p>Start with the <a class="reference internal" href="validate_workflow.html"><span class="std std-doc">SimReady Validation Workflow</span></a> to run the validator and save JSON results, then integrate the validation step into your build.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1109,8 +1109,8 @@ domains are relevant.</p></li>
 <hr class="docutils" />
 <p><strong>Still not sure?</strong> Browse the <a class="reference internal" href="../profiles/profiles.html"><span class="std std-doc">full profile comparison</span></a>
 to see what the foundation covers today, or jump into the
-<a class="reference internal" href="SimReady_learning_workflow.html"><span class="std std-doc">SimReady Learning Workflow</span></a> to try it hands-on
-with the sample validator.</p>
+<a class="reference internal" href="validate_workflow.html"><span class="std std-doc">SimReady Validation Workflow</span></a> to try it hands-on
+with a sample asset.</p>
 </section>
 </section>
 <section id="terminology-concepts">

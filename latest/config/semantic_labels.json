@@ -4,6 +4,40 @@
         "version": "1.0.0",
         "requirements": [
             {
+                "code": "SL.MAT.001",
+                "version": null,
+                "name": "semantic-label-material",
+                "compatibility": "omniverse",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "sl-mat-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/semantic_labels/requirements/semantic-label-material.html",
+                    "internal_path": "capabilities/semantic_labels/requirements/semantic-label-material.md"
+                },
+                "message": "Visual material prims must be labeled with a non-empty `SemanticsLabelsAPI:material` label.",
+                "examples": []
+            },
+            {
+                "code": "SL.001",
+                "version": null,
+                "name": "semantic-label-capability",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "sl-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/semantic_labels/requirements/semantic-label-capability.html",
+                    "internal_path": "capabilities/semantic_labels/requirements/semantic-label-capability.md"
+                },
+                "message": "All renderable geometry must be semantically labeled.",
+                "examples": []
+            },
+            {
                 "code": "SL.TIME.001",
                 "version": null,
                 "name": "semantic-label-time",
@@ -69,40 +103,6 @@
                     "internal_path": "capabilities/semantic_labels/requirements/semantic-label-qcode-valid.md"
                 },
                 "message": "If the Wikidata ontology is used, Q-Codes must be well-formed (`Q` followed by one or more digits). Values should reference a real Wikidata entity, but the validator checks format only \u2014 it does not contact wikidata.org.",
-                "examples": []
-            },
-            {
-                "code": "SL.001",
-                "version": null,
-                "name": "semantic-label-capability",
-                "compatibility": "core-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "sl-001",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/semantic_labels/requirements/semantic-label-capability.html",
-                    "internal_path": "capabilities/semantic_labels/requirements/semantic-label-capability.md"
-                },
-                "message": "All renderable geometry must be semantically labeled.",
-                "examples": []
-            },
-            {
-                "code": "SL.MAT.001",
-                "version": null,
-                "name": "semantic-label-material",
-                "compatibility": "omniverse",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": "sl-mat-001",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/semantic_labels/requirements/semantic-label-material.html",
-                    "internal_path": "capabilities/semantic_labels/requirements/semantic-label-material.md"
-                },
-                "message": "Visual material prims must be labeled with a non-empty `SemanticsLabelsAPI:material` label.",
                 "examples": []
             }
         ],

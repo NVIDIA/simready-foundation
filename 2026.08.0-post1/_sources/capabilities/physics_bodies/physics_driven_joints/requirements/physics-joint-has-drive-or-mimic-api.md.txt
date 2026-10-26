@@ -86,5 +86,5 @@ def PhysicsPrismaticJoint "finger_right" (
 ## For More Information
 
 * [PhysX Drive API Documentation](https://openusd.org/dev/api/class_usd_physics_drive_a_p_i.html)
-* [PhysX Mimic API Documentation](https://openusd.org/dev/api/class_usd_physics_mimic_a_p_i.html)
+* [PhysX Mimic API Documentation](https://docs.omniverse.nvidia.com/kit/docs/omni_usd_schema_physics/latest/physxschema/class_physx_schema_physx_mimic_joint_a_p_i.html)
 * [PhysxSchemaJointStateAPI Class Reference](https://docs.omniverse.nvidia.com/kit/docs/omni_usd_schema_physics/latest/physxschema/class_physx_schema_joint_state_a_p_i.html)

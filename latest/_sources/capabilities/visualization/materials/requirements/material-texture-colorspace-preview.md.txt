@@ -42,7 +42,7 @@ holds no evidence of it.
 
 The other three appearance formats declare color space elsewhere, in a different vocabulary,
 with a different default. MDL is
-[`VM.TEX.002`](/capabilities/visualization/materials/requirements/material-texture-colorspace-mdl)
+[`VM.TEX.005`](/capabilities/visualization/materials/requirements/material-texture-colorspace-mdl)
 and OpenPBR is
 [`VM.TEX.004`](/capabilities/visualization/materials/requirements/material-texture-colorspace-openpbr);
 the [requirements overview](../requirements) states all four side by side.

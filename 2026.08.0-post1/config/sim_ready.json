@@ -38,23 +38,6 @@
                 "examples": []
             },
             {
-                "code": "SR.001",
-                "version": null,
-                "name": "metadata-whitelist",
-                "compatibility": "core-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "sr-001",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/core/sim_ready/requirements/metadata-whitelist.html",
-                    "internal_path": "capabilities/core/sim_ready/requirements/metadata-whitelist.md"
-                },
-                "message": "The asset stage must contain all required metadata fields in root-layer `customLayerData`.",
-                "examples": []
-            },
-            {
                 "code": "SR.002",
                 "version": null,
                 "name": "thumbnail-exist",
@@ -69,6 +52,23 @@
                     "internal_path": "capabilities/core/sim_ready/requirements/thumbnail-exist.md"
                 },
                 "message": "The SimReady asset file should contain a thumbnail that is representative of the asset.",
+                "examples": []
+            },
+            {
+                "code": "SR.001",
+                "version": null,
+                "name": "metadata-whitelist",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "sr-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/sim_ready/requirements/metadata-whitelist.html",
+                    "internal_path": "capabilities/core/sim_ready/requirements/metadata-whitelist.md"
+                },
+                "message": "The asset stage must contain all required metadata fields in root-layer `customLayerData`.",
                 "examples": []
             }
         ],

@@ -4,6 +4,23 @@
         "version": "1.0.0",
         "requirements": [
             {
+                "code": "HI.005",
+                "version": null,
+                "name": "xform-common-api-usage",
+                "compatibility": "core-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/hierarchy/requirements/xform-common-api-usage.html",
+                    "internal_path": "capabilities/hierarchy/requirements/xform-common-api-usage.md"
+                },
+                "message": "Transformations (translate, rotate, scale, pivot) on prims that are intended to be translated, rotated or scaled by users (e.g. the root prim of an asset) should conform to the UsdGeomXformCommonAPI.",
+                "examples": []
+            },
+            {
                 "code": "HI.007",
                 "version": null,
                 "name": "dummy-requirement",
@@ -18,6 +35,23 @@
                     "internal_path": "capabilities/hierarchy/requirements/dummy-requirement.md"
                 },
                 "message": "This is a placeholder requirement to maintain sequential numbering in the hierarchy requirements.",
+                "examples": []
+            },
+            {
+                "code": "HI.003",
+                "version": null,
+                "name": "root-is-xformable",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/hierarchy/requirements/root-is-xformable.html",
+                    "internal_path": "capabilities/hierarchy/requirements/root-is-xformable.md"
+                },
+                "message": "The root prim of a hierarchy must be transformable, meaning its' prim type must inherit from UsdGeomXformable and be capable of receiving transform operations.",
                 "examples": []
             },
             {
@@ -55,6 +89,23 @@
                 "examples": []
             },
             {
+                "code": "HI.004",
+                "version": null,
+                "name": "stage-has-default-prim",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/hierarchy/requirements/stage-has-default-prim.html",
+                    "internal_path": "capabilities/hierarchy/requirements/stage-has-default-prim.md"
+                },
+                "message": "Stage must specify a default prim to define the root entry point.",
+                "examples": []
+            },
+            {
                 "code": "HI.009",
                 "version": null,
                 "name": "kinematic-chain-hierarchy",
@@ -69,57 +120,6 @@
                     "internal_path": "capabilities/hierarchy/requirements/kinematic-chain-hierarchy.md"
                 },
                 "message": "For assets (e.g., a robot with multiple articulated joints), the hierarchy should reflect the kinematic chain, with appropriate Xforms for each transformable link.",
-                "examples": []
-            },
-            {
-                "code": "HI.001",
-                "version": null,
-                "name": "hierarchy-has-root",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/hierarchy/requirements/hierarchy-has-root.html",
-                    "internal_path": "capabilities/hierarchy/requirements/hierarchy-has-root.md"
-                },
-                "message": "All prims in the hierarchy must be direct or indirect descendents of a single root root prim, preventing scattered or disconnected Xform hierarchies.",
-                "examples": []
-            },
-            {
-                "code": "HI.003",
-                "version": null,
-                "name": "root-is-xformable",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/hierarchy/requirements/root-is-xformable.html",
-                    "internal_path": "capabilities/hierarchy/requirements/root-is-xformable.md"
-                },
-                "message": "The root prim of a hierarchy must be transformable, meaning its' prim type must inherit from UsdGeomXformable and be capable of receiving transform operations.",
-                "examples": []
-            },
-            {
-                "code": "HI.005",
-                "version": null,
-                "name": "xform-common-api-usage",
-                "compatibility": "core-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/hierarchy/requirements/xform-common-api-usage.html",
-                    "internal_path": "capabilities/hierarchy/requirements/xform-common-api-usage.md"
-                },
-                "message": "Transformations (translate, rotate, scale, pivot) on prims that are intended to be translated, rotated or scaled by users (e.g. the root prim of an asset) should conform to the UsdGeomXformCommonAPI.",
                 "examples": []
             },
             {
@@ -140,23 +140,6 @@
                 "examples": []
             },
             {
-                "code": "HI.004",
-                "version": null,
-                "name": "stage-has-default-prim",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/hierarchy/requirements/stage-has-default-prim.html",
-                    "internal_path": "capabilities/hierarchy/requirements/stage-has-default-prim.md"
-                },
-                "message": "Stage must specify a default prim to define the root entry point.",
-                "examples": []
-            },
-            {
                 "code": "HI.010",
                 "version": null,
                 "name": "undefined-prims",
@@ -171,6 +154,23 @@
                     "internal_path": "capabilities/hierarchy/requirements/undefined-prims.md"
                 },
                 "message": "Assets must not contain undefined prims (overs)",
+                "examples": []
+            },
+            {
+                "code": "HI.001",
+                "version": null,
+                "name": "hierarchy-has-root",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/hierarchy/requirements/hierarchy-has-root.html",
+                    "internal_path": "capabilities/hierarchy/requirements/hierarchy-has-root.md"
+                },
+                "message": "All prims in the hierarchy must be direct or indirect descendents of a single root root prim, preventing scattered or disconnected Xform hierarchies.",
                 "examples": []
             }
         ],

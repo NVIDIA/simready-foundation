@@ -103,6 +103,6 @@ def "Chair" (
 
 ## For More Information
 
-- [USD Asset Packaging Best Practices](https://openusd.org/release/tut_usd_best_practices.html#asset-packaging)
+- [Learn OpenUSD: Modular Asset Structure](https://docs.nvidia.com/learn-openusd/latest/asset-structure/asset-structure-principles/why-necessary.html#modularity)
 - [USD References and Payloads](https://openusd.org/release/api/class_usd_references.html)
-- [USD Layer Composition](https://openusd.org/release/api/class_usd_layer.html)
+- [SdfLayer Class Reference](https://openusd.org/release/api/class_sdf_layer.html)

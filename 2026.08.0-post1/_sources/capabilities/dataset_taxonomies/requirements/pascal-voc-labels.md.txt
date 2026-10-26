@@ -73,4 +73,4 @@ def Xform "ThingC" (
 ## For More Information
 
 - [PASCAL VOC (20) dataset](http://host.robots.ox.ac.uk/pascal/VOC/)
-- [USD Semantics Documentation](https://openusd.org/release/api/usd_semantics_page_front.html)
+- [USD Semantics Documentation](https://openusd.org/release/api/usd_semantics_overview.html)

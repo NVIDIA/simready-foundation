@@ -4,23 +4,6 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "AM.004",
-                "version": null,
-                "name": "physical-dimensions-metadata",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "am-004",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/aif/metadata/requirements/physical-dimensions-metadata.html",
-                    "internal_path": "capabilities/aif/metadata/requirements/physical-dimensions-metadata.md"
-                },
-                "message": "The default prim must have all seven physical dimension attributes: `aif:core:height`, `aif:core:width`, `aif:core:depth`, `aif:core:weight`, `aif:core:overallGeometryDimensions`, `aif:core:installationClearance`, and `aif:core:accessibilityRequirement`.",
-                "examples": []
-            },
-            {
                 "code": "AM.003",
                 "version": null,
                 "name": "asset-identification-metadata",
@@ -35,57 +18,6 @@
                     "internal_path": "capabilities/aif/metadata/requirements/asset-identification-metadata.md"
                 },
                 "message": "The default prim must have `aif:core:manufacturer`, `aif:core:modelNumber`, and `aif:core:assetVersion` attributes.",
-                "examples": []
-            },
-            {
-                "code": "AM.005",
-                "version": null,
-                "name": "simready-version-tracking",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "am-005",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/aif/metadata/requirements/simready-version-tracking.html",
-                    "internal_path": "capabilities/aif/metadata/requirements/simready-version-tracking.md"
-                },
-                "message": "The default prim must have an `aif:core:simreadyVersion` attribute recording the SimReady specification version the asset was created against.",
-                "examples": []
-            },
-            {
-                "code": "AM.002",
-                "version": null,
-                "name": "asset-class-required",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "am-002",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/aif/metadata/requirements/asset-class-required.html",
-                    "internal_path": "capabilities/aif/metadata/requirements/asset-class-required.md"
-                },
-                "message": "The default prim in the properties sublayer must have an `aif:core:assetClass` attribute identifying the equipment type.",
-                "examples": []
-            },
-            {
-                "code": "AM.007",
-                "version": null,
-                "name": "equipment-class-template-compliance",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "am-007",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/aif/metadata/requirements/equipment-class-template-compliance.html",
-                    "internal_path": "capabilities/aif/metadata/requirements/equipment-class-template-compliance.md"
-                },
-                "message": "The default prim must carry every `aif:spec:*` attribute that its declared equipment class defines.",
                 "examples": []
             },
             {
@@ -106,6 +38,57 @@
                 "examples": []
             },
             {
+                "code": "AM.005",
+                "version": null,
+                "name": "simready-version-tracking",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "am-005",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/aif/metadata/requirements/simready-version-tracking.html",
+                    "internal_path": "capabilities/aif/metadata/requirements/simready-version-tracking.md"
+                },
+                "message": "The default prim must have an `aif:core:simreadyVersion` attribute recording the SimReady specification version the asset was created against.",
+                "examples": []
+            },
+            {
+                "code": "AM.004",
+                "version": null,
+                "name": "physical-dimensions-metadata",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "am-004",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/aif/metadata/requirements/physical-dimensions-metadata.html",
+                    "internal_path": "capabilities/aif/metadata/requirements/physical-dimensions-metadata.md"
+                },
+                "message": "The default prim must have all seven physical dimension attributes: `aif:core:height`, `aif:core:width`, `aif:core:depth`, `aif:core:weight`, `aif:core:overallGeometryDimensions`, `aif:core:installationClearance`, and `aif:core:accessibilityRequirement`.",
+                "examples": []
+            },
+            {
+                "code": "AM.002",
+                "version": null,
+                "name": "asset-class-required",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "am-002",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/aif/metadata/requirements/asset-class-required.html",
+                    "internal_path": "capabilities/aif/metadata/requirements/asset-class-required.md"
+                },
+                "message": "The default prim in the properties sublayer must have an `aif:core:assetClass` attribute identifying the equipment type.",
+                "examples": []
+            },
+            {
                 "code": "AM.001",
                 "version": null,
                 "name": "properties-sublayer-required",
@@ -120,6 +103,23 @@
                     "internal_path": "capabilities/aif/metadata/requirements/properties-sublayer-required.md"
                 },
                 "message": "The USD stage must include a sublayer with \"properties\" in its filename (e.g., `AssetName_Properties.usda`) and that sublayer must specify a `defaultPrim`.",
+                "examples": []
+            },
+            {
+                "code": "AM.007",
+                "version": null,
+                "name": "equipment-class-template-compliance",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "am-007",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/aif/metadata/requirements/equipment-class-template-compliance.html",
+                    "internal_path": "capabilities/aif/metadata/requirements/equipment-class-template-compliance.md"
+                },
+                "message": "The default prim must carry every `aif:spec:*` attribute that its declared equipment class defines.",
                 "examples": []
             }
         ],

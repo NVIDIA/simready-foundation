@@ -80,5 +80,5 @@ def "Chair" (
 
 - [USD References and Payloads](https://openusd.org/release/api/class_usd_references.html)
 - [USD Asset Resolution](https://openusd.org/release/api/ar_page_front.html)
-- [USD Layer Composition](https://openusd.org/release/api/class_usd_layer.html)
+- [SdfLayer Class Reference](https://openusd.org/release/api/class_sdf_layer.html)
 

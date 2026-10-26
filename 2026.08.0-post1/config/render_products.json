@@ -4,23 +4,6 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "RP.001",
-                "version": null,
-                "name": "render-product-camera",
-                "compatibility": null,
-                "tags": [
-                    "essential"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/rendering/render_products/requirements/render-product-camera.html",
-                    "internal_path": "capabilities/rendering/render_products/requirements/render-product-camera.md"
-                },
-                "message": "A RenderProduct prim must have a `camera` relationship targeting a valid prim.",
-                "examples": []
-            },
-            {
                 "code": "RP.003",
                 "version": null,
                 "name": "render-var-source-name",
@@ -55,9 +38,9 @@
                 "examples": []
             },
             {
-                "code": "RP.005",
+                "code": "RP.004",
                 "version": null,
-                "name": "compression-type-valid",
+                "name": "semantic-aov-compression",
                 "compatibility": null,
                 "tags": [
                     "correctness"
@@ -65,10 +48,10 @@
                 "validator": null,
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/rendering/render_products/requirements/compression-type-valid.html",
-                    "internal_path": "capabilities/rendering/render_products/requirements/compression-type-valid.md"
+                    "path": "capabilities/rendering/render_products/requirements/semantic-aov-compression.html",
+                    "internal_path": "capabilities/rendering/render_products/requirements/semantic-aov-compression.md"
                 },
-                "message": "The `srtx:compression:type` attribute on a `RenderVar` prim, if present, must be one of the four supported codec values: `hevc`, `h264`, `av1`, or `blosc`.",
+                "message": "RenderVar prims whose `sourceName` starts with \"semantic\" must use BLOSC compression.",
                 "examples": []
             },
             {
@@ -89,9 +72,26 @@
                 "examples": []
             },
             {
-                "code": "RP.004",
+                "code": "RP.001",
                 "version": null,
-                "name": "semantic-aov-compression",
+                "name": "render-product-camera",
+                "compatibility": null,
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/rendering/render_products/requirements/render-product-camera.html",
+                    "internal_path": "capabilities/rendering/render_products/requirements/render-product-camera.md"
+                },
+                "message": "A RenderProduct prim must have a `camera` relationship targeting a valid prim.",
+                "examples": []
+            },
+            {
+                "code": "RP.005",
+                "version": null,
+                "name": "compression-type-valid",
                 "compatibility": null,
                 "tags": [
                     "correctness"
@@ -99,10 +99,10 @@
                 "validator": null,
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/rendering/render_products/requirements/semantic-aov-compression.html",
-                    "internal_path": "capabilities/rendering/render_products/requirements/semantic-aov-compression.md"
+                    "path": "capabilities/rendering/render_products/requirements/compression-type-valid.html",
+                    "internal_path": "capabilities/rendering/render_products/requirements/compression-type-valid.md"
                 },
-                "message": "RenderVar prims whose `sourceName` starts with \"semantic\" must use BLOSC compression.",
+                "message": "The `srtx:compression:type` attribute on a `RenderVar` prim, if present, must be one of the four supported codec values: `hevc`, `h264`, `av1`, or `blosc`.",
                 "examples": []
             }
         ],

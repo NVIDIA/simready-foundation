@@ -50,4 +50,4 @@ def Mesh "MyMeshSDF" (
 - [UsdPhysics Collision Documentation](https://openusd.org/dev/api/usd_physics_page_front.html#usdPhysics_collision_shapes)
 - [UsdPhysicsCollisionAPI Documentation](https://openusd.org/dev/api/class_usd_physics_collision_a_p_i.html)
 - [SDF Collision Detection](https://openusd.org/dev/api/usd_physics_page_front.html#usdPhysics_sdf_collision)
-- [USD Physics Approximation](https://openusd.org/release/api/class_usd_physics_approximation_a_p_i.html)
+- [UsdPhysicsMeshCollisionAPI Documentation](https://openusd.org/release/api/class_usd_physics_mesh_collision_a_p_i.html)

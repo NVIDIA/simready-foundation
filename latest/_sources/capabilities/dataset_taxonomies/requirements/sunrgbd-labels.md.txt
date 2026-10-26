@@ -73,4 +73,4 @@ def Xform "ThingC" (
 ## For More Information
 
 - [SUN RGB-D (10) dataset](https://rgbd.cs.princeton.edu/)
-- [USD Semantics Documentation](https://openusd.org/release/api/usd_semantics_page_front.html)
+- [USD Semantics Documentation](https://openusd.org/release/api/usd_semantics_overview.html)

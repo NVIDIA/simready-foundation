@@ -4,37 +4,20 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "NP.008",
+                "code": "NP.005",
                 "version": null,
-                "name": "assetpath-validation",
+                "name": "asset-folder-structure",
                 "compatibility": "core-usd",
                 "tags": [
                     "essential"
                 ],
-                "validator": "np-008",
+                "validator": "np-005",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/core/naming_paths/requirements/assetpath-validation.html",
-                    "internal_path": "capabilities/core/naming_paths/requirements/assetpath-validation.md"
+                    "path": "capabilities/core/naming_paths/requirements/asset-folder-structure.html",
+                    "internal_path": "capabilities/core/naming_paths/requirements/asset-folder-structure.md"
                 },
-                "message": "All asset, reference, and payload paths must resolve to files that exist",
-                "examples": []
-            },
-            {
-                "code": "NP.006",
-                "version": null,
-                "name": "metadata-location",
-                "compatibility": "core-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "np-006",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/core/naming_paths/requirements/metadata-location.html",
-                    "internal_path": "capabilities/core/naming_paths/requirements/metadata-location.md"
-                },
-                "message": "Asset metadata must be stored in the USD file or a sidecar JSON file",
+                "message": "Assets must follow a specific folder structure with the asset name as the root folder",
                 "examples": []
             },
             {
@@ -72,6 +55,23 @@
                 "examples": []
             },
             {
+                "code": "NP.008",
+                "version": null,
+                "name": "assetpath-validation",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "np-008",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/naming_paths/requirements/assetpath-validation.html",
+                    "internal_path": "capabilities/core/naming_paths/requirements/assetpath-validation.md"
+                },
+                "message": "All asset, reference, and payload paths must resolve to files that exist",
+                "examples": []
+            },
+            {
                 "code": "NP.004",
                 "version": null,
                 "name": "path-length-limits",
@@ -89,37 +89,20 @@
                 "examples": []
             },
             {
-                "code": "NP.001",
+                "code": "NP.006",
                 "version": null,
-                "name": "prim-naming-convention",
+                "name": "metadata-location",
                 "compatibility": "core-usd",
                 "tags": [
                     "essential"
                 ],
-                "validator": "np-001",
+                "validator": "np-006",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/core/naming_paths/requirements/prim-naming-convention.html",
-                    "internal_path": "capabilities/core/naming_paths/requirements/prim-naming-convention.md"
+                    "path": "capabilities/core/naming_paths/requirements/metadata-location.html",
+                    "internal_path": "capabilities/core/naming_paths/requirements/metadata-location.md"
                 },
-                "message": "Prims shall follow consistent naming conventions",
-                "examples": []
-            },
-            {
-                "code": "NP.005",
-                "version": null,
-                "name": "asset-folder-structure",
-                "compatibility": "core-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "np-005",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/core/naming_paths/requirements/asset-folder-structure.html",
-                    "internal_path": "capabilities/core/naming_paths/requirements/asset-folder-structure.md"
-                },
-                "message": "Assets must follow a specific folder structure with the asset name as the root folder",
+                "message": "Asset metadata must be stored in the USD file or a sidecar JSON file",
                 "examples": []
             },
             {
@@ -137,6 +120,23 @@
                     "internal_path": "capabilities/core/naming_paths/requirements/directory-structure.md"
                 },
                 "message": "Asset directories shall use consistent naming and logical organization",
+                "examples": []
+            },
+            {
+                "code": "NP.001",
+                "version": null,
+                "name": "prim-naming-convention",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "np-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/naming_paths/requirements/prim-naming-convention.html",
+                    "internal_path": "capabilities/core/naming_paths/requirements/prim-naming-convention.md"
+                },
+                "message": "Prims shall follow consistent naming conventions",
                 "examples": []
             }
         ],

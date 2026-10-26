@@ -103,4 +103,4 @@ def Xform "chair base!" (  # Contains space and special character
 ## For More Information
 
 - [USD Schema Naming Conventions](https://openusd.org/release/api/class_usd_schema_base.html)
-- [USD Best Practices - Naming](https://openusd.org/release/tut_usd_best_practices.html#naming)
+- [Learn OpenUSD: Legible Asset Structure](https://docs.nvidia.com/learn-openusd/latest/asset-structure/asset-structure-principles/why-necessary.html#legibility)

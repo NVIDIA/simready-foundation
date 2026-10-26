@@ -4,74 +4,6 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "RC.003",
-                "version": null,
-                "name": "robot-naming",
-                "compatibility": "other",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/isaac_sim/robot_core/requirements/robot-naming.html",
-                    "internal_path": "capabilities/isaac_sim/robot_core/requirements/robot-naming.md"
-                },
-                "message": "Canonical robot and prim naming conventions for stable references and tools.",
-                "examples": []
-            },
-            {
-                "code": "RC.008",
-                "version": null,
-                "name": "robot-type",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "CheckStage",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/isaac_sim/robot_core/requirements/robot-type.html",
-                    "internal_path": "capabilities/isaac_sim/robot_core/requirements/robot-type.md"
-                },
-                "message": "Robot assets must declare a valid robot type on the default prim. The `isaac:robotType` attribute must be present, must be one of the schema-defined allowed tokens, and must not be `\"Default\"`.\nAllowed values are : \"End Effector\", \"Manipulator\", \"Humanoid\", \"Wheeled\", \"Holonomic\", \"Quadruped\", \"Mobile Manipulators\", \"Aerial\"",
-                "examples": []
-            },
-            {
-                "code": "RC.006",
-                "version": null,
-                "name": "verify-robot-physics-schema-source-layer",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/isaac_sim/robot_core/requirements/verify-robot-physics-schema-source-layer.html",
-                    "internal_path": "capabilities/isaac_sim/robot_core/requirements/verify-robot-physics-schema-source-layer.md"
-                },
-                "message": "Validates that physics schema are authored in the physics layer.",
-                "examples": []
-            },
-            {
-                "code": "RC.005",
-                "version": null,
-                "name": "verify-robot-physics-attribute-source-layer",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/isaac_sim/robot_core/requirements/verify-robot-physics-attribute-source-layer.html",
-                    "internal_path": "capabilities/isaac_sim/robot_core/requirements/verify-robot-physics-attribute-source-layer.md"
-                },
-                "message": "Validates that physics attributes are authored in the physics layer.",
-                "examples": []
-            },
-            {
                 "code": "RC.009",
                 "version": null,
                 "name": "root-joint-pinned",
@@ -146,23 +78,6 @@
                 ]
             },
             {
-                "code": "RC.002",
-                "version": null,
-                "name": "no-overrides",
-                "compatibility": "other",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/isaac_sim/robot_core/requirements/no-overrides.html",
-                    "internal_path": "capabilities/isaac_sim/robot_core/requirements/no-overrides.md"
-                },
-                "message": "Robot USDs avoid local override layers that mask upstream schemas or physics.",
-                "examples": []
-            },
-            {
                 "code": "RC.001",
                 "version": null,
                 "name": "clean-folder",
@@ -180,20 +95,20 @@
                 "examples": []
             },
             {
-                "code": "RC.004",
+                "code": "RC.006",
                 "version": null,
-                "name": "thumbnail-exist",
+                "name": "verify-robot-physics-schema-source-layer",
                 "compatibility": "other",
                 "tags": [
-                    "high-quality"
+                    "essential"
                 ],
                 "validator": null,
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/isaac_sim/robot_core/requirements/thumbnail-exist.html",
-                    "internal_path": "capabilities/isaac_sim/robot_core/requirements/thumbnail-exist.md"
+                    "path": "capabilities/isaac_sim/robot_core/requirements/verify-robot-physics-schema-source-layer.html",
+                    "internal_path": "capabilities/isaac_sim/robot_core/requirements/verify-robot-physics-schema-source-layer.md"
                 },
-                "message": "The robot interface asset file should contain a thumbnail. The thumbnail should be representative of the robot.",
+                "message": "Validates that physics schema are authored in the physics layer.",
                 "examples": []
             },
             {
@@ -211,6 +126,91 @@
                     "internal_path": "capabilities/isaac_sim/robot_core/requirements/robot-schema.md"
                 },
                 "message": "Robot USDs declare and use the required schemas and physics attributes.",
+                "examples": []
+            },
+            {
+                "code": "RC.002",
+                "version": null,
+                "name": "no-overrides",
+                "compatibility": "other",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/no-overrides.html",
+                    "internal_path": "capabilities/isaac_sim/robot_core/requirements/no-overrides.md"
+                },
+                "message": "Robot USDs avoid local override layers that mask upstream schemas or physics.",
+                "examples": []
+            },
+            {
+                "code": "RC.008",
+                "version": null,
+                "name": "robot-type",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "CheckStage",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/robot-type.html",
+                    "internal_path": "capabilities/isaac_sim/robot_core/requirements/robot-type.md"
+                },
+                "message": "Robot assets must declare a valid robot type on the default prim. The `isaac:robotType` attribute must be present, must be one of the schema-defined allowed tokens, and must not be `\"Default\"`.\nAllowed values are : \"End Effector\", \"Manipulator\", \"Humanoid\", \"Wheeled\", \"Holonomic\", \"Quadruped\", \"Mobile Manipulators\", \"Aerial\"",
+                "examples": []
+            },
+            {
+                "code": "RC.003",
+                "version": null,
+                "name": "robot-naming",
+                "compatibility": "other",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/robot-naming.html",
+                    "internal_path": "capabilities/isaac_sim/robot_core/requirements/robot-naming.md"
+                },
+                "message": "Canonical robot and prim naming conventions for stable references and tools.",
+                "examples": []
+            },
+            {
+                "code": "RC.005",
+                "version": null,
+                "name": "verify-robot-physics-attribute-source-layer",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/verify-robot-physics-attribute-source-layer.html",
+                    "internal_path": "capabilities/isaac_sim/robot_core/requirements/verify-robot-physics-attribute-source-layer.md"
+                },
+                "message": "Validates that physics attributes are authored in the physics layer.",
+                "examples": []
+            },
+            {
+                "code": "RC.004",
+                "version": null,
+                "name": "thumbnail-exist",
+                "compatibility": "other",
+                "tags": [
+                    "high-quality"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/isaac_sim/robot_core/requirements/thumbnail-exist.html",
+                    "internal_path": "capabilities/isaac_sim/robot_core/requirements/thumbnail-exist.md"
+                },
+                "message": "The robot interface asset file should contain a thumbnail. The thumbnail should be representative of the robot.",
                 "examples": []
             }
         ],

@@ -73,4 +73,4 @@ def Xform "ThingC" (
 ## For More Information
 
 - [COCO (instances) dataset](https://cocodataset.org)
-- [USD Semantics Documentation](https://openusd.org/release/api/usd_semantics_page_front.html)
+- [USD Semantics Documentation](https://openusd.org/release/api/usd_semantics_overview.html)

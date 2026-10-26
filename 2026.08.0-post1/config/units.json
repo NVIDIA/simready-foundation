@@ -21,20 +21,20 @@
                 "examples": []
             },
             {
-                "code": "UN.007",
+                "code": "UN.006",
                 "version": null,
-                "name": "meters-per-unit-1",
+                "name": "upaxis-z",
                 "compatibility": "core-usd",
                 "tags": [
                     "essential"
                 ],
-                "validator": "un-007",
+                "validator": "un-006",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/core/units/requirements/meters-per-unit-1.html",
-                    "internal_path": "capabilities/core/units/requirements/meters-per-unit-1.md"
+                    "path": "capabilities/core/units/requirements/upaxis-z.html",
+                    "internal_path": "capabilities/core/units/requirements/upaxis-z.md"
                 },
-                "message": "Stage must specify metersPerUnit = 1.0 to define the linear unit scale",
+                "message": "Stage must specify upAxis = \"Z\" to define the orientation of the stage",
                 "examples": []
             },
             {
@@ -55,54 +55,20 @@
                 "examples": []
             },
             {
-                "code": "UN.004",
+                "code": "UN.007",
                 "version": null,
-                "name": "corrective-transforms",
-                "compatibility": "core-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/core/units/requirements/corrective-transforms.html",
-                    "internal_path": "capabilities/core/units/requirements/corrective-transforms.md"
-                },
-                "message": "Must apply corrective transforms for different units",
-                "examples": []
-            },
-            {
-                "code": "UN.006",
-                "version": null,
-                "name": "upaxis-z",
+                "name": "meters-per-unit-1",
                 "compatibility": "core-usd",
                 "tags": [
                     "essential"
                 ],
-                "validator": "un-006",
+                "validator": "un-007",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/core/units/requirements/upaxis-z.html",
-                    "internal_path": "capabilities/core/units/requirements/upaxis-z.md"
+                    "path": "capabilities/core/units/requirements/meters-per-unit-1.html",
+                    "internal_path": "capabilities/core/units/requirements/meters-per-unit-1.md"
                 },
-                "message": "Stage must specify upAxis = \"Z\" to define the orientation of the stage",
-                "examples": []
-            },
-            {
-                "code": "UN.003",
-                "version": null,
-                "name": "kilograms-per-unit",
-                "compatibility": "core-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/core/units/requirements/kilograms-per-unit.html",
-                    "internal_path": "capabilities/core/units/requirements/kilograms-per-unit.md"
-                },
-                "message": "Stage must specify kilogramsPerUnit to define the mass unit scale, if physics objects are present in the stage.",
+                "message": "Stage must specify metersPerUnit = 1.0 to define the linear unit scale",
                 "examples": []
             },
             {
@@ -120,6 +86,40 @@
                     "internal_path": "capabilities/core/units/requirements/timecodes-per-second.md"
                 },
                 "message": "Stage must specify timeCodesPerSecond, if timesamples are present in the stage.",
+                "examples": []
+            },
+            {
+                "code": "UN.004",
+                "version": null,
+                "name": "corrective-transforms",
+                "compatibility": "core-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/units/requirements/corrective-transforms.html",
+                    "internal_path": "capabilities/core/units/requirements/corrective-transforms.md"
+                },
+                "message": "Must apply corrective transforms for different units",
+                "examples": []
+            },
+            {
+                "code": "UN.003",
+                "version": null,
+                "name": "kilograms-per-unit",
+                "compatibility": "core-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/units/requirements/kilograms-per-unit.html",
+                    "internal_path": "capabilities/core/units/requirements/kilograms-per-unit.md"
+                },
+                "message": "Stage must specify kilogramsPerUnit to define the mass unit scale, if physics objects are present in the stage.",
                 "examples": []
             }
         ],

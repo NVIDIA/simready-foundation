@@ -4,23 +4,6 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "AA.002",
-                "version": null,
-                "name": "supported-file-types",
-                "compatibility": "open-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": "aa-002",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/core/atomic_asset/requirements/supported-file-types.html",
-                    "internal_path": "capabilities/core/atomic_asset/requirements/supported-file-types.md"
-                },
-                "message": "Asset must use only supported file types",
-                "examples": []
-            },
-            {
                 "code": "AA.OV.001",
                 "version": null,
                 "name": "ov-usdz-udim-limitation",
@@ -35,6 +18,23 @@
                     "internal_path": "capabilities/core/atomic_asset/requirements/ov-usdz-udim-limitation.md"
                 },
                 "message": "Texture UDIMs are not supported in USDZ files in NVIDIA Omniverse",
+                "examples": []
+            },
+            {
+                "code": "AA.002",
+                "version": null,
+                "name": "supported-file-types",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "aa-002",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/atomic_asset/requirements/supported-file-types.html",
+                    "internal_path": "capabilities/core/atomic_asset/requirements/supported-file-types.md"
+                },
+                "message": "Asset must use only supported file types",
                 "examples": []
             },
             {

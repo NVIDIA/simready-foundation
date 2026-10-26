@@ -47,7 +47,7 @@ Products or workflows that consume this feature:
 
 This version is used in the following profiles:
 
-- **[Robotics Prop Profile](../profiles/profiles.md)** (`v3.0.0`) - Optional non-visual sensor material contract for props that need radar, lidar, thermal, or related sensor simulation.
+- **[Robotics Prop Profile](../profiles/robotics-prop.md)** (`v3.0.0`) - Optional non-visual sensor material contract for props that need radar, lidar, thermal, or related sensor simulation.
 
 #### Feature Dependencies
 

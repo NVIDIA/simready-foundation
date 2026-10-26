@@ -4,88 +4,6 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "DISP.002",
-                "version": null,
-                "name": "display-color-values",
-                "compatibility": "open-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": "disp-002",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/visualization/display_color/requirements/display-color-values.html",
-                    "internal_path": "capabilities/visualization/display_color/requirements/display-color-values.md"
-                },
-                "message": "Authored display colour values must lie within the range a consumer can interpret.",
-                "examples": [
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Mesh \"bracket\"\n{\n    color3f[] primvars:displayColor = [(0.4, 0.4, 0.42)] (\n        interpolation = \"constant\"\n    )\n}"
-                        },
-                        "name": "constant interpolation, one element, components in range",
-                        "result": "success"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Mesh \"bracket\"\n{\n    color3f[] primvars:displayColor = [(0.216, 0.216, 0.216)] (\n        interpolation = \"constant\"\n    )\n}"
-                        },
-                        "name": "no colour space authored, so values are linear Rec.709 by default",
-                        "result": "success"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Mesh \"bracket\"\n{\n    color3f[] primvars:displayColor = [(0.216, 0.216, 0.216)] (\n        colorSpace = \"lin_rec709_scene\"\n        interpolation = \"constant\"\n    )\n}"
-                        },
-                        "name": "colour space authored explicitly on the attribute",
-                        "result": "success"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Mesh \"bracket\"\n{\n    color3f[] primvars:displayColor = [(1.8, 0.4, 0.42)] (\n        interpolation = \"constant\"\n    )\n}"
-                        },
-                        "name": "component outside [0,1]",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Mesh \"bracket\"\n{\n    color3f[] primvars:displayColor = [(0.4, 0.4, 0.42), (0.1, 0.1, 0.1)] (\n        interpolation = \"constant\"\n    )\n}"
-                        },
-                        "name": "constant interpolation declared, two elements authored",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Xform \"Assembly\"\n{\n    color3f primvars:displayColor = (0.4, 0.4, 0.42) (\n        interpolation = \"constant\"\n    )\n\n    def Mesh \"bracket\"\n    {\n    }\n}"
-                        },
-                        "name": "a scalar color3f, not the declared color3f[]",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Xform \"Assembly\"\n{\n    color3d[] primvars:displayColor = [(0.4, 0.4, 0.42)] (\n        interpolation = \"constant\"\n    )\n\n    def Mesh \"bracket\"\n    {\n    }\n}"
-                        },
-                        "name": "color3d[], a precision variant of the declared color3f[]",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Mesh \"bracket\"\n{\n    color3f[] primvars:displayColor = [(0.4, 0.4, 0.42)] (\n        interpolation = \"constant\"\n    )\n    color3f[] primvars:displayColor.timeSamples = {\n        0: [(0.4, 0.4, 0.42)],\n        5: [(0.4, 9.5, 0.42)],\n    }\n}"
-                        },
-                        "name": "out of range at the second time sample",
-                        "result": "failure"
-                    }
-                ]
-            },
-            {
                 "code": "DISP.003",
                 "version": null,
                 "name": "display-opacity-values",
@@ -181,6 +99,88 @@
                             "content": "def Mesh \"bracket\"\n{\n}"
                         },
                         "name": "renderable mesh with no display colour on it or any ancestor",
+                        "result": "failure"
+                    }
+                ]
+            },
+            {
+                "code": "DISP.002",
+                "version": null,
+                "name": "display-color-values",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "disp-002",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/display_color/requirements/display-color-values.html",
+                    "internal_path": "capabilities/visualization/display_color/requirements/display-color-values.md"
+                },
+                "message": "Authored display colour values must lie within the range a consumer can interpret.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Mesh \"bracket\"\n{\n    color3f[] primvars:displayColor = [(0.4, 0.4, 0.42)] (\n        interpolation = \"constant\"\n    )\n}"
+                        },
+                        "name": "constant interpolation, one element, components in range",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Mesh \"bracket\"\n{\n    color3f[] primvars:displayColor = [(0.216, 0.216, 0.216)] (\n        interpolation = \"constant\"\n    )\n}"
+                        },
+                        "name": "no colour space authored, so values are linear Rec.709 by default",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Mesh \"bracket\"\n{\n    color3f[] primvars:displayColor = [(0.216, 0.216, 0.216)] (\n        colorSpace = \"lin_rec709_scene\"\n        interpolation = \"constant\"\n    )\n}"
+                        },
+                        "name": "colour space authored explicitly on the attribute",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Mesh \"bracket\"\n{\n    color3f[] primvars:displayColor = [(1.8, 0.4, 0.42)] (\n        interpolation = \"constant\"\n    )\n}"
+                        },
+                        "name": "component outside [0,1]",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Mesh \"bracket\"\n{\n    color3f[] primvars:displayColor = [(0.4, 0.4, 0.42), (0.1, 0.1, 0.1)] (\n        interpolation = \"constant\"\n    )\n}"
+                        },
+                        "name": "constant interpolation declared, two elements authored",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Assembly\"\n{\n    color3f primvars:displayColor = (0.4, 0.4, 0.42) (\n        interpolation = \"constant\"\n    )\n\n    def Mesh \"bracket\"\n    {\n    }\n}"
+                        },
+                        "name": "a scalar color3f, not the declared color3f[]",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Assembly\"\n{\n    color3d[] primvars:displayColor = [(0.4, 0.4, 0.42)] (\n        interpolation = \"constant\"\n    )\n\n    def Mesh \"bracket\"\n    {\n    }\n}"
+                        },
+                        "name": "color3d[], a precision variant of the declared color3f[]",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Mesh \"bracket\"\n{\n    color3f[] primvars:displayColor = [(0.4, 0.4, 0.42)] (\n        interpolation = \"constant\"\n    )\n    color3f[] primvars:displayColor.timeSamples = {\n        0: [(0.4, 0.4, 0.42)],\n        5: [(0.4, 9.5, 0.42)],\n    }\n}"
+                        },
+                        "name": "out of range at the second time sample",
                         "result": "failure"
                     }
                 ]

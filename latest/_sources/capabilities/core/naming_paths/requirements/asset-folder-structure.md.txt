@@ -108,5 +108,5 @@ USD assets must be organized in a specific folder structure where the asset name
 
 ## For More Information
 
-- [USD Asset Packaging Best Practices](https://openusd.org/release/tut_usd_best_practices.html#asset-packaging)
+- [Learn OpenUSD: Modular Asset Structure](https://docs.nvidia.com/learn-openusd/latest/asset-structure/asset-structure-principles/why-necessary.html#modularity)
 - [USDZ File Format Specification](https://openusd.org/release/spec_usdz.html)
