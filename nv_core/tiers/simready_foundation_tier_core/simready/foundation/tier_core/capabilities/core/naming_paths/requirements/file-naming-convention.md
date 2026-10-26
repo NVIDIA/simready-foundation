@@ -65,4 +65,4 @@ USD files shall follow consistent naming conventions to ensure proper identifica
 ## For More Information
 
 - [USD File Format Extensions](https://openusd.org/release/spec_usdz.html)
-- [USD Best Practices - File Organization](https://openusd.org/release/tut_usd_best_practices.html#file-organization)
+- [Learn OpenUSD: Navigable Asset Structure](https://docs.nvidia.com/learn-openusd/latest/asset-structure/asset-structure-principles/why-necessary.html#navigability)

@@ -11,7 +11,7 @@ To comply with this capability when creating physics joints in Omniverse, see:
 
 For a more comprehensive guide, see:
 
-- [Rig Closed Loop Structures](https://docs.isaacsim.omniverse.nvidia.com/4.5.0/robot_setup/rig_closed_loop_structures.html)
+- [Rig Closed Loop Structures](https://docs.isaacsim.omniverse.nvidia.com/5.1.0/robot_setup_tutorials/rig_closed_loop_structures.html)
 
 
 

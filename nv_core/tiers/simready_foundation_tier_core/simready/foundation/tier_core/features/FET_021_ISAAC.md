@@ -91,7 +91,7 @@ None.
 
 #### Used in Profiles
 
-- **[Robot Gripper Profile](../profiles/profiles.md)** (`v2.0.0`, `v2.1.0`) - Optional Isaac robot-core identity gate.
+- **[Robot Gripper Profile](../profiles/robot-gripper.md)** (`v2.0.0`, `v2.1.0`) - Optional Isaac robot-core identity gate.
 
 #### Feature Dependencies
 

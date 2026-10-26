@@ -105,5 +105,5 @@ Some overs are allowed in specific scenarios:
 
 - [USD Glossary - Over](https://openusd.org/release/glossary.html#usdglossary-over)
 - [USD Composition Arcs](https://openusd.org/release/glossary.html#composition-arcs)
-- [USD Best Practices - Asset Structure](https://openusd.org/release/tut_usd_best_practices.html)
+- [Learn OpenUSD: Scalable Asset Structure](https://docs.nvidia.com/learn-openusd/latest/asset-structure/asset-structure-principles/why-necessary.html)
 

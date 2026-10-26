@@ -76,4 +76,4 @@ def Mesh "ZeroLengthNormal"
 
 ## For more information
 
-- [USDGeom Documentation](https://openusd.org/docs/api/usd_geom_page_front.html#UsdGeom_WindingOrder)
+- [USDGeom Documentation](https://openusd.org/release/api/usd_geom_page_front.html#UsdGeom_WindingOrder)

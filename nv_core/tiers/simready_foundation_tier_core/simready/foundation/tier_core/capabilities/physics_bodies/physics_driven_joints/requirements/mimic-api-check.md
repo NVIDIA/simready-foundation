@@ -132,5 +132,5 @@ def PhysicsRevoluteJoint "ref_joint" (
 
 ## For More Information
 
-* [PhysX Mimic Joint Documentation](https://openusd.org/dev/api/class_usd_physics_mimic_a_p_i.html)
+* [PhysX Mimic Joint Documentation](https://docs.omniverse.nvidia.com/kit/docs/omni_usd_schema_physics/latest/physxschema/class_physx_schema_physx_mimic_joint_a_p_i.html)
 * [USD Physics Joint Relationships](https://openusd.org/dev/api/usd_physics_page_front.html#usdPhysics_joints)

@@ -1,5 +1,9 @@
 # SimReady Foundation
 
+## Documentation
+
+Read the [SimReady Foundation documentation](https://nvidia.github.io/simready-foundation/) for guides, features, profiles, and requirements.
+
 ## License
 
 This project's NVIDIA-authored content is licensed under the Apache License, Version 2.0. See [LICENSE.txt](LICENSE.txt).

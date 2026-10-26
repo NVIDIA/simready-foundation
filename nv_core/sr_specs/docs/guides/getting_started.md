@@ -79,9 +79,9 @@ joints.
 
 Without explicit layers these concerns blur together and assets silently break
 across pipelines. See each concept in depth:
-[Features](features/features.md) |
+[Features](../features/features.md) |
 [Capabilities](../capabilities/capabilities.md) |
-[Profiles](profiles/profiles.md)
+[Profiles](../profiles/profiles.md)
 
 Each layer references the one below it, so any failure traces to the exact USD
 property at fault — and new layers extend the spec without breaking existing
@@ -150,8 +150,8 @@ applies to your situation and exactly where to go next.
 | Your situation                                    | What to do                                                                                                                                                                                                                                                                                                                                                                                           |
 | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Already in OpenUSD** (`.usd`, `.usda`, `.usdc`) | You can validate immediately. Jump to Q3.                                                                                                                                                                                                                                                                                                                                                            |
-| **URDF** (common in robotics)                     | Import into USD using the [URDF Importer Extension](https://github.com/isaac-sim/urdf-importer-extension). See the [UR10 sample](../../../../sample_content/common_assets/robots_general/ur10/simready_usd/ur10.usd) for the expected USD output, and [rigid-body creators guide](../capabilities/physics_bodies/physics_rigid_bodies/creators.md) for details. Convert first, then continue to Q3. |
-| **MJCF** (MuJoCo)                                 | See the [UR10 URDF source](../../../../sample_content/common_assets/robots_general/ur10/urdf/urdf/ur10.urdf) alongside its [SimReady USD output](../../../../sample_content/common_assets/robots_general/ur10/simready_usd/ur10.usd) for the conversion pattern. Convert first, then continue to Q3.                                                                                                              |
+| **URDF** (common in robotics)                     | Import into USD using the [URDF Importer Extension](https://github.com/isaac-sim/IsaacSim/tree/main/source/extensions/isaacsim.asset.importer.urdf). See the [UR10 sample](../../../../sample_content/common_assets/robots_general/ur10/simready_usd/ur10.usd) for the expected USD output, and [rigid-body creators guide](../capabilities/physics_bodies/physics_rigid_bodies/creators.md) for details. Convert first, then continue to Q3. |
+| **MJCF** (MuJoCo)                                 | See the [UR10 MJCF sample](../../../../sample_content/common_assets/robots_general/ur10/mjcf/ur10e.xml) for a source model and the [SimReady USD sample](../../../../sample_content/common_assets/robots_general/ur10/simready_usd/ur10.usd) for the target asset structure. Convert first, then continue to Q3. |
 | **CAD (STEP, Fusion 360, etc.)**                  | Export to OpenUSD via [Omniverse CAD Converter](https://docs.omniverse.nvidia.com/extensions/latest/ext_cad-converter.html) or [Blender USD export](https://docs.blender.org/manual/en/latest/files/import_export/usd.html). See the [geometry creators guide](../capabilities/visualization/geometry/creators_overview.md) for supported CAD paths. Convert first, then continue to Q3.             |
 | **Other formats**                                 | Convert to OpenUSD. The foundation validates USD content — the source format does not matter as long as the USD output is well-structured. Continue to Q3.                                                                                                                                                                                                                                           |
 
@@ -165,7 +165,7 @@ applies to your situation and exactly where to go next.
 | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **A robot arm, mobile robot, or articulated agent**                      | [Robot-Body](../profiles/robot-body.md)                                                                                                  | Rigid-body physics, articulation, driven joints, base hierarchy, and optional runtime variants. See the [UR10 sample](../../../../sample_content/common_assets/robots_general/ur10/simready_usd/ur10.usd). |
 | **A prop or object in a robotics scene** (box, shelf, tool, etc.)        | [Robotics-Prop](../profiles/robotics-prop.md)                                      | Rigid-body physics, multi-body simulation, grasp-ready colliders, and optional runtime variants. For PhysX + Newton (+ MuJoCo) on one asset, see [Multiple Physics Solvers](multiphysics_solvers.md).       |
-| **A robot gripper or end effector**                                      | [Robot-Gripper](../profiles/profiles.md#profile-comparison)                                                                                | Robot-body physics plus optional gripper-site and runtime-specific contracts.                                                                                                           |
+| **A robot gripper or end effector**                                      | [Robot-Gripper](../profiles/robot-gripper.md)                                                                                | Robot-body physics plus optional gripper-site and runtime-specific contracts.                                                                                                           |
 | **Something else** (vehicle, deformable, environment)                    | Start with the [full profile list](../profiles/profiles.md) to see if an existing profile fits. If not, the spec is extensible — see the [Features Guide](features/features.md) for how to define new features. |                                                                                                                                                                              |
 
 
@@ -176,11 +176,11 @@ applies to your situation and exactly where to go next.
 
 | Your goal                                                               | Where to go                                                                                                                                                 |
 | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Validate** that an existing USD asset meets a profile                 | SimReady learning workflow — includes setup, running the validator, and reading results.                                                                    |
+| **Validate** that an existing USD asset meets a profile                 | [SimReady Validation Workflow](validate_workflow.md) — includes setup, running the validator, and reading results. |
 | **Author** a new asset from scratch                                     | Study the sample assets in `sample_content/common_assets/` for structure, then validate against your target profile.                                        |
 | **Convert** an asset from one profile to another (e.g. Neutral → PhysX) | [Feature Adapters Guide](feature_adapters/feature_adapters.md) — covers the adapter framework and the `workspace upgrade` command.                          |
 | **Extend** the spec with new requirements or features                   | [SimReady Learning Workflow](SimReady_learning_workflow.md) — walks through adding a requirement, rule, and feature end-to-end.                             |
-| **Integrate** SimReady validation into a pipeline or CI system          | Start with the [SimReady Learning Workflow](SimReady_learning_workflow.md) to understand the validator, then integrate the validation step into your build. |
+| **Integrate** SimReady validation into a pipeline or CI system          | Start with the [SimReady Validation Workflow](validate_workflow.md) to run the validator and save JSON results, then integrate the validation step into your build. |
 
 
 ---
@@ -200,8 +200,8 @@ applies to your situation and exactly where to go next.
 
 **Still not sure?** Browse the [full profile comparison](../profiles/profiles.md)
 to see what the foundation covers today, or jump into the
-[SimReady Learning Workflow](SimReady_learning_workflow.md) to try it hands-on
-with the sample validator.
+[SimReady Validation Workflow](validate_workflow.md) to try it hands-on
+with a sample asset.
 
 ## Terminology & Concepts
 

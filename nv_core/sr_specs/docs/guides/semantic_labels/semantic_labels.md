@@ -497,4 +497,4 @@ have it, so check before you trust an inherited `.blend`.
 - [Semantic Labels capability](../../capabilities/semantic_labels/capability-semantic_labels.md) for the contract in full.
 - [SimReady Validation Workflow](../validate_workflow.md) for validator setup, JSON reports and stamping.
 - [SimReady Benchmark](../benchmark/benchmark.md) for the runtime test framework.
-- [Profiles](../profiles/profiles.md) for which profiles select the semantic-labels feature.
+- [Profiles](../../profiles/profiles.md) for which profiles select the semantic-labels feature.

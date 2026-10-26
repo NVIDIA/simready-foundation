@@ -73,4 +73,4 @@ def Xform "ThingC" (
 ## For More Information
 
 - [ImageNet-1K dataset](https://www.image-net.org/)
-- [USD Semantics Documentation](https://openusd.org/release/api/usd_semantics_page_front.html)
+- [USD Semantics Documentation](https://openusd.org/release/api/usd_semantics_overview.html)

@@ -84,4 +84,4 @@ def Material "VeryLongMaterialNameWithManyDescriptiveWords"
 ## For More Information
 
 - [Windows Path Length Limitations](https://docs.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation)
-- [USD Best Practices - Path Management](https://openusd.org/release/tut_usd_best_practices.html#path-management)
+- [Learn OpenUSD: Navigable Asset Structure](https://docs.nvidia.com/learn-openusd/latest/asset-structure/asset-structure-principles/why-necessary.html#navigability)

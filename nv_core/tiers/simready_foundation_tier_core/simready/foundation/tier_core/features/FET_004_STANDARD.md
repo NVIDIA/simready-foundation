@@ -79,7 +79,7 @@ flowchart LR
 
 - **[Robotics Prop Profile](../profiles/robotics-prop.md)** (`v3.0.0`, `v3.1.0`, `v3.2.0`) - Optional consolidated Standard multibody feature.
 - **[Robot Body Profile](../profiles/robot-body.md)** (`v2.0.0`, `v2.1.0`, `v2.2.0`) - Optional consolidated Standard multibody feature.
-- **[Robot Gripper Profile](../profiles/profiles.md)** (`v2.0.0`, `v2.1.0`) - Optional consolidated Standard multibody feature.
+- **[Robot Gripper Profile](../profiles/robot-gripper.md)** (`v2.0.0`, `v2.1.0`) - Optional consolidated Standard multibody feature.
 
 #### Feature Dependencies
 

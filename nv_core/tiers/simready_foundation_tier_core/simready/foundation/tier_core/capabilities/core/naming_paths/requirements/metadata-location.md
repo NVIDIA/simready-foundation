@@ -111,6 +111,6 @@ USD/sidecar union provenance is
 
 ## For More Information
 
-- [USD Asset Metadata Best Practices](https://openusd.org/release/tut_usd_best_practices.html#asset-metadata)
-- [USD AssetInfo Schema](https://openusd.org/release/api/class_usd_asset_info.html)
+- [USD Metadata](https://openusd.org/release/glossary.html#usdglossary-metadata)
+- [USD AssetInfo Metadata](https://openusd.org/release/glossary.html#usdglossary-assetinfo)
 - [JSON Schema Specification](https://json-schema.org/)

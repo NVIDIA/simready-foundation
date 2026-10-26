@@ -146,7 +146,7 @@ This version is used in the following profiles:
 
 - **[Robotics Prop Profile](../profiles/robotics-prop.md)** (`v3.1.0`, `v3.2.0`) - Optional PhysX rigid-body gate.
 - **[Robot Body Profile](../profiles/robot-body.md)** (`v2.1.0`, `v2.2.0`) - Optional PhysX rigid-body gate.
-- **[Robot Gripper Profile](../profiles/profiles.md)** (`v2.1.0`) - Optional PhysX rigid-body gate.
+- **[Robot Gripper Profile](../profiles/robot-gripper.md)** (`v2.1.0`) - Optional PhysX rigid-body gate.
 
 #### Feature Dependencies
 

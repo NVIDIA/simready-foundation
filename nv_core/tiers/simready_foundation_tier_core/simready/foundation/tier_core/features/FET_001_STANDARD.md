@@ -128,7 +128,7 @@ This version is used in the following profiles:
 
 - **[Robotics Prop Profile](../profiles/robotics-prop.md)** (`v3.0.0`, `v3.1.0`, `v3.2.0`) - Uses the consolidated Standard Minimal feature gate.
 - **[Robot Body Profile](../profiles/robot-body.md)** (`v2.0.0`, `v2.1.0`, `v2.2.0`) - Uses the consolidated Standard Minimal feature gate.
-- **[Robot Gripper Profile](../profiles/profiles.md)** (`v2.0.0`, `v2.1.0`) - Uses the consolidated Standard Minimal feature gate.
+- **[Robot Gripper Profile](../profiles/robot-gripper.md)** (`v2.0.0`, `v2.1.0`) - Uses the consolidated Standard Minimal feature gate.
 
 #### Feature Dependencies
 

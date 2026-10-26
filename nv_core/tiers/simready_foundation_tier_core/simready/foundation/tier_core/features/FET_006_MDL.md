@@ -54,7 +54,7 @@ None.
 | `VM.MAT.001` | [VM.MAT.001](../capabilities/visualization/materials/requirements/material-assignment.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
 | `VM.MDL.001` | [VM.MDL.001](../capabilities/visualization/materials/requirements/material-mdl-source-asset.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
 | `VM.TEX.001` | [VM.TEX.001](../capabilities/visualization/materials/requirements/material-texture-maxsize.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
-| `VM.TEX.002` | [VM.TEX.002](../capabilities/visualization/materials/requirements/material-texture-colorspace-mdl.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
+| `VM.TEX.002` | [VM.TEX.002](../capabilities/visualization/materials/requirements/material-texture-colorspace-mdl-deprecated.md) | [Implementation](../capabilities/visualization/materials/validation.py) |
 
 </details>
 

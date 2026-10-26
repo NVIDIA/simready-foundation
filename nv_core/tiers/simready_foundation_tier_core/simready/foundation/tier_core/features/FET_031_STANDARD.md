@@ -32,7 +32,7 @@ Products or workflows that consume this feature:
 
 - [Robotics-Prop](../profiles/robotics-prop.md) v3.2.0
 - [Robot-Body](../profiles/robot-body.md) v2.1.0 and v2.2.0
-- [Robot-Gripper](../profiles/profiles.md#profile-comparison) v2.1.0
+- [Robot-Gripper](../profiles/robot-gripper.md) v2.1.0
 - Package-Candidate v1.0.0, v1.1.0, and v1.2.0
 
 #### Feature Dependencies
