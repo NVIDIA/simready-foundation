@@ -27,6 +27,7 @@
             "RB.012"
         ],
         "dependencies": [],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_004_ROBOT_MUJOCO.html",
             "internal_path": "features/FET_004_ROBOT_MUJOCO.md"

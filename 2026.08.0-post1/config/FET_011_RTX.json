@@ -10,6 +10,7 @@
         "dependencies": [
             "FET_011_STANDARD@0.2.0"
         ],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_011_RTX.html",
             "internal_path": "features/FET_011_RTX.md"

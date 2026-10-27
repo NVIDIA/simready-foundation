@@ -8,6 +8,7 @@
             "GSP.001"
         ],
         "dependencies": [],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_005_STANDARD.html",
             "internal_path": "features/FET_005_STANDARD.md"

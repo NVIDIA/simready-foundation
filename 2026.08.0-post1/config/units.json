@@ -4,20 +4,20 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "UN.001",
+                "code": "UN.002",
                 "version": null,
-                "name": "upaxis",
+                "name": "meters-per-unit",
                 "compatibility": "core-usd",
                 "tags": [
                     "essential"
                 ],
-                "validator": "un-001",
+                "validator": "un-002",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/core/units/requirements/upaxis.html",
-                    "internal_path": "capabilities/core/units/requirements/upaxis.md"
+                    "path": "capabilities/core/units/requirements/meters-per-unit.html",
+                    "internal_path": "capabilities/core/units/requirements/meters-per-unit.md"
                 },
-                "message": "Stage must specify upAxis to define the orientation of the stage",
+                "message": "Stage must specify metersPerUnit to define the linear unit scale",
                 "examples": []
             },
             {
@@ -38,37 +38,20 @@
                 "examples": []
             },
             {
-                "code": "UN.002",
+                "code": "UN.003",
                 "version": null,
-                "name": "meters-per-unit",
+                "name": "kilograms-per-unit",
                 "compatibility": "core-usd",
                 "tags": [
-                    "essential"
+                    "correctness"
                 ],
-                "validator": "un-002",
+                "validator": null,
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/core/units/requirements/meters-per-unit.html",
-                    "internal_path": "capabilities/core/units/requirements/meters-per-unit.md"
+                    "path": "capabilities/core/units/requirements/kilograms-per-unit.html",
+                    "internal_path": "capabilities/core/units/requirements/kilograms-per-unit.md"
                 },
-                "message": "Stage must specify metersPerUnit to define the linear unit scale",
-                "examples": []
-            },
-            {
-                "code": "UN.007",
-                "version": null,
-                "name": "meters-per-unit-1",
-                "compatibility": "core-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "un-007",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/core/units/requirements/meters-per-unit-1.html",
-                    "internal_path": "capabilities/core/units/requirements/meters-per-unit-1.md"
-                },
-                "message": "Stage must specify metersPerUnit = 1.0 to define the linear unit scale",
+                "message": "Stage must specify kilogramsPerUnit to define the mass unit scale, if physics objects are present in the stage.",
                 "examples": []
             },
             {
@@ -89,6 +72,23 @@
                 "examples": []
             },
             {
+                "code": "UN.001",
+                "version": null,
+                "name": "upaxis",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "un-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/core/units/requirements/upaxis.html",
+                    "internal_path": "capabilities/core/units/requirements/upaxis.md"
+                },
+                "message": "Stage must specify upAxis to define the orientation of the stage",
+                "examples": []
+            },
+            {
                 "code": "UN.004",
                 "version": null,
                 "name": "corrective-transforms",
@@ -106,20 +106,20 @@
                 "examples": []
             },
             {
-                "code": "UN.003",
+                "code": "UN.007",
                 "version": null,
-                "name": "kilograms-per-unit",
+                "name": "meters-per-unit-1",
                 "compatibility": "core-usd",
                 "tags": [
-                    "correctness"
+                    "essential"
                 ],
-                "validator": null,
+                "validator": "un-007",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/core/units/requirements/kilograms-per-unit.html",
-                    "internal_path": "capabilities/core/units/requirements/kilograms-per-unit.md"
+                    "path": "capabilities/core/units/requirements/meters-per-unit-1.html",
+                    "internal_path": "capabilities/core/units/requirements/meters-per-unit-1.md"
                 },
-                "message": "Stage must specify kilogramsPerUnit to define the mass unit scale, if physics objects are present in the stage.",
+                "message": "Stage must specify metersPerUnit = 1.0 to define the linear unit scale",
                 "examples": []
             }
         ],

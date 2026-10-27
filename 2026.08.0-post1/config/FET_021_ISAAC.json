@@ -10,6 +10,7 @@
             "RC.009"
         ],
         "dependencies": [],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_021_ISAAC.html",
             "internal_path": "features/FET_021_ISAAC.md"

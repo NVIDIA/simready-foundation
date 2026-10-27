@@ -4,23 +4,6 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "BA.002",
-                "version": null,
-                "name": "non-adjacent-collision-meshes-do-not-clash",
-                "compatibility": "physx",
-                "tags": [
-                    "essential"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/base_articulation/requirements/non-adjacent-collision-meshes-do-not-clash.html",
-                    "internal_path": "capabilities/physics_bodies/base_articulation/requirements/non-adjacent-collision-meshes-do-not-clash.md"
-                },
-                "message": "Collision meshes on non-adjacent links in the articulation hierarchy must not overlap or intersect.",
-                "examples": []
-            },
-            {
                 "code": "MUJOCO.BA.001",
                 "version": null,
                 "name": "mujoco-standard-articulation-root",
@@ -52,6 +35,23 @@
                     "internal_path": "capabilities/physics_bodies/base_articulation/requirements/newton-articulation-root-config.md"
                 },
                 "message": "Newton articulation roots must use standard `UsdPhysics.ArticulationRootAPI` and author explicit Newton self-collision configuration.",
+                "examples": []
+            },
+            {
+                "code": "BA.002",
+                "version": null,
+                "name": "non-adjacent-collision-meshes-do-not-clash",
+                "compatibility": "physx",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/base_articulation/requirements/non-adjacent-collision-meshes-do-not-clash.html",
+                    "internal_path": "capabilities/physics_bodies/base_articulation/requirements/non-adjacent-collision-meshes-do-not-clash.md"
+                },
+                "message": "Collision meshes on non-adjacent links in the articulation hierarchy must not overlap or intersect.",
                 "examples": []
             },
             {

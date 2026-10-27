@@ -12,6 +12,7 @@
         "dependencies": [
             "FET_000_STANDARD@0.1.0"
         ],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_000_ISAAC.html",
             "internal_path": "features/FET_000_ISAAC.md"

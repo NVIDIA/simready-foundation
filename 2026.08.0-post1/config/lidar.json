@@ -21,23 +21,6 @@
                 "examples": []
             },
             {
-                "code": "LI.002",
-                "version": null,
-                "name": "lidar-emitter-state-length",
-                "compatibility": null,
-                "tags": [
-                    "correctness"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/nonvisual_sensors/lidar/requirements/lidar-emitter-state-length.html",
-                    "internal_path": "capabilities/nonvisual_sensors/lidar/requirements/lidar-emitter-state-length.md"
-                },
-                "message": "Every emitter state array attribute on an OmniLidar prim must have the same length as `omni:sensor:Core:numberOfEmitters`, and all emitter state arrays must be mutually consistent in length.",
-                "examples": []
-            },
-            {
                 "code": "LI.004",
                 "version": null,
                 "name": "lidar-solid-state-rays-per-line",
@@ -69,6 +52,23 @@
                     "internal_path": "capabilities/nonvisual_sensors/lidar/requirements/lidar-omni-lidar-schema.md"
                 },
                 "message": "LiDAR sensors must be represented as OmniLidar prims with OmniSensorGenericLidarCoreAPI applied. The legacy UsdGeom.Camera with cameraSensorType=\"lidar\" pattern is not allowed.",
+                "examples": []
+            },
+            {
+                "code": "LI.002",
+                "version": null,
+                "name": "lidar-emitter-state-length",
+                "compatibility": null,
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/nonvisual_sensors/lidar/requirements/lidar-emitter-state-length.html",
+                    "internal_path": "capabilities/nonvisual_sensors/lidar/requirements/lidar-emitter-state-length.md"
+                },
+                "message": "Every emitter state array attribute on an OmniLidar prim must have the same length as `omni:sensor:Core:numberOfEmitters`, and all emitter state arrays must be mutually consistent in length.",
                 "examples": []
             }
         ],

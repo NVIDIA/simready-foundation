@@ -18,6 +18,7 @@
         "dependencies": [
             "FET_003_MUJOCO@0.1.0"
         ],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_004_MUJOCO.html",
             "internal_path": "features/FET_004_MUJOCO.md"

@@ -4,6 +4,48 @@
         "version": "1.0.0",
         "requirements": [
             {
+                "code": "DISP.001",
+                "version": null,
+                "name": "display-color-coverage",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "disp-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/visualization/display_color/requirements/display-color-coverage.html",
+                    "internal_path": "capabilities/visualization/display_color/requirements/display-color-coverage.md"
+                },
+                "message": "Every renderable geometry prim must resolve a display colour, authored on the prim or inherited from an ancestor.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Mesh \"bracket\"\n{\n    color3f[] primvars:displayColor = [(0.4, 0.4, 0.42)] (\n        interpolation = \"constant\"\n    )\n}"
+                        },
+                        "name": "authored on the Gprim",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Assembly\"\n{\n    color3f[] primvars:displayColor = [(0.4, 0.4, 0.42)] (\n        interpolation = \"constant\"\n    )\n\n    def Mesh \"bracket\"\n    {\n    }\n}"
+                        },
+                        "name": "authored once on an ancestor, inherited by the geometry below",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Mesh \"bracket\"\n{\n}"
+                        },
+                        "name": "renderable mesh with no display colour on it or any ancestor",
+                        "result": "failure"
+                    }
+                ]
+            },
+            {
                 "code": "DISP.003",
                 "version": null,
                 "name": "display-opacity-values",
@@ -57,48 +99,6 @@
                             "content": "def Mesh \"window\"\n{\n    color3f[] primvars:displayColor = [(0.8, 0.85, 0.9)] (\n        interpolation = \"constant\"\n    )\n    double[] primvars:displayOpacity = [0.25] (\n        interpolation = \"constant\"\n    )\n}"
                         },
                         "name": "double[], a precision variant of the declared float[]",
-                        "result": "failure"
-                    }
-                ]
-            },
-            {
-                "code": "DISP.001",
-                "version": null,
-                "name": "display-color-coverage",
-                "compatibility": "open-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": "disp-001",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/visualization/display_color/requirements/display-color-coverage.html",
-                    "internal_path": "capabilities/visualization/display_color/requirements/display-color-coverage.md"
-                },
-                "message": "Every renderable geometry prim must resolve a display colour, authored on the prim or inherited from an ancestor.",
-                "examples": [
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Mesh \"bracket\"\n{\n    color3f[] primvars:displayColor = [(0.4, 0.4, 0.42)] (\n        interpolation = \"constant\"\n    )\n}"
-                        },
-                        "name": "authored on the Gprim",
-                        "result": "success"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Xform \"Assembly\"\n{\n    color3f[] primvars:displayColor = [(0.4, 0.4, 0.42)] (\n        interpolation = \"constant\"\n    )\n\n    def Mesh \"bracket\"\n    {\n    }\n}"
-                        },
-                        "name": "authored once on an ancestor, inherited by the geometry below",
-                        "result": "success"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Mesh \"bracket\"\n{\n}"
-                        },
-                        "name": "renderable mesh with no display colour on it or any ancestor",
                         "result": "failure"
                     }
                 ]

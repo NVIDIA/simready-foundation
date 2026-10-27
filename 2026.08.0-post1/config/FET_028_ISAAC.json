@@ -10,6 +10,7 @@
             "FET_028_STANDARD@0.1.0",
             "FET_022_ISAAC@0.1.0"
         ],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_028_ISAAC.html",
             "internal_path": "features/FET_028_ISAAC.md"

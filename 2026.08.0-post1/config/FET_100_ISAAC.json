@@ -9,6 +9,7 @@
         "dependencies": [
             "FET_003_PHYSX@0.4.0"
         ],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_100_ISAAC.html",
             "internal_path": "features/FET_100_ISAAC.md"

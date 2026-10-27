@@ -10,6 +10,7 @@
         "dependencies": [
             "FET_031_STANDARD@0.1.0"
         ],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_033_STANDARD.html",
             "internal_path": "features/FET_033_STANDARD.md"

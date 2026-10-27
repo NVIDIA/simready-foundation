@@ -9,6 +9,7 @@
             "DISP.003"
         ],
         "dependencies": [],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_010_STANDARD.html",
             "internal_path": "features/FET_010_STANDARD.md"

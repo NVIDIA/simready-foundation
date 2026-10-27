@@ -14,6 +14,7 @@
             "VM.TEX.005"
         ],
         "dependencies": [],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_006_MDL.html",
             "internal_path": "features/FET_006_MDL.md"

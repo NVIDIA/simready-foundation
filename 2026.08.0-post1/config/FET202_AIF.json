@@ -10,6 +10,7 @@
         "dependencies": [
             "FET201_AIF@0.2.0"
         ],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_202-thermal_cooling.html",
             "internal_path": "features/FET_202-thermal_cooling.md"

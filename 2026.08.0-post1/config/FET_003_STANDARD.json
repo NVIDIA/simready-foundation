@@ -16,6 +16,7 @@
             "RB.010"
         ],
         "dependencies": [],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_003_STANDARD.html",
             "internal_path": "features/FET_003_STANDARD.md"

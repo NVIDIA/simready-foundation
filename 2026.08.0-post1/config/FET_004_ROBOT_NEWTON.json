@@ -29,6 +29,7 @@
             "RB.012"
         ],
         "dependencies": [],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_004_ROBOT_NEWTON.html",
             "internal_path": "features/FET_004_ROBOT_NEWTON.md"

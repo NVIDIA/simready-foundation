@@ -7,6 +7,7 @@
             "ROS.001"
         ],
         "dependencies": [],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_025_ROS.html",
             "internal_path": "features/FET_025_ROS.md"

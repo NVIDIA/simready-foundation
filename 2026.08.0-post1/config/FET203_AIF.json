@@ -12,6 +12,7 @@
         "dependencies": [
             "FET201_AIF@0.2.0"
         ],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_203-electrical.html",
             "internal_path": "features/FET_203-electrical.md"

@@ -4,6 +4,40 @@
         "version": "1.0.0",
         "requirements": [
             {
+                "code": "RB.008",
+                "version": null,
+                "name": "rigid-body-detailed-mass",
+                "compatibility": "open-usd",
+                "tags": [
+                    "high-quality"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-detailed-mass.html",
+                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-detailed-mass.md"
+                },
+                "message": "Rigid bodies _or_ their descendent collision shapes may have detailed mass properties including density, center of mass, and inertia tensor. When authored, these detailed mass properties must be internally consistent.",
+                "examples": []
+            },
+            {
+                "code": "NEWTON.MAS.001",
+                "version": null,
+                "name": "newton-mass-attributes",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "NewtonMassAttributesChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/newton-mass-attributes.html",
+                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/newton-mass-attributes.md"
+                },
+                "message": "`NewtonMassAPI` must be applied on an `Xformable`, and any authored Newton mass attributes must be valid.",
+                "examples": []
+            },
+            {
                 "code": "RB.COL.003",
                 "version": null,
                 "name": "collider-mesh",
@@ -18,6 +52,142 @@
                     "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/collider-mesh.md"
                 },
                 "message": "The Mesh Collision API can only be assigned to Mesh Prims.",
+                "examples": []
+            },
+            {
+                "code": "RB.006",
+                "version": null,
+                "name": "rigid-body-no-nesting",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "rb-006",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-no-nesting.html",
+                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-no-nesting.md"
+                },
+                "message": "Rigid bodies can not be nested unless xformOp reset xform stack is used.",
+                "examples": []
+            },
+            {
+                "code": "RB.011",
+                "version": null,
+                "name": "nested-rigid-body-mass",
+                "compatibility": "open-usd",
+                "tags": [
+                    "high-quality"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/nested-rigid-body-mass.html",
+                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/nested-rigid-body-mass.md"
+                },
+                "message": "Every rigid body must have a valid (positive) `physics:mass` on itself or on at least one of its child colliders. Nested rigid body subtrees are excluded from the traversal. Negative mass is always a failure.",
+                "examples": []
+            },
+            {
+                "code": "RB.COL.002",
+                "version": null,
+                "name": "mesh-collision-api",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "RigidBodyColliderMeshChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/mesh-collision-api.html",
+                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/mesh-collision-api.md"
+                },
+                "message": "**UsdPhysicsMeshCollisionAPI** may only be applied to **UsdGeom.Mesh** prims, and any prim with MeshCollisionAPI must also have **UsdPhysicsCollisionAPI** applied.",
+                "examples": []
+            },
+            {
+                "code": "RB.MB.001",
+                "version": null,
+                "name": "rigid-body-multibody-capability",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-multibody-capability.html",
+                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-multibody-capability.md"
+                },
+                "message": "Assets must contain at least two rigid bodies",
+                "examples": []
+            },
+            {
+                "code": "PHYSX.COL.001",
+                "version": null,
+                "name": "physx-collider-capability",
+                "compatibility": "physx",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/physx-collider-capability.html",
+                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/physx-collider-capability.md"
+                },
+                "message": "CollisionAPI may only be applied to a UsdGeom Gprim or to an Xform that has PhysxMeshMergeCollisionAPI and whose collisionmeshes collection includes at least one Gprim.",
+                "examples": []
+            },
+            {
+                "code": "RB.009",
+                "version": null,
+                "name": "rigid-body-schema-no-skew-matrix",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "rb-009",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-schema-no-skew-matrix.html",
+                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-schema-no-skew-matrix.md"
+                },
+                "message": "Rigid bodies have to be UsdGeomXformable prims without skew matrix.",
+                "examples": []
+            },
+            {
+                "code": "RB.001",
+                "version": null,
+                "name": "rigid-body-capability",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-capability.html",
+                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-capability.md"
+                },
+                "message": "Assets must contain at least one rigid body",
+                "examples": []
+            },
+            {
+                "code": "MUJOCO.COL.002",
+                "version": null,
+                "name": "mujoco-mesh-collision-api",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "MuJoCoMeshCollisionAPIChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/mujoco-mesh-collision-api.html",
+                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/mujoco-mesh-collision-api.md"
+                },
+                "message": "MuJoCo mesh collision data must use valid `MjcMeshCollisionAPI` and convex-hull mesh collision authoring.",
                 "examples": []
             },
             {
@@ -38,9 +208,26 @@
                 "examples": []
             },
             {
-                "code": "RB.MB.001",
+                "code": "RB.007",
                 "version": null,
-                "name": "rigid-body-multibody-capability",
+                "name": "rigid-body-mass",
+                "compatibility": "open-usd",
+                "tags": [
+                    "high-quality"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-mass.html",
+                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-mass.md"
+                },
+                "message": "Rigid bodies _or_ their descendant collision shapes must have a mass specification.",
+                "examples": []
+            },
+            {
+                "code": "RB.COL.001",
+                "version": null,
+                "name": "collider-capability",
                 "compatibility": "open-usd",
                 "tags": [
                     "essential"
@@ -48,10 +235,61 @@
                 "validator": null,
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-multibody-capability.html",
-                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-multibody-capability.md"
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/collider-capability.html",
+                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/collider-capability.md"
                 },
-                "message": "Assets must contain at least two rigid bodies",
+                "message": "Colliding Gprims must apply the Collision API.",
+                "examples": []
+            },
+            {
+                "code": "NEWTON.COL.001",
+                "version": null,
+                "name": "newton-collider-api",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "NewtonColliderAPIChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/newton-collider-api.html",
+                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/newton-collider-api.md"
+                },
+                "message": "Newton colliders must use a valid Newton collision schema.",
+                "examples": []
+            },
+            {
+                "code": "RB.013",
+                "version": null,
+                "name": "rigid-body-collider",
+                "compatibility": "open-usd",
+                "tags": [
+                    "high-quality"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-collider.html",
+                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-collider.md"
+                },
+                "message": "Enabled rigid bodies must have collision geometry.",
+                "examples": []
+            },
+            {
+                "code": "RB.COL.004",
+                "version": null,
+                "name": "collider-non-uniform-scale",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "rb-col-004",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/collider-non-uniform-scale.html",
+                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/collider-non-uniform-scale.md"
+                },
+                "message": "The collision shape scale must be uniform for the following geometries: Sphere, Capsule, Cylinder, Cone & Points.",
                 "examples": []
             },
             {
@@ -89,159 +327,6 @@
                 "examples": []
             },
             {
-                "code": "RB.010",
-                "version": null,
-                "name": "invisible-collision-mesh-has-purpose-guide",
-                "compatibility": "open-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/invisible-collision-mesh-has-purpose-guide.html",
-                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/invisible-collision-mesh-has-purpose-guide.md"
-                },
-                "message": "Invisible collision meshes must have their purpose attribute set to 'guide' to be properly excluded from rendering.",
-                "examples": []
-            },
-            {
-                "code": "RB.001",
-                "version": null,
-                "name": "rigid-body-capability",
-                "compatibility": "open-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-capability.html",
-                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-capability.md"
-                },
-                "message": "Assets must contain at least one rigid body",
-                "examples": []
-            },
-            {
-                "code": "PHYSX.COL.001",
-                "version": null,
-                "name": "physx-collider-capability",
-                "compatibility": "physx",
-                "tags": [
-                    "essential"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/physx-collider-capability.html",
-                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/physx-collider-capability.md"
-                },
-                "message": "CollisionAPI may only be applied to a UsdGeom Gprim or to an Xform that has PhysxMeshMergeCollisionAPI and whose collisionmeshes collection includes at least one Gprim.",
-                "examples": []
-            },
-            {
-                "code": "NEWTON.MAS.001",
-                "version": null,
-                "name": "newton-mass-attributes",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "NewtonMassAttributesChecker",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/newton-mass-attributes.html",
-                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/newton-mass-attributes.md"
-                },
-                "message": "`NewtonMassAPI` must be applied on an `Xformable`, and any authored Newton mass attributes must be valid.",
-                "examples": []
-            },
-            {
-                "code": "RB.COL.002",
-                "version": null,
-                "name": "mesh-collision-api",
-                "compatibility": "open-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": "RigidBodyColliderMeshChecker",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/mesh-collision-api.html",
-                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/mesh-collision-api.md"
-                },
-                "message": "**UsdPhysicsMeshCollisionAPI** may only be applied to **UsdGeom.Mesh** prims, and any prim with MeshCollisionAPI must also have **UsdPhysicsCollisionAPI** applied.",
-                "examples": []
-            },
-            {
-                "code": "RB.013",
-                "version": null,
-                "name": "rigid-body-collider",
-                "compatibility": "open-usd",
-                "tags": [
-                    "high-quality"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-collider.html",
-                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-collider.md"
-                },
-                "message": "Enabled rigid bodies must have collision geometry.",
-                "examples": []
-            },
-            {
-                "code": "RB.006",
-                "version": null,
-                "name": "rigid-body-no-nesting",
-                "compatibility": "open-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": "rb-006",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-no-nesting.html",
-                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-no-nesting.md"
-                },
-                "message": "Rigid bodies can not be nested unless xformOp reset xform stack is used.",
-                "examples": []
-            },
-            {
-                "code": "RB.COL.004",
-                "version": null,
-                "name": "collider-non-uniform-scale",
-                "compatibility": "open-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": "rb-col-004",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/collider-non-uniform-scale.html",
-                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/collider-non-uniform-scale.md"
-                },
-                "message": "The collision shape scale must be uniform for the following geometries: Sphere, Capsule, Cylinder, Cone & Points.",
-                "examples": []
-            },
-            {
-                "code": "RB.011",
-                "version": null,
-                "name": "nested-rigid-body-mass",
-                "compatibility": "open-usd",
-                "tags": [
-                    "high-quality"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/nested-rigid-body-mass.html",
-                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/nested-rigid-body-mass.md"
-                },
-                "message": "Every rigid body must have a valid (positive) `physics:mass` on itself or on at least one of its child colliders. Nested rigid body subtrees are excluded from the traversal. Negative mass is always a failure.",
-                "examples": []
-            },
-            {
                 "code": "RB.005",
                 "version": null,
                 "name": "rigid-body-no-instancing",
@@ -256,74 +341,6 @@
                     "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-no-instancing.md"
                 },
                 "message": "Rigid bodies cannot be part of a scene graph instance.",
-                "examples": []
-            },
-            {
-                "code": "RB.008",
-                "version": null,
-                "name": "rigid-body-detailed-mass",
-                "compatibility": "open-usd",
-                "tags": [
-                    "high-quality"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-detailed-mass.html",
-                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-detailed-mass.md"
-                },
-                "message": "Rigid bodies _or_ their descendent collision shapes may have detailed mass properties including density, center of mass, and inertia tensor. When authored, these detailed mass properties must be internally consistent.",
-                "examples": []
-            },
-            {
-                "code": "RB.007",
-                "version": null,
-                "name": "rigid-body-mass",
-                "compatibility": "open-usd",
-                "tags": [
-                    "high-quality"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-mass.html",
-                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-mass.md"
-                },
-                "message": "Rigid bodies _or_ their descendant collision shapes must have a mass specification.",
-                "examples": []
-            },
-            {
-                "code": "RB.003",
-                "version": null,
-                "name": "rigid-body-schema-application",
-                "compatibility": "open-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": "rb-003",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-schema-application.html",
-                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-schema-application.md"
-                },
-                "message": "Rigid bodies have to be UsdGeomXformable prims.",
-                "examples": []
-            },
-            {
-                "code": "RB.009",
-                "version": null,
-                "name": "rigid-body-schema-no-skew-matrix",
-                "compatibility": "open-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": "rb-009",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-schema-no-skew-matrix.html",
-                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-schema-no-skew-matrix.md"
-                },
-                "message": "Rigid bodies have to be UsdGeomXformable prims without skew matrix.",
                 "examples": []
             },
             {
@@ -344,43 +361,26 @@
                 "examples": []
             },
             {
-                "code": "MUJOCO.COL.002",
+                "code": "RB.003",
                 "version": null,
-                "name": "mujoco-mesh-collision-api",
-                "compatibility": "other",
+                "name": "rigid-body-schema-application",
+                "compatibility": "open-usd",
                 "tags": [
-                    "essential"
+                    "correctness"
                 ],
-                "validator": "MuJoCoMeshCollisionAPIChecker",
+                "validator": "rb-003",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/mujoco-mesh-collision-api.html",
-                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/mujoco-mesh-collision-api.md"
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-schema-application.html",
+                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/rigid-body-schema-application.md"
                 },
-                "message": "MuJoCo mesh collision data must use valid `MjcMeshCollisionAPI` and convex-hull mesh collision authoring.",
+                "message": "Rigid bodies have to be UsdGeomXformable prims.",
                 "examples": []
             },
             {
-                "code": "NEWTON.COL.001",
+                "code": "RB.010",
                 "version": null,
-                "name": "newton-collider-api",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "NewtonColliderAPIChecker",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/newton-collider-api.html",
-                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/newton-collider-api.md"
-                },
-                "message": "Newton colliders must use a valid Newton collision schema.",
-                "examples": []
-            },
-            {
-                "code": "RB.COL.001",
-                "version": null,
-                "name": "collider-capability",
+                "name": "invisible-collision-mesh-has-purpose-guide",
                 "compatibility": "open-usd",
                 "tags": [
                     "essential"
@@ -388,10 +388,10 @@
                 "validator": null,
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/collider-capability.html",
-                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/collider-capability.md"
+                    "path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/invisible-collision-mesh-has-purpose-guide.html",
+                    "internal_path": "capabilities/physics_bodies/physics_rigid_bodies/requirements/invisible-collision-mesh-has-purpose-guide.md"
                 },
-                "message": "Colliding Gprims must apply the Collision API.",
+                "message": "Invisible collision meshes must have their purpose attribute set to 'guide' to be properly excluded from rendering.",
                 "examples": []
             }
         ],

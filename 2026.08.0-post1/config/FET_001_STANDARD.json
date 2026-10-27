@@ -21,6 +21,7 @@
             "com.nvidia.usd.HI.004"
         ],
         "dependencies": [],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_001_STANDARD.html",
             "internal_path": "features/FET_001_STANDARD.md"

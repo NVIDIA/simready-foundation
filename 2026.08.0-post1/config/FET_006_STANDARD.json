@@ -12,6 +12,7 @@
             "VM.TEX.003"
         ],
         "dependencies": [],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_006_STANDARD.html",
             "internal_path": "features/FET_006_STANDARD.md"

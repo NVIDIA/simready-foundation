@@ -4,23 +4,6 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "HI.005",
-                "version": null,
-                "name": "xform-common-api-usage",
-                "compatibility": "core-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/hierarchy/requirements/xform-common-api-usage.html",
-                    "internal_path": "capabilities/hierarchy/requirements/xform-common-api-usage.md"
-                },
-                "message": "Transformations (translate, rotate, scale, pivot) on prims that are intended to be translated, rotated or scaled by users (e.g. the root prim of an asset) should conform to the UsdGeomXformCommonAPI.",
-                "examples": []
-            },
-            {
                 "code": "HI.007",
                 "version": null,
                 "name": "dummy-requirement",
@@ -55,37 +38,20 @@
                 "examples": []
             },
             {
-                "code": "HI.006",
-                "version": "0.1.0",
-                "name": "placeable-posable-are-xformable",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/hierarchy/requirements/placeable-posable-are-xformable.html",
-                    "internal_path": "capabilities/hierarchy/requirements/placeable-posable-are-xformable.md"
-                },
-                "message": "All prims representing distinct objects or groups that require placement, posing or animation shall inherit from UsdGeomXformable.",
-                "examples": []
-            },
-            {
-                "code": "HI.002",
+                "code": "HI.009",
                 "version": null,
-                "name": "exclusive-xform-parent-for-usdgeom",
-                "compatibility": "other",
+                "name": "kinematic-chain-hierarchy",
+                "compatibility": "open-usd",
                 "tags": [
-                    "essential"
+                    "correctness"
                 ],
                 "validator": null,
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/hierarchy/requirements/exclusive-xform-parent-for-usdgeom.html",
-                    "internal_path": "capabilities/hierarchy/requirements/exclusive-xform-parent-for-usdgeom.md"
+                    "path": "capabilities/hierarchy/requirements/kinematic-chain-hierarchy.html",
+                    "internal_path": "capabilities/hierarchy/requirements/kinematic-chain-hierarchy.md"
                 },
-                "message": "Every UsdGeomGprim must have a parent Xform with specific transform operations and hierarchy constraints.",
+                "message": "For assets (e.g., a robot with multiple articulated joints), the hierarchy should reflect the kinematic chain, with appropriate Xforms for each transformable link.",
                 "examples": []
             },
             {
@@ -106,20 +72,37 @@
                 "examples": []
             },
             {
-                "code": "HI.009",
+                "code": "HI.010",
                 "version": null,
-                "name": "kinematic-chain-hierarchy",
-                "compatibility": "open-usd",
+                "name": "undefined-prims",
+                "compatibility": "other",
                 "tags": [
-                    "correctness"
+                    "essential"
+                ],
+                "validator": "hi-010",
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/hierarchy/requirements/undefined-prims.html",
+                    "internal_path": "capabilities/hierarchy/requirements/undefined-prims.md"
+                },
+                "message": "Assets must not contain undefined prims (overs)",
+                "examples": []
+            },
+            {
+                "code": "HI.006",
+                "version": "0.1.0",
+                "name": "placeable-posable-are-xformable",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
                 ],
                 "validator": null,
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/hierarchy/requirements/kinematic-chain-hierarchy.html",
-                    "internal_path": "capabilities/hierarchy/requirements/kinematic-chain-hierarchy.md"
+                    "path": "capabilities/hierarchy/requirements/placeable-posable-are-xformable.html",
+                    "internal_path": "capabilities/hierarchy/requirements/placeable-posable-are-xformable.md"
                 },
-                "message": "For assets (e.g., a robot with multiple articulated joints), the hierarchy should reflect the kinematic chain, with appropriate Xforms for each transformable link.",
+                "message": "All prims representing distinct objects or groups that require placement, posing or animation shall inherit from UsdGeomXformable.",
                 "examples": []
             },
             {
@@ -140,20 +123,37 @@
                 "examples": []
             },
             {
-                "code": "HI.010",
+                "code": "HI.002",
                 "version": null,
-                "name": "undefined-prims",
+                "name": "exclusive-xform-parent-for-usdgeom",
                 "compatibility": "other",
                 "tags": [
                     "essential"
                 ],
-                "validator": "hi-010",
+                "validator": null,
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/hierarchy/requirements/undefined-prims.html",
-                    "internal_path": "capabilities/hierarchy/requirements/undefined-prims.md"
+                    "path": "capabilities/hierarchy/requirements/exclusive-xform-parent-for-usdgeom.html",
+                    "internal_path": "capabilities/hierarchy/requirements/exclusive-xform-parent-for-usdgeom.md"
                 },
-                "message": "Assets must not contain undefined prims (overs)",
+                "message": "Every UsdGeomGprim must have a parent Xform with specific transform operations and hierarchy constraints.",
+                "examples": []
+            },
+            {
+                "code": "HI.005",
+                "version": null,
+                "name": "xform-common-api-usage",
+                "compatibility": "core-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "capabilities/hierarchy/requirements/xform-common-api-usage.html",
+                    "internal_path": "capabilities/hierarchy/requirements/xform-common-api-usage.md"
+                },
+                "message": "Transformations (translate, rotate, scale, pivot) on prims that are intended to be translated, rotated or scaled by users (e.g. the root prim of an asset) should conform to the UsdGeomXformCommonAPI.",
                 "examples": []
             },
             {

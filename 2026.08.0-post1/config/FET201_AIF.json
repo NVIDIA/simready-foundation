@@ -13,6 +13,7 @@
         "dependencies": [
             "FET200_AIF@0.1.0"
         ],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_201-connection_points.html",
             "internal_path": "features/FET_201-connection_points.md"

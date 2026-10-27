@@ -9,6 +9,7 @@
             "SL.003"
         ],
         "dependencies": [],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_011_STANDARD.html",
             "internal_path": "features/FET_011_STANDARD.md"

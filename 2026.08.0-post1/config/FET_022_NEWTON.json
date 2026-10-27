@@ -13,6 +13,7 @@
         "dependencies": [
             "FET_004_ROBOT_NEWTON@0.1.0"
         ],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_022_NEWTON.html",
             "internal_path": "features/FET_022_NEWTON.md"

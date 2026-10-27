@@ -12,6 +12,7 @@
         "dependencies": [
             "FET_004_STANDARD@0.2.0"
         ],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_022_STANDARD.html",
             "internal_path": "features/FET_022_STANDARD.md"

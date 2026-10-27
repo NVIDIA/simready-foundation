@@ -11,6 +11,7 @@
             "FET_028_STANDARD@0.1.0",
             "FET_022_MUJOCO@0.1.0"
         ],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_028_MUJOCO.html",
             "internal_path": "features/FET_028_MUJOCO.md"

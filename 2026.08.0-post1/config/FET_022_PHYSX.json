@@ -17,6 +17,7 @@
         "dependencies": [
             "FET_004_PHYSX@0.4.0"
         ],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_022_PHYSX.html",
             "internal_path": "features/FET_022_PHYSX.md"

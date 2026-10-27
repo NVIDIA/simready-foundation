@@ -21,6 +21,7 @@
             "NEWTON.MAT.001"
         ],
         "dependencies": [],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_003_NEWTON.html",
             "internal_path": "features/FET_003_NEWTON.md"

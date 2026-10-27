@@ -12,6 +12,7 @@
             "RP.006"
         ],
         "dependencies": [],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_035_RTX.html",
             "internal_path": "features/FET_035_RTX.md"

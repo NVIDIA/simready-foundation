@@ -18,6 +18,7 @@
         "dependencies": [
             "FET_003_NEWTON@0.1.0"
         ],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_004_NEWTON.html",
             "internal_path": "features/FET_004_NEWTON.md"

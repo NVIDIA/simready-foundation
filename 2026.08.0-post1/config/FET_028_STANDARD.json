@@ -10,6 +10,7 @@
             "GR.004"
         ],
         "dependencies": [],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_028_STANDARD.html",
             "internal_path": "features/FET_028_STANDARD.md"

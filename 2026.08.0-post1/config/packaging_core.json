@@ -4,9 +4,9 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "PKG.HASH.001",
+                "code": "PKG.DEF.001",
                 "version": null,
-                "name": "hash-object-format",
+                "name": "package-definition",
                 "compatibility": "other",
                 "tags": [
                     "essential"
@@ -14,10 +14,10 @@
                 "validator": "_Not yet implemented_",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/packaging/packaging_core/requirements/hash-object-format.html",
-                    "internal_path": "capabilities/packaging/packaging_core/requirements/hash-object-format.md"
+                    "path": "capabilities/packaging/packaging_core/requirements/package-definition.html",
+                    "internal_path": "capabilities/packaging/packaging_core/requirements/package-definition.md"
                 },
-                "message": "Hash fields MUST be objects containing at least a `sha256` key with lowercase hexadecimal value. Implementations SHOULD also include `blake3` and/or `blake2b` when available, for performance. When `content_hash` or `package_hash` are present, their `sha256` values MUST be computed using the deterministic algorithms defined in this requirement.",
+                "message": "Each package MUST have exactly one valid package definition with a globally unique, case-insensitive, immutable identity, placed at the package root alongside a `.metadata/` folder",
                 "examples": []
             },
             {
@@ -38,9 +38,9 @@
                 "examples": []
             },
             {
-                "code": "PKG.DEF.001",
+                "code": "PKG.HASH.001",
                 "version": null,
-                "name": "package-definition",
+                "name": "hash-object-format",
                 "compatibility": "other",
                 "tags": [
                     "essential"
@@ -48,10 +48,10 @@
                 "validator": "_Not yet implemented_",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/packaging/packaging_core/requirements/package-definition.html",
-                    "internal_path": "capabilities/packaging/packaging_core/requirements/package-definition.md"
+                    "path": "capabilities/packaging/packaging_core/requirements/hash-object-format.html",
+                    "internal_path": "capabilities/packaging/packaging_core/requirements/hash-object-format.md"
                 },
-                "message": "Each package MUST have exactly one valid package definition with a globally unique, case-insensitive, immutable identity, placed at the package root alongside a `.metadata/` folder",
+                "message": "Hash fields MUST be objects containing at least a `sha256` key with lowercase hexadecimal value. Implementations SHOULD also include `blake3` and/or `blake2b` when available, for performance. When `content_hash` or `package_hash` are present, their `sha256` values MUST be computed using the deterministic algorithms defined in this requirement.",
                 "examples": []
             }
         ],

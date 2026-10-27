@@ -13,6 +13,7 @@
             "AM.007"
         ],
         "dependencies": [],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_200-aif_metadata.html",
             "internal_path": "features/FET_200-aif_metadata.md"

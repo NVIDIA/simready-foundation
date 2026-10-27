@@ -13,6 +13,7 @@
             "HI.010"
         ],
         "dependencies": [],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_000_STANDARD.html",
             "internal_path": "features/FET_000_STANDARD.md"

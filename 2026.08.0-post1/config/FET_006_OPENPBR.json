@@ -14,6 +14,7 @@
             "VM.TEX.004"
         ],
         "dependencies": [],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_006_OPENPBR.html",
             "internal_path": "features/FET_006_OPENPBR.md"

@@ -12,6 +12,7 @@
         "dependencies": [
             "FET_004_ROBOT_MUJOCO@0.1.0"
         ],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_022_MUJOCO.html",
             "internal_path": "features/FET_022_MUJOCO.md"

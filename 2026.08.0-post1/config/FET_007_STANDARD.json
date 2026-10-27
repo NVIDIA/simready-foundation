@@ -12,6 +12,7 @@
             "NVM.006"
         ],
         "dependencies": [],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_007_STANDARD.html",
             "internal_path": "features/FET_007_STANDARD.md"

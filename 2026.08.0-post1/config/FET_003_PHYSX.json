@@ -17,6 +17,7 @@
             "PHYSX.COL.002"
         ],
         "dependencies": [],
+        "parameters": [],
         "metadata": {
             "path": "features/FET_003_PHYSX.html",
             "internal_path": "features/FET_003_PHYSX.md"
