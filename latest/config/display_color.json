@@ -14,8 +14,8 @@
                 "validator": "disp-003",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/visualization/display_color/requirements/display-opacity-values.html",
-                    "internal_path": "capabilities/visualization/display_color/requirements/display-opacity-values.md"
+                    "path": "rules_and_reqs/visualization/display_color/requirements/display-opacity-values.html",
+                    "internal_path": "rules_and_reqs/visualization/display_color/requirements/display-opacity-values.md"
                 },
                 "message": "Display opacity, where authored, must lie within its valid range and agree with its declared interpolation.",
                 "examples": [
@@ -62,48 +62,6 @@
                 ]
             },
             {
-                "code": "DISP.001",
-                "version": null,
-                "name": "display-color-coverage",
-                "compatibility": "open-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": "disp-001",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/visualization/display_color/requirements/display-color-coverage.html",
-                    "internal_path": "capabilities/visualization/display_color/requirements/display-color-coverage.md"
-                },
-                "message": "Every renderable geometry prim must resolve a display colour, authored on the prim or inherited from an ancestor.",
-                "examples": [
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Mesh \"bracket\"\n{\n    color3f[] primvars:displayColor = [(0.4, 0.4, 0.42)] (\n        interpolation = \"constant\"\n    )\n}"
-                        },
-                        "name": "authored on the Gprim",
-                        "result": "success"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Xform \"Assembly\"\n{\n    color3f[] primvars:displayColor = [(0.4, 0.4, 0.42)] (\n        interpolation = \"constant\"\n    )\n\n    def Mesh \"bracket\"\n    {\n    }\n}"
-                        },
-                        "name": "authored once on an ancestor, inherited by the geometry below",
-                        "result": "success"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Mesh \"bracket\"\n{\n}"
-                        },
-                        "name": "renderable mesh with no display colour on it or any ancestor",
-                        "result": "failure"
-                    }
-                ]
-            },
-            {
                 "code": "DISP.002",
                 "version": null,
                 "name": "display-color-values",
@@ -114,8 +72,8 @@
                 "validator": "disp-002",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/visualization/display_color/requirements/display-color-values.html",
-                    "internal_path": "capabilities/visualization/display_color/requirements/display-color-values.md"
+                    "path": "rules_and_reqs/visualization/display_color/requirements/display-color-values.html",
+                    "internal_path": "rules_and_reqs/visualization/display_color/requirements/display-color-values.md"
                 },
                 "message": "Authored display colour values must lie within the range a consumer can interpret.",
                 "examples": [
@@ -184,11 +142,53 @@
                         "result": "failure"
                     }
                 ]
+            },
+            {
+                "code": "DISP.001",
+                "version": null,
+                "name": "display-color-coverage",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "disp-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/visualization/display_color/requirements/display-color-coverage.html",
+                    "internal_path": "rules_and_reqs/visualization/display_color/requirements/display-color-coverage.md"
+                },
+                "message": "Every renderable geometry prim must resolve a display colour, authored on the prim or inherited from an ancestor.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Mesh \"bracket\"\n{\n    color3f[] primvars:displayColor = [(0.4, 0.4, 0.42)] (\n        interpolation = \"constant\"\n    )\n}"
+                        },
+                        "name": "authored on the Gprim",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Assembly\"\n{\n    color3f[] primvars:displayColor = [(0.4, 0.4, 0.42)] (\n        interpolation = \"constant\"\n    )\n\n    def Mesh \"bracket\"\n    {\n    }\n}"
+                        },
+                        "name": "authored once on an ancestor, inherited by the geometry below",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Mesh \"bracket\"\n{\n}"
+                        },
+                        "name": "renderable mesh with no display colour on it or any ancestor",
+                        "result": "failure"
+                    }
+                ]
             }
         ],
         "metadata": {
-            "path": "capabilities/visualization/display_color/capability-display_color.html",
-            "internal_path": "capabilities/visualization/display_color/capability-display_color.md"
+            "path": "rules_and_reqs/visualization/display_color/capability-display_color.html",
+            "internal_path": "rules_and_reqs/visualization/display_color/capability-display_color.md"
         }
     }
 }

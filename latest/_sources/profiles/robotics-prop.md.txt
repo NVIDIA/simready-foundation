@@ -10,188 +10,189 @@ separate neutral and runtime-specific prop profiles with a single
 profile whose neutral OpenUSD core is mandatory and whose solver-specific
 behavior is selected through optional features.
 
+## SimReady Foundations 10.0 — 5.0.0
+
+`Robotics-Prop` 5.0.0 requires
+[`FET008_ObjectForward.0-1-0`](../features/FET008_ObjectForward.md) for
+semantic facing and
+[`FET009_MaterialCoverage.0-1-0`](../features/FET009_MaterialCoverage.md)
+for material binding (`VM.MAT.001`) and rendered coverage.
+It selects `FET006_Materials.0-3-0` (required),
+`FET006_Materials.Openpbr.0-2-0` and `FET006_Materials.MDL.0-3-0` (optional),
+and the optional PhysX, Newton, and MuJoCo Core capabilities at `0-2-0`.
+Version 4.0.0 is the SimReady Foundations 8.0 contract.
+
+Migration from 4.0.0 requires an authored forward vector or visual evidence
+through `simready-foundation-conform-fet-008-object-forward`, material-coverage
+validation, and the selected features' runtime tests. Preserve staged output
+and independent validation evidence for every requested profile.
+
 ## Profile definition
 
 The `Robotics-Prop` profile includes the following feature set (see
 `robotics_prop.toml` and the
-[feature dependency graph](../features/feature-dependency-graph)). Each
+[feature dependency graph](../features/feature-dependency-graph.md)). Each
 feature's requirements and dependencies are defined in the feature
 specifications.
 
 ```toml
+# Generated Foundations 2 projection. See ../catalog-map.json.
+
 [Robotics-Prop]
 "3.0.0" = {features = [
-    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
-    {"FET_001_STANDARD" = {version = "1.0.1"}}, # "Minimal"
-    {"FET_003_STANDARD" = {version = "0.2.0"}}, # "RBD Physics"
-    {"FET_004_STANDARD" = {version = "0.2.0"}, optional=true}, # "Simulate Multi-Body Physics"
-    {"FET_005_STANDARD" = {version = "0.1.0"}, optional=true}, # "Simulate Grasp Physics"
-    {"FET_006_STANDARD" = {version = "0.1.0"}, optional=true}, # "Materials (USDPreview)"
-    {"FET_006_MDL" = {version = "0.1.0"}, optional=true}, # "Materials (MDL)"
-    {"FET_007_STANDARD" = {version = "0.2.0"}, optional=true}, # "Non-Visual Materials"
-
-    {"FET_004_PHYSX" = {version = "0.4.0"}, optional=true}, # "Simulate Multi-Body Physics and SDF collision approximation"
-
-    {"FET_004_NEWTON" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (Newton)"
+    {selector = "FET001_MinimalPlaceableVisual.1-0-1"},
+    {selector = "FET003_RigidBody.0-2-0"},
+    {selector = "FET004_Multibody.0-2-0", optional = true},
+    {selector = "FET005_Grasp.0-1-0", optional = true},
+    {selector = "FET006_Materials.0-1-0", optional = true},
+    {selector = "FET006_Materials.MDL.0-1-0", optional = true},
+    {selector = "FET004_Multibody.PhysX.0-4-0", optional = true},
+    {selector = "FET004_Multibody.Newton.0-1-0", optional = true},
+], capabilities = [
+    {selector = "CAP000_Core.0-1-0"},
+    {selector = "CAP007_NonVisualMaterials.0-2-0", optional = true},
 ]}
-"3.1.0" = {features = [ # Add optional runtime physics variant scaffolding (FET_000_* / FET_003_* / FET_004_*)
-    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
-    {"FET_001_STANDARD" = {version = "1.0.1"}}, # "Minimal"
-    {"FET_003_STANDARD" = {version = "0.2.0"}}, # "RBD Physics"
-    {"FET_004_STANDARD" = {version = "0.2.0"}, optional=true}, # "Simulate Multi-Body Physics"
-    {"FET_005_STANDARD" = {version = "0.1.0"}, optional=true}, # "Simulate Grasp Physics"
-    {"FET_006_STANDARD" = {version = "0.1.0"}, optional=true}, # "Materials (USDPreview)"
-    {"FET_006_MDL" = {version = "0.1.0"}, optional=true}, # "Materials (MDL)"
-    {"FET_007_STANDARD" = {version = "0.2.0"}, optional=true}, # "Non-Visual Materials"
-
-    # PhysX runtime variant (Core -> Rigid Body -> Multibody)
-    {"FET_000_PHYSX" = {version = "0.1.0"}, optional=true}, # "Core PhysX runtime variant"
-    {"FET_003_PHYSX" = {version = "0.4.0"}, optional=true}, # "Rigid Body Physics (PhysX)"
-    {"FET_004_PHYSX" = {version = "0.4.0"}, optional=true}, # "Simulate Multi-Body Physics and SDF collision approximation"
-
-    # Newton runtime variant (Core -> Rigid Body -> Multibody)
-    {"FET_000_NEWTON" = {version = "0.1.0"}, optional=true}, # "Core Newton runtime variant"
-    {"FET_003_NEWTON" = {version = "0.1.0"}, optional=true}, # "Rigid Body Physics (Newton)"
-    {"FET_004_NEWTON" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (Newton)"
-
-    # MuJoCo runtime variant (Core -> Rigid Body -> Multibody)
-    {"FET_000_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Core MuJoCo runtime variant"
-    {"FET_003_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Rigid Body Physics (MuJoCo)"
-    {"FET_004_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (MuJoCo)"
+"3.1.0" = {features = [
+    {selector = "FET001_MinimalPlaceableVisual.1-0-1"},
+    {selector = "FET003_RigidBody.0-2-0"},
+    {selector = "FET004_Multibody.0-2-0", optional = true},
+    {selector = "FET005_Grasp.0-1-0", optional = true},
+    {selector = "FET006_Materials.0-1-0", optional = true},
+    {selector = "FET006_Materials.MDL.0-1-0", optional = true},
+    {selector = "FET003_RigidBody.PhysX.0-4-0", optional = true},
+    {selector = "FET004_Multibody.PhysX.0-4-0", optional = true},
+    {selector = "FET003_RigidBody.Newton.0-1-0", optional = true},
+    {selector = "FET004_Multibody.Newton.0-1-0", optional = true},
+], capabilities = [
+    {selector = "CAP000_Core.0-1-0"},
+    {selector = "CAP007_NonVisualMaterials.0-2-0", optional = true},
+    {selector = "CAP000_Core.PhysX.0-1-0", optional = true},
+    {selector = "CAP000_Core.Newton.0-1-0", optional = true},
+    {selector = "CAP000_Core.MuJoCo.0-1-0", optional = true},
+    {selector = "CAP003_RigidBody.MuJoCo.0-1-0", optional = true},
+    {selector = "CAP004_Multibody.MuJoCo.0-1-0", optional = true},
 ]}
-"3.2.0" = {features = [ # Add required SimReady packaging + provenance metadata (FET_031_STANDARD, FET_033_STANDARD@0.3.0 / SR.003) and optional standalone Isaac Sim composition (FET_100_ISAAC@0.4.0 / ISA.001)
-    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
-    {"FET_001_STANDARD" = {version = "1.0.1"}}, # "Minimal"
-    {"FET_003_STANDARD" = {version = "0.2.0"}}, # "RBD Physics"
-    {"FET_004_STANDARD" = {version = "0.2.0"}, optional=true}, # "Simulate Multi-Body Physics"
-    {"FET_005_STANDARD" = {version = "0.1.0"}, optional=true}, # "Simulate Grasp Physics"
-    {"FET_006_STANDARD" = {version = "0.1.0"}, optional=true}, # "Materials (USDPreview)"
-    {"FET_006_MDL" = {version = "0.1.0"}, optional=true}, # "Materials (MDL)"
-    {"FET_007_STANDARD" = {version = "0.2.0"}, optional=true}, # "Non-Visual Materials"
-    {"FET_011_STANDARD" = {version = "0.2.0"}}, # "Semantic Labels"
-    {"FET_011_RTX" = {version = "0.1.0"}}, # "Semantic Labels (RTX)"
-    {"FET_046_STANDARD" = {version = "0.1.0"}}, # "Wikidata Q-Code"
-
-    # SimReady packaging + provenance metadata (required)
-    {"FET_031_STANDARD" = {version = "0.1.0"}}, # "Self-contained Package Source"
-    {"FET_033_STANDARD" = {version = "0.3.0"}}, # "Metadata (thumbnail + nested provenance metadata)"
-
-    # Standalone Isaac Sim composition (optional, produced by the
-    # simready_physx_to_isaac_prop transform). FET_100_ISAAC@0.4.0 depends on the
-    # PhysX rigid-body chain; when present it pulls its PhysX requirements in as
-    # dependencies during validation, but the PhysX features below and
-    # FET_100_ISAAC itself stay optional at the profile level.
-    {"FET_100_ISAAC" = {version = "0.4.0"}, optional=true}, # "Isaac composition"
-
-    # PhysX runtime variant (Core -> Rigid Body -> Multibody)
-    {"FET_000_PHYSX" = {version = "0.1.0"}, optional=true}, # "Core PhysX runtime variant"
-    {"FET_003_PHYSX" = {version = "0.4.0"}, optional=true}, # "Rigid Body Physics (PhysX)"
-    {"FET_004_PHYSX" = {version = "0.4.0"}, optional=true}, # "Simulate Multi-Body Physics and SDF collision approximation"
-
-    # Newton runtime variant (Core -> Rigid Body -> Multibody)
-    {"FET_000_NEWTON" = {version = "0.1.0"}, optional=true}, # "Core Newton runtime variant"
-    {"FET_003_NEWTON" = {version = "0.1.0"}, optional=true}, # "Rigid Body Physics (Newton)"
-    {"FET_004_NEWTON" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (Newton)"
-
-    # MuJoCo runtime variant (Core -> Rigid Body -> Multibody)
-    {"FET_000_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Core MuJoCo runtime variant"
-    {"FET_003_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Rigid Body Physics (MuJoCo)"
-    {"FET_004_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (MuJoCo)"
-
+"3.2.0" = {features = [
+    {selector = "FET001_MinimalPlaceableVisual.1-0-1"},
+    {selector = "FET003_RigidBody.0-2-0"},
+    {selector = "FET004_Multibody.0-2-0", optional = true},
+    {selector = "FET005_Grasp.0-1-0", optional = true},
+    {selector = "FET006_Materials.0-1-0", optional = true},
+    {selector = "FET006_Materials.MDL.0-1-0", optional = true},
+    {selector = "FET011_SemanticLabels.0-2-0"},
+    {selector = "FET011_SemanticLabels.RTX.0-1-0"},
+    {selector = "FET003_RigidBody.PhysX.0-4-0", optional = true},
+    {selector = "FET004_Multibody.PhysX.0-4-0", optional = true},
+    {selector = "FET003_RigidBody.Newton.0-1-0", optional = true},
+    {selector = "FET004_Multibody.Newton.0-1-0", optional = true},
+], capabilities = [
+    {selector = "CAP000_Core.0-1-0"},
+    {selector = "CAP007_NonVisualMaterials.0-2-0", optional = true},
+    {selector = "CAP046_WikidataLabels.0-1-0"},
+    {selector = "CAP031_SelfContainedPackage.0-1-0"},
+    {selector = "CAP033_SimReadyPackage.0-3-0"},
+    {selector = "CAP100_IsaacComposition.Isaac.0-4-0", optional = true},
+    {selector = "CAP000_Core.PhysX.0-1-0", optional = true},
+    {selector = "CAP000_Core.Newton.0-1-0", optional = true},
+    {selector = "CAP000_Core.MuJoCo.0-1-0", optional = true},
+    {selector = "CAP003_RigidBody.MuJoCo.0-1-0", optional = true},
+    {selector = "CAP004_Multibody.MuJoCo.0-1-0", optional = true},
 ]}
-"3.3.0" = {features = [ # Adopt FET_000_STANDARD@0.2.0 (drop NP.006 and SR.001) and FET_033_STANDARD@0.4.0 (SR.004)
-    {"FET_000_STANDARD" = {version = "0.2.0"}}, # "Core"
-    {"FET_001_STANDARD" = {version = "1.0.1"}}, # "Minimal"
-    {"FET_003_STANDARD" = {version = "0.2.0"}}, # "RBD Physics"
-    {"FET_004_STANDARD" = {version = "0.2.0"}, optional=true}, # "Simulate Multi-Body Physics"
-    {"FET_005_STANDARD" = {version = "0.1.0"}, optional=true}, # "Simulate Grasp Physics"
-    {"FET_006_STANDARD" = {version = "0.1.0"}, optional=true}, # "Materials (USDPreview)"
-    {"FET_006_MDL" = {version = "0.1.0"}, optional=true}, # "Materials (MDL)"
-    {"FET_007_STANDARD" = {version = "0.2.0"}, optional=true}, # "Non-Visual Materials"
-    {"FET_011_STANDARD" = {version = "0.2.0"}}, # "Semantic Labels"
-    {"FET_011_RTX" = {version = "0.1.0"}}, # "Semantic Labels (RTX)"
-    {"FET_046_STANDARD" = {version = "0.1.0"}}, # "Wikidata Q-Code"
-
-    # SimReady packaging + provenance metadata (required)
-    {"FET_031_STANDARD" = {version = "0.1.0"}}, # "Self-contained Package Source"
-    {"FET_033_STANDARD" = {version = "0.4.0"}}, # "Metadata (thumbnail + USD/sidecar provenance union / SR.004)"
-
-    # Standalone Isaac Sim composition (optional, produced by the
-    # simready_physx_to_isaac_prop transform). FET_100_ISAAC@0.4.0 depends on the
-    # PhysX rigid-body chain; when present it pulls its PhysX requirements in as
-    # dependencies during validation, but the PhysX features below and
-    # FET_100_ISAAC itself stay optional at the profile level.
-    {"FET_100_ISAAC" = {version = "0.4.0"}, optional=true}, # "Isaac composition"
-
-    # PhysX runtime variant (Core -> Rigid Body -> Multibody)
-    {"FET_000_PHYSX" = {version = "0.1.0"}, optional=true}, # "Core PhysX runtime variant"
-    {"FET_003_PHYSX" = {version = "0.4.0"}, optional=true}, # "Rigid Body Physics (PhysX)"
-    {"FET_004_PHYSX" = {version = "0.4.0"}, optional=true}, # "Simulate Multi-Body Physics and SDF collision approximation"
-
-    # Newton runtime variant (Core -> Rigid Body -> Multibody)
-    {"FET_000_NEWTON" = {version = "0.1.0"}, optional=true}, # "Core Newton runtime variant"
-    {"FET_003_NEWTON" = {version = "0.1.0"}, optional=true}, # "Rigid Body Physics (Newton)"
-    {"FET_004_NEWTON" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (Newton)"
-
-    # MuJoCo runtime variant (Core -> Rigid Body -> Multibody)
-    {"FET_000_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Core MuJoCo runtime variant"
-    {"FET_003_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Rigid Body Physics (MuJoCo)"
-    {"FET_004_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (MuJoCo)"
-
+"3.3.0" = {features = [
+    {selector = "FET001_MinimalPlaceableVisual.1-0-1"},
+    {selector = "FET003_RigidBody.0-2-0"},
+    {selector = "FET004_Multibody.0-2-0", optional = true},
+    {selector = "FET005_Grasp.0-1-0", optional = true},
+    {selector = "FET006_Materials.0-1-0", optional = true},
+    {selector = "FET006_Materials.MDL.0-1-0", optional = true},
+    {selector = "FET011_SemanticLabels.0-2-0"},
+    {selector = "FET011_SemanticLabels.RTX.0-1-0"},
+    {selector = "FET003_RigidBody.PhysX.0-4-0", optional = true},
+    {selector = "FET004_Multibody.PhysX.0-4-0", optional = true},
+    {selector = "FET003_RigidBody.Newton.0-1-0", optional = true},
+    {selector = "FET004_Multibody.Newton.0-1-0", optional = true},
+], capabilities = [
+    {selector = "CAP000_Core.0-2-0"},
+    {selector = "CAP007_NonVisualMaterials.0-2-0", optional = true},
+    {selector = "CAP046_WikidataLabels.0-1-0"},
+    {selector = "CAP031_SelfContainedPackage.0-1-0"},
+    {selector = "CAP033_SimReadyPackage.0-4-0"},
+    {selector = "CAP100_IsaacComposition.Isaac.0-4-0", optional = true},
+    {selector = "CAP000_Core.PhysX.0-1-0", optional = true},
+    {selector = "CAP000_Core.Newton.0-1-0", optional = true},
+    {selector = "CAP000_Core.MuJoCo.0-1-0", optional = true},
+    {selector = "CAP003_RigidBody.MuJoCo.0-1-0", optional = true},
+    {selector = "CAP004_Multibody.MuJoCo.0-1-0", optional = true},
 ]}
-"4.0.0" = {features = [ # Require UsdPreviewSurface; display colour, OpenPBR and MDL stay optional
-    {"FET_000_STANDARD" = {version = "0.2.0"}}, # "Core"
-    {"FET_001_STANDARD" = {version = "1.0.1"}}, # "Minimal"
-    {"FET_003_STANDARD" = {version = "0.2.0"}}, # "RBD Physics"
-    {"FET_004_STANDARD" = {version = "0.2.0"}, optional=true}, # "Simulate Multi-Body Physics"
-    {"FET_005_STANDARD" = {version = "0.1.0"}, optional=true}, # "Simulate Grasp Physics"
-    {"FET_006_STANDARD" = {version = "0.2.0"}}, # "Materials - UsdPreviewSurface (required)"
-    {"FET_006_OPENPBR" = {version = "0.1.0"}, optional=true}, # "Materials - OpenPBR (optional)"
-    {"FET_006_MDL" = {version = "0.2.0"}, optional=true}, # "Materials - MDL (optional)"
-    {"FET_010_STANDARD" = {version = "0.1.0"}, optional=true}, # "Display Color (optional)"
-    {"FET_007_STANDARD" = {version = "0.2.0"}, optional=true}, # "Non-Visual Materials"
-    {"FET_011_STANDARD" = {version = "0.2.0"}}, # "Semantic Labels"
-    {"FET_011_RTX" = {version = "0.1.0"}}, # "Semantic Labels (RTX)"
-    {"FET_046_STANDARD" = {version = "0.1.0"}}, # "Wikidata Q-Code"
-
-    # SimReady packaging + provenance metadata (required)
-    {"FET_031_STANDARD" = {version = "0.1.0"}}, # "Self-contained Package Source"
-    {"FET_033_STANDARD" = {version = "0.4.0"}}, # "Metadata (thumbnail + USD/sidecar provenance union / SR.004)"
-
-    # Standalone Isaac Sim composition (optional, produced by the
-    # simready_physx_to_isaac_prop transform). FET_100_ISAAC@0.4.0 depends on the
-    # PhysX rigid-body chain; when present it pulls its PhysX requirements in as
-    # dependencies during validation, but the PhysX features below and
-    # FET_100_ISAAC itself stay optional at the profile level.
-    {"FET_100_ISAAC" = {version = "0.4.0"}, optional=true}, # "Isaac composition"
-
-    # PhysX runtime variant (Core -> Rigid Body -> Multibody)
-    {"FET_000_PHYSX" = {version = "0.1.0"}, optional=true}, # "Core PhysX runtime variant"
-    {"FET_003_PHYSX" = {version = "0.4.0"}, optional=true}, # "Rigid Body Physics (PhysX)"
-    {"FET_004_PHYSX" = {version = "0.4.0"}, optional=true}, # "Simulate Multi-Body Physics and SDF collision approximation"
-
-    # Newton runtime variant (Core -> Rigid Body -> Multibody)
-    {"FET_000_NEWTON" = {version = "0.1.0"}, optional=true}, # "Core Newton runtime variant"
-    {"FET_003_NEWTON" = {version = "0.1.0"}, optional=true}, # "Rigid Body Physics (Newton)"
-    {"FET_004_NEWTON" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (Newton)"
-
-    # MuJoCo runtime variant (Core -> Rigid Body -> Multibody)
-    {"FET_000_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Core MuJoCo runtime variant"
-    {"FET_003_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Rigid Body Physics (MuJoCo)"
-    {"FET_004_MUJOCO" = {version = "0.1.0"}, optional=true}, # "Simulate Multi-Body Physics (MuJoCo)"
-
+"4.0.0" = {features = [
+    {selector = "FET001_MinimalPlaceableVisual.1-0-1"},
+    {selector = "FET003_RigidBody.0-2-0"},
+    {selector = "FET004_Multibody.0-2-0", optional = true},
+    {selector = "FET005_Grasp.0-1-0", optional = true},
+    {selector = "FET006_Materials.0-2-0"},
+    {selector = "FET006_Materials.Openpbr.0-1-0", optional = true},
+    {selector = "FET006_Materials.MDL.0-2-0", optional = true},
+    {selector = "FET010_DisplayColor.0-1-0", optional = true},
+    {selector = "FET011_SemanticLabels.0-2-0"},
+    {selector = "FET011_SemanticLabels.RTX.0-1-0"},
+    {selector = "FET003_RigidBody.PhysX.0-4-0", optional = true},
+    {selector = "FET004_Multibody.PhysX.0-4-0", optional = true},
+    {selector = "FET003_RigidBody.Newton.0-1-0", optional = true},
+    {selector = "FET004_Multibody.Newton.0-1-0", optional = true},
+], capabilities = [
+    {selector = "CAP000_Core.0-2-0"},
+    {selector = "CAP007_NonVisualMaterials.0-2-0", optional = true},
+    {selector = "CAP046_WikidataLabels.0-1-0"},
+    {selector = "CAP031_SelfContainedPackage.0-1-0"},
+    {selector = "CAP033_SimReadyPackage.0-4-0"},
+    {selector = "CAP100_IsaacComposition.Isaac.0-4-0", optional = true},
+    {selector = "CAP000_Core.PhysX.0-1-0", optional = true},
+    {selector = "CAP000_Core.Newton.0-1-0", optional = true},
+    {selector = "CAP000_Core.MuJoCo.0-1-0", optional = true},
+    {selector = "CAP003_RigidBody.MuJoCo.0-1-0", optional = true},
+    {selector = "CAP004_Multibody.MuJoCo.0-1-0", optional = true},
 ]}
 
+"5.0.0" = {features = [
+    {selector = "FET008_ObjectForward.0-1-0"},
+    {selector = "FET001_MinimalPlaceableVisual.1-0-1"},
+    {selector = "FET003_RigidBody.0-2-0"},
+    {selector = "FET004_Multibody.0-2-0", optional = true},
+    {selector = "FET005_Grasp.0-1-0", optional = true},
+    {selector = "FET006_Materials.0-3-0"},
+    {selector = "FET006_Materials.Openpbr.0-2-0", optional = true},
+    {selector = "FET006_Materials.MDL.0-3-0", optional = true},
+    {selector = "FET009_MaterialCoverage.0-1-0"},
+    {selector = "FET010_DisplayColor.0-1-0", optional = true},
+    {selector = "FET011_SemanticLabels.0-2-0"},
+    {selector = "FET011_SemanticLabels.RTX.0-1-0"},
+    {selector = "FET003_RigidBody.PhysX.0-4-0", optional = true},
+    {selector = "FET004_Multibody.PhysX.0-4-0", optional = true},
+    {selector = "FET003_RigidBody.Newton.0-1-0", optional = true},
+    {selector = "FET004_Multibody.Newton.0-1-0", optional = true},
+], capabilities = [
+    {selector = "CAP000_Core.0-2-0"},
+    {selector = "CAP007_NonVisualMaterials.0-2-0", optional = true},
+    {selector = "CAP046_WikidataLabels.0-1-0"},
+    {selector = "CAP031_SelfContainedPackage.0-1-0"},
+    {selector = "CAP033_SimReadyPackage.0-4-0"},
+    {selector = "CAP100_IsaacComposition.Isaac.0-4-0", optional = true},
+    {selector = "CAP000_Core.PhysX.0-2-0", optional = true},
+    {selector = "CAP000_Core.Newton.0-2-0", optional = true},
+    {selector = "CAP000_Core.MuJoCo.0-2-0", optional = true},
+    {selector = "CAP003_RigidBody.MuJoCo.0-1-0", optional = true},
+    {selector = "CAP004_Multibody.MuJoCo.0-1-0", optional = true},
+]}
 ```
 
 Version `3.2.0` additionally makes SimReady semantic labels, packaging source,
-and provenance metadata required, and adds standalone Isaac Sim composition as an
+and provenance metadata required, and adds Kit-free Isaac Sim composition as an
 optional feature. The neutral runtime-variant scaffolding also stays optional, so
 the Isaac-composed asset and the neutral runtime variants are validated together
 on the same asset. See [Version 3.2.0 changes](#version-3-2-0-changes).
 
-Version `3.3.0` keeps that `3.2.0` menu and adopts `FET_000_STANDARD@0.2.0`
-(drops `NP.006` and `SR.001`) plus `FET_033_STANDARD@0.4.0` (`SR.004` USD/sidecar
+Version `3.3.0` keeps that `3.2.0` menu and adopts `CAP000_Core.0-2-0`
+(drops `NP.006` and `SR.001`) plus `CAP033_SimReadyPackage.0-4-0` (`SR.004` USD/sidecar
 union). See [Version 3.3.0 changes](#version-3-3-0-changes).
 
 Version `4.0.0` is the SimReady Foundations 8.0 release of that same `3.3.0` contract. See
@@ -199,50 +200,51 @@ Version `4.0.0` is the SimReady Foundations 8.0 release of that same `3.3.0` con
 
 ### Required versus optional features
 
-`FET_006_STANDARD` and `FET_006_MDL` remain optional through version `3.3.0`.
-Version `4.0.0` makes `FET_006_STANDARD` part of the required baseline and adds
+`FET006_Materials` and `FET006_Materials.MDL` remain optional through version `3.3.0`.
+Version `4.0.0` makes `FET006_Materials` part of the required baseline and adds
 display colour and OpenPBR as optional alternatives.
 
-| Feature | Version | Status | Purpose |
+| Contract | Version | Status | Purpose |
 |---|---|---|---|
-| `FET_000_STANDARD` | 0.2.0 (`3.3.0`/`4.0.0`; earlier versions pin 0.1.0) | Required | Core file layout and anchored references |
-| `FET_001_STANDARD` | 1.0.1 | Required | Minimal OpenUSD asset: units, hierarchy, mesh geometry |
-| `FET_003_STANDARD` | 0.2.0 | Required | Neutral rigid-body physics and colliders |
-| `FET_004_STANDARD` | 0.2.0 | Optional | Neutral multibody joints |
-| `FET_005_STANDARD` | 0.1.0 | Optional | Grasp physics (physics material + grasp line) |
-| `FET_006_STANDARD` | 0.1.0 optional through `3.3.0`; 0.2.0 required from `4.0.0` | Version-dependent | `UsdPreviewSurface` materials |
-| `FET_010_STANDARD` | 0.1.0 (from profile `4.0.0`) | Optional | Display colour and opacity |
-| `FET_006_MDL` | 0.1.0 through `3.3.0`; 0.2.0 from `4.0.0` | Optional | MDL materials |
-| `FET_006_OPENPBR` | 0.1.0 (from profile `4.0.0`) | Optional | OpenPBR materials |
-| `FET_007_STANDARD` | 0.2.0 | Optional | Non-visual sensor materials |
+| `CAP000_Core` | 0-2-0 (`3.3.0` and later; earlier versions pin 0-1-0) | Required | Core file layout and anchored references |
+| `FET001_MinimalPlaceableVisual` | 1-0-1 | Required | Minimal OpenUSD asset: units, hierarchy, mesh geometry |
+| `FET003_RigidBody` | 0-2-0 | Required | Neutral rigid-body physics and colliders |
+| `FET004_Multibody` | 0-2-0 | Optional | Neutral multibody joints |
+| `FET005_Grasp` | 0-1-0 | Optional | Grasp physics (physics material + grasp line) |
+| `FET006_Materials` | 0-1-0 optional through `3.3.0`; 0-2-0 required from `4.0.0`; 0-3-0 required from `5.0.0` | Version-dependent | `UsdPreviewSurface` materials |
+| `FET010_DisplayColor` | 0-1-0 (from profile `4.0.0`) | Optional | Display colour and opacity |
+| `FET006_Materials.MDL` | 0-1-0 through `3.3.0`; 0-2-0 from `4.0.0`; 0-3-0 from `5.0.0` | Optional | MDL materials |
+| `FET006_Materials.Openpbr` | 0-1-0 (`4.0.0`); 0-2-0 (from `5.0.0`) | Optional | OpenPBR materials |
+| `FET009_MaterialCoverage` | 0-1-0 (from profile `5.0.0`) | Required | Every renderable `Gprim` resolves a material (`VM.MAT.001`), and the asset's own materials cover its silhouette in renders |
+| `CAP007_NonVisualMaterials` | 0-2-0 | Optional | Non-visual sensor materials |
 
-A single-rigid-body prop satisfies the required set through `FET_003_STANDARD`
-alone. Select `FET_004_STANDARD` only for props intentionally authored as a
+A single-rigid-body prop satisfies the required set through `FET003_RigidBody`
+alone. Select `FET004_Multibody` only for props intentionally authored as a
 multibody assembly with joints.
 
 Version `3.1.0` additionally exposes optional PhysX, Newton, and MuJoCo runtime
-variants. Each runtime is a three-feature chain: `FET_000_<RUNTIME>` for the
-variant scaffolding, `FET_003_<RUNTIME>` for rigid bodies, and
-`FET_004_<RUNTIME>` for multibody joints.
+variants. Each runtime is a three-feature chain: `CAP000_Core.<Runtime>` for the
+variant scaffolding, `FET003_RigidBody.<Runtime>` for rigid bodies, and
+`FET004_Multibody.<Runtime>` for multibody joints.
 
 Version `4.0.0` makes the baseline appearance mandatory: every conforming asset
-carries a `UsdPreviewSurface` material (`FET_006_STANDARD`). Display colour,
+carries a `UsdPreviewSurface` material (`FET006_Materials`). Display colour,
 OpenPBR and MDL remain optional, so an asset picks whichever final surface its
 runtime needs without being forced to author them all.
-Requirements shared between a required and an optional feature stay required:
-`VM.MAT.001`, `VM.TEX.001`, `com.nvidia.usd.VM.BIND.001`, and
-`com.nvidia.usd.VM.PS.001` are mandatory from `4.0.0` because
-`FET_006_STANDARD` lists them, even though `FET_006_OPENPBR` and `FET_006_MDL`
-list some of them too. `VM.PBR.*` (OpenPBR) and `VM.BIND.002`, `VM.MDL.001`,
-`com.nvidia.usd.VM.MDL.002`, `VM.TEX.002` (MDL) stay optional.
+Requirements shared between a required and an optional feature stay required. From
+`4.0.0`, `FET006_Materials` makes `com.nvidia.usd.VM.BIND.001`,
+`com.nvidia.usd.VM.PS.001`, `VM.PS.002`, `VM.TEX.001` and `VM.TEX.003` mandatory, and
+`VM.MAT.001` in `4.0.0`. From `5.0.0`, `VM.MAT.001` is required through
+`FET009_MaterialCoverage` instead.
+`VM.BIND.002` and the OpenPBR (`VM.PBR.001` to `VM.PBR.003`, `VM.TEX.004`) and MDL
+(`VM.MDL.001`, `com.nvidia.usd.VM.MDL.002`, `VM.MDL.003`, `VM.TEX.005`) requirements stay optional.
 
 ## Required USD properties and schemas
 
-### Core file layout (`FET_000_STANDARD`)
+### Core file layout (`CAP000_Core`)
 
-- Lay the asset out as `<asset_root>/<intermediate_folder>/<main.usd>`, with the
-  main USD filename containing the root folder name and exactly one USD file in
-  the intermediate folder (`NP.005`).
+- Keep the folder holding the main asset file free of other USD files
+  (`NP.005`).
 - Use lowercase file names with `.usd`, `.usda`, `.usdc`, or `.usdz`
   extensions, separating words with `_` or `-` (`NP.002`).
 - Use lowercase directory names and group supporting content into purpose
@@ -259,7 +261,7 @@ list some of them too. `VM.PBR.*` (OpenPBR) and `VM.BIND.002`, `VM.MDL.001`,
   `usd_date_generated` in ISO `YYYY-MM-DD` form (`SR.001`).
 - Do not leave orphan `over` prims with no underlying `def` (`HI.010`).
 
-### Stage metadata and hierarchy (`FET_001_STANDARD`)
+### Stage metadata and hierarchy (`FET001_MinimalPlaceableVisual`)
 
 - Set `upAxis = "Z"` (`UN.006`) and `metersPerUnit = 1.0` (`UN.007`).
 - Set `defaultPrim` to an existing prim (`HI.004`).
@@ -270,7 +272,7 @@ list some of them too. `VM.PBR.*` (OpenPBR) and `VM.BIND.002`, `VM.MDL.001`,
   (`AA.001`), pointing only at supported file types: USD, `.png`, `.jpeg`,
   `.jpg`, `.exr`, `.m4a`, `.mp3`, `.wav` (`AA.002`).
 
-### Geometry (`FET_001_STANDARD`)
+### Geometry (`FET001_MinimalPlaceableVisual`)
 
 - Author render geometry as `UsdGeom.Mesh` with
   `uniform token subdivisionScheme = "none"` (`VG.MESH.001`).
@@ -283,7 +285,7 @@ list some of them too. `VM.PBR.*` (OpenPBR) and `VM.BIND.002`, `VM.MDL.001`,
 - Avoid coincident meshes occupying identical space (`VG.008`).
 - Place the asset at the origin with a neutral root transform (`VG.025`).
 
-### Rigid bodies and colliders (`FET_003_STANDARD`)
+### Rigid bodies and colliders (`FET003_RigidBody`)
 
 - Apply `UsdPhysicsRigidBodyAPI` to at least one `UsdGeomXformable` prim
   (`RB.001`), and only to `UsdGeomXformable` prims (`RB.003`).
@@ -301,9 +303,21 @@ list some of them too. `VM.PBR.*` (OpenPBR) and `VM.BIND.002`, `VM.MDL.001`,
 - Set `uniform token purpose = "guide"` on collision-only meshes that should not
   render (`RB.010`).
 
+### Material binding (`FET009_MaterialCoverage`)
+
+Required from profile `5.0.0`:
+
+- Resolve a material for every renderable Gprim at the `full` purpose, bound on the prim
+  or inherited from an ancestor. A Gprim with material-bind `GeomSubset` children resolves
+  one for each subset (`VM.MAT.001`).
+
+`simready-foundation-conform-fet-009-standard` repairs a `VM.MAT.001` failure. Through
+`5.0.0`, `FET006_Materials` 0-2-0 holds `VM.MAT.001` instead, and
+`simready-foundation-conform-fet-006-standard` repairs it.
+
 ## Optional feature requirements
 
-### Multibody joints (`FET_004_STANDARD`)
+### Multibody joints (`FET004_Multibody`)
 
 - Connect constrained bodies with a `UsdPhysicsJoint` subtype and author
   `rel physics:body0` and `rel physics:body1`; an empty side means world
@@ -315,7 +329,7 @@ list some of them too. `VM.PBR.*` (OpenPBR) and `VM.BIND.002`, `VM.MDL.001`,
 - Apply `PhysicsRigidBodyAPI` to at least two separate `UsdGeomXformable`
   hierarchies (`RB.MB.001`).
 
-### Grasp physics (`FET_005_STANDARD`)
+### Grasp physics (`FET005_Grasp`)
 
 - Bind a physics material to every collider through
   `rel material:binding:physics` (`PMT.001`).
@@ -327,14 +341,14 @@ list some of them too. `VM.PBR.*` (OpenPBR) and `VM.BIND.002`, `VM.MDL.001`,
 grasp line must cross a region a gripper can actually close on, so it needs
 visual review rather than an arbitrary line.
 
-### Materials (`FET_006_STANDARD`, `FET_010_STANDARD`, `FET_006_OPENPBR`, and `FET_006_MDL`)
+### Materials (`FET006_Materials`, `FET010_DisplayColor`, `FET006_Materials.Openpbr`, and `FET006_Materials.MDL`)
 
-From profile `4.0.0`, `FET_006_STANDARD` is required rather than optional;
-`FET_010_STANDARD`, `FET_006_OPENPBR` and `FET_006_MDL` stay optional.
+From profile `4.0.0`, `FET006_Materials` is required rather than optional;
+`FET010_DisplayColor`, `FET006_Materials.Openpbr` and `FET006_Materials.MDL` stay optional.
 Through `3.3.0`, the Standard and MDL material features remain optional and the
 display-colour and OpenPBR features are not listed.
 
-`FET_006_STANDARD` covers `UsdPreviewSurface` assets:
+`FET006_Materials` covers `UsdPreviewSurface` assets:
 
 - Bind materials from inside a payload to materials defined in that payload
   scope (`com.nvidia.usd.VM.BIND.001`).
@@ -344,12 +358,18 @@ display-colour and OpenPBR features are not listed.
 Both are defined and enforced by `usd-validation-nvidia` rather than by this
 repository.
 
-From version 0.2.0 (profile `3.3.0`) it also adds:
+From version 0-2-0 (profile `4.0.0`) it also adds:
 
-- Resolve a bound material for every renderable Gprim (`VM.MAT.001`).
+- Connect a `UsdPreviewSurface` on `outputs:surface` of every material a renderable Gprim
+  resolves (`VM.PS.002`).
 - Keep texture images at or below 16384 px in both dimensions (`VM.TEX.001`).
+- Declare `inputs:sourceColorSpace` on every texture to match how its input reads the
+  image: `sRGB` or `raw` on albedo reaching `diffuseColor`, matching the image's encoding;
+  `sRGB` on `emissiveColor` and `specularColor`; `raw` on data (`VM.TEX.003`).
+- Resolve a bound material for every renderable Gprim (`VM.MAT.001`), in version 0-2-0
+  only. From 0-3-0 (profile `5.0.0`), `FET009_MaterialCoverage` holds it.
 
-`FET_010_STANDARD` covers the display-colour appearance layer, from profile
+`FET010_DisplayColor` covers the display-colour appearance layer, from profile
 `4.0.0`:
 
 - Resolve a display colour on every renderable Gprim, authored on the prim or
@@ -363,34 +383,55 @@ Display colour carries no shading network, so it is the appearance available to
 consumers that do not evaluate materials. It is a sibling of the other three
 material features, not a dependency of any of them.
 
-`FET_006_OPENPBR` covers OpenPBR (MaterialX) assets, from profile `4.0.0`:
+`FET006_Materials.Openpbr` covers OpenPBR (MaterialX) assets, from profile `4.0.0`:
 
 - Author an OpenPBR surface on `outputs:mtlx:surface` (`VM.PBR.001`).
 - Keep OpenPBR parameter values within their defined ranges (`VM.PBR.002`).
 - Keep the MaterialX graph structurally valid, with no dangling connections (`VM.PBR.003`).
-- Plus `com.nvidia.usd.VM.BIND.001`, `VM.MAT.001`, and `VM.TEX.001` as above.
+- Declare `colorSpace` on every texture input to match how it reads the image (`VM.TEX.004`).
+- Plus `com.nvidia.usd.VM.BIND.001`, `VM.BIND.002` and `VM.TEX.001`, and `VM.MAT.001` in
+  version 0-1-0.
 
-`FET_006_MDL` covers MDL assets and adds:
+`FET006_Materials.MDL` covers MDL assets and adds:
 
 - Match shader `inputs:*` types to the MDL module or SDR spec (`VM.BIND.002`).
-- Resolve a bound material for every renderable Gprim (`VM.MAT.001`).
-- Author a non-empty `uniform asset info:mdl:sourceAsset` with a `./`-relative
-  `.mdl` path that exists (`VM.MDL.001`), using
+- Resolve a bound material for every renderable Gprim (`VM.MAT.001`), through version 0-2-0.
+- Connect an MDL surface on `outputs:mdl:surface` of every material a renderable Gprim
+  resolves (`VM.MDL.003`), from version 0-2-0.
+- Author a non-empty `uniform asset info:mdl:sourceAsset` with an explicit
+  relative `.mdl` path (`./` or `../`) that exists (`VM.MDL.001`), using
   `info:implementationSource = "sourceAsset"` rather than the deprecated
   `mdlMaterial` form (`com.nvidia.usd.VM.MDL.002`).
 - Keep texture images at or below 16384 px in both dimensions (`VM.TEX.001`).
 - Author `colorSpace` metadata on each `asset inputs:*` texture input of the MDL
-  shader: `srgb_rec709_scene` on the colour textures — `diffuse_texture`,
-  `emissive_color_texture`, and on OmniGlass `glass_color_texture` and
-  `reflection_color_texture` — and `raw` on every other texture input, including
-  roughness, metalness, ambient occlusion, ORM, opacity, emissive mask, and normal
-  and detail-normal maps (`VM.TEX.002`). This is `colorSpace` metadata on the input,
+  shader: `srgb_rec709_scene` or `raw` on `diffuse_texture`, matching the image's
+  encoding; `srgb_rec709_scene` on the other colour textures — `emissive_color_texture`,
+  and on OmniGlass `glass_color_texture` and `reflection_color_texture`; and `raw` on
+  every other texture input, including roughness, metalness, ambient occlusion, ORM,
+  opacity, emissive mask, and normal and detail-normal maps (`VM.TEX.002` in version 0-1-0,
+  `VM.TEX.005` from 0-2-0). This is `colorSpace` metadata on the input,
   not the `UsdUVTexture` attribute `inputs:sourceColorSpace`, which states the same
   thing in a different vocabulary for a shader class this requirement does not cover.
   The 8-bit normal-map scale and bias convention belongs to that reader too, and is
   not checked here.
 
-### Non-visual sensor materials (`FET_007_STANDARD`)
+### Material coverage (`FET009_MaterialCoverage`)
+
+Required from profile `5.0.0`. Rendered, at least `min_material_coverage` (default `0.98`)
+of the asset's silhouette shows its own materials instead of test-owned control materials
+(`VM.MAT.001`):
+
+- in the universal render context, for every asset;
+- in the `mtlx` and `mdl` render contexts, for an asset whose geometry resolves a material
+  with a surface on that context at the `full` purpose. An asset with none skips that
+  measurement.
+
+The runtime tests render in Kit with RTX. The
+[feature page](../features/FET009_MaterialCoverage.md) lists their requirements and
+what coverage does not establish.
+`simready-foundation-conform-fet-009-standard` repairs a coverage failure.
+
+### Non-visual sensor materials (`CAP007_NonVisualMaterials`)
 
 - Author `token[] omni:simready:nonvisual:attributes` (`NVM.001`),
   `token omni:simready:nonvisual:base` (`NVM.002`), and
@@ -405,7 +446,7 @@ material features, not a dependency of any of them.
 Version `3.1.0` adds optional runtime variant scaffolding so one asset can carry
 PhysX, Newton, and MuJoCo physics without any runtime seeing another's schemas.
 
-### Variant scaffolding (`FET_000_PHYSX`, `FET_000_NEWTON`, `FET_000_MUJOCO`)
+### Variant scaffolding (`CAP000_Core.PhysX`, `CAP000_Core.Newton`, `CAP000_Core.MuJoCo`)
 
 On the stage `defaultPrim`, author one variant set per runtime, named exactly
 `PhysX`, `Newton`, or `MuJoCo`, each with `Disabled` and `Enabled` options and a
@@ -419,7 +460,7 @@ variantSet "PhysX" = {
     "Disabled" {
     }
     "Enabled" {
-        prepend payload = @../runnables/physics/physx.usd@
+        prepend payload = @./runnables/physics/physx.usd@
     }
 }
 ```
@@ -433,7 +474,7 @@ contain only neutral `UsdPhysics`/`physics:` data plus that runtime's own
 schemas (`RV.011`). Foreign-runtime data leaking into the composed stage is a
 failure.
 
-### PhysX rigid bodies and multibody (`FET_003_PHYSX`, `FET_004_PHYSX`)
+### PhysX rigid bodies and multibody (`FET003_RigidBody.PhysX`, `FET004_Multibody.PhysX`)
 
 - Apply `PhysicsCollisionAPI` on a `UsdGeom.Gprim`, or on an Xform that also has
   `PhysxMeshMergeCollisionAPI` whose `collection:collisionmeshes:includes`
@@ -441,7 +482,7 @@ failure.
 - Apply `PhysicsMeshCollisionAPI` on a `UsdGeom.Mesh` or a prim with
   `PhysxMeshMergeCollisionAPI`, always alongside `PhysicsCollisionAPI`
   (`PHYSX.COL.002`).
-- `FET_004_PHYSX@0.4.0` adds the mass and nesting rules: every rigid-body
+- `FET004_Multibody.PhysX.0-4-0` adds the mass and nesting rules: every rigid-body
   subtree needs authored `physics:mass > 0` or a collider with non-zero volume
   for auto-mass (`RB.011`), and nested rigid bodies must be connected by a joint
   (`RB.012`).
@@ -449,7 +490,7 @@ failure.
 `physics:approximation = "sdf"` is a PhysX-only value. Authoring it in the
 neutral base layer fails `RV.011`.
 
-### Newton rigid bodies and multibody (`FET_003_NEWTON`, `FET_004_NEWTON`)
+### Newton rigid bodies and multibody (`FET003_RigidBody.Newton`, `FET004_Multibody.Newton`)
 
 - Apply either `NewtonMeshCollisionAPI` or `NewtonSDFCollisionAPI` on a
   `UsdGeom.Mesh`, but not both (`NEWTON.COL.001`).
@@ -463,7 +504,7 @@ neutral base layer fails `RV.011`.
 - Apply `NewtonMaterialAPI` only on a `UsdShade.Material` that also has
   `PhysicsMaterialAPI` (`NEWTON.MAT.001`).
 
-### MuJoCo rigid bodies and multibody (`FET_003_MUJOCO`, `FET_004_MUJOCO`)
+### MuJoCo rigid bodies and multibody (`CAP003_RigidBody.MuJoCo`, `CAP004_Multibody.MuJoCo`)
 
 - Apply `MjcCollisionAPI` alongside `PhysicsCollisionAPI` on every active MuJoCo
   collider `UsdGeom.Gprim` (`MUJOCO.COL.001`).
@@ -479,16 +520,16 @@ neutral base layer fails `RV.011`.
 Version `3.2.0` keeps the full `3.1.0` feature set and adds required SimReady
 semantic-label, packaging-source, and provenance-metadata features:
 
-| Feature | Version | Status | Purpose |
+| Contract | Version | Status | Purpose |
 |---|---|---|---|
-| `FET_011_STANDARD` | 0.2.0 | Required | Semantic labels |
-| `FET_011_RTX` | 0.1.0 | Required | Semantic labels (RTX) |
-| `FET_046_STANDARD` | 0.1.0 | Required | Wikidata Q-Code |
-| `FET_031_STANDARD` | 0.1.0 | Required | Self-contained package source (`AA.001`) |
-| `FET_033_STANDARD` | 0.3.0 | Required | Thumbnail (`SR.002`) and nested provenance metadata (`SR.003`) |
-| `FET_100_ISAAC` | 0.4.0 | Optional | Standalone Isaac Sim composition (`ISA.001`) |
+| `FET011_SemanticLabels` | 0-2-0 | Required | Semantic labels |
+| `FET011_SemanticLabels.RTX` | 0-1-0 | Required | Semantic labels (RTX) |
+| `CAP046_WikidataLabels` | 0-1-0 | Required | Wikidata Q-Code |
+| `CAP031_SelfContainedPackage` | 0-1-0 | Required | Self-contained package source (`AA.001`) |
+| `CAP033_SimReadyPackage` | 0-3-0 | Required | Thumbnail (`SR.002`) and nested provenance metadata (`SR.003`) |
+| `CAP100_IsaacComposition.Isaac` | 0-4-0 | Optional | Kit-free Isaac Sim composition (`ISA.001`) |
 
-`FET_033_STANDARD@0.3.0` requires a PNG thumbnail at
+`CAP033_SimReadyPackage.0-3-0` requires a PNG thumbnail at
 `.thumbs/256x256/<asset_filename>.png` next to the root asset, and a
 `customLayerData.SimReady_Metadata` dictionary carrying the string provenance
 fields (`author`, `asset_name`, `asset_type`, `asset_license`, `category`,
@@ -497,9 +538,9 @@ fields (`author`, `asset_name`, `asset_type`, `asset_license`, `category`,
 (float3 meters, XYZ), and `mass` (positive kilograms). Derive the physical
 fields from the actual asset rather than fabricating them.
 
-### Isaac Sim composition (`FET_100_ISAAC`)
+### Isaac Sim composition (`CAP100_IsaacComposition.Isaac`)
 
-`FET_100_ISAAC@0.4.0` (`ISA.001`) is optional at the profile level. When it is
+`CAP100_IsaacComposition.Isaac.0-4-0` (`ISA.001`) is optional at the profile level. When it is
 present, it requires the package to be a standalone Isaac component:
 
 - The interface prim sets `kind = component`.
@@ -507,28 +548,33 @@ present, it requires the package to be a standalone Isaac component:
   and `materials.usda`.
 - The interface references `./payloads/base.usda`.
 
-`FET_100_ISAAC@0.4.0` depends on the PhysX rigid-body chain, so its PhysX
-requirements are validated as dependencies even though `FET_000_PHYSX` and
-`FET_003_PHYSX` stay optional at the profile level. The neutral runtime-variant
-scaffolding (`FET_000_PHYSX`/`FET_000_NEWTON`/`FET_000_MUJOCO`) also stays
+`CAP100_IsaacComposition.Isaac.0-4-0` depends on the PhysX rigid-body chain, so its PhysX
+requirements are validated as dependencies even though `CAP000_Core.PhysX` and
+`FET003_RigidBody.PhysX` stay optional at the profile level. The neutral runtime-variant
+scaffolding (`CAP000_Core.PhysX`/`CAP000_Core.Newton`/`CAP000_Core.MuJoCo`) also stays
 optional, so the Isaac `payloads/` perf layout and the neutral
 `runnables/physics/<stem>.usd` runtime variants coexist on the same asset. The
 default composition is the neutral base (all runtimes `Disabled`), which also
-satisfies `FET_003_STANDARD`.
+satisfies `FET003_RigidBody`.
 
-The Isaac composition is produced by the standalone, Kit-free
-`simready.asset_transformer` package
-(`nv_core/cip_specs/isaac_asset_transformer`) via the
-`simready_physx_to_isaac_prop` profile transform, which builds the component
-interface and `payloads/` perf layers. Provenance is a separate step that
-derives the `FET_033_STANDARD@0.3.0` `SR.003` physical fields
+The Isaac composition is produced by public, Kit-free
+`isaacsim-asset-isolated==6.2.0.1` via the
+`simready_physx_to_isaac_prop` profile retained by the thin
+`simready.asset_transformer` integration. The integration also provides
+SimReady-specific rules and small guarded temporary transformer patches while
+preserving public rule FQCNs. Run it with Python 3.12 and
+`pip install "simready-foundation-tier-core[isaac]"`. This optional extra also
+installs `isaacsim-robot-schema==6.2.0.0`; both Isaac packages come from PyPI.
+The transform builds the component interface and `payloads/` perf layers.
+Provenance is a separate step that
+derives the `CAP033_SimReadyPackage.0-3-0` `SR.003` physical fields
 (`rigid_body_count`, summed authored `mass`, world-space `asset_extents`) from
 the *source* stage — the composed interface hides mass inside instanced payload
 prototypes — and stamps them, along with the string provenance fields and a
 `256x256` `SR.002` thumbnail, into the composed interface's
 `customLayerData.SimReady_Metadata`. Physical fields must be derived from the
 actual asset, never fabricated. On `3.3.0` and `4.0.0` the same fields may also
-live in the USD/sidecar union (`FET_033_STANDARD@0.4.0`).
+live in the USD/sidecar union (`CAP033_SimReadyPackage.0-4-0`).
 
 (version-3-3-0-changes)=
 ## Version 3.3.0 changes
@@ -536,10 +582,10 @@ live in the USD/sidecar union (`FET_033_STANDARD@0.4.0`).
 Version `3.3.0` keeps the full `3.2.0` feature set. The only contract changes
 are feature-version bumps:
 
-| Feature | From | To | Why |
+| Contract | From | To | Why |
 |---|---|---|---|
-| `FET_000_STANDARD` | 0.1.0 | 0.2.0 | Drop `NP.006` and `SR.001`. Nested provenance stays `SR.003` on `FET_033_STANDARD@0.3.0`; union provenance is `SR.004` on `FET_033_STANDARD@0.4.0`. |
-| `FET_033_STANDARD` | 0.3.0 | 0.4.0 | Replace `SR.003` with `SR.004`. Same field set; fields are read from the USD/sidecar union. Nested `SimReady_Metadata` is no longer required on its own. |
+| `CAP000_Core` | 0-1-0 | 0-2-0 | Drop `NP.006` and `SR.001`. Nested provenance stays `SR.003` on `CAP033_SimReadyPackage.0-3-0`; union provenance is `SR.004` on `CAP033_SimReadyPackage.0-4-0`. |
+| `CAP033_SimReadyPackage` | 0-3-0 | 0-4-0 | Replace `SR.003` with `SR.004`. Same field set; fields are read from the USD/sidecar union. Nested `SimReady_Metadata` is no longer required on its own. |
 
 Assets that already passed `3.2.0` with nested `SimReady_Metadata` still satisfy
 `3.3.0`. No feature adapter is required; a sidecar JSON is an optional extra
@@ -548,9 +594,11 @@ location, not a new required file.
 (version-4-0-0-changes)=
 ## Version 4.0.0 changes
 
-Version `4.0.0` is the SimReady Foundations 8.0 release pin. It keeps the full `3.3.0`
-feature set with no contract changes. Assets that already passed `3.3.0` satisfy
-`4.0.0`; no feature adapter is required.
+Version `4.0.0` is the SimReady Foundations 8.0 release pin. It keeps the `3.3.0`
+feature set and adds the baseline visual material contract: `FET006_Materials.0-2-0`
+is required, and `FET010_DisplayColor`, `FET006_Materials.Openpbr` and `FET006_Materials.MDL` are
+optional. An asset that passed `3.3.0` needs a `UsdPreviewSurface` on every bound
+material to satisfy `4.0.0`.
 
 ## Naming conventions
 
@@ -602,26 +650,26 @@ validate Robotics-Prop
 
 ## References
 
-- [Feature dependency graph](../features/feature-dependency-graph) — requirements and dependencies for all features
+- [Feature dependency graph](../features/feature-dependency-graph.md) — requirements and dependencies for all features
 - `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles/robotics_prop.toml`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_000_STANDARD.md`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_001_STANDARD.md`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_003_STANDARD.md`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_004_STANDARD.md`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_005_STANDARD.md`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_006_STANDARD.md`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_006_MDL.md`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_007_STANDARD.md`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/core/naming_paths/`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/core/atomic_asset/`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/core/runtime_variants/`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/core/sim_ready/`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/core/units/`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/hierarchy/`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/visualization/geometry/`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/visualization/materials/`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/physics_bodies/physics_rigid_bodies/`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/physics_bodies/physics_joints/`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/physics_bodies/physics_materials/`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/physics_bodies/physics_graspable/`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/nonvisual_sensors/nonvisual_materials/`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/CAP000_Core.md`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET001_MinimalPlaceableVisual.md`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET003_RigidBody.md`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET004_Multibody.md`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET005_Grasp.md`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET006_Materials.md`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET006_Materials.MDL.md`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/CAP007_NonVisualMaterials.md`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/core/naming_paths/`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/core/atomic_asset/`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/core/runtime_variants/`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/core/sim_ready/`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/core/units/`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/hierarchy/`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/visualization/geometry/`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/visualization/materials/`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/physics_bodies/physics_rigid_bodies/`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/physics_bodies/physics_joints/`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/physics_bodies/physics_materials/`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/physics_bodies/physics_graspable/`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/nonvisual_sensors/nonvisual_materials/`

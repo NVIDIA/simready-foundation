@@ -11,13 +11,6 @@
 
 def Xform "World"
 {
-    def PhysicsScene "PhysicsScene" (
-        prepend apiSchemas = ["PhysxSceneAPI"]
-    )
-    {
-        uint physxScene:timeStepsPerSecond = 24
-    }
-
     def Cube "Cube" (
         prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysxRigidBodyAPI", "PhysicsCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI", "PhysicsMeshCollisionAPI", "PhysicsMassAPI"]
     )

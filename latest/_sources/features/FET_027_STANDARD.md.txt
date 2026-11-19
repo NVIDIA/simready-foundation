@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_027_STANDARD`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP027_Connections.html" />
+<link rel="canonical" href="../capabilities/CAP027_Connections.html" />
+```
+
+This published feature route moved to [`CAP027_Connections`](../capabilities/CAP027_Connections.md) (Foundations 1 ID: `FET_027_STANDARD`).

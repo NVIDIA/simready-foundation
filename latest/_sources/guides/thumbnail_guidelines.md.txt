@@ -6,10 +6,10 @@ the asset recognizable before anyone opens the OpenUSD stage, while remaining
 visually consistent with other assets in the same class.
 
 This guide supplements the normative [SR.002 thumbnail
-requirement](../capabilities/core/sim_ready/requirements/thumbnail-exist.md).
+requirement](../rules_and_reqs/core/sim_ready/requirements/thumbnail-exist.md).
 `SR.002` is included in every version of
-[FET_033_STANDARD](../features/FET_033_STANDARD.md), the SimReady package
-metadata feature. Where this guide describes additional source resolutions,
+[CAP033_SimReadyPackage](../capabilities/CAP033_SimReadyPackage.md), the SimReady package
+metadata capability. Where this guide describes additional source resolutions,
 background variants, or rendering choices, those are production guidelines;
 the current validator contract remains the canonical thumbnail described
 below.
@@ -155,8 +155,8 @@ Before delivery, confirm:
 
 ## Validation boundary
 
-[FET_033_STANDARD](../features/FET_033_STANDARD.md) combines thumbnail
+[CAP033_SimReadyPackage](../capabilities/CAP033_SimReadyPackage.md) combines thumbnail
 presence with SimReady provenance metadata. Its thumbnail rule is
-[SR.002](../capabilities/core/sim_ready/requirements/thumbnail-exist.md).
+[SR.002](../rules_and_reqs/core/sim_ready/requirements/thumbnail-exist.md).
 Passing `SR.002` proves that the canonical thumbnail file is present; visual
 quality and consistency still require review against this guide.

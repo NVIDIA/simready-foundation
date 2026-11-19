@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_032-packaging_introspection`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP032_PackagingIntrospection.html" />
+<link rel="canonical" href="../capabilities/CAP032_PackagingIntrospection.html" />
+```
+
+This published feature route moved to [`CAP032_PackagingIntrospection`](../capabilities/CAP032_PackagingIntrospection.md) (Foundations 1 ID: `FET_032_STANDARD`).

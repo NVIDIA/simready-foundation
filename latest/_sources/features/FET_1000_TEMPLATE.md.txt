@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_1000_TEMPLATE`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP1000_TemplateSmoke.Template.html" />
+<link rel="canonical" href="../capabilities/CAP1000_TemplateSmoke.Template.html" />
+```
+
+This published feature route moved to [`CAP1000_TemplateSmoke.Template`](../capabilities/CAP1000_TemplateSmoke.Template.md) (Foundations 1 ID: `FET_1000_TEMPLATE`).

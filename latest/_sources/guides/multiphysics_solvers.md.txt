@@ -44,8 +44,8 @@ Three layers enforce the contract:
 
 | Layer | What it defines | Where to read |
 | --- | --- | --- |
-| Runtime Variants (RV) | Variant set names, payload paths, metadata, purity, isolation | [Runtime Variants](../capabilities/core/runtime_variants/capability-runtime_variants.md) |
-| Runtime features | Solver rigid-body and multibody rules (`FET_003_*`, `FET_004_*`) | Feature pages below |
+| Runtime Variants (RV) | Variant set names, payload paths, metadata, purity, isolation | [Runtime Variants](../rules_and_reqs/core/runtime_variants/capability-runtime_variants.md) |
+| Runtime features | Solver rigid-body and multibody rules (`FET003_RigidBody.*`, `FET004_Multibody.*`; MuJoCo uses the `CAP003_RigidBody.MuJoCo` and `CAP004_Multibody.MuJoCo` capabilities) | Feature pages below |
 | Profiles | Which optional runtime features a prop profile accepts | [Robotics-Prop](../profiles/robotics-prop.md) |
 
 ### Feature expansion pattern
@@ -55,13 +55,14 @@ runtime-tagged feature that the validator enables before checking:
 
 | Concern | Neutral | PhysX | Newton | MuJoCo |
 | --- | --- | --- | --- | --- |
-| Core scaffolding | `FET_000_STANDARD` | `FET_000_PHYSX` | `FET_000_NEWTON` | `FET_000_MUJOCO` |
-| Rigid body | `FET_003_STANDARD` | `FET_003_PHYSX` | `FET_003_NEWTON` | `FET_003_MUJOCO` |
-| Multibody | `FET_004_STANDARD` | `FET_004_PHYSX` | `FET_004_NEWTON` | `FET_004_MUJOCO` |
+| Core scaffolding | `CAP000_Core` | `CAP000_Core.PhysX` | `CAP000_Core.Newton` | `CAP000_Core.MuJoCo` |
+| Rigid body | `FET003_RigidBody` | `FET003_RigidBody.PhysX` | `FET003_RigidBody.Newton` | `CAP003_RigidBody.MuJoCo` |
+| Multibody | `FET004_Multibody` | `FET004_Multibody.PhysX` | `FET004_Multibody.Newton` | `CAP004_Multibody.MuJoCo` |
 
-Physics runtime features set a `runtime` field (`PhysX`, `Newton`, or
-`MuJoCo`) so `simready-validate` enables that variant set before those rules
-run. See [Runtime Variant Field](features/features.md#runtime-variant-field-runtime).
+Physics runtime features carry their runtime (`PhysX`, `Newton`, or `MuJoCo`)
+as the middle segment of their dotted ID, and `simready-validate` enables that
+variant set before those rules run. See
+[Foundations 2 model](features/features.md#foundations-2-model).
 
 ### Isolation rules
 
@@ -76,7 +77,7 @@ applies when Newton or MuJoCo is selected. With all physics variants
 `Disabled`, no solver-specific schemas may remain.
 
 Authoritative policy:
-[Runtime Physics Isolation Matrix](../capabilities/core/runtime_variants/runtime-physics-isolation-matrix.md).
+[Runtime Physics Isolation Matrix](../rules_and_reqs/core/runtime_variants/runtime-physics-isolation-matrix.md).
 
 Common mistakes:
 
@@ -89,7 +90,8 @@ Common mistakes:
 ### Prerequisites
 
 - A prop that already meets the neutral robotics contract
-  (`FET_000_STANDARD`, `FET_001_STANDARD`, plus the physics features you need)
+  (`CAP000_Core`, `FET001_MinimalPlaceableVisual`, plus the
+  physics features you need)
 - Familiarity with USD variant sets and payloads
 - `simready-validate` for the target Foundation release
 
@@ -108,7 +110,7 @@ variantSet "PhysX" = {
     "Disabled" {
     }
     "Enabled" {
-        prepend payload = @../runnables/physics/physx.usd@
+        prepend payload = @./runnables/physics/physx.usd@
     }
 }
 ```
@@ -125,26 +127,36 @@ Under root-layer `customLayerData.SimReady_Metadata.Variants.Physics`, record
 
 ### 4. Author each payload for one solver only
 
-| Payload | Feature contracts | Typical content |
+| Payload | Contracts | Typical content |
 | --- | --- | --- |
-| `runnables/physics/physx.usd` | `FET_003_PHYSX`, `FET_004_PHYSX` | PhysX collider APIs; SDF approximation when required |
-| `runnables/physics/newton.usd` | `FET_003_NEWTON`, `FET_004_NEWTON` | `NewtonCollisionAPI` plus mesh or SDF collision API |
-| `runnables/physics/mujoco.usd` | `FET_003_MUJOCO`, `FET_004_MUJOCO` | `MjcCollisionAPI` / `MjcMeshCollisionAPI`; convex hull |
+| `runnables/physics/physx.usd` | `FET003_RigidBody.PhysX`, `FET004_Multibody.PhysX` | PhysX collider APIs; SDF approximation when required |
+| `runnables/physics/newton.usd` | `FET003_RigidBody.Newton`, `FET004_Multibody.Newton` | `NewtonCollisionAPI` plus mesh or SDF collision API |
+| `runnables/physics/mujoco.usd` | `CAP003_RigidBody.MuJoCo`, `CAP004_Multibody.MuJoCo` | `MjcCollisionAPI` / `MjcMeshCollisionAPI`; convex hull |
 
 ### 5. Opt into features on a profile that allows them
 
-`Robotics-Prop@3.2.0` lists the
-`FET_000_*` / `FET_003_*` / `FET_004_*` runtime features as **optional**. A
-missing runtime does not fail the profile; a present runtime must pass its
-rules.
+`Robotics-Prop@3.2.0` selects every PhysX, Newton, and MuJoCo contract in the
+table above as **optional**.
+Failures contributed only by those optional features are reported as
+non-blocking evidence; a requirement is blocking if another required selector
+also contributes it.
 
-Stamp validation metadata with the profile name and version you target. See
-[Robotics-Prop profile guidance](../profiles/robotics-prop.md).
+The robot profiles differ. `Robot-Body@4.0.0` and `Robot-Gripper@4.0.0`
+**require** five Newton contracts: `FET003_RigidBody.Newton`,
+`FET004_Multibody.Newton`, `FET022_DrivenJoints.Newton`,
+`CAP000_Core.Newton`, and `CAP024_BaseArticulation.Newton`.
+Install the Newton tier next to Core first. If you do not, validation
+fails on selectors it cannot resolve.
+
+Record validation evidence under the profile target you requested; do not stamp
+one profile as exclusive asset identity. See
+[Robotics-Prop runtime physics variants](../profiles/robotics-prop.md#runtime-physics-variants-version-310).
 
 ### 6. Validate per runtime
 
-`simready-validate` groups profile features by the `runtime` field and checks
-each group with only that variant enabled. To inspect a payload manually,
+Validation derives each runtime from the second segment of the dotted feature
+ID and checks each runtime group with only that variant enabled. To inspect a
+payload manually,
 enable one variant (Composer or USD APIs), keep the others `Disabled`, then
 validate against the matching feature set.
 
@@ -159,24 +171,24 @@ validate against the matching feature set.
 
 Feature adapters mutate neutral physics into a runtime-specific contract
 (Neutral → PhysX, Neutral → Newton, and so on). They author payload content;
-Core `FET_000_*` features own the variant scaffolding around those payloads.
+the `CAP000_Core.*` capabilities own the variant scaffolding around those payloads.
 See [Feature Adapters](feature_adapters/feature_adapters.md).
 
 <details>
 <summary><strong>Related specification pages</strong></summary>
 
-- [Runtime Variants capability](../capabilities/core/runtime_variants/capability-runtime_variants.md)
-- [Runtime Physics Isolation Matrix](../capabilities/core/runtime_variants/runtime-physics-isolation-matrix.md)
-- [FET_000_PHYSX](../features/FET_000_PHYSX.md) ·
-  [FET_000_NEWTON](../features/FET_000_NEWTON.md) ·
-  [FET_000_MUJOCO](../features/FET_000_MUJOCO.md)
-- [FET_003_PHYSX](../features/FET_003_PHYSX.md) ·
-  [FET_003_NEWTON](../features/FET_003_NEWTON.md) ·
-  [FET_003_MUJOCO](../features/FET_003_MUJOCO.md)
-- [FET_004_PHYSX](../features/FET_004_PHYSX.md) ·
-  [FET_004_NEWTON](../features/FET_004_NEWTON.md) ·
-  [FET_004_MUJOCO](../features/FET_004_MUJOCO.md)
-- [Features guide — runtime field](features/features.md#runtime-variant-field-runtime)
-- [SimReady Benchmark](benchmark/benchmark.md)
+- [Runtime Variants capability](../rules_and_reqs/core/runtime_variants/capability-runtime_variants.md)
+- [Runtime Physics Isolation Matrix](../rules_and_reqs/core/runtime_variants/runtime-physics-isolation-matrix.md)
+- [CAP000_Core.PhysX](../capabilities/CAP000_Core.PhysX.md) ·
+  [CAP000_Core.Newton](../capabilities/CAP000_Core.Newton.md) ·
+  [CAP000_Core.MuJoCo](../capabilities/CAP000_Core.MuJoCo.md)
+- [FET003_RigidBody.PhysX](../features/FET003_RigidBody.PhysX.md) ·
+  [FET003_RigidBody.Newton](../features/FET003_RigidBody.Newton.md) ·
+  [CAP003_RigidBody.MuJoCo](../capabilities/CAP003_RigidBody.MuJoCo.md)
+- [FET004_Multibody.PhysX](../features/FET004_Multibody.PhysX.md) ·
+  [FET004_Multibody.Newton](../features/FET004_Multibody.Newton.md) ·
+  [CAP004_Multibody.MuJoCo](../capabilities/CAP004_Multibody.MuJoCo.md)
+- [Features guide — runtime segment](features/features.md#foundations-2-model)
+- [SimReady Evaluate](evaluate/evaluate.md)
 
 </details>

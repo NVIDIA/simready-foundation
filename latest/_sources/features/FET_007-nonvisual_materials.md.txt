@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_007-nonvisual_materials`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP007_NonVisualMaterials.html" />
+<link rel="canonical" href="../capabilities/CAP007_NonVisualMaterials.html" />
+```
+
+This published feature route moved to [`CAP007_NonVisualMaterials`](../capabilities/CAP007_NonVisualMaterials.md) (Foundations 1 ID: `FET_007_STANDARD`).

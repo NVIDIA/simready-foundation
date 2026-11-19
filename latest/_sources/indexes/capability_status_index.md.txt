@@ -81,6 +81,14 @@ This Document tracks the status of each capability.
 (capability-bill-of-materials)=
 ### **Bill of Materials** (10 points) ![Status](https://img.shields.io/badge/Status-Draft-red)
 - ✅ **List of Requirements** (10 points)
+(capability-mates)=
+### **Mates** (25 points) ![Status](https://img.shields.io/badge/Status-Draft-red)
+- ✅ **Custom OpenUSD Attributes** (15 points)
+- ✅ **List of Requirements** (10 points)
+(capability-connections)=
+### **Connections** (25 points) ![Status](https://img.shields.io/badge/Status-Draft-red)
+- ✅ **Custom OpenUSD Attributes** (15 points)
+- ✅ **List of Requirements** (10 points)
 
 ## Legend
 

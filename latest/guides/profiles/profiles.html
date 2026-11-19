@@ -27,8 +27,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=75c7c72ae941e8b558d8" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=75c7c72ae941e8b558d8" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -38,14 +38,14 @@
     <link rel="stylesheet" type="text/css" href="../../_static/tags.css?v=03faa5c8" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../_static/scripts/fontawesome.js?digest=18bd87630a240e9c25be"></script>
+  <script defer src="../../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
 
 
 
-    <script src="../../_static/documentation_options.js?v=07401e81"></script>
+    <script src="../../_static/documentation_options.js?v=c1b729fb"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -53,9 +53,9 @@
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'guides/profiles/profiles';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.23.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.24.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.08.0-post1';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.10.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
@@ -65,14 +65,14 @@
 
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="SimReady Benchmark" href="../benchmark/benchmark.html" />
+    <link rel="next" title="Profiles Validation Workflow" href="../profiles_validation_workflow.html" />
     <link rel="prev" title="Feature Adapters Documentation Guide" href="../feature_adapters/feature_adapters.html" />
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="2026.08.0-post1" />
+  <meta name="docsearch:version" content="2026.10.0" />
   
     
     <script src="../../_static/searchtools.js"></script>
@@ -125,7 +125,7 @@
   
     <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
 <div class="bd-header__inner bd-page-width">
-  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation" aria-expanded="false" aria-controls="pst-primary-sidebar-modal">
     <span class="fa-solid fa-bars"></span>
   </button>
   
@@ -227,14 +227,14 @@
 
 <div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
   <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
-    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
   </button>
   <ul class="dropdown-menu dropdown-menu-end">
-    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
-    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
-    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg me-1"></i>Dark</button></li>
   </ul>
 </div></div>
       
@@ -254,7 +254,7 @@
   
 
   
-    <button type="button" class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+    <button type="button" class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page" aria-expanded="false" aria-controls="pst-secondary-sidebar-modal">
       <span class="fa-solid fa-outdent"></span>
     </button>
   
@@ -268,7 +268,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <dialog id="pst-primary-sidebar-modal" tabindex="-1"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
@@ -361,14 +361,14 @@
 
 <div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
   <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
-    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
   </button>
   <ul class="dropdown-menu dropdown-menu-end">
-    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
-    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
-    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg me-1"></i>Dark</button></li>
   </ul>
 </div></div>
         
@@ -389,40 +389,54 @@
 <li class="toctree-l2"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tiers.html">SimReady Foundation Tiers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../foundation_pypi.html">SimReady Foundation PyPI Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries.html">SimReady Python Libraries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../validate_workflow.html">SimReady Validation Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../runtime_attribution_qa.html">Runtime Attribution QA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validator-integration.html">Foundations 2 Validator Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../foundations2-catalog-migration.html">Foundations 2 Catalog Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../foundations2-layout-migration.html">Foundations 2 Layout Migration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../semantic_labels/semantic_labels.html">Semantic Labels Workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../adding_a_custom_taxonomy.html">Adding a Custom Taxonomy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../packaging_workflow.html">SimReady Packaging Workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../thumbnail_guidelines.html">Thumbnail Guidelines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../acceptance_workflow.html">SimReady Acceptance Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../external_contribution_workflow.html">External Contribution Workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../multiphysics_solvers.html">Multiple Physics Solvers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../features/features.html">Features</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../feature_adapters/feature_adapters.html">Feature Adapters</a></li>
 <li class="toctree-l2 current active"><a aria-current="page" class="current reference internal" href="#">Profiles</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../benchmark/benchmark.html">SimReady Benchmark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../benchmark/overview.html">Overview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../benchmark/pipeline.html">Pipeline and Stages</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../benchmark/running.html">Running Tests</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../benchmark/reading-reports.html">Reading Reports</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../benchmark/tests/tests.html">Tests Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet001-visual.html">FET001 Visual</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet003-physics.html">FET003 Physics</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet004-multibody.html">FET004 Multibody</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet005-grasp.html">FET005 Grasp</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet006-materials.html">FET006 Materials</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet010-display-color.html">FET010 Display Color</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet011-semantic-labels.html">FET011 Semantic Labels</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet022-driven-joints.html">FET022 Driven Joints</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/fet028-gripper.html">FET028 Gripper</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/authoring.html">Authoring runtime tests</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../benchmark/tests/experimental.html">Experimental and disabled tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../evaluate/evaluate.html">SimReady Evaluate</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../evaluate/overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../evaluate/pipeline.html">Pipeline and Stages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../evaluate/running.html">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../evaluate/reading-reports.html">Reading Reports</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../evaluate/tests/tests.html">Tests Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../evaluate/tests/fet001-visual.html">FET001 Visual</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../evaluate/tests/fet003-physics.html">FET003 Physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../evaluate/tests/fet004-multibody.html">FET004 Multibody</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../evaluate/tests/fet005-grasp.html">FET005 Grasp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../evaluate/tests/fet006-materials.html">FET006 Materials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../evaluate/tests/fet008-object-forward.html">FET008 Object Forward</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../evaluate/tests/fet010-display-color.html">FET010 Display Color</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../evaluate/tests/fet011-semantic-labels.html">FET011 Semantic Labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../evaluate/tests/fet012-gaussian-splat.html">FET012 Gaussian Splat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../evaluate/tests/fet013-representation.html">FET013 Multi-Representation Visual</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../evaluate/tests/fet014-mesh-variant.html">FET014 Mesh Variant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../evaluate/tests/fet015-collision-variant.html">FET015 Collision Variant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../evaluate/tests/fet016-appearance-variant.html">FET016 Appearance Variant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../evaluate/tests/fet022-driven-joints.html">FET022 Driven Joints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../evaluate/tests/fet028-gripper.html">FET028 Gripper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../evaluate/tests/authoring.html">Authoring runtime tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../evaluate/tests/experimental.html">Experimental and disabled tests</a></li>
 </ul>
 </details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../benchmark/sensor-tests/tests.html">Sensor Tests Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../benchmark/sensor-tests/fet034-imu-sensors.html">FET034 IMU Sensors</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../benchmark/sensor-tests/fet035-render-products.html">FET035 Render Products</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../benchmark/sensor-tests/fet036-rtx-sensors.html">FET036 RTX Sensors</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../benchmark/sensor-tests/fet037-joint-sensors.html">FET037 Joint Sensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../evaluate/newton-tests/runtime-tests.html">Newton Runtime Tests</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../evaluate/sensor-tests/tests.html">Sensor Tests Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../evaluate/sensor-tests/fet034-imu-sensors.html">FET034 IMU Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../evaluate/sensor-tests/fet035-render-products.html">FET035 Render Products</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../evaluate/sensor-tests/fet036-rtx-sensors.html">FET036 RTX Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../evaluate/sensor-tests/fet037-joint-sensors.html">FET037 Joint Sensors</a></li>
 </ul>
 </details></li>
 </ul>
@@ -437,233 +451,330 @@
 <li class="toctree-l2"><a class="reference internal" href="../profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../capabilities/capabilities.html">Capabilities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/core/core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/core/sim_ready/capability-sim_ready.html">SimReady</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/sim_ready/requirements.html">SimReady Requirements</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/sim_ready/requirements/metadata-whitelist.html">metadata-whitelist</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/sim_ready/requirements/thumbnail-exist.html">Thumbnail Exist</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/sim_ready/requirements/nested-simready-metadata.html">nested-simready-metadata</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/sim_ready/requirements/metadata-union.html">metadata-union</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../rules_and_reqs/rules_and_reqs.html">Rules and Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../rules_and_reqs/core/core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/core/sim_ready/capability-sim_ready.html">SimReady</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/sim_ready/requirements.html">SimReady Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/sim_ready/requirements/metadata-whitelist.html">metadata-whitelist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/sim_ready/requirements/thumbnail-exist.html">Thumbnail Exist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/sim_ready/requirements/nested-simready-metadata.html">nested-simready-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/sim_ready/requirements/metadata-union.html">metadata-union</a></li>
 </ul>
 </details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/core/units/capability-units.html">Units</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/units/requirements.html">Requirements</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/core/units/capability-units.html">Units</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/units/requirements.html">Requirements</a></li>
 </ul>
 </details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/core/atomic_asset/capability-atomic_asset.html">Atomic Asset</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/atomic_asset/requirements.html">Requirements</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/atomic_asset/creators.html">Creators</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/core/asset_frame/capability-asset_frame.html">Asset Frame</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/asset_frame/requirements.html">Requirements</a></li>
 </ul>
 </details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/core/naming_paths/capability-naming_paths.html">Naming and Paths</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements.html">Naming and Paths Requirements</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements/prim-naming-convention.html">prim-naming-convention</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements/file-naming-convention.html">file-naming-convention</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements/directory-structure.html">directory-structure</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements/path-length-limits.html">path-length-limits</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements/asset-folder-structure.html">asset-folder-structure</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements/metadata-location.html">metadata-location</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/naming_paths/requirements/relative-paths.html">relative-paths</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/core/asset_variants/capability-asset_variants.html">Asset Variants</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/asset_variants/requirements.html">Requirements</a></li>
 </ul>
 </details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/core/runtime_variants/capability-runtime_variants.html">Runtime Variants</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements.html">Runtime Variants Requirements</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/physx-variant-set.html">physx-variant-set</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/physx-runtime-payload.html">physx-runtime-payload</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/physx-variant-metadata.html">physx-variant-metadata</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/newton-variant-set.html">newton-variant-set</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/newton-runtime-payload.html">newton-runtime-payload</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/newton-variant-metadata.html">newton-variant-metadata</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/mujoco-variant-set.html">mujoco-variant-set</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/mujoco-runtime-payload.html">mujoco-runtime-payload</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/mujoco-variant-metadata.html">mujoco-variant-metadata</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/runtime-variant-section-purity.html">runtime-variant-section-purity</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/requirements/runtime-physics-isolation.html">runtime-physics-isolation</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/core/runtime_variants/runtime-physics-isolation-matrix.html">Runtime Physics Isolation Matrix</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/core/atomic_asset/capability-atomic_asset.html">Atomic Asset</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/atomic_asset/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/atomic_asset/creators.html">Creators</a></li>
 </ul>
 </details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/core/naming_paths/capability-naming_paths.html">Naming and Paths</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/naming_paths/requirements.html">Naming and Paths Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/naming_paths/requirements/prim-naming-convention.html">prim-naming-convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/naming_paths/requirements/file-naming-convention.html">file-naming-convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/naming_paths/requirements/directory-structure.html">directory-structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/naming_paths/requirements/path-length-limits.html">path-length-limits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/naming_paths/requirements/asset-folder-structure.html">asset-folder-structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/naming_paths/requirements/metadata-location.html">metadata-location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/naming_paths/requirements/relative-paths.html">relative-paths</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/visualization/visualization.html">Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/visualization/geometry/capability-geometry.html">Geometry</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/visualization/geometry/requirements.html">Requirements</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/visualization/geometry/creators_overview.html">Creators</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/visualization/geometry/developers_overview.html">Developers</a></li>
-</ul>
-</details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/visualization/materials/capability-materials.html">Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/visualization/materials/requirements.html">Requirements</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/visualization/materials/developers.html">Developers</a></li>
-</ul>
-</details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/visualization/display_color/capability-display_color.html">Display Color</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/visualization/display_color/requirements.html">Requirements</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/core/runtime_variants/capability-runtime_variants.html">Runtime Variants</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/runtime_variants/requirements.html">Runtime Variants Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/runtime_variants/requirements/physx-variant-set.html">physx-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/runtime_variants/requirements/physx-runtime-payload.html">physx-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/runtime_variants/requirements/physx-variant-metadata.html">physx-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/runtime_variants/requirements/newton-variant-set.html">newton-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/runtime_variants/requirements/newton-runtime-payload.html">newton-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/runtime_variants/requirements/newton-variant-metadata.html">newton-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/runtime_variants/requirements/mujoco-variant-set.html">mujoco-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/runtime_variants/requirements/mujoco-runtime-payload.html">mujoco-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/runtime_variants/requirements/mujoco-variant-metadata.html">mujoco-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/runtime_variants/requirements/runtime-variant-section-purity.html">runtime-variant-section-purity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/runtime_variants/requirements/runtime-physics-isolation.html">runtime-physics-isolation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/core/runtime_variants/runtime-physics-isolation-matrix.html">Runtime Physics Isolation Matrix</a></li>
 </ul>
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/isaac_sim/isaac_sim.html">Isaac Sim</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/isaac_sim/composition/capability-composition.html">Composition</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/isaac_sim/composition/requirements.html">Requirements</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../rules_and_reqs/visualization/visualization.html">Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/visualization/geometry/capability-geometry.html">Geometry</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/visualization/geometry/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/visualization/geometry/creators_overview.html">Creators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/visualization/geometry/developers_overview.html">Developers</a></li>
 </ul>
 </details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/isaac_sim/ros_bridge/capability-ros_bridge.html">ROS Bridge</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/isaac_sim/ros_bridge/requirements.html">Requirements</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/visualization/materials/capability-materials.html">Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/visualization/materials/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/visualization/materials/developers.html">Developers</a></li>
 </ul>
 </details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/isaac_sim/robot_materials/capability-robot_materials.html">Robot Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/isaac_sim/robot_materials/requirements.html">Requirements</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/visualization/display_color/capability-display_color.html">Display Color</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/visualization/display_color/requirements.html">Requirements</a></li>
 </ul>
 </details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/isaac_sim/robot_core/capability-robot_core.html">Robot Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/isaac_sim/robot_core/requirements.html">Requirements</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/visualization/gaussian_splat/capability-gaussian_splat.html">Gaussian Splat</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/visualization/gaussian_splat/requirements.html">Requirements</a></li>
 </ul>
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_bodies.html">Physics Bodies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../capabilities/physics_bodies/base_articulation/capability-base-articulation.html">Base Articulation</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../rules_and_reqs/isaac_sim/isaac_sim.html">Isaac Sim</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/isaac_sim/composition/capability-composition.html">Composition</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/isaac_sim/composition/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/isaac_sim/ros_bridge/capability-ros_bridge.html">ROS Bridge</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/isaac_sim/ros_bridge/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/isaac_sim/robot_materials/capability-robot_materials.html">Robot Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/isaac_sim/robot_materials/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/isaac_sim/robot_core/capability-robot_core.html">Robot Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/isaac_sim/robot_core/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../rules_and_reqs/isaac_sim/optimizations/capability-optimizations.html">Isaac Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/isaac_sim/optimizations/requirements.html">Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/isaac_sim/optimizations/requirements/fixed-joint-no-mergeable-body-pair.html">fixed-joint-no-mergeable-body-pair</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/isaac_sim/optimizations/requirements/rigid-body-no-multiple-visual-meshes.html">rigid-body-no-multiple-visual-meshes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/isaac_sim/optimizations/requirements/render-only-no-inactive-collision-schemas.html">render-only-no-inactive-collision-schemas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/isaac_sim/optimizations/requirements/material-no-materialx-render-context.html">material-no-materialx-render-context</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/physics_bodies.html">Physics Bodies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/base_articulation/capability-base-articulation.html">Base Articulation</a></li>
 
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_rigid_bodies/capability-physics_rigid_bodies.html">Rigid Bodies and Colliders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_rigid_bodies/requirements.html">Requirements</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_rigid_bodies/creators.html">Creators</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/physics_rigid_bodies/capability-physics_rigid_bodies.html">Rigid Bodies and Colliders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/physics_rigid_bodies/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/physics_rigid_bodies/creators.html">Creators</a></li>
 </ul>
 </details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_colliders/capability-collider_approximations.html">Collider Approximations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_colliders/requirements.html">Requirements</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_colliders/creators.html">Creators</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/physics_colliders/capability-collider_approximations.html">Collider Approximations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/physics_colliders/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/physics_colliders/creators.html">Creators</a></li>
 </ul>
 </details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_joints/capability-physics_joints.html">Joints and Articulations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_joints/requirements.html">Requirements</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_joints/creators.html">Creators</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/physics_joints/capability-physics_joints.html">Joints and Articulations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/physics_joints/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/physics_joints/creators.html">Creators</a></li>
 </ul>
 </details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_driven_joints/capability-physics_driven_joints.html">Driven Joints</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_driven_joints/requirements.html">Requirements</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/physics_driven_joints/capability-physics_driven_joints.html">Driven Joints</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/physics_driven_joints/requirements.html">Requirements</a></li>
 </ul>
 </details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_materials/capability-physics_materials.html">Physics Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_materials/requirements.html">Requirements</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_materials/creators.html">Creators</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/physics_materials/capability-physics_materials.html">Physics Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/physics_materials/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/physics_materials/creators.html">Creators</a></li>
 </ul>
 </details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_graspable/capability-physics_graspable.html">Graspable Vectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_graspable/requirements.html">Requirements</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_graspable/creators.html">Creators</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/physics_graspable/capability-physics_graspable.html">Graspable Vectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/physics_graspable/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/physics_graspable/creators.html">Creators</a></li>
 </ul>
 </details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_grippers/capability-physics_grippers.html">Grippers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_grippers/requirements.html">Requirements</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/physics_grippers/capability-physics_grippers.html">Grippers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/physics_grippers/requirements.html">Requirements</a></li>
 </ul>
 </details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/physics_bodies/physics_sensors/capability-physics_sensors.html">Physics Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/physics_bodies/physics_sensors/requirements.html">Requirements</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/physics_sensors/capability-physics_sensors.html">Physics Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/physics_sensors/requirements.html">Requirements</a></li>
 </ul>
 </details></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/hierarchy/hierarchy.html">Hierarchy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/hierarchy/capability-hierarchy.html">Hierarchy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/hierarchy/requirements.html">Requirements</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/hierarchy/creators_overview.html">Creators</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/hierarchy/developers_overview.html">Developers</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/object_affordances/capability-object_affordances.html">Object Affordances</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/object_affordances/requirements.html">Object Affordances Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/object_affordances/requirements/object-affordance-valid.html">object-affordance-valid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/physics_bodies/object_affordances/requirements/object-affordance-state-valid.html">object-affordance-state-valid</a></li>
 </ul>
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_sensors.html">Non-Visual Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/capability-nonvisual_materials.html">Non-Visual Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/requirements.html">Non-Visual Materials Requirements</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/nonvisual_attributes_table.html">Non-Visual Sensor Attributes Table</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-base.html">material-base</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-coating.html">material-coating</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-attributes.html">material-attributes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-time.html">material-time</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-binding.html">material-binding</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/nonvisual_materials/requirements/material-consistency.html">material-consistency</a></li>
-</ul>
-</details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/nonvisual_sensors/lidar/capability-lidar.html">LiDAR Sensor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/nonvisual_sensors/lidar/requirements.html">Requirements</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../rules_and_reqs/hierarchy/hierarchy.html">Hierarchy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/hierarchy/capability-hierarchy.html">Hierarchy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/hierarchy/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/hierarchy/creators_overview.html">Creators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/hierarchy/developers_overview.html">Developers</a></li>
 </ul>
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/rendering/rendering.html">Rendering</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/rendering/render_products/capability-render_products.html">Render Products</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/rendering/render_products/requirements.html">Requirements</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../rules_and_reqs/nonvisual_sensors/nonvisual_sensors.html">Non-Visual Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/nonvisual_sensors/nonvisual_materials/capability-nonvisual_materials.html">Non-Visual Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements.html">Non-Visual Materials Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/nonvisual_sensors/nonvisual_materials/nonvisual_attributes_table.html">Non-Visual Sensor Attributes Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-base.html">material-base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-coating.html">material-coating</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-attributes.html">material-attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-time.html">material-time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-binding.html">material-binding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-consistency.html">material-consistency</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/nonvisual_sensors/lidar/capability-lidar.html">LiDAR Sensor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/nonvisual_sensors/lidar/requirements.html">Requirements</a></li>
 </ul>
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/semantic_labels/capability-semantic_labels.html">Semantic Labels</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/semantic_labels/requirements.html">Semantic Labels Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-capability.html">semantic-label-capability</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-deprecated-schema.html">semantic-label-deprecated-schema</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-qcode-valid.html">semantic-label-qcode-valid</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-schema.html">semantic-label-schema</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-time.html">semantic-label-time</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-material.html">semantic-label-material</a></li>
-</ul>
-</details></li>
-<li class="toctree-l3"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-capability.html">semantic-label-capability</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-deprecated-schema.html">semantic-label-deprecated-schema</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-qcode-valid.html">semantic-label-qcode-valid</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-schema.html">semantic-label-schema</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-time.html">semantic-label-time</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../capabilities/semantic_labels/requirements/semantic-label-material.html">semantic-label-material</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/dataset_taxonomies/capability-dataset_taxonomies.html">Dataset Taxonomies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements.html">Dataset Taxonomies Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/coco-labels.html">coco-labels</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/cityscapes-labels.html">cityscapes-labels</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/ade20k-labels.html">ade20k-labels</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/pascal-voc-labels.html">pascal-voc-labels</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/sunrgbd-labels.html">sunrgbd-labels</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/imagenet-labels.html">imagenet-labels</a></li>
-</ul>
-</details></li>
-<li class="toctree-l3"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/coco-labels.html">coco-labels</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/cityscapes-labels.html">cityscapes-labels</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/ade20k-labels.html">ade20k-labels</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/pascal-voc-labels.html">pascal-voc-labels</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/sunrgbd-labels.html">sunrgbd-labels</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../capabilities/dataset_taxonomies/requirements/imagenet-labels.html">imagenet-labels</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/packaging/packaging.html">Packaging</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/packaging/packaging_core/capability-packaging_core.html">Packaging Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/packaging/packaging_core/requirements.html">Requirements</a></li>
-</ul>
-</details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/packaging/conformance_metadata/capability-conformance_metadata.html">Conformance Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/packaging/conformance_metadata/requirements.html">Requirements</a></li>
-</ul>
-</details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/packaging/packaging_introspection/capability-packaging_introspection.html">Packaging Introspection</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/packaging/packaging_introspection/requirements.html">Requirements</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../rules_and_reqs/rendering/rendering.html">Rendering</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/rendering/render_products/capability-render_products.html">Render Products</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/rendering/render_products/requirements.html">Requirements</a></li>
 </ul>
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../capabilities/aif/aif.html">AIF</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/aif/metadata/capability-metadata.html">Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/aif/metadata/requirements.html">Requirements</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../rules_and_reqs/semantic_labels/capability-semantic_labels.html">Semantic Labels</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/semantic_labels/requirements.html">Semantic Labels Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/semantic_labels/requirements/semantic-label-capability.html">semantic-label-capability</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/semantic_labels/requirements/semantic-label-deprecated-schema.html">semantic-label-deprecated-schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/semantic_labels/requirements/semantic-label-qcode-valid.html">semantic-label-qcode-valid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/semantic_labels/requirements/semantic-label-schema.html">semantic-label-schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/semantic_labels/requirements/semantic-label-time.html">semantic-label-time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/semantic_labels/requirements/semantic-label-material.html">semantic-label-material</a></li>
 </ul>
 </details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/aif/connection_points/capability-connection_points.html">Connection Points</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/aif/connection_points/requirements.html">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rules_and_reqs/semantic_labels/requirements/semantic-label-capability.html">semantic-label-capability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rules_and_reqs/semantic_labels/requirements/semantic-label-deprecated-schema.html">semantic-label-deprecated-schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rules_and_reqs/semantic_labels/requirements/semantic-label-qcode-valid.html">semantic-label-qcode-valid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rules_and_reqs/semantic_labels/requirements/semantic-label-schema.html">semantic-label-schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rules_and_reqs/semantic_labels/requirements/semantic-label-time.html">semantic-label-time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rules_and_reqs/semantic_labels/requirements/semantic-label-material.html">semantic-label-material</a></li>
 </ul>
 </details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/aif/thermal_cooling/capability-thermal_cooling.html">Thermal Cooling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/aif/thermal_cooling/requirements.html">Requirements</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../rules_and_reqs/dataset_taxonomies/capability-dataset_taxonomies.html">Dataset Taxonomies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/dataset_taxonomies/requirements.html">Dataset Taxonomies Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/dataset_taxonomies/requirements/coco-labels.html">coco-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/dataset_taxonomies/requirements/cityscapes-labels.html">cityscapes-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/dataset_taxonomies/requirements/ade20k-labels.html">ade20k-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/dataset_taxonomies/requirements/pascal-voc-labels.html">pascal-voc-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/dataset_taxonomies/requirements/sunrgbd-labels.html">sunrgbd-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/dataset_taxonomies/requirements/imagenet-labels.html">imagenet-labels</a></li>
 </ul>
 </details></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../capabilities/aif/electrical/capability-electrical.html">Electrical</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../capabilities/aif/electrical/requirements.html">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rules_and_reqs/dataset_taxonomies/requirements/coco-labels.html">coco-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rules_and_reqs/dataset_taxonomies/requirements/cityscapes-labels.html">cityscapes-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rules_and_reqs/dataset_taxonomies/requirements/ade20k-labels.html">ade20k-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rules_and_reqs/dataset_taxonomies/requirements/pascal-voc-labels.html">pascal-voc-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rules_and_reqs/dataset_taxonomies/requirements/sunrgbd-labels.html">sunrgbd-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rules_and_reqs/dataset_taxonomies/requirements/imagenet-labels.html">imagenet-labels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../rules_and_reqs/packaging/packaging.html">Packaging</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/packaging/packaging_core/capability-packaging_core.html">Packaging Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/packaging/packaging_core/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/packaging/conformance_metadata/capability-conformance_metadata.html">Conformance Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/packaging/conformance_metadata/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/packaging/packaging_introspection/capability-packaging_introspection.html">Packaging Introspection</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/packaging/packaging_introspection/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../rules_and_reqs/aif/aif.html">AIF</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/aif/metadata/capability-metadata.html">Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/aif/metadata/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/aif/connection_points/capability-connection_points.html">Connection Points</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/aif/connection_points/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/aif/thermal_cooling/capability-thermal_cooling.html">Thermal Cooling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/aif/thermal_cooling/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/aif/electrical/capability-electrical.html">Electrical</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/aif/electrical/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../rules_and_reqs/template/template.html">Template</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/template/smoke/capability-smoke.html">Smoke</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/template/smoke/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../capabilities/capabilities.html">Capabilities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP000_Core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP000_Core.Isaac.html">Core (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP000_Core.MuJoCo.html">Core (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP000_Core.Newton.html">Core (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP000_Core.PhysX.html">Core (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP002_PosableBodies.html">Posable Bodies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP003_RigidBody.MuJoCo.html">Rigid Body Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP004_Multibody.MuJoCo.html">Simulate Multi-Body Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP004_Multibody.RobotMuJoCo.html">Simulate Multi-Body Physics (Robot MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP007_NonVisualMaterials.html">Non-Visual Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP021_RobotCore.Isaac.html">Robot Core (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP022_DrivenJoints.MuJoCo.html">Driven Joints (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP023_RobotMaterials.Isaac.html">Robot Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP024_BaseArticulation.html">Base Articulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP024_BaseArticulation.MuJoCo.html">Base Articulation (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP024_BaseArticulation.Newton.html">Base Articulation (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP024_BaseArticulation.PhysX.html">Base Articulation (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP025_RosBridge.Ros.html">ROS Ready (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP026_Mates.html">Mate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP027_Connections.html">Connections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP028_Gripper.MuJoCo.html">Gripper (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP029_ConnectionJoint.html">Connections Multibody-Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP029_ConnectionJoint.MuJoCo.html">Connections Multibody-Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP029_ConnectionJoint.Newton.html">Connections Multibody-Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP029_ConnectionJoint.PhysX.html">Connections Multibody-Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP030_PackagingCore.html">Packaging Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP031_SelfContainedPackage.html">Self-contained Package Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP032_PackagingIntrospection.html">Packaging Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP033_SimReadyPackage.html">Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP039_ObjectAffordances.html">Object Affordances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP040_CocoLabels.html">Semantic Labels - COCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP041_CityscapesLabels.html">Semantic Labels - Cityscapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP042_Ade20kLabels.html">Semantic Labels - ADE20K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP043_PascalVocLabels.html">Semantic Labels - PASCAL VOC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP044_SunRgbdLabels.html">Semantic Labels - SUN RGB-D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP045_ImageNet1kLabels.html">Semantic Labels - ImageNet-1K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP046_WikidataLabels.html">Semantic Labels - Wikidata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP1000_TemplateSmoke.Template.html">Template Smoke</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP100_IsaacComposition.Isaac.html">IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP101_RobotComposition.Isaac.html">Robot IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP102_RigidBodyCollapse.Isaac.html">Rigid-Body Collapse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP103_VisualMeshMerge.Isaac.html">Visual Mesh Merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP104_RenderCollisionSeparation.Isaac.html">Render-Collision Separation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP105_MaterialXRemoval.Isaac.html">MaterialX Removal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP200_AifMetadata.html">AIF Core Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP201_ConnectionPoints.html">Connection Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP202_ThermalCooling.html">AIF Thermal Cooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../capabilities/CAP203_Electrical.html">AIF Electrical</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../rules_and_reqs/assembly/assembly.html">Assembly</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/assembly/mates/capability-mates.html">Mates</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/assembly/mates/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../rules_and_reqs/assembly/connections/capability-connections.html">Connections</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../rules_and_reqs/assembly/connections/requirements.html">Requirements</a></li>
 </ul>
 </details></li>
 </ul>
@@ -672,81 +783,54 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../features/features.html">Features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../features/feature-dependency-graph.html">Feature dependency graph</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_000_STANDARD.html">Core</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_000_PHYSX.html">Core (PhysX)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_000_NEWTON.html">Core (Newton)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_000_MUJOCO.html">Core (MuJoCo)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_000_ISAAC.html">Core (Isaac)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_001_STANDARD.html">Minimal Placeable Visual</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_002_STANDARD.html">Posable Bodies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_003_STANDARD.html">Rigid Body Physics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_003_PHYSX.html">Rigid Body Physics (PhysX)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_003_NEWTON.html">Rigid Body Physics (Newton)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_003_MUJOCO.html">Rigid Body Physics (MuJoCo)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004_STANDARD.html">Simulate Multi-Body Physics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004_PHYSX.html">Simulate Multi-Body Physics (PhysX)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004_NEWTON.html">Simulate Multi-Body Physics (Newton)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004_MUJOCO.html">Simulate Multi-Body Physics (MuJoCo)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004_ROBOT_PHYSX.html">Simulate Multi-Body Physics (Robot PhysX) — Deprecated</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004_ROBOT_NEWTON.html">Simulate Multi-Body Physics (Robot Newton)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_004_ROBOT_MUJOCO.html">Simulate Multi-Body Physics (Robot MuJoCo)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_005_STANDARD.html">Simulate Grasp Physics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_006_STANDARD.html">Materials (USDPreviewSurface)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_006_MDL.html">Materials (MDL)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_006_OPENPBR.html">Materials (OpenPBR)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_007_STANDARD.html">Non-Visual Materials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_010_STANDARD.html">Display Color</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_011_STANDARD.html">Semantic Labels</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_011_RTX.html">Semantic Labels (RTX)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_046_STANDARD.html">Wikidata Q-Code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_040_STANDARD.html">Open Taxonomy COCO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_041_STANDARD.html">Open Taxonomy Cityscapes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_042_STANDARD.html">Open Taxonomy ADE20K</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_043_STANDARD.html">Open Taxonomy PASCAL VOC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_044_STANDARD.html">Open Taxonomy SUN RGB-D</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_045_STANDARD.html">Open Taxonomy ImageNet-1K</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_021_ISAAC.html">Robot Core (Isaac)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_022_STANDARD.html">Driven Joints</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_022_PHYSX.html">Driven Joints (PhysX)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_022_NEWTON.html">Driven Joints (Newton)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_022_MUJOCO.html">Driven Joints (MuJoCo)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_022_ISAAC.html">Driven Joints (Isaac)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_023_ISAAC.html">Robot Materials (Isaac)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_024_STANDARD.html">Base Articulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_024_PHYSX.html">Base Articulation (PhysX)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_024_NEWTON.html">Base Articulation (Newton)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_024_MUJOCO.html">Base Articulation (MuJoCo)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_025_ROS.html">ROS Ready (Isaac)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_034_ISAAC.html">IMU Sensor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_037_ISAAC.html">Joint Sensor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_035_RTX.html">Camera and Render Products</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_036_RTX.html">RTX Sensors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_028_STANDARD.html">Gripper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_028_ISAAC.html">Gripper (Isaac)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_028_MUJOCO.html">Gripper (MuJoCo)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_030_STANDARD.html">Packaging Core</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_031_STANDARD.html">Self-contained Package Source</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_032_STANDARD.html">Packaging Introspection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_033_STANDARD.html">Metadata</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_100_ISAAC.html">IsaacSim Composition</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_101_ISAAC.html">Robot IsaacSim Composition</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_200-aif_metadata.html">AIF Core Metadata</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_201-connection_points.html">Connection Points</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_202-thermal_cooling.html">AIF Thermal Cooling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/FET_203-electrical.html">AIF Electrical</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/drafts/FET_006-baseline-appearance-visualization-feature-card.html">Draft - Baseline Appearance Visualization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/drafts/FET_006-physically-plausible-appearance-visualization-feature-card.html">Draft - Physically Plausible Appearance Visualization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../features/drafts/FET_010-object-color-visualization-feature-card.html">Draft - Object Color Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET001_MinimalPlaceableVisual.html">Minimal Placeable Visual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET003_RigidBody.html">Rigid Body Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET003_RigidBody.Newton.html">Rigid Body Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET003_RigidBody.PhysX.html">Rigid Body Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET004_Multibody.html">Simulate Multi-Body Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET004_Multibody.Newton.html">Simulate Multi-Body Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET004_Multibody.PhysX.html">Simulate Multi-Body Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET004_Multibody.RobotNewton.html">Simulate Multi-Body Physics (Robot Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET004_Multibody.RobotPhysX.html">Simulate Multi-Body Physics (Robot PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET005_Grasp.html">Simulate Grasp Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET006_Materials.html">Materials (USDPreviewSurface)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET006_Materials.MDL.html">Materials (MDL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET006_Materials.Openpbr.html">Materials (OpenPBR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET008_ObjectForward.html">Object Forward</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET009_MaterialCoverage.html">Material Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET010_DisplayColor.html">Display Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET011_SemanticLabels.html">Semantic Labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET011_SemanticLabels.RTX.html">Semantic Labels (RTX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET012_GaussianSplat.html">Sensor Visual 3DGS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET013_MultiRepresentationVisual.html">Multi-Representation Visual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET014_MeshVariant.html">Visual Mesh Variant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET015_CollisionVariant.html">Collision Variant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET016_AppearanceVariant.html">Appearance Variant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET022_DrivenJoints.html">Driven Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET022_DrivenJoints.Isaac.html">Driven Joints (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET022_DrivenJoints.Newton.html">Driven Joints (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET022_DrivenJoints.PhysX.html">Driven Joints (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET028_Gripper.html">Gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET028_Gripper.Isaac.html">Gripper (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET034_ImuSensor.Isaac.html">IMU Sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET035_RenderProducts.RTX.html">Camera and Render Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET036_Lidar.RTX.html">RTX Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/FET037_JointSensor.Isaac.html">Joint Sensor</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../profiles/profiles.html">Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../profiles/robotics-prop.html">Robotics Prop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/nurec.html">NuRec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/asset-optimization.html">Asset Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-body.html">Robot Body</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-gripper.html">Robot Gripper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../profiles/sensor-imu.html">Sensor IMU</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../profiles/sensor-joint.html">Sensor Joint</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../profiles/sensor-camera.html">Sensor Camera</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../profiles/sensor-lidar.html">Sensor LiDAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/material.html">Material</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/assembly.html">Assembly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiles/robot-assembly.html">Robot Assembly</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../profiles/open-taxonomy-coco.html">Open Taxonomy COCO</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../profiles/open-taxonomy-cityscapes.html">Open Taxonomy Cityscapes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../profiles/open-taxonomy-ade20k.html">Open Taxonomy ADE20K</a></li>
@@ -759,6 +843,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../tiers/tiers.html">Tiers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../tiers/core.html">Core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../tiers/aif.html">AIF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tiers/newton.html">Newton</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../tiers/sensors.html">Sensors</a></li>
 </ul>
 </details></li>
@@ -799,7 +884,7 @@
     
     <li class="breadcrumb-item breadcrumb-home">
       <a href="../../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
+        <i class="fa-solid fa-house"></i>
       </a>
     </li>
     
@@ -824,357 +909,258 @@
                   
   <section id="profiles-documentation-guide">
 <h1>Profiles Documentation Guide<a class="headerlink" href="#profiles-documentation-guide" title="Link to this heading">#</a></h1>
-<section id="about-this-guide">
-<h2>About this guide<a class="headerlink" href="#about-this-guide" title="Link to this heading">#</a></h2>
-<p>This guide will walk you through the process of understanding, creating, and managing profiles in the SimReady Foundation system. Profiles are collections of features that define the capabilities and requirements for assets, enabling consistent asset transformation and validation across different simulation environments.</p>
-</section>
-<section id="what-is-a-profile">
-<h2>What is a Profile?<a class="headerlink" href="#what-is-a-profile" title="Link to this heading">#</a></h2>
-<p>A <strong>Profile</strong> is a named collection of features that defines the complete set of capabilities and requirements for an asset. Profiles serve as blueprints that specify exactly what features an asset must have to be considered compliant with a particular simulation environment or use case.</p>
-<section id="key-components">
-<h3>Key Components<a class="headerlink" href="#key-components" title="Link to this heading">#</a></h3>
+<section id="foundations-2-model">
+<h2>Foundations 2 model<a class="headerlink" href="#foundations-2-model" title="Link to this heading">#</a></h2>
+<p>A profile is a named, versioned selection contract over runtime-tested
+features and static capabilities. Capability IDs and selectors begin with
+<code class="docutils literal notranslate"><span class="pre">CAP</span></code>. A profile does not own an asset and an asset does not declare one
+exclusive profile. Producers and consumers may validate the same asset against
+any number of profiles.</p>
+<p>Profiles may contain:</p>
 <ul class="simple">
-<li><p><strong>Profile Name (ID)</strong>: Unique identifier for the profile (e.g., <code class="docutils literal notranslate"><span class="pre">Robotics-Prop</span></code>)</p></li>
-<li><p><strong>Version</strong>: Specific version of the profile (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;1.0.0&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;2.0.0&quot;</span></code>)</p></li>
-<li><p><strong>Feature Requirements</strong>: List of required features with their specific versions</p></li>
-<li><p><strong>Version Locking</strong>: Profile versions are immutable - changes require creating a new version</p></li>
+<li><p>feature selectors over dotted feature IDs;</p></li>
+<li><p>capability selectors over capability IDs;</p></li>
+<li><p>required and optional selectors in both groups; and</p></li>
+<li><p>wildcard selectors over feature name/runtime/version or capability name.</p></li>
 </ul>
+<p>Each profile remains in its own TOML file under the owning tier’s <code class="docutils literal notranslate"><span class="pre">profiles/</span></code>
+directory. Existing profile versions are immutable.</p>
 </section>
-<section id="profile-structure">
-<h3>Profile Structure<a class="headerlink" href="#profile-structure" title="Link to this heading">#</a></h3>
-<p>Each profile consists of:</p>
-<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[Profile-Name]</span>
-<span class="s2">"version"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FEATURE_ID"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"feature_version"</span><span class="p">}},</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FEATURE_ID"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"feature_version"</span><span class="p">}},</span>
-<span class="w">    </span><span class="c1"># ... more features</span>
-<span class="p">]}</span>
-</pre></div>
-</div>
-</section>
-<section id="how-profiles-work">
-<h3>How Profiles Work<a class="headerlink" href="#how-profiles-work" title="Link to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p><strong>Asset Classification</strong>: Assets are tagged with a specific profile and version</p></li>
-<li><p><strong>Feature Validation</strong>: Assets are validated against all required features in the profile</p></li>
-<li><p><strong>Transformation Path</strong>: Feature adapters enable transformation between different profiles</p></li>
-<li><p><strong>Environment Compatibility</strong>: Profiles ensure assets work correctly in specific simulation environments</p></li>
-</ol>
-</section>
-</section>
-<section id="profile-examples">
-<h2>Profile Examples<a class="headerlink" href="#profile-examples" title="Link to this heading">#</a></h2>
-<section id="example-1-robotics-prop-profile">
-<h3>Example 1: Robotics-Prop Profile<a class="headerlink" href="#example-1-robotics-prop-profile" title="Link to this heading">#</a></h3>
+<section id="profile-toml">
+<h2>Profile TOML<a class="headerlink" href="#profile-toml" title="Link to this heading">#</a></h2>
+<p>Each selector entry names its selector and, optionally, <code class="docutils literal notranslate"><span class="pre">optional</span> <span class="pre">=</span> <span class="pre">true</span></code>:</p>
 <div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[Robotics-Prop]</span>
-<span class="s2">"1.0.0"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_000_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Core"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_001_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Minimal"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_003_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "RBD Physics"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_004_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Simulate Multi-Body Physics"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_005_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Simulate Grasp Physics"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_006_MDL"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Materials (MDL)"</span>
-<span class="p">]}</span>
-<span class="s2">"2.0.0"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_000_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Core"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_001_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Minimal"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_003_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "RBD Physics"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_004_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Simulate Multi-Body Physics"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_005_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Simulate Grasp Physics"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_006_MDL"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Materials (MDL)"</span>
+<span class="s2">"4.0.0"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">selector</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"FET001.*.*"</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="n">selector</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"FET004.*.*"</span><span class="p">,</span><span class="w"> </span><span class="n">optional</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="n">selector</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"FET004.PhysX.*"</span><span class="p">,</span><span class="w"> </span><span class="n">optional</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span><span class="p">},</span>
+<span class="p">],</span><span class="w"> </span><span class="n">capabilities</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">selector</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"CAP000_Core.*.*"</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="n">selector</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"CAP007_NonVisualMaterials.*.*"</span><span class="p">,</span><span class="w"> </span><span class="n">optional</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span><span class="p">},</span>
 <span class="p">]}</span>
 </pre></div>
 </div>
+<p>Feature identity already includes its version, so Foundations 2 entries do not
+contain a separate <code class="docutils literal notranslate"><span class="pre">version</span></code> field.</p>
 </section>
-<section id="example-2-robot-body-profile">
-<h3>Example 2: Robot-Body Profile<a class="headerlink" href="#example-2-robot-body-profile" title="Link to this heading">#</a></h3>
-<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[Robot-Body]</span>
-<span class="s2">"1.0.0"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_000_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Core"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_001_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Minimal"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_003_PHYSX"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "RBD Physics"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_004_PHYSX"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Simulate Multi-Body Physics and SDF collision approximation"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_005_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Simulate Grasp Physics"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_006_MDL"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Materials (MDL)"</span>
-<span class="p">]}</span>
-<span class="s2">"2.0.0"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_000_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Core"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_001_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Minimal"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_003_PHYSX"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "RBD Physics"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_004_PHYSX"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Simulate Multi-Body Physics and SDF collision approximation"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_005_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Simulate Grasp Physics"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_006_MDL"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Materials (MDL)"</span>
-<span class="p">]}</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="creating-a-new-profile">
-<h2>Creating a New Profile<a class="headerlink" href="#creating-a-new-profile" title="Link to this heading">#</a></h2>
-<section id="step-1-define-profile-requirements">
-<h3>Step 1: Define Profile Requirements<a class="headerlink" href="#step-1-define-profile-requirements" title="Link to this heading">#</a></h3>
-<p>Before creating a profile, you need to understand:</p>
-<ol class="arabic simple">
-<li><p><strong>Target Environment</strong>: What simulation and or render environment will use this profile</p></li>
-<li><p><strong>Required Capabilities</strong>: What features need to be accounted for</p></li>
-<li><p><strong>Feature Dependencies</strong>: Which features are required vs. optional (see the <a class="reference internal" href="../../features/feature-dependency-graph.html"><span class="doc std std-doc">feature dependency graph</span></a> and <a class="reference internal" href="../../profiles/profiles.html"><span class="doc std std-doc">Asset Profiles</span></a> comparison table)</p></li>
-<li><p><strong>Version Compatibility</strong>: What versions of features are needed</p></li>
-</ol>
-</section>
-<section id="step-2-choose-a-profile-name">
-<h3>Step 2: Choose a Profile Name<a class="headerlink" href="#step-2-choose-a-profile-name" title="Link to this heading">#</a></h3>
-<p><strong>Naming Conventions:</strong></p>
-<ul class="simple">
-<li><p>Use descriptive names that indicate the target environment</p></li>
-<li><p>Use hyphens and title case for multi-word names</p></li>
-<li><p>Include the primary use case or environment</p></li>
-<li><p>Examples: <code class="docutils literal notranslate"><span class="pre">Robotics-Prop</span></code>, <code class="docutils literal notranslate"><span class="pre">Robot-Body</span></code>, <code class="docutils literal notranslate"><span class="pre">Vehicle-Simulation</span></code></p></li>
-</ul>
-</section>
-<section id="step-3-create-the-profile-configuration">
-<h3>Step 3: Create the Profile Configuration<a class="headerlink" href="#step-3-create-the-profile-configuration" title="Link to this heading">#</a></h3>
-<p>Create a new profile TOML file in the owning <a class="reference internal" href="../tiers.html"><span class="std std-doc">tier</span></a>’s <code class="docutils literal notranslate"><span class="pre">profiles/</span></code>
-directory. There
-is one file per profile and no consolidated <code class="docutils literal notranslate"><span class="pre">profiles.toml</span></code> — the validator
-loads every <code class="docutils literal notranslate"><span class="pre">*.toml</span></code> in each configured directory. Name the file after the
-profile, lowercased with underscores, so <code class="docutils literal notranslate"><span class="pre">Robotics-Prop</span></code> lives in
-<code class="docutils literal notranslate"><span class="pre">robotics_prop.toml</span></code>. The restored legacy catalogs
-<code class="docutils literal notranslate"><span class="pre">open_taxonomy_profiles.toml</span></code> and <code class="docutils literal notranslate"><span class="pre">package_profiles.toml</span></code> group related
-profiles; they are exceptions and should not be used as the pattern for new
-profile work:</p>
-<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[Your-Profile-Name]</span>
-<span class="s2">"1.0.0"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_001_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Minimal"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_003_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "RBD Physics"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_004_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Simulate Multi-Body Physics"</span>
-<span class="w">    </span><span class="c1"># Add more features as needed</span>
-<span class="p">]}</span>
-</pre></div>
-</div>
-</section>
-<section id="step-4-validate-feature-availability">
-<h3>Step 4: Validate Feature Availability<a class="headerlink" href="#step-4-validate-feature-availability" title="Link to this heading">#</a></h3>
-<p>Ensure all referenced feature IDs and versions exist as JSON files under the
-configured tier <code class="docutils literal notranslate"><span class="pre">features/</span></code> directories. Each feature variant+version has a
-corresponding file (e.g. <code class="docutils literal notranslate"><span class="pre">FET_003_PHYSX-0.1.0.json</span></code>).
-The <code class="docutils literal notranslate"><span class="pre">&quot;id&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;version&quot;</span></code> fields in the JSON must match what the profile
-references.</p>
-</section>
-<section id="step-5-test-profile-creation">
-<h3>Step 5: Test Profile Creation<a class="headerlink" href="#step-5-test-profile-creation" title="Link to this heading">#</a></h3>
-<p>Create a test asset and validate it against the new profile, see “SimReady - Feature Docs”:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>workspace<span class="w"> </span>validate<span class="w"> </span>&lt;path<span class="w"> </span>to<span class="w"> </span>usd<span class="w"> </span>asset&gt;
-</pre></div>
-</div>
-</section>
-<section id="step-6-create-documentation">
-<h3>Step 6: Create documentation<a class="headerlink" href="#step-6-create-documentation" title="Link to this heading">#</a></h3>
-<p>Each profile should have its own markdown file beside its TOML in the owning
-tier and should also be referenced by
-<code class="docutils literal notranslate"><span class="pre">nv_core/sr_specs/docs/shared/profiles/profiles.md</span></code>.</p>
-</section>
-</section>
-<section id="creating-a-new-profile-version">
-<h2>Creating a New Profile Version<a class="headerlink" href="#creating-a-new-profile-version" title="Link to this heading">#</a></h2>
-<section id="when-to-create-a-new-version">
-<h3>When to Create a New Version<a class="headerlink" href="#when-to-create-a-new-version" title="Link to this heading">#</a></h3>
-<p>Create a new profile version when:</p>
-<ul class="simple">
-<li><p><strong>Feature Updates</strong>: Required feature(s) have a new version</p></li>
-<li><p><strong>New Requirements</strong>: Additional features are needed</p></li>
-<li><p><strong>Breaking Changes</strong>: Existing features have incompatible changes</p></li>
-<li><p><strong>Environment Changes</strong>: Target simulation environment requirements change</p></li>
-</ul>
-</section>
-<section id="step-1-plan-the-version-update">
-<h3>Step 1: Plan the Version Update<a class="headerlink" href="#step-1-plan-the-version-update" title="Link to this heading">#</a></h3>
-<p><strong>Version Numbering:</strong></p>
-<ul class="simple">
-<li><p><strong>Major Version</strong> (X.0.0): Breaking changes, new features, incompatible updates</p></li>
-<li><p><strong>Minor Version</strong> (0.X.0): New features, backward compatible</p></li>
-<li><p><strong>Patch Version</strong> (0.0.X): Bug fixes, minor updates</p></li>
-</ul>
-</section>
-<section id="step-2-update-feature-versions">
-<h3>Step 2: Update Feature Versions<a class="headerlink" href="#step-2-update-feature-versions" title="Link to this heading">#</a></h3>
-<p>Identify which features need version updates:</p>
-<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[Your-Profile-Name]</span>
-<span class="s2">"1.0.0"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_001_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Minimal"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_003_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "RBD Physics"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_004_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Simulate Multi-Body Physics"</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_005_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Simulate Grasp Physics"</span>
-<span class="p">]}</span>
-<span class="s2">"2.0.0"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_001_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Minimal" - UPDATED</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_003_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "RBD Physics" - SAME</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_004_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Simulate Multi-Body Physics" - SAME</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_005_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># "Simulate Grasp Physics" - SAME</span>
-<span class="p">]}</span>
-</pre></div>
-</div>
-</section>
-<section id="step-3-add-new-version-to-profile">
-<h3>Step 3: Add New Version to Profile<a class="headerlink" href="#step-3-add-new-version-to-profile" title="Link to this heading">#</a></h3>
-<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[Your-Profile-Name]</span>
-<span class="s2">"1.0.0"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_001_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET002_MATERIAL_BASIC"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span>
-<span class="p">]}</span>
-<span class="s2">"2.0.0"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET_001_STANDARD"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># Updated feature version</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET002_MATERIAL_BASIC"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span>
-<span class="w">    </span><span class="p">{</span><span class="s2">"FET100_ANIMATION_BASIC"</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">}},</span><span class="w"> </span><span class="c1"># New feature added</span>
-<span class="p">]}</span>
-</pre></div>
-</div>
-</section>
-<section id="step-4-document-version-changes">
-<h3>Step 4: Document Version Changes<a class="headerlink" href="#step-4-document-version-changes" title="Link to this heading">#</a></h3>
-<p>Create a changelog entry:</p>
-<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gu">## Profile Version 2.0.0</span>
-
-<span class="gu">### Changes</span>
-<span class="k">-</span><span class="w"> </span>Updated FET_001_STANDARD from version 0.1.0 to 1.0.0
-<span class="k">-</span><span class="w"> </span>Added FET100_ANIMATION_BASIC version 0.1.0
-<span class="k">-</span><span class="w"> </span>Improved asset validation for animation properties
-
-<span class="gu">### Migration Notes</span>
-<span class="k">-</span><span class="w"> </span>Existing assets using version 1.0.0 will need feature adapter transformation
-<span class="k">-</span><span class="w"> </span>New animation features require additional asset properties
-</pre></div>
-</div>
-</section>
-<section id="step-5-upgrade-assets">
-<h3>Step 5: Upgrade assets<a class="headerlink" href="#step-5-upgrade-assets" title="Link to this heading">#</a></h3>
-<p>Its possible to “upgrade” assets that support a particular profile version to a new version, one way to achieve this is run “workspace upgrade” after creating the appropriate feature adapters, see the next section</p>
-</section>
-</section>
-<section id="creating-a-second-profile-and-required-adapters">
-<h2>Creating a Second Profile and Required Adapters<a class="headerlink" href="#creating-a-second-profile-and-required-adapters" title="Link to this heading">#</a></h2>
-<section id="step-1-identify-profile-differences">
-<h3>Step 1: Identify Profile Differences<a class="headerlink" href="#step-1-identify-profile-differences" title="Link to this heading">#</a></h3>
-<p>When creating a second profile, identify the differences from existing profiles:</p>
-<p><strong>Example: a Standard profile versus a PhysX-specific profile</strong></p>
+<section id="selector-behavior">
+<h2>Selector behavior<a class="headerlink" href="#selector-behavior" title="Link to this heading">#</a></h2>
+<p>The example above uses explicit runtime and version segments for compatibility
+with <code class="docutils literal notranslate"><span class="pre">simready-validate</span></code> 2026.10.0rc1. The Foundation reference resolver also
+accepts the shorthand described below. For commands and custom profiles used
+with that validator release, follow the compatibility forms in the next section.</p>
+<p>Feature selectors have one to three dotted segments. A bare name or family
+selects every runtime and version. Two-segment selectors match either a runtime
+or a neutral version; three-segment selectors select runtime and version
+explicitly. For example, <code class="docutils literal notranslate"><span class="pre">FET004.0-*</span></code> selects neutral versions beginning <code class="docutils literal notranslate"><span class="pre">0-</span></code>,
+<code class="docutils literal notranslate"><span class="pre">FET004.PhysX</span></code> selects every PhysX version, and <code class="docutils literal notranslate"><span class="pre">FET004.*</span></code> selects both.
+Version tokens remain opaque, including leading zeroes.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Feature</p></th>
-<th class="head"><p>Neutral Version</p></th>
-<th class="head"><p>Physx Version</p></th>
-<th class="head"><p>Difference</p></th>
+<tr class="row-odd"><th class="head"><p>Selector</p></th>
+<th class="head"><p>Expansion</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>FET_001_STANDARD</p></td>
-<td><p>0.1.0</p></td>
-<td><p>0.1.0</p></td>
-<td><p>Same</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FET004.*</span></code></p></td>
+<td><p>All runtimes and versions in FET family 004.</p></td>
 </tr>
-<tr class="row-odd"><td><p>FET_003_STANDARD</p></td>
-<td><p>0.1.0</p></td>
-<td><p>-</p></td>
-<td><p>Standard physics</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">FET004.PhysX.*</span></code></p></td>
+<td><p>All PhysX versions in FET family 004.</p></td>
 </tr>
-<tr class="row-even"><td><p>FET_003_PHYSX</p></td>
-<td><p>-</p></td>
-<td><p>0.1.0</p></td>
-<td><p>PhysX physics</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FET004_Multibody.PhysX.2-0-4</span></code></p></td>
+<td><p>One exact feature.</p></td>
 </tr>
-<tr class="row-odd"><td><p>FET_004_STANDARD</p></td>
-<td><p>0.1.0</p></td>
-<td><p>-</p></td>
-<td><p>Standard multi-body</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CAP024.*</span></code></p></td>
+<td><p>All runtimes and versions in CAP family 024.</p></td>
 </tr>
-<tr class="row-even"><td><p>FET_004_PHYSX</p></td>
-<td><p>-</p></td>
-<td><p>0.1.0</p></td>
-<td><p>PhysX multi-body</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CAP024_BaseArticulation.PhysX.*</span></code></p></td>
+<td><p>All PhysX versions of that capability.</p></td>
 </tr>
-<tr class="row-odd"><td><p>FET_005_STANDARD</p></td>
-<td><p>0.1.0</p></td>
-<td><p>0.1.0</p></td>
-<td><p>Same</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CAP007_NonVisualMaterials.0-2-0</span></code></p></td>
+<td><p>One exact capability.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-</section>
-<section id="step-2-plan-required-feature-adapters">
-<h3>Step 2: Plan Required Feature Adapters<a class="headerlink" href="#step-2-plan-required-feature-adapters" title="Link to this heading">#</a></h3>
-<p>Based on the differences, identify required adapters:</p>
-<p><strong>Required Adapters:</strong></p>
+<p>Capability selectors work exactly like feature selectors, with a <code class="docutils literal notranslate"><span class="pre">CAP</span></code> prefix
+instead of <code class="docutils literal notranslate"><span class="pre">FET</span></code>: one to three dotted segments, the same runtime-or-neutral-version
+shorthand, and shell-style <code class="docutils literal notranslate"><span class="pre">*</span></code> usable within a segment. A capability ID is
+<code class="docutils literal notranslate"><span class="pre">&lt;name&gt;[.&lt;runtime&gt;].&lt;version&gt;</span></code> like a feature ID, and a runtime-neutral
+capability omits the runtime segment.</p>
+<p>Resolution rules are deterministic:</p>
 <ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">FET_003_STANDARD</span></code> → <code class="docutils literal notranslate"><span class="pre">FET_003_PHYSX</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">FET_004_STANDARD</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">FET_004_PHYSX</span></code></p></li>
+<li><p>Expand against the complete catalog from all installed tiers.</p></li>
+<li><p>Sort matches by exact ID.</p></li>
+<li><p>Deduplicate matches.</p></li>
+<li><p>If required and optional selectors select the same item, it is required.</p></li>
+<li><p>A required selector matching nothing is an error.</p></li>
+<li><p>An optional selector matching nothing is allowed.</p></li>
+<li><p>Capabilities referenced by resolved features are included automatically and
+inherit feature optionality; required wins over any optional path.</p></li>
 </ol>
+<p>Wildcard profiles intentionally follow the installed catalog. Adding a new
+matching feature can therefore change their resolved bundle without editing
+the profile. Use an exact ID when reproducibility is more important than
+automatic adoption, and record the resolved bundle in validation evidence.</p>
 </section>
-<section id="step-4-implement-missing-adapters">
-<h3>Step 4: Implement Missing Adapters<a class="headerlink" href="#step-4-implement-missing-adapters" title="Link to this heading">#</a></h3>
-<p>If adapters don’t exist, please refer to &lt;feature_adapters&gt;</p>
+<section id="validate-rc1-selectors">
+<span id="validate-2026-10-0rc1-compatibility"></span><span id="validate-2026100rc1-compatibility"></span><h2>Validate 2026.10.0rc1 compatibility<a class="headerlink" href="#validate-rc1-selectors" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">simready-validate</span></code> 2026.10.0rc1 requires a version or wildcard segment in each
+selector. Its two-segment form is <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;.&lt;version&gt;</span></code>; the special
+<code class="docutils literal notranslate"><span class="pre">&lt;name&gt;.*</span></code> form selects all runtimes and versions. Use three segments when
+selecting a specific runtime. Use these forms when authoring a custom profile
+for that release:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Intended selection</p></th>
+<th class="head"><p>Compatible selector</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>All runtimes and versions of the Core capability</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CAP000_Core.*.*</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Neutral Core versions beginning with <code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CAP000_Core.0*</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>All PhysX versions of the multibody feature</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FET004.PhysX.*</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>All runtimes and versions of feature family 004</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FET004.*.*</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>All versions and runtimes of non-visual materials</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CAP007_NonVisualMaterials.*.*</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>One neutral Core version</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CAP000_Core.0-2-0</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Bare names such as <code class="docutils literal notranslate"><span class="pre">FET004</span></code>, name-only patterns such as
+<code class="docutils literal notranslate"><span class="pre">CAP007_NonVisualMaterials*</span></code>, and runtime shorthand such as
+<code class="docutils literal notranslate"><span class="pre">CAP000_Core.OpenUSD</span></code> are accepted by the Foundation reference resolver but
+rejected or interpreted differently by Validate rc1. A rejected required
+selector can cause the profile to be skipped and validation to produce no
+result. Inspect profile registration messages before interpreting that outcome
+as an asset failure.</p>
+<p>Choose the runtime scope explicitly when converting shorthand. For example,
+<code class="docutils literal notranslate"><span class="pre">CAP000_Core.0*</span></code> selects neutral versions, while <code class="docutils literal notranslate"><span class="pre">CAP000_Core.*.*</span></code> also selects
+Isaac, MuJoCo, Newton, and PhysX contracts present in the catalog. Prefer exact
+IDs when preserving a fixed set of contracts. Verify the resolved IDs with the
+installed validator; Foundation-only resolution does not prove rc1 acceptance.</p>
 </section>
-<section id="step-5-test-profile-transformation">
-<h3>Step 5: Test Profile Transformation<a class="headerlink" href="#step-5-test-profile-transformation" title="Link to this heading">#</a></h3>
-<p>please refer to “SimReady - Feature Docs” “Feature: Convert” to learn how to convert assets:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>workspace<span class="w"> </span>upgrade<span class="w"> </span>--output_uri<span class="w"> </span><span class="o">[</span>output<span class="w"> </span>asset<span class="w"> </span>file<span class="w"> </span>path<span class="o">]</span>
---output_profile<span class="w"> </span><span class="o">[</span>profile<span class="w"> </span>name<span class="o">]</span><span class="w"> </span>&lt;optional&gt;--output_profile_version<span class="w"> </span><span class="o">[</span>version<span class="w"> </span>number<span class="o">]</span>
+<section id="optional-features-and-capabilities">
+<h2>Optional features and capabilities<a class="headerlink" href="#optional-features-and-capabilities" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">optional</span> <span class="pre">=</span> <span class="pre">true</span></code> makes failures contributed only by that selector non-blocking.
+Validation engines still execute and report those checks as optional evidence.
+When a requirement is also selected through any required feature or capability,
+required wins and its failure is blocking.</p>
+<p>Optionality belongs to the profile selector, not to the feature or capability
+definition.</p>
+</section>
+<section id="validating-against-multiple-profiles">
+<h2>Validating against multiple profiles<a class="headerlink" href="#validating-against-multiple-profiles" title="Link to this heading">#</a></h2>
+<p>Profile selection is caller-supplied. Do not stamp a singular <code class="docutils literal notranslate"><span class="pre">profile</span></code> and
+<code class="docutils literal notranslate"><span class="pre">profile_version</span></code> into asset metadata as the validation authority.</p>
+<p>At the Python layer, resolve all requested targets and run the validator once
+per profile so evidence stays independent:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">simready.foundation.contracts</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProfileTarget</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">simready.foundation.validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">validate_profiles</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">validate_profiles</span><span class="p">(</span>
+    <span class="n">asset_path</span><span class="p">,</span>
+    <span class="n">targets</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">ProfileTarget</span><span class="p">(</span><span class="s2">"Robotics-Prop"</span><span class="p">,</span> <span class="s2">"5.0.0"</span><span class="p">),</span>
+        <span class="n">ProfileTarget</span><span class="p">(</span><span class="s2">"Robot-Body"</span><span class="p">,</span> <span class="s2">"4.0.0"</span><span class="p">),</span>
+    <span class="p">],</span>
+    <span class="n">profiles</span><span class="o">=</span><span class="n">profiles</span><span class="p">,</span>
+    <span class="n">features</span><span class="o">=</span><span class="n">features</span><span class="p">,</span>
+    <span class="n">capabilities</span><span class="o">=</span><span class="n">capabilities</span><span class="p">,</span>
+    <span class="n">validate_one</span><span class="o">=</span><span class="n">validate_one</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
+<p>The helper builds a <code class="docutils literal notranslate"><span class="pre">ValidationPlan</span></code> for every target and accepts an injected
+<code class="docutils literal notranslate"><span class="pre">validate_one</span></code> callback. This lets standalone validation, Kit, and other
+runtimes share identical resolution and optionality behavior.</p>
+<p>Conformance evidence may record several profile results for the same asset.
+Each result must retain its own profile name, profile version, resolved feature
+IDs, resolved capability IDs, and pass/fail outcome.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Robotics-Prop&#64;5.0.0</span></code> and <code class="docutils literal notranslate"><span class="pre">Robot-Body&#64;4.0.0</span></code> can be requested together.
+Newton checks are optional for the prop target and required for the robot
+target, so the same asset can pass one target and fail the other.</p>
+<section id="chain-stamping">
+<h3>Chain stamping<a class="headerlink" href="#chain-stamping" title="Link to this heading">#</a></h3>
+<p>The external validator’s multi-profile API validates each target independently
+and retains profile-keyed results in USD metadata and the JSON report. Initialize
+the validator with the selected tiers, then pass a staged output path when
+writing metadata:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">simready.validate</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProfileTarget</span><span class="p">,</span> <span class="n">validate_asset_against_profiles</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">validate_asset_against_profiles</span><span class="p">(</span>
+    <span class="n">asset_path</span><span class="p">,</span>
+    <span class="n">targets</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">ProfileTarget</span><span class="p">(</span><span class="s2">"Robotics-Prop"</span><span class="p">,</span> <span class="s2">"5.0.0"</span><span class="p">),</span>
+        <span class="n">ProfileTarget</span><span class="p">(</span><span class="s2">"Robot-Body"</span><span class="p">,</span> <span class="s2">"4.0.0"</span><span class="p">),</span>
+    <span class="p">],</span>
+    <span class="n">write_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">report_file_path</span><span class="o">=</span><span class="s2">"validation.json"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Each receipt and report preserves <code class="docutils literal notranslate"><span class="pre">Robotics-Prop&#64;5.0.0</span></code> and <code class="docutils literal notranslate"><span class="pre">Robot-Body&#64;4.0.0</span></code>
+as separate entries under <code class="docutils literal notranslate"><span class="pre">profiles</span></code>, including when a target fails validation.
+The Foundation orchestration helper above resolves targets and calls the
+validator; the external validation library owns receipt persistence.</p>
+<p>This API requires a validator release with multi-profile receipt support. Older
+single-profile validators, including <code class="docutils literal notranslate"><span class="pre">simready-validate</span></code> 2026.8.0, replace the
+profile identity and same-day stamp when another profile is stamped. Preserve
+one report per <code class="docutils literal notranslate"><span class="pre">(asset,</span> <span class="pre">profile,</span> <span class="pre">version)</span></code> with those releases.</p>
 </section>
 </section>
-<section id="best-practices">
-<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h2>
-<section id="profile-design">
-<h3>1. <strong>Profile Design</strong><a class="headerlink" href="#profile-design" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Keep profiles focused</strong> on specific use cases or environments</p></li>
-<li><p><strong>Use descriptive names</strong> that clearly indicate the target environment</p></li>
-<li><p><strong>Minimize feature overlap</strong> between similar profiles</p></li>
-<li><p><strong>Document profile purposes</strong> and use cases</p></li>
-</ul>
-</section>
-<section id="version-management">
-<h3>2. <strong>Version Management</strong><a class="headerlink" href="#version-management" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Never modify existing versions</strong> - always create new versions</p></li>
-<li><p><strong>Use semantic versioning</strong> (major.minor.patch)</p></li>
-<li><p><strong>Document all changes</strong> in version changelogs</p></li>
-<li><p><strong>Maintain backward compatibility</strong> when possible</p></li>
-</ul>
-</section>
-<section id="feature-selection">
-<h3>3. <strong>Feature Selection</strong><a class="headerlink" href="#feature-selection" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Include only necessary features</strong> to avoid bloat</p></li>
-<li><p><strong>Consider feature dependencies</strong> and requirements</p></li>
-<li><p><strong>Test feature combinations</strong> for compatibility</p></li>
-<li><p><strong>Validate against real-world use cases</strong></p></li>
-</ul>
-</section>
-<section id="testing-and-validation">
-<h3>4. <strong>Testing and Validation</strong><a class="headerlink" href="#testing-and-validation" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Create comprehensive test assets</strong> for each profile version</p></li>
-<li><p><strong>Test all transformation paths</strong> between profiles</p></li>
-<li><p><strong>Validate against real simulation environments</strong></p></li>
-<li><p><strong>Automate validation</strong> in CI/CD pipelines</p></li>
-</ul>
-</section>
-</section>
-<section id="getting-help">
-<h2>Getting Help<a class="headerlink" href="#getting-help" title="Link to this heading">#</a></h2>
-<p>If you need assistance creating or managing profiles:</p>
+<section id="creating-or-updating-a-profile">
+<h2>Creating or updating a profile<a class="headerlink" href="#creating-or-updating-a-profile" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p><strong>Review existing profiles</strong> for examples and patterns</p></li>
-<li><p><strong>Check feature documentation</strong> for available features and versions</p></li>
-<li><p><strong>Test with simple profiles</strong> before complex ones</p></li>
-<li><p><strong>Use validation tools</strong> to verify profile correctness</p></li>
-<li><p><strong>Ask the development team</strong> for guidance on complex profile designs</p></li>
+<li><p>Define the asset class and intended consumer/runtime.</p></li>
+<li><p>Choose exact or wildcard feature selectors.</p></li>
+<li><p>Add capability selectors for requirement-only contracts.</p></li>
+<li><p>Mark conditional feature and capability selectors optional in TOML.</p></li>
+<li><p>Resolve selectors against the complete installed tier catalog.</p></li>
+<li><p>Inspect every match, especially broad wildcards.</p></li>
+<li><p>Add a new profile version for any selector or optionality change.</p></li>
+<li><p>Keep the previous version unchanged.</p></li>
+<li><p>Update profile markdown and the shared profile index.</p></li>
+<li><p>Document adapter paths for differences from related profiles.</p></li>
+<li><p>Validate representative assets against this and other compatible profiles.</p></li>
 </ol>
 </section>
-<section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
-<p>This comprehensive guide provides everything needed to understand and manage profiles in the SimReady Foundation system. Profiles are essential for ensuring asset compatibility across different simulation environments, and proper profile management is crucial for maintaining a robust and flexible asset pipeline.</p>
-<p>By following the guidelines in this document, you can create effective profiles that meet your simulation requirements while maintaining compatibility and enabling smooth asset transformations between different environments.</p>
+<section id="adapters">
+<h2>Adapters<a class="headerlink" href="#adapters" title="Link to this heading">#</a></h2>
+<p>Feature adapters connect exact dotted runtime-tested feature IDs. Profile conversion
+planning compares the resolved source and target bundles. Every required target
+feature difference must have a direct adapter path or a documented blocker.</p>
+<p>Capability-only differences may use a profile adapter when mutation is needed;
+static capabilities that merely validate existing data require no adapter.</p>
+</section>
+<section id="validation-checklist">
+<h2>Validation checklist<a class="headerlink" href="#validation-checklist" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>TOML parses.</p></li>
+<li><p>Every required selector matches at least one catalog item.</p></li>
+<li><p>Every match is intentional.</p></li>
+<li><p>Optionality is stored in TOML for both features and capabilities.</p></li>
+<li><p>Capability selectors and definitions use the <code class="docutils literal notranslate"><span class="pre">CAP</span></code> prefix.</p></li>
+<li><p>Every runtime FET has tests/adapters, and every testless FET is the source of
+at least one tested derived FET.</p></li>
+<li><p>Exact selectors reference existing IDs.</p></li>
+<li><p>Profile docs show selectors and the resolved review bundle.</p></li>
+<li><p>Old profile versions are unchanged.</p></li>
+<li><p>Multi-profile validation preserves independent evidence.</p></li>
+<li><p>Adapter gaps are documented.</p></li>
+</ul>
 </section>
 </section>
 
@@ -1198,11 +1184,11 @@ tier and should also be referenced by
       </div>
     </a>
     <a class="right-next"
-       href="../benchmark/benchmark.html"
+       href="../profiles_validation_workflow.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">SimReady Benchmark</p>
+        <p class="prev-next-title">Profiles Validation Workflow</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1215,7 +1201,7 @@ tier and should also be referenced by
 
 
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <dialog id="pst-secondary-sidebar-modal" tabindex="-1"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
@@ -1227,52 +1213,18 @@ tier and should also be referenced by
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-this-guide">About this guide</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-profile">What is a Profile?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-components">Key Components</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#profile-structure">Profile Structure</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-profiles-work">How Profiles Work</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#foundations-2-model">Foundations 2 model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profile-toml">Profile TOML</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selector-behavior">Selector behavior</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-rc1-selectors">Validate 2026.10.0rc1 compatibility</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-features-and-capabilities">Optional features and capabilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validating-against-multiple-profiles">Validating against multiple profiles</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chain-stamping">Chain stamping</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profile-examples">Profile Examples</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-robotics-prop-profile">Example 1: Robotics-Prop Profile</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-robot-body-profile">Example 2: Robot-Body Profile</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-new-profile">Creating a New Profile</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-define-profile-requirements">Step 1: Define Profile Requirements</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-choose-a-profile-name">Step 2: Choose a Profile Name</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-create-the-profile-configuration">Step 3: Create the Profile Configuration</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-validate-feature-availability">Step 4: Validate Feature Availability</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-test-profile-creation">Step 5: Test Profile Creation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-create-documentation">Step 6: Create documentation</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-new-profile-version">Creating a New Profile Version</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-create-a-new-version">When to Create a New Version</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-plan-the-version-update">Step 1: Plan the Version Update</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-update-feature-versions">Step 2: Update Feature Versions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-add-new-version-to-profile">Step 3: Add New Version to Profile</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-document-version-changes">Step 4: Document Version Changes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-upgrade-assets">Step 5: Upgrade assets</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-second-profile-and-required-adapters">Creating a Second Profile and Required Adapters</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-identify-profile-differences">Step 1: Identify Profile Differences</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-plan-required-feature-adapters">Step 2: Plan Required Feature Adapters</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-implement-missing-adapters">Step 4: Implement Missing Adapters</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-test-profile-transformation">Step 5: Test Profile Transformation</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#profile-design">1. <strong>Profile Design</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#version-management">2. <strong>Version Management</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-selection">3. <strong>Feature Selection</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-and-validation">4. <strong>Testing and Validation</strong></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-help">Getting Help</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-or-updating-a-profile">Creating or updating a profile</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adapters">Adapters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-checklist">Validation checklist</a></li>
 </ul>
   </nav></div>
 
@@ -1291,8 +1243,8 @@ tier and should also be referenced by
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8"></script>
 
 
   <footer class="bd-footer">

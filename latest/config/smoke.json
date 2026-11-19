@@ -1,0 +1,29 @@
+{
+    "capability": {
+        "id": "smoke",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "TMP.001",
+                "version": null,
+                "name": "default-prim",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/template/smoke/requirements/default-prim.html",
+                    "internal_path": "rules_and_reqs/template/smoke/requirements/default-prim.md"
+                },
+                "message": "The stage must declare a valid `defaultPrim` so consumers can resolve the asset\nroot.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "rules_and_reqs/template/smoke/capability-smoke.html",
+            "internal_path": "rules_and_reqs/template/smoke/capability-smoke.md"
+        }
+    }
+}

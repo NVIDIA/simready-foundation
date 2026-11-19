@@ -14,8 +14,8 @@
                 "validator": "NewtonMaterialAttributesChecker",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/physics_bodies/physics_materials/requirements/newton-material-attributes.html",
-                    "internal_path": "capabilities/physics_bodies/physics_materials/requirements/newton-material-attributes.md"
+                    "path": "rules_and_reqs/physics_bodies/physics_materials/requirements/newton-material-attributes.html",
+                    "internal_path": "rules_and_reqs/physics_bodies/physics_materials/requirements/newton-material-attributes.md"
                 },
                 "message": "`NewtonMaterialAPI` must be applied on a physics `Material` \u2014 a `UsdShade.Material` that also carries `PhysicsMaterialAPI`.",
                 "examples": []
@@ -31,16 +31,16 @@
                 "validator": null,
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/physics_bodies/physics_materials/requirements/collider-material-binding.html",
-                    "internal_path": "capabilities/physics_bodies/physics_materials/requirements/collider-material-binding.md"
+                    "path": "rules_and_reqs/physics_bodies/physics_materials/requirements/collider-material-binding.html",
+                    "internal_path": "rules_and_reqs/physics_bodies/physics_materials/requirements/collider-material-binding.md"
                 },
                 "message": "Every collider (prim with PhysicsCollisionAPI) must have a material:binding:physics relationship to a physics material.",
                 "examples": []
             }
         ],
         "metadata": {
-            "path": "capabilities/physics_bodies/physics_materials/capability-physics_materials.html",
-            "internal_path": "capabilities/physics_bodies/physics_materials/capability-physics_materials.md"
+            "path": "rules_and_reqs/physics_bodies/physics_materials/capability-physics_materials.html",
+            "internal_path": "rules_and_reqs/physics_bodies/physics_materials/capability-physics_materials.md"
         }
     }
 }

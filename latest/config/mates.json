@@ -1,0 +1,131 @@
+{
+    "capability": {
+        "id": "mates",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "MC.004",
+                "version": null,
+                "name": "mechanical-interface",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "MechanicalSitePropertiesChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/assembly/mates/requirements/mechanical-interface.html",
+                    "internal_path": "rules_and_reqs/assembly/mates/requirements/mechanical-interface.md"
+                },
+                "message": "Every mechanical mate site must author a non-empty `simready:mate:mechanical:interface` token.",
+                "examples": []
+            },
+            {
+                "code": "MC.001",
+                "version": null,
+                "name": "mate-site-xform",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "MateSiteDeclarationChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/assembly/mates/requirements/mate-site-xform.html",
+                    "internal_path": "rules_and_reqs/assembly/mates/requirements/mate-site-xform.md"
+                },
+                "message": "A mate site is an `Xform` with authored `simready:mate:domain` and `simready:mate:role`. Those attributes are the discovery mechanism; prim names are unconstrained.",
+                "examples": []
+            },
+            {
+                "code": "MC.002",
+                "version": null,
+                "name": "mechanical-role",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "MateSiteDeclarationChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/assembly/mates/requirements/mechanical-role.html",
+                    "internal_path": "rules_and_reqs/assembly/mates/requirements/mechanical-role.md"
+                },
+                "message": "A mechanical mate site must author `simready:mate:domain = \"mechanical\"` and `simready:mate:role` of `Socket` or `Plug`. `Peer` is not part of this feature.",
+                "examples": []
+            },
+            {
+                "code": "MC.006",
+                "version": null,
+                "name": "socket-max-payload",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "MechanicalSitePropertiesChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/assembly/mates/requirements/socket-max-payload.html",
+                    "internal_path": "rules_and_reqs/assembly/mates/requirements/socket-max-payload.md"
+                },
+                "message": "A mechanical Socket mate site must author `simready:mate:mechanical:maxPayload` as a positive float. The value is always kilograms, regardless of stage units.",
+                "examples": []
+            },
+            {
+                "code": "MC.003",
+                "version": null,
+                "name": "mate-body-rigid-ancestor",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "MateBodyChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/assembly/mates/requirements/mate-body-rigid-ancestor.html",
+                    "internal_path": "rules_and_reqs/assembly/mates/requirements/mate-body-rigid-ancestor.md"
+                },
+                "message": "Every mechanical mate site must have an ancestor with an enabled `PhysicsRigidBodyAPI`. That ancestor is the site's **mate body** \u2014 the rigid body a jointed connection attaches to, and the actor a compound connection shares.",
+                "examples": []
+            },
+            {
+                "code": "MC.007",
+                "version": null,
+                "name": "mechanical-kind",
+                "compatibility": "open-usd",
+                "tags": [
+                    "unknown"
+                ],
+                "validator": "MechanicalSitePropertiesChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/assembly/mates/requirements/mechanical-kind.html",
+                    "internal_path": "rules_and_reqs/assembly/mates/requirements/mechanical-kind.md"
+                },
+                "message": "If `simready:mate:mechanical:kind` is authored, its value should be one of `Tool`, `Gripper`, `Sensor`, `ToolChanger`, `ManipulatorFlange`. Unrecognized tokens warn; they do not fail.",
+                "examples": []
+            },
+            {
+                "code": "MC.005",
+                "version": null,
+                "name": "mate-insertion-vector",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "MateInsertionVectorChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/assembly/mates/requirements/mate-insertion-vector.html",
+                    "internal_path": "rules_and_reqs/assembly/mates/requirements/mate-insertion-vector.md"
+                },
+                "message": "If a mate site has a child `mate_insertion_vector`, it must be a `BasisCurves` prim with `type = \"linear\"`, `curveVertexCounts = [2]`, and a non-zero direction `p1 - p0`.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "rules_and_reqs/assembly/mates/capability-mates.html",
+            "internal_path": "rules_and_reqs/assembly/mates/capability-mates.md"
+        }
+    }
+}

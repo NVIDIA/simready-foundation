@@ -1,0 +1,152 @@
+# Feature: `FET006_Materials.Openpbr`
+
+| **Property**            | **Value**         |
+|-------------------------|-------------------|
+| Contract                | `FET006_Materials.Openpbr` |
+| Runtime                 | `Openpbr` |
+| Proprietary Techs       | `None` |
+| Versions                | `0-1-0`, `0-2-0` |
+
+## Description
+
+Defines the OpenPBR material contract. The final surface is authored as an OpenPBR shading network
+on `outputs:mtlx:surface`, so the asset renders in RTX and perception runtimes without a
+vendor-specific material. `VM.PBR.001` accepts only an OpenPBR surface on
+`outputs:mtlx:surface`. A material whose only final surface is MDL satisfies
+`FET006_Materials.MDL` instead; a profile that accepts either selects both. The
+UsdPreviewSurface preview is a separate feature (`FET006_Materials`); profiles that
+require both list both.
+
+Whether renderable geometry resolves a material (`VM.MAT.001`) is
+[`FET009_MaterialCoverage`](FET009_MaterialCoverage.md)'s
+requirement from version `0-2-0` of this feature. An asset with geometry selects both; a
+material published on its own selects this feature without it.
+
+## Dependency Graph
+
+This feature has no dependencies and no other features depend on it directly. Each version
+names a `FET006_Materials` version as its `source_feature`: `0-1-0` names
+`FET006_Materials.0-1-0`, and `0-2-0` names `FET006_Materials.0-3-0`. The
+link classifies this feature as a runtime variant of that source; it does not make the source
+feature validate.
+
+## Use Cases
+
+Products or workflows that consume this feature:
+
+- SimReady validation verifies OpenPBR surface output, parameter ranges, MaterialX graph structure,
+  shader input types, material binding, texture colour space, and texture size requirements.
+- `simready-foundation-conform-fet-006-openpbr` authors an OpenPBR surface from a material's
+  UsdPreviewSurface or MDL surface and leaves the existing surfaces in place.
+
+## Requirements
+
+### Version 0-1-0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+- [Robot-Body](../profiles/robot-body.md): optional in `3.0.0`, `3.1.0`
+- [Robot-Gripper](../profiles/robot-gripper.md): optional in `3.0.0`
+- [Robotics-Prop](../profiles/robotics-prop.md): optional in `4.0.0`, `5.0.0`
+
+#### Feature Dependencies
+
+None.
+
+#### Requirement List
+
+* Capability: [Visualization/Materials](../rules_and_reqs/visualization/materials/capability-materials.md)
+
+| Requirement | Requirement Doc | Rule |
+|-------------|-----------------|------|
+| `com.nvidia.usd.VM.BIND.001` | [VM.BIND.001](../rules_and_reqs/visualization/materials/requirements/material-bind-scope.md) | `MaterialOutOfScopeChecker` |
+| `VM.BIND.002` | [VM.BIND.002](../rules_and_reqs/visualization/materials/requirements/material-shader-inputs.md) | `VisualMaterialsCapabilityChecker` |
+| `VM.MAT.001` | [VM.MAT.001](../rules_and_reqs/visualization/materials/requirements/material-assignment.md) | `VisualMaterialsCapabilityChecker` |
+| `VM.PBR.001` | [VM.PBR.001](../rules_and_reqs/visualization/materials/requirements/material-final-surface.md) | `VisualMaterialsCapabilityChecker` |
+| `VM.PBR.002` | [VM.PBR.002](../rules_and_reqs/visualization/materials/requirements/material-pbr-parameter-ranges.md) | `VisualMaterialsCapabilityChecker` |
+| `VM.PBR.003` | [VM.PBR.003](../rules_and_reqs/visualization/materials/requirements/material-shading-network-structure.md) | `VisualMaterialsCapabilityChecker` |
+| `VM.TEX.001` | [VM.TEX.001](../rules_and_reqs/visualization/materials/requirements/material-texture-maxsize.md) | `VisualMaterialsCapabilityChecker` |
+| `VM.TEX.004` | [VM.TEX.004](../rules_and_reqs/visualization/materials/requirements/material-texture-colorspace-openpbr.md) | `VisualMaterialsCapabilityChecker` |
+
+</details>
+
+### Version 0-2-0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+- [Material](../profiles/material.md): optional in `1.0.0`
+- [Robot-Body](../profiles/robot-body.md): optional in `4.0.0`
+- [Robot-Gripper](../profiles/robot-gripper.md): optional in `4.0.0`
+- [Robotics-Prop](../profiles/robotics-prop.md): optional in `5.0.0`
+
+#### Feature Dependencies
+
+None.
+
+#### Changes From Version 0-1-0
+
+`VM.MAT.001` moves to [`FET009_MaterialCoverage`](FET009_MaterialCoverage.md).
+The other requirements are those of `0-1-0`.
+On an asset with geometry, the runtime tests measure rendered coverage, and a coverage failure
+is a `VM.MAT.001` repair through `FET009_MaterialCoverage`. A material published on its
+own has no geometry to cover, so the tests render each of its materials on a test sphere.
+
+#### Requirement List
+
+* Capability: [Visualization/Materials](../rules_and_reqs/visualization/materials/capability-materials.md)
+
+| Requirement | Requirement Doc | Rule |
+|-------------|-----------------|------|
+| `com.nvidia.usd.VM.BIND.001` | [VM.BIND.001](../rules_and_reqs/visualization/materials/requirements/material-bind-scope.md) | `MaterialOutOfScopeChecker` |
+| `VM.BIND.002` | [VM.BIND.002](../rules_and_reqs/visualization/materials/requirements/material-shader-inputs.md) | `VisualMaterialsCapabilityChecker` |
+| `VM.PBR.001` | [VM.PBR.001](../rules_and_reqs/visualization/materials/requirements/material-final-surface.md) | `VisualMaterialsCapabilityChecker` |
+| `VM.PBR.002` | [VM.PBR.002](../rules_and_reqs/visualization/materials/requirements/material-pbr-parameter-ranges.md) | `VisualMaterialsCapabilityChecker` |
+| `VM.PBR.003` | [VM.PBR.003](../rules_and_reqs/visualization/materials/requirements/material-shading-network-structure.md) | `VisualMaterialsCapabilityChecker` |
+| `VM.TEX.001` | [VM.TEX.001](../rules_and_reqs/visualization/materials/requirements/material-texture-maxsize.md) | `VisualMaterialsCapabilityChecker` |
+| `VM.TEX.004` | [VM.TEX.004](../rules_and_reqs/visualization/materials/requirements/material-texture-colorspace-openpbr.md) | `VisualMaterialsCapabilityChecker` |
+
+</details>
+
+## Pipelines
+
+Source file type:
+
+- `.usd`, `.usda`, `.usdc`, package source folder, or package root as applicable.
+
+Validation or runtime pipeline:
+
+- SimReady validation verifies OpenPBR surface output, parameter ranges, MaterialX graph structure,
+  material binding, texture colour space, and texture size requirements.
+- `simready-foundation-conform-fet-006-openpbr` authors an OpenPBR surface from a material's
+  UsdPreviewSurface or MDL surface and leaves the existing surfaces in place.
+
+## Samples
+
+- [`obs_joystick_a01`](../../../../../sample_content/common_assets/props_general/obs_joystick_a01/simready_usd/sm_obs_joystick_a01_01.usd)
+- [`gen_cleaning_dishwand_v01_01`](../../../../../sample_content/common_assets/props_general/gen_cleaning_dishwand_v01_01/simready_usd/sm_gen_cleaning_dishwand_v01_01.usd)
+
+## Evaluates
+
+- Suite: [FET006 Materials](../guides/evaluate/tests/fet006-materials.md)
+  - Tests:
+    - [openpbr_renders](../guides/evaluate/tests/fet006/openpbr-renders.md)
+
+## Adapters
+
+| From Feature | To Feature | Adapter | Status | Notes |
+|--------------|------------|---------|--------|-------|
+| `FET006_Materials.0-1-0` | `FET006_Materials.Openpbr.0-1-0` | `nv_core/cip_specs/asset_handler_modules/neutral_to_openpbr` | Done | Authors an OpenPBR surface on `outputs:mtlx:surface`, reading the material's UsdPreviewSurface preview for base colour, roughness, metalness and normal. Reconnects texture-driven channels as `tiledimage` readers instead of flattening them to constants. |
+| `FET006_Materials.MDL.0-1-0` | `FET006_Materials.Openpbr.0-1-0` | `nv_core/cip_specs/asset_handler_modules/neutral_to_openpbr` | Done | Same adapter and the same output. Where a material has an OmniPBR or OmniGlass MDL shader, that source takes precedence over the preview surface, since it holds the higher-fidelity values. |
+| `FET006_Materials.0-3-0` | `FET006_Materials.Openpbr.0-2-0` | `nv_core/cip_specs/asset_handler_modules/neutral_to_openpbr` | Done | Same adapter and the same output. |
+| `FET006_Materials.MDL.0-3-0` | `FET006_Materials.Openpbr.0-2-0` | `nv_core/cip_specs/asset_handler_modules/neutral_to_openpbr` | Done | Same adapter and the same output. |
+
+All four entry points share one implementation, which reads whichever source surface a
+material provides. They are declared separately so the registry can resolve a path from each
+starting feature. The adapter runs in Kit; `simready-foundation-conform-fet-006-openpbr` runs
+the same migration without it.

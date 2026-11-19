@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_039_STANDARD`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP039_ObjectAffordances.html" />
+<link rel="canonical" href="../capabilities/CAP039_ObjectAffordances.html" />
+```
+
+This published feature route moved to [`CAP039_ObjectAffordances`](../capabilities/CAP039_ObjectAffordances.md) (Foundations 1 ID: `FET_039_STANDARD`).

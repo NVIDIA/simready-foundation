@@ -11,13 +11,6 @@
 
 def Xform "World"
 {
-    def PhysicsScene "PhysicsScene" (
-        prepend apiSchemas = ["PhysxSceneAPI"]
-    )
-    {
-        uint physxScene:timeStepsPerSecond = 24
-    }
-
     def Cube "Cube"
     {
         float3[] extent = [(-0.125, -0.125, -0.125), (0.125, 0.125, 0.125)]

@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_001-minimal`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=FET001_MinimalPlaceableVisual.html" />
+<link rel="canonical" href="FET001_MinimalPlaceableVisual.html" />
+```
+
+This published feature route moved to [`FET001_MinimalPlaceableVisual`](FET001_MinimalPlaceableVisual.md) (Foundations 1 ID: `FET_001_STANDARD`).

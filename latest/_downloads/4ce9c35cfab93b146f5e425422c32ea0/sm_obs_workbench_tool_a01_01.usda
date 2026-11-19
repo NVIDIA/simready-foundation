@@ -36,6 +36,298 @@
             dictionary validation = {
                 string profile = "Robotics-Prop"
                 string profile_version = "3.2.0"
+                dictionary profiles = {
+                    dictionary "Robotics-Prop@3.2.0" = {
+                        string profile = "Robotics-Prop"
+                        string profile_version = "3.2.0"
+                        dictionary validated_features = {
+                            dictionary "2026-11-03" = {
+                                dictionary "CAP000_Core.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP000_Core.MuJoCo.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP000_Core.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP000_Core.Newton.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP000_Core.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP000_Core.PhysX.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP000_Core.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP003_RigidBody.MuJoCo.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP004_Multibody.MuJoCo.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP003_RigidBody.MuJoCo.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP007_NonVisualMaterials.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-2-0"
+                                }
+                                dictionary "CAP031_SelfContainedPackage.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP033_SimReadyPackage.0-3-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP031_SelfContainedPackage.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-3-0"
+                                }
+                                dictionary "CAP046_WikidataLabels.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP100_IsaacComposition.Isaac.0-4-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-4-0"
+                                }
+                                dictionary "FET001_MinimalPlaceableVisual.1-0-1" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "1-0-1"
+                                }
+                                dictionary "FET003_RigidBody.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-2-0"
+                                }
+                                dictionary "FET003_RigidBody.Newton.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET003_RigidBody.PhysX.0-4-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-4-0"
+                                }
+                                dictionary "FET004_Multibody.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET003_RigidBody.0-2-0']"
+                                    bool passed = 1
+                                    string version = "0-2-0"
+                                }
+                                dictionary "FET004_Multibody.Newton.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET003_RigidBody.Newton.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET004_Multibody.PhysX.0-4-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET003_RigidBody.PhysX.0-4-0']"
+                                    bool passed = 1
+                                    string version = "0-4-0"
+                                }
+                                dictionary "FET005_Grasp.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    string "optional requirements" = "['com.nvidia.simready.GSP.001']"
+                                    bool passed = 0
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET006_Materials.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET006_Materials.MDL.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET011_SemanticLabels.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-2-0"
+                                }
+                                dictionary "FET011_SemanticLabels.RTX.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET011_SemanticLabels.0-2-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                            }
+                        }
+                    }
+                }
+                dictionary validated_features = {
+                    dictionary "2026-11-03" = {
+                        dictionary "CAP000_Core.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "CAP000_Core.MuJoCo.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['CAP000_Core.0-1-0']"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "CAP000_Core.Newton.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['CAP000_Core.0-1-0']"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "CAP000_Core.PhysX.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['CAP000_Core.0-1-0']"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "CAP003_RigidBody.MuJoCo.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "CAP004_Multibody.MuJoCo.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['CAP003_RigidBody.MuJoCo.0-1-0']"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "CAP007_NonVisualMaterials.0-2-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0-2-0"
+                        }
+                        dictionary "CAP031_SelfContainedPackage.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "CAP033_SimReadyPackage.0-3-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['CAP031_SelfContainedPackage.0-1-0']"
+                            bool passed = 1
+                            string version = "0-3-0"
+                        }
+                        dictionary "CAP046_WikidataLabels.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "CAP100_IsaacComposition.Isaac.0-4-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0-4-0"
+                        }
+                        dictionary "FET001_MinimalPlaceableVisual.1-0-1" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "1-0-1"
+                        }
+                        dictionary "FET003_RigidBody.0-2-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0-2-0"
+                        }
+                        dictionary "FET003_RigidBody.Newton.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "FET003_RigidBody.PhysX.0-4-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0-4-0"
+                        }
+                        dictionary "FET004_Multibody.0-2-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['FET003_RigidBody.0-2-0']"
+                            bool passed = 1
+                            string version = "0-2-0"
+                        }
+                        dictionary "FET004_Multibody.Newton.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['FET003_RigidBody.Newton.0-1-0']"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "FET004_Multibody.PhysX.0-4-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['FET003_RigidBody.PhysX.0-4-0']"
+                            bool passed = 1
+                            string version = "0-4-0"
+                        }
+                        dictionary "FET005_Grasp.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            string "optional requirements" = "['com.nvidia.simready.GSP.001']"
+                            bool passed = 0
+                            string version = "0-1-0"
+                        }
+                        dictionary "FET006_Materials.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "FET006_Materials.MDL.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "FET011_SemanticLabels.0-2-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0-2-0"
+                        }
+                        dictionary "FET011_SemanticLabels.RTX.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['FET011_SemanticLabels.0-2-0']"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                    }
+                }
             }
         }
         string asset_name = "obs_workbench_tool_a01"

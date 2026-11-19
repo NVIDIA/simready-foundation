@@ -1,0 +1,59 @@
+# Newton Tier
+
+The `simready-foundation-tier-newton` package contains the Newton-solver physics
+requirements, their validators, and the Newton runtime features.
+
+## Independence
+
+This tier is **independent of the Core tier at the package level**: it declares
+no dependency on `simready-foundation-tier-core` and imports no Core Python code
+(the few shared validator helpers are duplicated locally). Its features reference
+Core requirement and capability IDs (`RB.*`, `JT.*`, `RV.*`,
+`CAP000_Core`, `CAP024_BaseArticulation`) purely as **runtime
+content**, resolved from the merged
+registry when both tiers are installed. Core installs Newton automatically.
+For full validation of a robot/prop profile's Newton gates, install Core:
+
+```bash
+pip install simready-validate simready-foundation-tier-core
+```
+
+## Requirements
+
+The Newton tier contributes Newton-solver requirements to the shared
+physics-bodies capabilities; the base requirements in those capabilities remain
+Core-owned.
+
+| Code | Capability | Validator |
+| --- | --- | --- |
+| `NEWTON.BA.001` | base_articulation | `NewtonArticulationRootConfig` |
+| `NEWTON.DJ.001` | physics_driven_joints | `NewtonJointDriveAPIChecker` |
+| `NEWTON.DJ.002` | physics_driven_joints | `NewtonJointAttributesChecker` |
+| `NEWTON.DJ.003` | physics_driven_joints | `NewtonMimicAPIChecker` |
+| `NEWTON.MAT.001` | physics_materials | `NewtonMaterialAttributesChecker` |
+| `NEWTON.COL.001` | physics_rigid_bodies | `NewtonColliderAPIChecker` |
+| `NEWTON.COL.002` | physics_rigid_bodies | `NewtonSDFAttributesChecker` |
+| `NEWTON.MAS.001` | physics_rigid_bodies | `NewtonMassAttributesChecker` |
+
+The Newton runtime-variant scaffolding requirements (`RV.004`-`RV.006`) and the
+cross-runtime purity/isolation requirements (`RV.010`-`RV.011`) remain owned by
+the Core `runtime_variants` capability.
+
+## Features
+
+| Feature | Purpose | Available versions |
+| --- | --- | --- |
+| [`FET003_RigidBody.Newton`](../features/FET003_RigidBody.Newton.md) | Rigid Body Physics (Newton) | `0-1-0` |
+| [`FET004_Multibody.Newton`](../features/FET004_Multibody.Newton.md) | Simulate Multi-Body Physics (Newton) | `0-1-0` |
+| [`FET004_Multibody.RobotNewton`](../features/FET004_Multibody.RobotNewton.md) | Simulate Multi-Body Physics (Robot Newton) | `0-1-0` |
+| [`FET022_DrivenJoints.Newton`](../features/FET022_DrivenJoints.Newton.md) | Driven Joints (Newton) | `0-1-0` |
+
+## Capabilities
+
+| Capability | Purpose | Available versions |
+| --- | --- | --- |
+| [`CAP000_Core.Newton`](../capabilities/CAP000_Core.Newton.md) | Core (Newton runtime variant) | `0-1-0`, `0-2-0` |
+| [`CAP024_BaseArticulation.Newton`](../capabilities/CAP024_BaseArticulation.Newton.md) | Base Articulation (Newton) | `0-1-0` |
+
+The Core-tier robot and prop profiles (`Robot-Body`, `Robot-Gripper`,
+`Robotics-Prop`) select these contracts as optional runtime gates.

@@ -86,13 +86,13 @@ of install order.
 
 Runtime tests ship inside the tier package rather than as a separate
 distribution, so a tier's behavioral proof cannot drift from the specification
-it proves. The tests travel with the tier; the Benchmark and engine
+it proves. The tests travel with the tier; the Evaluate and engine
 dependencies needed to *run* them are an optional install, which keeps a
 validation-only setup lightweight. See
-[SimReady Benchmark](benchmark/benchmark.md).
+[SimReady Evaluate](evaluate/evaluate.md).
 
 When you browse this documentation, tier-owned pages appear in the
-[Capabilities](../capabilities/capabilities.md),
+[Capabilities](../rules_and_reqs/rules_and_reqs.md),
 [Features](../features/features.md), and
 [Profiles](../profiles/profiles.md) sections. The documentation is assembled
 from every tier, so those sections present the combined specification rather
@@ -100,20 +100,20 @@ than one tier at a time.
 
 ## Tiers available today
 
-SimReady Foundation currently ships three tiers.
+The [tier catalog](../tiers/tiers.md) lists the available Foundation tiers.
 
 | Tier | Package | Contents |
 |---|---|---|
 | Core | `simready-foundation-tier-core` | The Core, Hierarchy, Visualization, Physics Bodies, Isaac Sim, Non-Visual Sensors, Semantic Labels, Dataset Taxonomies, and Packaging capabilities; the neutral, PhysX, and Isaac prop profiles; the robot and gripper profiles; the package profiles; the Open Taxonomy profiles; and the Foundation runtime tests. |
 | AIF | `simready-foundation-tier-aif` | The AI Factory equipment capabilities (class metadata, connection points, thermal cooling, electrical) and the `AIF-Entity` profile for CDU, CRAH, UPS and compute-rack assets. An incubation tier owned by the AI Factory programme; depends on Core. |
-| Sensors | `simready-foundation-tier-sensors` | The Physics Sensors, RTX Sensors / LiDAR, and Camera and Render Products capabilities; the `Sensor-IMU`, `Sensor-Joint`, `Sensor-Camera`, and `Sensor-LiDAR` profiles; and their Foundation runtime tests. Sensor profiles apply alongside an asset's primary profile. |
+| Sensors | `simready-foundation-tier-sensors` | IMU, joint sensor, RTX LiDAR, and render-product contracts; the `Sensor-IMU`, `Sensor-Joint`, `Sensor-Camera`, and `Sensor-LiDAR` profiles and their runtime tests. Sensor profiles apply alongside the asset's primary profile. |
 
 ```{note}
 Additional tiers are in development, including tiers contributed by teams
 outside the Foundation. Installing `simready-foundation-tier-core` gives you
-the shared specification; install `simready-foundation-tier-aif` for the AI
-Factory equipment contracts, and `simready-foundation-tier-sensors` for
-physics sensor, LiDAR, and render-product contracts.
+the shared specification; install `simready-foundation-tier-aif` for AI
+Factory equipment and `simready-foundation-tier-sensors` for physics-sensor,
+LiDAR, and render-product contracts.
 ```
 
 Because tiers are ordinary Python packages, you can also create your own to
@@ -128,7 +128,7 @@ core tier is the baseline; install additional tiers when you need the content
 they own. Installing more tiers adds requirements, features, and profiles — it
 does not change the ones you already had. A plain install gives you everything
 you need to validate; if you also want to run a tier's runtime tests, install
-it with its `benchmark` extra, as shown in
+it with its `evaluate` extra, as shown in
 [SimReady Foundation PyPI Packages](foundation_pypi.md#installation).
 
 **Choosing a profile.** Pick a profile by the runtime and asset class you are
@@ -164,11 +164,12 @@ guide only describes the first.
 | **Compatibility tier** | Which runtime or shading system a feature variant targets. A property of a feature variant, not a package. |
 | **Maturity level** | How far a capability or feature has progressed through the acceptance lifecycle. |
 
-A compatibility tier appears as the suffix on a feature ID and as the
-**Runtime** column in the [feature list](../features/features.md). `STANDARD`
-marks a runtime-neutral feature; `PHYSX`, `NEWTON`, `MUJOCO`, `ISAAC`, `MDL`,
-and `ROS` mark variants for a specific runtime or shading system. For details,
-see [Runtime Variant Field](features/features.md#runtime-variant-field-runtime)
+A compatibility tier appears as the runtime segment of a dotted feature ID
+(`FET003_RigidBody.PhysX.0-4-0`) and as the **Runtime** column in the
+[feature list](../features/features.md). `OpenUSD` marks a runtime-neutral
+feature; `PhysX`, `Newton`, `MuJoCo`, `Isaac`, `MDL`, and `Ros` mark variants
+for a specific runtime or shading system. For details,
+see [Foundations 2 model](features/features.md#foundations-2-model)
 and [Multiple Physics Solvers](multiphysics_solvers.md). For maturity, see the
 [SimReady Acceptance Workflow](acceptance_workflow.md).
 

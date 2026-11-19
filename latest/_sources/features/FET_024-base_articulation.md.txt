@@ -1,0 +1,19 @@
+---
+orphan: true
+---
+
+# `FET_024-base_articulation`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP024_BaseArticulation.html" />
+<link rel="canonical" href="../capabilities/CAP024_BaseArticulation.html" />
+```
+
+This published feature route moved to [`CAP024_BaseArticulation`](../capabilities/CAP024_BaseArticulation.md) (Foundations 1 ID: `FET_024_STANDARD`).
+
+Split runtime contracts:
+
+- [`CAP024_BaseArticulation`](../capabilities/CAP024_BaseArticulation.md) (`FET_024_STANDARD`)
+- [`CAP024_BaseArticulation.PhysX`](../capabilities/CAP024_BaseArticulation.PhysX.md) (`FET_024_PHYSX`)
+- [`CAP024_BaseArticulation.Newton`](../capabilities/CAP024_BaseArticulation.Newton.md) (`FET_024_NEWTON`)
+- [`CAP024_BaseArticulation.MuJoCo`](../capabilities/CAP024_BaseArticulation.MuJoCo.md) (`FET_024_MUJOCO`)

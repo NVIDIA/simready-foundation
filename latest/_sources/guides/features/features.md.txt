@@ -1,672 +1,252 @@
 # Features Documentation Guide
 
-## About this guide
+## Foundations 2 model
 
-This guide will walk you through the process of understanding, creating, and managing features in the SimReady Foundation validation system. Features are collections of related requirements that define specific capabilities for USD assets.
+Foundations 2 separates static and runtime contracts:
 
-## What is a Feature?
+- A **capability** is a reusable static requirement bundle outside a runtime
+  feature family. Its canonical ID begins with `CAP`, for example
+  `CAP007_NonVisualMaterials.0-2-0`.
+- A **feature** belongs to a runtime behavior family. Runtime-tested variants
+  include tests, additional runtime requirements, and adapters. A testless
+  source remains a FET when tested derived features name it.
 
-A **Feature** is a collection of related requirements that work together to provide a specific capability or functionality. Features are the building blocks of the SimReady validation system and are used to:
+A contract without runtime tests is a feature only when it is the source of
+tested derived FETs. Move any orphan static contract to a `CAP` definition and
+update profiles to select that capability.
 
-- Define what capabilities an asset must have
-- Group related requirements logically
-- Enable versioning and dependency management
-- Support profile-based validation
+Feature identity is one opaque dotted ID:
 
-### Feature Structure
+```text
+<name>[.<runtime>].<version>
+```
 
-Each feature consists of:
+For example:
 
-- **Feature Name**: Unique feature name (e.g., `FET_001_STANDARD`)
-- **Version**: Semantic version string (e.g., `0.1.0`)
-- **Display Name**: Human-readable name (e.g., "Minimal Editor")
-- **Path**: File path for documentation
-- **Runtime** (optional): For physics runtime features, the USD physics variant
-  set the validator must enable before checking the feature (see
-  [Runtime Variant Field](#runtime-variant-field-runtime))
-- **Requirements**: List of requirement IDs that the feature depends on
+```text
+FET004_Multibody.PhysX.2-0-2
+FET004_Multibody.PhysX.2-0-4
+FET004_Multibody.Newton.0-0-2
+```
 
-### Example Feature Definition
+The components are:
+
+- **name** — stable FET-prefixed feature name, such as
+  `FET004_Multibody`;
+- **runtime** — runtime or implementation contract, such as `PhysX`,
+  `Newton`, or `AnimGraph`;
+- **version** — an opaque version token compared exactly.
+
+Neutral features and capabilities omit the runtime segment:
+`FET004_Multibody.0-2-0` and `CAP000_Core.0-2-0`.
+Runtime variants retain it, for example `FET004_Multibody.PhysX.0-4-0`.
+The parser accepts earlier explicit OpenUSD spellings and serializes them to
+the neutral spelling. Consumers still receive `OpenUSD` as the parsed runtime.
+
+A physics runtime segment (`PhysX`, `Newton`, or `MuJoCo`) is also the name of
+the USD variant set that `simready-validate` enables on the asset's default prim
+before checking that contract's requirements, matching the variant sets defined
+by the Runtime Variants capability (`RV.*`). Contracts with a neutral runtime
+such as `OpenUSD` are validated against the base composition with every physics
+variant disabled.
+
+Do not duplicate identity in separate `name`, `runtime`, or `version` fields.
+
+## Capability definition
+
+Static requirements belong in a capability JSON definition:
 
 ```json
 {
-    "id": "FET_001_STANDARD",
-    "version": "0.1.0",
-    "display_name": "Minimal Editor",
-    "path": "features/FET_001_STANDARD.html",
-    "dependencies": [
-        {
-            "FET_000_STANDARD": {
-                "version": "0.1.0"
-            }
-        }
-    ],
-    "requirements": [
-        "AA.001",
-        "AA.002",
-        "UN.001",
-        "UN.002"
-    ]
+  "id": "CAP007_NonVisualMaterials.0-2-0",
+  "requirements": [
+    "NVM.001",
+    "NVM.002"
+  ]
 }
 ```
 
-### Runtime Variant Field (`runtime`)
+Capability IDs and exact dependencies begin with `CAP` and are
+`<name>[.<runtime>].<version>`, the same shape as a feature ID. Capability
+selectors follow the same rules as feature selectors, so `CAP007_NonVisualMaterials.*`
+selects every runtime and version of that capability and `CAP007.*` selects the
+whole CAP family.
 
-Physics runtime features (those authored against a specific physics engine, e.g.
-`FET_003_PHYSX`, `FET_004_NEWTON`, `FET_022_MUJOCO`) declare an optional
-`runtime` field. It names the USD physics variant set the standalone validator
-enables before checking that feature's runtime-specific requirements:
+## Source feature definition
+
+A source remains a FET when tested variants derive from it:
 
 ```json
 {
-    "id": "FET_003_PHYSX",
-    "version": "0.4.0",
-    "display_name": "Rigid Body Physics (PhysX)",
-    "path": "features/FET_003_PHYSX.html",
-    "runtime": "PhysX",
-    "requirements": ["RB.001", "PHYSX.COL.001", "PHYSX.COL.002"]
+  "id": "FET004_Multibody.0-2-0",
+  "source": true,
+  "requirements": ["JT.001", "JT.002", "RB.MB.001"]
 }
 ```
 
-- The value is the exact variant-set name to Enable on the asset's default prim
-  (`PhysX`, `Newton`, or `MuJoCo`), matching the variant sets defined by the
-  Runtime Variants capability (`RV.*`).
-- Omit the field for neutral / OpenUSD features (`FET_*_STANDARD`), Isaac
-  composition features, MDL, and packaging features. Those are validated against
-  the neutral base (all physics variants Disabled).
-- The validator groups a profile's features by this field and validates each
-  runtime group with only its variant Enabled, so runtime-specific schemas and
-  attributes (which compose only when the variant is Enabled) are visible to
-  their rules. Requirements that also appear in a neutral feature are validated
-  once against the neutral base.
-- Adding a new physics engine is a data-only change: give its features a new
-  `runtime` value matching the new variant-set name; no validator change is
-  required.
+A source with no direct tests is valid only if at least one tested feature
+names it through `source_feature`.
 
-## Creating a New Feature
+## Feature definition
 
-Follow these 6 steps to create a new feature:
-
-### Step 1: Create Feature JSON and MD from Sample
-
-Start by copying the sample files and customizing them for your new feature:
-
-Use [feature-template.md](feature-template.md) as the canonical
-feature markdown template. It follows the same high-level structure as
-`FET_001_STANDARD.md` and includes the required sections for feature authors and
-AI agents.
-
-#### Sample Feature JSON (`FET_000_STANDARD-0.1.0.json`)
+A runtime-tested feature references its static capabilities and adds the
+runtime-specific contract:
 
 ```json
 {
-    "id": "FET_000_STANDARD",
-    "version": "0.1.0",
-    "display_name": "example new feature",
-    "path": "features/FET_000-new_feature.html",
-    "dependencies": [
-        {
-            "FET_001_STANDARD": {
-                "version": "0.1.0"
-            }
-        }
-    ],
-    "requirements": [
-        "AA.001"
-    ]
+  "id": "FET004_Multibody.PhysX.2-0-4",
+  "source_feature": "FET004_Multibody.0-2-0",
+  "additional_requirements": [
+    "PHYSX.COL.001",
+    "PHYSX.COL.002"
+  ],
+  "adapters": [
+    "neutral_to_physx:collider_neutral_to_prop_physx"
+  ],
+  "runtime_tests": [
+    "FET004:joint-movement"
+  ]
 }
 ```
 
-#### Sample Feature Markdown (`FET_000-new_feature.md`)
+Every runtime-tested Foundations 2 FET definition has non-empty `runtime_tests`,
+`additional_requirements`, and `adapters`. `runnable` is derived from runtime
+evidence. Testless source FETs do not declare runtime-only fields.
 
-```markdown
-# Feature: `ID:000 - Sample Feature Documentation`
+`requirements` remains available for static checks local to one runtime
+contract. Reusable static bundles should live in CAP definitions. The resolved
+requirement set is the union of feature requirements, additional requirements,
+and requirements from resolved capabilities.
 
-## Description
-This is a sample feature documentation that demonstrates the proper structure and format for documenting features in the validation system. This template should be used as a reference when creating new feature documentation.
+## Dependencies
 
-## Overview
+Use `source_feature` for the exact source FET, `dependencies` for other exact
+feature dependencies, and `capabilities` for exact static dependencies:
 
-| **Property**            | **Value**                 |
-|-------------------------|---------------------------|
-| Proprietary Techs       | `Sample Tech`             |
-| Dependency              | `None`                    |
-| Profile                 | `Robotics-Prop`           |
-
-## Detailed Description
-
-This sample feature showcases the standard format and structure that should be followed when documenting new features. It includes all the necessary sections and demonstrates proper markdown formatting.
-
-## Neutral Format
-### Version 0.1.0
-
-<details>
-<summary><strong>Details</strong></summary>
-
-#### Requirements
-
-* Capability: [Sample_Capability](../capabilities/sample/sample_capability.md)
-  * Requirements:
-    * [Sample-Requirement](../capabilities/sample/requirements/sample-requirement.md)
-        * SPL.001 | Version 0.1.0
-
-### Comments
-* This is a sample comment section
-* Add relevant notes, considerations, or future work items here
-* Use bullet points for clarity
-
-### Samples
-
-* Sample asset or reference material
-* Additional examples as needed
-
-## Testing Process
-
-### Steps for Manual Testing
-* Step 1: Sample testing procedure
-* Step 2: Another testing step
-* Step 3: Final validation step
-
-### Automated Testing
-* Unit tests for core functionality
-* Integration tests for component interaction
-* End-to-end validation tests
-
-</details>
-
-## Implementation Notes
-
-This feature serves as a documentation template and should not be implemented in production systems. When creating actual feature documentation:
-
-1. Replace sample content with real feature details
-2. Update all references and links
-3. Ensure proper versioning and dependency information
-4. Include relevant technical specifications
-5. Document testing procedures thoroughly
-
-## Related Documentation
-
-* [Feature Documentation Guide](../guides/feature_documentation.md)
-* [Capability Documentation](../capabilities/README.md)
-* [Testing Standards](../testing/standards.md)
+```json
+{
+  "id": "FET022_DrivenJoints.PhysX.0-0-2",
+  "source_feature": "FET022_DrivenJoints.0-2-0",
+  "dependencies": ["FET004_Multibody.PhysX.0-4-0"],
+  "additional_requirements": ["PHYSX.DRIVE.001"],
+  "adapters": ["physx_drives:add_drives"],
+  "runtime_tests": ["FET022:joint-motion"]
+}
 ```
 
-### Step 2: Generate Feature ID and Version
+Dependencies are exact IDs, never wildcards. Keep both graphs minimal and
+acyclic. `source_feature` is classification/provenance, not requirement
+inheritance; list the source in `dependencies` only when its whole contract
+must also validate. A capability required by a selected feature inherits that
+feature's optional state; any required path makes it required.
 
-#### Feature Name Convention
+## Profile selection
 
-Feature names follow the pattern `FET_###_<RUNTIME>` where the runtime suffix
-identifies the runtime contract for the feature. Common examples:
+Profiles select runtime features and static capabilities independently:
 
-- `FET_001_STANDARD` - OpenUSD only, no runtime-specific schemas or attributes
-- `FET_001_NEWTON` - Newton runtime behavior, schemas, or attributes
-- `FET_001_PHYSX` - PhysX runtime behavior, schemas, or attributes
-- `FET_001_ISAAC` - Isaac runtime behavior, schemas, or attributes
+| Selector | Meaning |
+|---|---|
+| `FET004.*.*` | Every member of FET family 004 across runtimes and versions. |
+| `FET004.PhysX.*` | Every PhysX member of FET family 004. |
+| `FET004_Multibody.PhysX.2-0-4` | One exact feature. |
+| `CAP007*.*.*` | Matching static capability contracts across runtimes and versions. |
 
-Use `STANDARD` when the feature is pure OpenUSD and has no additional
-runtime-specific attributes, schemas, validators, or behavior. The
-authoritative list of existing feature names is the set of `"id"` values in the
-feature JSON files under `features/`.
+For family selectors, `FET004` matches a name beginning `FET004_`, such as
+`FET004_Multibody`. See [Profiles](../profiles/profiles.md) for deterministic
+expansion, optional selectors, and multi-profile validation. Its
+{ref}`Validate 2026.10.0rc1 compatibility <validate-rc1-selectors>`
+section lists explicit selector forms for the release validator.
 
-#### Versioning Strategy
+## Conversion rule for existing content
 
-Use semantic feature versions:
+When reviewing an existing feature:
 
-- Start new feature contracts at `0.1.0`.
-- Increment the semantic version (for example `0.2.0`, `1.0.0`, `1.0.1`) for new published feature contracts.
-- Do not use bare integer versions such as `1` or `2` for feature versions.
+1. Confirm it has executable runtime tests mapped to the exact feature ID.
+2. If it does, publish a dotted FET definition with tests and adapters.
+3. If it is the source family contract for tested derived FETs, publish it as a
+   `source=true` FET and link each derived definition with `source_feature`.
+4. Otherwise create a `CAP` definition containing its static requirement
+   contract.
+5. Replace new-profile FET selectors/pins for that contract with capability
+   selectors.
+6. Update runtime-tested features that reuse a separate static contract to reference
+   the new capability.
 
-### Step 3: Add Requirements
+## Authoring workflow
 
-Identify and list all requirements your feature depends on:
+1. State the runtime promise and concrete runtime success signal.
+2. Identify the source FET and any separate CAP-prefixed static contracts.
+3. Choose a stable FET name, runtime, and exact version token.
+4. Add only runtime-specific requirements to the feature.
+5. Add exact feature and capability dependencies.
+6. Add direct adapters and executable runtime tests.
+7. Create matching JSON and markdown from
+   [feature-template.md](feature-template.md).
+8. Update the shared feature/capability indexes and dependency graph.
+9. Resolve affected profile selectors against the complete installed catalog.
+10. Do not publish a derived FET while runtime evidence is missing; convert it
+    to CAP unless it is itself a source for tested derivatives.
 
-1. **Browse existing capabilities** in the tier `capabilities/` directories
-2. **Select relevant requirements** from each capability
-3. **List requirement IDs** in the JSON file
-4. **Document requirement details** in the markdown file
+## Versioning and compatibility
 
-#### Example Requirements Section
+Published dotted IDs are immutable. Any requirement, dependency, adapter,
+runtime-test, or behavior change creates a new version segment. Keep older
+definitions available while profiles or evidence reference them.
 
-```markdown
-#### Requirements
-* Capability: [Core/Atomic_Asset](../capabilities/core/atomic_asset/capability-atomic_asset.md)
-    * Requirements
-        * [Anchored-Asset-Paths](../capabilities/core/atomic_asset/requirements/anchored-asset-paths.md)
-            * AA.001 | version 0.1.0
-            * Rule: provided by `usd-validation-nvidia`
-        * [Supported-File-Types](../capabilities/core/atomic_asset/requirements/supported-file-types.md)
-            * AA.002 | version 0.1.0
-            * Rule: provided by `usd-validation-nvidia`
-```
+The version is what an asset claims conformance to, so changing what a published
+version asks for changes the meaning of every asset already stamped with it, and
+changes it silently: nothing about the asset moved and nothing about the version
+moved, only the answer. `nv_core/sr_specs/tests/validate_feature_versions.py`
+enforces this in CI by comparing every feature and capability manifest against
+the default branch, matched by dotted ID.
 
-### Step 4: Place into Feature Folder
+### Recording a Necessary Edit
 
-Place your feature files in the owning [tier](../tiers.md):
-```
-nv_core/tiers/<owning-tier>/simready/foundation/<tier-module>/features/
-```
-
-**File naming convention:**
-- JSON: `FET_###_<RUNTIME>-<version>.json`
-- Markdown: `FET_###_<RUNTIME>.md`
-
-**Examples:**
-- `FET_001_STANDARD-0.1.0.json`
-- `FET_001_STANDARD.md`
-
-### Step 5: Add New Feature to Features Index
-
-Update `nv_core/sr_specs/docs/shared/features/features.md`; cross-tier feature
-family pages also live in that shared directory.
-
-Update `nv_core/sr_specs/docs/shared/features/features.md`:
-
-```markdown
-# Features
-
-```{toctree}
-:maxdepth: 1
-
-ID:001 - Minimal - Standard <FET_001_STANDARD>
-ID:002 - Posable Bodies - Standard <FET_002_STANDARD>
-ID:003 - RBD Physics - Standard <FET_003_STANDARD>
-ID:003 - RBD Physics - PhysX <FET_003_PHYSX>
-ID:003 - RBD Physics - Newton <FET_003_NEWTON>
-ID:004 - Simulate Multi-Body Physics - Standard <FET_004_STANDARD>
-ID:004 - Simulate Multi-Body Physics - PhysX <FET_004_PHYSX>
-ID:004 - Simulate Multi-Body Physics - Newton <FET_004_NEWTON>
-ID:004 - Simulate Multi-Body Physics - Robot PhysX (Deprecated) <FET_004_ROBOT_PHYSX>
-ID:004 - Simulate Multi-Body Physics - Robot Newton <FET_004_ROBOT_NEWTON>
-ID:005 - Simulate Grasp Physics - Standard <FET_005_STANDARD>
-ID:000 - Sample Feature - Base <FET_000-new_feature>
-```
-
-### Step 6: Use in a Profile
-
-Features are used in profiles to define what capabilities an asset must have. Here's an example profile:
+Some edits to a published version genuinely cannot be deferred to a new version -
+typically when the version names a requirement no rule implements, which makes
+the loader drop every profile that lists the feature. Record such an edit in its
+own TOML file under
+`nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/known_edits/`,
+named after the contract it edits, creating that directory if it does not exist:
 
 ```toml
-[Robotics-Prop]
-"3.1.0" = {features = [
-    {"FET_001_STANDARD" = {version = "0.1.0"}}, # "Minimal"
-    {"FET_003_PHYSX" = {version = "0.1.0"}}, # "RBD Physics"
-    {"FET_004_PHYSX" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
-    {"FET_005_STANDARD" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
-
-    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "New Feature"
-]}
+# known_edits/FET006_Materials.MDL.0-1-0.toml
+[edit]
+feature = "FET006_Materials.MDL.0-1-0"
+requirements = ["VM.BIND.002", "VM.MAT.001", "VM.MDL.001", "VM.TEX.001", "VM.TEX.002"]
+reason = "VM.MDL.002 is implemented by no rule, so this version unregisters its own feature."
 ```
 
-### Expanding a feature
-
-**Expanding a feature** means adding a technology-specific requirement that *replaces* a base (e.g. neutral) requirement when the technology supports an exception or extension that the base requirement does not allow. The base and expanded requirements are mutually exclusive for the same feature: a single feature uses one or the other, depending on the profile.
-
-#### When to expand
-
-Use an expansion when:
-
-- A technology (e.g. PhysX) supports a valid pattern that the base spec forbids or does not define.
-- Enforcing the base requirement would incorrectly fail assets that use that pattern.
-- The two rules cannot both apply: satisfying the expanded rule can violate the base rule, so they must not coexist in the same requirement set.
-
-#### Example: PHYSX.COL.001 and RB.COL.001
-
-- **RB.COL.001** (base / neutral): Every shape (UsdGeom Gprim) must have a collider; CollisionAPI cannot be applied to Xforms. This matches the basic USD/UsdPhysics model where merged mesh is not available.
-- **PHYSX.COL.001** (expansion): Same idea—colliders must be well-defined—but adds an exception: a shape does *not* need its own collider if it is covered by a **merged mesh collider**. In PhysX, an Xform with **PhysxMeshMergeCollisionAPI** acts as an umbrella collider for all sibling geometry (at any depth) via its collisionmeshes collection. So both “per-shape collider” and “merged mesh collider” are valid under PHYSX.COL.001.
-
-Assets using a merged mesh collider would fail RB.COL.001 (no per-shape collider). So the two requirements cannot both be in the same feature: the neutral RBD feature uses RB.COL.001; the PhysX RBD feature uses PHYSX.COL.001 (and related PHYSX collider requirements) instead.
-
-#### How to implement an expansion
-
-1. **Add the new requirement**
-   Create the capability and requirement documentation (e.g. `physx-collider-capability.md` for PHYSX.COL.001) that states the expanded rule and its exceptions.
-
-2. **Define the tech-specific feature requirement list**
-   In the technology-specific feature (e.g. `FET_003_PHYSX`), start from the base feature's full requirement list. Then:
-   - **Remove** the base requirement(s) being replaced (e.g. RB.COL.001, and if applicable RB.COL.002).
-   - **Add** the new requirement(s) (e.g. PHYSX.COL.001, PHYSX.COL.002).
-
-   The tech feature then carries an explicit, full list of requirements; it does not depend on the base feature for those requirements so that the expanded rule replaces the base rule rather than adding to it.
-
-3. **Wire profiles**
-   Profiles choose which feature (and thus which requirement) applies:
-   - **Standard contract**: the profile requires the standard feature (for example `FET_003_STANDARD`) and therefore RB.COL.001.
-   - **Optional PhysX contract**: the same consolidated profile may list the technology feature (for example `FET_003_PHYSX`) as optional and therefore apply PHYSX.COL.001 when that runtime variant is present.
-
-**Concrete example:** `FET_003_STANDARD-0.1.0.json` includes `RB.COL.001` in its requirements. `FET_003_PHYSX-0.2.0.json` lists all other rigid-body requirements from the standard feature but omits `RB.COL.001` (and RB.COL.002) and adds `PHYSX.COL.001` and `PHYSX.COL.002` so that both per-shape and merged-mesh colliders are valid under the PhysX spec.
-
-
-## Feature Dependencies
-
-### What are Dependencies?
-
-**Dependencies** are references to other features that your feature requires. When specified, the validation system will:
-
-1. **Automatically include** all requirements from dependent features
-2. **Recursively resolve** nested dependencies (features that depend on other features)
-3. **Validate against** the complete set of requirements from all dependencies
-4. **Ensure consistency** across related feature sets
-
-### Dependency Structure
-
-Dependencies are defined in the JSON file as an array of objects:
-
-```json
-"dependencies": [
-    {
-        "FET_001_STANDARD": {
-            "version": "0.1.0"
-        }
-    },
-    {
-        "FET_003_PHYSX": {
-            "version": "0.1.0"
-        }
-    }
-]
-```
-
-**Format:**
-- **Feature ID**: The ID of the dependent feature (e.g., `FET_001`)
-- **Version**: Specific semantic version requirement (e.g., `"0.1.0"`)
-- **Multiple Dependencies**: Can specify multiple features in the array
-
-### How Dependencies Work
-
-#### Automatic Requirement Resolution
-
-When a feature has dependencies, the validation system automatically:
-
-1. **Loads all requirements** from the specified dependent features
-2. **Combines requirements** with the feature's own requirements
-3. **Creates a complete validation set** for the asset
-4. **Ensures no conflicts** between feature requirements
-
-#### Example: Dependency Chain
-
-```json
-// Feature A depends on Feature B
-{
-    "id": "FET_A",
-    "dependencies": [
-        {
-            "FET_B": {"version": "0.1.0"}
-        }
-    ],
-    "requirements": ["REQ_A.001"]
-}
-
-// Feature B depends on Feature C
-{
-    "id": "FET_B",
-    "dependencies": [
-        {
-            "FET_C": {"version": "0.1.0"}
-        }
-    ],
-    "requirements": ["REQ_B.001"]
-}
-
-// Feature C has no dependencies
-{
-    "id": "FET_C",
-    "requirements": ["REQ_C.001", "REQ_C.002"]
-}
-```
-
-**Result:** When validating `FET_A`, the system will validate against:
-- `REQ_A.001` (from FET_A)
-- `REQ_B.001` (from FET_B dependency)
-- `REQ_C.001`, `REQ_C.002` (from FET_C dependency of FET_B)
-
-#### Version Compatibility
-
-Dependencies specify exact version requirements to ensure compatibility:
-
-```json
-"dependencies": [
-    {
-        "FET_001_STANDARD": {
-            "version": "0.1.0"
-        }
-    },
-    {
-        "FET_003_PHYSX": {
-            "version": "0.1.0"
-        }
-    }
-]
-```
-
-Version values must be exact semantic versions (e.g. `"0.1.0"`) matching an
-existing feature JSON file's `"version"` field.
-
-### Benefits of Using Dependencies
-
-#### 1. **Code Reuse**
-- Avoid duplicating requirements across features
-- Build complex features from simpler building blocks
-- Maintain consistency across related feature sets
-
-#### 2. **Automatic Validation**
-- No need to manually track dependent requirements
-- System automatically validates against all dependencies
-- Reduces human error in requirement specification
-
-#### 3. **Maintainability**
-- Update requirements in one place (the base feature)
-- Changes automatically propagate to dependent features
-- Easier to manage complex requirement relationships
-
-#### 4. **Clear Relationships**
-- Document how features relate to each other
-- Make feature hierarchies explicit and traceable
-- Help developers understand feature dependencies
-
-### Best Practices for Dependencies
-
-#### 1. **Keep Dependencies Minimal**
-```json
-// Good: Only depend on what you actually need
-"dependencies": [
-    {
-        "FET_001_STANDARD": {"version": "0.1.0"}  // Core minimal requirements
-    }
-]
-
-// Avoid: Don't depend on features you don't actually use
-"dependencies": [
-    {
-        "FET_001_STANDARD": {"version": "0.1.0"},
-        "FET_002_STANDARD": {"version": "0.1.0"},  // Unused dependency
-        "FET_003_STANDARD": {"version": "0.1.0"}   // Unused dependency
-    }
-]
-```
-
-#### 2. **Use Specific Versions**
-```json
-// Good: Specify exact versions for stability
-"dependencies": [
-    {
-        "FET_001_STANDARD": {"version": "0.1.0"}
-    }
-]
-
-// Avoid: Using version ranges that could cause instability
-"dependencies": [
-    {
-        "FET_001_STANDARD": {"version": ">=1"}  // Version ranges are not allowed
-    }
-]
-```
-
-#### 3. **Document Dependency Purpose**
-```json
-// Good: Add comments explaining why dependencies are needed
-"dependencies": [
-    {
-        "FET_001_STANDARD": {"version": "0.1.0"}  // Provides core asset validation
-    },
-    {
-        "FET_003_PHYSX": {"version": "0.1.0"}  // Provides physics requirements
-    }
-]
-```
-
-#### 4. **Avoid Circular Dependencies**
-```json
-// BAD: This creates a circular dependency that will cause errors
-// Feature A depends on Feature B
-"dependencies": [
-    {
-        "FET_B": {"version": "0.1.0"}
-    }
-]
-
-// Feature B depends on Feature A (circular!)
-"dependencies": [
-    {
-        "FET_A": {"version": "0.1.0"}
-    }
-]
-```
-
-### Dependency Validation
-
-The system automatically validates dependencies to ensure:
-
-1. **All dependent features exist** in the system
-2. **Specified versions are available** and compatible
-3. **No circular dependencies** are created
-4. **Requirements can be resolved** without conflicts
-
-#### Validation Errors
-
-Common dependency validation errors:
-
-```json
-// Error: Feature doesn't exist
-"dependencies": [
-    {
-        "NONEXISTENT_FEATURE": {"version": "0.1.0"}
-    }
-]
-
-// Error: Version doesn't exist
-"dependencies": [
-    {
-        "FET_001_STANDARD": {"version": "0.99.0"}
-    }
-]
-
-// Error: Circular dependency detected
-"dependencies": [
-    {
-        "FET_001_STANDARD": {"version": "0.1.0"}  // Creates circular reference
-    }
-]
-```
-
-### Example: Complete Feature with Dependencies
-
-```json
-{
-    "id": "FET_004_PHYSX",
-    "version": "0.1.0",
-    "display_name": "Simulate Multi-Body Physics",
-    "path": "features/FET_004_PHYSX.html",
-    "dependencies": [
-        {
-            "FET_003_PHYSX": {
-                "version": "0.1.0"
-            }
-        }
-    ],
-    "requirements": [
-        "JT.001",
-        "JT.002",
-        "RB.MB.001"
-    ]
-}
-```
-
-**What this means:**
-- `FET_004_PHYSX` automatically includes all requirements from:
-  - `FET_003_PHYSX` (rigid body physics requirements)
-- Plus its own specific requirements: `JT.001`, `JT.002`, `RB.MB.001`
-- Total validation set: All requirements from both features
-
-## Feature Documentation Best Practices
-
-### Content Structure
-
-1. **Clear Description**: Explain what the feature does and why it's needed
-2. **Requirements Mapping**: Clearly link to all required capabilities and requirements
-3. **Version History**: Document changes between versions
-4. **Testing Procedures**: Include both manual and automated testing steps
-5. **Examples**: Provide sample assets and use cases
-
-### Markdown Formatting
-
-- Use consistent heading levels
-- Include proper links to related documentation
-- Use tables for structured information
-- Include code blocks for examples
-- Use admonitions for important notes
-
-### Validation Integration
-
-- Link to validation rules and implementations
-- Include testing procedures
-- Document expected outcomes
-- Provide troubleshooting guidance
-
-## Testing Your Feature
-
-### Manual Testing
-
-1. **Create test assets** that should pass validation
-2. **Create test assets** that should fail validation
-3. **Verify requirement coverage** is complete
-4. **Test in different contexts** (various asset types)
-
-### Automated Testing
-
-1. **Unit tests** for individual requirements
-2. **Integration tests** for feature combinations
-3. **End-to-end validation** with real assets
-4. **Performance testing** for large assets
-
-## Common Pitfalls
-
-### Avoid These Mistakes
-
-1. **Missing Requirements**: Ensure all dependencies are listed
-2. **Incorrect Versioning**: Use semantic feature versions consistently
-3. **Poor Documentation**: Write clear, comprehensive descriptions
-4. **Missing Tests**: Include both manual and automated testing
-5. **Broken Links**: Verify all internal links work correctly
-
-### Best Practices
-
-1. **Start Simple**: Begin with minimal requirements and expand
-2. **Document Everything**: Include examples, tests, and troubleshooting
-3. **Version Control**: Track changes between versions
-4. **Peer Review**: Have others review your feature documentation
-5. **Regular Updates**: Keep documentation current with implementation
-
-
-## Getting Help
-
-If you need assistance creating or modifying features:
-
-1. **Review existing features** for examples
-2. **Check the capabilities directory** for available requirements
-3. **Consult the testing framework** for validation procedures
-4. **Ask the development team** for guidance on complex features
-
-
-## Summary
-
-This guide covers the essentials for understanding and creating features in the SimReady Foundation system, including feature JSON and markdown structure, dependency management, variant naming conventions, and testing procedures.
+All three fields are required. `feature` is the full dotted ID of a feature or
+capability, which already carries the version. `requirements` is the complete requirement list the
+edit produces, in manifest order, and the manifest is accepted only while it
+matches that list exactly. Binding the record to the content rather than to a diff
+has two consequences worth knowing:
+
+- The record reads the same before and after the edit merges. It does not need
+  removing in a follow-up commit, and it will not start failing CI once it lands.
+- It does not pre-authorize a later, different edit to the same version. A second
+  edit is a second decision, made by updating `requirements` in the record.
+
+Records stay in the tree once the edit merges, in the same way `known_deletions`
+records stay after sample content is removed. A merged record is inert: the
+manifest now agrees with the default branch, so the comparison has nothing left
+to accept. Deleting a spent record is safe and breaks nothing, but it is not
+required and nothing asks for it, so there is no follow-up chore to forget.
+
+Do not reach for a record in place of a version bump.
+
+The reference implementation is `simready.foundation.contracts`.
+
+## Validation checklist
+
+- Capability IDs and selectors begin with `CAP`.
+- Testless FETs are sources with tested derivatives; other static-only
+  contracts are capabilities.
+- Every feature ID uses `name[.runtime].version` and an FET-prefixed name.
+- Every runtime feature has tests, additional requirements, and adapters.
+- Every requirement and exact dependency exists.
+- Capability and feature JSON agree with their documentation.
+- Required profile selectors match at least one catalog item.
+- Required wins over optional across direct and dependency paths.
+- Published feature and capability versions remain unchanged.

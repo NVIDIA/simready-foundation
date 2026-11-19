@@ -1,0 +1,109 @@
+# Feature: `FET014_MeshVariant`
+
+| **Property**            | **Value**         |
+|-------------------------|-------------------|
+| Contract                | `FET014_MeshVariant` |
+| Runtime                 | `OpenUSD` |
+| Proprietary Techs       | `None` |
+| Versions                | `0-1-0` |
+
+## Description
+
+The Visual Mesh Variant feature defines the OpenUSD contract for an asset that
+offers two or more alternate visual mesh geometries within the same envelope, with
+the collider unchanged. Its variation category is `MeshVariant` and its impact
+class is `visual-only`.
+
+`MeshVariant` switches a part between alternate `UsdGeomMesh` content choices
+(mesh to mesh), distinct from `Representation` which switches the encoding
+(mesh to splat to other). Each option is a valid mesh satisfying the geometry
+requirements carried by the `FET001_MinimalPlaceableVisual` dependency.
+
+This is not a performance level-of-detail ladder: it is alternate visual *content*
+at the same envelope. Performance LOD is deferred to the forthcoming native USD LOD
+system. Beyond the shared visual envelope invariant (`AV.005`), `MeshVariant` holds
+the collider unchanged across options -- the same collision prims and approximation,
+not merely the same size -- so only the visual mesh gprims differ. Mass and physical
+material are invariant (`AV.007`).
+
+## Dependency Graph
+
+```{mermaid}
+flowchart LR
+    FET014S1["FET014_MeshVariant\n0-1-0"]
+    FET001S1["FET001_MinimalPlaceableVisual\n1-0-1"]
+
+    FET014S1 --> FET001S1
+
+    classDef current fill:#90EE90,stroke:#333
+    classDef other fill:#fff,stroke:#333
+    class FET014S1 current
+    class FET001S1 other
+```
+
+## Use Cases
+
+- A prop shipped with alternate sculpts or detail levels of the same object at one footprint.
+- Swapping decorative mesh content while placement, collider, and mass stay fixed.
+- Authoring regional or stylistic mesh variants without a second asset.
+
+## Requirements
+
+### Version 0-1-0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+No profile selects this version.
+
+#### Feature Dependencies
+
+| **Property** | **Value** |
+|--------------|-----------|
+| Dependency | [Minimal Placeable Visual](FET001_MinimalPlaceableVisual.md#version-1-0-1) (`FET001_MinimalPlaceableVisual.1-0-1`) |
+
+#### Requirement List
+
+* Capability: [Core/Asset Variants](../rules_and_reqs/core/asset_variants/capability-asset_variants.md)
+
+| Requirement | Requirement Doc |
+|-------------|-----------------|
+| `AV.001` | [AV.001](../rules_and_reqs/core/asset_variants/requirements/variation-discovery-metadata.md) |
+| `AV.002` | [AV.002](../rules_and_reqs/core/asset_variants/requirements/variant-set-location.md) |
+| `AV.003` | [AV.003](../rules_and_reqs/core/asset_variants/requirements/option-composability.md) |
+| `AV.004` | [AV.004](../rules_and_reqs/core/asset_variants/requirements/section-purity-isolation.md) |
+| `AV.005` | [AV.005](../rules_and_reqs/core/asset_variants/requirements/visual-envelope-invariant.md) |
+| `AV.006` | [AV.006](../rules_and_reqs/core/asset_variants/requirements/collision-envelope-invariant.md) |
+| `AV.007` | [AV.007](../rules_and_reqs/core/asset_variants/requirements/impact-class-honesty.md) |
+| `AV.008` | [AV.008](../rules_and_reqs/core/asset_variants/requirements/conditional-presence.md) |
+| `AV.009` | [AV.009](../rules_and_reqs/core/asset_variants/requirements/authored-physical-properties.md) |
+| `AV.010` | [AV.010](../rules_and_reqs/core/asset_variants/requirements/variation-stability.md) |
+
+</details>
+
+## Pipelines
+
+Source file type:
+
+- `.usd`, `.usda`, `.usdc` carrying authored mesh variant sets.
+
+Validation or runtime pipeline:
+
+- SimReady validation verifies the selected `FET014_MeshVariant.0-1-0` manifest.
+
+## Samples
+
+- [sample_content/common_assets/props_general/obs_electricians_large_tool_box_a02/simready_usd/sm_obs_electricians_large_tool_box_a02.usda](../../../../../sample_content/common_assets/props_general/obs_electricians_large_tool_box_a02/simready_usd/sm_obs_electricians_large_tool_box_a02.usda) - toolbox with per-part `MeshVariant_base` and `MeshVariant_lid` sets that swap base/lid mesh options via isolated payloads while the colliders and mass stay outside the variant sections.
+
+## Runtime Tests
+
+- [FET014 Visual Mesh Variant](../guides/evaluate/tests/fet014-mesh-variant.md)
+  - [mesh_variation](../guides/evaluate/tests/fet014/mesh-variation.md) - selects each mesh option, confirms each composes a valid mesh, and checks that the collider prims/approximation are identical across options and the visual envelope is stable within tolerance.
+
+## Adapters
+
+| From Feature | To Feature | Adapter | Status | Notes |
+|--------------|------------|---------|--------|-------|
+| Non-conformant asset | `FET014_MeshVariant.0-1-0` | `simready-foundation-conform-fet-014-standard` | Available | Authors the discovery metadata, variant sets, and isolated payload options on a staged copy while keeping the collider and mass outside the variant sections. It never fabricates geometry; a missing mesh option is reported as a blocker. |

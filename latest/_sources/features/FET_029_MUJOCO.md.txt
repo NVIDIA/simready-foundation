@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_029_MUJOCO`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP029_ConnectionJoint.MuJoCo.html" />
+<link rel="canonical" href="../capabilities/CAP029_ConnectionJoint.MuJoCo.html" />
+```
+
+This published feature route moved to [`CAP029_ConnectionJoint.MuJoCo`](../capabilities/CAP029_ConnectionJoint.MuJoCo.md) (Foundations 1 ID: `FET_029_MUJOCO`).

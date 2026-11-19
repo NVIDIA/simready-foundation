@@ -42,329 +42,664 @@
             dictionary validation = {
                 string profile = "Robot-Gripper"
                 string profile_version = "2.1.0"
-                dictionary validated_features = {
-                    dictionary "2026-08-27" = {
-                        dictionary FET_000_MUJOCO = {
-                            string dependencies = "[{'FET_000_STANDARD': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_000_NEWTON = {
-                            string dependencies = "[{'FET_000_STANDARD': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_000_PHYSX = {
-                            string dependencies = "[{'FET_000_STANDARD': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_000_STANDARD = {
-                            string dependencies = "[]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_001_STANDARD = {
-                            string dependencies = "[]"
-                            bool passed = 1
-                            string version = "1.0.1"
-                        }
-                        dictionary FET_003_MUJOCO = {
-                            string dependencies = "[]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_003_NEWTON = {
-                            string dependencies = "[]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_003_PHYSX = {
-                            string dependencies = "[]"
-                            bool passed = 1
-                            string version = "0.4.0"
-                        }
-                        dictionary FET_003_STANDARD = {
-                            string dependencies = "[]"
-                            bool passed = 1
-                            string version = "0.2.0"
-                        }
-                        dictionary FET_004_MUJOCO = {
-                            string dependencies = "[{'FET_003_MUJOCO': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_004_NEWTON = {
-                            string dependencies = "[{'FET_003_NEWTON': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_004_PHYSX = {
-                            string dependencies = "[{'FET_003_PHYSX': {'version': '0.4.0'}}]"
-                            bool passed = 1
-                            string version = "0.4.0"
-                        }
-                        dictionary FET_004_ROBOT_MUJOCO = {
-                            string dependencies = "[]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_004_ROBOT_NEWTON = {
-                            string dependencies = "[]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_004_ROBOT_PHYSX = {
-                            string dependencies = "[]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_004_STANDARD = {
-                            string dependencies = "[{'FET_003_STANDARD': {'version': '0.2.0'}}]"
-                            bool passed = 1
-                            string version = "0.2.0"
-                        }
-                        dictionary FET_021_ISAAC = {
-                            string dependencies = "[]"
-                            bool passed = 1
-                            string version = "0.2.0"
-                        }
-                        dictionary FET_022_ISAAC = {
-                            string dependencies = "[{'FET_022_PHYSX': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_022_MUJOCO = {
-                            string dependencies = "[{'FET_004_ROBOT_MUJOCO': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_022_NEWTON = {
-                            string dependencies = "[{'FET_004_ROBOT_NEWTON': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_022_PHYSX = {
-                            string dependencies = "[{'FET_004_PHYSX': {'version': '0.4.0'}}]"
-                            bool passed = 1
-                            string version = "0.2.0"
-                        }
-                        dictionary FET_022_STANDARD = {
-                            string dependencies = "[{'FET_004_STANDARD': {'version': '0.2.0'}}]"
-                            bool passed = 1
-                            string version = "0.2.0"
-                        }
-                        dictionary FET_024_MUJOCO = {
-                            string dependencies = "[{'FET_024_STANDARD': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_024_NEWTON = {
-                            string dependencies = "[{'FET_024_STANDARD': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_024_PHYSX = {
-                            string dependencies = "[{'FET_024_STANDARD': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_024_STANDARD = {
-                            string dependencies = "[]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_028_ISAAC = {
-                            string dependencies = "[{'FET_028_STANDARD': {'version': '0.1.0'}}, {'FET_022_ISAAC': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_028_MUJOCO = {
-                            string dependencies = "[{'FET_028_STANDARD': {'version': '0.1.0'}}, {'FET_022_MUJOCO': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_028_STANDARD = {
-                            string dependencies = "[]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_031_STANDARD = {
-                            string dependencies = "[]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_033_STANDARD = {
-                            string dependencies = "[{'FET_031_STANDARD': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.3.0"
-                        }
-                        dictionary FET_100_ISAAC = {
-                            string dependencies = "[{'FET_003_PHYSX': {'version': '0.4.0'}}]"
-                            bool passed = 1
-                            string version = "0.3.0"
+                dictionary profiles = {
+                    dictionary "Robot-Gripper@2.1.0" = {
+                        string profile = "Robot-Gripper"
+                        string profile_version = "2.1.0"
+                        dictionary validated_features = {
+                            dictionary "2026-11-03" = {
+                                dictionary "CAP000_Core.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    string "optional requirements" = "['com.nvidia.simready.SR.001']"
+                                    bool passed = 0
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP000_Core.MuJoCo.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP000_Core.0-1-0']"
+                                    string "optional requirements" = "['com.nvidia.simready.SR.001']"
+                                    bool passed = 0
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP000_Core.Newton.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP000_Core.0-1-0']"
+                                    string "optional requirements" = "['com.nvidia.simready.SR.001']"
+                                    bool passed = 0
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP000_Core.PhysX.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP000_Core.0-1-0']"
+                                    string "optional requirements" = "['com.nvidia.simready.SR.001']"
+                                    bool passed = 0
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP003_RigidBody.MuJoCo.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP004_Multibody.MuJoCo.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP003_RigidBody.MuJoCo.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP004_Multibody.RobotMuJoCo.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP021_RobotCore.Isaac.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    string "optional requirements" = "['com.nvidia.simready.RC.007']"
+                                    bool passed = 0
+                                    string version = "0-2-0"
+                                }
+                                dictionary "CAP022_DrivenJoints.MuJoCo.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP004_Multibody.RobotMuJoCo.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP024_BaseArticulation.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP024_BaseArticulation.MuJoCo.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP024_BaseArticulation.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP024_BaseArticulation.Newton.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP024_BaseArticulation.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP024_BaseArticulation.PhysX.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP024_BaseArticulation.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP028_Gripper.MuJoCo.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP022_DrivenJoints.MuJoCo.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP031_SelfContainedPackage.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP033_SimReadyPackage.0-3-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP031_SelfContainedPackage.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-3-0"
+                                }
+                                dictionary "CAP100_IsaacComposition.Isaac.0-3-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-3-0"
+                                }
+                                dictionary "FET001_MinimalPlaceableVisual.1-0-1" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "1-0-1"
+                                }
+                                dictionary "FET003_RigidBody.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-2-0"
+                                }
+                                dictionary "FET003_RigidBody.Newton.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET003_RigidBody.PhysX.0-4-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-4-0"
+                                }
+                                dictionary "FET004_Multibody.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET003_RigidBody.0-2-0']"
+                                    bool passed = 1
+                                    string version = "0-2-0"
+                                }
+                                dictionary "FET004_Multibody.Newton.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET003_RigidBody.Newton.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET004_Multibody.PhysX.0-4-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET003_RigidBody.PhysX.0-4-0']"
+                                    bool passed = 1
+                                    string version = "0-4-0"
+                                }
+                                dictionary "FET004_Multibody.RobotNewton.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET004_Multibody.RobotPhysX.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET022_DrivenJoints.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET004_Multibody.0-2-0']"
+                                    bool passed = 1
+                                    string version = "0-2-0"
+                                }
+                                dictionary "FET022_DrivenJoints.Isaac.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET022_DrivenJoints.PhysX.0-1-0']"
+                                    string "optional requirements" = "['com.nvidia.simready.DJ.007', 'com.nvidia.simready.DJ.008', 'com.nvidia.simready.DJ.009', 'com.nvidia.simready.DJ.010']"
+                                    bool passed = 0
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET022_DrivenJoints.Isaac.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET022_DrivenJoints.PhysX.0-2-0']"
+                                    string "optional requirements" = "['com.nvidia.simready.DJ.007', 'com.nvidia.simready.DJ.008', 'com.nvidia.simready.DJ.009', 'com.nvidia.simready.DJ.010']"
+                                    bool passed = 0
+                                    string version = "0-2-0"
+                                }
+                                dictionary "FET022_DrivenJoints.Newton.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET004_Multibody.RobotNewton.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET022_DrivenJoints.PhysX.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET004_Multibody.RobotPhysX.0-1-0']"
+                                    string "optional requirements" = "['com.nvidia.simready.DJ.007']"
+                                    bool passed = 0
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET022_DrivenJoints.PhysX.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET004_Multibody.PhysX.0-4-0']"
+                                    string "optional requirements" = "['com.nvidia.simready.DJ.007']"
+                                    bool passed = 0
+                                    string version = "0-2-0"
+                                }
+                                dictionary "FET028_Gripper.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET028_Gripper.Isaac.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET022_DrivenJoints.Isaac.0-1-0', 'FET028_Gripper.0-1-0']"
+                                    string "optional requirements" = "['com.nvidia.simready.DJ.007', 'com.nvidia.simready.DJ.008', 'com.nvidia.simready.DJ.009', 'com.nvidia.simready.DJ.010']"
+                                    bool passed = 0
+                                    string version = "0-1-0"
+                                }
+                            }
+                            dictionary "2026-11-16" = {
+                                dictionary "CAP000_Core.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    string "optional requirements" = "['com.nvidia.simready.SR.001']"
+                                    bool passed = 0
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP000_Core.MuJoCo.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP000_Core.0-1-0']"
+                                    string "optional requirements" = "['com.nvidia.simready.SR.001']"
+                                    bool passed = 0
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP000_Core.Newton.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP000_Core.0-1-0']"
+                                    string "optional requirements" = "['com.nvidia.simready.SR.001']"
+                                    bool passed = 0
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP000_Core.PhysX.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP000_Core.0-1-0']"
+                                    string "optional requirements" = "['com.nvidia.simready.SR.001']"
+                                    bool passed = 0
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP003_RigidBody.MuJoCo.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    string "optional requirements" = "['com.nvidia.simready.MUJOCO.COL.001']"
+                                    bool passed = 0
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP004_Multibody.MuJoCo.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP003_RigidBody.MuJoCo.0-1-0']"
+                                    string "optional requirements" = "['com.nvidia.simready.MUJOCO.COL.001']"
+                                    bool passed = 0
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP004_Multibody.RobotMuJoCo.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    string "optional requirements" = "['com.nvidia.simready.MUJOCO.COL.001']"
+                                    bool passed = 0
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP021_RobotCore.Isaac.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-2-0"
+                                }
+                                dictionary "CAP022_DrivenJoints.MuJoCo.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP004_Multibody.RobotMuJoCo.0-1-0']"
+                                    string "optional requirements" = "['com.nvidia.simready.MUJOCO.COL.001']"
+                                    bool passed = 0
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP024_BaseArticulation.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP024_BaseArticulation.MuJoCo.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP024_BaseArticulation.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP024_BaseArticulation.Newton.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP024_BaseArticulation.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP024_BaseArticulation.PhysX.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP024_BaseArticulation.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP028_Gripper.MuJoCo.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP022_DrivenJoints.MuJoCo.0-1-0']"
+                                    string "optional requirements" = "['com.nvidia.simready.MUJOCO.COL.001']"
+                                    bool passed = 0
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP031_SelfContainedPackage.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP033_SimReadyPackage.0-3-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP031_SelfContainedPackage.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-3-0"
+                                }
+                                dictionary "CAP100_IsaacComposition.Isaac.0-3-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-3-0"
+                                }
+                                dictionary "FET001_MinimalPlaceableVisual.1-0-1" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "1-0-1"
+                                }
+                                dictionary "FET003_RigidBody.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-2-0"
+                                }
+                                dictionary "FET003_RigidBody.Newton.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    string "optional requirements" = "['com.nvidia.simready.NEWTON.COL.001']"
+                                    bool passed = 0
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET003_RigidBody.PhysX.0-4-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-4-0"
+                                }
+                                dictionary "FET004_Multibody.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET003_RigidBody.0-2-0']"
+                                    bool passed = 1
+                                    string version = "0-2-0"
+                                }
+                                dictionary "FET004_Multibody.Newton.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET003_RigidBody.Newton.0-1-0']"
+                                    string "optional requirements" = "['com.nvidia.simready.NEWTON.COL.001']"
+                                    bool passed = 0
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET004_Multibody.PhysX.0-4-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET003_RigidBody.PhysX.0-4-0']"
+                                    bool passed = 1
+                                    string version = "0-4-0"
+                                }
+                                dictionary "FET004_Multibody.RobotNewton.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    string "optional requirements" = "['com.nvidia.simready.NEWTON.COL.001']"
+                                    bool passed = 0
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET004_Multibody.RobotPhysX.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET022_DrivenJoints.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET004_Multibody.0-2-0']"
+                                    bool passed = 1
+                                    string version = "0-2-0"
+                                }
+                                dictionary "FET022_DrivenJoints.Isaac.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET022_DrivenJoints.PhysX.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET022_DrivenJoints.Isaac.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET022_DrivenJoints.PhysX.0-2-0']"
+                                    bool passed = 1
+                                    string version = "0-2-0"
+                                }
+                                dictionary "FET022_DrivenJoints.Newton.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET004_Multibody.RobotNewton.0-1-0']"
+                                    string "optional requirements" = "['com.nvidia.simready.NEWTON.COL.001']"
+                                    bool passed = 0
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET022_DrivenJoints.PhysX.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET004_Multibody.RobotPhysX.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET022_DrivenJoints.PhysX.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET004_Multibody.PhysX.0-4-0']"
+                                    bool passed = 1
+                                    string version = "0-2-0"
+                                }
+                                dictionary "FET028_Gripper.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET028_Gripper.Isaac.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET022_DrivenJoints.Isaac.0-1-0', 'FET028_Gripper.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                            }
                         }
                     }
-                    dictionary "2026-09-03" = {
-                        dictionary FET_000_MUJOCO = {
-                            string dependencies = "[{'FET_000_STANDARD': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
+                }
+                dictionary validated_features = {
+                    dictionary "2026-11-03" = {
+                        dictionary "CAP000_Core.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            string "optional requirements" = "['com.nvidia.simready.SR.001']"
+                            bool passed = 0
+                            string version = "0-1-0"
                         }
-                        dictionary FET_000_NEWTON = {
-                            string dependencies = "[{'FET_000_STANDARD': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
+                        dictionary "CAP000_Core.MuJoCo.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['CAP000_Core.0-1-0']"
+                            string "optional requirements" = "['com.nvidia.simready.SR.001']"
+                            bool passed = 0
+                            string version = "0-1-0"
                         }
-                        dictionary FET_000_PHYSX = {
-                            string dependencies = "[{'FET_000_STANDARD': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
+                        dictionary "CAP000_Core.Newton.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['CAP000_Core.0-1-0']"
+                            string "optional requirements" = "['com.nvidia.simready.SR.001']"
+                            bool passed = 0
+                            string version = "0-1-0"
                         }
-                        dictionary FET_000_STANDARD = {
+                        dictionary "CAP000_Core.PhysX.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['CAP000_Core.0-1-0']"
+                            string "optional requirements" = "['com.nvidia.simready.SR.001']"
+                            bool passed = 0
+                            string version = "0-1-0"
+                        }
+                        dictionary "CAP003_RigidBody.MuJoCo.0-1-0" = {
+                            bool blocking_failure = 0
                             string dependencies = "[]"
                             bool passed = 1
-                            string version = "0.1.0"
+                            string version = "0-1-0"
                         }
-                        dictionary FET_001_STANDARD = {
+                        dictionary "CAP004_Multibody.MuJoCo.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['CAP003_RigidBody.MuJoCo.0-1-0']"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "CAP004_Multibody.RobotMuJoCo.0-1-0" = {
+                            bool blocking_failure = 0
                             string dependencies = "[]"
                             bool passed = 1
-                            string version = "1.0.1"
+                            string version = "0-1-0"
                         }
-                        dictionary FET_003_MUJOCO = {
+                        dictionary "CAP021_RobotCore.Isaac.0-2-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            string "optional requirements" = "['com.nvidia.simready.RC.007']"
+                            bool passed = 0
+                            string version = "0-2-0"
+                        }
+                        dictionary "CAP022_DrivenJoints.MuJoCo.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['CAP004_Multibody.RobotMuJoCo.0-1-0']"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "CAP024_BaseArticulation.0-1-0" = {
+                            bool blocking_failure = 0
                             string dependencies = "[]"
                             bool passed = 1
-                            string version = "0.1.0"
+                            string version = "0-1-0"
                         }
-                        dictionary FET_003_NEWTON = {
+                        dictionary "CAP024_BaseArticulation.MuJoCo.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['CAP024_BaseArticulation.0-1-0']"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "CAP024_BaseArticulation.Newton.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['CAP024_BaseArticulation.0-1-0']"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "CAP024_BaseArticulation.PhysX.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['CAP024_BaseArticulation.0-1-0']"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "CAP028_Gripper.MuJoCo.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['CAP022_DrivenJoints.MuJoCo.0-1-0']"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "CAP031_SelfContainedPackage.0-1-0" = {
+                            bool blocking_failure = 0
                             string dependencies = "[]"
                             bool passed = 1
-                            string version = "0.1.0"
+                            string version = "0-1-0"
                         }
-                        dictionary FET_003_PHYSX = {
+                        dictionary "CAP033_SimReadyPackage.0-3-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['CAP031_SelfContainedPackage.0-1-0']"
+                            bool passed = 1
+                            string version = "0-3-0"
+                        }
+                        dictionary "CAP100_IsaacComposition.Isaac.0-3-0" = {
+                            bool blocking_failure = 0
                             string dependencies = "[]"
                             bool passed = 1
-                            string version = "0.4.0"
+                            string version = "0-3-0"
                         }
-                        dictionary FET_003_STANDARD = {
+                        dictionary "FET001_MinimalPlaceableVisual.1-0-1" = {
+                            bool blocking_failure = 0
                             string dependencies = "[]"
                             bool passed = 1
-                            string version = "0.2.0"
+                            string version = "1-0-1"
                         }
-                        dictionary FET_004_MUJOCO = {
-                            string dependencies = "[{'FET_003_MUJOCO': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_004_NEWTON = {
-                            string dependencies = "[{'FET_003_NEWTON': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_004_PHYSX = {
-                            string dependencies = "[{'FET_003_PHYSX': {'version': '0.4.0'}}]"
-                            bool passed = 1
-                            string version = "0.4.0"
-                        }
-                        dictionary FET_004_ROBOT_MUJOCO = {
+                        dictionary "FET003_RigidBody.0-2-0" = {
+                            bool blocking_failure = 0
                             string dependencies = "[]"
                             bool passed = 1
-                            string version = "0.1.0"
+                            string version = "0-2-0"
                         }
-                        dictionary FET_004_ROBOT_NEWTON = {
+                        dictionary "FET003_RigidBody.Newton.0-1-0" = {
+                            bool blocking_failure = 0
                             string dependencies = "[]"
                             bool passed = 1
-                            string version = "0.1.0"
+                            string version = "0-1-0"
                         }
-                        dictionary FET_004_ROBOT_PHYSX = {
+                        dictionary "FET003_RigidBody.PhysX.0-4-0" = {
+                            bool blocking_failure = 0
                             string dependencies = "[]"
                             bool passed = 1
-                            string version = "0.1.0"
+                            string version = "0-4-0"
                         }
-                        dictionary FET_004_STANDARD = {
-                            string dependencies = "[{'FET_003_STANDARD': {'version': '0.2.0'}}]"
+                        dictionary "FET004_Multibody.0-2-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['FET003_RigidBody.0-2-0']"
                             bool passed = 1
-                            string version = "0.2.0"
+                            string version = "0-2-0"
                         }
-                        dictionary FET_021_ISAAC = {
+                        dictionary "FET004_Multibody.Newton.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['FET003_RigidBody.Newton.0-1-0']"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "FET004_Multibody.PhysX.0-4-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['FET003_RigidBody.PhysX.0-4-0']"
+                            bool passed = 1
+                            string version = "0-4-0"
+                        }
+                        dictionary "FET004_Multibody.RobotNewton.0-1-0" = {
+                            bool blocking_failure = 0
                             string dependencies = "[]"
                             bool passed = 1
-                            string version = "0.2.0"
+                            string version = "0-1-0"
                         }
-                        dictionary FET_022_ISAAC = {
-                            string dependencies = "[{'FET_022_PHYSX': {'version': '0.2.0'}}]"
-                            bool passed = 1
-                            string version = "0.2.0"
-                        }
-                        dictionary FET_022_MUJOCO = {
-                            string dependencies = "[{'FET_004_ROBOT_MUJOCO': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_022_NEWTON = {
-                            string dependencies = "[{'FET_004_ROBOT_NEWTON': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_022_PHYSX = {
-                            string dependencies = "[{'FET_004_ROBOT_PHYSX': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_022_STANDARD = {
-                            string dependencies = "[{'FET_004_STANDARD': {'version': '0.2.0'}}]"
-                            bool passed = 1
-                            string version = "0.2.0"
-                        }
-                        dictionary FET_024_MUJOCO = {
-                            string dependencies = "[{'FET_024_STANDARD': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_024_NEWTON = {
-                            string dependencies = "[{'FET_024_STANDARD': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_024_PHYSX = {
-                            string dependencies = "[{'FET_024_STANDARD': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_024_STANDARD = {
+                        dictionary "FET004_Multibody.RobotPhysX.0-1-0" = {
+                            bool blocking_failure = 0
                             string dependencies = "[]"
                             bool passed = 1
-                            string version = "0.1.0"
+                            string version = "0-1-0"
                         }
-                        dictionary FET_028_ISAAC = {
-                            string dependencies = "[{'FET_028_STANDARD': {'version': '0.1.0'}}, {'FET_022_ISAAC': {'version': '0.1.0'}}]"
+                        dictionary "FET022_DrivenJoints.0-2-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['FET004_Multibody.0-2-0']"
                             bool passed = 1
-                            string version = "0.1.0"
+                            string version = "0-2-0"
                         }
-                        dictionary FET_028_MUJOCO = {
-                            string dependencies = "[{'FET_028_STANDARD': {'version': '0.1.0'}}, {'FET_022_MUJOCO': {'version': '0.1.0'}}]"
+                        dictionary "FET022_DrivenJoints.Isaac.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['FET022_DrivenJoints.PhysX.0-1-0']"
+                            string "optional requirements" = "['com.nvidia.simready.DJ.007', 'com.nvidia.simready.DJ.008', 'com.nvidia.simready.DJ.009', 'com.nvidia.simready.DJ.010']"
+                            bool passed = 0
+                            string version = "0-1-0"
+                        }
+                        dictionary "FET022_DrivenJoints.Isaac.0-2-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['FET022_DrivenJoints.PhysX.0-2-0']"
+                            string "optional requirements" = "['com.nvidia.simready.DJ.007', 'com.nvidia.simready.DJ.008', 'com.nvidia.simready.DJ.009', 'com.nvidia.simready.DJ.010']"
+                            bool passed = 0
+                            string version = "0-2-0"
+                        }
+                        dictionary "FET022_DrivenJoints.Newton.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['FET004_Multibody.RobotNewton.0-1-0']"
                             bool passed = 1
-                            string version = "0.1.0"
+                            string version = "0-1-0"
                         }
-                        dictionary FET_028_STANDARD = {
+                        dictionary "FET022_DrivenJoints.PhysX.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['FET004_Multibody.RobotPhysX.0-1-0']"
+                            string "optional requirements" = "['com.nvidia.simready.DJ.007']"
+                            bool passed = 0
+                            string version = "0-1-0"
+                        }
+                        dictionary "FET022_DrivenJoints.PhysX.0-2-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['FET004_Multibody.PhysX.0-4-0']"
+                            string "optional requirements" = "['com.nvidia.simready.DJ.007']"
+                            bool passed = 0
+                            string version = "0-2-0"
+                        }
+                        dictionary "FET028_Gripper.0-1-0" = {
+                            bool blocking_failure = 0
                             string dependencies = "[]"
                             bool passed = 1
-                            string version = "0.1.0"
+                            string version = "0-1-0"
                         }
-                        dictionary FET_031_STANDARD = {
-                            string dependencies = "[]"
-                            bool passed = 1
-                            string version = "0.1.0"
-                        }
-                        dictionary FET_033_STANDARD = {
-                            string dependencies = "[{'FET_031_STANDARD': {'version': '0.1.0'}}]"
-                            bool passed = 1
-                            string version = "0.3.0"
-                        }
-                        dictionary FET_100_ISAAC = {
-                            string dependencies = "[{'FET_003_PHYSX': {'version': '0.4.0'}}]"
-                            bool passed = 1
-                            string version = "0.3.0"
+                        dictionary "FET028_Gripper.Isaac.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['FET022_DrivenJoints.Isaac.0-1-0', 'FET028_Gripper.0-1-0']"
+                            string "optional requirements" = "['com.nvidia.simready.DJ.007', 'com.nvidia.simready.DJ.008', 'com.nvidia.simready.DJ.009', 'com.nvidia.simready.DJ.010']"
+                            bool passed = 0
+                            string version = "0-1-0"
                         }
                     }
                 }
@@ -403,7 +738,6 @@
 )
 
 def Xform "Robotiq_2F_85" (
-    kind = "component"
     prepend references = @./payloads/base.usda@
     variants = {
         string MuJoCo = "Disabled"
@@ -417,7 +751,8 @@ def Xform "Robotiq_2F_85" (
         displayName = "Namespace"
         doc = "Namespace of the prim in Isaac Sim"
     )
-    custom rel isaac:physics:robotJoints = [
+    custom rel isaac:physics:robotJoints
+    prepend rel isaac:physics:robotJoints = [
         </Robotiq_2F_85/root_joint>,
         </Robotiq_2F_85/Joints/finger_joint>,
         </Robotiq_2F_85/Joints/right_outer_knuckle_joint>,
@@ -436,6 +771,22 @@ def Xform "Robotiq_2F_85" (
 
     over "base_link"
     {
+        def Xform "tool_plug_01" (
+            prepend apiSchemas = ["IsaacSiteAPI"]
+        )
+        {
+            string isaac:Description = "Robotiq 2F-85 mounting interface, ISO 9409-1-50-4-M6."
+            uniform token isaac:forwardAxis = "Z"
+            custom uniform token simready:mate:domain = "mechanical"
+            custom uniform token simready:mate:mechanical:interface = "ISO-9409-1-50-4-M6"
+            custom uniform token simready:mate:mechanical:kind = "Gripper"
+            custom uniform token simready:mate:role = "Plug"
+            quatd xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
         def Xform "gripper_01" (
             prepend apiSchemas = ["IsaacSiteAPI"]
         )

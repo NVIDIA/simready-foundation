@@ -4,9 +4,9 @@ End to end guide for applying and validating Semantic Labels.
 
 You will learn what the label spec asks for, assign labels either from
 Python or from inside Blender, check the result with `simready-validate`, and
-then confirm with `simready-benchmark` that those labels reach the
+then confirm with `simready-evaluate` that those labels reach the
 renderer. It is the reference pipeline for
-[Semantic Labels](../../capabilities/semantic_labels/capability-semantic_labels.md).
+[Semantic Labels](../../rules_and_reqs/semantic_labels/capability-semantic_labels.md).
 
 All commands run from the **repository root** unless stated otherwise.
 
@@ -18,9 +18,9 @@ All commands run from the **repository root** unless stated otherwise.
 | Baseline | `simready-validate` | The unlabeled asset fails `SL.001`, and the report names the prims it looked at. |
 | Conform | Python or Blender | `SemanticsLabelsAPI` applied, with real values. |
 | Validate | `simready-validate` | The semantic-labels feature drops off the failing list. |
-| Verify | `simready-benchmark` | The segmentation render shows the object while labels are present, and nothing once they are stripped. |
+| Verify | `simready-evaluate` | The segmentation render shows the object while labels are present, and nothing once they are stripped. |
 
-Validation tells you the labels are well-formed. Only the benchmark tells you
+Validation tells you the labels are well-formed. Only the evaluation tells you
 the renderer honors them: a single label on the root prim should produce
 segmentation coverage across the whole asset, and that coverage should vanish
 when you remove the label.
@@ -32,7 +32,7 @@ when you remove the label.
 | Python | 3.12 | All paths |
 | Git LFS | Installed and initialised (`git lfs install`) | Sample assets |
 | `simready-validate` | see [SimReady Validation Workflow](../validate_workflow.md) | Validation |
-| `simready-benchmark[kit]` | see [Running Tests](../benchmark/running.md) | Runtime verification |
+| `simready.evaluate[kit]` | see [Running Tests](../evaluate/running.md) | Runtime verification |
 | [SimReady Blender add-on](https://github.com/NVIDIA/simready-blender-add-on) | Blender 5.2, Windows 10/11 | Blender path only |
 | NVIDIA Isaac Sim | 6.0 or later | Runtime verification |
 
@@ -106,28 +106,29 @@ name into the value is the most common authoring error. See
 
 | Code | Requirement | Applies when |
 |---|---|---|
-| [`SL.001`](../../capabilities/semantic_labels/requirements/semantic-label-capability.md) | Every renderable prim resolves a label, whether from itself, an ancestor, its bound material, or `GeomSubset` membership. | Always |
-| [`SL.002`](../../capabilities/semantic_labels/requirements/semantic-label-deprecated-schema.md) | A deprecated `SemanticsAPI` label has been migrated to `SemanticsLabelsAPI`. | Only on prims that still carry legacy labels |
-| [`SL.003`](../../capabilities/semantic_labels/requirements/semantic-label-schema.md) | Labels use the `SemanticsLabelsAPI` schema. | Always |
-| [`SL.TIME.001`](../../capabilities/semantic_labels/requirements/semantic-label-time.md) | Labels have no time samples. | RTX perception pipelines |
-| [`SL.MAT.001`](../../capabilities/semantic_labels/requirements/semantic-label-material.md) | Each visual `Material` prim has a non-empty `SemanticsLabelsAPI:material` label. Physics materials are out of scope. | NVIDIA convention |
-| [`SL.QCODE.001`](../../capabilities/semantic_labels/requirements/semantic-label-qcode-valid.md) | Wikidata Q-codes are well-formed: `Q` followed by digits. | Opt-in, Wikidata only |
+| [`SL.001`](../../rules_and_reqs/semantic_labels/requirements/semantic-label-capability.md) | Every renderable prim resolves a label, whether from itself, an ancestor, its bound material, or `GeomSubset` membership. | Always |
+| [`SL.002`](../../rules_and_reqs/semantic_labels/requirements/semantic-label-deprecated-schema.md) | A deprecated `SemanticsAPI` label has been migrated to `SemanticsLabelsAPI`. | Only on prims that still carry legacy labels |
+| [`SL.003`](../../rules_and_reqs/semantic_labels/requirements/semantic-label-schema.md) | Labels use the `SemanticsLabelsAPI` schema. | Always |
+| [`SL.TIME.001`](../../rules_and_reqs/semantic_labels/requirements/semantic-label-time.md) | Labels have no time samples. | RTX perception pipelines |
+| [`SL.MAT.001`](../../rules_and_reqs/semantic_labels/requirements/semantic-label-material.md) | Each visual `Material` prim has a non-empty `SemanticsLabelsAPI:material` label. Physics materials are out of scope. | NVIDIA convention |
+| [`SL.QCODE.001`](../../rules_and_reqs/semantic_labels/requirements/semantic-label-qcode-valid.md) | Wikidata Q-codes are well-formed: `Q` followed by digits. | Opt-in, Wikidata only |
 
 Applying the schema without authoring a value does not satisfy `SL.001`: an
 empty label counts as no label.
 
-These rules are split across three features, so you only take on the ones that
+These rules are split across three contracts, so you only take on the ones that
 apply to your work:
 
-| Feature | Holds | Select it when |
+| Contract | Holds | Select it when |
 |---|---|---|
-| `FET_011_STANDARD` 0.2.0 | `SL.001`, `SL.002`, `SL.003` | Always. Any taxonomy, any runtime. |
-| `FET_011_RTX` 0.1.0 | `SL.TIME.001`, `SL.MAT.001` | You are targeting the NVIDIA RTX perception pipeline. Depends on `FET_011_STANDARD` 0.2.0. |
-| `FET_046_STANDARD` 0.1.0 | `SL.QCODE.001` | You are labeling with Wikidata Q-codes. Depends on `FET_011_STANDARD` 0.2.0. |
+| `FET011_SemanticLabels.0-2-0` | `SL.001`, `SL.002`, `SL.003` | Always. Any taxonomy, any runtime. |
+| `FET011_SemanticLabels.RTX.0-1-0` | `SL.TIME.001`, `SL.MAT.001` | You are targeting the NVIDIA RTX perception pipeline. Depends on `FET011_SemanticLabels.0-2-0`. |
+| `CAP046_WikidataLabels.0-1-0` | `SL.QCODE.001` | You are labeling with Wikidata Q-codes. |
 
-`FET_011_STANDARD` 0.2.0 is selected by `Robotics-Prop` 3.2.0 and every
-`Open-Taxonomy-*` profile.
-`FET_011_RTX` 0.1.0 is selected by `Robotics-Prop` 3.2.0.
+`FET011_SemanticLabels.0-2-0` is selected by `Robotics-Prop` 3.2.0 and
+every `Open-Taxonomy-*` profile.
+`FET011_SemanticLabels.RTX.0-1-0` and `CAP046_WikidataLabels.0-1-0` are
+selected by `Robotics-Prop` 3.2.0.
 
 ## 2. Establish a baseline
 
@@ -135,7 +136,7 @@ Start from an asset with no labels at all, so you can see the failure before you
 fix it.
 
 ```bash
-simready-validate --rules-path nv_core/sr_specs/docs/capabilities --features-path nv_core/sr_specs/docs/features --profiles-path nv_core/sr_specs/docs/profiles --profile Robotics-Prop --version 3.2.0 ASSET
+simready-validate --rules-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs --features-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities --features-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features --profiles-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles --profile Robotics-Prop --version 3.2.0 ASSET
 ```
 
 ```{note}
@@ -150,13 +151,13 @@ The line to look for:
 ```text
 Asset: toaster.usda
   [FAILED] Robotics-Prop v3.2.0
-           FET_011_STANDARD: failing requirements: ['com.nvidia.simready.SL.001']
+           FET011_SemanticLabels.0-2-0: failing requirements: ['com.nvidia.simready.SL.001']
 ```
 
 Requirement codes appear fully qualified in the report, so `SL.001` shows up as
 `com.nvidia.simready.SL.001`. Other features may fail on the same asset for
 reasons that have nothing to do with labels; this guide only follows the
-`FET_011_STANDARD` line.
+`FET011_SemanticLabels.0-2-0` line.
 
 The validator looks for a label on the prim itself, its ancestors, its bound
 material, and its `GeomSubset`s. Those are also the places where a fix can go.
@@ -318,7 +319,7 @@ A prim can resolve its label through its bound material, so a material label
 also satisfies `SL.001` for any geometry bound to that material. If some
 geometry is awkward to reach directly, label the material it uses instead.
 
-`SL.MAT.001` belongs to `FET_011_RTX`, so it only applies once you have
+`SL.MAT.001` belongs to `FET011_SemanticLabels.RTX`, so it only applies once you have
 selected the NVIDIA conventions.
 
 ### Using Wikidata Q-codes
@@ -364,7 +365,7 @@ never contacts wikidata.org, since a USD validator should not depend on network
 access. A well-formed code pointing at nothing real will still pass, so
 checking that a code means what you think it means is your job.
 
-This rule lives in `FET_046_STANDARD`, which you select only if you have
+This rule lives in `CAP046_WikidataLabels`, which you select only if you have
 committed to the Wikidata taxonomy.
 
 ## 4. Assign labels in Blender
@@ -403,10 +404,10 @@ Both need add-on 2026.8.0 or later.
 Run the same command as step 2, this time against the labeled asset:
 
 ```bash
-simready-validate --rules-path nv_core/sr_specs/docs/capabilities --features-path nv_core/sr_specs/docs/features --profiles-path nv_core/sr_specs/docs/profiles --profile Robotics-Prop --version 3.2.0 ASSET
+simready-validate --rules-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs --features-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities --features-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features --profiles-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles --profile Robotics-Prop --version 3.2.0 ASSET
 ```
 
-`FET_011_STANDARD` drops off the failing list. Nothing replaces it in the output;
+`FET011_SemanticLabels.0-2-0` drops off the failing list. Nothing replaces it in the output;
 the feature stops being reported.
 
 Add `--output results.json` if you want a machine-readable report, or
@@ -423,7 +424,7 @@ semantics schema from the asset and renders the same frame again, which should
 come back empty.
 
 ```bash
-simready-benchmark --assets ASSET --features FET_011
+simready-evaluate --assets ASSET --features FET011
 ```
 
 Measured on the sample toaster, Isaac Sim 6.0.1:
@@ -465,7 +466,7 @@ coverage instead.
 | `SL.002` fails | A deprecated `SemanticsAPI` label has no modern equivalent. | Add the equivalent `SemanticsLabelsAPI` label. The validator offers this as a suggestion. |
 | `SL.002` warns | Both schemas hold the same value. | Remove the deprecated schema and its `semantic:<instance>:params:*` attributes. |
 | `SL.TIME.001` fails | Labels are time-sampled. | Author a static value. Time-varying labels are valid OpenUSD, but the RTX static-label pipeline does not read them. |
-| Segmentation blank in the benchmark, though validation passed | Isaac Sim earlier than 6.0 does not read `SemanticsLabelsAPI`. | Run on 6.0 or later. |
+| Segmentation blank in the evaluation, though validation passed | Isaac Sim earlier than 6.0 does not read `SemanticsLabelsAPI`. | Run on 6.0 or later. |
 
 ### The instance-name-as-value mistake
 
@@ -494,7 +495,7 @@ have it, so check before you trust an inherited `.blend`.
 
 ## Where to go next
 
-- [Semantic Labels capability](../../capabilities/semantic_labels/capability-semantic_labels.md) for the contract in full.
+- [Semantic Labels capability](../../rules_and_reqs/semantic_labels/capability-semantic_labels.md) for the contract in full.
 - [SimReady Validation Workflow](../validate_workflow.md) for validator setup, JSON reports and stamping.
-- [SimReady Benchmark](../benchmark/benchmark.md) for the runtime test framework.
-- [Profiles](../../profiles/profiles.md) for which profiles select the semantic-labels feature.
+- [SimReady Evaluate](../evaluate/evaluate.md) for the runtime test framework.
+- [Profiles](../profiles/profiles.md) for which profiles select the semantic-labels feature.

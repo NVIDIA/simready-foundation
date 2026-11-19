@@ -1,0 +1,2056 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" data-theme="auto">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Foundations 2 Layout Migration &#8212; Content Capabilities</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=75c7c72ae941e8b558d8" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=75c7c72ae941e8b558d8" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/_style.css?v=e1c02e80" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/tags.css?v=03faa5c8" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
+
+
+
+    <script src="../_static/documentation_options.js?v=c1b729fb"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'guides/foundations2-layout-migration';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.24.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2026.10.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+
+    <link rel="icon" href="../_static/favicon.png"/>
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Semantic Labels Workflow" href="semantic_labels/semantic_labels.html" />
+    <link rel="prev" title="Foundations 2 Catalog Migration" href="foundations2-catalog-migration.html" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2026.10.0" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+
+
+  </head>
+
+  <body data-default-mode="auto">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation" aria-expanded="false" aria-controls="pst-primary-sidebar-modal">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Content Capabilities - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Content Capabilities - Home"/>
+  
+  
+    <p class="title logo__title">Content Capabilities</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-4"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-4"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-4"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-4">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button type="button" class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page" aria-expanded="false" aria-controls="pst-secondary-sidebar-modal">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal" tabindex="-1"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Content Capabilities - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Content Capabilities - Home"/>
+  
+  
+    <p class="title logo__title">Content Capabilities</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-5"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-5"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-5"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-5">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-6"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-6"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-6"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-6">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="guides.html">Guides</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tiers.html">SimReady Foundation Tiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="foundation_pypi.html">SimReady Foundation PyPI Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libraries.html">SimReady Python Libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validate_workflow.html">SimReady Validation Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="runtime_attribution_qa.html">Runtime Attribution QA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validator-integration.html">Foundations 2 Validator Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="foundations2-catalog-migration.html">Foundations 2 Catalog Migration</a></li>
+<li class="toctree-l2 current active"><a aria-current="page" class="current reference internal" href="#">Foundations 2 Layout Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="semantic_labels/semantic_labels.html">Semantic Labels Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_a_custom_taxonomy.html">Adding a Custom Taxonomy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="packaging_workflow.html">SimReady Packaging Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thumbnail_guidelines.html">Thumbnail Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acceptance_workflow.html">SimReady Acceptance Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_contribution_workflow.html">External Contribution Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiphysics_solvers.html">Multiple Physics Solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_adapters/feature_adapters.html">Feature Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiles/profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="evaluate/evaluate.html">SimReady Evaluate</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="evaluate/overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="evaluate/pipeline.html">Pipeline and Stages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="evaluate/running.html">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="evaluate/reading-reports.html">Reading Reports</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="evaluate/tests/tests.html">Tests Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet001-visual.html">FET001 Visual</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet003-physics.html">FET003 Physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet004-multibody.html">FET004 Multibody</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet005-grasp.html">FET005 Grasp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet006-materials.html">FET006 Materials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet008-object-forward.html">FET008 Object Forward</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet010-display-color.html">FET010 Display Color</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet011-semantic-labels.html">FET011 Semantic Labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet012-gaussian-splat.html">FET012 Gaussian Splat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet013-representation.html">FET013 Multi-Representation Visual</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet014-mesh-variant.html">FET014 Mesh Variant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet015-collision-variant.html">FET015 Collision Variant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet016-appearance-variant.html">FET016 Appearance Variant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet022-driven-joints.html">FET022 Driven Joints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet028-gripper.html">FET028 Gripper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/authoring.html">Authoring runtime tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/experimental.html">Experimental and disabled tests</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="evaluate/newton-tests/runtime-tests.html">Newton Runtime Tests</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="evaluate/sensor-tests/tests.html">Sensor Tests Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/sensor-tests/fet034-imu-sensors.html">FET034 IMU Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/sensor-tests/fet035-render-products.html">FET035 Render Products</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/sensor-tests/fet036-rtx-sensors.html">FET036 RTX Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/sensor-tests/fet037-joint-sensors.html">FET037 Joint Sensors</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="visual_materials/visual_materials.html">Visual Materials Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SimReady_learning_workflow.html">SimReady Learning Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="naming_conventions.html">Naming Conventions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="development.html">Development Workflows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="features_expansion_workflow.html">Features Expansion Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../rules_and_reqs/rules_and_reqs.html">Rules and Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/core/core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/core/sim_ready/capability-sim_ready.html">SimReady</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/sim_ready/requirements.html">SimReady Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/sim_ready/requirements/metadata-whitelist.html">metadata-whitelist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/sim_ready/requirements/thumbnail-exist.html">Thumbnail Exist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/sim_ready/requirements/nested-simready-metadata.html">nested-simready-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/sim_ready/requirements/metadata-union.html">metadata-union</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/core/units/capability-units.html">Units</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/units/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/core/asset_frame/capability-asset_frame.html">Asset Frame</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/asset_frame/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/core/asset_variants/capability-asset_variants.html">Asset Variants</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/asset_variants/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/core/atomic_asset/capability-atomic_asset.html">Atomic Asset</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/atomic_asset/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/atomic_asset/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/capability-naming_paths.html">Naming and Paths</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements.html">Naming and Paths Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements/prim-naming-convention.html">prim-naming-convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements/file-naming-convention.html">file-naming-convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements/directory-structure.html">directory-structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements/path-length-limits.html">path-length-limits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements/asset-folder-structure.html">asset-folder-structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements/metadata-location.html">metadata-location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements/relative-paths.html">relative-paths</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/capability-runtime_variants.html">Runtime Variants</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements.html">Runtime Variants Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/physx-variant-set.html">physx-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/physx-runtime-payload.html">physx-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/physx-variant-metadata.html">physx-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/newton-variant-set.html">newton-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/newton-runtime-payload.html">newton-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/newton-variant-metadata.html">newton-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/mujoco-variant-set.html">mujoco-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/mujoco-runtime-payload.html">mujoco-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/mujoco-variant-metadata.html">mujoco-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/runtime-variant-section-purity.html">runtime-variant-section-purity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/runtime-physics-isolation.html">runtime-physics-isolation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/runtime-physics-isolation-matrix.html">Runtime Physics Isolation Matrix</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/visualization/visualization.html">Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/visualization/geometry/capability-geometry.html">Geometry</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/visualization/geometry/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/visualization/geometry/creators_overview.html">Creators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/visualization/geometry/developers_overview.html">Developers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/visualization/materials/capability-materials.html">Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/visualization/materials/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/visualization/materials/developers.html">Developers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/visualization/display_color/capability-display_color.html">Display Color</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/visualization/display_color/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/visualization/gaussian_splat/capability-gaussian_splat.html">Gaussian Splat</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/visualization/gaussian_splat/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/isaac_sim/isaac_sim.html">Isaac Sim</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/isaac_sim/composition/capability-composition.html">Composition</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/composition/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/isaac_sim/ros_bridge/capability-ros_bridge.html">ROS Bridge</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/ros_bridge/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/isaac_sim/robot_materials/capability-robot_materials.html">Robot Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/robot_materials/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/isaac_sim/robot_core/capability-robot_core.html">Robot Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/robot_core/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/isaac_sim/optimizations/capability-optimizations.html">Isaac Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/isaac_sim/optimizations/requirements.html">Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/optimizations/requirements/fixed-joint-no-mergeable-body-pair.html">fixed-joint-no-mergeable-body-pair</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/optimizations/requirements/rigid-body-no-multiple-visual-meshes.html">rigid-body-no-multiple-visual-meshes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/optimizations/requirements/render-only-no-inactive-collision-schemas.html">render-only-no-inactive-collision-schemas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/optimizations/requirements/material-no-materialx-render-context.html">material-no-materialx-render-context</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_bodies.html">Physics Bodies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/physics_bodies/base_articulation/capability-base-articulation.html">Base Articulation</a></li>
+
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_rigid_bodies/capability-physics_rigid_bodies.html">Rigid Bodies and Colliders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_rigid_bodies/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_rigid_bodies/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_colliders/capability-collider_approximations.html">Collider Approximations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_colliders/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_colliders/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_joints/capability-physics_joints.html">Joints and Articulations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_joints/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_joints/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_driven_joints/capability-physics_driven_joints.html">Driven Joints</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_driven_joints/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_materials/capability-physics_materials.html">Physics Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_materials/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_materials/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_graspable/capability-physics_graspable.html">Graspable Vectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_graspable/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_graspable/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_grippers/capability-physics_grippers.html">Grippers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_grippers/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_sensors/capability-physics_sensors.html">Physics Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_sensors/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/object_affordances/capability-object_affordances.html">Object Affordances</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/object_affordances/requirements.html">Object Affordances Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/object_affordances/requirements/object-affordance-valid.html">object-affordance-valid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/object_affordances/requirements/object-affordance-state-valid.html">object-affordance-state-valid</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/hierarchy/hierarchy.html">Hierarchy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/hierarchy/capability-hierarchy.html">Hierarchy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/hierarchy/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/hierarchy/creators_overview.html">Creators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/hierarchy/developers_overview.html">Developers</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_sensors.html">Non-Visual Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/capability-nonvisual_materials.html">Non-Visual Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements.html">Non-Visual Materials Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/nonvisual_attributes_table.html">Non-Visual Sensor Attributes Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-base.html">material-base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-coating.html">material-coating</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-attributes.html">material-attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-time.html">material-time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-binding.html">material-binding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-consistency.html">material-consistency</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/lidar/capability-lidar.html">LiDAR Sensor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/lidar/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/rendering/rendering.html">Rendering</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/rendering/render_products/capability-render_products.html">Render Products</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/rendering/render_products/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/semantic_labels/capability-semantic_labels.html">Semantic Labels</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements.html">Semantic Labels Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-capability.html">semantic-label-capability</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-deprecated-schema.html">semantic-label-deprecated-schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-qcode-valid.html">semantic-label-qcode-valid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-schema.html">semantic-label-schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-time.html">semantic-label-time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-material.html">semantic-label-material</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-capability.html">semantic-label-capability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-deprecated-schema.html">semantic-label-deprecated-schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-qcode-valid.html">semantic-label-qcode-valid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-schema.html">semantic-label-schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-time.html">semantic-label-time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-material.html">semantic-label-material</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/capability-dataset_taxonomies.html">Dataset Taxonomies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements.html">Dataset Taxonomies Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/coco-labels.html">coco-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/cityscapes-labels.html">cityscapes-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/ade20k-labels.html">ade20k-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/pascal-voc-labels.html">pascal-voc-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/sunrgbd-labels.html">sunrgbd-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/imagenet-labels.html">imagenet-labels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/coco-labels.html">coco-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/cityscapes-labels.html">cityscapes-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/ade20k-labels.html">ade20k-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/pascal-voc-labels.html">pascal-voc-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/sunrgbd-labels.html">sunrgbd-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/imagenet-labels.html">imagenet-labels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/packaging/packaging.html">Packaging</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/packaging/packaging_core/capability-packaging_core.html">Packaging Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/packaging/packaging_core/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/packaging/conformance_metadata/capability-conformance_metadata.html">Conformance Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/packaging/conformance_metadata/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/packaging/packaging_introspection/capability-packaging_introspection.html">Packaging Introspection</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/packaging/packaging_introspection/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/aif/aif.html">AIF</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/aif/metadata/capability-metadata.html">Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/aif/metadata/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/aif/connection_points/capability-connection_points.html">Connection Points</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/aif/connection_points/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/aif/thermal_cooling/capability-thermal_cooling.html">Thermal Cooling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/aif/thermal_cooling/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/aif/electrical/capability-electrical.html">Electrical</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/aif/electrical/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/template/template.html">Template</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/template/smoke/capability-smoke.html">Smoke</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/template/smoke/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../capabilities/capabilities.html">Capabilities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP000_Core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP000_Core.Isaac.html">Core (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP000_Core.MuJoCo.html">Core (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP000_Core.Newton.html">Core (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP000_Core.PhysX.html">Core (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP002_PosableBodies.html">Posable Bodies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP003_RigidBody.MuJoCo.html">Rigid Body Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP004_Multibody.MuJoCo.html">Simulate Multi-Body Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP004_Multibody.RobotMuJoCo.html">Simulate Multi-Body Physics (Robot MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP007_NonVisualMaterials.html">Non-Visual Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP021_RobotCore.Isaac.html">Robot Core (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP022_DrivenJoints.MuJoCo.html">Driven Joints (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP023_RobotMaterials.Isaac.html">Robot Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP024_BaseArticulation.html">Base Articulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP024_BaseArticulation.MuJoCo.html">Base Articulation (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP024_BaseArticulation.Newton.html">Base Articulation (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP024_BaseArticulation.PhysX.html">Base Articulation (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP025_RosBridge.Ros.html">ROS Ready (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP026_Mates.html">Mate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP027_Connections.html">Connections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP028_Gripper.MuJoCo.html">Gripper (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP029_ConnectionJoint.html">Connections Multibody-Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP029_ConnectionJoint.MuJoCo.html">Connections Multibody-Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP029_ConnectionJoint.Newton.html">Connections Multibody-Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP029_ConnectionJoint.PhysX.html">Connections Multibody-Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP030_PackagingCore.html">Packaging Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP031_SelfContainedPackage.html">Self-contained Package Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP032_PackagingIntrospection.html">Packaging Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP033_SimReadyPackage.html">Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP039_ObjectAffordances.html">Object Affordances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP040_CocoLabels.html">Semantic Labels - COCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP041_CityscapesLabels.html">Semantic Labels - Cityscapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP042_Ade20kLabels.html">Semantic Labels - ADE20K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP043_PascalVocLabels.html">Semantic Labels - PASCAL VOC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP044_SunRgbdLabels.html">Semantic Labels - SUN RGB-D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP045_ImageNet1kLabels.html">Semantic Labels - ImageNet-1K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP046_WikidataLabels.html">Semantic Labels - Wikidata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP1000_TemplateSmoke.Template.html">Template Smoke</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP100_IsaacComposition.Isaac.html">IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP101_RobotComposition.Isaac.html">Robot IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP102_RigidBodyCollapse.Isaac.html">Rigid-Body Collapse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP103_VisualMeshMerge.Isaac.html">Visual Mesh Merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP104_RenderCollisionSeparation.Isaac.html">Render-Collision Separation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP105_MaterialXRemoval.Isaac.html">MaterialX Removal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP200_AifMetadata.html">AIF Core Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP201_ConnectionPoints.html">Connection Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP202_ThermalCooling.html">AIF Thermal Cooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP203_Electrical.html">AIF Electrical</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/assembly/assembly.html">Assembly</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/assembly/mates/capability-mates.html">Mates</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/assembly/mates/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/assembly/connections/capability-connections.html">Connections</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/assembly/connections/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../features/features.html">Features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../features/feature-dependency-graph.html">Feature dependency graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET001_MinimalPlaceableVisual.html">Minimal Placeable Visual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET003_RigidBody.html">Rigid Body Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET003_RigidBody.Newton.html">Rigid Body Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET003_RigidBody.PhysX.html">Rigid Body Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET004_Multibody.html">Simulate Multi-Body Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET004_Multibody.Newton.html">Simulate Multi-Body Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET004_Multibody.PhysX.html">Simulate Multi-Body Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET004_Multibody.RobotNewton.html">Simulate Multi-Body Physics (Robot Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET004_Multibody.RobotPhysX.html">Simulate Multi-Body Physics (Robot PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET005_Grasp.html">Simulate Grasp Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET006_Materials.html">Materials (USDPreviewSurface)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET006_Materials.MDL.html">Materials (MDL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET006_Materials.Openpbr.html">Materials (OpenPBR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET008_ObjectForward.html">Object Forward</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET009_MaterialCoverage.html">Material Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET010_DisplayColor.html">Display Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET011_SemanticLabels.html">Semantic Labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET011_SemanticLabels.RTX.html">Semantic Labels (RTX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET012_GaussianSplat.html">Sensor Visual 3DGS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET013_MultiRepresentationVisual.html">Multi-Representation Visual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET014_MeshVariant.html">Visual Mesh Variant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET015_CollisionVariant.html">Collision Variant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET016_AppearanceVariant.html">Appearance Variant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET022_DrivenJoints.html">Driven Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET022_DrivenJoints.Isaac.html">Driven Joints (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET022_DrivenJoints.Newton.html">Driven Joints (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET022_DrivenJoints.PhysX.html">Driven Joints (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET028_Gripper.html">Gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET028_Gripper.Isaac.html">Gripper (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET034_ImuSensor.Isaac.html">IMU Sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET035_RenderProducts.RTX.html">Camera and Render Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET036_Lidar.RTX.html">RTX Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET037_JointSensor.Isaac.html">Joint Sensor</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../profiles/profiles.html">Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robotics-prop.html">Robotics Prop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/nurec.html">NuRec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/asset-optimization.html">Asset Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-body.html">Robot Body</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-gripper.html">Robot Gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/sensor-imu.html">Sensor IMU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/sensor-joint.html">Sensor Joint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/sensor-camera.html">Sensor Camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/sensor-lidar.html">Sensor LiDAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/material.html">Material</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/assembly.html">Assembly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-assembly.html">Robot Assembly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/open-taxonomy-coco.html">Open Taxonomy COCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/open-taxonomy-cityscapes.html">Open Taxonomy Cityscapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/open-taxonomy-ade20k.html">Open Taxonomy ADE20K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/open-taxonomy-pascal_voc.html">Open Taxonomy PASCAL VOC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/open-taxonomy-sunrgbd.html">Open Taxonomy SUN RGB-D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/open-taxonomy-imagenet_1k.html">Open Taxonomy ImageNet-1K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/aif-entity.html">AIF Entity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tiers/tiers.html">Tiers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tiers/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tiers/aif.html">AIF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tiers/newton.html">Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tiers/sensors.html">Sensors</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../indexes/indexes.html">Indexes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../indexes/capability_status_index.html">Capability Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../indexes/requirements_index.html">Requirements Index</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelist.html">Changelist</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-house"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="guides.html" class="nav-link">End to End Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Foundations 2 Layout Migration</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="foundations-2-layout-migration">
+<h1>Foundations 2 Layout Migration<a class="headerlink" href="#foundations-2-layout-migration" title="Link to this heading">#</a></h1>
+<p>The verified inventory, identifier-consumer table and deferred follow-ups below
+describe the pre-Evaluate Foundations 1 migration checkout. Their Benchmark
+names, flat suite paths and collision examples are historical evidence for that
+transformation, not the current runtime package layout. Use
+<a class="reference internal" href="evaluate/evaluate.html"><span class="std std-doc">Evaluate</span></a> for current commands, providers and installation.
+<code class="docutils literal notranslate"><span class="pre">migrate_foundations2_catalog.py</span></code> retains its explicit Foundations 1 reader;
+its <code class="docutils literal notranslate"><span class="pre">FET_</span></code> pattern is not a coverage validator for current dotted Foundations 2 IDs.</p>
+<p>Instructions for transforming a Foundations 1 shaped repository into a
+Foundations 2 shaped one, retiring the transitional <code class="docutils literal notranslate"><span class="pre">foundations2/</span></code> directory
+level and making the Foundations 2 catalog the in-repo source of truth.</p>
+<p>This page exists to tell the <em>next</em> run what to do. It is not a record of
+previous runs: there are no completion markers here, and anything learned while
+executing gets written back as guidance rather than as history. The
+transformation is re-applied repeatedly against a moving <code class="docutils literal notranslate"><span class="pre">main</span></code>, so instructions
+that drift into past tense stop being usable exactly when they are needed.</p>
+<p>This plan supersedes the <em>layout</em> half of
+<a class="reference internal" href="foundations2-catalog-migration.html"><span class="std std-doc">Foundations 2 Catalog Migration</span></a>, which
+describes the current dual-tree arrangement. Read that page first for what the
+generated projection is; read this page for how the trees collapse into one.</p>
+<section id="goal-and-constraints">
+<h2>Goal and constraints<a class="headerlink" href="#goal-and-constraints" title="Link to this heading">#</a></h2>
+<p>The generated projection currently sits beside the published Foundations 1
+content, one level down in <code class="docutils literal notranslate"><span class="pre">foundations2/</span></code>. That arrangement was scaffolding. It
+has two costs: a directory named after a migration epoch will not age well, and
+the same contract is expressed twice per tier, so the two representations can
+drift.</p>
+<p>More importantly, the projection is <em>generated from</em> Foundations 1, so
+Foundations 1 is still the source of truth. Nobody can author a Foundations 2
+contract natively until that inverts. Collapsing the trees is what makes
+Foundations 2 authorable.</p>
+<p>Three constraints shape the work:</p>
+<ul class="simple">
+<li><p><strong>Consumer compatibility is not the same as repo layout.</strong> <code class="docutils literal notranslate"><span class="pre">simready.validate</span></code>
+must keep reading Foundations 1 shaped tiers, because published wheels and
+third-party tiers exist in the wild. The repo does not need to keep both trees
+for that to be true.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">simready-explorer</span></code> must ship its Foundations 1 fallback before ship.</strong>
+Otherwise an already-installed validator cannot read a migrated tier. Note the
+dependency runs the other way early on: the transformer has to exist first,
+because developing and testing that fallback means flipping a real repo
+between the two layouts.</p></li>
+<li><p><strong>The transformer stays a repeatable generator until ship.</strong> <code class="docutils literal notranslate"><span class="pre">main</span></code> adds
+Foundations 1 content continuously, so the transformation is re-run, not
+applied once. It becomes one-shot only at ship.</p></li>
+<li><p><strong>This migration rearranges existing content; it does not author new content.</strong>
+Gaps it happens to expose — a missing conform skill, a thin requirement page,
+an absent profile guide — get recorded and handled separately. Renaming and
+relocating what exists is already a large enough change to review on its own,
+and mixing authoring into it makes the diff unreadable.</p></li>
+</ul>
+</section>
+<section id="target-layout">
+<h2>Target layout<a class="headerlink" href="#target-layout" title="Link to this heading">#</a></h2>
+<p>Per tier, under each tier’s package root in <code class="docutils literal notranslate"><span class="pre">simready/foundation/&lt;package&gt;/</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>rules_and_reqs/     # requirement SOURCE tree: domain docs, requirement
+                    # markdown, validators (renamed from capabilities/)
+features/           # FET contracts: runtime-tested. JSON + sibling markdown
+capabilities/       # CAP contracts: static, no runtime tests. JSON + markdown
+profiles/           # profile TOML + profile markdown
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">foundations2/</span></code> ceases to exist.</p>
+<p>Package directory names are not uniform — <code class="docutils literal notranslate"><span class="pre">tier_core</span></code> and <code class="docutils literal notranslate"><span class="pre">tier_template</span></code> carry
+a <code class="docutils literal notranslate"><span class="pre">tier_</span></code> prefix while the sensors tier is plain <code class="docutils literal notranslate"><span class="pre">sensors</span></code> — so never discover
+tiers by directory name. The transformer keys on the <code class="docutils literal notranslate"><span class="pre">_tier.py</span></code> descriptor
+instead, and any script or instruction added here must do the same. A
+name-based glob silently skips a whole tier.</p>
+<section id="why-capabilities-has-to-be-renamed">
+<h3>Why <code class="docutils literal notranslate"><span class="pre">capabilities/</span></code> has to be renamed<a class="headerlink" href="#why-capabilities-has-to-be-renamed" title="Link to this heading">#</a></h3>
+<p>“Capability” currently means three different things:</p>
+<ol class="arabic simple">
+<li><p>the <code class="docutils literal notranslate"><span class="pre">rules_and_reqs/</span></code> source tree (domain docs, requirement markdown and
+validators, grouped by domain: <code class="docutils literal notranslate"><span class="pre">core</span></code>, <code class="docutils literal notranslate"><span class="pre">hierarchy</span></code>, <code class="docutils literal notranslate"><span class="pre">physics_bodies</span></code>,
+<code class="docutils literal notranslate"><span class="pre">packaging</span></code>, …);</p></li>
+<li><p>a Foundations 2 <code class="docutils literal notranslate"><span class="pre">CAP</span></code> contract, meaning a feature without runtime tests;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">usd_validation_nvidia.CapabilityRegistry</span></code>, the registry unit that <em>both</em> FET
+and CAP contracts register into.</p></li>
+</ol>
+<p>Senses 1 and 2 are not the same concept under two names. <code class="docutils literal notranslate"><span class="pre">CAP000_Core.0-1-0</span></code>
+lists <code class="docutils literal notranslate"><span class="pre">NP.002</span></code>–<code class="docutils literal notranslate"><span class="pre">NP.008</span></code>, <code class="docutils literal notranslate"><span class="pre">SR.001</span></code> and <code class="docutils literal notranslate"><span class="pre">HI.010</span></code> — requirements drawn from several
+different domains of the source tree. A CAP contract is a cross-domain bundle; a
+source-tree folder is one domain. So CAP JSON cannot simply move into the
+existing <code class="docutils literal notranslate"><span class="pre">capabilities/</span></code> tree.</p>
+<p><code class="docutils literal notranslate"><span class="pre">rules_and_reqs/</span></code> is chosen because the runtime contract already uses that
+vocabulary: the tier descriptor field is <code class="docutils literal notranslate"><span class="pre">rules_and_requirements_path</span></code> and the
+entry point is <code class="docutils literal notranslate"><span class="pre">rules_package</span></code>. Nothing except the directory name calls that tree
+“capabilities”. <code class="docutils literal notranslate"><span class="pre">requirements/</span></code> is unavailable — that name is taken by the
+generated requirement-enum package.</p>
+</section>
+<section id="naming-rules">
+<h3>Naming rules<a class="headerlink" href="#naming-rules" title="Link to this heading">#</a></h3>
+<p>A contract’s markdown sits next to its JSON and shares the name minus the
+version segment, which is how <code class="docutils literal notranslate"><span class="pre">features/</span></code> already works:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>features/FET004_Multibody.PhysX.md            # one page, all versions
+features/FET004_Multibody.PhysX.0-1-0.json
+features/FET004_Multibody.PhysX.0-2-0.json
+features/FET004_Multibody.PhysX.0-3-0.json
+features/FET004_Multibody.PhysX.0-4-0.json
+
+capabilities/CAP000_Core.md
+capabilities/CAP000_Core.0-1-0.json
+</pre></div>
+</div>
+<p>Contract markdown is renamed because its <em>identifier</em> changes, not to satisfy a
+filename style rule. There is no strict case convention for markdown filenames
+in this repo: source-tree directories are snake_case, while most requirement and
+profile pages are kebab-case. Both stay as they are.</p>
+<p>Profile markdown therefore carries over <strong>unchanged</strong>, and because <code class="docutils literal notranslate"><span class="pre">profiles/</span></code>
+keeps its name those pages do not even move. Profiles are also <strong>not</strong> required
+to pair 1:1 with a TOML — some TOMLs deliberately hold several profiles each, so
+a profile page may document one profile out of an aggregate file.</p>
+</section>
+</section>
+<section id="the-transformer">
+<h2>The transformer<a class="headerlink" href="#the-transformer" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">nv_core/tiers/_tooling/migrate_foundations2_catalog.py</span></code> is the instrument. It
+has two operations: generation, which is the default, and relocation, behind a
+flag that is <strong>off by default</strong> so no routine <code class="docutils literal notranslate"><span class="pre">repo</span></code> task can destroy the
+Foundations 1 tree.</p>
+<section id="what-it-reads-and-writes">
+<h3>What it reads and writes<a class="headerlink" href="#what-it-reads-and-writes" title="Link to this heading">#</a></h3>
+<p>This decoupling is what makes the ordering in
+<a class="reference internal" href="#order-and-revertability">Order and revertability</a> possible, so it is worth
+stating precisely. Generation reads only:</p>
+<ul class="simple">
+<li><p>every Benchmark suite any tier ships, to classify which contracts are
+runtime-tested. A tier’s suites are the top-level packages its
+<code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> wheel target lists besides <code class="docutils literal notranslate"><span class="pre">simready</span></code>. Runtime tests are not
+confined to the core tier — the Newton and sensors tiers ship their own — and
+a contract whose tests sit in an unscanned suite projects as a <code class="docutils literal notranslate"><span class="pre">CAP</span></code>;</p></li>
+<li><p>each tier’s <code class="docutils literal notranslate"><span class="pre">_tier.py</span></code>, used purely as a discovery marker;</p></li>
+<li><p>each tier’s <code class="docutils literal notranslate"><span class="pre">features/*.json</span></code> and <code class="docutils literal notranslate"><span class="pre">profiles/*.toml</span></code>, the Foundations 1
+manifests.</p></li>
+</ul>
+<p>It writes only into <code class="docutils literal notranslate"><span class="pre">foundations2/</span></code>. <strong>It never reads or writes the requirement
+source tree</strong>, under either name, and the contracts it emits embed no
+source-tree paths. Generation before the rename and generation after it produce
+byte-identical output.</p>
+<p>Consequently the whole transformation has exactly one ordering constraint: the
+rename must precede relocation, because relocation refuses to run while a
+<code class="docutils literal notranslate"><span class="pre">capabilities/</span></code> directory exists and pre-rename that directory is the source
+tree.</p>
+</section>
+<section id="what-relocation-does">
+<h3>What relocation does<a class="headerlink" href="#what-relocation-does" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>carries the feature markdown pages to their computed destinations, splitting
+FET pages from CAP pages and renaming both to the new stems;</p></li>
+<li><p>leaves the profile markdown pages in place, unchanged;</p></li>
+<li><p>replaces <code class="docutils literal notranslate"><span class="pre">features/*.json</span></code> and <code class="docutils literal notranslate"><span class="pre">profiles/*.toml</span></code> with the generated contracts;</p></li>
+<li><p>writes CAP contracts into <code class="docutils literal notranslate"><span class="pre">capabilities/</span></code>;</p></li>
+<li><p>moves <code class="docutils literal notranslate"><span class="pre">catalog-map.json</span></code> up to the tier package root, so provenance outlives
+the staging directory it was generated into;</p></li>
+<li><p>repoints links between contract pages, which break because both the filename
+and the containing directory can change;</p></li>
+<li><p>repoints references <em>into</em> the contract directories from files that do not
+move — profile pages, guides, benchmark suite docs, and the conform skills.
+This is the same rewrite as point 6 driven by the same catalog mapping, but
+it is easy to forget because most of those files sit outside the contract
+directories — guides and profile pages elsewhere in the docs tree, and the
+conform skills under each tier package’s <code class="docutils literal notranslate"><span class="pre">skills/</span></code>, beside <code class="docutils literal notranslate"><span class="pre">features/</span></code> but
+not in it. Expect roughly 260 references across some 76 files, about half of
+them in the skills. The top-level <code class="docutils literal notranslate"><span class="pre">skills/</span></code> entries for conform skills are
+symlinks into the tier packages; the walk does not follow directory
+symlinks, so each skill is rewritten once, at its tier location;</p></li>
+<li><p>regenerates the shared <code class="docutils literal notranslate"><span class="pre">features/</span></code> and <code class="docutils literal notranslate"><span class="pre">capabilities/</span></code> hub pages;</p></li>
+<li><p>leaves <code class="docutils literal notranslate"><span class="pre">rules_and_reqs/</span></code> untouched;</p></li>
+<li><p>refuses to run if any markdown page would be dropped or overwritten.</p></li>
+</ol>
+<p>Point 10 matters: a silent drop here loses documentation with no error, which is
+the same failure class as the generator’s earlier missing-suite behaviour.</p>
+<p>Points 6 and 7 share one subtlety worth stating plainly: a link’s <em>directory</em>
+component changes, not just its filename, whenever the target contract became a
+capability. <code class="docutils literal notranslate"><span class="pre">features/FET_000_STANDARD.md</span></code> becomes
+<code class="docutils literal notranslate"><span class="pre">capabilities/CAP000_Core.md</span></code>. A rewrite that only swaps stems produces
+links that resolve to nothing.</p>
+<p>Point 7 covers two reference shapes, and a rewrite built for one will silently
+miss the other. Guides, profile pages and Benchmark docs use relative links
+(<code class="docutils literal notranslate"><span class="pre">../features/…</span></code>, <code class="docutils literal notranslate"><span class="pre">../../../features/…</span></code>), while the conform skills cite full
+repository paths. Matching only the trailing <code class="docutils literal notranslate"><span class="pre">features/&lt;legacy</span> <span class="pre">id&gt;.md</span></code> and
+leaving whatever precedes it untouched handles both, and stays correct at any
+depth because <code class="docutils literal notranslate"><span class="pre">features/</span></code> and <code class="docutils literal notranslate"><span class="pre">capabilities/</span></code> are siblings — a file that does
+not move is equidistant from either.</p>
+<p>Versioned manifest references (<code class="docutils literal notranslate"><span class="pre">features/FET_003_PHYSX-0.4.0.json</span></code>) are
+repointed too, keyed on the legacy ID <em>and</em> version, since each published
+version projects to its own contract file. Leaving them for ship was the earlier
+plan, on the theory that the conform skills should change exactly once; that
+theory is spent once point 7 rewrites their links, and a half-migrated skill
+with live links and dead manifest paths is the state this guide warns against.</p>
+</section>
+<section id="interface-and-refusal-semantics">
+<h3>Interface and refusal semantics<a class="headerlink" href="#interface-and-refusal-semantics" title="Link to this heading">#</a></h3>
+<p>Relocation is a <strong>second step, not part of generation</strong>: it reads the staged
+<code class="docutils literal notranslate"><span class="pre">catalog-map.json</span></code>, so it requires a prior generate run and fails without one.
+Keeping the two separate is what lets them be reviewed separately.</p>
+<p>It refuses, rather than proceeding, in four cases:</p>
+<ul class="simple">
+<li><p>a page documents a contract that the generator did not emit — relocating
+would silently drop it;</p></li>
+<li><p>two pages resolve to one destination;</p></li>
+<li><p>a page would overwrite an existing file;</p></li>
+<li><p>the tree is <strong>already relocated</strong>. This one is easy to overlook.
+<code class="docutils literal notranslate"><span class="pre">generate()</span></code> projects <em>from</em> the Foundations 1 manifests in <code class="docutils literal notranslate"><span class="pre">features/</span></code>, so
+once those are replaced there is nothing left to project and a second run
+would produce a hollow catalog. Re-running means reverting to the
+Foundations 1 layout first, never relocating twice. Detected by the presence
+of a <code class="docutils literal notranslate"><span class="pre">capabilities/</span></code> contract directory.</p></li>
+</ul>
+<p>That last check is also what fires when the rename has not happened yet, since
+the pre-rename source tree occupies the same path. Read the refusal as “the name
+<code class="docutils literal notranslate"><span class="pre">capabilities/</span></code> is occupied”, and check which of the two situations applies
+before assuming a stale relocation.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">--relocate</span> <span class="pre">--dry-run</span></code> to print every move and deletion without performing
+them. That is how the destructive step gets reviewed before it runs, and its
+totals are a cheap sanity check against the inventory below.</p>
+<p>The two non-destructive halves are also runnable on their own, against a tree
+that has already been relocated:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Flag</p></th>
+<th class="head"><p>Effect</p></th>
+<th class="head"><p>Safe to re-run?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--relink</span></code></p></td>
+<td><p>repoint references in files that do not move</p></td>
+<td><p>yes — a second run reports zero changes</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--write-hubs</span></code></p></td>
+<td><p>regenerate the two contract hub pages</p></td>
+<td><p>yes — byte-identical output</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--relocate</span></code></p></td>
+<td><p>the destructive move</p></td>
+<td><p><strong>no</strong> — refuses; revert first</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Both read <code class="docutils literal notranslate"><span class="pre">catalog-map.json</span></code> from either its staged or its relocated location,
+which is what makes them usable after the fact. That matters when a gap in
+either one is discovered <em>after</em> the moves are committed: fixing it does not
+require reverting the relocation.</p>
+</section>
+<section id="what-is-deterministic-and-what-needs-judgement">
+<h3>What is deterministic and what needs judgement<a class="headerlink" href="#what-is-deterministic-and-what-needs-judgement" title="Link to this heading">#</a></h3>
+<p>The structural work belongs in the script: computing destinations from
+<code class="docutils literal notranslate"><span class="pre">catalog-map.json</span></code>, moving and renaming files, replacing JSON and TOML, and the
+safety checks. Some of the work needs judgement and is better handled by an
+agent following a skill.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Work</p></th>
+<th class="head"><p>Deterministic?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>destinations, moves, renames, JSON/TOML replacement, refusal checks</p></td>
+<td><p>yes — script</p></td>
+</tr>
+<tr class="row-odd"><td><p>link <em>targets</em> between contract pages</p></td>
+<td><p>yes — script</p></td>
+</tr>
+<tr class="row-even"><td><p>link <em>targets</em> into the contract directories from elsewhere</p></td>
+<td><p>yes — script</p></td>
+</tr>
+<tr class="row-odd"><td><p>link labels and prose naming Foundations 1 IDs and versions</p></td>
+<td><p>no — per-page rewrite</p></td>
+</tr>
+<tr class="row-even"><td><p>the two hub toctrees</p></td>
+<td><p>yes — regenerate from the catalog</p></td>
+</tr>
+<tr class="row-odd"><td><p>rebinding adapters, tests and skills at ship</p></td>
+<td><p>partly; the pre-underscore adapters are manual</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Two notes on that split, both of which are easy to get backwards.</p>
+<p>Links <em>between</em> contract pages are fully mechanical, not a judgement call:
+pages reference each other by bare filename because they used to share one
+directory, and after the split both the filename and the relative prefix are
+computable from the catalog. A link within one section stays bare; one across
+sections gains a <code class="docutils literal notranslate"><span class="pre">../capabilities/</span></code> or <code class="docutils literal notranslate"><span class="pre">../features/</span></code> prefix. Anchors and <code class="docutils literal notranslate"><span class="pre">./</span></code>
+forms must survive.</p>
+<p>Links <em>into</em> the requirement source tree need no work at all. A page moving
+from <code class="docutils literal notranslate"><span class="pre">features/</span></code> to <code class="docutils literal notranslate"><span class="pre">capabilities/</span></code> sits at the same depth, so <code class="docutils literal notranslate"><span class="pre">../rules_and_reqs/…</span></code>
+still resolves, and docs-root-absolute forms are unaffected. The same is true
+of the links from contract pages to profile pages, since profile pages neither
+move nor get renamed.</p>
+<p>What is left for the editorial pass is narrow but real: a rewritten link keeps
+its old label, so a page will read <code class="docutils literal notranslate"><span class="pre">[`FET_000_PHYSX`](CAP000_Core.PhysX.md)</span></code>
+until prose is revised.</p>
+<p>Keep the deterministic half re-runnable in one specific sense: runnable again
+<em>after a revert</em>, not runnable twice against its own output. Anything requiring
+judgement goes into the Foundations 1 source or a skill, never hand-patched into
+the relocated output — see the invariant in
+<a class="reference internal" href="#undoing-steps-2-and-3">Undoing steps 2 and 3</a>.</p>
+</section>
+</section>
+<section id="preconditions">
+<h2>Preconditions<a class="headerlink" href="#preconditions" title="Link to this heading">#</a></h2>
+<p><strong>Every feature family present in any tier needs a <code class="docutils literal notranslate"><span class="pre">FAMILY_NAMES</span></code> entry.</strong> The
+generator refuses to project a family it cannot name, and its error names the
+family, the manifest that needs it, and the file to edit. It does not invent a
+placeholder, because a placeholder would become a permanent contract ID and a
+permanent filename.</p>
+<p>So this is not a fixed checklist to tick once; it is a check that recurs
+whenever <code class="docutils literal notranslate"><span class="pre">main</span></code> adds a feature family. Run the generator and let it tell you.
+<code class="docutils literal notranslate"><span class="pre">FAMILY_NAMES</span></code> in <code class="docutils literal notranslate"><span class="pre">nv_core/tiers/_tooling/migrate_foundations2_catalog.py</span></code> is
+the source of truth for names already chosen, and those must not be renamed
+once explorer tests or published IDs reference them.</p>
+<p>When naming a new family:</p>
+<ul class="simple">
+<li><p>Use the manifest’s <code class="docutils literal notranslate"><span class="pre">display_name</span></code> in PascalCase as the default.</p></li>
+<li><p>Prefer what the family’s requirements actually cover when the display name is
+broader. A family carrying only <code class="docutils literal notranslate"><span class="pre">LI.*</span></code> LiDAR requirements is <code class="docutils literal notranslate"><span class="pre">Lidar</span></code>, even if
+its display name says “RTX Sensors”.</p></li>
+<li><p>Never embed the runtime in the family name. The runtime already occupies the
+middle dotted segment, so <code class="docutils literal notranslate"><span class="pre">RtxSensors.RTX</span></code> stutters.</p></li>
+<li><p>Keep families distinguishable by name and not only by number: family <code class="docutils literal notranslate"><span class="pre">101</span></code> is
+<code class="docutils literal notranslate"><span class="pre">RobotComposition</span></code> rather than reusing family <code class="docutils literal notranslate"><span class="pre">100</span></code>’s <code class="docutils literal notranslate"><span class="pre">IsaacComposition</span></code>.</p></li>
+</ul>
+<p>A <code class="docutils literal notranslate"><span class="pre">FAMILY_NAMES</span></code> addition is durable tooling, not part of the transformation.
+<code class="docutils literal notranslate"><span class="pre">main</span></code> never touches that table, so it carries no conflict surface — commit it
+below the revertable pair and let it stay.</p>
+<p>In particular, explorer’s Foundations 1 fallback is <strong>not</strong> a precondition: the
+transformer is what makes the fallback developable in the first place, because
+testing the fallback means transforming the repo to Foundations 2, exercising
+explorer against it, reverting, and exercising explorer against Foundations 1
+again. A shipped fallback is a gate on <a class="reference internal" href="#ship">ship</a>, not on starting.</p>
+</section>
+<section id="verified-inventory">
+<h2>Verified inventory<a class="headerlink" href="#verified-inventory" title="Link to this heading">#</a></h2>
+<p>Counts are from the current branch and will drift as <code class="docutils literal notranslate"><span class="pre">main</span></code> advances. Re-derive
+them before executing, and treat a mismatch against the dry run as a signal to
+investigate rather than a rounding difference. Derive them across <em>every</em>
+discovered tier — currently AIF, core, Newton, sensors and template — not just
+the tier you are looking at.</p>
+<p>The dry run refuses until step 2 has freed <code class="docutils literal notranslate"><span class="pre">capabilities/</span></code>. To re-derive the
+totals before then, call <code class="docutils literal notranslate"><span class="pre">_relocation_plan</span></code> on each package root, and
+<code class="docutils literal notranslate"><span class="pre">_rewrite_outbound_contract_links</span></code> over <code class="docutils literal notranslate"><span class="pre">_outbound_markdown_files</span></code> for the
+outbound count. All three only read.</p>
+<section id="contracts">
+<h3>Contracts<a class="headerlink" href="#contracts" title="Link to this heading">#</a></h3>
+<p>94 contracts (45 FET, 49 CAP) from 64 distinct Foundations 1 IDs. The mapping is
+clean: no legacy ID splits across FET and CAP, and no legacy ID maps to more
+than one new name stem, so every markdown page has exactly one destination.</p>
+</section>
+<section id="markdown">
+<h3>Markdown<a class="headerlink" href="#markdown" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Source</p></th>
+<th class="head"><p>Count</p></th>
+<th class="head"><p>Destination</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">features/*.md</span></code> mapping to a FET contract</p></td>
+<td><p>27</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">features/</span></code>, renamed to the new stem</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">features/*.md</span></code> mapping to a CAP contract</p></td>
+<td><p>37</p></td>
+<td><p><strong><code class="docutils literal notranslate"><span class="pre">capabilities/</span></code></strong>, renamed to the new stem</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">features/*.md</span></code> with no contract</p></td>
+<td><p>0</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">profiles/*.md</span></code></p></td>
+<td><p>12</p></td>
+<td><p>stay in place, unchanged — not moves</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Most of today’s “feature” pages describe contracts that are static capabilities
+under Foundations 2. This is the single largest change in the collapse and the
+least obvious from the directory names.</p>
+<p>A current dry run reports 64 markdown moves, 108 contract moves, 94 deletions,
+39 link rewrites between moved pages, and 259 outbound references repointed in
+76 files.</p>
+</section>
+<section id="files-needing-reference-edits">
+<h3>Files needing reference edits<a class="headerlink" href="#files-needing-reference-edits" title="Link to this heading">#</a></h3>
+<p>Several dozen files across documentation, build and config, plus the identifier
+consumers below. Notable hard couplings:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nv_core/tiers/_tooling/assemble_docs.py</span></code> — <code class="docutils literal notranslate"><span class="pre">SECTION_ROOTS</span></code> names exactly the
+sections the Sphinx build copies.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nv_core/sr_specs/docs/shared/features/features.md</span></code> — toctree names every
+Foundations 1 feature stem explicitly.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nv_core/sr_specs/docs/shared/profiles/profiles.md</span></code> — toctree names every
+profile stem explicitly.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nv_core/tiers/_tooling/build_hook.py</span></code> — runs requirement codegen over the
+source tree; follows the rename.</p></li>
+<li><p>Several <code class="docutils literal notranslate"><span class="pre">simready_benchmark_kit_suite/docs/fet*.md</span></code> pages link
+<code class="docutils literal notranslate"><span class="pre">../../../features/FET_00N_STANDARD.md</span></code>.</p></li>
+</ul>
+</section>
+<section id="identifier-consumers-still-on-foundations-1">
+<h3>Identifier consumers still on Foundations 1<a class="headerlink" href="#identifier-consumers-still-on-foundations-1" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Surface</p></th>
+<th class="head"><p>Count</p></th>
+<th class="head"><p>Note</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CIP feature adapters</p></td>
+<td><p>18</p></td>
+<td><p>all use split <code class="docutils literal notranslate"><span class="pre">input_feature_id</span></code>/<code class="docutils literal notranslate"><span class="pre">_version</span></code>; none use dotted IDs. 5 name pre-underscore endpoints (<code class="docutils literal notranslate"><span class="pre">FET001_BASE_NEUTRAL</span></code>, <code class="docutils literal notranslate"><span class="pre">FET004_BASE_NEUTRAL</span></code>, <code class="docutils literal notranslate"><span class="pre">FET004_ROBOT_PHYSX</span></code>, <code class="docutils literal notranslate"><span class="pre">FET100_BASE_ISAACSIM</span></code>) that appear in neither <code class="docutils literal notranslate"><span class="pre">catalog-map.json</span></code> nor any <code class="docutils literal notranslate"><span class="pre">legacy_identity</span></code>, so their rebinding must be done by hand</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime <code class="docutils literal notranslate"><span class="pre">&#64;test</span></code> registrations</p></td>
+<td><p>50</p></td>
+<td><p>across the core, Newton and sensors suites; all Foundations 1 IDs with semver constraints</p></td>
+</tr>
+<tr class="row-even"><td><p>Conform skills</p></td>
+<td><p>45</p></td>
+<td><p>39 in the core tier, 6 in the Newton tier; cite Foundations 1 IDs <em>and</em> paths into <code class="docutils literal notranslate"><span class="pre">features/</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Explorer adapter matching</p></td>
+<td><p>3</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">derive</span></code>’s direct pipeline, <code class="docutils literal notranslate"><span class="pre">omni.cip.configurable</span></code> and the <code class="docutils literal notranslate"><span class="pre">omni.simready.workspace_commands</span></code> upgrade pick adapters by comparing each adapter’s <code class="docutils literal notranslate"><span class="pre">output_feature</span></code> with the target profile’s feature IDs. Adapters declare split Foundations 1 IDs such as <code class="docutils literal notranslate"><span class="pre">FET_004_ROBOT_PHYSX</span></code>, while a Foundations 2 profile yields dotted IDs such as <code class="docutils literal notranslate"><span class="pre">FET004_Multibody.PhysX.0-4-0</span></code>, so nothing matches. Rebind the matching together with the CIP adapters themselves, keyed on the dotted ID, or on <code class="docutils literal notranslate"><span class="pre">legacy_identity</span></code> during the transition</p></td>
+</tr>
+<tr class="row-even"><td><p>Benchmark runtime routing</p></td>
+<td><p>1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simready_benchmark.core.runtime_routing.normalize_runtime</span></code> recognises only <code class="docutils literal notranslate"><span class="pre">physx</span></code>, <code class="docutils literal notranslate"><span class="pre">newton</span></code> and <code class="docutils literal notranslate"><span class="pre">mujoco</span></code>, and treats every other runtime as neutral. The projected robot variants carry the runtime segments <code class="docutils literal notranslate"><span class="pre">RobotPhysX</span></code>, <code class="docutils literal notranslate"><span class="pre">RobotNewton</span></code> and <code class="docutils literal notranslate"><span class="pre">RobotMuJoCo</span></code>, which Foundations 1 routed through the manifest’s <code class="docutils literal notranslate"><span class="pre">runtime</span></code> field instead. Map those tokens to their physics runtime before any profile selects a robot variant; none does yet</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">usd-profiles-nvidia</span></code> Sphinx extension</p></td>
+<td><p>1</p></td>
+<td><p>the docs build’s specification parser. It reads the requirement tree from <code class="docutils literal notranslate"><span class="pre">capabilities/</span></code> and decodes everything under <code class="docutils literal notranslate"><span class="pre">features/</span></code> and <code class="docutils literal notranslate"><span class="pre">profiles/</span></code> strictly as Foundations 1 descriptors; from 1.22 a dotted contract aborts the build. A layout-aware shim in <code class="docutils literal notranslate"><span class="pre">docs/conf.py</span></code>, mirrored in <code class="docutils literal notranslate"><span class="pre">repo.toml</span></code>’s <code class="docutils literal notranslate"><span class="pre">sphinx_conf_py_extra</span></code>, bridges it until the package accepts its input directories as config values and skips files that are not its descriptors. Then raise the floor in <code class="docutils literal notranslate"><span class="pre">requirements-docs.txt</span></code> to that release and delete the shim</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Five of these fail quietly rather than loudly:</p>
+<ul class="simple">
+<li><p>Explorer’s adapter matching finds no adapter for a Foundations 2 profile, so an
+upgrade runs no adapters and reports nothing wrong.</p></li>
+<li><p>Benchmark runtime routing treats a robot variant as neutral, so its tests fan
+out to every engine instead of running on the variant’s physics runtime.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">usd-profiles-nvidia</span></code> treats a missing requirement tree as empty. Without the
+shim, a build after step 2 stays green but publishes no capability JSONs under
+<code class="docutils literal notranslate"><span class="pre">config/</span></code>. Its <code class="docutils literal notranslate"><span class="pre">{requirements-table}</span></code> directive parses its own page, so the
+rendered tables do not reveal the loss.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">test_benchmark_documentation.py</span></code> enforces <code class="docutils literal notranslate"><span class="pre">^FET_(\d{3})_</span></code> and rejects any
+Foundations 2 ID as non-canonical.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fet005_grasp/grasp_and_lift.py</span></code> gates on <code class="docutils literal notranslate"><span class="pre">asset_validated_features</span></code>
+containing <code class="docutils literal notranslate"><span class="pre">FET_003_PHYSX</span></code>; if the stamped set becomes dotted IDs it silently
+skips instead of failing.</p></li>
+</ul>
+</section>
+</section>
+<section id="the-transformation">
+<h2>The transformation<a class="headerlink" href="#the-transformation" title="Link to this heading">#</a></h2>
+<p>Three steps, run in order: refresh the projection, rename the source tree,
+relocate the contracts. Only the last two are reverted.</p>
+<section id="order-and-revertability">
+<h3>Order and revertability<a class="headerlink" href="#order-and-revertability" title="Link to this heading">#</a></h3>
+<p>Two different kinds of work get confused with each other here, and keeping them
+apart is the whole point of this section. Building or fixing the transformer,
+adding a family name, developing explorer and shipping are <em>project</em> work: they
+change tooling or ship software, and they have no layout state to undo. Only the
+three steps below touch repo layout, and only two of those are revertable.</p>
+<p>What decides revertability is not whether a step is independently verifiable —
+it is <strong>how much conflict surface it carries against <code class="docutils literal notranslate"><span class="pre">main</span></code></strong>. A step that keeps
+churning files <code class="docutils literal notranslate"><span class="pre">main</span></code> also edits must revert before each merge, however
+self-contained it looks in isolation.</p>
+<ul class="simple">
+<li><p><strong>Step 1, refresh the projection — additive, never reverted.</strong> It writes only
+into <code class="docutils literal notranslate"><span class="pre">foundations2/</span></code>, a directory <code class="docutils literal notranslate"><span class="pre">main</span></code> never touches, so it carries no
+conflict surface and merges cleanly in place.</p></li>
+<li><p><strong>Step 2, rename the source tree — revertable.</strong> It renames a tree of roughly
+430 files whose only purpose in renaming is to free the name <code class="docutils literal notranslate"><span class="pre">capabilities/</span></code>
+for CAP contracts, a payoff that arrives in step 3 and not before. Held across
+a merge it is pure cost: in one representative window <code class="docutils literal notranslate"><span class="pre">main</span></code> modified 34 files
+under <code class="docutils literal notranslate"><span class="pre">capabilities/</span></code>, added 16 and deleted 3, and every one of those would
+have become a rename/modify or rename/add interaction. Worse, the 16 additions
+land at the old path regardless, because a directory rename does not propagate
+to files the other side newly created, so the tree ends up split across both
+names.</p></li>
+<li><p><strong>Step 3, relocate the contracts — revertable.</strong> It deletes the Foundations 1
+tree, which cannot survive a merge with a <code class="docutils literal notranslate"><span class="pre">main</span></code> that is still authoring into
+it.</p></li>
+</ul>
+<p>Run step 1 <strong>first</strong>, before the rename, and commit any drift it produces on its
+own. Generation does not depend on the rename — see
+<a class="reference internal" href="#what-it-reads-and-writes">What it reads and writes</a> — so nothing forces it
+into the middle, and putting it first leaves the two revertable commits at the
+top of the history.</p>
+<p>Keep them there. Every permanent commit — step 1 output, transformer fixes,
+family names, test fixes, plan updates — belongs <em>below</em> the revertable pair,
+so that undoing the transformation never discards permanent work. A permanent
+change discovered after step 2 has landed is committed on its own and then
+reordered beneath the pair; see
+<a class="reference internal" href="#undoing-steps-2-and-3">Undoing steps 2 and 3</a>.</p>
+</section>
+<section id="working-agreement">
+<h3>Working agreement<a class="headerlink" href="#working-agreement" title="Link to this heading">#</a></h3>
+<p><strong>Stage, do not commit.</strong> Whoever executes a step — human or agent — runs
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> and stops there. The commits are made by the repository owner after
+reviewing the staged diff. This matters more than usual here: two of the three
+steps are mostly renames and deletions, where the diff <em>is</em> the review, and step
+3 deliberately destroys the Foundations 1 tree in the working directory.</p>
+<p>Where a step produces two logically separate changes, stage and hand off the
+first, wait for it to be committed, then stage the second. Do not batch them
+into one staged blob.</p>
+<p>Pause for explicit confirmation before the first destructive relocation run.</p>
+<p><strong>Keep this plan out of the execution commits, and keep it in future tense.</strong>
+Updates to this page belong in their own commit, never mixed into the commit
+that performs a step. Record what an executor should <em>do</em>, not what a previous
+run <em>did</em>. The reason is the revert loop: steps 2 and 3 revert and re-apply
+repeatedly, so any note that rode in on an execution commit disappears exactly
+when the next executor needs it.</p>
+</section>
+<section id="step-1-refresh-the-projection">
+<span id="step-1--refresh-the-projection"></span><h3>Step 1 — refresh the projection<a class="headerlink" href="#step-1-refresh-the-projection" title="Link to this heading">#</a></h3>
+<p>Additive. Run the generator and commit whatever diff it produces, on its own.</p>
+<p>A clean run with no diff is the normal case and means the staged catalog is
+already current; there is nothing to commit and you proceed to step 2. A diff
+means <code class="docutils literal notranslate"><span class="pre">main</span></code> added or changed Foundations 1 content since the last refresh, and
+that belongs in its own commit before the revertable pair starts — not folded
+into a later step, where it would be indistinguishable from relocation churn.</p>
+<p><strong>Judge that with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code>, not <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>.</strong> Generation rewrites every
+contract file whether or not its content changed, which updates mtimes, and in a
+checkout configured to convert line endings that is enough for <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> to
+list files as modified when they are byte-identical to <code class="docutils literal notranslate"><span class="pre">HEAD</span></code>. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">--quiet</span></code> exiting zero is the reliable answer; an empty <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">--numstat</span></code> says
+the same thing. Reading <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> here invents drift that does not exist, and
+the resulting “refresh” commit would be empty of real change.</p>
+<p>If the generator refuses instead of running, it has found an unnamed feature
+family; see <a class="reference internal" href="#preconditions">Preconditions</a>.</p>
+<p><strong>Treat a contract changing kind as a finding, not as drift.</strong> A contract flips
+between <code class="docutils literal notranslate"><span class="pre">FET</span></code> and <code class="docutils literal notranslate"><span class="pre">CAP</span></code> only when the generator’s view of its runtime tests
+changes, and the kind is part of a permanent identifier. Before committing a
+flip, confirm the tests really appeared or disappeared, rather than moving to a
+suite the generator does not scan, such as one in a newly added tier.</p>
+<p><strong>Check a tier that <code class="docutils literal notranslate"><span class="pre">main</span></code> adds.</strong> Its <code class="docutils literal notranslate"><span class="pre">_tier.py</span></code> must advertise
+<code class="docutils literal notranslate"><span class="pre">capability_contracts_path</span></code>, <code class="docutils literal notranslate"><span class="pre">feature_contracts_path</span></code> and
+<code class="docutils literal notranslate"><span class="pre">profile_contracts_path</span></code>, or the validate loader skips its contracts silently;
+<code class="docutils literal notranslate"><span class="pre">_tooling/tests/test_tier_project_parity.py</span></code> fails when one is missing. If the
+new tier ships a Benchmark suite, it must list that suite in its wheel
+<code class="docutils literal notranslate"><span class="pre">packages</span></code>, which is where the generator looks.</p>
+</section>
+<section id="step-2-rename-the-source-tree">
+<span id="step-2--rename-the-source-tree"></span><h3>Step 2 — rename the source tree<a class="headerlink" href="#step-2-rename-the-source-tree" title="Link to this heading">#</a></h3>
+<p>Revertable. Revert it before merging <code class="docutils literal notranslate"><span class="pre">main</span></code> and re-apply it afterwards.</p>
+<p><code class="docutils literal notranslate"><span class="pre">capabilities/</span></code> → <code class="docutils literal notranslate"><span class="pre">rules_and_reqs/</span></code> in <strong>every</strong> tier. Discover them by the
+<code class="docutils literal notranslate"><span class="pre">_tier.py</span></code> descriptor rather than by directory name, or the sensors tier will be
+missed. Update <code class="docutils literal notranslate"><span class="pre">assemble_docs.py</span></code> section roots, <code class="docutils literal notranslate"><span class="pre">build_hook.py</span></code>, the Sphinx
+index toctree entry, every <code class="docutils literal notranslate"><span class="pre">_tier.py</span></code> descriptor, and the badge includes path.
+<code class="docutils literal notranslate"><span class="pre">nv_core/sr_specs/docs/config.json</span></code> needs nothing: it is an empty file, and no
+longer declares the docs path roots. Nothing about Foundations 2 changes here, so this can be
+validated on its own by building the docs and a tier wheel.</p>
+<p>Doing this before any contract moves means <code class="docutils literal notranslate"><span class="pre">capabilities/</span></code> is free when step 3
+needs it.</p>
+<p>The rename also changes an importable package path in every tier, from
+<code class="docutils literal notranslate"><span class="pre">simready.foundation.&lt;package&gt;.capabilities</span></code> to
+<code class="docutils literal notranslate"><span class="pre">...&lt;package&gt;.rules_and_reqs</span></code>. Live-tree coupling to that path:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">_tier.py</span></code> in each tier — the <code class="docutils literal notranslate"><span class="pre">rules_package</span></code> value;</p></li>
+<li><p>core tier tests that import validators absolutely: <code class="docutils literal notranslate"><span class="pre">test_ba002_registration.py</span></code>,
+<code class="docutils literal notranslate"><span class="pre">test_usdz_validation.py</span></code>, <code class="docutils literal notranslate"><span class="pre">test_undefined_prims_validation.py</span></code>,
+<code class="docutils literal notranslate"><span class="pre">test_texture_colorspace_suggestions.py</span></code> and
+<code class="docutils literal notranslate"><span class="pre">test_material_surface_presence.py</span></code>;</p></li>
+<li><p>the Newton tier’s four validators, which import their shared helpers
+absolutely from <code class="docutils literal notranslate"><span class="pre">simready.foundation.tier_newton.capabilities._common</span></code>;</p></li>
+<li><p>three <code class="docutils literal notranslate"><span class="pre">conform-fet-000-{physx,newton,mujoco}</span></code> skills — a documented harness
+import.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">main</span></code> keeps adding sites, so re-derive the list rather than trusting it: search
+for <code class="docutils literal notranslate"><span class="pre">foundation\.[a-z_]+\.capabilities</span></code>, then drop the
+<code class="docutils literal notranslate"><span class="pre">foundations2/capabilities</span></code> hits. The other tiers’ validators need no edits. They import
+each other relatively (<code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">..path_utils</span> <span class="pre">import</span> <span class="pre">…</span></code>) and reach their requirement
+enums through each tier’s <code class="docutils literal notranslate"><span class="pre">requirements</span></code> module, which this rename does not
+touch.</p>
+<p>Treat the new path as a breaking change for anything outside these two repos
+that imports the old one.</p>
+<p>Rename the docs section along with it: move the shared hub from
+<code class="docutils literal notranslate"><span class="pre">docs/shared/capabilities/capabilities.md</span></code> to
+<code class="docutils literal notranslate"><span class="pre">docs/shared/rules_and_reqs/rules_and_reqs.md</span></code>, retitle it “Rules and
+Requirements”, list <code class="docutils literal notranslate"><span class="pre">rules_and_reqs</span></code> in <code class="docutils literal notranslate"><span class="pre">SECTION_ROOTS</span></code> in <code class="docutils literal notranslate"><span class="pre">assemble_docs.py</span></code>,
+and update the <code class="docutils literal notranslate"><span class="pre">index.md</span></code> toctree entry and its body link. Do this here rather
+than deferring to step 3: <code class="docutils literal notranslate"><span class="pre">index.md</span></code> already describes “Capabilities” as
+<code class="docutils literal notranslate"><span class="pre">CAP</span></code>-prefixed contracts, so leaving the source tree on that docs path collides
+with the CAP contracts section as soon as step 3 creates it. Step 3 adds
+<code class="docutils literal notranslate"><span class="pre">capabilities</span></code> back to <code class="docutils literal notranslate"><span class="pre">SECTION_ROOTS</span></code> for the contracts themselves.</p>
+<section id="traps-in-the-reference-rewrite">
+<h4>Traps in the reference rewrite<a class="headerlink" href="#traps-in-the-reference-rewrite" title="Link to this heading">#</a></h4>
+<p>The reference update is large — expect roughly 700 replacements across ~180
+files — and a naive search for the word <code class="docutils literal notranslate"><span class="pre">capabilities</span></code> will both miss cases and
+destroy others. Specifically:</p>
+<ul class="simple">
+<li><p><strong>Two docs-root-absolute forms are easy to miss</strong> because they are neither
+relative links nor tier-qualified paths: Sphinx includes
+(<code class="docutils literal notranslate"><span class="pre">{include}</span> <span class="pre">/capabilities/_includes/badges/...</span></code>) and cross-links
+(<code class="docutils literal notranslate"><span class="pre">[kilograms-per-unit](/capabilities/core/units/...)</span></code>). Both appear
+throughout the requirement pages. Checking only for <code class="docutils literal notranslate"><span class="pre">../capabilities/</span></code>
+reports zero hits inside the tree and gives false confidence.</p></li>
+<li><p><strong>Never rewrite <code class="docutils literal notranslate"><span class="pre">foundations2/capabilities</span></code>.</strong> That is the Foundations 2 CAP
+contract directory and it keeps its name. A blanket rewrite silently breaks
+<code class="docutils literal notranslate"><span class="pre">capability_contracts_path</span></code> in the <code class="docutils literal notranslate"><span class="pre">_tier.py</span></code> descriptors and the catalog
+paths in the contract tests. Guard it, for example with a negative lookbehind.</p></li>
+<li><p><strong>Exclude this guide and <code class="docutils literal notranslate"><span class="pre">foundations2-catalog-migration.md</span></code></strong> from any
+scripted rewrite. They name both directories on purpose, and a rewrite turns
+“from <code class="docutils literal notranslate"><span class="pre">…capabilities</span></code> to <code class="docutils literal notranslate"><span class="pre">…rules_and_reqs</span></code>” into “from X to X”.</p></li>
+<li><p><strong>Exclude <code class="docutils literal notranslate"><span class="pre">_tooling/tests/test_migrate_foundations2_catalog.py</span></code></strong> as well. Its
+fixtures build Foundations 2 staging trees, so every <code class="docutils literal notranslate"><span class="pre">capabilities</span></code> and
+<code class="docutils literal notranslate"><span class="pre">../capabilities/</span></code> in it means the CAP contract section, not the source tree.
+The negative lookbehind on <code class="docutils literal notranslate"><span class="pre">foundations2/capabilities</span></code> will not save these:
+the section names are assembled from a loop variable and the links are written
+bare. A rewrite here goes unnoticed because the tests still pass — they assert
+against whatever the fixture wrote.</p></li>
+<li><p><strong>Leave the other meanings of the word alone:</strong> the <code class="docutils literal notranslate"><span class="pre">capabilities</span></code> field on a
+profile or feature, <code class="docutils literal notranslate"><span class="pre">omni.generated_capabilities</span></code>, and <code class="docutils literal notranslate"><span class="pre">repo.toml</span></code>’s
+<code class="docutils literal notranslate"><span class="pre">project</span> <span class="pre">=</span> <span class="pre">&quot;content-capabilities&quot;</span></code>.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">build_hook.py</span></code> needs care.</strong> <code class="docutils literal notranslate"><span class="pre">capabilities_root=</span></code> is the external
+<code class="docutils literal notranslate"><span class="pre">PythonGenerator</span></code> keyword argument and must keep its name; rename only the
+local variable, and check every use of that local so it does not become a
+<code class="docutils literal notranslate"><span class="pre">NameError</span></code> at build time.</p></li>
+<li><p><strong>Test fixtures encode the section name.</strong> <code class="docutils literal notranslate"><span class="pre">test_assemble_docs.py</span></code> builds
+fixture trees named after the section and asserts on resulting docnames,
+including the shared hub filename, so it needs updating in step.</p></li>
+<li><p><strong>The spec-consistency scripts and their CI arguments fail quietly.</strong> One of
+the scripts under <code class="docutils literal notranslate"><span class="pre">nv_core/sr_specs/tests/</span></code> that CI runs names the source tree
+in code: <code class="docutils literal notranslate"><span class="pre">validate_requirement_examples.py</span></code> (<code class="docutils literal notranslate"><span class="pre">CAPABILITIES</span></code> and
+<code class="docutils literal notranslate"><span class="pre">AIF_CAPABILITIES</span></code>). <code class="docutils literal notranslate"><span class="pre">.gitlab-ci.yml</span></code> also passes it one requirement directory
+per tier as arguments. Rewrite both; the other scripts need nothing (see the
+next bullet). Neither goes red when missed. A missing argument directory yields
+no requirement pages and the script exits zero having checked nothing, so
+confirm afterwards that <code class="docutils literal notranslate"><span class="pre">.gitlab-ci.yml</span></code> names no <code class="docutils literal notranslate"><span class="pre">capabilities/</span></code> path and
+that the script reports a non-zero block count. A missed constant is worse,
+because step 3 recreates <code class="docutils literal notranslate"><span class="pre">capabilities/</span></code> as the CAP contract directory and the
+stale path then resolves again, to the wrong content.</p></li>
+<li><p><strong>Leave <code class="docutils literal notranslate"><span class="pre">validate_sample_content.py</span></code> and <code class="docutils literal notranslate"><span class="pre">validate_feature_versions.py</span></code>
+alone.</strong> Both resolve the requirement tree to whichever name the checkout
+has, in permanent code below the revertable pair. <code class="docutils literal notranslate"><span class="pre">validate_sample_content.py</span></code>
+has to, because it validates the MR’s target branch and the branch under test
+in the same process, from the same default requirement paths, while the
+target branch is still on <code class="docutils literal notranslate"><span class="pre">capabilities/</span></code>; it also evicts both <code class="docutils literal notranslate"><span class="pre">capabilities</span></code>
+and <code class="docutils literal notranslate"><span class="pre">rules_and_reqs</span></code> modules between passes. <code class="docutils literal notranslate"><span class="pre">validate_feature_versions.py</span></code>
+does it through <code class="docutils literal notranslate"><span class="pre">_rules_dir()</span></code>. Do not “fix” their remaining <code class="docutils literal notranslate"><span class="pre">capabilities</span></code>
+strings by substitution: a script that names only <code class="docutils literal notranslate"><span class="pre">rules_and_reqs</span></code> finds no
+rules on the Foundations 1 side.</p></li>
+</ul>
+</section>
+</section>
+<section id="step-3-relocate-the-contracts">
+<span id="step-3--relocate-the-contracts"></span><h3>Step 3 — relocate the contracts<a class="headerlink" href="#step-3-relocate-the-contracts" title="Link to this heading">#</a></h3>
+<p>Revertable, and destructive. Two handoffs, staged and committed separately,
+because they review completely differently: a few hundred mechanical moves, then
+a small set of subtle path edits. One combined staging is an unreviewable blob.</p>
+<p><strong>Handoff A — the relocation.</strong> Run <code class="docutils literal notranslate"><span class="pre">--relocate</span> <span class="pre">--dry-run</span></code> first and check the
+totals against the inventory above, then run it for real.</p>
+<p>This handoff deliberately leaves the tree non-functional: the tier descriptors
+and the contract test still point at the staging directory that just
+disappeared. Decide up front whether a red intermediate commit is acceptable;
+if not, fold handoff B in before committing.</p>
+<p><strong>Handoff B — rewiring.</strong> Nothing here is optional; each item is something the
+relocation invalidates:</p>
+<ol class="arabic">
+<li><p>every <code class="docutils literal notranslate"><span class="pre">_tier.py</span></code>: repoint <code class="docutils literal notranslate"><span class="pre">capability_contracts_path</span></code>,
+<code class="docutils literal notranslate"><span class="pre">feature_contracts_path</span></code> and <code class="docutils literal notranslate"><span class="pre">profile_contracts_path</span></code> from <code class="docutils literal notranslate"><span class="pre">foundations2/…</span></code>
+to the flattened directories. The legacy <code class="docutils literal notranslate"><span class="pre">features_path</span></code> and <code class="docutils literal notranslate"><span class="pre">profiles_path</span></code>
+then name the same directories; that is redundant but correct, because a
+Foundations 2 aware loader ignores the legacy pair whenever any
+<code class="docutils literal notranslate"><span class="pre">*_contracts_path</span></code> is present. Collapsing the six fields to three plus a
+dialect marker is a separate change.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">test_foundations_contracts.py</span></code>: its catalog roots glob for
+<code class="docutils literal notranslate"><span class="pre">tier_*/foundations2</span></code>, which now resolves to nothing — and the failure is an
+unhelpful <code class="docutils literal notranslate"><span class="pre">assert</span> <span class="pre">[]</span></code> rather than a missing-path error. Fix both halves of
+that glob: <code class="docutils literal notranslate"><span class="pre">tier_*</span></code> misses the sensors tier, so key on the <code class="docutils literal notranslate"><span class="pre">_tier.py</span></code>
+descriptor. Pass the section directories straight through without filtering
+for existence; a tier publishing no contracts of one kind leaves an empty
+directory that git cannot track, and the loaders treat missing and empty
+alike so that loading does not depend on whether a checkout has generated
+the catalog.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">assemble_docs.py</span></code>: add <code class="docutils literal notranslate"><span class="pre">capabilities</span></code> back to <code class="docutils literal notranslate"><span class="pre">SECTION_ROOTS</span></code> and to the
+residual excludes, this time meaning CAP contracts. Check that
+<code class="docutils literal notranslate"><span class="pre">rules_and_reqs</span></code> is in the residual excludes too — step 2 adds it to
+<code class="docutils literal notranslate"><span class="pre">SECTION_ROOTS</span></code> and it is easy to miss the second list.</p></li>
+<li><p>add the Capabilities entry to the <code class="docutils literal notranslate"><span class="pre">index.md</span></code> toctree, which resolves the
+mismatch step 2 left behind where the index described CAP contracts but
+linked the requirement hub. <code class="docutils literal notranslate"><span class="pre">profiles/profiles.md</span></code> needs no change — profile
+pages keep their names.</p>
+<p>The two contract hubs themselves are regenerated by the relocation rather
+than hand-written: <code class="docutils literal notranslate"><span class="pre">features/features.md</span></code> for the FET contracts and
+<code class="docutils literal notranslate"><span class="pre">capabilities/capabilities.md</span></code> for the CAP contracts, each carrying a
+Versions column because one page now covers every published version of its
+contract. Review that output instead of transcribing it, and use
+<code class="docutils literal notranslate"><span class="pre">--write-hubs</span></code> on its own if a hub needs refreshing later.</p>
+<p>Two traps sit behind that generation, which is why it is generated. A
+generator that emits only contract entries <strong>silently drops the non-contract
+entries</strong> an existing hub carried; the features hub has a <code class="docutils literal notranslate"><span class="pre">Feature</span> <span class="pre">dependency</span> <span class="pre">graph</span> <span class="pre">&lt;feature-dependency-graph&gt;</span></code> entry ahead of the contracts and draft
+feature cards after them, and losing either orphans those pages. Reading the
+existing toctree back and preserving every non-contract entry, split around
+the contracts, survives future additions in a way that hard-coding the known
+ones does not. Either way, diff the regenerated toctree against the previous
+one and account for every removed line.</p>
+<p>Second, the hub links each contract page at its tier location, written
+relative to the hub file the way every docs link is: a hub at
+<code class="docutils literal notranslate"><span class="pre">docs/shared/&lt;section&gt;/</span></code> links a guide as <code class="docutils literal notranslate"><span class="pre">../../guides/…</span></code> and a contract
+page through <code class="docutils literal notranslate"><span class="pre">../../../../tiers/&lt;tier&gt;/…</span></code>. <code class="docutils literal notranslate"><span class="pre">assemble_docs.py</span></code> repoints those
+links at the assembled layout. The toctree entries are Sphinx docnames, not
+links, so they name the logical page (<code class="docutils literal notranslate"><span class="pre">FET003_RigidBody</span></code>).</p>
+</li>
+<li><p>run the docs build. The toctrees and the new section are structurally
+checkable only by building.</p></li>
+</ol>
+<section id="what-the-ci-checks-rely-on-after-relocation">
+<h4>What the CI checks rely on after relocation<a class="headerlink" href="#what-the-ci-checks-rely-on-after-relocation" title="Link to this heading">#</a></h4>
+<p>Handoff B has no CI item, because the CI scripts need no edit at relocation. Four
+of them read the contract directories, and each already reads both layouts, in
+permanent code below the revertable pair. Three of those also compare the
+relocated tree with something still on Foundations 1: the MR’s target branch, or
+the Foundations 1 IDs a document names. If one of these jobs goes red after
+relocation, look first for a dependency below that has stopped holding, not for
+a missing rewrite:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">validate_profile_table.py</span></code> (<code class="docutils literal notranslate"><span class="pre">test-profile-table</span></code>) maps every Foundations 2
+selector, from <code class="docutils literal notranslate"><span class="pre">features</span></code> and <code class="docutils literal notranslate"><span class="pre">capabilities</span></code> alike, back to its Foundations 1
+ID through each tier’s <code class="docutils literal notranslate"><span class="pre">catalog-map.json</span></code>, because the comparison table in
+<code class="docutils literal notranslate"><span class="pre">shared/profiles/profiles.md</span></code> names Foundations 1 IDs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">validate_sample_content.py</span></code> (<code class="docutils literal notranslate"><span class="pre">test-sample-content-validation</span></code>) passes each
+tier’s <code class="docutils literal notranslate"><span class="pre">features/</span></code> and, once <code class="docutils literal notranslate"><span class="pre">rules_and_reqs/</span></code> exists, its <code class="docutils literal notranslate"><span class="pre">capabilities/</span></code> as
+feature paths, dropping whichever does not exist. A tier whose contracts all
+project to capabilities, as the sensors tier’s do, has no <code class="docutils literal notranslate"><span class="pre">features/</span></code> for git
+to track, and <code class="docutils literal notranslate"><span class="pre">simready.validate</span></code> rejects a path that does not exist. It then
+translates both branches’ feature summaries to Foundations 1 IDs through
+<code class="docutils literal notranslate"><span class="pre">catalog-map.json</span></code> before comparing them, folding a Foundations 1 ID’s
+versions into one entry that passes only if every version passes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">validate_requirement_examples.py</span></code> (<code class="docutils literal notranslate"><span class="pre">test-spec-consistency</span></code>) passes the same
+contract directories, for the same reasons. The material and AIF requirements
+its examples exercise live in CAP contracts, so without <code class="docutils literal notranslate"><span class="pre">capabilities/</span></code> those
+examples report nothing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">validate_feature_versions.py</span></code> (<code class="docutils literal notranslate"><span class="pre">test-spec-consistency</span></code>) matches manifests by
+their dotted contract ID instead of by path. It reads
+<code class="docutils literal notranslate"><span class="pre">additional_requirements</span></code> where a contract has no <code class="docutils literal notranslate"><span class="pre">requirements</span></code>, loads
+<code class="docutils literal notranslate"><span class="pre">capabilities/</span></code> beside <code class="docutils literal notranslate"><span class="pre">features/</span></code>, and reports a released version that no
+manifest publishes any longer. <code class="docutils literal notranslate"><span class="pre">known_edits</span></code> records name the dotted
+contract ID.</p></li>
+</ul>
+<p>The three that install <code class="docutils literal notranslate"><span class="pre">simready-validate</span></code> need a release that reads
+Foundations 2 contracts, and <code class="docutils literal notranslate"><span class="pre">.gitlab-ci.yml</span></code> pins
+<code class="docutils literal notranslate"><span class="pre">simready-validate&gt;=2026.9.0.dev1</span></code> for each. Keep the specifier naming a
+pre-release while the Foundations 2 support exists only as one: <code class="docutils literal notranslate"><span class="pre">uv</span></code> selects a
+pre-release only when the specifier names one, so an unpinned
+<code class="docutils literal notranslate"><span class="pre">--with</span> <span class="pre">simready-validate</span></code> resolves to the newest stable release. A validator
+without Foundations 2 support fails on the first projected contract with
+<code class="docutils literal notranslate"><span class="pre">Invalid</span> <span class="pre">version</span> <span class="pre">format:</span> <span class="pre">.</span></code>, because the contract carries no <code class="docutils literal notranslate"><span class="pre">version</span></code> field.</p>
+<p>The Foundations 1 translation existed only to bridge a comparison with
+Foundations 1. <code class="docutils literal notranslate"><span class="pre">validate_profile_table.py</span></code> and <code class="docutils literal notranslate"><span class="pre">validate_feature_versions.py</span></code>
+have dropped it; <code class="docutils literal notranslate"><span class="pre">validate_sample_content.py</span></code> still folds its feature summaries
+to Foundations 1 IDs through <code class="docutils literal notranslate"><span class="pre">catalog-map.json</span></code>.</p>
+</section>
+<section id="reading-the-docs-build">
+<h4>Reading the docs build<a class="headerlink" href="#reading-the-docs-build" title="Link to this heading">#</a></h4>
+<p><strong>Assemble and build from the same operating system.</strong> The staged output carries
+an ownership marker naming its own resolved directory, so the assembler never
+cleans a tree it did not create. A WSL run writes
+<code class="docutils literal notranslate"><span class="pre">/mnt/d/…/_build/docs-src</span></code> into that marker; a Windows build resolves the same
+directory as <code class="docutils literal notranslate"><span class="pre">D:\…\_build\docs-src</span></code>, the two strings do not match, and the build
+dies on a mismatched-marker error that reads like corruption rather than a path
+spelling difference. Deleting <code class="docutils literal notranslate"><span class="pre">_build/docs-src</span></code> and its manifest clears it — the
+tree is generated and git-ignored. Running the assembler alone to sanity-check
+section layout is useful, but do it from whichever environment will run the
+build.</p>
+<p>Warning volume alone is misleading — one broken assumption can produce
+hundreds. Triage by asking <em>which</em> documents went missing:</p>
+<ul class="simple">
+<li><p><strong>Pages missing from sections this migration never touched</strong> — a
+<code class="docutils literal notranslate"><span class="pre">rules_and_reqs/core/core</span></code> or an untouched profile page — mean tier
+<strong>discovery</strong> failed and a whole tier was skipped, not that the rename is
+wrong. The <code class="docutils literal notranslate"><span class="pre">updating</span> <span class="pre">environment:</span> <span class="pre">N</span> <span class="pre">added,</span> <span class="pre">…</span> <span class="pre">M</span> <span class="pre">removed</span></code> line is the tell: a
+large <code class="docutils literal notranslate"><span class="pre">removed</span></code> count with a small <code class="docutils literal notranslate"><span class="pre">added</span></code> count is a dropped tier.
+<code class="docutils literal notranslate"><span class="pre">tier_docs_module_root</span></code> needs exactly one module directory under
+<code class="docutils literal notranslate"><span class="pre">simready/foundation/</span></code>, so anything unexpected sitting beside a tier’s
+modules can erase that tier’s entire documentation.</p></li>
+<li><p><strong>Pages missing only from the renamed sections</strong> point at the toctrees or the
+relocation itself.</p></li>
+</ul>
+<p>Expect a small residue that this migration does not cause and should not chase:
+<code class="docutils literal notranslate"><span class="pre">guides/multiphysics_solvers.md</span></code> links an anchor in
+<code class="docutils literal notranslate"><span class="pre">guides/features/features.md</span></code> that the original Foundations 2 branch deleted
+along with much of that guide, and two profile guides fence a selector fragment
+as <code class="docutils literal notranslate"><span class="pre">toml</span></code>, which Pygments cannot lex and renders in relaxed mode anyway.</p>
+</section>
+</section>
+</section>
+<section id="undoing-steps-2-and-3">
+<h2>Undoing steps 2 and 3<a class="headerlink" href="#undoing-steps-2-and-3" title="Link to this heading">#</a></h2>
+<p>The repository owner undoes the revertable pair; an executor never does. With
+every permanent commit below the pair, undoing is a reset to the last permanent
+commit, which returns the branch to the additive dual-tree state that <code class="docutils literal notranslate"><span class="pre">main</span></code>
+merges into. Step 1 output stays, because it sits below the line.</p>
+<p>An executor’s part is to keep that line clean: stage permanent work as its own
+change so it can be reordered beneath the pair, and never mix it into a step’s
+staging.</p>
+<p>Because the relocated layout is fully derived from the Foundations 1 tree plus
+the script, undoing loses no authored content. That property is what makes the
+loop safe, and it must be preserved: <strong>do not hand-edit the relocated layout</strong>.
+Any authoring change goes into the Foundations 1 tree or the generator until
+ship.</p>
+<p>After undoing, check for an untracked, git-ignored <code class="docutils literal notranslate"><span class="pre">rules_and_reqs/</span></code> left on
+disk, such as <code class="docutils literal notranslate"><span class="pre">__pycache__</span></code>. It looks like a present source tree while the
+repository has no trace of it, which reads exactly like a merge that duplicated
+the tree. If you clean, scope it to <code class="docutils literal notranslate"><span class="pre">nv_core/tiers</span></code>: a repo-wide
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clean</span> <span class="pre">-xdf</span></code> also deletes <code class="docutils literal notranslate"><span class="pre">_build</span></code>, <code class="docutils literal notranslate"><span class="pre">_compiler</span></code>, <code class="docutils literal notranslate"><span class="pre">_repo</span></code>, <code class="docutils literal notranslate"><span class="pre">tools/repoman</span></code>,
+<code class="docutils literal notranslate"><span class="pre">.worktrees</span></code>, and the generated <code class="docutils literal notranslate"><span class="pre">requirements/</span></code> packages an editable install
+depends on.</p>
+</section>
+<section id="milestones">
+<h2>Milestones<a class="headerlink" href="#milestones" title="Link to this heading">#</a></h2>
+<section id="develop-and-test-simready-explorer-both-ways">
+<h3>Develop and test <code class="docutils literal notranslate"><span class="pre">simready-explorer</span></code> both ways<a class="headerlink" href="#develop-and-test-simready-explorer-both-ways" title="Link to this heading">#</a></h3>
+<p>This is why the transformer exists. Both explorer code paths get exercised
+against a real repo rather than a hand-built approximation:</p>
+<ol class="arabic simple">
+<li><p>With the migrated layout in place, develop and test explorer’s Foundations 2
+path.</p></li>
+<li><p>Revert the rename and the relocation so the branch returns to the additive
+dual-tree state, which stays mergeable to <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p></li>
+<li><p>Re-run explorer against that Foundations 1 shaped repo to prove the fallback.</p></li>
+</ol>
+<p>Alternating those is the only way to be confident the fallback is real rather
+than assumed, and it is the reason a shipped fallback cannot be a precondition.</p>
+<p>Explorer also needs its own committed Foundations 2 fixture tier, or a
+pre-release tier wheel, so its CI does not resolve against a sibling Foundations
+checkout whose layout flips between the migrated and reverted states. Derive
+that fixture from a migrated tree, then keep it in the explorer repo. This is
+the same failure mode as the hard-coded catalog path that used to sit in
+<code class="docutils literal notranslate"><span class="pre">test_foundations2_registry_integration.py</span></code>, just with a moving target.</p>
+<p>Re-run the transformation whenever explorer needs a refreshed layout. Because
+the relocated layout is generated, “re-sync” means re-running the transformer,
+not resolving merges.</p>
+<p>Two parts are hand-applied and therefore have to be redone or cherry-picked each
+cycle: step 2’s rename, and step 3’s handoff B. Everything else — the projection,
+the moves, the reference rewrite and the hub pages — regenerates. Keep those two
+as their own commits precisely so they can be reapplied without being
+reconstructed from memory.</p>
+</section>
+<section id="ship">
+<h3>Ship<a class="headerlink" href="#ship" title="Link to this heading">#</a></h3>
+<p>Gates, all of which are consequences of the explorer work rather than inputs to
+it:</p>
+<ul class="simple">
+<li><p>explorer’s Foundations 2 support is released;</p></li>
+<li><p>explorer’s Foundations 1 fallback is released, so an already-installed
+validator can still read a migrated tier;</p></li>
+<li><p>the transformer has run cleanly against current <code class="docutils literal notranslate"><span class="pre">main</span></code> content.</p></li>
+</ul>
+<p>Then:</p>
+<ol class="arabic simple">
+<li><p>run the relocation for the last time;</p></li>
+<li><p>rebind the 18 CIP adapters, 50 test registrations and 45 conform skills, and
+explorer’s adapter matching along with the adapters;</p></li>
+<li><p>relax <code class="docutils literal notranslate"><span class="pre">test_benchmark_documentation.py</span></code>’s ID regex;</p></li>
+<li><p>map the robot runtime tokens in benchmark runtime routing;</p></li>
+<li><p>retire <code class="docutils literal notranslate"><span class="pre">migrate_foundations2_catalog.py</span></code> to a historical tools location — it
+cannot regenerate anything once its Foundations 1 input is gone;</p></li>
+<li><p>keep <code class="docutils literal notranslate"><span class="pre">catalog-map.json</span></code> as durable provenance.</p></li>
+</ol>
+<p>On point 6: every generated contract already carries <code class="docutils literal notranslate"><span class="pre">legacy_identity</span></code>, so the
+Foundations 1 ↔ Foundations 2 pair survives without the map. The map is still
+worth keeping because it is the only place the <code class="docutils literal notranslate"><span class="pre">kind</span></code> classification and the
+full mapping are stated together in one file, and because assets already stamped
+with Foundations 1 IDs need that lookup.</p>
+</section>
+</section>
+<section id="open-decisions">
+<h2>Open decisions<a class="headerlink" href="#open-decisions" title="Link to this heading">#</a></h2>
+<p><strong>O1 — conform skill directory names.</strong> Skill folders are slugs derived from
+Foundations 1 IDs (<code class="docutils literal notranslate"><span class="pre">simready-foundation-conform-fet-004-physx</span></code>). They can stay as
+slugs, since the F2 contracts reference them as <code class="docutils literal notranslate"><span class="pre">skill:</span></code> strings, but decide
+whether to rename for consistency at ship.</p>
+</section>
+<section id="deferred-follow-ups">
+<h2>Deferred follow-ups<a class="headerlink" href="#deferred-follow-ups" title="Link to this heading">#</a></h2>
+<p>Gaps this migration exposes but deliberately does not fix, per the scope
+constraint. Each needs its own change.</p>
+<ul>
+<li><p><strong>Two apparently stale profile pages.</strong> <code class="docutils literal notranslate"><span class="pre">robot-gripper-neutral.md</span></code> and
+<code class="docutils literal notranslate"><span class="pre">robot-gripper-isaac.md</span></code> describe profiles that no longer exist separately,
+while the consolidated <code class="docutils literal notranslate"><span class="pre">robot_gripper.toml</span></code> has no page at all. They are
+carried through the relocation unchanged; deleting or rewriting them is
+authoring, not rearranging.</p></li>
+<li><p><strong>Missing conform skills</strong> for <code class="docutils literal notranslate"><span class="pre">FET_011_RTX</span></code>, <code class="docutils literal notranslate"><span class="pre">FET_012_STANDARD</span></code>,
+<code class="docutils literal notranslate"><span class="pre">FET_040</span></code>–<code class="docutils literal notranslate"><span class="pre">046</span></code> and <code class="docutils literal notranslate"><span class="pre">FET_101_ISAAC</span></code>. A runtime-tested contract’s <code class="docutils literal notranslate"><span class="pre">adapters</span></code>
+entry names its skill regardless, so <code class="docutils literal notranslate"><span class="pre">FET012_GaussianSplat.0-1-0</span></code>
+points at a <code class="docutils literal notranslate"><span class="pre">simready-foundation-conform-fet-012-standard</span></code> that does not
+exist yet.</p></li>
+<li><p><strong>Kebab-case requirement pages.</strong> Most markdown files under the source tree
+use hyphens where directories use underscores. Not worth the churn or the link
+cascade.</p></li>
+<li><p><strong>Stale exclude in <code class="docutils literal notranslate"><span class="pre">nv_core/sr_specs/repo.toml</span></code>,</strong> pointing at
+<code class="docutils literal notranslate"><span class="pre">features/feature-template.md</span></code>, which now lives under <code class="docutils literal notranslate"><span class="pre">guides/</span></code>.</p></li>
+<li><p><strong>Doc paths that match neither naming scheme.</strong> Two
+<code class="docutils literal notranslate"><span class="pre">simready_benchmark_kit_suite/articulation_phases/*.py</span></code> files and an
+<code class="docutils literal notranslate"><span class="pre">assemble_docs.py</span></code> docstring name <code class="docutils literal notranslate"><span class="pre">features/FET_022-driven_joints.md</span></code> and
+<code class="docutils literal notranslate"><span class="pre">features/FET_003-rigid_body_physics.md</span></code>. Those files do not exist under
+Foundations 1 either, so this predates the migration and no mechanical
+rewrite will catch them.</p></li>
+<li><p><strong>A conform skill citing the wrong contract entirely.</strong>
+<code class="docutils literal notranslate"><span class="pre">simready-foundation-conform-fet-028-mujoco</span></code> lists
+<code class="docutils literal notranslate"><span class="pre">nv_core/sr_specs/docs/features/FET_022_MUJOCO-1.json</span></code> as a source of truth,
+which is broken three ways independently of this migration: that <code class="docutils literal notranslate"><span class="pre">docs/</span></code>
+directory does not exist, an FET_028 skill is naming FET_022, and version <code class="docutils literal notranslate"><span class="pre">1</span></code>
+was never published. The relocation’s rewrite leaves it alone by design —
+nothing in the catalog matches it, and inventing a target would replace a
+visibly broken path with a plausible wrong one. Fixing it means deciding what
+the skill meant.</p></li>
+<li><p><strong>Two tiers ship the same Benchmark package name.</strong> The core and sensors
+wheels both ship a top-level <code class="docutils literal notranslate"><span class="pre">simready_benchmark_kit_suite</span></code>, so installing
+both overwrites one with the other. The runtime-test references the sensors
+contracts record, <code class="docutils literal notranslate"><span class="pre">simready_benchmark_kit_suite:&lt;test&gt;</span></code>, also do not say
+which tier’s copy they mean. The generator scans each tier’s copy separately,
+so the projection is correct; the collision is a packaging problem for the
+sensors tier. Renaming that suite changes the references its contracts
+record, so regenerate afterwards.</p></li>
+<li><p><strong>No <code class="docutils literal notranslate"><span class="pre">known_edits</span></code> record accepts the deletion of a released version.</strong>
+<code class="docutils literal notranslate"><span class="pre">validate_feature_versions.py</span></code> reports every deletion, and an intentional one
+needs a record shape of its own before it can merge.</p>
+<p><code class="docutils literal notranslate"><span class="pre">FEATURES</span></code> is also hardcoded to the core tier, so the sensors, template and
+AIF tiers get no immutability checking and cannot have records written for
+them at all. That gap predates the migration and belongs to the validator’s
+owner.</p>
+</li>
+</ul>
+</section>
+<section id="a-wrinkle-in-the-conform-skills">
+<h2>A wrinkle in the conform skills<a class="headerlink" href="#a-wrinkle-in-the-conform-skills" title="Link to this heading">#</a></h2>
+<p>The 45 conform skills contain two kinds of reference, and the relocation
+invalidates them at different times:</p>
+<ul class="simple">
+<li><p>markdown links into <code class="docutils literal notranslate"><span class="pre">features/</span></code>, which the outbound link rewrite in step 3
+fixes along with everything else;</p></li>
+<li><p>the “source of truth” <strong>manifest paths</strong> such as
+<code class="docutils literal notranslate"><span class="pre">features/FET_003_PHYSX-0.4.0.json</span></code>, which the relocation deletes and which
+ship rebinds.</p></li>
+</ul>
+<p>Left alone, that means each skill spends the explorer milestone half-migrated:
+correct links, dead manifest paths. That is strictly better than before and
+harmless during the revert loop, since the skills are not executed by the
+transformation. But if a reviewer would rather see skills change exactly once,
+exclude each tier package’s <code class="docutils literal notranslate"><span class="pre">skills/</span></code> from the step 3 outbound rewrite and do
+the whole skill surface at ship instead. Either is defensible; decide once and be consistent,
+because the alternative is a skill set that nobody can tell the state of.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="foundations2-catalog-migration.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Foundations 2 Catalog Migration</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="semantic_labels/semantic_labels.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Semantic Labels Workflow</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal" tabindex="-1"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goal-and-constraints">Goal and constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#target-layout">Target layout</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-capabilities-has-to-be-renamed">Why <code class="docutils literal notranslate"><span class="pre">capabilities/</span></code> has to be renamed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naming-rules">Naming rules</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-transformer">The transformer</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-it-reads-and-writes">What it reads and writes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-relocation-does">What relocation does</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interface-and-refusal-semantics">Interface and refusal semantics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-deterministic-and-what-needs-judgement">What is deterministic and what needs judgement</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preconditions">Preconditions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verified-inventory">Verified inventory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contracts">Contracts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown">Markdown</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#files-needing-reference-edits">Files needing reference edits</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identifier-consumers-still-on-foundations-1">Identifier consumers still on Foundations 1</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-transformation">The transformation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#order-and-revertability">Order and revertability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-agreement">Working agreement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-refresh-the-projection">Step 1 — refresh the projection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-rename-the-source-tree">Step 2 — rename the source tree</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#traps-in-the-reference-rewrite">Traps in the reference rewrite</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-relocate-the-contracts">Step 3 — relocate the contracts</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-the-ci-checks-rely-on-after-relocation">What the CI checks rely on after relocation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-the-docs-build">Reading the docs build</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#undoing-steps-2-and-3">Undoing steps 2 and 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#milestones">Milestones</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#develop-and-test-simready-explorer-both-ways">Develop and test <code class="docutils literal notranslate"><span class="pre">simready-explorer</span></code> both ways</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ship">Ship</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-decisions">Open decisions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deferred-follow-ups">Deferred follow-ups</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-wrinkle-in-the-conform-skills">A wrinkle in the conform skills</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8"></script>
+
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2025-2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

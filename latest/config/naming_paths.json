@@ -4,57 +4,6 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "NP.005",
-                "version": null,
-                "name": "asset-folder-structure",
-                "compatibility": "core-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "np-005",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/core/naming_paths/requirements/asset-folder-structure.html",
-                    "internal_path": "capabilities/core/naming_paths/requirements/asset-folder-structure.md"
-                },
-                "message": "Assets must follow a specific folder structure with the asset name as the root folder",
-                "examples": []
-            },
-            {
-                "code": "NP.007",
-                "version": null,
-                "name": "relative-paths",
-                "compatibility": "core-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "np-007",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/core/naming_paths/requirements/relative-paths.html",
-                    "internal_path": "capabilities/core/naming_paths/requirements/relative-paths.md"
-                },
-                "message": "All references must use relative paths",
-                "examples": []
-            },
-            {
-                "code": "NP.002",
-                "version": null,
-                "name": "file-naming-convention",
-                "compatibility": "core-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "np-002",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/core/naming_paths/requirements/file-naming-convention.html",
-                    "internal_path": "capabilities/core/naming_paths/requirements/file-naming-convention.md"
-                },
-                "message": "USD files shall follow consistent naming conventions",
-                "examples": []
-            },
-            {
                 "code": "NP.008",
                 "version": null,
                 "name": "assetpath-validation",
@@ -65,27 +14,10 @@
                 "validator": "np-008",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/core/naming_paths/requirements/assetpath-validation.html",
-                    "internal_path": "capabilities/core/naming_paths/requirements/assetpath-validation.md"
+                    "path": "rules_and_reqs/core/naming_paths/requirements/assetpath-validation.html",
+                    "internal_path": "rules_and_reqs/core/naming_paths/requirements/assetpath-validation.md"
                 },
                 "message": "All asset, reference, and payload paths must resolve to files that exist",
-                "examples": []
-            },
-            {
-                "code": "NP.004",
-                "version": null,
-                "name": "path-length-limits",
-                "compatibility": "core-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "np-004",
-                "parameters": [],
-                "metadata": {
-                    "path": "capabilities/core/naming_paths/requirements/path-length-limits.html",
-                    "internal_path": "capabilities/core/naming_paths/requirements/path-length-limits.md"
-                },
-                "message": "File and directory paths shall not exceed platform limits",
                 "examples": []
             },
             {
@@ -99,10 +31,44 @@
                 "validator": "np-006",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/core/naming_paths/requirements/metadata-location.html",
-                    "internal_path": "capabilities/core/naming_paths/requirements/metadata-location.md"
+                    "path": "rules_and_reqs/core/naming_paths/requirements/metadata-location.html",
+                    "internal_path": "rules_and_reqs/core/naming_paths/requirements/metadata-location.md"
                 },
                 "message": "Asset metadata must be stored in the USD file or a sidecar JSON file",
+                "examples": []
+            },
+            {
+                "code": "NP.002",
+                "version": null,
+                "name": "file-naming-convention",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "np-002",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/naming_paths/requirements/file-naming-convention.html",
+                    "internal_path": "rules_and_reqs/core/naming_paths/requirements/file-naming-convention.md"
+                },
+                "message": "USD files shall follow consistent naming conventions",
+                "examples": []
+            },
+            {
+                "code": "NP.004",
+                "version": null,
+                "name": "path-length-limits",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "np-004",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/naming_paths/requirements/path-length-limits.html",
+                    "internal_path": "rules_and_reqs/core/naming_paths/requirements/path-length-limits.md"
+                },
+                "message": "File and directory paths shall not exceed platform limits",
                 "examples": []
             },
             {
@@ -116,10 +82,27 @@
                 "validator": "np-003",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/core/naming_paths/requirements/directory-structure.html",
-                    "internal_path": "capabilities/core/naming_paths/requirements/directory-structure.md"
+                    "path": "rules_and_reqs/core/naming_paths/requirements/directory-structure.html",
+                    "internal_path": "rules_and_reqs/core/naming_paths/requirements/directory-structure.md"
                 },
                 "message": "Asset directories shall use consistent naming and logical organization",
+                "examples": []
+            },
+            {
+                "code": "NP.007",
+                "version": null,
+                "name": "relative-paths",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "np-007",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/naming_paths/requirements/relative-paths.html",
+                    "internal_path": "rules_and_reqs/core/naming_paths/requirements/relative-paths.md"
+                },
+                "message": "All references must use relative paths",
                 "examples": []
             },
             {
@@ -133,16 +116,33 @@
                 "validator": "np-001",
                 "parameters": [],
                 "metadata": {
-                    "path": "capabilities/core/naming_paths/requirements/prim-naming-convention.html",
-                    "internal_path": "capabilities/core/naming_paths/requirements/prim-naming-convention.md"
+                    "path": "rules_and_reqs/core/naming_paths/requirements/prim-naming-convention.html",
+                    "internal_path": "rules_and_reqs/core/naming_paths/requirements/prim-naming-convention.md"
                 },
                 "message": "Prims shall follow consistent naming conventions",
+                "examples": []
+            },
+            {
+                "code": "NP.005",
+                "version": null,
+                "name": "asset-folder-structure",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "np-005",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/naming_paths/requirements/asset-folder-structure.html",
+                    "internal_path": "rules_and_reqs/core/naming_paths/requirements/asset-folder-structure.md"
+                },
+                "message": "The folder holding the main asset file must not contain any other USD file.",
                 "examples": []
             }
         ],
         "metadata": {
-            "path": "capabilities/core/naming_paths/capability-naming_paths.html",
-            "internal_path": "capabilities/core/naming_paths/capability-naming_paths.md"
+            "path": "rules_and_reqs/core/naming_paths/capability-naming_paths.html",
+            "internal_path": "rules_and_reqs/core/naming_paths/capability-naming_paths.md"
         }
     }
 }

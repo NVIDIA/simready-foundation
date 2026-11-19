@@ -1,0 +1,68 @@
+#usda 1.0
+(
+    doc = """Two industrialplasticpallet_stack_a01 assemblies nested into one six-high stack.
+
+    Each stack is referenced whole, so its own Connections scope comes with it
+    and occupies the sites it pairs (CN.007). The outer connection uses the
+    only unpaired pair: the top socket of Stack_0 and the bottom plug of
+    Stack_1.
+
+    Each inner CompoundBody is demoted, so both outer sites resolve to the
+    outer CompoundBody and the connection is compound. The outer aggregate is
+    the sum of the two inner aggregates: 2 x 85.5 kg = 171 kg (CN.011).
+    """
+    defaultPrim = "IndustrialPlasticPallet_Stack_B01"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "IndustrialPlasticPallet_Stack_B01" (
+    kind = "assembly"
+)
+{
+    uniform token simready:mate:assemblyType = "pallet_stack"
+
+    def Xform "CompoundBody" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+        kind = "group"
+    )
+    {
+        float physics:mass = 171
+
+        def Xform "Stack_0" (
+            prepend references = @../../industrialplasticpallet_stack_a01/simready_usd/industrialplasticpallet_stack_a01.usda@
+        )
+        {
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+
+            over "CompoundBody"
+            {
+                bool physics:rigidBodyEnabled = false
+            }
+        }
+
+        def Xform "Stack_1" (
+            prepend references = @../../industrialplasticpallet_stack_a01/simready_usd/industrialplasticpallet_stack_a01.usda@
+        )
+        {
+            double3 xformOp:translate = (0, 0, 0.1515)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+
+            over "CompoundBody"
+            {
+                bool physics:rigidBodyEnabled = false
+            }
+        }
+    }
+
+    def Scope "Connections"
+    {
+        def Scope "stack_0_to_stack_1"
+        {
+            custom uniform token simready:mate:realization = "compound"
+            custom rel simready:mate:socket = </IndustrialPlasticPallet_Stack_B01/CompoundBody/Stack_0/CompoundBody/Pallet_2/stack_socket>
+            custom rel simready:mate:plug = </IndustrialPlasticPallet_Stack_B01/CompoundBody/Stack_1/CompoundBody/Pallet_0/stack_plug>
+        }
+    }
+}

@@ -19,16 +19,16 @@ pip install simready-validate simready-foundation-tier-sensors simready-foundati
 
 The `Sensor-IMU` profile contains a single feature (see `profiles.toml`
 alongside this document, and the
-[feature dependency graph](../features/feature-dependency-graph)):
+[feature dependency graph](../features/feature-dependency-graph.md)):
 
 ```toml
 [Sensor-IMU]
 "1.0.0" = {features = [
-    {"FET_034_ISAAC" = {version = "0.1.0"}}, # "IMU Sensor"
+    {selector = "FET034_ImuSensor.Isaac.0-1-0"}, # "IMU Sensor"
 ]}
 ```
 
-[`FET_034_ISAAC`](../features/FET_034_ISAAC.md) defines the simulation-readiness
+[`FET034_ImuSensor.Isaac.0-1-0`](../features/FET034_ImuSensor.Isaac.md) defines the simulation-readiness
 contract for IMU sensor prims. It has no feature dependencies, so this profile
 checks IMU wiring only. Everything else about the asset — units, hierarchy,
 physics, materials, packaging — comes from whichever primary profile the asset
@@ -38,7 +38,7 @@ is also stamped with.
 
 | Requirement | Capability | Summary |
 |---|---|---|
-| [`PS.001`](../capabilities/physics_bodies/physics_sensors/requirements/imu-sensor-rigid-body.md) | [Physics Bodies/Physics Sensors](../capabilities/physics_bodies/physics_sensors/capability-physics_sensors.md) | An `IsaacImuSensor` prim must be a descendant of a prim with `PhysicsRigidBodyAPI` applied. |
+| [`PS.001`](../rules_and_reqs/physics_bodies/physics_sensors/requirements/imu-sensor-rigid-body.md) | [Physics Bodies/Physics Sensors](../rules_and_reqs/physics_bodies/physics_sensors/capability-physics_sensors.md) | An `IsaacImuSensor` prim must be a descendant of a prim with `PhysicsRigidBodyAPI` applied. |
 
 The check applies only to the `IsaacImuSensor` prims a stage actually
 contains. An asset with no IMU sensor **passes** this profile without
@@ -86,7 +86,7 @@ validation while producing accelerations that do not match the real device.
 ## Validation
 
 A sensor profile is validated in its own run. "Stamping both profiles" means
-validating the asset against each one; there is no combined invocation:
+validating the asset against each requested target independently:
 
 ```bash
 simready-validate --profile Robotics-Prop --version 4.0.0 path/to/asset.usd
@@ -97,24 +97,23 @@ Both runs must pass. The sensor profile is not a substitute for the primary
 one — on its own it says nothing about units, hierarchy, physics, materials,
 or packaging.
 
-If you record the result in the optional `validation` dictionary under
-`SimReady_Metadata`, note that the documented form holds a single `profile`
-and `profile_version`. Record the primary profile there and track sensor
-conformance alongside it; the metadata has no multi-profile form today.
+Preserve a separate report for each `(profile, version)` target. To retain
+profile-keyed USD receipts, use the multi-profile API described in the
+[profile validation guide](../guides/profiles/profiles.md#chain-stamping).
 
 ## Runtime verification
 
 Static validation confirms the sensor is wired to a rigid body. It cannot
-confirm the sensor produces data. The Benchmark test `imu_sensor_data` checks
+confirm the sensor produces data. The Evaluate test `imu_sensor_data` checks
 that the sensor reports non-zero angular velocity and linear acceleration
 during physics simulation:
 
 ```bash
-pip install "simready-foundation-tier-sensors[benchmark]"
-simready-benchmark --features FET_034_ISAAC
+pip install "simready-foundation-tier-sensors[evaluate]"
+simready-evaluate --features FET034_ImuSensor.Isaac.0-1-0
 ```
 
-The `[benchmark]` extra installs the Benchmark engine; a validator-only tier
+The `[evaluate]` extra installs the Evaluate engine; a validator-only tier
 install does not include it.
 
 ## Samples
@@ -124,7 +123,7 @@ install does not include it.
 
 ## References
 
-- [`FET_034_ISAAC` feature](../features/FET_034_ISAAC.md)
-- [Physics Sensors capability](../capabilities/physics_bodies/physics_sensors/capability-physics_sensors.md)
-- [`PS.001` imu-sensor-rigid-body](../capabilities/physics_bodies/physics_sensors/requirements/imu-sensor-rigid-body.md)
+- [`FET034_ImuSensor.Isaac.0-1-0` feature](../features/FET034_ImuSensor.Isaac.md)
+- [Physics Sensors capability](../rules_and_reqs/physics_bodies/physics_sensors/capability-physics_sensors.md)
+- [`PS.001` imu-sensor-rigid-body](../rules_and_reqs/physics_bodies/physics_sensors/requirements/imu-sensor-rigid-body.md)
 - `profiles.toml`, the profile definition alongside this document

@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_021-robot_core`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP021_RobotCore.Isaac.html" />
+<link rel="canonical" href="../capabilities/CAP021_RobotCore.Isaac.html" />
+```
+
+This published feature route moved to [`CAP021_RobotCore.Isaac`](../capabilities/CAP021_RobotCore.Isaac.md) (Foundations 1 ID: `FET_021_ISAAC`).
