@@ -79,6 +79,8 @@ remaining_gaps: requirement, validator, adapter, profile, or runtime-test follow
 
 ## Policies
 
+- Protect unrelated local work: before editing shared repository files (spec markdown, requirement/feature JSON, profile TOML, validators, skills, or docs), check `git status` for unrelated in-progress changes and scope edits to the requested task. Never revert, overwrite, discard, stash, or commit a user's uncommitted or unrelated changes; if a file you must edit already carries pending unrelated edits, surface it and confirm before proceeding.
+- Keep secrets out of the repo and evidence: never write user-provided tokens, credentials, API keys, or other secrets into files, source, logs, validation or evaluation reports, commit messages, or bug/Jira/Confluence attachments, and do not echo them in full; read them from environment variables or an existing credential store and redact them from any output you preserve.
 - Do not validate subjective guidance as a hard failure unless the requirement defines objective criteria.
 - Prefer one clear checker per rule family over tangled mega-checkers.
 - Avoid changing unrelated validators while adding a new one.

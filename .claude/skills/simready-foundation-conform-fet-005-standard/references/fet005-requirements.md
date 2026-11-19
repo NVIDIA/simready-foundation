@@ -1,14 +1,14 @@
-# FET_005_STANDARD Requirement Repair Map
+# FET005_Grasp Requirement Repair Map
 
-Use this reference when a validation report or inspection identifies `FET_005_STANDARD@0.1.0` failures. Load the selected JSON manifest first:
+Use this reference when a validation report or inspection identifies `FET005_Grasp.0-1-0` failures. Load the selected JSON manifest first:
 
-- `FET_005_STANDARD-0.1.0.json`
+- `FET005_Grasp.0-1-0.json`
 
 ## Manifest Requirements
 
 | Feature Variant | Requirements |
 |---|---|
-| `FET_005_STANDARD@0.1.0` | `PMT.001`, `GSP.001` |
+| `FET005_Grasp.0-1-0` | `PMT.001`, `GSP.001` |
 
 The current feature markdown emphasizes `GSP.001`. The current graspable validator checks only `GSP.001`: a `BasisCurves` prim under the default prim, whose name starts with `grasp_identifier`, with at least two points.
 
@@ -33,7 +33,7 @@ Current validator does not prove that the line intersects the asset or is a good
 
 If the current agent/model cannot inspect visual evidence directly, do not author
 or repair the grasp vector. Report the repair as blocked and tell the user that
-FET_005_STANDARD grasp-line repair requires a vision-capable model/agent.
+FET005_Grasp grasp-line repair requires a vision-capable model/agent.
 
 If the current agent/model can inspect visual evidence directly, it should choose
 explicit local-space points from that evidence and run the authoring script. Do
@@ -77,7 +77,7 @@ Good practice:
 - The annotation scope does not need to be a child of the rigid body. Runtime
   testing first uses a rigid-body ancestor when present; otherwise it resolves
   the body whose world bound is crossed most by the grasp segment. Make that
-  intersection unambiguous and do not reparent solely for the benchmark.
+  intersection unambiguous and do not reparent solely for the runtime test.
 - Use local coordinates relative to the authoring parent.
 - Check root and ancestor xform ops before authoring. Converted CAD assets may carry meter-normalization or source-unit scale, so source-space meter points may need conversion into authored local units.
 - Keep the line visible in review renders with a non-material display color.

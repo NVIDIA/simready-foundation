@@ -15,8 +15,8 @@
 
 [project]
 name = "simready-foundation-tier-aif"
-version = "2026.8.0"
-description = "SimReady AI Factory (AIF) tier: AIF core metadata, connection points (v0.1.0 geometry + v0.2.0 property vocabulary, coexisting), thermal cooling, and electrical capabilities/features, and the aif-entity profile"
+version = "2026.10.0"
+description = "SimReady AI Factory (AIF) tier: AIF core metadata, connection points (v0.1.0 geometry + v0.2.0 property vocabulary, coexisting), thermal cooling, and electrical rules_and_reqs/features, and the aif-entity profile"
 authors = [
     {name = "NVIDIA"},
 ]
@@ -25,14 +25,10 @@ license = "Apache-2.0"
 license-files = ["LICENSE.txt"]
 requires-python = ">=3.10,<3.13"
 dependencies = [
+    "semver>=3,<4",
     "usd-validation-nvidia>=1.20.0",
-    # The AIF-Entity profile selects FET_000_STANDARD and FET_001_STANDARD, which
-    # only tier_core provides. Without it the profile names features that are not
-    # registered and the loader skips it, so nothing validates.
-    #
-    # The 2026.8.0 release includes the FET_000_STANDARD and FET_001_STANDARD
-    # names used by the AIF-Entity profile.
-    "simready-foundation-tier-core>=2026.8.0,<2026.9.0",
+    # AIF-Entity selects the neutral Core contracts supplied by October rc2.
+    "simready-foundation-tier-core>=2026.10.0-rc2",
 ]
 
 # Framework discovery: the asset validator / usd-validation auto-discovers this
@@ -59,6 +55,7 @@ path = "../_tooling/build_hook.py"
 module = "simready.foundation.tier_aif"
 reverse_domain = "com.nvidia.simready"
 package_licenses = [
+    "semver-LICENSE.txt",
     "usd-validation-nvidia-LICENSE.txt",
     "usd-validation-nvidia-THIRD_PARTY_NOTICES.md",
     "usd-core-LICENSE.txt",
@@ -77,5 +74,5 @@ packages = ["simready"]
 # The shared build hook (../_tooling/build_hook.py) generates this tier's
 # requirements enums at build time, so the codegen package must be importable in
 # the (isolated) build env.
-requires = ["hatchling", "usd-profiles-nvidia"]
+requires = ["hatchling>=1.27", "usd-profiles-nvidia"]
 build-backend = "hatchling.build"

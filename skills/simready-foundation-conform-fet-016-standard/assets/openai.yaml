@@ -1,0 +1,4 @@
+interface:
+  display_name: "Conform Appearance Variant"
+  short_description: "Organize and validate visual-only material-look variants"
+  default_prompt: "Conform staged assets to FET016_AppearanceVariant.0-1-0 by organizing existing material looks into visual-only Appearance variant sets that rebind materials without moving geometry."

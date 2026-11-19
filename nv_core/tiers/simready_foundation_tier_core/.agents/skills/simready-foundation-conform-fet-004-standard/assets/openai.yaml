@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform FET004_Multibody"
+  short_description: "Repair FET004_Multibody conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-004-standard to repair FET004_Multibody SimReady conformance failures."

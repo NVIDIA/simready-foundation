@@ -5,7 +5,7 @@ This document describes how to author a USD asset that conforms to the
 
 `Sensor-LiDAR` is a sensor profile: it validates the LiDAR sensors an asset
 carries, not the asset itself. Stamp it alongside the asset's primary profile
-([`Robot-Body`](robot-body.md), [`Robotics-Prop`](robotics-prop.md), or whichever profile matches the host asset — see the [profile index](profiles.md#profile-comparison)).
+([`Robot-Body`](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/profiles/robot-body.md), [`Robotics-Prop`](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/profiles/robotics-prop.md), or whichever profile matches the host asset — see the [profile index](../../../../../../sr_specs/docs/shared/profiles/profiles.md#profile-comparison)).
 
 LiDAR is an RTX rendering sensor. It fires rays and produces point cloud data
 through the GPU render pipeline, which is why its capability sits under
@@ -25,30 +25,30 @@ pip install simready-validate simready-foundation-tier-sensors simready-foundati
 
 The `Sensor-LiDAR` profile contains a single feature (see `profiles.toml`
 alongside this document, and the
-[feature dependency graph](../features/feature-dependency-graph)):
+[feature dependency graph](../../../../../../sr_specs/docs/shared/features/feature-dependency-graph.md)):
 
 ```toml
 [Sensor-LiDAR]
 "1.0.0" = {features = [
-    {"FET_036_RTX" = {version = "0.1.0"}}, # "LiDAR (OmniLidar RTX)"
+    {selector = "FET036_Lidar.RTX.0-1-0"}, # "LiDAR (OmniLidar RTX)"
 ]}
 ```
 
-[`FET_036_RTX`](../features/FET_036_RTX.md) defines the schema and parameter
+[`FET036_Lidar.RTX.0-1-0`](../features/FET036_Lidar.RTX.md) defines the schema and parameter
 consistency contract for OmniLidar sensor prims.
 
 ## What the profile checks
 
 All four requirements belong to the
-[Non-Visual Sensors/LiDAR](../capabilities/nonvisual_sensors/lidar/capability-lidar.md)
+[Non-Visual Sensors/LiDAR](../rules_and_reqs/nonvisual_sensors/lidar/capability-lidar.md)
 capability.
 
 | Requirement | Summary |
 |---|---|
-| [`LI.001`](../capabilities/nonvisual_sensors/lidar/requirements/lidar-omni-lidar-schema.md) | A LiDAR must be an `OmniLidar` prim with `OmniSensorGenericLidarCoreAPI` applied. The legacy `Camera` with `cameraSensorType="lidar"` pattern is not allowed. |
-| [`LI.002`](../capabilities/nonvisual_sensors/lidar/requirements/lidar-emitter-state-length.md) | Every emitter state array must have the same length as `omni:sensor:Core:numberOfEmitters`, and the arrays must agree with each other. |
-| [`LI.003`](../capabilities/nonvisual_sensors/lidar/requirements/lidar-scan-rate-minimum.md) | `omni:sensor:Core:scanRateBaseHz` must be at least 0.466 Hz. |
-| [`LI.004`](../capabilities/nonvisual_sensors/lidar/requirements/lidar-solid-state-rays-per-line.md) | For solid-state LiDARs, the elements of `omni:sensor:Core:numRaysPerLine` must sum to `omni:sensor:Core:numberOfEmitters`. |
+| [`LI.001`](../rules_and_reqs/nonvisual_sensors/lidar/requirements/lidar-omni-lidar-schema.md) | A LiDAR must be an `OmniLidar` prim with `OmniSensorGenericLidarCoreAPI` applied. The legacy `Camera` with `cameraSensorType="lidar"` pattern is not allowed. |
+| [`LI.002`](../rules_and_reqs/nonvisual_sensors/lidar/requirements/lidar-emitter-state-length.md) | Every emitter state array must have the same length as `omni:sensor:Core:numberOfEmitters`, and the arrays must agree with each other. |
+| [`LI.003`](../rules_and_reqs/nonvisual_sensors/lidar/requirements/lidar-scan-rate-minimum.md) | `omni:sensor:Core:scanRateBaseHz` must be at least 0.466 Hz. |
+| [`LI.004`](../rules_and_reqs/nonvisual_sensors/lidar/requirements/lidar-solid-state-rays-per-line.md) | For solid-state LiDARs, the elements of `omni:sensor:Core:numRaysPerLine` must sum to `omni:sensor:Core:numberOfEmitters`. |
 
 These checks apply only to the `OmniLidar` prims a stage actually contains.
 An asset with no LiDAR **passes** this profile without asserting anything, and
@@ -116,7 +116,7 @@ into an authoring-time one.
 ## Validation
 
 A sensor profile is validated in its own run. "Stamping both profiles" means
-validating the asset against each one; there is no combined invocation:
+validating the asset against each requested target independently:
 
 ```bash
 simready-validate --profile Robotics-Prop --version 4.0.0 path/to/asset.usd
@@ -127,26 +127,25 @@ Both runs must pass. The sensor profile is not a substitute for the primary
 one — on its own it says nothing about units, hierarchy, physics, materials,
 or packaging.
 
-If you record the result in the optional `validation` dictionary under
-`SimReady_Metadata`, note that the documented form holds a single `profile`
-and `profile_version`. Record the primary profile there and track sensor
-conformance alongside it; the metadata has no multi-profile form today.
+Preserve a separate report for each `(profile, version)` target. To retain
+profile-keyed USD receipts, use the multi-profile API described in the
+[profile validation guide](../../../../../../sr_specs/docs/guides/profiles/profiles.md#chain-stamping).
 
 ## Runtime verification
 
 Static validation confirms the schema and parameter consistency. It cannot
-confirm the sensor measures accurately. The Benchmark test
+confirm the sensor measures accurately. The Evaluate test
 `lidar_point_cloud` surrounds each sensor with 16 cubes at asymmetric known
 distances, runs 120 RTX scan frames, and checks each return against the
 expected wall distance. It passes when fewer than 1% of returns exceed 2%
 range error, measured across non-edge returns:
 
 ```bash
-pip install "simready-foundation-tier-sensors[benchmark]"
-simready-benchmark --features FET_036_RTX
+pip install "simready-foundation-tier-sensors[evaluate]"
+simready-evaluate --features FET036_Lidar.RTX.0-1-0
 ```
 
-The `[benchmark]` extra installs the Benchmark engine; a validator-only tier
+The `[evaluate]` extra installs the Evaluate engine; a validator-only tier
 install does not include it.
 
 This test requires GPU driver 576.x or newer for RTX LiDAR CUDA 12.9 support
@@ -174,7 +173,7 @@ All under `sample_content/common_assets/sensors_fails/lidar/`.
 
 ## References
 
-- [`FET_036_RTX` feature](../features/FET_036_RTX.md)
-- [LiDAR capability](../capabilities/nonvisual_sensors/lidar/capability-lidar.md)
+- [`FET036_Lidar.RTX.0-1-0` feature](../features/FET036_Lidar.RTX.md)
+- [LiDAR capability](../rules_and_reqs/nonvisual_sensors/lidar/capability-lidar.md)
 - [`Sensor-Camera` profile](sensor-camera.md)
 - `profiles.toml`, the profile definition alongside this document

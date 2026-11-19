@@ -1,0 +1,24 @@
+# Test dependencies for the AIF tier suite (tier_aif in repo.toml).
+#
+# Both tiers are editable-installed from this checkout: test_profile_resolution
+# discovers tiers through their `simready.tier` entry points, and AIF-Entity
+# selects features only tier_core provides. That also pulls in each tier's own
+# dependencies, so nothing here mirrors a pyproject.toml.
+#
+# SIMREADY_TIERS_ROOT comes from the suite's env_vars: uv resolves a relative
+# path in this file against the working directory, not against this file.
+
+pytest==9.0.3
+
+-e ${SIMREADY_TIERS_ROOT}/simready_foundation_tier_core
+-e ${SIMREADY_TIERS_ROOT}/simready_foundation_tier_newton
+-e ${SIMREADY_TIERS_ROOT}/simready_foundation_tier_aif[usd]
+
+# test_profile_resolution resolves profiles through simready.validate and skips
+# without it. Neutral FET/CAP IDs require the Foundations 2 reader in rc1.
+# This floor also prevents an existing test environment from retaining rc0.
+simready-validate>=2026.10.0rc1,<2026.11
+
+# conftest.py regenerates the requirement enums when a wheel build has removed
+# them from the checkout.
+usd-profiles-nvidia

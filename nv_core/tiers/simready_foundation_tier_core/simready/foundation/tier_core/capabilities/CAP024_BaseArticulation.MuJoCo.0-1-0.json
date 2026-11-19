@@ -1,0 +1,14 @@
+{
+  "id": "CAP024_BaseArticulation.MuJoCo.0-1-0",
+  "display_name": "Base Articulation (MuJoCo)",
+  "legacy_identity": {
+    "id": "FET_024_MUJOCO",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "MUJOCO.BA.001"
+  ],
+  "dependencies": [
+    "CAP024_BaseArticulation.0-1-0"
+  ]
+}

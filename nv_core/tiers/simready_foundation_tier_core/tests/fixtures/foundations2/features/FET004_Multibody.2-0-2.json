@@ -1,0 +1,10 @@
+{
+  "id": "FET004_Multibody.2-0-2",
+  "display_name": "Multibody Source",
+  "source": true,
+  "requirements": [
+    "JT.001",
+    "JT.002",
+    "RB.MB.001"
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP032_PackagingIntrospection"
+  short_description: "Repair CAP032_PackagingIntrospection conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-032-standard to repair CAP032_PackagingIntrospection SimReady conformance failures."

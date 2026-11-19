@@ -1,0 +1,98 @@
+{
+    "tool": "ingest_static_prop_headless",
+    "version": 1.0,
+    "functions": {
+        "setup": {
+            "num_passes": 1,
+            "enabled": true,
+            "parameters": [
+                {
+                    "project_root": "D:/Perforce/omniverse/simready/simready/Projects",
+                    "input_fbx": "D:/Perforce/omniverse/simready/simready/Projects/source_assets/Digital_Twins_Library/Assets/Warehouse/Shipping/Pallets/Plastic/Industrial_A/IndustrialPlasticPallet_A01.usd",
+                    "output_usd": "D:/Perforce/omniverse/simready/simready/Projects/simready_content/common_assets/props/industrialplasticpallet_a01/industrialplasticpallet_a01.usd",
+                    "tagging_info": {
+                        "category": "props"
+                    },
+                    "prop_scale": 1.0
+                }
+            ]
+        },
+        "convert_fbx_to_usd": {
+            "num_passes": 1,
+            "enabled": true,
+            "parameters": [
+                {}
+            ]
+        },
+        "standardize_root_prim": {
+            "num_passes": 1,
+            "enabled": true,
+            "parameters": [
+                {}
+            ]
+        },
+        "normalize_usd": {
+            "num_passes": 1,
+            "enabled": true,
+            "parameters": [
+                {}
+            ]
+        },
+        "get_dependencies_from_list": {
+            "num_passes": 1,
+            "enabled": true,
+            "parameters": [
+                {
+                    "usd_list": null,
+                    "progress_callback": null,
+                    "done_callback": null,
+                    "allow_mdl_for_other_server": false
+                }
+            ]
+        },
+        "fixup_material_params": {
+            "num_passes": 1,
+            "enabled": true,
+            "parameters": [
+                {}
+            ]
+        },
+        "set_metadata": {
+            "num_passes": 1,
+            "enabled": true,
+            "parameters": [
+                {}
+            ]
+        },
+        "remove_camera_deltas": {
+            "num_passes": 1,
+            "enabled": true,
+            "parameters": [
+                {}
+            ]
+        },
+        "create_inst": {
+            "num_passes": 1,
+            "enabled": true,
+            "parameters": [
+                {}
+            ]
+        },
+        "create_tagged": {
+            "num_passes": 1,
+            "enabled": true,
+            "parameters": [
+                {}
+            ]
+        },
+        "validate_material": {
+            "num_passes": 1,
+            "enabled": true,
+            "parameters": [
+                {
+                    "prim": null
+                }
+            ]
+        }
+    }
+}

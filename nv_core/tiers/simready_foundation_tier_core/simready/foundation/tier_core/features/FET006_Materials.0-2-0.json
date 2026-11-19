@@ -1,0 +1,23 @@
+{
+  "id": "FET006_Materials.0-2-0",
+  "display_name": "Materials (USDPreviewSurface)",
+  "legacy_identity": {
+    "id": "FET_006_STANDARD",
+    "version": "0.2.0"
+  },
+  "source": true,
+  "additional_requirements": [
+    "com.nvidia.usd.VM.BIND.001",
+    "VM.MAT.001",
+    "com.nvidia.usd.VM.PS.001",
+    "VM.PS.002",
+    "VM.TEX.001",
+    "VM.TEX.003"
+  ],
+  "adapters": [
+    "skill:simready-foundation-conform-fet-006-standard"
+  ],
+  "runtime_tests": [
+    "simready.foundation.tier_core.runtime_tests:preview_surface_renders"
+  ]
+}

@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Tests for mimic_joint pure helpers."""
-from simready_benchmark_kit_suite.articulation_phases.mimic_joint import (
+from simready.foundation.tier_core.runtime_tests.articulation_phases.mimic_joint import (
     aggregate_mim_summary,
     compute_expected_follower,
     get_defaults,

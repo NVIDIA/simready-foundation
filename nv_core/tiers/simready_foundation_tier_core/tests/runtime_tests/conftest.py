@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Make the tier-owned Benchmark package importable in source tests."""
+"""Make the tier-owned Evaluate package importable in source tests."""
 
 import sys
 from importlib.util import find_spec
@@ -22,7 +22,7 @@ from pathlib import Path
 # no installed copy is importable. Prepending unconditionally also puts the
 # sibling `simready/` source tree ahead of an installed tier, and that tree has
 # no `requirements` module: it is generated into the wheel at build time.
-if find_spec("simready_benchmark_kit_suite") is None:
+if find_spec("simready.foundation.tier_core.runtime_tests") is None:
     _TEST_PACKAGES_ROOT = Path(__file__).resolve().parents[2]
     if str(_TEST_PACKAGES_ROOT) not in sys.path:
         sys.path.insert(0, str(_TEST_PACKAGES_ROOT))

@@ -1,0 +1,20 @@
+{
+  "id": "FET006_Materials.Openpbr.0-2-0",
+  "display_name": "Materials (OpenPBR)",
+  "source_feature": "FET006_Materials.0-3-0",
+  "additional_requirements": [
+    "com.nvidia.usd.VM.BIND.001",
+    "VM.BIND.002",
+    "VM.PBR.001",
+    "VM.PBR.002",
+    "VM.PBR.003",
+    "VM.TEX.001",
+    "VM.TEX.004"
+  ],
+  "adapters": [
+    "skill:simready-foundation-conform-fet-006-openpbr"
+  ],
+  "runtime_tests": [
+    "simready.foundation.tier_core.runtime_tests:openpbr_renders"
+  ]
+}

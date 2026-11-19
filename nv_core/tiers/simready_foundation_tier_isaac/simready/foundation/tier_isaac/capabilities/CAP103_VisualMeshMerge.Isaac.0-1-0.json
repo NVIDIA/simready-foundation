@@ -1,0 +1,7 @@
+{
+  "id": "CAP103_VisualMeshMerge.Isaac.0-1-0",
+  "display_name": "Visual Mesh Merge",
+  "requirements": [
+    "OPT.002"
+  ]
+}

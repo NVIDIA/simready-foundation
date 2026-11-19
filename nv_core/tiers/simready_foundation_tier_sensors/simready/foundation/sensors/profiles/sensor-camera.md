@@ -5,7 +5,7 @@ This document describes how to author a USD asset that conforms to the
 
 `Sensor-Camera` is a sensor profile: it validates the render pipeline wiring
 an asset carries, not the asset itself. Stamp it alongside the asset's primary
-profile ([`Robot-Body`](robot-body.md), [`Robotics-Prop`](robotics-prop.md), or whichever profile matches the host asset — see the [profile index](profiles.md#profile-comparison)).
+profile ([`Robot-Body`](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/profiles/robot-body.md), [`Robotics-Prop`](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/profiles/robotics-prop.md), or whichever profile matches the host asset — see the [profile index](../../../../../../sr_specs/docs/shared/profiles/profiles.md#profile-comparison)).
 
 Despite the name, this profile is not limited to cameras. `RenderProduct` and
 `RenderVar` prims are render pipeline infrastructure shared by every RTX
@@ -25,33 +25,33 @@ pip install simready-validate simready-foundation-tier-sensors simready-foundati
 
 The `Sensor-Camera` profile contains a single feature (see `profiles.toml`
 alongside this document, and the
-[feature dependency graph](../features/feature-dependency-graph)):
+[feature dependency graph](../../../../../../sr_specs/docs/shared/features/feature-dependency-graph.md)):
 
 ```toml
 [Sensor-Camera]
 "1.0.0" = {features = [
-    {"FET_035_RTX" = {version = "0.1.0"}}, # "Render Products (camera pipeline, AOVs)"
+    {selector = "FET035_RenderProducts.RTX.0-1-0"}, # "Render Products (camera pipeline, AOVs)"
 ]}
 ```
 
-[`FET_035_RTX`](../features/FET_035_RTX.md) defines the contract for the USD
+[`FET035_RenderProducts.RTX.0-1-0`](../features/FET035_RenderProducts.RTX.md) defines the contract for the USD
 render pipeline used by synthetic data generation (SDG) and
 software-in-the-loop (SIL) workflows.
 
 ## What the profile checks
 
 All six requirements belong to the
-[Visual Sensors/Render Products](../capabilities/rendering/render_products/capability-render_products.md)
+[Visual Sensors/Render Products](../rules_and_reqs/rendering/render_products/capability-render_products.md)
 capability.
 
 | Requirement | Summary |
 |---|---|
-| [`RP.001`](../capabilities/rendering/render_products/requirements/render-product-camera.md) | A `RenderProduct` must have a `camera` relationship targeting a valid prim. |
-| [`RP.002`](../capabilities/rendering/render_products/requirements/render-product-ordered-vars.md) | A `RenderProduct` must have an `orderedVars` relationship containing at least one valid `RenderVar`. |
-| [`RP.003`](../capabilities/rendering/render_products/requirements/render-var-source-name.md) | A `RenderVar` must have a non-empty `sourceName`. |
-| [`RP.004`](../capabilities/rendering/render_products/requirements/semantic-aov-compression.md) | A `RenderVar` whose `sourceName` starts with `semantic` must use BLOSC compression. |
-| [`RP.005`](../capabilities/rendering/render_products/requirements/compression-type-valid.md) | `srtx:compression:type`, when authored, must be `hevc`, `h264`, `av1`, or `blosc`. |
-| [`RP.006`](../capabilities/rendering/render_products/requirements/generic-model-output-compression.md) | A `RenderVar` with `sourceName = "GenericModelOutput"` should use BLOSC compression. Warning, not failure. |
+| [`RP.001`](../rules_and_reqs/rendering/render_products/requirements/render-product-camera.md) | A `RenderProduct` must have a `camera` relationship targeting a Camera or OmniLidar prim. |
+| [`RP.002`](../rules_and_reqs/rendering/render_products/requirements/render-product-ordered-vars.md) | A `RenderProduct` must have an `orderedVars` relationship containing at least one valid `RenderVar`. |
+| [`RP.003`](../rules_and_reqs/rendering/render_products/requirements/render-var-source-name.md) | A `RenderVar` must have a non-empty `sourceName`. |
+| [`RP.004`](../rules_and_reqs/rendering/render_products/requirements/semantic-aov-compression.md) | A `RenderVar` whose `sourceName` starts with `semantic` must use BLOSC compression. |
+| [`RP.005`](../rules_and_reqs/rendering/render_products/requirements/compression-type-valid.md) | `srtx:compression:type`, when authored, must be `hevc`, `h264`, `av1`, or `blosc`. |
+| [`RP.006`](../rules_and_reqs/rendering/render_products/requirements/generic-model-output-compression.md) | A `RenderVar` with `sourceName = "GenericModelOutput"` should use BLOSC compression. Warning, not failure. |
 
 These checks apply only to the `RenderProduct` and `RenderVar` prims a stage
 actually contains. An asset with no render products **passes** this profile
@@ -141,7 +141,7 @@ reported, not written into the asset.
 ## Validation
 
 A sensor profile is validated in its own run. "Stamping both profiles" means
-validating the asset against each one; there is no combined invocation:
+validating the asset against each requested target independently:
 
 ```bash
 simready-validate --profile Robotics-Prop --version 4.0.0 path/to/asset.usd
@@ -152,22 +152,21 @@ Both runs must pass. The sensor profile is not a substitute for the primary
 one — on its own it says nothing about units, hierarchy, physics, materials,
 or packaging.
 
-If you record the result in the optional `validation` dictionary under
-`SimReady_Metadata`, note that the documented form holds a single `profile`
-and `profile_version`. Record the primary profile there and track sensor
-conformance alongside it; the metadata has no multi-profile form today.
+Preserve a separate report for each `(profile, version)` target. To retain
+profile-keyed USD receipts, use the multi-profile API described in the
+[profile validation guide](../../../../../../sr_specs/docs/guides/profiles/profiles.md#chain-stamping).
 
 ## Runtime verification
 
 Static validation confirms the pipeline is wired and the codecs are legal. It
-cannot confirm that annotators return data. Two Benchmark tests cover that:
+cannot confirm that annotators return data. Two Evaluate tests cover that:
 
 ```bash
-pip install "simready-foundation-tier-sensors[benchmark]"
-simready-benchmark --features FET_035_RTX
+pip install "simready-foundation-tier-sensors[evaluate]"
+simready-evaluate --features FET035_RenderProducts.RTX.0-1-0
 ```
 
-The `[benchmark]` extra installs the Benchmark engine; a validator-only tier
+The `[evaluate]` extra installs the Evaluate engine; a validator-only tier
 install does not include it.
 
 - `render_product_output` verifies the structural wiring and that each
@@ -191,7 +190,7 @@ Failing:
 
 ## References
 
-- [`FET_035_RTX` feature](../features/FET_035_RTX.md)
-- [Render Products capability](../capabilities/rendering/render_products/capability-render_products.md)
+- [`FET035_RenderProducts.RTX.0-1-0` feature](../features/FET035_RenderProducts.RTX.md)
+- [Render Products capability](../rules_and_reqs/rendering/render_products/capability-render_products.md)
 - [`Sensor-LiDAR` profile](sensor-lidar.md)
 - `profiles.toml`, the profile definition alongside this document

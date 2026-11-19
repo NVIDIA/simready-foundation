@@ -185,7 +185,7 @@ categories of deliverables:
 | **Specs** | New or updated capability requirements, feature definitions (JSON + markdown), and profile entries. |
 | **Samples** | Reference OpenUSD assets in `sample_content/` that demonstrate compliant structure for the new domain. |
 | **Validators** | Rule implementations (`validation.py`) registered against the corresponding capability. |
-| **Tests** | Benchmarks that prove the feature works in a reference simulation runtime. Each test loads a sample asset into the runtime (for example Isaac Sim), exercises the behavior the feature claims to enable (physics drop, joint articulation, grasp planning), and asserts an expected outcome. A feature is not considered complete until it has at least one passing benchmark that demonstrates the claimed capability end-to-end. |
+| **Tests** | Evaluates that prove the feature works in a reference simulation runtime. Each test loads a sample asset into the runtime (for example Isaac Sim), exercises the behavior the feature claims to enable (physics drop, joint articulation, grasp planning), and asserts an expected outcome. A feature is not considered complete until it has at least one passing evaluation that demonstrates the claimed capability end-to-end. |
 | **Pipeline Blueprint** | CI job definitions, batch-maker configurations, or pipeline templates that exercise the new validators at scale. |
 
 ### iBeta and QA testing
@@ -262,7 +262,7 @@ documentation.
 Accepted artifacts are merged into the specification, in the
 [tier](tiers.md) that owns them:
 
-- Requirement markdown and `validation.py` land under `capabilities/`.
+- Requirement markdown and `validation.py` land under `rules_and_reqs/`.
 - Feature JSON and markdown land under `features/`.
 - Profile TOML entries and profile markdown land under `profiles/`.
 - Sample assets land under `sample_content/`.

@@ -1,0 +1,23 @@
+{
+  "id": "FET003_RigidBody.PhysX.0-1-0",
+  "display_name": "Rigid Body Physics (PhysX)",
+  "legacy_identity": {
+    "id": "FET_003_PHYSX",
+    "version": "0.1.0"
+  },
+  "source_feature": "FET003_RigidBody.0-1-0",
+  "dependencies": [
+    "FET003_RigidBody.0-1-0"
+  ],
+  "additional_requirements": [
+    "COL.001"
+  ],
+  "adapters": [
+    "skill:simready-foundation-conform-fet-003-physx"
+  ],
+  "runtime_tests": [
+    "simready.foundation.tier_core.runtime_tests:ground_drop",
+    "simready.foundation.tier_core.runtime_tests:ground_stability",
+    "simready.foundation.tier_core.runtime_tests:slope_drop"
+  ]
+}

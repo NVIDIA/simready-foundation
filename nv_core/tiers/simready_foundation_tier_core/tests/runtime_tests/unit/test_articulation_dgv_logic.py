@@ -16,7 +16,7 @@
 import math
 
 import numpy as np
-from simready_benchmark_kit_suite.articulation_phases.drive_gain_validation import (
+from simready.foundation.tier_core.runtime_tests.articulation_phases.drive_gain_validation import (
     aggregate_dgv_summary,
     compute_overshoot,
     compute_settling_time,

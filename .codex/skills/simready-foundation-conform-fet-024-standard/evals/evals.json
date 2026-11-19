@@ -1,12 +1,12 @@
 [
     {
         "id": "simready-foundation-conform-fet-024-standard-positive-trigger",
-        "question": "Repair FET_024_STANDARD@0.1.0 validation failures on a SimReady asset or package.",
+        "question": "Repair CAP024_BaseArticulation.0-1-0 validation failures on a SimReady asset or package.",
         "expected_skill": "simready-foundation-conform-fet-024-standard",
-        "ground_truth": "The agent should activate simready-foundation-conform-fet-024-standard and follow the exact FET_024_STANDARD workflow.",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-024-standard and follow the exact CAP024_BaseArticulation workflow.",
         "expected_behavior": [
             "Load the simready-foundation-conform-fet-024-standard skill.",
-            "Use the selected FET_024_STANDARD manifest as the authoritative feature contract.",
+            "Use the selected CAP024_BaseArticulation manifest as the authoritative feature contract.",
             "Report changed files, validation performed, and any remaining blockers."
         ]
     },

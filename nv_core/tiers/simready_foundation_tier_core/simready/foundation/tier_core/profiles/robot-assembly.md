@@ -1,0 +1,97 @@
+# Robot-Assembly Profile USD Authoring Guide
+
+```{warning}
+Work In Progress
+
+The Robot-Assembly profile and this authoring workflow are under development.
+The contract set and example below describe the current implementation for
+experimentation and review. **We welcome feedback** on robot composition,
+the authoring workflow, and the validation experience.
+
+**The missing feature is packaging and publishing robot assemblies.** The
+current profile covers connections and articulation; the workflow for
+packaging and publishing the composed robot with its child-asset dependencies
+is still to be defined.
+```
+
+This document tracks the current USD authoring approach for the
+`Robot-Assembly` profile and the composition and articulation behavior being
+evaluated.
+
+`Robot-Assembly` version `0.1.0` validates a robot built from separately
+published robot assets, such as an arm and a gripper, joined into one
+articulation. The child assets are validated against their own profiles
+(`Robot-Body`, `Robot-Gripper`). This profile validates the jointed connection
+between them and the articulation that results.
+
+## Current profile definition
+
+The `Robot-Assembly` profile includes the following contract set (see
+`robot_assembly.toml` and the
+[contract dependency graph](../../../../../../sr_specs/docs/shared/features/feature-dependency-graph.md)). Each
+contract's requirements and dependencies are defined in the contract
+specifications.
+
+```toml
+[Robot-Assembly]
+"0.1.0" = {features = [
+    {selector = "FET022_DrivenJoints.0-2-0", optional = true},
+], capabilities = [
+    {selector = "CAP026_Mates.0-1-0"},
+    {selector = "CAP027_Connections.0-1-0"},
+    {selector = "CAP029_ConnectionJoint.0-1-0"},
+    {selector = "CAP024_BaseArticulation.0-1-0"},
+]}
+```
+
+`CAP026_Mates` depends on `FET003_RigidBody.0-2-0` and
+`CAP029_ConnectionJoint` depends on `FET004_Multibody.0-2-0`. Validation pulls both
+in as feature dependencies.
+
+## Relation to Assembly
+
+`Robot-Assembly` uses the same stage layout, mate sites, and connections as
+[Assembly](assembly.md), and differs in two ways:
+
+- `CAP029_ConnectionJoint` is required. A part that contains a joint joins only
+  through a `jointed` connection (`CN.011`), so every connection between robot
+  parts carries an authored `UsdPhysicsFixedJoint` (`CN.009`).
+- `CAP024_BaseArticulation.0-1-0` is required. The connection fuses the arm and gripper
+  articulations, and exactly one articulation root survives on the composed
+  stage (`BA.001`).
+
+Author the default prim, child references, `Connections` scope, and connection
+joint as described in [Authoring a jointed connection](assembly.md#authoring-a-jointed-connection).
+`simready:mate:assemblyType` is `robot`.
+
+## Validation
+
+```bash
+simready-validate --profile Robot-Assembly --version 0.1.0 path/to/assembly.usda
+```
+
+Runtime variants (PhysX, Newton, MuJoCo) are validated on each child asset
+against its own profile. This profile does not re-validate them on the
+composed stage, where the assembly deactivates the plug asset's world pin and
+articulation root.
+
+## Work in progress
+
+The remaining feature work is around **packaging and publishing**: defining how
+the composed robot and its separately published child assets are delivered to
+consumers. Validating the arm, gripper, connection, and articulation does not
+establish that delivery workflow.
+
+We welcome feedback from robot authors and consumers, especially on dependency
+handling, reuse of published robot bodies and grippers, and expectations for a
+published robot assembly. The sample below is a starting point for trying the
+authoring workflow and sharing findings.
+
+Changes to selectors or validation policy require a new profile
+version; the current `0.1.0` TOML remains the source of truth for its checks.
+
+## Samples
+
+A robot assembly is in
+`sample_content/common_assets/robots_general/ur10_robotiq_2f85` (UR10 arm with
+a Robotiq 2F-85 gripper on `tool_mount_01`).

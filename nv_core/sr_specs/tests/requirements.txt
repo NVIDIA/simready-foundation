@@ -3,13 +3,24 @@
 # Install with:
 #   pip install -r tests/requirements.txt
 
-# The SimReady validator: provides the ValidationEngine API and
-# RequirementsRegistry that the test harness uses.
-simready-validate>=2026.8.0,<2026.9.0
+# Use the internal Omniverse index for the Foundations 2 validator.
+--extra-index-url https://artifactory.nvidia.com/artifactory/api/pypi/ct-omniverse-pypi-local/simple
 
-# Rule checkers under docs/capabilities import usd_validation_nvidia and
+# The SimReady validator: provides the ValidationEngine API and
+# RequirementsRegistry that the test harness uses. Neutral FET/CAP IDs require
+# the Foundations 2 reader in rc1; match the source-validation CI requirement.
+simready-validate>=2026.10.0rc1,<2026.11
+
+# Rule checkers under each tier's rules_and_reqs/ import usd_validation_nvidia and
 # omni.capabilities; simready-validate does not pull this in transitively.
-usd-validation-nvidia>=1.21.0
+usd-validation-nvidia>=1.23.0
+
+# AIF source validators select the connection vocabulary by semantic version.
+semver>=3,<4
+
+# Source-tree validation does not inherit the core tier wheel's dependencies.
+# Register PhysX schemas in standalone USD, which has no pxr.PhysxSchema bindings.
+physx-usd-schemas>=25.11.1,<25.11.2
 
 # numpy is a foundations-side runtime requirement.
 numpy

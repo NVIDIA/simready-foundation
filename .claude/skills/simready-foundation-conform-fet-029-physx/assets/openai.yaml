@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP029_ConnectionJoint.PhysX"
+  short_description: "Repair CAP029_ConnectionJoint.PhysX connection-joint conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-029-physx to repair CAP029_ConnectionJoint.PhysX SimReady PhysX connection joint conformance failures."

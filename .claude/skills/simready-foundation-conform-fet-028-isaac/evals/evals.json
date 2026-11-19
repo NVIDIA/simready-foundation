@@ -1,12 +1,12 @@
 [
     {
         "id": "simready-foundation-conform-fet-028-isaac-positive-trigger",
-        "question": "Repair FET_028_ISAAC@0.1.0 validation failures on a SimReady asset or package.",
+        "question": "Repair FET028_Gripper.Isaac.0-1-0 validation failures on a SimReady asset or package.",
         "expected_skill": "simready-foundation-conform-fet-028-isaac",
-        "ground_truth": "The agent should activate simready-foundation-conform-fet-028-isaac and follow the exact FET_028_ISAAC workflow.",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-028-isaac and follow the exact FET028_Gripper.Isaac workflow.",
         "expected_behavior": [
             "Load the simready-foundation-conform-fet-028-isaac skill.",
-            "Use the selected FET_028_ISAAC manifest as the authoritative feature contract.",
+            "Use the selected FET028_Gripper.Isaac manifest as the authoritative feature contract.",
             "Report changed files, validation performed, and any remaining blockers."
         ]
     },

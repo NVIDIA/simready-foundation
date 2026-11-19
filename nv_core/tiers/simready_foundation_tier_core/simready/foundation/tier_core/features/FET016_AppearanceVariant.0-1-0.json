@@ -1,0 +1,26 @@
+{
+  "id": "FET016_AppearanceVariant.0-1-0",
+  "display_name": "Appearance Variant",
+  "dependencies": [
+    "FET001_MinimalPlaceableVisual.1-0-1",
+    "FET006_Materials.0-2-0"
+  ],
+  "additional_requirements": [
+    "AV.001",
+    "AV.002",
+    "AV.003",
+    "AV.004",
+    "AV.005",
+    "AV.006",
+    "AV.007",
+    "AV.008",
+    "AV.009",
+    "AV.010"
+  ],
+  "adapters": [
+    "skill:simready-foundation-conform-fet-016-standard"
+  ],
+  "runtime_tests": [
+    "simready.foundation.tier_core.runtime_tests:appearance_variation"
+  ]
+}

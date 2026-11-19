@@ -1,0 +1,90 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+[project]
+name = "simready-foundation-tier-isaac"
+version = "2026.10.0"
+description = "SimReady Foundation Isaac optimization tier: static optimization capabilities, validators, and adapters"
+authors = [
+    {name = "NVIDIA"},
+]
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE.txt"]
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "usd-validation-nvidia>=1.20.0",
+    "numpy",
+    "simready-foundation-tier-core>=2026.10.0-rc2",
+]
+
+# Framework discovery: the asset validator / usd-validation auto-discovers this
+# tier's validators (rules + their requirements) through its own plugin group.
+[project.entry-points."usd_validation_nvidia"]
+simready-validate-tier-isaac = "simready.foundation.tier_isaac:SimReadyPlugin"
+
+# SimReady tier discovery: the SimReady loader enumerates this (deliberately
+# non-validation-specific) group to find installed tiers and their per-layer
+# content sources (requirements module + capability/feature/profile dirs).
+[project.entry-points."simready.tier"]
+tier_isaac = "simready.foundation.tier_isaac:tier"
+
+# Feature-adapter discovery: Derive and Kit's omni.cip.configurable load this
+# tier's optimization adapter definitions from this shared provider group.
+[project.entry-points."simready.feature_adapters"]
+isaac_optimization = "simready.foundation.tier_isaac.asset_handler_modules.isaac_optimization:feature_adapters"
+
+[project.urls]
+Documentation = "https://nvidia.github.io/simready-foundation/"
+
+[project.optional-dependencies]
+usd = ["usd-core>=22.11"]
+# Visual mesh merging requires usd-optimize 1.4 or later. Tested against a
+# usd-exchange-supplied OpenUSD runtime (see README.md).
+# Do not install alongside the `usd` extra above, since
+# usd-exchange and usd-core provide conflicting OpenUSD runtimes.
+optimize = ["usd-optimize>=1.4.0"]
+test = ["pytest"]
+
+# This tier's package lives committed under ./simready/foundation/... and ships
+# as-is. The ONLY build step is generating the requirements-enum module from the
+# committed requirement markdown; the shared hook reads `module`/`reverse_domain`
+# below to know what to generate and where.
+[tool.hatch.build.hooks.custom]
+path = "../_tooling/build_hook.py"
+module = "simready.foundation.tier_isaac"
+reverse_domain = "com.nvidia.simready"
+package_licenses = [
+    "numpy-LICENSE.txt",
+    "usd-validation-nvidia-LICENSE.txt",
+    "usd-validation-nvidia-THIRD_PARTY_NOTICES.md",
+    "usd-core-LICENSE.txt",
+]
+
+# Ship the committed package tree. The tier-local .gitignore excludes the
+# generated requirements/ mirror before force-include adds the build output.
+[tool.hatch.build.targets.wheel]
+packages = ["simready"]
+
+# ...and add the build-time generated requirements enums.
+[tool.hatch.build.targets.wheel.force-include]
+"_build/python/simready/foundation/tier_isaac/requirements" = "simready/foundation/tier_isaac/requirements"
+
+[build-system]
+# The shared build hook (../_tooling/build_hook.py) generates this tier's
+# requirements enums at build time, so the codegen package must be importable in
+# the (isolated) build env.
+requires = ["hatchling>=1.27", "usd-profiles-nvidia"]
+build-backend = "hatchling.build"

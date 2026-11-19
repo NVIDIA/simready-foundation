@@ -192,7 +192,10 @@ def collect_mesh_points(stage: Usd.Stage, default_prim: Usd.Prim, max_points_per
     source_point_count = 0
     sampled_point_count = 0
 
-    for prim in Usd.PrimRange(default_prim):
+    # Traverse instance proxies so meshes inside instanceable references are
+    # sampled. Without this, an instanced asset exposes no meshes under the
+    # default prim and the preview fails with "No mesh points found".
+    for prim in Usd.PrimRange(default_prim, Usd.TraverseInstanceProxies()):
         if prim.GetTypeName() != "Mesh":
             continue
         point_attr = prim.GetAttribute("points")

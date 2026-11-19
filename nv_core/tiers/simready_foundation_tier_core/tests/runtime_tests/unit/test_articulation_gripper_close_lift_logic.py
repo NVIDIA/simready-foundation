@@ -16,40 +16,16 @@
 import math
 
 import numpy as np
-from simready_benchmark_kit_suite.articulation_phases.gripper_close_lift import (
+from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_close_lift import (
     PassCriterion,
     _authored_hand_frames,
     _classify_hand_endpoint_motion,
     _descent_chunk_count,
-    _rotate_vector_xyzw,
-    _shape_indices_below_paths,
     _test_scope_skip_unsupported,
     compute_tested_mass,
     evaluate_pass_criterion,
     get_defaults,
-    sign_flip_detected,
 )
-
-
-def test_shape_indices_follow_fingertip_paths_not_collider_names():
-    labels = [
-        "/World/Robot/jaw_alpha/contact_surface_left",
-        "/World/Robot/jaw_beta/custom_collision_mesh",
-        "/World/Robot/jaw_alpha_aux/not_a_tip_shape",
-        "/World/Robot/palm/body_collision",
-    ]
-
-    assert _shape_indices_below_paths(
-        labels,
-        ("/World/Robot/jaw_alpha", "/World/Robot/jaw_beta"),
-    ) == {0, 1}
-
-
-def test_rotate_vector_xyzw_uses_newton_quaternion_order():
-    half_sqrt_two = math.sqrt(0.5)
-    rotated = _rotate_vector_xyzw((1.0, 0.0, 0.0), (0.0, 0.0, half_sqrt_two, half_sqrt_two))
-
-    assert np.allclose(rotated, (0.0, 1.0, 0.0), atol=1e-7)
 
 
 def test_descent_chunk_count_bounds_large_approach_steps():
@@ -82,17 +58,17 @@ def test_hand_endpoint_motion_classifies_closure_toward_grasp_center():
     assert endpoint == "upper"
 
 
-def test_hand_endpoint_motion_holds_lateral_positioning_at_upper():
+def test_hand_endpoint_motion_recognizes_reversed_lateral_closure():
     role, endpoint = _classify_hand_endpoint_motion((-0.01, 0.04, 0.0), radial_change=0.02)
 
-    assert role == "positioning"
-    assert endpoint == "upper"
+    assert role == "closure"
+    assert endpoint == "lower"
 
 
-def test_hand_endpoint_motion_holds_non_lateral_positioning_at_lower():
+def test_hand_endpoint_motion_recognizes_reversed_closure_at_lower():
     role, endpoint = _classify_hand_endpoint_motion((-0.01, 0.03, -0.05), radial_change=0.02)
 
-    assert role == "positioning"
+    assert role == "closure"
     assert endpoint == "lower"
 
 
@@ -213,28 +189,6 @@ def test_pass_criterion_reports_pre_load_without_rejecting_valid_lift():
     assert result.pre_load_dz >= cfg["pre_load_max_dz"]
 
 
-def test_sign_flip_not_detected_when_open_succeeded():
-    cfg = get_defaults()
-    flip = sign_flip_detected(
-        commanded_target=0.085,
-        measured_separation=0.084,
-        max_opening=0.085,
-        config=cfg,
-    )
-    assert flip is False
-
-
-def test_sign_flip_detected_when_open_command_actually_closed():
-    cfg = get_defaults()
-    flip = sign_flip_detected(
-        commanded_target=0.085,
-        measured_separation=0.001,
-        max_opening=0.085,
-        config=cfg,
-    )
-    assert flip is True
-
-
 # ---------------------------------------------------------------------------
 # _resolve_gripper_base_path -- prefer ancestors with body descendants over
 # the closest body. Catches the "site authored under a finger pad" case
@@ -266,7 +220,7 @@ def _build_gripper_with_layout(site_under: str):
 def test_resolve_gripper_base_picks_wrist_when_site_under_wrist():
     """Conventional authoring -- site under wrist body that has finger
     descendants. Resolver picks wrist."""
-    from simready_benchmark_kit_suite.articulation_phases.gripper_close_lift import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_close_lift import (
         _resolve_gripper_base_path,
     )
 
@@ -279,7 +233,7 @@ def test_resolve_gripper_base_walks_past_finger_to_wrist_when_site_under_finger(
     """Edge case -- site mistakenly authored under a finger pad. Naive
     "first ancestor body" returns the finger; the hardened resolver walks
     past it (finger has no body descendants) to the wrist (which does)."""
-    from simready_benchmark_kit_suite.articulation_phases.gripper_close_lift import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_close_lift import (
         _resolve_gripper_base_path,
     )
 
@@ -293,7 +247,7 @@ def test_resolve_gripper_base_falls_back_when_no_body_has_descendants():
     descendant-preference can't fire -- fall back to the closest ancestor
     body so the resolver still returns something usable."""
     from pxr import Usd, UsdGeom, UsdPhysics
-    from simready_benchmark_kit_suite.articulation_phases.gripper_close_lift import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_close_lift import (
         _resolve_gripper_base_path,
     )
 
@@ -312,7 +266,7 @@ def test_resolve_gripper_base_returns_none_when_no_body_ancestor():
     """Site authored without any RigidBodyAPI ancestor -- malformed asset.
     Resolver returns None; orchestrator escalates to ``precheck_failure``."""
     from pxr import Usd, UsdGeom
-    from simready_benchmark_kit_suite.articulation_phases.gripper_close_lift import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_close_lift import (
         _resolve_gripper_base_path,
     )
 
@@ -326,7 +280,7 @@ def test_resolve_gripper_base_returns_none_when_no_body_ancestor():
 
 
 def test_hand_cup_descent_lowers_fingertip_to_object_reference():
-    from simready_benchmark_kit_suite.articulation_phases.gripper_close_lift import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_close_lift import (
         _hand_cup_descent,
     )
 
@@ -338,7 +292,7 @@ def test_hand_cup_descent_lowers_fingertip_to_object_reference():
 
 
 def test_contact_inference_excludes_held_positioning_dofs():
-    from simready_benchmark_kit_suite.articulation_phases.gripper_close_lift import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_close_lift import (
         _contact_active_specs,
     )
 
@@ -352,7 +306,7 @@ def test_contact_inference_excludes_held_positioning_dofs():
 
 
 def test_spawn_position_uses_authored_grasp_center_without_offset():
-    from simready_benchmark_kit_suite.articulation_phases.gripper_close_lift import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_close_lift import (
         _authored_spawn_position,
     )
 
@@ -363,7 +317,7 @@ def test_spawn_position_uses_authored_grasp_center_without_offset():
 
 
 def test_retention_distance_is_measured_from_authored_spawn_xy():
-    from simready_benchmark_kit_suite.articulation_phases.gripper_close_lift import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_close_lift import (
         _lateral_distance,
     )
 

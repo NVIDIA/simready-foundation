@@ -1,6 +1,6 @@
 ---
 name: simready-foundation-update-capability
-description: "Use for updating SimReady capability docs, requirement indexes, validation registration, and feature references."
+description: "Update a CAP-prefixed Foundations 2 static contract, docs, requirement indexes, validation registration, and feature references."
 license: Apache-2.0
 metadata:
   author: "Shaad Boochoon <sboochoon@nvidia.com>"
@@ -47,12 +47,14 @@ Use this checklist when changing the repository:
 
 1. Confirm the capability folder and overview/index files exist.
 2. Classify the change as documentation-only, requirement-index, validator, or contract-impacting.
-3. Update `capability-<slug>.md` when scope, requirement list, related docs, or validation status changes.
-4. Update `requirements.md` to include every requirement doc exactly once.
-5. Add or move requirement docs with `simready-foundation-add-requirement` or `simready-foundation-update-requirement` guidance.
-6. Update `validation.py` and `capabilities/__init__.py` only when executable validators or imports change.
-7. If requirement semantics changed, hand off to feature/profile update skills.
-8. Validate consistency:
+3. Confirm the machine-readable capability ID begins with `CAP` and keep its
+   requirements and exact CAP dependencies aligned with the docs.
+4. Update `capability-<slug>.md` when scope, requirement list, related docs, or validation status changes.
+5. Update `requirements.md` to include every requirement doc exactly once.
+6. Add or move requirement docs with `simready-foundation-add-requirement` or `simready-foundation-update-requirement` guidance.
+7. Update `validation.py` and `rules_and_reqs/__init__.py` only when executable validators or imports change.
+8. If requirement semantics changed, hand off to the feature and profile update workflows.
+9. Validate consistency:
    - every requirement doc is indexed
    - every indexed requirement file exists
    - validator registrations reference documented requirement IDs
@@ -76,6 +78,8 @@ remaining_gaps: downstream feature, profile, adapter, or runtime-test follow-up
 
 ## Policies
 
+- Protect unrelated local work: before editing shared repository files (spec markdown, requirement/feature JSON, profile TOML, validators, skills, or docs), check `git status` for unrelated in-progress changes and scope edits to the requested task. Never revert, overwrite, discard, stash, or commit a user's uncommitted or unrelated changes; if a file you must edit already carries pending unrelated edits, surface it and confirm before proceeding.
+- Keep secrets out of the repo and evidence: never write user-provided tokens, credentials, API keys, or other secrets into files, source, logs, validation or evaluation reports, commit messages, or bug/Jira/Confluence attachments, and do not echo them in full; read them from environment variables or an existing credential store and redact them from any output you preserve.
 - Avoid broad reorganization unless it removes real confusion.
 - Preserve existing requirement codes and links whenever possible.
 - Keep capability scope broad enough for related requirements but narrow enough to be meaningful.

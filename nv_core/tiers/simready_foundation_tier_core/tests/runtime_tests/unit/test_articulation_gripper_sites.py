@@ -13,15 +13,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Tests for articulation_phases.gripper_sites."""
+
 import math
 
 import numpy as np
+import pytest
 from pxr import Sdf, Usd, UsdGeom
-from simready_benchmark_kit_suite.articulation_phases.gripper_sites import (
+from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_sites import (
     GripperSite,
+    _read_curve_segment,
     discover_gripper_sites,
 )
-from simready_benchmark_kit_suite.articulation_phases.robot_scene import (
+from simready.foundation.tier_core.runtime_tests.articulation_phases.robot_scene import (
     _has_gripper_signals,
 )
 
@@ -65,6 +68,7 @@ def _add_gripper_site(
     grip_line=((-0.04, 0.0, 0.0), (0.04, 0.0, 0.0)),
     max_opening=0.085,
     max_payload=None,
+    curve_names=("gripper_forward_axis", "gripper_grip_line"),
 ):
     site_path = "%s/%s" % (parent_path, name)
     xform = UsdGeom.Xform.Define(stage, site_path)
@@ -77,8 +81,8 @@ def _add_gripper_site(
         # code reads schemas via GetAppliedSchemas(), so AddAppliedSchema is
         # functionally equivalent for our purposes.
         prim.AddAppliedSchema("IsaacSiteAPI")
-    _add_basis_curves(stage, site_path, "gripper_forward_axis", *forward_axis)
-    _add_basis_curves(stage, site_path, "gripper_grip_line", *grip_line)
+    _add_basis_curves(stage, site_path, curve_names[0], *forward_axis)
+    _add_basis_curves(stage, site_path, curve_names[1], *grip_line)
     attr = prim.CreateAttribute("gripper_maxOpening", Sdf.ValueTypeNames.Float)
     attr.Set(float(max_opening))
     if max_payload is not None:
@@ -123,6 +127,69 @@ def test_legacy_isaac_site_with_arbitrary_name_is_classified_as_gripper():
     _add_gripper_site(stage, "/World/Asset", name="tool_contact_site")
 
     assert _has_gripper_signals(stage, asset_prim)
+
+
+@pytest.mark.parametrize(
+    "curve_names",
+    [("gripper_forward_axis", "gripper_grip_line"), ("forward_axis", "grip_line")],
+)
+@pytest.mark.parametrize("inactive_indices", [(0,), (1,), (0, 1)])
+def test_discover_rejects_inactive_required_curves(curve_names, inactive_indices):
+    stage, asset_prim = _stage_with_asset()
+    site = _add_gripper_site(stage, "/World/Asset", curve_names=curve_names)
+    for index in inactive_indices:
+        site.GetChild(curve_names[index]).SetActive(False)
+
+    assert discover_gripper_sites(stage, asset_prim) == []
+
+
+@pytest.mark.parametrize(
+    ("inactive_preferred", "expected_forward", "expected_grip"),
+    [
+        ("gripper_forward_axis", (0, 0, 1), ((-0.04, 0, 0), (0.04, 0, 0))),
+        ("gripper_grip_line", (0, 1, 0), ((0, -0.03, 0), (0, 0.03, 0))),
+    ],
+)
+def test_discover_reads_active_legacy_curve_when_preferred_is_inactive(
+    inactive_preferred, expected_forward, expected_grip
+):
+    stage, asset_prim = _stage_with_asset()
+    site = _add_gripper_site(stage, "/World/Asset")
+    _add_basis_curves(stage, site.GetPath(), "forward_axis", (0, 0, 0), (0, 0, 0.1))
+    _add_basis_curves(stage, site.GetPath(), "grip_line", (0, -0.03, 0), (0, 0.03, 0))
+    site.GetChild(inactive_preferred).SetActive(False)
+
+    sites = discover_gripper_sites(stage, asset_prim)
+
+    assert len(sites) == 1
+    assert np.allclose(sites[0].forward_axis_world, expected_forward)
+    assert np.allclose(sites[0].grip_line_world, expected_grip)
+
+
+def test_discover_preserves_active_site_beside_site_with_inactive_curve():
+    stage, asset_prim = _stage_with_asset()
+    inactive = _add_gripper_site(stage, "/World/Asset", name="inactive_curves")
+    active = _add_gripper_site(stage, "/World/Asset", name="active_curves")
+    inactive.GetChild("gripper_grip_line").SetActive(False)
+
+    assert [site.prim_path for site in discover_gripper_sites(stage, asset_prim)] == [str(active.GetPath())]
+
+
+@pytest.mark.parametrize("inactive_path", ["/World", "/World/Asset", "/World/Asset/gripper_01"])
+def test_discover_rejects_inactive_gripper_subtree(inactive_path):
+    stage, asset_prim = _stage_with_asset()
+    _add_gripper_site(stage, "/World/Asset")
+    stage.GetPrimAtPath(inactive_path).SetActive(False)
+
+    assert discover_gripper_sites(stage, stage.GetPrimAtPath("/World/Asset")) == []
+
+
+def test_read_curve_segment_rejects_inactive_curve():
+    stage, _ = _stage_with_asset()
+    curve = _add_basis_curves(stage, "/World/Asset", "grip_line", (-0.04, 0, 0), (0.04, 0, 0)).GetPrim()
+    curve.SetActive(False)
+
+    assert _read_curve_segment(curve) is None
 
 
 def test_discover_accepts_intentional_attactment_socket_spelling_without_isaac_api():

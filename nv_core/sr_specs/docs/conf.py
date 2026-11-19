@@ -67,10 +67,10 @@ exclude_patterns = [
     # not rendered standalone. Excluding them avoids "not in any toctree"
     # warnings while ``{include}`` transclusion still reads them from disk.
     # Mirrors nv_core/sr_specs/repo.toml sphinx_exclude_patterns.
-    "capabilities/_includes/badges/*.md",
-    "capabilities/_includes/badges/**",
-    "capabilities/_includes/tags/**",
-    "capabilities/_includes/tables/**",
+    "rules_and_reqs/_includes/badges/*.md",
+    "rules_and_reqs/_includes/badges/**",
+    "rules_and_reqs/_includes/tags/**",
+    "rules_and_reqs/_includes/tables/**",
 ]
 
 # -- MyST configuration ------------------------------------------------------
@@ -91,6 +91,37 @@ myst_substitutions = {
     "performance": '<span class="tag tag-performance">performance</span>',
 }
 
+# -- usd-profiles-nvidia input layout ------------------------------------------
+# The extension reads its requirement tree from capabilities/ and decodes every
+# file under features/ and profiles/ strictly as one of its own descriptors, so
+# the Foundations 2 layout either hides the requirement tree (rules_and_reqs/)
+# or aborts the build (dotted contracts carry no "version"). Retire this once
+# the package accepts its input directories as config values, and skips files
+# that are not its descriptors rather than raising. Mirrors repo.toml's
+# sphinx_conf_py_extra.
+import json as _json
+
+from usd_profiles_nvidia.parsers import SpecificationsParser as _SpecificationsParser
+
+_srcdir = os.path.dirname(os.path.abspath(__file__))
+
+
+def _holds_foundations2_contracts(section):
+    directory = os.path.join(_srcdir, section)
+    names = sorted(n for n in os.listdir(directory) if n.endswith(".json")) if os.path.isdir(directory) else []
+    if not names:
+        return False
+    with open(os.path.join(directory, names[0]), encoding="utf-8") as handle:
+        return "version" not in _json.load(handle)
+
+
+if os.path.isdir(os.path.join(_srcdir, "rules_and_reqs")):
+    _SpecificationsParser.CAPABILITIES_DIRECTORY = "rules_and_reqs"
+if _holds_foundations2_contracts("features"):
+    # Relocation replaces features and profiles together.
+    _SpecificationsParser.FEATURES_DIRECTORY = "_foundations2_features_not_parsed"
+    _SpecificationsParser.PROFILES_DIRECTORY = "_foundations2_profiles_not_parsed"
+
 # -- HTML output -------------------------------------------------------------
 html_theme = "nvidia_sphinx_theme"
 html_static_path = ["_static"]
@@ -108,14 +139,13 @@ if _docs_version:
     release = _docs_version
 
 html_theme_options = {}
+html_theme_options["check_switcher"] = False
 if _docs_versions_json and _docs_version:
     # nvidia-sphinx-theme is pydata-based, so it consumes the standard switcher.
     html_theme_options["switcher"] = {
         "json_url": _docs_versions_json,
         "version_match": _docs_version,
     }
-    # versions.json is published after the build, so skip the theme's fetch here.
-    html_theme_options["check_switcher"] = False
     html_theme_options["navbar_end"] = ["version-switcher", "theme-switcher"]
 
 html_context = {

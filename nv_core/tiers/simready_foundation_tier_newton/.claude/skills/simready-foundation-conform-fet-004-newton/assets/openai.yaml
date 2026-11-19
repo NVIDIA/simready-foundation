@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform FET004_Multibody.Newton"
+  short_description: "Repair FET004_Multibody.Newton conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-004-newton to repair FET004_Multibody.Newton SimReady conformance failures."

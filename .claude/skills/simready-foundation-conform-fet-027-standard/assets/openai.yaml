@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP027_Connections"
+  short_description: "Repair CAP027_Connections assembly-connection conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-027-standard to repair CAP027_Connections SimReady connection conformance failures."

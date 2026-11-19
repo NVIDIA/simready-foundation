@@ -1,5 +1,17 @@
 # SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """Generated loose/USDZ parity coverage for package-aware validators."""
 
 import zipfile
@@ -7,8 +19,14 @@ from pathlib import Path
 
 import pytest
 from pxr import Kind, Sdf, Usd, UsdUtils
-
-from simready.foundation.tier_core.capabilities.core.path_utils import (
+from simready.foundation.tier_core.rules_and_reqs.core.naming_paths.validation import (
+    AssetFolderStructureChecker,
+    DirectoryStructureChecker,
+    MetadataLocationChecker,
+    PathLengthLimitsChecker,
+    PathsExistChecker,
+)
+from simready.foundation.tier_core.rules_and_reqs.core.path_utils import (
     anchored_asset_identifier,
     delivered_asset_identifier,
     file_exists,
@@ -17,14 +35,7 @@ from simready.foundation.tier_core.capabilities.core.path_utils import (
     sidecar_json_identifiers,
     thumbnail_png_identifier,
 )
-from simready.foundation.tier_core.capabilities.core.naming_paths.validation import (
-    AssetFolderStructureChecker,
-    DirectoryStructureChecker,
-    MetadataLocationChecker,
-    PathLengthLimitsChecker,
-    PathsExistChecker,
-)
-from simready.foundation.tier_core.capabilities.isaac_sim.composition.validation import (
+from simready.foundation.tier_core.rules_and_reqs.isaac_sim.composition.validation import (
     IsaacCompositionCapabilityChecker,
 )
 
@@ -120,9 +131,7 @@ def test_package_helpers_keep_outer_and_inner_identifiers_distinct(tmp_path):
     assert file_exists(base_identifier)
     assert "payloads/base.usdc" in package_member_names(package_path.as_posix())
     assert sidecar_json_identifier(root_layer) == (tmp_path / "robot.json").as_posix()
-    assert thumbnail_png_identifier(root_layer) == (
-        tmp_path / ".thumbs" / "256x256" / "robot.usdz.png"
-    ).as_posix()
+    assert thumbnail_png_identifier(root_layer) == (tmp_path / ".thumbs" / "256x256" / "robot.usdz.png").as_posix()
 
 
 def test_delivered_identifier_uses_resolved_path_for_relative_stage(tmp_path, monkeypatch):
@@ -183,3 +192,41 @@ def test_naming_path_validators_have_loose_and_usdz_parity(tmp_path):
         results.append(issue_counts)
 
     assert results[0] == results[1] == [0, 0, 0, 0, 0]
+
+
+def _make_mdl_material(path: Path, source_asset: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    stage = Usd.Stage.CreateNew(path.as_posix())
+    root = stage.DefinePrim("/Asset", "Xform")
+    stage.SetDefaultPrim(root)
+    shader = stage.DefinePrim("/Asset/Looks/Material/Shader", "Shader")
+    shader.CreateAttribute("info:implementationSource", Sdf.ValueTypeNames.Token, variability=Sdf.VariabilityUniform).Set(
+        "sourceAsset"
+    )
+    shader.CreateAttribute("info:mdl:sourceAsset", Sdf.ValueTypeNames.Asset, variability=Sdf.VariabilityUniform).Set(
+        Sdf.AssetPath(source_asset)
+    )
+    stage.GetRootLayer().Save()
+
+
+@pytest.mark.parametrize(
+    "source_asset, reported",
+    [
+        # The runtime resolves these from its own MDL search path; VM.MDL.001 exempts them.
+        ("OmniPBR.mdl", False),
+        ("OmniPBR_Opacity.mdl", False),
+        ("nvidia/core_definitions.mdl", False),
+        # These name a location or a module the runtime does not ship, so the file must exist.
+        ("./OmniPBR.mdl", True),
+        ("materials/OmniPBR.mdl", True),
+        ("Custom.mdl", True),
+    ],
+)
+def test_np008_does_not_look_for_runtime_shipped_mdl_modules(tmp_path, source_asset, reported):
+    root_path = tmp_path / "asset" / "root.usda"
+    _make_mdl_material(root_path, source_asset)
+
+    checker = PathsExistChecker()
+    checker.CheckStage(Usd.Stage.Open(root_path.as_posix()))
+
+    assert bool(checker._issues) is reported, [str(issue) for issue in checker._issues]

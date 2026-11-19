@@ -1,0 +1,17 @@
+{
+  "id": "CAP200_AifMetadata.0-1-0",
+  "display_name": "AIF Core Metadata",
+  "legacy_identity": {
+    "id": "FET200_AIF",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "AM.001",
+    "AM.002",
+    "AM.003",
+    "AM.004",
+    "AM.005",
+    "AM.006",
+    "AM.007"
+  ]
+}

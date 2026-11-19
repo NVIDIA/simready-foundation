@@ -1,0 +1,36 @@
+{
+  "id": "FET001_MinimalPlaceableVisual.1-0-1",
+  "display_name": "Minimal Placeable Visual",
+  "legacy_identity": {
+    "id": "FET_001_STANDARD",
+    "version": "1.0.1"
+  },
+  "source": true,
+  "additional_requirements": [
+    "com.nvidia.usd.AA.001",
+    "com.nvidia.usd.AA.002",
+    "UN.006",
+    "UN.007",
+    "VG.MESH.001",
+    "com.nvidia.usd.VG.002",
+    "VG.008",
+    "com.nvidia.usd.VG.014",
+    "com.nvidia.usd.VG.029",
+    "VG.025",
+    "com.nvidia.usd.VG.027",
+    "com.nvidia.usd.VG.028",
+    "com.nvidia.usd.HI.001",
+    "com.nvidia.usd.HI.003",
+    "com.nvidia.usd.HI.004"
+  ],
+  "adapters": [
+    "skill:simready-foundation-conform-fet-001-standard"
+  ],
+  "runtime_tests": [
+    "simready.foundation.tier_core.runtime_tests:culling_xz",
+    "simready.foundation.tier_core.runtime_tests:light_response",
+    "simready.foundation.tier_core.runtime_tests:normals_xz",
+    "simready.foundation.tier_core.runtime_tests:pivot",
+    "simready.foundation.tier_core.runtime_tests:presence"
+  ]
+}

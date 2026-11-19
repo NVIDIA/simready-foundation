@@ -1,0 +1,31 @@
+# Test dependencies for the core tier suite (tier_core in repo.toml).
+#
+# The tests import the tier straight out of the source tree, so nothing installs
+# it and nothing resolves its dependencies for us. This file therefore mirrors
+# `[project].dependencies` in ../pyproject.toml plus the optional groups the
+# tests exercise. Keep it in sync when those change; a missing entry shows up as
+# a collection-time ImportError from deep inside a validator import chain.
+
+pytest==9.0.3
+pytest-asyncio
+
+# ../pyproject.toml dependencies
+simready-foundation-tier-newton>=2026.10.0rc2,!=2026.10.0rc1
+# Qualify this checkout's Newton dependency alongside Core.
+-e ${SIMREADY_TIERS_ROOT}/simready_foundation_tier_newton
+usd-validation-nvidia>=1.23.0
+physx-usd-schemas>=25.11.1,<25.11.2
+numpy
+MaterialX>=1.39
+pillow
+usd-core>=23.5
+simready.evaluate[kit]>=2026.9.0rc2,<2026.11
+simready.evaluate.engine-kit>=2026.9.0rc3,<2026.11
+
+# conftest.py generates the requirement enums the validators import, using the
+# same codegen the wheel build hook calls. Without it the validator test
+# modules cannot import at all.
+usd-profiles-nvidia
+
+# test_wheel_content.py builds the tier wheel with it, as `python -m uv`.
+uv

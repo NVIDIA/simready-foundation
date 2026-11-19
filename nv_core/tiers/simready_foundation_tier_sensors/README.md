@@ -1,7 +1,7 @@
 # SimReady Foundation Sensors Tier
 
 The `simready-foundation-tier-sensors` distribution contains the sensor
-capabilities, features, requirements, validator rules, and tier-owned Benchmark
+capabilities, features, requirements, validator rules, and tier-owned Evaluate
 runtime tests for physics sensors, RTX LiDAR, and render products.
 
 Install validation support:
@@ -10,19 +10,19 @@ Install validation support:
 pip install simready-validate simready-foundation-tier-sensors
 ```
 
-Install the optional Benchmark framework and Kit engine dependencies needed to
+Install the optional Evaluate framework and Kit engine dependencies needed to
 execute this tier's bundled runtime tests. This extra requires Python 3.12;
 validator-only tier installs also support Python 3.11.
 
 ```bash
-pip install "simready-foundation-tier-sensors[benchmark]"
+pip install "simready-foundation-tier-sensors[evaluate]"
 ```
 
 ## Contents
 
 The tier owns the physics-sensors, LiDAR, and render-products capability
 groups, together with their features, validation rules, profiles, and
-runtime benchmark tests.
+runtime evaluation tests.
 
 ### Capabilities
 
@@ -32,10 +32,10 @@ runtime benchmark tests.
 
 ### Features
 
-- `FET_034_ISAAC` — IMU Sensor (PS.001)
-- `FET_035_RTX` — Camera and Render Products (RP.001–RP.006)
-- `FET_036_RTX` — RTX Sensors (LI.001–LI.004)
-- `FET_037_ISAAC` — Joint Sensor (PS.002)
+- `FET034_ImuSensor.Isaac` — IMU Sensor (PS.001)
+- `FET035_RenderProducts.RTX` — Camera and Render Products (RP.001–RP.006)
+- `FET036_Lidar.RTX` — RTX Sensors (LI.001–LI.004)
+- `FET037_JointSensor.Isaac` — Joint Sensor (PS.002)
 
 ## Layout
 
@@ -45,10 +45,10 @@ simready_foundation_tier_sensors/
 |-- README.md
 |-- simready/foundation/sensors/
 |   |-- __init__.py, _plugin.py, _tier.py
-|   |-- capabilities/
+|   |-- rules_and_reqs/
 |   |-- features/
 |   `-- profiles/
-|-- simready_benchmark_kit_suite/
+|-- simready/foundation/sensors/runtime_tests/
 |   |-- README.md
 |   |-- docs/
 |   `-- fet034_physics_sensors/, fet035_render_products/, fet036_lidar/, fet037_joint_sensors/
@@ -67,7 +67,7 @@ The wheel advertises two entry points:
 - `usd_validation_nvidia` (`simready-validate-sensors`) -> `simready.foundation.sensors:SimReadyPlugin`
   lets the validator discover rules and requirements.
 - `simready.tier` (`sensors`) -> `simready.foundation.sensors:tier` lets validation and
-  Benchmark discover the tier's requirement module, catalogs, profile sources,
+  Evaluate discover the tier's requirement module, catalogs, profile sources,
   and optional runtime-test package.
 
 ## Build
@@ -81,4 +81,4 @@ From the repository root:
 On Windows use `repo.bat build_tiers`. Wheels are written to
 `nv_core/tiers/_build/dist/`.
 
-See `simready_benchmark_kit_suite/docs/authoring.md` for runtime-test authoring.
+See `simready/foundation/sensors/runtime_tests/docs/tests.md` for runtime-test authoring.

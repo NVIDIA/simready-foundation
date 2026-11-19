@@ -1,0 +1,23 @@
+{
+  "id": "FET035_RenderProducts.RTX.0-1-0",
+  "display_name": "Camera and Render Products",
+  "legacy_identity": {
+    "id": "FET_035_RTX",
+    "version": "0.1.0"
+  },
+  "additional_requirements": [
+    "RP.001",
+    "RP.002",
+    "RP.003",
+    "RP.004",
+    "RP.005",
+    "RP.006"
+  ],
+  "adapters": [
+    "skill:simready-foundation-conform-fet-035-rtx"
+  ],
+  "runtime_tests": [
+    "simready.foundation.sensors.runtime_tests:render_product_output",
+    "simready.foundation.sensors.runtime_tests:semantic_aov_output"
+  ]
+}

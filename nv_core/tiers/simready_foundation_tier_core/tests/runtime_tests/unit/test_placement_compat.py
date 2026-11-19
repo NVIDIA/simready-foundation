@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from simready_benchmark_kit_suite.placement_compat import place_with_minimum_clearance
+from simready.foundation.tier_core.runtime_tests.placement_compat import place_with_minimum_clearance
 
 
 def test_passes_clearance_to_current_engine_api():

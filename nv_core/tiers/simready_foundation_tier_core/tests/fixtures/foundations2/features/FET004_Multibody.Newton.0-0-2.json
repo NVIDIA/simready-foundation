@@ -1,0 +1,15 @@
+{
+  "id": "FET004_Multibody.Newton.0-0-2",
+  "display_name": "Runnable Newton Multibody",
+  "source_feature": "FET004_Multibody.2-0-2",
+  "runnable": true,
+  "additional_requirements": [
+    "NEWTON.COL.001"
+  ],
+  "runtime_tests": [
+    "FET004:joint-movement"
+  ],
+  "adapters": [
+    "neutral_to_newton:collider_neutral_to_prop_newton"
+  ]
+}

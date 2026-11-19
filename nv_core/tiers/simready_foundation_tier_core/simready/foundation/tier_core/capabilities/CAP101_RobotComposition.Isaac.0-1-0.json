@@ -1,0 +1,14 @@
+{
+  "id": "CAP101_RobotComposition.Isaac.0-1-0",
+  "display_name": "Robot IsaacSim Composition",
+  "legacy_identity": {
+    "id": "FET_101_ISAAC",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "ISA.001"
+  ],
+  "features": [
+    "FET004_Multibody.PhysX.0-4-0"
+  ]
+}

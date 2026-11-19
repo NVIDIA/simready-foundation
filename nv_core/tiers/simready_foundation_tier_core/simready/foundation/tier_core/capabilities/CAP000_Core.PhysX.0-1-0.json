@@ -1,0 +1,18 @@
+{
+  "id": "CAP000_Core.PhysX.0-1-0",
+  "display_name": "Core (PhysX)",
+  "legacy_identity": {
+    "id": "FET_000_PHYSX",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "RV.001",
+    "RV.002",
+    "RV.003",
+    "RV.010",
+    "RV.011"
+  ],
+  "dependencies": [
+    "CAP000_Core.0-1-0"
+  ]
+}

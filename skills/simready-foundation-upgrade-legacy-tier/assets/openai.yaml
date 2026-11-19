@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Define or Upgrade Tier"
+  short_description: "Define, expand, or upgrade a SimReady tier"
+  default_prompt: "Use $simready-foundation-upgrade-legacy-tier to define a new tier, expand an existing tier, or migrate a legacy/AIF tier to Foundations 2 while preserving published compatibility."

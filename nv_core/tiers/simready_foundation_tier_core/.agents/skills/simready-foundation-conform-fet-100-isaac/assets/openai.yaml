@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP100_IsaacComposition.Isaac"
+  short_description: "Repair CAP100_IsaacComposition.Isaac conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-100-isaac to repair CAP100_IsaacComposition.Isaac SimReady conformance failures."

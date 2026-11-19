@@ -1,12 +1,12 @@
 [
     {
         "id": "simready-foundation-conform-fet-006-openpbr-positive-trigger",
-        "question": "Repair FET_006_OPENPBR@0.1.0 validation failures on a SimReady asset or package.",
+        "question": "Repair FET006_Materials.Openpbr.0-1-0 validation failures on a SimReady asset or package.",
         "expected_skill": "simready-foundation-conform-fet-006-openpbr",
-        "ground_truth": "The agent should activate simready-foundation-conform-fet-006-openpbr and follow the exact FET_006_OPENPBR workflow.",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-006-openpbr and follow the exact FET006_Materials.Openpbr workflow.",
         "expected_behavior": [
             "Load the simready-foundation-conform-fet-006-openpbr skill.",
-            "Use the selected FET_006_OPENPBR manifest as the authoritative feature contract.",
+            "Use the selected FET006_Materials.Openpbr manifest as the authoritative feature contract.",
             "Run the bundled migrate_to_openpbr.py with --verify before editing.",
             "Report changed files, validation performed, and any remaining blockers."
         ]
@@ -38,7 +38,7 @@
         "id": "simready-foundation-conform-fet-006-openpbr-negative-sibling-feature",
         "question": "Repair the UsdPreviewSurface preview material on a SimReady asset.",
         "expected_skill": "simready-foundation-conform-fet-006-standard",
-        "ground_truth": "The preview surface is FET_006_STANDARD, a sibling contract, so the agent should switch to that feature's skill.",
+        "ground_truth": "The preview surface is FET006_Materials, a sibling contract, so the agent should switch to that feature's skill.",
         "expected_behavior": [
             "Do not activate simready-foundation-conform-fet-006-openpbr.",
             "Select the skill matching the named feature instead.",

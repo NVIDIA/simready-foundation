@@ -1,0 +1,159 @@
+# slope_drop (FET003 Physics)
+
+| Property | Value |
+|---|---|
+| Test name | slope_drop |
+| Feature(s)   | `FET003_RigidBody.0-1-0`, `FET003_RigidBody.0-2-0`, `FET003_RigidBody.PhysX.0-1-0`, `FET003_RigidBody.PhysX.0-2-0`, `FET003_RigidBody.PhysX.0-3-0`, `FET003_RigidBody.PhysX.0-4-0` |
+| Engine | Kit / Isaac Sim (>=2024.2.0) |
+| Test version | 3.3.6 |
+| Wall-clock timeout | 600 seconds |
+
+## Summary
+
+Checks proximity to a finite inclined ramp, signed downhill displacement,
+box-to-ramp overlap/separation and subsequent floor overlap using PhysX.
+The Newton tier owns the separate `slope_drop_newton` procedure and its setup.
+
+## What Pass Guarantees
+
+The sampled box/displacement proxies met configured limits. This does not prove
+contact points, collider fidelity or behavior on every ramp. Finite-ramp exit
+is permitted; the object need not remain on the ramp throughout the clip.
+
+## What It Checks
+
+The box's signed-distance interval along the ramp normal must reach the
+proximity allowance before sufficient signed downhill travel. Sideways or
+uphill motion does not satisfy downhill displacement.
+
+While the complete box footprint is over the ramp, an entire box below the
+analytic plane beyond its allowance fails. After proximity, sustained excessive
+minimum separation also fails unless the downhill-exit exemption applies.
+Ramp separation is exempt only while the leading edge extends past
+the low end and cumulative displacement still satisfies downhill travel.
+Crossing the uphill edge or returning uphill does not disable separation checks.
+After downhill travel, minimum box Z is checked against the floor
+overlap allowance. These are analytic proxies, not collision contact points.
+PASS additionally requires the full configured post-travel observation window.
+If travel occurs too late to fit that window in the hard simulation budget,
+execution is incomplete (ERROR), not PASS or an asset-response FAIL. An already
+observed overlap/separation or missing-motion failure retains its verdict.
+An explicit zero post-travel window completes on the detection observation.
+Metrics record required/observed post-travel steps and window completion; the
+test does not add simulation steps or extend the configured cap.
+
+## How It Works
+
+The asset starts near the top of a collision-enabled 45-degree ramp with bounded
+placement clearance. Defaults configure 240 Hz physics, capture every 16
+observed steps, and encode 15 fps video. The existing follow camera stays.
+Render warmup/stabilization/retries can add ticks excluded from nominal graph
+time. Encoded playback time is not automatically simulation time.
+
+Default distances are **stage units**, not automatically metres:
+
+The generated collision floor uses a typed, verified physics-purpose material
+with static/dynamic friction 0.5/0.4 and restitution 0, shared with the same
+tier's flat-floor fixture. Missing/disabled collision, rejected coefficient or
+binding writes, and mismatching effective readbacks are setup errors. They do
+not establish an asset defect. These checks qualify USD authoring, not native
+solver contact behavior; source asset materials remain unchanged.
+
+| Setting | Default | Meaning |
+|---|---|---|
+| minimum_slope_clearance | 0.1 | Initial vertical box clearance |
+| horizontal_movement_threshold | 0.01 | Signed downhill travel |
+| slope_contact_tolerance | 0.02 | Ramp proximity allowance |
+| slope_penetration_tolerance | 0.02 | Entire-box distance below ramp allowance |
+| maximum_slope_separation | 0.05 | Minimum box-plane separation limit |
+| floor_margin | 0.1 | Floor-overlap allowance |
+| separation_confirmation_seconds | 0.1 | Nominal separation window |
+| post_horiz_seconds | 3.0 | Nominal post-travel window |
+| simulation_seconds | 10.0 | Hard nominal step budget |
+
+The existing world-fixed precheck skips the trial. Not applicable requires
+positive proof connecting every enabled owned rigid-body component to a fixed
+world/static anchor through qualified constraints, resolved endpoints and their
+ancestry. Fixed, revolute and spherical connections can supply edges; prismatic
+connections need qualified finite travel. Disconnected bodies, unsupported/free
+constraints, animated eligibility or breakable essential connections cannot
+supply this proof. Both constant breaking thresholds must be positive infinity
+or exactly float32 maximum (`3.4028234663852886e38`), PhysX's
+effectively-unbreakable default. Other finite strengths do not qualify, even
+the adjacent lower float32 value. This is an exact sentinel check, not a
+tolerance or an asset edit. Incomplete or unresolved endpoint
+composition retains the original unmarked skip as Could not assess, supplying
+neither measured asset FAIL nor PASS. Cooking, initialization,
+capacity and watchdog failures require separate runtime diagnosis.
+
+Configuration is qualified before scene mutation: required numeric settings
+must be finite real values, not booleans or coercible strings. Physics/capture
+rates are positive integer-valued numbers, settle frames are nonnegative
+integer-valued numbers, and load timeout is positive. Lengths, tolerances,
+confirmation/post-observation durations and friction are nonnegative; floor
+level and slope angle are signed finite. Derived proximity, movement,
+penetration and separation gates are also validated before observation steps.
+Supported zero settings retain their existing comparator policy; invalid
+configuration is incomplete execution, not an asset-response failure.
+
+Required cleanup preserves the first execution error/cancellation, attempts
+remaining safe restoration and retires uncertain native context. With no
+earlier cause, cleanup-only cancellation propagates. Optional notes cannot
+replace the cause; a later cleanup retry does not qualify worker reuse.
+
+## Failure Cases
+
+Missing proximity, missing downhill travel, whole-box ramp overlap, excessive
+separation and floor overlap are distinct outcomes. Inspect uphill-motion metrics
+when downhill travel is absent. None alone establishes the root cause.
+
+## How to Fix
+
+A failed runtime row reports the observed behavior, not ownership of its cause.
+The message keeps the failed verdict and asks the user to send the result JSON,
+video, optional motion history, and engine log to the test owner. Users are not
+expected to enable Newton, build a reduced scene, or tune their collider merely
+to investigate a failure. The test owner should distinguish generated setup,
+backend behavior, and a proven asset-authoring violation before recommending a
+repair. A different collider passing is a diagnostic control, not proof that
+the original collider is invalid.
+
+Review phases, footage, scale, allowances relative to size, and authored collider
+settings. Establish a contract violation before repairing an asset. Do not reduce
+legitimate friction or replace valid geometry merely to force a pass. Preserve
+engine errors separately, particularly contact-capacity and cooking failures.
+
+## Expected Result
+
+![slope_drop expected result](../_images/slope-drop.png)
+
+[Result video](../../../../../../../../sr_specs/docs/_static/videos/slope-drop.mp4)
+
+The asset moves downhill, possibly tumbling and leaving the finite ramp.
+Footage can continue after ramp exit or end at a failure/deadline.
+Camera following can change apparent framing.
+
+## Notes and Caveats
+
+Version 3.3.1 adds diagnostic context/capture associations and corrects reporting.
+Version 3.3.2 retains the placement and configured limits, but fixes the ramp-exit
+separation guard so an uphill launch cannot bypass it. Legitimate downhill exit
+and the existing transient-separation confirmation window remain permitted.
+Small box/visible-mesh overlap alone does not prove an SDF collider defect.
+Version 3.3.3 qualifies finite configuration and required cleanup without
+changing valid defaults, ramp-exit policy or source assets.
+Version 3.3.5 requires the complete post-travel window before PASS and uses the
+qualified typed floor material instead of silently accepting failed fixture
+authoring. Observation durations, proxy thresholds and asset data are unchanged.
+Version 3.3.6 requests a near-terminal illustrative render after the
+measured slope, separation or floor guard fires. Renderer ticks can advance
+the physics scene, so the image has no exact measurement timestamp. If that
+optional capture fails, the measured physics result remains and the report
+records a media warning. Unsafe evidence paths remain execution errors.
+The box proxies and their limitations are unchanged.
+
+Histories record scale, initial box dimensions, rates, allowances and bounded
+authored collider settings, not effective cooked geometry. Unmeasured contact
+points remain unknown. Graph ticks associate successful captures with preceding
+observations, not exact image timestamps or encoded frame indices. Encoding
+can omit or repeat images. Tests without optional hooks still run normally.

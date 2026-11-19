@@ -1,12 +1,12 @@
 [
     {
         "id": "simready-foundation-conform-fet-030-standard-positive-trigger",
-        "question": "Repair FET_030_STANDARD@0.1.0 validation failures on a SimReady asset or package.",
+        "question": "Repair CAP030_PackagingCore.0-1-0 validation failures on a SimReady asset or package.",
         "expected_skill": "simready-foundation-conform-fet-030-standard",
-        "ground_truth": "The agent should activate simready-foundation-conform-fet-030-standard and follow the exact FET_030_STANDARD workflow.",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-030-standard and follow the exact CAP030_PackagingCore workflow.",
         "expected_behavior": [
             "Load the simready-foundation-conform-fet-030-standard skill.",
-            "Use the selected FET_030_STANDARD manifest as the authoritative feature contract.",
+            "Use the selected CAP030_PackagingCore manifest as the authoritative feature contract.",
             "Report changed files, validation performed, and any remaining blockers."
         ]
     },

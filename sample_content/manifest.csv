@@ -19,3 +19,5 @@ sample_content/common_assets/sensors/render_products/SemanticAovCompressionCheck
 sample_content/common_assets/sensors/lidar/OmniLidarCheckerPass.usda,N/A,NVIDIA,sensor,sensor.lidar,lidar,,,,,Tact,,,
 sample_content/common_assets/sensors/lidar/OmniLidarSolidStateCheckerPass.usda,N/A,NVIDIA,sensor,sensor.lidar,lidar,,,,,Tact,,,
 sample_content/common_assets/sensors/lidar/OmniLidarSolidStateRTXPass.usda,N/A,NVIDIA,sensor,sensor.lidar,lidar,,,,,Tact,,,
+sample_content/common_assets/props_general/traffic_cone_chn_red/simready_usd/sm_traffic_cone_chn_red_01.usd,N/A,NVIDIA,prop,prop.roadway,cones,,,,,Tact,,,
+sample_content/common_assets/materials/copper_brushed/simready_usd/copper_brushed.usda,N/A,NVIDIA,material,material.metal,materials,,,,,,,From PhysicalAI-SimReady-Materials 1.0.0 (MIT-0),

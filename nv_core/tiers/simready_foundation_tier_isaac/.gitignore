@@ -1,0 +1,10 @@
+# The requirements enums are generated: the build hook writes them into
+# _build/ and the wheel force-includes them from there. A dev/editable install
+# may additionally generate them here in the checkout.
+#
+# This file has to live in the tier project root, not just at the repo root,
+# because hatchling resolves VCS ignores relative to the directory holding
+# pyproject.toml. Without it, the checkout copy is packaged by `packages`
+# *and* added again by force-include, and the wheel build fails on the
+# duplicate archive path.
+/simready/foundation/tier_isaac/requirements/

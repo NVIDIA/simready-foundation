@@ -1,0 +1,19 @@
+{
+  "id": "FET005_Grasp.0-1-0",
+  "display_name": "Simulate Grasp Physics",
+  "legacy_identity": {
+    "id": "FET_005_STANDARD",
+    "version": "0.1.0"
+  },
+  "source": true,
+  "additional_requirements": [
+    "PMT.001",
+    "GSP.001"
+  ],
+  "adapters": [
+    "skill:simready-foundation-conform-fet-005-standard"
+  ],
+  "runtime_tests": [
+    "simready.foundation.tier_core.runtime_tests:grasp_and_lift"
+  ]
+}

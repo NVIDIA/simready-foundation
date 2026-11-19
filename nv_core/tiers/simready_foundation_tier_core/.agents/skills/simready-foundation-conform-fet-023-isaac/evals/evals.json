@@ -1,0 +1,33 @@
+[
+    {
+        "id": "simready-foundation-conform-fet-023-isaac-positive-trigger",
+        "question": "Repair CAP023_RobotMaterials.Isaac failures on a robot asset validated against Robot-Body 3.1.0: nested materials and materials not on the top-level Looks scope.",
+        "expected_skill": "simready-foundation-conform-fet-023-isaac",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-023-isaac and follow its workflow.",
+        "expected_behavior": [
+            "Load the simready-foundation-conform-fet-023-isaac skill.",
+            "Repair RM.001, and RM.002 outside instanceable prims; leave materials inside instanced parts in place and report those RM.002 failures as skipped.",
+            "Rerun the relevant validation gate and report changed files, validation performed, remaining gaps, and that Robot-Body 4.0.0 does not select CAP023."
+        ]
+    },
+    {
+        "id": "simready-foundation-conform-fet-023-isaac-negative-nontrigger",
+        "question": "Repair FET006_Materials PreviewSurface material binding failures on a prop asset.",
+        "expected_skill": null,
+        "ground_truth": "The agent should use the FET006 material skill, not CAP023_RobotMaterials.Isaac.",
+        "expected_behavior": [
+            "Do not activate simready-foundation-conform-fet-023-isaac.",
+            "Prefer simready-foundation-conform-fet-006-standard for PreviewSurface material repairs."
+        ]
+    },
+    {
+        "id": "simready-foundation-conform-fet-023-isaac-negative-new-profile",
+        "question": "Conform a robot asset to Robot-Body 4.0.0.",
+        "expected_skill": null,
+        "ground_truth": "Robot-Body 4.0.0 does not select the deprecated CAP023_RobotMaterials.Isaac, so the agent should not activate its skill.",
+        "expected_behavior": [
+            "Do not activate simready-foundation-conform-fet-023-isaac.",
+            "Use the skills for the contracts Robot-Body 4.0.0 selects."
+        ]
+    }
+]

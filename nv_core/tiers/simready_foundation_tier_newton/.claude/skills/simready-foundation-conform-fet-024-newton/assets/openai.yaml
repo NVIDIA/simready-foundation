@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP024_BaseArticulation.Newton"
+  short_description: "Repair CAP024_BaseArticulation.Newton conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-024-newton to repair CAP024_BaseArticulation.Newton SimReady conformance failures."

@@ -1,0 +1,22 @@
+# Test dependencies for the Isaac Asset Transformer suite
+# (isaac_asset_transformer in repo.toml).
+#
+# conftest.py imports the integration straight from ../src, so nothing installs
+# it. These are the pins of the tier's `isaac` extra in ../../../pyproject.toml;
+# keep them in sync. Both require Python 3.12.
+#
+# No usd-core: usd-exchange, which these depend on, ships its own pxr.
+
+pytest==9.0.3
+isaacsim-asset-isolated==6.2.0.1
+isaacsim-robot-schema==6.2.0.0
+
+# The integration imports physx_usd_schemas at package import to register the
+# PhysX schemas before any stage opens. The tier's base dependencies provide it
+# in the wheel; this venv does not install the tier, so pin it as the tier does.
+physx-usd-schemas>=25.11.1,<25.11.2
+
+# urdf-usd-converter, which isaacsim-asset-isolated pins, requires this
+# pre-release. The uv that repo_test uses only accepts a pre-release that a
+# requirement in this file names, not one requested by a dependency.
+tinyobjloader>=2.0.0rc13

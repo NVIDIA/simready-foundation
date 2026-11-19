@@ -1,0 +1,144 @@
+# Material Profile USD Authoring Guide
+
+This document describes how to author a USD asset that conforms to the
+`Material` profile.
+
+`Material` is for a material published on its own: a `UsdShade.Material`
+prim and its shading network, in an asset that has no geometry. It is the profile
+a material library is validated against before its contents are published.
+
+Every other asset profile — `Robotics-Prop`, `Robot-Body`, `Robot-Gripper` —
+validates a material as it is applied to geometry. A library material is bound by
+no `Gprim`, so those profiles report failures that describe a missing model rather
+than a defective material.
+
+## Profile definition
+
+The `Material` profile includes the following features and capabilities (see
+`material.toml` and the
+[feature dependency graph](../../../../../../sr_specs/docs/shared/features/feature-dependency-graph.md)). Each contract's
+requirements and dependencies are defined in its specification.
+
+```toml
+[Material]
+"1.0.0" = {features = [ # A material published on its own, bound to no geometry
+    {selector = "FET006_Materials.0-3-0"}, # "Materials - UsdPreviewSurface (required)"
+    {selector = "FET006_Materials.Openpbr.0-2-0", optional = true}, # "Materials - OpenPBR (optional)"
+    {selector = "FET006_Materials.MDL.0-3-0", optional = true}, # "Materials - MDL (optional)"
+], capabilities = [
+    {selector = "CAP000_Core.0-2-0"}, # "Core file layout (required)"
+    {selector = "CAP031_SelfContainedPackage.0-1-0"}, # "Self-contained package (required)"
+    {selector = "CAP033_SimReadyPackage.0-4-0"}, # "Thumbnail and provenance metadata (required)"
+]}
+```
+
+### Required versus optional contracts
+
+| Contract | Version | Status | Purpose |
+|---|---|---|---|
+| `FET006_Materials` | 0-3-0 | Required | `UsdPreviewSurface` preview surface |
+| `FET006_Materials.Openpbr` | 0-2-0 | Optional | OpenPBR final surface |
+| `FET006_Materials.MDL` | 0-3-0 | Optional | MDL final surface |
+| `CAP000_Core` | 0-2-0 | Required | Package folder layout and anchored references that resolve |
+| `CAP031_SelfContainedPackage` | 0-1-0 | Required | Every asset path resolves inside the package (`AA.001`) |
+| `CAP033_SimReadyPackage` | 0-4-0 | Required | Thumbnail (`SR.002`) and provenance metadata (`SR.004`) |
+
+`FET006_Materials` is required because `com.nvidia.usd.VM.PS.001` is the universal
+render context: it is what a consumer gets when it asks for no render context in
+particular. The universal context sits at the bottom of USD's resolution chain, so
+a material with no `outputs:surface` does not fall through to its MDL or MaterialX
+surface — a consumer that does not name a context gets the renderer's default
+material instead of the library's.
+
+A final surface stays optional, and a material selects whichever its consumers
+need. A library distilled to OpenPBR selects `FET006_Materials.Openpbr`; one still on MDL
+selects `FET006_Materials.MDL`; one that offers both selects both.
+
+Requirements shared between a required and an optional feature stay required.
+From `FET006_Materials` alone, that is `com.nvidia.usd.VM.BIND.001`,
+`com.nvidia.usd.VM.PS.001`, `VM.PS.002`, `VM.TEX.001` and `VM.TEX.003`.
+
+The material features' runtime tests render each material on a test sphere, in the render
+context each test selects. A material asset has no geometry of its own to cover, so the tests
+do not measure coverage. With MaterialX validation on in Kit, the OpenPBR test also fails a
+material whose MaterialX document Kit could not build.
+
+## What this profile does not include, and why
+
+| Contract | Reason |
+|---|---|
+| `FET009_MaterialCoverage` | `VM.MAT.001` and rendered coverage are denominated in renderable `Gprim`s, and a material asset has none |
+| `CAP007_NonVisualMaterials` | `NVM.004` accepts non-visual attributes only on a material bound to geometry, so a material asset that authors them fails it — see the open decision below |
+| `FET010_DisplayColor` | `DISP.001` is denominated in renderable `Gprim`s. A library material has none, so display colour has nothing to be authored on |
+| `CAP000_Core.PhysX`, `CAP000_Core.Newton`, `CAP000_Core.MuJoCo`, `CAP000_Core.Isaac` | Runtime variant scaffolding for simulated bodies, which a material asset has none of |
+| `FET001_MinimalPlaceableVisual` | Minimal asset: `HI.003` and `VG.MESH.001` require a prim hierarchy and mesh geometry |
+| `FET003_RigidBody.*`, `FET004_Multibody.*` | Rigid bodies and multi-body physics (`RB.001`) require a simulated body |
+| `FET011_SemanticLabels.RTX` | `SL.MAT.001` labels a material by its place on a labelled object |
+
+## Required USD properties and schemas
+
+### Package layout (`CAP000_Core`, `CAP031_SelfContainedPackage`)
+
+A material package holds one material and every file it references:
+
+```text
+Copper_Brushed/
+└── simready_usd/
+    ├── Copper_Brushed.usda                    main file; the Material is the default prim
+    ├── .thumbs/256x256/Copper_Brushed.usda.png
+    ├── materials/
+    │   └── open_pbr_uber_base_class.usda      base class the Material references
+    └── textures/
+        └── Copper_Brushed-base_color.png
+```
+
+The core file layout rules are the ones every SimReady asset follows; the
+[Robotics-Prop guide](robotics-prop.md) lists them. For a material package:
+
+- Keep the main file as the only USD file in the intermediate folder (`NP.005`). A base
+  class the material references goes in a subfolder such as `materials/`.
+- Make every reference and texture path anchored (`./` or `../`), resolving to a file
+  inside the package (`NP.007`, `NP.008`, `AA.001`). A material that references a base
+  class or texture pool shared between packages fails `AA.001`.
+- Author the material's colour and finish variations as a `look` variant set on the
+  `Material`. Validation composes the authored variant selection, so a package conforms
+  when it passes under every `look` selection.
+
+### Thumbnail and provenance (`CAP033_SimReadyPackage`)
+
+- Put a PNG thumbnail at `.thumbs/256x256/<main file name>.png` next to the main file
+  (`SR.002`).
+- Author the provenance fields in root-layer `customLayerData`, a sidecar
+  `<main file stem>.json`, or both (`SR.004`). A material asset has no geometry and no
+  mass: author `rigid_body_count` as `0`, `asset_extents` as `(0, 0, 0)` and `mass` as `0`.
+  `SR.004` accepts a `mass` of `0` only on an asset whose default prim is a `Material`.
+
+### Materials (`FET006_Materials`, and optionally `FET006_Materials.Openpbr` and `FET006_Materials.MDL`)
+
+The material requirements are identical to those in the
+[Robotics-Prop guide](robotics-prop.md), which describes each requirement in full.
+The only difference is what they are evaluated against: a `Material` prim reached
+directly, rather than one reached through a `Gprim`'s binding.
+
+- Author `outputs:surface` connected to a `UsdPreviewSurface` shader on every
+  material (`com.nvidia.usd.VM.PS.001`).
+- Declare the colour space on every texture input, following the surface input the
+  texture drives (`VM.TEX.003`).
+- Keep every texture within the size limit (`VM.TEX.001`).
+- A material binding inside a payload must target a material inside that payload
+  (`com.nvidia.usd.VM.BIND.001`). A library material with no bindings satisfies
+  this.
+
+### Adding an OpenPBR final surface
+
+The `simready-foundation-conform-fet-006-openpbr` skill authors an OpenPBR surface
+on a material that has a `UsdPreviewSurface` preview or an MDL surface, and sets
+the colour space on the MaterialX texture inputs it creates. It leaves the preview
+and MDL surfaces untouched, so a material can hold all three.
+
+## Samples
+
+- [`copper_brushed`](../../../../../../../sample_content/common_assets/materials/copper_brushed/simready_usd/copper_brushed.usda):
+  `Copper_Brushed` from PhysicalAI-SimReady-Materials 1.0.0, licensed MIT-0. The package holds
+  the material, its four textures, a copy of the OpenPBR base class, a thumbnail and a sidecar
+  `copper_brushed.json` with its provenance metadata.

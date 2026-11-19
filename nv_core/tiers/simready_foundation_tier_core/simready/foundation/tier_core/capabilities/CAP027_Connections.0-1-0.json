@@ -1,0 +1,23 @@
+{
+  "id": "CAP027_Connections.0-1-0",
+  "display_name": "Connections",
+  "legacy_identity": {
+    "id": "FET_027_STANDARD",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "CN.001",
+    "CN.002",
+    "CN.003",
+    "CN.004",
+    "CN.006",
+    "CN.007",
+    "CN.008",
+    "CN.010",
+    "CN.011",
+    "CN.012"
+  ],
+  "dependencies": [
+    "CAP026_Mates.0-1-0"
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "provider": "simready.foundation.tier_newton.runtime_tests",
+  "import_package": "simready.foundation.tier_newton.runtime_tests",
+  "aliases": ["simready_benchmark_newton_suite"]
+}

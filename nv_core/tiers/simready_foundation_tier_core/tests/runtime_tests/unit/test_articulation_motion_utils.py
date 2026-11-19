@@ -18,7 +18,7 @@ import math
 import numpy as np
 import pytest
 from pxr import Usd, UsdGeom, UsdPhysics
-from simready_benchmark_kit_suite.articulation_phases.motion_utils import (
+from simready.foundation.tier_core.runtime_tests.articulation_phases.motion_utils import (
     get_dof_property,
     get_limits,
     merge_velocity_limits,
@@ -26,11 +26,14 @@ from simready_benchmark_kit_suite.articulation_phases.motion_utils import (
 )
 
 try:
-    from pxr import PhysxSchema  # noqa: F401
-
-    _HAS_PHYSX_SCHEMA = True
+    from pxr import PhysxSchema
 except ImportError:
-    _HAS_PHYSX_SCHEMA = False
+    try:
+        from physx_usd_schemas import PhysxSchema
+    except ImportError:
+        PhysxSchema = None
+
+_HAS_PHYSX_SCHEMA = PhysxSchema is not None
 
 
 def test_get_dof_property_returns_none_for_missing():
@@ -82,10 +85,8 @@ def test_merge_velocity_limits_returns_dof_when_usd_none():
     assert list(merged) == [10.0, 20.0]
 
 
-@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="pxr.PhysxSchema unavailable")
+@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="PhysxSchema unavailable")
 def test_resolve_usd_max_velocities_reads_physx_joint_api():
-    from pxr import PhysxSchema
-
     stage = Usd.Stage.CreateInMemory()
     joint = UsdPhysics.RevoluteJoint.Define(stage, "/World/joints/shoulder_joint")
     physx_api = PhysxSchema.PhysxJointAPI.Apply(joint.GetPrim())
@@ -101,7 +102,8 @@ def test_resolve_usd_max_velocities_reads_physx_joint_api():
         robot_root_prim=asset_prim,
     )
     assert out is not None
-    assert abs(out[0] - 1.5) < 1e-6
+    # Authored in deg/s; the resolver reports rad/s for a revolute joint.
+    assert out[0] == pytest.approx(math.radians(1.5))
 
 
 def test_resolve_usd_max_velocities_returns_nan_without_authored_limits():

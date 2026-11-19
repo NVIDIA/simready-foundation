@@ -1,0 +1,14 @@
+{
+  "id": "CAP024_BaseArticulation.PhysX.0-1-0",
+  "display_name": "Base Articulation (PhysX)",
+  "legacy_identity": {
+    "id": "FET_024_PHYSX",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "BA.002"
+  ],
+  "dependencies": [
+    "CAP024_BaseArticulation.0-1-0"
+  ]
+}

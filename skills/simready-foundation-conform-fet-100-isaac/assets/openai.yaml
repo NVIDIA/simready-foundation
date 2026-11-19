@@ -1,6 +1,4 @@
-# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-# SPDX-License-Identifier: Apache-2.0
 interface:
-  display_name: "SimReady Conform FET_100_ISAAC"
-  short_description: "Repair FET_100_ISAAC conformance"
-  default_prompt: "Use $simready-foundation-conform-fet-100-isaac to repair FET_100_ISAAC SimReady conformance failures."
+  display_name: "SimReady Conform CAP100_IsaacComposition.Isaac"
+  short_description: "Repair CAP100_IsaacComposition.Isaac conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-100-isaac to repair CAP100_IsaacComposition.Isaac SimReady conformance failures."

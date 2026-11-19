@@ -1,12 +1,12 @@
 [
     {
         "id":  "simready-foundation-conform-fet-005-standard-positive-trigger",
-        "question":  "Use a vision-capable model to add a FET_005_STANDARD grasp line to a coffee mug USD asset.",
+        "question":  "Use a vision-capable model to add a FET005_Grasp grasp line to a coffee mug USD asset.",
         "expected_skill":  "simready-foundation-conform-fet-005-standard",
         "ground_truth":  "The agent should activate simready-foundation-conform-fet-005-standard and follow its workflow.",
         "expected_behavior":  [
                                   "Load the simready-foundation-conform-fet-005-standard skill.",
-                                  "Generate or inspect visual evidence, choose explicit grasp points, author a grasp_identifier BasisCurves line, record rationale/evidence, and rerun FET_005_STANDARD validation.",
+                                  "Generate or inspect visual evidence, choose explicit grasp points, author a grasp_identifier BasisCurves line, record rationale/evidence, and rerun FET005_Grasp validation.",
                                   "Report changed files, validation performed, and any remaining release or validation gaps."
                               ]
     },

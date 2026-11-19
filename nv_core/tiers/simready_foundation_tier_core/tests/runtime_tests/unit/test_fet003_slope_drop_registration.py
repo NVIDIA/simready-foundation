@@ -19,7 +19,67 @@ from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
 
-_SOURCE = Path(__file__).parents[3] / "simready_benchmark_kit_suite" / "fet003_physics" / "slope_drop.py"
+_SOURCE = Path(__file__).parents[3] / "simready/foundation/tier_core/runtime_tests" / "fet003_physics" / "slope_drop.py"
+
+
+def _static_dict(node):
+    """Return the statically-resolvable entries of a ``{...}`` or ``dict(...)`` node.
+
+    Non-literal entries (for example ``config_defaults=phase.get_defaults()``)
+    are skipped rather than rejecting the whole dict, so literal metadata such
+    as ``version`` and ``config_defaults`` still resolves for the ``**KWARGS`` spread.
+    """
+    if isinstance(node, ast.Dict):
+        result = {}
+        for key, value in zip(node.keys, node.values, strict=True):
+            if key is None:
+                continue
+            try:
+                result[ast.literal_eval(key)] = ast.literal_eval(value)
+            except Exception:
+                continue
+        return result
+    if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "dict" and not node.args:
+        result = {}
+        for keyword in node.keywords:
+            if keyword.arg is None:
+                continue
+            try:
+                result[keyword.arg] = ast.literal_eval(keyword.value)
+            except Exception:
+                continue
+        return result
+    return None
+
+
+def _module_dict_constants(tree):
+    constants = {}
+    for node in tree.body:
+        if not isinstance(node, ast.Assign) or len(node.targets) != 1:
+            continue
+        target = node.targets[0]
+        if not isinstance(target, ast.Name):
+            continue
+        value = _static_dict(node.value)
+        if value is not None:
+            constants[target.id] = value
+    return constants
+
+
+def _test_registration(call, tree):
+    """Effective @test(...) keyword args, expanding a module-level ``**KWARGS`` dict."""
+    constants = _module_dict_constants(tree)
+    kwargs = {}
+    for keyword in call.keywords:
+        if keyword.arg is None:
+            if isinstance(keyword.value, ast.Name):
+                kwargs.update(constants.get(keyword.value.id, {}))
+            continue
+        try:
+            kwargs[keyword.arg] = ast.literal_eval(keyword.value)
+        except Exception:
+            continue
+    return kwargs
 
 
 def _registration():
@@ -29,7 +89,7 @@ def _registration():
             continue
         for decorator in node.decorator_list:
             if isinstance(decorator, ast.Call) and isinstance(decorator.func, ast.Name) and decorator.func.id == "test":
-                return {keyword.arg: ast.literal_eval(keyword.value) for keyword in decorator.keywords}
+                return _test_registration(decorator, tree)
     raise AssertionError("slope_drop @test registration not found")
 
 
@@ -93,8 +153,8 @@ def _simulation_config():
 def test_slope_drop_requires_minimum_spawn_clearance():
     registration = _registration()
 
-    assert registration["version"] == "3.3.0"
-    assert registration["max_duration"] == 300
+    assert registration["version"] == "3.3.6"
+    assert registration["max_duration"] == 600
     assert registration["config_defaults"]["minimum_slope_clearance"] == 0.1
     assert registration["config_defaults"]["slope_contact_tolerance"] == 0.02
     assert registration["config_defaults"]["slope_penetration_tolerance"] == 0.02

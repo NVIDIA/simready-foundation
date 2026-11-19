@@ -1,0 +1,14 @@
+{
+  "id": "CAP043_PascalVocLabels.0-1-0",
+  "display_name": "Semantic Labels - PASCAL VOC",
+  "legacy_identity": {
+    "id": "FET_043_STANDARD",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "VOC.001"
+  ],
+  "features": [
+    "FET011_SemanticLabels.0-2-0"
+  ]
+}

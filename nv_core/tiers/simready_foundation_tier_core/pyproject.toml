@@ -15,7 +15,7 @@
 
 [project]
 name = "simready-foundation-tier-core"
-version = "2026.08.0-post1"
+version = "2026.10.0"
 description = "SimReady Foundation base tier: the foundation profiles, features, requirements, and validators, including the Isaac Sim capabilities and the isaac features/profiles"
 authors = [
     {name = "NVIDIA"},
@@ -23,11 +23,16 @@ authors = [
 readme = "README.md"
 license = "Apache-2.0"
 license-files = ["LICENSE.txt"]
-requires-python = ">=3.10,<3.13"
+requires-python = ">=3.11,<3.14"
 dependencies = [
-    "usd-validation-nvidia>=1.21.0",
-    "physx-usd-schemas>=25.11.1,<26",
+    # Robot-Body and Robot-Gripper 4.0.0 require Newton contracts.
+    # rc1's Evaluate extra still declares Core, creating a plugin ordering cycle.
+    "simready-foundation-tier-newton>=2026.10.0rc2,!=2026.10.0rc1",
+    "usd-validation-nvidia>=1.23.0",
+    "physx-usd-schemas>=25.11.1,<25.11.2",
     "numpy",
+    # Runtime receipt checks use contracts.py on supported Python 3.10 too.
+    "tomli>=2; python_version < '3.11'",
     # Source of the MaterialX nodedefs the OpenPBR requirements are checked against.
     # usd-core alone does not ship the usdMtlx plugin, so without MaterialX no ND_*
     # identifier resolves and VM.PBR.002 and VM.PBR.003 cannot run: neither has
@@ -51,20 +56,40 @@ simready-validate-tier-core = "simready.foundation.tier_core:SimReadyPlugin"
 [project.entry-points."simready.tier"]
 tier_core = "simready.foundation.tier_core:tier"
 
+# Derivation consumers load this group explicitly. Validation never resolves it,
+# so importing the tier remains free of adapter and transformer side effects.
+[project.entry-points."simready.feature_adapters"]
+tier_core = "simready.foundation.tier_core.asset_handler_modules:get_feature_adapters"
+
+# The thin SimReady integration for the public Isaac Asset Transformer ships
+# its profiles, patches, and CLI here.
+[project.scripts]
+simready-transform-asset = "simready.asset_transformer.cli:main"
+
 [project.urls]
 Documentation = "https://nvidia.github.io/simready-foundation/"
 
 [project.optional-dependencies]
 usd = ["usd-core>=22.11"]
 test = ["pytest"]
-
-# Standalone Kit-free Isaac asset transformer used by the CIP prop composition
-# adapter (FET_001_STANDARD@1.0.1 -> FET_100_ISAAC@0.4.0). Optional so base
-# validator installs are unaffected; resolved locally via the workspace source
-# mapping in ../pyproject.toml during development.
-isaac-transform = ["simready-isaac-asset-transformer>=2026.8.0,<2026.9.0"]
+# Public Isaac tooling is opt-in and requires Python 3.12. Keep its Python
+# requirement on the dependencies so an unsupported extra install fails clearly.
+isaac = [
+    "isaacsim-asset-isolated==6.2.0.1",
+    "isaacsim-robot-schema==6.2.0.0",
+]
 benchmark = [
-    "simready-benchmark[kit]>=2026.8.0,<2026.9.0",
+    "simready.evaluate[kit]>=2026.9.0rc2,<2026.11",
+    "simready.evaluate.engine-kit>=2026.9.0rc3,<2026.11",
+    "usd-core>=23.5",
+]
+evaluate = [
+    # The Evaluate API includes the live-geometry and required-cleanup APIs used here.
+    # The tier verifies floor state and isolates optional video diagnostics locally.
+    # Compatible prerelease and stable updates remain within this API generation.
+    "simready.evaluate[kit]>=2026.9.0rc2,<2026.11",
+    # Resolve the independently versioned Kit wheel against its declared range.
+    "simready.evaluate.engine-kit>=2026.9.0rc3,<2026.11",
     # Enables plain-Python test discovery outside Kit. Isaac Sim supplies pxr
     # at runtime, while this dependency lets --list-tests inspect the bundled
     # suite before an engine is launched.
@@ -83,23 +108,31 @@ package_licenses = [
     "materialx-LICENSE.txt",
     "numpy-LICENSE.txt",
     "pillow-LICENSE.txt",
+    "usd-core-LICENSE.txt",
     "usd-validation-nvidia-LICENSE.txt",
     "usd-validation-nvidia-THIRD_PARTY_NOTICES.md",
-    "usd-core-LICENSE.txt",
 ]
 
-# Ship the committed package tree (respects default excludes, so __pycache__ /
-# the git-ignored generated requirements/ are skipped here)...
+# Ship the committed package tree. __pycache__ and the generated
+# requirements/ are skipped via this directory's own .gitignore, which is where
+# hatchling looks for VCS ignores -- the repo-root .gitignore is not consulted.
 [tool.hatch.build.targets.wheel]
-packages = ["simready", "simready_benchmark_kit_suite"]
+packages = ["simready"]
+# The transformer integration under tools/ is force-included below; keep its
+# build residue (bytecode) out of the wheel regardless of what is on disk.
+exclude = ["**/__pycache__", "**/*.pyc"]
 
-# ...and add the build-time generated requirements enums.
+# ...and add the build-time generated requirements enums, public-transformer
+# integration, and entry-point-discovered feature adapters. These tool sources
+# live outside the committed `simready/` tree and are mapped into the wheel.
 [tool.hatch.build.targets.wheel.force-include]
 "_build/python/simready/foundation/tier_core/requirements" = "simready/foundation/tier_core/requirements"
+"tools/isaac_asset_transformer/src/simready/asset_transformer" = "simready/asset_transformer"
+"tools/asset_handler_modules" = "simready/foundation/tier_core/asset_handler_modules"
 
 [build-system]
 # The shared build hook (../_tooling/build_hook.py) generates this tier's
 # requirements enums at build time, so the codegen package must be importable in
 # the (isolated) build env.
-requires = ["hatchling", "usd-profiles-nvidia"]
+requires = ["hatchling>=1.27", "usd-profiles-nvidia"]
 build-backend = "hatchling.build"

@@ -1,0 +1,100 @@
+# culling_xz  (FET001 Visual)
+
+| Property     | Value                          |
+|--------------|--------------------------------|
+| Test name    | culling_xz                     |
+| Feature(s)   | `FET001_MinimalPlaceableVisual.0-1-0`, `FET001_MinimalPlaceableVisual.1-0-0`, `FET001_MinimalPlaceableVisual.1-0-1`            |
+| Engine       | Kit / Isaac Sim (>=2024.2.0)   |
+| Test version | 2.0.3                          |
+
+## Summary
+
+Rotates the asset through sampled X-and-Z poses, captures paired culling-off/on
+frames, and checks their object-masked differences against the configured ceiling.
+
+## What Pass Guarantees
+
+Before scene mutation, the difference threshold must be a finite real
+fraction in `[0, 1]`, steps a positive whole count, settling nonnegative,
+and camera padding/load timeout finite and positive. Booleans, numeric
+strings and nonfinite controls are configuration errors; zero difference
+tolerance remains valid.
+
+A passing result means every sampled culling-off/on pair has an object-masked
+changed ratio at or below `different_ratio_threshold` (default 10%). It does
+not certify every face's winding, prohibit smaller holes, or cover unsampled
+orientations. Diagnose differences using the paired frames before attributing
+them to an asset defect.
+
+Every sampled culling-OFF reference must contain at least 100 object pixels
+for its changed-pixel ratio to be measured. A reference below that floor is
+an unqualified view, not a zero difference. If all measured pairs satisfy the
+threshold but any reference is unqualified, the result is an incomplete
+measurement/runtime error rather than PASS. A valid measured threshold breach
+still gives FAIL even if another view is unqualified. Counts, zero-based
+omitted indices and `culling_xz_coverage_complete` expose the coverage gap.
+A culling-ON image becoming empty after a qualified OFF image remains a real
+measured difference and is never discarded as a missing reference.
+
+## What It Checks
+
+The test checks that back-face culling does not change the visible appearance of the asset. With correct counter-clockwise winding, all outward-facing polygons remain visible whether culling is off or on. With incorrect winding on any face, enabling culling causes that face to disappear or reveals the inside of the mesh, producing a measurable difference in the frame.
+
+The combined rotation (X at 70 percent amplitude, Z at 100 percent) sweeps the asset through diagonal angles where chamfered, beveled, or angled faces become front-facing. A single-axis rotation keeps many of these faces edge-on and would miss winding defects that only appear at oblique view angles.
+
+## How It Works
+
+The asset is loaded in a white room with dome lighting (intensity 1000) and an orange matte diagnostic material. Eight rotation steps are captured (`steps = 8`). At each step the asset is rotated, the camera is re-framed, and two frames are captured in sequence:
+
+1. Culling off: `doubleSided = True`. Both faces of every polygon are rendered.
+2. Culling on: `doubleSided = False` (the Omniverse renderer uses `singleSided` as the primary face culling authority). Only outward-facing polygons are rendered.
+
+The two frames are compared using an object-masked per-pixel difference on the white background (`pixel_threshold = 0.20`). The maximum difference ratio across all step pairs is compared against `different_ratio_threshold = 0.10` (10 percent of object pixels). The test passes when no step pair exceeds this threshold.
+
+A visibility pre-check compares the framed view with an asset-hidden control under the same lighting. If fewer than 100 diagnostic-colored pixels are attributable to the asset, the test fails before the sweep.
+
+## Failure Cases
+
+| Symptom | Likely cause |
+|---|---|
+| Any rotation step shows more than 10 percent object pixel difference between culling-off and culling-on frames | One or more faces have incorrect (clockwise) winding order; enabling culling removes those faces |
+| Missing/undersized OFF reference | Incomplete measurement: edge-on pose, viewport/rendering or framing issue; not an established winding defect |
+| Insufficient asset-attributable diagnostic pixels in pre-check | Asset hidden, not loaded, or camera framed incorrectly |
+
+## How to Fix
+
+If paired frames differ beyond tolerance, inspect the disappearing surfaces
+and confirm that the capture and culling settings are correct. If incorrect
+winding is confirmed, correct those faces in the DCC tool and recalculate
+normals outward. Re-export and rerun; a pixel difference alone does not locate
+or prove every underlying authoring defect.
+
+The combined X-and-Z sweep is specifically designed to expose diagonal faces that a single-axis rotation keeps edge-on. Winding defects on chamfered or angled surfaces might only appear during the combined rotation.
+
+If no frames are captured, verify that `steps` is greater than zero in the test configuration, that the viewport extension is loaded, and that the asset bounds resolve to non-zero extents.
+
+## Expected Result
+
+![culling_xz expected result](../_images/culling-xz.png)
+
+[Result video](../../../../../../../../sr_specs/docs/_static/videos/culling-xz.mp4)
+
+The asset rotating around a tilted axis combining pitch and yaw. The orange diagnostic surface fills the silhouette at every frame. Holes in the silhouette or faces that appear to show through the mesh when culling is enabled indicate incorrect winding only visible at oblique angles.
+
+## Notes and Caveats
+
+The Omniverse renderer uses `singleSided` as the primary face culling authority. The test sets `doubleSided = False` (culling on) rather than relying on any other material flag to ensure the comparison reflects the renderer's actual culling behavior.
+
+Object-masked comparison on a white background excludes background noise from the per-pixel difference calculation, ensuring only changes within the object silhouette contribute to the result.
+
+The `culling_xz_qualified_pairs`, `culling_xz_omitted_pairs` and
+`culling_xz_omitted_indices` metrics describe which reference masks met the
+existing 100-pixel usability floor. Every-pair coverage is required for PASS;
+a fully edge-on sampled view can therefore make coverage incomplete rather
+than certify culling. This corrects older zero-filled ratios and may reveal
+additional incomplete results without establishing a new asset defect.
+
+Video encoding is optional presentation when the owned encoder returns `None`
+for a recoverable failure, with warnings where available. Unknown engine/session
+exceptions and unsafe media paths still propagate, as do required coverage
+errors, cancellation and required-cleanup signals.

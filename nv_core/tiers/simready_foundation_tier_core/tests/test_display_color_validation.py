@@ -21,59 +21,33 @@ requirements are only exercised at all once a profile adopts it. FET_010_STANDAR
 in any profile yet, so nothing there reaches DISP.001, DISP.002 or DISP.003. These tests drive the
 checker directly against small stages instead, and do not depend on either.
 
-Run with::
-
-    pip install 'simready-validate>=2026.7.0.dev1' usd-validation-nvidia numpy pytest
-    pytest nv_core/tiers/simready_foundation_tier_core/tests/test_display_color_validation.py
+Requires an installed ``simready-foundation-tier-core`` wheel or editable install (with
+generated requirements) plus ``usd-validation-nvidia`` and ``pxr``. The checker is imported,
+not loaded through ``simready.validate.initialize``: that replaces the rule registry and
+path-loads a second copy of every rule, which leaves the checkers other test modules import
+unregistered for the rest of the session.
 """
 
 from __future__ import annotations
 
-import sys
-from pathlib import Path
+import importlib
 
 import pytest
-from pxr import Sdf, Usd, UsdGeom
 
-TIER = Path(__file__).resolve().parent.parent / "simready" / "foundation" / "tier_core"
+pytest.importorskip("usd_validation_nvidia")
+pytest.importorskip("pxr")
+pytest.importorskip("simready.foundation.tier_core.requirements")
 
-# ``simready.validate`` loads a capabilities tree by putting its parent on ``sys.path`` and
-# importing the directory name, so a path-loaded tier's validators land under a top-level
-# ``capabilities`` package. An installed tier wheel is imported by its dotted name instead.
-CHECKER_MODULES = (
-    "capabilities.visualization.display_color.validation",
-    "simready.foundation.tier_core.capabilities.visualization.display_color.validation",
-)
+from pxr import Sdf, Usd, UsdGeom  # noqa: E402
+from simready.foundation.tier_core._tier import tier  # noqa: E402
+
+# The descriptor names the rules package, which the Foundations 2 layout renames.
+display_color = importlib.import_module(f"{tier.rules_package}.visualization.display_color.validation")
 
 
 @pytest.fixture(scope="session")
 def checker_class():
-    """Load the tier's capabilities and hand back the display colour checker.
-
-    ``simready.validate.initialize`` is what generates the tier's requirements module and
-    imports every ``validation.py`` under its capabilities tree, so the checker is only
-    importable after it has run. Profiles are loaded because initialize wants them, not
-    because any of them reference this feature; none do.
-    """
-    simready_validate = pytest.importorskip(
-        "simready.validate",
-        reason="requires simready-validate>=2026.7.0.dev1, which resolves a tier's "
-        "requirements module from the tier's pyproject",
-    )
-    simready_validate.destroy()
-    simready_validate.initialize(
-        rules_and_requirements_paths=[TIER / "capabilities"],
-        features_paths=[TIER / "features"],
-        profiles_paths=sorted((TIER / "profiles").glob("*.toml")),
-    )
-    for name in CHECKER_MODULES:
-        module = sys.modules.get(name)
-        if module is not None:
-            break
-    else:
-        raise AssertionError(f"display colour checker not loaded; tried {CHECKER_MODULES}")
-    yield module.DisplayColorCapabilityChecker
-    simready_validate.destroy()
+    return display_color.DisplayColorCapabilityChecker
 
 
 def check(checker_class, usda: str, prim_path: str) -> list[str]:

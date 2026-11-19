@@ -31,28 +31,21 @@ pytest.importorskip("pxr")
 pytest.importorskip("simready.foundation.tier_core.requirements")
 
 
-def _clear_ba002_owner(ba002) -> None:
+def _clear_ba002_owners(ba002) -> None:
     registry = usd_validation_nvidia.RequirementsRegistry()
-    owner = registry.get_validator(ba002)
-    if owner is None:
-        return
-    usd_validation_nvidia.unregister_requirements(owner)
-    try:
+    while (owner := registry.get_validator(ba002)) is not None:
+        usd_validation_nvidia.unregister_requirements(owner)
         usd_validation_nvidia.unregister_rule(owner)
-    except Exception:
-        # Category registry may not have the rule if only requirements were mapped.
-        pass
-    assert not registry.is_implemented(ba002)
 
 
-def test_isaac_first_keeps_isaac_ba002_checker():
+def test_isaac_first_keeps_isaac_ba002_checker() -> None:
     """If Isaac registers BA.002 first, the tier placeholder must leave it alone."""
-    from simready.foundation.tier_core.capabilities.physics_bodies.base_articulation import (
+    from simready.foundation.tier_core.rules_and_reqs.physics_bodies.base_articulation import (
         validation as ba_mod,
     )
 
     ba002 = ba_mod.cap.BaseArticulationRequirements.BA_002
-    _clear_ba002_owner(ba002)
+    _clear_ba002_owners(ba002)
 
     @usd_validation_nvidia.register_rule("BaseArticulation")
     @usd_validation_nvidia.register_requirements(ba002, override=True)
@@ -69,17 +62,17 @@ def test_isaac_first_keeps_isaac_ba002_checker():
     assert registry.get_validator(ba002) is FakeIsaacBA002
     assert registry.get_validator(ba002) is not ba_mod.RuntimeOnlyBA002Registration
 
-    _clear_ba002_owner(ba002)
+    _clear_ba002_owners(ba002)
 
 
-def test_tier_first_registers_placeholder_when_missing():
+def test_tier_first_registers_placeholder_when_missing() -> None:
     """With no prior BA.002 checker, the placeholder must register itself."""
-    from simready.foundation.tier_core.capabilities.physics_bodies.base_articulation import (
+    from simready.foundation.tier_core.rules_and_reqs.physics_bodies.base_articulation import (
         validation as ba_mod,
     )
 
     ba002 = ba_mod.cap.BaseArticulationRequirements.BA_002
-    _clear_ba002_owner(ba002)
+    _clear_ba002_owners(ba002)
 
     registered = ba_mod.register_ba002_placeholder()
 
@@ -89,17 +82,17 @@ def test_tier_first_registers_placeholder_when_missing():
     assert registry.get_validator(ba002) is ba_mod.RuntimeOnlyBA002Registration
     assert ba_mod.RuntimeOnlyBA002Registration not in usd_validation_nvidia.CategoryRuleRegistry().rules
 
-    _clear_ba002_owner(ba002)
+    _clear_ba002_owners(ba002)
 
 
-def test_isaac_checker_replaces_tier_placeholder():
+def test_isaac_checker_replaces_tier_placeholder() -> None:
     """An Isaac checker loaded later must replace the standalone placeholder."""
-    from simready.foundation.tier_core.capabilities.physics_bodies.base_articulation import (
+    from simready.foundation.tier_core.rules_and_reqs.physics_bodies.base_articulation import (
         validation as ba_mod,
     )
 
     ba002 = ba_mod.cap.BaseArticulationRequirements.BA_002
-    _clear_ba002_owner(ba002)
+    _clear_ba002_owners(ba002)
     assert ba_mod.register_ba002_placeholder() is True
 
     @usd_validation_nvidia.register_rule("BaseArticulation")
@@ -111,4 +104,4 @@ def test_isaac_checker_replaces_tier_placeholder():
     assert registry.get_validator(ba002) is FakeIsaacBA002
     assert registry.get_validator(ba002) is not ba_mod.RuntimeOnlyBA002Registration
 
-    _clear_ba002_owner(ba002)
+    _clear_ba002_owners(ba002)

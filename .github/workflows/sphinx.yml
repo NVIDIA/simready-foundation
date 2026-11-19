@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - main
+      - release-*
       - release_*
       - preview_*
     tags: ["v*"]
@@ -16,7 +17,7 @@ on:
         required: false
         type: string
       branch_ref:
-        description: "Branch to build docs from (e.g. release_2026-04-1 or preview_my-feature)."
+        description: "Branch to build docs from (e.g. release-2026.10.0 or preview_my-feature)."
         required: false
         type: string
 

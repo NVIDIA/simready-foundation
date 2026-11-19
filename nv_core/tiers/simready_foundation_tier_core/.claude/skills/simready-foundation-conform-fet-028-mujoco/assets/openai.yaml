@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP028_Gripper.MuJoCo"
+  short_description: "Repair CAP028_Gripper.MuJoCo conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-028-mujoco to repair CAP028_Gripper.MuJoCo SimReady conformance failures."

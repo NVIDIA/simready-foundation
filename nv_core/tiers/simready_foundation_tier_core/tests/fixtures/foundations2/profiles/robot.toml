@@ -1,0 +1,7 @@
+[Robot]
+"2.0.0" = {features = [
+    {selector = "FET004.*", optional = true},
+    {selector = "FET004.PhysX.*"},
+], capabilities = [
+    {selector = "CAP007*", optional = true},
+]}

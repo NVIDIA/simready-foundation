@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP023_RobotMaterials.Isaac (Deprecated)"
+  short_description: "Repair deprecated CAP023_RobotMaterials.Isaac compatibility"
+  default_prompt: "Use $simready-foundation-conform-fet-023-isaac to repair deprecated CAP023_RobotMaterials.Isaac robot material organization on an asset validated against Robot-Body 2.0.0 through 3.1.0."

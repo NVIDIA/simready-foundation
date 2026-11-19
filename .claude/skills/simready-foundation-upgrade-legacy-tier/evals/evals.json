@@ -1,0 +1,49 @@
+[
+  {
+    "id": "simready-foundation-upgrade-legacy-tier-upgrade-trigger",
+    "question": "Upgrade our old AIF tier from FET001_BASE_NEUTRAL-style features to Foundations 2 and keep existing profiles and adapters working.",
+    "expected_skill": "simready-foundation-upgrade-legacy-tier",
+    "ground_truth": "The agent should activate the tier upgrader, inventory all legacy consumers, classify testless contracts as CAPs unless they qualify as source FETs, and preserve published compatibility.",
+    "expected_behavior": [
+      "Load the skill and its legacy-pattern reference.",
+      "Run a read-only inventory before edits and create an explicit lossless legacy-to-new catalog map.",
+      "Coordinate profiles, validators, runtime tests, adapters, stamps, caches, docs, and consumer integration.",
+      "Verify deterministic generation, installed-tier discovery, Foundations 2 resolution, and legacy compatibility."
+    ]
+  },
+  {
+    "id": "simready-foundation-upgrade-legacy-tier-define-trigger",
+    "question": "Define a new SimReady Foundation tier for electrical and thermal authored-data validation, with room to add runtime simulation features later.",
+    "expected_skill": "simready-foundation-upgrade-legacy-tier",
+    "ground_truth": "The agent should activate the tier skill in define mode, establish ownership and identity ranges, register both discovery surfaces, and model current static contracts as capabilities rather than speculative features.",
+    "expected_behavior": [
+      "Load the skill in define mode.",
+      "Establish tier names, ownership, namespaces, dependencies, source/generated roots, packaging, entry points, and tests.",
+      "Create static electrical and thermal contracts as CAPs until exact runtime-test evidence exists.",
+      "Verify installed-wheel discovery and a minimal end-to-end catalog/profile validation."
+    ]
+  },
+  {
+    "id": "simready-foundation-upgrade-legacy-tier-expand-trigger",
+    "question": "Expand our existing non-core tier with another capability and a tested runtime feature, then expose both through a new profile version.",
+    "expected_skill": "simready-foundation-upgrade-legacy-tier",
+    "ground_truth": "The agent should activate the tier skill in expand mode and preserve all published contracts while allocating new identities and integrating the complete tier surface.",
+    "expected_behavior": [
+      "Load the skill in expand mode.",
+      "Inventory the tier and confirm identity ownership before adding contracts.",
+      "Preserve old versions and create a new immutable profile version.",
+      "Update generation, validators, runtime tests, adapters, docs, and installed-catalog tests as applicable."
+    ]
+  },
+  {
+    "id": "simready-foundation-upgrade-legacy-tier-negative-nontrigger",
+    "question": "Fix the wording on requirement RB.001 without changing its meaning or any tier structure.",
+    "expected_skill": null,
+    "ground_truth": "The agent should use the requirement update workflow rather than the tier definition/upgrader skill.",
+    "expected_behavior": [
+      "Do not activate this tier skill.",
+      "Use the narrower requirement-editing workflow.",
+      "Do not modify tier packaging, catalogs, profiles, or registrations."
+    ]
+  }
+]

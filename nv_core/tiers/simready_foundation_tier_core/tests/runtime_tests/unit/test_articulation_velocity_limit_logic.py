@@ -14,7 +14,7 @@
 # limitations under the License.
 """Tests for velocity_limit's pure-Python helpers."""
 import numpy as np
-from simready_benchmark_kit_suite.articulation_phases.velocity_limit import (
+from simready.foundation.tier_core.runtime_tests.articulation_phases.velocity_limit import (
     analyze_velocity_results,
     compute_velocity_test_target,
     find_joints_with_velocity_limits,

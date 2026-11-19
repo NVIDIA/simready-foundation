@@ -1,0 +1,18 @@
+{
+  "id": "CAP000_Core.MuJoCo.0-1-0",
+  "display_name": "Core (MuJoCo)",
+  "legacy_identity": {
+    "id": "FET_000_MUJOCO",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "RV.007",
+    "RV.008",
+    "RV.009",
+    "RV.010",
+    "RV.011"
+  ],
+  "dependencies": [
+    "CAP000_Core.0-1-0"
+  ]
+}

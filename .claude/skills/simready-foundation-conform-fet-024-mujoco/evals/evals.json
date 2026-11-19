@@ -1,12 +1,12 @@
 [
     {
         "id": "simready-foundation-conform-fet-024-mujoco-positive-trigger",
-        "question": "Repair FET_024_MUJOCO@0.1.0 validation failures on a SimReady robot asset or package.",
+        "question": "Repair CAP024_BaseArticulation.MuJoCo.0-1-0 validation failures on a SimReady robot asset or package.",
         "expected_skill": "simready-foundation-conform-fet-024-mujoco",
-        "ground_truth": "The agent should activate simready-foundation-conform-fet-024-mujoco and follow the exact FET_024_MUJOCO workflow.",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-024-mujoco and follow the exact CAP024_BaseArticulation.MuJoCo workflow.",
         "expected_behavior": [
             "Load the simready-foundation-conform-fet-024-mujoco skill.",
-            "Use the selected FET_024_MUJOCO manifest as the authoritative feature contract.",
+            "Use the selected CAP024_BaseArticulation.MuJoCo manifest as the authoritative feature contract.",
             "Report changed files, validation performed, and any remaining blockers."
         ]
     }

@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP025_RosBridge.Ros"
+  short_description: "Repair CAP025_RosBridge.Ros conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-025-ros to repair CAP025_RosBridge.Ros SimReady conformance failures."

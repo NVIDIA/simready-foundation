@@ -1,6 +1,6 @@
 ---
 name: simready-foundation-conform-fet-005-standard
-description: "Use for vision-guided SimReady grasp repair, grasp_identifier curves, and physics-material triage."
+description: "Use for vision-guided SimReady grasp repair, grasp_identifier curves, and physics-material triage. Contract: FET005_Grasp; Foundations 1 ID: FET_005_STANDARD."
 license: Apache-2.0
 metadata:
   author: "Shaad Boochoon <sboochoon@nvidia.com>"
@@ -11,10 +11,10 @@ metadata:
 ---
 
 
-# SimReady Conform FET_005_STANDARD Simulate Grasp Physics
+# SimReady Conform FET005_Grasp Simulate Grasp Physics
 
 ## Purpose
-Use this workflow skill after Core, Minimal, and rigid-body requirements are already in a reasonable state and the next profile validation gate is `FET_005_STANDARD@0.1.0`. It adds or repairs a USD grasp vector line that tells a robotic gripper where to grasp the asset.
+Use this workflow skill after Core, Minimal, and rigid-body requirements are already in a reasonable state and the next profile validation gate is `FET005_Grasp.0-1-0`. It adds or repairs a USD grasp vector line that tells a robotic gripper where to grasp the asset.
 
 This is a visual-semantic authoring skill, not a bounding-box shortcut. The grasp line must be chosen from visual evidence of the asset shape and intended grasp behavior, then authored deterministically as a `UsdGeom.BasisCurves` prim.
 
@@ -27,7 +27,7 @@ captures, or generated mesh previews.
 
 If the current agent cannot use vision, stop immediately. Do not add or repair a
 grasp line from bounds, text metadata, file names, validator failures, or user
-descriptions alone. Tell the user that FET_005_STANDARD grasp-line repair requires a
+descriptions alone. Tell the user that FET005_Grasp grasp-line repair requires a
 vision-capable model/agent and ask them to rerun this skill with vision enabled.
 
 If the current agent can use vision and visual evidence is available, the agent
@@ -42,14 +42,14 @@ Read the source-of-truth files named below before editing. Work on staged output
 
 ## Source of Truth
 
-Before changing an asset, load the selected FET_005_STANDARD manifest and requirement docs:
+Before changing an asset, load the selected FET005_Grasp manifest and requirement docs:
 
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_005_STANDARD-0.1.0.json`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_005_STANDARD.md`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/physics_bodies/physics_graspable/requirements/graspable-vector-line.md`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/physics_bodies/physics_graspable/validation.py`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET005_Grasp.0-1-0.json`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET005_Grasp.md`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/physics_bodies/physics_graspable/requirements/graspable-vector-line.md`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/physics_bodies/physics_graspable/validation.py`
 
-The current manifest lists `PMT.001` and `GSP.001`. The current FET_005_STANDARD prose and graspable validator focus on `GSP.001`: at least one `BasisCurves` prim under the default prim, named with the `grasp_identifier` prefix, with at least two points. If validation reports `PMT.001`, read `references/fet005-requirements.md` and handle physics-material binding separately from grasp-line placement.
+The current manifest lists `PMT.001` and `GSP.001`. The current FET005_Grasp prose and graspable validator focus on `GSP.001`: at least one `BasisCurves` prim under the default prim, named with the `grasp_identifier` prefix, with at least two points. If validation reports `PMT.001`, read `references/fet005-requirements.md` and handle physics-material binding separately from grasp-line placement.
 
 ## Inputs
 
@@ -71,8 +71,8 @@ Collect these before editing:
 
 Use this checklist when changing the repository:
 
-1. Confirm the input asset exists and that earlier gates needed by the selected profile are already staged. For a prop workflow, `FET_000_STANDARD` and `FET_001_STANDARD` should pass; the selected `FET_003_*` rigid-body physics feature should usually pass before FET_005_STANDARD because grasping assumes a physical prop.
-2. Parse the validation report and filter to `FET_005_STANDARD@0.1.0` unless the user selected a different future version. If `GSP.001` already passes, do not add duplicate grasp lines.
+1. Confirm the input asset exists and that earlier gates needed by the selected profile are already staged. For a prop workflow, `CAP000_Core` and `FET001_MinimalPlaceableVisual` should pass; the selected `FET003_RigidBody.*` / `CAP003_RigidBody.*` rigid-body physics feature should usually pass before FET005_Grasp because grasping assumes a physical prop.
+2. Parse the validation report and filter to `FET005_Grasp.0-1-0` unless the user selected a different future version. If `GSP.001` already passes, do not add duplicate grasp lines.
 3. Inspect existing grasp vector prims under the default prim:
    - type is `BasisCurves`
    - name starts with `grasp_identifier`
@@ -101,7 +101,7 @@ Use this checklist when changing the repository:
    one, verify that the line's world-space segment crosses the intended rigid
    body so runtime body resolution is unambiguous.
 9. Render or inspect the repaired asset again. Confirm the line is visible, intersects the intended region, and is not accidentally placed through an avoided region. When possible, save overlay images or a small decision JSON beside the staged output.
-10. Rerun the same profile validation gate, or the narrowest available FET_005_STANDARD validation gate. Stop when FET_005_STANDARD passes or when the remaining FET_005_STANDARD issue requires user or runtime-gripper judgement. If the full profile still fails on another feature, report the first remaining failing gate separately from the FET_005_STANDARD result.
+10. Rerun the same profile validation gate, or the narrowest available FET005_Grasp validation gate. Stop when FET005_Grasp passes or when the remaining FET005_Grasp issue requires user or runtime-gripper judgement. If the full profile still fails on another feature, report the first remaining failing gate separately from the FET005_Grasp result.
 
 ## Authoring Script
 
@@ -180,7 +180,7 @@ asset has unresolved ambiguity that the report names precisely.
 Example request:
 
 ```text
-Use a vision-capable model to add a FET_005_STANDARD grasp line to a coffee mug USD asset.
+Use a vision-capable model to add a FET005_Grasp grasp line to a coffee mug USD asset.
 ```
 
 Expected result summary:
@@ -204,7 +204,7 @@ uv run --python 3.12 validate-simready-profile <staged-usd> \
   --report <output-root>/simready-profile-after-fet005.json
 ```
 
-Count this skill as successful when `FET_005_STANDARD@0.1.0` passes, even if the full profile still fails on unrelated features. If `PMT.001` fails, report it as a physics-material binding issue and do not hide it by only adding a grasp line.
+Count this skill as successful when `FET005_Grasp.0-1-0` passes, even if the full profile still fails on unrelated features. If `PMT.001` fails, report it as a physics-material binding issue and do not hide it by only adding a grasp line.
 
 ## Limitations
 
@@ -244,7 +244,7 @@ Report:
 | `input_usd_path` | Original USD path. |
 | `output_usd_path` | Latest staged/repaired USD path. |
 | `profile` and `profile_version` | Validation target. |
-| `fet005_feature` | Selected FET_005_STANDARD feature ID and version, normally `FET_005_STANDARD@0.1.0`. |
+| `fet005_feature` | Selected FET005_Grasp feature ID and version, normally `FET005_Grasp.0-1-0`. |
 | `visual_evidence` | Renders/screenshots inspected. |
 | `grasp_vector_path` | Authored or repaired `BasisCurves` prim. |
 | `grasp_points` | Final local-space points. |

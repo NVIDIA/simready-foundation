@@ -1,6 +1,4 @@
-# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-# SPDX-License-Identifier: Apache-2.0
 interface:
-  display_name: "SimReady Conform FET_022_NEWTON"
-  short_description: "Repair FET_022_NEWTON conformance"
-  default_prompt: "Use $simready-foundation-conform-fet-022-newton to repair FET_022_NEWTON SimReady conformance failures."
+  display_name: "SimReady Conform FET022_DrivenJoints.Newton"
+  short_description: "Repair FET022_DrivenJoints.Newton conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-022-newton to repair FET022_DrivenJoints.Newton SimReady conformance failures."

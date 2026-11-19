@@ -1,0 +1,8 @@
+# Generated Foundations 2 projection. See ../catalog-map.json.
+
+[NuRec]
+"1.0.0" = {features = [
+    {selector = "FET012_GaussianSplat.0-1-0"},
+], capabilities = [
+    {selector = "CAP000_Core.0-2-0"},
+]}

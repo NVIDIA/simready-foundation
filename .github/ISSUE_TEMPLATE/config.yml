@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: SimReady Foundation documentation
+    url: https://nvidia.github.io/simready-foundation/
+    about: Read the specs, guides, features, and profiles before filing an issue.
+  - name: Contributing guidelines
+    url: https://github.com/NVIDIA/simready-foundation/blob/main/CONTRIBUTING.md
+    about: Request a working branch and coordinate contribution scope and review with a maintainer.

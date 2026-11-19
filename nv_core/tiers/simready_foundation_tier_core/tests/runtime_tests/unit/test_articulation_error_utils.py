@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Tests for articulation_phases.error_utils."""
-from simready_benchmark_kit_suite.articulation_phases.error_utils import (
+from simready.foundation.tier_core.runtime_tests.articulation_phases.error_utils import (
     asset_fix,
     engine_note,
 )

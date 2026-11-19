@@ -13,18 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""What the FET006 surface tests decide, and what they decide it from.
+"""Host regressions for probe surfaces, context pins and coverage boundaries.
 
-Four things are worth pinning without a renderer: the probe material resolves
-under every pin the family uses, a pin is only accepted when carb holds the
-whole list, the comparison gate separates the runs measured on the rig, and so
-does the default-material gate the universal context uses instead of it.
-
-The two gates are different shapes because the contexts are. MDL and MaterialX
-fall back to the universal context, so a missing surface produces the same
-picture twice and has to be found by comparison. The universal context has
-nothing beneath it, so a missing surface produces Kit's default material and
-can be found in one frame.
+The production family uses a strong silhouette plus weak magenta and cyan
+controls under one requested context. These host tests do not qualify native
+rendering. Retained historical single-color/context-comparison measurements
+explain earlier proxy limits only; they are not current production gates or
+evidence that the revised three-probe procedure passes those assets.
 """
 
 import pytest
@@ -32,9 +27,7 @@ import pytest
 pytest.importorskip("pxr")
 
 from pxr import Usd, UsdShade  # noqa: E402
-
-from simready_benchmark_kit_suite.fet006_materials import (  # noqa: E402
-    _scene,
+from simready.foundation.tier_core.runtime_tests.fet006_materials import (  # noqa: E402
     _surface_test,
     preview_surface_renders,
     surfaces,
@@ -42,7 +35,7 @@ from simready_benchmark_kit_suite.fet006_materials import (  # noqa: E402
 
 # Measured on Isaac Sim 6.0, inside the asset silhouette, under [""]: the share
 # of the silhouette that is red-dominant, which is what Kit's default material
-# renders as. Only the universal context is measured this way.
+# rendered as. Historical reference only; current tests do not use a default-red gate.
 DEFAULT_MATERIAL_CONFORMANT = {
     "toaster, all three contexts": 0.00012,
     "toaster, UsdPreviewSurface alone": 0.00012,
@@ -57,6 +50,7 @@ DEFAULT_MATERIAL_NEGATIVE = {
 
 # Measured on Isaac Sim 6.0, inside the asset silhouette, the context under
 # test against its comparison. (changed fraction, mean-RGB delta).
+# Historical reference only; current tests do not compare different contexts.
 POSITIVES = {
     "toaster, mtlx against universal": (0.150, 0.0534),
     "workbench tool, mtlx against universal": (0.278, 0.0333),
@@ -80,10 +74,9 @@ NEGATIVES = {
 
 
 def test_the_probe_resolves_under_every_pin_the_family_uses():
-    """The silhouette is cut in both passes and the passes pin different lists.
-    A probe carrying one surface would resolve under some and fall to Kit's
-    default material under the rest, and the two silhouettes could not be
-    intersected."""
+    """Both control colors need outputs under every context the family requests.
+    Each production test keeps one context across its three probes; a control
+    with only one surface could use renderer fallback under another pin."""
     stage = Usd.Stage.CreateInMemory()
     material = _surface_test.build_probe(stage)
 
@@ -98,19 +91,14 @@ def test_the_probe_binds_stronger_than_anything_the_asset_authors():
 
     assert _surface_test.paint(stage, "/Asset") is True
     api = UsdShade.MaterialBindingAPI(root)
-    assert api.GetMaterialBindingStrength(api.GetDirectBindingRel()) == \
-        UsdShade.Tokens.strongerThanDescendants
+    assert api.GetMaterialBindingStrength(api.GetDirectBindingRel()) == UsdShade.Tokens.strongerThanDescendants
 
     panel = stage.GetPrimAtPath("/Asset/Geo/panel")
-    bound, _rel = UsdShade.MaterialBindingAPI(panel).ComputeBoundMaterial(
-        materialPurpose=UsdShade.Tokens.full
-    )
+    bound, _rel = UsdShade.MaterialBindingAPI(panel).ComputeBoundMaterial(materialPurpose=UsdShade.Tokens.full)
     assert bound.GetPath().pathString.startswith(_surface_test.PROBE_SCOPE)
 
     _surface_test.clear(stage, "/Asset")
-    bound, _rel = UsdShade.MaterialBindingAPI(panel).ComputeBoundMaterial(
-        materialPurpose=UsdShade.Tokens.full
-    )
+    bound, _rel = UsdShade.MaterialBindingAPI(panel).ComputeBoundMaterial(materialPurpose=UsdShade.Tokens.full)
     assert not bound
 
 
@@ -131,14 +119,11 @@ def test_the_config_drops_what_the_comparison_needed():
     though the test still consulted them."""
     config = preview_surface_renders.CONFIG
 
-    for key in ("min_mean_rgb_delta", "min_changed_fraction",
-                "min_silhouette_agreement", "pixel_change_threshold"):
+    for key in ("min_mean_rgb_delta", "min_changed_fraction", "min_silhouette_agreement", "pixel_change_threshold"):
         assert key not in config, key
     # Still needed: the silhouette is cut the same way in both shapes.
-    for key in ("mask_dominance_ratio", "mask_dominance_floor",
-                "min_silhouette_pixels"):
+    for key in ("mask_dominance_ratio", "mask_dominance_floor", "min_silhouette_pixels"):
         assert key in config, key
-
 
 
 def test_the_strict_query_is_what_makes_one_render_enough():
@@ -155,8 +140,7 @@ def test_the_strict_query_is_what_makes_one_render_enough():
     this is asserted rather than assumed.
     """
     from pxr import Sdf, Usd, UsdShade
-
-    from simready_benchmark_kit_suite.fet006_materials import surfaces
+    from simready.foundation.tier_core.runtime_tests.fet006_materials import surfaces
 
     stage = Usd.Stage.CreateInMemory()
     material = UsdShade.Material.Define(stage, "/M")
@@ -181,8 +165,7 @@ def test_an_unbound_material_is_not_counted_as_present():
     """A surface on a material nothing binds never reaches a pixel, so the
     presence half resolves bindings rather than reading /Looks."""
     from pxr import Sdf, Usd, UsdGeom, UsdShade
-
-    from simready_benchmark_kit_suite.fet006_materials import surfaces
+    from simready.foundation.tier_core.runtime_tests.fet006_materials import surfaces
 
     stage = Usd.Stage.CreateInMemory()
     UsdGeom.Xform.Define(stage, "/World")
@@ -208,8 +191,7 @@ def test_a_material_bound_on_a_geom_subset_is_counted():
     with nothing on the meshes at all. Asking the Gprim alone reports such an
     asset as having no materials."""
     from pxr import Sdf, Usd, UsdGeom, UsdShade
-
-    from simready_benchmark_kit_suite.fet006_materials import surfaces
+    from simready.foundation.tier_core.runtime_tests.fet006_materials import surfaces
 
     stage = Usd.Stage.CreateInMemory()
     UsdGeom.Xform.Define(stage, "/World")
@@ -230,6 +212,7 @@ def test_a_material_bound_on_a_geom_subset_is_counted():
     bound = surfaces.bound_materials(stage, "/World")
     assert [p.GetPath().pathString for p in bound] == ["/Looks/PerFace"]
 
+
 def _coverage(silhouette, uncovered):
     """The arithmetic the body does, kept in step with it."""
     return max(0.0, 1.0 - (uncovered / float(silhouette)))
@@ -243,8 +226,8 @@ def _covered_enough(silhouette, uncovered, config=None):
 def test_coverage_is_the_share_of_the_silhouette_the_asset_shades():
     """Both numbers are counted the same way in two frames that differ only in
     the strength of one binding, so the arithmetic is a ratio and nothing else."""
-    assert _coverage(1000, 0) == 1.0          # every pixel is the asset's own material
-    assert _coverage(1000, 1000) == 0.0       # the control shows everywhere; nothing bound
+    assert _coverage(1000, 0) == 1.0  # every pixel is the asset's own material
+    assert _coverage(1000, 1000) == 0.0  # the control shows everywhere; nothing bound
     assert _coverage(1000, 250) == 0.75
 
 
@@ -263,8 +246,8 @@ def test_the_coverage_gate_rejects_a_largely_unshaded_asset():
     back between 0.424 and 0.432, and an asset binding nothing anywhere came
     back at 0."""
     assert _covered_enough(1000, 0)
-    assert _covered_enough(1000, 20)          # 98%, exactly the floor
-    assert not _covered_enough(1000, 21)      # just under it
+    assert _covered_enough(1000, 20)  # 98%, exactly the floor
+    assert not _covered_enough(1000, 21)  # just under it
     assert not _covered_enough(338019, 191995)  # the two-cube fixture, 0.432
 
 
@@ -295,39 +278,49 @@ def test_the_materialx_log_names_only_the_asset_and_only_failures():
     binds is itself an OpenPBR network and the room has its own material, so a
     failure in either is a fault in the rig rather than in the content and is
     scoped out by prim path."""
-    from simready_benchmark_kit_suite.fet006_materials import _logs
+    from simready.foundation.tier_core.runtime_tests.fet006_materials import _logs
 
     entries = [
-        {"level": "error", "channel": "rtx.materialx.plugin",
-         "message": "Unable to create document for material: "
-                    "'/World/AssetRoot/Asset/Looks/Chrome'"},
-        {"level": "error", "channel": "rtx.materialx.plugin",
-         "message": "Unable to create document for material: "
-                    "'/SimReadySurfaceProbe/Flat'"},
-        {"level": "warning", "channel": "rtx.materialx.plugin",
-         "message": "Unable to create document for material: "
-                    "'/World/AssetRoot/Asset/Looks/OnlyAWarning'"},
-        {"level": "error", "channel": "omni.usd",
-         "message": "Unable to create document for material: "
-                    "'/World/AssetRoot/Asset/Looks/WrongChannel'"},
-        {"level": "error", "channel": "rtx.materialx.plugin",
-         "message": "Something else entirely"},
+        {
+            "level": "error",
+            "channel": "rtx.materialx.plugin",
+            "message": "Unable to create document for material: " "'/World/AssetRoot/Asset/Looks/Chrome'",
+        },
+        {
+            "level": "error",
+            "channel": "rtx.materialx.plugin",
+            "message": "Unable to create document for material: " "'/SimReadySurfaceProbe/Flat'",
+        },
+        {
+            "level": "warning",
+            "channel": "rtx.materialx.plugin",
+            "message": "Unable to create document for material: " "'/World/AssetRoot/Asset/Looks/OnlyAWarning'",
+        },
+        {
+            "level": "error",
+            "channel": "omni.usd",
+            "message": "Unable to create document for material: " "'/World/AssetRoot/Asset/Looks/WrongChannel'",
+        },
+        {"level": "error", "channel": "rtx.materialx.plugin", "message": "Something else entirely"},
     ]
     found = _logs.unresolved_materials("/World/AssetRoot/Asset", entries=entries)
     assert found == ["/World/AssetRoot/Asset/Looks/Chrome"]
 
     unscoped = _logs.unresolved_materials(None, entries=entries)
-    assert unscoped == ["/World/AssetRoot/Asset/Looks/Chrome",
-                        "/SimReadySurfaceProbe/Flat"]
+    assert unscoped == ["/World/AssetRoot/Asset/Looks/Chrome", "/SimReadySurfaceProbe/Flat"]
 
 
 def test_a_prefix_match_does_not_pull_in_a_sibling_asset():
     """`/World/AssetRoot/Asset2` is not under `/World/AssetRoot/Asset`."""
-    from simready_benchmark_kit_suite.fet006_materials import _logs
+    from simready.foundation.tier_core.runtime_tests.fet006_materials import _logs
 
-    entries = [{"level": "error", "channel": "rtx.materialx.plugin",
-                "message": "Unable to create document for material: "
-                           "'/World/AssetRoot/Asset2/Looks/Chrome'"}]
+    entries = [
+        {
+            "level": "error",
+            "channel": "rtx.materialx.plugin",
+            "message": "Unable to create document for material: " "'/World/AssetRoot/Asset2/Looks/Chrome'",
+        }
+    ]
     assert _logs.unresolved_materials("/World/AssetRoot/Asset", entries=entries) == []
 
 
@@ -337,9 +330,211 @@ def test_only_openpbr_reads_the_materialx_log():
     a clean result it never established."""
     import inspect
 
-    from simready_benchmark_kit_suite.fet006_materials import (
-        mdl_renders, openpbr_renders, preview_surface_renders)
+    from simready.foundation.tier_core.runtime_tests.fet006_materials import (
+        mdl_renders,
+        openpbr_renders,
+        preview_surface_renders,
+    )
 
     assert "read_materialx_log=True" in inspect.getsource(openpbr_renders)
     assert "read_materialx_log" not in inspect.getsource(mdl_renders)
     assert "read_materialx_log" not in inspect.getsource(preview_surface_renders)
+
+
+# ---------------------------------------------------------------------------
+# Instancing. NVBug 6798396: the probe is bound on the asset root, and an
+# ancestor binding does not reach a GeomSubset inside an instance, so the
+# silhouette came back empty or partial on half the SimReady Central staging
+# assets, including two that passed on a partial silhouette.
+#
+# Nothing here renders. These assert the precondition the silhouette pass
+# depends on, which is that no instance is left under the asset root. USD
+# resolution cannot stand in for it: ComputeBoundMaterial returns the probe for
+# a subset inside an instance while the renderer draws the subset's own.
+# ---------------------------------------------------------------------------
+
+
+def _instanced_asset(subsets):
+    """An asset whose mesh and materials sit inside an instanceable prim.
+
+    The shape SimReady assets ship in: 13 of the 14 sample props have every mesh
+    inside an instance, and five of those carry material-bound subsets.
+    """
+    from pxr import Usd, UsdGeom, UsdShade, Vt
+
+    inner = Usd.Stage.CreateInMemory()
+    geom = UsdGeom.Xform.Define(inner, "/Geom")
+    inner.SetDefaultPrim(geom.GetPrim())
+    mesh = UsdGeom.Mesh.Define(inner, "/Geom/Box")
+    mesh.CreatePointsAttr([(0, 0, 0), (1, 0, 0), (1, 1, 0), (0, 1, 0), (0, 0, 1), (1, 0, 1), (1, 1, 1), (0, 1, 1)])
+    mesh.CreateFaceVertexCountsAttr([4, 4])
+    mesh.CreateFaceVertexIndicesAttr([0, 1, 2, 3, 4, 5, 6, 7])
+    own = UsdShade.Material.Define(inner, "/Geom/VisualMaterials/Own")
+    api = UsdShade.MaterialBindingAPI.Apply(mesh.GetPrim())
+    api.Bind(own, bindingStrength=UsdShade.Tokens.weakerThanDescendants)
+    if subsets:
+        for name, faces in (("sub_a", [0]), ("sub_b", [1])):
+            subset = api.CreateMaterialBindSubset(name, Vt.IntArray(faces), UsdGeom.Tokens.face)
+            UsdShade.MaterialBindingAPI.Apply(subset.GetPrim()).Bind(
+                own, bindingStrength=UsdShade.Tokens.weakerThanDescendants
+            )
+
+    stage = Usd.Stage.CreateInMemory()
+    world = UsdGeom.Xform.Define(stage, "/World")
+    stage.SetDefaultPrim(world.GetPrim())
+    UsdGeom.Xform.Define(stage, "/World/Asset")
+    holder = UsdGeom.Xform.Define(stage, "/World/Asset/Holder")
+    holder.GetPrim().GetReferences().AddReference(inner.GetRootLayer().identifier)
+    holder.GetPrim().SetInstanceable(True)
+    return stage, inner  # inner is returned so it outlives the reference
+
+
+def test_an_instanced_asset_starts_with_instances_under_the_root():
+    """The fixture is the shape that fails, so the checks below mean something."""
+    stage, _inner = _instanced_asset(subsets=True)
+    assert _surface_test.instances_under(stage, "/World/Asset") > 0
+
+
+def test_deinstance_clears_every_instance_under_the_root():
+    """One pass is not enough: clearing an outer prim exposes inner ones."""
+    stage, _inner = _instanced_asset(subsets=True)
+    assert _surface_test.deinstance(stage, "/World/Asset") > 0
+    assert _surface_test.instances_under(stage, "/World/Asset") == 0
+
+
+@pytest.mark.parametrize("subsets", [False, True])
+def test_the_measurement_precondition_holds_only_after_deinstancing(subsets):
+    """Without the deinstance call the precondition fails, which is the bug."""
+    stage, _inner = _instanced_asset(subsets=subsets)
+    assert _surface_test.instances_under(stage, "/World/Asset") > 0
+    _surface_test.deinstance(stage, "/World/Asset")
+    assert _surface_test.paint(stage, "/World/Asset") is True
+    assert _surface_test.instances_under(stage, "/World/Asset") == 0
+
+
+@pytest.mark.parametrize("purpose", ["", "full", "preview"])
+def test_a_descendant_stronger_binding_does_not_defeat_the_strong_ancestor_probe(purpose):
+    """Check actual USD resolution rather than assuming the nearest flag wins."""
+    from pxr import UsdGeom, UsdShade
+
+    stage, _inner = _instanced_asset(subsets=False)
+    _surface_test.deinstance(stage, "/World/Asset")
+    assert _surface_test.stronger_bindings_under(stage, "/World/Asset") == []
+
+    mesh = next(p for p in stage.Traverse() if p.IsA(UsdGeom.Mesh))
+    material = UsdShade.Material.Define(stage, "/World/Asset/Loud")
+    UsdShade.MaterialBindingAPI.Apply(mesh).Bind(
+        material, bindingStrength=UsdShade.Tokens.strongerThanDescendants, materialPurpose=purpose
+    )
+
+    # The diagnostic inventories all-purpose descendants; purpose-specific
+    # flags are qualified by actual control readback, not used as a verdict.
+    found = _surface_test.stronger_bindings_under(stage, "/World/Asset")
+    assert found == ([str(mesh.GetPath())] if not purpose else [])
+    assert _surface_test.paint(stage, "/World/Asset")
+    _surface_test._require_strong_probe(stage, "/World/Asset")
+    resolved, _ = UsdShade.MaterialBindingAPI(mesh).ComputeBoundMaterial(materialPurpose=purpose)
+    assert str(resolved.GetPath()) == _surface_test.PROBE_SCOPE + "/Flat"
+    _surface_test.clear(stage, "/World/Asset")
+    restored, _ = UsdShade.MaterialBindingAPI(mesh).ComputeBoundMaterial(materialPurpose=purpose)
+    assert restored.GetPath() == material.GetPath()
+
+
+def test_a_default_strength_binding_does_not_trip_the_check():
+    """The normal case: assets bind their own materials weakerThanDescendants."""
+    stage, _inner = _instanced_asset(subsets=True)
+    _surface_test.deinstance(stage, "/World/Asset")
+    assert _surface_test.stronger_bindings_under(stage, "/World/Asset") == []
+
+
+def test_deinstance_uses_session_overrides_without_changing_source_or_edit_target():
+    stage, inner = _instanced_asset(subsets=True)
+    root_before = stage.GetRootLayer().ExportToString()
+    source_before = inner.GetRootLayer().ExportToString()
+    edit_target = stage.GetEditTarget().GetLayer()
+    with Usd.EditContext(stage, stage.GetSessionLayer()):
+        stage.GetPrimAtPath("/World/Asset/Holder").SetInstanceable(True)
+    assert _surface_test.deinstance(stage, "/World/Asset") == 1
+    assert _surface_test.instances_under(stage, "/World/Asset") == 0
+    assert stage.GetEditTarget().GetLayer() == edit_target
+    assert stage.GetRootLayer().ExportToString() == root_before
+    assert inner.GetRootLayer().ExportToString() == source_before
+
+
+@pytest.mark.parametrize("acknowledged", [False, True])
+def test_deinstance_rejected_or_ineffective_writes_stop_after_one_attempt(monkeypatch, acknowledged):
+    stage, _inner = _instanced_asset(subsets=True)
+    calls = []
+
+    def ineffective_write(prim, value):
+        calls.append((str(prim.GetPath()), value))
+        return acknowledged
+
+    monkeypatch.setattr(Usd.Prim, "SetInstanceable", ineffective_write)
+    expected = "no composed progress" if acknowledged else "write was rejected"
+    with pytest.raises(RuntimeError, match=expected):
+        _surface_test.deinstance(stage, "/World/Asset")
+    assert calls == [("/World/Asset/Holder", False)]
+    assert stage.GetPrimAtPath("/World/Asset/Holder").IsInstance()
+    assert stage.GetEditTarget().GetLayer() == stage.GetRootLayer()
+
+
+def test_deinstance_requeries_nested_instances_and_preserves_both_source_layers():
+    middle, inner = _instanced_asset(subsets=True)
+    outer = Usd.Stage.CreateInMemory()
+    root = outer.DefinePrim("/Root", "Xform")
+    root.GetReferences().AddReference(middle.GetRootLayer().identifier, "/World/Asset")
+    root.SetInstanceable(True)
+    before = [layer.GetRootLayer().ExportToString() for layer in (outer, middle, inner)]
+    assert _surface_test.deinstance(outer, "/Root") == 2
+    assert _surface_test.instances_under(outer, "/Root") == 0
+    assert [layer.GetRootLayer().ExportToString() for layer in (outer, middle, inner)] == before
+
+
+def test_deinstance_preserves_instances_outside_the_requested_asset_subtree():
+    """A stage-wide traversal would expand unrelated scene content too."""
+    stage, inner = _instanced_asset(subsets=True)
+    sibling = stage.DefinePrim("/World/OtherAsset", "Xform")
+    sibling.GetReferences().AddReference(inner.GetRootLayer().identifier)
+    sibling.SetInstanceable(True)
+    before = [layer.GetRootLayer().ExportToString() for layer in (stage, inner)]
+
+    assert _surface_test.deinstance(stage, "/World/Asset") == 1
+
+    assert not stage.GetPrimAtPath("/World/Asset/Holder").IsInstance()
+    assert stage.GetPrimAtPath("/World/OtherAsset").IsInstance()
+    assert stage.GetSessionLayer().GetPrimAtPath("/World/OtherAsset") is None
+    assert [layer.GetRootLayer().ExportToString() for layer in (stage, inner)] == before
+
+
+def test_deinstance_repeated_call_leaves_the_session_unchanged():
+    """An idempotent call must not add further overrides or count old edits."""
+    stage, _inner = _instanced_asset(subsets=True)
+    assert _surface_test.deinstance(stage, "/World/Asset") == 1
+    session_before = stage.GetSessionLayer().ExportToString()
+
+    assert _surface_test.deinstance(stage, "/World/Asset") == 0
+
+    assert not stage.GetPrimAtPath("/World/Asset/Holder").IsInstance()
+    assert stage.GetSessionLayer().ExportToString() == session_before
+
+
+def test_discarding_disposable_session_restores_nested_source_instancing():
+    """De-instancing must not survive discarding a measurement-only session."""
+    middle, inner = _instanced_asset(subsets=True)
+    stage = Usd.Stage.CreateInMemory()
+    root = stage.DefinePrim("/Root", "Xform")
+    root.GetReferences().AddReference(middle.GetRootLayer().identifier, "/World/Asset")
+    root.SetInstanceable(True)
+    before = [layer.GetRootLayer().ExportToString() for layer in (stage, middle, inner)]
+    assert stage.GetSessionLayer().empty
+
+    assert _surface_test.deinstance(stage, "/Root") == 2
+    assert not stage.GetPrimAtPath("/Root").IsInstance()
+    assert not stage.GetPrimAtPath("/Root/Holder").IsInstance()
+    # This layer belongs only to this in-memory fixture, not a caller's scene.
+    stage.GetSessionLayer().Clear()
+
+    assert stage.GetPrimAtPath("/Root").IsInstance()
+    assert stage.GetPrimAtPath("/Root/Holder").IsInstance()
+    assert [layer.GetRootLayer().ExportToString() for layer in (stage, middle, inner)] == before

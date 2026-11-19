@@ -1,0 +1,8 @@
+# Test dependencies for the all-tier tooling suite (tier_tooling in repo.toml).
+#
+# These tests drive the catalog projection, the docs assembler and tier/wheel
+# discovery. All of it is standard library plus pytest by design: the tooling
+# runs before anything is installed, so it must not need a built tier.
+pytest==9.0.3
+# Dependency-contract checks use packaging.
+packaging

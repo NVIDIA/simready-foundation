@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP104_RenderCollisionSeparation.Isaac"
+  short_description: "Remove inactive render collision schemas"
+  default_prompt: "Use $simready-foundation-conform-cap-104-isaac to safely repair CAP104_RenderCollisionSeparation.Isaac render-collision-separation failures."

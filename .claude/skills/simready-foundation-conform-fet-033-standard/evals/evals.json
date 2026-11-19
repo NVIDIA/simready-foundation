@@ -1,12 +1,12 @@
 [
     {
         "id": "simready-foundation-conform-fet-033-standard-positive-trigger",
-        "question": "Repair FET_033_STANDARD@0.1.0 validation failures on a SimReady asset or package.",
+        "question": "Repair CAP033_SimReadyPackage.0-1-0 validation failures on a SimReady asset or package.",
         "expected_skill": "simready-foundation-conform-fet-033-standard",
-        "ground_truth": "The agent should activate simready-foundation-conform-fet-033-standard and follow the exact FET_033_STANDARD workflow.",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-033-standard and follow the exact CAP033_SimReadyPackage workflow.",
         "expected_behavior": [
             "Load the simready-foundation-conform-fet-033-standard skill.",
-            "Use the selected FET_033_STANDARD manifest as the authoritative feature contract.",
+            "Use the selected CAP033_SimReadyPackage manifest as the authoritative feature contract.",
             "Report changed files, validation performed, and any remaining blockers."
         ]
     },

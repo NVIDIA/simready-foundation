@@ -1,12 +1,12 @@
 [
     {
         "id": "simready-foundation-conform-fet-003-physx-positive-trigger",
-        "question": "Repair FET_003_PHYSX@0.4.0 validation failures on a SimReady asset or package.",
+        "question": "Repair FET003_RigidBody.PhysX.0-4-0 validation failures on a SimReady asset or package.",
         "expected_skill": "simready-foundation-conform-fet-003-physx",
-        "ground_truth": "The agent should activate simready-foundation-conform-fet-003-physx and follow the exact FET_003_PHYSX workflow.",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-003-physx and follow the exact FET003_RigidBody.PhysX workflow.",
         "expected_behavior": [
             "Load the simready-foundation-conform-fet-003-physx skill.",
-            "Use the selected FET_003_PHYSX manifest as the authoritative feature contract.",
+            "Use the selected FET003_RigidBody.PhysX manifest as the authoritative feature contract.",
             "Report changed files, validation performed, and any remaining blockers."
         ]
     },

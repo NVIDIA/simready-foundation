@@ -1,111 +1,51 @@
 ---
 name: simready-foundation-update-feature-adapter
-description: "Use for updating SimReady feature adapters, USD mutation logic, tests, and source/target metadata."
+description: "Use for updating SimReady adapters, exact dotted endpoint metadata, USD mutations, and tests."
 license: Apache-2.0
 metadata:
   author: "Shaad Boochoon <sboochoon@nvidia.com>"
-  tags:
-    - simready
-    - adapter
-    - maintenance
+  tags: [simready, adapter, maintenance]
 ---
-
 
 # SimReady Update Feature Adapter
 
 ## Purpose
-Use this skill when an existing feature adapter no longer matches exact source/target `FET_###_<RUNTIME>` feature contracts, produces invalid USD, misses a required mutation, or needs new profile-version support.
+
+Repair or extend an adapter whose USD mutation or endpoint metadata no longer
+matches its exact source and target contracts.
 
 ## Prerequisites
-Before editing, read:
 
-- `AGENTS.md`
-- `nv_core/sr_specs/docs/guides/feature_adapters/feature_adapters.md`
-- target adapter file
-- source and target feature manifests
-- source and target profile versions
-- existing adapter tests or validation reports
+Read `AGENTS.md`, the adapter guide, adapter implementation/tests, exact source
+and target feature manifests, and affected profile versions.
 
-## Inputs
+## Workflow
 
-Collect or infer:
-
-| Input | Requirement |
-|---|---|
-| `adapter_path` | Existing adapter file. |
-| `source_feature` | Input feature name / manifest `id` and integer version currently supported. |
-| `target_feature` | Output feature name / manifest `id` and integer version currently supported. |
-| `bug_or_gap` | Missing mutation, bad metadata, invalid output, non-idempotence, crash, or profile drift. |
-| `new_feature_versions` | Updated integer feature versions if the adapter should support a new path. |
-| `test_assets` | Assets or reports that show the problem. |
-
-## Instructions
-
-Use this checklist when changing the repository:
-
-1. Compare adapter metadata with actual source/target manifests and profile versions. Confirm feature names use `FET_###_<RUNTIME>` and feature versions are exact integers.
-2. Reproduce or inspect the failed upgrade when possible.
-3. Determine whether to update the existing adapter or add a new adapter for a new exact version path. Prefer adding a new path when published source/target versions must keep their old behavior.
-4. Patch transformation logic narrowly:
-   - preserve unrelated data
-   - keep output deterministic
-   - avoid source-stage mutation
-   - save output stage correctly
-5. Update metadata only when the supported feature path changes.
-6. Update tests or manual validation instructions to cover the corrected path.
-7. Update profile migration notes if adapter behavior affects profile upgrades.
-8. Confirm every changed feature difference in the profile transformation still has a direct adapter path or documented blocker.
-9. Validate source-to-target behavior against the relevant feature/profile requirements when tooling is available.
-
-## Examples
-
-Example request:
-
-```text
-Update a SimReady feature adapter for a new exact source and target feature version.
-```
-
-Expected result summary:
-
-```text
-changed_files: updated docs, manifests, indexes, validators, or adapters
-validation: focused checks for the changed contract
-remaining_gaps: downstream feature, profile, adapter, or runtime-test follow-up
-```
+1. Compare adapter endpoints with complete
+   `<name>[.<runtime>].<version>` manifest IDs. Reject wildcard endpoints.
+2. Reproduce or inspect the failed upgrade.
+3. Resolve affected profile selectors before comparing source and target plans.
+4. Add a new exact adapter path when a new published feature ID changes the
+   contract; preserve existing published paths.
+5. Patch mutation logic narrowly, preserving unrelated data and the input stage.
+6. Keep the target's `adapters`, additional requirements, and runtime
+   tests synchronized with the implementation.
+7. Test source validation, mutation, target validation, runtime behavior, and
+   repeatability where practical.
+8. Update profile migration notes and confirm every resolved feature difference
+   has a direct path or documented blocker.
 
 ## Policies
 
-- Do not change an adapter to target a different feature version without preserving the old upgrade path when it is still published.
-- Prefer adding a new adapter for new feature versions over mutating old behavior.
-- Do not add broad catch-all mutation logic that could damage assets outside the adapter contract.
-- If a required mutation needs user intent, report a blocked adapter path.
+- Protect unrelated local work: before editing shared repository files (spec markdown, requirement/feature JSON, profile TOML, validators, skills, or docs), check `git status` for unrelated in-progress changes and scope edits to the requested task. Never revert, overwrite, discard, stash, or commit a user's uncommitted or unrelated changes; if a file you must edit already carries pending unrelated edits, surface it and confirm before proceeding.
+- Keep secrets out of the repo and evidence: never write user-provided tokens, credentials, API keys, or other secrets into files, source, logs, validation or evaluation reports, commit messages, or bug/Jira/Confluence attachments, and do not echo them in full; read them from environment variables or an existing credential store and redact them from any output you preserve.
+- Do not silently retarget an adapter to a different dotted ID.
+- Do not broaden mutations beyond the exact endpoint contract.
+- Keep legacy Foundations 1 adapters available while published profiles depend
+  on them.
+- If mutation requires user intent, report a blocked path rather than guessing.
 
-## Limitations
+## Summary
 
-- Do not silently change published contracts; add versions when behavior changes.
-- Do not update docs without checking validator, manifest, profile, adapter, and runtime-test impact.
-- Do not broaden a change beyond the selected requirement, capability, feature, profile, validator, or adapter.
-
-## Troubleshooting
-
-- Error: the requested change alters a published contract. Solution: create a new version and preserve the old artifact.
-- Error: docs and machine-readable manifests diverge. Solution: make the JSON/TOML and markdown agree, then rerun focused checks.
-- Error: downstream profile or adapter impact is unclear. Solution: list the affected artifacts before making broad edits.
-
-## Resources
-
-- `assets/openai.yaml` preserves optional UI metadata for clients that read skill display hints. It is not required for the workflow.
-
-## Summary Format
-
-Report:
-
-| Field | Meaning |
-|---|---|
-| `adapter_path` | Adapter changed. |
-| `feature_path` | Input and output feature names and integer versions. |
-| `change_type` | Bug fix, new version path, or docs/test update. |
-| `mutation_summary` | USD behavior changed. |
-| `tests` | Tests/assets run. |
-| `profile_followup` | Profile docs or migration notes changed/needed. |
-| `validation` | Remaining gaps. |
+Report the adapter path, exact endpoint IDs, change type, USD mutation, tests,
+profile impact, and remaining gaps.

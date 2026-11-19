@@ -1,0 +1,21 @@
+{
+  "format_version": "1.0",
+  "profile": "Package-NoBOM",
+  "profile_version": "1.0.0",
+  "timestamp": "2026-11-16T19:09:08",
+  "assets": [
+    {
+      "asset": "com.nvidia.simready.packaging.json",
+      "features": [
+        {
+          "CAP030_PackagingCore.0-1-0": {
+            "version": "0-1-0",
+            "passed": true,
+            "failing_requirements": [],
+            "dependencies": []
+          }
+        }
+      ]
+    }
+  ]
+}

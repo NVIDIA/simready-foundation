@@ -1,0 +1,48 @@
+[
+  {
+    "id": "simready-foundation-conform-fet-009-standard-positive-trigger",
+    "question": "preview_surface_renders fails on this asset at 0.45 against min_material_coverage 0.98. Repair FET009_MaterialCoverage.0-1-0.",
+    "expected_skill": "simready-foundation-conform-fet-009-standard",
+    "ground_truth": "A coverage failure means part of the silhouette renders without one of the asset's own materials. The repair is a VM.MAT.001 binding edit on staged output, confirmed by the static gate and, when runtime evidence is requested, by rerunning the coverage tests in Kit.",
+    "expected_behavior": [
+      "Load the simready-foundation-conform-fet-009-standard skill.",
+      "Run the VM.MAT.001 gate on the source asset to name the Gprims and GeomSubsets that resolve no material.",
+      "Bind each named prim to one of the asset's existing materials on a staged copy.",
+      "Rerun the VM.MAT.001 gate, and say that the static gate alone does not establish rendered coverage."
+    ]
+  },
+  {
+    "id": "simready-foundation-conform-fet-009-standard-skip-is-not-failure",
+    "question": "openpbr_renders was skipped with assessment_applicability.status=not_applicable and reason_code=no_resolved_surface_for_context. Add OpenPBR so FET009 passes.",
+    "expected_skill": "simready-foundation-conform-fet-009-standard",
+    "ground_truth": "A confirmed N/A skip proves this optional render context has no resolved surface; it is not a FET009 coverage failure. A requested OpenPBR authoring change belongs to the FET006_Materials.Openpbr skill and must be justified by that contract and static validation.",
+    "expected_behavior": [
+      "Report the marked skip as N/A, not as a measured coverage pass or failure.",
+      "Route an OpenPBR authoring request to simready-foundation-conform-fet-006-openpbr.",
+      "Make no binding edits on the strength of the skip."
+    ]
+  },
+  {
+    "id": "simready-foundation-conform-fet-009-standard-unmarked-skip",
+    "question": "mdl_renders was skipped without assessment_applicability; the reason says an external material binding source was unavailable. Is MDL absent?",
+    "expected_skill": "simready-foundation-conform-fet-009-standard",
+    "ground_truth": "An unmarked skip is no verdict. The unavailable binding source prevents proving the MDL surface is absent. Investigate the source or test setup; do not request MDL authoring or change bindings from this result alone.",
+    "expected_behavior": [
+      "State no verdict and explain that MDL absence has not been established.",
+      "Investigate the unavailable material binding source before any asset conclusion.",
+      "Do not author MDL or bindings merely to make the skip disappear."
+    ]
+  },
+  {
+    "id": "simready-foundation-conform-fet-009-standard-no-guessed-binding",
+    "question": "The VM.MAT.001 gate reports nothing, but mdl_renders still fails. Bind everything to the first material so it passes.",
+    "expected_skill": "simready-foundation-conform-fet-009-standard",
+    "ground_truth": "VM.MAT.001 checks only the materialBind subsets of a Gprim that has them, so a Gprim that resolves no material itself and whose subsets leave faces out passes the gate and still fails coverage. The skill looks for that case first and binds the Gprim or completes the partition. When neither the gate nor that check names a prim, the static check and the measurement disagree, and the skill stops and reports instead of authoring bindings, new materials, collection-based bindings or a binding strength.",
+    "expected_behavior": [
+      "Check each Gprim with materialBind GeomSubset children for faces outside every subset and no material on the Gprim itself.",
+      "Bind that Gprim, or make its materialBind subsets a partition of its faces, on staged output.",
+      "When no prim is named, stop without editing bindings and report the coverage metrics, the uncovered pixel count and the probe frames.",
+      "Do not author new materials, collection-based bindings or a binding strength."
+    ]
+  }
+]

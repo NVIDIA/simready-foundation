@@ -1,0 +1,24 @@
+[
+    {
+        "id": "simready-foundation-conform-cap-104-isaac-positive-trigger",
+        "question": "Repair OPT.003 on this Isaac USD asset without changing its active colliders.",
+        "expected_skill": "simready-foundation-conform-cap-104-isaac",
+        "ground_truth": "The agent should remove only inactive collision schema stacks from renderable prims.",
+        "expected_behavior": [
+            "Load the CAP104 manifest, OPT.003 requirement, validator, and separation adapter.",
+            "Stage output and snapshot active collider ownership, transforms, and material targets.",
+            "Remove inactive collision schemas, save, reopen, compare snapshots, and validate CAP104_RenderCollisionSeparation.Isaac."
+        ]
+    },
+    {
+        "id": "simready-foundation-conform-cap-104-isaac-instance-proxy",
+        "question": "Make this asset pass CAP104_RenderCollisionSeparation.Isaac; the inactive schema is authored on an instance proxy.",
+        "expected_skill": "simready-foundation-conform-cap-104-isaac",
+        "ground_truth": "The workflow must not de-instance shared topology.",
+        "expected_behavior": [
+            "Identify the instance-proxy candidate before mutation.",
+            "Do not save a partial repair or de-instance the prim.",
+            "Return blocked and direct the repair to the source prototype."
+        ]
+    }
+]

@@ -1,0 +1,9 @@
+# Each record retires one exact validation claim while keeping the asset published.
+# CI still requires the asset on disk and rejects every unrecorded claim removal.
+# Records remain valid after merging, when the baseline also lacks the claim.
+
+[[removal]]
+asset_path = "sample_content/common_assets/props_general/pose_electricians_large_tool_box_01/simready_usd/sm_pose_electricians_large_tool_box_01_01.usd"
+profile = "Robotics-Prop"
+profile_version = "3.2.0"
+reason = "Pose-only authoring sample; it does not contain the rigid-body physics and package metadata required by Robotics-Prop. It remains intentionally unprofiled."

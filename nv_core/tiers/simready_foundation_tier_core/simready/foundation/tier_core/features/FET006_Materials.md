@@ -1,0 +1,163 @@
+# Feature: `FET006_Materials`
+
+| **Property**            | **Value**         |
+|-------------------------|-------------------|
+| Contract                | `FET006_Materials` |
+| Runtime                 | `OpenUSD` |
+| Proprietary Techs       | `None` |
+| Versions                | `0-1-0`, `0-2-0`, `0-3-0` |
+
+## Description
+
+Defines the Standard OpenUSD material contract for assets that use UsdPreviewSurface
+materials. Assets have material bindings in valid scopes and renderable geometry bound to
+valid preview-surface shader networks.
+
+Whether renderable geometry resolves a material (`VM.MAT.001`) is
+[`FET009_MaterialCoverage`](FET009_MaterialCoverage.md)'s
+requirement from version `0-3-0` of this feature. An asset with geometry selects both; a
+material published on its own selects this feature without it.
+
+## Dependency Graph
+
+This feature has no dependencies.
+[`FET009_MaterialCoverage`](FET009_MaterialCoverage.md) depends on version 0-3-0. This
+feature is also the `source_feature` of the `FET006_Materials.MDL` and `FET006_Materials.Openpbr`
+runtime variants:
+
+- `0-1-0` for `FET006_Materials.MDL.0-1-0` and `FET006_Materials.Openpbr.0-1-0`
+- `0-2-0` for `FET006_Materials.MDL.0-2-0`
+- `0-3-0` for `FET006_Materials.MDL.0-3-0` and `FET006_Materials.Openpbr.0-2-0`
+
+The link classifies those features as runtime variants of this one; it does not make this
+feature validate when they are selected.
+
+## Use Cases
+
+Products or workflows that consume this feature:
+
+- SimReady validation verifies material binding, USDPreviewSurface, and texture colour space and size requirements.
+- `simready-foundation-conform-fet-006-standard` repairs USDPreviewSurface material conformance on staged assets.
+
+## Requirements
+
+### Version 0-1-0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+- [Robotics-Prop](../profiles/robotics-prop.md): optional in `3.0.0`, `3.1.0`, `3.2.0`, `3.3.0`
+
+#### Feature Dependencies
+
+None.
+
+#### Requirement List
+
+* Capability: [Visualization/Materials](../rules_and_reqs/visualization/materials/capability-materials.md)
+
+| Requirement | Requirement Doc | Rule |
+|-------------|-----------------|------|
+| `com.nvidia.usd.VM.BIND.001` | [VM.BIND.001](../rules_and_reqs/visualization/materials/requirements/material-bind-scope.md) | `MaterialOutOfScopeChecker` |
+| `com.nvidia.usd.VM.PS.001` | [VM.PS.001](../rules_and_reqs/visualization/materials/requirements/material-preview-surface.md) | `MaterialUsdPreviewSurfaceChecker` |
+
+</details>
+
+### Version 0-2-0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+Adds `VM.MAT.001`, `VM.TEX.001`, `VM.PS.002` and `VM.TEX.003` to the `0-1-0` requirements.
+`VM.PS.002` requires the material a renderable `Gprim` renders with to connect a
+UsdPreviewSurface, and `VM.TEX.003` checks a texture's colour space against the
+UsdPreviewSurface input it feeds.
+
+#### Used in Profiles
+
+- [Robot-Body](../profiles/robot-body.md): required in `3.0.0`, `3.1.0`
+- [Robot-Gripper](../profiles/robot-gripper.md): required in `3.0.0`
+- [Robotics-Prop](../profiles/robotics-prop.md): required in `4.0.0`, `5.0.0`
+
+#### Feature Dependencies
+
+None.
+
+#### Requirement List
+
+* Capability: [Visualization/Materials](../rules_and_reqs/visualization/materials/capability-materials.md)
+
+| Requirement | Requirement Doc | Rule |
+|-------------|-----------------|------|
+| `com.nvidia.usd.VM.BIND.001` | [VM.BIND.001](../rules_and_reqs/visualization/materials/requirements/material-bind-scope.md) | `MaterialOutOfScopeChecker` |
+| `VM.MAT.001` | [VM.MAT.001](../rules_and_reqs/visualization/materials/requirements/material-assignment.md) | `VisualMaterialsCapabilityChecker` |
+| `com.nvidia.usd.VM.PS.001` | [VM.PS.001](../rules_and_reqs/visualization/materials/requirements/material-preview-surface.md) | `MaterialUsdPreviewSurfaceChecker` |
+| `VM.PS.002` | [VM.PS.002](../rules_and_reqs/visualization/materials/requirements/material-preview-surface-present.md) | `VisualMaterialsCapabilityChecker` |
+| `VM.TEX.001` | [VM.TEX.001](../rules_and_reqs/visualization/materials/requirements/material-texture-maxsize.md) | `VisualMaterialsCapabilityChecker` |
+| `VM.TEX.003` | [VM.TEX.003](../rules_and_reqs/visualization/materials/requirements/material-texture-colorspace-preview.md) | `VisualMaterialsCapabilityChecker` |
+
+</details>
+
+### Version 0-3-0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+`VM.MAT.001` moves to [`FET009_MaterialCoverage`](FET009_MaterialCoverage.md).
+The other requirements are those of `0-2-0`, so a material published without geometry
+selects this version on its own.
+On an asset with geometry, the runtime tests measure rendered coverage, and a coverage failure
+is a `VM.MAT.001` repair through `FET009_MaterialCoverage`. A material published on its
+own has no geometry to cover, so the tests render each of its materials on a test sphere.
+
+#### Used in Profiles
+
+- [Material](../profiles/material.md): required in `1.0.0`
+- [Robot-Body](../profiles/robot-body.md): required in `4.0.0`
+- [Robot-Gripper](../profiles/robot-gripper.md): required in `4.0.0`
+- [Robotics-Prop](../profiles/robotics-prop.md): required in `5.0.0`
+
+#### Feature Dependencies
+
+None.
+
+#### Requirement List
+
+* Capability: [Visualization/Materials](../rules_and_reqs/visualization/materials/capability-materials.md)
+
+| Requirement | Requirement Doc | Rule |
+|-------------|-----------------|------|
+| `com.nvidia.usd.VM.BIND.001` | [VM.BIND.001](../rules_and_reqs/visualization/materials/requirements/material-bind-scope.md) | `MaterialOutOfScopeChecker` |
+| `com.nvidia.usd.VM.PS.001` | [VM.PS.001](../rules_and_reqs/visualization/materials/requirements/material-preview-surface.md) | `MaterialUsdPreviewSurfaceChecker` |
+| `VM.PS.002` | [VM.PS.002](../rules_and_reqs/visualization/materials/requirements/material-preview-surface-present.md) | `VisualMaterialsCapabilityChecker` |
+| `VM.TEX.001` | [VM.TEX.001](../rules_and_reqs/visualization/materials/requirements/material-texture-maxsize.md) | `VisualMaterialsCapabilityChecker` |
+| `VM.TEX.003` | [VM.TEX.003](../rules_and_reqs/visualization/materials/requirements/material-texture-colorspace-preview.md) | `VisualMaterialsCapabilityChecker` |
+
+</details>
+
+## Pipelines
+
+Source file type:
+
+- `.usd`, `.usda`, `.usdc`, package source folder, or package root as applicable.
+
+Validation or runtime pipeline:
+
+- SimReady validation verifies material binding, USDPreviewSurface, and texture colour space and size requirements.
+- `simready-foundation-conform-fet-006-standard` repairs USDPreviewSurface material conformance on staged assets.
+
+## Samples
+
+- [`obs_lamp_revolute_a01`](../../../../../../../sample_content/common_assets/props_general/obs_lamp_revolute_a01/simready_usd/sm_obs_lamp_revolute_a01_01.usda)
+
+## Evaluates
+
+- Suite: [FET006 Materials](../runtime_tests/docs/fet006-materials.md)
+  - Tests:
+    - [preview_surface_renders](../runtime_tests/docs/fet006/preview-surface-renders.md)
+
+## Adapters
+
+None.

@@ -2,7 +2,7 @@
 
 The documentation is no longer a single monolithic tree. Its content is owned by
 the SimReady validation tiers under `nv_core/tiers/` (each tier ships its own
-`capabilities/`, `features/`, and `profiles/`), by a committed cross-tier
+`rules_and_reqs/`, `features/`, and `profiles/`), by a committed cross-tier
 **shared overlay** at `docs/shared/` (hub pages, badge includes, the example
 scaffold, and family pages that span tiers), and by the residual site chrome
 that stays in `docs/` (`index.md`, `guides/`, `indexes/`, `_static/`).
@@ -10,7 +10,7 @@ that stays in `docs/` (`index.md`, `guides/`, `indexes/`, `_static/`).
 Both build pipelines stage those sources into a single Sphinx source tree at
 `_build/docs-src` with the repoman-free assembler
 (`nv_core/tiers/_tooling/assemble_docs.py`), which preserves every published
-docname (`capabilities/**`, `features/**`, `profiles/**`).
+docname (`rules_and_reqs/**`, `features/**`, `profiles/**`).
 
 # Building the Documentation
 
@@ -34,15 +34,15 @@ python build_docs.py            # add --strict to treat warnings as errors
 
 To add a new capability, follow these steps:
 
-1. Create a new folder in the `capabilities/` directory with a descriptive name (e.g., `visualization/geometry/`)
+1. Create a new folder in the `rules_and_reqs/` directory with a descriptive name (e.g., `visualization/geometry/`)
 
 2. Create a capability overview file:
-   - Copy an existing capability file (e.g., `capabilities/visualization/geometry/capability-geometry.md`)
+   - Copy an existing capability file (e.g., `rules_and_reqs/visualization/geometry/capability-geometry.md`)
    - Update the title, version, and overview sections
    - The status and requirements sections will be automatically populated when you build the docs
 
 3. Create a `requirements/` subdirectory and add individual requirement files:
-   - Copy an existing requirement file (e.g., `capabilities/visualization/geometry/requirements/usdgeom-mesh-topology.md`)
+   - Copy an existing requirement file (e.g., `rules_and_reqs/visualization/geometry/requirements/usdgeom-mesh-topology.md`)
    - Update the following sections:
      - Code and validator information in the header table
      - Summary and description
@@ -67,12 +67,12 @@ published site) is organized into the following logical sections. Note where
 each one is *authored*, since the source no longer all lives under `docs/`:
 
 ## Capabilities — authored in the tiers
-- `capabilities/**` comes from each tier's
-  `simready/foundation/<tier>/capabilities/` tree (capability overview,
+- `rules_and_reqs/**` comes from each tier's
+  `simready/foundation/<tier>/rules_and_reqs/` tree (capability overview,
   `requirements/` pages, and the `validation.py` validators live together).
-- The top-level `capabilities/capabilities.md` hub, the `_includes/badges/`
+- The top-level `rules_and_reqs/rules_and_reqs.md` hub, the `_includes/badges/`
   fragments, and the `example/` scaffold come from the shared overlay
-  (`docs/shared/capabilities/`).
+  (`docs/shared/rules_and_reqs/`).
 
 ## Features & Profiles — authored in the tiers + shared overlay
 - `features/**` and `profiles/**` narratives live beside their JSON/TOML owners
@@ -85,7 +85,7 @@ each one is *authored*, since the source no longer all lives under `docs/`:
 - `indexes/`: Generated index files and reports
   (`capability_status_index.md`: overall capability status report)
 - `index.md`: Main documentation landing page
-- `_static/`: Static assets (`tags.css`, images, benchmark videos)
+- `_static/`: Static assets (`tags.css`, images, evaluation videos)
 
 ## Supporting Infrastructure
 - Sphinx extensions (the `tag` role, requirement-table generation, capability
@@ -101,7 +101,7 @@ each one is *authored*, since the source no longer all lives under `docs/`:
 
 The documentation uses a custom Sphinx extension (`sphinx_requirement_table.py`) to automatically generate requirement tables for each capability. The extension:
 
-1. Scans the `docs/capabilities/*/requirements/` directories for markdown files
+1. Scans the `docs/rules_and_reqs/*/requirements/` directories for markdown files
 2. Parses each requirement file to extract:
    - Code
    - Summary
@@ -115,7 +115,7 @@ The documentation uses a custom Sphinx extension (`sphinx_requirement_table.py`)
    - High quality requirements third
    - Performance requirements fourth
 5. Generates a markdown table for each capability using the Jinja2 template `requirement_table.md.j2`
-6. Outputs the tables to `docs/capabilities/_includes/tables/`
+6. Outputs the tables to `docs/rules_and_reqs/_includes/tables/`
 
 The generated tables are then included in the capability documentation pages using:
 
@@ -152,12 +152,12 @@ The tags are implemented using custom Sphinx roles and styled using CSS. The sty
 
 The documentation uses a custom Sphinx extension (`sphinx_capability_report.py`) to automatically generate capability status reports and badges. The extension:
 
-1. Scans the `docs/capabilities/` directory for capability folders
+1. Scans the `docs/rules_and_reqs/` directory for capability folders
 2. Calculates capability scores based on criteria defined in `_ext/scoring_config.json`:
    - Assigns points for different documentation elements
    - Uses configurable thresholds for status levels (Complete, Development, Draft)
 3. Generates two types of output:
-   - Individual badge files in `docs/capabilities/_includes/badges/`
+   - Individual badge files in `docs/rules_and_reqs/_includes/badges/`
    - A consolidated status report in `docs/indexes/capability_status_index.md`
 4. Supports filtering capabilities through include/exclude lists in the Sphinx configuration
 
@@ -175,5 +175,5 @@ The generated badges show the current status of each capability:
 The badges can be included in capability documentation using:
 
 ```markdown
-```{include} /capabilities/_includes/badges/capability_name.md
+```{include} /rules_and_reqs/_includes/badges/capability_name.md
 ```

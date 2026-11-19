@@ -1,0 +1,14 @@
+{
+  "id": "CAP029_ConnectionJoint.Newton.0-1-0",
+  "display_name": "Connections Multibody-Physics (Newton)",
+  "legacy_identity": {
+    "id": "FET_029_NEWTON",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "CN.NEWTON.001"
+  ],
+  "dependencies": [
+    "CAP029_ConnectionJoint.0-1-0"
+  ]
+}

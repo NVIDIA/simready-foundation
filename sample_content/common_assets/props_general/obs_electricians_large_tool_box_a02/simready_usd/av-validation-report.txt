@@ -1,0 +1,16 @@
+Asset: sm_obs_electricians_large_tool_box_a02.usda
+Validation: current Core tier static AV checkers
+
+AV.001: PASS
+AV.002: PASS
+AV.003: PASS
+AV.004: PASS
+AV.005: PASS
+AV.006: PASS
+AV.007: PASS
+AV.008: PASS
+AV.009: PASS
+AV.010: PASS
+
+RESULT: PASS
+Runtime variation tests: not executed

@@ -14,7 +14,7 @@
 # limitations under the License.
 
 import pytest
-from simready_benchmark_kit_suite.fet005_grasp.newton_articulation import (
+from simready.foundation.tier_core.runtime_tests.fet005_grasp.newton_articulation import (
     NEWTON_TENSOR_DRIVE_SKIP,
     NewtonTensorDriveUnavailable,
     apply_temporary_newton_articulations,
@@ -39,6 +39,12 @@ class _AuthoredProperty:
         self.value = value
         return True
 
+    def Get(self):
+        return self.value
+
+    def GetTargets(self):
+        return self.value
+
 
 class _FakePrim:
     def __init__(self, path):
@@ -61,9 +67,15 @@ class _FakePrim:
         self.apis.append(name)
         return self
 
+    def HasAPI(self, name):
+        return name in self.apis
+
     def SetMetadata(self, name, value):
         self.metadata[name] = value
         return True
+
+    def GetMetadata(self, name):
+        return self.metadata.get(name)
 
     def CreateAttribute(self, name, _value_type):
         return self.attributes.setdefault(name, _AuthoredProperty())
@@ -152,11 +164,14 @@ def test_newton_pd_parameters_caps_high_friction_credit():
 
 
 try:
-    from pxr import PhysxSchema  # noqa: F401
-
-    _HAS_PHYSX_SCHEMA = True
+    from pxr import PhysxSchema
 except ImportError:
-    _HAS_PHYSX_SCHEMA = False
+    try:
+        from physx_usd_schemas import PhysxSchema
+    except ImportError:
+        PhysxSchema = None
+
+_HAS_PHYSX_SCHEMA = PhysxSchema is not None
 
 
 def test_infers_toolbox_tree_root():
@@ -227,9 +242,9 @@ def _temporary_articulation_stage():
     return stage, asset, root
 
 
-@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="pxr.PhysxSchema unavailable")
+@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="PhysxSchema unavailable")
 def test_temporary_articulation_applies_and_removes_both_articulation_apis():
-    from pxr import PhysxSchema, UsdPhysics
+    from pxr import UsdPhysics
 
     stage, asset, root = _temporary_articulation_stage()
 
@@ -237,18 +252,18 @@ def test_temporary_articulation_applies_and_removes_both_articulation_apis():
 
     assert [mutation.path for mutation in mutations] == [str(root.GetPath())]
     assert root.GetPrim().HasAPI(UsdPhysics.ArticulationRootAPI)
-    assert root.GetPrim().HasAPI(PhysxSchema.PhysxArticulationAPI)
+    assert root.GetPrim().HasAPI("PhysxArticulationAPI")
     assert PhysxSchema.PhysxArticulationAPI(root.GetPrim()).GetEnabledSelfCollisionsAttr().Get() is False
 
     remove_temporary_newton_articulations(stage, mutations)
 
     assert not root.GetPrim().HasAPI(UsdPhysics.ArticulationRootAPI)
-    assert not root.GetPrim().HasAPI(PhysxSchema.PhysxArticulationAPI)
+    assert not root.GetPrim().HasAPI("PhysxArticulationAPI")
 
 
-@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="pxr.PhysxSchema unavailable")
+@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="PhysxSchema unavailable")
 def test_temporary_articulation_restores_existing_physx_self_collision_setting():
-    from pxr import PhysxSchema, UsdPhysics
+    from pxr import UsdPhysics
 
     stage, asset, root = _temporary_articulation_stage()
     physx_api = PhysxSchema.PhysxArticulationAPI.Apply(root.GetPrim())
@@ -261,7 +276,7 @@ def test_temporary_articulation_restores_existing_physx_self_collision_setting()
     remove_temporary_newton_articulations(stage, mutations)
 
     assert not root.GetPrim().HasAPI(UsdPhysics.ArticulationRootAPI)
-    assert root.GetPrim().HasAPI(PhysxSchema.PhysxArticulationAPI)
+    assert root.GetPrim().HasAPI("PhysxArticulationAPI")
     assert PhysxSchema.PhysxArticulationAPI(root.GetPrim()).GetEnabledSelfCollisionsAttr().Get() is True
 
 

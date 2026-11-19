@@ -1,0 +1,14 @@
+{
+  "id": "CAP000_Core.PhysX.0-2-0",
+  "display_name": "Core (PhysX)",
+  "requirements": [
+    "RV.001",
+    "RV.002",
+    "RV.003",
+    "RV.010",
+    "RV.011"
+  ],
+  "dependencies": [
+    "CAP000_Core.0-2-0"
+  ]
+}

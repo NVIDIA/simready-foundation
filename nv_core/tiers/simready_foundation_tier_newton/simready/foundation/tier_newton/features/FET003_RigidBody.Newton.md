@@ -1,0 +1,163 @@
+# Feature: `FET003_RigidBody.Newton`
+
+| **Property**            | **Value**         |
+|-------------------------|-------------------|
+| Contract                | `FET003_RigidBody.Newton` |
+| Runtime                 | `Newton` |
+| Proprietary Techs       | `Newton` |
+| Versions                | `0-1-0` |
+
+## Description
+
+The Newton Rigid Body Physics feature defines the Newton runtime contract for
+assets that can be simulated as rigid bodies with Newton-compatible collision
+schemas.
+
+An asset that satisfies this feature carries the Standard rigid-body and
+collider requirements plus a Newton collider representation. Newton mesh
+colliders can use either `NewtonMeshCollisionAPI` for ordinary mesh collision
+or `NewtonSDFCollisionAPI` for SDF-backed or hydroelastic collision, but a
+single collider prim must not use both representations at once.
+
+### Newton Authoring Notes
+
+Editorial guidance (does not change the requirement IDs below):
+
+- **`NewtonCollisionAPI`** carries the shared contact tuning. `newton:contactMargin`
+  (default `0`) inflates the collision surface outward; `newton:contactGap` (default `-inf`
+  = engine default; samples author `0`) expands the AABB so contacts are detected earlier.
+- **`NewtonMeshCollisionAPI`** is the ordinary mesh path. When
+  `physics:approximation = "convexHull"`, `newton:maxHullVertices` (default `-1` = exact hull)
+  caps the hull vertex count. Newton uses the inherited `physics:approximation`, so keep it
+  set to a value the collider intends (`convexHull`, `convexDecomposition`, etc.).
+- **`NewtonSDFCollisionAPI`** is the SDF/hydroelastic path and is mutually exclusive with
+  `NewtonMeshCollisionAPI`. Author SDF tuning only when the collision intent is known:
+  `newton:sdfMaxResolution` must be divisible by 8, `newton:sdfTextureFormat` is one of
+  `uint8`/`uint16`/`float32`, and `newton:sdfNarrowBandInner < newton:sdfNarrowBandOuter`.
+- **`NewtonMassAPI`** (`NEWTON.MAS.001`) applies on an `Xformable` (body or collision `Gprim`) and
+  extends `PhysicsMassAPI`. `newton:inertia`, when authored non-empty, is a compact symmetric
+  tensor `[Ixx, Iyy, Izz, Ixy, Ixz, Iyz]` (exactly 6 finite elements; non-negative diagonal) that
+  overrides `physics:diagonalInertia`/`physics:principalAxes`; `newton:massModel` is `solid` or
+  `shell`; `newton:shellThickness` (default `-inf` = solver chooses) must be finite and `> 0` when
+  authored. Author only when overriding the neutral mass resolution.
+- **`NewtonMaterialAPI`** (`NEWTON.MAT.001`) applies on the physics `Material` bound to the
+  collider and adds Newton contact/friction tuning (`newton:torsionalFriction`,
+  `newton:rollingFriction`, and the `newton:contact*` attributes) on top of
+  `PhysicsMaterialAPI`. Aligned with the `UsdPhysicsMaterialAPI` convention (`PMT.001`),
+  validation checks **placement only**: the schema must sit on a `UsdShade.Material` that also
+  carries `PhysicsMaterialAPI`. The `newton:*` values are trusted rather than policed (leave the
+  contact attributes at the `-inf` sentinel, or unauthored, to use the Newton engine default).
+- Keep the composed Newton stage strictly Newton (RV.011): no `Mjc*` / `Physx*` schemas or
+  attributes, and no `physics:approximation = "sdf"` string.
+
+## Dependency Graph
+
+This feature has no JSON feature dependencies. It carries an explicit
+runtime-specific requirement list so the Newton runtime contract can be
+validated directly.
+
+```{mermaid}
+flowchart LR
+    FET003N["FET003_RigidBody.Newton\n0-1-0"]
+    FET004N["FET004_Multibody.Newton\n0-1-0"]
+
+    FET004N --> FET003N
+
+    classDef current fill:#90EE90,stroke:#333
+    classDef other fill:#fff,stroke:#333
+    class FET003N current
+    class FET004N other
+```
+
+## Use Cases
+
+- Newton runtime rigid-body simulation for USD assets.
+- Runtime-layer validation for Newton mesh collision or Newton SDF collision.
+- Physics payload variants where Newton can be switched alongside PhysX on the
+  same asset root.
+
+## Requirements
+
+### Version 0-1-0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+- [Robot-Body](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/profiles/robot-body.md): optional in `2.1.0`, `2.2.0`, `2.3.0`, `3.0.0`; required in `4.0.0`
+- [Robot-Gripper](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/profiles/robot-gripper.md): optional in `2.1.0`, `2.2.0`, `3.0.0`; required in `4.0.0`
+- [Robotics-Prop](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/profiles/robotics-prop.md): optional in `3.1.0`, `3.2.0`, `3.3.0`, `4.0.0`
+
+#### Feature Dependencies
+
+None.
+
+#### Requirement List
+
+* Capability: [Physics Bodies/Rigid Bodies](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/physics_bodies/physics_rigid_bodies/capability-physics_rigid_bodies.md)
+    * Requirements:
+        * [Collider-Capability](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/physics_bodies/physics_rigid_bodies/requirements/collider-capability.md)
+            * `RB.COL.001` | Version `0.1.0`
+        * [Mesh-Collision-API](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/physics_bodies/physics_rigid_bodies/requirements/mesh-collision-api.md)
+            * `RB.COL.002` | Version `0.1.0`
+        * [Collider-Mesh](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/physics_bodies/physics_rigid_bodies/requirements/collider-mesh.md)
+            * `RB.COL.003` | Version `0.1.0`
+        * [Collider-Non-Uniform-Scale](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/physics_bodies/physics_rigid_bodies/requirements/collider-non-uniform-scale.md)
+            * `RB.COL.004` | Version `0.1.0`
+        * [Rigid-Body-Capability](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/physics_bodies/physics_rigid_bodies/requirements/rigid-body-capability.md)
+            * `RB.001` | Version `0.1.0`
+        * [Rigid-Body-Schema-Application](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/physics_bodies/physics_rigid_bodies/requirements/rigid-body-schema-application.md)
+            * `RB.003` | Version `0.1.0`
+        * [Rigid-Body-No-Instancing](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/physics_bodies/physics_rigid_bodies/requirements/rigid-body-no-instancing.md)
+            * `RB.005` | Version `0.1.0`
+        * [Rigid-Body-Mass](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/physics_bodies/physics_rigid_bodies/requirements/rigid-body-mass.md)
+            * `RB.007` | Version `0.1.0`
+        * [Rigid-Body-Schema-No-Skew-Matrix](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/physics_bodies/physics_rigid_bodies/requirements/rigid-body-schema-no-skew-matrix.md)
+            * `RB.009` | Version `0.1.0`
+        * [Invisible-Collision-Mesh-Has-Purpose](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/physics_bodies/physics_rigid_bodies/requirements/invisible-collision-mesh-has-purpose-guide.md)
+            * `RB.010` | Version `0.1.0`
+        * [Newton-Collider-API](../rules_and_reqs/physics_bodies/physics_rigid_bodies/requirements/newton-collider-api.md)
+            * `NEWTON.COL.001` | Version `0.1.0`
+        * [Newton-SDF-Attributes](../rules_and_reqs/physics_bodies/physics_rigid_bodies/requirements/newton-sdf-attributes.md)
+            * `NEWTON.COL.002` | Version `0.1.0`
+        * [Newton-Mass-Attributes](../rules_and_reqs/physics_bodies/physics_rigid_bodies/requirements/newton-mass-attributes.md)
+            * `NEWTON.MAS.001` | Version `0.1.0`
+* Capability: [Physics Bodies/Physics Materials](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/physics_bodies/physics_materials/capability-physics_materials.md)
+    * Requirements:
+        * [Newton-Material-Attributes](../rules_and_reqs/physics_bodies/physics_materials/requirements/newton-material-attributes.md)
+            * `NEWTON.MAT.001` | Version `0.1.0`
+
+</details>
+
+## Pipelines
+
+Source file type:
+
+- `.usd` / `.usda`
+  - Via USD authoring tools that emit Newton runtime physics payload layers.
+
+Validation or runtime pipeline:
+
+- SimReady validation - verifies the Newton Rigid Body Physics requirement IDs
+  listed in the selected `FET003_RigidBody.Newton` manifest.
+- Newton runtime payload validation - verifies that the asset can expose a
+  Newton physics payload variant alongside other physics runtimes.
+
+## Samples
+
+- [sample_content/common_assets/props_general/obs_orange_a02/simready_usd/sm_obs_orange_a02_01.usd](../../../../../../../sample_content/common_assets/props_general/obs_orange_a02/simready_usd/sm_obs_orange_a02_01.usd)
+
+## Evaluates
+
+ - [Newton runtime procedures](../runtime_tests/docs/runtime-tests.md#test-owned-drop-fixtures-and-criteria)
+   - `ground_drop_newton` — independent proximity/allowed-overlap verdict.
+   - `ground_stability_newton` — complete sampled rest in the floor band before its deadline.
+   - `slope_drop_newton` — signed downhill displacement and configured overlap/separation criteria.
+
+## Adapters
+
+| From Feature | To Feature | Adapter | Status | Notes |
+|--------------|------------|---------|--------|-------|
+| `FET003_RigidBody.0-1-0` | `FET003_RigidBody.Newton.0-1-0` | `nv_core/tiers/simready_foundation_tier_core/tools/asset_handler_modules/neutral_to_newton` | Done | Computes mesh extents and applies Newton mesh-collision schemas (`newton:contactGap`), and applies `NewtonMaterialAPI` with default friction tuning to bound physics materials. |
+| `FET003_RigidBody.0-2-0` | `FET003_RigidBody.Newton.0-1-0` | `nv_core/cip_specs/asset_handler_modules/multiphysics_upgrade` | Done | Authors Newton collider, optional mass, and physics-material deltas in the isolated Newton runnable payload. |

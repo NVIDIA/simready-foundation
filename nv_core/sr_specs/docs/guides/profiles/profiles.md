@@ -1,303 +1,232 @@
 # Profiles Documentation Guide
 
-## About this guide
+## Foundations 2 model
 
-This guide will walk you through the process of understanding, creating, and managing profiles in the SimReady Foundation system. Profiles are collections of features that define the capabilities and requirements for assets, enabling consistent asset transformation and validation across different simulation environments.
+A profile is a named, versioned selection contract over runtime-tested
+features and static capabilities. Capability IDs and selectors begin with
+`CAP`. A profile does not own an asset and an asset does not declare one
+exclusive profile. Producers and consumers may validate the same asset against
+any number of profiles.
 
-## What is a Profile?
+Profiles may contain:
 
-A **Profile** is a named collection of features that defines the complete set of capabilities and requirements for an asset. Profiles serve as blueprints that specify exactly what features an asset must have to be considered compliant with a particular simulation environment or use case.
+- feature selectors over dotted feature IDs;
+- capability selectors over capability IDs;
+- required and optional selectors in both groups; and
+- wildcard selectors over feature name/runtime/version or capability name.
 
-### Key Components
+Each profile remains in its own TOML file under the owning tier's `profiles/`
+directory. Existing profile versions are immutable.
 
-- **Profile Name (ID)**: Unique identifier for the profile (e.g., `Robotics-Prop`)
-- **Version**: Specific version of the profile (e.g., `"1.0.0"`, `"2.0.0"`)
-- **Feature Requirements**: List of required features with their specific versions
-- **Version Locking**: Profile versions are immutable - changes require creating a new version
+## Profile TOML
 
-### Profile Structure
-
-Each profile consists of:
-
-```toml
-[Profile-Name]
-"version" = {features = [
-    {"FEATURE_ID" = {version = "feature_version"}},
-    {"FEATURE_ID" = {version = "feature_version"}},
-    # ... more features
-]}
-```
-
-### How Profiles Work
-
-1. **Asset Classification**: Assets are tagged with a specific profile and version
-2. **Feature Validation**: Assets are validated against all required features in the profile
-3. **Transformation Path**: Feature adapters enable transformation between different profiles
-4. **Environment Compatibility**: Profiles ensure assets work correctly in specific simulation environments
-
-## Profile Examples
-
-### Example 1: Robotics-Prop Profile
+Each selector entry names its selector and, optionally, `optional = true`:
 
 ```toml
 [Robotics-Prop]
-"1.0.0" = {features = [
-    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
-    {"FET_001_STANDARD" = {version = "0.1.0"}}, # "Minimal"
-    {"FET_003_STANDARD" = {version = "0.1.0"}}, # "RBD Physics"
-    {"FET_004_STANDARD" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics"
-    {"FET_005_STANDARD" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
-    {"FET_006_MDL" = {version = "0.1.0"}}, # "Materials (MDL)"
-]}
-"2.0.0" = {features = [
-    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
-    {"FET_001_STANDARD" = {version = "1.0.0"}}, # "Minimal"
-    {"FET_003_STANDARD" = {version = "0.1.0"}}, # "RBD Physics"
-    {"FET_004_STANDARD" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics"
-    {"FET_005_STANDARD" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
-    {"FET_006_MDL" = {version = "0.1.0"}}, # "Materials (MDL)"
+"4.0.0" = {features = [
+    {selector = "FET001.*.*"},
+    {selector = "FET004.*.*", optional = true},
+    {selector = "FET004.PhysX.*", optional = true},
+], capabilities = [
+    {selector = "CAP000_Core.*.*"},
+    {selector = "CAP007_NonVisualMaterials.*.*", optional = true},
 ]}
 ```
 
-### Example 2: Robot-Body Profile
+Feature identity already includes its version, so Foundations 2 entries do not
+contain a separate `version` field.
 
-```toml
-[Robot-Body]
-"1.0.0" = {features = [
-    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
-    {"FET_001_STANDARD" = {version = "0.1.0"}}, # "Minimal"
-    {"FET_003_PHYSX" = {version = "0.1.0"}}, # "RBD Physics"
-    {"FET_004_PHYSX" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
-    {"FET_005_STANDARD" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
-    {"FET_006_MDL" = {version = "0.1.0"}}, # "Materials (MDL)"
-]}
-"2.0.0" = {features = [
-    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
-    {"FET_001_STANDARD" = {version = "1.0.0"}}, # "Minimal"
-    {"FET_003_PHYSX" = {version = "0.1.0"}}, # "RBD Physics"
-    {"FET_004_PHYSX" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics and SDF collision approximation"
-    {"FET_005_STANDARD" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
-    {"FET_006_MDL" = {version = "0.1.0"}}, # "Materials (MDL)"
-]}
+## Selector behavior
+
+The example above uses explicit runtime and version segments for compatibility
+with `simready-validate` 2026.10.0rc1. The Foundation reference resolver also
+accepts the shorthand described below. For commands and custom profiles used
+with that validator release, follow the compatibility forms in the next section.
+
+Feature selectors have one to three dotted segments. A bare name or family
+selects every runtime and version. Two-segment selectors match either a runtime
+or a neutral version; three-segment selectors select runtime and version
+explicitly. For example, `FET004.0-*` selects neutral versions beginning `0-`,
+`FET004.PhysX` selects every PhysX version, and `FET004.*` selects both.
+Version tokens remain opaque, including leading zeroes.
+
+| Selector | Expansion |
+|---|---|
+| `FET004.*` | All runtimes and versions in FET family 004. |
+| `FET004.PhysX.*` | All PhysX versions in FET family 004. |
+| `FET004_Multibody.PhysX.2-0-4` | One exact feature. |
+| `CAP024.*` | All runtimes and versions in CAP family 024. |
+| `CAP024_BaseArticulation.PhysX.*` | All PhysX versions of that capability. |
+| `CAP007_NonVisualMaterials.0-2-0` | One exact capability. |
+
+Capability selectors work exactly like feature selectors, with a `CAP` prefix
+instead of `FET`: one to three dotted segments, the same runtime-or-neutral-version
+shorthand, and shell-style `*` usable within a segment. A capability ID is
+`<name>[.<runtime>].<version>` like a feature ID, and a runtime-neutral
+capability omits the runtime segment.
+
+Resolution rules are deterministic:
+
+1. Expand against the complete catalog from all installed tiers.
+2. Sort matches by exact ID.
+3. Deduplicate matches.
+4. If required and optional selectors select the same item, it is required.
+5. A required selector matching nothing is an error.
+6. An optional selector matching nothing is allowed.
+7. Capabilities referenced by resolved features are included automatically and
+   inherit feature optionality; required wins over any optional path.
+
+Wildcard profiles intentionally follow the installed catalog. Adding a new
+matching feature can therefore change their resolved bundle without editing
+the profile. Use an exact ID when reproducibility is more important than
+automatic adoption, and record the resolved bundle in validation evidence.
+
+(validate-rc1-selectors)=
+
+## Validate 2026.10.0rc1 compatibility
+
+`simready-validate` 2026.10.0rc1 requires a version or wildcard segment in each
+selector. Its two-segment form is `<name>.<version>`; the special
+`<name>.*` form selects all runtimes and versions. Use three segments when
+selecting a specific runtime. Use these forms when authoring a custom profile
+for that release:
+
+| Intended selection | Compatible selector |
+|---|---|
+| All runtimes and versions of the Core capability | `CAP000_Core.*.*` |
+| Neutral Core versions beginning with `0` | `CAP000_Core.0*` |
+| All PhysX versions of the multibody feature | `FET004.PhysX.*` |
+| All runtimes and versions of feature family 004 | `FET004.*.*` |
+| All versions and runtimes of non-visual materials | `CAP007_NonVisualMaterials.*.*` |
+| One neutral Core version | `CAP000_Core.0-2-0` |
+
+Bare names such as `FET004`, name-only patterns such as
+`CAP007_NonVisualMaterials*`, and runtime shorthand such as
+`CAP000_Core.OpenUSD` are accepted by the Foundation reference resolver but
+rejected or interpreted differently by Validate rc1. A rejected required
+selector can cause the profile to be skipped and validation to produce no
+result. Inspect profile registration messages before interpreting that outcome
+as an asset failure.
+
+Choose the runtime scope explicitly when converting shorthand. For example,
+`CAP000_Core.0*` selects neutral versions, while `CAP000_Core.*.*` also selects
+Isaac, MuJoCo, Newton, and PhysX contracts present in the catalog. Prefer exact
+IDs when preserving a fixed set of contracts. Verify the resolved IDs with the
+installed validator; Foundation-only resolution does not prove rc1 acceptance.
+
+## Optional features and capabilities
+
+`optional = true` makes failures contributed only by that selector non-blocking.
+Validation engines still execute and report those checks as optional evidence.
+When a requirement is also selected through any required feature or capability,
+required wins and its failure is blocking.
+
+Optionality belongs to the profile selector, not to the feature or capability
+definition.
+
+## Validating against multiple profiles
+
+Profile selection is caller-supplied. Do not stamp a singular `profile` and
+`profile_version` into asset metadata as the validation authority.
+
+At the Python layer, resolve all requested targets and run the validator once
+per profile so evidence stays independent:
+
+```python
+from simready.foundation.contracts import ProfileTarget
+from simready.foundation.validation import validate_profiles
+
+results = validate_profiles(
+    asset_path,
+    targets=[
+        ProfileTarget("Robotics-Prop", "5.0.0"),
+        ProfileTarget("Robot-Body", "4.0.0"),
+    ],
+    profiles=profiles,
+    features=features,
+    capabilities=capabilities,
+    validate_one=validate_one,
+)
 ```
 
-## Creating a New Profile
+The helper builds a `ValidationPlan` for every target and accepts an injected
+`validate_one` callback. This lets standalone validation, Kit, and other
+runtimes share identical resolution and optionality behavior.
 
-### Step 1: Define Profile Requirements
+Conformance evidence may record several profile results for the same asset.
+Each result must retain its own profile name, profile version, resolved feature
+IDs, resolved capability IDs, and pass/fail outcome.
 
-Before creating a profile, you need to understand:
+`Robotics-Prop@5.0.0` and `Robot-Body@4.0.0` can be requested together.
+Newton checks are optional for the prop target and required for the robot
+target, so the same asset can pass one target and fail the other.
 
-1. **Target Environment**: What simulation and or render environment will use this profile
-2. **Required Capabilities**: What features need to be accounted for
-3. **Feature Dependencies**: Which features are required vs. optional (see the [feature dependency graph](../../features/feature-dependency-graph) and [Asset Profiles](../../profiles/profiles) comparison table)
-4. **Version Compatibility**: What versions of features are needed
+### Chain stamping
 
-### Step 2: Choose a Profile Name
+The external validator's multi-profile API validates each target independently
+and retains profile-keyed results in USD metadata and the JSON report. Initialize
+the validator with the selected tiers, then pass a staged output path when
+writing metadata:
 
-**Naming Conventions:**
-- Use descriptive names that indicate the target environment
-- Use hyphens and title case for multi-word names
-- Include the primary use case or environment
-- Examples: `Robotics-Prop`, `Robot-Body`, `Vehicle-Simulation`
+```python
+from simready.validate import ProfileTarget, validate_asset_against_profiles
 
-### Step 3: Create the Profile Configuration
-
-Create a new profile TOML file in the owning [tier](../tiers.md)'s `profiles/`
-directory. There
-is one file per profile and no consolidated `profiles.toml` — the validator
-loads every `*.toml` in each configured directory. Name the file after the
-profile, lowercased with underscores, so `Robotics-Prop` lives in
-`robotics_prop.toml`. The restored legacy catalogs
-`open_taxonomy_profiles.toml` and `package_profiles.toml` group related
-profiles; they are exceptions and should not be used as the pattern for new
-profile work:
-
-```toml
-[Your-Profile-Name]
-"1.0.0" = {features = [
-    {"FET_001_STANDARD" = {version = "0.1.0"}}, # "Minimal"
-    {"FET_003_STANDARD" = {version = "0.1.0"}}, # "RBD Physics"
-    {"FET_004_STANDARD" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics"
-    # Add more features as needed
-]}
+results = validate_asset_against_profiles(
+    asset_path,
+    targets=[
+        ProfileTarget("Robotics-Prop", "5.0.0"),
+        ProfileTarget("Robot-Body", "4.0.0"),
+    ],
+    write_metadata=True,
+    report_file_path="validation.json",
+)
 ```
 
-### Step 4: Validate Feature Availability
+Each receipt and report preserves `Robotics-Prop@5.0.0` and `Robot-Body@4.0.0`
+as separate entries under `profiles`, including when a target fails validation.
+The Foundation orchestration helper above resolves targets and calls the
+validator; the external validation library owns receipt persistence.
 
-Ensure all referenced feature IDs and versions exist as JSON files under the
-configured tier `features/` directories. Each feature variant+version has a
-corresponding file (e.g. `FET_003_PHYSX-0.1.0.json`).
-The `"id"` and `"version"` fields in the JSON must match what the profile
-references.
+This API requires a validator release with multi-profile receipt support. Older
+single-profile validators, including `simready-validate` 2026.8.0, replace the
+profile identity and same-day stamp when another profile is stamped. Preserve
+one report per `(asset, profile, version)` with those releases.
 
-### Step 5: Test Profile Creation
+## Creating or updating a profile
 
-Create a test asset and validate it against the new profile, see "SimReady - Feature Docs":
+1. Define the asset class and intended consumer/runtime.
+2. Choose exact or wildcard feature selectors.
+3. Add capability selectors for requirement-only contracts.
+4. Mark conditional feature and capability selectors optional in TOML.
+5. Resolve selectors against the complete installed tier catalog.
+6. Inspect every match, especially broad wildcards.
+7. Add a new profile version for any selector or optionality change.
+8. Keep the previous version unchanged.
+9. Update profile markdown and the shared profile index.
+10. Document adapter paths for differences from related profiles.
+11. Validate representative assets against this and other compatible profiles.
 
-```bash
-workspace validate <path to usd asset>
-```
+## Adapters
 
-### Step 6: Create documentation
+Feature adapters connect exact dotted runtime-tested feature IDs. Profile conversion
+planning compares the resolved source and target bundles. Every required target
+feature difference must have a direct adapter path or a documented blocker.
 
-Each profile should have its own markdown file beside its TOML in the owning
-tier and should also be referenced by
-`nv_core/sr_specs/docs/shared/profiles/profiles.md`.
+Capability-only differences may use a profile adapter when mutation is needed;
+static capabilities that merely validate existing data require no adapter.
 
-## Creating a New Profile Version
+## Validation checklist
 
-### When to Create a New Version
-
-Create a new profile version when:
-- **Feature Updates**: Required feature(s) have a new version
-- **New Requirements**: Additional features are needed
-- **Breaking Changes**: Existing features have incompatible changes
-- **Environment Changes**: Target simulation environment requirements change
-
-### Step 1: Plan the Version Update
-
-**Version Numbering:**
-- **Major Version** (X.0.0): Breaking changes, new features, incompatible updates
-- **Minor Version** (0.X.0): New features, backward compatible
-- **Patch Version** (0.0.X): Bug fixes, minor updates
-
-### Step 2: Update Feature Versions
-
-Identify which features need version updates:
-
-```toml
-[Your-Profile-Name]
-"1.0.0" = {features = [
-    {"FET_001_STANDARD" = {version = "0.1.0"}}, # "Minimal"
-    {"FET_003_STANDARD" = {version = "0.1.0"}}, # "RBD Physics"
-    {"FET_004_STANDARD" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics"
-    {"FET_005_STANDARD" = {version = "0.1.0"}}, # "Simulate Grasp Physics"
-]}
-"2.0.0" = {features = [
-    {"FET_001_STANDARD" = {version = "1.0.0"}}, # "Minimal" - UPDATED
-    {"FET_003_STANDARD" = {version = "0.1.0"}}, # "RBD Physics" - SAME
-    {"FET_004_STANDARD" = {version = "0.1.0"}}, # "Simulate Multi-Body Physics" - SAME
-    {"FET_005_STANDARD" = {version = "0.1.0"}}, # "Simulate Grasp Physics" - SAME
-]}
-```
-
-### Step 3: Add New Version to Profile
-
-```toml
-[Your-Profile-Name]
-"1.0.0" = {features = [
-    {"FET_001_STANDARD" = {version = "0.1.0"}},
-    {"FET002_MATERIAL_BASIC" = {version = "0.1.0"}},
-]}
-"2.0.0" = {features = [
-    {"FET_001_STANDARD" = {version = "1.0.0"}}, # Updated feature version
-    {"FET002_MATERIAL_BASIC" = {version = "0.1.0"}},
-    {"FET100_ANIMATION_BASIC" = {version = "0.1.0"}}, # New feature added
-]}
-```
-
-### Step 4: Document Version Changes
-
-Create a changelog entry:
-
-```markdown
-## Profile Version 2.0.0
-
-### Changes
-- Updated FET_001_STANDARD from version 0.1.0 to 1.0.0
-- Added FET100_ANIMATION_BASIC version 0.1.0
-- Improved asset validation for animation properties
-
-### Migration Notes
-- Existing assets using version 1.0.0 will need feature adapter transformation
-- New animation features require additional asset properties
-```
-
-### Step 5: Upgrade assets
-
-Its possible to "upgrade" assets that support a particular profile version to a new version, one way to achieve this is run "workspace upgrade" after creating the appropriate feature adapters, see the next section
-
-## Creating a Second Profile and Required Adapters
-
-### Step 1: Identify Profile Differences
-
-When creating a second profile, identify the differences from existing profiles:
-
-**Example: a Standard profile versus a PhysX-specific profile**
-
-| Feature | Neutral Version | Physx Version | Difference |
-|---------|----------------|---------------|------------|
-| FET_001_STANDARD | 0.1.0 | 0.1.0 | Same |
-| FET_003_STANDARD | 0.1.0 | - | Standard physics |
-| FET_003_PHYSX | - | 0.1.0 | PhysX physics |
-| FET_004_STANDARD | 0.1.0 | - | Standard multi-body |
-| FET_004_PHYSX | - | 0.1.0 | PhysX multi-body |
-| FET_005_STANDARD | 0.1.0 | 0.1.0 | Same |
-
-### Step 2: Plan Required Feature Adapters
-
-Based on the differences, identify required adapters:
-
-**Required Adapters:**
-1. `FET_003_STANDARD` → `FET_003_PHYSX`
-2. `FET_004_STANDARD` -> `FET_004_PHYSX`
-
-
-### Step 4: Implement Missing Adapters
-
-If adapters don't exist, please refer to <feature_adapters>
-
-### Step 5: Test Profile Transformation
-
-please refer to "SimReady - Feature Docs" "Feature: Convert" to learn how to convert assets:
-
-```bash
-workspace upgrade --output_uri [output asset file path]
---output_profile [profile name] <optional>--output_profile_version [version number]
-```
-
-## Best Practices
-
-### 1. **Profile Design**
-
-- **Keep profiles focused** on specific use cases or environments
-- **Use descriptive names** that clearly indicate the target environment
-- **Minimize feature overlap** between similar profiles
-- **Document profile purposes** and use cases
-
-### 2. **Version Management**
-
-- **Never modify existing versions** - always create new versions
-- **Use semantic versioning** (major.minor.patch)
-- **Document all changes** in version changelogs
-- **Maintain backward compatibility** when possible
-
-### 3. **Feature Selection**
-
-- **Include only necessary features** to avoid bloat
-- **Consider feature dependencies** and requirements
-- **Test feature combinations** for compatibility
-- **Validate against real-world use cases**
-
-### 4. **Testing and Validation**
-
-- **Create comprehensive test assets** for each profile version
-- **Test all transformation paths** between profiles
-- **Validate against real simulation environments**
-- **Automate validation** in CI/CD pipelines
-
-## Getting Help
-
-If you need assistance creating or managing profiles:
-
-1. **Review existing profiles** for examples and patterns
-2. **Check feature documentation** for available features and versions
-3. **Test with simple profiles** before complex ones
-4. **Use validation tools** to verify profile correctness
-5. **Ask the development team** for guidance on complex profile designs
-
-## Conclusion
-
-This comprehensive guide provides everything needed to understand and manage profiles in the SimReady Foundation system. Profiles are essential for ensuring asset compatibility across different simulation environments, and proper profile management is crucial for maintaining a robust and flexible asset pipeline.
-
-By following the guidelines in this document, you can create effective profiles that meet your simulation requirements while maintaining compatibility and enabling smooth asset transformations between different environments.
+- TOML parses.
+- Every required selector matches at least one catalog item.
+- Every match is intentional.
+- Optionality is stored in TOML for both features and capabilities.
+- Capability selectors and definitions use the `CAP` prefix.
+- Every runtime FET has tests/adapters, and every testless FET is the source of
+  at least one tested derived FET.
+- Exact selectors reference existing IDs.
+- Profile docs show selectors and the resolved review bundle.
+- Old profile versions are unchanged.
+- Multi-profile validation preserves independent evidence.
+- Adapter gaps are documented.

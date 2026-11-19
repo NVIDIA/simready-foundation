@@ -1,137 +1,54 @@
 ---
 name: simready-foundation-update-profile
-description: "Use for updating SimReady profile versions, feature bundles, docs, and adapter notes."
+description: "Add a new Foundations 2 profile version with wildcard feature/capability selectors, optionality, resolution review, docs, and adapter notes."
 license: Apache-2.0
 metadata:
   author: "Shaad Boochoon <sboochoon@nvidia.com>"
-  tags:
-    - simready
-    - profile
-    - maintenance
+  tags: [simready, profile, maintenance]
 ---
-
 
 # SimReady Update Profile
 
 ## Purpose
-Use this skill to change an existing profile. Profile versions are immutable, so the normal operation is to add a new version under the existing profile table in its tier-owned TOML file under `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles/`, such as `robotics_prop.toml`, and update documentation to describe the new version. New profiles use one TOML each. The legacy `open_taxonomy_profiles.toml` and `package_profiles.toml` catalogs group related profiles; there is no single consolidated `profiles.toml`. The validator loads every `*.toml` in that directory.
 
-Edit an existing profile version in place only for a clear typo, comment correction, markdown-only clarification, or unpublished draft content that the user explicitly says may be changed in place.
+Change an existing profile by adding a new version in its tier-owned TOML.
+Published versions are immutable. Editorial prose fixes may be made in place
+only when they do not change selector resolution or validation policy.
 
 ## Prerequisites
-Before editing, read:
 
-- `AGENTS.md`
-- `nv_core/sr_specs/docs/guides/guides.md`
-- `nv_core/sr_specs/docs/guides/profiles/profiles.md`
-- `nv_core/sr_specs/docs/guides/feature_adapters/feature_adapters.md`
-- the target profile's TOML file or legacy grouped catalog under its owning tier's `profiles/` directory, such as `robotics_prop.toml` or `package_profiles.toml`
-- target profile markdown
-- `nv_core/sr_specs/docs/shared/profiles/profiles.md`
-- selected feature JSON manifests
-- `nv_core/sr_specs/docs/shared/features/feature-dependency-graph.md`
+Read `AGENTS.md`, the profile/feature/adapter guides, target TOML/markdown,
+shared indexes/graphs, and complete installed feature/capability catalogs.
 
-## Inputs
+## Workflow
 
-Collect or infer:
+1. Copy the base profile to a new version.
+2. Apply exact/wildcard feature selector and capability selector changes.
+   Capability selectors must begin with `CAP`; move any static-only FET
+   selection to the capability list.
+3. Apply `optional=true` in TOML for conditional features and capabilities.
+4. Resolve old and new versions against the same catalog and diff exact
+   matches. A required unmatched selector is an error.
+5. Review wildcard breadth and overlapping required/optional selectors;
+   required wins.
+6. Update profile docs with selectors, reviewed resolved bundle, migration,
+   and adapter implications.
+7. Update the shared profile index.
+8. Identify direct adapters for every required runtime-tested feature difference and
+   profile adapters for authored capability differences.
+9. Validate representative assets independently against the new profile and
+   other compatible profiles. Profile selection is caller-supplied and
+   repeatable, not an exclusive asset stamp.
+10. Parse TOML and run strict contract/dependency/adapter checks.
 
-| Input | Requirement |
-|---|---|
-| `profile_name` | Existing profile table name. |
-| `base_version` | Existing version to copy from. |
-| `new_version` | New semantic version for changed feature bundle. |
-| `feature_changes` | Added, removed, or changed exact `FET_###_<RUNTIME>` feature names and semantic feature versions. |
-| `reason` | Runtime, validation, asset class, or dependency reason for the update. |
-| `adapter_plan` | Required adapters or migration notes from old to new profile. |
+## Compatibility
 
-## Instructions
+Do not rewrite published Foundations 1 exact-pin versions. Add a Foundations 2
+profile version once its consumer can resolve dotted selectors, or use
+`simready.foundation.contracts` during transition.
 
-Use this checklist when changing the repository:
+## Summary
 
-1. Classify the change.
-   - Editorial changes may edit docs or comments in place.
-   - Feature bundle changes require a new profile version.
-2. Confirm the profile and base version exist in that profile's TOML file.
-3. Confirm every new feature name/semantic version exists as a JSON manifest before referencing it.
-4. Add the new profile version by copying the base version feature list and applying the requested changes.
-5. Preserve old profile versions exactly unless the user explicitly requested an editorial fix.
-6. Update the target profile markdown:
-   - add or update the version block
-   - document changed feature names and semantic feature versions
-   - describe migration and adapter implications
-   - keep authoring guidance synchronized with the new feature list
-7. Update `nv_core/sr_specs/docs/shared/profiles/profiles.md` so the profile summary lists the available versions and current feature bundle accurately.
-8. Update adapter docs or create adapter work items when assets are expected to upgrade between profile versions.
-9. When the new profile version differs from another source/target profile, identify every feature difference and whether a direct adapter path exists or is intentionally blocked.
-10. When validation tooling is available, run `workspace validate` or the equivalent `simready-validate` command against a representative asset.
-11. Validate consistency:
-   - TOML parses
-   - old version still exists
-   - new profile version exists and contains exact feature names and semantic feature versions
-   - profile markdown agrees with TOML
-   - profile index agrees with TOML
-   - all feature references resolve to JSON manifests
-
-## Versioning Rules
-
-- Patch: non-contract metadata or documentation fix.
-- Minor: backward-compatible added feature or feature-version bump.
-- Major: removed feature, incompatible feature-version change, target runtime change, or changed required authored data.
-
-When a profile adopts a new feature version created in the same change, include both the feature update and profile update in the final summary.
-
-## Examples
-
-Example request:
-
-```text
-Update Robotics-Prop to include a conditional optional feature note.
-```
-
-Expected result summary:
-
-```text
-changed_files: updated docs, manifests, indexes, validators, or adapters
-validation: focused checks for the changed contract
-remaining_gaps: downstream feature, profile, adapter, or runtime-test follow-up
-```
-
-## Policies
-
-- Treat the profile's tier-owned TOML table as source of truth, including when it lives in a legacy grouped catalog.
-- Do not silently make a feature optional by changing prose only; machine-readable profile behavior must match.
-- Do not update only markdown when validators consume TOML.
-- Do not reference feature names or semantic feature versions that do not exist.
-- Keep old versions available for existing assets.
-
-## Limitations
-
-- Do not silently change published contracts; add versions when behavior changes.
-- Do not update docs without checking validator, manifest, profile, adapter, and runtime-test impact.
-- Do not broaden a change beyond the selected requirement, capability, feature, profile, validator, or adapter.
-
-## Troubleshooting
-
-- Error: the requested change alters a published contract. Solution: create a new version and preserve the old artifact.
-- Error: docs and machine-readable manifests diverge. Solution: make the JSON/TOML and markdown agree, then rerun focused checks.
-- Error: downstream profile or adapter impact is unclear. Solution: list the affected artifacts before making broad edits.
-
-## Resources
-
-- `assets/openai.yaml` preserves optional UI metadata for clients that read skill display hints. It is not required for the workflow.
-
-## Summary Format
-
-Report:
-
-| Field | Meaning |
-|---|---|
-| `profile_name` | Profile changed. |
-| `base_version` | Existing version used as source. |
-| `new_version` | Version added, or `in-place editorial fix`. |
-| `features_added` | Feature names and semantic versions added. |
-| `features_removed` | Feature names removed. |
-| `features_changed` | Feature version changes. |
-| `docs_changed` | Markdown/index paths changed. |
-| `adapter_plan` | Migration/adapters required. |
-| `validation` | Checks run and remaining gaps. |
+Report profile/base/new versions, selector changes, optionality changes,
+before/after resolved IDs, adapter plan, docs, multi-profile validation, and
+remaining gaps.

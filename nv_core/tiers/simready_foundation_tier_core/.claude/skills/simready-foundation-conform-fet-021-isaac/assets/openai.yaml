@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP021_RobotCore.Isaac"
+  short_description: "Repair CAP021_RobotCore.Isaac robot-core identity"
+  default_prompt: "Use $simready-foundation-conform-fet-021-isaac to repair CAP021_RobotCore.Isaac SimReady robot-core identity conformance on a USD asset."

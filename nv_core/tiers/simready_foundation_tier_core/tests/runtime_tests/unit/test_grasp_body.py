@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from pxr import Gf, Usd, UsdGeom, UsdPhysics
-from simready_benchmark_kit_suite.fet005_grasp.grasp_body import resolve_grasp_body
+from simready.foundation.tier_core.runtime_tests.fet005_grasp.grasp_body import resolve_grasp_body
 
 
 def _stage_with_annotation_scope():

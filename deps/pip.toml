@@ -3,7 +3,8 @@
 [[dependency]]
 python = "../_build/target-deps/python"
 packages = [
-    "usd-validation-nvidia==1.21.0"
+    "usd-validation-nvidia==1.21.0",
+    "semver>=3,<4"
 ]
 extra_args = ["--upgrade", "--no-cache-dir"]
 target = "../_build/target-deps/pip_prebundle"

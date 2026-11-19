@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP004_Multibody.RobotMuJoCo"
+  short_description: "Repair CAP004_Multibody.RobotMuJoCo conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-004-robot-mujoco to repair CAP004_Multibody.RobotMuJoCo SimReady conformance failures."

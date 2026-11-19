@@ -1,0 +1,11 @@
+{
+  "id": "CAP031_SelfContainedPackage.0-1-0",
+  "display_name": "Self-contained Package Source",
+  "legacy_identity": {
+    "id": "FET_031_STANDARD",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "com.nvidia.usd.AA.001"
+  ]
+}

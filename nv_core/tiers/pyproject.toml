@@ -19,6 +19,8 @@
 #
 # `_tooling/build_tiers.py` builds the members with `uv build --all-packages`,
 # so adding a tier here is all that is needed for it to be built and published.
+# The template tier is the exception: it is built, but `publish-tiers` in
+# .gitlab-ci.yml leaves it out.
 #
 # Note: because this file makes the tiers root a workspace, a bare
 # `uv build <tier>` now resolves its default output directory to the workspace
@@ -29,13 +31,17 @@
 members = [
     "simready_foundation_tier_aif",
     "simready_foundation_tier_core",
+    "simready_foundation_tier_isaac",
+    "simready_foundation_tier_newton",
     "simready_foundation_tier_sensors",
+    "simready_foundation_tier_template",
 ]
 
-# The standalone Isaac asset transformer lives outside this workspace root (under
-# nv_core/cip_specs/), so it cannot be a uv workspace member. Map it as an
-# editable path source so tiers that declare it (tier-core's optional
-# `isaac-transform` extra) resolve it locally in this repo. Publishing resolves
-# the released `simready-isaac-asset-transformer` wheel from the configured index.
+# Cross-tier dependencies resolve from the workspace, not an index.
 [tool.uv.sources]
-simready-isaac-asset-transformer = { path = "../cip_specs/isaac_asset_transformer", editable = true }
+simready-foundation-tier-core = { workspace = true }
+simready-foundation-tier-newton = { workspace = true }
+
+# The SimReady profiles, temporary rule patches, and CLI integration for the
+# public Isaac Asset Transformer live under the tier-core member's `tools/`
+# directory and are force-included into that wheel.

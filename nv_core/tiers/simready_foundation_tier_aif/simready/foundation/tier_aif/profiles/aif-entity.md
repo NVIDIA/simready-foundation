@@ -12,29 +12,31 @@ separate profiles.
 ## Profile definition
 
 The `AIF-Entity` profile includes the following feature set (see `aif_entity.toml`
-and the [feature dependency graph](../features/feature-dependency-graph)). Each
+and the [feature dependency graph](../../../../../../sr_specs/docs/shared/features/feature-dependency-graph.md)). Each
 feature's requirements and dependencies are defined in the feature
 specifications.
 
 ```toml
 [AIF-Entity]
 "0.1.0" = {features = [
-    {"FET_000_STANDARD" = {version = "0.1.0"}},       # Core
-    {"FET_001_STANDARD" = {version = "1.0.0"}},       # Minimal Placeable Visual
-    {"FET200_AIF" = {version = "0.1.0"}},     # Core Metadata (capability; interim feature carrier)
-    {"FET201_AIF" = {version = "0.1.0"}},     # Connection Points (capability; interim feature carrier)
-    {"FET202_AIF" = {version = "0.1.0"}},     # Thermal Cooling (feature; assetClass-gated to CDU/CRAH)
-    {"FET203_AIF" = {version = "0.1.0"}},     # Electrical (feature; assetClass-gated)
+    {selector = "FET001_MinimalPlaceableVisual.1-0-0"}, # Minimal Placeable Visual
+], capabilities = [
+    {selector = "CAP000_Core.0-1-0"}, # Core
+    {selector = "CAP200_AifMetadata.0-1-0"}, # Core Metadata
+    {selector = "CAP201_ConnectionPoints.0-1-0"}, # Connection Points
+    {selector = "CAP202_ThermalCooling.0-1-0"}, # Thermal Cooling (assetClass-gated to CDU/CRAH)
+    {selector = "CAP203_Electrical.0-1-0"}, # Electrical (assetClass-gated)
 ]}
-"0.2.0" = {features = [ # Connection Points v0.2.0 (CP.010-CP.012 replace the v0.1.0 CP.002/CP.004 geometry and naming rules) and SimReady Central publishing (FET_031/FET_033)
-    {"FET_000_STANDARD" = {version = "0.2.0"}},       # Core, without SR.001 and NP.006
-    {"FET_001_STANDARD" = {version = "1.0.0"}},       # Minimal Placeable Visual
-    {"FET200_AIF" = {version = "0.1.0"}},     # Core Metadata (capability; interim feature carrier)
-    {"FET201_AIF" = {version = "0.2.0"}},     # Connection Points (capability; interim feature carrier)
-    {"FET202_AIF" = {version = "0.2.0"}},     # Thermal Cooling (feature; assetClass-gated to CDU/CRAH)
-    {"FET203_AIF" = {version = "0.2.0"}},     # Electrical (feature; assetClass-gated)
-    {"FET_031_STANDARD" = {version = "0.1.0"}},       # Self-contained Package Source (AA.001)
-    {"FET_033_STANDARD" = {version = "0.4.0"}},       # Thumbnail (SR.002) and USD/sidecar provenance union (SR.004)
+"0.2.0" = {features = [ # Connection Points v0.2.0 (CP.010-CP.012 replace the v0.1.0 CP.002/CP.004 geometry and naming rules) and SimReady Central publishing (CAP031/CAP033)
+    {selector = "FET001_MinimalPlaceableVisual.1-0-0"}, # Minimal Placeable Visual
+], capabilities = [
+    {selector = "CAP000_Core.0-2-0"}, # Core, without SR.001 and NP.006
+    {selector = "CAP200_AifMetadata.0-1-0"}, # Core Metadata
+    {selector = "CAP201_ConnectionPoints.0-2-0"}, # Connection Points
+    {selector = "CAP202_ThermalCooling.0-2-0"}, # Thermal Cooling (assetClass-gated to CDU/CRAH)
+    {selector = "CAP203_Electrical.0-2-0"}, # Electrical (assetClass-gated)
+    {selector = "CAP031_SelfContainedPackage.0-1-0"}, # Self-contained Package Source (AA.001)
+    {selector = "CAP033_SimReadyPackage.0-4-0"}, # Thumbnail (SR.002) and USD/sidecar provenance union (SR.004)
 ]}
 ```
 
@@ -49,13 +51,13 @@ CP.010 requires an Xform, which a v0.1.0 Plane or Disk mesh is not.
 The `AIF-Entity` profile composes two kinds of rule set:
 
 - **Features** (These rule sets change simulation output):
-  [Thermal Cooling](../features/FET_202-thermal_cooling) (`FET202`) and
-  [Electrical](../features/FET_203-electrical) (`FET203`). These are gated by
+  [Thermal Cooling](../capabilities/CAP202_ThermalCooling.md) (`CAP202`) and
+  [Electrical](../capabilities/CAP203_Electrical.md) (`CAP203`). These are gated by
   `aif:core:assetClass` -- thermal applies to CDU and CRAH; electrical applies
   to CDU, CRAH, and UPS.
 - **Capabilities** (These rule sets organize and validate, without changing
-  simulation output): [AIF Core Metadata](../capabilities/aif/metadata/capability-metadata)
-  and [Connection Points](../capabilities/aif/connection_points/capability-connection_points).
+  simulation output): [AIF Core Metadata](../rules_and_reqs/aif/metadata/capability-metadata.md)
+  and [Connection Points](../rules_and_reqs/aif/connection_points/capability-connection_points.md).
 
 ```{note}
 NOTE: The AIF Core Metadata and Connection Points rules are currently carried
@@ -90,7 +92,7 @@ Set `aif:core:assetClass` to identify the equipment class (`"CDU"`, `"CRAH"`,
 `"UPS"`, or `"Rack"`). The full `aif:core:*` identity, dimension, and
 documentation attribute set, plus the `aif:spec:*` attributes defined for the
 declared equipment class, must be present. See the
-[AIF Core Metadata capability](../capabilities/aif/metadata/capability-metadata) for
+[AIF Core Metadata capability](../rules_and_reqs/aif/metadata/capability-metadata.md) for
 the authoritative attribute list and the per-class `aif:spec:*` requirements
 validated by AM.007 (equipment-class template compliance).
 
@@ -101,7 +103,7 @@ directly beneath the default prim, following the `<vendor>_<type>_<suffix>`
 naming pattern (e.g. `nvidia_fws_supply_01`) and composed as a separate
 `<AssetName>_ConnectionPoints.usd` sublayer. The valid connection-point types
 depend on the equipment class. See the
-[Connection Points capability](../capabilities/aif/connection_points/capability-connection_points)
+[Connection Points capability](../rules_and_reqs/aif/connection_points/capability-connection_points.md)
 for the authoritative type enumeration per class.
 
 ## Stage composition requirements
@@ -165,13 +167,13 @@ use different requirements for it:
 
 | Profile version | Requirement | What it requires |
 |---|---|---|
-| 0.1.0 | [SR.001](../capabilities/core/sim_ready/requirements/metadata-whitelist.md), through `FET_000_STANDARD@0.1.0` | Five entries at the top level of `customLayerData`: the `SimReady_Metadata` dictionary itself, and `asset_name`, `asset_type`, `source_file` and `usd_date_generated` beside it |
-| 0.2.0 | [SR.004](../capabilities/core/sim_ready/requirements/metadata-union.md), through `FET_033_STANDARD@0.4.0` | Eleven provenance fields in the union of root-layer `customLayerData` and a sibling `<usd stem>.json`, each field authored in exactly one of those two locations |
+| 0.1.0 | [SR.001](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/core/sim_ready/requirements/metadata-whitelist.md), through `CAP000_Core.0-1-0` | Five entries at the top level of `customLayerData`: the `SimReady_Metadata` dictionary itself, and `asset_name`, `asset_type`, `source_file` and `usd_date_generated` beside it |
+| 0.2.0 | [SR.004](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/core/sim_ready/requirements/metadata-union.md), through `CAP033_SimReadyPackage.0-4-0` | Eleven provenance fields in the union of root-layer `customLayerData` and a sibling `<usd stem>.json`, each field authored in exactly one of those two locations |
 
 0.2.0 selects two further requirements for publishing to SimReady Central:
-[SR.002](../capabilities/core/sim_ready/requirements/thumbnail-exist.md) requires a
+[SR.002](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/core/sim_ready/requirements/thumbnail-exist.md) requires a
 thumbnail at `.thumbs/256x256/<usd file name>.png` beside the asset, and AA.001
-through `FET_031_STANDARD@0.1.0` requires the package source to be self-contained.
+through `CAP031_SelfContainedPackage.0-1-0` requires the package source to be self-contained.
 
 An asset can satisfy both versions at once. SR.004 reads a nested
 `SimReady_Metadata` dictionary and the top level of `customLayerData` as one side of
@@ -218,13 +220,13 @@ authored against.
 
 ## References
 
-- [Feature dependency graph](../features/feature-dependency-graph)
+- [Feature dependency graph](../../../../../../sr_specs/docs/shared/features/feature-dependency-graph.md)
 - `aif_entity.toml`, the profile definition alongside this document
-- [AIF Core Metadata capability](../capabilities/aif/metadata/capability-metadata)
-- [Connection Points capability](../capabilities/aif/connection_points/capability-connection_points)
-- [Thermal Cooling capability](../capabilities/aif/thermal_cooling/capability-thermal_cooling)
-- [Electrical capability](../capabilities/aif/electrical/capability-electrical)
-- [Thermal Cooling feature](../features/FET_202-thermal_cooling)
-- [Electrical feature](../features/FET_203-electrical)
-- [metadata-union (SR.004)](../capabilities/core/sim_ready/requirements/metadata-union.md)
-- [thumbnail-exist (SR.002)](../capabilities/core/sim_ready/requirements/thumbnail-exist.md)
+- [AIF Core Metadata capability](../rules_and_reqs/aif/metadata/capability-metadata.md)
+- [Connection Points capability](../rules_and_reqs/aif/connection_points/capability-connection_points.md)
+- [Thermal Cooling capability](../rules_and_reqs/aif/thermal_cooling/capability-thermal_cooling.md)
+- [Electrical capability](../rules_and_reqs/aif/electrical/capability-electrical.md)
+- [Thermal Cooling feature](../capabilities/CAP202_ThermalCooling.md)
+- [Electrical feature](../capabilities/CAP203_Electrical.md)
+- [metadata-union (SR.004)](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/core/sim_ready/requirements/metadata-union.md)
+- [thumbnail-exist (SR.002)](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/core/sim_ready/requirements/thumbnail-exist.md)

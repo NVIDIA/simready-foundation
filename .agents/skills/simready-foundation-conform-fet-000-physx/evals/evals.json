@@ -1,7 +1,7 @@
 [
     {
         "id":  "simready-foundation-conform-fet-000-physx-positive-trigger",
-        "question":  "Repair FET_000_PHYSX failures on a USD asset: the PhysX variant set, runnables/physics/physx payload, and SimReady variant metadata.",
+        "question":  "Repair CAP000_Core.PhysX failures on a USD asset: the PhysX variant set, runnables/physics/physx payload, and SimReady variant metadata.",
         "expected_skill":  "simready-foundation-conform-fet-000-physx",
         "ground_truth":  "The agent should activate simready-foundation-conform-fet-000-physx and follow its workflow.",
         "expected_behavior":  [

@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Tests for joint discovery pure-logic helpers."""
-from simready_benchmark_kit_suite.fet004_multibody.joint_discovery import (
+from simready.foundation.tier_core.runtime_tests.fet004_multibody.joint_discovery import (
     compute_test_force,
     sanitize_metric_name,
 )

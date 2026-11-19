@@ -14,6 +14,9 @@ the stage:
   with ``UsdPhysicsMassAPI``. Reported as ``null`` (needs input) when no mass is
   authored -- this script never fabricates a mass.
 
+A material asset, whose default prim is a ``Material``, has no geometry and no
+mass: its ``asset_extents`` are ``(0, 0, 0)`` and its ``mass`` is ``0``.
+
 ``qcode`` (Wikidata Q-Code) is derived from the asset's default (root) prim
 Wikidata semantic labels -- both the newer ``UsdSemantics`` form
 (``semantics:labels:<taxonomy>`` where the taxonomy name contains ``qcode``)
@@ -42,7 +45,16 @@ import stat
 from pathlib import Path
 from typing import Any
 
-from pxr import Gf, Usd, UsdGeom, UsdPhysics
+from pxr import Gf, Usd, UsdGeom, UsdPhysics, UsdShade
+
+# Rigid bodies, mass, and collider/mesh geometry frequently live inside
+# instanceable references (for example per-link parts referenced once and
+# instanced many times). The default stage traversal stops at instance
+# boundaries and never visits those prims, which silently undercounts
+# rigid_body_count, mass, and volume on instanced assets. Traversing instance
+# proxies visits the composed geometry under every instance; the script only
+# reads these prims, so the read-only nature of instance proxies is fine.
+_TRAVERSE_INSTANCE_PROXIES = Usd.TraverseInstanceProxies()
 
 # Fields this script is allowed to derive from the stage.
 DERIVED_FIELDS = ("asset_extents", "rigid_body_count", "mass", "qcode")
@@ -159,7 +171,7 @@ def compute_extents_meters(stage: Usd.Stage, prim: Usd.Prim) -> tuple[list[float
 
 def count_rigid_bodies(stage: Usd.Stage) -> int:
     count = 0
-    for prim in stage.Traverse():
+    for prim in stage.Traverse(_TRAVERSE_INSTANCE_PROXIES):
         has = False
         try:
             has = prim.HasAPI(UsdPhysics.RigidBodyAPI)
@@ -175,7 +187,7 @@ def count_rigid_bodies(stage: Usd.Stage) -> int:
 
 def sum_authored_mass(stage: Usd.Stage) -> tuple[float | None, int]:
     masses: list[float] = []
-    for prim in stage.Traverse():
+    for prim in stage.Traverse(_TRAVERSE_INSTANCE_PROXIES):
         has_mass_api = False
         try:
             has_mass_api = prim.HasAPI(UsdPhysics.MassAPI)
@@ -255,7 +267,7 @@ def build_mass_report(
 
     body_paths: set[str] = set()
     body_mass: dict[str, float | None] = {}
-    for prim in stage.Traverse():
+    for prim in stage.Traverse(_TRAVERSE_INSTANCE_PROXIES):
         is_body = False
         try:
             is_body = prim.HasAPI(UsdPhysics.RigidBodyAPI)
@@ -275,7 +287,7 @@ def build_mass_report(
     total_volume = 0.0
     unassigned_volume = 0.0
     warnings: list[str] = []
-    for prim in stage.Traverse():
+    for prim in stage.Traverse(_TRAVERSE_INSTANCE_PROXIES):
         if not prim.IsA(UsdGeom.Mesh):
             continue
         vol = mesh_volume_stage_units(UsdGeom.Mesh(prim), xform_cache)
@@ -484,11 +496,18 @@ def main() -> int:
         warnings.append("Stage has no valid default prim; extents computed over the whole stage.")
 
     mpu = UsdGeom.GetStageMetersPerUnit(read_stage) or 1.0
-    extents, extents_note = compute_extents_meters(read_stage, root_prim)
+    # A material asset has no geometry and no mass, so its extents and mass are 0 rather than unknown.
+    material_asset = bool(default_prim) and default_prim.IsValid() and default_prim.IsA(UsdShade.Material)
+    if material_asset:
+        extents, extents_note = [0.0, 0.0, 0.0], None
+    else:
+        extents, extents_note = compute_extents_meters(read_stage, root_prim)
     if extents_note:
         warnings.append(extents_note)
     rigid_body_count = count_rigid_bodies(read_stage)
     mass, mass_body_count = sum_authored_mass(read_stage)
+    if material_asset:
+        mass = 0.0
 
     set_keys = {key for key, _ in args.sets}
     qcode, qcode_source = derive_qcode(root_prim)

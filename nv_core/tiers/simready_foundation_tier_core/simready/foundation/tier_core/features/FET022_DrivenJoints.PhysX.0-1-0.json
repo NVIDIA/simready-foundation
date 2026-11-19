@@ -1,0 +1,36 @@
+{
+  "id": "FET022_DrivenJoints.PhysX.0-1-0",
+  "display_name": "Driven Joints (PhysX)",
+  "legacy_identity": {
+    "id": "FET_022_PHYSX",
+    "version": "0.1.0"
+  },
+  "source_feature": "FET022_DrivenJoints.0-1-0",
+  "dependencies": [
+    "FET004_Multibody.RobotPhysX.0-1-0"
+  ],
+  "additional_requirements": [
+    "DJ.001",
+    "DJ.002",
+    "DJ.003",
+    "DJ.004",
+    "DJ.005",
+    "DJ.006",
+    "DJ.007",
+    "DJ.011"
+  ],
+  "adapters": [
+    "skill:simready-foundation-conform-fet-022-physx"
+  ],
+  "runtime_tests": [
+    "simready.foundation.tier_core.runtime_tests:drive_gain_validation",
+    "simready.foundation.tier_core.runtime_tests:effort_limit",
+    "simready.foundation.tier_core.runtime_tests:full_range_sweep",
+    "simready.foundation.tier_core.runtime_tests:ik_target_reach",
+    "simready.foundation.tier_core.runtime_tests:jacobian_ik",
+    "simready.foundation.tier_core.runtime_tests:mimic_joint",
+    "simready.foundation.tier_core.runtime_tests:multi_joint_coordination",
+    "simready.foundation.tier_core.runtime_tests:state_accuracy",
+    "simready.foundation.tier_core.runtime_tests:velocity_limit"
+  ]
+}

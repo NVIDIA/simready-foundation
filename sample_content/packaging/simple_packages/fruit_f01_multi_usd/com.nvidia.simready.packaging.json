@@ -1,18 +1,18 @@
 {
   "format_version": "1.0",
   "package_id": "com.nvidia.simready.fruit_f01_multi_usd.1.0.0",
-  "license": "LicenseRef-NVIDIA-Proprietary",
+  "license": "Apache-2.0",
   "metadata": [
     {
       "name": "com.nvidia.simready.conformance.Package-Candidate@1.0.0.json",
       "hash": {
-        "sha256": "9c077b74e1999a14fad4b794771969adb5fad3cfa5be6feac0da5094902de240"
+        "sha256": "4181ecc10e15adba6e069ded297647679e330b452fc7c0f1266a4103c375cfe9"
       }
     },
     {
       "name": "com.nvidia.simready.packaging.bom.json",
       "hash": {
-        "sha256": "d93fad1045273313057b9c329123eafab6d283e9205684a931bb6def276f4905"
+        "sha256": "e464f026500a5e739f867a9a16d7cc47be30d1d6e6a1d79132c1af2a8ad95d3f"
       }
     },
     {
@@ -23,9 +23,9 @@
     }
   ],
   "content_hash": {
-    "sha256": "7b9b64474ca420d7ef740c5b58c46e248a426cc6e3d2bbe62f6d8ca8775b290e"
+    "sha256": "dd5d732faf3f8a353493f99ac07709825b1b6d32955c73a9f9fc1677b8ef7e42"
   },
   "package_hash": {
-    "sha256": "5d1c5c62eeaa53f5fa640e6ae4c824d2278516f9bd0ac5e6ececf540dd51fcd9"
+    "sha256": "2d97dc7e336174c0319aa6a8263cc26c006d32bb6a256e49fd3a790b4f587a0a"
   }
 }

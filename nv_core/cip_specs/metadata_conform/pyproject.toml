@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "simready-metadata-conform"
+version = "2026.10.0-rc0"
+description = "Deterministic FET_031 and FET_033 metadata conformance for SimReady packages"
+readme = "README.md"
+requires-python = ">=3.10,<3.14"
+license = "Apache-2.0"
+authors = [{ name = "NVIDIA Corporation" }]
+dependencies = []
+
+[project.optional-dependencies]
+usd = ["usd-core>=23.5"]
+test = ["pytest>=8"]
+# Profile validation is an end-state report, not part of conformance. Host
+# applications that only conform an asset must not be forced to install the
+# validator and a Foundation tier.
+validate = ["simready-validate", "simready-foundation-tier-core"]
+
+[project.scripts]
+simready-metadata-sidecar = "simready.metadata_conform.sidecar:main"
+simready-metadata-conform = "simready.metadata_conform.runner:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["simready", "simready.*"]
+# `simready` is a PEP 420 namespace package so this distribution can coexist
+# with `simready.multiphysics_upgrade`, `simready.asset_transformer`, and the
+# tier-core `simready.foundation` namespace in the same interpreter.
+namespaces = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

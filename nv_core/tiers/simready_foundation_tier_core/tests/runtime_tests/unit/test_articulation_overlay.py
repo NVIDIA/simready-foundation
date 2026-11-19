@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Tests for articulation_phases.overlay (pure-Python helpers only)."""
-from simready_benchmark_kit_suite.articulation_phases.overlay import (
+from simready.foundation.tier_core.runtime_tests.articulation_phases.overlay import (
     OVERLAY_ALLOWED,
     overlay_safe_text,
 )

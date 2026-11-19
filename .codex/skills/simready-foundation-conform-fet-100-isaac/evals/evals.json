@@ -1,12 +1,12 @@
 [
     {
         "id": "simready-foundation-conform-fet-100-isaac-positive-trigger",
-        "question": "Repair FET_100_ISAAC@0.4.0 validation failures on a SimReady asset or package.",
+        "question": "Repair CAP100_IsaacComposition.Isaac.0-4-0 validation failures on a SimReady asset or package.",
         "expected_skill": "simready-foundation-conform-fet-100-isaac",
-        "ground_truth": "The agent should activate simready-foundation-conform-fet-100-isaac and follow the exact FET_100_ISAAC workflow.",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-100-isaac and follow the exact CAP100_IsaacComposition.Isaac workflow.",
         "expected_behavior": [
             "Load the simready-foundation-conform-fet-100-isaac skill.",
-            "Use the selected FET_100_ISAAC manifest as the authoritative feature contract.",
+            "Use the selected CAP100_IsaacComposition.Isaac manifest as the authoritative feature contract.",
             "Report changed files, validation performed, and any remaining blockers."
         ]
     },

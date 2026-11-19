@@ -1,22 +1,22 @@
-# FET_001_STANDARD Requirement Repair Map
+# FET001_MinimalPlaceableVisual Requirement Repair Map
 
-Use this reference when a validation report or inspection identifies `FET_001_STANDARD` failures. Load the selected JSON manifest first:
+Use this reference when a validation report or inspection identifies `FET001_MinimalPlaceableVisual` failures. Load the selected JSON manifest first:
 
-- `FET_001_STANDARD-0.1.0.json`
-- `FET_001_STANDARD-1.0.0.json`
-- `FET_001_STANDARD-1.0.1.json`
+- `FET001_MinimalPlaceableVisual.0-1-0.json`
+- `FET001_MinimalPlaceableVisual.1-0-0.json`
+- `FET001_MinimalPlaceableVisual.1-0-1.json`
 
-Default to `FET_001_STANDARD@1.0.1` when the user asks for general FET_001_STANDARD/Minimal conformance and no profile or validation report selects an older version. Use an older version only when the user, profile, validation report, or migration task explicitly requests it. If an older report uses legacy integer versions, map `1` to `0.1.0`, `2` to `1.0.0`, and `3` to `1.0.1`.
+Default to `FET001_MinimalPlaceableVisual.1-0-1` when the user asks for general FET001_MinimalPlaceableVisual/Minimal conformance and no profile or validation report selects an older version. Use an older version only when the user, profile, validation report, or migration task explicitly requests it. If an older report uses legacy integer versions, map `1` to `FET001_MinimalPlaceableVisual.0-1-0`, `2` to `FET001_MinimalPlaceableVisual.1-0-0`, and `3` to `FET001_MinimalPlaceableVisual.1-0-1`.
 
 ## Version Target Matrix
 
 | Version | Manifest | Requirement IDs to Enforce |
 |---|---|---|
-| `0.1.0` | `FET_001_STANDARD-0.1.0.json` | `AA.001`, `AA.002`, `UN.001`, `UN.002`, `UN.007`, `VG.001`, `HI.004` |
-| `1.0.0` | `FET_001_STANDARD-1.0.0.json` | `AA.001`, `AA.002`, `UN.006`, `UN.007`, `VG.MESH.001`, `VG.002`, `VG.014`, `VG.029`, `VG.025`, `VG.027`, `VG.028`, `HI.001`, `HI.003`, `HI.004` |
-| `1.0.1` | `FET_001_STANDARD-1.0.1.json` | All version 1.0.0 requirement IDs plus `VG.008` |
+| `FET001_MinimalPlaceableVisual.0-1-0` | `FET001_MinimalPlaceableVisual.0-1-0.json` | `AA.001`, `AA.002`, `UN.001`, `UN.002`, `UN.007`, `VG.001`, `HI.004` |
+| `FET001_MinimalPlaceableVisual.1-0-0` | `FET001_MinimalPlaceableVisual.1-0-0.json` | `AA.001`, `AA.002`, `UN.006`, `UN.007`, `VG.MESH.001`, `VG.002`, `VG.014`, `VG.029`, `VG.025`, `VG.027`, `VG.028`, `HI.001`, `HI.003`, `HI.004` |
+| `FET001_MinimalPlaceableVisual.1-0-1` | `FET001_MinimalPlaceableVisual.1-0-1.json` | All `FET001_MinimalPlaceableVisual.1-0-0` requirement IDs plus `VG.008` |
 
-When conforming to a specific version, do not author repairs solely for newer-version requirement IDs unless the user asks for a broader best-effort cleanup. For example, `VG.008` is required for version `1.0.1`, but not for versions `0.1.0` or `1.0.0`.
+When conforming to a specific version, do not author repairs solely for newer-version requirement IDs unless the user asks for a broader best-effort cleanup. For example, `VG.008` is required for version `FET001_MinimalPlaceableVisual.1-0-1`, but not for versions `FET001_MinimalPlaceableVisual.0-1-0` or `FET001_MinimalPlaceableVisual.1-0-0`.
 
 ## Version 0.1.0 Requirements
 
@@ -71,9 +71,9 @@ Do not simply change `metersPerUnit` from `0.001` to `1.0` on CAD output unless 
 
 ## Forward-Tested Scenario
 
-After `simready-foundation-conform-fet-000-standard` repairs metadata on a converted CAD-derived asset, profile validation may select `FET_001_STANDARD@0.1.0` and fail only `UN.007`: stage `metersPerUnit = 0.001`, not `1.0`.
+After `simready-foundation-conform-fet-000-standard` repairs metadata on a converted CAD-derived asset, profile validation may select `FET001_MinimalPlaceableVisual.0-1-0` and fail only `UN.007`: stage `metersPerUnit = 0.001`, not `1.0`.
 
-The passing repair copied the `FET_000_STANDARD` USD into a fresh staged file, set stage `metersPerUnit = 1.0`, and added root xform op `xformOp:scale:meter_normalization` with a per-axis scale value of `0.001`. `FET_000_STANDARD` and `FET_001_STANDARD` both passed afterward.
+The passing repair copied the `CAP000_Core` USD into a fresh staged file, set stage `metersPerUnit = 1.0`, and added root xform op `xformOp:scale:meter_normalization` with a per-axis scale value of `0.001`. `CAP000_Core` and `FET001_MinimalPlaceableVisual` both passed afterward.
 
 A first wrapper attempt was rejected by current validators: an extra USD payload under `simready_usd` failed `NP.005`, while moving the payload to `../payloads/...` failed `AA.001` as outside the asset root. Prefer same-file normalization or data-space rescaling for this profile unless the package layout contract changes.
 

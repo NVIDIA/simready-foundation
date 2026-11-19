@@ -2,30 +2,26 @@
   "format_version": "1.0",
   "profile": "Package",
   "profile_version": "1.0.0",
-  "timestamp": "2026-05-13T13:20:55",
+  "timestamp": "2026-11-16T19:09:09",
   "assets": [
     {
       "asset": "com.nvidia.simready.packaging.json",
       "features": [
         {
-          "FET_030_STANDARD": {
-            "version": "0.1.0",
+          "CAP030_PackagingCore.0-1-0": {
+            "version": "0-1-0",
             "passed": true,
             "failing_requirements": [],
             "dependencies": []
           }
         },
         {
-          "FET_032_STANDARD": {
-            "version": "0.1.0",
+          "CAP032_PackagingIntrospection.0-1-0": {
+            "version": "0-1-0",
             "passed": true,
             "failing_requirements": [],
             "dependencies": [
-              {
-                "FET_030_STANDARD": {
-                  "version": "0.1.0"
-                }
-              }
+              "CAP030_PackagingCore.0-1-0"
             ]
           }
         }

@@ -30,8 +30,7 @@ pytest.importorskip("pxr")
 pytest.importorskip("simready.foundation.tier_core.requirements")
 
 from pxr import Sdf, Usd, UsdShade  # noqa: E402
-
-from simready.foundation.tier_core.capabilities.visualization.materials import (  # noqa: E402
+from simready.foundation.tier_core.rules_and_reqs.visualization.materials import (  # noqa: E402
     validation as materials,
 )
 
@@ -54,9 +53,7 @@ def _stage_with_diffuse_texture(authored_colorspace: str) -> Usd.Stage:
     reader.CreateInput("sourceColorSpace", Sdf.ValueTypeNames.Token).Set(authored_colorspace)
     reader.CreateOutput("rgb", Sdf.ValueTypeNames.Float3)
 
-    surface.CreateInput("diffuseColor", Sdf.ValueTypeNames.Color3f).ConnectToSource(
-        reader.ConnectableAPI(), "rgb"
-    )
+    surface.CreateInput("diffuseColor", Sdf.ValueTypeNames.Color3f).ConnectToSource(reader.ConnectableAPI(), "rgb")
     return stage
 
 
@@ -68,11 +65,7 @@ def _tex003_issues(stage: Usd.Stage) -> list:
     checker.CheckStage(stage)
     for prim in stage.Traverse():
         checker.CheckPrim(prim)
-    return [
-        issue
-        for issue in checker.GetIssues()
-        if issue.requirement == cap.MaterialsRequirements.VM_TEX_003
-    ]
+    return [issue for issue in checker.GetIssues() if issue.requirement == cap.MaterialsRequirements.VM_TEX_003]
 
 
 def test_wrong_colorspace_on_a_color_texture_is_reported_with_a_fix():
@@ -82,9 +75,9 @@ def test_wrong_colorspace_on_a_color_texture_is_reported_with_a_fix():
     issues = _tex003_issues(stage)
 
     assert issues, "an illegal 'linear' sourceColorSpace must fail VM.TEX.003"
-    assert any(issue.suggestion is not None for issue in issues), (
-        "the failure must offer a Suggestion so a consumer can apply the repair"
-    )
+    assert any(
+        issue.suggestion is not None for issue in issues
+    ), "the failure must offer a Suggestion so a consumer can apply the repair"
 
 
 def test_applying_the_suggestion_makes_the_stage_pass():

@@ -1,0 +1,858 @@
+/*****************************************************************************
+*     Copyright 1986-2020 NVIDIA Corporation. All rights reserved.
+******************************************************************************
+
+ MDL MATERIALS ARE PROVIDED PURSUANT TO AN END USER LICENSE  AGREEMENT,
+ WHICH WAS ACCEPTED IN ORDER TO GAIN ACCESS TO THIS FILE.  IN PARTICULAR,
+ THE MDL MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF
+ COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL NVIDIA
+ CORPORATION BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, INCLUDING
+ ANY GENERAL, SPECIAL,  INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES,
+ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
+ THE USE OR INABILITY TO USE THE MDL MATERIALS OR FROM OTHER DEALINGS IN
+ THE MDL MATERIALS.
+*/
+
+mdl 1.7;
+
+import ::df::*;
+import ::state::*;
+import ::math::*;
+import ::base::*;
+import ::tex::*;
+import ::anno::*;
+
+import .::SimPBR_Model::*;
+import .::SimPBR_Core::*;
+using .::baking_annotations import *;
+
+export material SimPBR(
+    // -------------------- DIFFUSE REFLECTION ----------------------
+    uniform color diffuse_color_constant = color(0.2f)
+    [[
+        anno::display_name("Albedo Base Color"),
+        anno::description("The base albedo color to use if no texture is specified"),
+        anno::in_group("Diffuse")
+    ]],
+    uniform texture_2d diffuse_texture = texture_2d()
+    [[
+        anno::display_name("Albedo Map"),
+        anno::description("The texture specifying the albedo value to use"),
+        anno::in_group("Diffuse"),
+        anno::usage("base_color")
+    ]],
+    uniform color diffuse_tint = color(1.0f)
+    [[
+        anno::display_name("Albedo Tint"),
+        anno::description("This tints the albedo color or texture contant"),
+        anno::in_group("Diffuse")
+    ]],
+    uniform bool enable_transmission = false
+    [[
+        anno::display_name("Enable Diffuse Transmission"),
+        anno::description("Enables the diffuse transmission of light through thin diffuse scattering layer"),
+        anno::in_group("Diffuse")
+    ]],
+    uniform float opacity_ratio = 1.f
+    [[
+        anno::enable_if("enable_transmission == true"),
+        anno::display_name("Opacity Ratio"),
+        anno::description("Amount of opacity"),
+        anno::in_group("Diffuse")
+    ]],
+    uniform color opacity_tint = color(1.0f)
+    [[
+        anno::enable_if("enable_transmission == true"),
+        anno::display_name("Diffuse transmission tint"),
+        anno::description("Base diffuse transmission color"),
+        anno::in_group("Diffuse")
+    ]],
+    uniform float opacity_multiplier = 1.f
+    [[
+        anno::enable_if("enable_transmission == true"),
+        anno::display_name("Diffuse transmission multiplier"),
+        anno::description("Base diffuse transmission multiplier"),
+        anno::in_group("Diffuse")
+    ]],
+
+    // -------------------- SPECULAR REFLECTION ----------------------
+    float reflection_roughness_constant = 0.5f
+    [[
+        anno::display_name("Roughness Amount"),
+        anno::hard_range(0.0,1.),
+        anno::description("Higher roughness values lead to more blurry reflections"),
+        anno::in_group("Specular")
+    ]],
+    uniform float reflection_roughness_texture_influence = 0.0f
+    [[
+        anno::display_name("Roughness Map Influence"),
+        anno::hard_range(0.0, 1.),
+        anno::description("Blends between the constant value and the lookup of the roughness texture"),
+        anno::in_group("Specular")
+    ]],
+    uniform texture_2d reflectionroughness_texture = texture_2d()
+    [[
+        anno::display_name("Roughness Map"),
+        anno::in_group("Specular"),
+        anno::usage("roughness")
+    ]],
+
+    float anisotropy_constant = 0.0f
+    [[
+        anno::display_name("Anisotropy Amount"),
+        anno::hard_range(-1.,1.),
+        anno::description("0 for isotropic, extents of -1 to 1 for anisotropy"),
+        anno::in_group("Specular")
+    ]],
+    uniform float anisotropy_texture_influence = 0.0f
+    [[
+        anno::display_name("Anisotropy Map Influence"),
+        anno::hard_range(0.0, 1.),
+        anno::description("Blends between the constant value and the lookup of the anisotropy texture"),
+        anno::in_group("Specular")
+    ]],
+    uniform texture_2d anisotropy_texture = texture_2d()
+    [[
+        anno::display_name("Anisotropy Map"),
+        anno::in_group("Specular"),
+        anno::usage("anisotropy")
+    ]],
+
+    float metallic_constant = 0.f
+    [[
+        anno::display_name("Metallic Amount"),
+        anno::hard_range(0.0,1.),
+        anno::description("Metallic Material"),
+        anno::in_group("Specular")
+    ]],
+    uniform float metallic_texture_influence = 0.0f
+    [[
+        anno::display_name("Metallic Map Influence"),
+        anno::hard_range(0.0, 1.),
+        anno::description("Blends between the constant value and the lookup of the metallic texture"),
+        anno::in_group("Specular")
+    ]],
+    uniform texture_2d metallic_texture = texture_2d()
+    [[
+        anno::display_name("Metallic Map"),
+        anno::in_group("Specular"),
+        anno::usage("metalness")
+    ]],
+
+    float specular_constant = 1.f
+    [[
+        anno::display_name("Specular amount"),
+        anno::hard_range(0.0, 1.0),
+        anno::description("Scale of the specular component"),
+        anno::in_group("Specular")
+    ]],
+    uniform texture_2d specular_texture = texture_2d()
+    [[
+        anno::display_name("Specular Map"),
+        anno::in_group("Specular"),
+        anno::usage("specular_color")
+    ]],
+
+    // -------------------- ORM ----------------------
+    uniform bool enable_ORM_texture = true
+    [[
+        anno::display_name("Enable ORM Texture"),
+        anno::description("When True the ORM texture will be used to extract the Occlusion, Roughness and Metallic Map"),
+        anno::in_group("Reflectivity")
+    ]],
+    uniform texture_2d ORM_texture = texture_2d()
+    [[
+        anno::display_name("ORM Map"),
+        anno::description("Texture that hae Occlusion, Roughness and Metallic map stored in the respective r, g and b channels"),
+        anno::in_group("Reflectivity"),
+        anno::usage("opacity"),
+        anno::usage("roughness"),
+        anno::usage("metalness")
+    ]],
+
+    // -------------------- Clearcoat ----------------------
+    uniform bool enable_clearcoat = false
+    [[
+        anno::display_name("Enable Clearcoat Layer"),
+        anno::description("Adds a  clearcoat layer on top of the material when enabled"),
+        anno::in_group("Clearcoat")
+    ]],
+    color clearcoat_tint = color(1.0f)
+    [[
+        anno::display_name("Clearcoat Tint"),
+        anno::description("Clearcoat is tinted and affects the underlying material"),
+        anno::in_group("Clearcoat")
+    ]],
+    float clearcoat_transparency = 1.0f
+    [[
+        anno::display_name("Clearcoat Transparency"),
+        anno::description("Adjusts the transparency of the clearcoat. Can be turned into a fully opaque clearcoat "
+        "covering the underlying layer"),
+        anno::in_group("Clearcoat")
+    ]],
+    float clearcoat_reflection_roughness = 0.0f
+    [[
+        anno::display_name("Clearcoat Roughness"),
+        anno::description("Higher roughness values lead to more blurry reflections"),
+        anno::hard_range(0.0f, 1.0f),
+        anno::in_group("Clearcoat")
+    ]],
+    float clearcoat_weight = 1.0f
+    [[
+        anno::display_name("Clearcoat Weight"),
+        anno::description("Sets the weight for clearcoat layer"),
+        anno::hard_range(0.0f, 1.0f),
+        anno::in_group("Clearcoat")
+    ]],
+    float clearcoat_flatten = 1.0f
+    [[
+        anno::display_name("Clearcoat Flatten"),
+        anno::description("Flattens the clearcoat to even out the underlying bump maps"),
+        anno::hard_range(0.0f, 1.0f),
+        anno::in_group("Clearcoat")
+    ]],
+    float clearcoat_ior = 1.56f
+    [[
+        anno::display_name("Clearcoat IOR"),
+        anno::description("Sets the Index of refraction for the clearcoat layer"),
+        anno::soft_range(1.0f, 4.0f),
+        anno::in_group("Clearcoat")
+    ]],
+    uniform float clearcoat_bump_factor = 1.f
+    [[
+        anno::display_name("Clearcoat Normal Map Strength"),
+        anno::description("Strength of normal map."),
+        anno::in_group("Clearcoat")
+    ]],
+
+    float3 clearcoat_normal_input = float3(0.0, 0.0, 0.0),
+    uniform texture_2d clearcoat_normalmap_texture = texture_2d()
+    [[
+        anno::display_name("Clearcoat Normal Map"),
+        anno::description("Enables the usage of the normalmap texture"),
+        anno::in_group("Clearcoat"),
+        anno::usage("normal")
+    ]],
+
+    uniform bool clearcoat_flip_tangent_u = false
+    [[
+        anno::display_name("Clearcoat Normal Map Flip U Tangent"),
+        anno::in_group("Clearcoat")
+    ]],
+    uniform bool clearcoat_flip_tangent_v = true
+    [[
+        anno::display_name("Clearcoat Normal Map Flip V Tangent"),
+        anno::in_group("Clearcoat")
+    ]],
+
+
+    // -------------------- REFLECTIVITY ----------------------
+    uniform bool enable_retroreflection = false
+    [[
+        anno::display_name("Enable Retroreflection"),
+        anno::in_group("Reflectivity")
+    ]],
+    uniform texture_2d retroreflection_mask_texture = texture_2d()
+    [[
+        anno::display_name("Retroreflection Mask Map"),
+        anno::in_group("Reflectivity")
+    ]],
+    color retroreflection_tint = color(.182,.800,.000)
+    [[
+        anno::display_name("Retro-reflection tint"),
+        anno::description("The tint of the retroreflection"),
+        anno::in_group("Reflectivity")
+    ]],
+    uniform float normal_reflectivity = 0.5
+    [[
+        anno::display_name("Retro-reflection weight facing"),
+        anno::hard_range(0.0,1.),
+        anno::description("Reflectivity control for geometry facing the viewer"),
+        anno::in_group("Reflectivity")
+    ]],
+    uniform float grazing_reflectivity = 1.0
+    [[
+        anno::display_name("Retro-reflection weight edge"),
+        anno::hard_range(0.0,1.),
+        anno::description("Reflectivity control for the reflectivity at geometry edges"),
+        anno::in_group("Reflectivity")
+    ]],
+
+    // -------------------- AMBIENT OCCLUSION ----------------------
+    float ao_to_diffuse = 0.0
+    [[
+        anno::display_name("AO to Diffuse"),
+        anno::description("Controls the amount of ambient occlusion multiplied into the diffuse color channel"),
+        anno::in_group("AO")
+    ]],
+    float ao_input = float(1.0),
+    uniform texture_2d ao_texture = texture_2d()
+    [[
+        anno::display_name("Ambient Occlusion Map"),
+        anno::description("The Ambient Occlusion texture for the material"),
+        anno::in_group("AO"),
+        anno::usage("occlusion")
+    ]],
+
+    // -------------------- EMISSIVE ----------------------
+    uniform bool enable_emission = false
+    [[
+        anno::display_name("Enable Emission"),
+        anno::description("Enables the emission of light from the material"),
+        anno::in_group("Emissive")
+    ]],
+    uniform color emissive_color = color(1.0, 0.1, 0.1)
+    [[
+        anno::enable_if("enable_emission == true"),
+        anno::display_name("Emissive Color"),
+        anno::description("The emission color"),
+        anno::in_group("Emissive")
+    ]],
+
+    color emissive_mask_input = color(1.0),
+    uniform texture_2d emissive_mask_texture = texture_2d()
+    [[
+        anno::enable_if("enable_emission == true"),
+        anno::display_name("Emissive Mask Map"),
+        anno::description("The texture masking the emissive color"),
+        anno::in_group("Emissive"),
+        anno::usage("emission_mask")
+    ]],
+    uniform float emissive_intensity = 40.f
+    [[
+        anno::enable_if("enable_emission == true"),
+        anno::display_name("Emissive Intensity"),
+        anno::description("Intensity of the emission"),
+        anno::in_group("Emissive")
+    ]],
+    uniform bool enable_emissive_flipbook = false
+    [[
+        anno::display_name("Enable Flipbook for emission"),
+        anno::description("Allows the use of animated emissive textures (e.g. video screens)"),
+        anno::in_group("Emissive")
+    ]],
+    uniform int2 flipbook_dim = int2(1,1)
+    [[
+        anno::enable_if("enable_emissive_flipbook == true"),
+        anno::display_name("Flipbook Dims"),
+        anno::description("How many rows and columns are in the flipbook?"),
+        anno::in_group("Emissive")
+    ]],
+    uniform int target_fps = 1
+    [[
+        anno::enable_if("enable_emissive_flipbook == true"),
+        anno::display_name("Flipbook Target FPS"),
+        anno::description("Playback speed in frames per second"),
+        anno::in_group("Emissive")
+    ]],
+    uniform float flipbook_time_offset = 0.0f
+    [[
+        anno::enable_if("enable_emissive_flipbook == true"),
+        anno::display_name("Flipbook Time Offset"),
+        anno::description("Playback offset in seconds"),
+        anno::in_group("Emissive")
+    ]],
+    uniform int2 flipbook_frame_interval = int2(0, -1)
+    [[
+        anno::enable_if("enable_emissive_flipbook == true"),
+        anno::display_name("Flipbook Frame Range"),
+        anno::description("Limit playback to given frame range. Put end to -1 to disable subrange and use the full animation range."),
+        anno::in_group("Emissive")
+    ]],
+
+    // -------------------- ALPHA  ----------------------
+    uniform bool enable_opacity = false
+    [[
+        anno::display_name("Enable Opacity"),
+        anno::description("Enables or disables alpha functionality"),
+        anno::in_group("Alpha")
+    ]],
+    float alpha_constant = 1.0
+    [[
+        anno::enable_if("enable_opacity == true"),
+        anno::display_name("Opacity Fallback Constant"),
+        anno::hard_range(0.0, 1.0),
+        anno::description("The base alpha constant to use if no texture is specified"),
+        anno::in_group("Alpha")
+    ]],
+    uniform texture_2d opacity_texture = texture_2d()
+    [[
+        anno::enable_if("enable_opacity == true"),
+        anno::display_name("Opacity Map"),
+        anno::description("The texture specifying the opacity value to use"),
+        anno::in_group("Alpha"),
+        anno::usage("opacity")
+    ]],
+    uniform bool enable_opacity_cutout = false
+    [[
+        anno::enable_if("enable_opacity == true"),
+        anno::display_name("Enable Alpha Cutout"),
+        anno::description("Enables or disables alpha cutout functionality"),
+        anno::in_group("Alpha")
+    ]],
+    uniform float alpha_cutout_cutoff = 1.f
+    [[
+        anno::enable_if("enable_opacity == true"),
+        anno::enable_if("enable_opacity_cutout == true"),
+        anno::hard_range(0.0, 1.0),
+        anno::display_name("Alpha Cutout Cutoff"),
+        anno::description("The cutoff value to to render as transparent up to and opaque past"),
+        anno::in_group("Alpha")
+    ]],
+
+    // -------------------- NORMAL ----------------------
+    uniform float bump_factor = 1.f
+    [[
+        anno::display_name("Normal Map Strength"),
+        anno::description("Strength of normal map."),
+        anno::in_group("Normal")
+    ]],
+
+    float3 normal_input = state::normal(),
+    uniform texture_2d normalmap_texture = texture_2d()
+    [[
+        anno::display_name("Normal Map"),
+        anno::in_group("Normal"),
+        anno::usage("normal")
+    ]],
+    uniform bool flip_tangent_u = false
+    [[
+        anno::display_name("Normal Map Flip U Tangent"),
+        anno::description("Flips the U Tangent vector."),
+        anno::in_group("Normal")
+    ]],
+    uniform bool flip_tangent_v = true
+    [[
+        anno::display_name("Normal Map Flip V Tangent"),
+        anno::description("Flips the V Tangent vector. By Default, SimPBR materials setup for DirectX normal maps. Set Normal Map Flip V = false for OpenGL."),
+        anno::in_group("Normal")
+    ]],
+
+    // -------------------- UV ADJUSTMENTS ----------------------
+    uniform bool project_uvw = false
+    [[
+        anno::display_name("Enable Project UVW Coordinates"),
+        anno::description("When enabled, UV coordinates will be generated by projecting them from a coordinate system"),
+        anno::in_group("UV")
+    ]],
+    uniform bool world_or_object = false
+    [[
+        anno::enable_if("project_uvw == true"),
+        anno::display_name("Enable World Space"),
+        anno::description("When set to 'true' uses world space for projection, when 'false' object space is used"),
+        anno::in_group("UV")
+    ]],
+    uniform float2 texture_translate =  float2(0.0f)
+    [[
+        anno::display_name("Texture Translate"),
+        anno::description("Controls position of texture."),
+        anno::in_group("UV")
+    ]],
+    uniform float2 texture_scale =  float2(1.0f)
+    [[
+        anno::display_name("Texture Tiling"),
+        anno::description("Controls repetition of the texture."),
+        anno::in_group("UV")
+    ]],
+    uniform float2 texture_speed =  float2(0.0f)
+    [[
+        anno::display_name("Texture Speed"),
+        anno::description("Scrolling texture animation speed in UVs per sec."),
+        anno::in_group("UV")
+    ]],
+
+    // -------------------- Wetness ----------------------
+    uniform bool enable_wetness = false
+    [[
+        anno::description("Enable wetness controls on the object"),
+        anno::display_name("Enable wetness"),
+        anno::in_group("Wetness parameters")
+    ]],
+    float wetness = 0.0f
+    [[
+        anno::description("Controls the wetness of the object"),
+        anno::display_name("Wetness strength"),
+        anno::in_group("Wetness parameters"),
+        anno::hard_range(0.0, 1.0)
+    ]],
+    float porosity = 0.5f
+    [[
+        anno::description("Controls the porosity of the object"),
+        anno::display_name("Porosity strength"),
+        anno::in_group("Wetness parameters"),
+        anno::hard_range(0.0, 1.0)
+    ]],
+    float porosity_scale = 1.0f
+    [[
+        anno::description("Scale the porosity fetched from the porosity map"),
+        anno::display_name("Porosity scale"),
+        anno::in_group("Wetness parameters"),
+        anno::soft_range(0.0, 2.0)
+    ]],
+    uniform texture_2d porosity_map = texture_2d()
+    [[
+        anno::description("Describes the porosity of object"),
+        anno::display_name("Porosity map"),
+        anno::in_group("Wetness parameters"),
+        anno::usage("porosity")
+    ]],
+    color water_albedo = color(0.5f)
+    [[
+        anno::description("Describes the color of the accumulated water"),
+        anno::display_name("Water albedo"),
+        anno::in_group("Wetness parameters")
+    ]],
+    float water_transparency = 1.0f
+    [[
+        anno::description("Describes the transparency of the water"),
+        anno::display_name("Water transparency"),
+        anno::in_group("Wetness parameters"),
+        anno::hard_range(0.0, 1.0)
+    ]],
+    float water_accumulation = 0.0f
+    [[
+        anno::description("Control the water accumulation in case of wetness"),
+        anno::display_name("Accumulation"),
+        anno::in_group("Wetness parameters"),
+        anno::hard_range(0.0, 1.0)
+    ]],
+    float water_accumulation_scale = 1.0f
+    [[
+        anno::description("Scale the accumualtion fetched from the accumulation map"),
+        anno::display_name("Accumulation scale"),
+        anno::in_group("Wetness parameters"),
+        anno::soft_range(0.0, 2.0)
+    ]],
+    uniform texture_2d water_accumulation_map = texture_2d()
+    [[
+        anno::description("Describes location on the where water would accumulate"),
+        anno::display_name("Accumulation map"),
+        anno::in_group("Wetness parameters"),
+        anno::usage("water_accumulation")
+    ]],
+
+    // -------------------- Noise (albedo) ----------------------
+    uniform float noise_blender_scale = 0.0f
+    [[
+        anno::display_name("Albedo/noise Blend Factor"),
+        anno::description("How much noise is being mixed with the albedo color"),
+        anno::in_group("Noise parameters"),
+        anno::hard_range(0.0, 1.0)
+    ]],
+    uniform color noise_albedo_tint = color(1.0f)
+    [[
+        anno::display_name("Albedo Tint"),
+        anno::in_group("Noise parameters")
+    ]],
+    float noise_specular_scale = 1.0f
+    [[
+        anno::display_name("Specular Scale"),
+        anno::in_group("Noise parameters"),
+        anno::hard_range(0.0, 1.0)
+    ]],
+    uniform int noise_levels = 3
+    [[
+        anno::description("Higher amounts will add detail to the noise"),
+        anno::display_name("Levels"),
+        anno::hard_range(1,6),
+        anno::in_group("Noise parameters")
+    ]],
+    uniform bool noise_absolute = false
+    [[
+        anno::display_name("Billowing appearance"),
+        anno::in_group("Noise parameters")
+    ]],
+    uniform float noise_threshold_low = 0.0f
+    [[
+        anno::hard_range(0.0,1.),
+        anno::description("Increasing this value will create bigger areas uniformly colored with Color 2"),
+        anno::display_name("Lower threshold"),
+        anno::in_group("Noise parameters")
+    ]],
+    uniform float noise_threshold_high = 1.0f
+    [[
+        anno::hard_range(0.0,1.),
+        anno::description("Lowering this value will create bigger areas uniformly colored with Color 1"),
+        anno::display_name("Upper threshold"),
+        anno::in_group("Noise parameters")
+    ]],
+    uniform bool noise_object_space = true
+    [[
+        anno::description("If off, UV space will be used. If on, 3D texturing in object space will apply. For applications that do not support object space, world space will be used."),
+        anno::display_name("Use object space"),
+        anno::in_group("Noise parameters")
+    ]],
+    uniform float3 noise_rotation = float3(0.0f)
+    [[
+        anno::description("Rotation angle of the texture in degrees"),
+        anno::display_name("Rotation"),
+        anno::in_group("Noise parameters")
+    ]],
+    uniform float3 noise_translation = float3(0.0f)
+    [[
+        anno::description("Controls position of the texture on the object"),
+        anno::display_name("Offset"),
+        anno::in_group("Noise parameters")
+    ]],
+    uniform float3 noise_scaling = float3(1.0f)
+    [[
+        anno::description("Controls the scale of the texture on the object"),
+        anno::display_name("Tiling"),
+        anno::in_group("Noise parameters")
+    ]],
+    uniform bool enable_gradient_darkening = false
+    [[
+        anno::description("Activates the gradient darkening or brightening effect on the material. When enabled, the color of the material adjusts based on its distance from a specified point, allowing for nuanced lighting effects."),
+        anno::display_name("Enable Gradient Darkening"),
+        anno::in_group("Gradient Darkening")
+    ]],
+    uniform bool use_localspace_noise_for_gradient = false
+    [[
+        anno::description("When enabled will use object space for the gradient (this is usefull for animated objects). If false world space will be used."),
+        anno::display_name("Use object space"),
+        anno::in_group("Gradient Darkening")
+    ]],
+    uniform float gradient_falloff_dist = 6
+    [[
+        anno::description("Defines the distance from the specified point at which the gradient effect begins to diminish. A larger value results in a more gradual change with distance, affecting a broader area."),
+        anno::display_name("Falloff Distance"),
+        anno::in_group("Gradient Darkening"),
+        anno::soft_range(0.0, 10.0)
+    ]],
+    uniform float gradient_mult = 0.5
+    [[
+        anno::description("Controls the intensity of the gradient effect. A value of 1 maintains the original color, values less than 1 darken the material, and values greater than 1 brighten it, with the effect scaling proportionally."),
+        anno::display_name("Darkening Intensity"),
+        anno::in_group("Gradient Darkening"),
+        anno::soft_range(0.0, 10.0)
+    ]],
+    uniform float gradient_falloff_exp = 1.5
+    [[
+        anno::description("Sets the exponent used to modulate the sharpness of the gradient transition. Higher values produce a sharper and more defined transition between the original and adjusted colors."),
+        anno::display_name("Darkening falloff exp"),
+        anno::in_group("Gradient Darkening"),
+        anno::soft_range(0.1, 10.0)
+    ]],
+    uniform float gradient_noise_scale = 0.3
+    [[
+        anno::description("Adjusts the scale of the noise applied to the gradient effect. This allows for more complex and varied transitions across the surface, simulating natural irregularities."),
+        anno::display_name("Noise Scale"),
+        anno::in_group("Gradient Darkening"),
+        anno::soft_range(0.0, 10.0)
+    ]],
+    uniform float gradien_noise_threshold_low = 0.9f
+    [[
+        anno::hard_range(0.0, 1.0),
+        anno::description("Lowering this value will create bigger areas uniformly colored with Color 1"),
+        anno::display_name("Threshold low"),
+        anno::in_group("Gradient Darkening")
+    ]],
+    uniform float gradien_noise_threshold_high = 1.0f
+    [[
+        anno::hard_range(0.01,1.),
+        anno::description("Lowering this value will create bigger areas uniformly colored with Color 1"),
+        anno::display_name("Threshold high"),
+        anno::in_group("Gradient Darkening")
+    ]]
+)
+[[
+    anno::display_name("Sim PBR"),
+    anno::description("Supports the opaque alpha cutout material model of the Sim Renderer"),
+    anno::in_group("SimReady"),
+    anno::version( 1, 0, 0),
+    anno::author("NVIDIA CORPORATION"),
+    anno::key_words(string[]("Sim", "PBR", "opaque", "alpha", "cutout", "omniverse", "generic"))
+]]
+ = let {
+    base::texture_coordinate_system the_system = world_or_object ? base::texture_coordinate_world : base::texture_coordinate_object;
+
+    base::texture_coordinate_info uvw = project_uvw ?
+        base::coordinate_projection(
+            coordinate_system: the_system,
+            texture_space: 0,
+            projection_type: base::projection_cubic
+        ) : base::coordinate_source(
+            coordinate_system: base::texture_coordinate_uvw,
+            texture_space: 0
+        );
+
+    // Need to use a small value so the compiler doesnt optimize out this var...
+    float t = 0.00000001;//state::animation_time();
+    base::texture_coordinate_info transformed_uvw =  base::transform_coordinate(
+        transform: base::rotation_translation_scale(
+        scaling: float3(texture_scale.x, texture_scale.y, 1.0),
+        rotation: float3(0.0, 0.0, 0.0 ),
+        translation: float3(texture_translate.x + t * texture_speed.x, texture_translate.y + t * texture_speed.y, 0.0)),
+        coordinate: uvw
+    );
+    float2 uv = float2(transformed_uvw.position.x, transformed_uvw.position.y);
+
+    // Diffuse Color Lookup and AO
+    float4 base_lookup = tex::texture_isvalid(diffuse_texture) ? tex::lookup_float4(tex: diffuse_texture, coord: uv) : float4(1, 1, 1, 1);
+
+    float opacityValue = tex::texture_isvalid(opacity_texture) ? tex::lookup_float4(tex: opacity_texture, coord: uv).w : alpha_constant;
+
+    float retroreflection_mask = tex::texture_isvalid(retroreflection_mask_texture) ? tex::lookup_float4(tex: retroreflection_mask_texture, coord: uv).x : 1.0;
+
+    // Normal calculations
+    float3 normal_lookup =  tex::texture_isvalid(normalmap_texture) ?
+        base::tangent_space_normal_texture(
+            texture: normalmap_texture,
+            factor: bump_factor,
+            uvw: transformed_uvw,
+            flip_tangent_u: flip_tangent_u,
+            flip_tangent_v: flip_tangent_v
+        ) : normal_input;
+
+    float3 clearcoat_normal = tex::texture_isvalid(clearcoat_normalmap_texture) ?
+        base::tangent_space_normal_texture(
+            texture: clearcoat_normalmap_texture,
+            factor: clearcoat_bump_factor,
+            uvw: uvw,
+            flip_tangent_u: clearcoat_flip_tangent_u,
+            flip_tangent_v: clearcoat_flip_tangent_v
+        ) : clearcoat_normal_input;
+
+    float3 flattened_clearcoat_normal = ::math::lerp(normal_lookup, ::state::normal(), clearcoat_flatten);
+    float3 final_clearcoat_normal = tex::texture_isvalid(clearcoat_normalmap_texture) ? clearcoat_normal : flattened_clearcoat_normal;
+
+    float ao_lookup = tex::texture_isvalid(ao_texture) ? tex::lookup_float4(tex: ao_texture, coord: uv).x : ao_input;
+
+    color diffuse_color = tex::texture_isvalid(diffuse_texture) ? color(base_lookup.x, base_lookup.y, base_lookup.z) : diffuse_color_constant;
+    float noise_scale = base::perlin_noise_texture(
+        color1: color(0),
+        color2: color(1),
+        noise_levels: noise_levels,
+        absolute_noise: noise_absolute,
+        noise_threshold_high: noise_threshold_high,
+        noise_threshold_low: noise_threshold_low,
+        uvw: base::transform_coordinate(
+            transform: base::rotation_translation_scale(
+                scaling: noise_scaling * state::meters_per_scene_unit(),
+                translation: noise_translation,
+                rotation: float3(noise_rotation.x/180.*math::PI, noise_rotation.y/180.*math::PI, noise_rotation.z/180.*math::PI)
+            ),
+            coordinate: noise_object_space ?
+                base::coordinate_source(coordinate_system: base::texture_coordinate_object):
+                base::coordinate_source(coordinate_system: base::texture_coordinate_world)
+            )
+        ).mono;
+
+    color int_diffuse_color = math::lerp(diffuse_color, noise_albedo_tint, noise_scale * noise_blender_scale);
+
+    //Gradient darkening
+    float noise_scale_adjusted = enable_gradient_darkening ? base::perlin_noise_texture(
+        color1: color(gradien_noise_threshold_low),
+        color2: color(gradien_noise_threshold_high),
+        noise_levels: 3,
+        absolute_noise: use_localspace_noise_for_gradient,
+        noise_threshold_low: 0,
+        noise_threshold_high: 1,
+        uvw: base::transform_coordinate(
+            transform: base::rotation_translation_scale(
+                scaling: float3(gradient_noise_scale),
+                translation: float3(0, 0, 0),
+                rotation: float3(0, 0, 0)
+            ),
+            coordinate: use_localspace_noise_for_gradient ?
+                base::coordinate_source(coordinate_system: base::texture_coordinate_object):
+                base::coordinate_source(coordinate_system: base::texture_coordinate_world)
+            )
+        ).mono : 1.0;
+    float3 localPosition = enable_gradient_darkening ? state::transform_point(state::coordinate_internal, state::coordinate_object, state::position()) * state::meters_per_scene_unit() : float3(0, 0, 0);
+    float v = enable_gradient_darkening ? gradient_falloff_dist - localPosition.z : 0.0;
+    float gradient_factor = enable_gradient_darkening ? math::clamp(v / gradient_falloff_dist, 0.0, 1.0) : 0.0;
+    float effect_factor = enable_gradient_darkening ? math::pow(gradient_factor, gradient_falloff_exp) * noise_scale_adjusted : 0.0;
+    color adjusted_color = enable_gradient_darkening ? int_diffuse_color * gradient_mult * (1.0f + effect_factor * (gradient_mult - 1.0f)) : color(0, 0, 0);
+    color final_diffuse_color = enable_gradient_darkening ? math::lerp(int_diffuse_color, adjusted_color, effect_factor) : int_diffuse_color;
+
+    float3 ORM_lookup = tex::lookup_float3(
+        tex: ORM_texture,
+        coord: float2(transformed_uvw.position.x, transformed_uvw.position.y)
+    );
+
+    float roughness_lookup = tex::texture_isvalid(reflectionroughness_texture) ?
+        tex::lookup_float4(tex: reflectionroughness_texture, coord: uv).x : reflection_roughness_constant;
+    float anisotropy_lookup = tex::texture_isvalid(anisotropy_texture) ?
+        (tex::lookup_float4(tex: anisotropy_texture, coord: uv).x * 2.0f - 1.0f) : anisotropy_constant;
+    float metallic_lookup = tex::texture_isvalid(metallic_texture) ?
+        tex::lookup_float4(tex: metallic_texture, coord: uv).x : metallic_constant;
+    float specular_lookup = tex::texture_isvalid(specular_texture) ?
+        tex::lookup_float4(tex: specular_texture, coord: uv).x : specular_constant;
+    float final_specular_lookup = math::lerp(specular_lookup, specular_lookup * (1.0 - noise_scale), (1.0 - noise_specular_scale) * noise_blender_scale);
+
+    float roughness_selection = enable_ORM_texture ? ORM_lookup.y : roughness_lookup;
+    float metallic_selection = enable_ORM_texture ? ORM_lookup.z : metallic_lookup;
+    float ao = enable_ORM_texture ? ORM_lookup.x : ao_lookup;
+
+    float reflection_roughness =  math::lerp(reflection_roughness_constant, roughness_selection, reflection_roughness_texture_influence);
+    float anisotropy =  math::lerp(anisotropy_constant, anisotropy_lookup, anisotropy_texture_influence);
+    float metallic = math::lerp(metallic_constant, metallic_selection, metallic_texture_influence);
+
+    int w = flipbook_dim.x;
+    int h = flipbook_dim.y;
+
+    int2 frame_interval = (flipbook_frame_interval.y == -1) ? int2(0, w * h)  : int2(flipbook_frame_interval.x, flipbook_frame_interval.y + 1);
+    int frame_count = frame_interval.y - frame_interval.x;
+
+    varying int frameIdx = int((state::animation_time() * target_fps ) + flipbook_time_offset ) % frame_count + frame_interval.x;
+    varying float2 baseUV = float2(transformed_uvw.position.x, transformed_uvw.position.y);
+    varying float2 emissiveUV = enable_emissive_flipbook ?
+        (float2(frameIdx % w, h - 1 - frameIdx / w) + baseUV) / float2(flipbook_dim) : baseUV;
+
+    color emissive_mask = tex::texture_isvalid(emissive_mask_texture) ?
+        tex::lookup_color(emissive_mask_texture, emissiveUV, tex::wrap_repeat, tex::wrap_repeat) : emissive_mask_input;
+
+    material base = SimPBR_Model::SimPBR_Model(
+        diffuse_color: final_diffuse_color,
+        diffuse_tint: diffuse_tint,
+        roughness: reflection_roughness,
+        anisotropy: anisotropy,
+        metallic: metallic,
+        specular: final_specular_lookup,
+        normal: normal_lookup,
+        enable_clearcoat: enable_clearcoat,
+        clearcoat_tint: clearcoat_tint,
+        clearcoat_transparency: clearcoat_transparency,
+        clearcoat_reflection_roughness: clearcoat_reflection_roughness,
+        clearcoat_weight: clearcoat_weight,
+        clearcoat_ior: clearcoat_ior,
+        clearcoat_normal: final_clearcoat_normal,
+        enable_retroreflection: enable_retroreflection,
+        retroreflection_tint: retroreflection_tint,
+        retroreflection_mask: retroreflection_mask,
+        normal_reflectivity: normal_reflectivity,
+        grazing_reflectivity: grazing_reflectivity,
+        ao_to_diffuse: ao_to_diffuse,
+        ao: ao,
+        enable_emission: enable_emission,
+        emissive_color: emissive_color,
+        emissive_mask: emissive_mask,
+        emissive_intensity: emissive_intensity,
+        enable_opacity: enable_opacity,
+        alpha: opacityValue,
+        enable_opacity_cutout: enable_opacity_cutout,
+        alpha_cutout_cutoff: alpha_cutout_cutoff,
+        opacity_ratio: enable_transmission ? opacity_ratio : 1.0,
+        opacity_tint : opacity_tint,
+        opacity_multiplier : opacity_multiplier
+    );
+
+    // Wetness
+    float local_accumulation = water_accumulation_scale * (tex::texture_isvalid(water_accumulation_map) ? tex::lookup_float4(tex: water_accumulation_map, coord: uv).x : water_accumulation);
+    float local_porosity = porosity_scale * (tex::texture_isvalid(porosity_map) ? tex::lookup_float4(tex: porosity_map, coord: uv).x : porosity);
+
+    material wetsimpbr = SimPBR_Core::apply_wetness(
+        	base: base,
+        	base_color: diffuse_color,
+        	wetness: wetness,
+			water_albedo: water_albedo,
+			water_transparency: water_transparency,
+        	porosity: local_porosity,
+        	water_accumulation: local_accumulation
+    	);
+
+	material final = enable_wetness ? wetsimpbr : base;
+} in final;

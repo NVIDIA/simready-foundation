@@ -1,385 +1,61 @@
-# Adding a New Feature
+# Adding or Expanding a Feature
 
-## At a glance
+Use the [Feature Authoring Guide](features/features.md) as the source of truth.
+This page summarizes the end-to-end acceptance path.
 
-1. Create requirement markdown + validation rule under an existing `capabilities/` folder.
-2. Create a feature JSON under `features/` that lists the requirement codes.
-3. Document the feature and add it to `features/features.md`.
-4. Add a new `Robotics-Prop` version in `profiles/robotics_prop.toml` that selects the feature.
-5. `pip install simready-validate`, then run `simready-validate` to verify.
+## Workflow
 
----
+1. State the runtime behavior and concrete success criteria.
+2. Reuse existing capability requirements where possible.
+3. Add and validate any genuinely new atomic requirements.
+4. Choose one dotted `<name>[.<runtime>].<version>` feature ID.
+5. Create matching JSON and markdown without separate identity fields.
+6. Declare additional requirements, runtime tests, and exact adapter
+   references. A testless source can remain a FET when tested derived features
+   name it; otherwise create a `CAP` capability.
+7. Add exact dependencies when the contract builds on another feature.
+8. Add a new immutable profile version using exact or wildcard selectors.
+9. Mark feature or capability selectors optional only when absence is valid.
+10. Validate known-good and known-bad assets against every affected profile.
 
-This guide walks through adding a new feature to the SimReady Foundation spec end-to-end. The example adds a dummy **"Has Foo Prim"** feature (`FET_099`) with one requirement (`FOO.001`) to the existing `hierarchy` capability.
+## Feature expansion
 
-## Core concepts
-
-### What is a feature?
-
-A **feature** describes a runtime behavior that an asset either supports or doesn't (e.g. "has physics", "can drive", "is grasp-ready"). Features are defined as JSON files in `features/` and each one bundles one or more requirements together. A feature **passes only when all of its requirements pass**.
-
-### Feature dependencies
-
-A feature can depend on other features. When specified, the validation system:
-
-1. **Automatically includes** all requirements from dependent features.
-2. **Recursively resolves** nested dependencies.
-3. **Validates against** the complete set of requirements from all dependencies.
-
-This lets you build on existing features without duplicating their requirement lists.
-
-## 1. Add the new requirement
-
-### 1a. Create the requirement documentation
-
-Add a new `.md` file in the existing capability's `requirements/` folder. For this example, create `capabilities/hierarchy/requirements/has-foo-prim.md`:
-
-````markdown
-# has-foo-prim
-
-| Code     | FOO.001 |
-|----------|---------|
-| Validator| {oav-validator-latest-link}`foo-001` |
-| Compatibility | {compatibility}`open-usd` |
-| Tags     | {tag}`essential` |
-
-## Summary
-
-The stage must contain a prim named "Foo".
-
-## Description
-
-The stage's default prim hierarchy must include at least one prim named
-"Foo". This is a structural requirement that downstream tools depend on
-to locate the primary content root.
-
-### Valid USDA
-
-```usda
-#usda 1.0
-(
-    defaultPrim = "Root"
-)
-def Xform "Root"
-{
-    def Xform "Foo"
-    {
-    }
-}
-```
-
-### Invalid USDA
-
-```usda
-#usda 1.0
-(
-    defaultPrim = "Root"
-)
-def Xform "Root"
-{
-    def Xform "Bar"
-    {
-    }
-}
-```
-
-## How to comply
-
-- Add an Xform prim named "Foo" under the default prim hierarchy.
-````
-
-### 1b. Register the requirement
-
-Add the requirement filename to `capabilities/hierarchy/requirements.md` in the toctree:
-
-```markdown
-```{toctree}
-:maxdepth: 1
-:hidden:
-
-requirements/hierarchy-has-root
-requirements/exclusive-xform-parent-for-usdgeom
-requirements/root-is-xformable
-requirements/stage-has-default-prim
-requirements/logical-geometry-grouping
-requirements/xform-common-api-usage
-requirements/placeable-posable-are-xformable
-requirements/has-foo-prim                        <-- add this line
-```
-
-### 1c. Implement the rule
-
-Add the checker class to `capabilities/hierarchy/validation.py`:
-
-```python
-@usd_validation_nvidia.register_rule("Hierarchy")
-@usd_validation_nvidia.register_requirements(cap.HierarchyRequirements.FOO_001)
-class HasFooPrimChecker(usd_validation_nvidia.BaseRuleChecker):
-    """Stage must contain a prim named 'Foo'."""
-    def CheckStage(self, stage: Usd.Stage) -> None:
-        default_prim = stage.GetDefaultPrim()
-        if not default_prim:
-            return
-        for child in default_prim.GetAllChildren():
-            if child.GetName() == "Foo":
-                return
-        self._AddFailedCheck(
-            requirement=cap.HierarchyRequirements.FOO_001,
-            message="No prim named 'Foo' found under the default prim.",
-        )
-```
-
-## 2. Define the feature
-
-Create `features/FET_099_base_neutral-0.1.0-has_foo_prim.json`:
+A runtime-specific feature may replace a base requirement when its technology
+supports a valid pattern that the base validator would reject. The expanded
+feature must carry the complete intended requirement set, with the rejected
+base rule removed and the runtime-specific rule added.
 
 ```json
 {
-    "id": "FET099_BASE_NEUTRAL",
-    "version": "0.1.0",
-    "display_name": "Has Foo Prim",
-    "path": "features/FET_099-has_foo_prim.html",
-    "requirements": [
-        "FOO.001"
-    ]
+  "id": "FET004_Multibody.PhysX.2-0-4",
+  "source_feature": "FET004_Multibody.0-2-0",
+  "additional_requirements": ["COL.001"],
+  "runtime_tests": ["FET004:joint-movement"],
+  "adapters": ["neutral_to_physx:collider_neutral_to_prop_physx"]
 }
 ```
 
-If your feature builds on an existing feature, you can declare a dependency to inherit its requirements and only list **additional** ones:
+The feature ID is the sole identity. Dependencies and adapter endpoints are
+exact dotted IDs; they never use profile wildcards.
 
-```json
-{
-    "id": "FET099_BASE_NEUTRAL",
-    "version": "0.1.0",
-    "display_name": "Has Foo Prim",
-    "path": "features/FET_099-has_foo_prim.html",
-    "dependencies": [
-        {"FET_003_STANDARD": {"version": "0.1.0"}}
-    ],
-    "requirements": [
-        "FOO.001"
-    ]
-}
-```
-
-The validation system merges all requirement sets (from dependencies and the feature itself) into a single set that gets validated.
-
-### Feature ID conventions
-
-Feature IDs follow the pattern `FET<NNN>_<VARIANT>`:
-
-| Variant suffix | Meaning |
-| --- | --- |
-| `BASE_NEUTRAL` | Core OpenUSD only |
-| `BASE_PHYSX` | Uses PhysX extensions |
-| `BASE_MDL` | Uses MDL materials |
-| `ROBOT_PHYSX` | Robot domain with PhysX |
-| `ROBOT_CORE_ISAAC` | Robot core for Isaac Sim |
-
-Pick the next available number for a new logical feature. If your feature is a runtime-specific variant of an existing feature, reuse the same number with a different suffix.
-
-## 3. Add feature documentation
-
-### 3a. Create a feature markdown
-
-Create `features/FET_099-has_foo_prim.md`:
-
-```markdown
-# Feature: `ID:099 - Has Foo Prim`
-
-## Neutral Format
-### Version 0.1.0
-
-<details>
-<summary><strong>Details</strong></summary>
-
-#### Requirements
-* Capability: [Hierarchy](../capabilities/hierarchy/capability-hierarchy.md)
-    * FOO.001
-</details>
-```
-
-### 3b. Update the features index
-
-Add the feature to `features/features.md` in the toctree:
-
-```markdown
-```{toctree}
-:maxdepth: 1
-
-ID:099 - Has Foo Prim - Base <FET_099-has_foo_prim>
-```
-
-## 4. Wire profiles
-
-For this local exercise, assume `Robotics-Prop@3.2.0` is still an unpublished
-draft and add the feature to its entry in `profiles/robotics_prop.toml`. Published
-profile versions are immutable; for production work, create the next semantic
-profile version instead and substitute that version throughout the commands
-below.
+## Profile adoption
 
 ```toml
-[Robotics-Prop]
-"3.2.0" = {features = [
-    {"FET_000_STANDARD" = {version = "0.1.0"}},           # "Core"
-    {"FET_001_STANDARD" = {version = "0.1.0"}},     # "Minimal"
-    {"FET_003_STANDARD" = {version = "0.1.0"}},            # "RBD Physics"
-    {"FET_004_STANDARD" = {version = "0.1.0"}},            # "Simulate Multi-Body Physics"
-    {"FET_005_STANDARD" = {version = "0.1.0"}},            # "Simulate Grasp Physics"
-    {"FET_006_MDL" = {version = "0.1.0"}},         # "Materials"
-    {"FET099_BASE_NEUTRAL" = {version = "0.1.0"}},     # "Has Foo Prim"   <-- add this line
+[Robot-Body]
+"2.0.0" = {features = [
+    {selector = "FET004.*", optional = true},
+    {selector = "FET004.PhysX.*"},
+], capabilities = [
+    {selector = "CAP024*"},
 ]}
 ```
 
-## 5. Install and verify
+Resolve selectors against the catalog before validation. Required matches win
+over optional matches. Unmatched required selectors fail resolution; unmatched
+optional selectors create no obligation.
 
-### 5a. Install simready-validate
+The caller may validate one asset against several profile targets. Keep each
+result separate and do not infer one exclusive profile from asset metadata.
 
-Requires **Python >=3.10,<3.13** (Python 3.12 recommended). The package is hosted on the internal NVIDIA Artifactory registry, not the public PyPI.
-
-```bash
-pip install simready-validate
-```
-
-### 5b. Confirm it fails on a non-conforming asset
-
-```{note}
-If you have installed the published tier wheels, `simready-validate` can load
-rules, features, and profiles by auto-discovery and you can omit the path flags
-below. See [SimReady Foundation PyPI Packages](foundation_pypi.md). The commands
-here use `--rules-path` / `--features-path` / `--profiles-path` so you can
-verify against the **local** tier source trees in this repository clone.
-```
-
-From the root of this repository (`simready_foundations/`), run the following. The sample asset `sm_apple_a01_01.usd` has no prim named "Foo", so it should fail `FOO.001`:
-
-```bash
-simready-validate \
-  --rules-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities \
-  --features-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features \
-  --profiles-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles \
-  --profile Robotics-Prop --version 3.2.0 \
-  sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd
-```
-
-Expected output:
-
-```text
-Asset: sample_content/.../sm_apple_a01_01.usd
-  [FAILED] Robotics-Prop v3.2.0
-           FET099_BASE_NEUTRAL: failing requirements: ['FOO.001']
-```
-
-### 5c. Fix the asset
-
-Add a "Foo" prim to the stage using the USD Python API and export the result:
-
-```python
-from pxr import Usd, UsdGeom
-
-stage = Usd.Stage.Open(
-    "sample_content/common_assets/props_general/apple_a01/simready_usd/sm_apple_a01_01.usd"
-)
-default_prim = stage.GetDefaultPrim()
-UsdGeom.Xform.Define(stage, default_prim.GetPath().AppendChild("Foo"))
-stage.Export("fixed_asset.usd")
-```
-
-The exported `fixed_asset.usd` now contains the required prim:
-
-```usda
-def Xform "Root"
-{
-    def Xform "Foo"
-    {
-    }
-    # ... existing geometry ...
-}
-```
-
-### 5d. Confirm it passes
-
-Re-run validation against the fixed asset:
-
-```bash
-simready-validate \
-  --rules-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities \
-  --features-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features \
-  --profiles-path nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles \
-  --profile Robotics-Prop --version 3.2.0 \
-  fixed_asset.usd
-```
-
-Expected output:
-
-```text
-Asset: fixed_asset.usd
-  [PASSED] Robotics-Prop v3.2.0
-```
-
-## Checklist
-
-1. **Requirement markdown:** Create under the existing capability's `requirements/` folder. Add to the `requirements.md` toctree.
-2. **Validation rule:** Implement the checker class in the capability's `validation.py`.
-3. **Feature JSON:** Create under `features/`.
-4. **Feature documentation:** Create the feature markdown under `features/`. Add to `features/features.md`.
-5. **Profile wiring:** Add a new `Robotics-Prop` version in `profiles/robotics_prop.toml` that selects the feature.
-6. **Install:** `pip install simready-validate`
-7. **Verify:** Run `simready-validate` against a sample asset and confirm pass/fail behavior.
-
-## Tips
-
-- **Version from 0.1.0.** Start at `0.1.0` and bump the version when the requirement set changes.
-- **One feature per logical concept.** Don't pack unrelated checks into the same feature.
-- **Document clearly.** In the feature markdown, list every requirement and link back to the capability docs.
-- **Test with sample assets.** Use the reference assets in `sample_content/` to validate against the target profile before merging.
-
-```{note}
-For the full acceptance lifecycle (domain identification, gap analysis, prototyping, QA, delivery), see the [SimReady Acceptance Workflow](acceptance_workflow.md).
-```
-
----
-
-## Appendix A: Creating a new capability
-
-If your requirement doesn't fit any existing capability, create a new capability folder under `capabilities/`:
-
-```text
-capabilities/
-└── foo_prims/
-    ├── capability-foo_prims.md
-    ├── requirements.md
-    ├── requirements/
-    │   └── has-foo-prim.md
-    └── validation.py
-```
-
-Then register it by adding the `validation` import to `capabilities/__init__.py`. Once the capability exists, the steps in this guide apply the same way -- add requirements, wire features, and validate.
-
-## Appendix B: Validating with the Python API
-
-The `simready-validate` CLI is backed by the `simready.validate` Python library, which you can use directly for scripted or programmatic validation:
-
-```python
-from pathlib import Path
-import simready.validate as sv
-
-TIER_CORE = Path(
-    "nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core"
-)
-
-sv.initialize(
-    rules_and_requirements_paths=[TIER_CORE / "capabilities"],
-    features_paths=[TIER_CORE / "features"],
-    profiles_paths=[TIER_CORE / "profiles"],
-)
-
-result = sv.validate_asset(sv.AssetValidationConfig(
-    asset_path="fixed_asset.usd",
-    profile_id="Robotics-Prop",
-    profile_version="3.2.0",
-))
-
-assert result is not None
-assert result.passed
-```
+Published feature and profile versions are immutable. Add new IDs and profile
+versions rather than rewriting published manifests or TOMLs in place.

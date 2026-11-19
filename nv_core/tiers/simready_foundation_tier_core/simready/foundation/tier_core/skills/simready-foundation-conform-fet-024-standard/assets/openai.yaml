@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP024_BaseArticulation"
+  short_description: "Repair CAP024_BaseArticulation conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-024-standard to repair CAP024_BaseArticulation SimReady conformance failures."

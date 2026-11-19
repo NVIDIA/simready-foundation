@@ -1,0 +1,16 @@
+{
+  "id": "CAP022_DrivenJoints.MuJoCo.0-1-0",
+  "display_name": "Driven Joints (MuJoCo)",
+  "legacy_identity": {
+    "id": "FET_022_MUJOCO",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "DJ.011",
+    "MUJOCO.DJ.001",
+    "MUJOCO.DJ.002"
+  ],
+  "dependencies": [
+    "CAP004_Multibody.RobotMuJoCo.0-1-0"
+  ]
+}

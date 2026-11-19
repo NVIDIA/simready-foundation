@@ -1,6 +1,6 @@
 ---
 name: simready-foundation-conform-fet-001-standard
-description: "Use for repairing SimReady Minimal assets: units, upAxis, defaultPrim, hierarchy, mesh quality, extents, and origin placement."
+description: "Use for repairing SimReady Minimal assets: units, upAxis, defaultPrim, hierarchy, mesh quality, extents, and origin placement. Contract: FET001_MinimalPlaceableVisual; Foundations 1 ID: FET_001_STANDARD."
 license: Apache-2.0
 metadata:
   author: "Shaad Boochoon <sboochoon@nvidia.com>"
@@ -11,12 +11,27 @@ metadata:
 ---
 
 
-# SimReady Conform FET_001_STANDARD Minimal
+# SimReady Conform FET001_MinimalPlaceableVisual Minimal
+
+## OpenUSD Competence
+
+Running this conform skill is expert USD authoring. Reason from the OpenUSD /
+Pixar USD spec rather than pattern-matching a validator message: composition
+arcs and LIVRPS strength ordering, value resolution and list editing
+(prepend, append, explicit, delete), the `def`/`over`/`class`
+specifiers, native instancing and model hierarchy, stage units and up-axis,
+and the `UsdGeom`, `UsdShade`, and `UsdPhysics` schemas. Make the exact native
+edit on the correct prim, arc, and layer, derive values from the asset's real
+geometry and composition, then reopen the composed stage to confirm the
+opinion resolves as intended before claiming the gate passes. Never fabricate
+data to satisfy a validator token. The repository-root `AGENTS.md`
+"Master-Level OpenUSD Competence for Conform Work" section is the full
+statement.
 
 ## Purpose
-Use this workflow skill after FET_000_STANDARD passes and the next profile validation gate is `FET_001_STANDARD`. It brings an existing USD asset toward the Minimal/Standard feature contract while preserving visual scale, hierarchy intent, and source traceability.
+Use this workflow skill after CAP000_Core passes and the next profile validation gate is `FET001_MinimalPlaceableVisual`. It brings an existing USD asset toward the Minimal/Standard feature contract while preserving visual scale, hierarchy intent, and source traceability.
 
-This is an authoring and repair skill, not the final validator. Work on a staged copy under the requested output directory, rerun the same validation gate after each repair stage, and stop at the first remaining failing FET_001_STANDARD validation gate.
+This is an authoring and repair skill, not the final validator. Work on a staged copy under the requested output directory, rerun the same validation gate after each repair stage, and stop at the first remaining failing FET001_MinimalPlaceableVisual validation gate.
 
 ## Prerequisites
 
@@ -24,16 +39,16 @@ Read the source-of-truth files named below before editing. Work on staged output
 
 ## Source of Truth
 
-Before changing an asset, load the exact FET_001_STANDARD manifest selected by the profile:
+Before changing an asset, load the exact FET001_MinimalPlaceableVisual manifest selected by the profile:
 
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_001_STANDARD-0.1.0.json`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_001_STANDARD-1.0.0.json`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_001_STANDARD-1.0.1.json`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_001_STANDARD.md`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET001_MinimalPlaceableVisual.0-1-0.json`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET001_MinimalPlaceableVisual.1-0-0.json`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET001_MinimalPlaceableVisual.1-0-1.json`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET001_MinimalPlaceableVisual.md`
 
-Profiles may select `FET_001_STANDARD@0.1.0`, `FET_001_STANDARD@1.0.0`, or `FET_001_STANDARD@1.0.1`. Treat the JSON manifest requirement list as authoritative for the selected profile/version.
+Profiles may select `FET001_MinimalPlaceableVisual.0-1-0`, `FET001_MinimalPlaceableVisual.1-0-0`, or `FET001_MinimalPlaceableVisual.1-0-1`. Treat the JSON manifest requirement list as authoritative for the selected profile/version.
 
-For per-requirement repair details, read `references/fet001-requirements.md` when a FET_001_STANDARD validation report or inspection identifies matching failures.
+For per-requirement repair details, read `references/fet001-requirements.md` when a FET001_MinimalPlaceableVisual validation report or inspection identifies matching failures.
 
 ## Inputs
 
@@ -45,7 +60,7 @@ Collect these before editing:
 | `output_root` | Required or inferred folder for staged assets and reports. |
 | `simready_profile` | Profile being validated, such as `Robotics-Prop`. |
 | `profile_version` | Profile version, if supplied by the user or validation command. |
-| `fet001_version` | Optional explicit `FET_001_STANDARD` version. Default to latest checked-in version `1.0.1` when neither the user nor the selected profile/report specifies a version. |
+| `fet001_version` | Optional explicit `FET001_MinimalPlaceableVisual` version. Default to latest checked-in version `FET001_MinimalPlaceableVisual.1-0-1` when neither the user nor the selected profile/report specifies a version. |
 | `validation_report` | Preferred JSON or markdown report from the failing profile/feature validation gate. |
 | `source_asset` | Original CAD, DCC, URDF, MJCF, or conversion input path, used for provenance. |
 | `physical_size_policy` | Whether to preserve physical size. Default to preserve size. |
@@ -54,13 +69,13 @@ Collect these before editing:
 
 Use this checklist when changing the repository:
 
-1. Confirm the input asset exists and that FET_000_STANDARD is already passing on the same staged asset. If Core still fails, hand back to `simready-foundation-conform-fet-000-standard` first.
-2. Select the FET_001_STANDARD version:
+1. Confirm the input asset exists and that CAP000_Core is already passing on the same staged asset. If Core still fails, hand back to `simready-foundation-conform-fet-000-standard` first.
+2. Select the FET001_MinimalPlaceableVisual version:
    - Use the version explicitly requested by the user when present.
-   - Otherwise use the exact `FET_001_STANDARD` version selected by the profile or validation report.
-   - Otherwise default to latest checked-in version `1.0.1`.
+   - Otherwise use the exact `FET001_MinimalPlaceableVisual` version selected by the profile or validation report.
+   - Otherwise default to latest checked-in version `FET001_MinimalPlaceableVisual.1-0-1`.
 3. Load the selected manifest and `references/fet001-requirements.md`. Only repair requirements present in that selected manifest.
-4. Parse the validation report and filter to `FET_001_STANDARD` failures. Do not repair later profile features in this skill.
+4. Parse the validation report and filter to `FET001_MinimalPlaceableVisual` failures. Do not repair later profile features in this skill.
 5. Create a staged output folder under `output_root`; do not mutate the source unless the user explicitly asks for in-place repair.
 6. Run or inspect minimum USD metadata: stage openability, default prim, root prims, `upAxis`, `metersPerUnit`, composed bounds, mesh/geometry counts, authored references, and used layers.
 7. Apply deterministic fixes in this order, skipping requirement IDs that are not in the selected manifest:
@@ -70,26 +85,26 @@ Use this checklist when changing the repository:
    - Minimal visual geometry fixes for `VG.001` or `VG.MESH.001`.
    - Mesh quality fixes for `VG.002`, `VG.008`, `VG.014`, `VG.027`, `VG.028`, and `VG.029`.
    - Origin placement fixes for `VG.025` only when the asset placement convention is clear.
-8. Rerun the same profile validation gate, or the narrowest available FET_001_STANDARD validation gate for the selected version.
-9. Summarize the stage as passed, failed, skipped, or blocked. Stop when the selected FET_001_STANDARD version passes or the next FET_001_STANDARD failure requires upstream conversion, source geometry, or user intent.
+8. Rerun the same profile validation gate, or the narrowest available FET001_MinimalPlaceableVisual validation gate for the selected version.
+9. Summarize the stage as passed, failed, skipped, or blocked. Stop when the selected FET001_MinimalPlaceableVisual version passes or the next FET001_MinimalPlaceableVisual failure requires upstream conversion, source geometry, or user intent.
 
 ## Version Selection
 
-Default to `FET_001_STANDARD@1.0.1` for open-ended conformance requests such as "repair FET_001_STANDARD" or "make this Minimal compliant." Use `@1` or `@2` only when the user, profile, validation report, or migration task explicitly selects that older contract.
+Default to `FET001_MinimalPlaceableVisual.1-0-1` for open-ended conformance requests such as "repair FET001_MinimalPlaceableVisual" or "make this Minimal compliant." Use `FET001_MinimalPlaceableVisual.0-1-0` or `FET001_MinimalPlaceableVisual.1-0-0` only when the user, profile, validation report, or migration task explicitly selects that older contract.
 
 | Selected Version | Manifest | Conformance Target |
 |---|---|---|
-| `0.1.0` | `FET_001_STANDARD-0.1.0.json` | Original Minimal visual-presence contract: atomic asset, declared units/up axis, meter scale, imageable geometry, and default prim. |
-| `1.0.0` | `FET_001_STANDARD-1.0.0.json` | Mesh-quality Minimal contract: version 0.1.0 retained requirements plus Z-up, mesh representation, extents, topology, winding, normals, single root, xformable root, and origin placement. |
-| `1.0.1` | `FET_001_STANDARD-1.0.1.json` | Latest Minimal Standard contract: version 1.0.0 plus `VG.008` cached extent conformance. |
+| `FET001_MinimalPlaceableVisual.0-1-0` | `FET001_MinimalPlaceableVisual.0-1-0.json` | Original Minimal visual-presence contract: atomic asset, declared units/up axis, meter scale, imageable geometry, and default prim. |
+| `FET001_MinimalPlaceableVisual.1-0-0` | `FET001_MinimalPlaceableVisual.1-0-0.json` | Mesh-quality Minimal contract: `FET001_MinimalPlaceableVisual.0-1-0` retained requirements plus Z-up, mesh representation, extents, topology, winding, normals, single root, xformable root, and origin placement. |
+| `FET001_MinimalPlaceableVisual.1-0-1` | `FET001_MinimalPlaceableVisual.1-0-1.json` | Latest Minimal Standard contract: `FET001_MinimalPlaceableVisual.1-0-0` plus `VG.008` cached extent conformance. |
 
 If an older report uses legacy feature versions, map them before loading the manifest:
 
 | Legacy Version | Current Version |
 |---|---|
-| `0.1.0` | `1` |
-| `1.0.0` | `2` |
-| `1.0.1` | `3` |
+| `FET001_MinimalPlaceableVisual.0-1-0` | `1` |
+| `FET001_MinimalPlaceableVisual.1-0-0` | `2` |
+| `FET001_MinimalPlaceableVisual.1-0-1` | `3` |
 
 ## Unit Repair Policy
 
@@ -109,8 +124,8 @@ Prefer these approaches in order:
 |---|---|---|
 | Re-export from converter with meter units | Conversion options are available and reliable. | Best long-term fix because geometry, metadata, and derived data are generated consistently. |
 | Rescale staged USD data | All relevant layers are local and editable. | Multiply points, translate ops, extents, and other linear authored values by `old_meters_per_unit / 1.0`, then set stage `metersPerUnit = 1.0`. |
-| Apply root-scale normalization in the same staged USD | The asset root has no existing authored xform ops and the selected FET_001_STANDARD version does not reject a root scale. | Set stage `metersPerUnit = 1.0` and add a root scale op equal to `old_meters_per_unit / 1.0`. This strategy is useful for millimeter- or centimeter-authored converter output when a root scale is acceptable. |
-| Create a meter-unit wrapper | The package/validator contract allows a local USD payload reference without violating Core or atomic-asset rules. | Verify `FET_000_STANDARD` and `AA.001` immediately. Current validators may reject extra USD files under `simready_usd` (`NP.005`) or `../payloads/...` references as outside the asset root (`AA.001`). |
+| Apply root-scale normalization in the same staged USD | The asset root has no existing authored xform ops and the selected FET001_MinimalPlaceableVisual version does not reject a root scale. | Set stage `metersPerUnit = 1.0` and add a root scale op equal to `old_meters_per_unit / 1.0`. This strategy is useful for millimeter- or centimeter-authored converter output when a root scale is acceptable. |
+| Create a meter-unit wrapper | The package/validator contract allows a local USD payload reference without violating Core or atomic-asset rules. | Verify `CAP000_Core` and `AA.001` immediately. Current validators may reject extra USD files under `simready_usd` (`NP.005`) or `../payloads/...` references as outside the asset root (`AA.001`). |
 | Metadata-only change | The coordinates are already in meters, or the user accepts a physical size change. | Report this explicitly because it can make the asset too large or too small. |
 
 For any asset with `metersPerUnit = 0.001`, a size-preserving single-file repair can set `metersPerUnit = 1.0` and author root op `xformOp:scale:meter_normalization = (0.001, 0.001, 0.001)`, assuming the root transform is otherwise safe to modify.
@@ -120,7 +135,7 @@ For any asset with `metersPerUnit = 0.001`, a size-preserving single-file repair
 Example request:
 
 ```text
-Repair FET_001_STANDARD minimal stage failures on a staged USD asset.
+Repair FET001_MinimalPlaceableVisual minimal stage failures on a staged USD asset.
 ```
 
 Expected result summary:
@@ -141,6 +156,7 @@ Make automatic repairs only when the result is mechanical and locally verifiable
 - Convert search paths to anchored relative paths only after the dependency is inside the staged asset root.
 - Author extents using USD-computed bounds for local editable meshes.
 - Normalize or generate mesh normals only when the intended smoothing can be inferred or the converter already produced enough topology to compute them deterministically.
+- Remove any leftover interactive Kit `def "Render"` root prims (`RenderProduct`, `RenderSettings`, `RenderVar`) and `renderSettings` / `omni_layer` entries in `customLayerData` from asset entrypoints, and ensure collision-only Xforms/meshes carry `uniform token purpose = "guide"` (or `visibility = "invisible"`) without `bindMaterialAs = "strongerThanDescendants"` visual material bindings that could interfere with `culling_xz` / `normals_xz` diagnostic material overrides.
 - If adding a root-scale normalization, check for existing root xform ops first. If the root already has meaningful transform ops, preserve order and semantics or use data-space rescaling instead.
 
 Block and report instead of guessing when:
@@ -149,7 +165,7 @@ Block and report instead of guessing when:
 - Unsupported file types require lossy texture/audio/geometry conversion.
 - Winding, normal direction, or origin placement cannot be inferred from local geometry.
 - Rescaling would require editing external layers that are not staged with the asset.
-- A unit wrapper or payload layout causes `FET_000_STANDARD` or `AA.001` to regress.
+- A unit wrapper or payload layout causes `CAP000_Core` or `AA.001` to regress.
 
 ## Validation Handoff
 
@@ -167,7 +183,7 @@ uv run --python 3.12 validate-simready-profile <staged-usd> \
   --report <output-root>/simready-profile-after-fet001.json
 ```
 
-Count this skill as successful when `FET_001_STANDARD` passes, even if the full profile still fails on later features such as rigid bodies, multibody physics, or grasp vectors. Report those remaining failures as handoff work for their own skills.
+Count this skill as successful when `FET001_MinimalPlaceableVisual` passes, even if the full profile still fails on later features such as rigid bodies, multibody physics, or grasp vectors. Report those remaining failures as handoff work for their own skills.
 
 ## Limitations
 
@@ -195,11 +211,11 @@ Report:
 | `input_usd_path` | Original USD path. |
 | `output_usd_path` | Latest staged/repaired USD path. |
 | `profile` and `profile_version` | Validation target. |
-| `fet001_version` | Selected `FET_001_STANDARD` manifest version; default is `1.0.1` unless explicitly overridden. |
+| `fet001_version` | Selected `FET001_MinimalPlaceableVisual` manifest version; default is `FET001_MinimalPlaceableVisual.1-0-1` unless explicitly overridden. |
 | `requirements_repaired` | Requirement IDs changed by this skill. |
 | `requirements_blocked` | Requirement IDs that need user intent or upstream conversion. |
 | `scale_preserved` | Whether composed physical bounds were preserved after unit repair. |
 | `validation_report` | Path to the rerun validation report. |
 | `next_step` | Usually the next failing profile feature. |
 
-Keep the user-facing summary short: what was fixed, whether the asset scale was preserved, what FET_001_STANDARD result validation reported, and the first remaining validation gate.
+Keep the user-facing summary short: what was fixed, whether the asset scale was preserved, what FET001_MinimalPlaceableVisual result validation reported, and the first remaining validation gate.

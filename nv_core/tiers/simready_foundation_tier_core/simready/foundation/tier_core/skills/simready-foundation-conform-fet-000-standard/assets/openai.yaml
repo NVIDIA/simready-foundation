@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP000_Core"
+  short_description: "Repair CAP000_Core Core validation failures (default 0-2-0)"
+  default_prompt: "Use $simready-foundation-conform-fet-000-standard to repair CAP000_Core SimReady Core validation failures on a USD asset."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform FET011_SemanticLabels"
+  short_description: "Repair FET011_SemanticLabels conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-011-standard to repair FET011_SemanticLabels SimReady conformance failures."

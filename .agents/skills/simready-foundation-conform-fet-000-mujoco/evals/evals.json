@@ -1,7 +1,7 @@
 [
     {
         "id":  "simready-foundation-conform-fet-000-mujoco-positive-trigger",
-        "question":  "Repair FET_000_MUJOCO failures on a USD asset: the MuJoCo variant set, runnables/physics/mujoco payload, and SimReady variant metadata.",
+        "question":  "Repair CAP000_Core.MuJoCo failures on a USD asset: the MuJoCo variant set, runnables/physics/mujoco payload, and SimReady variant metadata.",
         "expected_skill":  "simready-foundation-conform-fet-000-mujoco",
         "ground_truth":  "The agent should activate simready-foundation-conform-fet-000-mujoco and follow its workflow.",
         "expected_behavior":  [

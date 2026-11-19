@@ -16,13 +16,15 @@
 """Tests for the deterministic tier docs assembler (``assemble_docs.py``).
 
 These tests build a small synthetic tier + site layout under ``tmp_path`` so
-they are fast and independent of repo content.
+they are fast. One publishing regression also checks committed tier mappings
+and navigation before exercising them in an isolated synthetic layout.
 """
 
 from __future__ import annotations
 
 import json
 import sys
+import tempfile
 from pathlib import Path
 
 import pytest
@@ -60,8 +62,10 @@ def _make_site(site_root: Path) -> None:
     _write(site_root / "_plugin.py", "raise RuntimeError('not docs')\n")
 
 
-def _write_docs_sources(tier_dir: Path, sources) -> None:
+def _write_docs_sources(tier_dir: Path, sources, exclude=None) -> None:
     payload = {"schema_version": 1, "sources": sources}
+    if exclude is not None:
+        payload["exclude"] = exclude
     _write(tier_dir / ad.TIER_DOC_SOURCES_FILENAME, json.dumps(payload, indent=2) + "\n")
 
 
@@ -72,6 +76,59 @@ def _docnames(output_root: Path) -> set:
 # ---------------------------------------------------------------------------
 # 1. Source mapping.
 # ---------------------------------------------------------------------------
+def test_module_root_ignores_caches_beside_the_module(tmp_path):
+    """A ``__pycache__`` sibling must not make the tier undiscoverable.
+
+    A tier that ships modules directly under ``simready/foundation`` gets a
+    cache directory there as soon as anything imports them, and counting it
+    drops that tier's entire documentation with no error.
+    """
+    module_root = _make_tier(tmp_path, "core_tier", "tier_core")
+    foundation = module_root.parent
+    (foundation / "contracts.py").write_text("", encoding="utf-8")
+    (foundation / "__pycache__").mkdir()
+    (foundation / ".pytest_cache").mkdir()
+
+    assert ad.tier_docs_module_root(module_root.parents[2]) == module_root
+
+
+def test_module_root_is_none_when_two_real_modules_exist(tmp_path):
+    module_root = _make_tier(tmp_path, "core_tier", "tier_core")
+    (module_root.parent / "tier_other").mkdir()
+
+    assert ad.tier_docs_module_root(module_root.parents[2]) is None
+
+
+def test_known_edits_records_never_assemble_but_drafts_do(tmp_path):
+    """`features/known_edits/` is provenance, not documentation.
+
+    The records live inside `features/`, where the docs spec parser reads every
+    file as a feature descriptor, so copying one fails the whole build on its
+    missing `id` key. `features/drafts/` is the counter-case: every other
+    subdirectory of `features/` is documentation and is copied.
+    """
+    site = tmp_path / "docs"
+    tiers = tmp_path / "tiers"
+    out = tmp_path / "out"
+    _make_site(site)
+
+    core = _make_tier(tiers, "tier_core", "core")
+    _write(core / "features" / "FET006_Materials.MDL.md", "# Materials\n")
+    _write(core / "features" / "drafts" / "FET006-draft-card.md", "# Draft\n")
+    _write(
+        core / "features" / "known_edits" / "FET006_Materials.MDL.0-1-0.toml",
+        '[edit]\nfeature = "FET006_Materials.MDL.0-1-0"\n',
+    )
+    _write(site / "shared" / "features" / "features.md", "# Features hub\n")
+
+    ad.assemble(site, out, tiers, manifest_path=out.parent / "m.json", exclude_logical=())
+
+    assert not list(out.rglob("known_edits"))
+    assert not list(out.rglob("FET006_Materials.MDL.0-1-0.toml"))
+    assert (out / "features" / "drafts" / "FET006-draft-card.md").is_file()
+    assert (out / "features" / "FET006_Materials.MDL.md").is_file()
+
+
 def test_source_mapping_merges_tiers_shared_and_residual(tmp_path):
     site = tmp_path / "docs"
     tiers = tmp_path / "tiers"
@@ -79,18 +136,17 @@ def test_source_mapping_merges_tiers_shared_and_residual(tmp_path):
     _make_site(site)
 
     core = _make_tier(tiers, "tier_core", "core")
-    _write(core / "capabilities" / "core" / "core.md", "# Core cap\n")
+    _write(core / "rules_and_reqs" / "core" / "core.md", "# Core cap\n")
     _write(core / "features" / "FET_001-minimal.md", "# Minimal\n")
     _write(core / "features" / "FET_001-minimal.json", "{}\n")  # non-doc travels along
-    _write(core / "features" / "known_edits" / "fet-001-0-1-0.toml", '[edit]\nfeature = "FET_001"\n')
     _write(core / "profiles" / "prop-neutral.md", "# Neutral\n")
 
     isaac = _make_tier(tiers, "tier_isaac", "isaac")
-    _write(isaac / "capabilities" / "isaac_sim" / "isaac_sim.md", "# Isaac cap\n")
+    _write(isaac / "rules_and_reqs" / "isaac_sim" / "isaac_sim.md", "# Isaac cap\n")
     _write(isaac / "features" / "FET_100-composition.md", "# Composition\n")
 
     # shared overlay: hubs mapped onto section roots
-    _write(site / "shared" / "capabilities" / "capabilities.md", "# Capabilities hub\n")
+    _write(site / "shared" / "rules_and_reqs" / "rules_and_reqs.md", "# Rules and Requirements hub\n")
     _write(site / "shared" / "features" / "features.md", "# Features hub\n")
     _write(site / "shared" / "profiles" / "profiles.md", "# Profiles hub\n")
 
@@ -99,26 +155,25 @@ def test_source_mapping_merges_tiers_shared_and_residual(tmp_path):
     names = _docnames(out)
     assert "index" in names  # residual file
     assert "guides/guides" in names  # residual dir
-    assert "capabilities/core/core" in names  # core tier
-    assert "capabilities/isaac_sim/isaac_sim" in names  # isaac tier
+    assert "rules_and_reqs/core/core" in names  # core tier
+    assert "rules_and_reqs/isaac_sim/isaac_sim" in names  # isaac tier
     assert "features/FET_001-minimal" in names  # core tier narrative
     assert "features/FET_100-composition" in names  # isaac tier narrative
     assert "profiles/prop-neutral" in names  # core tier narrative
-    assert "capabilities/capabilities" in names  # shared overlay hub
+    assert "rules_and_reqs/rules_and_reqs" in names  # shared overlay hub
     assert "features/features" in names  # shared overlay hub
     assert "profiles/profiles" in names  # shared overlay hub
 
     # non-doc payload travels with the section
     assert (out / "features" / "FET_001-minimal.json").is_file()
-    assert not (out / "features" / "known_edits").exists()
     # package scaffolding is dropped
     assert not (out / "__init__.py").exists()
     assert not (out / "_plugin.py").exists()
 
     # manifest source labels are attributed correctly
-    assert manifest["capabilities/core/core.md"]["source"] == "tier:tier_core"
-    assert manifest["capabilities/isaac_sim/isaac_sim.md"]["source"] == "tier:tier_isaac"
-    assert manifest["capabilities/capabilities.md"]["source"] == "shared"
+    assert manifest["rules_and_reqs/core/core.md"]["source"] == "tier:tier_core"
+    assert manifest["rules_and_reqs/isaac_sim/isaac_sim.md"]["source"] == "tier:tier_isaac"
+    assert manifest["rules_and_reqs/rules_and_reqs.md"]["source"] == "shared"
     assert manifest["index.md"]["source"] == "site"
 
 
@@ -141,14 +196,65 @@ def test_declarative_tier_docs_source_maps_without_tier_specific_code(tmp_path):
     _write(tier_dir / "vendor_runtime_suite" / "docs" / "index.md", "# Vendor runtime tests\n")
     _write_docs_sources(
         tier_dir,
-        [{"path": "vendor_runtime_suite/docs", "destination": "guides/benchmark/vendor-tests"}],
+        [{"path": "vendor_runtime_suite/docs", "destination": "guides/evaluate/vendor-tests"}],
     )
 
     manifest = ad.assemble(site, out, tiers, manifest_path=tmp_path / "m.json", exclude_logical=())
 
-    logical = "guides/benchmark/vendor-tests/index.md"
+    logical = "guides/evaluate/vendor-tests/index.md"
     assert (out / logical).read_text(encoding="utf-8") == "# Vendor runtime tests\n"
     assert manifest[logical]["source"] == "tier:vendor_tier:docs:vendor_runtime_suite/docs"
+
+
+def test_newton_runtime_guide_is_published_and_linked(tmp_path):
+    tiers_root = _TOOLING_DIR.parent
+    newton_root = tiers_root / "simready_foundation_tier_newton"
+    source = "simready/foundation/tier_newton/runtime_tests/docs"
+    destination = "guides/evaluate/newton-tests"
+    assert (newton_root / source, destination, source) in ad.tier_doc_sources(newton_root)
+    for tier in ("simready_foundation_tier_core", "simready_foundation_tier_sensors"):
+        assert destination not in {entry[1] for entry in ad.tier_doc_sources(tiers_root / tier)}
+
+    # Links are written between the real source locations, so the synthetic
+    # layout keeps the site docs and the tiers at their real relative positions.
+    site = tmp_path / "nv_core" / "sr_specs" / "docs"
+    tiers = tmp_path / "nv_core" / "tiers"
+    out = tmp_path / "out"
+    _make_site(site)
+    real_site = tiers_root.parent / "sr_specs" / "docs"
+    for page in ("evaluate.md", "overview.md"):
+        relative = Path("guides/evaluate") / page
+        _write(site / relative, (real_site / relative).read_text(encoding="utf-8"))
+
+    newton = _make_tier(tiers, "simready_foundation_tier_newton", "tier_newton").parents[2]
+    guide = "runtime-tests.md"
+    _write(newton / source / guide, (newton_root / source / guide).read_text(encoding="utf-8"))
+    _write_docs_sources(newton, [{"path": source, "destination": destination}])
+
+    core = _make_tier(tiers, "simready_foundation_tier_core", "tier_core").parents[2]
+    core_source = "simready/foundation/tier_core/runtime_tests/docs"
+    core_page = "fet022-driven-joints.md"
+    _write(
+        core / core_source / core_page,
+        (tiers_root / "simready_foundation_tier_core" / core_source / core_page).read_text(encoding="utf-8"),
+    )
+    _write_docs_sources(core, [{"path": core_source, "destination": "guides/evaluate/tests"}])
+
+    manifest = ad.assemble(site, out, tiers, manifest_path=tmp_path / "m.json", exclude_logical=())
+    logical = destination + "/" + guide
+    assert logical[:-3] in _docnames(out)
+    assert manifest[logical]["source"] == "tier:simready_foundation_tier_newton:docs:" + source
+    benchmark = out / "guides" / "evaluate"
+    assert "Newton Runtime Tests <newton-tests/runtime-tests>" in (benchmark / "evaluate.md").read_text(
+        encoding="utf-8"
+    )
+    assert "[Newton Runtime Tests](newton-tests/runtime-tests.md)" in (benchmark / "overview.md").read_text(
+        encoding="utf-8"
+    )
+    core_text = (benchmark / "tests" / core_page).read_text(encoding="utf-8")
+    assert "[Newton Runtime Tests](../newton-tests/runtime-tests.md)" in core_text
+    assert (benchmark / "tests" / "../newton-tests/runtime-tests.md").resolve() == (out / logical).resolve()
+    assert (out / logical).is_file()
 
 
 @pytest.mark.parametrize(
@@ -188,6 +294,45 @@ def test_declarative_tier_docs_source_rejects_missing_directory(tmp_path):
         ad.assemble(site, tmp_path / "out", tiers, manifest_path=tmp_path / "m.json", exclude_logical=())
 
 
+def test_tier_exclude_keeps_codegen_pages_out_of_another_tiers_capability(tmp_path) -> None:
+    """A tier can keep a codegen-only capability page out of the docs tree.
+
+    The Newton tier needs its own capability page for requirement codegen in a
+    capability the Core tier documents. Excluding it by source file keeps the
+    Core page at the same logical path, and the Newton requirement page still
+    assembles.
+    """
+    site = tmp_path / "docs"
+    tiers = tmp_path / "tiers"
+    out = tmp_path / "out"
+    _make_site(site)
+    core = _make_tier(tiers, "tier_core", "core")
+    newton = _make_tier(tiers, "tier_newton", "newton")
+    _write(core / "rules_and_reqs" / "cap" / "capability-cap.md", "# Core cap\n")
+    _write(newton / "rules_and_reqs" / "cap" / "capability-cap.md", "# Newton cap\n")
+    _write(newton / "rules_and_reqs" / "cap" / "requirements" / "newton-req.md", "# Newton req\n")
+    _write_docs_sources(
+        newton.parents[2], [], exclude=["simready/foundation/newton/rules_and_reqs/cap/capability-cap.md"]
+    )
+
+    manifest = ad.assemble(site, out, tiers, manifest_path=tmp_path / "m.json", exclude_logical=())
+
+    assert (out / "rules_and_reqs" / "cap" / "capability-cap.md").read_text(encoding="utf-8") == "# Core cap\n"
+    assert manifest["rules_and_reqs/cap/capability-cap.md"]["source"] == "tier:tier_core"
+    assert manifest["rules_and_reqs/cap/requirements/newton-req.md"]["source"] == "tier:tier_newton"
+
+
+def test_tier_exclude_rejects_missing_file(tmp_path) -> None:
+    site = tmp_path / "docs"
+    tiers = tmp_path / "tiers"
+    _make_site(site)
+    module_root = _make_tier(tiers, "vendor_tier", "vendor")
+    _write_docs_sources(module_root.parents[2], [], exclude=["simready/foundation/vendor/missing.md"])
+
+    with pytest.raises(ad.AssembleError, match="excluded path is not a file"):
+        ad.assemble(site, tmp_path / "out", tiers, manifest_path=tmp_path / "m.json", exclude_logical=())
+
+
 # ---------------------------------------------------------------------------
 # 2. Deterministic output.
 # ---------------------------------------------------------------------------
@@ -196,7 +341,7 @@ def test_deterministic_output(tmp_path):
     tiers = tmp_path / "tiers"
     _make_site(site)
     core = _make_tier(tiers, "tier_core", "core")
-    _write(core / "capabilities" / "a.md", "# A\n")
+    _write(core / "rules_and_reqs" / "a.md", "# A\n")
     _write(core / "features" / "b.md", "# B\n")
 
     out1 = tmp_path / "o1"
@@ -217,15 +362,15 @@ def test_reassembly_is_clean(tmp_path):
     tiers = tmp_path / "tiers"
     _make_site(site)
     core = _make_tier(tiers, "tier_core", "core")
-    stale = core / "capabilities" / "stale.md"
+    stale = core / "rules_and_reqs" / "stale.md"
     _write(stale, "# stale\n")
     out = tmp_path / "out"
     ad.assemble(site, out, tiers, manifest_path=tmp_path / "m.json", exclude_logical=())
-    assert (out / "capabilities" / "stale.md").exists()
+    assert (out / "rules_and_reqs" / "stale.md").exists()
 
     stale.unlink()  # remove from source, reassemble
     ad.assemble(site, out, tiers, manifest_path=tmp_path / "m.json", exclude_logical=())
-    assert not (out / "capabilities" / "stale.md").exists()
+    assert not (out / "rules_and_reqs" / "stale.md").exists()
 
 
 def test_existing_unowned_output_is_refused_and_preserved(tmp_path):
@@ -312,8 +457,8 @@ def test_divergent_duplicate_raises(tmp_path):
     _make_site(site)
     core = _make_tier(tiers, "tier_a", "a")
     isaac = _make_tier(tiers, "tier_b", "b")
-    _write(core / "capabilities" / "dup.md", "# version A\n")
-    _write(isaac / "capabilities" / "dup.md", "# version B — different!\n")
+    _write(core / "rules_and_reqs" / "dup.md", "# version A\n")
+    _write(isaac / "rules_and_reqs" / "dup.md", "# version B — different!\n")
 
     with pytest.raises(ad.AssembleError, match="Divergent duplicate"):
         ad.assemble(site, tmp_path / "out", tiers, manifest_path=tmp_path / "m.json", exclude_logical=())
@@ -325,12 +470,59 @@ def test_identical_duplicate_is_allowed(tmp_path):
     _make_site(site)
     core = _make_tier(tiers, "tier_a", "a")
     isaac = _make_tier(tiers, "tier_b", "b")
-    _write(core / "capabilities" / "dup.md", "# identical\n")
-    _write(isaac / "capabilities" / "dup.md", "# identical\n")
+    _write(core / "rules_and_reqs" / "dup.md", "# identical\n")
+    _write(isaac / "rules_and_reqs" / "dup.md", "# identical\n")
 
     manifest = ad.assemble(site, tmp_path / "out", tiers, manifest_path=tmp_path / "m.json", exclude_logical=())
     # first source wins the attribution; no error
-    assert manifest["capabilities/dup.md"]["source"] == "tier:tier_a"
+    assert manifest["rules_and_reqs/dup.md"]["source"] == "tier:tier_a"
+
+
+def test_rejected_rebuild_preserves_prior_output_and_manifest_integrity(tmp_path):
+    """A late shared-overlay collision must not leave a truncated tree beside a prior manifest."""
+    site = tmp_path / "docs"
+    tiers = tmp_path / "tiers"
+    out = tmp_path / "out"
+    manifest_file = tmp_path / "m.json"
+    _make_site(site)
+
+    tier_a = _make_tier(tiers, "tier_a", "a")
+    tier_b = _make_tier(tiers, "tier_b", "b")
+    _write(tier_a / "rules_and_reqs" / "a.md", "# Cap A\n")
+    _write(tier_a / "features" / "f.md", "# Feature F\n")
+    _write(tier_b / "rules_and_reqs" / "b.md", "# Cap B\n")
+    _write(tier_b / "profiles" / "p.md", "# Profile P\n")
+
+    shared_f = site / "shared" / "features" / "f.md"
+    _write(shared_f, "# Feature F\n")  # identical overlap on baseline
+    _write(site / "shared" / "features" / "hub.md", "# Features Hub\n")
+    _write(site / "shared" / "profiles" / "zz-shared.md", "# Shared Profile\n")
+    _write(site / "shared" / "zz-tail.md", "# Shared Tail\n")
+
+    baseline_manifest = ad.assemble(site, out, tiers, manifest_path=manifest_file, exclude_logical=())
+    assert len(baseline_manifest) == 9
+    baseline_manifest_bytes = manifest_file.read_bytes()
+    baseline_tree = {rel: (out / rel).read_bytes() for rel in baseline_manifest}
+
+    # Mutate the shared feature so step (4) fails mid-way, before profiles/zz-shared.md and zz-tail.md.
+    _write(shared_f, "# Feature F (divergent shared edit)\n")
+    with pytest.raises(ad.AssembleError, match="Divergent duplicate"):
+        ad.assemble(site, out, tiers, manifest_path=manifest_file, exclude_logical=())
+
+    # Retained manifest and retained staged output must remain 100% consistent.
+    retained = json.loads(manifest_file.read_text(encoding="utf-8"))["files"]
+    actual_files = {rel: (out / rel).read_bytes() for rel, _ in ad._iter_files(out) if rel != ad.OUTPUT_OWNERSHIP_MARKER}
+    assert set(retained) == set(actual_files)
+    assert "profiles/zz-shared.md" in actual_files
+    assert "zz-tail.md" in actual_files
+    assert manifest_file.read_bytes() == baseline_manifest_bytes
+    assert actual_files == baseline_tree
+
+    # Restore the fixture and confirm reassembly succeeds with identical bytes.
+    _write(shared_f, "# Feature F\n")
+    ad.assemble(site, out, tiers, manifest_path=manifest_file, exclude_logical=())
+    assert manifest_file.read_bytes() == baseline_manifest_bytes
+    assert {rel: (out / rel).read_bytes() for rel in baseline_manifest} == baseline_tree
 
 
 # ---------------------------------------------------------------------------
@@ -341,11 +533,11 @@ def test_missing_tier_sections_and_overlay_are_tolerated(tmp_path):
     tiers = tmp_path / "tiers"
     _make_site(site)  # no shared/ overlay at all
     core = _make_tier(tiers, "tier_core", "core")
-    _write(core / "capabilities" / "only.md", "# only capability\n")
+    _write(core / "rules_and_reqs" / "only.md", "# only capability\n")
     # no features/ or profiles/ dirs for this tier
 
     names = _docnames_after(site, tiers, tmp_path)
-    assert "capabilities/only" in names
+    assert "rules_and_reqs/only" in names
     assert "index" in names
     assert not any(n.startswith("features/") for n in names)
     assert not any(n.startswith("profiles/") for n in names)
@@ -363,15 +555,15 @@ def _docnames_after(site, tiers, tmp_path):
 
 
 # ---------------------------------------------------------------------------
-# 5. Logical-prefix exclusion + __init__ dropping.
+# 5. Logical-prefix exclusion + Python dropping.
 # ---------------------------------------------------------------------------
 def test_exclude_logical_drops_named_subtree(tmp_path):
     site = tmp_path / "docs"
     tiers = tmp_path / "tiers"
     _make_site(site)
     isaac = _make_tier(tiers, "tier_isaac", "isaac")
-    _write(isaac / "capabilities" / "physics_bodies" / "quarantined" / "capability-quarantined.md", "# q\n")
-    _write(isaac / "capabilities" / "isaac_sim" / "isaac_sim.md", "# isaac\n")
+    _write(isaac / "rules_and_reqs" / "physics_bodies" / "quarantined" / "capability-quarantined.md", "# q\n")
+    _write(isaac / "rules_and_reqs" / "isaac_sim" / "isaac_sim.md", "# isaac\n")
 
     out = tmp_path / "out"
     ad.assemble(
@@ -379,10 +571,10 @@ def test_exclude_logical_drops_named_subtree(tmp_path):
         out,
         tiers,
         manifest_path=tmp_path / "m.json",
-        exclude_logical=("capabilities/physics_bodies/quarantined",),
+        exclude_logical=("rules_and_reqs/physics_bodies/quarantined",),
     )
     names = _docnames(out)
-    assert "capabilities/isaac_sim/isaac_sim" in names
+    assert "rules_and_reqs/isaac_sim/isaac_sim" in names
     assert not any("quarantined" in n for n in names)
 
     # nothing is excluded by default
@@ -391,52 +583,178 @@ def test_exclude_logical_drops_named_subtree(tmp_path):
     assert any("quarantined" in n for n in _docnames(out2))
 
 
-def test_init_py_is_dropped(tmp_path):
+def test_python_files_are_dropped(tmp_path) -> None:
     site = tmp_path / "docs"
     tiers = tmp_path / "tiers"
     _make_site(site)
     core = _make_tier(tiers, "tier_core", "core")
-    _write(core / "capabilities" / "__init__.py", "import something\n")
-    _write(core / "capabilities" / "a.md", "# a\n")
+    newton = _make_tier(tiers, "tier_newton", "newton")
+    _write(core / "rules_and_reqs" / "__init__.py", "import something\n")
+    _write(core / "rules_and_reqs" / "cap" / "requirements.md", "# reqs\n")
+    _write(core / "rules_and_reqs" / "cap" / "validation.py", "# core validators\n")
+    _write(newton / "rules_and_reqs" / "cap" / "validation.py", "# newton validators\n")
 
     out = tmp_path / "out"
     ad.assemble(site, out, tiers, manifest_path=tmp_path / "m.json", exclude_logical=())
-    assert (out / "capabilities" / "a.md").exists()
-    assert not (out / "capabilities" / "__init__.py").exists()
+    assert (out / "rules_and_reqs" / "cap" / "requirements.md").exists()
+    assert not (out / "rules_and_reqs" / "__init__.py").exists()
+    assert not (out / "rules_and_reqs" / "cap" / "validation.py").exists()
 
 
 # ---------------------------------------------------------------------------
-# 6. Escaping-reference rewriting.
+# 6. Link rewriting.
 # ---------------------------------------------------------------------------
-def test_rewrite_escaping_refs_depth_shift(tmp_path):
-    # site docs at .../docs (depth N); output at .../out/staged (depth N+1)
-    site = tmp_path / "sr" / "docs"
-    out = tmp_path / "sr" / "_build" / "docs-src"
-    site.mkdir(parents=True)
-    out.mkdir(parents=True)
+def _repo_layout(tmp_path: Path):
+    """Return ``(site, tiers, out, core module root)`` laid out like the repository."""
+    site = tmp_path / "nv_core" / "sr_specs" / "docs"
+    tiers = tmp_path / "nv_core" / "tiers"
+    out = tmp_path / "nv_core" / "sr_specs" / "_build" / "docs-src"
+    _make_site(site)
+    core = _make_tier(tiers, "tier_core", "tier_core")
+    return site, tiers, out, core
 
-    # a feature page linking OUT to repo-root sample_content, and IN to _static
-    text = (
-        "See [asset](../../../sample_content/a.usd) and "
-        "[video](../_static/v.mp4) and [peer](other.md).\n"
-        "```{include} ../../../changelist.md\n```\n"
+
+def test_source_relative_links_are_repointed_at_the_assembled_layout(tmp_path) -> None:
+    site, tiers, out, core = _repo_layout(tmp_path)
+    newton = _make_tier(tiers, "tier_newton", "tier_newton")
+    _write(tmp_path / "sample_content" / "a.usda", "#usda 1.0\n")
+    _write(core / "rules_and_reqs" / "cap" / "cap.md", "# Cap\n")
+    _write(core / "rules_and_reqs" / "_includes" / "badges" / "cap.md", "badge\n")
+    _write(newton / "rules_and_reqs" / "cap" / "newton-req.md", "# Newton req\n")
+    _write(
+        core / "features" / "F.md",
+        "[cap](../rules_and_reqs/cap/cap.md#reqs) "
+        "[newton](../../../../../tier_newton/simready/foundation/tier_newton/rules_and_reqs/cap/newton-req.md) "
+        "[guide](../../../../../../sr_specs/docs/guides/guides.md) "
+        "![asset](<../../../../../../../sample_content/a.usda>)\n",
     )
-    logical = "features/FET_x.md"
-    result = ad.rewrite_escaping_refs(text, logical, site, out)
+    _write(
+        core / "rules_and_reqs" / "cap" / "requirements.md",
+        "```{include} ../_includes/badges/cap.md\n```\n",
+    )
+    _write(
+        site / "shared" / "features" / "features.md",
+        "[F](../../../../tiers/tier_core/simready/foundation/tier_core/features/F.md)\n",
+    )
 
-    # escaping refs gain exactly one extra ../ (out is one level deeper)
-    assert "(../../../../sample_content/a.usd)" in result
-    assert "{include} ../../../../changelist.md" in result
-    # in-tree refs are untouched
-    assert "(../_static/v.mp4)" in result
-    assert "(other.md)" in result
+    ad.assemble(site, out, tiers, manifest_path=tmp_path / "m.json", exclude_logical=())
+
+    assert (out / "features" / "F.md").read_text(encoding="utf-8") == (
+        "[cap](../rules_and_reqs/cap/cap.md#reqs) "
+        "[newton](../rules_and_reqs/cap/newton-req.md) "
+        "[guide](../guides/guides.md) "
+        "![asset](<../../../../../sample_content/a.usda>)\n"
+    )
+    assert (out / "rules_and_reqs" / "cap" / "requirements.md").read_text(encoding="utf-8") == (
+        "```{include} ../_includes/badges/cap.md\n```\n"
+    )
+    assert (out / "features" / "features.md").read_text(encoding="utf-8") == "[F](F.md)\n"
+    staged_asset = (out / "features" / "../../../../../sample_content/a.usda").resolve()
+    assert staged_asset == (tmp_path / "sample_content" / "a.usda").resolve()
 
 
-def test_rewrite_leaves_urls_and_anchors_alone(tmp_path):
+def test_links_that_do_not_resolve_in_source_are_left_as_written(tmp_path) -> None:
+    site, tiers, out, core = _repo_layout(tmp_path)
+    text = (
+        "[web](https://example.com/x) [abs](/rules_and_reqs/x.md) [anchor](#sec) "
+        "[missing](missing.md) [sub]({{version}}) [mail](mailto:a@b.c)\n"
+    )
+    _write(core / "features" / "F.md", text)
+
+    ad.assemble(site, out, tiers, manifest_path=tmp_path / "m.json", exclude_logical=())
+
+    assert (out / "features" / "F.md").read_text(encoding="utf-8") == text
+
+
+def test_path_refs_skip_code_and_comments_but_not_directive_bodies() -> None:
+    text = (
+        "[a](a.md) `[b](b.md)` <!-- [c](c.md) -->\n"
+        "```usda\n[d](d.md)\n```\n"
+        "````{note}\n[e](e.md)\n```python\n[f](f.md)\n```\n````\n"
+        "```{include} g.md\n:start-after: x\n```\n"
+        ":::{figure} h.png\n[i](i.md)\n:::\n"
+        "```{toctree}\nj\n```\n"
+        "[k]: <k dir/k.md>\n[^l]: footnote\n"
+    )
+
+    refs = [(text[start:end], kind) for start, end, kind in ad.iter_path_refs(text)]
+
+    assert refs == [
+        ("a.md", "link"),
+        ("e.md", "link"),
+        ("g.md", "directive"),
+        ("h.png", "directive"),
+        ("i.md", "link"),
+        ("k dir/k.md", "link"),
+    ]
+
+
+# ---------------------------------------------------------------------------
+# 7. Legacy feature route compatibility stubs.
+# ---------------------------------------------------------------------------
+def test_legacy_june_routes_emit_redirects_in_foundations1_layout(tmp_path):
     site = tmp_path / "docs"
-    out = tmp_path / "_build" / "docs-src"
-    site.mkdir(parents=True)
-    out.mkdir(parents=True)
-    text = "[web](https://example.com/x) [abs](/root) [anchor](#sec) [peer](sub/a.md#frag)\n"
-    result = ad.rewrite_escaping_refs(text, "features/x.md", site, out)
-    assert result == text  # nothing escapes, nothing external touched
+    tiers = tmp_path / "tiers"
+    out = tmp_path / "out"
+    manifest_file = tmp_path / "m.json"
+    _make_site(site)
+
+    core = _make_tier(tiers, "tier_core", "core")
+    _write(core / "features" / "FET_001_STANDARD.md", "# Minimal\n")
+    _write(core / "features" / "FET_003_STANDARD.md", "# RBD Standard\n")
+    _write(core / "features" / "FET_003_PHYSX.md", "# RBD PhysX\n")
+
+    manifest = ad.assemble(site, out, tiers, manifest_path=manifest_file, exclude_logical=())
+    names = _docnames(out)
+
+    assert "features/FET_001_STANDARD" in names
+    assert "features/FET_001-minimal" in names
+    assert "features/FET_001-minimal.md" in manifest
+    assert manifest["features/FET_001-minimal.md"]["source"] == "compat:2026.06"
+
+    minimal_stub = (out / "features" / "FET_001-minimal.md").read_text(encoding="utf-8")
+    assert minimal_stub.startswith("---\norphan: true\n---\n")
+    assert "url=FET_001_STANDARD.html" in minimal_stub
+    assert "[`FET_001_STANDARD`](FET_001_STANDARD.md)" in minimal_stub
+
+    rbd_stub = (out / "features" / "FET_003-rigid_body_physics.md").read_text(encoding="utf-8")
+    assert "url=FET_003_STANDARD.html" in rbd_stub
+    assert "[`FET_003_STANDARD`](FET_003_STANDARD.md)" in rbd_stub
+    assert "[`FET_003_PHYSX`](FET_003_PHYSX.md)" in rbd_stub
+
+
+def test_committed_tiers_preserve_all_18_june_and_foundations1_feature_routes() -> None:
+    tiers_root = _TOOLING_DIR.parent
+    site_docs_root = tiers_root.parent / "sr_specs" / "docs"
+    repo_root = tiers_root.parent.parent
+
+    # The committed docs include files above the docs root, which are rewritten
+    # with os.path.relpath; on Windows that requires the output on the repo's drive.
+    with tempfile.TemporaryDirectory(dir=repo_root, prefix=".pytest-assemble-") as tmp:
+        out = Path(tmp) / "docs"
+        manifest_file = Path(tmp) / "manifest.json"
+
+        manifest = ad.assemble(
+            site_docs_root=site_docs_root,
+            output_root=out,
+            tiers_root=tiers_root,
+            manifest_path=manifest_file,
+        )
+        names = _docnames(out)
+        manifest_text = manifest_file.read_text(encoding="utf-8")
+
+        assert len(ad.LEGACY_JUNE_FEATURE_ROUTES) == 18
+        assert "features/FET_001-minimal" in names
+        assert "features/FET_001_STANDARD" in names
+        assert "features/FET_001-minimal" in manifest_text
+
+        for june_stem, f1_stems in ad.LEGACY_JUNE_FEATURE_ROUTES:
+            june_docname = f"features/{june_stem}"
+            june_logical = f"{june_docname}.md"
+            assert june_docname in names
+            assert june_logical in manifest
+            assert (out / june_logical).is_file()
+            for f1_stem in f1_stems:
+                assert f"features/{f1_stem}" in names
+                assert f"features/{f1_stem}.md" in manifest
+

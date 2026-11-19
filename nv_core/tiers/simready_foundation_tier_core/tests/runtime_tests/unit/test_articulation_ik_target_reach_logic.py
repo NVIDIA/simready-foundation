@@ -19,25 +19,221 @@ is exercised only by the manual smoke run. These unit tests cover the pure
 module-level helpers that ship with the phase: defaults, aggregate
 summary, Lula robot-name lookup, EE-candidate lookup.
 """
+
 import math
 from types import SimpleNamespace
 
+import numpy as np
 import pytest
-from simready_benchmark_kit_suite.articulation_phases.ik_target_reach import (
+from simready.foundation.tier_core.runtime_tests.articulation_phases import (
+    ik_target_reach,
+    required_readback,
+)
+from simready.foundation.tier_core.runtime_tests.articulation_phases.ik_target_reach import (
+    _precompute_ik_solutions,
+    _teleport_to_joints,
     aggregate_ik_summary,
     default_ee_candidates,
+    expand_ik_action,
     get_defaults,
     run_ik_target_reach,
     select_lula_robot_name,
 )
-from simready_benchmark_kit_suite.articulation_phases.robot_type import RobotType
+from simready.foundation.tier_core.runtime_tests.articulation_phases.robot_type import RobotType
+
+
+class _HostBoundaryTensor:
+    def __init__(self, values):
+        self.values = values
+        self.calls = []
+
+    def detach(self):
+        self.calls.append("detach")
+        return self
+
+    def cpu(self):
+        self.calls.append("cpu")
+        return self
+
+    def numpy(self):
+        self.calls.append("numpy")
+        return self.values
+
+
+def _make_host_boundary_articulation(joints, position):
+    calls = {"fk": [], "ik": []}
+
+    def forward(frame, values, **kwargs):
+        calls["fk"].append(values.copy())
+        return position, np.array([1.0, 0.0, 0.0, 0.0])
+
+    def inverse(frame, target, orientation, warm_start, position_tolerance, orientation_tolerance):
+        calls["ik"].append(warm_start.copy())
+        return np.array([0.1, 0.2, 0.3]), True
+
+    subset = SimpleNamespace(
+        get_joint_positions=lambda: joints,
+        make_articulation_action=lambda values, velocities: SimpleNamespace(joint_positions=values),
+    )
+    kinematics = SimpleNamespace(compute_forward_kinematics=forward, compute_inverse_kinematics=inverse)
+    articulation = SimpleNamespace(
+        get_joints_subset=lambda: subset,
+        get_kinematics_solver=lambda: kinematics,
+        get_end_effector_frame=lambda: "tip",
+    )
+    return articulation, calls
+
+
+@pytest.mark.parametrize(
+    "values",
+    [
+        np.array([True, False, True]),
+        np.array(["0", "1", "2"]),
+        np.array([0, 1, 2], dtype=object),
+        np.array([complex(0, 1), 0, 0]),
+        np.array([complex(0, math.inf), 0, 0]),
+    ],
+)
+@pytest.mark.parametrize("boundary", ["fk_joints", "fk_position", "ik_warm_start"])
+@pytest.mark.parametrize("wrapped", [False, True])
+def test_lula_host_boundary_rejects_malformed_dtype_before_numeric_conversion(values, boundary, wrapped):
+    backend = _HostBoundaryTensor(values) if wrapped else values
+    joints = backend if boundary != "fk_position" else np.array([0.0, 0.1, 0.2])
+    position = backend if boundary == "fk_position" else np.array([1.0, 2.0, 3.0])
+    articulation, calls = _make_host_boundary_articulation(joints, position)
+    with pytest.raises(required_readback.RequiredReadbackError):
+        if boundary == "ik_warm_start":
+            ik_target_reach._compute_inverse_kinematics_host(articulation, np.zeros(3), 0.01, 0.1)
+        else:
+            ik_target_reach._compute_end_effector_pose_host(articulation)
+    assert len(calls["fk"]) == (1 if boundary == "fk_position" else 0)
+    assert calls["ik"] == []
+    if wrapped:
+        assert backend.calls == ["detach", "cpu", "numpy"]
+
+
+@pytest.mark.parametrize("dtype", [np.float32, np.float64, np.int32, np.uint32])
+@pytest.mark.parametrize("wrapped", [False, True])
+def test_lula_host_boundary_keeps_backend_copy_and_qualified_numeric_float64_contract(dtype, wrapped):
+    values = np.array([0, 1, 2], dtype=dtype)
+    backend = _HostBoundaryTensor(values) if wrapped else values
+    host = ik_target_reach._host_array(backend)
+    assert host is values and host.dtype == values.dtype
+    if wrapped:
+        assert backend.calls == ["detach", "cpu", "numpy"]
+        backend.calls.clear()
+    articulation, calls = _make_host_boundary_articulation(backend, backend)
+    position, _ = ik_target_reach._compute_end_effector_pose_host(articulation)
+    action, success = ik_target_reach._compute_inverse_kinematics_host(articulation, np.zeros(3), 0.01, 0.1)
+    assert success and action.joint_positions.shape == (3,)
+    np.testing.assert_array_equal(position, values)
+    assert position.dtype == np.float64
+    assert calls["fk"][0].dtype == np.float64 and calls["ik"][0].dtype == np.float64
+    np.testing.assert_array_equal(calls["fk"][0], values)
+    np.testing.assert_array_equal(calls["ik"][0], values)
+    np.testing.assert_array_equal(values, [0, 1, 2])
+    if wrapped:
+        assert backend.calls == ["detach", "cpu", "numpy"] * 3
+
+
+@pytest.mark.parametrize(
+    "asset,expected",
+    [
+        ("factory_ur3e.usd", "UR3e"),
+        ("robot_ur5e", "UR5e"),
+        ("robot_ur10e", "UR10e"),
+        ("robot_fr3", "FR3"),
+        ("robot_panda", "Franka"),
+        ("UR300", None),
+        ("frankalog", None),
+    ],
+)
+def test_model_names_match_tokens_not_prefixes(asset, expected):
+    assert select_lula_robot_name(None, asset, None) == expected
+
+
+def test_expand_indexed_action_preserves_non_commanded_dofs():
+    current = np.array([0.1, 0.2, 0.3])
+    action = SimpleNamespace(joint_positions=[0.7, 0.9], joint_indices=np.array([2, 0], dtype=np.int32))
+    assert np.allclose(expand_ik_action(action, current), [0.9, 0.2, 0.7])
+    assert np.allclose(current, [0.1, 0.2, 0.3])
+
+
+@pytest.mark.parametrize("indices", [[True, False], [False, 1], [0.0, 1.0], [0, 0], [-1, 1], [0, 3], [[0, 1]]])
+def test_expand_action_rejects_invalid_indices(indices):
+    with pytest.raises(RuntimeError, match="indices"):
+        expand_ik_action(SimpleNamespace(joint_positions=[0.2, 0.3], joint_indices=indices), [0, 0, 0])
+
+
+@pytest.mark.parametrize("current,positions", [([0, float("nan")], [0.2]), ([0, 0], [float("inf")]), ([[0, 0]], [0.2])])
+def test_expand_action_requires_finite_full_current_and_solver_vectors(current, positions):
+    with pytest.raises(RuntimeError, match="runtime error"):
+        expand_ik_action(SimpleNamespace(joint_positions=positions, joint_indices=[0]), current)
+
+
+def test_full_action_requires_all_dofs():
+    with pytest.raises(RuntimeError, match="DOF count"):
+        expand_ik_action(SimpleNamespace(joint_positions=[0.2], joint_indices=None), [0, 0])
+
+
+@pytest.mark.asyncio
+async def test_teleport_synchronizes_target_and_velocity_before_stepping():
+    calls = []
+
+    async def step():
+        calls.append("step")
+
+    robot = SimpleNamespace(
+        dof_names=["a", "b"],
+        set_joint_positions=lambda value: calls.append(("positions", value.copy())),
+        set_joint_position_targets=lambda value: calls.append(("targets", value.copy())),
+        set_joint_velocities=lambda value: calls.append(("velocities", value.copy())),
+    )
+    await _teleport_to_joints(robot, [0.2, 0.3], SimpleNamespace(step_one=step), 1)
+    assert [item[0] if isinstance(item, tuple) else item for item in calls] == [
+        "positions",
+        "targets",
+        "velocities",
+        "step",
+    ]
+    assert np.array_equal(calls[0][1], calls[1][1]) and np.array_equal(calls[2][1], [0, 0])
+
+
+@pytest.mark.asyncio
+async def test_precompute_restores_reference_after_required_state_failure(monkeypatch):
+    from simready.foundation.tier_core.runtime_tests.articulation_phases import (
+        ik_target_reach as phase,
+    )
+
+    writes = []
+
+    async def fail(*args):
+        raise RuntimeError("original solver state failure")
+
+    async def step():
+        pass
+
+    robot = SimpleNamespace(
+        dof_names=["joint"],
+        set_joint_positions=lambda value: writes.append(value.copy()),
+        set_joint_position_targets=lambda value: None,
+        set_joint_velocities=lambda value: None,
+    )
+    monkeypatch.setattr(phase, "_precompute_ik_solutions_impl", fail)
+    with pytest.raises(RuntimeError, match="original solver state failure"):
+        await _precompute_ik_solutions(SimpleNamespace(step_one=step), robot, None, [], 0.01, 0.01, np.array([0.4]))
+    assert np.array_equal(writes[-1], [0.4])
 
 
 @pytest.mark.asyncio
 async def test_ik_skips_validated_driven_joint_gripper_contract_before_lula_setup():
-    ctx = SimpleNamespace(asset_validated_features=["FET_022_PHYSX", "FET_028_ISAAC"], skip_message=None)
+    ctx = SimpleNamespace(
+        asset_validated_features=["FET022_DrivenJoints.PhysX.0-2-0", "FET028_Gripper.Isaac.0-1-0"],
+        skip_message=None,
+        add_metric=lambda name, value: None,
+    )
     ctx.skip = lambda message: setattr(ctx, "skip_message", message)
-    robot = SimpleNamespace(dof_count=7)
+    robot = SimpleNamespace(dof_count=1)
 
     await run_ik_target_reach(
         ctx,

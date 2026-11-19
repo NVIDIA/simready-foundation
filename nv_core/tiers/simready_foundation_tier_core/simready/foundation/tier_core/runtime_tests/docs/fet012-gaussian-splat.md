@@ -1,0 +1,63 @@
+# FET012 Gaussian Splat
+
+Tests in this family verify that an asset's 3D Gaussian Splat visual actually renders at
+runtime — that the `ParticleField3DGaussianSplat` an author declares is drawn by the RTX
+renderer, not merely well formed on disk.
+
+## Overview
+
+One test renders the asset in a neutral white room and toggles **only** the splat prims: it
+captures a frame with the splats hidden and a frame with them shown, and measures the fraction
+of the frame that changes. Those changed pixels are the splats' screen footprint.
+
+Toggling only the splats — rather than the whole asset — is what makes the measurement
+trustworthy. FET_012 permits an asset to carry a base mesh alongside its 3DGS visual, so hiding
+the whole asset could not tell the splat's pixels from the mesh's. Hiding just the splats leaves
+any base geometry in both frames, so the difference is the splats alone. This is the splat
+analog of FET011's labelled/stripped pair.
+
+3DGS is self-emissive, so the dome light present in the scene is only a uniform backdrop, not a
+lighting requirement.
+
+## What a Passing Family Means
+
+Invalid acceptance fractions or setup timing/framing configuration stop
+before scene mutation. Required image-analysis errors leave coverage
+incomplete rather than turning unavailable comparison into measured pixels.
+Existing valid defaults remain unchanged; host checks do not prove RTX support.
+
+Toggling the splat prims changes at least `min_splat_coverage` of this sampled
+RTX viewport (default 1%). This screen-footprint probe does not guarantee
+photorealism, appearance quality, or visibility in every camera/sensor view.
+
+This is the runtime counterpart to the offline validator. Splat *data* correctness
+(`SPL.001`–`SPL.006`) is checked by `validation.py`; this family confirms the splats actually
+render.
+
+## Tests
+
+:::{list-table}
+:header-rows: 1
+:widths: 30 45 25
+
+* - Test
+  - What It Checks
+  - Validates
+* - [gaussian_splat_presence](fet012/gaussian-splat-presence.md)
+  - Toggles only the `ParticleField3DGaussianSplat` prims and measures the fraction of the frame that changes (the splats' footprint). Passes at or above `min_splat_coverage`.
+  - FET012_GaussianSplat
+:::
+
+## Relationship to the Feature
+
+This family validates the runtime behavior described by
+[FET012 Sensor Visual 3DGS](../../features/FET012_GaussianSplat.md). Splat authoring and data
+rules live in the
+[Gaussian Splat capability](../../rules_and_reqs/visualization/gaussian_splat/capability-gaussian_splat.md).
+
+```{toctree}
+:maxdepth: 1
+:hidden:
+
+Gaussian Splat Presence <fet012/gaussian-splat-presence>
+```

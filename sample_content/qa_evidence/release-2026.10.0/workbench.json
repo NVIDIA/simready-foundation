@@ -1,0 +1,151 @@
+{
+    "C:\\Users\\jbatchkoff\\.codex\\worktrees\\rel10-ompe-content-repairs\\foundations2\\sample_content\\common_assets\\props_general\\obs_workbench_tool_a01\\simready_usd\\sm_obs_workbench_tool_a01_01.usda": {
+        "profiles": {
+            "Robotics-Prop@3.2.0": {
+                "features_summary": {
+                    "CAP000_Core.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "passed": true,
+                        "version": "0-1-0"
+                    },
+                    "CAP000_Core.MuJoCo.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['CAP000_Core.0-1-0']",
+                        "passed": true,
+                        "version": "0-1-0"
+                    },
+                    "CAP000_Core.Newton.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['CAP000_Core.0-1-0']",
+                        "passed": true,
+                        "version": "0-1-0"
+                    },
+                    "CAP000_Core.PhysX.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['CAP000_Core.0-1-0']",
+                        "passed": true,
+                        "version": "0-1-0"
+                    },
+                    "CAP003_RigidBody.MuJoCo.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "passed": true,
+                        "version": "0-1-0"
+                    },
+                    "CAP004_Multibody.MuJoCo.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['CAP003_RigidBody.MuJoCo.0-1-0']",
+                        "passed": true,
+                        "version": "0-1-0"
+                    },
+                    "CAP007_NonVisualMaterials.0-2-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "passed": true,
+                        "version": "0-2-0"
+                    },
+                    "CAP031_SelfContainedPackage.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "passed": true,
+                        "version": "0-1-0"
+                    },
+                    "CAP033_SimReadyPackage.0-3-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['CAP031_SelfContainedPackage.0-1-0']",
+                        "passed": true,
+                        "version": "0-3-0"
+                    },
+                    "CAP046_WikidataLabels.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "passed": true,
+                        "version": "0-1-0"
+                    },
+                    "CAP100_IsaacComposition.Isaac.0-4-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "passed": true,
+                        "version": "0-4-0"
+                    },
+                    "FET001_MinimalPlaceableVisual.1-0-1": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "passed": true,
+                        "version": "1-0-1"
+                    },
+                    "FET003_RigidBody.0-2-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "passed": true,
+                        "version": "0-2-0"
+                    },
+                    "FET003_RigidBody.Newton.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "passed": true,
+                        "version": "0-1-0"
+                    },
+                    "FET003_RigidBody.PhysX.0-4-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "passed": true,
+                        "version": "0-4-0"
+                    },
+                    "FET004_Multibody.0-2-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['FET003_RigidBody.0-2-0']",
+                        "passed": true,
+                        "version": "0-2-0"
+                    },
+                    "FET004_Multibody.Newton.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['FET003_RigidBody.Newton.0-1-0']",
+                        "passed": true,
+                        "version": "0-1-0"
+                    },
+                    "FET004_Multibody.PhysX.0-4-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['FET003_RigidBody.PhysX.0-4-0']",
+                        "passed": true,
+                        "version": "0-4-0"
+                    },
+                    "FET005_Grasp.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "optional requirements": "['com.nvidia.simready.GSP.001']",
+                        "passed": false,
+                        "version": "0-1-0"
+                    },
+                    "FET006_Materials.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "passed": true,
+                        "version": "0-1-0"
+                    },
+                    "FET006_Materials.MDL.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "passed": true,
+                        "version": "0-1-0"
+                    },
+                    "FET011_SemanticLabels.0-2-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "passed": true,
+                        "version": "0-2-0"
+                    },
+                    "FET011_SemanticLabels.RTX.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['FET011_SemanticLabels.0-2-0']",
+                        "passed": true,
+                        "version": "0-1-0"
+                    }
+                },
+                "profile_id": "Robotics-Prop",
+                "profile_version": "3.2.0"
+            }
+        }
+    }
+}

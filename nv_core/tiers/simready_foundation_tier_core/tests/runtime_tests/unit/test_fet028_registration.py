@@ -14,15 +14,19 @@
 # limitations under the License.
 
 import ast
+import inspect
 from pathlib import Path
 from types import SimpleNamespace
 
-from simready_benchmark.core.feature_aggregator import aggregate_feature_pass
-from simready_benchmark_kit_suite.fet028_gripper.gripper_close_lift import (
+import pytest
+from simready.evaluate.core.feature_aggregator import aggregate_feature_pass
+from simready.foundation.tier_core.runtime_tests.fet028_gripper.gripper_close_lift import (
     _config_defaults_for_shape,
 )
 
-_SOURCE = Path(__file__).parents[3] / "simready_benchmark_kit_suite" / "fet028_gripper"
+_SOURCE = Path(__file__).parents[3] / "simready/foundation/tier_core/runtime_tests" / "fet028_gripper"
+# simready-evaluate releases before 2026.8.0 have no per-asset `asset=` filter.
+_HAS_ASSET_AGGREGATION = "asset" in inspect.signature(aggregate_feature_pass).parameters
 
 
 def _registration(path):
@@ -52,16 +56,16 @@ def test_shape_tests_are_separate_isaac_registrations():
 
     assert _registration(sphere_path) == [
         {
-            "features": [{"id": "FET_028_ISAAC", "version": ">=0.1.0"}],
+            "features": [{"id": "FET028_Gripper.Isaac.0-1-0", "version": "*"}],
             "name": "gripper_close_lift_sphere",
-            "version": "1.4.0",
+            "version": "1.4.9",
         }
     ]
     assert _registration(cube_path) == [
         {
-            "features": [{"id": "FET_028_ISAAC", "version": ">=0.1.0"}],
+            "features": [{"id": "FET028_Gripper.Isaac.0-1-0", "version": "*"}],
             "name": "gripper_close_lift_cube",
-            "version": "1.4.0",
+            "version": "1.4.9",
         }
     ]
     assert _registration(_SOURCE / "gripper_close_lift.py") == []
@@ -77,30 +81,36 @@ def test_shape_payloads_are_reported_at_50_and_85_percent():
     assert cube["payload_mass_fraction"] == 0.85
 
 
+@pytest.mark.skipif(
+    not _HAS_ASSET_AGGREGATION,
+    reason="installed simready-evaluate lacks aggregate_feature_pass(asset=...)",
+)
 def test_fet028_rollup_requires_both_shape_results_to_pass():
     tests = [
         SimpleNamespace(
             id=1,
             name="gripper_close_lift_sphere",
             test_file="sphere.py",
-            provider="simready_benchmark_kit_suite",
-            version="1.4.0",
+            provider="simready.foundation.tier_core.runtime_tests",
+            version="1.4.4",
             requirement=None,
         ),
         SimpleNamespace(
             id=2,
             name="gripper_close_lift_cube",
             test_file="cube.py",
-            provider="simready_benchmark_kit_suite",
-            version="1.4.0",
+            provider="simready.foundation.tier_core.runtime_tests",
+            version="1.4.4",
             requirement=None,
         ),
     ]
-    feature = SimpleNamespace(id=1, name="FET_028_ISAAC", version="0.1.0", tests=[1, 2], runtime=None)
-    asset = SimpleNamespace(tests=[1, 2], profile_features=[])
+    feature = SimpleNamespace(id=1, name="FET028_Gripper.Isaac.0-1-0", version="0.1.0", tests=[1, 2], runtime=None)
+    asset = SimpleNamespace(id=1, path="gripper.usda", tests=[1, 2], profile_features=[])
     plan = SimpleNamespace(
         tests=tests,
         features=[feature],
+        profiles=[],
+        overrides=[],
         assets=[asset],
         engine_configs={},
     )
@@ -120,5 +130,5 @@ def test_fet028_rollup_requires_both_shape_results_to_pass():
         ],
     )
 
-    assert one_failure["FET_028_ISAAC"].passed is False
-    assert both_pass["FET_028_ISAAC"].passed is True
+    assert one_failure["FET028_Gripper.Isaac.0-1-0"].passed is False
+    assert both_pass["FET028_Gripper.Isaac.0-1-0"].passed is True

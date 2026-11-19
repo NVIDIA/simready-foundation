@@ -8,10 +8,10 @@
 # automatically generated folders
 _*/
 # The committed cross-tier overlay's badge includes (dir name starts with "_").
-!docs/shared/capabilities/_includes
+!docs/shared/rules_and_reqs/_includes
 !docs/_ext
 !docs/_static
-!docs/guides/benchmark/tests/_images
+!docs/guides/evaluate/tests/_images
 
 # automatically generated files
 *.7z

@@ -1,0 +1,13 @@
+{
+  "id": "CAP000_Core.Isaac.0-2-0",
+  "display_name": "Core (Isaac)",
+  "requirements": [
+    "RC.001",
+    "RC.004",
+    "RC.005",
+    "RC.006"
+  ],
+  "dependencies": [
+    "CAP000_Core.0-2-0"
+  ]
+}

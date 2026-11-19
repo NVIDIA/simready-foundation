@@ -68,7 +68,7 @@ def _resolve_requirement(code: str):
     assert matches, (
         f"Requirement code '{code}' is not registered. "
         f"Check the spelling, or confirm conftest.py's tier import actually "
-        f"triggered the capabilities module's @register_rule decorators."
+        f"triggered the rules_and_reqs module's @register_rule decorators."
     )
     assert len(matches) == 1, (
         f"Requirement code '{code}' is ambiguous across capabilities: "

@@ -1,4 +1,11 @@
 # The repo-root .gitignore has a broad "_*/" rule, so we need a couple of
 # exemptions for things that should be tracked:
 !_tooling/
-!*/simready/foundation/*/capabilities/_includes
+!*/simready/foundation/*/rules_and_reqs/_includes
+
+# Generated requirements-enum package. build_hook.py always generates it into
+# the tier's _build/python scratch (already ignored) for the wheel, and mirrors
+# it here as well for editable installs, where a tier's regular-package
+# __path__ is the only importable location. Never committed: it is derived from
+# the capability markdown on every build.
+*/simready/foundation/*/requirements/

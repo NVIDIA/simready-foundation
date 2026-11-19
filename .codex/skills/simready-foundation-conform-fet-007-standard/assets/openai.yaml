@@ -1,6 +1,4 @@
-# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-# SPDX-License-Identifier: Apache-2.0
 interface:
-  display_name: "SimReady Conform FET_007_STANDARD Nonvisual Materials"
+  display_name: "SimReady Conform CAP007_NonVisualMaterials Nonvisual Materials"
   short_description: "Repair non-visual sensor material attributes"
-  default_prompt: "Use $simready-foundation-conform-fet-007-standard to repair FET_007_STANDARD non-visual sensor material SimReady validation failures on a USD asset."
+  default_prompt: "Use $simready-foundation-conform-fet-007-standard to repair CAP007_NonVisualMaterials non-visual sensor material SimReady validation failures on a USD asset."

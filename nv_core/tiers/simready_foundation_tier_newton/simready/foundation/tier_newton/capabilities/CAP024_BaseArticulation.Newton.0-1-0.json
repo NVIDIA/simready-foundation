@@ -1,0 +1,14 @@
+{
+  "id": "CAP024_BaseArticulation.Newton.0-1-0",
+  "display_name": "Base Articulation (Newton)",
+  "legacy_identity": {
+    "id": "FET_024_NEWTON",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "NEWTON.BA.001"
+  ],
+  "dependencies": [
+    "CAP024_BaseArticulation.0-1-0"
+  ]
+}

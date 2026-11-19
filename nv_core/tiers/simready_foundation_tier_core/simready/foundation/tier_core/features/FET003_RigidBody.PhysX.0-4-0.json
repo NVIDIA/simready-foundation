@@ -1,0 +1,29 @@
+{
+  "id": "FET003_RigidBody.PhysX.0-4-0",
+  "display_name": "Rigid Body Physics (PhysX)",
+  "legacy_identity": {
+    "id": "FET_003_PHYSX",
+    "version": "0.4.0"
+  },
+  "source_feature": "FET003_RigidBody.0-2-0",
+  "additional_requirements": [
+    "RB.COL.003",
+    "com.nvidia.usd.RB.COL.004",
+    "RB.001",
+    "com.nvidia.usd.RB.003",
+    "com.nvidia.usd.RB.005",
+    "RB.007",
+    "com.nvidia.usd.RB.009",
+    "RB.010",
+    "PHYSX.COL.001",
+    "PHYSX.COL.002"
+  ],
+  "adapters": [
+    "skill:simready-foundation-conform-fet-003-physx"
+  ],
+  "runtime_tests": [
+    "simready.foundation.tier_core.runtime_tests:ground_drop",
+    "simready.foundation.tier_core.runtime_tests:ground_stability",
+    "simready.foundation.tier_core.runtime_tests:slope_drop"
+  ]
+}

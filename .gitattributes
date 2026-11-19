@@ -37,5 +37,6 @@
 *.SLDPRT filter=lfs diff=lfs merge=lfs -text
 *.stp filter=lfs diff=lfs merge=lfs -text
 *.step filter=lfs diff=lfs merge=lfs -text
+
 # Preserve the upstream usd-core license bytes, including CRLF and spacing.
-PACKAGE-LICENSES/usd-core-LICENSE.txt -text
+PACKAGE-LICENSES/usd-core-LICENSE.txt -text -whitespace

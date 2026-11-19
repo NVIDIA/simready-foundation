@@ -13,12 +13,12 @@ Install the validator and tier together:
 pip install simready-validate simready-foundation-tier-sensors
 ```
 
-Install the optional Benchmark framework and Kit engine dependencies needed to
+Install the optional Evaluate framework and Kit engine dependencies needed to
 execute this tier's bundled runtime tests. This extra requires Python 3.12;
 validator-only tier installs also support Python 3.11.
 
 ```bash
-pip install "simready-foundation-tier-sensors[benchmark]"
+pip install "simready-foundation-tier-sensors[evaluate]"
 ```
 
 The tables below reflect the catalogs in the current source tree. The tier's
@@ -34,10 +34,10 @@ should be stamped with each applicable profile.
 
 | Profile | Available versions | Catalog file |
 | --- | --- | --- |
-| [Sensor-IMU](../profiles/sensor-imu.md) | `1.0.0` | `profiles.toml` |
-| [Sensor-Joint](../profiles/sensor-joint.md) | `1.0.0` | `profiles.toml` |
-| [Sensor-Camera](../profiles/sensor-camera.md) | `1.0.0` | `profiles.toml` |
-| [Sensor-LiDAR](../profiles/sensor-lidar.md) | `1.0.0` | `profiles.toml` |
+| [Sensor-IMU](../../../../tiers/simready_foundation_tier_sensors/simready/foundation/sensors/profiles/sensor-imu.md) | `1.0.0` | `profiles.toml` |
+| [Sensor-Joint](../../../../tiers/simready_foundation_tier_sensors/simready/foundation/sensors/profiles/sensor-joint.md) | `1.0.0` | `profiles.toml` |
+| [Sensor-Camera](../../../../tiers/simready_foundation_tier_sensors/simready/foundation/sensors/profiles/sensor-camera.md) | `1.0.0` | `profiles.toml` |
+| [Sensor-LiDAR](../../../../tiers/simready_foundation_tier_sensors/simready/foundation/sensors/profiles/sensor-lidar.md) | `1.0.0` | `profiles.toml` |
 
 ## Features
 
@@ -45,10 +45,10 @@ The Sensors tier owns four feature IDs and four exact feature versions.
 
 | Feature | Purpose | Available versions |
 | --- | --- | --- |
-| [FET_034_ISAAC](../features/FET_034_ISAAC.md) | IMU Sensor | `0.1.0` |
-| [FET_035_RTX](../features/FET_035_RTX.md) | Camera and Render Products | `0.1.0` |
-| [FET_036_RTX](../features/FET_036_RTX.md) | RTX Sensors (LiDAR) | `0.1.0` |
-| [FET_037_ISAAC](../features/FET_037_ISAAC.md) | Joint Sensor | `0.1.0` |
+| [FET034_ImuSensor.Isaac](../../../../tiers/simready_foundation_tier_sensors/simready/foundation/sensors/features/FET034_ImuSensor.Isaac.md) | IMU Sensor | `0-1-0` |
+| [FET035_RenderProducts.RTX](../../../../tiers/simready_foundation_tier_sensors/simready/foundation/sensors/features/FET035_RenderProducts.RTX.md) | Camera and Render Products | `0-1-0` |
+| [FET036_Lidar.RTX](../../../../tiers/simready_foundation_tier_sensors/simready/foundation/sensors/features/FET036_Lidar.RTX.md) | RTX Sensors (LiDAR) | `0-1-0` |
+| [FET037_JointSensor.Isaac](../../../../tiers/simready_foundation_tier_sensors/simready/foundation/sensors/features/FET037_JointSensor.Isaac.md) | Joint Sensor | `0-1-0` |
 
 ## Package contents and discovery
 
@@ -58,7 +58,7 @@ The distribution advertises both the `usd_validation_nvidia` and
 - Capability and requirement documentation plus registered validators.
 - Generated requirement enums.
 - Feature JSON and profile TOML catalogs.
-- Tier-owned Benchmark runtime tests for the physics-sensors, render-products,
+- Tier-owned Evaluate runtime tests for the physics-sensors, render-products,
   LiDAR, and joint-sensor features.
 
 For the package layout, build commands, and local development notes, see the

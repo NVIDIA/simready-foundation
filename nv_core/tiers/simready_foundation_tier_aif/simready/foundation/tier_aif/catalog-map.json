@@ -1,0 +1,62 @@
+{
+  "schema": "simready-foundations2-catalog-map-v1",
+  "version_encoding": "published semantic version dots become hyphens",
+  "contracts": [
+    {
+      "legacy_id": "FET200_AIF",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_200-aif_metadata",
+      "kind": "capability",
+      "id": "CAP200_AifMetadata.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET201_AIF",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_201-connection_points",
+      "kind": "capability",
+      "id": "CAP201_ConnectionPoints.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET201_AIF",
+      "legacy_version": "0.2.0",
+      "legacy_page": "FET_201-connection_points",
+      "kind": "capability",
+      "id": "CAP201_ConnectionPoints.0-2-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET202_AIF",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_202-thermal_cooling",
+      "kind": "capability",
+      "id": "CAP202_ThermalCooling.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET202_AIF",
+      "legacy_version": "0.2.0",
+      "legacy_page": "FET_202-thermal_cooling",
+      "kind": "capability",
+      "id": "CAP202_ThermalCooling.0-2-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET203_AIF",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_203-electrical",
+      "kind": "capability",
+      "id": "CAP203_Electrical.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET203_AIF",
+      "legacy_version": "0.2.0",
+      "legacy_page": "FET_203-electrical",
+      "kind": "capability",
+      "id": "CAP203_Electrical.0-2-0",
+      "runtime_tests": []
+    }
+  ]
+}

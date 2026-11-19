@@ -1,0 +1,15 @@
+{
+  "id": "CAP039_ObjectAffordances.0-1-0",
+  "display_name": "Object Affordances",
+  "legacy_identity": {
+    "id": "FET_039_STANDARD",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "AFF.001",
+    "AFF.002"
+  ],
+  "features": [
+    "FET011_SemanticLabels.0-2-0"
+  ]
+}

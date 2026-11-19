@@ -1,0 +1,16 @@
+{
+  "id": "CAP201_ConnectionPoints.0-1-0",
+  "display_name": "Connection Points",
+  "legacy_identity": {
+    "id": "FET201_AIF",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "CP.001",
+    "CP.004",
+    "CP.005"
+  ],
+  "dependencies": [
+    "CAP200_AifMetadata.0-1-0"
+  ]
+}

@@ -1,0 +1,4 @@
+[edit]
+feature = "FET006_Materials.MDL.0-1-0"
+requirements = ["VM.BIND.002", "VM.MAT.001", "VM.MDL.001", "VM.TEX.001", "VM.TEX.002"]
+reason = "com.nvidia.usd.VM.BIND.001 and com.nvidia.usd.VM.MDL.002 are removed. SimReady registered VM.MDL.002 and never reported it, so handing the code upstream turned an inert requirement into a live one and began failing assets on the deprecated MDL schema that this version had shipped without checking. Removing them restores what 0-1-0 asked for. FET006_Materials.MDL.0-2-0 carries both."

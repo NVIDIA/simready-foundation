@@ -1,29 +1,45 @@
 # SimReady Foundation
 
-## Documentation
-
-Read the [SimReady Foundation documentation](https://nvidia.github.io/simready-foundation/) for guides, features, profiles, and requirements.
+> [!IMPORTANT]
+> **Library compatibility: Foundation 2026.10.0 requires the 10.0 generation
+> of the SimReady libraries**: `simready-validate`, `simready-evaluate`, and
+> `simready-package`. Upgrade the libraries alongside Foundation.
+>
+> This release uses the Foundations 2.0 CAP/FET contract model. Older
+> Foundations 1 library readers cannot load the new dotted contract catalogs;
+> the 8.0 library generation is not sufficient for this release.
+>
+> See [Install dependencies](#6-install-dependencies) and the
+> [Foundation installation guide](nv_core/sr_specs/docs/guides/foundation_pypi.md#installation).
 
 ## License
 
 This project's NVIDIA-authored content is licensed under the Apache License, Version 2.0. See [LICENSE.txt](LICENSE.txt).
 
-Included third-party files retain their own licenses:
+Included third-party files retain their own licenses. [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md) lists each component with its copyright and license:
 
 | Files | License and notice |
 | --- | --- |
 | `sample_content/common_assets/robots_general/Robotiq/2F-85/urdf/urdf/`, `urdf/meshes/`, and Robotiq geometry derived from them in `simready_usd/` | Robotiq model material from the URDF dataset (MIT) and the original ROS-Industrial package (BSD-3-Clause); see the [Robotiq notices](sample_content/common_assets/robots_general/Robotiq/2F-85/urdf/README.md). |
-| `sample_content/common_assets/robots_general/spot_boston_dynamics/dcc_source/working/model/urdf/` | Boston Dynamics Spot model files are distributed under the Boston Dynamics SDK license; dataset metadata also carries the dataset's MIT notice. See the [Spot notices](sample_content/common_assets/robots_general/spot_boston_dynamics/dcc_source/working/model/urdf/README.md). |
-| `sample_content/common_assets/robots_general/ur10/mjcf/` | BSD-3-Clause; see its [LICENSE](sample_content/common_assets/robots_general/ur10/mjcf/LICENSE). |
-| Bundled Python dependencies | See [PACKAGE-LICENSES](PACKAGE-LICENSES/). |
+| `sample_content/common_assets/robots_general/spot_boston_dynamics/dcc_source/working/model/urdf/` | Boston Dynamics SDK license: use only with Boston Dynamics products or software-based simulation/emulation; use with other hardware is prohibited. OBJ line-ending changes are marked as modifications. Dataset metadata also carries the dataset's MIT notice. See the [Spot notices](sample_content/common_assets/robots_general/spot_boston_dynamics/dcc_source/working/model/urdf/README.md). |
+| `sample_content/common_assets/robots_general/ur10/` (including `urdf/`, `urdf_2/`, `mjcf/`, `cad/`, `simready_usd/`, and `simready_isaac_usd/`) | BSD-3-Clause; see the asset-level [license and scope notice](sample_content/common_assets/robots_general/ur10/README.md). |
+| NVIDIA MDL materials (`OmniPBR*.mdl`, `OmniGlass*.mdl`) under `sample_content/` and the Isaac asset transformer test fixtures | BSD-3-Clause; the license text is in each file's header. |
+| Python dependencies | See the [dependency notices](THIRD-PARTY-NOTICES.md#python-dependency-notices) and [PACKAGE-LICENSES](PACKAGE-LICENSES/). |
 
 ## Contributing
 
-This project does currently not accept contributions. See [CONTRIBUTING.md](CONTRIBUTING.md).
+To contribute, start with a GitHub issue to coordinate scope, branch access, and
+work ownership with a maintainer. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Getting the repository
 
 This repository uses **Git LFS** to track binary and USD asset files (`.usda`, `.usdc`, `.usd`, `.usdz`, images, and others). You must have Git LFS installed before cloning, otherwise those files will check out as tiny pointer files instead of the real content.
+
+> [!NOTE]
+> The sample assets ship in USD's binary **crate** format, including the ones
+> named `.usd`, so opening one in a text editor shows binary rather than scene
+> description. See [Reading the sample assets](#reading-the-sample-assets) to
+> convert a layer to human-readable `.usda`.
 
 ### 1. Install Git LFS (once per machine)
 
@@ -131,18 +147,6 @@ source .venv/bin/activate
 
 ### 6. Install dependencies
 
-> [!IMPORTANT]
-> Foundation 8.0 requires the 8.0 releases of the SimReady libraries
-> (`simready-validate`, `simready-benchmark`, `simready-package`, etc.).
-> Foundation 8.0 does not work with older library releases.
->
-> The 8.0 SimReady libraries (`simready-validate`, `simready-benchmark`,
-> `simready-package`, etc.) are backward-compatible with earlier Foundation
-> releases, including 6.0 and 7.1.
->
-> See the [Foundation PyPI installation guide](nv_core/sr_specs/docs/guides/foundation_pypi.md#foundation-and-library-compatibility)
-> for guidance on selecting Foundation content and library versions.
-
 Choose the requirements file that matches your workflow:
 
 | Workflow | Requirements file | What gets installed |
@@ -165,18 +169,80 @@ pip install -r nv_core/package_sample/requirements.txt
 
 You're now ready to go. See [Next steps](#next-steps) for guides on validation, packaging, profiles, and more.
 
+## Reading the sample assets
+
+The sample assets are stored as USD **crate** layers — binary. That is true of
+the `.usd` files too: the extension does not tell you the encoding, since `.usd`
+may be either. Crate is the right shipping format — smaller, faster to open —
+but it cannot be read in a text editor, searched with `grep`, or diffed.
+
+Converting a layer to `.usda` makes it readable. Nothing is lost — the two are
+the same scene description in different encodings.
+
+### Check what you have
+
+A crate layer begins with the bytes `PXR-USDC`, a `.usda` layer with `#usda`:
+
+```bash
+head -c 8 sample_content/common_assets/props_general/alcohol_a01/simready_usd/sm_alcohol_a01_01.usd
+```
+
+To survey a whole tree without converting anything:
+
+```bash
+python scripts/usd_to_usda.py --check sample_content/common_assets/props_general/alcohol_a01
+```
+
+### Convert to `.usda`
+
+`scripts/usd_to_usda.py` converts a single layer or a whole tree. It needs only
+`usd-core`, which the environment setup above already installs:
+
+```bash
+# one asset, written beside the original
+python scripts/usd_to_usda.py sample_content/common_assets/props_general/alcohol_a01/simready_usd/sm_alcohol_a01_01.usd
+
+# a whole tree, collected outside the repo so nothing lands in your working copy
+python scripts/usd_to_usda.py sample_content/common_assets --outdir /tmp/usda
+```
+
+The equivalent in Python, if you would rather do it inline:
+
+```python
+from pxr import Sdf
+
+Sdf.Layer.FindOrOpen("sm_alcohol_a01_01.usd").Export("sm_alcohol_a01_01.usda")
+```
+
+If you have a full OpenUSD build or an Omniverse Kit environment, `usdcat` does
+the same job:
+
+```bash
+usdcat sm_alcohol_a01_01.usd -o sm_alcohol_a01_01.usda
+```
+
+> [!NOTE]
+> `usdcat` is **not** part of the `usd-core` wheel that `requirements.txt`
+> installs — that package ships the Python modules only. Use the script or the
+> `Sdf.Layer` snippet above unless you already have a full USD install.
+
+> [!IMPORTANT]
+> Converted `.usda` files are for human legibility. Keep the crate layer as the
+> source of truth and do not commit the converted copies — they are several
+> times larger, and the assets are validated and shipped in crate form.
+
 ## About SimReady Foundation
 
 SimReady Foundation defines guidelines and requirements for **OpenUSD content** so that assets work reliably across rendering, simulation, robotics, and AI training workflows within NVIDIA Omniverse.
 
-The framework is built around a layered hierarchy:
+The framework is built from four kinds of contract:
 
-| Layer | Purpose | Example |
+| Contract | Purpose | Example |
 |-------|---------|---------|
 | **Requirement** | A single, testable rule an asset must satisfy | *"The stage must define a default prim"* (SAMP.001) |
-| **Capability** | A category that groups related requirements | *Sample* (`SAMP`), *Visualization/Geometry* (`VG`), *Units* (`UN`) |
-| **Feature** | A set of requirements that together describe a queryable property of an asset | *Minimal Placeable Visual*, *RBD Physics*, *Driven Joints* |
-| **Profile** | A bundle of features that defines what an asset must satisfy for a given use case | *Robotics-Prop*, *Robot-Body* |
+| **Capability** | A `CAP`-prefixed contract that groups related requirements | `CAP000_Core`, `CAP024_BaseArticulation`, `CAP039_ObjectAffordances` |
+| **Feature** | A runtime-tested contract, identified by a dotted `<name>[.<runtime>].<version>` ID | `FET003_RigidBody.PhysX.0-4-0`, `FET022_DrivenJoints.Newton.0-1-0` |
+| **Profile** | A named, versioned set of selectors over features and capabilities, each required or optional | *Robotics-Prop*, *Robot-Body* |
 
 ### Profiles
 
@@ -208,9 +274,10 @@ Once you have the environment set up, explore the guides in [`nv_core/sr_specs/d
 |-------|-------------|
 | [SimReady Validation Workflow](nv_core/sr_specs/docs/guides/validate_workflow.md) | Run your first validation — commands, expected output, stamping, and troubleshooting |
 | [SimReady Packaging Workflow](nv_core/sr_specs/docs/guides/packaging_workflow.md) | Package a SimReady asset — pre-validate, local mode, full WRAPP build, and troubleshooting |
-| [SimReady Benchmark](nv_core/sr_specs/docs/guides/benchmark/benchmark.md) | Run benchmarks with `simready-benchmark`, covering install, the pipeline stages, and reading reports |
+| [SimReady Evaluate](nv_core/sr_specs/docs/guides/evaluate/evaluate.md) | Run runtime tests with `simready-evaluate`, covering install, the pipeline stages, and reading reports |
 | [Getting Started](nv_core/sr_specs/docs/guides/getting_started.md) | Orientation — who SimReady is for, choosing a profile, and where to go next |
 | [SimReady Acceptance Workflow](nv_core/sr_specs/docs/guides/acceptance_workflow.md) | How new requirements, features, and profiles move through review |
+| [External Contribution Workflow](nv_core/sr_specs/docs/guides/external_contribution_workflow.md) | Branch access, tier choice, contracts, samples, benchmarks, and review |
 | [Features Expansion Workflow](nv_core/sr_specs/docs/guides/features_expansion_workflow.md) | Create technology-specific feature variants (e.g. neutral to PhysX) |
 | [Profiles Validation Workflow](nv_core/sr_specs/docs/guides/profiles_validation_workflow.md) | Create, version, and validate assets against profiles |
 | [Naming Conventions](nv_core/sr_specs/docs/guides/naming_conventions.md) | Asset and prim naming standards |

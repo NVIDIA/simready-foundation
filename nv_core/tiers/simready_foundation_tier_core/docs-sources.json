@@ -2,8 +2,8 @@
   "schema_version": 1,
   "sources": [
     {
-      "path": "simready_benchmark_kit_suite/docs",
-      "destination": "guides/benchmark/tests"
+      "path": "simready/foundation/tier_core/runtime_tests/docs",
+      "destination": "guides/evaluate/tests"
     }
   ]
 }

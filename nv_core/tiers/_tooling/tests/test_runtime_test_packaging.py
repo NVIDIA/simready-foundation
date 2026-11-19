@@ -17,6 +17,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import os
 import sys
 import tomllib
@@ -25,11 +26,74 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
+from packaging.requirements import Requirement
 
 _TOOLING_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_TOOLING_DIR))
 
 import build_tiers as bt  # noqa: E402
+
+
+@pytest.mark.parametrize("extra", ["benchmark", "evaluate"])
+@pytest.mark.parametrize("tier", ["core", "newton", "sensors"])
+@pytest.mark.parametrize("package", ["simready.evaluate", "simready.evaluate.engine-kit"])
+def test_runtime_dependencies_admit_supported_api_baseline_and_independent_updates(tier, package, extra):
+    root = _foundation_root()
+    project = tomllib.loads(
+        (root / "nv_core/tiers" / ("simready_foundation_tier_" + tier) / "pyproject.toml").read_text(encoding="utf-8")
+    )["project"]
+    requirement = next(
+        requirement
+        for requirement in map(Requirement, project["optional-dependencies"][extra])
+        if requirement.name == package
+    )
+    # The tier owns floor readback and optional diagnostic isolation. A newer
+    # framework or engine is independently admissible within the API generation.
+    assert not requirement.specifier.contains("2026.9.0.dev4", prereleases=True)
+    assert not requirement.specifier.contains("2026.9.0rc1", prereleases=True)
+    assert requirement.specifier.contains("2026.9.0rc3", prereleases=True)
+    assert requirement.specifier.contains("2026.9.0rc4", prereleases=True)
+    assert requirement.url is None
+    assert all(specifier.operator not in {"==", "==="} for specifier in requirement.specifier)
+    assert requirement.specifier.contains(
+        "2026.9.0rc2" if package == "simready.evaluate" else "2026.9.0rc3", prereleases=True
+    )
+    assert requirement.specifier.contains("2026.9.0", prereleases=True)
+    assert requirement.specifier.contains("2026.10.0", prereleases=True)
+    assert requirement.specifier.contains("2026.10.0.dev1", prereleases=True)
+    assert requirement.specifier.contains("2026.10.0.dev2", prereleases=True)
+    assert not requirement.specifier.contains("2026.11.0", prereleases=True)
+    assert not requirement.specifier.contains("2026.11.0.dev1", prereleases=True)
+    assert all(Requirement(item).name != package for item in project["dependencies"])
+
+    requirements = root / "nv_core/tiers/simready_foundation_tier_core/tests/requirements.txt"
+    test_requirement = next(
+        requirement
+        for requirement in map(
+            Requirement,
+            (line for line in requirements.read_text().splitlines() if line.strip() and not line.startswith(("#", "-"))),
+        )
+        if requirement.name == package
+    )
+    assert test_requirement.specifier == requirement.specifier
+    assert project["optional-dependencies"]["benchmark"] == project["optional-dependencies"]["evaluate"]
+
+
+@pytest.mark.parametrize("extra", ["benchmark", "evaluate"])
+def test_newton_runtime_owns_helpers_without_core_dependency(extra):
+    project = tomllib.loads(
+        (_foundation_root() / "nv_core/tiers/simready_foundation_tier_newton/pyproject.toml").read_text(
+            encoding="utf-8"
+        )
+    )["project"]
+    dependencies = project["dependencies"] + project["optional-dependencies"][extra]
+    assert all(Requirement(item).name != "simready-foundation-tier-core" for item in dependencies)
+    runtime = (
+        _foundation_root()
+        / "nv_core/tiers/simready_foundation_tier_newton/simready/foundation/tier_newton/runtime_tests"
+    )
+    assert (runtime / "placement_compat.py").is_file()
+    assert (runtime / "articulation_phases/error_utils.py").is_file()
 
 
 def _foundation_root():
@@ -40,18 +104,6 @@ def _foundation_root():
     raise AssertionError("could not locate the SimReady Foundation root")
 
 
-def test_core_benchmark_extra_installs_runtime_dependencies():
-    root = _foundation_root()
-    project = tomllib.loads(
-        (root / "nv_core" / "tiers" / "simready_foundation_tier_core" / "pyproject.toml").read_text(encoding="utf-8")
-    )["project"]
-
-    assert all("simready-benchmark" not in dependency for dependency in project["dependencies"])
-    benchmark = project["optional-dependencies"]["benchmark"]
-    assert "simready-benchmark[kit]>=2026.8.0,<2026.9.0" in benchmark
-    assert "usd-core>=23.5" in benchmark
-
-
 def test_core_tier_bundles_and_advertises_runtime_tests():
     root = _foundation_root()
     tier_root = root / "nv_core" / "tiers" / "simready_foundation_tier_core"
@@ -59,9 +111,8 @@ def test_core_tier_bundles_and_advertises_runtime_tests():
 
     assert project["tool"]["hatch"]["build"]["targets"]["wheel"]["packages"] == [
         "simready",
-        "simready_benchmark_kit_suite",
     ]
-    assert (tier_root / "simready_benchmark_kit_suite" / "__init__.py").is_file()
+    assert (tier_root / "simready/foundation/tier_core/runtime_tests" / "__init__.py").is_file()
     assert project["project"]["entry-points"]["simready.tier"]["tier_core"] == "simready.foundation.tier_core:tier"
 
     tier_module = (tier_root / "simready" / "foundation" / "tier_core" / "_tier.py").read_text(encoding="utf-8")
@@ -81,23 +132,30 @@ def test_source_descriptor_resolves_importable_runtime_test_package(monkeypatch)
     monkeypatch.setitem(sys.modules, module_name, module)
     spec.loader.exec_module(module)
 
-    expected = (tier_root / "simready_benchmark_kit_suite").resolve()
+    expected = (tier_root / "simready/foundation/tier_core/runtime_tests").resolve()
     assert module.tier.runtime_tests_path == expected
     assert module.tier.runtime_tests_path.is_dir()
+    provider_file = module.tier.runtime_tests_path / "benchmark-provider.json"
+    assert json.loads(provider_file.read_text(encoding="utf-8")) == {
+        "provider": "simready.foundation.tier_core.runtime_tests",
+        "import_package": "simready.foundation.tier_core.runtime_tests",
+        "aliases": ["simready_benchmark_kit_suite"],
+    }
     assert module._owned_package_directory("package_that_does_not_exist_for_simready_tests") is None
     assert module._owned_package_directory("pytest") is None
 
 
-def test_installed_descriptor_ignores_unrelated_parent_project(tmp_path, monkeypatch):
+@pytest.mark.parametrize("tier,package", [("core", "tier_core"), ("newton", "tier_newton"), ("sensors", "sensors")])
+def test_installed_descriptor_ignores_unrelated_parent_project(tier, package, tmp_path, monkeypatch):
     root = _foundation_root()
     source_module = (
         root
         / "nv_core"
         / "tiers"
-        / "simready_foundation_tier_core"
+        / ("simready_foundation_tier_" + tier)
         / "simready"
         / "foundation"
-        / "tier_core"
+        / package
         / "_tier.py"
     )
     unrelated_project = tmp_path / "unrelated-project"
@@ -105,22 +163,22 @@ def test_installed_descriptor_ignores_unrelated_parent_project(tmp_path, monkeyp
     (unrelated_project / "pyproject.toml").write_text("[project]\nname='unrelated'\nversion='1'\n", encoding="utf-8")
 
     install_root = unrelated_project / "target"
-    module_path = install_root / "simready" / "foundation" / "tier_core" / "_tier.py"
+    module_path = install_root / "simready" / "foundation" / package / "_tier.py"
     module_path.parent.mkdir(parents=True)
     module_path.write_text(source_module.read_text(encoding="utf-8"), encoding="utf-8")
-    package_root = install_root / "simready_benchmark_kit_suite"
-    package_root.mkdir()
+    package_root = install_root / "simready" / "foundation" / package / "runtime_tests"
+    package_root.mkdir(parents=True)
     (package_root / "__init__.py").write_text("", encoding="utf-8")
 
-    module_name = "simready.foundation.tier_core._installed_contract_test"
+    module_name = "simready.foundation." + package + "._installed_contract_test"
     spec = importlib.util.spec_from_file_location(module_name, module_path)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     monkeypatch.setitem(sys.modules, module_name, module)
     spec.loader.exec_module(module)
 
-    descriptor_record = module.PurePosixPath("simready", "foundation", "tier_core", "_tier.py")
-    package_record = module.PurePosixPath("simready_benchmark_kit_suite", "__init__.py")
+    descriptor_record = module.PurePosixPath("simready", "foundation", package, "_tier.py")
+    package_record = module.PurePosixPath("simready", "foundation", package, "runtime_tests", "__init__.py")
     distribution = SimpleNamespace(
         files=(descriptor_record, package_record),
         locate_file=lambda record: install_root / Path(record),
@@ -128,7 +186,11 @@ def test_installed_descriptor_ignores_unrelated_parent_project(tmp_path, monkeyp
     monkeypatch.setattr(module.importlib.metadata, "packages_distributions", lambda: {"simready": ("test-tier",)})
     monkeypatch.setattr(module.importlib.metadata, "distribution", lambda _name: distribution)
 
-    assert module._owned_package_directory("simready_benchmark_kit_suite") == package_root.resolve()
+    assert (
+        module._owned_package_directory("simready.foundation." + package + ".runtime_tests") == package_root.resolve()
+    )
+    distribution.files = (descriptor_record,)
+    assert module._owned_package_directory("simready.foundation." + package + ".runtime_tests") is None
 
 
 def test_built_core_tier_wheel_contains_runtime_test_contract():
@@ -143,11 +205,12 @@ def test_built_core_tier_wheel_contains_runtime_test_contract():
     assert len(wheels) == 1, [wheel.name for wheel in wheels]
     with zipfile.ZipFile(wheels[0]) as archive:
         names = set(archive.namelist())
-        assert "simready_benchmark_kit_suite/__init__.py" in names
-        assert "simready_benchmark_kit_suite/README.md" in names
-        assert "simready_benchmark_kit_suite/docs/authoring.md" in names
-        assert "simready_benchmark_kit_suite/docs/tests.md" in names
-        assert "simready_benchmark_kit_suite/docs/_images/presence.png" in names
+        assert "simready/foundation/tier_core/runtime_tests/__init__.py" in names
+        assert "simready/foundation/tier_core/runtime_tests/benchmark-provider.json" in names
+        assert "simready/foundation/tier_core/runtime_tests/README.md" in names
+        assert "simready/foundation/tier_core/runtime_tests/docs/authoring.md" in names
+        assert "simready/foundation/tier_core/runtime_tests/docs/tests.md" in names
+        assert "simready/foundation/tier_core/runtime_tests/docs/_images/presence.png" in names
         assert "simready/foundation/tier_core/_tier.py" in names
         entry_point_files = [name for name in names if name.endswith(".dist-info/entry_points.txt")]
         assert len(entry_point_files) == 1

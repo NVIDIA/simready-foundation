@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP102_RigidBodyCollapse.Isaac"
+  short_description: "Repair Isaac rigid-body collapse"
+  default_prompt: "Use $simready-foundation-conform-cap-102-isaac to safely repair CAP102_RigidBodyCollapse.Isaac rigid-body-collapse failures."

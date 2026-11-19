@@ -1,6 +1,6 @@
 ---
 name: simready-foundation-conform-fet-007-standard
-description: "Use for repairing SimReady nonvisual sensor material attributes on bound USD materials."
+description: "Use for repairing SimReady nonvisual sensor material attributes on bound USD materials. Contract: CAP007_NonVisualMaterials; Foundations 1 ID: FET_007_STANDARD."
 license: Apache-2.0
 metadata:
   author: "Shaad Boochoon <sboochoon@nvidia.com>"
@@ -11,14 +11,29 @@ metadata:
 ---
 
 
-# SimReady Conform FET_007_STANDARD Nonvisual Materials
+# SimReady Conform CAP007_NonVisualMaterials Nonvisual Materials
+
+## OpenUSD Competence
+
+Running this conform skill is expert USD authoring. Reason from the OpenUSD /
+Pixar USD spec rather than pattern-matching a validator message: composition
+arcs and LIVRPS strength ordering, value resolution and list editing
+(prepend, append, explicit, delete), the `def`/`over`/`class`
+specifiers, native instancing and model hierarchy, stage units and up-axis,
+and the `UsdGeom`, `UsdShade`, and `UsdPhysics` schemas. Make the exact native
+edit on the correct prim, arc, and layer, derive values from the asset's real
+geometry and composition, then reopen the composed stage to confirm the
+opinion resolves as intended before claiming the gate passes. Never fabricate
+data to satisfy a validator token. The repository-root `AGENTS.md`
+"Master-Level OpenUSD Competence for Conform Work" section is the full
+statement.
 
 ## Purpose
-Use this workflow skill when the selected profile, validation report, or user request targets `FET_007_STANDARD@0.2.0` non-visual sensor material attributes. FET_007_STANDARD authors and repairs sensor-facing material classification on bound `UsdShade.Material` prims so radar, lidar, thermal, and related RTX sensor simulations can reason about surfaces beyond visible shader appearance.
+Use this workflow skill when the selected profile, validation report, or user request targets `CAP007_NonVisualMaterials.0-2-0` non-visual sensor material attributes. CAP007_NonVisualMaterials authors and repairs sensor-facing material classification on bound `UsdShade.Material` prims so radar, lidar, thermal, and related RTX sensor simulations can reason about surfaces beyond visible shader appearance.
 
-This is a material-semantics repair skill, not a shader-generation skill. Work on a staged copy under the requested output directory, preserve existing visual material bindings, and stop at the first FET_007_STANDARD issue that needs material identity or user judgement.
+This is a material-semantics repair skill, not a shader-generation skill. Work on a staged copy under the requested output directory, preserve existing visual material bindings, and stop at the first CAP007_NonVisualMaterials issue that needs material identity or user judgement.
 
-FET_007_STANDARD is optional in the consolidated Robotics-Prop profile and is not part of the default prop robotics profile sequence. When a profile does not include FET_007_STANDARD, run this skill only when the user explicitly asks for non-visual sensor material conformance or supplies a profile/workflow that includes `FET_007_STANDARD`.
+CAP007_NonVisualMaterials is optional in the consolidated Robotics-Prop profile and is not part of the default prop robotics profile sequence. When a profile does not include CAP007_NonVisualMaterials, run this skill only when the user explicitly asks for non-visual sensor material conformance or supplies a profile/workflow that includes `CAP007_NonVisualMaterials`.
 
 ## Prerequisites
 
@@ -26,17 +41,17 @@ Read the source-of-truth files named below before editing. Work on staged output
 
 ## Source of Truth
 
-Before changing an asset, load the selected FET_007_STANDARD manifest and requirement docs:
+Before changing an asset, load the selected CAP007_NonVisualMaterials manifest and requirement docs:
 
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_007_STANDARD-0.2.0.json`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_007_STANDARD.md`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/nonvisual_sensors/nonvisual_materials/capability-nonvisual_materials.md`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/nonvisual_sensors/nonvisual_materials/requirements.md`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/nonvisual_sensors/nonvisual_materials/validation.py`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/CAP007_NonVisualMaterials.0-2-0.json`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/CAP007_NonVisualMaterials.md`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/nonvisual_sensors/nonvisual_materials/capability-nonvisual_materials.md`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements.md`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/nonvisual_sensors/nonvisual_materials/validation.py`
 
 Treat the selected JSON manifest as authoritative for the required IDs. If the markdown, manifest, validator, or report disagree on allowed values or requirement behavior, follow the current validation report and call out the mismatch in the stage summary.
 
-For per-requirement repair details, read `references/fet007-requirements.md` when a FET_007_STANDARD validation report or inspection identifies matching failures.
+For per-requirement repair details, read `references/fet007-requirements.md` when a CAP007_NonVisualMaterials validation report or inspection identifies matching failures.
 
 ## Inputs
 
@@ -46,10 +61,10 @@ Collect these before editing:
 |---|---|
 | `usd_asset` | Required `.usd`, `.usda`, `.usdc`, or unpacked USD-family asset to repair. |
 | `output_root` | Required or inferred folder for staged assets and reports. |
-| `simready_profile` | Profile being validated, if one includes FET_007_STANDARD. |
+| `simready_profile` | Profile being validated, if one includes CAP007_NonVisualMaterials. |
 | `profile_version` | Profile version, if supplied by the user or validation command. |
 | `validation_report` | Preferred JSON or markdown report from the failing profile or feature validation gate. |
-| `fet007_feature` | Selected feature ID and version, currently `FET_007_STANDARD@0.2.0`. |
+| `fet007_feature` | Selected feature ID and version, currently `CAP007_NonVisualMaterials.0-2-0`. |
 | `material_evidence` | Source DCC material metadata, visual material names, shader parameters, property reports, render review, or user-supplied material classifications. |
 | `classification_policy` | User-approved defaults or mappings for unknown materials, coatings, and special attributes. |
 
@@ -57,9 +72,9 @@ Collect these before editing:
 
 Use this checklist when changing the repository:
 
-1. Confirm the input asset exists and determine whether FET_007_STANDARD is actually selected by the profile or explicitly requested by the user.
-2. Parse the validation report and filter to FET_007_STANDARD/NVM failures. Do not repair visual shader, texture, rigid-body, physics-material, or grasp issues in this skill.
-3. Load the selected FET_007_STANDARD manifest version and the requirement repair map.
+1. Confirm the input asset exists and determine whether CAP007_NonVisualMaterials is actually selected by the profile or explicitly requested by the user.
+2. Parse the validation report and filter to CAP007_NonVisualMaterials/NVM failures. Do not repair visual shader, texture, rigid-body, physics-material, or grasp issues in this skill.
+3. Load the selected CAP007_NonVisualMaterials manifest version and the requirement repair map.
 4. Create a staged output folder under `output_root`; do not mutate the source unless the user explicitly asks for in-place repair.
 5. Inspect the stage before editing:
    - default prim and composed payload/reference boundaries
@@ -81,15 +96,15 @@ Use this checklist when changing the repository:
    - Add or fix `omni:simready:nonvisual:attributes`, using `["none"]` or an empty token array only when no special sensor attributes are intended by policy.
    - Remove time samples from non-visual attributes only after preserving one intended default value.
    - Re-check consistency with the visual material semantics.
-8. Rerun the same validation gate when a profile includes FET_007_STANDARD, or the narrowest available Foundation/OAV capability check for non-visual materials. If no executable FET_007_STANDARD gate is available, report the USD inspection results and the validation gap.
-9. Summarize the stage as passed, failed, skipped, or blocked. Stop when FET_007_STANDARD passes or the next FET_007_STANDARD failure requires material identity, sensor-response policy, visual review, or source-material data.
+8. Rerun the same validation gate when a profile includes CAP007_NonVisualMaterials, or the narrowest available Foundation/OAV capability check for non-visual materials. If no executable CAP007_NonVisualMaterials gate is available, report the USD inspection results and the validation gap.
+9. Summarize the stage as passed, failed, skipped, or blocked. Stop when CAP007_NonVisualMaterials passes or the next CAP007_NonVisualMaterials failure requires material identity, sensor-response policy, visual review, or source-material data.
 
 ## Examples
 
 Example request:
 
 ```text
-Repair FET_007_STANDARD nonvisual sensor material attributes on a USD asset.
+Repair CAP007_NonVisualMaterials nonvisual sensor material attributes on a USD asset.
 ```
 
 Expected result summary:
@@ -114,14 +129,14 @@ Block and report instead of guessing when:
 
 - A material has no reliable source classification.
 - A visual material name or shader color is too generic to identify a sensor material class.
-- The asset material is outside the current allowed FET_007_STANDARD value list.
+- The asset material is outside the current allowed CAP007_NonVisualMaterials value list.
 - The validator and docs disagree and the repair would risk making sensor semantics less truthful.
 - A material appears visually inconsistent with the proposed non-visual class.
 - The staged asset has no bound visual materials and the user did not ask to create visual materials first.
 
 ## Classification Guidance
 
-FET_007_STANDARD values are semantic labels, not visual decoration. Do not choose them just to satisfy the validator.
+CAP007_NonVisualMaterials values are semantic labels, not visual decoration. Do not choose them just to satisfy the validator.
 
 Use the current validator value list for pass/fail decisions. Notable current values include:
 
@@ -139,7 +154,7 @@ Common consistency checks:
 
 ## Validation Handoff
 
-Preserve reports under the staged output directory. If a selected profile includes FET_007_STANDARD and the Physical AI Skill Hub validation commands are available, use the same profile gate that exposed the failure:
+Preserve reports under the staged output directory. If a selected profile includes CAP007_NonVisualMaterials and the Physical AI Skill Hub validation commands are available, use the same profile gate that exposed the failure:
 
 ```bash
 uv run --python 3.12 validate-simready-profile <staged-usd> \
@@ -150,7 +165,7 @@ uv run --python 3.12 validate-simready-profile <staged-usd> \
   --report <output-root>/simready-profile-after-fet007.json
 ```
 
-If no selected profile includes FET_007_STANDARD, do not mutate a profile TOML file just to test the skill. Run the available non-visual materials capability validator directly if the local environment exposes it; otherwise report the deterministic USD inspection and note that profile validation cannot exercise FET_007_STANDARD until a profile selects it.
+If no selected profile includes CAP007_NonVisualMaterials, do not mutate a profile TOML file just to test the skill. Run the available non-visual materials capability validator directly if the local environment exposes it; otherwise report the deterministic USD inspection and note that profile validation cannot exercise CAP007_NonVisualMaterials until a profile selects it.
 
 ## Limitations
 
@@ -178,7 +193,7 @@ Report:
 | `input_usd_path` | Original USD path. |
 | `output_usd_path` | Latest staged/repaired USD path. |
 | `profile` and `profile_version` | Validation target, if any. |
-| `fet007_feature` | Selected FET_007_STANDARD feature ID and version. |
+| `fet007_feature` | Selected CAP007_NonVisualMaterials feature ID and version. |
 | `material_evidence` | Source used for non-visual classification. |
 | `classified_materials` | Bound material prims and authored base/coating/attribute values. |
 | `unbound_material_repairs` | Orphaned attribute fixes or bindings changed for NVM.004. |
@@ -186,6 +201,6 @@ Report:
 | `requirements_repaired` | Requirement IDs changed by this skill. |
 | `requirements_blocked` | Requirement IDs that need material identity, source data, or user judgement. |
 | `validation_report` | Path to the rerun validation or inspection report. |
-| `next_step` | Usually run FET_007_STANDARD-capable validation or collect missing material evidence. |
+| `next_step` | Usually run CAP007_NonVisualMaterials-capable validation or collect missing material evidence. |
 
 Keep the user-facing summary short: which materials were classified, what evidence justified the values, what validation could run, and what remains blocked.

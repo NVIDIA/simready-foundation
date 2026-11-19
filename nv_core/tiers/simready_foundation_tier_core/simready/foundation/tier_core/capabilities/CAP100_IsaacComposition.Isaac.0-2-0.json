@@ -1,0 +1,14 @@
+{
+  "id": "CAP100_IsaacComposition.Isaac.0-2-0",
+  "display_name": "IsaacSim Composition",
+  "legacy_identity": {
+    "id": "FET_100_ISAAC",
+    "version": "0.2.0"
+  },
+  "requirements": [
+    "ISA.001"
+  ],
+  "features": [
+    "FET003_RigidBody.PhysX.0-3-0"
+  ]
+}

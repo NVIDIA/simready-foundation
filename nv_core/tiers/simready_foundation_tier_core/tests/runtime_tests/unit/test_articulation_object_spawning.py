@@ -16,7 +16,7 @@
 import numpy as np
 import pytest
 from pxr import Usd, UsdGeom, UsdPhysics
-from simready_benchmark_kit_suite.articulation_phases.object_spawning import (
+from simready.foundation.tier_core.runtime_tests.articulation_phases.object_spawning import (
     SpawnedObject,
     spawn_test_object,
 )

@@ -22,8 +22,9 @@ import sys
 import types
 
 import numpy as np
-from pxr import Sdf, Usd, UsdGeom
-from simready_benchmark_kit_suite.articulation_phases.robot_handle import (
+import pytest
+from pxr import Sdf, Usd, UsdGeom, UsdPhysics
+from simready.foundation.tier_core.runtime_tests.articulation_phases.robot_handle import (
     RobotHandle,
     _discover_mjc_tendon_controls,
     _has_native_newton_actuators,
@@ -32,7 +33,7 @@ from simready_benchmark_kit_suite.articulation_phases.robot_handle import (
     _tendon_position_to_ctrl,
     _to_dof_array,
 )
-from simready_benchmark_kit_suite.articulation_phases.robot_type import RobotType
+from simready.foundation.tier_core.runtime_tests.articulation_phases.robot_type import RobotType
 
 
 class FakeArticulationAction:
@@ -335,17 +336,24 @@ class _CudaBackedPhysicsView(_FakePhysicsView):
         return DeviceBackedValues()
 
 
-def _handle_with_link_view(body_names, transforms, paths):
+def _handle_with_link_view(body_names, transforms, paths, rigid_bodies=True, native_paths=True):
     art = FakeArticulation([], [], [], [], [], [], [], [])
+    physics_view = _FakePhysicsView(transforms)
+    if native_paths is True:
+        physics_view.link_paths = [list(paths)]
+    elif native_paths is not False:
+        physics_view.link_paths = native_paths
     art._articulation_view = types.SimpleNamespace(
         body_names=body_names,
-        _physics_view=_FakePhysicsView(transforms),
+        _physics_view=physics_view,
     )
     handle = _make_handle_with_fake(art)
     stage = Usd.Stage.CreateInMemory()
     UsdGeom.Xform.Define(stage, "/World")
     for path in paths:
-        UsdGeom.Xform.Define(stage, path)
+        prim = UsdGeom.Xform.Define(stage, path).GetPrim()
+        if rigid_bodies:
+            UsdPhysics.RigidBodyAPI.Apply(prim)
     handle._stage = stage
     return handle
 
@@ -404,6 +412,144 @@ def test_link_transform_lookup_copies_cuda_backed_rows_to_host():
     position, quaternion = transforms["/World/a/tip"]
     assert np.allclose(position, [1, 2, 3])
     assert np.allclose(quaternion, [0, 0, 0, 1])
+
+
+def test_child_body_world_com_uses_live_rotated_link_local_offset():
+    handle = _handle_with_link_view(
+        ["tip"],
+        [[[4, 5, 6, 0, 0, np.sqrt(0.5), np.sqrt(0.5)]]],
+        ["/World/a/tip"],
+    )
+    view = handle._articulation._articulation_view._physics_view
+    view.get_coms = lambda: np.array([[[2, 0, 0, 0, 0, 0, 1]]], dtype=float)
+
+    assert handle.get_child_body_world_com("/World/a/tip") == pytest.approx((4, 7, 6))
+    view.transforms[0, 0, :3] += [10, -3, 2]
+    assert handle.get_child_body_world_com("/World/a/tip") == pytest.approx((14, 4, 8))
+
+
+@pytest.mark.parametrize(
+    ("names", "transforms", "coms"),
+    [
+        (["tip"], [[[1, 2, 3, 0, 0, 0, 1]]], None),
+        (["tip"], [[[1, 2, 3, 0, 0, 0, 1]]], [[[float("nan"), 0, 0, 0, 0, 0, 1]]]),
+        (["tip"], [[[1, 2, 3, 0, 0, 0, 0]]], [[[0, 0, 0, 0, 0, 0, 1]]]),
+        (["tip"], [[[1, 2, 3, 0, 0, 0, 1]]], [[[True, 0, 0, 0, 0, 0, 1]]]),
+        (["tip"], [[[1, 2, 3, 0, 0, 0, 1]]], [[["2", 0, 0, 0, 0, 0, 1]]]),
+        (["tip"], [[[1, 2, 3, 0, 0, 0, 1]]], [[[2 + 0j, 0, 0, 0, 0, 0, 1]]]),
+        (["tip"], [[[1, 2, 3, 0, 0, 0, 1]]], [[[0, 0, 0]]]),
+        (["tip"], [[[1, 2, 3, 0, 0, 0, 1]]], [[[0, 0, 0, 0, 0, 0, 1]], [[0, 0, 0, 0, 0, 0, 1]]]),
+    ],
+)
+def test_child_body_world_com_rejects_unqualified_readback(names, transforms, coms):
+    handle = _handle_with_link_view(names, transforms, ["/World/a/tip"])
+    view = handle._articulation._articulation_view._physics_view
+    view.get_coms = lambda: coms
+    with pytest.raises(RuntimeError, match="COM"):
+        handle.get_child_body_world_com("/World/a/tip")
+
+
+def test_child_body_world_com_rejects_duplicate_exact_cooked_paths():
+    handle = _handle_with_link_view(
+        ["tip", "tip1"],
+        [[[1, 2, 3, 0, 0, 0, 1], [9, 8, 7, 0, 0, 0, 1]]],
+        ["/World/a/tip", "/World/b/tip"],
+        native_paths=[["/World/a/tip", "/World/a/tip"]],
+    )
+    handle._articulation._articulation_view._physics_view.get_coms = lambda: [[[0, 0, 0, 0, 0, 0, 1]]]
+    with pytest.raises(RuntimeError, match="COM.*path"):
+        handle.get_child_body_world_com("/World/a/tip")
+
+
+@pytest.mark.parametrize("native_paths", [False, [], [[]]])
+def test_child_body_world_com_requires_authoritative_cooked_paths(native_paths):
+    handle = _handle_with_link_view(["tip"], [[[1, 2, 3, 0, 0, 0, 1]]], ["/World/a/tip"], native_paths=native_paths)
+    handle._articulation._articulation_view._physics_view.get_coms = lambda: [[[0, 0, 0, 0, 0, 0, 1]]]
+    with pytest.raises(RuntimeError, match="COM.*link path"):
+        handle.get_child_body_world_com("/World/a/tip")
+
+
+def test_child_body_world_com_rejects_invalid_local_com_quaternion():
+    handle = _handle_with_link_view(["tip"], [[[1, 2, 3, 0, 0, 0, 1]]], ["/World/a/tip"])
+    handle._articulation._articulation_view._physics_view.get_coms = lambda: [[[0, 0, 0, 0, 0, 0, 0]]]
+    with pytest.raises(RuntimeError, match="COM.*quaternion"):
+        handle.get_child_body_world_com("/World/a/tip")
+
+
+def test_child_body_world_com_rejects_quaternion_norm_below_native_float32_resolution():
+    handle = _handle_with_link_view(["tip"], [[[1, 2, 3, 0, 0, 0, 1e-9]]], ["/World/a/tip"])
+    handle._articulation._articulation_view._physics_view.get_coms = lambda: [[[0, 0, 0, 0, 0, 0, 1]]]
+    with pytest.raises(RuntimeError, match="COM.*quaternion"):
+        handle.get_child_body_world_com("/World/a/tip")
+
+
+def test_child_body_world_com_prefers_exact_cooked_link_paths_when_available():
+    handle = _handle_with_link_view(
+        ["tip", "tip"],
+        [[[1, 2, 3, 0, 0, 0, 1], [9, 8, 7, 0, 0, 0, 1]]],
+        ["/World/a/tip", "/World/b/tip"],
+    )
+    for path in ("/World/a/tip", "/World/b/tip"):
+        UsdPhysics.RigidBodyAPI.Apply(handle._stage.GetPrimAtPath(path))
+    physics = handle._articulation._articulation_view._physics_view
+    physics.link_paths = [["/World/a/tip", "/World/b/tip"]]
+    physics.get_coms = lambda: [[[0, 0, 0, 0, 0, 0, 1], [2, 0, 0, 0, 0, 0, 1]]]
+    assert handle.get_child_body_world_com("/World/b/tip") == pytest.approx((11, 8, 7))
+
+
+def test_child_body_world_com_rejects_mismatched_cooked_link_paths():
+    handle = _handle_with_link_view(["tip"], [[[1, 2, 3, 0, 0, 0, 1]]], ["/World/a/tip"])
+    physics = handle._articulation._articulation_view._physics_view
+    physics.link_paths = [["/World/other/tip"]]
+    physics.get_coms = lambda: [[[0, 0, 0, 0, 0, 0, 1]]]
+    with pytest.raises(RuntimeError, match="COM.*path"):
+        handle.get_child_body_world_com("/World/a/tip")
+
+
+def test_child_body_world_com_rejects_multiple_cooked_path_rows():
+    handle = _handle_with_link_view(["tip"], [[[1, 2, 3, 0, 0, 0, 1]]], ["/World/a/tip"])
+    physics = handle._articulation._articulation_view._physics_view
+    physics.link_paths = [["/World/a/tip"], ["/World/a/tip"]]
+    physics.get_coms = lambda: [[[0, 0, 0, 0, 0, 0, 1]]]
+    with pytest.raises(RuntimeError, match="COM.*path rows"):
+        handle.get_child_body_world_com("/World/a/tip")
+
+
+def test_child_body_world_com_accepts_sdk_suffixed_names_with_exact_paths():
+    handle = _handle_with_link_view(
+        ["tip", "tip1"],
+        [[[1, 2, 3, 0, 0, 0, 1], [9, 8, 7, 0, 0, 0, 1]]],
+        ["/World/a/tip", "/World/b/tip"],
+    )
+    physics = handle._articulation._articulation_view._physics_view
+    physics.link_paths = [["/World/a/tip", "/World/b/tip"]]
+    physics.get_coms = lambda: [[[0, 0, 0, 0, 0, 0, 1], [2, 0, 0, 0, 0, 0, 1]]]
+    assert handle.get_child_body_world_com("/World/b/tip") == pytest.approx((11, 8, 7))
+
+
+def test_child_body_world_com_exact_path_survives_same_stage_duplicate_usd_body_edit():
+    handle = _handle_with_link_view(
+        ["tip"],
+        [[[1, 2, 3, 0, 0, 0, 1]]],
+        ["/World/a/tip", "/World/b/tip"],
+        rigid_bodies=False,
+        native_paths=[["/World/a/tip"]],
+    )
+    UsdPhysics.RigidBodyAPI.Apply(handle._stage.GetPrimAtPath("/World/a/tip"))
+    physics = handle._articulation._articulation_view._physics_view
+    physics.get_coms = lambda: [[[0, 0, 0, 0, 0, 0, 1]]]
+    assert handle.get_child_body_world_com("/World/a/tip") == pytest.approx((1, 2, 3))
+    UsdPhysics.RigidBodyAPI.Apply(handle._stage.GetPrimAtPath("/World/b/tip"))
+    physics.transforms[0, 0, :3] = [4, 5, 6]
+    assert handle.get_child_body_world_com("/World/a/tip") == pytest.approx((4, 5, 6))
+
+    replacement = _FakePhysicsView([[[7, 8, 9, 0, 0, 0, 1]]])
+    replacement.link_paths = [["/World/b/tip"]]
+    replacement.get_coms = lambda: [[[1, 0, 0, 0, 0, 0, 1]]]
+    handle._articulation._articulation_view = types.SimpleNamespace(body_names=["tip"], _physics_view=replacement)
+    with pytest.raises(RuntimeError, match="COM.*path"):
+        handle.get_child_body_world_com("/World/a/tip")
+    assert handle.get_child_body_world_com("/World/b/tip") == pytest.approx((8, 8, 9))
 
 
 def test_apply_external_force_targets_exact_articulation_link():

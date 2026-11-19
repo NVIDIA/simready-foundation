@@ -13,8 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Tests for full_range_sweep's pure-Python helpers."""
+
 import numpy as np
-from simready_benchmark_kit_suite.articulation_phases.full_range_sweep import (
+from simready.foundation.tier_core.runtime_tests.articulation_phases.full_range_sweep import (
     build_sweep_segments,
     command_single_joint_position,
     compute_sweep_parameters,
@@ -47,6 +48,7 @@ def test_get_defaults_shape():
     assert d["sweep_speed_scale"] == 0.8
     assert d["pause_at_limits_seconds"] == 0.15
     assert d["rest_check_fatal"] is True
+    assert not any(key.startswith("newton_") for key in d)
 
 
 def test_rest_window_requires_majority_of_frames_to_hold_endpoint():

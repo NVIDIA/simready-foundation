@@ -1,0 +1,20 @@
+{
+  "id": "FET006_Materials.MDL.0-3-0",
+  "display_name": "Materials (MDL)",
+  "source_feature": "FET006_Materials.0-3-0",
+  "additional_requirements": [
+    "com.nvidia.usd.VM.BIND.001",
+    "VM.BIND.002",
+    "VM.MDL.001",
+    "com.nvidia.usd.VM.MDL.002",
+    "VM.MDL.003",
+    "VM.TEX.001",
+    "VM.TEX.005"
+  ],
+  "adapters": [
+    "skill:simready-foundation-conform-fet-006-mdl"
+  ],
+  "runtime_tests": [
+    "simready.foundation.tier_core.runtime_tests:mdl_renders"
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Conform Collision Variant"
+  short_description: "Organize and validate collider-approximation variants"
+  default_prompt: "Conform staged assets to FET015_CollisionVariant.0-1-0 by organizing existing collider approximations into Collision variant sets that hold the collision envelope and leave the render mesh in place."

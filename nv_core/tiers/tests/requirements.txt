@@ -1,0 +1,25 @@
+# Test dependencies for the cross-tier suite (all_tiers in repo.toml).
+#
+# Every tier is editable-installed from this checkout, so the tests find the
+# tiers the way consumers do, through their `simready.tier` entry points, and
+# each tier's own dependencies come with it. A new tier must be added here too;
+# test_every_tier_is_installed fails until it is.
+#
+# SIMREADY_TIERS_ROOT comes from the suite's env_vars: uv resolves a relative
+# path in this file against the working directory, not against this file.
+
+pytest==9.0.3
+
+-e ${SIMREADY_TIERS_ROOT}/simready_foundation_tier_aif
+-e ${SIMREADY_TIERS_ROOT}/simready_foundation_tier_core
+-e ${SIMREADY_TIERS_ROOT}/simready_foundation_tier_isaac
+-e ${SIMREADY_TIERS_ROOT}/simready_foundation_tier_newton
+-e ${SIMREADY_TIERS_ROOT}/simready_foundation_tier_sensors
+-e ${SIMREADY_TIERS_ROOT}/simready_foundation_tier_template
+
+# The validators import pxr, which no tier requires outside an optional extra.
+usd-core>=22.11
+
+# conftest.py regenerates the requirement enums when a wheel build has removed
+# them from a checkout.
+usd-profiles-nvidia

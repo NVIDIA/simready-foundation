@@ -2,8 +2,8 @@
   "schema_version": 1,
   "sources": [
     {
-      "path": "simready_benchmark_kit_suite/docs",
-      "destination": "guides/benchmark/sensor-tests"
+      "path": "simready/foundation/sensors/runtime_tests/docs",
+      "destination": "guides/evaluate/sensor-tests"
     }
   ]
 }

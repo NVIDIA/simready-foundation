@@ -15,17 +15,20 @@
 """Tests for articulation_phases.mimic_joints."""
 import pytest
 from pxr import Sdf, Usd, UsdGeom, UsdPhysics
-from simready_benchmark_kit_suite.articulation_phases.mimic_joints import (
+from simready.foundation.tier_core.runtime_tests.articulation_phases.mimic_joints import (
     MimicJointSpec,
     detect_mimic_joints,
 )
 
 try:
-    from pxr import PhysxSchema  # noqa: F401
-
-    _HAS_PHYSX_SCHEMA = True
+    from pxr import PhysxSchema
 except ImportError:
-    _HAS_PHYSX_SCHEMA = False
+    try:
+        from physx_usd_schemas import PhysxSchema
+    except ImportError:
+        PhysxSchema = None
+
+_HAS_PHYSX_SCHEMA = PhysxSchema is not None
 
 
 def _make_stage_with_mimic(ref_path, follower_path, gear, offset):
@@ -34,8 +37,6 @@ def _make_stage_with_mimic(ref_path, follower_path, gear, offset):
     The follower carries PhysxMimicJointAPI pointing to the reference joint with
     the given gear + offset. Returns (stage, asset_prim, robot_prim_path).
     """
-    from pxr import PhysxSchema
-
     stage = Usd.Stage.CreateInMemory()
     UsdGeom.Xform.Define(stage, "/World")
     asset = UsdGeom.Xform.Define(stage, "/World/Asset").GetPrim()
@@ -92,7 +93,7 @@ def test_detect_mimic_joints_extracts_newton_contract():
     assert specs[0].gear == pytest.approx(-2.0)
 
 
-@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="pxr.PhysxSchema unavailable")
+@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="PhysxSchema unavailable")
 def test_detect_mimic_joints_extracts_reference_gear_offset():
     stage, asset, robot_path = _make_stage_with_mimic(
         "/World/Asset/Robot/ref_joint",
@@ -113,7 +114,7 @@ def test_detect_mimic_joints_extracts_reference_gear_offset():
     assert s.backend == "physx"
 
 
-@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="pxr.PhysxSchema unavailable")
+@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="PhysxSchema unavailable")
 def test_detect_mimic_joints_returns_none_dof_index_when_name_missing():
     stage, asset, robot_path = _make_stage_with_mimic(
         "/World/Asset/Robot/ref_joint",
@@ -127,10 +128,8 @@ def test_detect_mimic_joints_returns_none_dof_index_when_name_missing():
     assert specs[0].follower_dof_index is None
 
 
-@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="pxr.PhysxSchema unavailable")
+@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="PhysxSchema unavailable")
 def test_detect_mimic_joints_skips_mimic_with_no_reference():
-    from pxr import PhysxSchema
-
     stage = Usd.Stage.CreateInMemory()
     UsdGeom.Xform.Define(stage, "/World")
     asset = UsdGeom.Xform.Define(stage, "/World/Asset").GetPrim()

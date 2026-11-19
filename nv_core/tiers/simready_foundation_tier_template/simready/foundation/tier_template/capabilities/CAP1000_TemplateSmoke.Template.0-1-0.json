@@ -1,0 +1,11 @@
+{
+  "id": "CAP1000_TemplateSmoke.Template.0-1-0",
+  "display_name": "Template Smoke",
+  "legacy_identity": {
+    "id": "FET_1000_TEMPLATE",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "TMP.001"
+  ]
+}

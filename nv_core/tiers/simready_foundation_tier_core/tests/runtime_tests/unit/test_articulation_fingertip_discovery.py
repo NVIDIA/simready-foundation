@@ -13,21 +13,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Tests for articulation_phases.fingertip_discovery."""
+
+from types import SimpleNamespace
+
 import numpy as np  # noqa: F401  (kept for parity with sibling tests)
 import pytest
 from pxr import Sdf, Usd, UsdGeom, UsdPhysics
 
-# pxr.PhysxSchema is only available when omni.physx is loaded. Mimic-driven
-# tests skip when it isn't, matching test_articulation_mimic_joints.py.
+# Kit binds PhysxSchema into pxr; outside Kit it comes from physx-usd-schemas.
+# Mimic-driven tests skip without either, matching test_articulation_mimic_joints.py.
 try:
-    from pxr import PhysxSchema  # noqa: F401
-
-    _HAS_PHYSX_SCHEMA = True
+    from pxr import PhysxSchema
 except ImportError:
-    _HAS_PHYSX_SCHEMA = False
+    try:
+        from physx_usd_schemas import PhysxSchema
+    except ImportError:
+        PhysxSchema = None
 
-from simready_benchmark_kit_suite.articulation_phases.fingertip_discovery import (
+_HAS_PHYSX_SCHEMA = PhysxSchema is not None
+
+from simready.foundation.tier_core.runtime_tests.articulation_phases.fingertip_discovery import (
     FingertipSet,
+    GripperTopologyError,
     discover_fingertips,
 )
 
@@ -138,9 +145,9 @@ def _build_parallel_jaw_stage():
     return stage, asset
 
 
-@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="pxr.PhysxSchema unavailable")
+@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="PhysxSchema unavailable")
 def test_discover_fingertips_recognizes_parallel_jaw_mimic():
-    from simready_benchmark_kit_suite.articulation_phases.gripper_sites import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_sites import (
         discover_gripper_sites,
     )
 
@@ -166,7 +173,7 @@ def test_discover_fingertips_returns_unsupported_for_zero_mimic_zero_chain():
     UsdGeom.Xform.Define(stage, "/World")
     UsdGeom.Xform.Define(stage, "/World/Asset")
     _add_gripper_site_simple(stage, "/World/Asset")
-    from simready_benchmark_kit_suite.articulation_phases.gripper_sites import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_sites import (
         discover_gripper_sites,
     )
 
@@ -180,7 +187,7 @@ def test_discover_fingertips_returns_unsupported_for_zero_mimic_zero_chain():
 
 def test_discover_fingertips_uses_exact_carrier_path_and_keeps_asset_joint_z():
     """Test-owned carrier filtering must not hide an asset DOF with a common name."""
-    from simready_benchmark_kit_suite.articulation_phases.gripper_sites import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_sites import (
         discover_gripper_sites,
     )
 
@@ -236,9 +243,9 @@ def test_discover_fingertips_uses_exact_carrier_path_and_keeps_asset_joint_z():
     assert fs.tip_link_paths == ["/World/Asset/left_pad", "/World/Asset/right_pad"]
 
 
-@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="pxr.PhysxSchema unavailable")
+@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="PhysxSchema unavailable")
 def test_discover_fingertips_rejects_mixed_3finger_with_one_mimic():
-    """3 DOFs + 1 mimic is NOT a parallel-jaw -- should fall through."""
+    """3 DOFs + 1 mimic cannot fall through to independent follower commands."""
     stage, asset = _build_parallel_jaw_stage()
     # Add a third independent prismatic joint with no mimic.
     third = UsdPhysics.PrismaticJoint.Define(stage, "/World/Asset/joint_third")
@@ -246,7 +253,7 @@ def test_discover_fingertips_rejects_mixed_3finger_with_one_mimic():
     UsdGeom.Xform.Define(stage, "/World/Asset/finger_third_pad")
     third.GetPrim().CreateRelationship("physics:body1").SetTargets(["/World/Asset/finger_third_pad"])
     _add_gripper_site_simple(stage, "/World/Asset")
-    from simready_benchmark_kit_suite.articulation_phases.gripper_sites import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_sites import (
         discover_gripper_sites,
     )
 
@@ -255,12 +262,11 @@ def test_discover_fingertips_rejects_mixed_3finger_with_one_mimic():
         dof_names=["joint_left", "joint_right", "joint_third"],
         prim_path="/World/Asset",
     )
-    fs = discover_fingertips(stage, robot, sites[0])
-    # 3 DOFs but only 1 mimic pair -- must NOT be classified as parallel-jaw.
-    assert fs.kind != "mimic_parallel_jaw"
+    with pytest.raises(GripperTopologyError, match="active mimic topology"):
+        discover_fingertips(stage, robot, sites[0])
 
 
-@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="pxr.PhysxSchema unavailable")
+@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="PhysxSchema unavailable")
 def test_discover_fingertips_rejects_non_symmetric_gear():
     """gear=2.0 implies asymmetric closure -- reject for v1."""
     stage, asset = _build_parallel_jaw_stage()
@@ -271,7 +277,7 @@ def test_discover_fingertips_rejects_non_symmetric_gear():
     mimic_api = PhysxSchema.PhysxMimicJointAPI(follower, UsdPhysics.Tokens.transX)
     mimic_api.GetGearingAttr().Set(2.0)
     _add_gripper_site_simple(stage, "/World/Asset")
-    from simready_benchmark_kit_suite.articulation_phases.gripper_sites import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_sites import (
         discover_gripper_sites,
     )
 
@@ -280,11 +286,11 @@ def test_discover_fingertips_rejects_non_symmetric_gear():
         dof_names=["joint_left", "joint_right"],
         prim_path="/World/Asset",
     )
-    fs = discover_fingertips(stage, robot, sites[0])
-    assert fs.kind != "mimic_parallel_jaw"
+    with pytest.raises(GripperTopologyError, match="active mimic topology"):
+        discover_fingertips(stage, robot, sites[0])
 
 
-@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="pxr.PhysxSchema unavailable")
+@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="PhysxSchema unavailable")
 def test_discover_fingertips_falls_back_to_body0_when_body1_empty():
     """Some assets author the convention reversed: body0 is the moving link."""
     stage, asset = _build_parallel_jaw_stage()
@@ -293,7 +299,7 @@ def test_discover_fingertips_falls_back_to_body0_when_body1_empty():
     j_right.GetRelationship("physics:body1").ClearTargets(removeSpec=True)
     j_right.CreateRelationship("physics:body0").SetTargets(["/World/Asset/finger_right_pad"])
     _add_gripper_site_simple(stage, "/World/Asset")
-    from simready_benchmark_kit_suite.articulation_phases.gripper_sites import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_sites import (
         discover_gripper_sites,
     )
 
@@ -312,18 +318,20 @@ def _build_robotiq_style_stage(master_visible_only: bool = False):
     the master. Mimics the topology of a Robotiq 2F-85's 4-bar linkage:
     one driven joint, several mechanical-linkage followers, all with |gear|=1.
 
-    Body layout puts the two contact-pad bodies on the X extremes (left/right)
-    so ``_pick_two_furthest_apart`` selects them rather than the central
-    linkage bodies that cluster near origin.
+    Body layout puts the two contact-pad bodies on the X extremes (left/right),
+    nearest the grip line's endpoints, so discovery selects them rather than the
+    central linkage bodies that cluster near origin.
     """
     stage = Usd.Stage.CreateInMemory()
     UsdGeom.Xform.Define(stage, "/World")
     asset = UsdGeom.Xform.Define(stage, "/World/Asset").GetPrim()
 
-    # Helper: create an Xform body at a given X offset.
+    # Helper: create a body at a given X offset. Pads are matched to the grip
+    # line by their world bounds, so each body needs geometry.
     def _body(name, x):
         xform = UsdGeom.Xform.Define(stage, "/World/Asset/" + name)
         xform.AddTranslateOp().Set((x, 0.0, 0.0))
+        UsdGeom.Cube.Define(stage, "/World/Asset/%s/geom" % name).CreateSizeAttr(0.01)
         return xform.GetPrim()
 
     # Two contact pads at the extremes.
@@ -363,12 +371,12 @@ def _build_robotiq_style_stage(master_visible_only: bool = False):
     return stage, asset, dof_names
 
 
-@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="pxr.PhysxSchema unavailable")
+@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="PhysxSchema unavailable")
 def test_discover_fingertips_recognizes_multi_mimic_single_master():
     """Robotiq-style: 1 master + 3 followers, all sharing the master and
     symmetric. Discovery should classify as parallel_jaw, picking the two
     body candidates furthest apart at rest as the tip pads."""
-    from simready_benchmark_kit_suite.articulation_phases.gripper_sites import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_sites import (
         discover_gripper_sites,
     )
 
@@ -386,12 +394,12 @@ def test_discover_fingertips_recognizes_multi_mimic_single_master():
     }
 
 
-@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="pxr.PhysxSchema unavailable")
+@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="PhysxSchema unavailable")
 def test_discover_fingertips_recognizes_multi_mimic_when_followers_hidden():
     """Same Robotiq-style asset but the articulation has been initialized
     with use_mimic_joints=True, so only the master DOF is visible. Discovery
     must still classify cleanly (don't reject just because dof_names is short)."""
-    from simready_benchmark_kit_suite.articulation_phases.gripper_sites import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_sites import (
         discover_gripper_sites,
     )
 
@@ -405,11 +413,11 @@ def test_discover_fingertips_recognizes_multi_mimic_when_followers_hidden():
     assert fs.kind == "mimic_parallel_jaw"
 
 
-@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="pxr.PhysxSchema unavailable")
+@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="PhysxSchema unavailable")
 def test_discover_fingertips_rejects_multi_mimic_with_extra_independent_dof():
     """Robotiq-style + one extra non-mimic'd DOF should NOT classify as
     parallel_jaw -- there's a free joint we're not modelling."""
-    from simready_benchmark_kit_suite.articulation_phases.gripper_sites import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_sites import (
         discover_gripper_sites,
     )
 
@@ -426,16 +434,16 @@ def test_discover_fingertips_rejects_multi_mimic_with_extra_independent_dof():
         prim_path="/World/Asset",
     )
 
-    fs = discover_fingertips(stage, robot, sites[0])
-    assert fs.kind != "mimic_parallel_jaw"
+    with pytest.raises(GripperTopologyError, match="active mimic topology"):
+        discover_fingertips(stage, robot, sites[0])
 
 
-@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="pxr.PhysxSchema unavailable")
+@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="PhysxSchema unavailable")
 def test_discover_fingertips_rejects_multi_mimic_with_two_distinct_masters():
     """Two independent mimic chains -- each with its own master -- is NOT a
     parallel-jaw gripper (could be e.g. a two-axis gripper or two separate
     grippers on one articulation). Reject."""
-    from simready_benchmark_kit_suite.articulation_phases.gripper_sites import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_sites import (
         discover_gripper_sites,
     )
 
@@ -456,18 +464,18 @@ def test_discover_fingertips_rejects_multi_mimic_with_two_distinct_masters():
         prim_path="/World/Asset",
     )
 
-    fs = discover_fingertips(stage, robot, sites[0])
-    assert fs.kind != "mimic_parallel_jaw"
+    with pytest.raises(GripperTopologyError, match="active mimic topology"):
+        discover_fingertips(stage, robot, sites[0])
 
 
-@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="pxr.PhysxSchema unavailable")
+@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="PhysxSchema unavailable")
 def test_discover_fingertips_accepts_two_newton_actuator_owned_jaw_leaders():
     """A Newton-native parallel jaw may split effort across one leader per side.
 
     Acceptance requires explicit Newton actuators for both leaders and an
     authored grip line that resolves their two opposed pad branches.
     """
-    from simready_benchmark_kit_suite.articulation_phases.gripper_sites import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_sites import (
         discover_gripper_sites,
     )
 
@@ -505,11 +513,11 @@ def test_discover_fingertips_accepts_two_newton_actuator_owned_jaw_leaders():
     }
 
 
-@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="pxr.PhysxSchema unavailable")
+@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="PhysxSchema unavailable")
 def test_discover_fingertips_rejects_multi_mimic_with_one_asymmetric_gear():
     """Even one asymmetric mimic gear in the chain disqualifies the whole
     assembly -- closure is no longer guaranteed symmetric."""
-    from simready_benchmark_kit_suite.articulation_phases.gripper_sites import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_sites import (
         discover_gripper_sites,
     )
 
@@ -520,12 +528,12 @@ def test_discover_fingertips_rejects_multi_mimic_with_one_asymmetric_gear():
     sites = discover_gripper_sites(stage, asset)
     robot = _StubRobot(dof_names=dof_names, prim_path="/World/Asset")
 
-    fs = discover_fingertips(stage, robot, sites[0])
-    assert fs.kind != "mimic_parallel_jaw"
+    with pytest.raises(GripperTopologyError, match="active mimic topology"):
+        discover_fingertips(stage, robot, sites[0])
 
 
 def test_deepest_leaf_follows_chain_to_end():
-    from simready_benchmark_kit_suite.articulation_phases.fingertip_discovery import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.fingertip_discovery import (
         _deepest_leaf,
     )
 
@@ -537,7 +545,7 @@ def test_deepest_leaf_follows_chain_to_end():
 
 
 def test_reachable_descendants_is_stable_and_cycle_safe():
-    from simready_benchmark_kit_suite.articulation_phases.fingertip_discovery import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.fingertip_discovery import (
         _reachable_descendants,
     )
 
@@ -547,16 +555,16 @@ def test_reachable_descendants_is_stable_and_cycle_safe():
 
 def test_parallel_jaw_accepts_only_detected_passive_linkage_dofs(monkeypatch):
     """Newton exposes passive four-bar DOFs that are not independent fingers."""
-    from simready_benchmark_kit_suite.articulation_phases import joint_utils
-    from simready_benchmark_kit_suite.articulation_phases.fingertip_discovery import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases import joint_utils
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.fingertip_discovery import (
         _classify_parallel_jaw_mimic,
     )
-    from simready_benchmark_kit_suite.articulation_phases.mimic_joints import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.mimic_joints import (
         MimicJointSpec,
     )
 
     stage = Usd.Stage.CreateInMemory()
-    asset = UsdGeom.Xform.Define(stage, "/Asset").GetPrim()
+    UsdGeom.Xform.Define(stage, "/Asset")
     for name, x in (
         ("base", 0.0),
         ("left_driver", -0.02),
@@ -594,7 +602,7 @@ def test_parallel_jaw_accepts_only_detected_passive_linkage_dofs(monkeypatch):
     monkeypatch.setattr(
         joint_utils,
         "detect_loop_joints",
-        lambda *_args: (frozenset({1, 2, 3}), ["follower", "left_link", "right_link"]),
+        lambda *_args, **_kwargs: (frozenset({1, 2, 3}), ["follower", "left_link", "right_link"]),
     )
 
     result = _classify_parallel_jaw_mimic(stage, robot, [mimic])
@@ -605,7 +613,7 @@ def test_parallel_jaw_accepts_only_detected_passive_linkage_dofs(monkeypatch):
 
 
 def test_independent_fingers_require_two_distinct_resolved_tips():
-    from simready_benchmark_kit_suite.articulation_phases.fingertip_discovery import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.fingertip_discovery import (
         _distinct_resolved_tip_paths,
     )
 
@@ -624,7 +632,7 @@ def test_independent_fingers_require_two_distinct_resolved_tips():
 
 
 def test_actuated_branches_are_grouped_by_graph_not_joint_names():
-    from simready_benchmark_kit_suite.articulation_phases.fingertip_discovery import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.fingertip_discovery import (
         _group_actuated_joint_branches,
     )
 
@@ -643,7 +651,7 @@ def test_actuated_branches_are_grouped_by_graph_not_joint_names():
 
 
 def test_deepest_leaf_is_cycle_safe_and_still_finds_exit_leaf():
-    from simready_benchmark_kit_suite.articulation_phases.fingertip_discovery import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.fingertip_discovery import (
         _deepest_leaf,
     )
 
@@ -652,7 +660,7 @@ def test_deepest_leaf_is_cycle_safe_and_still_finds_exit_leaf():
 
 
 def test_child_link_map_traverses_fixed_and_spherical_joints():
-    from simready_benchmark_kit_suite.articulation_phases.fingertip_discovery import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.fingertip_discovery import (
         _build_child_link_map,
         _resolve_joint_child_link_from_path,
     )
@@ -680,7 +688,7 @@ def test_distal_tip_picks_deeper_branch_over_shorter():
     """SVH thumb shape: the opposition joint's child link is a shallow leaf,
     the flexion joint's child continues through passive links to the real tip.
     The resolver must pick the deeper (flexion-chain) leaf, name-agnostically."""
-    from simready_benchmark_kit_suite.articulation_phases.fingertip_discovery import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.fingertip_discovery import (
         _distal_tip_of_finger,
     )
 
@@ -697,7 +705,7 @@ def test_distal_tip_picks_deeper_branch_over_shorter():
 def test_distal_tip_extends_past_last_actuated_joint():
     """A finger whose last actuated joint's child has a further PASSIVE link
     resolves to that passive leaf (the real fingertip), not the actuated link."""
-    from simready_benchmark_kit_suite.articulation_phases.fingertip_discovery import (
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.fingertip_discovery import (
         _distal_tip_of_finger,
     )
 
@@ -707,3 +715,153 @@ def test_distal_tip_extends_past_last_actuated_joint():
     ]
     child_map = {"p_prox": ["p"], "p": ["t"]}  # p -> t is a passive extension
     assert _distal_tip_of_finger(joints, child_map) == "t"
+
+
+def _joint_root_fingers(world_body="body1", child_targets=False):
+    stage = Usd.Stage.CreateInMemory()
+    asset = UsdGeom.Xform.Define(stage, "/Asset").GetPrim()
+    base = UsdGeom.Xform.Define(stage, "/Asset/base").GetPrim()
+    UsdPhysics.RigidBodyAPI.Apply(base)
+    root = UsdPhysics.FixedJoint.Define(stage, "/Asset/joints/root_pin")
+    getattr(root, f"Create{world_body.capitalize()}Rel")().SetTargets([base.GetPath()])
+    UsdPhysics.ArticulationRootAPI.Apply(root.GetPrim())
+    for digit in ("a", "b"):
+        body = UsdGeom.Xform.Define(stage, "/Asset/" + digit).GetPrim()
+        UsdPhysics.RigidBodyAPI.Apply(body)
+        target = body.GetPath()
+        if child_targets:
+            target = UsdGeom.Cube.Define(stage, str(target) + "/shape").GetPath()
+        joint = UsdPhysics.RevoluteJoint.Define(stage, "/Asset/joints/" + digit)
+        joint.CreateBody0Rel().SetTargets([base.GetPath()])
+        if child_targets:
+            forwarded = asset.CreateRelationship("endpoint_" + digit)
+            forwarded.SetTargets([target])
+            target = forwarded.GetPath()
+        joint.CreateBody1Rel().SetTargets([target])
+        UsdPhysics.DriveAPI.Apply(joint.GetPrim(), "angular").CreateStiffnessAttr(100.0)
+    robot = _StubRobot(["a", "b"], str(root.GetPath()))
+    robot.asset_prim = asset
+    return stage, robot
+
+
+@pytest.mark.parametrize("world_body", ["body0", "body1"])
+@pytest.mark.parametrize("child_targets", [False, True])
+def test_joint_root_discovery_finds_sibling_fingers_and_owning_bodies(world_body, child_targets):
+    stage, robot = _joint_root_fingers(world_body, child_targets)
+    result = discover_fingertips(stage, robot, None)
+    assert result.kind == "independent_fingers"
+    assert result.finger_chains == [[0], [1]]
+    assert result.tip_link_paths == ["/Asset/a", "/Asset/b"]
+    assert discover_fingertips(stage, robot, None, robot_prim_path=robot.prim_path).kind == "unsupported"
+
+
+@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="PhysxSchema unavailable")
+def test_joint_root_discovery_preserves_selected_mimic_leader_and_branches():
+    stage, robot = _joint_root_fingers(child_targets=True)
+    follower = stage.GetPrimAtPath("/Asset/joints/b")
+    mimic = PhysxSchema.PhysxMimicJointAPI.Apply(follower, UsdPhysics.Tokens.rotX)
+    mimic.CreateReferenceJointRel().SetTargets(["/Asset/joints/a"])
+    mimic.CreateGearingAttr().Set(-1)
+    mimic.CreateOffsetAttr().Set(0)
+    result = discover_fingertips(stage, robot, None)
+    assert result.kind == "mimic_parallel_jaw"
+    assert result.mimic_master_dofs == [0]
+    assert result.mimic_follower_dof == 1
+    assert set(result.candidate_tip_paths) == {"/Asset/a", "/Asset/b"}
+    assert len(set(result.candidate_branches.values())) == 2
+
+
+@pytest.mark.parametrize("foreign_state", ["disconnected", "disabled", "inactive", "excluded"])
+def test_joint_root_discovery_excludes_foreign_same_named_branches(foreign_state):
+    stage, robot = _joint_root_fingers()
+    palm = UsdGeom.Xform.Define(stage, "/Asset/Foreign/palm").GetPrim()
+    UsdPhysics.RigidBodyAPI.Apply(palm)
+    body = UsdGeom.Xform.Define(stage, "/Asset/Foreign/finger").GetPrim()
+    UsdPhysics.RigidBodyAPI.Apply(body)
+    joint = UsdPhysics.RevoluteJoint.Define(stage, "/Asset/Foreign/joints/a")
+    joint.CreateBody0Rel().SetTargets([palm.GetPath() if foreign_state == "disconnected" else "/Asset/base"])
+    joint.CreateBody1Rel().SetTargets([body.GetPath()])
+    UsdPhysics.DriveAPI.Apply(joint.GetPrim(), "angular").CreateStiffnessAttr(100.0)
+    if foreign_state == "disabled":
+        joint.CreateJointEnabledAttr().Set(False)
+    elif foreign_state == "inactive":
+        joint.GetPrim().SetActive(False)
+    elif foreign_state == "excluded":
+        joint.CreateExcludeFromArticulationAttr().Set(True)
+    result = discover_fingertips(stage, robot, None)
+    assert result.finger_chains == [[0], [1]]
+    assert result.tip_link_paths == ["/Asset/a", "/Asset/b"]
+
+
+def test_joint_root_discovery_rejects_an_unrelated_loaded_boundary():
+    stage, robot = _joint_root_fingers()
+    robot.asset_prim = UsdGeom.Xform.Define(stage, "/Other").GetPrim()
+    with pytest.raises(GripperTopologyError, match="verified loaded asset boundary"):
+        discover_fingertips(stage, robot, None)
+
+
+def test_joint_root_discovery_excludes_same_named_constraint_between_selected_bodies():
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.fingertip_discovery import (
+        _discovery_scope,
+    )
+
+    stage, robot = _joint_root_fingers()
+    constraint = UsdPhysics.RevoluteJoint.Define(stage, "/Asset/Foreign/joints/b")
+    constraint.CreateBody0Rel().SetTargets(["/Asset/base"])
+    constraint.CreateBody1Rel().SetTargets(["/Asset/a"])
+    constraint.CreateExcludeFromArticulationAttr().Set(True)
+    UsdPhysics.DriveAPI.Apply(constraint.GetPrim(), "angular").CreateStiffnessAttr(100.0)
+    _, geometry_joints = _discovery_scope(stage, robot, None)
+    assert str(constraint.GetPath()) in geometry_joints  # Geometry is retained, actuator ownership is not.
+    result = discover_fingertips(stage, robot, None)
+    assert result.kind == "independent_fingers"
+    assert result.finger_chains == [[0], [1]]
+    assert result.tip_link_paths == ["/Asset/a", "/Asset/b"]
+
+
+def test_joint_root_discovery_keeps_a_fixed_non_dof_tip_extension():
+    stage, robot = _joint_root_fingers()
+    tip = UsdGeom.Xform.Define(stage, "/Asset/distal_tip").GetPrim()
+    UsdPhysics.RigidBodyAPI.Apply(tip)
+    extension = UsdPhysics.FixedJoint.Define(stage, "/Asset/joints/tip_extension")
+    extension.CreateBody0Rel().SetTargets(["/Asset/a"])
+    extension.CreateBody1Rel().SetTargets([tip.GetPath()])
+    result = discover_fingertips(stage, robot, None)
+    assert result.kind == "independent_fingers"
+    assert result.finger_chains == [[0], [1]]
+    assert result.tip_link_paths == ["/Asset/distal_tip", "/Asset/b"]
+
+
+@pytest.mark.parametrize("native_names", [["a", "b", "b"], ["a", "b", "c"]])
+def test_joint_root_discovery_rejects_duplicate_selected_driven_identity_before_probing(native_names):
+    stage, robot = _joint_root_fingers()
+    third = UsdGeom.Xform.Define(stage, "/Asset/c").GetPrim()
+    UsdPhysics.RigidBodyAPI.Apply(third)
+    duplicate = UsdPhysics.RevoluteJoint.Define(stage, "/Asset/Other/joints/b")
+    duplicate.CreateBody0Rel().SetTargets(["/Asset/base"])
+    duplicate.CreateBody1Rel().SetTargets([third.GetPath()])
+    UsdPhysics.DriveAPI.Apply(duplicate.GetPrim(), "angular").CreateStiffnessAttr(100.0)
+    robot.dof_names = native_names
+    with pytest.raises(GripperTopologyError, match="selected driven joint name 'b' is ambiguous"):
+        discover_fingertips(stage, robot, None)
+
+
+def test_joint_root_discovery_ignores_duplicate_native_names_not_used_by_selected_drives():
+    stage, robot = _joint_root_fingers()
+    robot.dof_names = ["a", "b", "unused", "unused"]
+    result = discover_fingertips(stage, robot, None)
+    assert result.finger_chains == [[0], [1]]
+    assert result.tip_link_paths == ["/Asset/a", "/Asset/b"]
+
+
+def test_joint_root_discovery_filters_foreign_mimics_and_rejects_external_selected_coupling(monkeypatch):
+    from simready.foundation.tier_core.runtime_tests.articulation_phases import mimic_joints
+
+    stage, robot = _joint_root_fingers()
+    foreign = SimpleNamespace(follower_joint_path="/Asset/Foreign/joint", reference_joint_path="/Asset/Foreign/master")
+    monkeypatch.setattr(mimic_joints, "detect_mimic_joints", lambda *args: [foreign])
+    assert discover_fingertips(stage, robot, None).kind == "independent_fingers"
+    selected = SimpleNamespace(follower_joint_path="/Asset/joints/a", reference_joint_path="/Asset/Foreign/master")
+    monkeypatch.setattr(mimic_joints, "detect_mimic_joints", lambda *args: [selected])
+    with pytest.raises(GripperTopologyError, match="outside its articulation"):
+        discover_fingertips(stage, robot, None)

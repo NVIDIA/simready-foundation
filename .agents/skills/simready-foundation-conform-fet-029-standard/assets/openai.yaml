@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP029_ConnectionJoint"
+  short_description: "Repair CAP029_ConnectionJoint connection multibody-physics conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-029-standard to repair CAP029_ConnectionJoint SimReady connection joint conformance failures."

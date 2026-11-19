@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP103_VisualMeshMerge.Isaac"
+  short_description: "Repair Isaac visual-mesh merging"
+  default_prompt: "Use $simready-foundation-conform-cap-103-isaac to safely repair CAP103_VisualMeshMerge.Isaac visual-mesh-merge failures."

@@ -4,7 +4,7 @@ This document describes how to author a USD asset that conforms to the `Open-Tax
 
 `Open-Taxonomy-PascalVOC` is an **example profile** that demonstrates labeling assets with the **PASCAL VOC** taxonomy
 instead of NVIDIA's Wikidata Q-codes. It pairs the Core feature with one closed-vocabulary taxonomy
-feature (VOC.001). See [Adding a custom taxonomy](../guides/adding_a_custom_taxonomy.md) to build your own.
+feature (VOC.001). See [Adding a custom taxonomy](../../../../../../sr_specs/docs/guides/adding_a_custom_taxonomy.md) to build your own.
 
 ## Profile definition
 
@@ -14,9 +14,10 @@ Each feature's requirements and dependencies are defined in the feature specific
 ```toml
 [Open-Taxonomy-PascalVOC]
 "0.1.0" = {features = [
-    {"FET_000_STANDARD" = {version = "0.1.0"}}, # Core
-    {"FET_011_STANDARD" = {version = "0.2.0"}}, # Semantic Labels
-    {"FET_043_STANDARD" = {version = "0.1.0"}}, # PASCAL VOC Labels
+    {selector = "FET011_SemanticLabels.0-2-0"}, # Semantic Labels
+], capabilities = [
+    {selector = "CAP000_Core.0-1-0"}, # Core
+    {selector = "CAP043_PascalVocLabels.0-1-0"}, # PASCAL VOC Labels
 ]}
 ```
 
@@ -57,7 +58,7 @@ customLayerData = {
         "validation" = {
             "validated_features" = {
                 "<YYYY-MM-DD>" = {
-                    "FET_043_STANDARD" = {
+                    "CAP043_PascalVocLabels" = {
                         "version" = "0.1.0"
                         "passed" = true
                     }
@@ -71,6 +72,6 @@ customLayerData = {
 ## References
 
 - `docs/profiles/open_taxonomy_profiles.toml`
-- `docs/features/FET_043_STANDARD.md`
-- `docs/capabilities/dataset_taxonomies/capability-dataset_taxonomies.md`
+- `docs/capabilities/CAP043_PascalVocLabels.md`
+- `docs/rules_and_reqs/dataset_taxonomies/capability-dataset_taxonomies.md`
 - `docs/guides/adding_a_custom_taxonomy.md`

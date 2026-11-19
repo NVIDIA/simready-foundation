@@ -1,0 +1,5 @@
+# Newton runtime units use the supported Evaluate/Kit API floor and neutral Core helpers.
+# Reuse Core's dependency floor so both isolated suites qualify the same pair.
+# This installs dependencies only; conftest chooses source when no tier wheel is
+# installed, while installed-wheel CI continues testing the built distributions.
+-r ../../simready_foundation_tier_core/tests/requirements.txt

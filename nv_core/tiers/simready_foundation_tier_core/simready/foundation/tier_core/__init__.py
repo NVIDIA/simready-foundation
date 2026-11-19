@@ -30,7 +30,7 @@ Two discovery surfaces are exposed:
 
 This package uses reusable tier scaffolding and derives its tier name/module
 from its own package name. Each tier still configures tier-owned optional
-content, such as its bundled Benchmark test package, in its descriptor.
+content, such as its bundled Evaluate test package, in its descriptor.
 """
 
 from ._plugin import SimReadyPlugin

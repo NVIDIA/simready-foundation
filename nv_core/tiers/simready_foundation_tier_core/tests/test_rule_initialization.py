@@ -9,13 +9,13 @@ import pytest
 from usd_validation_nvidia import BaseRuleChecker
 from usd_validation_nvidia._compliance_checker import ComplianceChecker
 
-import simready.foundation.tier_core.capabilities  # noqa: F401
+import simready.foundation.tier_core.rules_and_reqs  # noqa: F401
 
 
 def _core_checkers():
     checkers = set()
     for name, module in list(sys.modules.items()):
-        if not name.startswith("simready.foundation.tier_core.capabilities."):
+        if not name.startswith("simready.foundation.tier_core.rules_and_reqs."):
             continue
         for candidate in vars(module).values():
             if (

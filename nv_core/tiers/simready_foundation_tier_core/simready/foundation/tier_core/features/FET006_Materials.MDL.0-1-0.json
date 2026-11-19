@@ -1,0 +1,22 @@
+{
+  "id": "FET006_Materials.MDL.0-1-0",
+  "display_name": "Materials (MDL)",
+  "legacy_identity": {
+    "id": "FET_006_MDL",
+    "version": "0.1.0"
+  },
+  "source_feature": "FET006_Materials.0-1-0",
+  "additional_requirements": [
+    "VM.BIND.002",
+    "VM.MAT.001",
+    "VM.MDL.001",
+    "VM.TEX.001",
+    "VM.TEX.002"
+  ],
+  "adapters": [
+    "skill:simready-foundation-conform-fet-006-mdl"
+  ],
+  "runtime_tests": [
+    "simready.foundation.tier_core.runtime_tests:mdl_renders"
+  ]
+}

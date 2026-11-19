@@ -22,6 +22,10 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 VERSION_FILE = REPO_ROOT / "VERSION.md"
 
+# release-<version> e.g. release-2026.10.0, or the legacy
+# release_<major>-<minor>-<patch> form e.g. release_2026-04-1
+_RELEASE_BRANCH_RE = re.compile(r"^release[-_](?P<version>\d[\w.\-]*)$")
+
 # preview_<product>_<major>-<minor>-<patch>  e.g. preview_aif_0-1-0
 _PREVIEW_BRANCH_RE = re.compile(
     r"^preview_(?P<product>[a-z0-9]+)_(?P<version>\d+(?:-\d+)*)$",
@@ -52,6 +56,7 @@ def fetch_refs() -> None:
             "git",
             "fetch",
             "origin",
+            "+refs/heads/release-*:refs/remotes/origin/release-*",
             "+refs/heads/release_*:refs/remotes/origin/release_*",
             "+refs/heads/preview_*:refs/remotes/origin/preview_*",
             "--tags",
@@ -66,7 +71,7 @@ def fetch_refs() -> None:
 def list_branch_refs() -> list[str]:
     fetch_refs()
     refs: set[str] = set()
-    for pattern in ("refs/remotes/origin/release_*", "refs/remotes/origin/preview_*"):
+    for pattern in ("refs/remotes/origin/release-*", "refs/remotes/origin/release_*", "refs/remotes/origin/preview_*"):
         result = subprocess.run(
             ["git", "for-each-ref", "--format=%(refname:short)", pattern],
             cwd=REPO_ROOT,
@@ -97,8 +102,15 @@ def ref_to_version(ref: str) -> str:
 
     branch = ref_to_branch(ref)
 
-    if branch.startswith("release_"):
-        return branch.removeprefix("release_").replace("-", ".")
+    release_match = _RELEASE_BRANCH_RE.match(branch)
+    if release_match:
+        version = release_match.group("version")
+        # Legacy release_ branches spelled the version with hyphens.
+        # Current release- branches already carry dots, and suffixed
+        # versions such as 2026.08.0-post1 must keep their hyphen.
+        if "." not in version:
+            version = version.replace("-", ".")
+        return version
     if branch.startswith("preview_"):
         slug = preview_branch_to_slug(branch)
         if slug:
@@ -153,7 +165,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Docs version ref helpers")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    subparsers.add_parser("fetch", help="Fetch release_*, preview_*, and tags from origin")
+    subparsers.add_parser("fetch", help="Fetch release-*, release_*, preview_*, and tags from origin")
 
     list_parser = subparsers.add_parser("list", help="List release and preview branch names")
     list_parser.set_defaults(func=lambda _args: print("\n".join(list_branch_refs())))

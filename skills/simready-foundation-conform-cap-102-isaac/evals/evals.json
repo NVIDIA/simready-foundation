@@ -1,0 +1,24 @@
+[
+    {
+        "id": "simready-foundation-conform-cap-102-isaac-positive-trigger",
+        "question": "Repair OPT.001 on this Isaac USD asset without changing its simulation behavior.",
+        "expected_skill": "simready-foundation-conform-cap-102-isaac",
+        "ground_truth": "The agent should activate only the CAP102_RigidBodyCollapse.Isaac rigid-body-collapse workflow.",
+        "expected_behavior": [
+            "Load the CAP102 manifest, OPT.001 requirement, validator, and fixed-body adapter.",
+            "Stage output, collapse eligible fixed-joint bodies, and preserve unrelated USD data.",
+            "Save, reopen, and validate CAP102_RigidBodyCollapse.Isaac without running the visual-mesh adapter."
+        ]
+    },
+    {
+        "id": "simready-foundation-conform-cap-102-isaac-blocked-mass",
+        "question": "Make this welded rigid-body asset pass CAP102_RigidBodyCollapse.Isaac; its mass is derived from a convexHull collider and no inertia is authored.",
+        "expected_skill": "simready-foundation-conform-cap-102-isaac",
+        "ground_truth": "The workflow must refuse to derive aggregate dynamics from the authored concave surface.",
+        "expected_behavior": [
+            "Do not partially collapse the assembly.",
+            "Report that convexHull changes the simulated shape and requires positive authored body mass and diagonal inertia.",
+            "Preserve the source and return a blocked status."
+        ]
+    }
+]

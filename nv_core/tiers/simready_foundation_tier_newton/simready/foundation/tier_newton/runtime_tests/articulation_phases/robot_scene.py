@@ -1,0 +1,783 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""Compose a robot-ready test scene using Framework 2.0 primitives."""
+
+from simready.foundation.tier_newton.runtime_tests.articulation_phases.joint_utils import (
+    compute_world_aligned_bbox,
+    get_articulation_root_path,
+)
+from simready.foundation.tier_newton.runtime_tests.articulation_phases.passive_joints import (
+    detect_passive_joints,
+)
+from simready.foundation.tier_newton.runtime_tests.articulation_phases.robot_handle import RobotHandle
+from simready.foundation.tier_newton.runtime_tests.articulation_phases.robot_state import (
+    capture_default_state,
+)
+from simready.foundation.tier_newton.runtime_tests.articulation_phases.robot_type import (
+    RobotType,
+    determine_robot_type,
+    get_scene_defaults,
+    has_authored_robot_type,
+    has_standalone_gripper_topology,
+)
+
+# ---------------------------------------------------------------------------
+# Fix-message helpers
+#
+# Library value proposition: a failure message must teach the asset author
+# EXACTLY how to fix the asset. Each helper below returns a message with
+# (1) headline, (2) what was searched vs. expected, (3) the prim path /
+# attribute to author, (4) a paste-ready USDA snippet, and (5) a spec +
+# real-asset reference. Keep these as module-level pure functions so
+# unit tests can snapshot them without scene setup.
+# ---------------------------------------------------------------------------
+
+_SPEC_BASE = "nv_core/tiers/simready_foundation_tier_core/" "simready/foundation/tier_core/rules_and_reqs"
+
+
+def _hide_room_ground(stage, room):
+    """Qualify composed fixture state even with older room implementations."""
+    from pxr import Sdf, Usd, UsdGeom, UsdPhysics
+
+    room_path = getattr(room, "_room_path", None)
+    if not isinstance(room_path, (str, Sdf.Path)) or not Sdf.Path(room_path).IsAbsolutePath():
+        raise RuntimeError("Cannot verify room floor: the room handle has no absolute fixture path")
+    floor_path = Sdf.Path(room_path).AppendChild("Floor")
+    floor = stage.GetPrimAtPath(floor_path)
+    if not floor.IsValid() or not floor.HasAPI(UsdPhysics.CollisionAPI):
+        raise RuntimeError("Cannot verify room floor: required fixture geometry or collision API is missing")
+    room.hide_ground()
+    # Disabled fixture state must hold throughout the run, not only at Default.
+    # Stronger time samples can override a correct default at physics time.
+    collision = UsdPhysics.CollisionAPI(floor).GetCollisionEnabledAttr()
+    if any(collision.Get(time) is not False for time in [Usd.TimeCode.Default(), *collision.GetTimeSamples()]):
+        raise RuntimeError(f"Cannot set room floor collision: composed collision remains enabled at {floor_path}")
+    visibility = UsdGeom.Imageable(floor).GetVisibilityAttr()
+    if any(
+        visibility.Get(time) != UsdGeom.Tokens.invisible
+        for time in [Usd.TimeCode.Default(), *visibility.GetTimeSamples()]
+    ):
+        raise RuntimeError(f"Cannot set room floor visibility: composed floor remains visible at {floor_path}")
+
+
+_REF_ARTICULATION_ROOT = (
+    "REFERENCE:\n"
+    f"  Spec:      {_SPEC_BASE}/physics_bodies/base_articulation/requirements/\n"
+    "             has-articulation-root.md  (BA.001)\n"
+    f"  Spec:      {_SPEC_BASE}/physics_bodies/physics_joints/requirements/\n"
+    "             articulation.md           (JT.ART.001)\n"
+    "  Example:   sample_content/common_assets/robots_general/Robotiq/\n"
+    "             2F-85/simready_usd/2F-85.usda\n"
+    "             (PhysicsArticulationRootAPI on the gripper base Xform)"
+)
+
+_REF_ROBOT_TYPE = (
+    "REFERENCE:\n"
+    f"  Spec:      {_SPEC_BASE}/isaac_sim/robot_core/requirements/robot-type.md\n"
+    "             (RC.008 -- allowed tokens: Manipulator, End Effector,\n"
+    "             Humanoid, Wheeled, Holonomic, Quadruped,\n"
+    "             Mobile Manipulators, Aerial)\n"
+    "  Example:   sample_content/common_assets/robots_general/Robotiq/\n"
+    "             2F-85/simready_usd/2F-85.usda\n"
+    '             (token isaac:robotType = "End Effector")'
+)
+
+
+def _fix_message_asset_load_failed(asset_path):
+    # type: (str) -> str
+    """Describe the invalid loaded prim, not an unproven defaultPrim/root cause."""
+    return (
+        "Asset loader returned an invalid loaded asset prim.\n"
+        f"  Asset: {asset_path}\n\n"
+        "DIAGNOSE: check whether the actual file opens, the layer's defaultPrim "
+        "is valid for the intended asset, and references/payloads/dependencies "
+        "resolve in this environment. Inspect composition/importer logs and "
+        "the loader's returned prim-path mapping in the selected stage/variant. "
+        "An invalid returned prim alone does not isolate the failing file, "
+        "metadata field, dependency or loader step.\n\n"
+        "The governing root-is-xformable requirement permits UsdGeomXformable "
+        "types; do not force a concrete Xform, new articulation/robot APIs, "
+        "metersPerUnit=1 or upAxis=Z merely to satisfy a loader diagnostic. "
+        "Preserve the authored root, units and orientation while proving the cause."
+    )
+
+
+def _fix_message_no_articulation_root(asset_prim_path):
+    # type: (str) -> str
+    """No prim under the asset has PhysicsArticulationRootAPI applied.
+    The framework refuses to test an asset with no declared articulation
+    because PhysX would otherwise infer a root heuristically and produce
+    silently wrong results.
+    """
+    return (
+        f"No articulation root found under {asset_prim_path}.\n"
+        "The framework searched every descendant for\n"
+        "`PhysicsArticulationRootAPI` and found none.\n"
+        "\n"
+        "FIX: Apply `PhysicsArticulationRootAPI` to ONE prim per\n"
+        "articulated asset. The correct prim depends on the robot style:\n"
+        "\n"
+        "  * Fixed-base robot (arm bolted to a table, gripper bolted to\n"
+        "    a flange): apply it to the root JOINT that connects the\n"
+        "    robot to the world (a PhysicsFixedJoint with body0 unset\n"
+        "    or pointing to world). This is the OpenUSD-canonical pattern\n"
+        "    for fixed articulations.\n"
+        "\n"
+        "  * Free-floating robot (mobile base, quadruped, humanoid):\n"
+        "    apply it to the root BODY -- the top-level Xform that\n"
+        "    carries `PhysicsRigidBodyAPI` and is the base link of the\n"
+        "    kinematic tree.\n"
+        "\n"
+        "Apply to exactly ONE prim; nested articulation roots produce\n"
+        "undefined behavior (see articulation-no-nesting.md).\n"
+        "\n"
+        "TEMPLATE A -- fixed-base robot (apply to root joint):\n"
+        "\n"
+        '    def PhysicsFixedJoint "root_joint" (\n'
+        '        prepend apiSchemas = ["PhysicsArticulationRootAPI"]\n'
+        "    )\n"
+        "    {\n"
+        "        rel physics:body1 = </Robot/base_link>\n"
+        "    }\n"
+        "\n"
+        "TEMPLATE B -- free-floating robot (apply to base body):\n"
+        "\n"
+        '    def Xform "base_link" (\n'
+        "        prepend apiSchemas = [\n"
+        '            "PhysicsRigidBodyAPI",\n'
+        '            "PhysicsArticulationRootAPI"\n'
+        "        ]\n"
+        "    )\n"
+        "    {\n"
+        "        # ... mass, collision, child links ...\n"
+        "    }\n"
+        "\n"
+        f"{_REF_ARTICULATION_ROOT}"
+    )
+
+
+def _fix_message_no_root_body_for_pin(robot_root_path):
+    # type: (str) -> str
+    """Describe an unresolved physical attachment body without prescribing topology."""
+    return (
+        "Cannot pin the gripper base to world: the provider could not resolve "
+        "a qualified physical articulation root body.\n"
+        f"  Selected articulation root: {robot_root_path}\n\n"
+        "This is an observed attachment/mapping prerequisite, not proof that "
+        "the authored root or a sibling-body layout is invalid.\n\n"
+        "DIAGNOSE: inspect the selected composed variant, verified loaded asset "
+        "subtree, articulation root and source rigid bodies. For a fixed-joint "
+        "root, resolve physics:body0/body1 and their physical body identities, "
+        "including bodies authored as siblings rather than descendants. "
+        "Compare the loader/importer mappings and active runtime's attachment "
+        "capability with the intended base/world constraints. Preserve the source "
+        "topology and transforms while isolating a provider limitation.\n\n"
+        "Do not relocate the articulation root, add body/mass APIs to decorators, "
+        "or invent a mass merely to make the temporary pin resolve. A justified "
+        "asset repair needs independent evidence of a violated requirement.\n\n" + _REF_ARTICULATION_ROOT
+    )
+
+
+def _fix_message_zero_dofs(robot_root_path):
+    # type: (str) -> str
+    """Describe the native view's zero-DOF observation, not its unproven cause."""
+    return (
+        f"Runtime articulation view reports zero degrees of freedom at {robot_root_path}.\n\n"
+        "This observation alone does not prove that no movable joints were "
+        "authored, that a leaf root is invalid, or that cooking/import completed "
+        "successfully. Joint-rooted and sibling-joint layouts can be valid.\n\n"
+        "DIAGNOSE: inspect the selected composed variant and verified loaded "
+        "asset subtree, not just descendants of the controller root. Resolve "
+        "physics:body0/body1, the physical base body and authored articulation "
+        "membership, then compare importer logs, native articulation/tensor "
+        "view identity and runtime DOF mapping. Check effective enabled/locked "
+        "opinions and solver support without changing them to force coverage.\n\n"
+        "Do not relocate PhysicsArticulationRootAPI, unlock constrained axes "
+        "or invent position limits solely to populate this view. Preserve the "
+        "original topology and reproduce an importer/view or test-setup "
+        "hypothesis before attributing an asset defect.\n\n" + _REF_ARTICULATION_ROOT
+    )
+
+
+def _fix_message_robot_type_unauthored_gripper_signals():
+    # type: () -> str
+    """Explain provisional gripper inference without prescribing an authored type."""
+    return (
+        "Asset has no isaac:robotType authored on the default prim. Positive "
+        "gripper signals and qualified one-leader topology provisionally "
+        "reclassify it as GRIPPER for setup; native independent DOFs still "
+        "determine IK/JIK applicability.\n\n"
+        "DIAGNOSE: compare this inference and selected composed variant with "
+        "the actual mechanism and governing robot-type contract. An attached "
+        "gripper does not by itself classify an entire arm as an end effector. "
+        "If explicit metadata is required, choose the token justified by the "
+        "actual mechanism: End Effector is an example only for a qualifying "
+        "standalone end effector, not a value to copy from this heuristic. "
+        "Preserve the recorded inference/provenance; do not stamp an inferred "
+        "token merely to remove this warning.\n\n" + _REF_ROBOT_TYPE
+    )
+
+
+def _fix_message_robot_type_unauthored_default_arm():
+    # type: () -> str
+    """Explain provisional arm defaults without prescribing the mechanism's type."""
+    return (
+        "Asset has no isaac:robotType authored on the default prim; the "
+        "framework is provisionally defaulting to ARM (Manipulator) for this "
+        "run. Type-specific setup and applicability can differ for a mobile "
+        "base, standalone end effector or other mechanism.\n\n"
+        "DIAGNOSE: inspect the actual mechanism, selected composed variant "
+        "and governing robot-type contract before choosing explicit metadata. "
+        "Manipulator is an example only for a qualifying manipulator, not "
+        "evidence supplied by this fallback. If explicit metadata is required, "
+        "author the token justified by the real asset rather than copying the "
+        "setup default. Preserve the warning and classification provenance.\n\n" + _REF_ROBOT_TYPE
+    )
+
+
+def _has_gripper_signals(stage, asset_prim):
+    # type: (Any, Any) -> bool
+    """Return True iff the asset's USD shows a positive gripper signal:
+
+    - Any joint prim has ``PhysxMimicJointAPI`` applied (a gripper / 4-bar
+      linkage signature; bare arms don't typically use mimic), OR
+    - Any descendant carries the spec-canonical
+      ``simready:attactment:socketType = "Gripper"`` attribute on an Xform
+      (FET028 spec GR.001 -- the discovery rule used by
+      ``gripper_sites._is_qualifying_gripper_site``), OR
+    - Any descendant qualifies through the same schema-based gripper-site
+      discovery used by FET028, including legacy ``IsaacSiteAPI`` authoring.
+
+    Conservative — false negatives (a gripper without any of these signals
+    stays classified as ARM) are preferable to false positives (an arm
+    without isaac:robotType authored gets reclassified as a gripper and
+    loses its ik/jik coverage). Pure-USD inspection; no articulation
+    initialization required.
+    """
+    if asset_prim is None or not asset_prim.IsValid():
+        return False
+    try:
+        from pxr import Usd
+    except Exception:
+        return False
+    from simready.foundation.tier_newton.runtime_tests.articulation_phases.gripper_sites import (
+        _is_qualifying_gripper_site,
+    )
+
+    for prim in Usd.PrimRange(asset_prim):
+        try:
+            applied = list(prim.GetAppliedSchemas())
+            try:
+                applied.extend(list(prim.GetPrimTypeInfo().GetAppliedAPISchemas()))
+            except Exception:
+                pass
+        except Exception:
+            applied = []
+        for s in applied:
+            s_str = str(s)
+            # Multi-apply: "PhysxMimicJointAPI:rotZ" etc.
+            if s_str.startswith("PhysxMimicJointAPI"):
+                return True
+        # Spec-canonical: simready:attactment:socketType = "Gripper"
+        sock = prim.GetAttribute("simready:attactment:socketType")
+        if sock and sock.IsDefined():
+            try:
+                if sock.Get() == "Gripper":
+                    return True
+            except Exception:
+                pass
+        if _is_qualifying_gripper_site(prim):
+            return True
+    return False
+
+
+def setup_gripper_inspection_camera(ctx, scene_info, config=None):
+    # type: (Any, dict[str, Any], Optional[dict[str, Any]]) -> bool
+    """Face an authored gripper so opening/closing is visible in FET022.
+
+    Generic articulation framing uses a diagonal three-quarter view, which is
+    useful for arms but can place one gripper jaw behind the other.  Grippers
+    already author the FET028 grip-line axis; looking back along that axis puts
+    the closure axis across the image, matching the useful FET028 view without
+    introducing asset-specific camera coordinates.
+    """
+    if scene_info.get("robot_type") != RobotType.GRIPPER:
+        return False
+
+    import numpy as np
+    from simready.foundation.tier_newton.runtime_tests.articulation_phases.gripper_sites import (
+        discover_gripper_sites,
+    )
+
+    stage = scene_info.get("stage")
+    asset_prim = scene_info.get("asset_prim")
+    if stage is None or asset_prim is None:
+        return False
+    sites = discover_gripper_sites(stage, asset_prim)
+    if not sites:
+        return False
+
+    cfg = dict(config or {})
+    site = sites[0]
+    grip_dir = np.asarray(site.grip_line_world[1] - site.grip_line_world[0], dtype=np.float64).reshape(3)
+    horizontal = np.array([float(grip_dir[0]), float(grip_dir[1]), 0.0], dtype=np.float64)
+    norm = float(np.linalg.norm(horizontal))
+    if norm < 1e-6:
+        horizontal = np.array([0.0, -1.0, 0.0], dtype=np.float64)
+    else:
+        horizontal /= norm
+
+    side_sign = float(cfg.get("camera_side_sign", 1.0))
+    elevation = float(cfg.get("camera_elevation", 0.2))
+    direction = np.array(
+        [horizontal[0] * side_sign, horizontal[1] * side_sign, elevation],
+        dtype=np.float64,
+    )
+    direction /= float(np.linalg.norm(direction))
+    margin = float(cfg.get("camera_margin_factor", 1.6))
+    ctx.scene.setup_camera_follow(
+        {
+            "camera_direction": tuple(float(value) for value in direction),
+            "camera_margin_factor": margin,
+        }
+    )
+    ctx.scene.update_camera_follow(update_history=True)
+    ctx.log(
+        "FET022 gripper camera-follow: direction=%s margin=%.2f"
+        % (tuple(round(float(value), 3) for value in direction), margin)
+    )
+    return True
+
+
+def _find_existing_world_pin(stage, asset_prim, body_path):
+    # type: (Any, Any, str) -> str
+    """Return an enabled authored world-to-body FixedJoint, if present."""
+    try:
+        from pxr import Usd, UsdPhysics
+
+        for prim in Usd.PrimRange(asset_prim):
+            if not prim.IsA(UsdPhysics.FixedJoint):
+                continue
+            joint = UsdPhysics.FixedJoint(prim)
+            if joint.GetBody0Rel().GetTargets():
+                continue
+            body1 = [str(path) for path in joint.GetBody1Rel().GetForwardedTargets()]
+            if str(body_path) not in body1:
+                continue
+            if joint.GetJointEnabledAttr().Get() is not False:
+                return str(prim.GetPath())
+    except Exception:
+        pass
+    return ""
+
+
+async def setup_robot_test_scene(ctx, config_overrides=None):
+    """Build a scene without leaking temporary Newton builder hooks.
+
+    Restore the original methods on normal completion, setup failure, or task
+    cancellation. The ground hooks are process-global, so leaving them installed
+    after an early camera/composition failure would affect subsequent tests.
+    """
+    builder_originals = {}
+    try:
+        return await _setup_robot_test_scene(ctx, config_overrides, builder_originals)
+    finally:
+        if builder_originals:
+            builder = builder_originals["builder"]
+            builder.add_usd = builder_originals["add_usd"]
+            builder.finalize = builder_originals["finalize"]
+
+
+async def _setup_robot_test_scene(ctx, config_overrides, builder_originals):
+    # type: (Any, Optional[dict[str, Any]]) -> tuple[Any, dict[str, Any]]
+    """Build a robot-ready scene and return (RobotHandle, scene_info).
+
+    Performs the full sequence: load asset, determine RobotType, create room
+    (auto-size), add physics, apply scene defaults (gravity / ground plane),
+    create RobotHandle, start timeline, settle, initialize tensor view,
+    capture default state + initial bbox + passive joints.
+
+    Calls ctx.precheck_failure(msg) on precondition failures (no articulation
+    root, zero DOFs). Callers should `return` after the precheck_failure.
+    Returns (None, {}) on precheck_failure so callers can guard.
+    """
+    cfg = dict(ctx.config)
+    if config_overrides:
+        cfg.update(config_overrides)
+    ctx.set_settle_frames(int(cfg.get("settle_frames", 5)))
+
+    from simready.evaluate_engine_kit.physics_utils import active_physics_engine
+
+    active_engine = active_physics_engine()
+
+    # 1. Load asset
+    timeout = int(cfg.get("asset_load_timeout", 30))
+    asset_handle = ctx.scene.load_asset(ctx.asset_path, timeout=timeout)
+    stage = ctx.scene.stage
+    asset_prim = stage.GetPrimAtPath(asset_handle.prim_path)
+    if not asset_prim or not asset_prim.IsValid():
+        ctx.precheck_failure(_fix_message_asset_load_failed(ctx.asset_path))
+        return (None, {})
+
+    # 1a. De-instance every `instanceable=true` prim under the asset.
+    # Fanuc-style robots author their geometry inside instanced
+    # ``visuals/`` and ``collisions/`` Xforms. Omni Fabric cannot resolve
+    # attribute lookups through instance proxies, so any code path that
+    # queries Fabric by a child path (SingleArticulation registering
+    # link colliders, text_3d creating overlay GeomSubsets, the render
+    # update walking the articulation) emits warnings like
+    # "getAttributeCount called on non-existent path
+    # /World/AssetRoot/Asset/robot_base/visuals/base" and can lead to
+    # silent Kit crashes shortly after. v1.6 avoided this by
+    # de-instancing as a side effect of FET001 material override; we
+    # do it explicitly here before Newton compiles the stage.
+    try:
+        from pxr import Usd
+
+        deinstanced = 0
+        for prim in Usd.PrimRange(asset_prim):
+            if prim.IsInstance():
+                prim.SetInstanceable(False)
+                deinstanced += 1
+        if deinstanced:
+            ctx.step(
+                "setup_robot_test_scene: de-instanced %d prim(s) under %s "
+                "so Fabric can resolve child paths" % (deinstanced, asset_handle.prim_path)
+            )
+    except Exception as exc:
+        ctx.step(
+            "INTERNAL: de-instance pass raised an unexpected exception "
+            "(ignored; Fabric child-path lookups may emit warnings on "
+            "instanced visuals/collisions): %s" % exc
+        )
+
+    # 2. Determine RobotType
+    robot_type = determine_robot_type(stage, asset_prim)
+    gripper_signals = _has_gripper_signals(stage, asset_prim)
+    robot_type_authored = has_authored_robot_type(stage, asset_prim)
+    robot_type_source = "authored" if robot_type_authored else "structural_or_default"
+
+    # A gripper site or mimic pair may belong to an attached gripper on an arm.
+    # Require qualified one-leader topology before pinning/reframing the entire
+    # unauthored articulation as a jaw. Native DOFs still decide IK applicability.
+    if not robot_type_authored and robot_type == RobotType.ARM:
+        if gripper_signals and has_standalone_gripper_topology(stage, asset_prim):
+            ctx.warn(_fix_message_robot_type_unauthored_gripper_signals())
+            robot_type = RobotType.GRIPPER
+            robot_type_source = "inferred_gripper_topology"
+        else:
+            ctx.warn(_fix_message_robot_type_unauthored_default_arm())
+
+    ctx.step("setup_robot_test_scene: robot_type=%s (%s)" % (robot_type.name, robot_type_source))
+
+    # 3. Articulation root
+    robot_root_path = get_articulation_root_path(stage, asset_prim)
+    if not robot_root_path:
+        ctx.precheck_failure(_fix_message_no_articulation_root(asset_prim.GetPath()))
+        return (None, {})
+
+    # 4. Scene defaults from robot type
+    scene_defaults = get_scene_defaults(robot_type)
+    if "activate_ground_plane" in cfg:
+        scene_defaults["activate_ground_plane"] = bool(cfg["activate_ground_plane"])
+    # Joint-only gripper tests use a world pin and require no collision floor.
+    if robot_type == RobotType.GRIPPER:
+        scene_defaults["activate_ground_plane"] = False
+    newton_ground_prebuilt = False
+    if scene_defaults.get("activate_ground_plane", False):
+        # Isaac Sim 6.0's Newton bridge calls ``builder.finalize()`` and then
+        # assigns ``model.ground = True``.  Current Newton models do not consume
+        # that legacy dynamic attribute; a ground collision shape must be added
+        # to ModelBuilder before finalization.  USD static/kinematic planes are
+        # also omitted because the bridge parses only enabled rigid bodies.
+        # Mark this scene so the first-cook block below can use Newton's native
+        # ModelBuilder.add_ground_plane() API at the correct lifecycle point.
+        newton_ground_prebuilt = True
+        ctx.step("setup_robot_test_scene: requested native Newton builder ground for first cook")
+
+    # 5. Room
+    room = ctx.scene.add_room()
+    try:
+        room.auto_size(asset_handle)
+    except Exception as exc:
+        # Newton runtime-control prims (for example NewtonActuator) are not
+        # imageable geometry. Isaac Sim 6.0's generic auto-size path can still
+        # ask BBoxCache for their nonexistent visibility attribute. Build the
+        # same minimum room used by RoomHandle.auto_size() explicitly; merely
+        # keeping the handle leaves /World/Room empty and Newton captures render
+        # against the dome light instead of the room.
+        room.set_size(100.0, 100.0, 100.0)
+        ctx.warn(
+            "Room auto-size could not measure this asset; using the default "
+            "room size. Runtime-control prims are excluded from articulation "
+            "test bounds. Detail: %s" % exc
+        )
+    # Robots that do not use a ground plane (ARM, SCARA) often reach below
+    # the asset base during a sweep; keep walls for lighting / bbox framing
+    # but hide the floor so the arm is not clipped visually and does not
+    # collide with a surface it should not be touching.
+    if not scene_defaults.get("activate_ground_plane", False):
+        # Floor collision is required fixture state; rejection must precede
+        # add_physics and any evaluated motion.
+        _hide_room_ground(stage, room)
+
+    # 6. Physics. Runtime behavior uses real-world gravity by default on every
+    # engine. Tests that intentionally isolate drive tracking from gravity
+    # (state_accuracy) opt out explicitly through ``gravity_magnitude``. Do not
+    # disable gravity just because Newton is selected.
+    physics_fps = float(cfg.get("physics_fps", 240.0))
+    scene_gravity = float(cfg.get("gravity_magnitude", 9.81))
+    ctx.step("setup_robot_test_scene: add_physics(gravity=%s, fps=%s)" % (scene_gravity, physics_fps))
+    restore_newton_finalize = None
+    restore_newton_add_usd = None
+    if newton_ground_prebuilt:
+        import newton  # type: ignore
+
+        original_finalize = newton.ModelBuilder.finalize
+        original_add_usd = newton.ModelBuilder.add_usd
+        builder_originals.update(
+            builder=newton.ModelBuilder,
+            add_usd=original_add_usd,
+            finalize=original_finalize,
+        )
+
+        def _add_usd_with_newton_ground(builder, *args, **kwargs):
+            result = original_add_usd(builder, *args, **kwargs)
+            labels = [str(label) for label in (getattr(builder, "shape_label", ()) or ())]
+            if "newton_articulation_ground" not in labels:
+                builder.add_ground_plane(label="newton_articulation_ground")
+                ctx.step("setup_robot_test_scene: added native Newton ground after USD import")
+            return result
+
+        def _finalize_with_newton_ground(builder, *args, **kwargs):
+            labels = [str(label) for label in (getattr(builder, "shape_label", ()) or ())]
+            if "newton_articulation_ground" not in labels:
+                builder.add_ground_plane(label="newton_articulation_ground")
+                ctx.step("setup_robot_test_scene: added native Newton ground to ModelBuilder")
+            return original_finalize(builder, *args, **kwargs)
+
+        newton.ModelBuilder.add_usd = _add_usd_with_newton_ground
+        newton.ModelBuilder.finalize = _finalize_with_newton_ground
+        restore_newton_add_usd = original_add_usd
+        restore_newton_finalize = original_finalize
+
+    def _restore_newton_builder_hooks():
+        if restore_newton_finalize is None and restore_newton_add_usd is None:
+            return
+        import newton  # type: ignore
+
+        if restore_newton_add_usd is not None:
+            newton.ModelBuilder.add_usd = restore_newton_add_usd
+        if restore_newton_finalize is not None:
+            newton.ModelBuilder.finalize = restore_newton_finalize
+
+    try:
+        physics = ctx.scene.add_physics(gravity=scene_gravity, fps=physics_fps)
+    except Exception:
+        _restore_newton_builder_hooks()
+        raise
+    # Newton cold init (CUDA/tensor backend) can run hundreds of ms to
+    # multiple seconds on the first session, all silent because
+    # add_physics is synchronous and does not pump the renderer. Emit
+    # a step so the watchdog sees activity before the next await.
+    ctx.step("setup_robot_test_scene: add_physics returned (PhysicsScene cooked)")
+
+    # 8. Ground plane
+    if scene_defaults.get("activate_ground_plane", False) and not newton_ground_prebuilt:
+        ctx.scene.enable_ground_plane(friction=0.5)
+
+    # 9. Lighting
+    ctx.scene.lighting.add_dome(intensity=1000.0)
+
+    # 10. Build RobotHandle (pre-init). Defer even this lightweight wrapper on
+    # Newton until its native scene is compiled, mirroring FET004's proven
+    # lifecycle and ensuring no articulation-controller state exists during
+    # the backend's first parse.
+    robot = None
+
+    # 11. Camera follow
+    ctx.scene.setup_camera_follow(cfg)
+
+    # 11a. Pin gripper base to world.
+    # Without a pin, applying joint torque to a free-floating gripper rotates
+    # the entire articulation (action-reaction), making per-joint tests measure
+    # base rotation instead of joint motion. State accuracy, mimic, multi-joint
+    # coordination, and JIK all degrade. The pin is a temporary FixedJoint at
+    # ``physics_utils.WORLD_PIN_PATH`` (single slot — fine because we only test
+    # one robot per session). It is harmless on already-pinned assets (the
+    # solver sees a redundant zero-motion constraint).
+    pinned_body_path = ""
+    pinned_joint_path = ""
+    if robot_type == RobotType.GRIPPER:
+        try:
+            from simready.evaluate_engine_kit.physics_utils import (
+                WORLD_PIN_PATH,
+                find_root_body,
+                pin_body_to_world,
+            )
+
+            base_body = find_root_body(stage, robot_root_path)
+            if base_body:
+                authored_pin = _find_existing_world_pin(stage, asset_prim, base_body)
+                if authored_pin:
+                    pinned_body_path = base_body
+                    pinned_joint_path = str(authored_pin)
+                    ctx.step(
+                        "setup_robot_test_scene: gripper base already pinned to world by %s: %s"
+                        % (authored_pin, base_body)
+                    )
+                elif pin_body_to_world(stage, base_body):
+                    pinned_body_path = base_body
+                    pinned_joint_path = WORLD_PIN_PATH
+                    ctx.step("setup_robot_test_scene: pinned gripper base to world: %s" % base_body)
+                else:
+                    ctx.warn(
+                        "INTERNAL: pin_body_to_world(%s) returned False; "
+                        "the framework could not author the temporary "
+                        "FixedJoint at WORLD_PIN_PATH. This is not an "
+                        "asset bug -- file an issue against simready-evaluate "
+                        "with the asset path and this log. Per-joint "
+                        "tests may rotate the whole gripper for this "
+                        "run." % base_body
+                    )
+            else:
+                ctx.warn(_fix_message_no_root_body_for_pin(robot_root_path))
+        except Exception as exc:
+            ctx.warn(
+                "INTERNAL: gripper pin step raised an unexpected "
+                "exception (ignored, per-joint tests may rotate the whole "
+                "gripper): %s" % exc
+            )
+
+    # 12. Finish asset composition before compiling the Newton scene.
+    ctx.step("setup_robot_test_scene: settle for asset composition")
+    await ctx.settle(count=3)
+
+    # 12a. Cook dynamic mesh colliders (and author missing mass) OFF the
+    # timeline path, time-boxed, BEFORE robot.initialize() -- which plays the
+    # timeline, initializes Newton, and cooks the articulation. A cold SDF cook
+    # there can freeze the run; doing it here as a pumped, time-boxed step
+    # keeps the run alive and reports a clean failure if a collider cannot cook.
+    from simready.evaluate_engine_kit.physics_utils import cook_skip_message
+
+    try:
+        cook_skip = cook_skip_message(await ctx.scene.prepare_physics())
+    except Exception:
+        _restore_newton_builder_hooks()
+        raise
+    if cook_skip is not None:
+        _restore_newton_builder_hooks()
+        ctx.precheck_failure(cook_skip[5:].strip())
+        return (None, {})
+
+    # 13. Initialize the runtime-specific articulation controller. FET022
+    # proves the drives authored by the asset, so Newton must consume the
+    # native USD drive configuration unchanged. In particular, do not add or
+    # rewrite DriveAPI opinions here: doing so would both invalidate the proof
+    # and force Isaac Sim 6.0's live CUDA articulation through an unsupported
+    # gain-reconfiguration path.
+    from simready.foundation.tier_newton.runtime_tests.engine_guard import (
+        NEWTON_SCENE_ERROR,
+        NewtonSceneInitializationError,
+        newton_scene_initialized,
+    )
+
+    # Compile and verify the asset's native Newton scene before creating
+    # the SingleArticulation tensor view.
+    try:
+        physics.play()
+        try:
+            await ctx.settle(count=3)
+        except Exception as exc:
+            raise NewtonSceneInitializationError(
+                f"Newton failed while compiling the native articulation scene: {exc}"
+            ) from exc
+    finally:
+        _restore_newton_builder_hooks()
+    if not newton_scene_initialized():
+        raise NewtonSceneInitializationError(NEWTON_SCENE_ERROR)
+    robot = RobotHandle(
+        stage=stage,
+        robot_prim_path=robot_root_path,
+        asset_prim=asset_prim,
+        robot_type=robot_type,
+        setup_world_pin=(pinned_joint_path, pinned_body_path) if pinned_joint_path else None,
+    )
+    ctx.step("setup_robot_test_scene: awaiting robot.initialize_newton(ctx)")
+    await robot.initialize_newton(ctx)
+    ctx.step("setup_robot_test_scene: robot.initialize_newton(ctx) returned")
+
+    # 14. Precondition: DOFs must exist.
+    # Return ``(None, {})`` (not ``(robot, {})``) so callers' standard
+    # ``if robot is None: return`` guard triggers and downstream phases
+    # don't try to operate on a 0-DOF articulation -- which would fail
+    # with obscure errors (empty position arrays, index out of range on
+    # dof_names) instead of the actionable precheck message above.
+    if robot.dof_count == 0:
+        ctx.precheck_failure(_fix_message_zero_dofs(robot_root_path))
+        return (None, {})
+
+    # Capture default state + initial bbox + passive joints
+    default_state = capture_default_state(robot)
+    content_root_path = robot_root_path
+    content_root_prim = stage.GetPrimAtPath(content_root_path)
+    # ArticulationRootAPI may live on a fixed-joint leaf. Keep that controller
+    # identity, but measure geometry and discover sibling joints inside the
+    # already verified loaded asset subtree, never the surrounding test room.
+    initial_bbox = compute_world_aligned_bbox(asset_prim)
+    passive_indices, passive_names = detect_passive_joints(
+        stage, content_root_path, robot.dof_names, asset_prim=asset_prim
+    )
+
+    # Ownership is required control state, separate from coefficient/verdict
+    # discovery. Unknown schemas/references must not erase follower exclusions.
+    from ._independent_dofs import control_ownership
+
+    mimic_follower_indices, mimic_follower_names, loop_joint_indices, loop_joint_names = control_ownership(
+        stage, asset_prim, content_root_path, robot.dof_names
+    )
+    if loop_joint_names:
+        ctx.warn(
+            "Closed kinematic loop detected; excluding parallel-linkage "
+            "joints from independent per-joint driving (they are "
+            "constrained by the loop and cannot track an independent "
+            "target): %s. Refer to DJ.011 (no articulation loops)." % ", ".join(loop_joint_names)
+        )
+
+    scene_info = {
+        "asset_handle": asset_handle,
+        "physics": physics,
+        "robot_type": robot_type,
+        "robot_type_authored": robot_type_authored,
+        "robot_type_source": robot_type_source,
+        "has_gripper_signals": gripper_signals,
+        "default_state": default_state,
+        "initial_bbox": initial_bbox,
+        "passive_joint_indices": passive_indices,
+        "passive_dof_names": passive_names,
+        "mimic_follower_indices": mimic_follower_indices,
+        "mimic_follower_ownership_basis": "composed authored mimic API presence; not native equation/support qualification",
+        "mimic_follower_names": mimic_follower_names,
+        "loop_joint_indices": loop_joint_indices,
+        "loop_joint_names": loop_joint_names,
+        "stage": stage,
+        "asset_prim": asset_prim,
+        "robot_root_prim": content_root_prim,
+        "camera_prim_path": "/World/Camera",
+        # Empty string = no pin applied; non-empty = path of the pinned base body.
+        "pinned_to_world": pinned_body_path,
+        "active_physics_engine": active_engine,
+    }
+    return (robot, scene_info)

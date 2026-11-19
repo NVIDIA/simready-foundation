@@ -1,6 +1,6 @@
 ---
 name: simready-foundation-conform-fet-025-ros
-description: "Use for repairing exact FET_025_ROS SimReady conformance for Isaac ROS-Ready bridge-node presence. Use when a profile, validation report, or user request names FET_025_ROS; default to version `0.1.0`."
+description: "Use for repairing exact CAP025_RosBridge.Ros SimReady conformance for Isaac ROS-Ready bridge-node presence. Use when a profile, validation report, or user request names CAP025_RosBridge.Ros; default to `CAP025_RosBridge.Ros.0-1-0`. Foundations 1 ID: FET_025_ROS."
 license: Apache-2.0
 metadata:
   author: "Cursor Agent"
@@ -11,29 +11,44 @@ metadata:
     - ros2
 ---
 
-# SimReady Conform FET_025_ROS
+# SimReady Conform CAP025_RosBridge.Ros
+
+## OpenUSD Competence
+
+Running this conform skill is expert USD authoring. Reason from the OpenUSD /
+Pixar USD spec rather than pattern-matching a validator message: composition
+arcs and LIVRPS strength ordering, value resolution and list editing
+(prepend, append, explicit, delete), the `def`/`over`/`class`
+specifiers, native instancing and model hierarchy, stage units and up-axis,
+and the `UsdGeom`, `UsdShade`, and `UsdPhysics` schemas. Make the exact native
+edit on the correct prim, arc, and layer, derive values from the asset's real
+geometry and composition, then reopen the composed stage to confirm the
+opinion resolves as intended before claiming the gate passes. Never fabricate
+data to satisfy a validator token. The repository-root `AGENTS.md`
+"Master-Level OpenUSD Competence for Conform Work" section is the full
+statement.
 
 ## Purpose
 
-Use this exact feature skill when the selected profile, validation report, or user request names `FET_025_ROS`. It stages or reports Isaac ROS-Ready conformance for OmniGraph ROS 2 bridge nodes.
+Use this exact capability skill when the selected profile, validation report, or user request names `CAP025_RosBridge.Ros`. It stages or reports Isaac ROS-Ready conformance for OmniGraph ROS 2 bridge nodes.
 
-Default to `FET_025_ROS@0.1.0`.
+Default to `CAP025_RosBridge.Ros.0-1-0`.
 
 ## Source of Truth
 
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_025_ROS-0.1.0.json`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_025_ROS.md`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/isaac_sim/ros_bridge/requirements/ros2-bridge-nodes-present.md`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/CAP025_RosBridge.Ros.0-1-0.json`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/CAP025_RosBridge.Ros.md`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/isaac_sim/ros_bridge/requirements/ros2-bridge-nodes-present.md`
 
-## Feature Versions
+## Capability Versions
 
 | Version | Dependencies | Requirements |
 |---|---|---|
-| `0.1.0` | None | `ROS.001` |
+| `CAP025_RosBridge.Ros.0-1-0` | None | `ROS.001` |
 
 ## Workflow
 
-1. Confirm the input stage/asset exists and the selected feature is `FET_025_ROS@0.1.0`.
+1. Confirm the input stage/asset exists and the selected feature is `CAP025_RosBridge.Ros.0-1-0`.
 2. Validate for `ROS.001` (at least one OmniGraph `node:type` starting with `isaacsim.ros2.bridge.`).
 3. If missing, prefer repairing in Isaac Sim by authoring an Action Graph with at least one ROS 2 bridge node, then saving the USD.
 4. Do **not** invent arbitrary bridge nodes with placeholder topics in headless USD-only repair unless the user provides the intended ROS graph contract.
@@ -48,10 +63,10 @@ Default to `FET_025_ROS@0.1.0`.
 
 | Field | Meaning |
 |---|---|
-| `feature` | Exact feature ID and version, for example `FET_025_ROS@0.1.0`. |
+| `feature` | Exact contract ID, for example `CAP025_RosBridge.Ros.0-1-0`. |
 | `input` | Source asset or stage inspected. |
 | `output` | Staged output path, or `in-place` only when explicitly requested. |
 | `requirements_repaired` | Requirement IDs repaired in this pass. |
 | `validation` | Command or inspection used to verify this exact feature. |
 | `status` | `passed`, `failed`, `skipped`, or `blocked`. |
-| `next_step` | Next exact feature skill or user/runtime evidence needed. |
+| `next_step` | Next exact capability skill or user/runtime evidence needed. |

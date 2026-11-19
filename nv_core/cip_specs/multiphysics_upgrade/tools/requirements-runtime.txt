@@ -1,0 +1,8 @@
+# Third-party runtime requirements for the offline multiphysics wheelhouse.
+#
+# Resolved for CPython 3.12 on Windows x64, required by tier-core's Isaac extra.
+# The builder also resolves every local wheel's dependencies; the manifest records
+# the resolved versions and hashes in
+# wheelhouse.json.
+usd-core>=23.5
+numpy==2.2.6

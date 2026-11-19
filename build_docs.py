@@ -6,7 +6,7 @@ Usage:
     python build_docs.py [--strict] [--verbose]
 
 The SimReady docs are assembled on the fly: each validation tier under
-``nv_core/tiers/`` owns its capabilities/features/profiles, the shared overlay
+``nv_core/tiers/`` owns its rules_and_reqs/features/profiles, the shared overlay
 holds cross-tier pages, and the remaining site chrome lives in
 ``nv_core/sr_specs/docs``. This script stages them into
 ``nv_core/sr_specs/_build/docs-src`` (via ``assemble_docs``), drops the

@@ -1,12 +1,12 @@
 [
     {
         "id": "simready-foundation-conform-fet-022-physx-positive-trigger",
-        "question": "Repair FET_022_PHYSX@0.2.0 validation failures on a SimReady asset or package.",
+        "question": "Repair FET022_DrivenJoints.PhysX.0-2-0 validation failures on a SimReady asset or package.",
         "expected_skill": "simready-foundation-conform-fet-022-physx",
-        "ground_truth": "The agent should activate simready-foundation-conform-fet-022-physx and follow the exact FET_022_PHYSX workflow.",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-022-physx and follow the exact FET022_DrivenJoints.PhysX workflow.",
         "expected_behavior": [
             "Load the simready-foundation-conform-fet-022-physx skill.",
-            "Use the selected FET_022_PHYSX manifest as the authoritative feature contract.",
+            "Use the selected FET022_DrivenJoints.PhysX manifest as the authoritative feature contract.",
             "Report changed files, validation performed, and any remaining blockers."
         ]
     },

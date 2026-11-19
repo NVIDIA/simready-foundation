@@ -1,0 +1,4 @@
+interface:
+  display_name: "Conform Material Coverage"
+  short_description: "Bind uncovered geometry and re-measure rendered material coverage"
+  default_prompt: "Conform staged assets to FET009_MaterialCoverage.0-1-0 by binding uncovered geometry to the asset's own materials, then rerun VM.MAT.001 and the coverage tests in Kit."
