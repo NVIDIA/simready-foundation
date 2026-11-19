@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_028_MUJOCO`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP028_Gripper.MuJoCo.html" />
+<link rel="canonical" href="../capabilities/CAP028_Gripper.MuJoCo.html" />
+```
+
+This published feature route moved to [`CAP028_Gripper.MuJoCo`](../capabilities/CAP028_Gripper.MuJoCo.md) (Foundations 1 ID: `FET_028_MUJOCO`).

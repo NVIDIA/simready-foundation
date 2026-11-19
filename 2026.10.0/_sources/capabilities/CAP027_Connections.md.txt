@@ -1,0 +1,108 @@
+# Capability: `CAP027_Connections`
+
+| **Property** | **Value** |
+|--------------|-----------|
+| Capability Name | `CAP027_Connections` |
+| Runtime | `OpenUSD` |
+| Proprietary Techs | `None` |
+| Version token | `0-1-0` |
+
+## Description
+
+An assembly stage pairs a socket-bearing part with a plug-bearing part. Each connection names the two mate sites, requires matching `interface` tokens, composes the parts by reference, and declares how the pairing is realized.
+
+`CN.006` requires every connection to declare `realization` as either `compound` or `jointed`, and that token must agree with how the two mate bodies resolve. A mate body is the nearest ancestor with an *enabled* `PhysicsRigidBodyAPI`, so a part the assembly demoted with `physics:rigidBodyEnabled = false` is transparent to that walk.
+
+This capability fully specifies the `compound` shape. Each part keeps the rigid body its author supplied and the assembly disables it, so both sites resolve to one enabled body above them. `CN.011` specifies that body: an assembly-local prim carrying no reference arc, with `physics:mass` summed from the parts it fuses. The aggregate may be omitted only when the parts carry their mass on their colliders, which the runtime sums onto the compound body by itself. Composition holds the pairing and the result simulates as a single actor with the combined mass of the stack. A stacked prop compound is that shape. A part that contains a joint joins only through a `jointed` connection.
+
+`CN.012` fixes the model hierarchy: the default prim is `assembly`, and each child asset root is `component` or `assembly`. A child may itself be an assembly. Its connections count toward `CN.007` occupancy on the outer stage, and its unpaired sites stay available.
+
+`jointed` connections are declared here but their physics is specified by [CAP029_ConnectionJoint](CAP029_ConnectionJoint.md), which requires the authored fixed joint (`CN.009`) and rates it against the socket capacity (`CN.005`). An arm plus gripper is that shape. An assembly that contains only `compound` connections satisfies its contract with this capability alone.
+
+This capability occupies `027`. Runtime tool-change orchestration is not in scope; the connection is the data that orchestration consumes.
+
+## Dependency Graph
+
+```{mermaid}
+flowchart LR
+    CAP026_Mates_OpenUSD_0_1_0["CAP026_Mates.0-1-0"]
+    CAP027_Connections_OpenUSD_0_1_0["CAP027_Connections.0-1-0"]
+    CAP029_ConnectionJoint_OpenUSD_0_1_0["CAP029_ConnectionJoint.0-1-0"]
+    CAP027_Connections_OpenUSD_0_1_0 --> CAP026_Mates_OpenUSD_0_1_0
+    CAP029_ConnectionJoint_OpenUSD_0_1_0 --> CAP027_Connections_OpenUSD_0_1_0
+
+    classDef current fill:#90EE90,stroke:#333
+    class CAP027_Connections_OpenUSD_0_1_0 current
+```
+
+## Use Cases
+
+Products or workflows that consume this capability:
+
+- SimReady validation of a standalone assembly USD.
+- Compound prop assemblies (stacked, nested, or interlocking props) held by composition rather than by a joint, simulating as one actor with the combined mass of their parts.
+- A SimReady-aware runtime that locates a pairing and its joint from the connection data.
+- Catalog search over assemblies by `assemblyType`.
+
+## Requirements
+
+### Version 0-1-0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+- Assembly v0.1.0 (required)
+
+Not added to `Robot-Body`, `Robot-Gripper`, or `Robotics-Prop`: a standalone asset declares mate sites (`CAP026_Mates`) but does not assert a realized connection.
+
+#### Capability Dependencies
+
+| **Property** | **Value** |
+|--------------|-----------|
+| Dependency | [Mate](CAP026_Mates.md) (`CAP026_Mates.0-1-0`) |
+
+#### Requirement List
+
+* Capability: [Assembly/Connections](../rules_and_reqs/assembly/connections/capability-connections.md)
+
+| Requirement | Requirement Doc | Rule |
+|-------------|-----------------|------|
+| `CN.001` | [CN.001](../rules_and_reqs/assembly/connections/requirements/connection-rels.md) | Implemented (`validation.py`) |
+| `CN.002` | [CN.002](../rules_and_reqs/assembly/connections/requirements/connection-targets-resolve.md) | Implemented (`validation.py`) |
+| `CN.003` | [CN.003](../rules_and_reqs/assembly/connections/requirements/opposite-roles.md) | Implemented (`validation.py`) |
+| `CN.004` | [CN.004](../rules_and_reqs/assembly/connections/requirements/interface-match.md) | Implemented (`validation.py`) |
+| `CN.006` | [CN.006](../rules_and_reqs/assembly/connections/requirements/mate-realization.md) | Implemented (`validation.py`) |
+| `CN.007` | [CN.007](../rules_and_reqs/assembly/connections/requirements/exclusive-pairing.md) | Implemented (`validation.py`) |
+| `CN.008` | [CN.008](../rules_and_reqs/assembly/connections/requirements/assembly-type.md) | Implemented (`validation.py`) |
+| `CN.010` | [CN.010](../rules_and_reqs/assembly/connections/requirements/assembly-child-references.md) | Implemented (`validation.py`) |
+| `CN.011` | [CN.011](../rules_and_reqs/assembly/connections/requirements/compound-body.md) | Implemented (`validation.py`) |
+| `CN.012` | [CN.012](../rules_and_reqs/assembly/connections/requirements/assembly-model-hierarchy.md) | Implemented (`validation.py`) |
+
+</details>
+
+## Pipelines
+
+Source file type:
+
+- `.usd`, `.usda`, `.usdc`
+
+Validation or runtime pipeline:
+
+- Static checkers in `rules_and_reqs/assembly/connections/validation.py`.
+- Behavioral proof (assembly holds under gravity / rated load) is runtime-test territory and is not specified here.
+
+## Samples
+
+- [`UR10 + Robotiq 2F-85` assembly](../../../../../sample_content/common_assets/robots_general/ur10_robotiq_2f85/simready_usd/ur10_robotiq_2f85.usda)
+- [`Industrial plastic pallet stack`](../../../../../sample_content/common_assets/props_general/industrialplasticpallet_stack_a01/simready_usd/industrialplasticpallet_stack_a01.usda)
+- [`Nested pallet stack`](../../../../../sample_content/common_assets/props_general/industrialplasticpallet_stack_b01/simready_usd/industrialplasticpallet_stack_b01.usda)
+
+## Evaluates
+
+- None.
+
+## Profile conversion helpers
+
+None.

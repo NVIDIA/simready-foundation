@@ -1,0 +1,59 @@
+.tag {
+    display: inline-block;
+    padding: 0.2em 0.75em;
+    font-size: 0.75em;
+    font-weight: 500;
+    color: white;
+    background-color: #6c757d;
+    border-radius: 999px;
+    line-height: 1;
+    white-space: nowrap;
+    vertical-align: middle;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+  }
+  
+  .tag-performance {
+    background-color: #8800ff;
+  }
+  
+  .tag-nvidia {
+    background-color: #76B900;
+  }
+
+  .tag-openUSD {
+    background-color: #2C6FED;
+  }
+
+  .tag-compatibility {
+    background-color: #2C6FED;
+  }
+
+  .tag-correctness {
+    background-color: #ed2c79;
+  }
+
+  .tag-high-quality {
+    background-color: #eded2c;
+  }
+
+  .my-custom-table-class {
+    background-color: #eded2c;
+    font-size: 0.8em;
+    color: pink;
+  }
+
+  .emoji-tag {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    font-size: 1.2em;
+    line-height: 1;
+    vertical-align: middle;
+  }
+
+  .emoji-tag:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+  }

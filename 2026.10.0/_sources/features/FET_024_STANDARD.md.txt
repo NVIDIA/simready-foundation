@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_024_STANDARD`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP024_BaseArticulation.html" />
+<link rel="canonical" href="../capabilities/CAP024_BaseArticulation.html" />
+```
+
+This published feature route moved to [`CAP024_BaseArticulation`](../capabilities/CAP024_BaseArticulation.md) (Foundations 1 ID: `FET_024_STANDARD`).

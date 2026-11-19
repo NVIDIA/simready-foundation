@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_028_STANDARD`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=FET028_Gripper.html" />
+<link rel="canonical" href="FET028_Gripper.html" />
+```
+
+This published feature route moved to [`FET028_Gripper`](FET028_Gripper.md) (Foundations 1 ID: `FET_028_STANDARD`).

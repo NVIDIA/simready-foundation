@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_040_STANDARD`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP040_CocoLabels.html" />
+<link rel="canonical" href="../capabilities/CAP040_CocoLabels.html" />
+```
+
+This published feature route moved to [`CAP040_CocoLabels`](../capabilities/CAP040_CocoLabels.md) (Foundations 1 ID: `FET_040_STANDARD`).

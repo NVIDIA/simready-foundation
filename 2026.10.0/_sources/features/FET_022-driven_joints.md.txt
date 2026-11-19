@@ -1,0 +1,20 @@
+---
+orphan: true
+---
+
+# `FET_022-driven_joints`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=FET022_DrivenJoints.html" />
+<link rel="canonical" href="FET022_DrivenJoints.html" />
+```
+
+This published feature route moved to [`FET022_DrivenJoints`](FET022_DrivenJoints.md) (Foundations 1 ID: `FET_022_STANDARD`).
+
+Split runtime contracts:
+
+- [`FET022_DrivenJoints`](FET022_DrivenJoints.md) (`FET_022_STANDARD`)
+- [`FET022_DrivenJoints.PhysX`](FET022_DrivenJoints.PhysX.md) (`FET_022_PHYSX`)
+- [`FET022_DrivenJoints.Newton`](FET022_DrivenJoints.Newton.md) (`FET_022_NEWTON`)
+- [`CAP022_DrivenJoints.MuJoCo`](../capabilities/CAP022_DrivenJoints.MuJoCo.md) (`FET_022_MUJOCO`)
+- [`FET022_DrivenJoints.Isaac`](FET022_DrivenJoints.Isaac.md) (`FET_022_ISAAC`)

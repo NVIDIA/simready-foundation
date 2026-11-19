@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_042_STANDARD`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP042_Ade20kLabels.html" />
+<link rel="canonical" href="../capabilities/CAP042_Ade20kLabels.html" />
+```
+
+This published feature route moved to [`CAP042_Ade20kLabels`](../capabilities/CAP042_Ade20kLabels.md) (Foundations 1 ID: `FET_042_STANDARD`).

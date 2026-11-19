@@ -1,0 +1,51 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    endTimeCode = 100
+    metersPerUnit = 1
+    startTimeCode = 0
+    timeCodesPerSecond = 60
+    upAxis = "Z"
+)
+
+def Xform "World"
+{
+    def Camera "Camera"
+    {
+        float2 clippingRange = (1, 10000000)
+        float focalLength = 18.147562
+        float focusDistance = 400
+    }
+}
+
+def Scope "Render"
+{
+    def RenderProduct "CameraRp"
+    {
+        rel camera = </World/Camera>
+        rel orderedVars = [
+            </Render/CameraRp/LdrColor>,
+            </Render/CameraRp/SemanticSegmentation>,
+            </Render/CameraRp/SemanticIdMap>,
+        ]
+        uniform int2 resolution = (1920, 1080)
+
+        def RenderVar "LdrColor"
+        {
+            uniform string sourceName = "LdrColor"
+        }
+
+        def RenderVar "SemanticSegmentation"
+        {
+            uniform string sourceName = "SemanticSegmentation"
+            uniform string srtx:compression:type = "hevc" (
+                allowedTokens = ["hevc", "h264", "av1", "blosc"]
+            )
+        }
+
+        def RenderVar "SemanticIdMap"
+        {
+            uniform string sourceName = "SemanticIdMap"
+        }
+    }
+}

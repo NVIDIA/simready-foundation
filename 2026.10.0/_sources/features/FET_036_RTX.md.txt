@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_036_RTX`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=FET036_Lidar.RTX.html" />
+<link rel="canonical" href="FET036_Lidar.RTX.html" />
+```
+
+This published feature route moved to [`FET036_Lidar.RTX`](FET036_Lidar.RTX.md) (Foundations 1 ID: `FET_036_RTX`).

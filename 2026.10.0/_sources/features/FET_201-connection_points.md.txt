@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_201-connection_points`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP201_ConnectionPoints.html" />
+<link rel="canonical" href="../capabilities/CAP201_ConnectionPoints.html" />
+```
+
+This published feature route moved to [`CAP201_ConnectionPoints`](../capabilities/CAP201_ConnectionPoints.md) (Foundations 1 ID: `FET_201-connection_points`).

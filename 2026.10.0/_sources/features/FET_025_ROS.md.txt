@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_025_ROS`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP025_RosBridge.Ros.html" />
+<link rel="canonical" href="../capabilities/CAP025_RosBridge.Ros.html" />
+```
+
+This published feature route moved to [`CAP025_RosBridge.Ros`](../capabilities/CAP025_RosBridge.Ros.md) (Foundations 1 ID: `FET_025_ROS`).

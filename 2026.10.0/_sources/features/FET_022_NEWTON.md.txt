@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_022_NEWTON`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=FET022_DrivenJoints.Newton.html" />
+<link rel="canonical" href="FET022_DrivenJoints.Newton.html" />
+```
+
+This published feature route moved to [`FET022_DrivenJoints.Newton`](FET022_DrivenJoints.Newton.md) (Foundations 1 ID: `FET_022_NEWTON`).

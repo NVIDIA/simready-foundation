@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_101_ISAAC`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP101_RobotComposition.Isaac.html" />
+<link rel="canonical" href="../capabilities/CAP101_RobotComposition.Isaac.html" />
+```
+
+This published feature route moved to [`CAP101_RobotComposition.Isaac`](../capabilities/CAP101_RobotComposition.Isaac.md) (Foundations 1 ID: `FET_101_ISAAC`).

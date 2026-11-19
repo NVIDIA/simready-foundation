@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_043_STANDARD`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP043_PascalVocLabels.html" />
+<link rel="canonical" href="../capabilities/CAP043_PascalVocLabels.html" />
+```
+
+This published feature route moved to [`CAP043_PascalVocLabels`](../capabilities/CAP043_PascalVocLabels.md) (Foundations 1 ID: `FET_043_STANDARD`).

@@ -1,0 +1,19 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "World"
+{
+}
+
+def Scope "Render"
+{
+    def RenderVar "GenericModelOutput"
+    {
+        uniform string sourceName = "GenericModelOutput"
+        uniform string srtx:compression:type = "hevc"
+    }
+}

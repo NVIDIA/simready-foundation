@@ -1,0 +1,339 @@
+# Assembly Profile USD Authoring Guide
+
+```{warning}
+Work In Progress
+
+The Assembly profile and this authoring workflow are under development. The
+contract set and examples below describe the current implementation for
+experimentation and review. **We welcome feedback** on the assembly model,
+authoring workflow, and validation experience.
+
+**The missing feature is packaging and publishing assemblies.** The current
+profile covers composition and connections; the workflow for packaging and
+publishing an assembly with its child-asset dependencies is still to be defined.
+```
+
+This document tracks the current USD authoring approach for the `Assembly`
+profile: its contract set, the `simready:mate:` properties an assembly stage
+authors, and the composition and physics expectations being evaluated for the
+two assembly shapes.
+
+`Assembly` version `0.1.0` is a generic profile. It validates a stage that
+composes two or more published assets, each a `component` or another assembly,
+and declares how their mate sites are paired. It is deliberately not robot-specific: an arm with a gripper and a
+stack of interlocking pallets are both assemblies, and both validate against
+this profile.
+
+The child assets are validated against their own profiles
+(`Robot-Body`, `Robot-Gripper`, `Robotics-Prop`, or `Assembly`). Mate sites are
+validated through `CAP026_Mates.0-1-0` as a dependency of this assembly
+profile. This profile validates the aggregation.
+
+[Robot-Assembly](robot-assembly.md) builds on this profile for robots, requiring
+the jointed connection and a single articulation root.
+
+## Current profile definition
+
+The `Assembly` profile includes the following contract set (see
+`assembly.toml` and the
+[contract dependency graph](../features/feature-dependency-graph.md)). Each
+contract's requirements and dependencies are defined in the contract
+specifications.
+
+```toml
+[Assembly]
+"0.1.0" = {features = [
+], capabilities = [
+    {selector = "CAP026_Mates.0-1-0"},
+    {selector = "CAP027_Connections.0-1-0"},
+    {selector = "CAP029_ConnectionJoint.0-1-0", optional = true},
+    {selector = "CAP029_ConnectionJoint.PhysX.0-1-0", optional = true},
+    {selector = "CAP029_ConnectionJoint.Newton.0-1-0", optional = true},
+    {selector = "CAP029_ConnectionJoint.MuJoCo.0-1-0", optional = true},
+]}
+```
+
+`CAP026_Mates` depends on `FET003_RigidBody.0-2-0` and
+`CAP029_ConnectionJoint` depends on `FET004_Multibody.0-2-0`. Validation pulls both
+in as feature dependencies, so they are not pinned separately here.
+
+## The two assembly shapes
+
+`simready:mate:realization` on each connection names which shape it is, and
+that token selects which capabilities govern it.
+
+| `realization` | Mate bodies | Hold | Governed by |
+|---|---|---|---|
+| `compound` | One, shared | Composition | `CAP027_Connections` (incl. `CN.011`) |
+| `jointed` | Two, distinct | Authored `UsdPhysicsFixedJoint` | `CAP027_Connections` + `CAP029_ConnectionJoint` |
+
+A mate body is the nearest ancestor with an *enabled* `PhysicsRigidBodyAPI`
+(`MC.003`), so a part the assembly demoted with
+`physics:rigidBodyEnabled = false` is transparent to that walk. That is the
+mechanism behind `compound`.
+
+An assembly may mix both on one stage, in which case each group of compound
+connections gets its own compound body and the jointed parts keep theirs
+enabled. An assembly built entirely from `compound` connections satisfies this
+profile without any `CAP029_ConnectionJoint.*` capability, which is why they are optional.
+
+## Stage layout
+
+```usd
+def Xform "MyAssembly" (
+    kind = "assembly"
+)
+{
+    uniform token simready:mate:assemblyType = "robot"
+
+    def Xform "PartA" (
+        prepend references = @../../part_a/simready_usd/part_a.usd@</PartA>
+    )
+    {
+    }
+
+    def Xform "PartB" (
+        prepend references = @../../part_b/simready_usd/part_b.usd@</PartB>
+    )
+    {
+    }
+
+    def Scope "Connections"
+    {
+        def Scope "a_to_b"
+        {
+            uniform token simready:mate:realization = "jointed"
+            rel simready:mate:socket = </MyAssembly/PartA/link/socket_01>
+            rel simready:mate:plug = </MyAssembly/PartB/base/plug_01>
+            rel simready:mate:joint = </MyAssembly/Connections/a_to_b_joint>
+        }
+
+        def PhysicsFixedJoint "a_to_b_joint"
+        {
+            rel physics:body0 = </MyAssembly/PartA/link>
+            rel physics:body1 = </MyAssembly/PartB/base>
+        }
+    }
+}
+```
+
+Required on the assembly default prim:
+
+- `kind = "assembly"`, over child asset roots of kind `component` or
+  `assembly`, with a contiguous model hierarchy (`CN.012`)
+- `uniform token simready:mate:assemblyType`, one of `robot`, `pallet_stack`
+  (`CN.008`)
+
+Required for every connection:
+
+- one `Connections` Scope under the default prim (`CN.001`)
+- exactly one `simready:mate:socket` and one `simready:mate:plug`, each with
+  one target (`CN.001`)
+- both targets resolve to mechanical mate sites on the composed stage
+  (`CN.002`)
+- opposite roles (`CN.003`) and equal `mechanical:interface` tokens (`CN.004`)
+- each site reached through a reference or payload arc, not authored inline
+  (`CN.010`)
+- no site used by more than one connection, including a nested assembly's
+  own connections (`CN.007`)
+- `simready:mate:realization` authored as `compound` or `jointed`, agreeing
+  with how the mate bodies resolve (`CN.006`)
+
+Required for every `compound` connection:
+
+- the shared mate body is assembly-local, carries no reference or payload arc,
+  has an enabled `PhysicsRigidBodyAPI`, and authors `physics:mass` equal to the
+  sum of the parts it fuses, each of which authors
+  `physics:rigidBodyEnabled = false` (`CN.011`). The aggregate may be omitted
+  only when the parts carry their mass on their colliders, which the runtime
+  sums onto the compound body by itself. No joint may sit beneath the compound
+  body; a part that contains a joint joins through a `jointed` connection.
+
+## Authoring a compound connection
+
+Each part keeps the rigid body its author supplied and the assembly
+disables it. One assembly-local `Xform` above them carries the enabled rigid
+body and the aggregate mass, so both sites resolve to it and the stack
+simulates as a single actor weighing what the whole stack weighs.
+
+```usd
+def Xform "CompoundBody" (
+    prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    kind = "group"
+)
+{
+    float physics:mass = 57
+
+    def Xform "Pallet_0" (
+        prepend references = @../../pallet/simready_usd/pallet.usd@</RootNode>
+    )
+    {
+        bool physics:rigidBodyEnabled = false
+        double3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Xform "Pallet_1" (
+        prepend references = @../../pallet/simready_usd/pallet.usd@</RootNode>
+    )
+    {
+        bool physics:rigidBodyEnabled = false
+        double3 xformOp:translate = (0, 0, 0.0505)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+}
+```
+
+The connection authors `realization = "compound"` and no
+`simready:mate:joint`.
+
+Read each part's `physics:mass` off the composed stage and sum it to get the
+aggregate; do not estimate it. The parts keep their own `PhysicsMassAPI`, which
+is what makes the aggregate checkable and the demotion reversible. `CN.011`'s
+sum stops at the first prim on each branch that authors `physics:mass`, so
+nesting a compound inside another compound contributes one aggregate rather
+than double-counting.
+
+A part whose mass sits on its colliders rather than on its root needs no
+aggregate above it. Colliders attribute to the nearest enabled body, so the
+runtime already sums them onto the compound body. Mass on a demoted root is
+inert by the same rule — the root is neither a collider nor an enabled body —
+so a compound built from parts shaped that way must author the aggregate.
+
+Siblings under the compound body are usually easier to author than nesting
+parts inside one another, because each part carries its own absolute pose, but
+`CN.011` accepts either shape. Unstacking is a composition edit: re-enable the
+part's rigid body, subtract its share from the aggregate, and reparent it out.
+
+`kind = "group"` on the compound body keeps the model hierarchy contiguous
+(`CN.012`).
+
+## Authoring a jointed connection
+
+Both mate bodies keep `PhysicsRigidBodyAPI`, and an authored
+`UsdPhysicsFixedJoint` holds them (`CN.009`):
+
+1. Resolve each site's mate body: the nearest ancestor with an enabled
+   `PhysicsRigidBodyAPI` (`MC.003`). Confirm the two are distinct.
+2. Author a `UsdPhysicsFixedJoint` with `physics:body0` set to the socket mate
+   body and `physics:body1` set to the plug mate body.
+3. Express each mate site transform in its own mate body and author the result
+   as `localPos0`/`localRot0` and `localPos1`/`localRot1`, so the two mate
+   frames are coincident.
+4. Author `rel simready:mate:joint` on the connection prim targeting that
+   joint.
+5. Author `physics:breakForce` and `physics:breakTorque`. Use `inf` for a
+   permanent attachment, or the rated load when the coupling has one. Both are
+   `UsdPhysicsJoint` attributes, so every runtime reads them and no variant
+   restates them.
+6. Deactivate any competing world pin the plug asset carried standalone, such
+   as a gripper `root_joint`.
+7. When both mate bodies are articulated, the connection fuses the two
+   articulations into one. Deactivate or remove the plug asset's
+   articulation root so exactly one survives, and leave the joint in the
+   articulation.
+8. Confirm the socket `maxPayload` is at least the plug subtree mass
+   (`CN.005`).
+
+The joint is authored rather than inferred. This keeps the assembly rigid in a
+runtime that does not read the `simready:mate:` namespace, and it satisfies
+`RB.012` for the nested rigid bodies so this assembly can itself be nested
+inside a larger one. A SimReady-aware runtime still owns the joint: it follows
+`simready:mate:joint` and sets `physics:jointEnabled = false`, retunes, or
+deletes the prim to release the pairing.
+
+### Layer placement
+
+Author the connection joint where `simready:mate:joint` resolves with runtime
+payloads unloaded. One neutral `UsdPhysicsFixedJoint` belongs in the assembly
+physics layer; the runtime variants overlay attributes onto that same prim
+rather than defining their own, typically from a
+   `runnables/physics/{physx,newton,mujoco}` layer.
+
+## Nesting assemblies
+
+A published assembly is referenced into a larger one like any other child
+asset. Its root stays `kind = "assembly"`, and it keeps its own
+`assemblyType`.
+
+- Its `Connections` scope comes with it. Those pairings occupy their sites
+  (`CN.007`); every site they do not pair stays available to the outer
+  assembly.
+- An outer compound demotes the inner compound body like any part root and
+  authors the outer aggregate (`CN.011`).
+- A nested assembly that contains a joint joins only through a `jointed`
+  connection.
+
+## Runtime variants
+
+Each variant constrains what may be layered onto the neutral connection joint.
+
+- `CAP029_ConnectionJoint.PhysX` (`CN.PHYSX.001`) requires the standard fixed joint with
+  explicit `physics:collisionEnabled = false`, forbids `PhysxJointAPI` and any
+  `physxJoint:` attribute on a zero-degree-of-freedom joint, requires
+  `physics:excludeFromArticulation` to stay false or unset, and requires
+  exactly one surviving articulation root when both mate bodies belong to
+  articulations, because the connection fuses the two articulations into one.
+- `CAP029_ConnectionJoint.Newton` (`CN.NEWTON.001`) requires the standard fixed joint with
+  explicit `physics:collisionEnabled = false`, forbids `NewtonJointAPI`
+  degree-of-freedom tuning on a zero-degree-of-freedom joint, and requires
+  exactly one surviving articulation root carrying
+  `newton:selfCollisionEnabled`.
+- `CAP029_ConnectionJoint.MuJoCo` (`CN.MUJOCO.001`) requires the standard fixed joint with
+  explicit `physics:collisionEnabled = false`, and forbids `MjcJointAPI`,
+  `MjcActuator` targeting, and invented MuJoCo weld schemas. MuJoCo has no
+  fixed joint; where an attachment is permanent, `compound` expresses the
+  fused body directly and is the better fit.
+
+## Validation
+
+Every `MC.*` and `CN.*` rule has a static checker. They live in `validation.py`
+under `rules_and_reqs/assembly/mates/` and `rules_and_reqs/assembly/connections/`,
+share traversal helpers in `rules_and_reqs/assembly/utils.py`, and are registered
+in `rules_and_reqs/__init__.py`, so validating an asset against `Assembly@0.1.0`
+exercises the full contract.
+
+The checkers report the requirement that owns each finding, so one authoring
+mistake usually surfaces on more than one rule. A site that stops being a site
+fails `MC.001` and, because the connection can no longer resolve it, `CN.002`.
+A compound relabelled `jointed` fails `CN.006` and then `CN.009` for the joint
+it does not have. Fix the earliest requirement in the chain first.
+
+The three `CAP029_ConnectionJoint.*` runtime rules are optional on this profile and only run
+when the profile selection includes them, so a neutral assembly that authors no
+PhysX, Newton, or MuJoCo data on its connection joint is not failing them.
+
+Behavioral proof that the assembly holds under gravity and under rated load is
+runtime-test territory and is not specified by this profile. A passing static
+report should be read within that scope.
+
+## Work in progress
+
+The remaining feature work is around **packaging and publishing**: defining how
+an assembly and its child-asset dependencies are packaged and published for
+consumers. The current composition and connection checks do not establish that
+delivery workflow.
+
+We welcome feedback from authors and consumers, especially on dependency
+handling, reuse of separately published child assets, and expectations for a
+published assembly. The samples below are starting points for trying the
+authoring workflow and sharing findings.
+
+Changes to selectors or validation policy require a new profile
+version; the current `0.1.0` TOML remains the source of truth for its checks.
+
+## Samples
+
+A jointed assembly is in
+`sample_content/common_assets/robots_general/ur10_robotiq_2f85` (UR10 arm with
+a Robotiq 2F-85 gripper on `tool_mount_01`).
+
+A compound assembly is in
+`sample_content/common_assets/props_general/industrialplasticpallet_stack_a01`
+(three demoted pallets resolving to one compound body carrying their combined
+85.5 kg).
+
+A nested assembly is in
+`sample_content/common_assets/props_general/industrialplasticpallet_stack_b01`
+(two `industrialplasticpallet_stack_a01` stacks fused onto one compound body
+carrying 171 kg).

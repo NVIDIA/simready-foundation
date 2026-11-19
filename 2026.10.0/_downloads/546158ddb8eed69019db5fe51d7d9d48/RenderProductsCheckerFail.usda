@@ -1,0 +1,134 @@
+#usda 1.0
+(
+    defaultPrim = "Root"
+    endTimeCode = 90
+    framesPerSecond = 24
+    metersPerUnit = 1
+    startTimeCode = 90
+    timeCodesPerSecond = 24
+    upAxis = "Z"
+)
+
+def Xform "Root"
+{
+    def Camera "RGB_Camera"
+    {
+        float2 clippingRange = (1, 10000000)
+        float focalLength = 18.147562
+        float focusDistance = 400
+        double3 xformOp:rotateYXZ = (90, -0, 90)
+        double3 xformOp:scale = (1, 1, 1)
+        double3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateYXZ", "xformOp:scale"]
+    }
+
+    def OmniLidar "Lidar_3D" (
+        prepend apiSchemas = ["OmniSensorGenericLidarCoreAPI"]
+    )
+    {
+        float omni:sensor:Core:avgPowerW = 0.004
+        float omni:sensor:Core:azimuthErrorMean = 0
+        float omni:sensor:Core:azimuthErrorStd = 0
+        float omni:sensor:Core:elevationErrorMean = 0
+        float omni:sensor:Core:elevationErrorStd = 0
+        float[] omni:sensor:Core:emitterState:s001:azimuthDeg = [0]
+        uint[] omni:sensor:Core:emitterState:s001:channelId = [1]
+        float[] omni:sensor:Core:emitterState:s001:distanceCorrectionM = [0]
+        float[] omni:sensor:Core:emitterState:s001:elevationDeg = [1]
+        uint[] omni:sensor:Core:emitterState:s001:fireTimeNs = [0]
+        float[] omni:sensor:Core:emitterState:s001:focalDistM = [0]
+        float[] omni:sensor:Core:emitterState:s001:focalSlope = [0]
+        float[] omni:sensor:Core:emitterState:s001:horOffsetM = [0]
+        float[] omni:sensor:Core:emitterState:s001:reportRateDiv = [0]
+        float[] omni:sensor:Core:emitterState:s001:vertOffsetM = [0]
+        float omni:sensor:Core:farRangeM = 30
+        token omni:sensor:Core:intensityMappingType = "LINEAR"
+        token omni:sensor:Core:intensityProcessing = "NORMALIZATION"
+        uint omni:sensor:Core:maxReturns = 1
+        float omni:sensor:Core:minReflectance = 0.1
+        float omni:sensor:Core:nearRangeM = 0.05
+        uint omni:sensor:Core:numberOfChannels = 1
+        uint omni:sensor:Core:numberOfEmitters = 1
+        uint omni:sensor:Core:pulseTimeNs = 5
+        float omni:sensor:Core:rangeAccuracyM = 0.03
+        float omni:sensor:Core:rangeResolutionM = 0.013
+        token omni:sensor:Core:rayType = "IDEALIZED"
+        uint omni:sensor:Core:reportRateBaseHz = 32000
+        token omni:sensor:Core:rotationDirection = "CW"
+        uint omni:sensor:Core:scanRateBaseHz = 10
+        token omni:sensor:Core:scanType = "ROTARY"
+        string omni:sensor:modelName = "RPLIDAR_S2E"
+    }
+
+    def OmniLidar "Lidar_2D" (
+        prepend apiSchemas = ["OmniSensorGenericLidarCoreAPI"]
+    )
+    {
+        float omni:sensor:Core:avgPowerW = 0.004
+        float omni:sensor:Core:azimuthErrorMean = 0
+        float omni:sensor:Core:azimuthErrorStd = 0
+        float omni:sensor:Core:elevationErrorMean = 0
+        float omni:sensor:Core:elevationErrorStd = 0
+        float[] omni:sensor:Core:emitterState:s001:azimuthDeg = [0]
+        uint[] omni:sensor:Core:emitterState:s001:channelId = [1]
+        float[] omni:sensor:Core:emitterState:s001:distanceCorrectionM = [0]
+        float[] omni:sensor:Core:emitterState:s001:elevationDeg = [0]
+        uint[] omni:sensor:Core:emitterState:s001:fireTimeNs = [0]
+        float[] omni:sensor:Core:emitterState:s001:focalDistM = [0]
+        float[] omni:sensor:Core:emitterState:s001:focalSlope = [0]
+        float[] omni:sensor:Core:emitterState:s001:horOffsetM = [0]
+        float[] omni:sensor:Core:emitterState:s001:reportRateDiv = [0]
+        float[] omni:sensor:Core:emitterState:s001:vertOffsetM = [0]
+        float omni:sensor:Core:farRangeM = 30
+        token omni:sensor:Core:intensityMappingType = "LINEAR"
+        token omni:sensor:Core:intensityProcessing = "NORMALIZATION"
+        uint omni:sensor:Core:maxReturns = 1
+        float omni:sensor:Core:minReflectance = 0.1
+        float omni:sensor:Core:nearRangeM = 0.05
+        uint omni:sensor:Core:numberOfChannels = 1
+        uint omni:sensor:Core:numberOfEmitters = 1
+        uint omni:sensor:Core:pulseTimeNs = 5
+        float omni:sensor:Core:rangeAccuracyM = 0.03
+        float omni:sensor:Core:rangeResolutionM = 0.013
+        token omni:sensor:Core:rayType = "IDEALIZED"
+        uint omni:sensor:Core:reportRateBaseHz = 32000
+        token omni:sensor:Core:rotationDirection = "CW"
+        uint omni:sensor:Core:scanRateBaseHz = 10
+        token omni:sensor:Core:scanType = "ROTARY"
+        string omni:sensor:modelName = "RPLIDAR_S2E"
+    }
+}
+
+def Scope "Render"
+{
+    def Scope "Vars"
+    {
+        def RenderVar "LdrColor"
+        {
+            uniform string sourceName = "LdrColor"
+        }
+
+        def RenderVar "InvalidVar"
+        {
+            uniform string sourceName = "InvalidVar"
+        }
+
+        def RenderVar "MissingVar"
+        {
+        }
+    }
+
+    def RenderProduct "EmptyRp"
+    {
+    }
+
+    def RenderProduct "UnresolvedRp"
+    {
+        rel camera = </Root/MissingCamera>
+        rel orderedVars = [
+            </Render/Vars/LdrColor>,
+            </Render/Vars/MissingRenderVar01>,
+            </Render/Vars/MissingRenderVar02>,
+        ]
+    }
+}

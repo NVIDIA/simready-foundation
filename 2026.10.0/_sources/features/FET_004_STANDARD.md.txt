@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_004_STANDARD`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=FET004_Multibody.html" />
+<link rel="canonical" href="FET004_Multibody.html" />
+```
+
+This published feature route moved to [`FET004_Multibody`](FET004_Multibody.md) (Foundations 1 ID: `FET_004_STANDARD`).

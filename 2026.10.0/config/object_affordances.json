@@ -1,0 +1,46 @@
+{
+    "capability": {
+        "id": "object_affordances",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "AFF.002",
+                "version": null,
+                "name": "object-affordance-state-valid",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "ObjectAffordancesCapabilityChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/physics_bodies/object_affordances/requirements/object-affordance-state-valid.html",
+                    "internal_path": "rules_and_reqs/physics_bodies/object_affordances/requirements/object-affordance-state-valid.md"
+                },
+                "message": "If `SemanticsLabelsAPI:affordance_state` is applied to a prim, every authored value in\n`semantics:labels:affordance_state` must be one of the allowed state tokens.",
+                "examples": []
+            },
+            {
+                "code": "AFF.001",
+                "version": null,
+                "name": "object-affordance-valid",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "ObjectAffordancesCapabilityChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/physics_bodies/object_affordances/requirements/object-affordance-valid.html",
+                    "internal_path": "rules_and_reqs/physics_bodies/object_affordances/requirements/object-affordance-valid.md"
+                },
+                "message": "If `SemanticsLabelsAPI:affordance` is applied to a prim, every authored value in\n`semantics:labels:affordance` must be one of the allowed affordance tokens.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "rules_and_reqs/physics_bodies/object_affordances/capability-object_affordances.html",
+            "internal_path": "rules_and_reqs/physics_bodies/object_affordances/capability-object_affordances.md"
+        }
+    }
+}

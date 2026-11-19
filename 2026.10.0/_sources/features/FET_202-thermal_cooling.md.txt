@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_202-thermal_cooling`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP202_ThermalCooling.html" />
+<link rel="canonical" href="../capabilities/CAP202_ThermalCooling.html" />
+```
+
+This published feature route moved to [`CAP202_ThermalCooling`](../capabilities/CAP202_ThermalCooling.md) (Foundations 1 ID: `FET_202-thermal_cooling`).

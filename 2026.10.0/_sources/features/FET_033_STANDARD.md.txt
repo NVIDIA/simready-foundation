@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_033_STANDARD`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP033_SimReadyPackage.html" />
+<link rel="canonical" href="../capabilities/CAP033_SimReadyPackage.html" />
+```
+
+This published feature route moved to [`CAP033_SimReadyPackage`](../capabilities/CAP033_SimReadyPackage.md) (Foundations 1 ID: `FET_033_STANDARD`).

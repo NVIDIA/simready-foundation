@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_028_ISAAC`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=FET028_Gripper.Isaac.html" />
+<link rel="canonical" href="FET028_Gripper.Isaac.html" />
+```
+
+This published feature route moved to [`FET028_Gripper.Isaac`](FET028_Gripper.Isaac.md) (Foundations 1 ID: `FET_028_ISAAC`).

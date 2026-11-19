@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_024_PHYSX`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP024_BaseArticulation.PhysX.html" />
+<link rel="canonical" href="../capabilities/CAP024_BaseArticulation.PhysX.html" />
+```
+
+This published feature route moved to [`CAP024_BaseArticulation.PhysX`](../capabilities/CAP024_BaseArticulation.PhysX.md) (Foundations 1 ID: `FET_024_PHYSX`).

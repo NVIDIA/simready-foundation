@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_029_PHYSX`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP029_ConnectionJoint.PhysX.html" />
+<link rel="canonical" href="../capabilities/CAP029_ConnectionJoint.PhysX.html" />
+```
+
+This published feature route moved to [`CAP029_ConnectionJoint.PhysX`](../capabilities/CAP029_ConnectionJoint.PhysX.md) (Foundations 1 ID: `FET_029_PHYSX`).

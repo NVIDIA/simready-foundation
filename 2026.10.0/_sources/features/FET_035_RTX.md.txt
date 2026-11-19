@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_035_RTX`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=FET035_RenderProducts.RTX.html" />
+<link rel="canonical" href="FET035_RenderProducts.RTX.html" />
+```
+
+This published feature route moved to [`FET035_RenderProducts.RTX`](FET035_RenderProducts.RTX.md) (Foundations 1 ID: `FET_035_RTX`).

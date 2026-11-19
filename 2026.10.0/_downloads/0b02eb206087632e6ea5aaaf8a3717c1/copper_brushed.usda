@@ -1,0 +1,47 @@
+#usda 1.0
+(
+    defaultPrim = "Copper_Brushed"
+    doc = "OpenPBR material transcribed from MDL ::Metal::Copper_Brushed::Copper_Brushed by mdl2openpbr."
+)
+
+def Material "Copper_Brushed" (
+    prepend apiSchemas = ["MaterialXConfigAPI", "SemanticsLabelsAPI:material", "SemanticsLabelsAPI:vMaterial_Ver", "SemanticsLabelsAPI:OpenPBR_Ver", "SemanticsLabelsAPI:MaterialX_Ver"]
+    prepend references = @./materials/open_pbr_uber_base_class.usda@</open_pbr_uber_base>
+)
+{
+    custom string omni:simready:catalog_key = "Metal__Copper_Brushed"
+    string config:mtlx:version = "1.39"
+    token[] semantics:labels:material = ["aec", "metal", "copper", "brushed", "kitchen", "design", "modern", "reflective", "shiny", "architecture", "sanitary", "new", "gray", "neutral"]
+    token[] semantics:labels:vMaterial_Ver = ["2.2"]
+    token[] semantics:labels:OpenPBR_Ver = ["1.1"]
+    token[] semantics:labels:MaterialX_Ver = ["1.39.3"]
+
+    custom token[] omni:simready:nonvisual:attributes = ["none"]
+    custom token omni:simready:nonvisual:base = "copper"
+    custom token omni:simready:nonvisual:coating = "none"
+
+    asset inputs:base_color_texture_file = @./textures/Copper_Brushed-base_color.png@ (
+        colorSpace = "sRGB"
+    )
+    asset inputs:specular_roughness_texture_file = @./textures/Copper_Brushed-roughness.png@ (
+        colorSpace = "raw"
+    )
+    asset inputs:geometry_normal_texture_file = @./textures/Copper_Brushed-normal.png@ (
+        colorSpace = "raw"
+    )
+    asset inputs:specular_roughness_anisotropy_texture_file = @./textures/Copper_Brushed-specular_roughness_anisotropy.png@ (
+        colorSpace = "raw"
+    )
+    float inputs:base_metalness = 1.000000
+    color3f inputs:fuzz_color = (0.000000, 0.000000, 0.000000)
+    float inputs:fuzz_weight = 0.000000
+    float inputs:fuzz_roughness = 0.300000
+
+    over "preview_surface"
+    {
+        float inputs:clearcoat.connect = </Copper_Brushed.inputs:coat_weight>
+        float inputs:clearcoatRoughness.connect = </Copper_Brushed.inputs:coat_roughness>
+        float inputs:metallic.connect = </Copper_Brushed.inputs:base_metalness>
+        float inputs:opacity.connect = </Copper_Brushed.inputs:geometry_opacity>
+    }
+}

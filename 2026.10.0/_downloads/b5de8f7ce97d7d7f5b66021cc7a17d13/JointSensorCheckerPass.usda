@@ -1,0 +1,80 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    endTimeCode = 90
+    framesPerSecond = 24
+    metersPerUnit = 1
+    startTimeCode = 90
+    timeCodesPerSecond = 24
+    upAxis = "Z"
+)
+
+def Xform "World"
+{
+    def PhysicsScene "PhysicsScene" (
+        prepend apiSchemas = ["PhysxSceneAPI"]
+    )
+    {
+        uint physxScene:timeStepsPerSecond = 24
+    }
+
+    def IsaacJointStateSensor "JointStateSensor" (
+        prepend apiSchemas = ["PhysicsArticulationRootAPI", "PhysxArticulationAPI"]
+    )
+    {
+        def PhysicsFixedJoint "rootJoint"
+        {
+            rel physics:body1 = </World/JointStateSensor/articulationLink0>
+            point3f physics:localPos0 = (0, 0, 0)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (1, 0, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def Cube "articulationLink0" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsRigidBodyAPI"]
+        )
+        {
+            float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            double size = 1
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:scale = (2, 2, 0.5)
+            double3 xformOp:translate = (0, 0, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def PhysicsRevoluteJoint "articulatedRevoluteJoint1" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular"]
+        )
+        {
+            float drive:angular:physics:damping = 10
+            float drive:angular:physics:stiffness = 100
+            float drive:angular:physics:targetPosition = 90
+            uniform token physics:axis = "X"
+            rel physics:body0 = </World/JointStateSensor/articulationLink0>
+            rel physics:body1 = </World/JointStateSensor/articulationLink1>
+            point3f physics:localPos0 = (0, 0, -2)
+            point3f physics:localPos1 = (0, 0.5, 0)
+            quatf physics:localRot0 = (1, 0, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def Cube "articulationLink1" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysxRigidBodyAPI", "PhysicsCollisionAPI", "PhysxCollisionAPI", "PhysicsMassAPI"]
+        )
+        {
+            float3[] extent = [(-0.5, -0.5, -0.5), (0.5, 0.5, 0.5)]
+            vector3f physics:angularVelocity = (0, 0, 0)
+            bool physics:collisionEnabled = 1
+            bool physics:kinematicEnabled = 0
+            float physics:mass = 1
+            bool physics:rigidBodyEnabled = 1
+            vector3f physics:velocity = (0, 0, 0)
+            double size = 1
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:scale = (1, 5, 1)
+            double3 xformOp:translate = (0, -2.5, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+    }
+}

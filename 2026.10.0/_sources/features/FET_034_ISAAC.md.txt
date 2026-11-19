@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_034_ISAAC`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=FET034_ImuSensor.Isaac.html" />
+<link rel="canonical" href="FET034_ImuSensor.Isaac.html" />
+```
+
+This published feature route moved to [`FET034_ImuSensor.Isaac`](FET034_ImuSensor.Isaac.md) (Foundations 1 ID: `FET_034_ISAAC`).

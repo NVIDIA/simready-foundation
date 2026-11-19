@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_000_PHYSX`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP000_Core.PhysX.html" />
+<link rel="canonical" href="../capabilities/CAP000_Core.PhysX.html" />
+```
+
+This published feature route moved to [`CAP000_Core.PhysX`](../capabilities/CAP000_Core.PhysX.md) (Foundations 1 ID: `FET_000_PHYSX`).
