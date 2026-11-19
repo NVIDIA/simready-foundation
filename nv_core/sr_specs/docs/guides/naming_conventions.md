@@ -356,15 +356,15 @@ defines:
 ## Capabilities folder layout
 
 When adding a new capability or requirement to the specs, files must be
-placed in the owning tier's `capabilities/` directory under `nv_core/tiers/`.
+placed in the owning tier's `rules_and_reqs/` directory under `nv_core/tiers/`.
 The shared Sphinx hub and generated includes live under
-`nv_core/sr_specs/docs/shared/capabilities/`. The assembled folder structure
+`nv_core/sr_specs/docs/shared/rules_and_reqs/`. The assembled folder structure
 mirrors the layered hierarchy described above.
 
 ### Directory structure
 
 ```text
-capabilities/
+rules_and_reqs/
 ├── <group>/                           # snake_case group folder
 │   ├── <group>.md                     # Group landing page
 │   ├── <capability>/                  # snake_case capability folder
@@ -376,10 +376,10 @@ capabilities/
 │   │   └── validation.py              # Validator classes for the capability
 │   └── ...
 
-docs/shared/capabilities/
+docs/shared/rules_and_reqs/
 ├── _includes/                         # Shared Sphinx snippets (badges, etc.)
 │   └── badges/
-└── capabilities.md                    # Top-level Sphinx entrypoint
+└── rules_and_reqs.md                  # Top-level Sphinx entrypoint
 ```
 
 ### Existing groups
@@ -393,6 +393,8 @@ docs/shared/capabilities/
 | `nonvisual_sensors/` | Non-visual sensor materials |
 | `semantic_labels/` | Semantic labeling |
 | `hierarchy/` | Stage and prim hierarchy |
+| `packaging/` | Package identity, provenance, and BOM |
+| `assembly/` | Mate sites on components and realized connections on assemblies |
 
 If a new capability logically belongs to an existing group, place it as a
 new subfolder under that group. If it represents an entirely new area,
@@ -450,7 +452,7 @@ hierarchy, `RB` for rigid bodies, `VG` for visualization/geometry).
 After creating the folder and files:
 
 1. Add the capability's `validation.py` import to
-   `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/__init__.py` so validators are
+   `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/__init__.py` so validators are
    discovered at package import time.
 2. Add the capability overview page to the parent group's `{toctree}`.
 3. Add any badge snippets to `_includes/badges/` if the requirement tables

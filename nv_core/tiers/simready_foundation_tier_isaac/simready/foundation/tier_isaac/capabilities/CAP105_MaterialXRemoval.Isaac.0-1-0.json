@@ -1,0 +1,5 @@
+{
+  "id": "CAP105_MaterialXRemoval.Isaac.0-1-0",
+  "display_name": "MaterialX Removal",
+  "requirements": ["OPT.004"]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "CAP028_Gripper.MuJoCo.0-1-0",
+  "display_name": "Gripper (MuJoCo)",
+  "legacy_identity": {
+    "id": "FET_028_MUJOCO",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "MUJOCO.GR.001"
+  ],
+  "dependencies": [
+    "CAP022_DrivenJoints.MuJoCo.0-1-0"
+  ],
+  "features": [
+    "FET028_Gripper.0-1-0"
+  ]
+}

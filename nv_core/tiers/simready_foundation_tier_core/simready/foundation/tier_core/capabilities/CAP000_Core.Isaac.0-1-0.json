@@ -1,0 +1,17 @@
+{
+  "id": "CAP000_Core.Isaac.0-1-0",
+  "display_name": "Core (Isaac)",
+  "legacy_identity": {
+    "id": "FET_000_ISAAC",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "RC.001",
+    "RC.004",
+    "RC.005",
+    "RC.006"
+  ],
+  "dependencies": [
+    "CAP000_Core.0-1-0"
+  ]
+}

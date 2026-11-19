@@ -1,0 +1,7 @@
+{
+  "id": "CAP102_RigidBodyCollapse.Isaac.0-1-0",
+  "display_name": "Rigid-Body Collapse",
+  "requirements": [
+    "OPT.001"
+  ]
+}

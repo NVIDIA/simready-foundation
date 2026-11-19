@@ -22,7 +22,7 @@ class SimReadyPlugin:
     """Framework plugin that registers this tier's validators.
 
     Discovered via the ``usd_validation_nvidia`` entry-point group. Importing the
-    tier's ``capabilities`` hub imports every validator module in the tier; their
+    tier's ``rules_and_reqs`` hub imports every validator module in the tier; their
     ``@register_rule`` / ``@register_requirements`` decorators register the
     tier's rules and the requirements they enforce with ``usd_validation_nvidia``.
 
@@ -36,9 +36,9 @@ class SimReadyPlugin:
     """
 
     def on_startup(self) -> None:
-        # Import side-effects do the work: the capabilities hub imports each
+        # Import side-effects do the work: the rules_and_reqs hub imports each
         # validator module, whose decorators register the rules + requirements.
-        from . import capabilities  # noqa: F401
+        from . import rules_and_reqs  # noqa: F401
 
     def on_shutdown(self) -> None:
         # Registry teardown is owned by the loader (it clears non-built-in

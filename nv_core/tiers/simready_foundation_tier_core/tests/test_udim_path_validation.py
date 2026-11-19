@@ -17,7 +17,7 @@
 import importlib.util
 from pathlib import Path
 
-PATH_UTILS_PATH = Path(__file__).parents[1] / "simready/foundation/tier_core/capabilities/core/path_utils.py"
+PATH_UTILS_PATH = Path(__file__).parents[1] / "simready/foundation/tier_core/rules_and_reqs/core/path_utils.py"
 PATH_UTILS_SPEC = importlib.util.spec_from_file_location("core_path_utils", PATH_UTILS_PATH)
 assert PATH_UTILS_SPEC and PATH_UTILS_SPEC.loader
 path_utils = importlib.util.module_from_spec(PATH_UTILS_SPEC)
@@ -42,10 +42,7 @@ def test_sidecar_json_identifier_keeps_uri_scheme():
 
 
 def test_thumbnail_png_identifier_keeps_uri_scheme():
-    assert (
-        thumbnail_png_identifier(_UriLayer())
-        == "omniverse://server/library/.thumbs/256x256/chair.usd.png"
-    )
+    assert thumbnail_png_identifier(_UriLayer()) == "omniverse://server/library/.thumbs/256x256/chair.usd.png"
 
 
 def test_resolve_udim_template_path_anchors_authored_path(tmp_path):
@@ -95,3 +92,58 @@ def test_aa001_rejects_udim_template_without_tiles(tmp_path):
     )
 
     assert result == ""
+
+
+is_builtin_mdl_search_path = path_utils.is_builtin_mdl_search_path
+
+
+def test_builtin_mdl_search_path_accepts_the_forms_the_runtime_resolves():
+    for authored in (
+        "OmniPBR.mdl",
+        "omnipbr.MDL",
+        "OmniGlass.mdl",
+        "OmniPBRBase.mdl",
+        "OmniPBR_Opacity.mdl",
+        "OmniGlass_Opacity.mdl",
+        "SimPBR.mdl",
+        "nvidia/core_definitions.mdl",
+        "nvidia\\core_definitions.mdl",
+        "OmniSurface/OmniSurfaceBase.mdl",
+        "materialx/pbrlib.mdl",
+        "gltf/pbr.mdl",
+    ):
+        assert is_builtin_mdl_search_path(authored), authored
+
+
+def test_builtin_mdl_search_path_rejects_names_kit_does_not_resolve_as_written():
+    # OmniSurfaceBase.mdl and core_definitions.mdl live in subfolders of a search folder,
+    # so only their folder-qualified names resolve. omnipbr_base.mdl matches no shipped
+    # file. The MDL standard library and the renderer's own modules are not material
+    # sources, and their generic names would match an asset's own module.
+    for authored in ("OmniSurfaceBase.mdl", "core_definitions.mdl", "omnipbr_base.mdl", "base.mdl", "Default.mdl"):
+        assert not is_builtin_mdl_search_path(authored), authored
+
+
+def test_builtin_mdl_search_path_rejects_paths_that_name_a_location():
+    # An anchored, absolute, directory-qualified or URI path states where the file is,
+    # so NP.008 still has to find it there.
+    for authored in ("./OmniPBR.mdl", "../OmniPBR.mdl", "/kit/mdl/OmniPBR.mdl", "materials/OmniPBR.mdl", "omniverse://srv/OmniPBR.mdl"):
+        assert not is_builtin_mdl_search_path(authored), authored
+
+
+def test_builtin_mdl_search_path_rejects_modules_the_runtime_does_not_ship():
+    assert not is_builtin_mdl_search_path("Custom.mdl")
+
+
+is_builtin_mdl_module = path_utils.is_builtin_mdl_module
+
+
+def test_builtin_mdl_module_matches_shipped_modules_at_any_path():
+    # VM.MDL.001 matches by name wherever the file sits, so a packaged copy counts too.
+    for authored in ("OmniPBR_Opacity.mdl", "./materials/OmniPBRBase.mdl", "OmniSurface/OmniSurfaceBase.mdl", "./mdl/nvidia/core_definitions.mdl"):
+        assert is_builtin_mdl_module(authored), authored
+
+
+def test_builtin_mdl_module_does_not_claim_an_assets_own_generically_named_module():
+    for authored in ("./materials/default.mdl", "./materials/base.mdl", "./materials/Custom.mdl"):
+        assert not is_builtin_mdl_module(authored), authored

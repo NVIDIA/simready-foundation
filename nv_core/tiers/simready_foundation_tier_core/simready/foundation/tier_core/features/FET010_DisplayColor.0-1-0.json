@@ -1,0 +1,20 @@
+{
+  "id": "FET010_DisplayColor.0-1-0",
+  "display_name": "Display Color",
+  "legacy_identity": {
+    "id": "FET_010_STANDARD",
+    "version": "0.1.0"
+  },
+  "source": true,
+  "additional_requirements": [
+    "DISP.001",
+    "DISP.002",
+    "DISP.003"
+  ],
+  "adapters": [
+    "skill:simready-foundation-conform-fet-010-standard"
+  ],
+  "runtime_tests": [
+    "simready.foundation.tier_core.runtime_tests:display_color_response"
+  ]
+}

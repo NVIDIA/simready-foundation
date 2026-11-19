@@ -1,8 +1,8 @@
-# FET_007_STANDARD Requirement Repair Map
+# CAP007_NonVisualMaterials Requirement Repair Map
 
-Use this reference when a validation report or inspection identifies `FET_007_STANDARD@0.2.0` failures. Load the selected JSON manifest first:
+Use this reference when a validation report or inspection identifies `CAP007_NonVisualMaterials.0-2-0` failures. Load the selected JSON manifest first:
 
-- `FET_007_STANDARD-0.2.0.json`
+- `CAP007_NonVisualMaterials.0-2-0.json`
 
 The feature markdown and requirement docs are useful context, but the selected manifest and current validation report decide which IDs are in scope.
 
@@ -10,11 +10,11 @@ The feature markdown and requirement docs are useful context, but the selected m
 
 | Feature Variant | Requirements |
 |---|---|
-| `FET_007_STANDARD@0.2.0` | `NVM.001`, `NVM.002`, `NVM.003`, `NVM.004`, `NVM.005`, `NVM.006` |
+| `CAP007_NonVisualMaterials.0-2-0` | `NVM.001`, `NVM.002`, `NVM.003`, `NVM.004`, `NVM.005`, `NVM.006` |
 
 ## Authored Attributes
 
-FET_007_STANDARD uses three attributes on bound `UsdShade.Material` prims:
+CAP007_NonVisualMaterials uses three attributes on bound `UsdShade.Material` prims:
 
 | Attribute | Type | Current Validator Values |
 |---|---|---|
@@ -39,14 +39,14 @@ The docs table includes a `none` base label, but the current validator does not 
 
 Use this decision order before editing:
 
-1. Confirm FET_007_STANDARD is selected by the profile or explicitly requested.
-2. Confirm visual materials and material bindings exist; if not, hand off to FET_006 or a material-assignment step first.
+1. Confirm CAP007_NonVisualMaterials is selected by the profile or explicitly requested.
+2. Confirm visual materials and material bindings exist; if not, hand off to FET006 or a material-assignment step first.
 3. List every renderable GPrim or GeomSubset and its computed full-purpose material binding.
 4. Classify each unique bound material from reliable evidence.
 5. Author all three non-visual attributes on each bound material.
 6. Remove or relocate orphaned non-visual attributes.
 7. Remove time samples after choosing a static value.
-8. Re-run the narrowest available FET_007_STANDARD-capable validation.
+8. Re-run the narrowest available CAP007_NonVisualMaterials-capable validation.
 
 ## USD Authoring Notes
 

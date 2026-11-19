@@ -1,0 +1,141 @@
+{
+  "review_date": "2026-10-09",
+  "source_url": "https://github.com/boston-dynamics/spot-sdk/blob/91ed30607264e795699995d6d7834ba0c8a94d36/files/spot_base_urdf.zip",
+  "archive_sha256": "f52a28d9364c025626e955ec82faace72f0f3f13df7069d74decc44a27ad3115",
+  "normalization": "Replace CRLF with LF before normalized SHA-256 and equality comparison",
+  "files": [
+    {
+      "path": "model.urdf",
+      "byte_identical": true,
+      "identical_after_line_ending_normalization": true,
+      "local_sha256": "5cbd1ba59ea755b55ec9ab709ca033fbd82cf41f675f653b2c57895d79681a55",
+      "upstream_sha256": "5cbd1ba59ea755b55ec9ab709ca033fbd82cf41f675f653b2c57895d79681a55",
+      "normalized_sha256": "e0e3198f386694f80e21657d9191f78de0fbccafbbdf059805fe50d97199e856"
+    },
+    {
+      "path": "link_models/base.obj",
+      "byte_identical": false,
+      "identical_after_line_ending_normalization": true,
+      "local_sha256": "a3d6ca4b3fb518c4a46e67a66f89b163e44e889ec0c253a2b50b80ded29fd097",
+      "upstream_sha256": "6a65701c2f314ec0daf7430b83da5b18302d504eed102cf038b41da5ceea1230",
+      "normalized_sha256": "6a65701c2f314ec0daf7430b83da5b18302d504eed102cf038b41da5ceea1230"
+    },
+    {
+      "path": "link_models/fl.hip.obj",
+      "byte_identical": false,
+      "identical_after_line_ending_normalization": true,
+      "local_sha256": "fb39d57e41f3a1486d99ba8a9c93c4d2d513c1691ee6e8f2b116f766b2c59ab7",
+      "upstream_sha256": "023fdaf0546d6f7d4b778535059b23b3ed06394f58773cd6e59336f3977b63b1",
+      "normalized_sha256": "023fdaf0546d6f7d4b778535059b23b3ed06394f58773cd6e59336f3977b63b1"
+    },
+    {
+      "path": "link_models/fl.lleg.obj",
+      "byte_identical": false,
+      "identical_after_line_ending_normalization": true,
+      "local_sha256": "b737e45f2ee284152f7ec0285a6761e255aab5635ed62b49c1775dd7bd3017a3",
+      "upstream_sha256": "92a34e929f9fac5dd43eef3bbde2a333fb1ac663429add297a1636932d57197d",
+      "normalized_sha256": "92a34e929f9fac5dd43eef3bbde2a333fb1ac663429add297a1636932d57197d"
+    },
+    {
+      "path": "link_models/fl.uleg.obj",
+      "byte_identical": false,
+      "identical_after_line_ending_normalization": true,
+      "local_sha256": "61edbe729c516244cebae16fe9364968680a5f70ae77d148fd78f81c2a89b3dd",
+      "upstream_sha256": "18e760f534d32e25ea6f6f3445bf7ea61fd2241c2747c4acf95c440d69706d88",
+      "normalized_sha256": "18e760f534d32e25ea6f6f3445bf7ea61fd2241c2747c4acf95c440d69706d88"
+    },
+    {
+      "path": "link_models/fr.hip.obj",
+      "byte_identical": false,
+      "identical_after_line_ending_normalization": true,
+      "local_sha256": "85c1b48f195180409d482d0a78d020e889ff49f55c3ba390beb92c269e2827c2",
+      "upstream_sha256": "716d321e2daf6e3a52502c0bea6a45b9ce75f82879973756900a9f40c3553b85",
+      "normalized_sha256": "716d321e2daf6e3a52502c0bea6a45b9ce75f82879973756900a9f40c3553b85"
+    },
+    {
+      "path": "link_models/fr.lleg.obj",
+      "byte_identical": false,
+      "identical_after_line_ending_normalization": true,
+      "local_sha256": "7cf4cd2e14a81da496b1ad615959a963b906740f264c2b9c5999663ac66276e8",
+      "upstream_sha256": "cd1fb383d3264de8fc5c3311e7614bc096d0d15eae59b373c9e83843b22bc51b",
+      "normalized_sha256": "cd1fb383d3264de8fc5c3311e7614bc096d0d15eae59b373c9e83843b22bc51b"
+    },
+    {
+      "path": "link_models/fr.uleg.obj",
+      "byte_identical": false,
+      "identical_after_line_ending_normalization": true,
+      "local_sha256": "41501b8276b21f936a6b2df843101827e91aa9b278bc1a28c5f32971d3c1cb96",
+      "upstream_sha256": "e8a18f7bf11cf705fd2d6a9c36e182152c3f1218df4a40541cabd3a5ea8483c6",
+      "normalized_sha256": "e8a18f7bf11cf705fd2d6a9c36e182152c3f1218df4a40541cabd3a5ea8483c6"
+    },
+    {
+      "path": "link_models/hl.hip.obj",
+      "byte_identical": false,
+      "identical_after_line_ending_normalization": true,
+      "local_sha256": "3d2550b1164fcec41d9e8a9502c05ead9684f8409f0e390ff9ad2d774f27337d",
+      "upstream_sha256": "8af3c8e74dab221e741d1aef9377e86b0b6c51a7b07e94646deae8ffaff327b1",
+      "normalized_sha256": "8af3c8e74dab221e741d1aef9377e86b0b6c51a7b07e94646deae8ffaff327b1"
+    },
+    {
+      "path": "link_models/hl.lleg.obj",
+      "byte_identical": false,
+      "identical_after_line_ending_normalization": true,
+      "local_sha256": "33a9fb9731a398a2dfaef59431718c0dcdd6305b4c48d819a0ae743fc4d86eba",
+      "upstream_sha256": "456f70b678492fd5528887cb63bb4c89549d3c98382bf890a45766798357d0c4",
+      "normalized_sha256": "456f70b678492fd5528887cb63bb4c89549d3c98382bf890a45766798357d0c4"
+    },
+    {
+      "path": "link_models/hl.uleg.obj",
+      "byte_identical": false,
+      "identical_after_line_ending_normalization": true,
+      "local_sha256": "30223a78a8c2b36cf7d0aba9d4ef45f4b09bd8e55d3fefc40e42e442cb741506",
+      "upstream_sha256": "70485986fab558c417a02b7771c02c32e8d68b2919126b0f92cfe80fe5ac4f6f",
+      "normalized_sha256": "70485986fab558c417a02b7771c02c32e8d68b2919126b0f92cfe80fe5ac4f6f"
+    },
+    {
+      "path": "link_models/hr.hip.obj",
+      "byte_identical": false,
+      "identical_after_line_ending_normalization": true,
+      "local_sha256": "1d019115bb412396326d2727fe7a6c2485eaaeb3bec6f6f12facc5e14581fa45",
+      "upstream_sha256": "e5617f84e8d2d015039c0f96b4cdaf05c7b28429615a811b571c3c04318c8515",
+      "normalized_sha256": "e5617f84e8d2d015039c0f96b4cdaf05c7b28429615a811b571c3c04318c8515"
+    },
+    {
+      "path": "link_models/hr.lleg.obj",
+      "byte_identical": false,
+      "identical_after_line_ending_normalization": true,
+      "local_sha256": "ba9fc2a5a4197e1ae7d7536994235db0ce5813801a61783ecfb544a6e974d801",
+      "upstream_sha256": "5717719dd357842476e4196a134b49d769c076780a78822680868098089c6305",
+      "normalized_sha256": "5717719dd357842476e4196a134b49d769c076780a78822680868098089c6305"
+    },
+    {
+      "path": "link_models/hr.uleg.obj",
+      "byte_identical": false,
+      "identical_after_line_ending_normalization": true,
+      "local_sha256": "7483c84f0af931136a17cda0de01dedf49af374cc42a779647d8b2ea62fa35e2",
+      "upstream_sha256": "ea69a9166ca6f670e62c4b2de716fad0048dd06e438ce1fcbc46df84298e175a",
+      "normalized_sha256": "ea69a9166ca6f670e62c4b2de716fad0048dd06e438ce1fcbc46df84298e175a"
+    }
+  ],
+  "permission_letter": "Not reviewed; user requested that the separate letter be ignored for now. Archive match does not establish letter coverage.",
+  "branding": {
+    "finding": "Only factual names and attribution found; no logos or endorsement statements found.",
+    "evidence": "OBJ record inspection, URDF and USD text/asset reference inspection, and visual review of side A, side B, front, rear, top, and perspective mesh projections. No texture assets or references.",
+    "written_trademark_approval": "None supplied or claimed."
+  },
+  "modification_marking": {
+    "usd": "Explicit MODIFIED VERSION notice in layer comment, layer documentation, default prim documentation, and README.md",
+    "obj": "README.md explicitly marks all 13 OBJ files as modified solely in line endings",
+    "verification": "USD reopens; exported layer data identical before/after when the three notice fields are restored to their previous values/absence."
+  },
+  "field_of_use": "Boston Dynamics products or software-based simulation/emulation only; other hardware prohibited. Included SDK license section 2(c). Notice present in repository README.md, asset README.md, and USD notices.",
+  "sdk_license": {
+    "source_url": "https://github.com/boston-dynamics/spot-sdk/blob/91ed30607264e795699995d6d7834ba0c8a94d36/LICENSE",
+    "matches_after_line_ending_normalization": true
+  },
+  "dataset_license": {
+    "source_url": "https://github.com/Daniella1/urdf_files_dataset/blob/main/LICENSE",
+    "local_path": "LICENSE.MIT",
+    "matches_after_line_ending_normalization": true
+  }
+}

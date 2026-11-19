@@ -9,7 +9,7 @@ This step writes a single ``com.nvidia.simready.packaging.json`` file
 into the source folder containing only the three fields the SimReady
 packaging standard marks as required (``format_version``,
 ``package_id``, ``license`` — see ``PKG.DEF.001`` in
-``capabilities/packaging/packaging_core/requirements/package-definition.md``).
+``rules_and_reqs/packaging/packaging_core/requirements/package-definition.md``).
 
 The result is a SimReady-conformant package skeleton with no BOM, no
 ``.metadata/`` folder, and no file hashes.  The package will satisfy

@@ -1,0 +1,18 @@
+{
+  "id": "CAP029_ConnectionJoint.0-1-0",
+  "display_name": "Connections Multibody-Physics",
+  "legacy_identity": {
+    "id": "FET_029_STANDARD",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "CN.005",
+    "CN.009"
+  ],
+  "dependencies": [
+    "CAP027_Connections.0-1-0"
+  ],
+  "features": [
+    "FET004_Multibody.0-2-0"
+  ]
+}

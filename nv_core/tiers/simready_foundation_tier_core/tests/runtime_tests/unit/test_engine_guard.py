@@ -14,7 +14,7 @@
 # limitations under the License.
 
 from pxr import Usd, UsdGeom, UsdPhysics
-from simready_benchmark_kit_suite.engine_guard import (
+from simready.foundation.tier_core.runtime_tests.engine_guard import (
     NEWTON_SCENE_ERROR,
     NewtonSceneInitializationError,
     asset_has_articulation,

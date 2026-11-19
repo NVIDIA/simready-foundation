@@ -6,10 +6,10 @@ import pytest
 from pxr import Sdf, Usd, UsdGeom, UsdPhysics, UsdShade
 from usd_validation_nvidia._compliance_checker import ComplianceChecker
 from simready.foundation.tier_core import requirements as cap
-from simready.foundation.tier_core.capabilities.semantic_labels.validation import (
+from simready.foundation.tier_core.rules_and_reqs.semantic_labels.validation import (
     SemanticLabelsMaterialChecker,
 )
-from simready.foundation.tier_core.capabilities.visualization.materials.validation import (
+from simready.foundation.tier_core.rules_and_reqs.visualization.materials.validation import (
     VisualMaterialsCapabilityChecker,
 )
 
@@ -289,7 +289,7 @@ def test_static_label_rule_still_applies_to_physics_material():
 )
 @pytest.mark.parametrize("units", [None, 1.0, 0.001])
 def test_physics_units_must_be_authored(api, units):
-    from simready.foundation.tier_core.capabilities.core.units.validation import (
+    from simready.foundation.tier_core.rules_and_reqs.core.units.validation import (
         KilogramsPerUnitChecker,
     )
 
@@ -303,7 +303,7 @@ def test_physics_units_must_be_authored(api, units):
 
 
 def test_nonphysics_stage_does_not_require_mass_units():
-    from simready.foundation.tier_core.capabilities.core.units.validation import (
+    from simready.foundation.tier_core.rules_and_reqs.core.units.validation import (
         KilogramsPerUnitChecker,
     )
 

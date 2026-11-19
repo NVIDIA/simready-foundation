@@ -1,0 +1,10 @@
+[Assembly]
+"0.1.0" = {features = [
+], capabilities = [
+    {selector = "CAP026_Mates.0-1-0"},
+    {selector = "CAP027_Connections.0-1-0"},
+    {selector = "CAP029_ConnectionJoint.0-1-0", optional = true},
+    {selector = "CAP029_ConnectionJoint.PhysX.0-1-0", optional = true},
+    {selector = "CAP029_ConnectionJoint.Newton.0-1-0", optional = true},
+    {selector = "CAP029_ConnectionJoint.MuJoCo.0-1-0", optional = true},
+]}

@@ -1,0 +1,256 @@
+# velocity_limit  (FET022 Driven Joints)
+
+| Property     | Value                                                                         |
+|--------------|-------------------------------------------------------------------------------|
+| Test name    | velocity_limit                                                                |
+| Feature(s)   | `FET022_DrivenJoints.PhysX.0-1-0`, `FET022_DrivenJoints.PhysX.0-2-0`, `FET022_DrivenJoints.Isaac.0-1-0`, `FET022_DrivenJoints.Isaac.0-2-0` |
+| Engine       | Kit / Isaac Sim (>=2024.2.0)                                                  |
+| Test version | 1.1.11                                                                         |
+| Wall-clock timeout | 600 seconds |
+
+## Nominal Initial Settling
+
+Before measuring the response, the phase requests complete `ctx.step_one()`
+ticks for the configured initial settling interval, rounded up from
+`settle_seconds * physics_fps`. Zero settling is allowed; FPS must be finite
+and positive, and settling seconds finite and nonnegative. Invalid timing
+configuration or failed ticks remain execution errors, not asset verdicts.
+This is nominal requested tick time, not measured solver or wall-clock time;
+render/capture work is separate. The processing-only `ctx.physics_steps()`
+helper is not used to establish this interval.
+
+## Summary
+
+Drives each non-passive, non-mimic-follower joint individually and verifies that
+the measured velocity stays within the resolved runtime/authored/actuator
+comparison ceiling during the evaluated simulation-step window. Inspect
+`max_velocity_source`; a PASS does not establish authored hard-cap enforcement.
+
+## Optional Motion Evidence
+
+An optional `vel_joint_NNN` history records the existing signed velocity
+readback, the actual position command, the resolved speed ceiling, and the
+ceiling with the configured tolerance. The unchanged verdict compares the
+absolute velocity with the allowed speed, not the signed velocity alone.
+Metadata identifies the limit source and joint type; angular tensor values
+are in radians/radians-per-second. Prismatic tensor scaling is unqualified,
+so the diagnostic channels use `unknown_native`; stage meters-per-unit does
+not prove their scale. Unresolved identities also remain unknown. Raw USD
+body/bounding-box distances remain stage lengths. This evidence-unit caveat
+does not convert comparison inputs or change the existing verdict policy.
+
+Time is estimated from observed physics steps and configured `physics_fps`,
+excluding setup and capture/render ticks. Captures reference the preceding
+retained observation, not an exact solver/video time mapping. Histories retain
+at most 4096 samples, normally every fourth sample plus phase changes. Optional
+recording failures warn and mark evidence partial; no extra physics steps or
+required readbacks are added, and old runners without motion support execute
+normally. Sparse plotted evidence is diagnostic and does not replace the
+evaluated velocity observations used by the verdict (including its startup
+exclusion below).
+
+## Independent Control Ownership
+
+Declared mimic followers, passive coordinates and identified loop joints receive
+no independent position, target or velocity writes, including restoration where
+used. Their live motion remains determined by authored coupling/dynamics.
+Other independent coordinates retain the existing starting hold targets;
+eligibility, target selection and response criteria are unchanged. Sparse
+commands must use a genuine indexed runtime API: an unqualified backend stops
+with a setup/capability error before excitation, never an asset-response FAIL.
+Core requires the selected PhysX engine for this procedure. Newton's separately
+owned implementation and backend qualification are not established by this
+page. No-applicable-joint cases still skip before control checks.
+
+## Required Runtime State
+
+Missing, non-finite or wrong-shaped runtime state needed by control or the
+verdict stops the test as a setup/runtime error, not conformance PASS or an
+evaluated asset-response FAIL. Optional extra motion readbacks remain nullable
+and can mark diagnostic evidence partial. Eligible-joint goals, finite response
+criteria, timing and configured failure policies are unchanged; command
+ownership now leaves dependent/passive control buffers untouched.
+
+## Spatial Safety Observation
+
+The safety guard compares required finite live articulation geometry with a
+frozen setup reach reference derived from owned body geometry, joint-anchor
+offsets and bounded prismatic travel, when that topology can be qualified.
+The configured volume-margin factor is applied as its cube root to this span;
+ordinary bending from a slender initial pose is not judged against that pose's
+small volume. Unsupported topology retains an explicitly unqualified initial
+volume proxy. `vel_guard_reference` records the basis and qualification;
+`vel_guard_abort` retains a detected guard interruption when diagnostics
+are available. Raw initial-box metrics remain observations, not the qualified
+reach reference.
+
+A guard trip interrupts execution as a runtime/setup error with incomplete
+response coverage, not an evaluated joint/target failure or an asset-defect
+diagnosis. Required geometry errors also propagate; optional diagnostic
+persistence cannot disable the guard or replace its original cause. Inspect
+completed observations/timing records where supplied, rather than assuming
+all planned motion ran. No extra physics steps or acceptance tolerances are
+introduced; native qualification of the reported asset remains separate.
+
+## What Pass Guarantees
+
+A passing result confirms that the recorded absolute joint velocities in this
+evaluated window do not exceed the resolved ceiling plus tolerance. The existing
+criterion excludes the first five observations when more than ten were collected;
+shorter windows evaluate every collected observation. This does not establish a
+universal speed guarantee under other commands, loads, or excluded startup steps.
+
+## What It Checks
+
+The test drives each non-passive, non-mimic-follower joint individually from its
+rest position toward a commanded target, measuring the actual joint velocity at
+every frame during a `test_duration_seconds` window (default 2.0 s). For revolute
+joints, `physxJoint:maxJointVelocity` is authored in degrees per second. The test
+converts this value to radians per second and compares it against the per-frame
+measured velocity, which is also in radians per second. The evaluated peak excludes
+the first five startup observations when more than ten observations were collected.
+A joint fails if the
+peak measured velocity exceeds the resolved ceiling by more than
+`tolerance_percent` (default 5 percent, that is, 0.05). If independent
+coordinates exist but none has the required comparison ceiling and bounded
+travel, execution stops with NO VERDICT. If every coordinate is excluded,
+the existing skip records `no_independent_coordinates` only after complete
+concrete owned composition and actual control-source inspection establish
+that no independent coordinate exists. Cached exclusions or uninspected proxy
+controls cannot provide that proof. When it is unavailable, the same skip
+remains unmarked and reported as Could not assess, not measured asset FAIL or PASS.
+The resolver combines runtime DOF ceilings with supported authored joint/actuator
+velocity inputs; inspect `max_velocity_source` and typed histories. Passive,
+mimic-follower and closed-loop joints are excluded. A separate spatial safety
+guard can interrupt execution; that incomplete observation is not a measured
+speed exceedance or independently failed joint response.
+
+Version 1.1.6 treats the SDK's rounded float32-maximum unlimited sentinel as
+missing comparison evidence, not a real speed ceiling or position stop. Raw
+authored sentinel values are rejected before angular unit conversion. A valid
+supported authored ceiling can still supply the comparison when the runtime
+reports unlimited speed; its provenance remains visible. Reversed, locked,
+one-sided or unbounded ranges do not receive an invented excursion or enormous
+setpoint. Such joints are omitted with visible prerequisite coverage limits;
+if none remain despite independent coordinates, execution supplies NO VERDICT.
+Finite eligible targets retain the opposite-range 5-percent inset and floating
+command construction preserves their fractional coordinates.
+
+VEL's authored fallback requires a uniquely resolved composed revolute or
+prismatic joint and the matching angular/linear envelope instance. Duplicate
+joint basenames (even when one has no ceiling) cannot arbitrarily supply a
+rating, and a mismatched-axis value is not converted into the other joint's
+units. These limitations do not discard an independently meaningful native
+ceiling. `vel_joints_not_evaluated` counts ineligible nonexcluded joints;
+`vel_joint_eligibility_omissions` retains up to 64 names/reasons and
+`vel_joint_eligibility_omissions_truncated` discloses omitted diagnostics.
+A bounded warning states that the result covers only the eligible subset.
+
+Missing optional schema support and absent/unusable authored values preserve
+the existing fallback policy. A supported selected joint's schema, attribute,
+presence or value query failure is a required read error; it cannot become a
+native comparison ceiling or an applicability skip. The original exception
+propagates with the qualified property path noted best-effort. Core
+initialization also treats this as failed setup and attempts required teardown,
+retiring the session if cleanup fails.
+
+Host regressions in `test_authored_velocity_query_errors.py` exercise real USD,
+the installed legacy schema, VEL eligibility, IKR input gathering and Core
+initialization with bounded native adapters. They establish input and
+first-cause/cleanup behavior, not native speed-cap enforcement or asset PASS.
+
+## How It Works
+
+Velocity-cap requests contain positive finite values for tested coordinates;
+NaN slots mean preserve the existing native limit. The runtime boundary never
+submits those NaNs. It reads a complete live native row to preserve omitted
+coordinates, including existing zero caps and SDK unlimited defaults, or fails
+before writing if preservation is unavailable. Core initialization uses the
+same policy for unauthored coordinates and invents no substitute ceiling.
+Malformed requests, infinity, nonpositive requested caps and float32
+overflow/underflow are rejected before native submission. Available readback
+must match the complete submitted float32 row exactly; an absent getter can
+acknowledge a fully specified safe request, with that limitation recorded in
+the helper detail, but cannot preserve omitted coordinates.
+
+For a positively identified native revolute coordinate, the degree-to-radian
+conversion of the SDK's float32-maximum default is also absent comparison
+evidence. This classification uses selected physical joint identity and the
+native rad/s contract. Authored ratings, linear coordinates and unqualified
+units are not discarded merely for matching that converted number. Native
+defaults retained as state do not become mechanical ratings.
+
+`vel_velocity_limit_application` records `reported_success`, `not_applied` or
+`unknown` from the runtime application helper; false/unknown outcomes warn and
+are also retained in motion metadata. A successful helper return is not proof
+that the engine physically enforces a hard cap:
+`vel_velocity_limit_enforcement` remains `not_verified`. An application
+exception stops execution instead of becoming a sampled PASS. These setup
+observations do not replace the velocity criterion or create an arrival test.
+
+Each joint is tested in isolation. The test sends a drive command that
+can induce a fast response. The simulation runs at the configured rate (default
+240 Hz), and the evaluated peak velocity is recorded. After
+the window closes, the peak is compared against the resolved ceiling with the
+tolerance margin applied, with the startup exclusion above. The window can end
+early after the configured consecutive near-zero velocity condition is met.
+If the evaluated peak exceeds `limit * (1 + tolerance_percent)`,
+the joint is counted as failed.
+
+This test does not attach a carrier fixture. Authored world constraints remain
+in effect, and qualified standalone grippers may receive a temporary world pin.
+Inspect `scene_info.pinned_to_world`, the configured gravity and the authored
+constraints when interpreting motion; not every robot base is fixed.
+
+## Failure Cases
+
+| Symptom | Likely cause |
+|---|---|
+| Measured velocity exceeds resolved ceiling | Check `max_velocity_source`, imported units, actuator configuration and runtime enforcement; an authored input is only one possible ceiling source |
+| No evaluated joints | Missing comparison ceilings or qualified travel leave execution incomplete. All excluded coordinates qualify Not applicable only with positive complete composition/control-inspection proof; otherwise the original unmarked skip is Could not assess. |
+
+## How to Fix
+
+First distinguish a measured speed exceedance from a spatial-guard interruption in the
+per-joint warnings. Preserve the original run and verify the selected variant,
+comparison-ceiling provenance, imported units, actuator controls and test setup;
+the observed failure does not establish its cause. Do not raise a rating to the
+observed peak, paste generic gains or relax tolerance solely to force a pass.
+
+If the joint limit is the demonstrated source, verify that `physxJoint:maxJointVelocity` is
+authored on the correct prim (the joint prim that carries `PhysxJointAPI`), and
+that the value is in degrees per second for revolute joints or stage-distance per second
+for prismatic joints. Confirm the joint type is one that PhysX applies a velocity
+cap to (revolute and prismatic are supported; spherical and fixed joints are not).
+
+If comparison inputs are demonstrably missing and velocity limiting is required
+by the governing contract, author the correct mechanism-specific rating in the
+required schema. Missing imported prerequisites or unqualified linear scaling
+can instead be a runtime/test issue; incomplete execution supplies no measured coverage.
+
+## Expected Result
+
+![velocity_limit expected result](../_images/velocity-limit.png)
+
+[Result video](../../../../../../../../sr_specs/docs/_static/videos/velocity-limit.mp4)
+
+One joint receives a command per segment toward the opposite-range target;
+coupled joints and an unconstrained base may also move. Consult measured
+velocities and the resolved ceiling: smoothness in a sparse video is not itself
+a pass criterion or proof of hard-cap enforcement.
+
+## Notes and Caveats
+
+Not applicable requires positive complete inspection proof that no independent
+coordinates exist. An unqualified original skip stays unmarked/Could not assess;
+neither its message nor cached exclusions establish that proof.
+Missing resolved comparison ceilings or qualified bounded travel leave NO VERDICT.
+Mixed eligibility covers only the tested
+subset; omitted joints remain visible prerequisite limitations. A skip supplies
+no measured velocity coverage; it does not itself prove
+an asset defect or that all possible authoring/import paths lack a rating.
+
+The tolerance margin (default 5 percent) accommodates one-frame overshoot at the
+simulation timestep boundary. A very stiff joint or a very fast drive might exhibit
+single-frame spikes; if those spikes are below the tolerance margin, the test
+passes.

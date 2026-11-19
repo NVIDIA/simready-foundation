@@ -1,0 +1,4 @@
+interface:
+  display_name: "Conform Multi-Representation Visual"
+  short_description: "Organize and validate interchangeable visual representations"
+  default_prompt: "Conform staged assets to FET013_MultiRepresentationVisual.0-1-0 by organizing existing representations into composable Representation variant sets that hold the visual envelope."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP024_BaseArticulation.MuJoCo"
+  short_description: "Repair CAP024_BaseArticulation.MuJoCo conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-024-mujoco to repair CAP024_BaseArticulation.MuJoCo SimReady conformance failures."

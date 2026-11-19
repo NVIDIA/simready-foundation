@@ -1,13 +1,13 @@
 [
     {
         "id":  "simready-foundation-conform-fet-001-standard-positive-trigger",
-        "question":  "Repair FET_001_STANDARD minimal stage failures on a staged USD asset.",
+        "question":  "Repair FET001_MinimalPlaceableVisual minimal stage failures on a staged USD asset.",
         "expected_skill":  "simready-foundation-conform-fet-001-standard",
         "ground_truth":  "The agent should activate simready-foundation-conform-fet-001-standard and follow its workflow.",
         "expected_behavior":  [
                                   "Load the simready-foundation-conform-fet-001-standard skill.",
-                                  "Default to FET_001_STANDARD@1.0.1 unless the user, profile, or validation report specifies another version.",
-                                  "Confirm FET_000_STANDARD is passing, repair only the selected FET_001_STANDARD manifest requirements, then rerun FET_001_STANDARD validation.",
+                                  "Default to FET001_MinimalPlaceableVisual.1-0-1 unless the user, profile, or validation report specifies another version.",
+                                  "Confirm CAP000_Core is passing, repair only the selected FET001_MinimalPlaceableVisual manifest requirements, then rerun FET001_MinimalPlaceableVisual validation.",
                                   "Report changed files, validation performed, and any remaining release or validation gaps."
                               ]
     },

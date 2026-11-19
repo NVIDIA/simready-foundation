@@ -12,15 +12,37 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from types import SimpleNamespace
+
 import pytest
-from simready_benchmark_kit_suite.fet005_grasp.grasp_phases import GraspPhaseManager
-from simready_benchmark_kit_suite.fet005_grasp.phase_dropping import DroppingPhase
-from simready_benchmark_kit_suite.fet005_grasp.phase_grasping import (
+from simready.foundation.tier_core.runtime_tests.fet005_grasp.grasp_phases import GraspPhaseManager
+from simready.foundation.tier_core.runtime_tests.fet005_grasp.phase_dropping import DroppingPhase
+from simready.foundation.tier_core.runtime_tests.fet005_grasp.phase_grasping import (
     GraspingPhase,
     _empty_grasp_failure_message,
 )
-from simready_benchmark_kit_suite.fet005_grasp.phase_opening import OpeningPhase
-from simready_benchmark_kit_suite.fet005_grasp.phase_shake import ShakePhase
+from simready.foundation.tier_core.runtime_tests.fet005_grasp.phase_opening import OpeningPhase
+from simready.foundation.tier_core.runtime_tests.fet005_grasp.phase_shake import ShakePhase
+
+
+def test_completed_intermediate_phase_evidence_is_retained_without_terminal_result():
+    manager = GraspPhaseManager({"physics_fps": 240})
+    result = {"phase_name": "Stability", "failed": False, "stability_frame": 12}
+    manager._phases[0] = SimpleNamespace(check_frame=lambda *_: result)
+    assert manager.check_frame(12, 0.05, None, None) is None
+    assert manager.current_phase_name == "GripperPositioning"
+    assert manager.drain_completed_results() == [result]
+    assert manager.drain_completed_results() == []
+
+
+def test_completed_failure_phase_keeps_verdict_and_evidence():
+    manager = GraspPhaseManager({"physics_fps": 240})
+    result = {"phase_name": "Stability", "failed": True, "message": "not stable", "stability_frame": 12}
+    manager._phases[0] = SimpleNamespace(check_frame=lambda *_: result)
+    assert manager.check_frame(12, 0.05, None, None) is result
+    assert manager.drain_completed_results() == [result]
+    assert manager.check_frame(13, 0.06, None, None) is None
+    assert manager.drain_completed_results() == []
 
 
 def test_empty_grasp_uses_scene_runtime_diagnostic():
@@ -146,6 +168,10 @@ def test_opening_disables_fixture_collisions_once_after_opening_completes():
 
 
 def test_drop_verdict_remains_strict_after_fixture_release():
+    class Scene:
+        def verify_gripper_collision_disabled(self):
+            pass
+
     class Tracker:
         center_history = [(0.0, 0.0, 1.0)]
 
@@ -158,8 +184,9 @@ def test_drop_verdict_remains_strict_after_fixture_release():
     )
     phase._compute_required_fall = lambda _scene: 0.05
 
-    assert phase.check_frame(0, 0.0, object(), Tracker()) is None
-    result = phase.check_frame(2, 0.2, object(), Tracker())
+    scene = Scene()
+    assert phase.check_frame(0, 0.0, scene, Tracker()) is None
+    result = phase.check_frame(2, 0.2, scene, Tracker())
 
     assert result["failed"] is True
     assert result["drop_distance"] == 0.0

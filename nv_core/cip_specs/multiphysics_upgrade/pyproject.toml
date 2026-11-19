@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "simready-multiphysics-upgrade"
+version = "2026.10.0-rc0"
+description = "Neutral to PhysX/Newton/MuJoCo multiphysics upgrade for SimReady prop packages"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+license = "Apache-2.0"
+authors = [{ name = "NVIDIA Corporation" }]
+dependencies = [
+    "simready-foundation-tier-core>=2026.10.0-rc0",
+]
+
+[project.optional-dependencies]
+isaac = ["simready-foundation-tier-core[isaac]>=2026.10.0-rc0"]
+usd = ["usd-core>=23.5"]
+test = ["pytest>=8"]
+
+[project.scripts]
+simready-multiphysics-sidecar = "simready.multiphysics_upgrade.sidecar:main"
+simready-multiphysics-upgrade = "simready.multiphysics_upgrade.runner:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["simready", "simready.*"]
+# `simready` is a PEP 420 namespace package so this distribution can coexist
+# with `simready.asset_transformer` and the tier-core `simready.foundation`
+# namespace in the same interpreter.
+namespaces = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

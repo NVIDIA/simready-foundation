@@ -82,9 +82,7 @@ def _authoring():
     """
     global _authoring_module
     if _authoring_module is None:
-        spec = importlib.util.spec_from_file_location(
-            "simready_author_display_color", _SCRIPT_PATH
-        )
+        spec = importlib.util.spec_from_file_location("simready_author_display_color", _SCRIPT_PATH)
         if spec is None or spec.loader is None:
             raise RuntimeError(f"cannot load the display colour script at {_SCRIPT_PATH}")
         module = importlib.util.module_from_spec(spec)
@@ -95,10 +93,8 @@ def _authoring():
 
 @feature_adapter(
     name="material_neutral_to_display_color",
-    input_feature_id="FET_006_STANDARD",
-    input_feature_version="0.1.0",
-    output_feature_id="FET_010_STANDARD",
-    output_feature_version="0.1.0",
+    input_feature_id="FET006_Materials.0-1-0",
+    output_feature_id="FET010_DisplayColor.0-1-0",
 )
 def material_neutral_to_display_color(input_stage: Usd.Stage, output_stage: Usd.Stage):
     _author_display_color(output_stage)
@@ -106,10 +102,8 @@ def material_neutral_to_display_color(input_stage: Usd.Stage, output_stage: Usd.
 
 @feature_adapter(
     name="material_openpbr_to_display_color",
-    input_feature_id="FET_006_OPENPBR",
-    input_feature_version="0.1.0",
-    output_feature_id="FET_010_STANDARD",
-    output_feature_version="0.1.0",
+    input_feature_id="FET006_Materials.Openpbr.0-1-0",
+    output_feature_id="FET010_DisplayColor.0-1-0",
 )
 def material_openpbr_to_display_color(input_stage: Usd.Stage, output_stage: Usd.Stage):
     _author_display_color(output_stage)
@@ -117,22 +111,47 @@ def material_openpbr_to_display_color(input_stage: Usd.Stage, output_stage: Usd.
 
 @feature_adapter(
     name="material_mdl_to_display_color",
-    input_feature_id="FET_006_MDL",
-    input_feature_version="0.1.0",
-    output_feature_id="FET_010_STANDARD",
-    output_feature_version="0.1.0",
+    input_feature_id="FET006_Materials.MDL.0-1-0",
+    output_feature_id="FET010_DisplayColor.0-1-0",
 )
 def material_mdl_to_display_color(input_stage: Usd.Stage, output_stage: Usd.Stage):
+    _author_display_color(output_stage)
+
+
+@feature_adapter(
+    name="material_neutral_to_display_color_0_3_0",
+    input_feature_id="FET006_Materials.0-3-0",
+    output_feature_id="FET010_DisplayColor.0-1-0",
+)
+def material_neutral_to_display_color_0_3_0(input_stage: Usd.Stage, output_stage: Usd.Stage):
+    _author_display_color(output_stage)
+
+
+@feature_adapter(
+    name="material_openpbr_to_display_color_0_2_0",
+    input_feature_id="FET006_Materials.Openpbr.0-2-0",
+    output_feature_id="FET010_DisplayColor.0-1-0",
+)
+def material_openpbr_to_display_color_0_2_0(input_stage: Usd.Stage, output_stage: Usd.Stage):
+    _author_display_color(output_stage)
+
+
+@feature_adapter(
+    name="material_mdl_to_display_color_0_3_0",
+    input_feature_id="FET006_Materials.MDL.0-3-0",
+    output_feature_id="FET010_DisplayColor.0-1-0",
+)
+def material_mdl_to_display_color_0_3_0(input_stage: Usd.Stage, output_stage: Usd.Stage):
     _author_display_color(output_stage)
 
 
 def _author_display_color(output_stage: Usd.Stage):
     """Author the display colour on every renderable Gprim of the output stage.
 
-    All three entry points share one implementation because the script resolves
+    Every entry point shares one implementation because the script resolves
     whichever surface a material carries, in the order OpenPBR, UsdPreviewSurface,
-    MDL. Declaring the three transitions separately keeps the adapter graph
-    explicit about which input contracts have a known path to display colour.
+    MDL. Declaring each transition separately keeps the adapter graph explicit
+    about which input contracts have a known path to display colour.
 
     Texture sampling is requested, and it needs ``numpy`` and ``Pillow``. Install
     them. Without them the adapter does not fail, but on a texture-driven material
@@ -151,9 +170,7 @@ def _author_display_color(output_stage: Usd.Stage):
     ``default`` input, and even there it is usually the nodedef default rather
     than a colour the material shows.
     """
-    authored, skipped, conflicts, _per_material, notes = _authoring().author_stage(
-        output_stage, sample_textures=True
-    )
+    authored, skipped, conflicts, _per_material, notes = _authoring().author_stage(output_stage, sample_textures=True)
     logger.info(
         "Display colour adapter: %d Gprim(s) authored, %d skipped, %d conflict(s)",
         authored,

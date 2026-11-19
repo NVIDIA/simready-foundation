@@ -79,9 +79,7 @@ def _migration():
     """
     global _migration_module
     if _migration_module is None:
-        spec = importlib.util.spec_from_file_location(
-            "simready_migrate_to_openpbr", _SCRIPT_PATH
-        )
+        spec = importlib.util.spec_from_file_location("simready_migrate_to_openpbr", _SCRIPT_PATH)
         if spec is None or spec.loader is None:
             raise RuntimeError(f"cannot load the OpenPBR migration script at {_SCRIPT_PATH}")
         module = importlib.util.module_from_spec(spec)
@@ -92,10 +90,8 @@ def _migration():
 
 @feature_adapter(
     name="material_neutral_to_openpbr",
-    input_feature_id="FET_006_STANDARD",
-    input_feature_version="0.1.0",
-    output_feature_id="FET_006_OPENPBR",
-    output_feature_version="0.1.0",
+    input_feature_id="FET006_Materials.0-1-0",
+    output_feature_id="FET006_Materials.Openpbr.0-1-0",
 )
 def material_neutral_to_openpbr(input_stage: Usd.Stage, output_stage: Usd.Stage):
     _author_openpbr(output_stage)
@@ -103,30 +99,43 @@ def material_neutral_to_openpbr(input_stage: Usd.Stage, output_stage: Usd.Stage)
 
 @feature_adapter(
     name="material_mdl_to_openpbr",
-    input_feature_id="FET_006_MDL",
-    input_feature_version="0.1.0",
-    output_feature_id="FET_006_OPENPBR",
-    output_feature_version="0.1.0",
+    input_feature_id="FET006_Materials.MDL.0-1-0",
+    output_feature_id="FET006_Materials.Openpbr.0-1-0",
 )
 def material_mdl_to_openpbr(input_stage: Usd.Stage, output_stage: Usd.Stage):
+    _author_openpbr(output_stage)
+
+
+@feature_adapter(
+    name="material_neutral_to_openpbr_0_2_0",
+    input_feature_id="FET006_Materials.0-3-0",
+    output_feature_id="FET006_Materials.Openpbr.0-2-0",
+)
+def material_neutral_to_openpbr_0_2_0(input_stage: Usd.Stage, output_stage: Usd.Stage):
+    _author_openpbr(output_stage)
+
+
+@feature_adapter(
+    name="material_mdl_to_openpbr_0_2_0",
+    input_feature_id="FET006_Materials.MDL.0-3-0",
+    output_feature_id="FET006_Materials.Openpbr.0-2-0",
+)
+def material_mdl_to_openpbr_0_2_0(input_stage: Usd.Stage, output_stage: Usd.Stage):
     _author_openpbr(output_stage)
 
 
 def _author_openpbr(output_stage: Usd.Stage):
     """Author the OpenPBR surface on every material of the output stage.
 
-    Both entry points share one implementation because the script reads whichever
+    Every entry point shares one implementation because the script reads whichever
     source surface a material carries: an OmniPBR or OmniGlass MDL shader where
-    there is one, the UsdPreviewSurface preview otherwise. Declaring the two
-    transitions separately keeps the adapter graph explicit about which input
+    there is one, the UsdPreviewSurface preview otherwise. Declaring each
+    transition separately keeps the adapter graph explicit about which input
     contracts have a known path to OpenPBR.
     """
-    migrated, skipped, conflicts, wired, flattened, notes = _migration().migrate_stage(
-        output_stage, wire_textures=True
-    )
+    migrated, skipped, conflicts, wired, flattened, notes = _migration().migrate_stage(output_stage, wire_textures=True)
     logger.info(
-        "OpenPBR adapter: %d material(s) migrated, %d skipped, %d conflict(s), "
-        "%d texture(s) wired, %d flattened",
+        "OpenPBR adapter: %d material(s) migrated, %d skipped, %d conflict(s), " "%d texture(s) wired, %d flattened",
         migrated,
         skipped,
         conflicts,

@@ -13,9 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Tests for articulation_phases.passive_joints."""
-from pxr import Usd, UsdGeom, UsdPhysics
-from simready_benchmark_kit_suite.articulation_phases.passive_joints import (
+
+import pytest
+from pxr import Sdf, Usd, UsdGeom, UsdPhysics
+from simready.foundation.tier_core.runtime_tests.articulation_phases.passive_joints import (
     detect_passive_joints,
+)
+from simready.foundation.tier_core.runtime_tests.articulation_phases.required_readback import (
+    RequiredReadbackError,
 )
 
 
@@ -110,7 +115,74 @@ def test_detect_passive_joints_follows_mjc_actuator_tendon_targets():
     assert names == ["joint_passive"]
 
 
+def test_detect_passive_joints_accepts_direct_mjc_joint_target():
+    stage = _stage_with_joints([("joint_a", "revolute", None), ("joint_passive", "revolute", None)])
+    actuator = stage.DefinePrim("/World/Asset/actuators/direct", "MjcActuator")
+    actuator.CreateRelationship("mjc:target").SetTargets(["/World/Asset/joints/joint_a"])
+    indices, names = detect_passive_joints(stage, "/World/Asset", ["joint_a", "joint_passive"])
+    assert indices == frozenset({1})
+    assert names == ["joint_passive"]
+
+
 def test_detect_passive_joints_handles_invalid_input():
     stage = Usd.Stage.CreateInMemory()
     indices, names = detect_passive_joints(stage, "/NonExistent", ["joint_a"])
     assert indices == frozenset()
+
+
+def _leaf_root_scene():
+    stage = _stage_with_joints([("joint_a", "revolute", 100), ("joint_passive", "revolute", None)])
+    root = UsdPhysics.FixedJoint.Define(stage, "/World/Asset/root_joint").GetPrim()
+    UsdPhysics.ArticulationRootAPI.Apply(root)
+    for body in ("base", "a", "passive"):
+        UsdPhysics.RigidBodyAPI.Apply(UsdGeom.Xform.Define(stage, "/World/Asset/" + body).GetPrim())
+    UsdPhysics.Joint(root).CreateBody1Rel().SetTargets(["/World/Asset/base"])
+    for name, body in (("joint_a", "a"), ("joint_passive", "passive")):
+        joint = UsdPhysics.Joint(stage.GetPrimAtPath("/World/Asset/joints/" + name))
+        joint.CreateBody0Rel().SetTargets(["/World/Asset/base"])
+        joint.CreateBody1Rel().SetTargets(["/World/Asset/" + body])
+    return stage, root, stage.GetPrimAtPath("/World/Asset")
+
+
+def test_leaf_articulation_discovers_sibling_passives_without_room_probe_contamination():
+    stage, root, asset = _leaf_root_scene()
+    foreign_joint = UsdPhysics.RevoluteJoint.Define(stage, "/World/Room/joint_passive")
+    UsdPhysics.DriveAPI.Apply(foreign_joint.GetPrim(), "angular").CreateStiffnessAttr(100)
+    probe = stage.DefinePrim("/World/Probe/actuator", "NewtonActuator")
+    probe.CreateRelationship("newton:targets").SetTargets(["/World/Asset/joints/joint_passive"])
+    assert detect_passive_joints(stage, str(root.GetPath()), ["joint_a", "joint_passive"]) == (frozenset(), [])
+    assert detect_passive_joints(stage, str(root.GetPath()), ["joint_a", "joint_passive"], asset_prim=asset) == (
+        frozenset({1}),
+        ["joint_passive"],
+    )
+
+
+def test_loaded_asset_scope_finds_sibling_actuator_without_changing_root_policy():
+    stage, root, asset = _leaf_root_scene()
+    actuator = stage.DefinePrim("/World/Asset/actuators/a", "NewtonActuator")
+    actuator.CreateRelationship("newton:targets").SetTargets(["/World/Asset/joints/joint_passive"])
+    assert detect_passive_joints(stage, str(root.GetPath()), ["joint_a", "joint_passive"], asset_prim=asset) == (
+        frozenset(),
+        [],
+    )
+    stage.RemovePrim(actuator.GetPath())
+    root.CreateAttribute("newton:jointsAddMobility", Sdf.ValueTypeNames.Bool).Set(True)
+    asset.CreateAttribute("newton:jointsAddMobility", Sdf.ValueTypeNames.Bool).Set(False)
+    assert detect_passive_joints(stage, str(root.GetPath()), ["joint_a", "joint_passive"], asset_prim=asset) == (
+        frozenset(),
+        [],
+    )
+
+
+@pytest.mark.parametrize("invalid_scope", ["sibling", "different_stage", "missing"])
+def test_explicit_asset_discovery_scope_must_contain_actual_root(invalid_scope):
+    stage, root, _ = _leaf_root_scene()
+    foreign_stage = Usd.Stage.CreateInMemory()
+    if invalid_scope == "sibling":
+        selected = UsdGeom.Xform.Define(stage, "/World/Probe").GetPrim()
+    elif invalid_scope == "different_stage":
+        selected = UsdGeom.Xform.Define(foreign_stage, "/World/Asset").GetPrim()
+    else:
+        selected = stage.GetPrimAtPath("/Missing")
+    with pytest.raises(RequiredReadbackError, match="verified loaded asset subtree"):
+        detect_passive_joints(stage, str(root.GetPath()), ["joint_passive"], asset_prim=selected)

@@ -61,7 +61,7 @@ finally:
         capture_output=True, text=True, timeout=60,
     )
     assert api.returncode == 0, api.stdout + api.stderr
-    summary = json.loads(api_report.read_text())["FET_011_RTX"]
+    summary = json.loads(api_report.read_text())["FET011_SemanticLabels.RTX.0-1-0"]
     assert summary["passed"] is (label_state == "static")
     assert summary["blocking_failure"] is (label_state != "static")
     if label_state != "static":
@@ -83,4 +83,4 @@ finally:
     report = json.loads(cli_report.read_text())
     assert len(report) == 1
     entry = next(iter(report.values()))
-    assert entry["features_summary"]["FET_011_RTX"] == summary
+    assert entry["features_summary"]["FET011_SemanticLabels.RTX.0-1-0"] == summary

@@ -1,0 +1,20 @@
+{
+  "id": "CAP026_Mates.0-1-0",
+  "display_name": "Mate",
+  "legacy_identity": {
+    "id": "FET_026_STANDARD",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "MC.001",
+    "MC.002",
+    "MC.003",
+    "MC.004",
+    "MC.005",
+    "MC.006",
+    "MC.007"
+  ],
+  "features": [
+    "FET003_RigidBody.0-2-0"
+  ]
+}

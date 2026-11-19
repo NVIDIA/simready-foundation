@@ -1,0 +1,32 @@
+{
+  "id": "FET022_DrivenJoints.Newton.0-1-0",
+  "display_name": "Driven Joints (Newton)",
+  "legacy_identity": {
+    "id": "FET_022_NEWTON",
+    "version": "0.1.0"
+  },
+  "source_feature": "FET022_DrivenJoints.0-1-0",
+  "dependencies": [
+    "FET004_Multibody.RobotNewton.0-1-0"
+  ],
+  "additional_requirements": [
+    "DJ.011",
+    "NEWTON.DJ.001",
+    "NEWTON.DJ.002",
+    "NEWTON.DJ.003"
+  ],
+  "adapters": [
+    "skill:simready-foundation-conform-fet-022-newton"
+  ],
+  "runtime_tests": [
+    "simready.foundation.tier_newton.runtime_tests:drive_gain_validation_newton",
+    "simready.foundation.tier_newton.runtime_tests:effort_limit_newton",
+    "simready.foundation.tier_newton.runtime_tests:full_range_sweep_newton",
+    "simready.foundation.tier_newton.runtime_tests:ik_target_reach_newton",
+    "simready.foundation.tier_newton.runtime_tests:jacobian_ik_newton",
+    "simready.foundation.tier_newton.runtime_tests:mimic_joint_newton",
+    "simready.foundation.tier_newton.runtime_tests:multi_joint_coordination_newton",
+    "simready.foundation.tier_newton.runtime_tests:state_accuracy_newton",
+    "simready.foundation.tier_newton.runtime_tests:velocity_limit_newton"
+  ]
+}

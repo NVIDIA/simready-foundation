@@ -86,7 +86,7 @@ _TIER_CONTENT_DIRS = (
     / "foundation"
     / "tier_core",
 )
-FOUNDATIONS_RULES_PATHS = tuple(path / "capabilities" for path in _TIER_CONTENT_DIRS)
+FOUNDATIONS_RULES_PATHS = tuple(path / "rules_and_reqs" for path in _TIER_CONTENT_DIRS)
 FOUNDATIONS_FEATURES_PATHS = tuple(path / "features" for path in _TIER_CONTENT_DIRS)
 FOUNDATIONS_PROFILES_PATHS = tuple(path / "profiles" for path in _TIER_CONTENT_DIRS)
 

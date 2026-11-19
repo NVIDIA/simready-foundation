@@ -1,0 +1,78 @@
+{
+  "schema": "simready-foundations2-catalog-map-v1",
+  "version_encoding": "published semantic version dots become hyphens",
+  "contracts": [
+    {
+      "legacy_id": "FET_000_NEWTON",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_000_NEWTON",
+      "kind": "capability",
+      "id": "CAP000_Core.Newton.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_003_NEWTON",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_003_NEWTON",
+      "kind": "feature",
+      "id": "FET003_RigidBody.Newton.0-1-0",
+      "runtime_tests": [
+        "simready.foundation.tier_newton.runtime_tests:ground_drop_newton",
+        "simready.foundation.tier_newton.runtime_tests:ground_stability_newton",
+        "simready.foundation.tier_newton.runtime_tests:slope_drop_newton"
+      ]
+    },
+    {
+      "legacy_id": "FET_004_NEWTON",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_004_NEWTON",
+      "kind": "feature",
+      "id": "FET004_Multibody.Newton.0-1-0",
+      "runtime_tests": [
+        "simready.foundation.tier_newton.runtime_tests:joint_movement_newton"
+      ]
+    },
+    {
+      "legacy_id": "FET_004_ROBOT_NEWTON",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_004_ROBOT_NEWTON",
+      "kind": "feature",
+      "id": "FET004_Multibody.RobotNewton.0-1-0",
+      "runtime_tests": [
+        "simready_benchmark_newton_suite:joint_movement_newton"
+      ]
+    },
+    {
+      "legacy_id": "FET_022_NEWTON",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_022_NEWTON",
+      "kind": "feature",
+      "id": "FET022_DrivenJoints.Newton.0-1-0",
+      "runtime_tests": [
+        "simready.foundation.tier_newton.runtime_tests:drive_gain_validation_newton",
+        "simready.foundation.tier_newton.runtime_tests:effort_limit_newton",
+        "simready.foundation.tier_newton.runtime_tests:full_range_sweep_newton",
+        "simready.foundation.tier_newton.runtime_tests:ik_target_reach_newton",
+        "simready.foundation.tier_newton.runtime_tests:jacobian_ik_newton",
+        "simready.foundation.tier_newton.runtime_tests:mimic_joint_newton",
+        "simready.foundation.tier_newton.runtime_tests:multi_joint_coordination_newton",
+        "simready.foundation.tier_newton.runtime_tests:state_accuracy_newton",
+        "simready.foundation.tier_newton.runtime_tests:velocity_limit_newton"
+      ]
+    },
+    {
+      "legacy_id": "FET_024_NEWTON",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_024_NEWTON",
+      "kind": "capability",
+      "id": "CAP024_BaseArticulation.Newton.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "kind": "capability",
+      "id": "CAP000_Core.Newton.0-2-0",
+      "native": true,
+      "runtime_tests": []
+    }
+  ]
+}

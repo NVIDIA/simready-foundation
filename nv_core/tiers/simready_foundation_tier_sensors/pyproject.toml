@@ -15,7 +15,7 @@
 
 [project]
 name = "simready-foundation-tier-sensors"
-version = "2026.8.0"
+version = "2026.10.0"
 description = "SimReady Foundation sensors tier: sensor capabilities, features, requirements, and validators (nonvisual sensors, physics sensors, and render products)"
 authors = [
     {name = "NVIDIA"},
@@ -47,7 +47,16 @@ Documentation = "https://nvidia.github.io/simready-foundation/"
 usd = ["usd-core>=22.11"]
 test = ["pytest"]
 benchmark = [
-    "simready-benchmark[kit]>=2026.8.0,<2026.9.0",
+    "simready.evaluate[kit]>=2026.9.0rc2,<2026.11",
+    "simready.evaluate.engine-kit>=2026.9.0rc3,<2026.11",
+    "usd-core>=23.5",
+]
+evaluate = [
+    # Match Core's Foundation 2-compatible Evaluate release line.
+    # Compatible prerelease and stable updates remain within this API generation.
+    "simready.evaluate[kit]>=2026.9.0rc2,<2026.11",
+    # Evaluate's kit extra does not pin its matching engine-kit build.
+    "simready.evaluate.engine-kit>=2026.9.0rc3,<2026.11",
     # Enables plain-Python test discovery outside Kit. Isaac Sim supplies pxr
     # at runtime, while this dependency lets --list-tests inspect the bundled
     # suite before an engine is launched.
@@ -72,7 +81,7 @@ package_licenses = [
 # Ship the committed package tree (respects default excludes, so __pycache__ /
 # the git-ignored generated requirements/ are skipped here)...
 [tool.hatch.build.targets.wheel]
-packages = ["simready", "simready_benchmark_kit_suite"]
+packages = ["simready"]
 
 # ...and add the build-time generated requirements enums.
 [tool.hatch.build.targets.wheel.force-include]
@@ -82,5 +91,5 @@ packages = ["simready", "simready_benchmark_kit_suite"]
 # The shared build hook (../_tooling/build_hook.py) generates this tier's
 # requirements enums at build time, so the codegen package must be importable in
 # the (isolated) build env.
-requires = ["hatchling", "usd-profiles-nvidia"]
+requires = ["hatchling>=1.27", "usd-profiles-nvidia"]
 build-backend = "hatchling.build"

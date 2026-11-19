@@ -1,0 +1,15 @@
+{
+  "id": "CAP202_ThermalCooling.0-1-0",
+  "display_name": "AIF Thermal Cooling",
+  "legacy_identity": {
+    "id": "FET202_AIF",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "TC.001",
+    "TC.002"
+  ],
+  "dependencies": [
+    "CAP201_ConnectionPoints.0-1-0"
+  ]
+}

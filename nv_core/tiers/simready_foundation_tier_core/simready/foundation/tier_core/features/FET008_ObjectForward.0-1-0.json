@@ -1,0 +1,17 @@
+{
+  "id": "FET008_ObjectForward.0-1-0",
+  "display_name": "Object Forward",
+  "dependencies": [
+    "FET001_MinimalPlaceableVisual.1-0-1"
+  ],
+  "additional_requirements": [
+    "AF.001"
+  ],
+  "adapters": [
+    "skill:simready-foundation-conform-fet-008-object-forward"
+  ],
+  "runtime_tests": [
+    "simready.foundation.tier_core.runtime_tests:object_forward_contract",
+    "simready.foundation.tier_core.runtime_tests:object_forward_camera_response"
+  ]
+}

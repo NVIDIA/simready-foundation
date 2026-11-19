@@ -320,7 +320,7 @@ def cp2_usda_type(domain, prop, value):
 
 def emit_cp2(root, write):
     import re
-    reqs = os.path.join(root, PKG, "capabilities/aif/connection_points/requirements")
+    reqs = os.path.join(root, PKG, "rules_and_reqs/aif/connection_points/requirements")
 
     def table(text, marker):
         body = text.split(marker, 1)[1]

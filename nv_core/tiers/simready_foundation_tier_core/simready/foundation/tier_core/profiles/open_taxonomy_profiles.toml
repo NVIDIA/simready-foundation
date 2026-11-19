@@ -1,45 +1,51 @@
 # SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0
-# Optional example profiles for validating one closed-vocabulary dataset taxonomy at a time.
+# Generated Foundations 2 projection. See ../catalog-map.json.
 
 [Open-Taxonomy-COCO]
 "0.1.0" = {features = [
-    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
-    {"FET_011_STANDARD" = {version = "0.2.0"}}, # "Semantic Labels"
-    {"FET_040_STANDARD" = {version = "0.1.0"}}, # "COCO Labels"
+    {selector = "FET011_SemanticLabels.0-2-0"},
+], capabilities = [
+    {selector = "CAP000_Core.0-1-0"},
+    {selector = "CAP040_CocoLabels.0-1-0"},
 ]}
 
 [Open-Taxonomy-Cityscapes]
 "0.1.0" = {features = [
-    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
-    {"FET_011_STANDARD" = {version = "0.2.0"}}, # "Semantic Labels"
-    {"FET_041_STANDARD" = {version = "0.1.0"}}, # "Cityscapes Labels"
+    {selector = "FET011_SemanticLabels.0-2-0"},
+], capabilities = [
+    {selector = "CAP000_Core.0-1-0"},
+    {selector = "CAP041_CityscapesLabels.0-1-0"},
 ]}
 
 [Open-Taxonomy-ADE20K]
 "0.1.0" = {features = [
-    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
-    {"FET_011_STANDARD" = {version = "0.2.0"}}, # "Semantic Labels"
-    {"FET_042_STANDARD" = {version = "0.1.0"}}, # "ADE20K Labels"
+    {selector = "FET011_SemanticLabels.0-2-0"},
+], capabilities = [
+    {selector = "CAP000_Core.0-1-0"},
+    {selector = "CAP042_Ade20kLabels.0-1-0"},
 ]}
 
 [Open-Taxonomy-PascalVOC]
 "0.1.0" = {features = [
-    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
-    {"FET_011_STANDARD" = {version = "0.2.0"}}, # "Semantic Labels"
-    {"FET_043_STANDARD" = {version = "0.1.0"}}, # "PASCAL VOC Labels"
+    {selector = "FET011_SemanticLabels.0-2-0"},
+], capabilities = [
+    {selector = "CAP000_Core.0-1-0"},
+    {selector = "CAP043_PascalVocLabels.0-1-0"},
 ]}
 
 [Open-Taxonomy-SUNRGBD]
 "0.1.0" = {features = [
-    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
-    {"FET_011_STANDARD" = {version = "0.2.0"}}, # "Semantic Labels"
-    {"FET_044_STANDARD" = {version = "0.1.0"}}, # "SUN RGB-D Labels"
+    {selector = "FET011_SemanticLabels.0-2-0"},
+], capabilities = [
+    {selector = "CAP000_Core.0-1-0"},
+    {selector = "CAP044_SunRgbdLabels.0-1-0"},
 ]}
 
 [Open-Taxonomy-ImageNet1K]
 "0.1.0" = {features = [
-    {"FET_000_STANDARD" = {version = "0.1.0"}}, # "Core"
-    {"FET_011_STANDARD" = {version = "0.2.0"}}, # "Semantic Labels"
-    {"FET_045_STANDARD" = {version = "0.1.0"}}, # "ImageNet-1K Labels"
+    {selector = "FET011_SemanticLabels.0-2-0"},
+], capabilities = [
+    {selector = "CAP000_Core.0-1-0"},
+    {selector = "CAP045_ImageNet1kLabels.0-1-0"},
 ]}

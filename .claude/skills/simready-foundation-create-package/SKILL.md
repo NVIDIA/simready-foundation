@@ -96,15 +96,17 @@ python create_simready_package.py apple_a01 1.0.0 MIT \
 
 ## Failure Handling
 
-- Pre-validation `FET_031_STANDARD` or `AA.001`: report the offending anchored-path failure and ask before editing USD references.
+- Pre-validation `CAP031_SelfContainedPackage` or `AA.001`: report the offending anchored-path failure and ask before editing USD references.
 - Pre-validation usage error: collect the missing `--root-usd`, missing `--source`, or invalid folder path.
 - Create error about an existing root `.wrapp` marker: ask whether to reuse that package name or remove the marker.
 - Create error about nested packages: ask the user to remove nested `.wrapp` files before retrying.
-- Post-validation `FET_030_STANDARD`: cite the failing package-core requirement and keep the generated package for inspection.
-- Post-validation `FET_032_STANDARD`: check whether BOM metadata was written and rerun the full flow if the source did not change.
+- Post-validation `CAP030_PackagingCore`: cite the failing package-core requirement and keep the generated package for inspection.
+- Post-validation `CAP032_PackagingIntrospection`: check whether BOM metadata was written and rerun the full flow if the source did not change.
 
 ## Policies
 
+- Protect unrelated local work: before editing shared repository files (spec markdown, requirement/feature JSON, profile TOML, validators, skills, or docs), check `git status` for unrelated in-progress changes and scope edits to the requested task. Never revert, overwrite, discard, stash, or commit a user's uncommitted or unrelated changes; if a file you must edit already carries pending unrelated edits, surface it and confirm before proceeding.
+- Keep secrets out of the repo and evidence: never write user-provided tokens, credentials, API keys, or other secrets into files, source, logs, validation or evaluation reports, commit messages, or bug/Jira/Confluence attachments, and do not echo them in full; read them from environment variables or an existing credential store and redact them from any output you preserve.
 - Do not rewrite the user's USD files automatically while packaging.
 - Do not pick the asset license for the user.
 - Treat `assets/scripts/` as the skill-owned copy of the package workflow.

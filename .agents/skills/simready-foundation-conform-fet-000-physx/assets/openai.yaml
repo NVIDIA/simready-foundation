@@ -1,6 +1,4 @@
-# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-# SPDX-License-Identifier: Apache-2.0
 interface:
-  display_name: "SimReady Conform FET_000_PHYSX"
-  short_description: "Repair FET_000_PHYSX PhysX runtime variant scaffolding"
-  default_prompt: "Use $simready-foundation-conform-fet-000-physx to repair FET_000_PHYSX SimReady PhysX runtime variant conformance on a USD asset."
+  display_name: "SimReady Conform CAP000_Core.PhysX"
+  short_description: "Repair CAP000_Core.PhysX PhysX runtime variant scaffolding"
+  default_prompt: "Use $simready-foundation-conform-fet-000-physx to repair CAP000_Core.PhysX SimReady PhysX runtime variant conformance on a USD asset."

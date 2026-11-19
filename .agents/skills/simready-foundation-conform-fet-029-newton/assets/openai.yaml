@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP029_ConnectionJoint.Newton"
+  short_description: "Repair CAP029_ConnectionJoint.Newton connection-joint conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-029-newton to repair CAP029_ConnectionJoint.Newton SimReady Newton connection joint conformance failures."

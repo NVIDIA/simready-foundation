@@ -1,0 +1,12 @@
+# Generated Foundations 2 projection. See ../catalog-map.json.
+
+[Material]
+"1.0.0" = {features = [
+    {selector = "FET006_Materials.0-3-0"},
+    {selector = "FET006_Materials.Openpbr.0-2-0", optional = true},
+    {selector = "FET006_Materials.MDL.0-3-0", optional = true},
+], capabilities = [
+    {selector = "CAP000_Core.0-2-0"},
+    {selector = "CAP031_SelfContainedPackage.0-1-0"},
+    {selector = "CAP033_SimReadyPackage.0-4-0"},
+]}

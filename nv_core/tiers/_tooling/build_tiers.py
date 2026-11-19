@@ -22,6 +22,11 @@ This module builds into an owned temporary staging directory, sanity-checks the
 result, and then publishes only the wheel distributions produced by that run.
 Unrelated files already present in ``<tiers root>/_build/dist/`` are preserved.
 
+The Kit-free Isaac asset transformer is not built as its own wheel: its source
+lives under ``simready_foundation_tier_core/tools/`` and is force-included into
+the tier-core wheel (see that tier's ``pyproject.toml``). Only workspace members
+are built here.
+
 Each tier's Hatchling build hook (``build_hook.py``, here) generates the
 requirements-enum module during the build; that codegen needs
 ``usd_profiles_nvidia`` (+ ``pxr``) resolvable at build time -- point uv at the
@@ -53,29 +58,6 @@ from typing import List, Optional, Sequence, Tuple
 # Tiers live next to this _tooling/ directory: every tier's pyproject points
 # hatchling at ../_tooling/build_hook.py, so the tiers root is _tooling/'s parent.
 _TIERS_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Packages that ship with the tiers but live outside the uv workspace root, so
-# they cannot be workspace members (uv requires members within the root). They
-# are built with their own `uv build` invocation and verified alongside the
-# tier wheels. Paths are relative to _TIERS_ROOT.
-_EXTERNAL_PACKAGE_RELPATHS = [
-    os.path.join("..", "cip_specs", "isaac_asset_transformer"),
-]
-
-
-def discover_external_packages(tiers_root: str = _TIERS_ROOT) -> List[str]:
-    """Return existing out-of-workspace package dirs (those with a ``pyproject.toml``).
-
-    These are built in addition to the workspace members. Missing directories are
-    skipped so the builder stays usable in partial checkouts.
-    """
-    packages: List[str] = []
-    for relpath in _EXTERNAL_PACKAGE_RELPATHS:
-        pkg_dir = os.path.normpath(os.path.join(tiers_root, relpath))
-        if os.path.isfile(os.path.join(pkg_dir, "pyproject.toml")):
-            packages.append(pkg_dir)
-    return packages
-
 
 class TierBuildError(RuntimeError):
     """Raised for setup problems that prevent building (e.g. ``uv`` not found)."""
@@ -185,20 +167,15 @@ def build_tiers(
     print(f"[build_tiers]   uv        : {uv}")
 
     # Tier discovery is uv's job (the workspace members); this scan is only used
-    # to assert afterwards that uv produced a wheel for each one. External
-    # packages live outside the workspace and are built with their own command.
+    # to assert afterwards that uv produced a wheel for each one.
     expected = [os.path.basename(t) for t in discover_tiers(tiers_root)]
-    external_packages = discover_external_packages(tiers_root)
-    expected_external = [os.path.basename(p) for p in external_packages]
     if not expected:
         print(f"[build_tiers]   no tiers with a pyproject.toml found under {tiers_root}")
         print("=" * 78)
         return [], []
 
-    total_expected = len(expected) + len(expected_external)
+    total_expected = len(expected)
     print(f"[build_tiers]   expecting {len(expected)} tier wheel(s) for: {', '.join(expected)}")
-    if expected_external:
-        print(f"[build_tiers]   plus {len(expected_external)} external wheel(s) for: {', '.join(expected_external)}")
     os.makedirs(build_root, exist_ok=True)
 
     start = time.time()
@@ -211,19 +188,9 @@ def build_tiers(
         print("=" * 78 + "\n")
 
         tier_returncode = subprocess.run(tier_cmd).returncode
-        external_failures: List[str] = []
-        for pkg_dir in external_packages:
-            ext_cmd = [uv, "build", "--wheel", "--out-dir", staging_dir, pkg_dir]
-            print(f"[build_tiers]   run       : {' '.join(ext_cmd)}")
-            ext_returncode = subprocess.run(ext_cmd).returncode
-            if ext_returncode != 0:
-                external_failures.append(
-                    f"external package {os.path.basename(pkg_dir)} uv build exited {ext_returncode}"
-                )
         staged_wheels = sorted(glob.glob(os.path.join(staging_dir, "*.whl")))
         if tier_returncode != 0:
             failures.append(f"tier uv build exited {tier_returncode}")
-        failures.extend(external_failures)
         if not failures and len(staged_wheels) != total_expected:
             # uv returned 0 but did not produce the expected artifacts -> treat
             # it as a failure rather than publishing a partial result.

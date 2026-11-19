@@ -79,9 +79,14 @@ _repo
 _build
 source/apps/exts.deps.generated.kit
 
+# Build-time generated requirements-enum module (produced by the tier build hook
+# from the committed capability markdown; not source, must not be committed).
+/nv_core/tiers/*/simready/foundation/*/requirements/
+
 # Local working notes (agent scratchpad; not part of the repo)
 /MEMORY.md
 /NEWTON.md
+/MATES_REVIEW.md
 
 # Generated validation and reconciliation artifacts
 /outputs/

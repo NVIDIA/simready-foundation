@@ -1,0 +1,18 @@
+{
+  "id": "FET009_MaterialCoverage.0-1-0",
+  "display_name": "Material Coverage",
+  "dependencies": [
+    "FET006_Materials.0-3-0"
+  ],
+  "additional_requirements": [
+    "VM.MAT.001"
+  ],
+  "adapters": [
+    "skill:simready-foundation-conform-fet-009-standard"
+  ],
+  "runtime_tests": [
+    "simready.foundation.tier_core.runtime_tests:preview_surface_renders",
+    "simready.foundation.tier_core.runtime_tests:openpbr_renders",
+    "simready.foundation.tier_core.runtime_tests:mdl_renders"
+  ]
+}

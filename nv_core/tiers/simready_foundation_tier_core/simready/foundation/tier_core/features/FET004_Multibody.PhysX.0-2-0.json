@@ -1,0 +1,23 @@
+{
+  "id": "FET004_Multibody.PhysX.0-2-0",
+  "display_name": "Simulate Multi-Body Physics (PhysX)",
+  "legacy_identity": {
+    "id": "FET_004_PHYSX",
+    "version": "0.2.0"
+  },
+  "source_feature": "FET004_Multibody.0-2-0",
+  "dependencies": [
+    "FET003_RigidBody.PhysX.0-2-0",
+    "FET004_Multibody.0-1-0"
+  ],
+  "additional_requirements": [
+    "PHYSX.COL.001",
+    "PHYSX.COL.002"
+  ],
+  "adapters": [
+    "skill:simready-foundation-conform-fet-004-physx"
+  ],
+  "runtime_tests": [
+    "simready.foundation.tier_core.runtime_tests:joint_movement"
+  ]
+}

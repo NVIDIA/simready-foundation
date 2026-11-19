@@ -1,0 +1,18 @@
+{
+  "id": "FET022_DrivenJoints.0-1-0",
+  "display_name": "Driven Joints",
+  "legacy_identity": {
+    "id": "FET_022_STANDARD",
+    "version": "0.1.0"
+  },
+  "source": true,
+  "dependencies": [
+    "FET004_Multibody.0-1-0"
+  ],
+  "requirements": [
+    "DJ.001",
+    "DJ.002",
+    "DJ.003",
+    "DJ.011"
+  ]
+}

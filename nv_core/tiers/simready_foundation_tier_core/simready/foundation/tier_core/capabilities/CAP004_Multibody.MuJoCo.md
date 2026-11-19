@@ -1,0 +1,83 @@
+# Capability: `CAP004_Multibody.MuJoCo`
+
+| **Property**            | **Value**         |
+|-------------------------|-------------------|
+| Contract                | `CAP004_Multibody.MuJoCo` |
+| Runtime                 | `MuJoCo` |
+| Proprietary Techs       | `MuJoCo` |
+| Versions                | `0-1-0` |
+
+## Description
+
+Defines the MuJoCo multibody physics contract for assets with multiple intended rigid bodies connected by USD physics joints. The feature depends on `CAP003_RigidBody.MuJoCo.0-1-0` for MuJoCo rigid-body and collider authoring, then adds the Standard multibody, joint, and articulation topology requirements.
+
+## Dependency Graph
+
+```{mermaid}
+flowchart LR
+    FET003M["CAP003_RigidBody.MuJoCo\n0-1-0"]
+    FET004M["CAP004_Multibody.MuJoCo\n0-1-0"]
+    FET004M --> FET003M
+
+    classDef current fill:#90EE90,stroke:#333
+```
+
+## Use Cases
+
+- MuJoCo runtime multibody simulation for props and robot-adjacent assets.
+- MJCF-to-USD conversion workflows that preserve jointed rigid-body topology.
+- Physics payload variants where MuJoCo is selectable alongside PhysX and Newton.
+
+## Requirements
+
+### Version 0-1-0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+- [Robot-Body](../profiles/robot-body.md): optional in `2.1.0`, `2.2.0`, `2.3.0`, `3.0.0`
+- [Robot-Gripper](../profiles/robot-gripper.md): optional in `2.1.0`, `2.2.0`, `3.0.0`
+- [Robotics-Prop](../profiles/robotics-prop.md): optional in `3.1.0`, `3.2.0`, `3.3.0`, `4.0.0`
+
+#### Dependencies
+
+| **Property** | **Value** |
+|--------------|-----------|
+| Dependency | `CAP003_RigidBody.MuJoCo.0-1-0` |
+
+#### Requirement List
+
+| Capability | Requirements |
+|------------|--------------|
+| Physics Rigid Bodies | `RB.MB.001`, `RB.011`, `RB.012` |
+| Physics Joints | `JT.001`, `JT.002`, `JT.003`, `JT.ART.002`, `JT.ART.003`, `JT.ART.004` |
+
+</details>
+
+## Pipelines
+
+Source file type:
+
+- `.mjcf`, `.xml`, `.usd`, `.usda`, `.usdc`
+
+Validation or runtime pipeline:
+
+- SimReady validation verifies the selected `CAP004_Multibody.MuJoCo` manifest.
+- MuJoCo runtime validation should simulate the jointed body hierarchy and confirm all linked rigid bodies move as expected.
+
+## Samples
+
+- [sample_content/common_assets/props_general/obs_electricians_large_tool_box_a01/simready_usd/sm_obs_electricians_large_tool_box_a01_01.usd](../../../../../../../sample_content/common_assets/props_general/obs_electricians_large_tool_box_a01/simready_usd/sm_obs_electricians_large_tool_box_a01_01.usd) - multibody prop (5 rigid bodies, 4 revolute joints); select the `MuJoCo` variant.
+
+## Evaluates
+
+- None.
+
+## Adapters
+
+| From Feature | To Feature | Adapter | Status | Notes |
+|--------------|------------|---------|--------|-------|
+| `FET004_Multibody.0-1-0` | `CAP004_Multibody.MuJoCo.0-1-0` | `nv_core/tiers/simready_foundation_tier_core/tools/asset_handler_modules/neutral_to_mujoco` | Done | Applies MuJoCo mesh-collision schemas (`convexHull`) on existing collider prims. |
+| `FET004_Multibody.0-2-0` | `CAP004_Multibody.MuJoCo.0-1-0` | `nv_core/cip_specs/asset_handler_modules/multiphysics_upgrade` | Done | Validates the neutral multibody topology used by MuJoCo; no joints or runtime intent are invented. |

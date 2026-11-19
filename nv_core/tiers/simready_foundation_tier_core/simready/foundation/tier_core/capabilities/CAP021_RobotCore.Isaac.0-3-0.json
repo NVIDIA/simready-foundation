@@ -1,0 +1,14 @@
+{
+  "id": "CAP021_RobotCore.Isaac.0-3-0",
+  "display_name": "Robot Core (Isaac)",
+  "legacy_identity": {
+    "id": "FET_021_ISAAC",
+    "version": "0.3.0"
+  },
+  "requirements": [
+    "RC.003",
+    "RC.007",
+    "RC.008",
+    "RC.009"
+  ]
+}

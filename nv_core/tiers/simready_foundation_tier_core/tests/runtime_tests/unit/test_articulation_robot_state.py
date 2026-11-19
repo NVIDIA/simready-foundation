@@ -15,7 +15,7 @@
 """Tests for articulation_phases.robot_state (uses fake RobotHandle stub)."""
 import numpy as np
 import pytest
-from simready_benchmark_kit_suite.articulation_phases.robot_state import (
+from simready.foundation.tier_core.runtime_tests.articulation_phases.robot_state import (
     RobotDefaultState,
     capture_default_state,
     reset_to_default,

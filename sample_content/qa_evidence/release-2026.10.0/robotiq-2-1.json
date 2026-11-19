@@ -1,0 +1,229 @@
+{
+    "C:\\Users\\jbatchkoff\\.codex\\worktrees\\rel10-ompe-content-repairs\\foundations2\\sample_content\\common_assets\\robots_general\\Robotiq\\2F-85\\simready_usd\\2F-85.usda": {
+        "profiles": {
+            "Robot-Gripper@2.1.0": {
+                "features_summary": {
+                    "CAP000_Core.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "optional requirements": "['com.nvidia.simready.SR.001']",
+                        "passed": false,
+                        "version": "0-1-0"
+                    },
+                    "CAP000_Core.MuJoCo.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['CAP000_Core.0-1-0']",
+                        "optional requirements": "['com.nvidia.simready.SR.001']",
+                        "passed": false,
+                        "version": "0-1-0"
+                    },
+                    "CAP000_Core.Newton.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['CAP000_Core.0-1-0']",
+                        "optional requirements": "['com.nvidia.simready.SR.001']",
+                        "passed": false,
+                        "version": "0-1-0"
+                    },
+                    "CAP000_Core.PhysX.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['CAP000_Core.0-1-0']",
+                        "optional requirements": "['com.nvidia.simready.SR.001']",
+                        "passed": false,
+                        "version": "0-1-0"
+                    },
+                    "CAP003_RigidBody.MuJoCo.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "optional requirements": "['com.nvidia.simready.MUJOCO.COL.001']",
+                        "passed": false,
+                        "version": "0-1-0"
+                    },
+                    "CAP004_Multibody.MuJoCo.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['CAP003_RigidBody.MuJoCo.0-1-0']",
+                        "optional requirements": "['com.nvidia.simready.MUJOCO.COL.001']",
+                        "passed": false,
+                        "version": "0-1-0"
+                    },
+                    "CAP004_Multibody.RobotMuJoCo.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "optional requirements": "['com.nvidia.simready.MUJOCO.COL.001']",
+                        "passed": false,
+                        "version": "0-1-0"
+                    },
+                    "CAP021_RobotCore.Isaac.0-2-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "passed": true,
+                        "version": "0-2-0"
+                    },
+                    "CAP022_DrivenJoints.MuJoCo.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['CAP004_Multibody.RobotMuJoCo.0-1-0']",
+                        "optional requirements": "['com.nvidia.simready.MUJOCO.COL.001']",
+                        "passed": false,
+                        "version": "0-1-0"
+                    },
+                    "CAP024_BaseArticulation.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "passed": true,
+                        "version": "0-1-0"
+                    },
+                    "CAP024_BaseArticulation.MuJoCo.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['CAP024_BaseArticulation.0-1-0']",
+                        "passed": true,
+                        "version": "0-1-0"
+                    },
+                    "CAP024_BaseArticulation.Newton.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['CAP024_BaseArticulation.0-1-0']",
+                        "passed": true,
+                        "version": "0-1-0"
+                    },
+                    "CAP024_BaseArticulation.PhysX.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['CAP024_BaseArticulation.0-1-0']",
+                        "passed": true,
+                        "version": "0-1-0"
+                    },
+                    "CAP028_Gripper.MuJoCo.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['CAP022_DrivenJoints.MuJoCo.0-1-0']",
+                        "optional requirements": "['com.nvidia.simready.MUJOCO.COL.001']",
+                        "passed": false,
+                        "version": "0-1-0"
+                    },
+                    "CAP031_SelfContainedPackage.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "passed": true,
+                        "version": "0-1-0"
+                    },
+                    "CAP033_SimReadyPackage.0-3-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['CAP031_SelfContainedPackage.0-1-0']",
+                        "passed": true,
+                        "version": "0-3-0"
+                    },
+                    "CAP100_IsaacComposition.Isaac.0-3-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "passed": true,
+                        "version": "0-3-0"
+                    },
+                    "FET001_MinimalPlaceableVisual.1-0-1": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "passed": true,
+                        "version": "1-0-1"
+                    },
+                    "FET003_RigidBody.0-2-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "passed": true,
+                        "version": "0-2-0"
+                    },
+                    "FET003_RigidBody.Newton.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "optional requirements": "['com.nvidia.simready.NEWTON.COL.001']",
+                        "passed": false,
+                        "version": "0-1-0"
+                    },
+                    "FET003_RigidBody.PhysX.0-4-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "passed": true,
+                        "version": "0-4-0"
+                    },
+                    "FET004_Multibody.0-2-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['FET003_RigidBody.0-2-0']",
+                        "passed": true,
+                        "version": "0-2-0"
+                    },
+                    "FET004_Multibody.Newton.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['FET003_RigidBody.Newton.0-1-0']",
+                        "optional requirements": "['com.nvidia.simready.NEWTON.COL.001']",
+                        "passed": false,
+                        "version": "0-1-0"
+                    },
+                    "FET004_Multibody.PhysX.0-4-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['FET003_RigidBody.PhysX.0-4-0']",
+                        "passed": true,
+                        "version": "0-4-0"
+                    },
+                    "FET004_Multibody.RobotNewton.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "optional requirements": "['com.nvidia.simready.NEWTON.COL.001']",
+                        "passed": false,
+                        "version": "0-1-0"
+                    },
+                    "FET004_Multibody.RobotPhysX.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "passed": true,
+                        "version": "0-1-0"
+                    },
+                    "FET022_DrivenJoints.0-2-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['FET004_Multibody.0-2-0']",
+                        "passed": true,
+                        "version": "0-2-0"
+                    },
+                    "FET022_DrivenJoints.Isaac.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['FET022_DrivenJoints.PhysX.0-1-0']",
+                        "passed": true,
+                        "version": "0-1-0"
+                    },
+                    "FET022_DrivenJoints.Isaac.0-2-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['FET022_DrivenJoints.PhysX.0-2-0']",
+                        "passed": true,
+                        "version": "0-2-0"
+                    },
+                    "FET022_DrivenJoints.Newton.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['FET004_Multibody.RobotNewton.0-1-0']",
+                        "optional requirements": "['com.nvidia.simready.NEWTON.COL.001']",
+                        "passed": false,
+                        "version": "0-1-0"
+                    },
+                    "FET022_DrivenJoints.PhysX.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['FET004_Multibody.RobotPhysX.0-1-0']",
+                        "passed": true,
+                        "version": "0-1-0"
+                    },
+                    "FET022_DrivenJoints.PhysX.0-2-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['FET004_Multibody.PhysX.0-4-0']",
+                        "passed": true,
+                        "version": "0-2-0"
+                    },
+                    "FET028_Gripper.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "[]",
+                        "passed": true,
+                        "version": "0-1-0"
+                    },
+                    "FET028_Gripper.Isaac.0-1-0": {
+                        "blocking_failure": false,
+                        "dependencies": "['FET022_DrivenJoints.Isaac.0-1-0', 'FET028_Gripper.0-1-0']",
+                        "passed": true,
+                        "version": "0-1-0"
+                    }
+                },
+                "profile_id": "Robot-Gripper",
+                "profile_version": "2.1.0"
+            }
+        }
+    }
+}

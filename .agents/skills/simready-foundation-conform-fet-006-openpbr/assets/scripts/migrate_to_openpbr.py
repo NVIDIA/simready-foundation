@@ -1128,7 +1128,7 @@ def texture_problems(material_prim: Usd.Prim) -> list:
     missing texture.
     """
     problems, seen = [], set()
-    for prim in Usd.PrimRange(material_prim):
+    for prim in Usd.PrimRange(material_prim, Usd.TraverseInstanceProxies()):
         for attr in prim.GetAttributes():
             name = attr.GetName()
             if not name.startswith("inputs:"):
@@ -1149,7 +1149,11 @@ def texture_problems(material_prim: Usd.Prim) -> list:
 def verify(stage: Usd.Stage) -> list:
     """Report the VM.PBR conditions this script is responsible for."""
     problems = []
-    for prim in stage.TraverseAll():
+    # Instance proxies are included so --verify sees the same materials the
+    # migration authors. A material inside an instanceable reference is invisible
+    # to TraverseAll, so verifying with it reported success on assets whose
+    # materials were almost entirely hidden behind instancing.
+    for prim in stage.Traverse(Usd.TraverseInstanceProxies()):
         if prim.GetTypeName() != "Material":
             continue
         if "PhysicsMaterials" in str(prim.GetPath()):

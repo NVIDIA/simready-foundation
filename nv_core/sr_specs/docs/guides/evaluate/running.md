@@ -1,0 +1,255 @@
+# Running Tests
+
+This page walks through installing the `simready-evaluate` tool, configuring an
+engine, and running tests against an asset. The installed-tier workflow does not
+require a SimReady Foundation clone: the tier supplies both specifications and
+runtime tests, while its optional Evaluate extra supplies execution dependencies.
+
+## Prerequisites
+
+Before you install, confirm the following:
+
+| Requirement | Minimum |
+|---|---|
+| Python | 3.12 |
+| Virtual environment | A dedicated venv for `simready-evaluate` and its dependencies |
+
+## Install
+
+Create and activate a virtual environment:
+
+````{tab-set}
+```{tab-item} Windows (PowerShell)
+python -m venv .venv
+.venv\Scripts\activate
+```
+
+```{tab-item} Linux
+python -m venv .venv
+source .venv/bin/activate
+```
+````
+
+Install the core tier with its optional `evaluate` extra. The command respects
+the package index and mirror already configured for `pip`:
+
+```bash
+pip install "simready-foundation-tier-core[evaluate]"
+```
+
+The extra installs `simready-evaluate[kit]`; the runtime-test modules already
+ship in the tier. Evaluate discovers both specification catalogs and the
+runtime-test directory through `simready.tier`, so neither `--sr-specs` nor
+`--tests-path` is required for published content.
+
+For Newton tests, also install the independently owned Newton tier in this same
+Evaluate environment:
+
+```bash
+pip install "simready-foundation-tier-newton[evaluate]"
+simready-evaluate --show-config
+simready-evaluate --list-tests
+```
+
+Check that discovery lists the canonical provider
+`simready.foundation.tier_newton.runtime_tests` and the intended `_newton`
+procedures. Configuring a Newton engine alone does not install its catalogs or
+test provider. See [Newton Runtime Tests](../../../../tiers/simready_foundation_tier_newton/simready/foundation/tier_newton/runtime_tests/docs/runtime-tests.md) for
+ownership, coverage and runtime prerequisites.
+
+Use `--tests-path` only to add an unpublished test package during development.
+Explicit paths are loaded in addition to installed test providers.
+
+## Set Up the Engine
+
+Keep Evaluate and validation dependencies in the original Python 3.12
+environment. Install pip Isaac Sim in a separate Python 3.12 environment:
+
+```powershell
+py -3.12 -m venv PATH_TO_ISAAC_ENV
+PATH_TO_ISAAC_ENV\Scripts\python.exe -m pip install "isaacsim[all,extscache]" --extra-index-url https://pypi.nvidia.com
+```
+
+```bash
+python3.12 -m venv PATH_TO_ISAAC_ENV
+PATH_TO_ISAAC_ENV/bin/python -m pip install 'isaacsim[all,extscache]' --extra-index-url https://pypi.nvidia.com
+```
+
+Do not install Isaac beside Evaluate's `usd-core`: Isaac's `usd-exchange`
+dependencies also own `pxr/` files. `--setup --install-isaac` refuses this mixed
+environment. If it already happened, recreate the host environment; uninstalling
+one overlapping USD distribution can remove files needed by the other.
+
+Configure the separate pip installation in `engines.toml`; use forward slashes
+in TOML paths and the version reported by that environment's `pip show isaacsim`:
+
+```toml
+[kit.isaac_sim]
+executable_path = "PATH_TO_ISAAC_ENV/Scripts/isaacsim.exe"
+python_executable = "PATH_TO_ISAAC_ENV/Scripts/python.exe"
+version = "6.1.0.0"
+tags = ["isaac", "kit"]
+runtime = "PhysX"
+
+[kit.isaac_sim_newton]
+executable_path = "PATH_TO_ISAAC_ENV/Scripts/isaacsim.exe"
+python_executable = "PATH_TO_ISAAC_ENV/Scripts/python.exe"
+version = "6.1.0.0"
+tags = ["isaac", "kit"]
+runtime = "Newton"
+experience = "isaacsim.exp.full.newton"
+```
+
+On Linux, substitute `PATH_TO_ISAAC_ENV/bin/isaacsim` and
+`PATH_TO_ISAAC_ENV/bin/python`. The separate `python_executable` also permits
+Isaac's binary Python dependencies to preload before Kit extension imports.
+Run `python -m pip check` in the host and with the separate Isaac Python, then
+run `--engines-toml engines.toml --show-config`, `--list-tests`, and a targeted
+real session from the Evaluate environment. `--setup --engines-toml engines.toml`
+verifies the configured pip-Isaac interpreter and prepared runtime read-only.
+That additional check requires mirrored Evaluate/Kit/tier wheels and their
+runtime manifest; it is not required for an SDK-only headless environment.
+It does not repair the separate installation, create configuration files, or
+persist a checkout. A real official-test session remains required; host setup
+does not establish physics or renderer health. For manual Script Editor use,
+prepare the runtime wheels and verify the native SDK inside that Isaac session.
+
+For an existing standalone Isaac Sim installation, create `engines.toml` in
+the working directory or user configuration directory and point it at the
+launcher:
+
+```toml
+[kit.isaac_sim]
+executable_path = "PATH_TO_ISAAC_LAUNCHER"
+tags = ["isaac", "kit"]
+runtime = "PhysX"
+
+[kit.isaac_sim_newton]
+executable_path = "PATH_TO_ISAAC_LAUNCHER"
+tags = ["isaac", "kit"]
+runtime = "Newton"
+experience = "isaacsim.exp.full.newton"
+```
+
+The standalone launcher is `isaac-sim.bat` on Windows or `isaac-sim.sh` on
+Linux. `--engines-toml FILE` selects an explicit configuration for one command.
+An explicit file replaces automatic local pip-Isaac discovery.
+
+## Use a Foundation Source Checkout
+
+Use a checkout without rebuilding its tier wheel by passing the checkout root:
+
+```bash
+simready-evaluate --foundations-path PATH_TO_FOUNDATIONS --show-config
+simready-evaluate --foundations-path PATH_TO_FOUNDATIONS --list-tests
+```
+
+`--foundations-path` selects the checkout's project configuration, tier
+catalogs, and tier-owned runtime tests. It cannot be combined with
+`--project-config`.
+
+To make a checkout persistent, set its project configuration in the user
+`engines.toml` instead of repeating the flag:
+
+```toml
+[paths]
+project_config = "PATH_TO_FOUNDATIONS/sample_content/project_config.toml"
+```
+
+The `SIMREADY_PROJECT_CONFIG` environment variable provides the same override.
+
+Discovery inputs have distinct purposes:
+
+| Flag | Effect |
+|---|---|
+| `--foundations-path <DIR>` | Use one Foundation source checkout for catalogs, project configuration, and tier-owned tests. |
+| `--project-config <FILE>` | Use an explicit project configuration; mutually exclusive with `--foundations-path`. |
+| `--tests-path <DIR> [...]` | Add one or more trusted unpublished test packages. Installed providers remain active. |
+| `--engines-toml <FILE>` | Use one explicit engine configuration for this command. |
+
+## Run
+
+An ordinary assessment requires current official Validate evidence attributable
+to the unchanged asset and selected profile/version. Evaluate reads evidence;
+it does not perform static validation, and the Evaluate extra does not install
+`simready-validate`. If an attributable current receipt already exists, run:
+
+```bash
+simready-evaluate --engines-toml engines.toml --assets path/to/asset.usd --no-stamp
+```
+
+For a fresh unstamped asset or unqualified existing evidence, install/use
+`simready-validate` separately in an approved compatible validation host with
+the selected tier and schema plugins. Keep pip Isaac in its separate environment.
+Record the resolved Validate/provider/catalog versions and paths; select the
+requested registered profile/version. Write official results to a fresh JSON
+path, then hand them to Evaluate without feature/test overrides:
+
+```bash
+simready-validate --profile <profile-id> --version <profile-version> \
+  --output <absolute-fresh-validation.json> <absolute-asset.usd>
+simready-evaluate --engines-toml engines.toml --assets <absolute-asset.usd> \
+  --validation-results <absolute-fresh-validation.json> --no-stamp
+```
+
+This handoff requires exactly one local asset. Relative JSON asset keys resolve
+from the JSON directory unless `--validation-results-root <absolute-key-root>`
+is supplied. Do not pass Validate's `--stamp-asset-validation`: this path leaves
+source assets and receipts unchanged. Validate and Evaluate remain independent
+packages. Failed static results stay authoritative; do not replace them with an
+old receipt or a forced feature to obtain a pass. Inspect plan warnings, selected
+binding issues, the exit code, `run_summary.json` and detailed report rows.
+Without evidence, an ordinary run can select no runtime tests; an empty plan
+does not establish conformance.
+
+By default, the stamp stage copies the root USD into the run's `results/`
+mirror and writes the evaluation receipt to that copy and its sibling
+`.simready/assets/<asset-key>/validation.json`. The asset key is the first 16
+hexadecimal characters of the SHA-256 of the full USD filename, including its
+extension. Legacy directory-level receipts remain readable when no asset-owned
+receipt exists. It never modifies the source asset. Specify
+`--no-stamp` to skip this step. Refer to
+[The Runtime Stamp](reading-reports.md#the-runtime-stamp) for the output contract.
+
+To force a specific feature's tests to run, regardless of the asset's validation
+status, add `--features`. Inspect the installed inventory and its catalog-binding
+warnings first, then replace `EXACT_AVAILABLE_FEATURE_ID` with the desired exact
+dotted contract ID:
+
+```bash
+simready-evaluate --list-tests
+simready-evaluate --assets path/to/asset.usd --features EXACT_AVAILABLE_FEATURE_ID
+```
+
+A historical contract can require a missing or disabled test even when its
+available siblings are listed. Those siblings can run, but the feature remains
+incomplete and the run exits nonzero; a narrower `--tests` filter does not make
+an unavailable required binding pass. Do not enable an experiment or modify a
+published contract merely to remove that warning. Forced runs bypass static
+validation gating and are diagnostic scope, not complete asset certification.
+
+To list the tests available before a run, use `simready-evaluate --list-tests`.
+By default, the requested output location is `_testing/` at the configured
+project root, or the current directory when no project root resolves.
+An explicit `--output-dir` takes precedence over `engines.toml [paths].output_dir`,
+which takes precedence over that fallback. Missing or empty directories are
+used directly. Only nonempty directories receive an `evaluate_report_N` child,
+starting at `0` or one above the highest existing numeric suffix. Existing files
+are preserved; gaps are not reused. Evaluate prints the resolved path; use that
+exact run directory for reruns and report regeneration. `--output-dir DIR` requests a different
+location. Refer to [Pipeline and Stages](pipeline.md) for stage flow and flags
+such as `--plan-only` and `--no-stamp`, and to [Reading Reports](reading-reports.md)
+for the output contract.
+
+On Windows, Kit may need a shorter native capture path than the final result
+directory. Evaluate stages the native capture under the first configured
+TMPDIR, TEMP, or TMP directory and then publishes accepted media under the
+normal run output. Keep that temporary directory absolute, writable, and
+short before launching Isaac. If capture reports a temporary path error,
+correct the setting and rerun; check the engine log and result media. A
+missing recording does not by itself establish an asset physics failure.
+
+## Next Steps
+
+- [Pipeline and Stages](pipeline.md): plan, run, stamp, and report stages
+- [Reading Reports](reading-reports.md): interpret results, exit codes, and [verify a clean run](reading-reports.md#verify-a-clean-run)

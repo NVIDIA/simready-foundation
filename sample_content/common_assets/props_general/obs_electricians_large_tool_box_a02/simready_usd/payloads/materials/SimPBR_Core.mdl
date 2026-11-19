@@ -1,0 +1,139 @@
+mdl 1.7;
+
+import ::df::*;
+import ::state::*;
+import ::math::*;
+import ::base::*;
+import ::tex::*;
+import ::anno::*;
+
+export material apply_geometry_alpha_cutoff(
+    material base,
+    float alpha,
+    float alpha_cutout_cutoff
+) = let {
+    material final = material(
+        thin_walled: base.thin_walled,
+        ior: base.ior,
+        surface: base.surface,
+        backface: base.backface,
+        geometry: material_geometry(
+            displacement: base.geometry.displacement,
+            normal: base.geometry.normal,
+            cutout_opacity: alpha < alpha_cutout_cutoff ? 0.0 : base.geometry.cutout_opacity
+        )
+    );
+} in final;
+
+export material apply_wetness(
+    material base,
+
+    color base_color,
+
+    float wetness,
+    float porosity,
+
+    color water_albedo,
+    float water_accumulation,
+    float water_transparency
+) = let {
+    // Compute related geometrical state.
+    // Depending on water accumulation value, the normal is expected to be geared toward the up direction
+    float3 base_normal = base.geometry.normal;
+    float3 world_up = float3(0.0f, 0.0f, 1.0f);
+    float maxWaterAccumulation = ::math::saturate(water_accumulation);
+    float3 up = state::transform_vector(state::coordinate_world, state::coordinate_internal, world_up);
+    float accumulation_factor = 1.0 - ::math::pow(1.0 - maxWaterAccumulation, 3.0);
+    float tweak_normal_scale = ::math::saturate((math::dot(state::geometry_normal(), up) - 0.8f) / 0.2f) * accumulation_factor;
+    float3 accumulation_normal = ::math::normalize(math::lerp(base_normal, up, tweak_normal_scale)); // Assuming both normals are almost aligned, good enough approximation
+
+    // First darken and saturate the color to mimic the tint change due to absorption on porous materials.
+    // Strengthened darkening effect for Kit 107 renderer compatibility
+    float wet_factor = ::math::max(maxWaterAccumulation, wetness);
+    color desaturated_color = ::math::dot(float3(0.2126, 0.7152, 0.0722), float3(base_color));
+    color saturated_color = ::math::saturate(math::lerp(desaturated_color, base_color, 1.5f)) * 0.4f; // Increased darkening (was 0.5)
+    color wetcolor_tint = ::math::saturate(math::lerp(color(1.0f), saturated_color / base_color, porosity * wet_factor));
+    // Additional darkening based on wetness - surfaces get darker when wet
+    color darkness_factor = math::lerp(color(1.0f), color(0.7f), wet_factor * porosity);
+    color final_tint = wetcolor_tint * darkness_factor;
+
+    bsdf tinted = ::df::tint(final_tint, base.surface.scattering);
+
+
+    // Add a layer of reflection depending on wetness and porosity
+    // Strengthened reflection weight for Kit 107 renderer compatibility
+    float reflection_weight = ::math::saturate(wetness * (1.0 - porosity * 0.5)); // Reduced porosity influence (was 1.0 - porosity)
+    
+    // For wet reflections, use the TRUE GEOMETRY normal (state::geometry_normal()) to ensure consistent reflections
+    // across all materials (road, road paint, etc.). The water layer should reflect as a flat puddle,
+    // independent of the underlying material's normal map textures or shading normal modifications.
+    // state::geometry_normal() returns the actual face normal, NOT the shading normal which materials can modify.
+    // This ensures the pole reflection aligns correctly on both road and road markings.
+    float3 wet_normal = state::geometry_normal(); // TRUE geometric face normal - consistent across all materials
+    
+    // Use custom_curve_layer instead of fresnel_layer for better control over reflections
+    // Keep reflections subtle - wet roads should be DARKER than dry roads, not brighter
+    // The darkening comes from the tinted base, reflections should be secondary
+    bsdf wet = ::df::custom_curve_layer(
+            normal_reflectivity: 0.02 * reflection_weight, // 2% reflection when looking straight down (subtle)
+            grazing_reflectivity: 0.4,  // 40% reflection at grazing angles (much reduced to avoid bright/white appearance)
+            exponent: 5.0, // Fresnel-like falloff curve
+            weight: reflection_weight,
+            layer:
+                ::df::microfacet_ggx_smith_bsdf(mode: df::scatter_reflect, roughness_u: 0.02, tint: color(1.0)), // More roughness for realistic wet look
+            base: tinted,
+            normal: wet_normal
+    );
+
+    // Accumulation: less reflection on normal angles and slighty darker tinting
+    // Change normal reflectivity, layer weight and tint in case of shady water
+    bsdf accumulation = ::df::custom_curve_layer(
+                normal_reflectivity: 0.78,
+                grazing_reflectivity: 1.0,
+                weight: maxWaterAccumulation,
+                layer: ::df::directional_factor(
+                    normal_tint: color(0.5),
+                    grazing_tint: color(1.0),
+                    base: ::df::microfacet_ggx_smith_bsdf(
+                        mode: ::df::scatter_reflect,
+                        roughness_u: 0.0,
+                        tint: color(water_albedo)
+                    )
+                ),
+                base:
+                    ::df::weighted_layer(
+                        layer: ::df::diffuse_reflection_bsdf(tint: water_albedo, roughness: 0.07 * 0.07),
+                        base: tinted,
+                        weight:  1.0 - water_transparency
+                    ),
+                normal: accumulation_normal
+            );
+
+    // Eventually blend between the two wetness layers to get the final result.
+    material final = material(
+        thin_walled: base.thin_walled,
+        surface: material_surface(
+            scattering: 
+                ::df::weighted_layer(
+                    base: wet,
+                    layer: accumulation,
+                    weight: maxWaterAccumulation),
+            emission: base.surface.emission
+        ),
+        backface: base.backface,
+        ior: base.ior,
+        volume: base.volume,
+        geometry: base.geometry
+    );
+} in material(
+    thin_walled: final.thin_walled,
+    surface: final.surface,
+    backface: final.backface,
+    ior: final.ior,
+    volume: final.volume,
+    geometry: material_geometry(
+        displacement: final.geometry.displacement,
+        normal: accumulation_normal,
+        cutout_opacity: final.geometry.cutout_opacity
+    )
+);

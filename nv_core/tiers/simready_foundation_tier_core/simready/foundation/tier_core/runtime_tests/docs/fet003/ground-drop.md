@@ -1,0 +1,138 @@
+# ground_drop (FET003 Physics)
+
+| Property | Value |
+|---|---|
+| Test name | ground_drop |
+| Feature(s)   | `FET003_RigidBody.0-1-0`, `FET003_RigidBody.0-2-0`, `FET003_RigidBody.PhysX.0-1-0`, `FET003_RigidBody.PhysX.0-2-0`, `FET003_RigidBody.PhysX.0-3-0`, `FET003_RigidBody.PhysX.0-4-0` |
+| Engine | Kit / Isaac Sim (>=2024.2.0) |
+| Test version | 4.0.2 |
+| Wall-clock timeout | 600 seconds |
+
+## Summary
+
+Drops an asset above a flat floor and checks bounding-box proximity, allowed
+overlap using PhysX. The Newton tier owns the separate
+`ground_drop_newton` procedure and its backend-specific setup.
+Settling is evaluated independently by [ground_stability](ground-stability.md).
+The drop still observes settling to retain its existing early-stop/video policy;
+those observations no longer decide this procedure's PASS/FAIL.
+
+## What Pass Guarantees
+
+The sampled bounding-box proxies met configured limits. A pass does not certify
+exact contact, collider fidelity, realistic mass/inertia or continuous stability.
+It also does not guarantee settling. The selected rigid-body feature still
+requires its separately bound stability and slope tests.
+
+## What It Checks
+
+- Proximity: minimum box Z crosses floor_level + floor_margin from above.
+  This is not the instant of physical impact.
+- Overlap: after proximity, minimum box Z must stay above
+  floor_level - floor_margin. The check starts immediately.
+- Diagnostic rest: sampled box-center distance and min/max box-corner coordinate
+  variation are observed for early stopping, not required for a drop PASS.
+  These are not linear/angular velocities; rotation can preserve the same box.
+
+## How It Works
+
+Placement uses twice the initial box height, raised as needed to preserve the
+minimum drop distance above the proximity line. The existing follow camera stays.
+Defaults configure 240 Hz physics, capture every 16 observed steps, and encode
+15 fps video. Render warmup/stabilization/retries can add uncounted ticks;
+nominal step-count graph time is not guaranteed video time.
+
+Rest checking starts after the post-proximity delay. The loop ends after rest,
+failure/deadline plus a short tail, or the hard step budget. Missing required
+live bounds or a hard budget
+ending before the required post-proximity overlap window leaves execution
+incomplete, not an asset FAIL. Rest/deadline acceptance freezes before the video
+tail; later recording cannot turn a missed deadline into success. Overlap checks
+continue through the tail and may still invalidate the result. The existing
+world-fixed precheck skips the trial. It records Not applicable only when the
+positive anchor proof connects every enabled owned rigid-body component to a
+fixed world/static anchor through qualified constraints, including resolved
+endpoints and their ancestry. Fixed, revolute and spherical connections can
+supply edges; prismatic connections need qualified finite travel. Disconnected
+bodies, unsupported/free constraints, animated eligibility or breakable essential
+connections cannot supply this proof.
+Both constant breaking thresholds must be positive infinity or exactly the
+largest finite IEEE-754 float32 value (`3.4028234663852886e38`), PhysX's
+effectively-unbreakable default. Other finite values, including the adjacent
+lower float32 value, do not qualify; this is not a large-strength tolerance.
+The graph check reads the composed values without changing the asset. Incomplete endpoint
+composition leaves the original skip unmarked and reported as Could not assess;
+it establishes neither measured asset FAIL nor PASS. Cooking, initialization
+and watchdog failures
+require runtime diagnosis, not an inferred asset-physics defect.
+
+Configuration is qualified before scene mutation: required numeric settings
+must be finite real values, not booleans or coercible strings. Physics/capture
+rates are positive integer-valued numbers, settle frames are nonnegative
+integer-valued numbers, and load timeout is positive. Lengths, tolerances,
+durations and friction are nonnegative; floor level is signed finite. Supported
+zero settings retain their existing comparator policy and do not establish a
+positive observed response. Invalid configuration is incomplete execution,
+not a completed asset-response failure.
+
+Required cleanup preserves the first execution error/cancellation, attempts
+remaining safe restoration and retires uncertain native context. With no
+earlier cause, cleanup-only cancellation propagates. Optional notes cannot
+replace the cause; a later cleanup retry does not qualify worker reuse.
+
+Default distances are **stage units**, not automatically metres:
+
+| Setting | Default | Meaning |
+|---|---|---|
+| drop_height_factor | 2.0 | Initial box-height multiplier |
+| minimum_drop_distance | 0.1 | Clearance above proximity line |
+| floor_margin | 0.1 | Both proximity and floor-overlap allowance |
+| rest_tolerance | 0.02 | Center/corner variation allowance |
+| penetration_check_seconds | 1.0 | Nominal delay before rest checking |
+| rest_detection_hold_seconds | 2.0 | Nominal sampled hold window |
+| rest_detection_max_seconds | 8.0 | Nominal deadline after proximity |
+| simulation_seconds | 10.0 | Hard nominal step budget |
+| simulate_after_result_seconds | 0.5 | Nominal video tail |
+
+## Failure Cases
+
+Missing proximity and excessive box overlap are measured drop failures.
+An unsatisfied settling window belongs to the independent stability test.
+None proves mass, friction or geometry as its cause.
+
+## How to Fix
+
+Review the result, video, sampled variation, stage scale and collider settings.
+Compare allowances with asset size before assigning an asset defect. Repair only
+a proven contract violation; do not flatten valid geometry or replace an SDF
+collider solely to force a pass. Preserve execution errors separately.
+
+## Expected Result
+
+![ground_drop expected result](../_images/ground-drop.png)
+
+[Result video](../../../../../../../../sr_specs/docs/_static/videos/ground-drop.mp4)
+
+The asset falls, possibly bouncing/tumbling before sampled rest. Clips may end
+after a failure/deadline. Camera following can change apparent size.
+
+## Notes and Caveats
+
+Version 3.2.1 adds diagnostic context/capture associations and corrects reporting;
+3.2.0 placement and acceptance thresholds are unchanged. The absolute 0.1
+stage-unit allowance can be large for small assets; it is not precision contact
+validation. Missing contact telemetry stays unknown, not zero penetration.
+Version 3.2.2 qualifies finite configuration and required cleanup without
+changing valid defaults, observation criteria or source assets.
+Version 4.0.0 separates the drop verdict from settling, freezes rest/deadline
+outcomes before recording tails and qualifies required overlap-window budgets.
+The floor now uses a typed, verified physics-purpose material binding with
+unchanged coefficients (static 0.5, dynamic 0.4, restitution 0). Older untyped
+or ineffective fixture bindings are not assumed equivalent native simulations.
+This is a test-fixture correction, not an asset material edit.
+
+Histories record scale, initial box size, rates, thresholds and bounded authored
+collider settings. Authored approximation/contact/rest offsets are not effective
+cooked geometry. Small AABB/visible overlap can differ from SDF collider contact.
+Graph ticks associate successful captures with preceding observations, not exact
+image timestamps or encoded indices. Missing hooks retain normal execution.

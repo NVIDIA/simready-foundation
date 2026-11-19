@@ -53,8 +53,7 @@ simready-package --help
 
 ### 2b. WRAPP (required for full BOM packaging only)
 
-`ovpackage` is not on `pypi.nvidia.com`. Install it separately from
-the NVIDIA internal index:
+Install `ovpackage` separately from your configured package source:
 
 ```bash
 pip install ovpackage
@@ -91,8 +90,8 @@ Pre-validation: [PASSED]
 
 Exit code `0` means the folder is ready to package. The
 `Package-Candidate` profile checks that all USD references are
-self-contained (`FET031`) and that the required packaging metadata
-structure is in place (`FET033`).
+self-contained (`CAP031_SelfContainedPackage`) and that the required
+packaging metadata structure is in place (`CAP033_SimReadyPackage`).
 
 ## 4. Local packaging (no BOM)
 
@@ -107,9 +106,10 @@ simready-package sample_content/packaging/simple_packages/apple_a01_nobom --name
 
 Local mode automatically uses the `Package-NoBOM` profile for
 post-validation. `Package-NoBOM` checks only manifest structure
-(`FET_030_STANDARD`: `format_version`, `package_id`, `license`),
+(`CAP030_PackagingCore`: `format_version`, `package_id`, `license`),
 without requiring a BOM or content hash. The full `Package` profile
-(which adds `FET032` BOM introspection) is only used in WRAPP mode.
+(which adds `CAP032_PackagingIntrospection` BOM introspection) is only
+used in WRAPP mode.
 
 Expected output:
 
@@ -194,7 +194,7 @@ Post-validation: [PASSED]
 
 A package produced by WRAPP (step 5) includes a BOM and content hash.
 Validate it against the full `Package` profile, which also checks BOM
-completeness (`FET032`):
+completeness (`CAP032_PackagingIntrospection`):
 
 ```bash
 simready-package --project-config sample_content/project_config.toml --post-validate-only --package-def sample_content/packaging/simple_packages/apple_a01_usd_bom/com.nvidia.simready.packaging.json

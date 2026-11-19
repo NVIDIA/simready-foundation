@@ -1,0 +1,5 @@
+{
+  "provider": "simready.foundation.sensors.runtime_tests",
+  "import_package": "simready.foundation.sensors.runtime_tests",
+  "aliases": ["simready_benchmark_sensors_kit_suite"]
+}

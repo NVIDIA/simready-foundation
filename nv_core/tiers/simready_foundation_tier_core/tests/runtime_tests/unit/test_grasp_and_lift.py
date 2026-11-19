@@ -21,24 +21,41 @@ import pytest
 
 
 def _import_grasp_and_lift(monkeypatch):
-    decorator_module = types.ModuleType("simready_benchmark.core.decorator")
+    decorator_module = types.ModuleType("simready.evaluate.core.decorator")
     decorator_module.test = lambda **_kwargs: lambda function: function
-    monkeypatch.setitem(sys.modules, "simready_benchmark.core.decorator", decorator_module)
-    return importlib.import_module("simready_benchmark_kit_suite.fet005_grasp.grasp_and_lift")
+    monkeypatch.setitem(sys.modules, "simready.evaluate.core.decorator", decorator_module)
+    return importlib.import_module("simready.foundation.tier_core.runtime_tests.fet005_grasp.grasp_and_lift")
 
 
 @pytest.mark.parametrize(
     ("runtime", "feature"),
     [
-        ("PhysX", "FET_003_PHYSX"),
-        (" newton ", "FET_003_NEWTON"),
-        ("MUJOCO", "FET_003_MUJOCO"),
+        ("PhysX", "FET003_RigidBody.PhysX"),
+        (" newton ", "FET003_RigidBody.Newton"),
+        ("MUJOCO", "CAP003_RigidBody.MuJoCo"),
     ],
 )
 def test_runtime_dependency_uses_exact_fet003_variant(monkeypatch, runtime, feature):
     grasp_and_lift = _import_grasp_and_lift(monkeypatch)
 
     assert grasp_and_lift._required_physics_feature(runtime) == feature
+
+
+@pytest.mark.parametrize(
+    ("validated", "expected"),
+    [
+        ({"FET003_RigidBody.PhysX.0-1-0"}, True),
+        ({"FET003_RigidBody.PhysX.0-4-0", "FET003_RigidBody.0-2-0"}, True),
+        ({"FET003_RigidBody.0-2-0"}, False),
+        ({"FET003_RigidBody.PhysXRobot.0-1-0"}, False),
+    ],
+)
+def test_any_version_of_the_runtime_contract_satisfies_the_dependency(monkeypatch, validated, expected):
+    grasp_and_lift = _import_grasp_and_lift(monkeypatch)
+
+    assert grasp_and_lift._is_validated("FET003_RigidBody.PhysX", validated) is expected
+    assert grasp_and_lift._is_validated("FET003_RigidBody.PhysX", {"FET_003_PHYSX"})
+    assert not grasp_and_lift._is_validated("FET003_RigidBody.PhysX", {"FET003_RigidBody.PhysX"})
 
 
 def test_fixture_setup_failure_does_not_recommend_mass_or_friction(monkeypatch):
@@ -61,7 +78,7 @@ def test_fixture_setup_failure_does_not_recommend_mass_or_friction(monkeypatch):
     assert "dynamicFriction" not in message
 
 
-def test_behavior_failure_keeps_physics_remediation(monkeypatch):
+def test_behavior_failure_keeps_observed_phase_without_inventing_asset_cause(monkeypatch):
     grasp_and_lift = _import_grasp_and_lift(monkeypatch)
 
     message = grasp_and_lift._all_identifiers_failed_message(
@@ -69,8 +86,28 @@ def test_behavior_failure_keeps_physics_remediation(monkeypatch):
         [("/Asset/grasp_identifier", "Grasping", "pads touched (no object)")],
     )
 
-    assert "physxRigidBody:mass" in message
-    assert "dynamicFriction" in message
+    assert "pads touched (no object)" in message
+    assert "not proof of its cause" in message
+    assert "fixture placement" in message
+    assert "object ejection" in message
+    assert "physxRigidBody:mass" not in message
+    assert "dynamicFriction" not in message
+    assert "remove those identifiers" not in message
+
+
+def test_grip_loss_guidance_uses_conditional_usdphysics_authoring_names(monkeypatch):
+    grasp_and_lift = _import_grasp_and_lift(monkeypatch)
+    message = grasp_and_lift._all_identifiers_failed_message(
+        1, [("/Asset/grasp_identifier", "Lifting", "object did not rise")]
+    )
+    assert "object did not rise" in message
+    assert "When load/contact evidence is relevant" in message
+    assert "physics:mass" in message
+    assert "physics:diagonalInertia" in message
+    assert "physics:staticFriction" in message
+    assert "physics:dynamicFriction" in message
+    assert "physxRigidBody" not in message
+    assert "physxMaterial" not in message
 
 
 @pytest.mark.asyncio
@@ -80,7 +117,7 @@ async def test_unknown_runtime_skips_instead_of_using_standard_dependency(monkey
     monkeypatch.setenv("SIMREADY_PHYSICS_RUNTIME", runtime)
 
     class Context:
-        asset_validated_features = {"FET_003_STANDARD"}
+        asset_validated_features = {"FET003_RigidBody.0-2-0"}
 
         def __init__(self):
             self.skip_message = None
@@ -157,7 +194,11 @@ async def test_cook_skip_returns_precheck_signal_instead_of_none(monkeypatch):
 
     omni = types.ModuleType("omni")
     omni_usd = types.ModuleType("omni.usd")
-    omni_usd.get_context = lambda: types.SimpleNamespace(get_stage=lambda: object())
+    omni_usd.get_context = lambda: types.SimpleNamespace(
+        get_stage=lambda: types.SimpleNamespace(
+            GetPrimAtPath=lambda _path: types.SimpleNamespace(IsValid=lambda: False)
+        )
+    )
     omni.usd = omni_usd
 
     stage_module = types.ModuleType("isaacsim.core.utils.stage")
@@ -167,30 +208,30 @@ async def test_cook_skip_returns_precheck_signal_instead_of_none(monkeypatch):
 
     stage_module.update_stage_async = update_stage_async
 
-    physics_utils = types.ModuleType("simready_benchmark_engine_kit.physics_utils")
+    physics_utils = types.ModuleType("simready.evaluate_engine_kit.physics_utils")
     physics_utils.active_physics_engine = lambda: "physx"
     physics_utils.configure_physx_determinism = lambda *_args: None
     physics_utils.cook_skip_message = lambda status: status
 
-    grasp_scene_module = types.ModuleType("simready_benchmark_kit_suite.fet005_grasp.grasp_scene")
+    grasp_scene_module = types.ModuleType("simready.foundation.tier_core.runtime_tests.fet005_grasp.grasp_scene")
     grasp_scene_module.GraspScene = GraspScene
 
-    articulation_module = types.ModuleType("simready_benchmark_kit_suite.fet005_grasp.newton_articulation")
+    articulation_module = types.ModuleType("simready.foundation.tier_core.runtime_tests.fet005_grasp.newton_articulation")
     articulation_module.apply_temporary_newton_articulations = lambda *_args: []
     articulation_module.remove_temporary_newton_articulations = lambda *_args: None
 
     monkeypatch.setitem(sys.modules, "omni", omni)
     monkeypatch.setitem(sys.modules, "omni.usd", omni_usd)
     monkeypatch.setitem(sys.modules, "isaacsim.core.utils.stage", stage_module)
-    monkeypatch.setitem(sys.modules, "simready_benchmark_engine_kit.physics_utils", physics_utils)
+    monkeypatch.setitem(sys.modules, "simready.evaluate_engine_kit.physics_utils", physics_utils)
     monkeypatch.setitem(
         sys.modules,
-        "simready_benchmark_kit_suite.fet005_grasp.grasp_scene",
+        "simready.foundation.tier_core.runtime_tests.fet005_grasp.grasp_scene",
         grasp_scene_module,
     )
     monkeypatch.setitem(
         sys.modules,
-        "simready_benchmark_kit_suite.fet005_grasp.newton_articulation",
+        "simready.foundation.tier_core.runtime_tests.fet005_grasp.newton_articulation",
         articulation_module,
     )
     monkeypatch.setattr(grasp_and_lift, "_place_asset_on_ground", lambda *_args, **_kwargs: None)
@@ -229,11 +270,14 @@ async def test_import_error_escapes_per_identifier_asset_failure(monkeypatch):
         def set_settle_frames(self, _count):
             pass
 
-    grasp_checks = types.ModuleType("simready_benchmark_kit_suite.fet005_grasp.grasp_checks")
+        def add_metric(self, _name, _value):
+            pass
+
+    grasp_checks = types.ModuleType("simready.foundation.tier_core.runtime_tests.fet005_grasp.grasp_checks")
     grasp_checks.run_pre_checks = lambda *_args: (None, ["/Asset/grasp_identifier"])
     monkeypatch.setitem(
         sys.modules,
-        "simready_benchmark_kit_suite.fet005_grasp.grasp_checks",
+        "simready.foundation.tier_core.runtime_tests.fet005_grasp.grasp_checks",
         grasp_checks,
     )
 

@@ -1,0 +1,890 @@
+{
+  "schema": "simready-foundations2-catalog-map-v1",
+  "version_encoding": "published semantic version dots become hyphens",
+  "contracts": [
+    {
+      "legacy_id": "FET_000_ISAAC",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_000_ISAAC",
+      "kind": "capability",
+      "id": "CAP000_Core.Isaac.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_000_MUJOCO",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_000_MUJOCO",
+      "kind": "capability",
+      "id": "CAP000_Core.MuJoCo.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_000_PHYSX",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_000_PHYSX",
+      "kind": "capability",
+      "id": "CAP000_Core.PhysX.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_000_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_000_STANDARD",
+      "kind": "capability",
+      "id": "CAP000_Core.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_000_STANDARD",
+      "legacy_version": "0.2.0",
+      "legacy_page": "FET_000_STANDARD",
+      "kind": "capability",
+      "id": "CAP000_Core.0-2-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_001_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_001_STANDARD",
+      "kind": "feature",
+      "id": "FET001_MinimalPlaceableVisual.0-1-0",
+      "runtime_tests": [
+        "simready.foundation.tier_core.runtime_tests:culling_xz",
+        "simready.foundation.tier_core.runtime_tests:light_response",
+        "simready.foundation.tier_core.runtime_tests:normals_xz",
+        "simready.foundation.tier_core.runtime_tests:pivot",
+        "simready.foundation.tier_core.runtime_tests:presence"
+      ]
+    },
+    {
+      "legacy_id": "FET_001_STANDARD",
+      "legacy_version": "1.0.0",
+      "legacy_page": "FET_001_STANDARD",
+      "kind": "feature",
+      "id": "FET001_MinimalPlaceableVisual.1-0-0",
+      "runtime_tests": [
+        "simready_benchmark_kit_suite:culling_xz",
+        "simready_benchmark_kit_suite:light_response",
+        "simready_benchmark_kit_suite:normals_xz",
+        "simready_benchmark_kit_suite:pivot",
+        "simready_benchmark_kit_suite:presence"
+      ]
+    },
+    {
+      "legacy_id": "FET_001_STANDARD",
+      "legacy_version": "1.0.1",
+      "legacy_page": "FET_001_STANDARD",
+      "kind": "feature",
+      "id": "FET001_MinimalPlaceableVisual.1-0-1",
+      "runtime_tests": [
+        "simready_benchmark_kit_suite:culling_xz",
+        "simready_benchmark_kit_suite:light_response",
+        "simready_benchmark_kit_suite:normals_xz",
+        "simready_benchmark_kit_suite:pivot",
+        "simready_benchmark_kit_suite:presence"
+      ]
+    },
+    {
+      "legacy_id": "FET_002_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_002_STANDARD",
+      "kind": "capability",
+      "id": "CAP002_PosableBodies.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_003_MUJOCO",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_003_MUJOCO",
+      "kind": "capability",
+      "id": "CAP003_RigidBody.MuJoCo.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_003_PHYSX",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_003_PHYSX",
+      "kind": "feature",
+      "id": "FET003_RigidBody.PhysX.0-1-0",
+      "runtime_tests": [
+        "simready.foundation.tier_core.runtime_tests:ground_drop",
+        "simready.foundation.tier_core.runtime_tests:ground_stability",
+        "simready.foundation.tier_core.runtime_tests:slope_drop"
+      ]
+    },
+    {
+      "legacy_id": "FET_003_PHYSX",
+      "legacy_version": "0.2.0",
+      "legacy_page": "FET_003_PHYSX",
+      "kind": "feature",
+      "id": "FET003_RigidBody.PhysX.0-2-0",
+      "runtime_tests": [
+        "simready_benchmark_kit_suite:ground_drop",
+        "simready_benchmark_kit_suite:ground_stability",
+        "simready_benchmark_kit_suite:slope_drop"
+      ]
+    },
+    {
+      "legacy_id": "FET_003_PHYSX",
+      "legacy_version": "0.3.0",
+      "legacy_page": "FET_003_PHYSX",
+      "kind": "feature",
+      "id": "FET003_RigidBody.PhysX.0-3-0",
+      "runtime_tests": [
+        "simready_benchmark_kit_suite:ground_drop",
+        "simready_benchmark_kit_suite:ground_stability",
+        "simready_benchmark_kit_suite:slope_drop"
+      ]
+    },
+    {
+      "legacy_id": "FET_003_PHYSX",
+      "legacy_version": "0.4.0",
+      "legacy_page": "FET_003_PHYSX",
+      "kind": "feature",
+      "id": "FET003_RigidBody.PhysX.0-4-0",
+      "runtime_tests": [
+        "simready_benchmark_kit_suite:ground_drop",
+        "simready_benchmark_kit_suite:ground_stability",
+        "simready_benchmark_kit_suite:slope_drop"
+      ]
+    },
+    {
+      "legacy_id": "FET_003_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_003_STANDARD",
+      "kind": "feature",
+      "id": "FET003_RigidBody.0-1-0",
+      "runtime_tests": [
+        "simready_benchmark_kit_suite:ground_drop",
+        "simready_benchmark_kit_suite:ground_stability",
+        "simready_benchmark_kit_suite:slope_drop"
+      ]
+    },
+    {
+      "legacy_id": "FET_003_STANDARD",
+      "legacy_version": "0.2.0",
+      "legacy_page": "FET_003_STANDARD",
+      "kind": "feature",
+      "id": "FET003_RigidBody.0-2-0",
+      "runtime_tests": [
+        "simready_benchmark_kit_suite:ground_drop",
+        "simready_benchmark_kit_suite:ground_stability",
+        "simready_benchmark_kit_suite:slope_drop"
+      ]
+    },
+    {
+      "legacy_id": "FET_004_MUJOCO",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_004_MUJOCO",
+      "kind": "capability",
+      "id": "CAP004_Multibody.MuJoCo.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_004_PHYSX",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_004_PHYSX",
+      "kind": "feature",
+      "id": "FET004_Multibody.PhysX.0-1-0",
+      "runtime_tests": [
+        "simready.foundation.tier_core.runtime_tests:joint_movement"
+      ]
+    },
+    {
+      "legacy_id": "FET_004_PHYSX",
+      "legacy_version": "0.2.0",
+      "legacy_page": "FET_004_PHYSX",
+      "kind": "feature",
+      "id": "FET004_Multibody.PhysX.0-2-0",
+      "runtime_tests": [
+        "simready_benchmark_kit_suite:joint_movement"
+      ]
+    },
+    {
+      "legacy_id": "FET_004_PHYSX",
+      "legacy_version": "0.3.0",
+      "legacy_page": "FET_004_PHYSX",
+      "kind": "feature",
+      "id": "FET004_Multibody.PhysX.0-3-0",
+      "runtime_tests": [
+        "simready_benchmark_kit_suite:joint_movement"
+      ]
+    },
+    {
+      "legacy_id": "FET_004_PHYSX",
+      "legacy_version": "0.4.0",
+      "legacy_page": "FET_004_PHYSX",
+      "kind": "feature",
+      "id": "FET004_Multibody.PhysX.0-4-0",
+      "runtime_tests": [
+        "simready_benchmark_kit_suite:joint_movement"
+      ]
+    },
+    {
+      "legacy_id": "FET_004_ROBOT_MUJOCO",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_004_ROBOT_MUJOCO",
+      "kind": "capability",
+      "id": "CAP004_Multibody.RobotMuJoCo.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_004_ROBOT_PHYSX",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_004_ROBOT_PHYSX",
+      "kind": "feature",
+      "id": "FET004_Multibody.RobotPhysX.0-1-0",
+      "runtime_tests": [
+        "simready_benchmark_kit_suite:joint_movement"
+      ]
+    },
+    {
+      "legacy_id": "FET_004_ROBOT_PHYSX",
+      "legacy_version": "0.2.0",
+      "legacy_page": "FET_004_ROBOT_PHYSX",
+      "kind": "feature",
+      "id": "FET004_Multibody.RobotPhysX.0-2-0",
+      "runtime_tests": [
+        "simready_benchmark_kit_suite:joint_movement"
+      ]
+    },
+    {
+      "legacy_id": "FET_004_ROBOT_PHYSX",
+      "legacy_version": "0.3.0",
+      "legacy_page": "FET_004_ROBOT_PHYSX",
+      "kind": "feature",
+      "id": "FET004_Multibody.RobotPhysX.0-3-0",
+      "runtime_tests": [
+        "simready_benchmark_kit_suite:joint_movement"
+      ]
+    },
+    {
+      "legacy_id": "FET_004_ROBOT_PHYSX",
+      "legacy_version": "0.4.0",
+      "legacy_page": "FET_004_ROBOT_PHYSX",
+      "kind": "feature",
+      "id": "FET004_Multibody.RobotPhysX.0-4-0",
+      "runtime_tests": [
+        "simready_benchmark_kit_suite:joint_movement"
+      ]
+    },
+    {
+      "legacy_id": "FET_004_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_004_STANDARD",
+      "kind": "feature",
+      "id": "FET004_Multibody.0-1-0",
+      "runtime_tests": [
+        "simready_benchmark_kit_suite:joint_movement"
+      ]
+    },
+    {
+      "legacy_id": "FET_004_STANDARD",
+      "legacy_version": "0.2.0",
+      "legacy_page": "FET_004_STANDARD",
+      "kind": "feature",
+      "id": "FET004_Multibody.0-2-0",
+      "runtime_tests": [
+        "simready_benchmark_kit_suite:joint_movement"
+      ]
+    },
+    {
+      "legacy_id": "FET_005_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_005_STANDARD",
+      "kind": "feature",
+      "id": "FET005_Grasp.0-1-0",
+      "runtime_tests": [
+        "simready.foundation.tier_core.runtime_tests:grasp_and_lift"
+      ]
+    },
+    {
+      "legacy_id": "FET_006_MDL",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_006_MDL",
+      "kind": "feature",
+      "id": "FET006_Materials.MDL.0-1-0",
+      "runtime_tests": [
+        "simready.foundation.tier_core.runtime_tests:mdl_renders"
+      ]
+    },
+    {
+      "legacy_id": "FET_006_MDL",
+      "legacy_version": "0.2.0",
+      "legacy_page": "FET_006_MDL",
+      "kind": "feature",
+      "id": "FET006_Materials.MDL.0-2-0",
+      "runtime_tests": [
+        "simready_benchmark_kit_suite:mdl_renders"
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "FET006_Materials.MDL.0-3-0",
+      "native": true,
+      "runtime_tests": [
+        "simready.foundation.tier_core.runtime_tests:mdl_renders"
+      ]
+    },
+    {
+      "legacy_id": "FET_006_OPENPBR",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_006_OPENPBR",
+      "kind": "feature",
+      "id": "FET006_Materials.Openpbr.0-1-0",
+      "runtime_tests": [
+        "simready.foundation.tier_core.runtime_tests:openpbr_renders"
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "FET006_Materials.Openpbr.0-2-0",
+      "native": true,
+      "runtime_tests": [
+        "simready.foundation.tier_core.runtime_tests:openpbr_renders"
+      ]
+    },
+    {
+      "legacy_id": "FET_006_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_006_STANDARD",
+      "kind": "feature",
+      "id": "FET006_Materials.0-1-0",
+      "runtime_tests": [
+        "simready.foundation.tier_core.runtime_tests:preview_surface_renders"
+      ]
+    },
+    {
+      "legacy_id": "FET_006_STANDARD",
+      "legacy_version": "0.2.0",
+      "legacy_page": "FET_006_STANDARD",
+      "kind": "feature",
+      "id": "FET006_Materials.0-2-0",
+      "runtime_tests": [
+        "simready_benchmark_kit_suite:preview_surface_renders"
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "FET006_Materials.0-3-0",
+      "native": true,
+      "runtime_tests": [
+        "simready.foundation.tier_core.runtime_tests:preview_surface_renders"
+      ]
+    },
+    {
+      "legacy_id": "FET_007_STANDARD",
+      "legacy_version": "0.2.0",
+      "legacy_page": "FET_007_STANDARD",
+      "kind": "capability",
+      "id": "CAP007_NonVisualMaterials.0-2-0",
+      "runtime_tests": []
+    },
+    {
+      "kind": "feature",
+      "id": "FET009_MaterialCoverage.0-1-0",
+      "native": true,
+      "runtime_tests": [
+        "simready.foundation.tier_core.runtime_tests:preview_surface_renders",
+        "simready.foundation.tier_core.runtime_tests:openpbr_renders",
+        "simready.foundation.tier_core.runtime_tests:mdl_renders"
+      ]
+    },
+    {
+      "legacy_id": "FET_010_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_010_STANDARD",
+      "kind": "feature",
+      "id": "FET010_DisplayColor.0-1-0",
+      "runtime_tests": [
+        "simready.foundation.tier_core.runtime_tests:display_color_response"
+      ]
+    },
+    {
+      "legacy_id": "FET_011_RTX",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_011_RTX",
+      "kind": "feature",
+      "id": "FET011_SemanticLabels.RTX.0-1-0",
+      "runtime_tests": [
+        "simready.foundation.tier_core.runtime_tests:semantic_labels_seg_labelled",
+        "simready.foundation.tier_core.runtime_tests:semantic_labels_seg_stripped"
+      ]
+    },
+    {
+      "legacy_id": "FET_011_STANDARD",
+      "legacy_version": "0.2.0",
+      "legacy_page": "FET_011_STANDARD",
+      "kind": "feature",
+      "id": "FET011_SemanticLabels.0-2-0",
+      "runtime_tests": [
+        "simready_benchmark_kit_suite:semantic_labels_seg_labelled",
+        "simready_benchmark_kit_suite:semantic_labels_seg_stripped"
+      ]
+    },
+    {
+      "legacy_id": "FET_012_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_012_STANDARD",
+      "kind": "feature",
+      "id": "FET012_GaussianSplat.0-1-0",
+      "runtime_tests": [
+        "simready.foundation.tier_core.runtime_tests:gaussian_splat_presence"
+      ]
+    },
+    {
+      "legacy_id": "FET_021_ISAAC",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_021_ISAAC",
+      "kind": "capability",
+      "id": "CAP021_RobotCore.Isaac.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_021_ISAAC",
+      "legacy_version": "0.2.0",
+      "legacy_page": "FET_021_ISAAC",
+      "kind": "capability",
+      "id": "CAP021_RobotCore.Isaac.0-2-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_021_ISAAC",
+      "legacy_version": "0.3.0",
+      "legacy_page": "FET_021_ISAAC",
+      "kind": "capability",
+      "id": "CAP021_RobotCore.Isaac.0-3-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_022_ISAAC",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_022_ISAAC",
+      "kind": "feature",
+      "id": "FET022_DrivenJoints.Isaac.0-1-0",
+      "runtime_tests": [
+        "simready.foundation.tier_core.runtime_tests:drive_gain_validation",
+        "simready.foundation.tier_core.runtime_tests:effort_limit",
+        "simready.foundation.tier_core.runtime_tests:full_range_sweep",
+        "simready.foundation.tier_core.runtime_tests:ik_target_reach",
+        "simready.foundation.tier_core.runtime_tests:jacobian_ik",
+        "simready.foundation.tier_core.runtime_tests:mimic_joint",
+        "simready.foundation.tier_core.runtime_tests:multi_joint_coordination",
+        "simready.foundation.tier_core.runtime_tests:state_accuracy",
+        "simready.foundation.tier_core.runtime_tests:velocity_limit"
+      ]
+    },
+    {
+      "legacy_id": "FET_022_ISAAC",
+      "legacy_version": "0.2.0",
+      "legacy_page": "FET_022_ISAAC",
+      "kind": "feature",
+      "id": "FET022_DrivenJoints.Isaac.0-2-0",
+      "runtime_tests": [
+        "simready_benchmark_kit_suite:drive_gain_validation",
+        "simready_benchmark_kit_suite:effort_limit",
+        "simready_benchmark_kit_suite:full_range_sweep",
+        "simready_benchmark_kit_suite:ik_target_reach",
+        "simready_benchmark_kit_suite:jacobian_ik",
+        "simready_benchmark_kit_suite:mimic_joint",
+        "simready_benchmark_kit_suite:multi_joint_coordination",
+        "simready_benchmark_kit_suite:state_accuracy",
+        "simready_benchmark_kit_suite:velocity_limit"
+      ]
+    },
+    {
+      "legacy_id": "FET_022_MUJOCO",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_022_MUJOCO",
+      "kind": "capability",
+      "id": "CAP022_DrivenJoints.MuJoCo.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_022_PHYSX",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_022_PHYSX",
+      "kind": "feature",
+      "id": "FET022_DrivenJoints.PhysX.0-1-0",
+      "runtime_tests": [
+        "simready_benchmark_kit_suite:drive_gain_validation",
+        "simready_benchmark_kit_suite:effort_limit",
+        "simready_benchmark_kit_suite:full_range_sweep",
+        "simready_benchmark_kit_suite:ik_target_reach",
+        "simready_benchmark_kit_suite:jacobian_ik",
+        "simready_benchmark_kit_suite:mimic_joint",
+        "simready_benchmark_kit_suite:multi_joint_coordination",
+        "simready_benchmark_kit_suite:state_accuracy",
+        "simready_benchmark_kit_suite:velocity_limit"
+      ]
+    },
+    {
+      "legacy_id": "FET_022_PHYSX",
+      "legacy_version": "0.2.0",
+      "legacy_page": "FET_022_PHYSX",
+      "kind": "feature",
+      "id": "FET022_DrivenJoints.PhysX.0-2-0",
+      "runtime_tests": [
+        "simready_benchmark_kit_suite:drive_gain_validation",
+        "simready_benchmark_kit_suite:effort_limit",
+        "simready_benchmark_kit_suite:full_range_sweep",
+        "simready_benchmark_kit_suite:ik_target_reach",
+        "simready_benchmark_kit_suite:jacobian_ik",
+        "simready_benchmark_kit_suite:mimic_joint",
+        "simready_benchmark_kit_suite:multi_joint_coordination",
+        "simready_benchmark_kit_suite:state_accuracy",
+        "simready_benchmark_kit_suite:velocity_limit"
+      ]
+    },
+    {
+      "legacy_id": "FET_022_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_022_STANDARD",
+      "kind": "feature",
+      "id": "FET022_DrivenJoints.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_022_STANDARD",
+      "legacy_version": "0.2.0",
+      "legacy_page": "FET_022_STANDARD",
+      "kind": "feature",
+      "id": "FET022_DrivenJoints.0-2-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_023_ISAAC",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_023_ISAAC",
+      "kind": "capability",
+      "id": "CAP023_RobotMaterials.Isaac.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_024_MUJOCO",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_024_MUJOCO",
+      "kind": "capability",
+      "id": "CAP024_BaseArticulation.MuJoCo.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_024_PHYSX",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_024_PHYSX",
+      "kind": "capability",
+      "id": "CAP024_BaseArticulation.PhysX.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_024_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_024_STANDARD",
+      "kind": "capability",
+      "id": "CAP024_BaseArticulation.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_025_ROS",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_025_ROS",
+      "kind": "capability",
+      "id": "CAP025_RosBridge.Ros.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_026_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_026_STANDARD",
+      "kind": "capability",
+      "id": "CAP026_Mates.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_027_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_027_STANDARD",
+      "kind": "capability",
+      "id": "CAP027_Connections.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_028_ISAAC",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_028_ISAAC",
+      "kind": "feature",
+      "id": "FET028_Gripper.Isaac.0-1-0",
+      "runtime_tests": [
+        "simready.foundation.tier_core.runtime_tests:gripper_close_lift_cube",
+        "simready.foundation.tier_core.runtime_tests:gripper_close_lift_sphere"
+      ]
+    },
+    {
+      "legacy_id": "FET_028_MUJOCO",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_028_MUJOCO",
+      "kind": "capability",
+      "id": "CAP028_Gripper.MuJoCo.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_028_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_028_STANDARD",
+      "kind": "feature",
+      "id": "FET028_Gripper.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_029_MUJOCO",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_029_MUJOCO",
+      "kind": "capability",
+      "id": "CAP029_ConnectionJoint.MuJoCo.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_029_NEWTON",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_029_NEWTON",
+      "kind": "capability",
+      "id": "CAP029_ConnectionJoint.Newton.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_029_PHYSX",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_029_PHYSX",
+      "kind": "capability",
+      "id": "CAP029_ConnectionJoint.PhysX.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_029_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_029_STANDARD",
+      "kind": "capability",
+      "id": "CAP029_ConnectionJoint.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_030_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_030_STANDARD",
+      "kind": "capability",
+      "id": "CAP030_PackagingCore.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_031_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_031_STANDARD",
+      "kind": "capability",
+      "id": "CAP031_SelfContainedPackage.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_032_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_032_STANDARD",
+      "kind": "capability",
+      "id": "CAP032_PackagingIntrospection.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_033_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_033_STANDARD",
+      "kind": "capability",
+      "id": "CAP033_SimReadyPackage.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_033_STANDARD",
+      "legacy_version": "0.2.0",
+      "legacy_page": "FET_033_STANDARD",
+      "kind": "capability",
+      "id": "CAP033_SimReadyPackage.0-2-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_033_STANDARD",
+      "legacy_version": "0.3.0",
+      "legacy_page": "FET_033_STANDARD",
+      "kind": "capability",
+      "id": "CAP033_SimReadyPackage.0-3-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_033_STANDARD",
+      "legacy_version": "0.4.0",
+      "legacy_page": "FET_033_STANDARD",
+      "kind": "capability",
+      "id": "CAP033_SimReadyPackage.0-4-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_040_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_040_STANDARD",
+      "kind": "capability",
+      "id": "CAP040_CocoLabels.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_041_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_041_STANDARD",
+      "kind": "capability",
+      "id": "CAP041_CityscapesLabels.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_042_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_042_STANDARD",
+      "kind": "capability",
+      "id": "CAP042_Ade20kLabels.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_043_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_043_STANDARD",
+      "kind": "capability",
+      "id": "CAP043_PascalVocLabels.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_044_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_044_STANDARD",
+      "kind": "capability",
+      "id": "CAP044_SunRgbdLabels.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_045_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_045_STANDARD",
+      "kind": "capability",
+      "id": "CAP045_ImageNet1kLabels.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_046_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_046_STANDARD",
+      "kind": "capability",
+      "id": "CAP046_WikidataLabels.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_100_ISAAC",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_100_ISAAC",
+      "kind": "capability",
+      "id": "CAP100_IsaacComposition.Isaac.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_100_ISAAC",
+      "legacy_version": "0.2.0",
+      "legacy_page": "FET_100_ISAAC",
+      "kind": "capability",
+      "id": "CAP100_IsaacComposition.Isaac.0-2-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_100_ISAAC",
+      "legacy_version": "0.3.0",
+      "legacy_page": "FET_100_ISAAC",
+      "kind": "capability",
+      "id": "CAP100_IsaacComposition.Isaac.0-3-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_100_ISAAC",
+      "legacy_version": "0.4.0",
+      "legacy_page": "FET_100_ISAAC",
+      "kind": "capability",
+      "id": "CAP100_IsaacComposition.Isaac.0-4-0",
+      "runtime_tests": []
+    },
+    {
+      "legacy_id": "FET_101_ISAAC",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_101_ISAAC",
+      "kind": "capability",
+      "id": "CAP101_RobotComposition.Isaac.0-1-0",
+      "runtime_tests": []
+    },
+    {
+      "kind": "feature",
+      "id": "FET008_ObjectForward.0-1-0",
+      "native": true,
+      "runtime_tests": [
+        "simready.foundation.tier_core.runtime_tests:object_forward_contract",
+        "simready.foundation.tier_core.runtime_tests:object_forward_camera_response"
+      ]
+    },
+    {
+      "kind": "capability",
+      "id": "CAP000_Core.Isaac.0-2-0",
+      "native": true,
+      "runtime_tests": []
+    },
+    {
+      "kind": "capability",
+      "id": "CAP000_Core.MuJoCo.0-2-0",
+      "native": true,
+      "runtime_tests": []
+    },
+    {
+      "kind": "capability",
+      "id": "CAP000_Core.PhysX.0-2-0",
+      "native": true,
+      "runtime_tests": []
+    },
+    {
+      "kind": "feature",
+      "id": "FET013_MultiRepresentationVisual.0-1-0",
+      "native": true,
+      "runtime_tests": [
+        "simready.foundation.tier_core.runtime_tests:representation_variation"
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "FET014_MeshVariant.0-1-0",
+      "native": true,
+      "runtime_tests": [
+        "simready.foundation.tier_core.runtime_tests:mesh_variation"
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "FET015_CollisionVariant.0-1-0",
+      "native": true,
+      "runtime_tests": [
+        "simready.foundation.tier_core.runtime_tests:collision_variation"
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "FET016_AppearanceVariant.0-1-0",
+      "native": true,
+      "runtime_tests": [
+        "simready.foundation.tier_core.runtime_tests:appearance_variation"
+      ]
+    },
+    {
+      "legacy_id": "FET_039_STANDARD",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_039_STANDARD",
+      "kind": "capability",
+      "id": "CAP039_ObjectAffordances.0-1-0",
+      "runtime_tests": []
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "CAP044_SunRgbdLabels.0-1-0",
+  "display_name": "Semantic Labels - SUN RGB-D",
+  "legacy_identity": {
+    "id": "FET_044_STANDARD",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "SUN.001"
+  ],
+  "features": [
+    "FET011_SemanticLabels.0-2-0"
+  ]
+}

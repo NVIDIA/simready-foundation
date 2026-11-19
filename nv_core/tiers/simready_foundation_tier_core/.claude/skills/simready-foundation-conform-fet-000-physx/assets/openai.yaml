@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP000_Core.PhysX"
+  short_description: "Repair CAP000_Core.PhysX PhysX runtime variant scaffolding"
+  default_prompt: "Use $simready-foundation-conform-fet-000-physx to repair CAP000_Core.PhysX SimReady PhysX runtime variant conformance on a USD asset."

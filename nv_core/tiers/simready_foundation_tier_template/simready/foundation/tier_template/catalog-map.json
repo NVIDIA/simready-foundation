@@ -1,0 +1,14 @@
+{
+  "schema": "simready-foundations2-catalog-map-v1",
+  "version_encoding": "published semantic version dots become hyphens",
+  "contracts": [
+    {
+      "legacy_id": "FET_1000_TEMPLATE",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_1000_TEMPLATE",
+      "kind": "capability",
+      "id": "CAP1000_TemplateSmoke.Template.0-1-0",
+      "runtime_tests": []
+    }
+  ]
+}

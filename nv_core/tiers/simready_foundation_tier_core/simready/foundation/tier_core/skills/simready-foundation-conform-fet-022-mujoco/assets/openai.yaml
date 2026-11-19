@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP022_DrivenJoints.MuJoCo"
+  short_description: "Repair CAP022_DrivenJoints.MuJoCo conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-022-mujoco to repair CAP022_DrivenJoints.MuJoCo SimReady conformance failures."

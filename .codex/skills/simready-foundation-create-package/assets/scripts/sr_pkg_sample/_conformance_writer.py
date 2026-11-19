@@ -14,6 +14,7 @@ Provides helpers for the two JSON artefacts pre-validation writes:
 
 from __future__ import annotations
 
+import ast
 import json
 from datetime import datetime, timezone
 from pathlib import Path
@@ -168,14 +169,14 @@ def build_asset_results(
         for fid, summary in sorted(result.features_summary.items()):
             dep_str = summary.get("dependencies", "[]")
             try:
-                deps = eval(dep_str) if isinstance(dep_str, str) else dep_str
+                deps = ast.literal_eval(dep_str) if isinstance(dep_str, str) else dep_str
             except Exception:
                 deps = []
             failing = []
             if not summary.get("passed", False):
                 failing_str = summary.get("failing requirements", "[]")
                 try:
-                    failing = eval(failing_str) if isinstance(failing_str, str) else failing_str
+                    failing = ast.literal_eval(failing_str) if isinstance(failing_str, str) else failing_str
                 except Exception:
                     failing = []
             features_list.append({

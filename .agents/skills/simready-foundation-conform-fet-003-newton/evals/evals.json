@@ -1,12 +1,12 @@
 [
     {
         "id": "simready-foundation-conform-fet-003-newton-positive-trigger",
-        "question": "Repair FET_003_NEWTON@0.1.0 validation failures on a SimReady asset or package.",
+        "question": "Repair FET003_RigidBody.Newton.0-1-0 validation failures on a SimReady asset or package.",
         "expected_skill": "simready-foundation-conform-fet-003-newton",
-        "ground_truth": "The agent should activate simready-foundation-conform-fet-003-newton and follow the exact FET_003_NEWTON workflow.",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-003-newton and follow the exact FET003_RigidBody.Newton workflow.",
         "expected_behavior": [
             "Load the simready-foundation-conform-fet-003-newton skill.",
-            "Use the selected FET_003_NEWTON manifest as the authoritative feature contract.",
+            "Use the selected FET003_RigidBody.Newton manifest as the authoritative feature contract.",
             "Report changed files, validation performed, and any remaining blockers."
         ]
     },

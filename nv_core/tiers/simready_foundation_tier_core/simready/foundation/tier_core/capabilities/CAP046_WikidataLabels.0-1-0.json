@@ -1,0 +1,14 @@
+{
+  "id": "CAP046_WikidataLabels.0-1-0",
+  "display_name": "Semantic Labels - Wikidata",
+  "legacy_identity": {
+    "id": "FET_046_STANDARD",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "SL.QCODE.001"
+  ],
+  "features": [
+    "FET011_SemanticLabels.0-2-0"
+  ]
+}

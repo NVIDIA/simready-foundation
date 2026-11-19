@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP007_NonVisualMaterials Nonvisual Materials"
+  short_description: "Repair non-visual sensor material attributes"
+  default_prompt: "Use $simready-foundation-conform-fet-007-standard to repair CAP007_NonVisualMaterials non-visual sensor material SimReady validation failures on a USD asset."

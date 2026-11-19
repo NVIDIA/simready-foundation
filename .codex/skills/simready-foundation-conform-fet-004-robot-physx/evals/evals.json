@@ -1,12 +1,12 @@
 [
     {
         "id": "simready-foundation-conform-fet-004-robot-physx-positive-trigger",
-        "question": "Repair FET_004_ROBOT_PHYSX@0.4.0 validation failures on a SimReady asset or package.",
+        "question": "Repair FET004_Multibody.RobotPhysX.0-4-0 validation failures on a SimReady asset or package.",
         "expected_skill": "simready-foundation-conform-fet-004-robot-physx",
-        "ground_truth": "The agent should activate simready-foundation-conform-fet-004-robot-physx and follow the exact FET_004_ROBOT_PHYSX workflow.",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-004-robot-physx and follow the exact FET004_Multibody.RobotPhysX workflow.",
         "expected_behavior": [
             "Load the simready-foundation-conform-fet-004-robot-physx skill.",
-            "Use the selected FET_004_ROBOT_PHYSX manifest as the authoritative feature contract.",
+            "Use the selected FET004_Multibody.RobotPhysX manifest as the authoritative feature contract.",
             "Report changed files, validation performed, and any remaining blockers."
         ]
     },

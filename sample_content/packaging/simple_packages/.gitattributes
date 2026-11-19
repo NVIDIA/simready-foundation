@@ -1,0 +1,4 @@
+# Preserve package bytes: BOMs hash content and metadata files.
+*/** -text
+# Copied vendor MDL retains its original whitespace and hashed bytes.
+*.mdl -whitespace

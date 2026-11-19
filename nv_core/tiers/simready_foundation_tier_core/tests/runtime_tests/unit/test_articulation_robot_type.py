@@ -14,7 +14,7 @@
 # limitations under the License.
 """Tests for articulation_phases.robot_type."""
 from pxr import Sdf, Usd, UsdGeom, UsdPhysics
-from simready_benchmark_kit_suite.articulation_phases.robot_type import (
+from simready.foundation.tier_core.runtime_tests.articulation_phases.robot_type import (
     RobotType,
     determine_robot_type,
     get_scene_defaults,

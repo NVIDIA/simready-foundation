@@ -1,5 +1,8 @@
+--extra-index-url https://artifactory.nvidia.com/artifactory/api/pypi/ct-omniverse-pypi-local/simple
+
 # Runtime -- required by simready-validate
 numpy
 
 # Runtime
-simready-package[publish]>=2026.8.0,<2026.9.0
+# Upper bound keeps the rc floor from making newer dev builds eligible.
+simready-package[publish]>=2026.7.1rc1,<2026.8

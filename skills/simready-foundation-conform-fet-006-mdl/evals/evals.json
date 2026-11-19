@@ -1,12 +1,12 @@
 [
     {
         "id": "simready-foundation-conform-fet-006-mdl-positive-trigger",
-        "question": "Repair FET_006_MDL@0.1.0 validation failures on a SimReady asset or package.",
+        "question": "Repair FET006_Materials.MDL.0-1-0 validation failures on a SimReady asset or package.",
         "expected_skill": "simready-foundation-conform-fet-006-mdl",
-        "ground_truth": "The agent should activate simready-foundation-conform-fet-006-mdl and follow the exact FET_006_MDL workflow.",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-006-mdl and follow the exact FET006_Materials.MDL workflow.",
         "expected_behavior": [
             "Load the simready-foundation-conform-fet-006-mdl skill.",
-            "Use the selected FET_006_MDL manifest as the authoritative feature contract.",
+            "Use the selected FET006_Materials.MDL manifest as the authoritative feature contract.",
             "Report changed files, validation performed, and any remaining blockers."
         ]
     },

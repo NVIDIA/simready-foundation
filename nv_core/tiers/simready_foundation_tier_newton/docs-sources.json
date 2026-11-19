@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "simready/foundation/tier_newton/runtime_tests/docs",
+      "destination": "guides/evaluate/newton-tests"
+    }
+  ],
+  "exclude": [
+    "simready/foundation/tier_newton/rules_and_reqs/physics_bodies/base_articulation/capability-base-articulation.md",
+    "simready/foundation/tier_newton/rules_and_reqs/physics_bodies/base_articulation/requirements.md",
+    "simready/foundation/tier_newton/rules_and_reqs/physics_bodies/physics_driven_joints/capability-physics_driven_joints.md",
+    "simready/foundation/tier_newton/rules_and_reqs/physics_bodies/physics_driven_joints/requirements.md",
+    "simready/foundation/tier_newton/rules_and_reqs/physics_bodies/physics_materials/capability-physics_materials.md",
+    "simready/foundation/tier_newton/rules_and_reqs/physics_bodies/physics_materials/requirements.md",
+    "simready/foundation/tier_newton/rules_and_reqs/physics_bodies/physics_rigid_bodies/capability-physics_rigid_bodies.md",
+    "simready/foundation/tier_newton/rules_and_reqs/physics_bodies/physics_rigid_bodies/requirements.md"
+  ]
+}

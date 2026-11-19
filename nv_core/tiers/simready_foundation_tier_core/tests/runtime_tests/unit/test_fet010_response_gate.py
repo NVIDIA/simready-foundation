@@ -32,17 +32,15 @@ them. Both now pass, and DISP.001 fails both in the validator, per Gprim and by
 name.
 """
 
-from simready_benchmark.core.decorator import get_registered_tests
+from simready.evaluate.core.decorator import get_registered_tests
 
 # Importing the module is what registers it; the decorator returns the bare
 # function, so the config lives on the Definition rather than on the function.
-from simready_benchmark_kit_suite.fet010_standard import display_color_response  # noqa: F401
-
-CONFIG = next(
-    d.config_defaults
-    for d in get_registered_tests()
-    if d.name == "display_color_response"
+from simready.foundation.tier_core.runtime_tests.fet010_standard import (  # noqa: F401
+    display_color_response,
 )
+
+CONFIG = next(d.config_defaults for d in get_registered_tests() if d.name == "display_color_response")
 
 # Measured on Isaac Sim 6.0. Some display colour of the asset's own reaches the
 # shader in every one of these, so the feature is live and the benchmark says
@@ -70,8 +68,7 @@ INERT = {
     "toaster, every colour authored as the probe's magenta": 0.000766,
 }
 # Two renders that should have been identical, across every run measured.
-CONTROL = (0.0, 0.000027, 0.00006, 0.000085, 0.000119, 0.000251, 0.000427,
-           0.000532, 0.000549)
+CONTROL = (0.0, 0.000027, 0.00006, 0.000085, 0.000119, 0.000251, 0.000427, 0.000532, 0.000549)
 
 
 def gate(response, config=None):

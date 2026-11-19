@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP029_ConnectionJoint.MuJoCo"
+  short_description: "Repair CAP029_ConnectionJoint.MuJoCo connection-joint conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-029-mujoco to repair CAP029_ConnectionJoint.MuJoCo SimReady MuJoCo connection joint conformance failures."

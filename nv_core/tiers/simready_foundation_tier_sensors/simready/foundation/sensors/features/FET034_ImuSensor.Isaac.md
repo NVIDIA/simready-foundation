@@ -1,0 +1,72 @@
+# Feature: `FET034_ImuSensor.Isaac`
+
+| **Property**            | **Value**         |
+|-------------------------|-------------------|
+| Contract                | `FET034_ImuSensor.Isaac` |
+| Runtime                 | `Isaac` |
+| Proprietary Techs       | `None` |
+| Versions                | `0-1-0` |
+
+## Description
+
+Defines the simulation-readiness contract for IMU sensor prims on robot assets. An IMU sensor prim must be parented under a prim with PhysicsRigidBodyAPI so that the physics engine communicates forces and velocities to the sensor.
+
+## Dependency Graph
+
+This feature has no dependencies and no other features depend on it directly.
+
+## Use Cases
+
+Products or workflows that consume this feature:
+
+- SimReady validation verifies IMU sensor wiring requirements at asset authoring time.
+- Isaac Sim runtime evaluation tests (`imu_sensor_data`) verify live IMU sensor data output.
+
+## Requirements
+
+### Version 0-1-0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+- [Sensor-IMU](../../../../../../sr_specs/docs/shared/profiles/profiles.md): required in `1.0.0`
+
+#### Feature Dependencies
+
+None.
+
+#### Requirement List
+
+* Capability: [Physics Bodies/Physics Sensors](../rules_and_reqs/physics_bodies/physics_sensors/capability-physics_sensors.md)
+
+| Requirement | Requirement Doc |
+|-------------|-----------------|
+| `PS.001` | [PS.001](../rules_and_reqs/physics_bodies/physics_sensors/requirements/imu-sensor-rigid-body.md) |
+
+</details>
+
+## Pipelines
+
+Source file type:
+
+- `.usd`, `.usda`, `.usdc`
+
+Validation or runtime pipeline:
+
+- `simready-validate` verifies FET034_ImuSensor.Isaac requirements at asset authoring time.
+- `simready-evaluate --features FET034_ImuSensor.Isaac` runs runtime IMU sensor data verification in Isaac Sim.
+
+## Samples
+
+- [sample_content/common_assets/sensors/physics_sensors/IMUSensorCheckerPass.usda](../../../../../../../sample_content/common_assets/sensors/physics_sensors/IMUSensorCheckerPass.usda)
+- [sample_content/common_assets/sensors_fails/physics_sensors/IMUSensorCheckerFail.usda](../../../../../../../sample_content/common_assets/sensors_fails/physics_sensors/IMUSensorCheckerFail.usda)
+
+## Evaluates
+
+- `imu_sensor_data` — verifies IMU sensor produces non-zero angular velocity and linear acceleration during physics simulation.
+
+## Adapters
+
+None.

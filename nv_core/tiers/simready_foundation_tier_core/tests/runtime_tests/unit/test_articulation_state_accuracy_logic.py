@@ -13,9 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Tests for state_accuracy pure helpers."""
+
 import math
 
-from simready_benchmark_kit_suite.articulation_phases.state_accuracy import (
+import pytest
+from simready.foundation.tier_core.runtime_tests.articulation_phases.state_accuracy import (
     aggregate_sta_summary,
     classify_position_error,
     compute_motion_frames,
@@ -33,19 +35,11 @@ def test_defaults_shape():
     assert d["test_duration_seconds"] == 3.0
     assert d["settle_seconds"] == 0.5
     assert d["capture_fps"] == 15
-    assert d["newton_min_motion_seconds"] == 0.5
+    assert not any(key.startswith("newton_") for key in d)
 
 
 def test_compute_motion_frames_preserves_physx_budget():
-    assert compute_motion_frames(3.0, 240.0, 5, "physx") == 30
-
-
-def test_compute_motion_frames_gives_newton_stable_ramp():
-    assert compute_motion_frames(3.0, 240.0, 5, "newton") == 120
-
-
-def test_compute_motion_frames_honors_longer_explicit_newton_budget():
-    assert compute_motion_frames(3.0, 240.0, 5, "newton", 0.75) == 180
+    assert compute_motion_frames(3.0, 240.0, 5) == 30
 
 
 def test_compute_test_positions_returns_5_step_sequence():
@@ -71,16 +65,18 @@ def test_compute_test_positions_uses_range_fraction_when_smaller():
     assert abs(step - 0.02) < 1e-9
 
 
-def test_compute_test_positions_clamps_pos_a_pos_b_to_authored_limits():
-    # v1 parity: pos_a and pos_b are clamped, but center=0 is returned uncapped
-    # even when 0 is outside [lo, hi]. PhysX will clamp the commanded target
-    # to authored limits at apply-time.
-    positions = compute_test_positions(0.5, 1.5, max_step_deg=15.0, step_range_fraction=0.10)
-    # pos_a (idx 1) and pos_b (idx 3) clamp inside [lo+0.05, hi-0.05]
-    for idx in (1, 3):
-        assert 0.5 + 0.05 - 1e-9 <= positions[idx] <= 1.5 - 0.05 + 1e-9
-    # center (indices 0, 2, 4) stays at 0.0
-    assert positions[0] == 0.0 and positions[2] == 0.0 and positions[4] == 0.0
+@pytest.mark.parametrize("lo,hi", [(0.5, 1.5), (-1.5, -0.5), (0.0, 0.04)])
+def test_compute_test_positions_keeps_every_target_inside_authored_limits(lo, hi):
+    positions = compute_test_positions(lo, hi)
+    assert all(lo <= target <= hi for target in positions)
+    assert positions[0] == positions[2] == positions[4]
+    assert len(set(positions)) >= 2
+
+
+@pytest.mark.parametrize("lo,hi", [(1, 0), (0, 0), (float("nan"), 1), (-math.inf, 1)])
+def test_compute_test_positions_rejects_malformed_ranges(lo, hi):
+    with pytest.raises(ValueError, match="finite ordered"):
+        compute_test_positions(lo, hi)
 
 
 def test_classify_position_error_passes_within_tolerance():

@@ -1,0 +1,126 @@
+# NuRec Profile USD Authoring Guide
+
+This document describes how to author a USD asset that conforms to the
+`NuRec` profile. It is the profile for **NuRec 3D Gaussian Splat
+delivery props**: assets whose visual representation is purely a
+`ParticleField3DGaussianSplat`, with no mesh geometry and no materials.
+
+`NuRec` is intentionally lean. Unlike `Robotics-Prop`, it does not
+require (or expect) a mesh, physics, or materials — the Gaussian splat *is* the
+asset. The 3DGS feature carries its own mesh-free minimal contract, so a raw
+neural-reconstruction splat export can conform without being turned into a mesh
+prop first.
+
+## Profile definition
+
+The `NuRec` profile includes the following feature set (see
+`nurec.toml` and the
+[feature dependency graph](../../../../../../sr_specs/docs/shared/features/feature-dependency-graph.md)). Each
+feature's requirements are defined in the feature specifications.
+
+```toml
+[NuRec]
+"1.0.0" = {features = [ # NuRec 3DGS-delivery props whose visual is purely a Gaussian splat (no mesh)
+    {selector = "FET012_GaussianSplat.0-1-0"}, # "Sensor Visual 3DGS" (self-contained: mesh-free minimal + SPL.001-006)
+], capabilities = [
+    {selector = "CAP000_Core.0-2-0"}, # "Core"
+]}
+```
+
+### Required features
+
+Both features are required.
+
+| Contract | Version | Status | Purpose |
+|---|---|---|---|
+| `CAP000_Core` | 0-2-0 | Required | Core file layout, anchored references, SimReady metadata |
+| `FET012_GaussianSplat` | 0-1-0 | Required | Sensor Visual 3DGS — a valid placeable asset whose visual is a Gaussian splat |
+
+`FET012_GaussianSplat` is **self-contained**: it carries the non-mesh half of the
+minimal placeable contract (anchored paths, up-axis/units, hierarchy) plus the
+Gaussian-splat data contract, so this profile does not include
+`FET001_MinimalPlaceableVisual` (whose mesh requirement a pure splat cannot satisfy).
+
+## Required USD properties and schemas
+
+### Core file layout (`CAP000_Core`)
+
+- Lay the asset out as `<asset_root>/<intermediate_folder>/<main.usd>`, use
+  lowercase file and directory names with USD extensions, keep paths within
+  platform limits, and make every `references`, `payloads`, `subLayers`, and
+  texture `asset` path relative with `./` or `../` that resolves on disk
+  (`NP.*`).
+- Author `dictionary SimReady_Metadata` in root-layer `customLayerData`
+  (`asset_name`, `asset_type`, `source_file`, `usd_date_generated`).
+- Do not leave orphan `over` prims with no underlying `def` (`HI.010`).
+
+### Minimal placeable contract (`FET012_GaussianSplat`, non-mesh half)
+
+- Use anchored `./` or `../` reference/payload paths that do not escape the
+  asset root (`AA.001`), pointing only at supported file types (`AA.002`).
+- Set `upAxis = "Z"` (`UN.006`) and `metersPerUnit = 1.0` (`UN.007`).
+- Parent all prims under a single stage root prim (`HI.001`) that inherits
+  `UsdGeomXformable` (`HI.003`), and set `defaultPrim` to an existing prim
+  (`HI.004`).
+
+### Gaussian Splat visual (`FET012_GaussianSplat`)
+
+- Author the visual representation as one or more
+  `ParticleField3DGaussianSplat` prims (`UsdVol`, OpenUSD `26.03`+) (`SPL.001`).
+- Each splat prim authors the per-Gaussian data required to render it:
+  `positions` (`SPL.002`), `scales` (`SPL.003`), `orientations` (`SPL.004`),
+  `opacities` (`SPL.005`), and view-dependent radiance
+  `radiance:sphericalHarmonicsDegree` / `radiance:sphericalHarmonicsCoefficients`
+  whose coefficient count equals `len(positions) * (degree + 1)^2` (`SPL.006`).
+
+See the
+[Gaussian Splat capability](../rules_and_reqs/visualization/gaussian_splat/capability-gaussian_splat.md)
+for the full requirement text.
+
+## Naming conventions
+
+### Prim naming
+
+- Choose either `camelCase` or `snake_case` and use it consistently.
+- Avoid spaces, special characters, and reserved keywords.
+- Use descriptive, purpose-driven names.
+
+### File naming
+
+- Use lowercase file names with `.usd`, `.usda`, `.usdc`, or `.usdz`.
+- Use underscores or hyphens; avoid spaces and special characters.
+
+## Validation metadata (recommended)
+
+Include profile metadata in `customLayerData` to simplify validation workflows:
+
+```usd
+customLayerData = {
+    dictionary SimReady_Metadata = {
+        dictionary validation = {
+            string profile = "NuRec"
+            string profile_version = "1.0.0"
+        }
+    }
+}
+```
+
+## Conformance workflow
+
+```text
+validate NuRec
+-> simready-foundation-conform-fet-000-standard
+-> author a valid ParticleField3DGaussianSplat visual (SPL.001-006)
+-> validate NuRec again
+```
+
+## References
+
+- [Feature dependency graph](../../../../../../sr_specs/docs/shared/features/feature-dependency-graph.md) — requirements and dependencies for all features
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles/nurec.toml`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/CAP000_Core.md`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET012_GaussianSplat.md`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/visualization/gaussian_splat/`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/core/atomic_asset/`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/core/units/`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/hierarchy/`

@@ -108,5 +108,102 @@ files.exclude = [
     "omni/repo/format/_vendor/*",
 ]
 
+[repo_test]
+default_suite = [
+    "tier_tooling",
+    "all_tiers",
+    "isaac_asset_transformer",
+    "tier_core",
+    "tier_aif",
+    "tier_newton",
+]
+
+# The all-tier tooling: catalog projection, docs assembly, wheel/tier discovery.
+[repo_test.suites.tier_tooling]
+kind = "pytest"
+discover_path = "${root}/nv_core/tiers/_tooling/tests"
+log_file = "${root}/_testoutput/tier_tooling.xml"
+python_source_path = "${root}/nv_core/tiers/_tooling"
+extra_pytest_args = ["-v"]
+
+[[repo_test.suites.tier_tooling.venv]]
+path = "${test_root}/_build/venvs/${suite_name}"
+pip_requirements = "${root}/nv_core/tiers/_tooling/tests/requirements.txt"
+packman_package_version = "3.12.10+nv3-${platform}"
+
+# Cross-tier contract checks, against editable installs of every tier checkout.
+[repo_test.suites.all_tiers]
+kind = "pytest"
+discover_path = "${root}/nv_core/tiers/tests"
+log_file = "${root}/_testoutput/all_tiers.xml"
+python_source_path = "${root}/nv_core/tiers"
+extra_pytest_args = ["-v"]
+# Locates the tier checkouts from tests/requirements.txt.
+env_vars = [["SIMREADY_TIERS_ROOT", "${root}/nv_core/tiers"]]
+
+[[repo_test.suites.all_tiers.venv]]
+path = "${test_root}/_build/venvs/${suite_name}"
+pip_requirements = "${root}/nv_core/tiers/tests/requirements.txt"
+packman_package_version = "3.12.10+nv3-${platform}"
+
+# The core tier's integration with the public Isaac Asset Transformer.
+[repo_test.suites.isaac_asset_transformer]
+kind = "pytest"
+discover_path = "${root}/nv_core/tiers/simready_foundation_tier_core/tools/isaac_asset_transformer/tests"
+log_file = "${root}/_testoutput/isaac_asset_transformer.xml"
+python_source_path = "${root}/nv_core/tiers/simready_foundation_tier_core/tools/isaac_asset_transformer/src"
+extra_pytest_args = ["-v"]
+
+[[repo_test.suites.isaac_asset_transformer.venv]]
+path = "${test_root}/_build/venvs/${suite_name}"
+pip_requirements = "${root}/nv_core/tiers/simready_foundation_tier_core/tools/isaac_asset_transformer/tests/requirements.txt"
+packman_package_version = "3.12.10+nv3-${platform}"
+
+# The tier's own package tree, validators, contracts and runtime-test units.
+[repo_test.suites.tier_core]
+kind = "pytest"
+discover_path = "${root}/nv_core/tiers/simready_foundation_tier_core/tests"
+log_file = "${root}/_testoutput/tier_core.xml"
+# Scopes coverage only; it adds nothing to sys.path.
+python_source_path = "${root}/nv_core/tiers/simready_foundation_tier_core"
+extra_pytest_args = ["-v"]
+env_vars = [["SIMREADY_FOUNDATION_SOURCE_ROOTS", "${root}/nv_core/tiers/simready_foundation_tier_core"], ["SIMREADY_TIERS_ROOT", "${root}/nv_core/tiers"]]
+
+[[repo_test.suites.tier_core.venv]]
+path = "${test_root}/_build/venvs/${suite_name}"
+pip_requirements = "${root}/nv_core/tiers/simready_foundation_tier_core/tests/requirements.txt"
+packman_package_version = "3.12.10+nv3-${platform}"
+
+# The AIF tier's validators and profile, against editable installs of the AIF and
+# core tier checkouts.
+[repo_test.suites.tier_aif]
+kind = "pytest"
+discover_path = "${root}/nv_core/tiers/simready_foundation_tier_aif/tests"
+log_file = "${root}/_testoutput/tier_aif.xml"
+python_source_path = "${root}/nv_core/tiers/simready_foundation_tier_aif"
+extra_pytest_args = ["-v"]
+# Locates the tier checkouts from tests/requirements.txt.
+env_vars = [["SIMREADY_TIERS_ROOT", "${root}/nv_core/tiers"]]
+
+[[repo_test.suites.tier_aif.venv]]
+path = "${test_root}/_build/venvs/${suite_name}"
+pip_requirements = "${root}/nv_core/tiers/simready_foundation_tier_aif/tests/requirements.txt"
+packman_package_version = "3.12.10+nv3-${platform}"
+
+# Newton-owned runtime-test units, with the same qualified Evaluate/Kit APIs
+# as Core but in an isolated interpreter so team-owned suites stay independent.
+[repo_test.suites.tier_newton]
+kind = "pytest"
+discover_path = "${root}/nv_core/tiers/simready_foundation_tier_newton/tests"
+log_file = "${root}/_testoutput/tier_newton.xml"
+python_source_path = "${root}/nv_core/tiers/simready_foundation_tier_newton"
+extra_pytest_args = ["-v"]
+env_vars = [["SIMREADY_FOUNDATION_SOURCE_ROOTS", "${root}/nv_core/tiers/simready_foundation_tier_core,${root}/nv_core/tiers/simready_foundation_tier_newton"], ["SIMREADY_TIERS_ROOT", "${root}/nv_core/tiers"]]
+
+[[repo_test.suites.tier_newton.venv]]
+path = "${test_root}/_build/venvs/${suite_name}"
+pip_requirements = "${root}/nv_core/tiers/simready_foundation_tier_newton/tests/requirements.txt"
+packman_package_version = "3.12.10+nv3-${platform}"
+
 
 

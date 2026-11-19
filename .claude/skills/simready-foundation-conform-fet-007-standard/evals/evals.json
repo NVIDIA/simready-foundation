@@ -1,12 +1,12 @@
 [
     {
         "id":  "simready-foundation-conform-fet-007-standard-positive-trigger",
-        "question":  "Repair FET_007_STANDARD nonvisual sensor material attributes on a USD asset.",
+        "question":  "Repair CAP007_NonVisualMaterials nonvisual sensor material attributes on a USD asset.",
         "expected_skill":  "simready-foundation-conform-fet-007-standard",
         "ground_truth":  "The agent should activate simready-foundation-conform-fet-007-standard and follow its workflow.",
         "expected_behavior":  [
                                   "Load the simready-foundation-conform-fet-007-standard skill.",
-                                  "Confirm FET_007_STANDARD is in scope, repair nonvisual material attributes on bound materials, and rerun the FET_007_STANDARD validation gate.",
+                                  "Confirm CAP007_NonVisualMaterials is in scope, repair nonvisual material attributes on bound materials, and rerun the CAP007_NonVisualMaterials validation gate.",
                                   "Report changed files, validation performed, and any remaining release or validation gaps."
                               ]
     },

@@ -1,12 +1,12 @@
 [
     {
         "id": "simready-foundation-conform-fet-010-standard-positive-trigger",
-        "question": "Repair FET_010_STANDARD@0.1.0 validation failures on a SimReady asset or package.",
+        "question": "Repair FET010_DisplayColor.0-1-0 validation failures on a SimReady asset or package.",
         "expected_skill": "simready-foundation-conform-fet-010-standard",
-        "ground_truth": "The agent should activate simready-foundation-conform-fet-010-standard and follow the exact FET_010_STANDARD workflow.",
+        "ground_truth": "The agent should activate simready-foundation-conform-fet-010-standard and follow the exact FET010_DisplayColor workflow.",
         "expected_behavior": [
             "Load the simready-foundation-conform-fet-010-standard skill.",
-            "Use the selected FET_010_STANDARD manifest as the authoritative feature contract.",
+            "Use the selected FET010_DisplayColor manifest as the authoritative feature contract.",
             "Run the bundled author_display_color.py with --verify before editing.",
             "Report changed files, validation performed, and any remaining blockers."
         ]
@@ -15,7 +15,7 @@
         "id": "simready-foundation-conform-fet-010-standard-dc-001-trigger",
         "question": "The validator says these meshes do not resolve a primvars:displayColor. Fix DISP.001 on this asset.",
         "expected_skill": "simready-foundation-conform-fet-010-standard",
-        "ground_truth": "DISP.001 is a Display Color capability requirement carried by FET_010_STANDARD, so the display colour skill owns the repair even though the request names a requirement rather than a feature.",
+        "ground_truth": "DISP.001 is a Display Color capability requirement carried by FET010_DisplayColor, so the display colour skill owns the repair even though the request names a requirement rather than a feature.",
         "expected_behavior": [
             "Load the simready-foundation-conform-fet-010-standard skill.",
             "Author primvars:displayColor on the renderable Gprims rather than editing a shaded surface.",
@@ -70,7 +70,7 @@
         "id": "simready-foundation-conform-fet-010-standard-negative-sibling-feature",
         "question": "Repair the OpenPBR final surface on a SimReady asset.",
         "expected_skill": "simready-foundation-conform-fet-006-openpbr",
-        "ground_truth": "The OpenPBR surface is FET_006_OPENPBR, a sibling contract, so the agent should switch to that feature's skill.",
+        "ground_truth": "The OpenPBR surface is FET006_Materials.Openpbr, a sibling contract, so the agent should switch to that feature's skill.",
         "expected_behavior": [
             "Do not activate simready-foundation-conform-fet-010-standard.",
             "Select the skill matching the named feature instead.",

@@ -1,12 +1,12 @@
 [
     {
         "id":  "simready-foundation-conform-fet-000-standard-positive-trigger",
-        "question":  "Repair FET_000_STANDARD@0.1.0 failures on a USD asset, including Core metadata and naming/path issues.",
+        "question":  "Repair CAP000_Core.0-1-0 failures on a USD asset, including Core metadata and naming/path issues.",
         "expected_skill":  "simready-foundation-conform-fet-000-standard",
         "ground_truth":  "The agent should activate simready-foundation-conform-fet-000-standard and follow its workflow.",
         "expected_behavior":  [
                                   "Load the simready-foundation-conform-fet-000-standard skill.",
-                                  "Inspect the validation report, repair FET_000_STANDARD@0.1.0 Core metadata and structural issues, then rerun the relevant validation gate.",
+                                  "Inspect the validation report, repair CAP000_Core.0-1-0 Core metadata and structural issues, then rerun the relevant validation gate.",
                                   "Report changed files, validation performed, and any remaining release or validation gaps."
                               ]
     },

@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP026_Mates"
+  short_description: "Repair CAP026_Mates mate-site conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-026-standard to repair CAP026_Mates SimReady mate-site conformance failures."

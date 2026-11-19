@@ -1,0 +1,35 @@
+# Ruff configuration for the SimReady Foundation repo.
+#
+# Formatting, import ordering, and SPDX license headers are owned by the repo's
+# canonical formatter, `./repo.sh format` (omni.repo.format -> black + isort at
+# line_length = 120; see [repo_format.python] in repo.toml). To avoid two tools
+# fighting over the same bytes, Ruff is used here ONLY as a linter for bug and
+# quality rules -- it does not format code and does not sort imports.
+#
+# Run manually:   ruff check .
+# Or via the bundled pre-commit hook (.pre-commit-config.yaml).
+# Format separately with:   ./repo.sh format
+
+# Match the validator wheels' floor (requires-python = ">=3.10,<3.13").
+target-version = "py310"
+# Match the repo's canonical formatter (repo.toml -> line_length = 120).
+line-length = 120
+
+# Generated output and vendored/build trees are never hand-edited.
+extend-exclude = [
+    "**/_build",
+    "**/__pycache__",
+    "tools/packman/**",
+    "tools/repoman/**",
+]
+
+[lint]
+# Bug/quality rules that complement (never overlap) black + isort:
+#   E/W  pycodestyle    F   pyflakes      UP  pyupgrade
+#   B    bugbear        C4  comprehensions
+# `I` (import sorting) is intentionally omitted: isort owns that via repo format.
+select = ["E", "W", "F", "UP", "B", "C4"]
+
+# Line length is enforced by the formatter (black @ 120), so E501 stays off to
+# avoid double-reporting long strings / URLs.
+ignore = ["E501"]

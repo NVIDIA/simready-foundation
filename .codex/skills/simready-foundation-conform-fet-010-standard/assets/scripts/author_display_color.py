@@ -1001,7 +1001,7 @@ def format_color(color) -> str:
 # nothing else. That validator is
 #
 #     nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/
-#         capabilities/visualization/display_color/validation.py
+#         rules_and_reqs/visualization/display_color/validation.py
 #
 # and it cannot be imported from here: it depends on
 # ``simready.foundation.tier_core.requirements`` and

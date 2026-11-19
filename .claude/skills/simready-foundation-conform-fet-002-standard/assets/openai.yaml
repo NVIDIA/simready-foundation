@@ -1,6 +1,4 @@
-# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-# SPDX-License-Identifier: Apache-2.0
 interface:
-  display_name: "SimReady Conform FET_002_STANDARD"
-  short_description: "Repair FET_002_STANDARD conformance"
-  default_prompt: "Use $simready-foundation-conform-fet-002-standard to repair FET_002_STANDARD SimReady conformance failures."
+  display_name: "SimReady Conform CAP002_PosableBodies"
+  short_description: "Repair CAP002_PosableBodies conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-002-standard to repair CAP002_PosableBodies SimReady conformance failures."

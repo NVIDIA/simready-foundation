@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP000_Core.Isaac"
+  short_description: "Repair CAP000_Core.Isaac Isaac packaging Core"
+  default_prompt: "Use $simready-foundation-conform-fet-000-isaac to repair CAP000_Core.Isaac SimReady Isaac packaging Core conformance on a USD asset."

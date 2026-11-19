@@ -15,7 +15,7 @@
 """Tests for articulation_phases.ik_targets (algorithmic core)."""
 
 import numpy as np
-from simready_benchmark_kit_suite.articulation_phases.ik_targets import (
+from simready.foundation.tier_core.runtime_tests.articulation_phases.ik_targets import (
     IKTarget,
     LegendCounts,
     _fibonacci_sphere_points,

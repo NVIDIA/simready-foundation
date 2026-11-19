@@ -21,10 +21,10 @@ commands run from the repository root unless stated otherwise.
 | OpenPBR surfaces | `migrate_to_openpbr.py` | `outputs:mtlx:surface` on every visual material, textures reconnected |
 | Display colour | `author_display_color.py` | `primvars:displayColor` on every renderable Gprim |
 | Re-validation | `simready-validate` | The static contract, confirmed |
-| Benchmark | `simready-benchmark` | Evidence that the geometry bound to each surface drew in the engine |
+| Evaluate | `simready-evaluate` | Evidence that the geometry bound to each surface drew in the engine |
 
-Static validation and the benchmark answer different questions. Validation inspects the
-authored scene description and confirms the file holds the right values. The benchmark loads
+Static validation and the evaluation answer different questions. Validation inspects the
+authored scene description and confirms the file holds the right values. The evaluation loads
 the asset in Kit and confirms the engine resolved it. Neither establishes that the asset looks correct, and
 step 5 is about where that line falls.
 
@@ -36,7 +36,7 @@ step 5 is about where that line falls.
 | Git LFS | `git lfs install` | Sample assets |
 | `simready-validate` and the validator dependencies | `pip install -r requirements.txt` | Steps 2 and 3 |
 | `simready-foundation-tier-core` | `pip install simready-foundation-tier-core` | Steps 2 and 3 |
-| `simready-benchmark` | Refer to [Running Tests](../benchmark/running.md) | Step 4 |
+| `simready-evaluate` | Refer to [Running Tests](../evaluate/running.md) | Step 4 |
 | Kit or Isaac Sim | 2024.2.0 or later | Step 4 |
 
 One environment covers steps 2 and 3. `requirements.txt` lists `simready-validate` and
@@ -69,10 +69,10 @@ pip install simready-foundation-tier-core
 [SimReady Foundation PyPI Packages](../foundation_pypi.md) covers the tiers, the index to
 install from, and how content is discovered.
 
-### The benchmark
+### The evaluation
 
-Give `simready-benchmark` a virtual environment of its own: it installs a Kit engine plugin
-on top of its own USD build, and [Running Tests](../benchmark/running.md) covers the setup.
+Give `simready-evaluate` a virtual environment of its own: it installs a Kit engine plugin
+on top of its own USD build, and [Running Tests](../evaluate/running.md) covers the setup.
 
 The worked example uses the toaster sample. Both conform scripts write into an asset in
 place, so take a copy and work on that. The samples are LFS-tracked binaries and a rewrite
@@ -98,14 +98,14 @@ material it evaluates.
 
 | Output | Shader | Render context | Feature | Requirement |
 |---|---|---|---|---|
-| `outputs:surface` | UsdPreviewSurface | universal | `FET_006_STANDARD` | com.nvidia.usd.VM.PS.001 |
-| `outputs:mdl:surface` | OmniPBR | `mdl` | `FET_006_MDL` | VM.MDL.001 |
-| `outputs:mtlx:surface` | OpenPBR | `mtlx` | `FET_006_OPENPBR` | VM.PBR.001 |
+| `outputs:surface` | UsdPreviewSurface | universal | `FET006_Materials` | com.nvidia.usd.VM.PS.001 |
+| `outputs:mdl:surface` | OmniPBR | `mdl` | `FET006_Materials.MDL` | VM.MDL.001 |
+| `outputs:mtlx:surface` | OpenPBR | `mtlx` | `FET006_Materials.Openpbr` | VM.PBR.001 |
 
 These are sibling contracts. An asset may declare any combination, and none of the three
 depends on another. OpenPBR is the recommended target for new assets because it is a
 portable format that needs no vendor-specific material; MDL stays permitted for existing
-content. Refer to [FET006 OpenPBR Materials](../../features/FET_006_OPENPBR.md) for the
+content. Refer to [FET006 OpenPBR Materials](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET006_Materials.Openpbr.md) for the
 full contract.
 
 ### Which surface the renderer picks
@@ -118,9 +118,9 @@ An asset with both an OmniPBR and an OpenPBR surface therefore renders the OmniP
 one. If you open a migrated asset in Kit and it looks unchanged, that is why: you are
 looking at MDL.
 
-The benchmark tests in step 4 pin the context themselves and verify the pin took, so you
+The evaluation tests in step 4 pin the context themselves and verify the pin took, so you
 do not need to change the setting to see the OpenPBR surface rendered. Refer to
-[How a Surface Is Measured](../benchmark/tests/fet006-materials.md#how-a-surface-is-measured)
+[How a Surface Is Measured](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/runtime_tests/docs/fet006-materials.md#how-a-surface-is-measured)
 for how they do it.
 
 Render context is a different mechanism from binding purpose. Render context selects which
@@ -138,9 +138,9 @@ material bound.
 
 | Code | Requirement | Status |
 |---|---|---|
-| [`DISP.001`](../../capabilities/visualization/display_color/requirements/display-color-coverage.md) | Every renderable Gprim resolves a `primvars:displayColor` | Required |
-| [`DISP.002`](../../capabilities/visualization/display_color/requirements/display-color-values.md) | Every component is within `[0, 1]` and finite, and the element count agrees with the interpolation | Required |
-| [`DISP.003`](../../capabilities/visualization/display_color/requirements/display-opacity-values.md) | `primvars:displayOpacity`, where authored, is within `[0, 1]` and finite | Optional |
+| [`DISP.001`](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/visualization/display_color/requirements/display-color-coverage.md) | Every renderable Gprim resolves a `primvars:displayColor` | Required |
+| [`DISP.002`](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/visualization/display_color/requirements/display-color-values.md) | Every component is within `[0, 1]` and finite, and the element count agrees with the interpolation | Required |
+| [`DISP.003`](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/visualization/display_color/requirements/display-opacity-values.md) | `primvars:displayOpacity`, where authored, is within `[0, 1]` and finite | Optional |
 
 Display opacity works differently. A material has to opt in to reading
 `displayOpacity`; `gltf/pbr.mdl` is one that does. Kit's RTX default material has no
@@ -169,9 +169,9 @@ before it averages, so you only need to think about it when you author a value b
 
 | Surface | Declared on | No declaration means | Requirement |
 |---|---|---|---|
-| UsdPreviewSurface | `inputs:sourceColorSpace` on the `UsdUVTexture` | `auto` | [`VM.TEX.003`](../../capabilities/visualization/materials/requirements/material-texture-colorspace-preview.md) |
-| MDL | `colorSpace` metadata on the shader's own `asset inputs:*` | `auto` | [`VM.TEX.005`](../../capabilities/visualization/materials/requirements/material-texture-colorspace-mdl.md) |
-| OpenPBR | `colorSpace` metadata on the image node's `inputs:file` | no transform at all | [`VM.TEX.004`](../../capabilities/visualization/materials/requirements/material-texture-colorspace-openpbr.md) |
+| UsdPreviewSurface | `inputs:sourceColorSpace` on the `UsdUVTexture` | `auto` | [`VM.TEX.003`](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/visualization/materials/requirements/material-texture-colorspace-preview.md) |
+| MDL | `colorSpace` metadata on the shader's own `asset inputs:*` | `auto` | [`VM.TEX.005`](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/visualization/materials/requirements/material-texture-colorspace-mdl.md) |
+| OpenPBR | `colorSpace` metadata on the image node's `inputs:file` | no transform at all | [`VM.TEX.004`](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/visualization/materials/requirements/material-texture-colorspace-openpbr.md) |
 
 `auto` reads the image file's own colour-space metadata; where the file states nothing, it
 decodes any 8-bit three- or four-channel image as sRGB and treats everything else as raw.
@@ -203,14 +203,14 @@ grey card; they differ because the texture is sRGB-encoded and the constant is l
 `128` is not mid grey in a colour texture: it is the middle of the *encoding* range and
 decodes to `0.216`, about 20% lighter than a grey card.
 
-The [materials requirements overview](../../capabilities/visualization/materials/requirements.md)
+The [materials requirements overview](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/visualization/materials/requirements.md)
 states the conventions of all four appearance formats side by side, including display colour.
 
 ## 2. Authoring in Blender
 
 Blender 5.2 LTS writes an OpenPBR surface with no add-on. One export puts both a
 UsdPreviewSurface and an OpenPBR surface on the same `Material` prim, which is the shape
-[FET006 OpenPBR Materials](../../features/FET_006_OPENPBR.md) describes. One thing stands
+[FET006 OpenPBR Materials](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET006_Materials.Openpbr.md) describes. One thing stands
 between that and a conformant material: the setting that writes the OpenPBR network is off
 by default.
 
@@ -437,40 +437,49 @@ is missing. Copy `bl_probe.usda` and its `textures/` beside it into the reposito
 give the command an absolute path to where the export landed:
 
 ```bash
-simready-validate --project-config sample_content/project_config.toml --profile Robotics-Prop --version 3.3.0 --output results.json bl_probe.usda
+simready-validate --project-config sample_content/project_config.toml --profile Robotics-Prop --version 4.0.0 --output results.json bl_probe.usda
 ```
 
-3.3.0 is the first Robotics-Prop version that requires `FET_006_STANDARD` instead of
-marking it optional, so it is the one that tests whether the UsdPreviewSurface half of the
-export holds up.
+4.0.0 is the first Robotics-Prop version that requires `FET006_Materials` instead
+of marking it optional, so it is the one that tests whether the UsdPreviewSurface half of
+the export holds up.
 
 ```text
 Asset: bl_probe.usda
-  [FAILED] Robotics-Prop v3.3.0
-           FET_000_STANDARD: failing requirements: ['com.nvidia.simready.NP.005', 'com.nvidia.simready.NP.006']
-           FET_003_STANDARD: failing requirements: ['com.nvidia.simready.RB.001']
-           FET_004_STANDARD: failing requirements: ['com.nvidia.simready.RB.001']
-           ...
+  [FAILED] Robotics-Prop v4.0.0
+           CAP000_Core.MuJoCo.0-1-0: failing requirements: ['com.nvidia.simready.NP.005']
+           CAP000_Core.0-1-0: failing requirements: ['com.nvidia.simready.NP.005']
+           CAP000_Core.0-2-0: failing requirements: ['com.nvidia.simready.NP.005']
+           CAP000_Core.PhysX.0-1-0: failing requirements: ['com.nvidia.simready.NP.005']
+           CAP003_RigidBody.MuJoCo.0-1-0: failing requirements: ['com.nvidia.simready.RB.001']
+           CAP004_Multibody.MuJoCo.0-1-0: failing requirements: ['com.nvidia.simready.RB.001']
+           FET003_RigidBody.0-2-0: failing requirements: ['com.nvidia.simready.RB.001']
+           FET003_RigidBody.PhysX.0-4-0: failing requirements: ['com.nvidia.simready.RB.001']
+           FET004_Multibody.0-2-0: failing requirements: ['com.nvidia.simready.RB.001']
+           FET004_Multibody.PhysX.0-4-0: failing requirements: ['com.nvidia.simready.RB.001']
+           FET010_DisplayColor.0-1-0: optional feature, unmet requirements: ['com.nvidia.simready.DISP.001']
 ```
 
-Twelve lines, three distinct requirements, each repeated once per runtime physics variant.
-RB.001 is `No physics rigid bodies found under the default prim`; NP.005 and NP.006 are
-naming and path requirements a bare export does not meet. Physics and naming are outside
-what this section covers.
+The first ten lines are two requirements, repeated once for every core, rigid-body and
+multibody contract that includes them. RB.001 is
+`No physics rigid bodies found under the default prim`; NP.005 is the asset folder
+structure, which a loose export file does not meet. Physics and naming are outside what
+this section covers.
 
-The material features are absent from that list. The `features_summary` in `results.json`
-gives them by name:
+The material contracts pass, so only display colour appears in that list. The
+`features_summary` in `results.json` gives all four by name:
 
 ```text
-FET_006_STANDARD      {"dependencies": "[]", "passed": true, "version": "0.2.0"}
-FET_006_OPENPBR       {"dependencies": "[]", "passed": true, "version": "0.1.0"}
-FET_006_MDL           {"dependencies": "[]", "passed": true, "version": "0.2.0"}
-FET_010_STANDARD {"dependencies": "[]", "optional requirements": "['com.nvidia.simready.DISP.001']", "passed": true, "version": "0.1.0"}
+FET006_Materials.MDL.0-2-0 {"blocking_failure": false, "dependencies": "[]", "passed": true, "version": "0-2-0"}
+FET006_Materials.0-2-0 {"blocking_failure": false, "dependencies": "[]", "passed": true, "version": "0-2-0"}
+FET006_Materials.Openpbr.0-1-0 {"blocking_failure": false, "dependencies": "[]", "passed": true, "version": "0-1-0"}
+FET010_DisplayColor.0-1-0 {"blocking_failure": false, "dependencies": "[]", "optional requirements": "['com.nvidia.simready.DISP.001']", "passed": false, "version": "0-1-0"}
 ```
 
 The first three pass. The fourth is this export's one gap on visual materials: the probe
-has no `primvars:displayColor`, so DISP.001 goes unsatisfied and shows up as an optional
-requirement instead of a failure. The next subsection closes it.
+has no `primvars:displayColor`, so DISP.001 goes unsatisfied. The contract is optional, so
+it is reported with `"blocking_failure": false` and an `optional requirements` list instead
+of failing the profile. The next subsection closes it.
 
 ```{note}
 `migrate_to_openpbr.py --verify` and VM.PBR.001 both read `outputs:mtlx:surface`, so a
@@ -547,7 +556,7 @@ conform, and a second profile run.
 Run the profile the asset targets:
 
 ```bash
-simready-validate --project-config sample_content/project_config.toml --profile Robotics-Prop --version 3.3.0 ../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd
+simready-validate --project-config sample_content/project_config.toml --profile Robotics-Prop --version 4.0.0 ../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd
 ```
 
 `--project-config` takes the capability, feature and profile directories from the
@@ -563,21 +572,22 @@ anything else:
 
 ```text
 Asset: ../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd
-  [PASSED] Robotics-Prop v3.3.0
+  [PASSED] Robotics-Prop v4.0.0
 ```
 
 Name a profile version that does not exist and you get the `Asset:` line, no verdict, and
 exit 1. The reason is in the warnings above it, as `Profile ... is not registered — cannot
-validate`. Refer to [Profiles](../../profiles/profiles.md) for the versions on offer.
+validate`. Refer to [Profiles](../../shared/profiles/profiles.md) for the versions on offer.
 
 ```{note}
 A green profile line establishes less about visual materials than it appears to.
-Robotics-Prop 3.3.0 requires the UsdPreviewSurface preview (`FET_006_STANDARD`) and marks
-display colour, OpenPBR and MDL optional. Three profiles list `FET_006_OPENPBR` and
-`FET_010_STANDARD`: Robotics-Prop, Robot-Body and Robot-Gripper. All three mark both
-optional. An optional feature's requirements still run, and they are reported under
-`optional requirements` in the JSON report, but they cannot fail the profile. So no profile
-today fails an asset for shipping no OpenPBR surface or no display colour.
+Robotics-Prop 4.0.0 requires the UsdPreviewSurface preview (`FET006_Materials`) and
+marks display colour, OpenPBR and MDL optional. Three profiles list
+`FET006_Materials.Openpbr` and `FET010_DisplayColor`: Robotics-Prop, Robot-Body and
+Robot-Gripper. All three mark both optional. An optional feature's requirements still run:
+an unmet one is listed under the verdict and reported under `optional requirements` in the
+JSON report, but it cannot fail the profile. So no profile today fails an asset for
+shipping no OpenPBR surface or no display colour.
 ```
 
 Two requirements ask for less than their names suggest:
@@ -784,40 +794,43 @@ authored by hand, and is reported as a conflict and left alone.
 Run the baseline command again, against the copy you have been working on:
 
 ```bash
-simready-validate --project-config sample_content/project_config.toml --profile Robotics-Prop --version 3.3.0 ../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd
+simready-validate --project-config sample_content/project_config.toml --profile Robotics-Prop --version 4.0.0 ../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd
 ```
 
 ```text
 Asset: ../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd
-  [PASSED] Robotics-Prop v3.3.0
+  [PASSED] Robotics-Prop v4.0.0
 ```
 
-The console line is identical whatever the two conform scripts did, because the features
-they conform are optional in every profile that lists them. To see per-feature detail, write
-a JSON report:
+The verdict is the same whatever the two conform scripts did, because the features they
+conform are optional in every profile that lists them. What the scripts change is the list
+under the verdict: an unmet optional feature is printed there as
+`optional feature, unmet requirements`, and the conformed toaster has none. To see
+per-feature detail, write a JSON report:
 
 ```bash
-simready-validate --project-config sample_content/project_config.toml --profile Robotics-Prop --version 3.3.0 --output results.json ../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd
+simready-validate --project-config sample_content/project_config.toml --profile Robotics-Prop --version 4.0.0 --output results.json ../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd
 ```
 
 `results.json` is keyed by asset path, and each asset has a `features_summary` with one
-entry per feature holding `passed`, `version`, `dependencies` and, where they apply,
-`failing requirements` and `optional requirements`. The four visual-material features on
-the conformed toaster:
+entry per feature holding `passed`, `blocking_failure`, `version`, `dependencies` and,
+where they apply, `failing requirements` and `optional requirements`. The four
+visual-material features on the conformed toaster:
 
 ```text
-FET_010_STANDARD {"dependencies": "[]", "passed": true, "version": "0.1.0"}
-FET_006_MDL           {"dependencies": "[]", "passed": true, "version": "0.2.0"}
-FET_006_OPENPBR       {"dependencies": "[]", "passed": true, "version": "0.1.0"}
-FET_006_STANDARD      {"dependencies": "[]", "passed": true, "version": "0.2.0"}
+FET006_Materials.MDL.0-2-0 {"blocking_failure": false, "dependencies": "[]", "passed": true, "version": "0-2-0"}
+FET006_Materials.0-2-0 {"blocking_failure": false, "dependencies": "[]", "passed": true, "version": "0-2-0"}
+FET006_Materials.Openpbr.0-1-0 {"blocking_failure": false, "dependencies": "[]", "passed": true, "version": "0-1-0"}
+FET010_DisplayColor.0-1-0 {"blocking_failure": false, "dependencies": "[]", "passed": true, "version": "0-1-0"}
 ```
 
-This is where an unmet optional requirement shows up. An asset whose materials have no
-physically based final surface still reports `"passed": true` for `FET_006_OPENPBR`, with
-the requirement it missed listed alongside:
+This is where an unmet optional requirement shows up in detail. An asset whose materials
+have no physically based final surface reports `"passed": false` for
+`FET006_Materials.Openpbr`, with the requirement it missed listed alongside and
+`"blocking_failure": false` because the feature is optional:
 
 ```text
-FET_006_OPENPBR       {"dependencies": "[]", "optional requirements": "['com.nvidia.simready.VM.PBR.001']", "passed": true, "version": "0.1.0"}
+FET006_Materials.Openpbr.0-1-0 {"blocking_failure": false, "dependencies": "[]", "optional requirements": "['com.nvidia.simready.VM.PBR.001']", "passed": false, "version": "0-1-0"}
 ```
 
 Removing the OpenPBR surface produces that line even where an MDL surface remains, since
@@ -829,123 +842,153 @@ review that makes the JSON the interesting output, and it makes each conform scr
 where a missing OpenPBR surface or a missing display colour produces a non-zero exit code.
 
 Refer to [SimReady Validation Workflow](../validate_workflow.md) for stamping results into
-the asset with `--stamp-asset-validation`, which is what makes the benchmark plan these
+the asset with `--stamp-asset-validation`, which is what makes the evaluation plan these
 tests without `--features`.
 
-## 4. Benchmark
+## 4. Evaluate
 
 Four tests cover visual materials. Each loads the asset in Kit and measures pixels.
 
 | Test | What it renders | Feature |
 |---|---|---|
-| [openpbr_renders](../benchmark/tests/fet006/openpbr-renders.md) | The OpenPBR surface on `outputs:mtlx:surface` | `FET_006_OPENPBR` |
-| [mdl_renders](../benchmark/tests/fet006/mdl-renders.md) | The MDL surface on `outputs:mdl:surface` | `FET_006_MDL` |
-| [preview_surface_renders](../benchmark/tests/fet006/preview-surface-renders.md) | The UsdPreviewSurface on `outputs:surface` | `FET_006_STANDARD` |
-| [display_color_response](../benchmark/tests/fet010/display-color-response.md) | `primvars:displayColor` through the OpenPBR material DISP.001 nominates | `FET_010_STANDARD` |
+| [openpbr_renders](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/runtime_tests/docs/fet006/openpbr-renders.md) | Bound-material pixel coverage with `mtlx` requested | `FET006_Materials.Openpbr` |
+| [mdl_renders](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/runtime_tests/docs/fet006/mdl-renders.md) | Bound-material pixel coverage with `mdl` requested | `FET006_Materials.MDL` |
+| [preview_surface_renders](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/runtime_tests/docs/fet006/preview-surface-renders.md) | Bound-material pixel coverage with the universal context requested | `FET006_Materials` |
+| [display_color_response](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/runtime_tests/docs/fet010/display-color-response.md) | `primvars:displayColor` through the OpenPBR material DISP.001 nominates | `FET010_DisplayColor` |
 
-The first three share a room, a light rig and a camera framing, so a difference between them
-comes from the material. Each puts its own render context at the front of Kit's list, checks
-the value took before it renders anything, and puts the list back afterwards. Nothing edits
-the asset's materials. The number each one reports is what the geometry bound to a material
-with that context contributed, measured by hiding exactly that geometry and differencing, so
-on a partly migrated asset it is smaller than what the asset as a whole drew.
+Each of the first three requests a single render context and uses three fresh
+disposable stages with the same room, light rig and camera-framing procedure.
+A strong magenta control on a fixture-owned enclosing ancestor establishes the
+silhouette. Weak magenta and weak cyan controls let the asset's own bindings win;
+a pixel counts as uncovered only if it follows both weak colors inside that
+silhouette. Coverage is `1 - uncovered / silhouette`, not a hidden-geometry
+difference or proof that the named shader evaluated. Each stage expands nested
+instances in its session layer; source layers, materials and bindings remain
+unchanged. Context pinning and required cleanup are checked, and the incoming
+render-context list is restored. See [FET006 Materials](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/runtime_tests/docs/fet006-materials.md)
+for the measurement prerequisites and renderer limitations.
 
 `display_color_response` works by substitution. It binds one material over the whole asset
-from a single relationship on the asset's root prim, marked
-`bindMaterialAs = "strongerThanDescendants"`, which beats every binding the asset authors
-below it, including bindings inside prototypes. That material is the OpenPBR surface DISP.001's
+from strong all-purpose/full/preview relationships on a test-owned enclosing ancestor,
+marked `bindMaterialAs = "strongerThanDescendants"`. Before collecting geometry,
+procedure 0.4.5 expands nested instances only in the disposable stage's session
+layer and requires zero instances remaining. Source layers, material opinions
+and primvars are preserved. That material is the OpenPBR surface DISP.001's
 guidance nominates, with a MaterialX primvar reader feeding `displayColor` into `base_color`.
-The test renders the asset through four variants of it and takes the answer from the
-differences:
+After a hidden-background capture, the fixture primes Read and ReadControl
+through its checked binding/settling/capture path. Those warmups are diagnostic
+only, excluded from masks, ratios and the three-frame summary video. The fixed
+measured sequence is:
 
 | Variant | What it changes | What the difference answers |
 |---|---|---|
 | Read | The reader, falling back to magenta | The frame everything else is compared against |
-| Altered | The same reader, falling back to green | Whether any Gprim fell back, which is DISP.001 |
+| ReadControl | An identical reader through a second material | Whether the measured material-swap comparison is qualified by its noise ceiling |
 | Removed | No reader, flat magenta | Whether the primvar drove the pixels, or a constant did |
 | Opacity | The Read material with the `displayOpacity` fallback at 0 | DISP.003 |
 
-Nothing on the asset is edited and nothing is written to disk. `mtlx` has to be in Kit's
-render-context list for the substituted material to resolve at all, so the test checks the
-list and fails the run when it is missing.
+The fixture requests `["mtlx"]` before stage creation and verifies the effective
+list before asset loading, then restores the incoming context list and clears its temporary
+wrapper bindings on every exit. Rejected expansion, bindings, context or noisy
+measured controls leave the response unassessed; they do not establish an asset
+color defect. First-visible-material initialization differences are not proof
+that longer settling will fix the run. The measured control must qualify without
+selecting a favorable later frame pair. See the linked procedure page for the
+expansion/warmup metrics, unchanged acceptance criteria and required cleanup.
 
 The asset's stamped profile drives planning, so an asset stamped against a profile without
 a feature will not pick its tests up. `--features` bypasses that gate while the plan is
 built:
 
 ```bash
-simready-benchmark --assets ../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd --features FET_006_OPENPBR
+simready-evaluate --assets ../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd --features FET006_Materials.Openpbr
 ```
 
 ```bash
-simready-benchmark --assets ../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd --features FET_010_STANDARD
+simready-evaluate --assets ../vm-workflow/gen_appliance_toaster_v01_01/simready_usd/sm_gen_appliance_toaster_v01_01.usd --features FET010_DisplayColor
 ```
 
 Pass one `--features` value per invocation. `--only-features` is a different flag: it
 narrows a plan that already exists, where `--features` acts while the plan is built. Refer
-to [Running Tests](../benchmark/running.md) for installation and engine configuration.
+to [Running Tests](../evaluate/running.md) for installation and engine configuration.
 
-A surface test can skip, fail or pass. It skips when no material on the asset has a surface
-for its context, because the asset never claimed that feature: an asset shipping only MDL
-skips the OpenPBR and UsdPreviewSurface tests instead of failing them. It fails in two
-cases: the asset has the surface but no material with it is bound to geometry the render
-draws, and the bound geometry draws too few pixels to measure. Otherwise it passes.
+These coverage procedures do not skip merely because the requested surface is
+absent. Normal planning uses prior validation evidence; a forced diagnostic can
+still run without that evidence. Static validation owns surface presence and
+resolution, and a runtime coverage PASS does not establish them. Qualified
+coverage below `min_material_coverage` is a measured FAIL. A strong silhouette
+below `min_silhouette_pixels`, rejected context/binding, unusable image mask or
+failed required cleanup is an execution/measurement error, not an asset FAIL.
+OpenPBR also checks captured scoped MaterialX document-build errors when its
+startup validation logging is enabled; missing logging is not proof of clean
+shader evaluation.
 
 ## 5. Read the report
 
-Results land under `_testing/`. Open `index.html` for the run, with a page per asset under
-`_testing/assets/`. Captured frames and the per-test `result.json` sit under
-`_testing/results/<asset path>/.simready/runtime/<test name>/`. Refer to
-[Reading Reports](../benchmark/reading-reports.md) for the full layout and exit codes.
+Use the resolved output directory printed by the CLI; an existing requested
+directory can redirect this run into a new `evaluate_testing_N` directory.
+Open its `index.html`, then the per-asset pages under `assets/` and their native
+result/media links. Canonical test evidence lives under
+`results/<asset-parent>/.simready/assets/<asset-namespace>/runtime/<test-artifact-name>/<engine>/`.
+The namespace includes the asset filename's identity hash, so do not guess an
+evidence path from a shared basename. Refer to
+[Reading Reports](../evaluate/reading-reports.md) for the full layout and exit codes.
 
-The frames are more informative than the counts, so open them. Each surface test keeps four: the
-asset hidden, that frame repeated to establish a noise floor, the asset shown with its
-supporting geometry hidden, and the asset shown. The number the test judges is the difference
-between the last two.
+Inspect the appearance frame, the three separately captured strong-magenta,
+weak-magenta and weak-cyan controls, and the coverage metrics together. The
+appearance capture precedes the strong binding and may be repeated for settling;
+the control captures are diagnostic, not source appearance. Their intersected
+color masks supply the verdict; the test no longer hides supporting geometry
+or judges an appearance-frame difference.
 
-![openpbr_renders expected result](../benchmark/tests/_images/openpbr-renders.png)
+![openpbr_renders expected result](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/runtime_tests/docs/_images/openpbr-renders.png)
 
-The toaster in the mid-grey room, shaded by the OpenPBR surface on `outputs:mtlx:surface`.
-One run of `openpbr_renders` on this sample reported five Gprims bound to a material with
-an OpenPBR surface, drawing 293,685 pixels against a 212 pixel noise floor, with the
-context list pinned to `[mtlx, mdl, universal]`. Two identical frames would mean that
-geometry contributed nothing.
+This historical toaster image and the earlier result (293,685 pixels against a
+212-pixel noise floor with `[mtlx, mdl, universal]`) came from the replaced
+selective-hide procedure. They are not evidence for the current single-context,
+three-control measurement or proof that the OpenPBR network evaluated. Current
+runs need their own appearance, control masks and coverage evidence.
 
 ### What a pass establishes
 
-Geometry bound to a material with the named surface drew the frame, with that context
-first in Kit's list. That is a stronger claim than "the asset rendered": the test resolves
-bindings before it measures, so an unbound MaterialX material sitting in `/Looks` cannot
-supply the pass while other materials supply the pixels.
+The sampled bound-material coverage proxy met its configured floor with the
+requested context pinned. Controls bind above the asset so its root, descendant
+and subset bindings can win unchanged in the weak passes. A universal fallback
+or a bound shader that fails to evaluate may still count as covered. An unused
+material in `/Looks` alone cannot replace those winning asset bindings.
 
-`display_color_response` establishes that the display colours in the file reach the shader.
-Swapping the primvar reader's fallback changes the frame only where a Gprim resolved no
-display colour, so a pass means none did. Taking the reader out entirely changes the frame
-wherever the primvar was driving the shading, so a pass means it was. The test also checks
-the file for coverage and reports both answers side by side. Their disagreement is the
-useful signal: a file that resolves everywhere and a render that does not means the primvar
-is not reaching the shader, which is a different defect from the asset not having one.
+`display_color_response` establishes a sampled display-color response through
+the nominated material on the expanded measurement scene. Its qualified
+Read/Removed comparison must reach the configured presence floor and exceed
+applicable swap noise; the opacity rule depends on whether opacity is authored everywhere,
+nowhere or on a subset. The file-side counts are diagnostic, not a per-Gprim
+rendered coverage gate. A pass does not certify complete static conformance,
+the original instanced rendering path, its performance or every consumer.
+Static validation owns per-Gprim resolved coverage and value validity. A
+disagreement calls for fixture and capture investigation before source repair;
+it does not justify relocating valid inherited colors or de-instancing an asset.
 
-![display_color_response expected result](../benchmark/tests/_images/display-color-response.png)
+![display_color_response expected result](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/runtime_tests/docs/_images/display-color-response.png)
 
 ### What a pass does not establish
 
-That the surface network under test is the one Kit evaluated. The trailing render contexts
-stay in the list as fallbacks, deliberately, because without them everything with no surface
-for the pinned context renders as the default material. So geometry whose OpenPBR network
-fails to resolve still draws, through MDL, and still counts. Catching that needs a probe
-that writes a known value into the shader under test and looks for it, which means editing
-the material, and no test in this family does that today.
+That the requested surface network is the one Kit evaluated. The context list
+contains the requested entry alone, but universal fallback resolution is still
+possible. A winning bound material can also count as covered when its shader
+fails to evaluate. The separate scoped MaterialX log check can detect reported
+document-build failures; absence of captured errors is not a complete shader
+evaluation inventory. This family does not modify the source shader network
+to identify which network produced every pixel.
 
 Nor does a pass establish that the surface looks correct or has its intended textures. The clearest
 way to see the size of that gap is the same prop rendered through the same room, light rig
 and camera, before and after migration:
 
-![OpenPBR surface before and after sample migration](../benchmark/tests/_images/openpbr-migration-before-after.png)
+![OpenPBR surface before and after sample migration](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/runtime_tests/docs/_images/openpbr-migration-before-after.png)
 
 Left, the OpenPBR surface with constant inputs and no textures wired: flat white, because
 `base_color` was unauthored and fell back to the node definition's default. Right, the same
-prop after migration kept its maps. Both pass `openpbr_renders`. Everything
+prop after migration kept its maps. Both passed the historical `openpbr_renders` procedure. Everything
 separating those two frames is outside what the test judges, which is why the frames are
 kept instead of reduced to a number.
 
@@ -957,26 +1000,28 @@ against. Whether the shipped colours are the right colours is not something a re
 settle: the conform script's derivation approximates albedo without claiming to match what a
 path tracer produces for the same object.
 
-A full green run supports one narrow claim. The asset has the surfaces and primvars the
-features describe, the values are in range, and the geometry bound to each surface drew the
-frame with that context resolved first. Whether the asset looks right is a judgement a human
-still has to make by looking at the frames.
+A green runtime report establishes only the selected sampled coverage and
+response checks. Static surface presence, primvar coverage and value validity
+need their own recorded validation; a profile PASS does not establish optional
+feature conformance. Neither result identifies the evaluated network for every
+pixel or certifies appearance quality. Inspect the frames and exact selected
+requirements before making those separate claims.
 
 ## Common mistakes
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| Migrated asset looks unchanged in Kit | Kit resolved the MDL surface, which sits ahead of `mtlx` in the shipped context order | Run the step 4 benchmark, which pins the context and confirms the pin took |
+| Migrated asset looks unchanged in Kit | MDL has priority in the shipped context order; similar-looking surfaces and failed evaluation are also possible | Use the requested-context appearance capture and scoped logs; a confirmed pin alone does not identify the evaluated network |
 | Display colours all come back `(0.8, 0.8, 0.8)` | `numpy` or `Pillow` is missing, so the script fell back to material constants | Install both and re-run; the log records when this happened |
 | Display colour looks washed out | An sRGB value was written without converting to linear | Decode through the sRGB transfer function first |
-| A profile pass on an asset with no OpenPBR surface | `FET_006_OPENPBR` is `optional=true` in every shipped profile | Use `migrate_to_openpbr.py --verify` as the gate |
+| A profile pass on an asset with no OpenPBR surface | `FET006_Materials.Openpbr` is `optional = true` in every shipped profile | Use `migrate_to_openpbr.py --verify` as the gate |
 | A Blender export has no `outputs:mtlx:surface` | `generate_materialx_network` is `False` by default | Set it to `True` and export again |
 | A Blender export has an unreferenced copy under `textures/` | `export_textures_mode` was set to `KEEP` or `PRESERVE` with the MaterialX network on | Leave the mode on `NEW` |
 
 ## Where to go next
 
-- [FET006 OpenPBR Materials](../../features/FET_006_OPENPBR.md) and [FET010 Display Color](../../features/FET_010_STANDARD.md) for the two contracts in full.
-- [Final Surface requirement](../../capabilities/visualization/materials/requirements/material-final-surface.md) for VM.PBR.001, and [Display Color capability](../../capabilities/visualization/display_color/capability-display_color.md) for DISP.001 to DISP.003.
-- [FET006 Materials](../benchmark/tests/fet006-materials.md) and [FET010 Display Color](../benchmark/tests/fet010-display-color.md) for the benchmark families and what each test guards against.
+- [FET006 OpenPBR Materials](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET006_Materials.Openpbr.md) and [FET010 Display Color](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET010_DisplayColor.md) for the two contracts in full.
+- [Visual Materials capability](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/visualization/materials/requirements/material-final-surface.md) for VM.PBR.001, and [Display Color capability](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/visualization/display_color/capability-display_color.md) for DISP.001 to DISP.003.
+- [FET006 Materials](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/runtime_tests/docs/fet006-materials.md) and [FET010 Display Color](../../../../tiers/simready_foundation_tier_core/simready/foundation/tier_core/runtime_tests/docs/fet010-display-color.md) for the evaluation families and what each test guards against.
 - [SimReady Validation Workflow](../validate_workflow.md) for validator setup, JSON reports and stamping.
-- [Profiles](../../profiles/profiles.md) for which profiles select these features and at which version.
+- [Profiles](../../shared/profiles/profiles.md) for which profiles select these features and at which version.

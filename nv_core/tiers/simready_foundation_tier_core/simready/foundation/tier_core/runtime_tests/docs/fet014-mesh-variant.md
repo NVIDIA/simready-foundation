@@ -1,0 +1,41 @@
+# FET014 Mesh Variant
+
+## Overview
+
+`FET014_MeshVariant.0-1-0` has one version 1.0.0 runtime test. It checks
+that every declared `MeshVariant` option composes and is genuinely visual-only:
+the visible mesh changes while both the visual and collision envelopes stay put.
+
+## What a Passing Family Means
+
+The asset offers interchangeable render meshes (for example high-poly and
+low-poly) that a pipeline can pick by budget without re-fitting the object. The
+swap never touches collision or footprint.
+
+## Tests
+
+:::{list-table}
+:header-rows: 1
+:widths: 30 45 25
+
+* - Test
+  - What It Checks
+  - Validates
+* - [mesh_variation](fet014/mesh-variation.md)
+  - Recomposes each MeshVariant option and confirms the visual and collision envelopes match the authored default, then renders a frame per option.
+  - FET014 Mesh Variant
+:::
+
+## Relationship to the Feature
+
+The test provides evidence for
+[Mesh Variant](../../features/FET014_MeshVariant.md). It exercises
+AV.001-AV.005 and AV.007 (visual-only impact honesty), validated by the
+`AssetVariants` checkers.
+
+```{toctree}
+:maxdepth: 1
+:hidden:
+
+mesh_variation <fet014/mesh-variation>
+```

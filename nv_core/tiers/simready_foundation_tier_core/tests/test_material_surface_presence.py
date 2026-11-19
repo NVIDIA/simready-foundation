@@ -33,8 +33,7 @@ pytest.importorskip("pxr")
 pytest.importorskip("simready.foundation.tier_core.requirements")
 
 from pxr import Sdf, Usd, UsdGeom, UsdShade  # noqa: E402
-
-from simready.foundation.tier_core.capabilities.visualization.materials import (  # noqa: E402
+from simready.foundation.tier_core.rules_and_reqs.visualization.materials import (  # noqa: E402
     validation as materials,
 )
 
@@ -49,17 +48,14 @@ def _stage(terminals: tuple[str, ...], *, bind: bool = True) -> Usd.Stage:
     material = UsdShade.Material.Define(stage, MATERIAL_PATH)
 
     for terminal in terminals:
-        name = {"outputs:surface": "Preview",
-                "outputs:mdl:surface": "Mdl",
-                "outputs:mtlx:surface": "Mtlx"}[terminal]
+        name = {"outputs:surface": "Preview", "outputs:mdl:surface": "Mdl", "outputs:mtlx:surface": "Mtlx"}[terminal]
         shader = UsdShade.Shader.Define(stage, f"{MATERIAL_PATH}/{name}")
-        shader.CreateIdAttr({"Preview": "UsdPreviewSurface",
-                             "Mdl": "mdl:OmniPBR",
-                             "Mtlx": "ND_open_pbr_surface_surfaceshader"}[name])
+        shader.CreateIdAttr(
+            {"Preview": "UsdPreviewSurface", "Mdl": "mdl:OmniPBR", "Mtlx": "ND_open_pbr_surface_surfaceshader"}[name]
+        )
         shader.CreateOutput("out", Sdf.ValueTypeNames.Token)
         context = "" if terminal == "outputs:surface" else terminal.split(":")[1]
-        output = (material.CreateSurfaceOutput(context) if context
-                  else material.CreateSurfaceOutput())
+        output = material.CreateSurfaceOutput(context) if context else material.CreateSurfaceOutput()
         output.ConnectToSource(shader.ConnectableAPI(), "out")
 
     if bind:
@@ -78,29 +74,25 @@ def _issues(stage: Usd.Stage, code):
 
 def _code(name):
     import simready.foundation.tier_core.requirements as cap
+
     return getattr(cap.MaterialsRequirements, name)
 
 
 @pytest.mark.parametrize(
     "requirement,terminal",
-    [("VM_PS_002", "outputs:surface"),
-     ("VM_MDL_003", "outputs:mdl:surface"),
-     ("VM_PBR_001", "outputs:mtlx:surface")],
+    [("VM_PS_002", "outputs:surface"), ("VM_MDL_003", "outputs:mdl:surface"), ("VM_PBR_001", "outputs:mtlx:surface")],
 )
 def test_a_material_without_the_surface_fails(requirement, terminal):
     """The point of each requirement: a pass means the asset has that surface."""
-    others = tuple(t for t in ("outputs:surface", "outputs:mdl:surface", "outputs:mtlx:surface")
-                   if t != terminal)
-    assert _issues(_stage(others), _code(requirement)), (
-        f"a material connecting {others} and not {terminal} must fail {requirement}"
-    )
+    others = tuple(t for t in ("outputs:surface", "outputs:mdl:surface", "outputs:mtlx:surface") if t != terminal)
+    assert _issues(
+        _stage(others), _code(requirement)
+    ), f"a material connecting {others} and not {terminal} must fail {requirement}"
 
 
 @pytest.mark.parametrize(
     "requirement,terminal",
-    [("VM_PS_002", "outputs:surface"),
-     ("VM_MDL_003", "outputs:mdl:surface"),
-     ("VM_PBR_001", "outputs:mtlx:surface")],
+    [("VM_PS_002", "outputs:surface"), ("VM_MDL_003", "outputs:mdl:surface"), ("VM_PBR_001", "outputs:mtlx:surface")],
 )
 def test_a_material_with_the_surface_passes(requirement, terminal):
     assert not _issues(_stage((terminal,)), _code(requirement))
@@ -114,9 +106,7 @@ def test_an_mdl_surface_does_not_satisfy_openpbr():
     could not answer whether an asset has OpenPBR.
     """
     stage = _stage(("outputs:surface", "outputs:mdl:surface"))
-    assert _issues(stage, _code("VM_PBR_001")), (
-        "an MDL surface must not satisfy VM.PBR.001"
-    )
+    assert _issues(stage, _code("VM_PBR_001")), "an MDL surface must not satisfy VM.PBR.001"
     assert "outputs:mtlx:surface" in str(_issues(stage, _code("VM_PBR_001"))[0].message)
 
 
@@ -139,36 +129,30 @@ def _material_only_stage(terminals: tuple[str, ...]) -> Usd.Stage:
     stage = Usd.Stage.CreateInMemory()
     material = UsdShade.Material.Define(stage, MATERIAL_PATH)
     for terminal in terminals:
-        name = {"outputs:surface": "Preview",
-                "outputs:mdl:surface": "Mdl",
-                "outputs:mtlx:surface": "Mtlx"}[terminal]
+        name = {"outputs:surface": "Preview", "outputs:mdl:surface": "Mdl", "outputs:mtlx:surface": "Mtlx"}[terminal]
         shader = UsdShade.Shader.Define(stage, f"{MATERIAL_PATH}/{name}")
-        shader.CreateIdAttr({"Preview": "UsdPreviewSurface",
-                             "Mdl": "mdl:OmniPBR",
-                             "Mtlx": "ND_open_pbr_surface_surfaceshader"}[name])
+        shader.CreateIdAttr(
+            {"Preview": "UsdPreviewSurface", "Mdl": "mdl:OmniPBR", "Mtlx": "ND_open_pbr_surface_surfaceshader"}[name]
+        )
         shader.CreateOutput("out", Sdf.ValueTypeNames.Token)
         context = "" if terminal == "outputs:surface" else terminal.split(":")[1]
-        output = (material.CreateSurfaceOutput(context) if context
-                  else material.CreateSurfaceOutput())
+        output = material.CreateSurfaceOutput(context) if context else material.CreateSurfaceOutput()
         output.ConnectToSource(shader.ConnectableAPI(), "out")
     return stage
 
 
 @pytest.mark.parametrize(
     "requirement,terminal",
-    [("VM_PS_002", "outputs:surface"),
-     ("VM_MDL_003", "outputs:mdl:surface"),
-     ("VM_PBR_001", "outputs:mtlx:surface")],
+    [("VM_PS_002", "outputs:surface"), ("VM_MDL_003", "outputs:mdl:surface"), ("VM_PBR_001", "outputs:mtlx:surface")],
 )
 def test_a_material_only_asset_is_judged_on_its_materials(requirement, terminal):
     """A material library declares materials and no geometry. A requirement written
     only against bound materials reports nothing about it, so the feature would state
     nothing a consumer can act on."""
-    others = tuple(t for t in ("outputs:surface", "outputs:mdl:surface", "outputs:mtlx:surface")
-                   if t != terminal)
-    assert _issues(_material_only_stage(others), _code(requirement)), (
-        f"a material-only asset with no {terminal} must fail {requirement}"
-    )
+    others = tuple(t for t in ("outputs:surface", "outputs:mdl:surface", "outputs:mtlx:surface") if t != terminal)
+    assert _issues(
+        _material_only_stage(others), _code(requirement)
+    ), f"a material-only asset with no {terminal} must fail {requirement}"
     assert not _issues(_material_only_stage((terminal,)), _code(requirement))
 
 
@@ -187,9 +171,50 @@ def test_proxy_only_geometry_is_read_as_having_no_renderable_geometry():
     stage = _material_only_stage(("outputs:mtlx:surface",))
     proxy = UsdGeom.Mesh.Define(stage, "/World/Geometry/Proxy")
     UsdGeom.Imageable(proxy).CreatePurposeAttr(UsdGeom.Tokens.proxy)
-    assert _issues(stage, _code("VM_PS_002")), (
-        "the stage-level branch must still run when the only geometry is proxy purpose"
-    )
+    assert _issues(
+        stage, _code("VM_PS_002")
+    ), "the stage-level branch must still run when the only geometry is proxy purpose"
+
+
+def _miswired_stage(wiring: str, *, geometry: bool) -> Usd.Stage:
+    """``outputs:surface`` is connected, but not to an active UsdPreviewSurface."""
+    stage = _stage(()) if geometry else _material_only_stage(())
+    output = UsdShade.Material(stage.GetPrimAtPath(MATERIAL_PATH)).CreateSurfaceOutput()
+    if wiring == "missing":
+        output.GetAttr().SetConnections([Sdf.Path(f"{MATERIAL_PATH}/NoSuchShader.outputs:surface")])
+        return stage
+    shader = UsdShade.Shader.Define(stage, f"{MATERIAL_PATH}/Shader")
+    shader.CreateIdAttr("ND_open_pbr_surface_surfaceshader" if wiring == "materialx" else "UsdPreviewSurface")
+    shader.CreateOutput("out", Sdf.ValueTypeNames.Token)
+    output.ConnectToSource(shader.ConnectableAPI(), "out")
+    if wiring == "inactive":
+        shader.GetPrim().SetActive(False)
+    return stage
+
+
+@pytest.mark.parametrize("geometry", [True, False], ids=["geometry", "material_only"])
+@pytest.mark.parametrize("wiring", ["missing", "inactive", "materialx"])
+def test_a_terminal_that_reaches_no_preview_surface_fails(wiring: str, geometry: bool) -> None:
+    """A connection is not a surface. A terminal wired to a prim that is not there, to
+    an inactive shader, or to a MaterialX shader gives a consumer asking for no render
+    context the renderer's default material."""
+    assert _issues(
+        _miswired_stage(wiring, geometry=geometry), _code("VM_PS_002")
+    ), f"outputs:surface wired to a {wiring} target must fail VM.PS.002"
+
+
+@pytest.mark.parametrize("geometry", [True, False], ids=["geometry", "material_only"])
+def test_a_preview_surface_behind_a_node_graph_passes(geometry: bool) -> None:
+    """A terminal routed through a NodeGraph to a UsdPreviewSurface is conformant UsdShade."""
+    stage = _stage(()) if geometry else _material_only_stage(())
+    shader = UsdShade.Shader.Define(stage, f"{MATERIAL_PATH}/Graph/Preview")
+    shader.CreateIdAttr("UsdPreviewSurface")
+    shader.CreateOutput("surface", Sdf.ValueTypeNames.Token)
+    graph = UsdShade.NodeGraph.Define(stage, f"{MATERIAL_PATH}/Graph")
+    graph.CreateOutput("surface", Sdf.ValueTypeNames.Token).ConnectToSource(shader.ConnectableAPI(), "surface")
+    material = UsdShade.Material(stage.GetPrimAtPath(MATERIAL_PATH))
+    material.CreateSurfaceOutput().ConnectToSource(graph.ConnectableAPI(), "surface")
+    assert not _issues(stage, _code("VM_PS_002"))
 
 
 def test_geometry_present_means_the_per_prim_rule_decides():
@@ -202,6 +227,6 @@ def test_geometry_present_means_the_per_prim_rule_decides():
     shader.CreateOutput("out", Sdf.ValueTypeNames.Token)
     unused.CreateSurfaceOutput("mtlx").ConnectToSource(shader.ConnectableAPI(), "out")
 
-    assert _issues(stage, _code("VM_PBR_001")), (
-        "an unused OpenPBR material must not rescue a bound material that has none"
-    )
+    assert _issues(
+        stage, _code("VM_PBR_001")
+    ), "an unused OpenPBR material must not rescue a bound material that has none"

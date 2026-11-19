@@ -1,0 +1,65 @@
+name: Bug report
+description: Report an incorrect validator, adapter, script, or docs-build behavior.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug. Please confirm the problem against the current
+        `main` and include enough detail for someone to reproduce it.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: A clear, concise description of the bug.
+      placeholder: What went wrong?
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Affected file(s) or component
+      description: Exact repo path(s), requirement/feature/profile ID, or CLI command.
+      placeholder: e.g. nv_core/.../rules_and_reqs/core/naming_paths/validation.py, or CAP033_SimReadyPackage
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: Commands and inputs. For validation issues, include the exact `simready-validate` invocation.
+      placeholder: |
+        1. simready-validate --profile Robotics-Prop --version 4.0.0 path/to/asset.usd
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs. actual behavior
+      placeholder: |
+        Expected: ...
+        Actual: ...
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Python version, and installed SimReady library/tier versions (`pip show simready-validate simready-foundation-tier-core`).
+      placeholder: |
+        OS:
+        Python:
+        simready-validate:
+        simready-foundation-tier-core:
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / output
+      description: Relevant error output or a validation report excerpt. This is automatically formatted as code.
+      render: shell
+    validations:
+      required: false

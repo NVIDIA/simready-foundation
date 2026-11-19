@@ -1,0 +1,3 @@
+[deletion]
+asset_path = "sample_content/common_assets/props_general/obs_workbench_tool_a01/isaacsim_usd/sm_obs_workbench_tool_a01_01.usd"
+reason = "The Isaac package was deleted during sample cleanup in e2f25a24e and restored in c10f813d3 under obs_workbench_tool_01.usd. The manifest now publishes that restored root layer instead of this obsolete path."

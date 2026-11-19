@@ -1,0 +1,90 @@
+# Capability: `CAP002_PosableBodies`
+
+| **Property**            | **Value**         |
+|-------------------------|-------------------|
+| Contract                | `CAP002_PosableBodies` |
+| Runtime                 | `OpenUSD` |
+| Proprietary Techs       | `None` |
+| Versions                | `0-1-0` |
+
+## Description
+
+The Posable Bodies feature defines the standard OpenUSD contract for an asset
+whose visible body can be posed by applying transform edits to its body
+hierarchy.
+
+An asset that satisfies this capability has visible imageable geometry, a valid
+default prim entry point, and geometry organized under xform parents with
+authored translation and rotation operations. This lets authoring tools,
+runtime tests, and animation workflows apply USD transform overrides and
+observe visible changes without requiring runtime-specific physics schemas.
+
+## Dependency Graph
+
+This capability has no dependencies and no other features depend on it directly.
+
+## Use Cases
+
+- USD transform and posing tests for visible body assets.
+- Authoring workflows that need a visible asset body to be repositioned,
+  rotated, or animated through xform operations.
+- Pre-physics body hierarchy checks before rigid-body, multibody, grasp, or
+  robot-specific features are applied.
+- Runtime evaluation workflows that apply transform overrides and compare
+  rendered output.
+
+## Requirements
+
+### Version 0-1-0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+No profile selects this version.
+
+#### Dependencies
+
+None.
+
+#### Requirement List
+
+* Capability: [Hierarchy](../rules_and_reqs/hierarchy/capability-hierarchy.md)
+    * Requirements:
+        * [Exclusive-Xform-Parent-For-UsdGeom](../rules_and_reqs/hierarchy/requirements/exclusive-xform-parent-for-usdgeom.md)
+            * `HI.002` | Version `0.1.0`
+        * [Stage-Has-Default-Prim](../rules_and_reqs/hierarchy/requirements/stage-has-default-prim.md)
+            * `HI.004` | Version `0.1.0`
+* Capability: [Visualization/Geometry](../rules_and_reqs/visualization/geometry/capability-geometry.md)
+    * Requirements:
+        * [At-Least-One-Imageable-Geometry](../rules_and_reqs/visualization/geometry/requirements/at-least-one-imageable-geometry.md)
+            * `VG.001` | Version `0.1.0`
+
+</details>
+
+## Pipelines
+
+Source file type:
+
+- `.usd` / `.usda`
+  - Via USD authoring tools that emit visible geometry under xformable body
+    hierarchy.
+
+Validation or runtime pipeline:
+
+- SimReady validation - verifies the Posable Bodies requirement IDs listed in
+  the selected `CAP002_PosableBodies` manifest.
+- No Evaluate runtime test is currently registered for this capability.
+
+## Samples
+
+- [sample_content/common_assets/props_general/pose_electricians_large_tool_box_01/simready_usd/sm_pose_electricians_large_tool_box_01_01.usd](../../../../../../../sample_content/common_assets/props_general/pose_electricians_large_tool_box_01/simready_usd/sm_pose_electricians_large_tool_box_01_01.usd)
+
+## Evaluates
+
+None currently registered.
+
+## Adapters
+
+None.

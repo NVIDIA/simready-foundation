@@ -1,0 +1,27 @@
+{
+  "id": "FET004_Multibody.0-1-0",
+  "display_name": "Simulate Multi-Body Physics",
+  "legacy_identity": {
+    "id": "FET_004_STANDARD",
+    "version": "0.1.0"
+  },
+  "source": true,
+  "dependencies": [
+    "FET003_RigidBody.0-1-0"
+  ],
+  "additional_requirements": [
+    "JT.001",
+    "com.nvidia.usd.JT.002",
+    "com.nvidia.usd.JT.003",
+    "com.nvidia.usd.JT.ART.002",
+    "JT.ART.003",
+    "com.nvidia.usd.JT.ART.004",
+    "RB.MB.001"
+  ],
+  "adapters": [
+    "skill:simready-foundation-conform-fet-004-standard"
+  ],
+  "runtime_tests": [
+    "simready.foundation.tier_core.runtime_tests:joint_movement"
+  ]
+}

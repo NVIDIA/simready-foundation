@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP031_SelfContainedPackage"
+  short_description: "Repair CAP031_SelfContainedPackage conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-031-standard to repair CAP031_SelfContainedPackage SimReady conformance failures."

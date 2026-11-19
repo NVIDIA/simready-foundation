@@ -1,0 +1,42 @@
+# FET015 Collision Variant
+
+## Overview
+
+`FET015_CollisionVariant.0-1-0` has one version 1.0.0 runtime test. It
+checks that every declared `Collision` option composes, is simulable, and keeps
+the collision envelope while the visible mesh stays put.
+
+## What a Passing Family Means
+
+The asset offers interchangeable collider approximations (for example a convex
+hull and a convex decomposition) that a pipeline can pick by cost. Each option
+simulates and occupies the same simulated footprint; the render mesh never
+moves.
+
+## Tests
+
+:::{list-table}
+:header-rows: 1
+:widths: 30 45 25
+
+* - Test
+  - What It Checks
+  - Validates
+* - [collision_variation](fet015/collision-variation.md)
+  - Recomposes each Collision option, confirms the collision envelope matches the default and the visual envelope is unchanged, then loads with physics, settles, and renders a frame per option.
+  - FET015 Collision Variant
+:::
+
+## Relationship to the Feature
+
+The test provides evidence for
+[Collision Variant](../../features/FET015_CollisionVariant.md). It
+exercises AV.001-AV.006, validated by the `AssetVariants` checkers, and depends
+on the rigid-body contract carried by `FET003`.
+
+```{toctree}
+:maxdepth: 1
+:hidden:
+
+collision_variation <fet015/collision-variation>
+```

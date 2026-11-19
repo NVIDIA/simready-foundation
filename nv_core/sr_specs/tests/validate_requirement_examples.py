@@ -1,6 +1,18 @@
 #!/usr/bin/env python3
 # SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """Check every ``usd`` example on a requirement page against the rule it illustrates.
 
 An example that does not parse, or that passes where the page says it fails, teaches an
@@ -47,6 +59,7 @@ import sys
 import tempfile
 import zlib
 from dataclasses import dataclass, field
+from importlib import metadata
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[3]
@@ -64,7 +77,7 @@ def _first(*candidates: Path) -> Path:
 
 _TIER = REPO / "nv_core" / "tiers" / "simready_foundation_tier_core" / "simready" / "foundation" / "tier_core"
 _DOCS = REPO / "nv_core" / "sr_specs" / "docs"
-CAPABILITIES = _first(_TIER / "capabilities", _DOCS / "capabilities")
+CAPABILITIES = _first(_TIER / "rules_and_reqs", _DOCS / "rules_and_reqs")
 FEATURES = _first(_TIER / "features", _DOCS / "features")
 PROFILES = _first(_TIER / "profiles", _DOCS / "profiles")
 TIER_MODULE = "simready.foundation.tier_core"
@@ -77,7 +90,7 @@ DEFAULT_CAPABILITIES = [CAPABILITIES / "visualization" / "materials"]
 # exist only at 0.2.0 while CP.001-006 are 0.1.0 requirements.
 _TIER_AIF_ROOT = REPO / "nv_core" / "tiers" / "simready_foundation_tier_aif"
 _TIER_AIF = _TIER_AIF_ROOT / "simready" / "foundation" / "tier_aif"
-AIF_CAPABILITIES = _TIER_AIF / "capabilities"
+AIF_CAPABILITIES = _TIER_AIF / "rules_and_reqs"
 AIF_FEATURES = _TIER_AIF / "features"
 AIF_PROFILES = _TIER_AIF / "profiles"
 AIF_TIER_MODULE = "simready.foundation.tier_aif"
@@ -101,10 +114,42 @@ FENCE_CLOSE = re.compile(r"^```\s*$")
 CODE_ROW = re.compile(r"^\|\s*Code\s*\|\s*([A-Z0-9.]+)\s*\|", re.MULTILINE)
 VERDICT = re.compile(r"\b(invalid|valid|warned)\b", re.IGNORECASE)
 ASSET_REF = re.compile(r"@([^@]+)@")
-PIXEL_DIMS = re.compile(r"(\d+)\s*[x×]\s*(\d+)\s*pixels")
+PIXEL_DIMS = re.compile(r"(\d+)\s*[x×]\s*(\d+)(?:\s*pixels)?\b")
+# A reference says its file is three-channel by naming RGB in the comment beside it.
+RGB_HINT = re.compile(r"\bRGB\b")
 ABSENT_ON_PURPOSE = ("unknown", "missing", "nonexistent")
 
 ROOT_PRIM = re.compile(r'^(?:def|over|class)\s+\w*\s*"([^"]+)"')
+
+
+MAIN_LAYER = """#usda 1.0
+(
+    defaultPrim = "World"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "World"
+{
+    def Scope "Scene" (
+        prepend payload = @./example.usda@
+    )
+    {
+    }
+
+    def Material "Material"
+    {
+        token outputs:surface.connect = </World/Material/Preview.outputs:surface>
+
+        def Shader "Preview"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor = (0.35, 0.36, 0.38)
+            token outputs:surface
+        }
+    }
+}
+"""
 
 
 def layer_text(body: str) -> str:
@@ -125,6 +170,7 @@ class Block:
     code: str
     caption: str
     body: str
+    payload: bool = False
     verdict: str | None = None
     parsed: bool = False
     parse_error: str = ""
@@ -133,17 +179,19 @@ class Block:
     undecided: str = ""
 
 
-def png_header(width: int, height: int) -> bytes:
-    """A PNG carrying the given dimensions. Pillow reads size from IHDR alone."""
+def png_header(width: int, height: int, colour_type: int = 0) -> bytes:
+    """A PNG carrying the given dimensions and channel count.
+
+    Pillow reads both from IHDR alone. Colour type 0 is greyscale and 2 is RGB, which
+    is the distinction a rule about a three-channel map left to ``auto`` turns on.
+    """
+
     def chunk(tag: bytes, payload: bytes) -> bytes:
         return (
-            struct.pack(">I", len(payload))
-            + tag
-            + payload
-            + struct.pack(">I", zlib.crc32(tag + payload) & 0xFFFFFFFF)
+            struct.pack(">I", len(payload)) + tag + payload + struct.pack(">I", zlib.crc32(tag + payload) & 0xFFFFFFFF)
         )
 
-    ihdr = struct.pack(">IIBBBBB", width, height, 8, 0, 0, 0, 0)
+    ihdr = struct.pack(">IIBBBBB", width, height, 8, colour_type, 0, 0, 0)
     return b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", ihdr) + chunk(b"IEND", b"")
 
 
@@ -167,12 +215,27 @@ def read_blocks(page: Path) -> list[Block]:
             above -= 1
         caption = lines[above].strip() if above >= 0 else ""
         match = VERDICT.search(caption)
+        if not match:
+            # A section states the verdict in its heading and may explain the example
+            # in a line of prose before the fence. Walk back to the heading, stopping
+            # at the previous block so a heading is never read for two fences.
+            probe = above
+            while probe >= 0:
+                line = lines[probe].strip()
+                if FENCE_CLOSE.match(lines[probe]):
+                    break
+                if HEADING.match(line):
+                    caption = line
+                    match = VERDICT.search(caption)
+                    break
+                probe -= 1
         blocks.append(
             Block(
                 page=page,
                 line=start + 1,
                 code=code,
                 caption=caption,
+                payload=bool(FENCE_OPEN.match(lines[start]).group("mode")),
                 body="\n".join(lines[start + 1 : end]) + "\n",
                 verdict=match.group(1).lower() if match else None,
             )
@@ -200,7 +263,8 @@ def materialise_assets(block: Block, directory: Path) -> None:
             if target.suffix.lower() == ".png":
                 dims = PIXEL_DIMS.search(line)
                 width, height = (int(dims.group(1)), int(dims.group(2))) if dims else (8, 8)
-                target.write_bytes(png_header(width, height))
+                colour_type = 2 if RGB_HINT.search(line) else 0
+                target.write_bytes(png_header(width, height, colour_type))
             elif target.suffix.lower() == ".mdl":
                 target.write_text("mdl 1.6;\n")
             else:
@@ -240,18 +304,18 @@ def merged_capabilities_root(destination: Path) -> Path:
 
     The loader imports a rules root by its directory name and evicts that name
     from ``sys.modules`` before each import, so two roots both called
-    ``capabilities`` cannot be loaded in one session: the second import resolves
+    ``rules_and_reqs`` cannot be loaded in one session: the second import resolves
     to the first root again and re-registers its rules. AIF-Entity selects Core
     features, so the AIF session needs both. The Core tree is copied, the AIF
     ``aif/`` capability and its ``config/`` are added, and the two ``__init__``
     files are concatenated so every validator module is imported.
     """
-    root = destination / "capabilities"
+    root = destination / "rules_and_reqs"
     ignore = shutil.ignore_patterns("__pycache__", "*.pyc")
     shutil.copytree(CAPABILITIES, root, ignore=ignore)
     shutil.copytree(AIF_CAPABILITIES / "aif", root / "aif", ignore=ignore)
     # AM.007 and the electrical rules read config/aif-equipment-*.json from the
-    # package directory above capabilities/, so the merged root gets it too.
+    # package directory above rules_and_reqs/, so the merged root gets it too.
     shutil.copytree(_TIER_AIF / "config", destination / "config", ignore=ignore)
     init = (CAPABILITIES / "__init__.py").read_text() + "\n" + (AIF_CAPABILITIES / "__init__.py").read_text()
     (root / "__init__.py").write_text(init)
@@ -266,8 +330,11 @@ def ensure_requirements_module(destination: Path) -> None:
     committed requirement markdown at build time and is not in the tree, so a checkout that
     has not been built cannot import a single capability -- which is what CI is. Generating it
     here is the same call the tier's hatchling hook makes, so the script runs against a bare
-    checkout with only the published wheels installed.
+    checkout with only the published wheels installed. The real source package
+    supplies helpers imported by validators; attach generated enums to its path.
     """
+    import importlib
+
     from usd_profiles_nvidia.codegen import PythonGenerator
 
     destination.mkdir(parents=True, exist_ok=True)
@@ -277,10 +344,47 @@ def ensure_requirements_module(destination: Path) -> None:
         package_name=f"{TIER_MODULE}.requirements",
         reverse_domain=REVERSE_DOMAIN,
     ).generate()
-    sys.path.insert(0, str(destination))
+    sys.path.insert(0, str(_TIER.parents[2]))
+    package = importlib.import_module(TIER_MODULE)
+    generated = destination.joinpath(*TIER_MODULE.split("."))
+    if str(generated) not in package.__path__:
+        package.__path__.append(str(generated))
+
+
+RUNTIME_PACKAGES = ("simready-validate", "usd-validation-nvidia", "usd-profiles-nvidia", "MaterialX", "semver")
+
+
+def runtime_versions() -> str:
+    """The installed versions of the packages whose behavior decides these verdicts.
+
+    Printed at job startup so the log records what produced the verdicts. MaterialX is the
+    one that moves them: VM.PBR.002 and VM.PBR.003 report nothing when no OpenPBR nodedef
+    can be resolved, and eight blocks across three pages turn from invalid to silent
+    without it. It is pinned in ``.gitlab-ci.yml`` for that reason; the other packages are not.
+    """
+    reported = []
+    for name in RUNTIME_PACKAGES:
+        try:
+            reported.append(f"{name} {metadata.version(name)}")
+        except metadata.PackageNotFoundError:
+            reported.append(f"{name} not installed")
+    return ", ".join(reported)
+
+
+def _contract_dirs(features: Path) -> list[Path]:
+    """A tier's feature directory and its sibling capability contract directory, those that
+    exist. A relocated tier holds CAP contracts in ``capabilities/`` and may hold no FET
+    contracts, leaving no ``features/`` for git to track. Before the rename ``capabilities/``
+    is the requirement tree instead, so it is only a contract directory once
+    ``rules_and_reqs/`` exists."""
+    candidates = [features]
+    if (features.parent / "rules_and_reqs").is_dir():
+        candidates.append(features.parent / "capabilities")
+    return [path for path in candidates if path.is_dir()]
 
 
 def main(argv: list[str]) -> int:
+    print(f"checked with {runtime_versions()}")
     logging.disable(logging.CRITICAL)
     generated = tempfile.mkdtemp(prefix="requirement-enums-")
     with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
@@ -301,7 +405,7 @@ def main(argv: list[str]) -> int:
 
     # AIF-Entity selects Core features, so an AIF page needs both tiers' rules
     # registered; see merged_capabilities_root for why that is one merged root.
-    features_paths = [FEATURES] + ([AIF_FEATURES] if with_aif else [])
+    features_paths = _contract_dirs(FEATURES) + (_contract_dirs(AIF_FEATURES) if with_aif else [])
     profiles_paths = sorted(PROFILES.glob("*.toml")) + (sorted(AIF_PROFILES.glob("*.toml")) if with_aif else [])
 
     sink = io.StringIO()
@@ -321,6 +425,13 @@ def main(argv: list[str]) -> int:
             layer = directory / "example.usda"
             layer.write_text(layer_text(block.body))
             materialise_assets(block, directory)
+            if block.payload:
+                # A rule about what a payload may reach needs the payload arc, which one
+                # layer cannot express. The block becomes the payload and a main layer
+                # composes it, which is what the page describes.
+                main = directory / "main.usda"
+                main.write_text(MAIN_LAYER)
+                layer = main
 
             try:
                 with contextlib.redirect_stdout(sink), contextlib.redirect_stderr(sink):

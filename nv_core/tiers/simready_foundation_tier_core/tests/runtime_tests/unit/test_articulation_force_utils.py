@@ -13,9 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Tests for articulation_phases.force_utils pure helpers."""
-import math
 
-from simready_benchmark_kit_suite.articulation_phases.force_utils import (
+import math
+import sys
+from types import SimpleNamespace
+
+import numpy as np
+import pytest
+from simready.foundation.tier_core.runtime_tests.articulation_phases.force_utils import (
     ForceVector,
     bisect_break_force,
     generate_12_force_directions,
@@ -44,7 +49,7 @@ def test_generate_12_force_directions_symmetric_pairs():
         neg_label = "-" + pos_label[1:]
         pos = by_label[pos_label]
         neg = by_label[neg_label]
-        for a, b in zip(pos, neg):
+        for a, b in zip(pos, neg, strict=True):
             assert abs(a + b) < 1e-9, "pair %s / %s not opposite" % (pos_label, neg_label)
 
 
@@ -82,10 +87,73 @@ def test_force_vector_is_frozen_dataclass():
     raise AssertionError("ForceVector should be frozen")
 
 
+@pytest.mark.parametrize(("native_return", "accepted"), [(None, True), (True, True), (False, False)])
+def test_external_force_submission_acknowledges_void_success_and_explicit_rejection(
+    monkeypatch, native_return, accepted
+):
+    import pxr
+    from pxr import Usd
+    from simready.foundation.tier_core.runtime_tests.articulation_phases import force_utils
+
+    calls = []
+
+    def submit(*args):
+        calls.append(args)
+        return native_return
+
+    monkeypatch.setattr(
+        force_utils, "_get_physx_simulation_interface", lambda: SimpleNamespace(apply_force_at_pos=submit)
+    )
+    monkeypatch.setitem(sys.modules, "carb", SimpleNamespace(Float3=lambda *values: values))
+    monkeypatch.setattr(pxr, "PhysicsSchemaTools", SimpleNamespace(sdfPathToInt=lambda path: 1234), raising=False)
+    stage = Usd.Stage.CreateInMemory()
+    stage.DefinePrim("/Body", "Xform")
+
+    assert force_utils.apply_external_force(stage, "/Body", (0, 1, 0), 10.0, (3, 4, 5)) is accepted
+    assert len(calls) == 1
+    assert calls[0][2] == (0.0, 10.0, 0.0)
+    assert calls[0][3] == (3.0, 4.0, 5.0)
+    # A load at this COM has a nonzero moment about an offset anchor.
+    assert tuple(np.cross(np.subtract(calls[0][3], (2, 4, 5)), calls[0][2])) == (0, 0, 10)
+
+
+def test_external_force_missing_target_or_interface_is_not_submission(monkeypatch):
+    from simready.foundation.tier_core.runtime_tests.articulation_phases import force_utils
+
+    monkeypatch.setattr(force_utils, "_get_physx_simulation_interface", lambda: None)
+    assert force_utils.apply_external_force(None, "/Body", (1, 0, 0), 10.0, (1, 2, 3)) is False
+    assert force_utils.apply_external_force(object(), "", (1, 0, 0), 10.0, (1, 2, 3)) is False
+    assert force_utils.apply_external_force(object(), "/Body", (1, 0, 0), 10.0, (1, 2, 3)) is False
+
+
+def test_external_force_required_sdk_acquisition_preserves_original_exception(monkeypatch):
+    from simready.foundation.tier_core.runtime_tests.articulation_phases import force_utils
+
+    failure = RuntimeError("native force interface acquisition failed")
+
+    def unavailable():
+        raise failure
+
+    monkeypatch.setitem(sys.modules, "omni.physx", SimpleNamespace(get_physx_simulation_interface=unavailable))
+
+    with pytest.raises(RuntimeError) as error:
+        force_utils.apply_external_force(object(), "/Body", (1, 0, 0), 10.0, (1, 2, 3))
+    assert error.value is failure
+
+
+def test_external_force_required_carb_import_failure_is_not_silent(monkeypatch):
+    from simready.foundation.tier_core.runtime_tests.articulation_phases import force_utils
+
+    monkeypatch.setattr(force_utils, "_get_physx_simulation_interface", lambda: object())
+    monkeypatch.setitem(sys.modules, "carb", None)
+    with pytest.raises(ModuleNotFoundError, match="carb"):
+        force_utils.apply_external_force(object(), "/Body", (1, 0, 0), 10.0, (1, 2, 3))
+
+
 def test_read_contact_force_magnitude_returns_norm_of_force_vector():
     """If the underlying contact-force source returns [3, 4, 0], the
     magnitude should be 5.0."""
-    from simready_benchmark_kit_suite.articulation_phases import force_utils
+    from simready.foundation.tier_core.runtime_tests.articulation_phases import force_utils
 
     class _StubRobot:
         def get_body_contact_force(self, body_path):
@@ -97,7 +165,7 @@ def test_read_contact_force_magnitude_returns_norm_of_force_vector():
 
 
 def test_read_contact_force_magnitude_returns_none_when_untracked():
-    from simready_benchmark_kit_suite.articulation_phases import force_utils
+    from simready.foundation.tier_core.runtime_tests.articulation_phases import force_utils
 
     class _StubRobot:
         def get_body_contact_force(self, body_path):

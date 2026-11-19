@@ -1,0 +1,7 @@
+{
+  "id": "CAP104_RenderCollisionSeparation.Isaac.0-1-0",
+  "display_name": "Render-Collision Separation",
+  "requirements": [
+    "OPT.003"
+  ]
+}

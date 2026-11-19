@@ -34,7 +34,7 @@ Collect or infer:
 
 | Input | Requirement |
 |---|---|
-| `capability_path` | Existing capability folder under its owning tier's `capabilities/` directory. |
+| `capability_path` | Existing capability folder under its owning tier's `rules_and_reqs/` directory. |
 | `requirement_slug` | Kebab-case filename without `.md`. |
 | `requirement_code` | Stable code such as `RB.011` or `NVM.006`; must not already exist. |
 | `summary` | One-sentence rule statement. |
@@ -80,6 +80,8 @@ remaining_gaps: requirement, validator, adapter, profile, or runtime-test follow
 
 ## Policies
 
+- Protect unrelated local work: before editing shared repository files (spec markdown, requirement/feature JSON, profile TOML, validators, skills, or docs), check `git status` for unrelated in-progress changes and scope edits to the requested task. Never revert, overwrite, discard, stash, or commit a user's uncommitted or unrelated changes; if a file you must edit already carries pending unrelated edits, surface it and confirm before proceeding.
+- Keep secrets out of the repo and evidence: never write user-provided tokens, credentials, API keys, or other secrets into files, source, logs, validation or evaluation reports, commit messages, or bug/Jira/Confluence attachments, and do not echo them in full; read them from environment variables or an existing credential store and redact them from any output you preserve.
 - Requirements must be atomic. Split compound rules into separate requirement IDs.
 - Do not create a requirement just to mirror a feature name; define the concrete asset rule.
 - Prefer native USD concepts before custom metadata.

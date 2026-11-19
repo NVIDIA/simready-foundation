@@ -1,0 +1,101 @@
+# FET010 Display Color
+
+Whether an asset's own display color produces a measurable renderer response,
+through the material the specification nominates for it.
+
+## Overview
+
+Display color is a primvar rather than a material, so the asset carries no surface for it and there is no render context to resolve through. It sits alongside the material features rather than inside them, which is why it has its own family.
+
+The capability rests on a premise no file inspection can establish: that display color is a usable appearance layer for consumers that do not evaluate materials. Static validation confirms the primvar is authored and well formed. The test in this family renders the asset through that layer and measures what comes out.
+
+What it renders through is the material DISP.001's Guidance nominates: an
+OpenPBR surface driven by MaterialX primvar readers,
+`ND_geompropvalue_color3` on `displayColor` into `base_color` and
+`ND_geompropvalue_float` on `displayOpacity` into `geometry_opacity`. Strong
+all-purpose/full/preview bindings on a verified test-owned enclosing ancestor
+swap the reader in and out over the whole asset. Required acknowledgements
+and resolved purposes are checked; bindings are cleared on every exit without
+overwriting source root, descendant or prototype opinions.
+Before collecting geometry, the fixture expands nested instances in the
+disposable stage's session layer and requires that no instances remain.
+Source layers, material bindings and authored primvars are preserved. This
+qualifies the expanded measurement scene, not original instanced rendering or
+its performance. Composed binding resolution alone does not establish that
+the renderer used a probe on an instanced material subset.
+
+Both identical Read/ReadControl probe materials are primed before measured
+captures. Warmup captures are diagnostic only: they do not contribute to masks,
+response/control ratios or the summary video. The fixed warmup does not retry
+until a favorable control is obtained; the existing noise gate still applies.
+The fixture also requests `mtlx` before creating its stage and loading the
+asset, checks the effective context, and restores the incoming list on every
+exit. Context setup/restoration failures are execution errors; a custom user
+render-context list is not a display-color authoring defect.
+
+Using the nominated material rather than a renderer's own fallback is what makes the result about the specification. It is also what reaches display opacity: Kit's fallback for unbound geometry, `kit/mdl/rtx/Default.mdl`, declares a surface and no opacity term, so a evaluation built on it cannot show a response to `displayOpacity` at all.
+
+## What a Passing Family Means
+
+Malformed/nonfinite acceptance configuration stops before scene mutation;
+valid defaults and explicit zero fractions remain unchanged. A required
+image-analysis failure supplies no measured color/opacity response and leaves
+execution incomplete. Host regressions do not qualify a native render.
+Rejected required binding setup/cleanup is also an execution error, not a
+measured response failure. A custom zero response floor cannot establish
+nonzero response; default floors remain positive and unchanged.
+An insufficient silhouette or excessive identical-material control noise
+also leaves the comparison unqualified/incomplete, not a completed asset
+response failure. This does not relax the measured color/opacity gates.
+Control noise may remain below its global ceiling while masking a smaller
+presence floor. When nonzero control noise reaches that floor and the color
+response (or all-omitting opacity response) does not exceed the noise, execution
+is inconclusive rather than PASS or an asset-response failure. Low-noise
+responses below their configured floor retain FAIL; neither floor is lowered.
+
+**A pass means the feature is live. It does not mean the asset is conformant.**
+
+A passing measurement establishes visible display-color response through the
+nominated material on the expanded test scene. It does not certify the original
+instance/subset rendering path, every consumer, or complete per-Gprim coverage.
+The file-side validation and this sampled renderer response remain distinct.
+
+It is not a coverage result. This evaluation does not say every renderable Gprim
+carries a display color. An asset with one on a single prim in fifty can pass
+if the visible response reaches `min_response_ratio`; one tiny or hidden prim
+alone is not sufficient. Coverage is DISP.001's: the static validator measures
+it per Gprim and names the prims that resolve nothing. Normal planning consumes
+prior validation evidence, but a forced-feature diagnostic can bypass absent
+or failed validation. The two checks are complementary and neither substitutes
+for the other: validation reads the file, this test reads the render response.
+
+The reason for the split is that the evaluation's measurement is denominated in pixels while the requirement is denominated in Gprims, and on the same defect those two disagree by orders of magnitude depending on how large the offending geometry happens to be. The [test page](fet010/display-color-response.md#why-coverage-is-not-measured-here) has the fixtures that show it.
+
+What a pass does not do is judge whether the shipped colors are the right ones, or order them. Nothing visible in a render establishes that a display color is a faithful stand-in for the material it was derived from, and DISP.002 sets no plausibility band against which such a claim could be checked. It says none is planned, because Rec.709 weights blue at 0.0722 and a saturated navy computes a lower luminance than charcoal.
+
+## Tests
+
+:::{list-table}
+:header-rows: 1
+:widths: 25 50 25
+
+* - Test
+  - What It Checks
+  - Validates
+* - [display_color_response](fet010/display-color-response.md)
+  - `primvars:displayColor` and `primvars:displayOpacity` reach the renderer through the material DISP.001 nominates for them.
+  - FET010_DisplayColor
+:::
+
+## Relationship to the Feature
+
+This family validates the runtime behavior described by
+[FET010 Display Color](../../features/FET010_DisplayColor.md). Authoring and value rules live
+in the [Display Color capability](../../rules_and_reqs/visualization/display_color/capability-display_color.md).
+
+```{toctree}
+:maxdepth: 1
+:hidden:
+
+display_color_response <fet010/display-color-response>
+```

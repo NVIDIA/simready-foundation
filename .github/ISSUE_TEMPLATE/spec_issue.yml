@@ -1,0 +1,54 @@
+name: Spec issue or change request
+description: Report an issue with, or propose a change to, a requirement, capability, feature, or profile.
+title: "[Spec]: "
+labels: ["spec"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for the specification itself (requirement/capability/feature/profile
+        semantics, docs, or manifests) rather than a code defect. Note that published
+        feature and profile versions are immutable; new behavior is adopted via a new
+        version, so proposals should account for versioning.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Spec area
+      options:
+        - Requirement
+        - Capability
+        - Feature
+        - Profile
+        - Guide / documentation
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: identifier
+    attributes:
+      label: Identifier / version
+      description: The stable ID and version this concerns, if known.
+      placeholder: e.g. RB.001, FET004_Multibody.PhysX.0-4-0, Robotics-Prop@4.0.0
+    validations:
+      required: false
+  - type: textarea
+    id: description
+    attributes:
+      label: What is the issue or proposed change?
+      description: Describe the gap, ambiguity, or desired behavior in concrete asset terms.
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Rationale / runtime use case
+      description: Why does this matter? What runtime behavior or contract does it affect?
+    validations:
+      required: false
+  - type: textarea
+    id: impact
+    attributes:
+      label: Expected impact
+      description: Which requirements, validators, features, profiles, or adapters would be affected?
+    validations:
+      required: false

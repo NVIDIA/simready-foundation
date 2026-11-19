@@ -23,7 +23,7 @@ only computes paths and never imports ``pxr`` or the validators.
 
 The tier name and module are derived from this package's own dotted name. The
 descriptor structure is reusable across tiers, while optional tier-owned
-content such as the Benchmark test package is configured per tier.
+content such as the Evaluate test package is configured per tier.
 """
 
 from __future__ import annotations
@@ -35,8 +35,8 @@ _PKG_ROOT = Path(__file__).resolve().parent
 _MODULE = __package__ or _PKG_ROOT.name
 _NAME = _MODULE.rsplit(".", 1)[-1]
 
-# This tier has no bundled Benchmark test package (unlike tier_core's
-# simready_benchmark_kit_suite) -- runtime_tests_path stays unset below.
+# This tier has no bundled Evaluate test package (unlike tier_core's
+# simready.foundation.tier_core.runtime_tests) -- runtime_tests_path stays unset below.
 
 
 @dataclass(frozen=True)
@@ -46,7 +46,7 @@ class TierContent:
     Attributes:
         name: Short tier name (matches the ``simready.tier`` entry-point name).
         rules_package: Importable package whose import registers this tier's
-            rules + requirements (its ``capabilities/__init__.py`` imports every
+            rules + requirements (its ``rules_and_reqs/__init__.py`` imports every
             validator module). Prefer importing this over path-based codegen for
             an installed wheel, where requirements are already baked.
         requirements_module: The generated requirements-enum module baked into
@@ -56,7 +56,13 @@ class TierContent:
             loader's path-based registration / dev codegen fallback.
         features_path: Bundled directory of feature definition files.
         profiles_path: Bundled directory of profile definition files.
-        runtime_tests_path: Optional bundled Benchmark test-package directory.
+        capability_contracts_path: Foundations 2 CAP-prefixed JSON catalog.
+        feature_contracts_path: Foundations 2 dotted FET JSON catalog.
+        profile_contracts_path: Foundations 2 selector TOML catalog.
+        skills_path: Bundled directory of this tier's agent skills (conform
+            skills for the features this tier owns). May not exist for tiers that
+            ship no skills; consumers should check ``skills_path.is_dir()``.
+        runtime_tests_path: Optional bundled Evaluate test-package directory.
             Consumers may ignore this field when they do not execute runtime
             tests; resolving the descriptor never imports the test package.
     """
@@ -67,15 +73,23 @@ class TierContent:
     rules_and_requirements_path: Path
     features_path: Path
     profiles_path: Path
+    capability_contracts_path: Path
+    feature_contracts_path: Path
+    profile_contracts_path: Path
+    skills_path: Path
     runtime_tests_path: Path | None = None
 
 
 tier = TierContent(
     name=_NAME,
-    rules_package=f"{_MODULE}.capabilities",
+    rules_package=f"{_MODULE}.rules_and_reqs",
     requirements_module=f"{_MODULE}.requirements",
-    rules_and_requirements_path=_PKG_ROOT / "capabilities",
+    rules_and_requirements_path=_PKG_ROOT / "rules_and_reqs",
     features_path=_PKG_ROOT / "features",
     profiles_path=_PKG_ROOT / "profiles",
+    capability_contracts_path=_PKG_ROOT / "capabilities",
+    feature_contracts_path=_PKG_ROOT / "features",
+    profile_contracts_path=_PKG_ROOT / "profiles",
+    skills_path=_PKG_ROOT / "skills",
     runtime_tests_path=None,
 )

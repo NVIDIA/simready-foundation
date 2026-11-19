@@ -1,0 +1,9 @@
+[Robot-Assembly]
+"0.1.0" = {features = [
+    {selector = "FET022_DrivenJoints.0-2-0", optional = true},
+], capabilities = [
+    {selector = "CAP026_Mates.0-1-0"},
+    {selector = "CAP027_Connections.0-1-0"},
+    {selector = "CAP029_ConnectionJoint.0-1-0"},
+    {selector = "CAP024_BaseArticulation.0-1-0"},
+]}

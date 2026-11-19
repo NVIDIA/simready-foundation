@@ -12,8 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-"""Tests for tier and external-package discovery used by ``build_tiers``.
+"""Tests for tier discovery used by ``build_tiers``.
 
 These tests exercise pure discovery helpers (no ``uv`` invocation) so they run
 in any environment.
@@ -49,18 +48,14 @@ def test_discover_tiers_skips_tooling_and_workspace_root():
     assert "_tooling" not in tiers
 
 
-def test_discover_external_packages_includes_isaac_transformer():
-    external = [os.path.basename(p) for p in build_tiers.discover_external_packages(_TIERS_ROOT)]
-    assert "isaac_asset_transformer" in external
+def test_no_external_package_discovery():
+    # The Isaac asset transformer is bundled into the tier-core wheel rather than
+    # built as its own distribution, so the builder no longer discovers any
+    # out-of-workspace packages.
+    assert not hasattr(build_tiers, "discover_external_packages")
 
 
-def test_external_packages_have_pyproject():
-    for pkg_dir in build_tiers.discover_external_packages(_TIERS_ROOT):
-        assert os.path.isfile(os.path.join(pkg_dir, "pyproject.toml"))
-
-
-def test_expected_wheel_count_covers_tiers_and_external():
+def test_expected_wheel_count_covers_tiers():
     tiers = build_tiers.discover_tiers(_TIERS_ROOT)
-    external = build_tiers.discover_external_packages(_TIERS_ROOT)
-    # At minimum: the core tier plus the standalone Isaac transformer.
-    assert len(tiers) + len(external) >= 2
+    # At minimum the core tier is present.
+    assert len(tiers) >= 1

@@ -13,30 +13,188 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Tests for jacobian_ik phase pure helpers."""
+
+import math
 from types import SimpleNamespace
 
+import numpy as np
 import pytest
-from simready_benchmark_kit_suite.articulation_phases.ik_targets import IKTarget
-from simready_benchmark_kit_suite.articulation_phases.jacobian_ik import (
+from simready.foundation.tier_core.runtime_tests.articulation_phases.ik_targets import IKTarget
+from simready.foundation.tier_core.runtime_tests.articulation_phases.jacobian_ik import (
+    _generate_fk_targets,
+    _sample_joint_configs,
+    _sampling_joint_indices,
+    _teleport_to_joints,
     aggregate_jik_summary,
     compute_pass_rate,
     count_distinct_reachable_positions,
     get_defaults,
     interpolate_profile,
-    resolve_engine_motion_timing,
     resolve_live_end_effector_link,
+    resolve_motion_timing,
     run_jacobian_ik,
     smoothstep,
 )
-from simready_benchmark_kit_suite.articulation_phases.robot_type import (
+from simready.foundation.tier_core.runtime_tests.articulation_phases.robot_type import (
     RobotType,
     is_standalone_gripper,
 )
 
 
+def test_fk_sampling_limits_unbounded_angular_joints_and_retains_one_sided_stops():
+    home = np.array([0.0, 0.0, 0.75])
+    configs = _sample_joint_configs(
+        home, [-3.402823e38, -math.inf, 0.5], [3.402823e38, 0.1, math.inf], set(), 50, angular_indices={0, 1, 2}
+    )
+    assert any(not np.array_equal(config, home) for config in configs)
+    assert all(abs(config[0]) < math.pi and config[1] <= 0.1 and config[2] >= 0.5 for config in configs)
+
+
+def test_fk_sampling_holds_unbounded_prismatic_and_unknown_joints():
+    configs = _sample_joint_configs([0.2, 0.7], [-math.inf, -3.402823e38], [math.inf, 3.402823e38], set(), 4)
+    assert all(np.array_equal(config, [0.2, 0.7]) for config in configs)
+
+
+@pytest.mark.asyncio
+async def test_fk_sampling_exclusion_does_not_freeze_nonlocked_solver_dofs():
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.jik_solver import (
+        JacobianIKSolver,
+    )
+
+    positions, commands = np.zeros(2), []
+
+    def set_positions(values):
+        positions[:] = values
+        commands.append(values.copy())
+
+    robot = SimpleNamespace(
+        dof_count=2,
+        dof_names=["bounded_revolute", "unbounded_prismatic"],
+        get_joint_positions=lambda: positions.copy(),
+        get_joint_position_limits=lambda: (np.array([-1.0, -math.inf]), np.array([1.0, math.inf])),
+        set_joint_positions=set_positions,
+        set_joint_position_targets=lambda values: None,
+        set_joint_velocities=lambda values: None,
+        get_link_world_transforms=lambda paths: {
+            paths[0]: (np.array([positions.sum(), 0.0, 0.0]), np.array([0.0, 0.0, 0.0, 1.0]))
+        },
+    )
+    samples = _sample_joint_configs(positions, [-1.0, -math.inf], [1.0, math.inf], set(), 5, angular_indices={0})
+    assert all(sample[1] == 0.0 for sample in samples)
+
+    async def step():
+        pass
+
+    solver = JacobianIKSolver(robot, "/Robot/tool", locked_indices=set())
+    result = await solver.solve([0.5, 0.0, 0.0], [1.0, 0.0, 0.0, 0.0], step, max_iterations=5)
+    assert result.success and result.converged_joints[1] > 0.2
+    assert any(command[1] != 0.0 for command in commands)
+
+
+@pytest.mark.asyncio
+async def test_jik_teleport_rejects_controller_failure_without_stepping():
+    async def forbidden_step():
+        raise AssertionError("must not step a failed probe")
+
+    def fail(value):
+        raise OSError("controller write unavailable")
+
+    robot = SimpleNamespace(
+        dof_names=["j"],
+        set_joint_positions=lambda value: None,
+        set_joint_position_targets=fail,
+        set_joint_velocities=lambda value: None,
+    )
+    with pytest.raises(RuntimeError, match="probe configuration") as error:
+        await _teleport_to_joints(SimpleNamespace(step_one=forbidden_step), robot, [0.0])
+    assert isinstance(error.value.__cause__, OSError)
+
+
+@pytest.mark.asyncio
+async def test_fk_generation_restores_home_on_failure_and_cancellation(monkeypatch):
+    import asyncio
+
+    from simready.foundation.tier_core.runtime_tests.articulation_phases import jacobian_ik as phase
+
+    for exception in (RuntimeError("live probe failed"), asyncio.CancelledError()):
+        poses = []
+
+        async def fail(*args, error=exception):
+            raise error
+
+        async def step():
+            pass
+
+        robot = SimpleNamespace(
+            dof_names=["joint"],
+            set_joint_positions=lambda value, captured_poses=poses: captured_poses.append(value.copy()),
+            set_joint_position_targets=lambda value: None,
+            set_joint_velocities=lambda value: None,
+        )
+        monkeypatch.setattr(phase, "_generate_fk_targets_impl", fail)
+        with pytest.raises(type(exception)):
+            await _generate_fk_targets(
+                SimpleNamespace(step_one=step), robot, None, np.array([0.3]), np.zeros(3), [-1], [1], set(), 1, 0
+            )
+        assert np.array_equal(poses[-1], [0.3])
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("case", ["prismatic", "unknown", "locked"])
+@pytest.mark.parametrize("target_count", [1, 5])
+async def test_jik_skips_without_any_qualified_excursion_before_fk_or_solver(monkeypatch, case, target_count):
+    from pxr import Usd, UsdGeom, UsdPhysics
+    from simready.foundation.tier_core.runtime_tests.articulation_phases import jacobian_ik as phase
+
+    stage = Usd.Stage.CreateInMemory()
+    root = UsdGeom.Xform.Define(stage, "/Robot").GetPrim()
+    UsdGeom.Xform.Define(stage, "/Robot/tool")
+    if case == "prismatic":
+        UsdPhysics.PrismaticJoint.Define(stage, "/Robot/joints/slide")
+    finite = case == "locked"
+    robot = SimpleNamespace(
+        dof_count=1,
+        dof_names=["slide"],
+        prim_path="/Robot",
+        get_joint_position_limits=lambda: ([-1 if finite else -math.inf], [1 if finite else math.inf]),
+    )
+    context = SimpleNamespace(skip_message=None, metrics={}, warnings=[])
+    context.skip = lambda message: setattr(context, "skip_message", message)
+    context.add_metric = lambda key, value: context.metrics.__setitem__(key, value)
+    context.step = context.log = lambda message: None
+    context.warn = context.warnings.append
+
+    async def settled(*args):
+        return np.array([0.0])
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError("no solver or FK probe is permitted for home-only coverage")
+
+    monkeypatch.setattr(phase, "is_standalone_gripper", lambda *args: False)
+    monkeypatch.setattr(phase, "discover_end_effector_link", lambda **kwargs: "/Robot/tool")
+    monkeypatch.setattr(phase, "resolve_live_end_effector_link", lambda *args: "/Robot/tool")
+    monkeypatch.setattr(phase, "_settle_and_snapshot", settled)
+    monkeypatch.setattr(phase, "JacobianIKSolver", forbidden)
+    monkeypatch.setattr(phase, "_generate_fk_targets", forbidden)
+    await run_jacobian_ik(
+        context,
+        robot,
+        {"stage": stage, "asset_prim": root, "loop_joint_indices": [0] if finite else []},
+        {"num_targets": target_count},
+    )
+    assert "insufficient coverage" in context.skip_message
+    assert context.metrics["jik_sampled_joint_count"] == 0
+    if case != "locked":
+        assert len(context.warnings) == 1 and "at home for FK target samples" in context.warnings[0]
+
+
+def test_sampling_eligibility_matches_real_bounded_and_unbounded_angular_policy():
+    assert _sampling_joint_indices([0, 0, 0], [-math.inf, -1, -1], [math.inf, 1, 1], {2}, {0}) == {0, 1}
+
+
 @pytest.mark.asyncio
 async def test_jik_skips_standalone_grippers_before_solver_setup():
-    ctx = SimpleNamespace(skip_message=None)
+    ctx = SimpleNamespace(skip_message=None, add_metric=lambda name, value: None)
     ctx.skip = lambda message: setattr(ctx, "skip_message", message)
     await run_jacobian_ik(ctx, robot=object(), scene_info={"robot_type": RobotType.GRIPPER}, config={})
     assert "not applicable to standalone grippers" in ctx.skip_message
@@ -44,7 +202,7 @@ async def test_jik_skips_standalone_grippers_before_solver_setup():
 
 @pytest.mark.asyncio
 async def test_jik_skips_mimic_gripper_even_when_asset_is_mistagged_as_arm():
-    ctx = SimpleNamespace(skip_message=None)
+    ctx = SimpleNamespace(skip_message=None, add_metric=lambda name, value: None)
     ctx.skip = lambda message: setattr(ctx, "skip_message", message)
     robot = SimpleNamespace(dof_count=6)
     scene_info = {"robot_type": RobotType.ARM, "has_gripper_signals": True, "mimic_follower_indices": [1, 2, 3, 4, 5]}
@@ -58,16 +216,23 @@ def test_arm_with_attached_gripper_remains_jik_applicable():
     assert not is_standalone_gripper(robot, scene_info)
 
 
-def test_resolve_engine_motion_timing_preserves_physx_and_tunes_newton():
+def test_resolve_motion_timing_preserves_physx_defaults_and_overrides():
     defaults = get_defaults()
-    assert resolve_engine_motion_timing(defaults, "isaac_sim") == (0.67, 0.3)
-    assert resolve_engine_motion_timing(defaults, "newton") == (1.25, 1.0)
+    assert resolve_motion_timing(defaults) == (0.67, 0.3)
+    defaults.update(interpolation_seconds=0.8, hold_after_reach_seconds=0.4)
+    assert resolve_motion_timing(defaults) == (0.8, 0.4)
 
 
-def test_validated_driven_joint_gripper_contract_skips_ik_regardless_of_bad_type():
+def test_validated_gripper_receipts_do_not_hide_an_independent_arm_chain():
     robot = SimpleNamespace(dof_count=7)
     scene_info = {"robot_type": RobotType.ARM, "has_gripper_signals": False}
-    assert is_standalone_gripper(robot, scene_info, ["FET_022_PHYSX", "FET_028_ISAAC"])
+    assert not is_standalone_gripper(
+        robot, scene_info, ["FET022_DrivenJoints.PhysX.0-2-0", "FET028_Gripper.Isaac.0-1-0"]
+    )
+    assert not is_standalone_gripper(robot, scene_info, ["FET_022_PHYSX", "FET_028_ISAAC"])
+    assert not is_standalone_gripper(
+        robot, scene_info, ["FET022_DrivenJointsOther.PhysX.0-2-0", "FET028_Gripper.Isaac.0-1-0"]
+    )
 
 
 def test_distinct_reachable_positions_rejects_collapsed_fk_targets():
@@ -127,8 +292,7 @@ def test_get_defaults_shape():
     assert d["damping_lambda"] == 0.05
     assert d["finite_difference_epsilon"] == 1.0e-5
     assert d["jacobian_propagation_steps"] == 1
-    assert d["newton_finite_difference_epsilon"] == 1.0e-3
-    assert d["newton_jacobian_propagation_steps"] == 2
+    assert not any(key.startswith("newton_") for key in d)
     assert abs(d["interpolation_seconds"] - 0.67) < 1e-9
     assert d["hold_after_reach_seconds"] == 0.3
     assert d["min_pass_rate"] == 0.40
@@ -245,6 +409,18 @@ def test_aggregate_jik_summary_empty():
     assert s["in_reach_total"] == 0
     assert s["pass_rate"] == 0.0
     assert s["failure_names"] == []
+    assert s["max_live_playback_position_error_m"] is None
+    assert s["live_playback_targets_observed"] == 0
+
+
+def test_solver_rejection_residual_is_not_live_playback_error():
+    played = dict(_result(0, True, True, pos_err=0.01), playback_position_error_m=0.01)
+    rejected = dict(_result(1, False, True, pos_err=10.0), playback_position_error_m=None)
+    summary = aggregate_jik_summary([played, rejected])
+    assert summary["max_position_error_m"] == 10.0  # Backward-compatible, explicitly mixed basis.
+    assert summary["max_live_playback_position_error_m"] == 0.01
+    assert summary["live_playback_targets_observed"] == 1
+    assert summary["position_error_basis"] == "mixed_solver_or_live_playback_residual"
 
 
 def test_aggregate_jik_summary_only_out_of_reach():

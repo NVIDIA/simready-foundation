@@ -19,11 +19,12 @@ so it is exercised only by the manual Kit smoke run. These unit tests
 cover the pure module-level helpers (DLS step, joint clamping, pose
 error, quaternion utilities) plus the dataclass shape.
 """
+
 import math
 
 import numpy as np
 import pytest
-from simready_benchmark_kit_suite.articulation_phases.jik_solver import (
+from simready.foundation.tier_core.runtime_tests.articulation_phases.jik_solver import (
     JacobianIKResult,
     JacobianIKSolver,
     _clamp_joints_to_limits,
@@ -71,7 +72,7 @@ def test_get_ee_pose_uses_live_tensor_pose_and_converts_xyzw_to_wxyz():
 
 def test_get_ee_pose_fails_closed_when_live_pose_is_unavailable():
     robot = _LivePoseRobot(detail="physics link view is unavailable")
-    with pytest.raises(ValueError, match="physics link view is unavailable"):
+    with pytest.raises(RuntimeError, match="physics link view is unavailable"):
         _solver_for_live_pose(robot).get_ee_pose()
 
 
@@ -314,3 +315,131 @@ def test_normalize_quat_zero_returns_input():
     q = np.zeros(4)
     out = _normalize_quat(q)
     assert np.array_equal(out, q)
+
+
+class _DrivenProbeRobot:
+    dof_names = ["joint"]
+
+    def __init__(self):
+        self.position = np.array([0.0])
+        self.target = np.array([0.8])
+        self.velocity = np.array([0.5])
+
+    def get_joint_position_limits(self):
+        return np.array([-1.0]), np.array([1.0])
+
+    def get_joint_positions(self):
+        return self.position.copy()
+
+    def set_joint_positions(self, value):
+        self.position = value.copy()
+
+    def set_joint_position_targets(self, value):
+        self.target = value.copy()
+
+    def set_joint_velocities(self, value):
+        self.velocity = value.copy()
+
+    def get_link_world_transforms(self, paths):
+        return {paths[0]: (np.array([self.position[0], 0.0, 0.0]), np.array([0.0, 0.0, 0.0, 1.0]))}
+
+
+@pytest.mark.asyncio
+async def test_jacobian_probe_synchronizes_drive_targets_for_correct_finite_difference():
+    robot = _DrivenProbeRobot()
+    solver = JacobianIKSolver(robot, "/Robot/tool")
+
+    async def driven_step():
+        assert np.array_equal(robot.position, robot.target)
+        assert np.array_equal(robot.velocity, [0.0])
+        robot.position = robot.target.copy()
+
+    result = await solver.compute_jacobian(np.array([0.25]), driven_step)
+    assert result[0, 0] == pytest.approx(1.0)
+    assert np.array_equal(robot.position, [0.25]) and np.array_equal(robot.target, [0.25])
+
+
+@pytest.mark.asyncio
+async def test_jacobian_restores_pose_when_live_read_or_cancellation_fails():
+    import asyncio
+
+    for exception in (RuntimeError("live pose failed"), asyncio.CancelledError()):
+        robot = _DrivenProbeRobot()
+        solver = JacobianIKSolver(robot, "/Robot/tool")
+        reads = 0
+        original = solver.get_ee_pose
+
+        def read_pose(exception=exception, original=original):
+            nonlocal reads
+            reads += 1
+            if reads == 2:
+                raise exception
+            return original()
+
+        solver.get_ee_pose = read_pose
+
+        async def step():
+            pass
+
+        with pytest.raises(type(exception)):
+            await solver.compute_jacobian(np.array([0.25]), step)
+        assert np.array_equal(robot.position, [0.25]) and np.array_equal(robot.target, [0.25])
+
+
+@pytest.mark.asyncio
+async def test_jacobian_preserves_original_error_when_restore_fails():
+    robot = _DrivenProbeRobot()
+    solver = JacobianIKSolver(robot, "/Robot/tool")
+
+    async def step():
+        raise OSError("original stepping failure")
+
+    with pytest.raises(RuntimeError, match="propagation failed") as error:
+        await solver.compute_jacobian(np.array([0.25]), step)
+    assert isinstance(error.value.__cause__, OSError)
+    assert str(error.value.__cause__) == "original stepping failure"
+    assert any("restoration also failed" in note for note in error.value.__notes__)
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("position", [0.0, 1.0e-6])
+async def test_jacobian_divides_by_actual_limit_clipped_probe_displacement(position):
+    robot = _DrivenProbeRobot()
+    robot.get_joint_position_limits = lambda: (np.array([0.0]), np.array([1.0e-6]))
+    solver = JacobianIKSolver(robot, "/Robot/tool", finite_difference_epsilon=1.0e-3)
+
+    async def step():
+        pass
+
+    result = await solver.compute_jacobian(np.array([position]), step)
+    assert result[0, 0] == pytest.approx(1.0)
+    assert np.allclose(result[1:, 0], 0.0)
+
+
+@pytest.mark.asyncio
+async def test_jacobian_locked_interval_has_zero_column_without_invalid_division():
+    robot = _DrivenProbeRobot()
+    robot.get_joint_position_limits = lambda: (np.array([0.25]), np.array([0.25]))
+    solver = JacobianIKSolver(robot, "/Robot/tool")
+
+    async def step():
+        pass
+
+    result = await solver.compute_jacobian(np.array([0.25]), step)
+    assert np.array_equal(result, np.zeros((6, 1)))
+
+
+@pytest.mark.asyncio
+async def test_solver_physics_step_failure_is_not_a_finite_target_failure():
+    solver = JacobianIKSolver(_DrivenProbeRobot(), "/Robot/tool")
+
+    async def step():
+        raise OSError("engine propagation unavailable")
+
+    from simready.foundation.tier_core.runtime_tests.articulation_phases.required_readback import (
+        RequiredReadbackError,
+    )
+
+    with pytest.raises(RequiredReadbackError, match="propagation failed") as error:
+        await solver.solve(np.ones(3), [1, 0, 0, 0], step, max_iterations=1)
+    assert isinstance(error.value.__cause__, OSError)

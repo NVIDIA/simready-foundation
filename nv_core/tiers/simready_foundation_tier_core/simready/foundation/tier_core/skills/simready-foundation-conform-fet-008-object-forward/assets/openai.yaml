@@ -1,0 +1,4 @@
+interface:
+  display_name: "Conform Object Forward"
+  short_description: "Author and validate explicit semantic facing"
+  default_prompt: "Conform staged assets to FET008_ObjectForward.0-1-0 using explicit facing evidence and native upAxis."

@@ -7,8 +7,10 @@ numpy
 simready-validate>=2026.4.2
 # For package validation, omniverse-asset-validator>=1.18.0 is required.
 omniverse-asset-validator>=1.18.0
-# blake3 is optional - if it is available in the environment, BLAKE3 content hashes will be added to the package definition.
-blake3
+# BLAKE3 hashing is optional. When the hashing library is importable, BLAKE3
+# content hashes are added to the package definition alongside SHA-256. Install
+# it explicitly to enable that path:
+#   pip install blake3
 # [local] enables the file:// backend the create step needs.
 # Other backends: nucleus, s3, azure, storage-api.
 # Extras can be combined, e.g. omni-wrapp-minimal[local,s3].

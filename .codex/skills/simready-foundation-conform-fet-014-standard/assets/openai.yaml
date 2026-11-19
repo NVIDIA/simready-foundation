@@ -1,0 +1,4 @@
+interface:
+  display_name: "Conform Mesh Variant"
+  short_description: "Organize and validate visual-only render-mesh variants"
+  default_prompt: "Conform staged assets to FET014_MeshVariant.0-1-0 by organizing existing render meshes into visual-only MeshVariant sets that hold both the visual and collision envelopes."

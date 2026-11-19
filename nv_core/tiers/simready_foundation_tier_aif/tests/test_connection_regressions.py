@@ -50,8 +50,9 @@ CASES = [("cdu", "TC.002", CDU), ("crah", "TC.002", CRAH)] + [
 
 @pytest.mark.parametrize("asset_class,code,ports", CASES)
 @pytest.mark.parametrize("alias", [False, True])
-def test_property_identified_ports(tmp_path, asset_class, code, ports, alias):
-    path = make_asset(tmp_path, asset_class, ports=ports, alias=alias)
+@pytest.mark.parametrize("version", ["0.2.0", "0.2.1", "0.3.0", "0.10.0", "1.0.0"])
+def test_property_identified_ports(tmp_path, asset_class, code, ports, alias, version):
+    path = make_asset(tmp_path, asset_class, version=version, ports=ports, alias=alias)
     assert_no_failures(path, [code, "CP.010", "CP.011"])
 
 
@@ -137,9 +138,9 @@ def test_shipped_profile_port_results(tmp_path, public_validator, asset_class, c
     result = public_validator.validate_asset(public_validator.AssetValidationConfig(
         asset_path=str(path), profile_id="AIF-Entity", profile_version="0.2.0"))
     assert result is not None and result.features_summary
-    feature = "FET202_AIF" if code == "TC.002" else "FET203_AIF"
+    feature = "CAP202_ThermalCooling.0-2-0" if code == "TC.002" else "CAP203_Electrical.0-2-0"
     summary = result.features_summary[feature]
-    assert summary["version"] == "0.2.0"
+    assert feature.endswith(".0-2-0")
     # These minimal assets intentionally lack unrelated profile requirements.
     failed = summary.get("failing requirements", [])
     assert (f"com.nvidia.simready.{code}" in failed) is missing
@@ -154,5 +155,28 @@ def test_shipped_profile_clearance_is_blocking(tmp_path, public_validator, clear
     failures = [issue for issue in result.issues
                 if issue.requirement and issue.requirement.code == "com.nvidia.simready.CP.011"]
     assert bool(failures) is (clearance < 0)
-    failed = result.features_summary["FET201_AIF"].get("failing requirements", [])
+    failed = result.features_summary["CAP201_ConnectionPoints.0-2-0"].get("failing requirements", [])
     assert ("com.nvidia.simready.CP.011" in failed) is (clearance < 0)
+
+
+@pytest.mark.parametrize("version,expected", [
+    ("0.1.99", False),
+    ("0.2.0-alpha.1", False),
+    ("0.2.0-rc.1", False),
+    ("0.2.0", True),
+    ("0.2.0+build.1", True),
+    ("0.2.1-alpha.1", True),
+    ("0.10.0", True),
+    ("1.0.0", True),
+    ("2.0.0-preview", True),
+    (None, False),
+    ("", False),
+    ("not-a-version", False),
+])
+def test_property_vocabulary_semantic_version_threshold(tmp_path, version, expected):
+    from simready.foundation.tier_aif.rules_and_reqs.aif.connection_points.validation import (
+        _uses_property_vocabulary,
+    )
+
+    stage = Usd.Stage.Open(str(make_asset(tmp_path, version=version)))
+    assert _uses_property_vocabulary(stage) is expected

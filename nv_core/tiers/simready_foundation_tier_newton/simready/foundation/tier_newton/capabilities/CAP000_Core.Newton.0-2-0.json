@@ -1,0 +1,14 @@
+{
+  "id": "CAP000_Core.Newton.0-2-0",
+  "display_name": "Core (Newton)",
+  "requirements": [
+    "RV.004",
+    "RV.005",
+    "RV.006",
+    "RV.010",
+    "RV.011"
+  ],
+  "dependencies": [
+    "CAP000_Core.0-2-0"
+  ]
+}

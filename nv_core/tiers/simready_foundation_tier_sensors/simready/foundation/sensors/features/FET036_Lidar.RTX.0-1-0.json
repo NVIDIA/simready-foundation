@@ -1,0 +1,20 @@
+{
+  "id": "FET036_Lidar.RTX.0-1-0",
+  "display_name": "RTX Sensors",
+  "legacy_identity": {
+    "id": "FET_036_RTX",
+    "version": "0.1.0"
+  },
+  "additional_requirements": [
+    "LI.001",
+    "LI.002",
+    "LI.003",
+    "LI.004"
+  ],
+  "adapters": [
+    "skill:simready-foundation-conform-fet-036-rtx"
+  ],
+  "runtime_tests": [
+    "simready.foundation.sensors.runtime_tests:lidar_point_cloud"
+  ]
+}

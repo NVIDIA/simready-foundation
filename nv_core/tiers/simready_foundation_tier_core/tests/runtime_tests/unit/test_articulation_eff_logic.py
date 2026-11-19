@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Tests for effort_limit pure helpers."""
-from simready_benchmark_kit_suite.articulation_phases.effort_limit import (
+from simready.foundation.tier_core.runtime_tests.articulation_phases.effort_limit import (
     aggregate_eff_summary,
     detect_break_from_positions,
     get_defaults,

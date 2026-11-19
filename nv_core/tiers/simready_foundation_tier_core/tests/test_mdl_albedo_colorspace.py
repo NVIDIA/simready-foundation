@@ -4,7 +4,7 @@
 
 import pytest
 from pxr import Sdf, Usd, UsdShade
-from simready.foundation.tier_core.capabilities.visualization.materials.validation import (
+from simready.foundation.tier_core.rules_and_reqs.visualization.materials.validation import (
     VisualMaterialsCapabilityChecker,
 )
 

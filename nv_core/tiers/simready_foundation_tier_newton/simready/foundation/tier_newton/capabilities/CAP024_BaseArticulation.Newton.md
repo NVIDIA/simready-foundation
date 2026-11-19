@@ -1,0 +1,86 @@
+# Capability: `CAP024_BaseArticulation.Newton`
+
+| **Property**            | **Value**         |
+|-------------------------|-------------------|
+| Contract                | `CAP024_BaseArticulation.Newton` |
+| Runtime                 | `Newton` |
+| Proprietary Techs       | `Newton` |
+| Versions                | `0-1-0` |
+
+## Description
+
+Defines the Newton base-articulation contract. It depends on Standard articulation root
+authoring and adds Newton articulation-root configuration via `newton:selfCollisionEnabled`.
+The canonical form is `NewtonArticulationRootAPI` applied to the single articulation root
+(it extends `PhysicsArticulationRootAPI` and defines `newton:selfCollisionEnabled` plus the
+optional `newton:jointsAddMobility`); the bare `newton:selfCollisionEnabled` attribute on a
+`PhysicsArticulationRootAPI` root is also accepted.
+
+## Dependency Graph
+
+```{mermaid}
+flowchart LR
+    FET_024_NEWTON_0_1_0["CAP024_BaseArticulation.Newton\n0-1-0"]
+    FET_024_STANDARD_0_1_0["CAP024_BaseArticulation\n0-1-0"]
+    FET_024_NEWTON_0_1_0 --> FET_024_STANDARD_0_1_0
+
+    classDef current fill:#90EE90,stroke:#333
+```
+
+## Use Cases
+
+Products or workflows that consume this capability:
+
+- SimReady validation verifies NEWTON.BA.001.
+- Newton runtime validation is planned when a Newton robot profile consumes this capability.
+
+## Requirements
+
+### Version 0-1-0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+- [Robot-Body](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/profiles/robot-body.md): optional in `2.1.0`, `2.2.0`, `2.3.0`, `3.0.0`; required in `4.0.0`
+- [Robot-Gripper](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/profiles/robot-gripper.md): optional in `2.1.0`, `2.2.0`, `3.0.0`; required in `4.0.0`
+
+#### Dependencies
+
+| **Property** | **Value** |
+|--------------|-----------|
+| Dependency | `CAP024_BaseArticulation.0-1-0` |
+
+#### Requirement List
+
+* Capability: [Physics Bodies/Base Articulation](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/physics_bodies/base_articulation/capability-base-articulation.md)
+
+| Requirement | Requirement Doc |
+|-------------|-----------------|
+| `NEWTON.BA.001` | [NEWTON.BA.001](../rules_and_reqs/physics_bodies/base_articulation/requirements/newton-articulation-root-config.md) |
+
+</details>
+
+## Pipelines
+
+Source file type:
+
+- `.usd`, `.usda`, `.usdc`, package source folder, or package root as applicable.
+
+Validation or runtime pipeline:
+
+- SimReady validation verifies NEWTON.BA.001.
+- Newton runtime validation is planned when a Newton robot profile consumes this capability.
+
+## Samples
+
+- None.
+
+## Evaluates
+
+- None.
+
+## Adapters
+
+None.

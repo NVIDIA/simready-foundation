@@ -1,379 +1,111 @@
-# Release notes
+# Changelist
 
-Release history for the SimReady Foundation. Public releases use a
-`major.minor` product version. Repository branches and Python distributions
-prefix that version with the release year, so Foundation 8.0 is published as
-`2026.08.0` from the `release-2026.08.0` branch. This release version is
-separate from the semantic versions assigned to individual features and
-profiles. The current repository version is recorded in `VERSION.md`.
-
-Foundation 8.0 requires the 8.0 releases of the SimReady libraries
-(`simready-validate`, `simready-benchmark`, `simready-package`, etc.).
-Foundation 8.0 does not work with older library releases.
-
-The 8.0 SimReady libraries (`simready-validate`, `simready-benchmark`,
-`simready-package`, etc.) are backward-compatible with earlier Foundation
-releases, including 6.0 and 7.1.
-
-Use documentation, tier content, and profile versions for the Foundation
-release you are targeting. When adopting a newer Foundation profile, migrate
-assets and custom tiers as needed and validate them against that profile;
-earlier validation results or stamps do not establish conformance to it.
+Release history for the SimReady Foundation. Versions use the
+`YYYY.MM.patch` scheme and correspond to the `release-<version>` branches.
+The current version is recorded in `VERSION.md`.
 
 Entries are newest first.
 
-<!--
-Template for a new release entry. Copy the block between the markers, fill in
-the version and date, and drop any section that has no entries. Keep
-"Breaking changes" and "Deprecated" even when they are empty: state NONE
-rather than omitting them, so readers never have to guess whether the section
-was considered.
+---
 
-## YYYY.MM.patch — Month YYYY
+## 2026.10.0 — October 2026
 
-One-paragraph summary of what this release is about.
-
-### Breaking changes
-NONE
+Newton is now required for robot profiles. This release also adds asset
+variation, material coverage, object affordance, and Isaac optimization
+contracts.
 
 ### Added
+
+#### Newton required for robot profiles
+* `Robot-Body@4.0.0` and `Robot-Gripper@4.0.0` require
+  `FET003_RigidBody.Newton.0-1-0`, `FET004_Multibody.Newton.0-1-0`,
+  `FET022_DrivenJoints.Newton.0-1-0`, `CAP000_Core.Newton.0-2-0`, and
+  `CAP024_BaseArticulation.Newton.0-1-0`. Install the Newton tier alongside
+  Core to validate an asset against either profile.
+* Newton contracts stay optional in `Robotics-Prop@5.0.0`.
+
+#### Asset variation
+* `FET013_MultiRepresentationVisual.0-1-0`, `FET014_MeshVariant.0-1-0`,
+  `FET015_CollisionVariant.0-1-0`, and `FET016_AppearanceVariant.0-1-0`.
+  Each groups existing alternates into a variant set and carries
+  `AV.001`–`AV.010`.
+
+#### Materials
+* `FET006_Materials.0-3-0`, `FET006_Materials.MDL.0-3-0`, and
+  `FET006_Materials.Openpbr.0-2-0`.
+* `FET009_MaterialCoverage.0-1-0` checks that rendered geometry is bound to a
+  material.
+* `Material@1.0.0`, a Core tier profile for library materials.
+
+#### Object affordances
+* `CAP039_ObjectAffordances.0-1-0` defines a fixed set of affordance labels
+  (`AFF.001`, `AFF.002`). No profile selects it yet.
+
+#### Isaac asset optimization
+* `CAP102_RigidBodyCollapse.Isaac.0-1-0`,
+  `CAP103_VisualMeshMerge.Isaac.0-1-0`, and
+  `CAP104_RenderCollisionSeparation.Isaac.0-1-0`, carrying `OPT.001`–`OPT.003`.
+* `Asset-Optimization@1.0.0`, an Isaac tier profile that selects all three. It
+  applies to props and robots, whatever their main profile.
+
+#### Runtime variant Core contracts
+* `CAP000_Core.PhysX.0-2-0`, `CAP000_Core.Newton.0-2-0`,
+  `CAP000_Core.MuJoCo.0-2-0`, and `CAP000_Core.Isaac.0-2-0`.
+
+#### Authoring guides
+* Sensor profile guides for camera, IMU, joint, and lidar.
 
 ### Changed
 
-### Deprecated
-NONE
-
-### Removed
-
-### Fixed
--->
+* `Assembly` and `Robot-Assembly` are renumbered to `0.1.0`. Both were
+  introduced on the `2026.09.0` branch, so no previously published profile
+  version changed.
 
 ---
 
-## 2026.08.0-post1 — October 2026
+## 2026.09.0 — September 2026
 
-Material and semantic-label validation fixes for Foundation 8.0. This
-post-release corrects false failures for linear albedo and physics-only
-materials, ensures semantic checkers initialize through the validation
-engine, and detects missing authored physics mass units. Existing feature
-and profile version pins are unchanged.
-
-### Breaking changes
-NONE
-
-### Fixed
-* `SL.MAT.001` checks materials used by renderable geometry through render
-  bindings and resolving a shading network. Physics-only materials, unused
-  material libraries, and materials used only by guide or proxy geometry no
-  longer require material-segmentation labels. Inherited bindings,
-  material-bind subsets, and instance proxies are included in the visual
-  material scope.
-* The semantic material checker initializes through the consumer's rule
-  factory and resets its material-scope cache between variant passes.
-  Missing labels and time-sampled labels produce the expected failures in
-  both the validation API and CLI.
-* Linear albedo explicitly declaring `raw` is accepted for UsdPreviewSurface
-  `diffuseColor` (`VM.TEX.003`) and MDL `diffuse_texture` (`VM.TEX.002` and
-  `VM.TEX.005`). A Preview texture shared by albedo and data inputs can use
-  `raw`. Normal/data texture checks, other color inputs, OpenPBR checks, and
-  invalid color-space token diagnostics retain their existing behavior.
-* `UN.003` now checks whether `kilogramsPerUnit` is authored when physics
-  objects are present. The OpenUSD getter's default value of `1.0` no longer
-  hides missing stage metadata.
-
-### Added
-* Regression tests for linear albedo, visual-only material semantics,
-  material-scope cache resets, authored mass units, and initialization of
-  every Core checker through the consumer's rule factory.
-* Installed-wheel API and CLI tests for missing, time-sampled, and static
-  material labels using the stock `Robotics-Prop@3.2.0` profile.
+Tier-split documentation assembly and canonical contract route migration.
 
 ### Changed
-* Material color-space requirements, RTX material-label feature guidance,
-  and the semantic-label workflow now describe the corrected scope and
-  albedo encoding behavior. The materials index includes the per-family
-  color-space pages.
-* Package versions in this release are listed below. Post-release
-  numbers can differ between packages within the Foundation 8.0 line.
 
-| Package | Version |
-|---|---|
-| `simready-foundation-tier-core` | `2026.8.0.post1` |
-| `simready-foundation-tier-aif` | `2026.8.0` |
-| `simready-foundation-tier-sensors` | `2026.8.0` |
-
-`VERSION.md` and the release tag identify this repository snapshot as
-`2026.08.0-post1`. The 8.0 SimReady libraries (`simready-validate`,
-`simready-benchmark`, `simready-package`, etc.) remain backward-compatible
-with earlier Foundation releases, including 6.0 and 7.1.
-
-### Deprecated
-NONE
-
-### Removed
-NONE
-
----
-
-## 2026.08.0 — September 2026
-
-Visual materials, sensors, and AI Factory release. Foundation 8.0 adds the
-OpenPBR and display color material contracts, a Sensors tier covering IMU,
-joint, camera, and LiDAR sensors, and an AIF tier for AI Factory data center
-equipment. Asset provenance moves from nested USD metadata to a USD and
-sidecar union, and the legacy split prop and robot profiles are consolidated
-into `Robotics-Prop`, `Robot-Body`, and `Robot-Gripper`.
-
-```{important}
-Foundation 8.0 requires the 8.0 releases of the SimReady libraries
-(`simready-validate`, `simready-benchmark`, `simready-package`, etc.).
-Foundation 8.0 does not work with older library releases.
-
-The 8.0 SimReady libraries (`simready-validate`, `simready-benchmark`,
-`simready-package`, etc.) are backward-compatible with earlier Foundation
-releases, including 6.0 and 7.1.
-```
-
-### Foundation 8.0 libraries
-
-Foundation 8.0 ships as three tier packages, used together with the
-corresponding 8.0 SimReady tools:
-
-| Library | Purpose |
-|---|---|
-| `simready-foundation-tier-core` | The baseline requirements, features, profiles, validators, and bundled runtime tests. Required. |
-| `simready-foundation-tier-sensors` | Physics sensor, RTX LiDAR, and camera render-product contracts. Add it for sensor-bearing assets. |
-| `simready-foundation-tier-aif` | AI Factory equipment contracts. Add it for CDU, CRAH, UPS, and compute-rack assets. |
-| `simready-validate` | Static validation CLI and Python API. |
-| `simready-benchmark` | Runtime and behavioral testing in Kit or Isaac Sim. Arrives through a tier's `benchmark` extra; you do not normally install it directly. |
-| `simready-package` | Package creation and pre/post validation. Use the `publish` extra for WRAPP publishing. |
-
-The tier wheels for a given Foundation release share one version line, so
-install the tiers you need in a single command and let pip resolve a matching
-set rather than pinning them separately:
-
-```bash
-pip install "simready-foundation-tier-core[benchmark]" simready-validate
-```
-
-Add `simready-foundation-tier-sensors` or `simready-foundation-tier-aif` to
-that same command when the asset needs them. Supporting packages such as
-`usd-validation-nvidia`, `MaterialX`, `pillow`, `usd-core`, and `numpy` are
-resolved transitively.
-
-The published version of each package is listed on its PyPI project page. Pin
-exact versions there if your environment requires reproducible installs, and
-keep the three tier wheels on the same version when you do.
-
-### Breaking changes
-
-* The split prop and robot profiles are removed in favor of the consolidated
-  profiles. Re-stamp affected assets and validate again; a stamp naming a
-  removed profile no longer resolves. The runtime-specific behavior these
-  profiles carried is now selected through optional PhysX, Newton, MuJoCo, and
-  Isaac feature bundles on the consolidated profile versions, rather than by
-  choosing a separate profile.
-* A UsdPreviewSurface material is now mandatory on the 8.0 profile versions.
-  `FET_006_STANDARD` was optional through `Robotics-Prop@3.3.0`; at
-  `Robotics-Prop@4.0.0`, `Robot-Body@3.0.0`, and `Robot-Gripper@3.0.0` it is
-  required, at version `0.2.0`. An asset that passes the previous profile
-  version without a UsdPreviewSurface material will fail the 8.0 version.
-  Author one, or pin the earlier profile version. OpenPBR, MDL, and display
-  color remain optional alongside it.
-* `FET_000_STANDARD@0.2.0` drops `NP.006` (conformance metadata location) and
-  `SR.001` (SimReady metadata whitelist) from the Core feature. Both moved to
-  the packaging and metadata features. Custom-tier owners who relied on Core to
-  supply them must add `FET_031_STANDARD` and `FET_033_STANDARD` to the
-  affected profile versions in their profile TOML. Asset authors are not
-  affected as long as they use an 8.0 profile version, which pins both.
-
-Profile migration map:
-
-| Removed profile | Use instead |
-|---|---|
-| `Prop-Robotics-Neutral`, `Prop-Robotics-Physx`, `Prop-Robotics-Isaac` | `Robotics-Prop` |
-| `Robot-Body-Neutral`, `Robot-Body-Isaac`, `Robot-Body-Runnable` | `Robot-Body` |
-
-### Added
-
-#### Tier distribution
-* `simready-foundation-tier-sensors`, a Sensors tier owning the physics
-  sensor, RTX LiDAR, and render-product capabilities, their four profiles,
-  validators, and bundled runtime tests.
-* `simready-foundation-tier-aif`, an AI Factory tier owning equipment class
-  metadata, connection points, thermal cooling, and electrical contracts for
-  CDU, CRAH, UPS, and compute-rack assets.
-* Shared tier documentation covering the Core, AIF, and Sensors tiers
-  (`shared/tiers/`).
-
-#### Visual materials
-* `FET_006_OPENPBR@0.1.0`: the OpenPBR material contract, with the final
-  surface authored as an OpenPBR shading network on `outputs:mtlx:surface`
-  (`VM.PBR.001`–`VM.PBR.003`, `VM.TEX.004`). OpenPBR is the recommended target
-  for new SimReady assets; MDL remains permitted for existing content.
-  `VM.PBR.001` is phased-permissive, so an MDL surface still passes during
-  migration.
-* `FET_006_STANDARD@0.2.0` and `FET_006_MDL@0.2.0`: expanded UsdPreviewSurface
-  and MDL contracts covering bind scope, final-surface presence, PBR parameter
-  ranges, and per-family texture color space.
-* `FET_010_STANDARD@0.1.0`: display color on renderable geometry
-  (`DISP.001`–`DISP.003`), with a new Display Color capability and validator.
-* Guide: Visual Materials (`guides/visual_materials/visual_materials.md`),
-  covering OpenPBR and display color authoring, validation, and rendering.
-
-#### Sensors
-* `FET_034_ISAAC@0.1.0` (IMU sensor rigid-body attachment, `PS.001`) and
-  `FET_037_ISAAC@0.1.0` (joint sensor on the articulation root, `PS.002`).
-* `FET_035_RTX@0.1.0`: camera render products and AOVs (`RP.001`–`RP.006`),
-  including codec validation and BLOSC compression for semantic AOVs.
-* `FET_036_RTX@0.1.0`: RTX LiDAR (`LI.001`–`LI.004`), covering the OmniLidar
-  schema, emitter-state array consistency, the scan-rate floor, and
-  solid-state ray counts.
-* Four sensor profiles at `1.0.0` — `Sensor-IMU`, `Sensor-Joint`,
-  `Sensor-Camera`, and `Sensor-LiDAR` — each stamped alongside an asset's
-  primary profile, with authoring guides.
-* Runtime tests: `imu_sensor_data`, `joint_sensor_data`,
-  `render_product_output`, `semantic_aov_output`, and `lidar_point_cloud`.
-
-#### AI Factory equipment
-* `FET200_AIF` (equipment metadata, `AM.001`–`AM.007`), `FET201_AIF`
-  (connection points), `FET202_AIF` (thermal cooling), and `FET203_AIF`
-  (electrical), with `FET201`–`FET203` at both `0.1.0` and `0.2.0`.
-* `AIF-Entity` profile at `0.1.0` and `0.2.0`. A single profile covers all
-  equipment classes; `aif:core:assetClass` selects the class-specific checks.
-* Reference assets for four equipment classes under `sample_content/aif/`.
-
-#### Metadata and packaging
-* `SR.004`: provenance read from the union of root-layer `customLayerData` and
-  an optional same-directory `<usd_stem>.json` sidecar, delivered as
-  `FET_033_STANDARD@0.4.0`. A field must not be authored in both locations.
-* `Package-Candidate@1.3.0` adopts `FET_033_STANDARD@0.4.0`.
-
-#### Profiles
-* 8.0 releases of the consolidated profiles: `Robotics-Prop@4.0.0`,
-  `Robot-Body@3.0.0`, and `Robot-Gripper@3.0.0`, each requiring
-  `FET_006_STANDARD@0.2.0` with optional OpenPBR, MDL, and display color.
-* Intermediate versions `Robotics-Prop@3.3.0`, `Robot-Body@2.3.0`, and
-  `Robot-Gripper@2.2.0` adopt `FET_033_STANDARD@0.4.0`.
-* `Robot-Body@2.3.0` and `@3.0.0` offer the full optional runtime menu for all
-  three solvers — core scaffolding, rigid body, multibody, driven joints, and
-  articulation for PhysX, Newton, and MuJoCo — rather than PhysX alone.
-
-#### Conformance skills
-* `simready-foundation-conform-fet-006-openpbr` and
-  `simready-foundation-conform-fet-010-standard`.
-
-### Changed
-* The reference prop library is re-authored to payload-based composition, with
-  per-solver instance layers and refreshed light, dark, and transparent
-  thumbnails.
-* Geometry and units validators delegate to `usd-validation-nvidia` rather
-  than duplicating the checks locally. The affected requirements are now
-  referenced through their `com.nvidia.usd.*` names.
-* The monolithic texture color-space requirement is replaced by per-family
-  requirements for UsdPreviewSurface, OpenPBR, and MDL
-  (`VM.TEX.003`–`VM.TEX.005`).
-* Built-in Kit MDL modules such as OmniPBR are exempt from the rule requiring
-  MDL sources to be packaged with the asset, matching Isaac asset transformer
-  behavior.
-
-### Deprecated
-NONE
-
-### Removed
-* The six split prop and robot profiles listed under Breaking changes.
-* The `atomic_asset` executable validator. Its requirements are now checked by
-  `usd-validation-nvidia`; the capability documentation remains.
-* Per-asset `metadata.json` sidecars and `web/*.glb` exports from the migrated
-  reference props, replaced by the USD-native provenance and thumbnail layout.
-
-### Fixed
-* Physics drop placement is size-safe for the `FET_003` ground and slope drop
-  runtime tests.
-* Cross-engine runtime-test reliability for gripper, articulation, and
-  placement tests.
-* Stale Isaac references removed from the sample manifest.
-* Material and thumbnail fixes for the lamp and workbench tool props.
-* The sensor runtime tests ship with the Sensors tier (OMPE-112896), and their
-  execution was corrected (OMPE-113171, OMPE-113178, OMPE-113181).
-* `FET_005` grasp setup now resolves rigid bodies outside identifier scopes,
-  and Newton failure reporting is corrected.
-* Generated artifacts and unreferenced DCC source assets are excluded from the
-  released package.
+#### Documentation routes and compatibility redirects
+* Documentation sources are assembled from per-tier packages (`nv_core/tiers/`)
+  and the shared overlay (`nv_core/sr_specs/docs/shared/`) into
+  `nv_core/sr_specs/_build/docs-src` via `nv_core/tiers/_tooling/assemble_docs.py`.
+* Published `2026.06.0` feature routes under `features/` were split by runtime
+  into canonical `FET_<family>_<runtime>` routes in `2026.08.0` and into dotted
+  Foundations 2 contract routes (`features/FET*` and `capabilities/CAP*`).
+  `assemble_docs.py` emits compatibility redirect pages at the historical
+  `features/FET_*` docnames so existing links and bookmarks continue to resolve:
+  * `features/FET_000-base_neutral-0.1.0-core` -> `features/FET_000_STANDARD` (`capabilities/CAP000_Core`)
+  * `features/FET_001-minimal` -> `features/FET_001_STANDARD` (`features/FET001_MinimalPlaceableVisual`)
+  * `features/FET_002-posable_bodies` -> `features/FET_002_STANDARD` (`capabilities/CAP002_PosableBodies`)
+  * `features/FET_003-rigid_body_physics` -> `features/FET_003_STANDARD`, `features/FET_003_PHYSX`, `features/FET_003_NEWTON`, `features/FET_003_MUJOCO` (`features/FET003_RigidBody`)
+  * `features/FET_004-simulate_multi_body_physics` -> `features/FET_004_STANDARD`, `features/FET_004_PHYSX`, `features/FET_004_NEWTON`, `features/FET_004_MUJOCO`, `features/FET_004_ROBOT_PHYSX`, `features/FET_004_ROBOT_NEWTON`, `features/FET_004_ROBOT_MUJOCO` (`features/FET004_Multibody`)
+  * `features/FET_005-simulate_grasp_physics` -> `features/FET_005_STANDARD` (`features/FET005_Grasp`)
+  * `features/FET_006-materials` -> `features/FET_006_STANDARD`, `features/FET_006_MDL`, `features/FET_006_OPENPBR` (`features/FET006_Materials`)
+  * `features/FET_007-nonvisual_materials` -> `features/FET_007_STANDARD` (`capabilities/CAP007_NonVisualMaterials`)
+  * `features/FET_011-semantic_labels` -> `features/FET_011_STANDARD`, `features/FET_011_RTX` (`features/FET011_SemanticLabels`)
+  * `features/FET_021-robot_core` -> `features/FET_021_ISAAC` (`capabilities/CAP021_RobotCore.Isaac`)
+  * `features/FET_022-driven_joints` -> `features/FET_022_STANDARD`, `features/FET_022_PHYSX`, `features/FET_022_NEWTON`, `features/FET_022_MUJOCO`, `features/FET_022_ISAAC` (`features/FET022_DrivenJoints`)
+  * `features/FET_023-robot_materials` -> `features/FET_023_ISAAC` (`capabilities/CAP023_RobotMaterials.Isaac`)
+  * `features/FET_024-base_articulation` -> `features/FET_024_STANDARD`, `features/FET_024_PHYSX`, `features/FET_024_NEWTON`, `features/FET_024_MUJOCO` (`capabilities/CAP024_BaseArticulation`)
+  * `features/FET_030-packaging_core` -> `features/FET_030_STANDARD` (`capabilities/CAP030_PackagingCore`)
+  * `features/FET_031-package_self_contained` -> `features/FET_031_STANDARD` (`capabilities/CAP031_SelfContainedPackage`)
+  * `features/FET_032-packaging_introspection` -> `features/FET_032_STANDARD` (`capabilities/CAP032_PackagingIntrospection`)
+  * `features/FET_033-simready_packaging` -> `features/FET_033_STANDARD` (`capabilities/CAP033_SimReadyPackage`)
+  * `features/FET_100-isaacsim-0.1.0-composition` -> `features/FET_100_ISAAC` (`capabilities/CAP100_IsaacComposition.Isaac`)
 
 ---
 
-## 2026.07.1 — August 2026
+## 2026.07.0 — July 2026
 
-Tiered distribution and multiphysics release. The specification is now
-distributed as installable tier packages, so `simready-validate` discovers
-requirements, features, and profiles from installed wheels instead of
-filesystem paths. One SimReady prop can carry isolated PhysX, Newton, and
-MuJoCo physics payloads through USD runtime variants, with matching features,
-validators, samples, and authoring docs. This release supersedes 2026.07.0,
-which was not shipped; its content is included here.
-
-```{important}
-Foundation 7.1 is not backward-compatible with earlier Foundation major or
-minor releases. Do not mix 7.1 requirements, features, profiles, or tier
-packages with content from 7.0 or earlier. Existing assets and custom tiers
-must be migrated as needed and revalidated against a 7.1 profile; validation
-results or stamps from an older Foundation release do not establish 7.1
-conformance.
-```
-
-### Foundation 7.1 libraries
-
-Use the following independently versioned libraries with Foundation 7.1:
-
-| Library | Compatible version | Purpose |
-|---|---|---|
-| `simready-foundation-tier-core` | `2026.7.1` | Foundation 7.1 requirements, features, profiles, validators, and bundled runtime tests. |
-| `simready-validate` | `>=2026.7.0.dev1` | Static validation CLI and Python API. |
-| `simready-benchmark[kit]` | `>=2026.6.6` | Runtime and behavioral testing in Kit or Isaac Sim; installed by the core tier's `benchmark` extra. |
-| `simready-package` | `>=2026.6.0a1` | Package creation and pre/post validation; use the `publish` extra for WRAPP publishing. |
-
-For a complete validation and Benchmark environment:
-
-```bash
-pip install "simready-foundation-tier-core[benchmark]==2026.7.1" "simready-validate>=2026.7.0.dev1"
-```
-
-Add `simready-package>=2026.6.0a1` for packaging, or
-`simready-package[publish]>=2026.6.0a1` when WRAPP publishing is required.
-Supporting packages such as `usd-validation-nvidia>=1.20.0`,
-`usd-core>=23.5`, and `numpy` are resolved transitively.
-
-### Breaking changes
-
-* `simready-foundation-tier-isaac` is no longer published. Its Isaac Sim
-  capabilities, features, and profiles are now part of
-  `simready-foundation-tier-core`. Run
-  `pip uninstall simready-foundation-tier-isaac` before upgrading: leaving both
-  in one environment registers the Isaac requirement IDs twice.
-* Foundation runtime tests now ship inside `simready-foundation-tier-core`
-  rather than as standalone distributions. Uninstall
-  `simready-benchmark-kit-suite` and `simready-foundation-runtime-tests-kit`
-  before upgrading an existing Benchmark environment; both can own files in the
-  same top-level package now bundled by the core tier.
+Multiphysics Foundations release. One SimReady prop can carry isolated PhysX,
+Newton, and MuJoCo physics payloads through USD runtime variants, with matching
+features, validators, samples, and authoring docs.
 
 ### Added
-
-#### Tiered distribution
-* Tier packaging: the specification ships as `simready-foundation-tier-core`,
-  a Python package owning the Core, Hierarchy, Visualization, Physics Bodies,
-  Isaac Sim, Non-Visual Sensors, Semantic Labels, Dataset Taxonomies, and
-  Packaging capabilities along with their profiles.
-* Tier discovery through the `usd_validation_nvidia` and `simready.tier` entry
-  points, so `simready-validate` loads content from installed wheels. The
-  `--rules-path`, `--features-path`, and `--profiles-path` flags are no longer
-  needed once a tier is installed.
-* Benchmark runtime tests bundled with their owning tier and advertised through
-  `runtime_tests_path` on the tier descriptor, so tests and specification
-  catalogs cannot drift. Validator-only installs stay lightweight; the
-  `[benchmark]` extra installs the Benchmark engine dependencies.
-* Guide: SimReady Foundation Tiers (`guides/tiers.md`), plus tier ownership
-  surfaced across the capability, feature, and profile documentation.
 
 #### Multiple physics solvers (runtime variants)
 * Runtime Variants capability (`RV.001`–`RV.011`): per-runtime variant sets,
@@ -395,57 +127,11 @@ Supporting packages such as `usd-validation-nvidia>=1.20.0`,
   (multibody).
 * Guide: Multiple Physics Solvers (`guides/multiphysics_solvers.md`).
 
-#### Semantic labels and dataset taxonomies
-* Semantic Labels capability (`SL.001`–`SL.003`, `MAT.001`, `TIME.001`) in the
-  core tier, covering label schema, material labels, and time-sampled labels.
-* Dataset Taxonomies capability with validators for the ADE20K, Cityscapes,
-  COCO, SUN RGB-D, and Pascal VOC taxonomies (`ADE.001`, `CITY.001`,
-  `COCO.001`, `SUN.001`, `VOC.001`).
-* Sample assets updated to comply with the Semantic Labels specification.
-
-#### Robotics
-* `FET_025_ROS` (ROS-Ready): Isaac ROS bridge-node presence for robot assets,
-  offered as an optional feature on `Robot-Body@2.2.0`.
-* Standalone Isaac asset transformer, plus Isaac composition features.
-* Complete FET022 driven-joint runtime testing on Newton.
-* Restored the `FET_028` gripper stack that was dropped during the
-  foundations 1.1 sync.
-
-#### Metadata
-* `SR.003` nested provenance metadata extended with `asset_license`, `qcode`
-  (Wikidata Q-Code), `rigid_body_count`, `asset_extents` (float3 meters, XYZ),
-  and `mass` (kilograms), delivered as `FET_033_STANDARD@0.3.0` and bundled
-  into the robot and prop profiles.
-
 ### Changed
 * Prop physics authoring guides document optional runtime variant scaffolding
   and per-solver payload expectations.
 * Neutral base authoring guidance tightened so solver-only values (for example
   PhysX SDF approximation) stay inside runtime payloads.
-* Recombined the separate validation tiers into the single core tier.
-* Prop profiles updated to reference the new feature set.
-* Benchmark reference documentation aligned with the registered runtime tests.
-* Fixed KitMaker publishing and added the tier-core project ID.
-
-### Deprecated
-NONE
-
-### Removed
-* `simready-foundation-tier-isaac`, superseded by `simready-foundation-tier-core`.
-* The standalone `simready-benchmark-kit-suite` and
-  `simready-foundation-runtime-tests-kit` distributions, replaced by the
-  runtime tests bundled with the core tier.
-
-### Fixed
-* `NP.008` false positives on UDIM texture paths, and UDIM path handling in the
-  core validators (OMPE-104937).
-* Driven-joint validators for prismatic PhysX mimic couplings.
-* `RB.011` tier validation logic.
-* Registered the `dataset_taxonomies` validators in the core tier.
-* Docs build now completes with all Sphinx warnings cleared.
-* Sample-content validation isolated into two branch passes and now fails on
-  logged errors (OMPE-103628).
-* GitLab security builds and CI jobs.
 
 ---
 
@@ -465,7 +151,7 @@ of the 2026.04.x packaging milestone.
 * Faithful runtime robot tests: closed-loop joints, IK solver, and
   gravity-on articulation behavior.
 * Per-test reference docset for the runtime testing guides.
-* Published `simready-benchmark` library documentation.
+* Published SimReady test library documentation.
 * `batch_maker` now consumes the `simready_search` PyPI package for job
   generation.
 

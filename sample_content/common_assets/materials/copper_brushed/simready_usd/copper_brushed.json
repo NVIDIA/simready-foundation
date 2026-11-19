@@ -1,0 +1,13 @@
+{
+  "author": "NVIDIA",
+  "asset_name": "Copper_Brushed",
+  "asset_type": "material",
+  "asset_license": "MIT-0",
+  "category": "Metal",
+  "source_file": "PhysicalAI-SimReady-Materials/Metal/Copper_Brushed.usda",
+  "usd_date_generated": "2026-10-23",
+  "qcode": "Q753",
+  "rigid_body_count": 0,
+  "asset_extents": [0, 0, 0],
+  "mass": 0
+}

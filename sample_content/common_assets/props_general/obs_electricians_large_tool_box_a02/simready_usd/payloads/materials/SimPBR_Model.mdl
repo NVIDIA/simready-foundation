@@ -1,0 +1,232 @@
+/*****************************************************************************
+*     Copyright 1986-2020 NVIDIA Corporation. All rights reserved.
+******************************************************************************
+
+ MDL MATERIALS ARE PROVIDED PURSUANT TO AN END USER LICENSE  AGREEMENT,
+ WHICH WAS ACCEPTED IN ORDER TO GAIN ACCESS TO THIS FILE.  IN PARTICULAR,
+ THE MDL MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF
+ COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL NVIDIA
+ CORPORATION BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, INCLUDING
+ ANY GENERAL, SPECIAL,  INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES,
+ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
+ THE USE OR INABILITY TO USE THE MDL MATERIALS OR FROM OTHER DEALINGS IN
+ THE MDL MATERIALS.
+*/
+
+mdl 1.7;
+
+import ::df::*;
+import ::state::*;
+import ::math::*;
+import ::base::*;
+import ::tex::*;
+import ::anno::*;
+
+import SimPBR_Core::*;
+
+using .::baking_annotations import *;
+
+
+base::texture_return multiply_colors(
+    color color_1 = color(1.0, 1.0, 1.0),
+    color color_2 = color(.5, .5, .5),
+    float weight  = 1.0
+)
+[[
+    anno::hidden()
+]]
+{
+    return base::blend_color_layers(
+        layers: base::color_layer[](
+            base::color_layer(
+                layer_color: color_2,
+                weight: weight,
+                mode: base::color_layer_multiply
+            )
+        ), base: color_1
+    );
+}
+
+export material SimPBR_Model(
+    color diffuse_color = color(0.2f)               [[ target_baked_argument("diffuse_texture", "diffuse_color_constant", "RGBA8_UNORM") ]],
+    color diffuse_tint = color(1.0f),
+    float roughness = 0.5f                          [[ target_baked_argument("reflectionroughness_texture", "reflection_roughness_constant", "R8_UNORM") ]],
+    float anisotropy = 0.0f                         [[ target_baked_argument("anisotropy_texture", "anisotropy_constant", "R8_SNORM") ]],
+    float metallic = 0.f                            [[ target_baked_argument("metallic_texture", "metallic_constant", "R8_UNORM") ]],
+    float specular = 1.f                            [[ target_baked_argument("specular_texture", "specular_constant", "R8_UNORM") ]],
+    float3 normal = float3(0.0, 0.0, 0.0)           [[ target_baked_argument("normalmap_texture", "normal_input", "RGBA8_SNORM", baking_annotations::TRANSFORM_UNORM_VECTOR) ]],
+    uniform bool enable_clearcoat = false,
+    color clearcoat_tint = color(1.0f),
+    float clearcoat_transparency = 1.0f,
+    float clearcoat_reflection_roughness = 0.0f,
+    float clearcoat_weight = 1.0f,
+    float clearcoat_ior = 1.56f,
+    float3 clearcoat_normal = float3(0.0, 0.0, 0.0) [[ target_baked_argument("clearcoat_normalmap_texture", "clearcoat_normal_input", "RGBA8_SNORM", baking_annotations::TRANSFORM_UNORM_VECTOR) ]],
+    uniform bool enable_retroreflection = false,
+    color retroreflection_tint = color(.182,.800,.000),
+    float retroreflection_mask = 1.0,
+    uniform float normal_reflectivity = 0.5,
+    uniform float grazing_reflectivity = 1.0,
+    float ao_to_diffuse = 0.0,
+    float ao = 1.0f                                 [[ target_baked_argument("ao_texture", "ao_input", "R8_UNORM") ]],
+    uniform bool enable_emission = false,
+    uniform color emissive_color = color(1.0, 0.1, 0.1),
+    color emissive_mask = color(1.0, 0.1, 0.1)      [[ target_baked_argument("emissive_mask_texture", "emissive_mask_input", "R8_UNORM") ]],
+    uniform float emissive_intensity = 40.f,
+    uniform bool enable_opacity = false,
+    float alpha = 1.0,
+    uniform bool enable_opacity_cutout = false,
+    uniform float alpha_cutout_cutoff = 1.f,
+    uniform float opacity_ratio = 1.f,
+    uniform color opacity_tint = color(1.0f),
+    uniform float opacity_multiplier = 1.f
+)
+[[
+    target_material_model(),
+    target_material_rendering("..::SimPBR::SimPBR")
+]]
+ = let {
+    color base_color = multiply_colors(diffuse_color, diffuse_tint, 1.0).tint;
+    color ao_weighted_base_color = multiply_colors(base_color, color(ao), ao_to_diffuse).tint;
+
+    float squared_roughness = roughness * roughness;
+    float roughness_u = squared_roughness * (1 + anisotropy);
+    float roughness_v = squared_roughness * (1 - anisotropy);
+
+    color diffuse_transmission_color = base_color * opacity_tint * opacity_multiplier;
+
+    bsdf diffuse_bsdf = df::weighted_layer(
+        weight: opacity_ratio,
+            layer: df::diffuse_reflection_bsdf(
+            tint: ao_weighted_base_color,
+            roughness: 0.0f
+        ),
+        base: df::diffuse_transmission_bsdf(tint: diffuse_transmission_color),
+        normal: enable_clearcoat ? normal : state::normal()
+    );
+
+    bsdf ggx_smith_bsdf = df::microfacet_ggx_smith_bsdf(
+        roughness_u: roughness_u,
+        roughness_v: roughness_v,
+        tint: color(1.0, 1.0, 1.0),
+        mode: df::scatter_reflect
+    );
+
+    bsdf custom_curve_layer_bsdf = df::custom_curve_layer(
+        normal_reflectivity: 0.03,
+        grazing_reflectivity: 1.0,
+        exponent: 5.0,
+        weight: specular,
+        layer: ggx_smith_bsdf,
+        base: diffuse_bsdf,
+        normal: enable_clearcoat ? normal : state::normal()
+    );
+
+    //
+    // Retroreflection support (additive; keep base appearance unchanged in daylight)
+    //
+    // Problem we are solving:
+    // - Energy-conserving layering can make paint look darker/dirty in daylight because the sun is
+    //   not co-located with the camera, so backscattering contributes little.
+    // - We want base PBR to stay the same, and retro to add on top only when it contributes.
+    //
+    float retro_n = enable_retroreflection ? math::saturate(normal_reflectivity * retroreflection_mask) : 0.0;
+    float retro_g = enable_retroreflection ? math::saturate(grazing_reflectivity * retroreflection_mask) : 0.0;
+
+    // View-angle weight (Schlick-style curve) between facing and grazing strengths
+    float3 N = math::normalize(state::normal());
+    float3 V = math::normalize(state::direction());
+    float ndotv = math::abs(math::dot(N, V));
+    float t = math::pow(1.0 - ndotv, 5.0);
+    float retro_w = math::saturate(retro_n + (retro_g - retro_n) * t);
+
+    // Retro tint and boost (kept modest; tune via retro_w parameters)
+    color final_retroreflection_color = multiply_colors(retroreflection_tint, base_color, 1.0).tint;
+    color boosted_retro_color = final_retroreflection_color * 4.0;
+    color clamped_retro_color = math::clamp(boosted_retro_color, color(0.0), color(2.5));
+
+    // Broad enough for camera-behind-headlights, but not so broad that it becomes just diffuse
+    float retro_roughness_u = math::clamp(squared_roughness, 0.30, 0.60);
+
+    bsdf backscattering_glossy_bsdf = df::backscattering_glossy_reflection_bsdf(
+        tint: clamped_retro_color,
+        roughness_u: retro_roughness_u
+    );
+
+    // Make an additive mix without stealing energy from the base:
+    // normalized_mix gives (base * 1/(1+w) + retro * w/(1+w)).
+    // Tint by (1+w) yields base + w*retro.
+    bsdf opt_retroreflection_bsdf = df::tint(
+        tint: color(1.0 + retro_w),
+        base: df::normalized_mix(
+            components: df::bsdf_component[](
+                df::bsdf_component(component: custom_curve_layer_bsdf, weight: 1.0),
+                df::bsdf_component(component: backscattering_glossy_bsdf, weight: retro_w)
+            )
+        )
+    );
+
+    bsdf directional_factor_bsdf = df::directional_factor(
+        normal_tint: ao_weighted_base_color,
+        grazing_tint: color(1.0, 1.0, 1.0),
+        exponent: 5.0f,
+        base: ggx_smith_bsdf
+    );
+
+    // CLEARCOAT
+    bsdf omni_PBR_bsdf = df::weighted_layer(
+        weight: metallic,
+        layer: directional_factor_bsdf,
+        base: opt_retroreflection_bsdf, //enable_retroreflection ? retroreflection_bsdf : custom_curve_layer_bsdf,
+        normal: enable_clearcoat ? normal : state::normal()
+    );
+
+    bsdf clearcoat_bsdf = df::microfacet_ggx_smith_bsdf(
+        roughness_u: clearcoat_reflection_roughness * clearcoat_reflection_roughness,
+        roughness_v: clearcoat_reflection_roughness * clearcoat_reflection_roughness,
+        tint: color(1.0f),
+        mode: df::scatter_reflect
+    );
+
+    // bsdf omni_PBR_coated_bsdf = df::custom_curve_layer(
+        // normal_reflectivity: clearcoat_reflectivity * 0.08,
+        // grazing_reflectivity: 1.0,
+        // weight: clearcoat_weight,
+        // layer: clearcoat_bsdf,
+        // base: omni_PBR_bsdf,
+        // normal: final_clearcoat_normal
+    // );
+
+    bsdf opt_opaque_clearcoat = df::weighted_layer(
+        weight: enable_clearcoat ? clearcoat_transparency : 1,
+        layer: ::df::tint(tint: enable_clearcoat ? clearcoat_tint : color(1), base: omni_PBR_bsdf),
+        base: ::df::diffuse_reflection_bsdf(tint: clearcoat_tint)
+    );
+
+    bsdf opt_omni_PBR_coated_bsdf = df::fresnel_layer(
+        ior: clearcoat_ior,
+        weight: enable_clearcoat ? clearcoat_weight : 0,
+        layer: clearcoat_bsdf,
+        base: opt_opaque_clearcoat,
+        normal: clearcoat_normal
+    );
+
+    bsdf final_bsdf = opt_omni_PBR_coated_bsdf;
+
+    material final_material = material(
+        thin_walled: false,
+        surface: material_surface(
+            scattering: final_bsdf,
+            emission: material_emission(
+                df::diffuse_edf(),
+                intensity: enable_emission ? emissive_color * emissive_mask * color(emissive_intensity) : color(0)
+            )
+        ),
+        geometry: material_geometry(
+            normal: enable_clearcoat ? state::normal() : normal,
+            cutout_opacity: enable_opacity ? (enable_opacity_cutout ? (alpha < alpha_cutout_cutoff ? 0.0 : 1.0) : alpha) : 1.0
+        )
+    );
+} in final_material;

@@ -21,10 +21,9 @@ runtime (``physics.stop()`` / ``play()``, ``robot.articulation``,
 ``world.reset_async()``) and is exercised by integration tests inside
 Kit, not here.
 
-``_build_gantry`` itself depends on ``pxr.PhysxSchema`` (Kit-only;
-not in the ``usd-core`` PyPI distribution that this package's hard
-dependencies pull in). Tests that need it use ``pytest.importorskip``
-so they skip cleanly on host-Python machines without Kit.
+``_build_gantry`` itself depends on PhysxSchema, which Kit binds into
+``pxr`` and physx-usd-schemas provides outside Kit. Tests that need it
+skip cleanly without either.
 """
 from types import SimpleNamespace
 
@@ -32,7 +31,7 @@ import pytest
 
 pytest.importorskip("pxr")
 from pxr import Usd, UsdGeom, UsdPhysics  # noqa: E402  -- must follow importorskip
-from simready_benchmark_kit_suite.articulation_phases.gripper_carrier import (  # noqa: E402
+from simready.foundation.tier_core.runtime_tests.articulation_phases.gripper_carrier import (  # noqa: E402
     _GANTRY_BASE,
     _GANTRY_ROOT,
     _GANTRY_Z,
@@ -51,6 +50,16 @@ from simready_benchmark_kit_suite.articulation_phases.gripper_carrier import (  
     detach_carrier,
     set_carrier_target_z,
 )
+
+try:
+    from pxr import PhysxSchema  # noqa: F401
+except ImportError:
+    try:
+        from physx_usd_schemas import PhysxSchema  # noqa: F401
+    except ImportError:
+        PhysxSchema = None
+
+_HAS_PHYSX_SCHEMA = PhysxSchema is not None
 
 
 def _stage_with_gripper_base():
@@ -164,7 +173,8 @@ async def test_partial_attach_rollback_restores_stage_and_physics_state():
     assert not root.GetAttribute("xformOp:orient").IsDefined()
     assert stage.GetPrimAtPath("/World/authored_pin").IsActive()
     assert physics.stops == 1
-    assert physics.plays == 1
+    # Start the recook, then restore the caller's timeline state after reset.
+    assert physics.plays == 2
     assert robot.articulation.default_state == {"position": "position", "orientation": "orientation"}
     assert robot.articulation.joint_state == {
         "positions": "positions",
@@ -269,15 +279,15 @@ async def test_detach_reinitializes_robot_before_resetting_world():
     assert not stage.GetPrimAtPath(_GANTRY_ROOT).IsValid()
 
 
-# ---- tests that require PhysxSchema (Kit-only) -------------------------------
+# ---- tests that require PhysxSchema ------------------------------------------
 
 
+@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="PhysxSchema unavailable")
 def test_build_gantry_authors_expected_prim_layout():
     """Verifies the gantry's USD shape: base + Z xforms with rigid bodies and
     mass, prismatic Z joint between them with DriveAPI(linear), and an attach
     FixedJoint bound to the gripper base. attach_carrier relies on this layout
     -- if any prim path or joint relationship shifts, the runtime breaks."""
-    pytest.importorskip("pxr.PhysxSchema")
     stage, base = _stage_with_gripper_base()
 
     _build_gantry(stage, str(base.GetPath()), (1.0, 2.0, 3.0))
@@ -301,12 +311,12 @@ def test_build_gantry_authors_expected_prim_layout():
     assert joint_z_prim.HasAPI(UsdPhysics.DriveAPI, "linear")
 
 
+@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="PhysxSchema unavailable")
 def test_build_gantry_attach_joint_binds_gantry_z_to_gripper_base():
     """The FixedJoint between gantry_z and the gripper base is what makes the
     gripper follow the prismatic drive; excludeFromArticulation=True keeps the
     gantry out of the gripper's articulation graph (otherwise PhysX merges
     them and ParallelGripper crashes on shape mismatch)."""
-    pytest.importorskip("pxr.PhysxSchema")
     stage, base = _stage_with_gripper_base()
     _build_gantry(stage, str(base.GetPath()), (0.0, 0.0, 0.0))
 
@@ -319,10 +329,10 @@ def test_build_gantry_attach_joint_binds_gantry_z_to_gripper_base():
     assert fj.GetExcludeFromArticulationAttr().Get() is True
 
 
+@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="PhysxSchema unavailable")
 def test_set_carrier_target_z_roundtrip_via_carrier_target_z():
     """The drive-target write/read pair is what the test phases use to
     command and observe gantry motion. Round-trip must be exact."""
-    pytest.importorskip("pxr.PhysxSchema")
     stage, base = _stage_with_gripper_base()
     _build_gantry(stage, str(base.GetPath()), (0.0, 0.0, 0.0))
 
@@ -333,10 +343,10 @@ def test_set_carrier_target_z_roundtrip_via_carrier_target_z():
     assert carrier_target_z(stage) == pytest.approx(-0.17)
 
 
+@pytest.mark.skipif(not _HAS_PHYSX_SCHEMA, reason="PhysxSchema unavailable")
 def test_remove_existing_gantry_clears_built_layout():
     """attach_carrier calls _remove_existing_gantry on each entry to guarantee
     a clean slate. After removal, none of the gantry prims should remain."""
-    pytest.importorskip("pxr.PhysxSchema")
     stage, base = _stage_with_gripper_base()
     _build_gantry(stage, str(base.GetPath()), (0.0, 0.0, 0.0))
     assert stage.GetPrimAtPath(_GANTRY_ROOT).IsValid()

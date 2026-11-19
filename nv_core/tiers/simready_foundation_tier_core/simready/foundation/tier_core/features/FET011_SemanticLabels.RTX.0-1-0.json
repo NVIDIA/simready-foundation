@@ -1,0 +1,23 @@
+{
+  "id": "FET011_SemanticLabels.RTX.0-1-0",
+  "display_name": "Semantic Labels (RTX)",
+  "legacy_identity": {
+    "id": "FET_011_RTX",
+    "version": "0.1.0"
+  },
+  "source_feature": "FET011_SemanticLabels.0-2-0",
+  "dependencies": [
+    "FET011_SemanticLabels.0-2-0"
+  ],
+  "additional_requirements": [
+    "SL.MAT.001",
+    "SL.TIME.001"
+  ],
+  "adapters": [
+    "skill:simready-foundation-conform-fet-011-standard"
+  ],
+  "runtime_tests": [
+    "simready.foundation.tier_core.runtime_tests:semantic_labels_seg_labelled",
+    "simready.foundation.tier_core.runtime_tests:semantic_labels_seg_stripped"
+  ]
+}

@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Tests for articulation_phases.joint_utils."""
-from simready_benchmark_kit_suite.articulation_phases.joint_utils import (
+from simready.foundation.tier_core.runtime_tests.articulation_phases.joint_utils import (
     BBoxSnapshot,
     check_bbox_explode,
     compute_world_aligned_bbox,
@@ -69,20 +69,20 @@ def test_compute_world_aligned_bbox_ignores_non_geometry_control_prims():
     cube = UsdGeom.Cube.Define(stage, "/Robot/Geometry/cube")
     cube.GetSizeAttr().Set(2.0)
 
-    bounds = compute_world_aligned_bbox(root)
+    bounds = compute_world_aligned_bbox(root, authored=True)
 
     assert bounds.min_point == (-1.0, -1.0, -1.0)
     assert bounds.max_point == (1.0, 1.0, 1.0)
 
 
-def test_compute_world_aligned_bbox_returns_zero_for_control_only_prim():
+def test_explicit_authored_setup_retains_empty_control_only_heuristic():
     from pxr import Usd
 
     stage = Usd.Stage.CreateInMemory()
     root = stage.DefinePrim("/Robot", "Xform")
     stage.DefinePrim("/Robot/Actuators/finger_actuator", "NewtonActuator")
 
-    bounds = compute_world_aligned_bbox(root)
+    bounds = compute_world_aligned_bbox(root, authored=True)
 
     assert bounds.min_point == (0.0, 0.0, 0.0)
     assert bounds.max_point == (0.0, 0.0, 0.0)

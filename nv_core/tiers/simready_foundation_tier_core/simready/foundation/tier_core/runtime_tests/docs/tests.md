@@ -1,0 +1,174 @@
+# Evaluate Reference
+
+This section documents every evaluation in the bundled FET suite: what each
+test checks, what a passing result guarantees, how the test works, what failure modes to expect, and how to fix a failing asset. Tests are organized by feature: each
+family page lists the tests that validate that feature.
+
+## Wall-clock execution allowances
+
+Motion-test wall-clock safety allowances are doubled, including the internal
+FRS, coordination and Jacobian-IK wall guards. This does not change physics
+FPS, velocity-aware ramp calculations, simulation-step budgets, settling
+windows, targets, tolerances or pass criteria. Explicit configuration values
+remain literal wall seconds; they are not multiplied again. The independent
+Kit output-inactivity watchdog is unchanged. A wall deadline is total elapsed
+execution time, not time since the last progress message.
+
+Generate a fresh plan after rebuilding/installing the tier: saved plans keep
+their recorded procedure versions, deadlines and configuration overrides.
+
+| Test | Whole-test wall limit (seconds) |
+|---|---:|
+| `ground_drop` | 600 |
+| `ground_stability` | 600 |
+| `slope_drop` | 600 |
+| `joint_movement` | 600 |
+| `grasp_and_lift` | 1200 |
+| `drive_gain_validation` | 600 |
+| `effort_limit` | 1200 |
+| `full_range_sweep` | 14400 |
+| `ik_target_reach` | 1200 |
+| `jacobian_ik` | 2400 |
+| `mimic_joint` | 600 |
+| `multi_joint_coordination` | 3600 |
+| `state_accuracy` | 600 |
+| `velocity_limit` | 600 |
+| `gripper_close_lift_cube` | 600 |
+| `gripper_close_lift_sphere` | 600 |
+
+State accuracy completes every configured smoothstep ramp before its endpoint
+hold. Only the hold may stop early after consecutive settled samples; entering
+a coarse response band cannot leave an intermediate command active. Motion
+budgets, legal waypoint selection and configured response tolerances are unchanged.
+
+FRS defaults to 3360 internal wall seconds beneath its 14400-second outer
+ceiling; coordination defaults to 3360 beneath 3600; Jacobian IK search
+defaults to a maximum of 1800 beneath 2400. FRS and coordination still reserve
+at least 60 seconds beneath the outer ceiling for remaining work. The FET004
+batched-drive wall watchdog is 240 seconds. Startup and asset-loading watchdogs
+are not motion execution allowances and are unchanged.
+
+## Family Labels and Feature Manifest IDs
+
+Names such as `FET001`, `FET003`, and `FET004` identify evaluation families.
+They are compact reporting groups and accepted CLI filter prefixes; they are
+not canonical Foundation feature manifest IDs.
+
+A family can map to one or more runtime-specific feature variants. The following
+are Foundation 2 contract-name prefixes, not exact versioned contract IDs:
+
+:::{list-table}
+:header-rows: 1
+:widths: 20 80
+
+* - Evaluate family
+  - Foundation 2 contract-name prefixes
+* - `FET001`
+  - `FET001_MinimalPlaceableVisual`
+* - `FET003`
+  - `FET003_RigidBody`, `FET003_RigidBody.PhysX`, `FET003_RigidBody.Newton`
+* - `FET004`
+  - `FET004_Multibody`, `FET004_Multibody.PhysX`, `FET004_Multibody.Newton`
+:::
+
+For Foundation 1 catalogs, executable association uses
+`@test(features=[...])` metadata and catalog version constraints. Foundation 2
+instead uses each exact contract's manifest-owned `runtime_tests` bindings to
+provider-qualified test names. For example,
+`FET003_RigidBody.PhysX.0-4-0` is an exact Foundation 2 contract, not the legacy
+`FET_003_PHYSX` decorator ID. Decorator metadata alone does not grant Foundation 2
+coverage. Planning and audit tools must resolve the installed catalog and its
+provider bindings; they must not construct a manifest ID from a family heading,
+directory, or filename. See [Authoring runtime tests](authoring.md).
+
+## What the Framework Does
+
+Evaluation runs as a pipeline: the planner selects the tests an asset is
+eligible for, the runner executes them in the engine and captures frames and
+logs, the stamper records the outcome on the asset, and the reporter aggregates
+results into an HTML and JSON report. Refer to
+[Pipeline and Stages](../../../../../../../sr_specs/docs/guides/evaluate/pipeline.md) for the full pipeline, and to
+[Running Tests](../../../../../../../sr_specs/docs/guides/evaluate/running.md) to set up and run the tool.
+
+## How to Read a Test Result
+
+Each feature in a report carries one state. PASS requires actual passing test
+evidence; applicability skips do not prove that a test passed. When all tests
+are skipped, the feature is SKIPPED, not PASS. Failed tests produce FAIL;
+execution errors, blocked tests and missing required work remain distinct
+non-passing outcomes. A statically validated feature with no runtime evaluation
+can be NEUTRAL, while VALIDATION_FAILED records a static validation failure.
+Inspect coverage and static validation alongside the runtime result. Refer to
+[Reading Reports](../../../../../../../sr_specs/docs/guides/evaluate/reading-reports.md) to interpret a full report.
+
+## Test Families
+
+:::{list-table}
+:header-rows: 1
+:widths: 20 80
+
+* - Family
+  - Validates
+* - [FET001 Visual](fet001-visual.md)
+  - Visual presence, surface normals, back-face culling, lighting response, and pivot placement.
+* - [FET003 Physics](fet003-physics.md)
+  - Independent rigid-body ground drop, sampled ground stability, and slope drop.
+* - [FET004 Multibody](fet004-multibody.md)
+  - Multibody articulation and joint movement.
+* - [FET005 Grasp](fet005-grasp.md)
+  - Grasp, lift, shake, and release.
+* - [FET006 Materials](fet006-materials.md)
+  - How much of what a viewer sees is shaded by the asset's own material, per render context: OpenPBR, MDL, and UsdPreviewSurface. The same runs provide FET009 Material Coverage's verdict.
+* - [FET008 Object Forward](fet008-object-forward.md)
+  - Loaded facing preservation and front-camera response.
+* - [FET010 Display Color](fet010-display-color.md)
+  - Whether display color and display opacity reach the renderer.
+* - [FET011 Semantic Labels](fet011-semantic-labels.md)
+  - Labelled and stripped semantic-segmentation evidence.
+* - [FET012 Gaussian Splat](fet012-gaussian-splat.md)
+  - Whether the asset's 3D Gaussian Splat visual renders in RTX.
+* - [FET013 Multi-Representation Visual](fet013-representation.md)
+  - Whether every visual representation composes and holds the visual envelope.
+* - [FET014 Mesh Variant](fet014-mesh-variant.md)
+  - Whether each render-mesh option is visual-only and holds both envelopes.
+* - [FET015 Collision Variant](fet015-collision-variant.md)
+  - Whether each collider option simulates and holds the collision envelope.
+* - [FET016 Appearance Variant](fet016-appearance-variant.md)
+  - Whether each appearance option re-binds materials visual-only and renders differently.
+* - [FET022 Driven Joints](fet022-driven-joints.md)
+  - Driven joint range, velocity, effort, mimic behavior, coordination, and inverse kinematics.
+* - [FET028 Gripper](fet028-gripper.md)
+  - Gripper close, lift, shake, and release.
+:::
+
+This reference lists enabled tests discovered from the bundled suite. Experimental
+or disabled test implementations are not shipped coverage and are intentionally
+omitted.
+
+## Maintainer Documentation
+
+- [Authoring SimReady Foundation runtime tests](authoring.md)
+- [Experimental and disabled runtime tests](experimental.md)
+
+```{toctree}
+:maxdepth: 1
+:hidden:
+
+FET001 Visual <fet001-visual>
+FET003 Physics <fet003-physics>
+FET004 Multibody <fet004-multibody>
+FET005 Grasp <fet005-grasp>
+FET006 Materials <fet006-materials>
+FET008 Object Forward <fet008-object-forward>
+FET010 Display Color <fet010-display-color>
+FET011 Semantic Labels <fet011-semantic-labels>
+FET012 Gaussian Splat <fet012-gaussian-splat>
+FET013 Multi-Representation Visual <fet013-representation>
+FET014 Mesh Variant <fet014-mesh-variant>
+FET015 Collision Variant <fet015-collision-variant>
+FET016 Appearance Variant <fet016-appearance-variant>
+FET022 Driven Joints <fet022-driven-joints>
+FET028 Gripper <fet028-gripper>
+Authoring runtime tests <authoring>
+Experimental and disabled tests <experimental>
+```

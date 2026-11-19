@@ -1,0 +1,23 @@
+{
+  "id": "FET028_Gripper.Isaac.0-1-0",
+  "display_name": "Gripper (Isaac)",
+  "legacy_identity": {
+    "id": "FET_028_ISAAC",
+    "version": "0.1.0"
+  },
+  "source_feature": "FET028_Gripper.0-1-0",
+  "dependencies": [
+    "FET022_DrivenJoints.Isaac.0-1-0",
+    "FET028_Gripper.0-1-0"
+  ],
+  "additional_requirements": [
+    "GR.ISA.001"
+  ],
+  "adapters": [
+    "skill:simready-foundation-conform-fet-028-isaac"
+  ],
+  "runtime_tests": [
+    "simready.foundation.tier_core.runtime_tests:gripper_close_lift_cube",
+    "simready.foundation.tier_core.runtime_tests:gripper_close_lift_sphere"
+  ]
+}

@@ -1,6 +1,6 @@
 ---
 name: simready-foundation-conform-fet-006-openpbr
-description: "Use for repairing exact FET_006_OPENPBR SimReady conformance for OpenPBR (MaterialX) material conformance. Use when a profile, validation report, or user request names FET_006_OPENPBR; default to version `0.1.0` unless a profile or report pins another version."
+description: "Use for repairing exact FET006_Materials.Openpbr SimReady conformance for OpenPBR (MaterialX) material conformance. Use when a profile, validation report, or user request names FET006_Materials.Openpbr; default to `FET006_Materials.Openpbr.0-1-0` unless a profile or report pins another version. Foundations 1 ID: FET_006_OPENPBR."
 license: Apache-2.0
 metadata:
   author: "Jens Jebens <jjebens@nvidia.com>"
@@ -10,28 +10,45 @@ metadata:
     - openpbr
 ---
 
-# SimReady Conform FET_006_OPENPBR
+# SimReady Conform FET006_Materials.Openpbr
+
+## OpenUSD Competence
+
+Running this conform skill is expert USD authoring. Reason from the OpenUSD /
+Pixar USD spec rather than pattern-matching a validator message: composition
+arcs and LIVRPS strength ordering, value resolution and list editing
+(prepend, append, explicit, delete), the `def`/`over`/`class`
+specifiers, native instancing and model hierarchy, stage units and up-axis,
+and the `UsdGeom`, `UsdShade`, and `UsdPhysics` schemas. Make the exact native
+edit on the correct prim, arc, and layer, derive values from the asset's real
+geometry and composition, then reopen the composed stage to confirm the
+opinion resolves as intended before claiming the gate passes. Never fabricate
+data to satisfy a validator token. The repository-root `AGENTS.md`
+"Master-Level OpenUSD Competence for Conform Work" section is the full
+statement.
 
 ## Purpose
 
-Use this exact feature skill when the selected profile, validation report, or user request names `FET_006_OPENPBR`. It adds or repairs the OpenPBR final surface on a material without touching the UsdPreviewSurface preview (`FET_006_STANDARD`) or the MDL surface (`FET_006_MDL`), which are sibling contracts.
+Use this exact feature skill when the selected profile, validation report, or user request names `FET006_Materials.Openpbr`. It adds or repairs the OpenPBR final surface on a material without touching the UsdPreviewSurface preview (`FET006_Materials`) or the MDL surface (`FET006_Materials.MDL`), which are sibling contracts.
 
-Default to `FET_006_OPENPBR@0.1.0` when the user asks for this feature without a version. Use another version only when the profile, validation report, or user explicitly pins it. If the report names a different `FET_###_RUNTIME` feature, switch to that feature's matching skill before editing.
+Default to `FET006_Materials.Openpbr.0-1-0` when the user asks for this feature without a version. Use another version only when the profile, validation report, or user explicitly pins it. If the report names a different contract, switch to that contract's matching skill before editing.
 
 ## Source of Truth
 
 Before changing an asset or package, read:
 
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_006_OPENPBR-0.1.0.json`
-- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET_006_OPENPBR.md`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET006_Materials.Openpbr.0-1-0.json`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET006_Materials.Openpbr.0-2-0.json`
+- `nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features/FET006_Materials.Openpbr.md`
 
-Treat the JSON manifest as authoritative for requirement IDs. Use the feature markdown for contract details, requirement links, samples and benchmarks.
+Treat the JSON manifest as authoritative for requirement IDs. Use the feature markdown for contract details, requirement links, samples and runtime tests.
 
 ## Feature Versions
 
 | Version | Dependencies | Requirements |
 |---|---|---|
-| `0.1.0` | None | `com.nvidia.usd.VM.BIND.001`, `VM.BIND.002`, `VM.MAT.001`, `VM.PBR.001`, `VM.PBR.002`, `VM.PBR.003`, `VM.TEX.001`, `VM.TEX.004` |
+| `FET006_Materials.Openpbr.0-1-0` | None | `com.nvidia.usd.VM.BIND.001`, `VM.BIND.002`, `VM.MAT.001`, `VM.PBR.001`, `VM.PBR.002`, `VM.PBR.003`, `VM.TEX.001`, `VM.TEX.004` |
+| `FET006_Materials.Openpbr.0-2-0` | None | `com.nvidia.usd.VM.BIND.001`, `VM.BIND.002`, `VM.PBR.001`, `VM.PBR.002`, `VM.PBR.003`, `VM.TEX.001`, `VM.TEX.004` |
 
 ## Bundled script
 
@@ -120,248 +137,13 @@ Three consequences of that rewrite:
 Re-running rewrites the binary layer, so the file hash changes even when the scene description
 does not. Compare flattened USD rather than file hashes when checking a re-run changed nothing.
 
-### The surface output
+### Mapping and model-semantics reference
 
-The OpenPBR nodedef declares a single output, `out`:
-
-```xml
-<nodedef name="ND_open_pbr_surface_surfaceshader" node="open_pbr_surface" ...>
-  <output name="out" type="surfaceshader" />
-```
-
-so `outputs:mtlx:surface` connects to `OpenPBR_Shader.outputs:out`, matching NVIDIA's
-`open_pbr_uber_base_class.usda`, where all 904 shipped OpenPBR materials use `out`.
-
-That is the name to author, but it is not load-bearing, and `--verify` does not check it. Kit
-accepts `outputs:out` and `outputs:surface` alike. Hydra derives the MaterialX terminal from the
-nodedef's type and never reads the USD output property name, in
-`HdMtlxGetMxTerminalName(terminalNodeDef->getType())` in `hdMtlx.cpp`. That was measured on
-three isolated mtlx-only assets, magenta-probed with `mtlx` pinned first: `surface` rendered
-99.63% magenta and `out` 99.58%, against a bogus-nodedef control at 0%.
-
-Nothing else in the contract reads it either. VM.PBR.001 names no output. USD's own `usdMtlx`
-reader deliberately normalises the other way, to `outputs:surface`, which is why an asset
-round-tripped through it, or exported from Blender, carries that name. An earlier version of
-this skill gated `--verify` on the name, and so rejected assets USD's own converter produces.
-That gate is gone.
-
-### Materials it will not touch
-
-The script only ever rewrites a surface it created itself. A material that already carries an
-OpenPBR surface under a prim name other than `OpenPBR_Shader`, or something other than that
-surface sitting on the `OpenPBR_Shader` name, was authored by hand. The script reports it as a
-conflict, leaves it exactly as it is, and counts it separately at the end of the run:
-
-```
-/World/Looks/ForeignMat: CONFLICT, OpenPBR surface already authored at MyOpenPBR, left alone
-/Looks/SquatMat: CONFLICT, OpenPBR_Shader is already a Shader (ND_standard_surface_surfaceshader), left alone
-```
-
-Resolve those by hand. The script will not overwrite them and will not author a second,
-competing surface beside them.
-
-### What it maps
-
-| OpenPBR input | From UsdPreviewSurface | From OmniPBR |
-|---|---|---|
-| `base_color` | `diffuseColor` | `diffuse_color_constant`, `diffuse_texture` |
-| `base_metalness` | `metallic` | `metallic_constant`, `ORM_texture` (blue) |
-| `specular_roughness` | `roughness` | `reflection_roughness_constant`, `ORM_texture` (green) |
-| `specular_ior` | `ior` | — |
-| `geometry_opacity` | `opacity` | `opacity_constant` |
-| `emission_color` | `emissiveColor` | `emissive_color` |
-| `emission_luminance` | — | `emissive_intensity` |
-| `geometry_normal` | `normal` | `normalmap_texture` |
-
-The OmniPBR ORM channels are only read when `enable_ORM_texture` is set. `geometry_normal` has
-no constant form: it comes across when the source has a normal map and is absent otherwise.
-
-### Which materials it writes to, and where
-
-A material is migrated in the layer where it is defined — the weakest `def` in its prim
-stack — because a new render-context output belongs with the material rather than with the
-asset that binds it.
-
-That layer is often not this asset's. A shared material library is referenced by many assets,
-so migrating one of its materials from inside one asset's run changes how every other asset
-renders. `--shared-materials` decides what happens to those:
-
-- `skip` (default) reports each one by the layer it lives in and leaves it alone.
-- `migrate` authors into that layer, which is what a deliberate library-wide pass wants.
-
-Containment is by directory, not by layer stack: an asset's own parts arrive through
-references too, so a layer-stack test would call its doors and wheels external. A material
-defined under the root layer's directory is this asset's; anything else is not.
-
-A material whose surface is already what the run would author is reported as unchanged and
-its layer is not rewritten, so a second pass over a library is quiet on everything it has
-already done.
-
-### Reading a model's semantics, not just its input names
-
-Two models can spell an input the same way and mean different things by it, and three of
-those differences change how a migrated material renders. Each is read out of the MDL
-rather than inferred:
-
-- **Gated inputs.** SimPBR authors `emissive_color`, `emissive_intensity` and the opacity
-  inputs on every material and gates each behind a boolean. Where `enable_emission` or
-  `enable_opacity` is false the value beside it is inert. Carried across ungated, a matte
-  car paint arrives glowing at 40 nits.
-- **Albedo tint.** `SimPBR_Model.mdl` computes
-  `base_color = multiply_colors(diffuse_color, diffuse_tint, 1.0).tint`, so the tint is a
-  multiplier on the albedo. Dropped, a material with a 0.5 tint arrives twice as bright as
-  it renders.
-- **Coat darkening.** OpenPBR darkens what sits under a coat, modelling light reflected
-  back internally, and `coat_darkening` defaults to 1.0. SimPBR's coat is a `fresnel_layer`
-  over a base that is only tinted, so with a white `clearcoat_tint` the base is untouched.
-  A coat migrated without setting `coat_darkening` to 0 renders the base darker than the
-  source does, most visibly on a dark metallic under a full-weight coat.
-
-### Which MDL models it reads
-
-`OmniPBR`, `OmniGlass`, `SimPBR` and `SimPBR_Translucent`, matched on
-`info:mdl:sourceAsset:subIdentifier`. A material built on any other MDL model is reported and
-left alone, because the mapping matches source inputs by name and different models spell the
-same name with different meaning.
-
-SimPBR maps albedo, metalness and roughness as OmniPBR does, and takes `alpha_constant` for
-`geometry_opacity`. It has no plain index of refraction — `clearcoat_ior` describes the coat,
-not the base — so `specular_ior` comes from the UsdPreviewSurface or the nodedef default.
-`SimPBR_Translucent` maps no `base_color`: it describes what light picks up passing through
-rather than what the surface reflects, so it takes `ior_constant` for `specular_ior` and gets
-`transmission_weight` 1.0, as OmniGlass does.
-
-SimPBR authors `emissive_color`, `emissive_intensity` and the opacity inputs on every material
-whether or not it uses them, and gates each behind a boolean. Where `enable_emission` or
-`enable_opacity` is false the value beside it is inert and does not migrate; the run says which
-input it held back and why. Read without those gates, a matte car paint arrives glowing.
-
-Clearcoat maps one to one, gated behind `enable_clearcoat`: `clearcoat_weight` to
-`coat_weight`, `clearcoat_reflection_roughness` to `coat_roughness`, `clearcoat_tint` to
-`coat_color` and `clearcoat_ior` to `coat_ior`. `coat_weight` and `coat_roughness` are held in
-`[0, 1]` and `coat_ior` in `[1, 3]`, on the same terms as every other bounded input.
-
-Precedence runs texture first. For each channel the script looks for a texture on the
-UsdPreviewSurface, then on the MDL surface, and takes a constant only when neither source has
-one. A shader that authors a constant beside its own map carries the map across rather than the
-constant: OmniPBR declares `diffuse_color_constant` ("Albedo Color") beside `diffuse_texture`
-("Albedo Map"), and `metallic_texture_influence` / `reflection_roughness_texture_influence`
-exist precisely to blend one against the other, so the constant next to a map is a default and
-not the authored value. Between two constants the UsdPreviewSurface is read first, with the
-OmniGlass exception noted below.
-
-Every value is held inside the range VM.PBR.002 defines, so an out-of-range source value is
-clamped rather than carried across. Physics materials are left alone.
-
-An `OmniGlass` source is mapped differently, because it names its inputs differently and
-describes a transmissive material:
-
-| OpenPBR input | From OmniGlass |
-|---|---|
-| `base_color` | `glass_color`, `glass_color_texture` |
-| `specular_roughness` | `frosting_roughness`, `ORM_texture` (green) |
-| `specular_ior` | `glass_ior` |
-| `geometry_opacity` | `cutout_opacity` |
-| `geometry_normal` | `normal_map_texture` |
-| `transmission_weight` | set to `1.0` |
-
-OmniGlass spells its albedo and normal maps `glass_color_texture` and `normal_map_texture`,
-where OmniPBR writes `diffuse_texture` and `normalmap_texture`. Both spellings are read, so a
-material carrying only an OmniGlass surface keeps those two maps. It packs its ORM the same way
-OmniPBR does, under the same `ORM_texture` and `enable_ORM_texture` names.
-
-`base_metalness` is not mapped from an OmniGlass source. It is pinned to `0.0`, which is what a
-dielectric is, so the ORM blue channel is deliberately not read for glass.
-
-Where both sources hold a constant for the same channel, the OmniGlass value wins, because the
-preview surface usually holds a generic default. That ordering settles constants only: a texture
-on either source still beats a constant on either source, so `frosting_roughness` does not
-displace a roughness map the source also carries.
-
-No sample in this repository exercises the constant-against-constant case. `clear__platic_01` in
-`gen_cleaning_dishwand_v01_01` is the only OmniGlass material here, and its preview `ior` and its
-`glass_ior` are both 1.52, so the two sources agree.
-
-### Texture-driven inputs
-
-Where a source input is driven by a texture, the script authors the MaterialX reader nodes that
-sample it and wires them into the OpenPBR surface. The topology follows NVIDIA's PhysicalAI
-SimReady materials library (`open_pbr_uber_base_class.usda`):
-
-| Piece | Node |
-|---|---|
-| UV source, one per material | `ND_texcoord_vector2`, `index = 0` |
-| Colour map | `ND_tiledimage_color3` |
-| Single-channel map | `ND_tiledimage_float` |
-| Packed map (ORM) | `ND_tiledimage_vector3` + `ND_separate3_vector3` |
-| Normal map | `ND_tiledimage_vector3` + `ND_normalmap_float` |
-
-Each reader takes `texcoord` from the shared texcoord node and `uvtiling`/`uvoffset` from the
-`Material`, matching the reference wiring.
-
-A packed map is read once and split once, however many channels come out of it: an ORM map
-feeding both roughness and metalness produces one reader and one `separate3`, not two of each.
-Which channel feeds which input is read from the source connection rather than assumed, so a
-material that wires roughness to the red channel keeps doing that.
-
-The reference library writes `ND_normalmap`, which is the MaterialX 1.38 name. 1.39 split that
-nodedef by the type of its `scale` input, and the plain name resolves in neither the 1.39
-stdlib nor the library Kit ships, so the script writes `ND_normalmap_float`. `ND_normalmap`
-would leave the normal unresolvable, which renders flat rather than failing loudly.
-
-`ND_normalmap` decodes the tangent-space range itself, so the reader feeds it the raw texture
-value and the script authors no scale/bias node.
-
-Colour space is set on the `Material`'s asset input, as the reference library sets it, and is
-decided by what the texture is rather than by what the source says: `srgb_texture` for colour
-channels, `none` for roughness, metalness, normals and opacity. Several source assets label an
-ORM or normal map `sRGB`, which would skew those values if it were carried across verbatim.
-
-Running with `--no-textures` reports these channels as `FLAT` and holds the OpenPBR input at a
-constant: the one the source carries beside the map, or the OpenPBR nodedef default where it
-carries none, which is what most of these samples hit, since a Blender export writes the map
-and no value beside it. `geometry_normal` is the exception and is left unauthored, having no
-constant form. Those materials satisfy VM.PBR.001 and VM.PBR.002 but will not look like the
-original.
-
-The reader nodes need something that resolves MaterialX nodedefs, and Kit is not the only thing
-that does. `usd-core` on its own does not register them, so `Sdr` resolves neither
-`ND_open_pbr_surface_surfaceshader` nor `ND_tiledimage_color3` under a bare
-`pip install usd-core`. The materials validator falls back to the `MaterialX` Python package
-when `Sdr` comes up empty, so `pip install MaterialX>=1.39` beside `usd-core` is enough for
-VM.PBR.003 to run, with no Kit and no Isaac Sim. What still needs a renderer is the rendered
-result: whether the migrated material looks right is a render question, not a nodedef one.
-
-### Parameters on the Material prim
-
-Every parameter the OpenPBR surface reads is exposed as an interface input on the `Material`
-prim, and the shader reads it through that input, so a material can be retuned without reaching
-into its shader network:
-
-```usda
-def Material "m_opaque__plastic__toaster_v01_01"
-{
-    color3f inputs:base_color = (0.8, 0.8, 0.8)
-    asset inputs:base_color_texture_file = @./textures/..._a.png@ ( colorSpace = "srgb_texture" )
-    float inputs:specular_ior = 1.5
-    float2 inputs:uvtiling = (1, 1)
-    ...
-    def Shader "OpenPBR_Shader"
-    {
-        float inputs:specular_ior.connect = </...m_opaque__plastic__toaster_v01_01.inputs:specular_ior>
-```
-
-For a channel driven by its own texture the constant is still exposed and feeds the reader's
-`default`, which is the reference library's texture-else-value idiom: it is what the material
-falls back to if the texture fails to load, and the one place to retune the channel.
-
-A channel unpacked from a packed map has no constant of its own, because the reader's fallback
-is one value shared by every channel in the map. Retune those by swapping the map, which is
-exposed as `inputs:<map name>_texture_file`.
-
-Unlike the reference library, the materials this script writes carry no `inherits` or
-`specializes` arc. The reference shares one base class across a library; a migrated sample has
-to stand on its own, so each material carries its own copy of the network it needs.
+The OpenPBR surface output, the materials the script refuses to touch, the full
+input-mapping tables (UsdPreviewSurface, OmniPBR, OmniGlass), how it chooses the
+layer to write, the per-model MDL semantics it reads, the texture-reader
+topology, and the interface inputs it exposes on the `Material` prim are
+documented in `references/openpbr-migration-details.md`.
 
 ## Feature Adapter
 
@@ -371,21 +153,23 @@ path that runs without a person driving it. See
 
 | Adapter module | Adapter | Transition | Authors |
 |---|---|---|---|
-| `nv_core/cip_specs/asset_handler_modules/neutral_to_openpbr` | `material_neutral_to_openpbr` | `FET_006_STANDARD@0.1.0` -> `FET_006_OPENPBR@0.1.0` | OpenPBR surface on `outputs:mtlx:surface`, derived from the UsdPreviewSurface preview. |
-| `nv_core/cip_specs/asset_handler_modules/neutral_to_openpbr` | `material_mdl_to_openpbr` | `FET_006_MDL@0.1.0` -> `FET_006_OPENPBR@0.1.0` | OpenPBR surface on `outputs:mtlx:surface`, derived from the OmniPBR or OmniGlass MDL surface. |
+| `nv_core/cip_specs/asset_handler_modules/neutral_to_openpbr` | `material_neutral_to_openpbr` | `FET006_Materials.0-1-0` -> `FET006_Materials.Openpbr.0-1-0` | OpenPBR surface on `outputs:mtlx:surface`, derived from the UsdPreviewSurface preview. |
+| `nv_core/cip_specs/asset_handler_modules/neutral_to_openpbr` | `material_mdl_to_openpbr` | `FET006_Materials.MDL.0-1-0` -> `FET006_Materials.Openpbr.0-1-0` | OpenPBR surface on `outputs:mtlx:surface`, derived from the OmniPBR or OmniGlass MDL surface. |
+| `nv_core/cip_specs/asset_handler_modules/neutral_to_openpbr` | `material_neutral_to_openpbr_0_2_0` | `FET006_Materials.0-3-0` -> `FET006_Materials.Openpbr.0-2-0` | Same as `material_neutral_to_openpbr`, for the versions that leave `VM.MAT.001` to `FET009_MaterialCoverage`. |
+| `nv_core/cip_specs/asset_handler_modules/neutral_to_openpbr` | `material_mdl_to_openpbr_0_2_0` | `FET006_Materials.MDL.0-3-0` -> `FET006_Materials.Openpbr.0-2-0` | Same as `material_mdl_to_openpbr`, for the same versions. |
 
 - The adapter holds no derivation of its own. It calls `migrate_stage()` in the bundled script
   above, which is the single implementation of this migration, so running the skill by hand and
   running the adapter author the same thing. Change the script, not the adapter, to change what
   is authored.
-- Both transitions are the conformance case where an asset had no OpenPBR surface and now has
-  one. Neither is a version migration: `FET_006_OPENPBR` has only `0.1.0`. When a later version
-  exists, add another decorated function pinning the two versions rather than editing these,
-  which is what `neutral_to_physx` does for its `@0.2.0` -> `@0.3.0` path.
+- Every transition is the conformance case where an asset had no OpenPBR surface and now has
+  one. None is a version migration. Each pair of versions has its own decorated function, and a
+  later version adds another rather than editing these, which is what `neutral_to_physx` does
+  for its `FET004_Multibody.0-2-0` -> `FET004_Multibody.RobotPhysX.0-3-0` path.
 - The adapter adds; it removes nothing. The preview and MDL surfaces are separate contracts an
   asset may hold at the same time, and both survive the run.
 - A material carrying a hand-authored OpenPBR surface is left alone and logged as a conflict, so
-  the stage can still fail `FET_006_OPENPBR` after the adapter runs. Resolve those by hand.
+  the stage can still fail `FET006_Materials.Openpbr` after the adapter runs. Resolve those by hand.
 ### Running it
 
 Two paths, and they author the same thing because they call the same function.
@@ -427,7 +211,7 @@ adapter, has no implementation in this repository (`AGENTS.md`).
 ## Workflow
 
 1. Confirm the input exists and identify the exact selected feature/version from the profile TOML, validation report, or user request.
-2. Load the selected `FET_006_OPENPBR` manifest and the feature markdown before editing.
+2. Load the selected `FET006_Materials.Openpbr` manifest and the feature markdown before editing.
 3. Load requirement docs linked from the feature markdown for every reported failing requirement.
 4. Run the bundled script with `--verify` to establish the starting state. It reports the
    surface contract, the VM.PBR.002 ranges, and any texture the material names that does not

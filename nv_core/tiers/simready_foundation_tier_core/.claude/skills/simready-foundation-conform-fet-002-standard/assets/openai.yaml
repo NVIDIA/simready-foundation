@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimReady Conform CAP002_PosableBodies"
+  short_description: "Repair CAP002_PosableBodies conformance"
+  default_prompt: "Use $simready-foundation-conform-fet-002-standard to repair CAP002_PosableBodies SimReady conformance failures."

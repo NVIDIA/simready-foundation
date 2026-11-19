@@ -1,0 +1,15 @@
+{
+  "id": "FET004_Multibody.PhysX.2-0-4",
+  "display_name": "Runnable PhysX Multibody",
+  "source_feature": "FET004_Multibody.2-0-2",
+  "runnable": true,
+  "additional_requirements": [
+    "COL.001"
+  ],
+  "runtime_tests": [
+    "FET004:joint-movement"
+  ],
+  "adapters": [
+    "neutral_to_physx:collider_neutral_to_prop_physx"
+  ]
+}

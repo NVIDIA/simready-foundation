@@ -1,0 +1,11 @@
+{
+  "id": "CAP024_BaseArticulation.0-1-0",
+  "display_name": "Base Articulation",
+  "legacy_identity": {
+    "id": "FET_024_STANDARD",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "BA.001"
+  ]
+}

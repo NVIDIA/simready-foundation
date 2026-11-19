@@ -14,14 +14,14 @@
 # limitations under the License.
 
 import pytest
-from simready_benchmark_kit_suite.fet005_grasp.grasp_geometry import (
+from simready.foundation.tier_core.runtime_tests.fet005_grasp.grasp_geometry import (
     bounded_lift_height,
     contact_preloaded_close_travel,
     pad_ground_clearance_offset,
     pair_closure_reaches_contact,
     post_failure_stop_frame,
-    resolve_test_fixture_mass,
     relative_offset_error,
+    resolve_test_fixture_mass,
     smooth_motion_envelope,
     smoothstep_progress,
 )

@@ -1,0 +1,4 @@
+[edit]
+feature = "FET016_AppearanceVariant.0-1-0"
+requirements = ["AV.001", "AV.002", "AV.003", "AV.004", "AV.005", "AV.006", "AV.007", "AV.008", "AV.009", "AV.010"]
+reason = "AV.010 (variation stability) joins the asset-variation requirement set so an Appearance switch cannot change a shared prim's type or authored transform across the set's options; a variation may only swap the material binding under a stable part prim. No shipped profile selects FET016 yet and the only asset referencing it, the a02 sample, satisfies AV.010, so the stability guarantee is folded into 0-1-0 rather than forked into a new version. Assets that already conformed to the geometry-swap pattern AV.010 describes stay valid."

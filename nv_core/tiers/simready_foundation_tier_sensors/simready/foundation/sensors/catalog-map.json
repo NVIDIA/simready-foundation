@@ -1,0 +1,47 @@
+{
+  "schema": "simready-foundations2-catalog-map-v1",
+  "version_encoding": "published semantic version dots become hyphens",
+  "contracts": [
+    {
+      "legacy_id": "FET_034_ISAAC",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_034_ISAAC",
+      "kind": "feature",
+      "id": "FET034_ImuSensor.Isaac.0-1-0",
+      "runtime_tests": [
+        "simready.foundation.sensors.runtime_tests:imu_sensor_data"
+      ]
+    },
+    {
+      "legacy_id": "FET_035_RTX",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_035_RTX",
+      "kind": "feature",
+      "id": "FET035_RenderProducts.RTX.0-1-0",
+      "runtime_tests": [
+        "simready.foundation.sensors.runtime_tests:render_product_output",
+        "simready.foundation.sensors.runtime_tests:semantic_aov_output"
+      ]
+    },
+    {
+      "legacy_id": "FET_036_RTX",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_036_RTX",
+      "kind": "feature",
+      "id": "FET036_Lidar.RTX.0-1-0",
+      "runtime_tests": [
+        "simready.foundation.sensors.runtime_tests:lidar_point_cloud"
+      ]
+    },
+    {
+      "legacy_id": "FET_037_ISAAC",
+      "legacy_version": "0.1.0",
+      "legacy_page": "FET_037_ISAAC",
+      "kind": "feature",
+      "id": "FET037_JointSensor.Isaac.0-1-0",
+      "runtime_tests": [
+        "simready.foundation.sensors.runtime_tests:joint_sensor_data"
+      ]
+    }
+  ]
+}

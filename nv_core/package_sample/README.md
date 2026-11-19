@@ -238,7 +238,7 @@ They are mutually exclusive with each other and with the default flow
 
 - `--only-pre-validation --source <folder>` — pre-flight a candidate
   source folder. The headline check is
-  [AA.001 — anchored-asset-paths](../tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities/core/atomic_asset/requirements/anchored-asset-paths.md):
+  [AA.001 — anchored-asset-paths](../tiers/simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/core/atomic_asset/requirements/anchored-asset-paths.md):
   every reference in every USD has to be written as a relative path
   (e.g. `./materials/wood.mdl`), not an absolute path or a search-path
   token. Useful while iterating on a folder before you're ready to
@@ -309,7 +309,7 @@ python create_simready_package.py apple_a01 1.0.0 Apache-2.0 \
 
 Pre-validation still runs by default, and so does post-validation —
 but the resulting package will FAIL post-validation features that
-look for a BOM (e.g. `FET_032_STANDARD`). That's
+look for a BOM (e.g. `CAP032_PackagingIntrospection`). That's
 expected. If you want a clean exit code in this mode, also pass
 `--skip-post-validation`.
 

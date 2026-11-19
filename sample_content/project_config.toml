@@ -10,24 +10,15 @@ name = "sample_content"
 subconfigs = []
 subconfigs_priority = ["sample_content"]
 
+# Installed wheels provide validation, feature adapters, and Evaluate planning
+# content through package entry points. For source development only, add
+# non-empty [validate] requirements_paths/features_paths/profiles_paths.
+
 [validate]
 # Validation content is owned by the tiers.
-requirements_paths = [
-    "nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/capabilities",
-    "nv_core/tiers/simready_foundation_tier_sensors/simready/foundation/sensors/capabilities",
-]
-features_paths = [
-    "nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/features",
-    "nv_core/tiers/simready_foundation_tier_sensors/simready/foundation/sensors/features",
-]
-profiles_paths = [
-    "nv_core/tiers/simready_foundation_tier_core/simready/foundation/tier_core/profiles",
-    "nv_core/tiers/simready_foundation_tier_sensors/simready/foundation/sensors/profiles",
-]
-
-[cip]
-adapter_modules_path = "nv_core/cip_specs/asset_handler_modules"
-spec_root = "nv_core/sr_specs/docs"
+requirements_paths = []
+features_paths = []
+profiles_paths = []
 
 [wrapp]
 install_from_server = "omniverse://example.com/simready_content/assets/.wrapp_publish"

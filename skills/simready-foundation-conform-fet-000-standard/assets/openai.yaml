@@ -1,6 +1,4 @@
-# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
-# SPDX-License-Identifier: Apache-2.0
 interface:
-  display_name: "SimReady Conform FET_000_STANDARD"
-  short_description: "Repair FET_000_STANDARD@0.1.0 Core validation failures"
-  default_prompt: "Use $simready-foundation-conform-fet-000-standard to repair FET_000_STANDARD@0.1.0 SimReady Core validation failures on a USD asset."
+  display_name: "SimReady Conform CAP000_Core"
+  short_description: "Repair CAP000_Core Core validation failures (default 0-2-0)"
+  default_prompt: "Use $simready-foundation-conform-fet-000-standard to repair CAP000_Core SimReady Core validation failures on a USD asset."

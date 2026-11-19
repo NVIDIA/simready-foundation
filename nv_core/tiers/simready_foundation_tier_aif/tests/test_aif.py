@@ -22,7 +22,7 @@ requirement set it must pass. See ./README.md for the human-readable
 expectation matrix.
 
 How the tests work:
-  1. tests/conftest.py imports this tier's capabilities module at session
+  1. tests/conftest.py imports this tier's rules_and_reqs module at session
      start. That import triggers every validator module's @register_rule /
      @register_requirements decorators, which populates RequirementsRegistry
      with every checker class registered under its spec code (AM.002 ->

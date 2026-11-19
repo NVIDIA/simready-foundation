@@ -1,0 +1,24 @@
+[
+    {
+        "id": "simready-foundation-conform-cap-103-isaac-positive-trigger",
+        "question": "Repair OPT.002 on this Isaac USD asset without changing its appearance or collision geometry.",
+        "expected_skill": "simready-foundation-conform-cap-103-isaac",
+        "ground_truth": "The agent should activate only the CAP103_VisualMeshMerge.Isaac visual-mesh workflow.",
+        "expected_behavior": [
+            "Load the CAP103 manifest, OPT.002 requirement, validator, and visual-mesh adapter.",
+            "Stage output, merge eligible per-body visual meshes, and preserve materials and property specs.",
+            "Save, reopen, and validate CAP103_VisualMeshMerge.Isaac without collapsing rigid bodies."
+        ]
+    },
+    {
+        "id": "simready-foundation-conform-cap-103-isaac-blocked-output",
+        "question": "Make this asset pass CAP103_VisualMeshMerge.Isaac, but usd-optimize produced two possible merged meshes.",
+        "expected_skill": "simready-foundation-conform-cap-103-isaac",
+        "ground_truth": "The workflow must not guess which mesh is the optimizer output.",
+        "expected_behavior": [
+            "Preserve the usd-optimize diagnostic.",
+            "Do not save a partially merged result.",
+            "Return a blocked status naming the ambiguous output."
+        ]
+    }
+]

@@ -1,0 +1,18 @@
+{
+  "id": "CAP000_Core.Newton.0-1-0",
+  "display_name": "Core (Newton)",
+  "legacy_identity": {
+    "id": "FET_000_NEWTON",
+    "version": "0.1.0"
+  },
+  "requirements": [
+    "RV.004",
+    "RV.005",
+    "RV.006",
+    "RV.010",
+    "RV.011"
+  ],
+  "dependencies": [
+    "CAP000_Core.0-1-0"
+  ]
+}

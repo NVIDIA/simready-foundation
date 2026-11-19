@@ -1,0 +1,13 @@
+# Isaac optimization checks, independent of full prop conformance.
+[Asset-Optimization]
+"1.0.0" = {capabilities = [
+    {selector = "CAP102_RigidBodyCollapse.Isaac.0-1-0"},
+    {selector = "CAP103_VisualMeshMerge.Isaac.0-1-0"},
+    {selector = "CAP104_RenderCollisionSeparation.Isaac.0-1-0"},
+]}
+"1.1.0" = {capabilities = [
+    {selector = "CAP102_RigidBodyCollapse.Isaac.0-1-0"},
+    {selector = "CAP103_VisualMeshMerge.Isaac.0-1-0"},
+    {selector = "CAP104_RenderCollisionSeparation.Isaac.0-1-0"},
+    {selector = "CAP105_MaterialXRemoval.Isaac.0-1-0"},
+]}
