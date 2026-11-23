@@ -955,9 +955,8 @@ source .venv/bin/activate</p>
 </section>
 <section id="install-dependencies">
 <span id="2-install-dependencies"></span><h2>2. Install dependencies<a class="headerlink" href="#install-dependencies" title="Link to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">simready-validate</span></code> package is hosted on the internal NVIDIA Artifactory
-registry:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<p>Install the validator and Core tier from public PyPI:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>simready-validate<span class="w"> </span>simready-foundation-tier-core
 </pre></div>
 </div>
 <p>This installs:</p>
@@ -965,8 +964,8 @@ registry:</p>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">simready-validate</span></code></strong> — the CLI and <code class="docutils literal notranslate"><span class="pre">simready.validate</span></code> Python API
 (pulls in <code class="docutils literal notranslate"><span class="pre">usd-validation-nvidia</span></code>, <code class="docutils literal notranslate"><span class="pre">usd-profiles-nvidia</span></code>, and <code class="docutils literal notranslate"><span class="pre">usd-core</span></code> as
 transitive dependencies).</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">physx-usd-schemas</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">MaterialX</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">pillow</span></code></strong>, and <strong><code class="docutils literal notranslate"><span class="pre">numpy</span></code></strong> —
-needed by the tier validators when you run them from this source tree.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">simready-foundation-tier-core</span></code></strong> — the profiles, features, requirements,
+and rules, with their validator dependencies.</p></li>
 </ul>
 <p>Verify the install succeeded:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-validate<span class="w"> </span>--help

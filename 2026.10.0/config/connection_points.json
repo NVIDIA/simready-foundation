@@ -21,81 +21,6 @@
                 "examples": []
             },
             {
-                "code": "CP.011",
-                "version": null,
-                "name": "connection-point-base-namespace",
-                "compatibility": "other",
-                "tags": [
-                    "unknown"
-                ],
-                "validator": "cp-011",
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/aif/connection_points/requirements/connection-point-base-namespace.html",
-                    "internal_path": "rules_and_reqs/aif/connection_points/requirements/connection-point-base-namespace.md"
-                },
-                "message": "Every connection point must carry all five base namespace properties, which together state the semantic identity of the connection.",
-                "examples": []
-            },
-            {
-                "code": "CP.001",
-                "version": null,
-                "name": "connectionpoints-scope-structure",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "cp-001",
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/aif/connection_points/requirements/connectionpoints-scope-structure.html",
-                    "internal_path": "rules_and_reqs/aif/connection_points/requirements/connectionpoints-scope-structure.md"
-                },
-                "message": "Connection point prims must be organized under a `ConnectionPoints` Scope prim that is a direct child of the default prim.",
-                "examples": [
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Xform \"Generic_CRAH\"\n{\n    def Scope \"ConnectionPoints\"\n    {\n        def Mesh \"acme_liq_supply_main\"\n        {\n        }\n\n        def Mesh \"acme_liq_return_main\"\n        {\n        }\n\n        def Mesh \"acme_electrical_nominal_voltage_main\"\n        {\n        }\n    }\n}"
-                        },
-                        "name": "the scope is a direct child of the default prim",
-                        "result": "success"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Xform \"Generic_CRAH\"\n{\n    def Xform \"Geometry\"\n    {\n        def Scope \"ConnectionPoints\"\n        {\n            def Mesh \"acme_liq_supply_main\"\n            {\n            }\n        }\n    }\n}"
-                        },
-                        "name": "the scope sits under a child of the default prim",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Xform \"Generic_CRAH\"\n{\n    def Xform \"ConnectionPoints\"\n    {\n        def Mesh \"acme_liq_supply_main\"\n        {\n        }\n    }\n}"
-                        },
-                        "name": "`ConnectionPoints` is an Xform, not a Scope",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Xform \"Generic_CRAH\"\n{\n    def Scope \"ConnectionPoints\"\n    {\n    }\n}"
-                        },
-                        "name": "the scope is empty",
-                        "result": "failure"
-                    },
-                    {
-                        "snippet": {
-                            "language": "usd",
-                            "content": "def Xform \"Generic_CRAH\"\n{\n    def Scope \"Geometry\"\n    {\n    }\n}"
-                        },
-                        "name": "there is no `ConnectionPoints` prim",
-                        "result": "failure"
-                    }
-                ]
-            },
-            {
                 "code": "CP.006",
                 "version": null,
                 "name": "connection-point-alignment",
@@ -120,40 +45,6 @@
                         "result": "success"
                     }
                 ]
-            },
-            {
-                "code": "CP.010",
-                "version": null,
-                "name": "connection-point-prim-structure",
-                "compatibility": "other",
-                "tags": [
-                    "unknown"
-                ],
-                "validator": "cp-010",
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/aif/connection_points/requirements/connection-point-prim-structure.html",
-                    "internal_path": "rules_and_reqs/aif/connection_points/requirements/connection-point-prim-structure.md"
-                },
-                "message": "Connection points must be Xform prims under the `ConnectionPoints` scope with `purpose = \"guide\"`, each carrying at least `simready:connectionPoint:domain` and `simready:connectionPoint:direction`.",
-                "examples": []
-            },
-            {
-                "code": "CP.004",
-                "version": null,
-                "name": "connection-point-naming-convention",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "cp-004",
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/aif/connection_points/requirements/connection-point-naming-convention.html",
-                    "internal_path": "rules_and_reqs/aif/connection_points/requirements/connection-point-naming-convention.md"
-                },
-                "message": "All prims under the `ConnectionPoints` scope must follow the `<vendor>_<type>_<suffix>` naming pattern using a valid type prefix from the AIF connection point type table.",
-                "examples": []
             },
             {
                 "code": "CP.012",
@@ -222,23 +113,6 @@
                 ]
             },
             {
-                "code": "CP.005",
-                "version": null,
-                "name": "connection-points-composition",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "cp-005",
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/aif/connection_points/requirements/connection-points-composition.html",
-                    "internal_path": "rules_and_reqs/aif/connection_points/requirements/connection-points-composition.md"
-                },
-                "message": "Connection points must be saved as a separate `<AssetName>_ConnectionPoints.usd` file and composed into the main stage as a sublayer.",
-                "examples": []
-            },
-            {
                 "code": "CP.003",
                 "version": null,
                 "name": "connection-point-purpose-guide",
@@ -253,6 +127,132 @@
                     "internal_path": "rules_and_reqs/aif/connection_points/requirements/connection-point-purpose-guide.md"
                 },
                 "message": "All connection point prims must have their `purpose` attribute set to `\"guide\"`. The rule carries\nacross both vocabularies: under v0.2.0 CP.010 applies it to connection point Xforms.",
+                "examples": []
+            },
+            {
+                "code": "CP.011",
+                "version": null,
+                "name": "connection-point-base-namespace",
+                "compatibility": "other",
+                "tags": [
+                    "unknown"
+                ],
+                "validator": "cp-011",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/aif/connection_points/requirements/connection-point-base-namespace.html",
+                    "internal_path": "rules_and_reqs/aif/connection_points/requirements/connection-point-base-namespace.md"
+                },
+                "message": "Every connection point must carry all five base namespace properties, which together state the semantic identity of the connection.",
+                "examples": []
+            },
+            {
+                "code": "CP.004",
+                "version": null,
+                "name": "connection-point-naming-convention",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "cp-004",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/aif/connection_points/requirements/connection-point-naming-convention.html",
+                    "internal_path": "rules_and_reqs/aif/connection_points/requirements/connection-point-naming-convention.md"
+                },
+                "message": "All prims under the `ConnectionPoints` scope must follow the `<vendor>_<type>_<suffix>` naming pattern using a valid type prefix from the AIF connection point type table.",
+                "examples": []
+            },
+            {
+                "code": "CP.010",
+                "version": null,
+                "name": "connection-point-prim-structure",
+                "compatibility": "other",
+                "tags": [
+                    "unknown"
+                ],
+                "validator": "cp-010",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/aif/connection_points/requirements/connection-point-prim-structure.html",
+                    "internal_path": "rules_and_reqs/aif/connection_points/requirements/connection-point-prim-structure.md"
+                },
+                "message": "Connection points must be Xform prims under the `ConnectionPoints` scope with `purpose = \"guide\"`, each carrying at least `simready:connectionPoint:domain` and `simready:connectionPoint:direction`.",
+                "examples": []
+            },
+            {
+                "code": "CP.001",
+                "version": null,
+                "name": "connectionpoints-scope-structure",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "cp-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/aif/connection_points/requirements/connectionpoints-scope-structure.html",
+                    "internal_path": "rules_and_reqs/aif/connection_points/requirements/connectionpoints-scope-structure.md"
+                },
+                "message": "Connection point prims must be organized under a `ConnectionPoints` Scope prim that is a direct child of the default prim.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Generic_CRAH\"\n{\n    def Scope \"ConnectionPoints\"\n    {\n        def Mesh \"acme_liq_supply_main\"\n        {\n        }\n\n        def Mesh \"acme_liq_return_main\"\n        {\n        }\n\n        def Mesh \"acme_electrical_nominal_voltage_main\"\n        {\n        }\n    }\n}"
+                        },
+                        "name": "the scope is a direct child of the default prim",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Generic_CRAH\"\n{\n    def Xform \"Geometry\"\n    {\n        def Scope \"ConnectionPoints\"\n        {\n            def Mesh \"acme_liq_supply_main\"\n            {\n            }\n        }\n    }\n}"
+                        },
+                        "name": "the scope sits under a child of the default prim",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Generic_CRAH\"\n{\n    def Xform \"ConnectionPoints\"\n    {\n        def Mesh \"acme_liq_supply_main\"\n        {\n        }\n    }\n}"
+                        },
+                        "name": "`ConnectionPoints` is an Xform, not a Scope",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Generic_CRAH\"\n{\n    def Scope \"ConnectionPoints\"\n    {\n    }\n}"
+                        },
+                        "name": "the scope is empty",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "def Xform \"Generic_CRAH\"\n{\n    def Scope \"Geometry\"\n    {\n    }\n}"
+                        },
+                        "name": "there is no `ConnectionPoints` prim",
+                        "result": "failure"
+                    }
+                ]
+            },
+            {
+                "code": "CP.005",
+                "version": null,
+                "name": "connection-points-composition",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "cp-005",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/aif/connection_points/requirements/connection-points-composition.html",
+                    "internal_path": "rules_and_reqs/aif/connection_points/requirements/connection-points-composition.md"
+                },
+                "message": "Connection points must be saved as a separate `<AssetName>_ConnectionPoints.usd` file and composed into the main stage as a sublayer.",
                 "examples": []
             }
         ],

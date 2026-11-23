@@ -34,19 +34,18 @@ source .venv/bin/activate
 
 ## 2. Install dependencies
 
-The `simready-validate` package is hosted on the internal NVIDIA Artifactory
-registry:
+Install the validator and Core tier from public PyPI:
 
 ```bash
-pip install -r requirements.txt
+pip install simready-validate simready-foundation-tier-core
 ```
 
 This installs:
 - **`simready-validate`** — the CLI and `simready.validate` Python API
   (pulls in `usd-validation-nvidia`, `usd-profiles-nvidia`, and `usd-core` as
   transitive dependencies).
-- **`physx-usd-schemas`**, **`MaterialX`**, **`pillow`**, and **`numpy`** —
-  needed by the tier validators when you run them from this source tree.
+- **`simready-foundation-tier-core`** — the profiles, features, requirements,
+  and rules, with their validator dependencies.
 
 Verify the install succeeded:
 

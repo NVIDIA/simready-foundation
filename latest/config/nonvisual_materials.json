@@ -4,6 +4,40 @@
         "version": "1.0.0",
         "requirements": [
             {
+                "code": "NVM.006",
+                "version": null,
+                "name": "material-time",
+                "compatibility": "rtx",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "nvm-006",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-time.html",
+                    "internal_path": "rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-time.md"
+                },
+                "message": "Properties must not be time-varying",
+                "examples": []
+            },
+            {
+                "code": "NVM.003",
+                "version": null,
+                "name": "material-coating",
+                "compatibility": "rtx",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "nvm-003",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-coating.html",
+                    "internal_path": "rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-coating.md"
+                },
+                "message": "Materials must specify surface coating",
+                "examples": []
+            },
+            {
                 "code": "NVM.005",
                 "version": null,
                 "name": "material-consistency",
@@ -18,23 +52,6 @@
                     "internal_path": "rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-consistency.md"
                 },
                 "message": "Properties must be consistent with visual materials",
-                "examples": []
-            },
-            {
-                "code": "NVM.004",
-                "version": null,
-                "name": "material-binding",
-                "compatibility": "rtx",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-binding.html",
-                    "internal_path": "rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-binding.md"
-                },
-                "message": "Attributes must be on bound materials",
                 "examples": []
             },
             {
@@ -55,23 +72,6 @@
                 "examples": []
             },
             {
-                "code": "NVM.006",
-                "version": null,
-                "name": "material-time",
-                "compatibility": "rtx",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": "nvm-006",
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-time.html",
-                    "internal_path": "rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-time.md"
-                },
-                "message": "Properties must not be time-varying",
-                "examples": []
-            },
-            {
                 "code": "NVM.001",
                 "version": null,
                 "name": "material-attributes",
@@ -89,20 +89,20 @@
                 "examples": []
             },
             {
-                "code": "NVM.003",
+                "code": "NVM.004",
                 "version": null,
-                "name": "material-coating",
+                "name": "material-binding",
                 "compatibility": "rtx",
                 "tags": [
                     "correctness"
                 ],
-                "validator": "nvm-003",
+                "validator": null,
                 "parameters": [],
                 "metadata": {
-                    "path": "rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-coating.html",
-                    "internal_path": "rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-coating.md"
+                    "path": "rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-binding.html",
+                    "internal_path": "rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-binding.md"
                 },
-                "message": "Materials must specify surface coating",
+                "message": "Attributes must be on bound materials",
                 "examples": []
             }
         ],

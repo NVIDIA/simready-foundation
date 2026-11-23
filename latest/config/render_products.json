@@ -4,23 +4,6 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "RP.004",
-                "version": null,
-                "name": "semantic-aov-compression",
-                "compatibility": null,
-                "tags": [
-                    "correctness"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/rendering/render_products/requirements/semantic-aov-compression.html",
-                    "internal_path": "rules_and_reqs/rendering/render_products/requirements/semantic-aov-compression.md"
-                },
-                "message": "RenderVar prims whose `sourceName` starts with \"semantic\" must use BLOSC compression.",
-                "examples": []
-            },
-            {
                 "code": "RP.005",
                 "version": null,
                 "name": "compression-type-valid",
@@ -38,9 +21,9 @@
                 "examples": []
             },
             {
-                "code": "RP.001",
+                "code": "RP.002",
                 "version": null,
-                "name": "render-product-camera",
+                "name": "render-product-ordered-vars",
                 "compatibility": null,
                 "tags": [
                     "essential"
@@ -48,10 +31,10 @@
                 "validator": null,
                 "parameters": [],
                 "metadata": {
-                    "path": "rules_and_reqs/rendering/render_products/requirements/render-product-camera.html",
-                    "internal_path": "rules_and_reqs/rendering/render_products/requirements/render-product-camera.md"
+                    "path": "rules_and_reqs/rendering/render_products/requirements/render-product-ordered-vars.html",
+                    "internal_path": "rules_and_reqs/rendering/render_products/requirements/render-product-ordered-vars.md"
                 },
-                "message": "A RenderProduct prim must have a `camera` relationship targeting a valid prim.",
+                "message": "A RenderProduct prim must have an `orderedVars` relationship containing at least one valid UsdRender.Var prim.",
                 "examples": []
             },
             {
@@ -72,6 +55,40 @@
                 "examples": []
             },
             {
+                "code": "RP.004",
+                "version": null,
+                "name": "semantic-aov-compression",
+                "compatibility": null,
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/rendering/render_products/requirements/semantic-aov-compression.html",
+                    "internal_path": "rules_and_reqs/rendering/render_products/requirements/semantic-aov-compression.md"
+                },
+                "message": "RenderVar prims whose `sourceName` starts with \"semantic\" must use BLOSC compression.",
+                "examples": []
+            },
+            {
+                "code": "RP.001",
+                "version": null,
+                "name": "render-product-camera",
+                "compatibility": null,
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/rendering/render_products/requirements/render-product-camera.html",
+                    "internal_path": "rules_and_reqs/rendering/render_products/requirements/render-product-camera.md"
+                },
+                "message": "A RenderProduct prim must have a `camera` relationship targeting a valid prim.",
+                "examples": []
+            },
+            {
                 "code": "RP.006",
                 "version": null,
                 "name": "generic-model-output-compression",
@@ -86,23 +103,6 @@
                     "internal_path": "rules_and_reqs/rendering/render_products/requirements/generic-model-output-compression.md"
                 },
                 "message": "`RenderVar` prims with `sourceName = \"GenericModelOutput\"` should use BLOSC compression (`srtx:compression:type = \"blosc\"`).",
-                "examples": []
-            },
-            {
-                "code": "RP.002",
-                "version": null,
-                "name": "render-product-ordered-vars",
-                "compatibility": null,
-                "tags": [
-                    "essential"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/rendering/render_products/requirements/render-product-ordered-vars.html",
-                    "internal_path": "rules_and_reqs/rendering/render_products/requirements/render-product-ordered-vars.md"
-                },
-                "message": "A RenderProduct prim must have an `orderedVars` relationship containing at least one valid UsdRender.Var prim.",
                 "examples": []
             }
         ],

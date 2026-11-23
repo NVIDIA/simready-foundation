@@ -973,9 +973,8 @@ source .venv/bin/activate</p>
 </section>
 <section id="b-wrapp-required-for-full-bom-packaging-only">
 <span id="2b-wrapp-required-for-full-bom-packaging-only"></span><h3>2b. WRAPP (required for full BOM packaging only)<a class="headerlink" href="#b-wrapp-required-for-full-bom-packaging-only" title="Link to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">ovpackage</span></code> is not on <code class="docutils literal notranslate"><span class="pre">pypi.nvidia.com</span></code>. Install it separately from
-the NVIDIA internal index:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>ovpackage<span class="w"> </span>--extra-index-url<span class="w"> </span>https://artifactory.nvidia.com/artifactory/api/pypi/ct-omniverse-pypi-local/simple
+<p>Install <code class="docutils literal notranslate"><span class="pre">ovpackage</span></code> separately from your configured package source:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>ovpackage
 </pre></div>
 </div>
 <p>Steps 3–4 work without WRAPP.</p>

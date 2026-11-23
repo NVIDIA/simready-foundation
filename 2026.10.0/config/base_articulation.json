@@ -4,20 +4,20 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "BA.001",
+                "code": "MUJOCO.BA.001",
                 "version": null,
-                "name": "has-articulation-root",
-                "compatibility": "open-usd",
+                "name": "mujoco-standard-articulation-root",
+                "compatibility": "other",
                 "tags": [
                     "essential"
                 ],
-                "validator": null,
+                "validator": "CheckPrim",
                 "parameters": [],
                 "metadata": {
-                    "path": "rules_and_reqs/physics_bodies/base_articulation/requirements/has-articulation-root.html",
-                    "internal_path": "rules_and_reqs/physics_bodies/base_articulation/requirements/has-articulation-root.md"
+                    "path": "rules_and_reqs/physics_bodies/base_articulation/requirements/mujoco-standard-articulation-root.html",
+                    "internal_path": "rules_and_reqs/physics_bodies/base_articulation/requirements/mujoco-standard-articulation-root.md"
                 },
-                "message": "An articulated USD stage must contain exactly one prim with the\nUsdPhysicsArticulationRootAPI applied.",
+                "message": "MuJoCo articulations must use standard `UsdPhysics.ArticulationRootAPI` and must not author unsupported MuJoCo-specific articulation-root schemas.",
                 "examples": []
             },
             {
@@ -55,20 +55,20 @@
                 "examples": []
             },
             {
-                "code": "MUJOCO.BA.001",
+                "code": "BA.001",
                 "version": null,
-                "name": "mujoco-standard-articulation-root",
-                "compatibility": "other",
+                "name": "has-articulation-root",
+                "compatibility": "open-usd",
                 "tags": [
                     "essential"
                 ],
-                "validator": "CheckPrim",
+                "validator": null,
                 "parameters": [],
                 "metadata": {
-                    "path": "rules_and_reqs/physics_bodies/base_articulation/requirements/mujoco-standard-articulation-root.html",
-                    "internal_path": "rules_and_reqs/physics_bodies/base_articulation/requirements/mujoco-standard-articulation-root.md"
+                    "path": "rules_and_reqs/physics_bodies/base_articulation/requirements/has-articulation-root.html",
+                    "internal_path": "rules_and_reqs/physics_bodies/base_articulation/requirements/has-articulation-root.md"
                 },
-                "message": "MuJoCo articulations must use standard `UsdPhysics.ArticulationRootAPI` and must not author unsupported MuJoCo-specific articulation-root schemas.",
+                "message": "An articulated USD stage must contain exactly one prim with the\nUsdPhysicsArticulationRootAPI applied.",
                 "examples": []
             }
         ],

@@ -4,9 +4,9 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "SPL.005",
+                "code": "SPL.004",
                 "version": null,
-                "name": "splat-has-opacities",
+                "name": "splat-has-orientations",
                 "compatibility": "open-usd",
                 "tags": [
                     "correctness"
@@ -14,10 +14,10 @@
                 "validator": "`GaussianSplatCapabilityChecker` (validation.py)",
                 "parameters": [],
                 "metadata": {
-                    "path": "rules_and_reqs/visualization/gaussian_splat/requirements/splat-has-opacities.html",
-                    "internal_path": "rules_and_reqs/visualization/gaussian_splat/requirements/splat-has-opacities.md"
+                    "path": "rules_and_reqs/visualization/gaussian_splat/requirements/splat-has-orientations.html",
+                    "internal_path": "rules_and_reqs/visualization/gaussian_splat/requirements/splat-has-orientations.md"
                 },
-                "message": "Each `ParticleField3DGaussianSplat` prim must author `opacities`, one per\nGaussian.",
+                "message": "Each `ParticleField3DGaussianSplat` prim must author `orientations`, one per\nGaussian.",
                 "examples": []
             },
             {
@@ -38,9 +38,9 @@
                 "examples": []
             },
             {
-                "code": "SPL.001",
+                "code": "SPL.003",
                 "version": null,
-                "name": "splat-prim-type",
+                "name": "splat-has-scales",
                 "compatibility": "open-usd",
                 "tags": [
                     "correctness"
@@ -48,16 +48,16 @@
                 "validator": "`GaussianSplatCapabilityChecker` (validation.py)",
                 "parameters": [],
                 "metadata": {
-                    "path": "rules_and_reqs/visualization/gaussian_splat/requirements/splat-prim-type.html",
-                    "internal_path": "rules_and_reqs/visualization/gaussian_splat/requirements/splat-prim-type.md"
+                    "path": "rules_and_reqs/visualization/gaussian_splat/requirements/splat-has-scales.html",
+                    "internal_path": "rules_and_reqs/visualization/gaussian_splat/requirements/splat-has-scales.md"
                 },
-                "message": "The asset's visual representation must be a `ParticleField3DGaussianSplat` prim.",
+                "message": "Each `ParticleField3DGaussianSplat` prim must author `scales`, one per Gaussian.",
                 "examples": []
             },
             {
-                "code": "SPL.004",
+                "code": "SPL.005",
                 "version": null,
-                "name": "splat-has-orientations",
+                "name": "splat-has-opacities",
                 "compatibility": "open-usd",
                 "tags": [
                     "correctness"
@@ -65,10 +65,10 @@
                 "validator": "`GaussianSplatCapabilityChecker` (validation.py)",
                 "parameters": [],
                 "metadata": {
-                    "path": "rules_and_reqs/visualization/gaussian_splat/requirements/splat-has-orientations.html",
-                    "internal_path": "rules_and_reqs/visualization/gaussian_splat/requirements/splat-has-orientations.md"
+                    "path": "rules_and_reqs/visualization/gaussian_splat/requirements/splat-has-opacities.html",
+                    "internal_path": "rules_and_reqs/visualization/gaussian_splat/requirements/splat-has-opacities.md"
                 },
-                "message": "Each `ParticleField3DGaussianSplat` prim must author `orientations`, one per\nGaussian.",
+                "message": "Each `ParticleField3DGaussianSplat` prim must author `opacities`, one per\nGaussian.",
                 "examples": []
             },
             {
@@ -89,9 +89,9 @@
                 "examples": []
             },
             {
-                "code": "SPL.003",
+                "code": "SPL.001",
                 "version": null,
-                "name": "splat-has-scales",
+                "name": "splat-prim-type",
                 "compatibility": "open-usd",
                 "tags": [
                     "correctness"
@@ -99,10 +99,10 @@
                 "validator": "`GaussianSplatCapabilityChecker` (validation.py)",
                 "parameters": [],
                 "metadata": {
-                    "path": "rules_and_reqs/visualization/gaussian_splat/requirements/splat-has-scales.html",
-                    "internal_path": "rules_and_reqs/visualization/gaussian_splat/requirements/splat-has-scales.md"
+                    "path": "rules_and_reqs/visualization/gaussian_splat/requirements/splat-prim-type.html",
+                    "internal_path": "rules_and_reqs/visualization/gaussian_splat/requirements/splat-prim-type.md"
                 },
-                "message": "Each `ParticleField3DGaussianSplat` prim must author `scales`, one per Gaussian.",
+                "message": "The asset's visual representation must be a `ParticleField3DGaussianSplat` prim.",
                 "examples": []
             }
         ],

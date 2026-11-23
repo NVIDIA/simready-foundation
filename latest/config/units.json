@@ -4,57 +4,6 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "UN.004",
-                "version": null,
-                "name": "corrective-transforms",
-                "compatibility": "core-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/core/units/requirements/corrective-transforms.html",
-                    "internal_path": "rules_and_reqs/core/units/requirements/corrective-transforms.md"
-                },
-                "message": "Must apply corrective transforms for different units",
-                "examples": []
-            },
-            {
-                "code": "UN.002",
-                "version": null,
-                "name": "meters-per-unit",
-                "compatibility": "core-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "un-002",
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/core/units/requirements/meters-per-unit.html",
-                    "internal_path": "rules_and_reqs/core/units/requirements/meters-per-unit.md"
-                },
-                "message": "Stage must specify metersPerUnit to define the linear unit scale",
-                "examples": []
-            },
-            {
-                "code": "UN.005",
-                "version": null,
-                "name": "timecodes-per-second",
-                "compatibility": "core-usd",
-                "tags": [
-                    "correctness"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/core/units/requirements/timecodes-per-second.html",
-                    "internal_path": "rules_and_reqs/core/units/requirements/timecodes-per-second.md"
-                },
-                "message": "Stage must specify timeCodesPerSecond, if timesamples are present in the stage.",
-                "examples": []
-            },
-            {
                 "code": "UN.001",
                 "version": null,
                 "name": "upaxis",
@@ -89,20 +38,37 @@
                 "examples": []
             },
             {
-                "code": "UN.006",
+                "code": "UN.002",
                 "version": null,
-                "name": "upaxis-z",
+                "name": "meters-per-unit",
                 "compatibility": "core-usd",
                 "tags": [
                     "essential"
                 ],
-                "validator": "un-006",
+                "validator": "un-002",
                 "parameters": [],
                 "metadata": {
-                    "path": "rules_and_reqs/core/units/requirements/upaxis-z.html",
-                    "internal_path": "rules_and_reqs/core/units/requirements/upaxis-z.md"
+                    "path": "rules_and_reqs/core/units/requirements/meters-per-unit.html",
+                    "internal_path": "rules_and_reqs/core/units/requirements/meters-per-unit.md"
                 },
-                "message": "Stage must specify upAxis = \"Z\" to define the orientation of the stage",
+                "message": "Stage must specify metersPerUnit to define the linear unit scale",
+                "examples": []
+            },
+            {
+                "code": "UN.004",
+                "version": null,
+                "name": "corrective-transforms",
+                "compatibility": "core-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/units/requirements/corrective-transforms.html",
+                    "internal_path": "rules_and_reqs/core/units/requirements/corrective-transforms.md"
+                },
+                "message": "Must apply corrective transforms for different units",
                 "examples": []
             },
             {
@@ -120,6 +86,40 @@
                     "internal_path": "rules_and_reqs/core/units/requirements/meters-per-unit-1.md"
                 },
                 "message": "Stage must specify metersPerUnit = 1.0 to define the linear unit scale",
+                "examples": []
+            },
+            {
+                "code": "UN.005",
+                "version": null,
+                "name": "timecodes-per-second",
+                "compatibility": "core-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/units/requirements/timecodes-per-second.html",
+                    "internal_path": "rules_and_reqs/core/units/requirements/timecodes-per-second.md"
+                },
+                "message": "Stage must specify timeCodesPerSecond, if timesamples are present in the stage.",
+                "examples": []
+            },
+            {
+                "code": "UN.006",
+                "version": null,
+                "name": "upaxis-z",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "un-006",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/units/requirements/upaxis-z.html",
+                    "internal_path": "rules_and_reqs/core/units/requirements/upaxis-z.md"
+                },
+                "message": "Stage must specify upAxis = \"Z\" to define the orientation of the stage",
                 "examples": []
             }
         ],

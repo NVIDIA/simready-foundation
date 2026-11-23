@@ -167,7 +167,7 @@ profile authoring convenience and never reach adapter dispatch.
 
 ## SimReady Explorer implementation map
 
-The companion checkout at `C:\dev\simready-explorer` already contains a
+The companion `simready-explorer` repository contains a
 partial Foundations 2 implementation. The remaining integration should be
 made in these validator surfaces:
 

@@ -53,11 +53,10 @@ simready-package --help
 
 ### 2b. WRAPP (required for full BOM packaging only)
 
-`ovpackage` is not on `pypi.nvidia.com`. Install it separately from
-the NVIDIA internal index:
+Install `ovpackage` separately from your configured package source:
 
 ```bash
-pip install ovpackage --extra-index-url https://artifactory.nvidia.com/artifactory/api/pypi/ct-omniverse-pypi-local/simple
+pip install ovpackage
 ```
 
 Steps 3–4 work without WRAPP.

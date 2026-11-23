@@ -4,26 +4,9 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "OPT.001",
+                "code": "OPT.004",
                 "version": null,
-                "name": "fixed-joint-no-mergeable-body-pair",
-                "compatibility": "open-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/isaac_sim/optimizations/requirements/fixed-joint-no-mergeable-body-pair.html",
-                    "internal_path": "rules_and_reqs/isaac_sim/optimizations/requirements/fixed-joint-no-mergeable-body-pair.md"
-                },
-                "message": "The asset must contain no two dynamic rigid bodies joined by an unbreakable fixed joint, unless one of them carries `PhysxContactReportAPI`, or contains an `IsaacContactSensor`, `IsaacImuSensor`, `IsaacLightBeamSensor` or `IsaacRaycastSensor` prim, or a prim carrying `IsaacRtxLidarSensorAPI` or `IsaacRtxRadarSensorAPI`.",
-                "examples": []
-            },
-            {
-                "code": "OPT.003",
-                "version": null,
-                "name": "render-only-no-inactive-collision-schemas",
+                "name": "material-no-materialx-render-context",
                 "compatibility": "open-usd",
                 "tags": [
                     "performance"
@@ -31,10 +14,10 @@
                 "validator": null,
                 "parameters": [],
                 "metadata": {
-                    "path": "rules_and_reqs/isaac_sim/optimizations/requirements/render-only-no-inactive-collision-schemas.html",
-                    "internal_path": "rules_and_reqs/isaac_sim/optimizations/requirements/render-only-no-inactive-collision-schemas.md"
+                    "path": "rules_and_reqs/isaac_sim/optimizations/requirements/material-no-materialx-render-context.html",
+                    "internal_path": "rules_and_reqs/isaac_sim/optimizations/requirements/material-no-materialx-render-context.md"
                 },
-                "message": "Renderable prims with no active collision shape must not retain collision API schemas.",
+                "message": "Materials must have no connected MaterialX render-context outputs.",
                 "examples": []
             },
             {
@@ -55,9 +38,9 @@
                 "examples": []
             },
             {
-                "code": "OPT.004",
+                "code": "OPT.003",
                 "version": null,
-                "name": "material-no-materialx-render-context",
+                "name": "render-only-no-inactive-collision-schemas",
                 "compatibility": "open-usd",
                 "tags": [
                     "performance"
@@ -65,10 +48,27 @@
                 "validator": null,
                 "parameters": [],
                 "metadata": {
-                    "path": "rules_and_reqs/isaac_sim/optimizations/requirements/material-no-materialx-render-context.html",
-                    "internal_path": "rules_and_reqs/isaac_sim/optimizations/requirements/material-no-materialx-render-context.md"
+                    "path": "rules_and_reqs/isaac_sim/optimizations/requirements/render-only-no-inactive-collision-schemas.html",
+                    "internal_path": "rules_and_reqs/isaac_sim/optimizations/requirements/render-only-no-inactive-collision-schemas.md"
                 },
-                "message": "Materials must have no connected MaterialX render-context outputs.",
+                "message": "Renderable prims with no active collision shape must not retain collision API schemas.",
+                "examples": []
+            },
+            {
+                "code": "OPT.001",
+                "version": null,
+                "name": "fixed-joint-no-mergeable-body-pair",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/isaac_sim/optimizations/requirements/fixed-joint-no-mergeable-body-pair.html",
+                    "internal_path": "rules_and_reqs/isaac_sim/optimizations/requirements/fixed-joint-no-mergeable-body-pair.md"
+                },
+                "message": "The asset must contain no two dynamic rigid bodies joined by an unbreakable fixed joint, unless one of them carries `PhysxContactReportAPI`, or contains an `IsaacContactSensor`, `IsaacImuSensor`, `IsaacLightBeamSensor` or `IsaacRaycastSensor` prim, or a prim carrying `IsaacRtxLidarSensorAPI` or `IsaacRtxRadarSensorAPI`.",
                 "examples": []
             }
         ],

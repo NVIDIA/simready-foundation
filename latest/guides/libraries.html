@@ -968,14 +968,12 @@ requires exactly 3.12.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>simready.search
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">simready.retrieve</span></code> and <code class="docutils literal notranslate"><span class="pre">simready.evaluate</span></code> are not on public PyPI. Install
-those from the NVIDIA index:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>--extra-index-url<span class="w"> </span>https://artifactory.nvidia.com/artifactory/api/pypi/ct-omniverse-pypi-local/simple<span class="w"> </span>simready.retrieve
+<p>Install <code class="docutils literal notranslate"><span class="pre">simready.retrieve</span></code> from your configured package source:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>simready.retrieve
 </pre></div>
 </div>
-<p>The versions on public PyPI are older than the current release. Use the NVIDIA
-index when you need to match the release this documentation describes. Check
-what you have with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">show</span> <span class="pre">&lt;library&gt;</span></code>.</p>
+<p>Check the available versions on your configured indexes when matching a
+specific release. Check what you have with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">show</span> <span class="pre">&lt;library&gt;</span></code>.</p>
 </section>
 <section id="find-assets">
 <h2>Find assets<a class="headerlink" href="#find-assets" title="Link to this heading">#</a></h2>
@@ -1056,7 +1054,7 @@ can actually hold a prop.</p>
 </pre></div>
 </div>
 <p>The engine runs through a separate package. Install it with the <code class="docutils literal notranslate"><span class="pre">kit</span></code> extra:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>--extra-index-url<span class="w"> </span>https://artifactory.nvidia.com/artifactory/api/pypi/ct-omniverse-pypi-local/simple<span class="w"> </span><span class="s2">"simready.evaluate[kit]"</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"simready.evaluate[kit]"</span>
 </pre></div>
 </div>
 <p>This library was renamed from <code class="docutils literal notranslate"><span class="pre">benchmark</span></code>. The older name is still in use in

@@ -4,6 +4,57 @@
         "version": "1.0.0",
         "requirements": [
             {
+                "code": "SR.002",
+                "version": null,
+                "name": "thumbnail-exist",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "sr-002",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/sim_ready/requirements/thumbnail-exist.html",
+                    "internal_path": "rules_and_reqs/core/sim_ready/requirements/thumbnail-exist.md"
+                },
+                "message": "The SimReady asset file should contain a thumbnail that is representative of the asset.",
+                "examples": []
+            },
+            {
+                "code": "SR.001",
+                "version": null,
+                "name": "metadata-whitelist",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "sr-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/sim_ready/requirements/metadata-whitelist.html",
+                    "internal_path": "rules_and_reqs/core/sim_ready/requirements/metadata-whitelist.md"
+                },
+                "message": "The asset stage must contain all required metadata fields in root-layer `customLayerData`.",
+                "examples": []
+            },
+            {
+                "code": "SR.003",
+                "version": null,
+                "name": "nested-simready-metadata",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "sr-003",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/sim_ready/requirements/nested-simready-metadata.html",
+                    "internal_path": "rules_and_reqs/core/sim_ready/requirements/nested-simready-metadata.md"
+                },
+                "message": "Required SimReady provenance fields must be authored inside the root-layer `SimReady_Metadata` dictionary.",
+                "examples": []
+            },
+            {
                 "code": "SR.004",
                 "version": null,
                 "name": "metadata-union",
@@ -36,57 +87,6 @@
                         "result": "failure"
                     }
                 ]
-            },
-            {
-                "code": "SR.001",
-                "version": null,
-                "name": "metadata-whitelist",
-                "compatibility": "core-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "sr-001",
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/core/sim_ready/requirements/metadata-whitelist.html",
-                    "internal_path": "rules_and_reqs/core/sim_ready/requirements/metadata-whitelist.md"
-                },
-                "message": "The asset stage must contain all required metadata fields in root-layer `customLayerData`.",
-                "examples": []
-            },
-            {
-                "code": "SR.002",
-                "version": null,
-                "name": "thumbnail-exist",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "sr-002",
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/core/sim_ready/requirements/thumbnail-exist.html",
-                    "internal_path": "rules_and_reqs/core/sim_ready/requirements/thumbnail-exist.md"
-                },
-                "message": "The SimReady asset file should contain a thumbnail that is representative of the asset.",
-                "examples": []
-            },
-            {
-                "code": "SR.003",
-                "version": null,
-                "name": "nested-simready-metadata",
-                "compatibility": "core-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "sr-003",
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/core/sim_ready/requirements/nested-simready-metadata.html",
-                    "internal_path": "rules_and_reqs/core/sim_ready/requirements/nested-simready-metadata.md"
-                },
-                "message": "Required SimReady provenance fields must be authored inside the root-layer `SimReady_Metadata` dictionary.",
-                "examples": []
             }
         ],
         "metadata": {

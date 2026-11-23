@@ -182,9 +182,8 @@ diagnostics without requiring a newer bug-fix release. Native engine errors,
 unsafe evidence and cancellation remain fatal to the affected execution.
 Newer assessment-aware reports present completed pivot advice explicitly;
 older supported reporters retain its raw skip and recorded advisory evidence.
-See the [NVIDIA internal index](#nvidia-internal-artifactory) for index
-configuration; declared bounds do not establish that a compatible build is
-published or available there. Locally built compatible wheels are a separate
+Declared bounds do not establish that a compatible build is
+published or available. Locally built compatible wheels are a separate
 development workflow: record their source revision, build and installed package
 provenance when qualifying that environment.
 
@@ -208,30 +207,6 @@ uv pip install --upgrade "simready-foundation-tier-core[isaac]" "tinyobjloader==
 This opts in to that package's prerelease without enabling prereleases for all
 dependencies. Both packages resolve from PyPI. The pip commands above already
 accept the converters' prerelease requirement.
-
-### NVIDIA Internal Artifactory
-
-Confirm the internal index URL and authentication requirements for your environment before running these commands.
-For release-candidate qualification, add `--pre` and select the intended
-published versions explicitly; the commands below otherwise use pip's normal
-release selection. Apply the same index and version selection to the optional
-Isaac installs above.
-
-```bash
-pip install --upgrade --extra-index-url https://artifactory.nvidia.com/artifactory/api/pypi/ct-omniverse-pypi-local/simple simready-validate
-```
-
-Then install or upgrade Core and Sensors:
-
-```bash
-pip install --upgrade --extra-index-url https://artifactory.nvidia.com/artifactory/api/pypi/ct-omniverse-pypi-local/simple simready-foundation-tier-core simready-foundation-tier-sensors
-```
-
-For the complete Evaluate environment:
-
-```bash
-pip install --upgrade --extra-index-url https://artifactory.nvidia.com/artifactory/api/pypi/ct-omniverse-pypi-local/simple "simready-foundation-tier-core[evaluate]"
-```
 
 ## How Tier Discovery Works
 

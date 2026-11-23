@@ -4,57 +4,6 @@
         "version": "1.0.0",
         "requirements": [
             {
-                "code": "CN.008",
-                "version": null,
-                "name": "assembly-type",
-                "compatibility": "open-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "AssemblyTypeChecker",
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/assembly/connections/requirements/assembly-type.html",
-                    "internal_path": "rules_and_reqs/assembly/connections/requirements/assembly-type.md"
-                },
-                "message": "The assembly default prim must author `simready:mate:assemblyType` with exactly one value drawn from the closed list `robot`, `pallet_stack`. A missing attribute or an unrecognized token fails.",
-                "examples": []
-            },
-            {
-                "code": "CN.009",
-                "version": null,
-                "name": "connection-joint",
-                "compatibility": "open-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "ConnectionJointChecker",
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/assembly/connections/requirements/connection-joint.html",
-                    "internal_path": "rules_and_reqs/assembly/connections/requirements/connection-joint.md"
-                },
-                "message": "Every connection with `realization = \"jointed\"` must author `simready:mate:joint` targeting exactly one `UsdPhysicsFixedJoint` whose `physics:body0` and `physics:body1` resolve to the connection's two mate bodies, whose local poses place the socket and plug frames coincident, and which authors explicit `physics:breakForce` and `physics:breakTorque`.",
-                "examples": []
-            },
-            {
-                "code": "CN.010",
-                "version": null,
-                "name": "assembly-child-references",
-                "compatibility": "open-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "AssemblyChildReferencesChecker",
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/assembly/connections/requirements/assembly-child-references.html",
-                    "internal_path": "rules_and_reqs/assembly/connections/requirements/assembly-child-references.md"
-                },
-                "message": "Each connected mate site must arrive on the assembly stage through a reference or payload arc to a separately published asset. Parts authored inline in the assembly's own root layer fail.",
-                "examples": []
-            },
-            {
                 "code": "CN.001",
                 "version": null,
                 "name": "connection-rels",
@@ -69,6 +18,23 @@
                     "internal_path": "rules_and_reqs/assembly/connections/requirements/connection-rels.md"
                 },
                 "message": "The assembly default prim has a `Connections` Scope. Each connection prim under it authors exactly one `simready:mate:socket` relationship and exactly one `simready:mate:plug` relationship, each with exactly one target.",
+                "examples": []
+            },
+            {
+                "code": "CN.008",
+                "version": null,
+                "name": "assembly-type",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "AssemblyTypeChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/assembly/connections/requirements/assembly-type.html",
+                    "internal_path": "rules_and_reqs/assembly/connections/requirements/assembly-type.md"
+                },
+                "message": "The assembly default prim must author `simready:mate:assemblyType` with exactly one value drawn from the closed list `robot`, `pallet_stack`. A missing attribute or an unrecognized token fails.",
                 "examples": []
             },
             {
@@ -89,54 +55,20 @@
                 "examples": []
             },
             {
-                "code": "CN.011",
+                "code": "CN.006",
                 "version": null,
-                "name": "compound-body",
+                "name": "mate-realization",
                 "compatibility": "open-usd",
                 "tags": [
                     "essential"
                 ],
-                "validator": "CompoundBodyChecker",
+                "validator": "MateRealizationChecker",
                 "parameters": [],
                 "metadata": {
-                    "path": "rules_and_reqs/assembly/connections/requirements/compound-body.html",
-                    "internal_path": "rules_and_reqs/assembly/connections/requirements/compound-body.md"
+                    "path": "rules_and_reqs/assembly/connections/requirements/mate-realization.html",
+                    "internal_path": "rules_and_reqs/assembly/connections/requirements/mate-realization.md"
                 },
-                "message": "The mate body shared by a `compound` connection must be an assembly-local prim carrying no reference or payload arc, with an enabled `PhysicsRigidBodyAPI` and a `physics:mass` equal to the sum of the parts it fuses. It may omit that aggregate only when the parts carry their mass on their colliders, which the runtime sums to the same total. Every part beneath it must author `physics:rigidBodyEnabled = false`, and no joint may sit beneath it.",
-                "examples": []
-            },
-            {
-                "code": "CN.012",
-                "version": null,
-                "name": "assembly-model-hierarchy",
-                "compatibility": "open-usd",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "AssemblyModelHierarchyChecker",
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/assembly/connections/requirements/assembly-model-hierarchy.html",
-                    "internal_path": "rules_and_reqs/assembly/connections/requirements/assembly-model-hierarchy.md"
-                },
-                "message": "The assembly default prim must have `kind = \"assembly\"`. Each composed-in child asset root must have `kind = \"component\"` or `kind = \"assembly\"`, and every prim between the default prim and a child asset root that carries a model kind must be `group` or `assembly`, so the model hierarchy is contiguous.",
-                "examples": []
-            },
-            {
-                "code": "CN.PHYSX.001",
-                "version": null,
-                "name": "physx-connection-joint",
-                "compatibility": "physx",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "PhysxConnectionJointChecker",
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/assembly/connections/requirements/physx-connection-joint.html",
-                    "internal_path": "rules_and_reqs/assembly/connections/requirements/physx-connection-joint.md"
-                },
-                "message": "A `jointed` connection joint must remain a standard `UsdPhysicsFixedJoint` with explicit `physics:collisionEnabled = false`, must not apply `PhysxJointAPI` degree-of-freedom tuning, and must leave `physics:excludeFromArticulation` false or unset; when it fuses two articulations, exactly one `PhysicsArticulationRootAPI` may survive on the composed assembly.",
+                "message": "Every connection prim must author `simready:mate:realization` as either `compound` or `jointed`, and the token must agree with how the two mate bodies resolve. `jointed` requires two distinct mate bodies; `compound` requires one shared mate body and must not author `simready:mate:joint`.",
                 "examples": []
             },
             {
@@ -157,6 +89,23 @@
                 "examples": []
             },
             {
+                "code": "CN.012",
+                "version": null,
+                "name": "assembly-model-hierarchy",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "AssemblyModelHierarchyChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/assembly/connections/requirements/assembly-model-hierarchy.html",
+                    "internal_path": "rules_and_reqs/assembly/connections/requirements/assembly-model-hierarchy.md"
+                },
+                "message": "The assembly default prim must have `kind = \"assembly\"`. Each composed-in child asset root must have `kind = \"component\"` or `kind = \"assembly\"`, and every prim between the default prim and a child asset root that carries a model kind must be `group` or `assembly`, so the model hierarchy is contiguous.",
+                "examples": []
+            },
+            {
                 "code": "CN.004",
                 "version": null,
                 "name": "interface-match",
@@ -174,20 +123,20 @@
                 "examples": []
             },
             {
-                "code": "CN.002",
+                "code": "CN.009",
                 "version": null,
-                "name": "connection-targets-resolve",
+                "name": "connection-joint",
                 "compatibility": "open-usd",
                 "tags": [
                     "essential"
                 ],
-                "validator": "ConnectionDeclarationChecker",
+                "validator": "ConnectionJointChecker",
                 "parameters": [],
                 "metadata": {
-                    "path": "rules_and_reqs/assembly/connections/requirements/connection-targets-resolve.html",
-                    "internal_path": "rules_and_reqs/assembly/connections/requirements/connection-targets-resolve.md"
+                    "path": "rules_and_reqs/assembly/connections/requirements/connection-joint.html",
+                    "internal_path": "rules_and_reqs/assembly/connections/requirements/connection-joint.md"
                 },
-                "message": "Each `socket` and `plug` relationship target must resolve on the composed stage and satisfy `MC.001` and `MC.002`.",
+                "message": "Every connection with `realization = \"jointed\"` must author `simready:mate:joint` targeting exactly one `UsdPhysicsFixedJoint` whose `physics:body0` and `physics:body1` resolve to the connection's two mate bodies, whose local poses place the socket and plug frames coincident, and which authors explicit `physics:breakForce` and `physics:breakTorque`.",
                 "examples": []
             },
             {
@@ -208,23 +157,6 @@
                 "examples": []
             },
             {
-                "code": "CN.MUJOCO.001",
-                "version": null,
-                "name": "mujoco-connection-joint",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": "MuJoCoConnectionJointChecker",
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/assembly/connections/requirements/mujoco-connection-joint.html",
-                    "internal_path": "rules_and_reqs/assembly/connections/requirements/mujoco-connection-joint.md"
-                },
-                "message": "A `jointed` connection joint must remain a standard `UsdPhysicsFixedJoint` with explicit `physics:collisionEnabled = false`, must not apply `MjcJointAPI`, must not be targeted by an `MjcActuator`, and must not author an invented MuJoCo weld or fixed-joint schema.",
-                "examples": []
-            },
-            {
                 "code": "CN.NEWTON.001",
                 "version": null,
                 "name": "newton-connection-joint",
@@ -242,20 +174,88 @@
                 "examples": []
             },
             {
-                "code": "CN.006",
+                "code": "CN.MUJOCO.001",
                 "version": null,
-                "name": "mate-realization",
+                "name": "mujoco-connection-joint",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "MuJoCoConnectionJointChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/assembly/connections/requirements/mujoco-connection-joint.html",
+                    "internal_path": "rules_and_reqs/assembly/connections/requirements/mujoco-connection-joint.md"
+                },
+                "message": "A `jointed` connection joint must remain a standard `UsdPhysicsFixedJoint` with explicit `physics:collisionEnabled = false`, must not apply `MjcJointAPI`, must not be targeted by an `MjcActuator`, and must not author an invented MuJoCo weld or fixed-joint schema.",
+                "examples": []
+            },
+            {
+                "code": "CN.010",
+                "version": null,
+                "name": "assembly-child-references",
                 "compatibility": "open-usd",
                 "tags": [
                     "essential"
                 ],
-                "validator": "MateRealizationChecker",
+                "validator": "AssemblyChildReferencesChecker",
                 "parameters": [],
                 "metadata": {
-                    "path": "rules_and_reqs/assembly/connections/requirements/mate-realization.html",
-                    "internal_path": "rules_and_reqs/assembly/connections/requirements/mate-realization.md"
+                    "path": "rules_and_reqs/assembly/connections/requirements/assembly-child-references.html",
+                    "internal_path": "rules_and_reqs/assembly/connections/requirements/assembly-child-references.md"
                 },
-                "message": "Every connection prim must author `simready:mate:realization` as either `compound` or `jointed`, and the token must agree with how the two mate bodies resolve. `jointed` requires two distinct mate bodies; `compound` requires one shared mate body and must not author `simready:mate:joint`.",
+                "message": "Each connected mate site must arrive on the assembly stage through a reference or payload arc to a separately published asset. Parts authored inline in the assembly's own root layer fail.",
+                "examples": []
+            },
+            {
+                "code": "CN.002",
+                "version": null,
+                "name": "connection-targets-resolve",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "ConnectionDeclarationChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/assembly/connections/requirements/connection-targets-resolve.html",
+                    "internal_path": "rules_and_reqs/assembly/connections/requirements/connection-targets-resolve.md"
+                },
+                "message": "Each `socket` and `plug` relationship target must resolve on the composed stage and satisfy `MC.001` and `MC.002`.",
+                "examples": []
+            },
+            {
+                "code": "CN.PHYSX.001",
+                "version": null,
+                "name": "physx-connection-joint",
+                "compatibility": "physx",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "PhysxConnectionJointChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/assembly/connections/requirements/physx-connection-joint.html",
+                    "internal_path": "rules_and_reqs/assembly/connections/requirements/physx-connection-joint.md"
+                },
+                "message": "A `jointed` connection joint must remain a standard `UsdPhysicsFixedJoint` with explicit `physics:collisionEnabled = false`, must not apply `PhysxJointAPI` degree-of-freedom tuning, and must leave `physics:excludeFromArticulation` false or unset; when it fuses two articulations, exactly one `PhysicsArticulationRootAPI` may survive on the composed assembly.",
+                "examples": []
+            },
+            {
+                "code": "CN.011",
+                "version": null,
+                "name": "compound-body",
+                "compatibility": "open-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "CompoundBodyChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/assembly/connections/requirements/compound-body.html",
+                    "internal_path": "rules_and_reqs/assembly/connections/requirements/compound-body.md"
+                },
+                "message": "The mate body shared by a `compound` connection must be an assembly-local prim carrying no reference or payload arc, with an enabled `PhysicsRigidBodyAPI` and a `physics:mass` equal to the sum of the parts it fuses. It may omit that aggregate only when the parts carry their mass on their colliders, which the runtime sums to the same total. Every part beneath it must author `physics:rigidBodyEnabled = false`, and no joint may sit beneath it.",
                 "examples": []
             }
         ],

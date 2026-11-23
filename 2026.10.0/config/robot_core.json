@@ -4,6 +4,23 @@
         "version": "1.0.0",
         "requirements": [
             {
+                "code": "RC.004",
+                "version": null,
+                "name": "thumbnail-exist",
+                "compatibility": "other",
+                "tags": [
+                    "high-quality"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/isaac_sim/robot_core/requirements/thumbnail-exist.html",
+                    "internal_path": "rules_and_reqs/isaac_sim/robot_core/requirements/thumbnail-exist.md"
+                },
+                "message": "The robot interface asset file should contain a thumbnail. The thumbnail should be representative of the robot.",
+                "examples": []
+            },
+            {
                 "code": "RC.007",
                 "version": null,
                 "name": "robot-schema",
@@ -18,6 +35,23 @@
                     "internal_path": "rules_and_reqs/isaac_sim/robot_core/requirements/robot-schema.md"
                 },
                 "message": "Robot USDs declare and use the required schemas and physics attributes.",
+                "examples": []
+            },
+            {
+                "code": "RC.005",
+                "version": null,
+                "name": "verify-robot-physics-attribute-source-layer",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": null,
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/isaac_sim/robot_core/requirements/verify-robot-physics-attribute-source-layer.html",
+                    "internal_path": "rules_and_reqs/isaac_sim/robot_core/requirements/verify-robot-physics-attribute-source-layer.md"
+                },
+                "message": "Validates that physics attributes are authored in the physics layer.",
                 "examples": []
             },
             {
@@ -160,40 +194,6 @@
                     "internal_path": "rules_and_reqs/isaac_sim/robot_core/requirements/robot-naming.md"
                 },
                 "message": "Canonical robot and prim naming conventions for stable references and tools.",
-                "examples": []
-            },
-            {
-                "code": "RC.005",
-                "version": null,
-                "name": "verify-robot-physics-attribute-source-layer",
-                "compatibility": "other",
-                "tags": [
-                    "essential"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/isaac_sim/robot_core/requirements/verify-robot-physics-attribute-source-layer.html",
-                    "internal_path": "rules_and_reqs/isaac_sim/robot_core/requirements/verify-robot-physics-attribute-source-layer.md"
-                },
-                "message": "Validates that physics attributes are authored in the physics layer.",
-                "examples": []
-            },
-            {
-                "code": "RC.004",
-                "version": null,
-                "name": "thumbnail-exist",
-                "compatibility": "other",
-                "tags": [
-                    "high-quality"
-                ],
-                "validator": null,
-                "parameters": [],
-                "metadata": {
-                    "path": "rules_and_reqs/isaac_sim/robot_core/requirements/thumbnail-exist.html",
-                    "internal_path": "rules_and_reqs/isaac_sim/robot_core/requirements/thumbnail-exist.md"
-                },
-                "message": "The robot interface asset file should contain a thumbnail. The thumbnail should be representative of the robot.",
                 "examples": []
             },
             {

@@ -35,16 +35,14 @@ Five of them install from public PyPI:
 pip install simready.search
 ```
 
-`simready.retrieve` and `simready.evaluate` are not on public PyPI. Install
-those from the NVIDIA index:
+Install `simready.retrieve` from your configured package source:
 
 ```bash
-pip install --extra-index-url https://artifactory.nvidia.com/artifactory/api/pypi/ct-omniverse-pypi-local/simple simready.retrieve
+pip install simready.retrieve
 ```
 
-The versions on public PyPI are older than the current release. Use the NVIDIA
-index when you need to match the release this documentation describes. Check
-what you have with `pip show <library>`.
+Check the available versions on your configured indexes when matching a
+specific release. Check what you have with `pip show <library>`.
 
 ## Find assets
 
@@ -140,7 +138,7 @@ simready-evaluate --help
 The engine runs through a separate package. Install it with the `kit` extra:
 
 ```bash
-pip install --extra-index-url https://artifactory.nvidia.com/artifactory/api/pypi/ct-omniverse-pypi-local/simple "simready.evaluate[kit]"
+pip install "simready.evaluate[kit]"
 ```
 
 This library was renamed from `benchmark`. The older name is still in use in
