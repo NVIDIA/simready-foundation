@@ -1,0 +1,415 @@
+#usda 1.0
+(
+    customLayerData = {
+        dictionary SimReady_Metadata = {
+            dictionary Variants = {
+                dictionary MeshVariant = {
+                    dictionary MeshVariant_base = {
+                        string category = "MeshVariant"
+                        string default = "base_var_001"
+                        string impactClass = "visual-only"
+                        string prim = "/Toolbox"
+                        string variantSetName = "MeshVariant_base"
+                    }
+                    dictionary MeshVariant_lid = {
+                        string category = "MeshVariant"
+                        string default = "lid_var_001"
+                        string impactClass = "visual-only"
+                        string prim = "/Toolbox"
+                        string variantSetName = "MeshVariant_lid"
+                    }
+                }
+                dictionary Physics = {
+                    dictionary MuJoCo = {
+                        string activateOption = "Enabled"
+                        string prim = "/Toolbox"
+                        string variantSetName = "MuJoCo"
+                    }
+                    dictionary Newton = {
+                        string activateOption = "Enabled"
+                        string prim = "/Toolbox"
+                        string variantSetName = "Newton"
+                    }
+                    dictionary PhysX = {
+                        string activateOption = "Enabled"
+                        string prim = "/Toolbox"
+                        string variantSetName = "PhysX"
+                    }
+                }
+                dictionary Representation = {
+                    dictionary Representation = {
+                        string category = "Representation"
+                        string default = "Original"
+                        string impactClass = "visual-only"
+                        string prim = "/Toolbox"
+                        string variantSetName = "Representation"
+                    }
+                    dictionary Representation_base = {
+                        string category = "Representation"
+                        string default = "Original"
+                        string impactClass = "visual-only"
+                        string prim = "/Toolbox"
+                        string variantSetName = "Representation_base"
+                    }
+                    dictionary Representation_lid = {
+                        string category = "Representation"
+                        string default = "Original"
+                        string impactClass = "visual-only"
+                        string prim = "/Toolbox"
+                        string variantSetName = "Representation_lid"
+                    }
+                }
+            }
+            string asset_license = "Apache-2.0"
+            dictionary validation = {
+                string profile = "Robotics-Prop"
+                string profile_version = "3.0.0"
+                dictionary profiles = {
+                    dictionary "Robotics-Prop@3.0.0" = {
+                        string profile = "Robotics-Prop"
+                        string profile_version = "3.0.0"
+                        dictionary validated_features = {
+                            dictionary "2026-11-03" = {
+                                dictionary "CAP000_Core.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP007_NonVisualMaterials.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    string "optional requirements" = "['com.nvidia.simready.NVM.001', 'com.nvidia.simready.NVM.002', 'com.nvidia.simready.NVM.003']"
+                                    bool passed = 0
+                                    string version = "0-2-0"
+                                }
+                                dictionary "FET001_MinimalPlaceableVisual.1-0-1" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "1-0-1"
+                                }
+                                dictionary "FET003_RigidBody.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-2-0"
+                                }
+                                dictionary "FET003_RigidBody.Newton.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET003_RigidBody.PhysX.0-4-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-4-0"
+                                }
+                                dictionary "FET004_Multibody.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET003_RigidBody.0-2-0']"
+                                    bool passed = 1
+                                    string version = "0-2-0"
+                                }
+                                dictionary "FET004_Multibody.Newton.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET003_RigidBody.Newton.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET004_Multibody.PhysX.0-4-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET003_RigidBody.PhysX.0-4-0']"
+                                    bool passed = 1
+                                    string version = "0-4-0"
+                                }
+                                dictionary "FET005_Grasp.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    string "optional requirements" = "['com.nvidia.simready.GSP.001', 'com.nvidia.simready.PMT.001']"
+                                    bool passed = 0
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET006_Materials.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET006_Materials.MDL.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                            }
+                        }
+                    }
+                }
+                dictionary validated_features = {
+                    dictionary "2026-11-03" = {
+                        dictionary "CAP000_Core.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "CAP007_NonVisualMaterials.0-2-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            string "optional requirements" = "['com.nvidia.simready.NVM.001', 'com.nvidia.simready.NVM.002', 'com.nvidia.simready.NVM.003']"
+                            bool passed = 0
+                            string version = "0-2-0"
+                        }
+                        dictionary "FET001_MinimalPlaceableVisual.1-0-1" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "1-0-1"
+                        }
+                        dictionary "FET003_RigidBody.0-2-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0-2-0"
+                        }
+                        dictionary "FET003_RigidBody.Newton.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "FET003_RigidBody.PhysX.0-4-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0-4-0"
+                        }
+                        dictionary "FET004_Multibody.0-2-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['FET003_RigidBody.0-2-0']"
+                            bool passed = 1
+                            string version = "0-2-0"
+                        }
+                        dictionary "FET004_Multibody.Newton.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['FET003_RigidBody.Newton.0-1-0']"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "FET004_Multibody.PhysX.0-4-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['FET003_RigidBody.PhysX.0-4-0']"
+                            bool passed = 1
+                            string version = "0-4-0"
+                        }
+                        dictionary "FET005_Grasp.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            string "optional requirements" = "['com.nvidia.simready.GSP.001', 'com.nvidia.simready.PMT.001']"
+                            bool passed = 0
+                            string version = "0-1-0"
+                        }
+                        dictionary "FET006_Materials.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "FET006_Materials.MDL.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                    }
+                }
+            }
+        }
+        string asset_name = "obs_electricians_large_tool_box_a02"
+        string asset_type = "prop"
+        string source_file = "obs_electricians_large_tool_box_01_multi.blend"
+        string usd_date_generated = "2026-10-22"
+    }
+    defaultPrim = "Toolbox"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "Toolbox" (
+    prepend apiSchemas = ["PhysicsArticulationRootAPI"]
+    kind = "component"
+    variants = {
+        string MeshVariant_base = "base_var_001"
+        string MeshVariant_lid = "lid_var_001"
+        string MuJoCo = "Disabled"
+        string Newton = "Disabled"
+        string PhysX = "Disabled"
+        string Representation = "Original"
+    }
+    prepend variantSets = ["Representation", "MeshVariant_base", "MeshVariant_lid", "PhysX", "Newton", "MuJoCo"]
+)
+{
+    def Xform "Base" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+    )
+    {
+        rel material:binding:physics = </Toolbox/PhysicsMaterials/physics_mat_opaque__plastic> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        float physics:mass = 1.2
+        bool physics:rigidBodyEnabled = 1
+
+        def Cube "collision" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            uniform token purpose = "guide"
+            double size = 1
+            token visibility = "invisible"
+            float3 xformOp:scale = (0.47000003, 0.25097048, 0.2154652)
+            double3 xformOp:translate = (2.2351741790771484e-8, 0.006092224270105362, 0.10773258743460179)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def Xform "Lid" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "MaterialBindingAPI"]
+    )
+    {
+        rel material:binding:physics = </Toolbox/PhysicsMaterials/physics_mat_opaque__plastic> (
+            bindMaterialAs = "weakerThanDescendants"
+        )
+        float physics:mass = 0.8
+        bool physics:rigidBodyEnabled = 1
+        float3 xformOp:rotateXYZ = (0, 0, 0)
+        double3 xformOp:translate:pivot = (0, 0.12863185, 0.17159575)
+        uniform token[] xformOpOrder = ["xformOp:translate:pivot", "xformOp:rotateXYZ", "!invert!xformOp:translate:pivot"]
+
+        def Cube "collision" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            uniform token purpose = "guide"
+            double size = 1
+            token visibility = "invisible"
+            float3 xformOp:scale = (0.47000003, 0.25097078, 0.11568993)
+            double3 xformOp:translate = (0.0000079423189163208, 0.006091408431529999, 0.22101804614067078)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def Scope "PhysicsMaterials"
+    {
+        def Material "physics_mat_opaque__plastic" (
+            prepend apiSchemas = ["PhysicsMaterialAPI"]
+        )
+        {
+            float physics:density = 950
+            float physics:dynamicFriction = 0.4
+            float physics:restitution = 0.4
+            float physics:staticFriction = 0.4
+        }
+    }
+
+    def Scope "Joints"
+    {
+        def PhysicsRevoluteJoint "lid_joint"
+        {
+            uniform token physics:axis = "X"
+            rel physics:body0 = </Toolbox/Base>
+            rel physics:body1 = </Toolbox/Lid>
+            float physics:breakForce = inf
+            float physics:breakTorque = inf
+            bool physics:collisionEnabled = 0
+            uniform bool physics:excludeFromArticulation = 0
+            bool physics:jointEnabled = 1
+            point3f physics:localPos0 = (0, 0.12863185, 0.17159575)
+            point3f physics:localPos1 = (0, 0.12863185, 0.17159575)
+            quatf physics:localRot0 = (1, 0, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+            float physics:lowerLimit = -150
+            float physics:upperLimit = 0
+        }
+    }
+    variantSet "MeshVariant_base" = {
+        "base_var_001" (
+            prepend payload = @./wrappers/base_var_001_cell.usda@
+        ) {
+
+        }
+        "base_var_002" (
+            prepend payload = @./wrappers/base_var_002_cell.usda@
+        ) {
+
+        }
+    }
+    variantSet "MeshVariant_lid" = {
+        "lid_var_001" (
+            prepend payload = @./wrappers/lid_var_001_cell.usda@
+        ) {
+
+        }
+        "lid_var_002" (
+            prepend payload = @./wrappers/lid_var_002_cell.usda@
+        ) {
+
+        }
+        "lid_var_003" (
+            prepend payload = @./wrappers/lid_var_003_cell.usda@
+        ) {
+
+        }
+    }
+    variantSet "PhysX" = {
+        "Disabled" {
+
+        }
+        "Enabled" (
+            prepend payload = @./runnables/physics/physx.usda@
+        ) {
+
+        }
+    }
+    variantSet "Newton" = {
+        "Disabled" {
+
+        }
+        "Enabled" (
+            prepend payload = @./runnables/physics/newton.usda@
+        ) {
+
+        }
+    }
+    variantSet "MuJoCo" = {
+        "Disabled" {
+
+        }
+        "Enabled" (
+            prepend payload = @./runnables/physics/mujoco.usda@
+        ) {
+
+        }
+    }
+    variantSet "Representation" = {
+        "Original" (
+            variants = {
+                string Representation_base = "Original"
+                string Representation_lid = "Original"
+            }
+        ) {
+
+        }
+        "Splat" (
+            variants = {
+                string Representation_base = "Splat"
+                string Representation_lid = "Splat"
+            }
+        ) {
+
+        }
+    }
+}
+

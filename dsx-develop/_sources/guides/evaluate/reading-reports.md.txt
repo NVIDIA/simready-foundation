@@ -1,0 +1,207 @@
+# Reading Evaluate Reports
+
+This page describes the current run-output contract, result states, exit codes,
+and the optional stamp written to the run's asset mirror.
+
+## Find the Resolved Output Directory
+
+Evaluate creates a fresh directory for every run and prints its resolved path
+when the command completes. It never clears an existing requested directory.
+Missing or empty requested directories are used directly. When `--output-dir
+DIR` names a nonempty directory, Evaluate creates `DIR/evaluate_report_N`,
+starting at `0` or one above the highest existing numeric suffix; gaps are not
+reused. Use the printed path rather than assuming the requested path was used
+directly.
+
+Each allocated directory contains a `.simready-evaluate-output.json` ownership
+marker. Evaluate cleanup is limited to framework-owned artifacts inside that
+marked run directory.
+
+## Output Layout
+
+```text
+<run>/
+|-- .simready-evaluate-output.json
+|-- plan.json
+|-- run_summary.json
+|-- index.html
+|-- logs/
+|   |-- orchestrator.log
+|   `-- <engine-session>.log
+|-- state/
+|   |-- events.jsonl
+|   `-- work_pool.json
+|-- report/
+|   `-- test_results_index.json
+`-- results/
+    `-- <asset-relative-path>/
+        |-- <asset>.usd
+        `-- .simready/
+            `-- assets/<asset-key>/
+                |-- validation.json
+                `-- runtime/<test-output-name>/<engine>/
+                    |-- result.json
+                    `-- <images, videos, logs, or USD recordings>
+```
+
+The exact media files depend on the test. Paths in
+`report/test_results_index.json` and per-test `result.json` are authoritative.
+The asset key is the first 16 hexadecimal characters of the SHA-256 of the full
+USD filename, including its extension. A test output name is normally the public
+test name; provider qualification and an identity suffix resolve name collisions
+without overwriting another definition's evidence. Do not derive public test
+identity from the artifact directory name.
+
+## Which File to Read
+
+| File | Purpose |
+|---|---|
+| `index.html` | Human-readable asset, feature, test, engine, media, and diagnostic views. |
+| `run_summary.json` | Top-level automation status, readiness, completed work, and failed work. |
+| `report/test_results_index.json` | Detailed result rows and paths to per-test evidence. |
+| `state/events.jsonl` | Append-only execution events for debugging and integrations. |
+| `state/work_pool.json` | Runtime work-item state; use reports for final pass/fail decisions. |
+| `results/**/.simready/assets/<asset-key>/runtime/**/result.json` | The result and metrics for one asset, test, and engine. |
+
+For CI, gate on the process exit code and retain the complete run directory as
+an artifact. For diagnostics, start with `index.html`, then open the failing
+row's engine log and per-test evidence.
+
+## Result States
+
+Individual result rows can be `pass`, `fail`, `skipped`, or an execution state
+such as `error`, `blocked`, or `incomplete`. A skipped test is not evidence that
+the behavior passed; its message explains why the test was not applicable or
+could not run. Test-body or setup exceptions retain `execution_status: error`
+and their cause category, while durable report/receipt cells use
+`status: incomplete`; these are not proven asset failures. A validation-gated
+feature can also be reported as not tested
+when its static feature contract did not pass.
+
+A clean run has no failed or non-terminal planned work. Do not infer success
+from the presence of media or from a completed engine session alone.
+Missing or disabled required Foundation 2 bindings remain incomplete even when
+all available applicable tests passed. Static validation remains a separate
+assessment; a forced runtime pass does not repair a failed validation receipt.
+
+General/source OpenUSD and runtime-specific features are distinct contracts.
+An `OpenUSD source` label is not another physics engine. Contracts explicitly
+binding the same provider/test/version/engine execution can display shared
+evidence without merging their requirements or static validation claims.
+A profile can select optional multibody coverage for a prop; a recorded
+no-joints applicability SKIP does not request adding joints to that prop.
+Missing required dependency coverage remains visible separately from the skip.
+
+Current ground-drop 4.0.0 and ground-stability 3.0.0 procedures report independent
+drop/overlap and sampled-settling results. Drop PASS with stability FAIL is
+consistent and does not pass a feature requiring both. Older combined drop
+versions included settling in their own verdict. Window-variation graph points
+are unknown until a complete hold exists; a flat height curve alone is not rest.
+
+## Exit Codes
+
+| Exit code | Meaning |
+|---|---|
+| `0` | The requested command completed without failed work or unavailable required runtime bindings; skips or static-validation failures may remain. |
+| `1` | A runtime test, stage, report, stamp, or setup operation failed, or required runtime bindings were unavailable. |
+| `2` | Invalid command-line input or invalid stage input. |
+| `3` | A required plan or result contract is missing. |
+| `4` | The selected runtime is not ready. |
+| `130` | The command was interrupted. |
+
+Treat only exit code `0` as success in automation. Also retain
+`run_summary.json` and `report/test_results_index.json` so a failure can be
+diagnosed without rerunning the engine.
+Exit `0` alone does not certify every asset feature; inspect selected coverage
+and static validation as well as runtime results.
+
+## Verify a Clean Run
+
+1. Confirm that the process exit code is `0`.
+2. Read `run_summary.json`; verify that readiness is `ready`, `failed` is zero,
+   and the top-level status is successful.
+3. Inspect `report/test_results_index.json`; verify that every planned result
+   has the intended terminal state. Treat `skipped` according to the test's
+   applicability contract rather than as behavioral proof.
+4. Open `index.html` and review videos, images, USD recordings, metrics, and
+   engine logs for the rows that matter to the acceptance decision.
+5. If stamping was enabled, inspect the mirror USD and sibling
+   `.simready/assets/<asset-key>/validation.json` described below. Confirm
+   `run_summary.stamping` reports successful requested writes; a receipt-write
+   failure is a workflow failure, not a changed physics verdict.
+
+PowerShell exposes the command exit code through `$LASTEXITCODE`; POSIX shells
+use `$?`.
+
+## The Runtime Stamp
+
+Stamping is enabled by default and can be disabled with `--no-stamp`. Evaluate
+does **not** modify the source asset. It copies the root USD into `results/`
+using the asset's relative mirror path, then writes run metadata to that copy
+and to its sibling `.simready/assets/<asset-key>/validation.json`. Legacy
+directory-level `.simready/validation.json` receipts remain readable when no
+asset-owned receipt exists; new writes never share that destination across
+sibling USD assets. USDZ mirrors remain byte-preserved and receive only the
+JSON receipt, not in-package metadata edits.
+
+The USD copy receives this nested `customLayerData` shape:
+
+```text
+SimReady_Metadata
+`-- runtime_testing
+    `-- tested_features
+        `-- <ISO timestamp>
+            `-- <exact feature contract ID>
+                |-- passed
+                |-- status
+                |-- version
+                `-- engines
+                    `-- <engine configuration name>
+                        |-- passed
+                        |-- status
+                        `-- tests
+                            `-- <collision-safe test output name>
+                                |-- passed
+                                |-- status
+                                |-- provider
+                                |-- name
+                                |-- test_file
+                                `-- version
+```
+
+Feature ownership and versions come from the selected plan contracts.
+Foundation 2 uses exact dotted IDs and manifest runtime-test bindings;
+Foundation 1 uses legacy decorator ID/version matching. Feature, engine and test
+cells carry explicit `status`; the legacy `passed: false` only means not a pass,
+not necessarily an asset failure. Per-test `result.json` contains the detailed
+measurements and engine version.
+
+Stamping adds a timestamped sibling to entries already present in the layer or
+JSON receipt; re-stamping the same timestamp replaces that entry. Fleet
+stamping refreshes the mirror from the source and seeds its receipt from source
+evidence when available. It is not an archive of every earlier Evaluate run.
+After partial reruns, coverage can include retained prior results; read the
+report's `stamp_attempt_id`, `evidence_origin`, and `stamp_history` rather than
+assuming all evidence was rewritten by the latest attempt.
+
+The `.simready/assets/<asset-key>/validation.json` mirror sidecar carries the corresponding static
+validation and runtime-test receipt for consumers that do not read USD
+`customLayerData`. It intentionally lives beside the mirror USD. Materials and
+textures are not copied merely to make the stamped root USD a standalone asset;
+open the original source asset for authoring, and use the mirror as report
+evidence.
+
+## Multiple Engines and Assets
+
+One report can contain several assets and several engines. Result identity is
+the asset, feature, test, and engine tuple. Use the engine filter in the HTML
+report or the engine field in JSON rather than combining rows from different
+physics runtimes. The planner may select different feature variants for PhysX,
+Newton, or another configured runtime.
+
+## Related Pages
+
+- [SimReady Evaluate Overview](overview.md)
+- [Pipeline and Stages](pipeline.md)
+- [Running Tests](running.md)
+- [Evaluate Test Reference](tests/tests.md)

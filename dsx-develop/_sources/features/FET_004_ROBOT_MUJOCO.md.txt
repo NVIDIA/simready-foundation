@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_004_ROBOT_MUJOCO`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP004_Multibody.RobotMuJoCo.html" />
+<link rel="canonical" href="../capabilities/CAP004_Multibody.RobotMuJoCo.html" />
+```
+
+This published feature route moved to [`CAP004_Multibody.RobotMuJoCo`](../capabilities/CAP004_Multibody.RobotMuJoCo.md) (Foundations 1 ID: `FET_004_ROBOT_MUJOCO`).

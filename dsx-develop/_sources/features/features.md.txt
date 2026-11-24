@@ -1,0 +1,84 @@
+# Features
+
+This section lists the features from every SimReady Foundation
+[tier](../guides/tiers.md) together. A feature is a runtime-tested contract.
+The **Runtime** column is the runtime a variant targets, which is independent
+of the tier that owns the contract.
+
+## Status Dashboard
+
+| Name | Runtime | Versions | Contract |
+|---|---|---|---|
+| [Minimal Placeable Visual](FET001_MinimalPlaceableVisual.md) | OpenUSD | 0-1-0, 1-0-0, 1-0-1 | `FET001_MinimalPlaceableVisual` |
+| [Rigid Body Physics](FET003_RigidBody.md) | OpenUSD | 0-1-0, 0-2-0 | `FET003_RigidBody` |
+| [Rigid Body Physics (Newton)](FET003_RigidBody.Newton.md) | Newton | 0-1-0 | `FET003_RigidBody.Newton` |
+| [Rigid Body Physics (PhysX)](FET003_RigidBody.PhysX.md) | PhysX | 0-1-0, 0-2-0, 0-3-0, 0-4-0 | `FET003_RigidBody.PhysX` |
+| [Simulate Multi-Body Physics](FET004_Multibody.md) | OpenUSD | 0-1-0, 0-2-0 | `FET004_Multibody` |
+| [Simulate Multi-Body Physics (Newton)](FET004_Multibody.Newton.md) | Newton | 0-1-0 | `FET004_Multibody.Newton` |
+| [Simulate Multi-Body Physics (PhysX)](FET004_Multibody.PhysX.md) | PhysX | 0-1-0, 0-2-0, 0-3-0, 0-4-0 | `FET004_Multibody.PhysX` |
+| [Simulate Multi-Body Physics (Robot Newton)](FET004_Multibody.RobotNewton.md) | RobotNewton | 0-1-0 | `FET004_Multibody.RobotNewton` |
+| [Simulate Multi-Body Physics (Robot PhysX)](FET004_Multibody.RobotPhysX.md) | RobotPhysX | 0-1-0, 0-2-0, 0-3-0, 0-4-0 | `FET004_Multibody.RobotPhysX` |
+| [Simulate Grasp Physics](FET005_Grasp.md) | OpenUSD | 0-1-0 | `FET005_Grasp` |
+| [Materials (USDPreviewSurface)](FET006_Materials.md) | OpenUSD | 0-1-0, 0-2-0, 0-3-0 | `FET006_Materials` |
+| [Materials (MDL)](FET006_Materials.MDL.md) | MDL | 0-1-0, 0-2-0, 0-3-0 | `FET006_Materials.MDL` |
+| [Materials (OpenPBR)](FET006_Materials.Openpbr.md) | Openpbr | 0-1-0, 0-2-0 | `FET006_Materials.Openpbr` |
+| [Object Forward](FET008_ObjectForward.md) | OpenUSD | 0-1-0 | `FET008_ObjectForward` |
+| [Material Coverage](FET009_MaterialCoverage.md) | OpenUSD | 0-1-0 | `FET009_MaterialCoverage` |
+| [Display Color](FET010_DisplayColor.md) | OpenUSD | 0-1-0 | `FET010_DisplayColor` |
+| [Semantic Labels](FET011_SemanticLabels.md) | OpenUSD | 0-2-0 | `FET011_SemanticLabels` |
+| [Semantic Labels (RTX)](FET011_SemanticLabels.RTX.md) | RTX | 0-1-0 | `FET011_SemanticLabels.RTX` |
+| [Sensor Visual 3DGS](FET012_GaussianSplat.md) | OpenUSD | 0-1-0 | `FET012_GaussianSplat` |
+| [Multi-Representation Visual](FET013_MultiRepresentationVisual.md) | OpenUSD | 0-1-0 | `FET013_MultiRepresentationVisual` |
+| [Visual Mesh Variant](FET014_MeshVariant.md) | OpenUSD | 0-1-0 | `FET014_MeshVariant` |
+| [Collision Variant](FET015_CollisionVariant.md) | OpenUSD | 0-1-0 | `FET015_CollisionVariant` |
+| [Appearance Variant](FET016_AppearanceVariant.md) | OpenUSD | 0-1-0 | `FET016_AppearanceVariant` |
+| [Driven Joints](FET022_DrivenJoints.md) | OpenUSD | 0-1-0, 0-2-0 | `FET022_DrivenJoints` |
+| [Driven Joints (Isaac)](FET022_DrivenJoints.Isaac.md) | Isaac | 0-1-0, 0-2-0 | `FET022_DrivenJoints.Isaac` |
+| [Driven Joints (Newton)](FET022_DrivenJoints.Newton.md) | Newton | 0-1-0 | `FET022_DrivenJoints.Newton` |
+| [Driven Joints (PhysX)](FET022_DrivenJoints.PhysX.md) | PhysX | 0-1-0, 0-2-0 | `FET022_DrivenJoints.PhysX` |
+| [Gripper](FET028_Gripper.md) | OpenUSD | 0-1-0 | `FET028_Gripper` |
+| [Gripper (Isaac)](FET028_Gripper.Isaac.md) | Isaac | 0-1-0 | `FET028_Gripper.Isaac` |
+| [IMU Sensor](FET034_ImuSensor.Isaac.md) | Isaac | 0-1-0 | `FET034_ImuSensor.Isaac` |
+| [Camera and Render Products](FET035_RenderProducts.RTX.md) | RTX | 0-1-0 | `FET035_RenderProducts.RTX` |
+| [RTX Sensors](FET036_Lidar.RTX.md) | RTX | 0-1-0 | `FET036_Lidar.RTX` |
+| [Joint Sensor](FET037_JointSensor.Isaac.md) | Isaac | 0-1-0 | `FET037_JointSensor.Isaac` |
+
+```{toctree}
+:maxdepth: 1
+:hidden:
+
+Feature dependency graph <feature-dependency-graph>
+Minimal Placeable Visual <FET001_MinimalPlaceableVisual>
+Rigid Body Physics <FET003_RigidBody>
+Rigid Body Physics (Newton) <FET003_RigidBody.Newton>
+Rigid Body Physics (PhysX) <FET003_RigidBody.PhysX>
+Simulate Multi-Body Physics <FET004_Multibody>
+Simulate Multi-Body Physics (Newton) <FET004_Multibody.Newton>
+Simulate Multi-Body Physics (PhysX) <FET004_Multibody.PhysX>
+Simulate Multi-Body Physics (Robot Newton) <FET004_Multibody.RobotNewton>
+Simulate Multi-Body Physics (Robot PhysX) <FET004_Multibody.RobotPhysX>
+Simulate Grasp Physics <FET005_Grasp>
+Materials (USDPreviewSurface) <FET006_Materials>
+Materials (MDL) <FET006_Materials.MDL>
+Materials (OpenPBR) <FET006_Materials.Openpbr>
+Object Forward <FET008_ObjectForward>
+Material Coverage <FET009_MaterialCoverage>
+Display Color <FET010_DisplayColor>
+Semantic Labels <FET011_SemanticLabels>
+Semantic Labels (RTX) <FET011_SemanticLabels.RTX>
+Sensor Visual 3DGS <FET012_GaussianSplat>
+Multi-Representation Visual <FET013_MultiRepresentationVisual>
+Visual Mesh Variant <FET014_MeshVariant>
+Collision Variant <FET015_CollisionVariant>
+Appearance Variant <FET016_AppearanceVariant>
+Driven Joints <FET022_DrivenJoints>
+Driven Joints (Isaac) <FET022_DrivenJoints.Isaac>
+Driven Joints (Newton) <FET022_DrivenJoints.Newton>
+Driven Joints (PhysX) <FET022_DrivenJoints.PhysX>
+Gripper <FET028_Gripper>
+Gripper (Isaac) <FET028_Gripper.Isaac>
+IMU Sensor <FET034_ImuSensor.Isaac>
+Camera and Render Products <FET035_RenderProducts.RTX>
+RTX Sensors <FET036_Lidar.RTX>
+Joint Sensor <FET037_JointSensor.Isaac>
+```

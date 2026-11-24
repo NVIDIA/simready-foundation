@@ -1,0 +1,1530 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" data-theme="auto">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Extending the Validation Sample: Adding a New Demo Validator &#8212; Content Capabilities</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=75c7c72ae941e8b558d8" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=75c7c72ae941e8b558d8" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/_style.css?v=e1c02e80" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/tags.css?v=03faa5c8" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
+
+
+
+    <script src="../_static/documentation_options.js?v=31aa9904"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'guides/SimReady_learning_workflow';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.24.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dsx-develop';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+
+    <link rel="icon" href="../_static/favicon.png"/>
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Attribute Naming Conventions" href="naming_conventions.html" />
+    <link rel="prev" title="Visual Materials Workflow" href="visual_materials/visual_materials.html" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="dsx-develop" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+
+
+  </head>
+
+  <body data-default-mode="auto">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation" aria-expanded="false" aria-controls="pst-primary-sidebar-modal">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Content Capabilities - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Content Capabilities - Home"/>
+  
+  
+    <p class="title logo__title">Content Capabilities</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-4"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-4"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-4"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-4">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button type="button" class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page" aria-expanded="false" aria-controls="pst-secondary-sidebar-modal">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal" tabindex="-1"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Content Capabilities - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Content Capabilities - Home"/>
+  
+  
+    <p class="title logo__title">Content Capabilities</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-5"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-5"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-5"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-5">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-6"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-6"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-6"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-6">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="guides.html">Guides</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tiers.html">SimReady Foundation Tiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="foundation_pypi.html">SimReady Foundation PyPI Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libraries.html">SimReady Python Libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validate_workflow.html">SimReady Validation Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="runtime_attribution_qa.html">Runtime Attribution QA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validator-integration.html">Foundations 2 Validator Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="foundations2-catalog-migration.html">Foundations 2 Catalog Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="foundations2-layout-migration.html">Foundations 2 Layout Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="semantic_labels/semantic_labels.html">Semantic Labels Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_a_custom_taxonomy.html">Adding a Custom Taxonomy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="packaging_workflow.html">SimReady Packaging Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thumbnail_guidelines.html">Thumbnail Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acceptance_workflow.html">SimReady Acceptance Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_contribution_workflow.html">External Contribution Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiphysics_solvers.html">Multiple Physics Solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_adapters/feature_adapters.html">Feature Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiles/profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="evaluate/evaluate.html">SimReady Evaluate</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="evaluate/overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="evaluate/pipeline.html">Pipeline and Stages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="evaluate/running.html">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="evaluate/reading-reports.html">Reading Reports</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="evaluate/tests/tests.html">Tests Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet001-visual.html">FET001 Visual</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet003-physics.html">FET003 Physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet004-multibody.html">FET004 Multibody</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet005-grasp.html">FET005 Grasp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet006-materials.html">FET006 Materials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet008-object-forward.html">FET008 Object Forward</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet010-display-color.html">FET010 Display Color</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet011-semantic-labels.html">FET011 Semantic Labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet012-gaussian-splat.html">FET012 Gaussian Splat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet013-representation.html">FET013 Multi-Representation Visual</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet014-mesh-variant.html">FET014 Mesh Variant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet015-collision-variant.html">FET015 Collision Variant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet016-appearance-variant.html">FET016 Appearance Variant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet022-driven-joints.html">FET022 Driven Joints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet028-gripper.html">FET028 Gripper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/authoring.html">Authoring runtime tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/experimental.html">Experimental and disabled tests</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="evaluate/newton-tests/runtime-tests.html">Newton Runtime Tests</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="evaluate/sensor-tests/tests.html">Sensor Tests Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/sensor-tests/fet034-imu-sensors.html">FET034 IMU Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/sensor-tests/fet035-render-products.html">FET035 Render Products</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/sensor-tests/fet036-rtx-sensors.html">FET036 RTX Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/sensor-tests/fet037-joint-sensors.html">FET037 Joint Sensors</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="visual_materials/visual_materials.html">Visual Materials Workflow</a></li>
+<li class="toctree-l2 current active"><a aria-current="page" class="current reference internal" href="#">SimReady Learning Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="naming_conventions.html">Naming Conventions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="development.html">Development Workflows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="features_expansion_workflow.html">Features Expansion Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../rules_and_reqs/rules_and_reqs.html">Rules and Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/core/core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/core/sim_ready/capability-sim_ready.html">SimReady</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/sim_ready/requirements.html">SimReady Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/sim_ready/requirements/metadata-whitelist.html">metadata-whitelist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/sim_ready/requirements/thumbnail-exist.html">Thumbnail Exist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/sim_ready/requirements/nested-simready-metadata.html">nested-simready-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/sim_ready/requirements/metadata-union.html">metadata-union</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/core/units/capability-units.html">Units</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/units/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/core/asset_frame/capability-asset_frame.html">Asset Frame</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/asset_frame/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/core/asset_variants/capability-asset_variants.html">Asset Variants</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/asset_variants/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/core/atomic_asset/capability-atomic_asset.html">Atomic Asset</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/atomic_asset/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/atomic_asset/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/capability-naming_paths.html">Naming and Paths</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements.html">Naming and Paths Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements/prim-naming-convention.html">prim-naming-convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements/file-naming-convention.html">file-naming-convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements/directory-structure.html">directory-structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements/path-length-limits.html">path-length-limits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements/asset-folder-structure.html">asset-folder-structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements/metadata-location.html">metadata-location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements/relative-paths.html">relative-paths</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/capability-runtime_variants.html">Runtime Variants</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements.html">Runtime Variants Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/physx-variant-set.html">physx-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/physx-runtime-payload.html">physx-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/physx-variant-metadata.html">physx-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/newton-variant-set.html">newton-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/newton-runtime-payload.html">newton-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/newton-variant-metadata.html">newton-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/mujoco-variant-set.html">mujoco-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/mujoco-runtime-payload.html">mujoco-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/mujoco-variant-metadata.html">mujoco-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/runtime-variant-section-purity.html">runtime-variant-section-purity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/runtime-physics-isolation.html">runtime-physics-isolation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/runtime-physics-isolation-matrix.html">Runtime Physics Isolation Matrix</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/visualization/visualization.html">Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/visualization/geometry/capability-geometry.html">Geometry</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/visualization/geometry/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/visualization/geometry/creators_overview.html">Creators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/visualization/geometry/developers_overview.html">Developers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/visualization/materials/capability-materials.html">Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/visualization/materials/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/visualization/materials/developers.html">Developers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/visualization/display_color/capability-display_color.html">Display Color</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/visualization/display_color/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/visualization/gaussian_splat/capability-gaussian_splat.html">Gaussian Splat</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/visualization/gaussian_splat/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/isaac_sim/isaac_sim.html">Isaac Sim</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/isaac_sim/composition/capability-composition.html">Composition</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/composition/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/isaac_sim/ros_bridge/capability-ros_bridge.html">ROS Bridge</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/ros_bridge/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/isaac_sim/robot_materials/capability-robot_materials.html">Robot Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/robot_materials/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/isaac_sim/robot_core/capability-robot_core.html">Robot Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/robot_core/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/isaac_sim/optimizations/capability-optimizations.html">Isaac Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/isaac_sim/optimizations/requirements.html">Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/optimizations/requirements/fixed-joint-no-mergeable-body-pair.html">fixed-joint-no-mergeable-body-pair</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/optimizations/requirements/rigid-body-no-multiple-visual-meshes.html">rigid-body-no-multiple-visual-meshes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/optimizations/requirements/render-only-no-inactive-collision-schemas.html">render-only-no-inactive-collision-schemas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/optimizations/requirements/material-no-materialx-render-context.html">material-no-materialx-render-context</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_bodies.html">Physics Bodies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/physics_bodies/base_articulation/capability-base-articulation.html">Base Articulation</a></li>
+
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_rigid_bodies/capability-physics_rigid_bodies.html">Rigid Bodies and Colliders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_rigid_bodies/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_rigid_bodies/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_colliders/capability-collider_approximations.html">Collider Approximations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_colliders/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_colliders/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_joints/capability-physics_joints.html">Joints and Articulations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_joints/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_joints/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_driven_joints/capability-physics_driven_joints.html">Driven Joints</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_driven_joints/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_materials/capability-physics_materials.html">Physics Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_materials/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_materials/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_graspable/capability-physics_graspable.html">Graspable Vectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_graspable/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_graspable/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_grippers/capability-physics_grippers.html">Grippers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_grippers/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_sensors/capability-physics_sensors.html">Physics Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_sensors/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/object_affordances/capability-object_affordances.html">Object Affordances</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/object_affordances/requirements.html">Object Affordances Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/object_affordances/requirements/object-affordance-valid.html">object-affordance-valid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/object_affordances/requirements/object-affordance-state-valid.html">object-affordance-state-valid</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/hierarchy/hierarchy.html">Hierarchy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/hierarchy/capability-hierarchy.html">Hierarchy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/hierarchy/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/hierarchy/creators_overview.html">Creators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/hierarchy/developers_overview.html">Developers</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_sensors.html">Non-Visual Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/capability-nonvisual_materials.html">Non-Visual Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements.html">Non-Visual Materials Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/nonvisual_attributes_table.html">Non-Visual Sensor Attributes Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-base.html">material-base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-coating.html">material-coating</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-attributes.html">material-attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-time.html">material-time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-binding.html">material-binding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-consistency.html">material-consistency</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/lidar/capability-lidar.html">LiDAR Sensor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/lidar/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/rendering/rendering.html">Rendering</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/rendering/render_products/capability-render_products.html">Render Products</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/rendering/render_products/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/semantic_labels/capability-semantic_labels.html">Semantic Labels</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements.html">Semantic Labels Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-capability.html">semantic-label-capability</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-deprecated-schema.html">semantic-label-deprecated-schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-qcode-valid.html">semantic-label-qcode-valid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-schema.html">semantic-label-schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-time.html">semantic-label-time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-material.html">semantic-label-material</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-capability.html">semantic-label-capability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-deprecated-schema.html">semantic-label-deprecated-schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-qcode-valid.html">semantic-label-qcode-valid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-schema.html">semantic-label-schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-time.html">semantic-label-time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-material.html">semantic-label-material</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/capability-dataset_taxonomies.html">Dataset Taxonomies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements.html">Dataset Taxonomies Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/coco-labels.html">coco-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/cityscapes-labels.html">cityscapes-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/ade20k-labels.html">ade20k-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/pascal-voc-labels.html">pascal-voc-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/sunrgbd-labels.html">sunrgbd-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/imagenet-labels.html">imagenet-labels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/coco-labels.html">coco-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/cityscapes-labels.html">cityscapes-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/ade20k-labels.html">ade20k-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/pascal-voc-labels.html">pascal-voc-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/sunrgbd-labels.html">sunrgbd-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/imagenet-labels.html">imagenet-labels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/packaging/packaging.html">Packaging</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/packaging/packaging_core/capability-packaging_core.html">Packaging Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/packaging/packaging_core/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/packaging/conformance_metadata/capability-conformance_metadata.html">Conformance Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/packaging/conformance_metadata/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/packaging/packaging_introspection/capability-packaging_introspection.html">Packaging Introspection</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/packaging/packaging_introspection/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/aif/aif.html">AIF</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/aif/metadata/capability-metadata.html">Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/aif/metadata/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/aif/connection_points/capability-connection_points.html">Connection Points</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/aif/connection_points/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/aif/thermal_cooling/capability-thermal_cooling.html">Thermal Cooling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/aif/thermal_cooling/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/aif/electrical/capability-electrical.html">Electrical</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/aif/electrical/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/template/template.html">Template</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/template/smoke/capability-smoke.html">Smoke</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/template/smoke/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../capabilities/capabilities.html">Capabilities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP000_Core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP000_Core.Isaac.html">Core (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP000_Core.MuJoCo.html">Core (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP000_Core.Newton.html">Core (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP000_Core.PhysX.html">Core (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP002_PosableBodies.html">Posable Bodies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP003_RigidBody.MuJoCo.html">Rigid Body Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP004_Multibody.MuJoCo.html">Simulate Multi-Body Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP004_Multibody.RobotMuJoCo.html">Simulate Multi-Body Physics (Robot MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP007_NonVisualMaterials.html">Non-Visual Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP021_RobotCore.Isaac.html">Robot Core (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP022_DrivenJoints.MuJoCo.html">Driven Joints (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP023_RobotMaterials.Isaac.html">Robot Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP024_BaseArticulation.html">Base Articulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP024_BaseArticulation.MuJoCo.html">Base Articulation (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP024_BaseArticulation.Newton.html">Base Articulation (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP024_BaseArticulation.PhysX.html">Base Articulation (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP025_RosBridge.Ros.html">ROS Ready (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP026_Mates.html">Mate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP027_Connections.html">Connections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP028_Gripper.MuJoCo.html">Gripper (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP029_ConnectionJoint.html">Connections Multibody-Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP029_ConnectionJoint.MuJoCo.html">Connections Multibody-Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP029_ConnectionJoint.Newton.html">Connections Multibody-Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP029_ConnectionJoint.PhysX.html">Connections Multibody-Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP030_PackagingCore.html">Packaging Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP031_SelfContainedPackage.html">Self-contained Package Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP032_PackagingIntrospection.html">Packaging Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP033_SimReadyPackage.html">Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP039_ObjectAffordances.html">Object Affordances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP040_CocoLabels.html">Semantic Labels - COCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP041_CityscapesLabels.html">Semantic Labels - Cityscapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP042_Ade20kLabels.html">Semantic Labels - ADE20K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP043_PascalVocLabels.html">Semantic Labels - PASCAL VOC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP044_SunRgbdLabels.html">Semantic Labels - SUN RGB-D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP045_ImageNet1kLabels.html">Semantic Labels - ImageNet-1K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP046_WikidataLabels.html">Semantic Labels - Wikidata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP1000_TemplateSmoke.Template.html">Template Smoke</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP100_IsaacComposition.Isaac.html">IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP101_RobotComposition.Isaac.html">Robot IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP102_RigidBodyCollapse.Isaac.html">Rigid-Body Collapse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP103_VisualMeshMerge.Isaac.html">Visual Mesh Merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP104_RenderCollisionSeparation.Isaac.html">Render-Collision Separation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP105_MaterialXRemoval.Isaac.html">MaterialX Removal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP200_AifMetadata.html">AIF Core Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP201_ConnectionPoints.html">Connection Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP202_ThermalCooling.html">AIF Thermal Cooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP203_Electrical.html">AIF Electrical</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/assembly/assembly.html">Assembly</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/assembly/mates/capability-mates.html">Mates</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/assembly/mates/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/assembly/connections/capability-connections.html">Connections</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/assembly/connections/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../features/features.html">Features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../features/feature-dependency-graph.html">Feature dependency graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET001_MinimalPlaceableVisual.html">Minimal Placeable Visual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET003_RigidBody.html">Rigid Body Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET003_RigidBody.Newton.html">Rigid Body Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET003_RigidBody.PhysX.html">Rigid Body Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET004_Multibody.html">Simulate Multi-Body Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET004_Multibody.Newton.html">Simulate Multi-Body Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET004_Multibody.PhysX.html">Simulate Multi-Body Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET004_Multibody.RobotNewton.html">Simulate Multi-Body Physics (Robot Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET004_Multibody.RobotPhysX.html">Simulate Multi-Body Physics (Robot PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET005_Grasp.html">Simulate Grasp Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET006_Materials.html">Materials (USDPreviewSurface)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET006_Materials.MDL.html">Materials (MDL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET006_Materials.Openpbr.html">Materials (OpenPBR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET008_ObjectForward.html">Object Forward</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET009_MaterialCoverage.html">Material Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET010_DisplayColor.html">Display Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET011_SemanticLabels.html">Semantic Labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET011_SemanticLabels.RTX.html">Semantic Labels (RTX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET012_GaussianSplat.html">Sensor Visual 3DGS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET013_MultiRepresentationVisual.html">Multi-Representation Visual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET014_MeshVariant.html">Visual Mesh Variant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET015_CollisionVariant.html">Collision Variant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET016_AppearanceVariant.html">Appearance Variant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET022_DrivenJoints.html">Driven Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET022_DrivenJoints.Isaac.html">Driven Joints (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET022_DrivenJoints.Newton.html">Driven Joints (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET022_DrivenJoints.PhysX.html">Driven Joints (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET028_Gripper.html">Gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET028_Gripper.Isaac.html">Gripper (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET034_ImuSensor.Isaac.html">IMU Sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET035_RenderProducts.RTX.html">Camera and Render Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET036_Lidar.RTX.html">RTX Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET037_JointSensor.Isaac.html">Joint Sensor</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../profiles/profiles.html">Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robotics-prop.html">Robotics Prop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/nurec.html">NuRec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/asset-optimization.html">Asset Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-body.html">Robot Body</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-gripper.html">Robot Gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/sensor-imu.html">Sensor IMU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/sensor-joint.html">Sensor Joint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/sensor-camera.html">Sensor Camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/sensor-lidar.html">Sensor LiDAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/material.html">Material</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/assembly.html">Assembly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-assembly.html">Robot Assembly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/open-taxonomy-coco.html">Open Taxonomy COCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/open-taxonomy-cityscapes.html">Open Taxonomy Cityscapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/open-taxonomy-ade20k.html">Open Taxonomy ADE20K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/open-taxonomy-pascal_voc.html">Open Taxonomy PASCAL VOC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/open-taxonomy-sunrgbd.html">Open Taxonomy SUN RGB-D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/open-taxonomy-imagenet_1k.html">Open Taxonomy ImageNet-1K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/aif-entity.html">AIF Entity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tiers/tiers.html">Tiers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tiers/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tiers/aif.html">AIF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tiers/newton.html">Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tiers/sensors.html">Sensors</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../indexes/indexes.html">Indexes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../indexes/capability_status_index.html">Capability Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../indexes/requirements_index.html">Requirements Index</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelist.html">Changelist</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-house"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="guides.html" class="nav-link">End to End Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Extending the Validation Sample: Adding a New Demo Validator</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="extending-the-validation-sample-adding-a-new-demo-validator">
+<h1>Extending the Validation Sample: Adding a New Demo Validator<a class="headerlink" href="#extending-the-validation-sample-adding-a-new-demo-validator" title="Link to this heading">#</a></h1>
+<p>This guide walks through adding another requirement and rule to the sample in <code class="docutils literal notranslate"><span class="pre">nv_core/validator_sample/</span></code>. You will add a <strong>requirement</strong> (what to check), a <strong>rule</strong> (the Python checker), a <strong>capability</strong> that bundles the new requirement, and a new <strong>profile version</strong> that selects it.</p>
+<section id="core-concepts">
+<h2>Core concepts<a class="headerlink" href="#core-concepts" title="Link to this heading">#</a></h2>
+<p>Before extending, it helps to understand the layers that make up the validation system and how they connect.</p>
+<section id="requirements">
+<h3>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h3>
+<p>A <strong>requirement</strong> is a single, concrete check that an asset must pass. Each requirement is defined as a detailed markdown file in <code class="docutils literal notranslate"><span class="pre">sample_requirements/</span></code> with:</p>
+<ul class="simple">
+<li><p>A <strong>code</strong> that combines a category prefix and a unique number (e.g. <code class="docutils literal notranslate"><span class="pre">SAMP.001</span></code>, <code class="docutils literal notranslate"><span class="pre">SAMP.002</span></code>).</p></li>
+<li><p>A <strong>version</strong> (e.g. <code class="docutils literal notranslate"><span class="pre">1.0.0</span></code>).</p></li>
+<li><p>Detailed documentation: Summary, Description, and <strong>Valid USDA</strong> / <strong>Invalid USDA</strong> subsections with concrete USDA snippets showing exactly what passes and what fails.</p></li>
+</ul>
+<p>The code generator reads these markdown files and produces Python enums. For example, the code <code class="docutils literal notranslate"><span class="pre">SAMP.002</span></code> becomes the enum member <code class="docutils literal notranslate"><span class="pre">SampleRequirements.SAMP_002</span></code> (dot to underscore). Requirements are grouped by prefix into a category: <code class="docutils literal notranslate"><span class="pre">SAMP</span></code> belongs to the “Sample” category, declared in <code class="docutils literal notranslate"><span class="pre">capability-sample.md</span></code>, which contains a requirements table listing all the <code class="docutils literal notranslate"><span class="pre">.md</span></code> files in that category (see <a class="reference internal" href="#appendix-requirement-category">Appendix: Requirement category</a>). This markdown category is not the same thing as the <code class="docutils literal notranslate"><span class="pre">CAP</span></code>-prefixed capability contract described below.</p>
+</section>
+<section id="rules">
+<h3>Rules<a class="headerlink" href="#rules" title="Link to this heading">#</a></h3>
+<p>A <strong>rule</strong> is the Python class that enforces a requirement. Each rule lives in its own <code class="docutils literal notranslate"><span class="pre">.py</span></code> file inside <code class="docutils literal notranslate"><span class="pre">sample_requirements/</span></code> and subclasses <code class="docutils literal notranslate"><span class="pre">BaseRuleChecker</span></code>. The class is decorated with <code class="docutils literal notranslate"><span class="pre">&#64;register_rule(&quot;&lt;CategoryName&gt;&quot;)</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;register_requirements(...)</span></code> to declare which requirement(s) it checks. When a rule detects a violation it calls <code class="docutils literal notranslate"><span class="pre">_AddFailedCheck(...)</span></code> with the specific <code class="docutils literal notranslate"><span class="pre">requirement=</span></code> so failures are reported against the right requirement code. <code class="docutils literal notranslate"><span class="pre">sample_requirements/__init__.py</span></code> auto-imports every rule module in the folder, so adding a new <code class="docutils literal notranslate"><span class="pre">.py</span></code> file is all that is needed to register a rule.</p>
+</section>
+<section id="capabilities">
+<h3>Capabilities<a class="headerlink" href="#capabilities" title="Link to this heading">#</a></h3>
+<p>A <strong>capability</strong> is a static contract: something you can say an asset has or doesn’t have (e.g. “properly named”, “has a Bar prim”). Capabilities are defined as JSON files in <code class="docutils literal notranslate"><span class="pre">sample_capabilities/</span></code> and each one bundles one or more requirements together. A capability <strong>passes only when all of its requirements pass</strong>. A capability can be backed by a single rule or by many rules that together define it.</p>
+<p>Every capability has one ID of the form <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;[.&lt;runtime&gt;].&lt;version&gt;</span></code>:</p>
+<ul class="simple">
+<li><p><strong>name</strong> — <code class="docutils literal notranslate"><span class="pre">CAP</span></code>, a number, and a descriptive suffix, e.g. <code class="docutils literal notranslate"><span class="pre">CAP900_ProperlyNamed</span></code>.</p></li>
+<li><p><strong>runtime</strong> — <code class="docutils literal notranslate"><span class="pre">OpenUSD</span></code> for checks that do not depend on a simulation runtime.</p></li>
+<li><p><strong>version</strong> — an opaque token with hyphens instead of dots, e.g. <code class="docutils literal notranslate"><span class="pre">1-0-0</span></code>.</p></li>
+</ul>
+<p>The ID is the capability’s only identity; there is no separate <code class="docutils literal notranslate"><span class="pre">version</span></code> field. A published ID is immutable: to change what a capability requires, publish a new version.</p>
+</section>
+<section id="features">
+<h3>Features<a class="headerlink" href="#features" title="Link to this heading">#</a></h3>
+<p>A <strong>feature</strong> is a contract that is also proven at runtime: something an asset can do in a simulator (e.g. “has physics”, “graspable”). Like a capability, a feature bundles one or more requirements and <strong>passes only when all of its requirements pass</strong>. A feature like “has physics” might require many rules (rigid bodies present, collision shapes, no invalid references, etc.). A feature also declares runtime tests, behavioral tests that load the asset into a simulator and check how it behaves.</p>
+<p>Features use the same ID scheme as capabilities with an <code class="docutils literal notranslate"><span class="pre">FET</span></code> prefix, e.g. <code class="docutils literal notranslate"><span class="pre">FET003_RigidBody.PhysX.0-4-0</span></code>, where the runtime segment names the simulator the tests run in. A contract with no runtime tests is a capability.</p>
+<p>This sample has no runtime tests, so it only uses capabilities. See <a class="reference internal" href="features/features.html"><span class="std std-doc">Features</span></a>.</p>
+</section>
+<section id="profiles">
+<h3>Profiles<a class="headerlink" href="#profiles" title="Link to this heading">#</a></h3>
+<p>A <strong>profile</strong> is the top-level configuration that selects which capabilities and features to validate. Profiles are defined in TOML (<code class="docutils literal notranslate"><span class="pre">sample_profiles/profiles.toml</span></code>); each profile version lists feature and capability selectors, and each selector matches one or more feature or capability IDs. When you run validation you run it <em>with a profile</em>; the profile determines which features and capabilities are active, which in turn determines which requirements (and their backing rules) actually execute. Published profile versions are immutable too: to change what a profile selects, add a new profile version.</p>
+</section>
+<section id="how-they-connect">
+<h3>How they connect<a class="headerlink" href="#how-they-connect" title="Link to this heading">#</a></h3>
+<p>The layers form a hierarchy:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Profile</span>  <span class="o">--</span><span class="n">selects</span><span class="o">--&gt;</span>  <span class="n">Features</span> <span class="o">/</span> <span class="n">Capabilities</span>  <span class="o">--</span><span class="n">group</span><span class="o">--&gt;</span>  <span class="n">Requirements</span>  <span class="o">--</span><span class="n">enforced</span> <span class="n">by</span><span class="o">--&gt;</span>  <span class="n">Rules</span> <span class="p">(</span><span class="n">Python</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>At runtime the system loads in this order (see also <a class="reference internal" href="#load-order-and-running">Section 5</a>):</p>
+<ol class="arabic simple">
+<li><p><strong>Requirements</strong> – codegen reads the markdown files and generates enums.</p></li>
+<li><p><strong>Rules</strong> – <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> auto-imports all rule modules in the folder; decorators register checkers against requirement enums.</p></li>
+<li><p><strong>Features and capabilities</strong> – JSON files are loaded, linking requirement codes to feature and capability IDs.</p></li>
+<li><p><strong>Profiles</strong> – TOML is loaded, and each selector is resolved against the loaded features and capabilities.</p></li>
+</ol>
+<p>In this sample everything is minimal: one requirement (<code class="docutils literal notranslate"><span class="pre">SAMP.001</span></code>), one capability (<code class="docutils literal notranslate"><span class="pre">CAP900_ProperlyNamed.1-0-0</span></code>), and one profile (<code class="docutils literal notranslate"><span class="pre">Sample-Profile</span></code>).</p>
+</section>
+</section>
+<section id="run-the-demo-validator">
+<h2>Run the demo validator<a class="headerlink" href="#run-the-demo-validator" title="Link to this heading">#</a></h2>
+<p>Before extending, confirm the sample works. From <code class="docutils literal notranslate"><span class="pre">nv_core/validator_sample/</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-validate<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--rules-path<span class="w"> </span>sample_requirements<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--features-path<span class="w"> </span>sample_capabilities<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--profiles-path<span class="w"> </span>sample_profiles/profiles.toml<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--profile<span class="w"> </span>Sample-Profile<span class="w"> </span>--version<span class="w"> </span><span class="m">1</span>.0.0<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>sample_assets/sample1.usda
+</pre></div>
+</div>
+<p>The terminal should report <code class="docutils literal notranslate"><span class="pre">[PASSED]</span> <span class="pre">Sample-Profile</span> <span class="pre">v1.0.0</span></code>. <code class="docutils literal notranslate"><span class="pre">--features-path</span></code> loads contract JSON of both kinds, <code class="docutils literal notranslate"><span class="pre">CAP</span></code> capabilities and <code class="docutils literal notranslate"><span class="pre">FET</span></code> features.</p>
+</section>
+<section id="where-is-samp-001-defined">
+<span id="where-is-samp001-defined"></span><h2>Where is SAMP.001 defined?<a class="headerlink" href="#where-is-samp-001-defined" title="Link to this heading">#</a></h2>
+<p>To see how the pieces fit together concretely, trace the existing sample through its files.</p>
+<p><strong>Profile</strong> (<code class="docutils literal notranslate"><span class="pre">sample_profiles/profiles.toml</span></code>):</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[Sample-Profile]</span>
+<span class="s2">"1.0.0"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">capabilities</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">selector</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"CAP900_ProperlyNamed.1-0-0"</span><span class="p">},</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+<p><strong>Capability</strong> (<code class="docutils literal notranslate"><span class="pre">sample_capabilities/CAP900_ProperlyNamed.1-0-0.json</span></code>):</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CAP900_ProperlyNamed.1-0-0"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ProperlyNamed"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"requirements"</span><span class="p">:</span>
+<span class="w">    </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"SAMP.001"</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Rule</strong> (<code class="docutils literal notranslate"><span class="pre">sample_requirements/rule_name_checker.py</span></code>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@register_rule</span><span class="p">(</span><span class="s2">"Sample"</span><span class="p">)</span>
+<span class="nd">@register_requirements</span><span class="p">(</span><span class="n">cap</span><span class="o">.</span><span class="n">SampleRequirements</span><span class="o">.</span><span class="n">SAMP_001</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SampleNameChecker</span><span class="p">(</span><span class="n">BaseRuleChecker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    The default prim must be named "Foo".</span>
+<span class="sd">    """</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CheckStage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">):</span>
+        <span class="n">default_prim</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetDefaultPrim</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">default_prim</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_AddFailedCheck</span><span class="p">(</span><span class="s2">"Stage has no default prim."</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="n">stage</span><span class="p">,</span> <span class="n">requirement</span><span class="o">=</span><span class="n">cap</span><span class="o">.</span><span class="n">SampleRequirements</span><span class="o">.</span><span class="n">SAMP_001</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="n">default_prim</span><span class="o">.</span><span class="n">GetName</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">"Foo"</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_AddFailedCheck</span><span class="p">(</span><span class="s2">"Root prim must be named 'Foo'."</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="n">default_prim</span><span class="p">,</span> <span class="n">requirement</span><span class="o">=</span><span class="n">cap</span><span class="o">.</span><span class="n">SampleRequirements</span><span class="o">.</span><span class="n">SAMP_001</span><span class="p">)</span>
+            <span class="k">return</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">sample_requirements/__init__.py</span></code> auto-imports every <code class="docutils literal notranslate"><span class="pre">.py</span></code> module in the folder, so this rule is registered automatically.</p>
+<p><strong>Asset</strong> (<code class="docutils literal notranslate"><span class="pre">sample_assets/sample1.usda</span></code>):</p>
+<div class="highlight-usda notranslate"><div class="highlight"><pre><span></span><span class="c1">#usda 1.0</span>
+<span class="p">(</span>
+<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Foo"</span>
+<span class="w">    </span>metersPerUnit<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="n n-Builtins">upAxis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Z"</span>
+<span class="p">)</span>
+
+<span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"Foo"</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"Geometry"</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k k-Tokens">def</span><span class="w"> </span>Xform<span class="w"> </span><span class="s">"some_transform"</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">--profile</span> <span class="pre">Sample-Profile</span> <span class="pre">--version</span> <span class="pre">1.0.0</span></code> arguments select the profile target. The validator resolves the profile’s selector to <code class="docutils literal notranslate"><span class="pre">CAP900_ProperlyNamed.1-0-0</span></code>, collects its requirement (<code class="docutils literal notranslate"><span class="pre">SAMP.001</span></code>), and runs the matching rule. The caller always chooses the profile target; it is never inferred from asset metadata. See <a class="reference internal" href="#appendix-caller-supplied-profile-targets">Caller-supplied profile targets</a>.</p>
+</section>
+<section id="what-the-sample-does-samp-001-only">
+<span id="what-the-sample-does-samp001-only"></span><h2>What the sample does (SAMP.001 only)<a class="headerlink" href="#what-the-sample-does-samp-001-only" title="Link to this heading">#</a></h2>
+<p>The sample ships with a single requirement, <strong>SAMP.001</strong>: the stage must have a default prim named exactly <code class="docutils literal notranslate"><span class="pre">&quot;Foo&quot;</span></code>. Nothing else is checked. The rule that enforces this is <code class="docutils literal notranslate"><span class="pre">SampleNameChecker</span></code> in <code class="docutils literal notranslate"><span class="pre">sample_requirements/rule_name_checker.py</span></code>; the requirement is documented in <code class="docutils literal notranslate"><span class="pre">sample_requirements/requirement-name.md</span></code>.</p>
+<p><strong>Valid USDA</strong> — the asset passes when the stage has a default prim named “Foo”:</p>
+<div class="highlight-usda notranslate"><div class="highlight"><pre><span></span><span class="c1">#usda 1.0</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Foo"</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Or with explicit defaultPrim:</p>
+<div class="highlight-usda notranslate"><div class="highlight"><pre><span></span><span class="c1">#usda 1.0</span>
+<span class="p">(</span>
+<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Foo"</span>
+<span class="p">)</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Foo"</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Invalid USDA</strong> — the asset fails when there is no default prim, or the default prim has any other name:</p>
+<ul class="simple">
+<li><p><strong>No default prim</strong> — the stage has no default prim set:</p></li>
+</ul>
+<div class="highlight-usda notranslate"><div class="highlight"><pre><span></span><span class="c1">#usda 1.0</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"SomePrim"</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Default prim has a different name</strong> — the default prim exists but is not named “Foo”:</p></li>
+</ul>
+<div class="highlight-usda notranslate"><div class="highlight"><pre><span></span><span class="c1">#usda 1.0</span>
+<span class="p">(</span>
+<span class="w">    </span><span class="n n-Builtins">defaultPrim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Bar"</span>
+<span class="p">)</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Bar"</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Full details and snippets are in <code class="docutils literal notranslate"><span class="pre">sample_requirements/requirement-name.md</span></code>.</p>
+</section>
+<section id="when-you-extend-what-we-want-samp-002-to-do">
+<span id="when-you-extend-what-we-want-samp002-to-do"></span><h2>When you extend: what we want SAMP.002 to do<a class="headerlink" href="#when-you-extend-what-we-want-samp-002-to-do" title="Link to this heading">#</a></h2>
+<p><strong>Goal:</strong> We will add a new requirement. When you add a second requirement, keep it <strong>different</strong> from SAMP.001 (which is only about the default prim). A good next step is <strong>SAMP.002</strong>: the stage must contain at least one prim named <code class="docutils literal notranslate"><span class="pre">&quot;Bar&quot;</span></code>, anywhere in the hierarchy. That is a separate, simple check (traverse the stage; look for a prim whose name is “Bar”). We define the requirement in markdown, implement the rule in Python, bundle it in a new capability, and select that capability from a new profile version. The published <code class="docutils literal notranslate"><span class="pre">Sample-Profile</span></code> <code class="docutils literal notranslate"><span class="pre">1.0.0</span></code> and <code class="docutils literal notranslate"><span class="pre">CAP900_ProperlyNamed.1-0-0</span></code> stay unchanged.</p>
+<blockquote>
+<div><p><strong>Note:</strong> Do all the work below from <code class="docutils literal notranslate"><span class="pre">nv_core/validator_sample/</span></code>.</p>
+</div></blockquote>
+</section>
+<section id="define-a-new-requirement-markdown">
+<span id="1-define-a-new-requirement-markdown"></span><h2>1. Define a New Requirement (Markdown)<a class="headerlink" href="#define-a-new-requirement-markdown" title="Link to this heading">#</a></h2>
+<p>Requirements are specified in markdown under <code class="docutils literal notranslate"><span class="pre">sample_requirements/</span></code>. Use an existing category prefix (e.g. <code class="docutils literal notranslate"><span class="pre">SAMP</span></code> for Sample) so the code generator produces enums like <code class="docutils literal notranslate"><span class="pre">SampleRequirements.SAMP_002</span></code>. To add a new category, see <a class="reference internal" href="#appendix-requirement-category">Appendix: Requirement category</a>.</p>
+<p><strong>These requirement files should be very detailed.</strong> Follow the same structure as the existing sample (<code class="docutils literal notranslate"><span class="pre">sample_requirements/requirement-name.md</span></code>): a clear Summary, a full Description, and <strong>Valid USDA</strong> / <strong>Invalid USDA</strong> subsections with explanatory text and concrete USDA snippets for each pass/fail case. That level of detail makes the requirement unambiguous for implementers and for documentation.</p>
+<section id="a-add-the-requirement-markdown">
+<span id="1a-add-the-requirement-markdown"></span><h3>1a. Add the requirement markdown<a class="headerlink" href="#a-add-the-requirement-markdown" title="Link to this heading">#</a></h3>
+<p>Add a new <code class="docutils literal notranslate"><span class="pre">.md</span></code> file in <code class="docutils literal notranslate"><span class="pre">sample_requirements/</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">requirement-has-bar.md</span></code> for a requirement that is <em>not</em> about the default prim (SAMP.001 already covers that). Example for SAMP.002 = stage must contain a prim named “Bar”, in the same detailed style as the sample:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gh"># has-bar</span>
+
+| Code     | SAMP.002 |
+|----------|-----------|
+| Version  | 1.0.0 |
+| Validator| {oav-validator-latest-link}`samp-002` |
+| Compatibility | {compatibility}`sample` |
+| Tags     | {tag}`essential` |
+
+<span class="gu">## Summary</span>
+
+The stage must contain at least one prim named "Bar".
+
+<span class="gu">## Description</span>
+
+This requirement ensures that the USD stage has at least one prim whose name is exactly "Bar", anywhere in the hierarchy. It is independent of the default prim (SAMP.001). The prim may be at root or under another prim.
+
+<span class="gu">### Valid USDA</span>
+
+The asset passes SAMP.002 when the stage contains at least one prim named "Bar". For example:
+
+<span class="sb">```usda</span>
+<span class="c1">#usda 1.0</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Foo"</span>
+<span class="p">{</span>
+<span class="p">}</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Bar"</span>
+<span class="p">{</span>
+<span class="p">}</span>
+<span class="sb">```</span>
+
+"Bar" may also be nested; the rule traverses the stage:
+
+<span class="sb">```usda</span>
+<span class="c1">#usda 1.0</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Foo"</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Bar"</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="sb">```</span>
+
+<span class="gu">### Invalid USDA</span>
+
+The asset fails SAMP.002 if:
+
+<span class="k">-</span><span class="w"> </span><span class="gs">**No prim named "Bar"**</span> — the stage has no prim with that name:
+
+<span class="sb">```usda</span>
+<span class="c1">#usda 1.0</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Foo"</span>
+<span class="p">{</span>
+<span class="p">}</span>
+<span class="k k-Tokens">def</span><span class="w"> </span><span class="s">"Baz"</span>
+<span class="p">{</span>
+<span class="p">}</span>
+<span class="sb">```</span>
+
+<span class="k">-</span><span class="w"> </span><span class="gs">**Only similar names**</span> — "Bar" must match exactly (e.g. "bar", "BarChild" do not satisfy the requirement).
+</pre></div>
+</div>
+<p>Important:</p>
+<ul class="simple">
+<li><p>At the top, the <strong>Code</strong> header must use the category prefix (e.g. <code class="docutils literal notranslate"><span class="pre">SAMP</span></code>) and a unique number: <code class="docutils literal notranslate"><span class="pre">SAMP.002</span></code>, <code class="docutils literal notranslate"><span class="pre">SAMP.003</span></code>, etc.</p></li>
+<li><p>Add this requirement’s filename to the category’s requirements table (see <a class="reference internal" href="#b-make-the-requirement-discoverable">step 1b</a> and <a class="reference internal" href="#appendix-requirement-category">Appendix: Requirement category</a>).</p></li>
+</ul>
+<p>The generator converts <code class="docutils literal notranslate"><span class="pre">SAMP.002</span></code> to the enum member <code class="docutils literal notranslate"><span class="pre">SampleRequirements.SAMP_002</span></code> (dot → underscore).</p>
+</section>
+<section id="b-make-the-requirement-discoverable">
+<span id="1b-make-the-requirement-discoverable"></span><h3>1b. Make the requirement discoverable<a class="headerlink" href="#b-make-the-requirement-discoverable" title="Link to this heading">#</a></h3>
+<p>Add <code class="docutils literal notranslate"><span class="pre">requirement-has-bar</span></code> to the <code class="docutils literal notranslate"><span class="pre">{requirements-table}</span></code> in the category markdown <code class="docutils literal notranslate"><span class="pre">sample_requirements/capability-sample.md</span></code>:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gh"># Sample</span>
+
+<span class="gs">**Capability:**</span> Sample (SAMP)
+
+<span class="gu">## Overview</span>
+
+A sample category for demo requirements.
+
+<span class="gu">## Requirements</span>
+
+```{requirements-table}
+requirement-name
+<span class="hll">requirement-has-bar
+</span>```
+</pre></div>
+</div>
+<p>Without this entry the code generator will not produce an enum for SAMP.002 and the rule will not be loadable.</p>
+</section>
+</section>
+<section id="implement-the-rule-python">
+<span id="2-implement-the-rule-python"></span><h2>2. Implement the Rule (Python)<a class="headerlink" href="#implement-the-rule-python" title="Link to this heading">#</a></h2>
+<p>Each rule lives in its own <code class="docutils literal notranslate"><span class="pre">.py</span></code> file inside <code class="docutils literal notranslate"><span class="pre">sample_requirements/</span></code>. The <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> auto-imports every module in the folder, so adding a new file is all that is needed to register a rule.</p>
+<section id="a-add-a-checker-class">
+<span id="2a-add-a-checker-class"></span><h3>2a. Add a checker class<a class="headerlink" href="#a-add-a-checker-class" title="Link to this heading">#</a></h3>
+<p>Subclass <code class="docutils literal notranslate"><span class="pre">BaseRuleChecker</span></code> and decorate with:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;register_rule(&quot;&lt;CategoryName&gt;&quot;)</span></code> — must match the category (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;Sample&quot;</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;register_requirements(cap.SampleRequirements.SAMP_002)</span></code> — one or more requirement enums.</p></li>
+</ul>
+<p>Example: a rule for SAMP.002 that the stage must contain a prim named “Bar” (different from SAMP.001’s default-prim check). Create a new file <code class="docutils literal notranslate"><span class="pre">sample_requirements/rule_has_bar_checker.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">omni.capabilities</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cap</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">usd_validation_nvidia</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">BaseRuleChecker</span><span class="p">,</span>
+    <span class="n">register_requirements</span><span class="p">,</span>
+    <span class="n">register_rule</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">Usd</span>
+
+<span class="nd">@register_rule</span><span class="p">(</span><span class="s2">"Sample"</span><span class="p">)</span>
+<span class="nd">@register_requirements</span><span class="p">(</span><span class="n">cap</span><span class="o">.</span><span class="n">SampleRequirements</span><span class="o">.</span><span class="n">SAMP_002</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SampleHasBarChecker</span><span class="p">(</span><span class="n">BaseRuleChecker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Stage must contain a prim named 'Bar'."""</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CheckStage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stage</span><span class="p">:</span> <span class="n">Usd</span><span class="o">.</span><span class="n">Stage</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">prim</span> <span class="ow">in</span> <span class="n">stage</span><span class="o">.</span><span class="n">Traverse</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">prim</span><span class="o">.</span><span class="n">GetName</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"Bar"</span><span class="p">:</span>
+                <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_AddFailedCheck</span><span class="p">(</span><span class="s2">"Stage must contain a prim named 'Bar'."</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="n">stage</span><span class="p">,</span> <span class="n">requirement</span><span class="o">=</span><span class="n">cap</span><span class="o">.</span><span class="n">SampleRequirements</span><span class="o">.</span><span class="n">SAMP_002</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">requirement=...</span></code> so failures are tied to the right requirement (needed for capability pass/fail and summaries).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">at=</span></code> can be a <code class="docutils literal notranslate"><span class="pre">Usd.Stage</span></code> or a <code class="docutils literal notranslate"><span class="pre">Usd.Prim</span></code> for location info.</p></li>
+</ul>
+</section>
+</section>
+<section id="add-a-capability-json">
+<span id="3-add-a-capability-json"></span><h2>3. Add a Capability (JSON)<a class="headerlink" href="#add-a-capability-json" title="Link to this heading">#</a></h2>
+<p>The rule is now defined, but it is not part of any capability — so no profile can select it. Create <code class="docutils literal notranslate"><span class="pre">sample_capabilities/CAP901_HasBar.1-0-0.json</span></code>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CAP901_HasBar.1-0-0"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HasBar"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"SAMP.002"</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>id</strong> — The capability’s only identity: <code class="docutils literal notranslate"><span class="pre">CAP</span></code> plus a number and name, the runtime (<code class="docutils literal notranslate"><span class="pre">OpenUSD</span></code>), and the version token. Name the file after the ID.</p></li>
+<li><p><strong>requirements</strong> — Requirement codes as strings (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;SAMP.002&quot;</span></code>). Only registered requirements (from the Python module) are used; a capability that lists an unregistered code is skipped at load, and any profile that selects it fails to resolve.</p></li>
+<li><p><strong>display_name</strong> — Optional human-readable label.</p></li>
+</ul>
+<p>You can list multiple requirement codes if this capability is composed of several rules (e.g. <code class="docutils literal notranslate"><span class="pre">[&quot;SAMP.002&quot;,</span> <span class="pre">&quot;SAMP.003&quot;]</span></code>). The capability passes only when all of them pass. A capability can also list exact capability IDs it builds on in a <code class="docutils literal notranslate"><span class="pre">dependencies</span></code> array; the validator pulls those in whenever this one is selected.</p>
+</section>
+<section id="add-a-profile-version-toml">
+<span id="4-add-a-profile-version-toml"></span><h2>4. Add a Profile Version (TOML)<a class="headerlink" href="#add-a-profile-version-toml" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Sample-Profile</span></code> <code class="docutils literal notranslate"><span class="pre">1.0.0</span></code> is published, so leave it as it is and add version <code class="docutils literal notranslate"><span class="pre">1.1.0</span></code> to <code class="docutils literal notranslate"><span class="pre">sample_profiles/profiles.toml</span></code>, selecting both capabilities:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[Sample-Profile]</span>
+<span class="s2">"1.0.0"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">capabilities</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">selector</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"CAP900_ProperlyNamed.1-0-0"</span><span class="p">},</span>
+<span class="p">]}</span>
+<span class="s2">"1.1.0"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">capabilities</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">selector</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"CAP900_ProperlyNamed.1-0-0"</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="n">selector</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"CAP901_HasBar.1-0-0"</span><span class="p">},</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+<p>Each entry is a table with a <code class="docutils literal notranslate"><span class="pre">selector</span></code> key. A selector that matches no loaded capability is an error, unless it is marked optional (see <a class="reference internal" href="#appendix-optional-and-wildcard-selectors">Appendix: Optional and wildcard selectors</a>).</p>
+</section>
+<section id="load-order-and-running">
+<span id="5-load-order-and-running"></span><h2>5. Load Order and Running<a class="headerlink" href="#load-order-and-running" title="Link to this heading">#</a></h2>
+<p>The sample loads in this order:</p>
+<ol class="arabic simple">
+<li><p><strong>Requirements</strong> (from <code class="docutils literal notranslate"><span class="pre">sample_requirements/</span></code>): codegen generates enums → injected into <code class="docutils literal notranslate"><span class="pre">omni.capabilities</span></code>.</p></li>
+<li><p><strong>Rules</strong>: <code class="docutils literal notranslate"><span class="pre">sample_requirements/__init__.py</span></code> auto-imports all rule modules in the folder; their <code class="docutils literal notranslate"><span class="pre">&#64;register_rule</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;register_requirements</span></code> decorators register checkers.</p></li>
+<li><p><strong>Capabilities</strong>: JSON files under <code class="docutils literal notranslate"><span class="pre">sample_capabilities/</span></code> are loaded and registered.</p></li>
+<li><p><strong>Profiles</strong>: <code class="docutils literal notranslate"><span class="pre">sample_profiles/profiles.toml</span></code> is loaded, and each selector is resolved against the registered capabilities.</p></li>
+</ol>
+<p>Run validation against the new profile version:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-validate<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--rules-path<span class="w"> </span>sample_requirements<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--features-path<span class="w"> </span>sample_capabilities<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--profiles-path<span class="w"> </span>sample_profiles/profiles.toml<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--profile<span class="w"> </span>Sample-Profile<span class="w"> </span>--version<span class="w"> </span><span class="m">1</span>.1.0<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>sample_assets/sample1.usda
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">sample1.usda</span></code> has no prim named “Bar”, so the new capability fails:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  [FAILED] Sample-Profile v1.1.0
+           CAP901_HasBar.1-0-0: failing requirements: ['com.nvidia.simready.SAMP.002']
+</pre></div>
+</div>
+<p>Add a <code class="docutils literal notranslate"><span class="pre">Bar</span></code> prim anywhere under <code class="docutils literal notranslate"><span class="pre">Foo</span></code> and the asset passes. Validating against <code class="docutils literal notranslate"><span class="pre">--version</span> <span class="pre">1.0.0</span></code> still passes, because that profile version does not select the new capability. Add <code class="docutils literal notranslate"><span class="pre">-v</span></code> to print each issue’s message.</p>
+</section>
+<section id="checklist-for-extending">
+<h2>Checklist for extending<a class="headerlink" href="#checklist-for-extending" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Requirement (markdown):</strong> New <code class="docutils literal notranslate"><span class="pre">.md</span></code> in <code class="docutils literal notranslate"><span class="pre">sample_requirements/</span></code> with unique <code class="docutils literal notranslate"><span class="pre">Code</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">SAMP.002</span></code>), and include it in the category’s requirements table (see appendix).</p></li>
+<li><p><strong>Rule (Python):</strong> Add a new <code class="docutils literal notranslate"><span class="pre">.py</span></code> file in <code class="docutils literal notranslate"><span class="pre">sample_requirements/</span></code> with a <code class="docutils literal notranslate"><span class="pre">BaseRuleChecker</span></code> with <code class="docutils literal notranslate"><span class="pre">&#64;register_rule(&quot;Sample&quot;)</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;register_requirements(cap.SampleRequirements.SAMP_002)</span></code>, and implement the check with <code class="docutils literal notranslate"><span class="pre">_AddFailedCheck(...,</span> <span class="pre">requirement=...)</span></code>.</p></li>
+<li><p><strong>Capability (JSON):</strong> Add <code class="docutils literal notranslate"><span class="pre">sample_capabilities/CAP901_HasBar.1-0-0.json</span></code> listing <code class="docutils literal notranslate"><span class="pre">&quot;SAMP.002&quot;</span></code>.</p></li>
+<li><p><strong>Profile (TOML):</strong> Add a new <code class="docutils literal notranslate"><span class="pre">Sample-Profile</span></code> version that selects the new capability. Leave published versions unchanged.</p></li>
+<li><p><strong>Run:</strong> Validate <code class="docutils literal notranslate"><span class="pre">sample_assets/sample1.usda</span></code> against the new profile version and confirm your rule runs.</p></li>
+</ol>
+</section>
+<section id="tips">
+<h2>Tips<a class="headerlink" href="#tips" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Naming:</strong> Keep requirement codes and enum names in sync: code <code class="docutils literal notranslate"><span class="pre">SAMP.002</span></code> → <code class="docutils literal notranslate"><span class="pre">SAMP_002</span></code> in <code class="docutils literal notranslate"><span class="pre">SampleRequirements</span></code>.</p></li>
+<li><p><strong>One rule, multiple requirements:</strong> You can use <code class="docutils literal notranslate"><span class="pre">&#64;register_requirements(cap.SampleRequirements.SAMP_001,</span> <span class="pre">cap.SampleRequirements.SAMP_002)</span></code> and pass the appropriate <code class="docutils literal notranslate"><span class="pre">requirement</span></code> in each <code class="docutils literal notranslate"><span class="pre">_AddFailedCheck</span></code> so the right requirement is reported.</p></li>
+<li><p><strong>Existing sample:</strong> SAMP.001 is in <code class="docutils literal notranslate"><span class="pre">requirement-name.md</span></code> and <code class="docutils literal notranslate"><span class="pre">SampleNameChecker</span></code> in <code class="docutils literal notranslate"><span class="pre">rule_name_checker.py</span></code>; add SAMP.002 as a different check (e.g. stage contains prim named Bar).</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="appendix-adding-a-requirement-to-an-existing-capability">
+<h2>Appendix: Adding a requirement to an existing capability<a class="headerlink" href="#appendix-adding-a-requirement-to-an-existing-capability" title="Link to this heading">#</a></h2>
+<p>To make SAMP.002 part of “ProperlyNamed” instead of a separate capability, publish a new version of that capability rather than editing <code class="docutils literal notranslate"><span class="pre">1-0-0</span></code>. Create <code class="docutils literal notranslate"><span class="pre">sample_capabilities/CAP900_ProperlyNamed.1-1-0.json</span></code>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CAP900_ProperlyNamed.1-1-0"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ProperlyNamed"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"requirements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"SAMP.001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SAMP.002"</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then select it from a new profile version:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="s2">"1.2.0"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">capabilities</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">selector</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"CAP900_ProperlyNamed.1-1-0"</span><span class="p">},</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+<p>Assets and profiles that reference <code class="docutils literal notranslate"><span class="pre">CAP900_ProperlyNamed.1-0-0</span></code> keep their original meaning. Use a separate capability when the new rule represents something you want to report or gate on independently; use a new version when it refines the same concept.</p>
+</section>
+<section id="appendix-optional-and-wildcard-selectors">
+<h2>Appendix: Optional and wildcard selectors<a class="headerlink" href="#appendix-optional-and-wildcard-selectors" title="Link to this heading">#</a></h2>
+<p>Mark a selector <code class="docutils literal notranslate"><span class="pre">optional</span> <span class="pre">=</span> <span class="pre">true</span></code> to run its checks and report failures without failing the profile:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="s2">"1.3.0"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">capabilities</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">selector</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"CAP900_ProperlyNamed.1-0-0"</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="n">selector</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"CAP901_HasBar.1-0-0"</span><span class="p">,</span><span class="w"> </span><span class="n">optional</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span><span class="p">},</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+<p>Validating <code class="docutils literal notranslate"><span class="pre">sample1.usda</span></code> against this version passes and lists <code class="docutils literal notranslate"><span class="pre">CAP901_HasBar.1-0-0</span></code> with its unmet <code class="docutils literal notranslate"><span class="pre">SAMP.002</span></code> requirement. An optional selector that matches nothing is allowed; a required one is an error. If the same capability is selected both ways, required wins.</p>
+<p>Selectors may also leave trailing segments off or use <code class="docutils literal notranslate"><span class="pre">*</span></code> wildcards. <code class="docutils literal notranslate"><span class="pre">CAP900_ProperlyNamed</span></code> selects every runtime and version of that capability, and <code class="docutils literal notranslate"><span class="pre">CAP901</span></code> selects the whole <code class="docutils literal notranslate"><span class="pre">CAP901</span></code> family. Wildcard selectors pick up new matching versions automatically, so use an exact ID when the profile must stay reproducible. See <a class="reference internal" href="profiles/profiles.html"><span class="std std-doc">Profiles</span></a> for the full selector rules.</p>
+</section>
+<section id="appendix-requirement-category">
+<h2>Appendix: Requirement category<a class="headerlink" href="#appendix-requirement-category" title="Link to this heading">#</a></h2>
+<p>A requirement category groups requirements by code prefix (e.g. “Sample”). The foundation spec code generator turns the prefix into an enum namespace: <code class="docutils literal notranslate"><span class="pre">SAMP</span></code> → <code class="docutils literal notranslate"><span class="pre">SampleRequirements</span></code> with codes like <code class="docutils literal notranslate"><span class="pre">SAMP_001</span></code>.</p>
+<p>If you are adding a new category, add a category file like <code class="docutils literal notranslate"><span class="pre">sample_requirements/capability-sample.md</span></code>:</p>
+<ul class="simple">
+<li><p><strong>Capability:</strong> <code class="docutils literal notranslate"><span class="pre">&lt;Name&gt;</span></code> (<code class="docutils literal notranslate"><span class="pre">&lt;PREFIX&gt;</span></code>), e.g. <code class="docutils literal notranslate"><span class="pre">Sample</span> <span class="pre">(SAMP)</span></code>.</p></li>
+<li><p><strong>Requirements table:</strong> list the requirement file names (without <code class="docutils literal notranslate"><span class="pre">.md</span></code>) that belong to this category, using the <code class="docutils literal notranslate"><span class="pre">requirements-table</span></code> directive.</p></li>
+</ul>
+<p>When you add a new requirement <code class="docutils literal notranslate"><span class="pre">.md</span></code> file, add that requirement’s filename (no <code class="docutils literal notranslate"><span class="pre">.md</span></code>) to the category’s requirements table so it is part of that category.</p>
+</section>
+<section id="appendix-caller-supplied-profile-targets">
+<h2>Appendix: Caller-supplied profile targets<a class="headerlink" href="#appendix-caller-supplied-profile-targets" title="Link to this heading">#</a></h2>
+<p>This sample specifies one profile target explicitly (<code class="docutils literal notranslate"><span class="pre">Sample-Profile</span></code>, <code class="docutils literal notranslate"><span class="pre">1.0.0</span></code>).
+Production callers may provide several targets for the same asset, for example a
+robotics profile and a marketplace-delivery profile. Resolve and validate every
+<code class="docutils literal notranslate"><span class="pre">(profile,</span> <span class="pre">version)</span></code> pair independently and retain one result per target.</p>
+<p>Do not treat a <code class="docutils literal notranslate"><span class="pre">SimReady_Metadata.profile</span></code> value as a declaration of what the
+asset can satisfy; it only records which target was last validated. Validation
+targets come from the caller. The reference multi-profile orchestration helper
+is <code class="docutils literal notranslate"><span class="pre">simready.foundation.validation.validate_profiles</span></code>.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="visual_materials/visual_materials.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Visual Materials Workflow</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="naming_conventions.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Attribute Naming Conventions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal" tabindex="-1"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-concepts">Core concepts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rules">Rules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#capabilities">Capabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#features">Features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#profiles">Profiles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-they-connect">How they connect</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-demo-validator">Run the demo validator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-is-samp-001-defined">Where is SAMP.001 defined?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-the-sample-does-samp-001-only">What the sample does (SAMP.001 only)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-you-extend-what-we-want-samp-002-to-do">When you extend: what we want SAMP.002 to do</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-new-requirement-markdown">1. Define a New Requirement (Markdown)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-add-the-requirement-markdown">1a. Add the requirement markdown</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-make-the-requirement-discoverable">1b. Make the requirement discoverable</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implement-the-rule-python">2. Implement the Rule (Python)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-add-a-checker-class">2a. Add a checker class</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-a-capability-json">3. Add a Capability (JSON)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-a-profile-version-toml">4. Add a Profile Version (TOML)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-order-and-running">5. Load Order and Running</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checklist-for-extending">Checklist for extending</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tips">Tips</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-adding-a-requirement-to-an-existing-capability">Appendix: Adding a requirement to an existing capability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-optional-and-wildcard-selectors">Appendix: Optional and wildcard selectors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-requirement-category">Appendix: Requirement category</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-caller-supplied-profile-targets">Appendix: Caller-supplied profile targets</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8"></script>
+
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2025-2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

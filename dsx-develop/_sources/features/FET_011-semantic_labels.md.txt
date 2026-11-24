@@ -1,0 +1,17 @@
+---
+orphan: true
+---
+
+# `FET_011-semantic_labels`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=FET011_SemanticLabels.html" />
+<link rel="canonical" href="FET011_SemanticLabels.html" />
+```
+
+This published feature route moved to [`FET011_SemanticLabels`](FET011_SemanticLabels.md) (Foundations 1 ID: `FET_011_STANDARD`).
+
+Split runtime contracts:
+
+- [`FET011_SemanticLabels`](FET011_SemanticLabels.md) (`FET_011_STANDARD`)
+- [`FET011_SemanticLabels.RTX`](FET011_SemanticLabels.RTX.md) (`FET_011_RTX`)

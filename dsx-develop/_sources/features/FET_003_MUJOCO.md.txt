@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_003_MUJOCO`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP003_RigidBody.MuJoCo.html" />
+<link rel="canonical" href="../capabilities/CAP003_RigidBody.MuJoCo.html" />
+```
+
+This published feature route moved to [`CAP003_RigidBody.MuJoCo`](../capabilities/CAP003_RigidBody.MuJoCo.md) (Foundations 1 ID: `FET_003_MUJOCO`).

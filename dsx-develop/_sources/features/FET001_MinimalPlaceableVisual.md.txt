@@ -1,0 +1,179 @@
+# Feature: `FET001_MinimalPlaceableVisual`
+
+| **Property**            | **Value**         |
+|-------------------------|-------------------|
+| Contract                | `FET001_MinimalPlaceableVisual` |
+| Runtime                 | `OpenUSD` |
+| Proprietary Techs       | `None` |
+| Versions                | `0-1-0`, `1-0-0`, `1-0-1` |
+
+## Description
+
+The Minimal Placeable Visual feature defines the standard OpenUSD contract for
+an asset that can be loaded, placed, transformed, and rendered as a visible
+object in a broad range of applications.
+
+An asset that satisfies this feature has supported asset paths and file types,
+known stage units and up axis, a valid default prim, a single xformable root for
+placement, mesh-based visible geometry, authored extents, valid mesh topology,
+valid normals and winding, and an origin placement suitable for aggregation
+into scenes.
+
+## Dependency Graph
+
+This feature has no JSON feature dependencies. In normal profile workflows it
+is validated after `CAP000_Core` because Core establishes the asset layout,
+metadata, and path contract that Minimal builds on.
+
+## Use Cases
+
+- Synthetic data generation and scene assembly.
+- Robotics and simulation asset placement.
+- Visual inspection of converted CAD, DCC, MJCF, or USD assets.
+- Baseline renderability checks before physics, materials, grasp, robot, or
+  runtime-specific features are applied.
+
+## Requirements
+
+### Version 0-1-0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+No profile selects this version.
+
+#### Feature Dependencies
+
+None.
+
+#### Requirement List
+
+* Capability: [Core/Atomic Asset](../rules_and_reqs/core/atomic_asset/capability-atomic_asset.md)
+    * Requirements:
+        * [Anchored-Asset-Paths](../rules_and_reqs/core/atomic_asset/requirements/anchored-asset-paths.md)
+            * `AA.001` | Version `0.1.0`
+            * Rule: provided by `usd-validation-nvidia`
+        * [Supported-File-Types](../rules_and_reqs/core/atomic_asset/requirements/supported-file-types.md)
+            * `AA.002` | Version `0.1.0`
+            * Rule: provided by `usd-validation-nvidia`
+* Capability: [Core/Units](../rules_and_reqs/core/units/capability-units.md)
+    * Requirements:
+        * [UpAxis](../rules_and_reqs/core/units/requirements/upaxis.md)
+            * `UN.001` | Version `0.1.0`
+        * [Meters-Per-Unit](../rules_and_reqs/core/units/requirements/meters-per-unit.md)
+            * `UN.002` | Version `0.1.0`
+        * [Meters-Per-Unit-1](../rules_and_reqs/core/units/requirements/meters-per-unit-1.md)
+            * `UN.007` | Version `0.1.0`
+* Capability: [Visualization/Geometry](../rules_and_reqs/visualization/geometry/capability-geometry.md)
+    * Requirements:
+        * [At-Least-One-Imageable-Geometry](../rules_and_reqs/visualization/geometry/requirements/at-least-one-imageable-geometry.md)
+            * `VG.001` | Version `0.1.0`
+* Capability: [Hierarchy](../rules_and_reqs/hierarchy/hierarchy.md)
+    * Requirements:
+        * [Stage-Has-Default-Prim](../rules_and_reqs/hierarchy/requirements/stage-has-default-prim.md)
+            * `HI.004` | Version `0.1.0`
+
+</details>
+
+### Version 1-0-0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+- [AIF-Entity](../profiles/aif-entity.md): required in `0.1.0`, `0.2.0`
+
+#### Feature Dependencies
+
+None.
+
+#### Changes From Version 0-1-0
+
+Version 1-0-0 keeps `AA.001`, `AA.002`, `UN.007`, and `HI.004`.
+
+| Change | Requirement | Reason |
+|--------|-------------|--------|
+| Removed | `UN.001` | Replaced by the stricter Z-up requirement. |
+| Removed | `UN.002` | The feature now requires meter units through `UN.007`. |
+| Removed | `VG.001` | Replaced by explicit mesh representation and mesh-quality requirements. |
+| Added | `UN.006` | Requires the stage up axis to be `Z`. |
+| Added | `VG.MESH.001` | Requires visible geometry to be represented as mesh geometry. |
+| Added | `VG.002` | Requires authored extents on boundable geometry. |
+| Added | `VG.014` | Requires valid mesh topology. |
+| Added | `VG.029` | Requires correct mesh winding order. |
+| Added | `VG.025` | Requires asset origin placement suitable for the asset type. |
+| Added | `VG.027` | Requires surface normals on non-subdivided meshes. |
+| Added | `VG.028` | Requires valid mesh normals. |
+| Added | `HI.001` | Requires all asset content under one root hierarchy. |
+| Added | `HI.003` | Requires the root prim to be xformable. |
+
+</details>
+
+### Version 1-0-1
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+- [Robot-Body](../profiles/robot-body.md): required in `2.0.0`, `2.1.0`, `2.2.0`, `2.3.0`, `3.0.0`
+- [Robot-Gripper](../profiles/robot-gripper.md): required in `2.0.0`, `2.1.0`, `2.2.0`, `3.0.0`
+- [Robotics-Prop](../profiles/robotics-prop.md): required in `3.0.0`, `3.1.0`, `3.2.0`, `3.3.0`, `4.0.0`
+
+#### Feature Dependencies
+
+None.
+
+#### Changes From Version 1-0-0
+
+Version 1-0-1 keeps all Version 1-0-0 requirements and adds:
+
+| Change | Requirement | Reason |
+|--------|-------------|--------|
+| Added | `VG.008` | Requires geometry cached extent conformance used by the latest Minimal visual validation. |
+
+</details>
+
+## Pipelines
+
+Source file type:
+
+- `.blend`
+  - Via Blender SimReady Add-ons
+- `.mjcf`
+  - Via Blender SimReady Add-ons and MJCF2USD Tool
+- `.step`
+  - Via Blender SimReady Add-ons and CAD Converter
+
+Validation or runtime pipeline:
+
+- SimReady validation - verifies the Minimal requirement IDs listed in the
+  selected `FET001_MinimalPlaceableVisual` manifest.
+- SimReady Evaluate FET001 Visual - verifies visible pixels, lighting
+  response, normals, culling, winding, and pivot behavior in a runtime render
+  pipeline.
+
+## Samples
+
+- [sample_content/common_assets/props_general/obs_lamp_revolute_a01/simready_usd/sm_obs_lamp_revolute_a01_01.usda](../../../../../sample_content/common_assets/props_general/obs_lamp_revolute_a01/simready_usd/sm_obs_lamp_revolute_a01_01.usda)
+
+## Evaluates
+
+- Suite: [FET001 Visual](../guides/evaluate/tests/fet001-visual.md)
+  - Tests:
+    - [presence](../guides/evaluate/tests/fet001/presence.md)
+    - [normals_xz](../guides/evaluate/tests/fet001/normals-xz.md)
+    - [culling_xz](../guides/evaluate/tests/fet001/culling-xz.md)
+    - [light_response](../guides/evaluate/tests/fet001/light-response.md)
+    - [pivot](../guides/evaluate/tests/fet001/pivot.md)
+
+## Adapters
+
+| From Feature | To Feature | Adapter | Status | Notes |
+|--------------|------------|---------|--------|-------|
+| `FET001_MinimalPlaceableVisual.0-1-0` | `CAP100_IsaacComposition.Isaac.0-1-0` | — | Deprecated | The former Kit-extension adapter is no longer registered. |
+| `FET001_MinimalPlaceableVisual.1-0-1` | `CAP100_IsaacComposition.Isaac.0-4-0` | `nv_core/tiers/simready_foundation_tier_core/tools/asset_handler_modules/physx_to_isaacsim` | Done | Converts a Minimal Standard asset through the public Asset Transformer and SimReady prop profile. |
+| `FET001_MinimalPlaceableVisual.1-0-1` | `CAP101_RobotComposition.Isaac.0-1-0` | `nv_core/tiers/simready_foundation_tier_core/tools/asset_handler_modules/physx_to_isaacsim` | Done | Converts a Minimal Standard asset through the public Asset Transformer and SimReady robot profile. |

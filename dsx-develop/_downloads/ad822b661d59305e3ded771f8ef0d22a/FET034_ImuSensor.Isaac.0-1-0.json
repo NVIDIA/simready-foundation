@@ -1,0 +1,17 @@
+{
+  "id": "FET034_ImuSensor.Isaac.0-1-0",
+  "display_name": "IMU Sensor",
+  "legacy_identity": {
+    "id": "FET_034_ISAAC",
+    "version": "0.1.0"
+  },
+  "additional_requirements": [
+    "PS.001"
+  ],
+  "adapters": [
+    "skill:simready-foundation-conform-fet-034-isaac"
+  ],
+  "runtime_tests": [
+    "simready.foundation.sensors.runtime_tests:imu_sensor_data"
+  ]
+}

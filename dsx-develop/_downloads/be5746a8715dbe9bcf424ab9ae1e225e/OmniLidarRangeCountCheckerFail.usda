@@ -1,0 +1,21 @@
+#usda 1.0
+(
+    defaultPrim = "Lidar"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def OmniLidar "Lidar" (
+    prepend apiSchemas = ["OmniSensorGenericLidarCoreAPI"]
+)
+{
+    uint omni:sensor:Core:numberOfEmitters = 1
+    uint omni:sensor:Core:numberOfChannels = 1
+    uint omni:sensor:Core:scanRateBaseHz = 10
+    token omni:sensor:Core:scanType = "ROTARY"
+    uint omni:sensor:Core:rangeCount = 2
+    float[] omni:sensor:Core:rangesMinM = [0.05]
+    float[] omni:sensor:Core:rangesMaxM = [30, 50]
+    float[] omni:sensor:Core:emitterState:s001:azimuthDeg = [0]
+    uint[] omni:sensor:Core:emitterState:s001:channelId = [1]
+}

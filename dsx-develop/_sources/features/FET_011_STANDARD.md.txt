@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_011_STANDARD`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=FET011_SemanticLabels.html" />
+<link rel="canonical" href="FET011_SemanticLabels.html" />
+```
+
+This published feature route moved to [`FET011_SemanticLabels`](FET011_SemanticLabels.md) (Foundations 1 ID: `FET_011_STANDARD`).

@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_046_STANDARD`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP046_WikidataLabels.html" />
+<link rel="canonical" href="../capabilities/CAP046_WikidataLabels.html" />
+```
+
+This published feature route moved to [`CAP046_WikidataLabels`](../capabilities/CAP046_WikidataLabels.md) (Foundations 1 ID: `FET_046_STANDARD`).

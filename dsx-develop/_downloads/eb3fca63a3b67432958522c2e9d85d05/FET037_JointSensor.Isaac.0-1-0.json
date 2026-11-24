@@ -1,0 +1,17 @@
+{
+  "id": "FET037_JointSensor.Isaac.0-1-0",
+  "display_name": "Joint Sensor",
+  "legacy_identity": {
+    "id": "FET_037_ISAAC",
+    "version": "0.1.0"
+  },
+  "additional_requirements": [
+    "PS.002"
+  ],
+  "adapters": [
+    "skill:simready-foundation-conform-fet-037-isaac"
+  ],
+  "runtime_tests": [
+    "simready.foundation.sensors.runtime_tests:joint_sensor_data"
+  ]
+}

@@ -1,0 +1,1314 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" data-theme="auto">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>gripper_close_lift_cube (FET028 Gripper) &#8212; Content Capabilities</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=75c7c72ae941e8b558d8" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=75c7c72ae941e8b558d8" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/_style.css?v=e1c02e80" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/tags.css?v=03faa5c8" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
+
+
+
+    <script src="../../../../_static/documentation_options.js?v=31aa9904"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'guides/evaluate/tests/fet028/gripper-close-lift-cube';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.24.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dsx-develop';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+
+    <link rel="icon" href="../../../../_static/favicon.png"/>
+
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Configured hand trials (FET028)" href="hand-trial-controls.html" />
+    <link rel="prev" title="gripper_close_lift_sphere (FET028 Gripper)" href="gripper-close-lift-sphere.html" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="dsx-develop" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
+
+
+  </head>
+
+  <body data-default-mode="auto">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation" aria-expanded="false" aria-controls="pst-primary-sidebar-modal">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Content Capabilities - Home"/>
+    <img src="../../../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Content Capabilities - Home"/>
+  
+  
+    <p class="title logo__title">Content Capabilities</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-4"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-4"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-4"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-4">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button type="button" class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page" aria-expanded="false" aria-controls="pst-secondary-sidebar-modal">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal" tabindex="-1"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Content Capabilities - Home"/>
+    <img src="../../../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Content Capabilities - Home"/>
+  
+  
+    <p class="title logo__title">Content Capabilities</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-5"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-5"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-5"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-5">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-6"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-6"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-6"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-6">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../../guides.html">Guides</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tiers.html">SimReady Foundation Tiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../foundation_pypi.html">SimReady Foundation PyPI Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../libraries.html">SimReady Python Libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../validate_workflow.html">SimReady Validation Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../runtime_attribution_qa.html">Runtime Attribution QA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../validator-integration.html">Foundations 2 Validator Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../foundations2-catalog-migration.html">Foundations 2 Catalog Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../foundations2-layout-migration.html">Foundations 2 Layout Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../semantic_labels/semantic_labels.html">Semantic Labels Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../adding_a_custom_taxonomy.html">Adding a Custom Taxonomy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../packaging_workflow.html">SimReady Packaging Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../thumbnail_guidelines.html">Thumbnail Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../acceptance_workflow.html">SimReady Acceptance Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../external_contribution_workflow.html">External Contribution Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../multiphysics_solvers.html">Multiple Physics Solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../feature_adapters/feature_adapters.html">Feature Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles/profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../../evaluate.html">SimReady Evaluate</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pipeline.html">Pipeline and Stages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../running.html">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reading-reports.html">Reading Reports</a></li>
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="../tests.html">Tests Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../fet001-visual.html">FET001 Visual</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fet003-physics.html">FET003 Physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fet004-multibody.html">FET004 Multibody</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fet005-grasp.html">FET005 Grasp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fet006-materials.html">FET006 Materials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fet008-object-forward.html">FET008 Object Forward</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fet010-display-color.html">FET010 Display Color</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fet011-semantic-labels.html">FET011 Semantic Labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fet012-gaussian-splat.html">FET012 Gaussian Splat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fet013-representation.html">FET013 Multi-Representation Visual</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fet014-mesh-variant.html">FET014 Mesh Variant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fet015-collision-variant.html">FET015 Collision Variant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fet016-appearance-variant.html">FET016 Appearance Variant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fet022-driven-joints.html">FET022 Driven Joints</a></li>
+<li class="toctree-l4 current active"><a class="reference internal" href="../fet028-gripper.html">FET028 Gripper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../authoring.html">Authoring runtime tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../experimental.html">Experimental and disabled tests</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../../newton-tests/runtime-tests.html">Newton Runtime Tests</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../sensor-tests/tests.html">Sensor Tests Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../sensor-tests/fet034-imu-sensors.html">FET034 IMU Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sensor-tests/fet035-render-products.html">FET035 Render Products</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sensor-tests/fet036-rtx-sensors.html">FET036 RTX Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../sensor-tests/fet037-joint-sensors.html">FET037 Joint Sensors</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../visual_materials/visual_materials.html">Visual Materials Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../SimReady_learning_workflow.html">SimReady Learning Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../naming_conventions.html">Naming Conventions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../development.html">Development Workflows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../features_expansion_workflow.html">Features Expansion Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../rules_and_reqs/rules_and_reqs.html">Rules and Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../rules_and_reqs/core/core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/core/sim_ready/capability-sim_ready.html">SimReady</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/sim_ready/requirements.html">SimReady Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/sim_ready/requirements/metadata-whitelist.html">metadata-whitelist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/sim_ready/requirements/thumbnail-exist.html">Thumbnail Exist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/sim_ready/requirements/nested-simready-metadata.html">nested-simready-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/sim_ready/requirements/metadata-union.html">metadata-union</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/core/units/capability-units.html">Units</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/units/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/core/asset_frame/capability-asset_frame.html">Asset Frame</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/asset_frame/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/core/asset_variants/capability-asset_variants.html">Asset Variants</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/asset_variants/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/core/atomic_asset/capability-atomic_asset.html">Atomic Asset</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/atomic_asset/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/atomic_asset/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/core/naming_paths/capability-naming_paths.html">Naming and Paths</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/naming_paths/requirements.html">Naming and Paths Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/naming_paths/requirements/prim-naming-convention.html">prim-naming-convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/naming_paths/requirements/file-naming-convention.html">file-naming-convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/naming_paths/requirements/directory-structure.html">directory-structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/naming_paths/requirements/path-length-limits.html">path-length-limits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/naming_paths/requirements/asset-folder-structure.html">asset-folder-structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/naming_paths/requirements/metadata-location.html">metadata-location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/naming_paths/requirements/relative-paths.html">relative-paths</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/core/runtime_variants/capability-runtime_variants.html">Runtime Variants</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/runtime_variants/requirements.html">Runtime Variants Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/runtime_variants/requirements/physx-variant-set.html">physx-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/runtime_variants/requirements/physx-runtime-payload.html">physx-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/runtime_variants/requirements/physx-variant-metadata.html">physx-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/runtime_variants/requirements/newton-variant-set.html">newton-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/runtime_variants/requirements/newton-runtime-payload.html">newton-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/runtime_variants/requirements/newton-variant-metadata.html">newton-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/runtime_variants/requirements/mujoco-variant-set.html">mujoco-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/runtime_variants/requirements/mujoco-runtime-payload.html">mujoco-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/runtime_variants/requirements/mujoco-variant-metadata.html">mujoco-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/runtime_variants/requirements/runtime-variant-section-purity.html">runtime-variant-section-purity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/runtime_variants/requirements/runtime-physics-isolation.html">runtime-physics-isolation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/core/runtime_variants/runtime-physics-isolation-matrix.html">Runtime Physics Isolation Matrix</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../rules_and_reqs/visualization/visualization.html">Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/visualization/geometry/capability-geometry.html">Geometry</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/visualization/geometry/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/visualization/geometry/creators_overview.html">Creators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/visualization/geometry/developers_overview.html">Developers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/visualization/materials/capability-materials.html">Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/visualization/materials/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/visualization/materials/developers.html">Developers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/visualization/display_color/capability-display_color.html">Display Color</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/visualization/display_color/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/visualization/gaussian_splat/capability-gaussian_splat.html">Gaussian Splat</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/visualization/gaussian_splat/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../rules_and_reqs/isaac_sim/isaac_sim.html">Isaac Sim</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/isaac_sim/composition/capability-composition.html">Composition</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/isaac_sim/composition/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/isaac_sim/ros_bridge/capability-ros_bridge.html">ROS Bridge</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/isaac_sim/ros_bridge/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/isaac_sim/robot_materials/capability-robot_materials.html">Robot Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/isaac_sim/robot_materials/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/isaac_sim/robot_core/capability-robot_core.html">Robot Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/isaac_sim/robot_core/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../rules_and_reqs/isaac_sim/optimizations/capability-optimizations.html">Isaac Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/isaac_sim/optimizations/requirements.html">Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/isaac_sim/optimizations/requirements/fixed-joint-no-mergeable-body-pair.html">fixed-joint-no-mergeable-body-pair</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/isaac_sim/optimizations/requirements/rigid-body-no-multiple-visual-meshes.html">rigid-body-no-multiple-visual-meshes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/isaac_sim/optimizations/requirements/render-only-no-inactive-collision-schemas.html">render-only-no-inactive-collision-schemas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/isaac_sim/optimizations/requirements/material-no-materialx-render-context.html">material-no-materialx-render-context</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/physics_bodies.html">Physics Bodies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/base_articulation/capability-base-articulation.html">Base Articulation</a></li>
+
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/physics_rigid_bodies/capability-physics_rigid_bodies.html">Rigid Bodies and Colliders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/physics_rigid_bodies/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/physics_rigid_bodies/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/physics_colliders/capability-collider_approximations.html">Collider Approximations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/physics_colliders/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/physics_colliders/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/physics_joints/capability-physics_joints.html">Joints and Articulations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/physics_joints/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/physics_joints/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/physics_driven_joints/capability-physics_driven_joints.html">Driven Joints</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/physics_driven_joints/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/physics_materials/capability-physics_materials.html">Physics Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/physics_materials/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/physics_materials/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/physics_graspable/capability-physics_graspable.html">Graspable Vectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/physics_graspable/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/physics_graspable/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/physics_grippers/capability-physics_grippers.html">Grippers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/physics_grippers/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/physics_sensors/capability-physics_sensors.html">Physics Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/physics_sensors/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/object_affordances/capability-object_affordances.html">Object Affordances</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/object_affordances/requirements.html">Object Affordances Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/object_affordances/requirements/object-affordance-valid.html">object-affordance-valid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/physics_bodies/object_affordances/requirements/object-affordance-state-valid.html">object-affordance-state-valid</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../rules_and_reqs/hierarchy/hierarchy.html">Hierarchy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/hierarchy/capability-hierarchy.html">Hierarchy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/hierarchy/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/hierarchy/creators_overview.html">Creators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/hierarchy/developers_overview.html">Developers</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../rules_and_reqs/nonvisual_sensors/nonvisual_sensors.html">Non-Visual Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/nonvisual_sensors/nonvisual_materials/capability-nonvisual_materials.html">Non-Visual Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements.html">Non-Visual Materials Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/nonvisual_sensors/nonvisual_materials/nonvisual_attributes_table.html">Non-Visual Sensor Attributes Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-base.html">material-base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-coating.html">material-coating</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-attributes.html">material-attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-time.html">material-time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-binding.html">material-binding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-consistency.html">material-consistency</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/nonvisual_sensors/lidar/capability-lidar.html">LiDAR Sensor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/nonvisual_sensors/lidar/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../rules_and_reqs/rendering/rendering.html">Rendering</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/rendering/render_products/capability-render_products.html">Render Products</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/rendering/render_products/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../rules_and_reqs/semantic_labels/capability-semantic_labels.html">Semantic Labels</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/semantic_labels/requirements.html">Semantic Labels Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/semantic_labels/requirements/semantic-label-capability.html">semantic-label-capability</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/semantic_labels/requirements/semantic-label-deprecated-schema.html">semantic-label-deprecated-schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/semantic_labels/requirements/semantic-label-qcode-valid.html">semantic-label-qcode-valid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/semantic_labels/requirements/semantic-label-schema.html">semantic-label-schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/semantic_labels/requirements/semantic-label-time.html">semantic-label-time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/semantic_labels/requirements/semantic-label-material.html">semantic-label-material</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../rules_and_reqs/semantic_labels/requirements/semantic-label-capability.html">semantic-label-capability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../rules_and_reqs/semantic_labels/requirements/semantic-label-deprecated-schema.html">semantic-label-deprecated-schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../rules_and_reqs/semantic_labels/requirements/semantic-label-qcode-valid.html">semantic-label-qcode-valid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../rules_and_reqs/semantic_labels/requirements/semantic-label-schema.html">semantic-label-schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../rules_and_reqs/semantic_labels/requirements/semantic-label-time.html">semantic-label-time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../rules_and_reqs/semantic_labels/requirements/semantic-label-material.html">semantic-label-material</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../rules_and_reqs/dataset_taxonomies/capability-dataset_taxonomies.html">Dataset Taxonomies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/dataset_taxonomies/requirements.html">Dataset Taxonomies Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/dataset_taxonomies/requirements/coco-labels.html">coco-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/dataset_taxonomies/requirements/cityscapes-labels.html">cityscapes-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/dataset_taxonomies/requirements/ade20k-labels.html">ade20k-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/dataset_taxonomies/requirements/pascal-voc-labels.html">pascal-voc-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/dataset_taxonomies/requirements/sunrgbd-labels.html">sunrgbd-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/dataset_taxonomies/requirements/imagenet-labels.html">imagenet-labels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../rules_and_reqs/dataset_taxonomies/requirements/coco-labels.html">coco-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../rules_and_reqs/dataset_taxonomies/requirements/cityscapes-labels.html">cityscapes-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../rules_and_reqs/dataset_taxonomies/requirements/ade20k-labels.html">ade20k-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../rules_and_reqs/dataset_taxonomies/requirements/pascal-voc-labels.html">pascal-voc-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../rules_and_reqs/dataset_taxonomies/requirements/sunrgbd-labels.html">sunrgbd-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../rules_and_reqs/dataset_taxonomies/requirements/imagenet-labels.html">imagenet-labels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../rules_and_reqs/packaging/packaging.html">Packaging</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/packaging/packaging_core/capability-packaging_core.html">Packaging Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/packaging/packaging_core/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/packaging/conformance_metadata/capability-conformance_metadata.html">Conformance Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/packaging/conformance_metadata/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/packaging/packaging_introspection/capability-packaging_introspection.html">Packaging Introspection</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/packaging/packaging_introspection/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../rules_and_reqs/aif/aif.html">AIF</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/aif/metadata/capability-metadata.html">Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/aif/metadata/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/aif/connection_points/capability-connection_points.html">Connection Points</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/aif/connection_points/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/aif/thermal_cooling/capability-thermal_cooling.html">Thermal Cooling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/aif/thermal_cooling/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/aif/electrical/capability-electrical.html">Electrical</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/aif/electrical/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../rules_and_reqs/template/template.html">Template</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/template/smoke/capability-smoke.html">Smoke</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/template/smoke/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../capabilities/capabilities.html">Capabilities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP000_Core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP000_Core.Isaac.html">Core (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP000_Core.MuJoCo.html">Core (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP000_Core.Newton.html">Core (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP000_Core.PhysX.html">Core (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP002_PosableBodies.html">Posable Bodies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP003_RigidBody.MuJoCo.html">Rigid Body Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP004_Multibody.MuJoCo.html">Simulate Multi-Body Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP004_Multibody.RobotMuJoCo.html">Simulate Multi-Body Physics (Robot MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP007_NonVisualMaterials.html">Non-Visual Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP021_RobotCore.Isaac.html">Robot Core (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP022_DrivenJoints.MuJoCo.html">Driven Joints (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP023_RobotMaterials.Isaac.html">Robot Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP024_BaseArticulation.html">Base Articulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP024_BaseArticulation.MuJoCo.html">Base Articulation (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP024_BaseArticulation.Newton.html">Base Articulation (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP024_BaseArticulation.PhysX.html">Base Articulation (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP025_RosBridge.Ros.html">ROS Ready (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP026_Mates.html">Mate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP027_Connections.html">Connections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP028_Gripper.MuJoCo.html">Gripper (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP029_ConnectionJoint.html">Connections Multibody-Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP029_ConnectionJoint.MuJoCo.html">Connections Multibody-Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP029_ConnectionJoint.Newton.html">Connections Multibody-Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP029_ConnectionJoint.PhysX.html">Connections Multibody-Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP030_PackagingCore.html">Packaging Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP031_SelfContainedPackage.html">Self-contained Package Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP032_PackagingIntrospection.html">Packaging Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP033_SimReadyPackage.html">Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP039_ObjectAffordances.html">Object Affordances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP040_CocoLabels.html">Semantic Labels - COCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP041_CityscapesLabels.html">Semantic Labels - Cityscapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP042_Ade20kLabels.html">Semantic Labels - ADE20K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP043_PascalVocLabels.html">Semantic Labels - PASCAL VOC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP044_SunRgbdLabels.html">Semantic Labels - SUN RGB-D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP045_ImageNet1kLabels.html">Semantic Labels - ImageNet-1K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP046_WikidataLabels.html">Semantic Labels - Wikidata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP1000_TemplateSmoke.Template.html">Template Smoke</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP100_IsaacComposition.Isaac.html">IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP101_RobotComposition.Isaac.html">Robot IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP102_RigidBodyCollapse.Isaac.html">Rigid-Body Collapse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP103_VisualMeshMerge.Isaac.html">Visual Mesh Merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP104_RenderCollisionSeparation.Isaac.html">Render-Collision Separation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP105_MaterialXRemoval.Isaac.html">MaterialX Removal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP200_AifMetadata.html">AIF Core Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP201_ConnectionPoints.html">Connection Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP202_ThermalCooling.html">AIF Thermal Cooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../capabilities/CAP203_Electrical.html">AIF Electrical</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../rules_and_reqs/assembly/assembly.html">Assembly</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/assembly/mates/capability-mates.html">Mates</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/assembly/mates/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../rules_and_reqs/assembly/connections/capability-connections.html">Connections</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../rules_and_reqs/assembly/connections/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../features/features.html">Features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/feature-dependency-graph.html">Feature dependency graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET001_MinimalPlaceableVisual.html">Minimal Placeable Visual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET003_RigidBody.html">Rigid Body Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET003_RigidBody.Newton.html">Rigid Body Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET003_RigidBody.PhysX.html">Rigid Body Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET004_Multibody.html">Simulate Multi-Body Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET004_Multibody.Newton.html">Simulate Multi-Body Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET004_Multibody.PhysX.html">Simulate Multi-Body Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET004_Multibody.RobotNewton.html">Simulate Multi-Body Physics (Robot Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET004_Multibody.RobotPhysX.html">Simulate Multi-Body Physics (Robot PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET005_Grasp.html">Simulate Grasp Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET006_Materials.html">Materials (USDPreviewSurface)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET006_Materials.MDL.html">Materials (MDL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET006_Materials.Openpbr.html">Materials (OpenPBR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET008_ObjectForward.html">Object Forward</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET009_MaterialCoverage.html">Material Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET010_DisplayColor.html">Display Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET011_SemanticLabels.html">Semantic Labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET011_SemanticLabels.RTX.html">Semantic Labels (RTX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET012_GaussianSplat.html">Sensor Visual 3DGS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET013_MultiRepresentationVisual.html">Multi-Representation Visual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET014_MeshVariant.html">Visual Mesh Variant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET015_CollisionVariant.html">Collision Variant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET016_AppearanceVariant.html">Appearance Variant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET022_DrivenJoints.html">Driven Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET022_DrivenJoints.Isaac.html">Driven Joints (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET022_DrivenJoints.Newton.html">Driven Joints (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET022_DrivenJoints.PhysX.html">Driven Joints (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET028_Gripper.html">Gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET028_Gripper.Isaac.html">Gripper (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET034_ImuSensor.Isaac.html">IMU Sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET035_RenderProducts.RTX.html">Camera and Render Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET036_Lidar.RTX.html">RTX Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../features/FET037_JointSensor.Isaac.html">Joint Sensor</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../profiles/profiles.html">Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/robotics-prop.html">Robotics Prop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/nurec.html">NuRec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/asset-optimization.html">Asset Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/robot-body.html">Robot Body</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/robot-gripper.html">Robot Gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/sensor-imu.html">Sensor IMU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/sensor-joint.html">Sensor Joint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/sensor-camera.html">Sensor Camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/sensor-lidar.html">Sensor LiDAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/material.html">Material</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/assembly.html">Assembly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/robot-assembly.html">Robot Assembly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/open-taxonomy-coco.html">Open Taxonomy COCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/open-taxonomy-cityscapes.html">Open Taxonomy Cityscapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/open-taxonomy-ade20k.html">Open Taxonomy ADE20K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/open-taxonomy-pascal_voc.html">Open Taxonomy PASCAL VOC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/open-taxonomy-sunrgbd.html">Open Taxonomy SUN RGB-D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/open-taxonomy-imagenet_1k.html">Open Taxonomy ImageNet-1K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../profiles/aif-entity.html">AIF Entity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../tiers/tiers.html">Tiers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tiers/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tiers/aif.html">AIF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tiers/newton.html">Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tiers/sensors.html">Sensors</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../indexes/indexes.html">Indexes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../indexes/capability_status_index.html">Capability Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../indexes/requirements_index.html">Requirements Index</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelist.html">Changelist</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-house"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../guides.html" class="nav-link">End to End Guides</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../../evaluate.html" class="nav-link">SimReady Evaluate</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../tests.html" class="nav-link">Evaluate Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../fet028-gripper.html" class="nav-link">FET028 Gripper</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">gripper_close_lift_cube  (FET028 Gripper)</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="gripper-close-lift-cube-fet028-gripper">
+<span id="gripper_close_lift_cube--fet028-gripper"></span><h1>gripper_close_lift_cube  (FET028 Gripper)<a class="headerlink" href="#gripper-close-lift-cube-fet028-gripper" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Test name</p></td>
+<td><p>gripper_close_lift_cube</p></td>
+</tr>
+<tr class="row-odd"><td><p>Feature(s)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FET028_Gripper.Isaac.0-1-0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Engine</p></td>
+<td><p>Kit / Isaac Sim (PhysX; &gt;=2024.2.0)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Test version</p></td>
+<td><p>1.4.9</p></td>
+</tr>
+<tr class="row-even"><td><p>Wall-clock timeout</p></td>
+<td><p>600 seconds</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>By default, the gripper closes on a cube whose edge length is 70 percent of its maximum jaw opening, at 85 percent of the resolved maximum payload, then attempts a 20 cm gantry lift, a 2-second sinusoidal shake, and release. Opening and payload metadata prefer <code class="docutils literal notranslate"><span class="pre">gripper_maxOpening</span></code> and <code class="docutils literal notranslate"><span class="pre">gripper_maxPayload</span></code>; the reader also accepts legacy <code class="docutils literal notranslate"><span class="pre">custom:maxOpening</span></code> and <code class="docutils literal notranslate"><span class="pre">custom:maxPayload</span></code>. If no usable positive payload is resolved, an opening-based heuristic supplies the maximum; it is not necessarily a rated capability.</p>
+</section>
+<section id="what-pass-guarantees">
+<h2>What Pass Guarantees<a class="headerlink" href="#what-pass-guarantees" title="Link to this heading">#</a></h2>
+<p>A pass means this configured synthetic-cube simulation satisfied the close/retention proxies, carrier-follow, shake, and release criteria. It does not directly measure contact force, holding torque, or pad friction, and it does not certify a rated payload or real-world pick-and-place suitability. Review the resolved payload and setup together with the sampled evidence.</p>
+</section>
+<section id="what-it-checks">
+<h2>What It Checks<a class="headerlink" href="#what-it-checks" title="Link to this heading">#</a></h2>
+<p>The test confirms that the gripper:</p>
+<ul class="simple">
+<li><p>discovers a valid gripper site with a positive maximum jaw opening,</p></li>
+<li><p>attaches to a test-owned Z-axis gantry through the gripper base rigid body,</p></li>
+<li><p>drives every resolved jaw leader to its open limit and verifies that the commanded leaders reach the open position,</p></li>
+<li><p>descends toward the cube using an object-motion contact proxy before closing,</p></li>
+<li><p>satisfies the close stall/engagement proxy (not a measured collision-contact check),</p></li>
+<li><p>retains the cube laterally within one object diameter of its spawn XY position after the close,</p></li>
+<li><p>lifts the cube at least 10 cm with the gantry and confirms the cube follows the carrier upward within 5 cm vertical error and 5 cm horizontal drift,</p></li>
+<li><p>holds the cube through 2 s of sinusoidal Z-axis perturbation with the object staying above 2 cm and slipping less than 3 cm relative to the gripper, and</p></li>
+<li><p>releases the cube when commanded: the cube falls at least 5 cm after the open command.</p></li>
+</ul>
+<p>The published Isaac contract runs on PhysX and covers resolvable parallel-jaw and centric mimic grippers as well as independent-finger hands. Internal legacy Newton jaw helpers are not a published Newton gripper contract. Mechanisms without compatible position-driven branches retain an unmarked skip reported as Could not assess; unsafe or unresolved active coupling stops execution with a mapping/setup error.</p>
+<p>Missing-site skips are also unmarked and reported as Could not assess.
+Neither skip supplies positive N/A evidence, measured grasp PASS or asset FAIL.</p>
+</section>
+<section id="how-it-works">
+<h2>How It Works<a class="headerlink" href="#how-it-works" title="Link to this heading">#</a></h2>
+<p>The test runs the following stages in order. Numeric values below describe the
+registered defaults; supported configuration can change the trial. Inspect
+<code class="docutils literal notranslate"><span class="pre">gripper_trial_controls</span></code> for the effective dimensions, mass, targets and controls.</p>
+<ol class="arabic simple">
+<li><p><strong>Site discovery.</strong> The test uses the first discovered valid gripper site and resolves maximum opening from preferred <code class="docutils literal notranslate"><span class="pre">gripper_maxOpening</span></code> (metres), with <code class="docutils literal notranslate"><span class="pre">custom:maxOpening</span></code> as a legacy fallback. The current orientation/mapping helper requires a rigid-body ancestor of the site, preferring one with rigid-body descendants and otherwise the closest ancestor. This is a provider mapping constraint, not an additional GR.001 authoring requirement. The physical carrier attachment root is resolved separately within the verified loaded asset; it need not be that ancestor or the articulation API prim.</p></li>
+</ol>
+<p>The numeric reader tries the canonical field first and reaches the legacy alias
+only when the preferred field returns no value (missing, empty or non-finite).
+Once a finite value is found it takes precedence: a nonpositive canonical
+opening fails the opening gate rather than borrowing a conflicting positive
+legacy value. Malformed values can raise setup errors. Do not author conflicting
+aliases to manipulate the trial.</p>
+<ol class="arabic simple" start="2">
+<li><p><strong>Topology check.</strong> All joint types, including fixed and closed-loop extensions, contribute geometry candidates on distinct physical branches. The rest-pose pair is only a provisional hint; live geometry selects distal pads. GR.003 is the tube axis/contact-pad width, not a pad-to-pad opening segment. The guarded internal Newton-native two-leader helper still requires explicit actuator targets and separate joint-graph branches; it is not a published Newton close/lift contract.</p></li>
+<li><p><strong>Payload resolution.</strong> The default cube mass is <code class="docutils literal notranslate"><span class="pre">0.85</span> <span class="pre">*</span> <span class="pre">resolved_max_payload_kg</span></code>. A positive <code class="docutils literal notranslate"><span class="pre">gripper_maxPayload</span></code> supplies that maximum, with <code class="docutils literal notranslate"><span class="pre">custom:maxPayload</span></code> accepted as a legacy fallback. If no usable positive value is resolved, the maximum is estimated at 50 kg/m of maximum opening and clamped between 0.1 kg and 50 kg before applying the fraction. A warning identifies the heuristic. <code class="docutils literal notranslate"><span class="pre">tested_mass_kg_override</span></code> can explicitly replace the trial mass and is recorded as an override, not an authored rating.</p></li>
+<li><p><strong>Gantry attachment and free-probe setup.</strong> The test attaches a prismatic Z-axis carrier by a fixed joint to the unambiguous physical articulation root body, not arbitrarily to the site ancestor or API prim. A world-joint API can resolve a sibling body; competing roots/anchors stop setup rather than guessing. Default parallel/centric approach points toward world negative Z; independent hands retain their authored frame unless a supported control overrides it. Collision on explicitly tracked test-owned supports is temporarily suspended; asset colliders and walls are untouched. No pickup object exists during mapping.</p></li>
+<li><p><strong>Measured endpoint mapping.</strong> Each selected jaw leader is gently ramped to inset lower and upper probes using existing authored drives and the configured bounded probe steps. One live transform snapshot at each endpoint locates owned distal geometry, excluding nested rigid bodies and non-colliding guide annotations. Wider planar pad separation (or collective centric spread) determines open; an authored rest target, curve length, or joint name never determines polarity. Multiple leaders are mapped independently and can use opposite conventions. Independent fingers likewise use stepped live geometry, including reversed closure; radial-invariant positioning DOFs retain their prior commands. Observations are normalized to the live gripper-base frame so carrier translation/rotation does not masquerade as finger closure. The probe returns leaders toward their measured initial pose, then restores only their prior controller commands through sparse writes, without teleporting followers, changing gains, or overwriting the carrier. This is bounded command restoration, not an exact dynamic-state rollback. Angular readbacks are radians; unresolved Core prismatic tensor scale remains <code class="docutils literal notranslate"><span class="pre">unknown_native</span></code>.</p></li>
+</ol>
+<p>Missing prior commands, partial/stale/non-finite live geometry, insignificant
+motion, equally plausible pads or incomplete restoration stop the trial with
+an explicit mapping/setup diagnostic. Geometry apertures are proxies, not
+measured collision contacts. Physical-metre aperture metrics include the stage
+scale; runtime joint coordinates retain their separately recorded units.</p>
+<ol class="arabic simple" start="6">
+<li><p><strong>Standoff, support restoration, spawn and open.</strong> With test-owned support collision still suspended, the existing gantry move positions the gripper at its size-based standoff. The test restores those prior collision opinions, enables the required pickup floor, then spawns a synthetic cube below the resolved grasp center and configured placement offsets. By default its edge is <code class="docutils literal notranslate"><span class="pre">0.7</span> <span class="pre">*</span> <span class="pre">gripper_maxOpening</span></code>, its mass is 85 percent of the resolved maximum payload, and static/dynamic friction are 2.0. The effective size fraction and any direct-mass override are recorded. The cube settles briefly. Actual open commands must reach their selected targets within <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">*</span> <span class="pre">open_position_tolerance</span></code> (default 0.025), unchanged from the existing test. Support restoration is also attempted on errors and cancellation; an incomplete restoration is a setup error, never an asset verdict.</p></li>
+<li><p><strong>Descent and contact proxy.</strong> The gantry descends while holding the gripper open, using at least the configured minimum chunk count (default 12) and increasing it as needed to respect <code class="docutils literal notranslate"><span class="pre">descent_contact_max_step_m</span></code> (default 5 mm). When the cube shifts by more than 3 mm, the descent stops and the gripper backs off 10 percent of the maximum opening before closing. Object motion is a proxy, not a measured contact point or force.</p></li>
+<li><p><strong>Close.</strong> The test drives the resolved grasp DOFs toward their close targets using the asset’s authored drive parameters. Engagement followed by a stall short of the closed target is the test’s grasp proxy; it does not prove the pads contact the cube. DOFs held at the same open and closed target are excluded from this inference.</p></li>
+<li><p><strong>Grip gate.</strong> The test requires the stall/engagement proxy and cube retention within one object diameter of its spawn XY position. If either condition fails, the test reports a failed configured trial without proceeding to lift; placement, grasp depth, incomplete reopening, and backend setup must be checked before blaming the asset.</p></li>
+<li><p><strong>Lift.</strong> The gantry raises the gripper 20 cm over 1 s. Pass criteria: the cube’s vertical deviation from the expected position is less than 5 cm and horizontal drift is less than 5 cm. Vertical motion during close is reported as a pre-load diagnostic because a hand may seat or lift the cube while establishing contact; the subsequent carrier-follow, shake, and release phases determine whether the grasp is valid. The gantry must lift at least 10 cm; a shorter lift is an internal harness error, not an asset fault.</p></li>
+<li><p><strong>Shake.</strong> The gantry oscillates sinusoidally along Z at 2 Hz, 2 cm amplitude, for 2 s. The cube must stay above 2 cm and slip less than 3 cm relative to the gripper throughout.</p></li>
+<li><p><strong>Release.</strong> The test drives every resolved jaw leader back to its open position. The cube must fall at least 5 cm after the open command.</p></li>
+</ol>
+</section>
+<section id="failure-cases">
+<h2>Failure Cases<a class="headerlink" href="#failure-cases" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Symptom</p></th>
+<th class="head"><p>Checks before attributing a cause</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Test skipped: no gripper site found</p></td>
+<td><p>The existing unmarked skip is Could not assess, not Not applicable. Inspect the provider’s discovery diagnostic and selected contract without inferring asset FAIL or PASS.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Test skipped: no compatible position-driven finger topology</p></td>
+<td><p>The existing unmarked skip is Could not assess, not Not applicable; inspect the emitted topology diagnostic. No grasp response was measured.</p></td>
+</tr>
+<tr class="row-even"><td><p>Runtime/setup error: unresolved or unsafe coupled topology</p></td>
+<td><p>Raw active selected coupling coverage, local references, finite coefficients, unique leader ownership and distinct physical tips are required before mapping; unresolved coupling is an execution limitation, not an applicability skip or asset FAIL</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime/setup error: ambiguous or invalid mapping/readback</p></td>
+<td><p>Duplicate physics-link names, a stale tensor view, non-finite live transforms or ambiguous pad motion prevent safe endpoint mapping; this is not proof of an asset defect</p></td>
+</tr>
+<tr class="row-even"><td><p>Runtime/setup error: required ground or backend unavailable</p></td>
+<td><p>A usable collision floor is required; the published Core test requires PhysX and has no Newton binding</p></td>
+</tr>
+<tr class="row-odd"><td><p>Runtime/setup error: required joint/object state or carrier lift unavailable</p></td>
+<td><p>Open/close readbacks must be finite and correctly indexed; required test-object poses must be available and finite; the test-owned gantry must produce the existing minimum lift before asset retention can be evaluated</p></td>
+</tr>
+<tr class="row-even"><td><p>Precheck failure: invalid maximum opening</p></td>
+<td><p>No usable positive opening was resolved from the preferred <code class="docutils literal notranslate"><span class="pre">gripper_maxOpening</span></code> or accepted legacy reader alias; inspect the composed site metadata and selected contract</p></td>
+</tr>
+<tr class="row-odd"><td><p>Precheck failure: no resolvable rigid-body attachment</p></td>
+<td><p>The provider could not resolve its carrier attachment from the site’s current ancestor/mapping path; this does not itself establish a GR.001 marker violation or missing body schema</p></td>
+</tr>
+<tr class="row-even"><td><p>Open command did not reach the open position</p></td>
+<td><p>Check resolved leader mappings, authored limits, runtime units, initial pose, command timing, and drive response; this observation does not isolate the cause</p></td>
+</tr>
+<tr class="row-odd"><td><p>Grasp center at or below the cube</p></td>
+<td><p>Inspect generated object placement, carrier frame, grasp-center mapping and available descent first; the source gripper need not point down or have a universal floor elevation</p></td>
+</tr>
+<tr class="row-even"><td><p>Close/retention proxy gate failed</p></td>
+<td><p>Check reopening, target mapping, grasp depth, placement and object motion; a false proxy is not proof that the fingers reached a closed limit or that contact never occurred</p></td>
+</tr>
+<tr class="row-odd"><td><p>Lift failed: cube did not follow the carrier</p></td>
+<td><p>Check the resolved authored/heuristic payload, carrier lift, placement, engagement and proxy readbacks before investigating materials or drive parameters. A gantry lift below 10 cm is a harness error.</p></td>
+</tr>
+<tr class="row-even"><td><p>Shake failed: cube dropped or slipped</p></td>
+<td><p>Check setup, payload resolution, carrier trajectory, engagement and motion readbacks; insufficient holding force or friction is only a possible cause</p></td>
+</tr>
+<tr class="row-odd"><td><p>Release failed: cube did not fall</p></td>
+<td><p>Check open targets, leader mappings, readbacks and the release window before attributing the result to limits or drives</p></td>
+</tr>
+<tr class="row-even"><td><p>Physics view returns None after the open command</p></td>
+<td><p>Internal harness error, not an asset fault. The Isaac physics view was not initialized before the open command returned. File a bug against the core tier’s FET028 runtime tests.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gantry lifted less than 10 cm</p></td>
+<td><p>Internal harness error, not an asset fault. The test-owned Z-axis carrier failed to produce a meaningful lift. Refer to the gantry lift note in How It Works.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="how-to-fix">
+<h2>How to Fix<a class="headerlink" href="#how-to-fix" title="Link to this heading">#</a></h2>
+<p>If the site is not found or maximum opening is invalid, inspect the selected
+contract, composed gripper-site schema, marker identity and measured opening.
+The canonical field is <code class="docutils literal notranslate"><span class="pre">gripper_maxOpening</span></code>, in metres; <code class="docutils literal notranslate"><span class="pre">custom:maxOpening</span></code> is
+only a legacy reader fallback, not permission to add conflicting metadata.
+Use the real mechanism’s opening rather than a generic industrial range, and
+rerun the actual static gate after any justified authoring correction. Missing
+runtime discovery alone does not establish which property or topology is wrong.</p>
+<p>If the carrier attachment cannot be resolved, preserve the marker’s authored local frame and source topology. Inspect the composed layout/variant, physical base body, loader/importer mapping and runtime support. GR.001 does not itself require a rigid-body ancestor. A provider mapping limitation can need a test fix rather than reparenting the marker or adding body/mass APIs to decorators; establish the cause before changing the asset.</p>
+<p>If the open command does not reach its target, inspect the recorded per-leader achieved coordinates and geometry apertures, finite joint limits, runtime units, initial pose and motion window. Mapping ambiguity or incomplete readback is a test/setup limitation, not proof of bad asset authoring. Do not swap limits, rewrite GR.003 metadata or increase drive force merely to satisfy the harness.</p>
+<p>If the close/retention gate fails, first verify complete reopening, object placement, grasp depth, leader mapping and the configured engagement tolerance. The stall proxy may fail despite partial contact, or pass for a different obstruction. Use the videos and histories to distinguish those cases before changing the asset.</p>
+<p>If lift or shake fails, check the actual carrier motion, payload source, grasp placement and proxy readbacks first. A heuristic payload may overestimate capability. Only after setup is established should drive parameters and collision materials be compared with the mechanism’s specifications; no universal stiffness, effort, or friction coefficient follows from this failure.</p>
+<p>If no usable declared payload is resolved, compare the heuristic with the
+mechanism’s specification before interpreting the trial. A justified metadata
+repair should use canonical <code class="docutils literal notranslate"><span class="pre">gripper_maxPayload</span></code> in kilograms; the reader accepts
+<code class="docutils literal notranslate"><span class="pre">custom:maxPayload</span></code> only for legacy compatibility. Do not fabricate a rating or
+add conflicting aliases merely to avoid the warning or obtain a pass.</p>
+<p>If the release fails, check that the open drive parameters and joint limits allow every commanded leader to return to its open position. A locked, reversed, or uncoordinated leader will prevent the gripper from re-opening.</p>
+</section>
+<section id="expected-result">
+<h2>Expected Result<a class="headerlink" href="#expected-result" title="Link to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>An expected-result still and video for this test are not captured yet. The expected result is described below.</p>
+</div>
+<p>In the default trial, a cyan cube rests on the floor below the gripper. The gripper opens, the gantry descends, the gripper closes on the cube, the gantry lifts 20 cm, the gantry shakes for approximately 2 s, and the gripper opens again. A passing configured result meets the observed carrier-follow, shake and post-opening fall criteria. Overrides can change placement and controls, and a failure clip can end before all stages complete; video alone does not measure contact or holding force.</p>
+</section>
+<section id="notes-and-caveats">
+<h2>Notes and Caveats<a class="headerlink" href="#notes-and-caveats" title="Link to this heading">#</a></h2>
+<p>See <a class="reference internal" href="hand-trial-controls.html"><span class="std std-doc">Hand trial controls</span></a> for opt-in signed joint
+targets, held positioning joints, closing delays, approach/placement controls
+and optional native contact summaries. The report’s <strong>Recorded grasp trial controls</strong>
+uses provider-recorded effective dimensions, mass and targets; this description
+states defaults. Configured trial passes do not qualify default controls or
+unrun shapes. Fixture handling and diagnostics do not alter source assets,
+published feature bindings or the existing grasp verdict thresholds.</p>
+<p>The carrier resolves the articulation API prim, connected physical root body,
+and bounded asset transform separately. A fixed world joint carrying
+<code class="docutils literal notranslate"><span class="pre">PhysicsArticulationRootAPI</span></code> is supported even when its rigid-body links are
+siblings. Approach prediction uses that physical body’s pivot, so mapping,
+standoff travel, and object spawn stay aligned with a site on an offset link.
+Temporary carrier root ownership, world-pin suspension, and approach
+rotation belong only to the disposable test stage; detach or failed attachment
+restores the original controller path and authored opinions after a successful
+physics stop. If stopping fails, topology restoration, controller rebinding and
+timeline restart are blocked; the runner must retry teardown or retire the stage.
+The original attachment error/cancellation is preserved with rollback notes;
+detach reports an error. Optional carrier state/effort traces can be unavailable
+or omitted when trace-only getters, formatting or logging fail, without changing
+commands or simulation steps. Required live carrier motion checks remain
+independent, and required-operation failures and cancellation are not suppressed.
+Ambiguous topology
+or incomplete restoration is a setup error, not evidence of an asset defect.
+Do not remove an asset’s valid world pin or relocate its API to work around
+such an error. Test 1.4.6 includes this fixture handling and current prerequisite diagnostics without changing the
+published feature requirements or the grasp pass thresholds.
+Version 1.4.7 also protects the first required error/cancellation from failures
+in secondary note lookup, formatting or delivery, including SDK exceptions
+without <code class="docutils literal notranslate"><span class="pre">add_note</span></code>; it does not change the grasp criteria.</p>
+<p>Bounded failed-probe metrics <code class="docutils literal notranslate"><span class="pre">detect_probe_evidence_&lt;DOF&gt;</span></code> retain prior commands,
+original/achieved positions, inset endpoint commands, live world/base-relative
+pad bounds, aperture changes/tolerances and omission counts. Optional
+<code class="docutils literal notranslate"><span class="pre">gripper_probe_joint_&lt;zero-padded-DOF&gt;</span></code> histories distinguish probe and restore;
+later trials append <code class="docutils literal notranslate"><span class="pre">_trial_002</span></code>, <code class="docutils literal notranslate"><span class="pre">_trial_003</span></code>, etc., with shape/trial metadata.
+Interrupted mapping is partial evidence, not a completed grasp. The grasp video
+starts after silent mapping/standoff; an exported reset/cleanup scene is not
+proof of probe-time contact. Review the numeric evidence first when mapping fails.</p>
+<p>The default cube payload is 85 percent of the resolved maximum payload; the sphere uses 50 percent. These are configured synthetic trials, not measurements of a mechanical rating or physical contact patches.</p>
+<p>Closing-fraction diagnostics use the signed open-to-close range, so a decreasing target range remains meaningful and overshoot is not clamped. Held DOFs, missing readbacks and non-finite values are null, not zero; only measured fractions enter the diagnostic mean. These fractions do not affect pass/fail.</p>
+<p>Successful still/video captures are associated with the latest retained motion observation. Graph ticks are capture associations, not exact encoded-frame indices or timestamps, and can be coalesced when multiple captures share an observation. Gripper histories use the Kit timeline clock where available, not a measured solver-step clock. Missing contact-force channels remain null and do not prove zero force. Hooks remain optional for older runners and do not add simulation steps or captures.</p>
+<p>The report distinguishes a resolved authored maximum from the opening-based
+heuristic and any explicit trial-mass override. A supported configured trial is
+not an automatic validation of a mechanical payload rating.</p>
+<p>Version 1.4.9 supports independent leader-owned finger chains, including mixed
+free/mimic fingers and finite signed/asymmetric gearing. Raw active selected
+couplings are validated before accepting either a jaw or hand mapping. Each
+independent leader is probed against its own branch’s distal tip; follower and
+passive links contribute geometry but never become commanded finger controls.
+Duplicate ownership, cycles, foreign/unresolved references, missing or ambiguous
+tips and ambiguous closure stop execution. Held positioning controls remain
+readable and every required branch must retain a closing leader.</p>
+<p>Parallel-jaw, centric, and independent-finger grippers retain the existing pass
+thresholds. Missing-site and unsupported position-driven-topology skips remain
+unmarked/Could not assess; they do not establish Not applicable. Unsafe or
+unresolved active coupling is a
+mapping/setup error. Topology discovery alone does not qualify a grasp; cube and
+sphere require separate official native runs with this procedure version.</p>
+<p>The internal legacy Newton two-leader classifier remains guarded by explicit actuator ownership, symmetric follower groups, and distinct joint-graph branches. Live mapping determines each leader polarity separately. These guards do not provide published Newton close/lift coverage; the Isaac binding remains on PhysX.</p>
+<p>The test does not override the gripper’s finger-pad physics materials. Authored materials participate in the configured backend simulation, but the failure proxies do not establish low friction as the cause or automatically justify changing the asset.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="gripper-close-lift-sphere.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">gripper_close_lift_sphere  (FET028 Gripper)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="hand-trial-controls.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Configured hand trials (FET028)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal" tabindex="-1"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-pass-guarantees">What Pass Guarantees</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-it-checks">What It Checks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How It Works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#failure-cases">Failure Cases</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-fix">How to Fix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-result">Expected Result</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes-and-caveats">Notes and Caveats</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8"></script>
+
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../../../../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../../../../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2025-2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

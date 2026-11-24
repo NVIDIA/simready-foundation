@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_004_ROBOT_NEWTON`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=FET004_Multibody.RobotNewton.html" />
+<link rel="canonical" href="FET004_Multibody.RobotNewton.html" />
+```
+
+This published feature route moved to [`FET004_Multibody.RobotNewton`](FET004_Multibody.RobotNewton.md) (Foundations 1 ID: `FET_004_ROBOT_NEWTON`).

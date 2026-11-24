@@ -1,0 +1,103 @@
+# normals_xz  (FET001 Visual)
+
+| Property     | Value                          |
+|--------------|--------------------------------|
+| Test name    | normals_xz                     |
+| Feature(s)   | `FET001_MinimalPlaceableVisual.0-1-0`, `FET001_MinimalPlaceableVisual.1-0-0`, `FET001_MinimalPlaceableVisual.1-0-1`            |
+| Engine       | Kit / Isaac Sim (>=2024.2.0)   |
+| Test version | 2.0.4                          |
+
+## Summary
+
+Rotates the asset through a sampled combined X-and-Z sweep under dome lighting
+and checks the count of frames whose diagnostic surface is too dark.
+
+## What Pass Guarantees
+
+Required pixel thresholds/fractions must be finite real numbers in `[0, 1]`;
+step/problem-frame counts positive whole numbers, `min_problem_frames <= steps`, and settling count a
+nonnegative whole number. Camera padding/load timeout must be finite and
+positive. Invalid booleans, strings, nonfinite values or domains stop before
+scene mutation as configuration errors. Defaults and valid zero fractions
+remain unchanged. Missing/invalid image analysis does not become a zero
+problem count. At least `min_problem_frames` captured frames must have at
+least 100 object pixels each. Too few usable frames is an incomplete
+measurement/runtime error, not an asset FAIL or PASS. Host checks do not
+qualify the native renderer.
+
+A pass means fewer than `min_problem_frames` sampled frames exceed
+`max_problem_ratio` dark object pixels. Defaults allow one such frame, and
+frames with fewer than 100 object pixels do not count as problems or enter
+the average-darkness denominator. Their zero-based indices and counts are
+reported as `normals_xz_omitted_indices` / `normals_xz_omitted_frames`, alongside
+`normals_xz_qualified_frames`. This image
+proxy does not establish every normal's direction, exclude smaller dark patches,
+or certify unsampled viewpoints.
+
+## What It Checks
+
+The test counts sampled frames with an excessive dark-object-pixel fraction.
+Inverted normals are one possible cause of dark patches; inspect the geometry
+and diagnostic scene before treating this image proxy as an authoring diagnosis.
+
+The combined rotation (X at 70 percent amplitude, Z at 100 percent) sweeps the asset through diagonal angles where beveled, chamfered, or angled faces become visible. A rotation around a single axis would keep many of these faces edge-on and miss the defect.
+
+## How It Works
+
+The asset is loaded in a white room with dome-only lighting (intensity 2000) and an orange matte diagnostic material. Double-sided rendering is enabled during capture so that face culling does not interfere with the dark-pixel analysis.
+
+Eight rotation steps are captured (`steps = 8`). At each step the asset is rotated with X at 70 percent of the step angle and Z at 100 percent (`rotate_asset_multi`). The camera is re-framed after each rotation. For each frame, object pixels are masked against the white background and the fraction of dark pixels (luminance below `dark_threshold = 0.15`) is measured.
+
+A frame is counted as a problem frame when more than 50 percent of its object pixels are dark (`max_problem_ratio = 0.50`). The test fails when the number of problem frames reaches or exceeds two (`min_problem_frames = 2`). This threshold prevents a single interior-exposed angle from failing the test.
+
+A visibility pre-check compares a framed diagnostic capture with the same scene
+after temporarily hiding the staged asset. At least 100 diagnostic-colored
+pixels must change. Orange scene content that remains when the asset is hidden
+does not prove visibility; an asset with no attributable pixels fails before
+the sweep. The asset is restored before the sweep.
+
+## Failure Cases
+
+| Symptom | Likely cause |
+|---|---|
+| Two or more rotation frames show more than 50 percent dark object pixels | Surface normals on one or more faces are inverted; affected faces receive no dome illumination |
+| Fewer than 100 asset-attributable diagnostic pixels in pre-check | Asset not loaded, hidden, or camera framed incorrectly |
+
+## How to Fix
+
+If the sweep fails, first inspect the dark frames and verify the lighting,
+framing and diagnostic-material setup. Check the corresponding geometry for
+inverted, invalid or missing normals; darkness alone is not a definitive cause.
+Correct confirmed authoring defects, re-export and rerun.
+
+The combined X-and-Z sweep is specifically designed to expose diagonal faces that a single-axis rotation keeps edge-on. If only a small number of diagonal faces are affected, they might only appear dark during the XZ sweep and not during purely horizontal or vertical rotation.
+
+## Expected Result
+
+![normals_xz expected result](../_images/normals-xz.png)
+
+[Result video](../../../../_static/videos/normals-xz.mp4)
+
+The asset rotates through sampled pitch-and-yaw poses under dome lighting.
+Inspect dark patches alongside the problem-frame count and configured tolerance;
+even a passing run may contain dark patches or one default problem frame.
+
+## Notes and Caveats
+
+Dome-only lighting is used so that every face with outward-pointing normals receives equal illumination regardless of its orientation. A directional light would produce natural shading variation that would be indistinguishable from inverted-normal darkening.
+
+The `min_problem_frames = 2` threshold prevents a false failure when a hollow object's interior is briefly exposed at one rotation angle. A single interior-exposed frame is not treated as a defect.
+
+Frames with fewer than 100 object pixels are excluded from the problem-frame
+count and darkness statistics to avoid false positives from edge-on or
+heavily foreshortened poses. They are not measured as zero darkness. The
+minimum usable count makes the existing failure threshold reachable, without
+inventing a new coverage percentage. An omitted view may be a legitimate
+edge-on pose or a rendering/framing problem; diagnose it before assigning
+an asset defect. This qualification can now expose incomplete measurements
+that older code falsely presented as PASS.
+
+Video encoding is optional presentation when the owned encoder returns `None`
+for a recoverable failure; warning transport cannot replace measured PASS/FAIL.
+Unknown engine/session exceptions and unsafe media paths still propagate, as
+do required capture/analysis errors, cancellation and required-cleanup signals.

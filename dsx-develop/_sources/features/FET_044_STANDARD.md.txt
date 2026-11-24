@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_044_STANDARD`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP044_SunRgbdLabels.html" />
+<link rel="canonical" href="../capabilities/CAP044_SunRgbdLabels.html" />
+```
+
+This published feature route moved to [`CAP044_SunRgbdLabels`](../capabilities/CAP044_SunRgbdLabels.md) (Foundations 1 ID: `FET_044_STANDARD`).

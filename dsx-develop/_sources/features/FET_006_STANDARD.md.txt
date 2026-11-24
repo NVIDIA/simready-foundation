@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_006_STANDARD`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=FET006_Materials.html" />
+<link rel="canonical" href="FET006_Materials.html" />
+```
+
+This published feature route moved to [`FET006_Materials`](FET006_Materials.md) (Foundations 1 ID: `FET_006_STANDARD`).

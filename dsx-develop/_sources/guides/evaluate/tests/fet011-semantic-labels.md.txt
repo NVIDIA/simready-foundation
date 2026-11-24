@@ -1,0 +1,95 @@
+# FET011 Semantic Labels
+
+Tests in this family verify that an asset's SimReady semantic labels drive the RTX
+semantic-segmentation AOV at runtime — that the labels an author declares are the labels the
+renderer segments.
+
+## Overview
+
+Two tests work as a pair. The first renders the segmentation AOV of the asset as authored and
+measures how much of the frame carries a label. The second removes recognized
+semantics schemas from the label sources reached by its current renderable-Gprim
+traversal and renders again, requiring the configured near-blank threshold.
+
+The strip traverses instance proxies and applies temporary de-instancing to
+owning instances within the loaded asset when recognized label sources need
+editing. Required edits and composition changes are verified, then sources are
+recollected. External instance-proxy sources or rejected edits leave execution
+incomplete. Source layers and prototypes remain unchanged. A zero-edits skip
+means no recognized schema was removed from the visited renderable sources,
+not that every possible semantic source in the complete asset is absent.
+
+Not applicable additionally requires complete proof for the actual inspected
+binding, collection, material and ancestor sources, including those outside the
+asset. Computed material resolution returning nothing does not qualify an
+unresolved authored binding. The strip visits subset prims without following
+each subset's material; an otherwise uninspected subset-bound source, including
+one reached through an inherited or collection binding, withholds the marker.
+The existing zero-edits skip then remains unmarked/Could not assess,
+not asset FAIL or measured PASS. This qualification adds no stripping behavior.
+
+A populated buffer on its own proves nothing: scene content, a leftover label on a shared
+material, or a stray label elsewhere would produce one too. Measuring the same frame with the
+labels gone is what closes that gap, and it is why this is two tests rather than one.
+
+Each procedure runs on a fresh stage and steps Replicator once. The generic
+runner may reuse the engine process; the registrations do not guarantee
+process separation. Native orchestrator lifecycle behavior must be qualified
+on the selected runtime rather than inferred from host regression coverage.
+Required annotator attachment/cleanup failures leave execution incomplete.
+Failed detach records unsafe-worker retirement through the compatible Kit
+adapter; original errors/cancellation remain primary even if diagnostic
+notes or retirement reporting fail.
+
+Verified on Isaac Sim 6.0, whose Replicator reads `SemanticsLabelsAPI` natively: a label authored
+on an object resolves to that object's child meshes, so no migration to the deprecated
+`SemanticsAPI` schema is required.
+
+## What a Passing Family Means
+
+A required segmentation buffer must be nonempty, finite, nonnegative real
+numeric data in a supported label/color shape. Invalid AOVs and acceptance
+configuration remain execution errors; they cannot supply a fabricated
+near-blank buffer or PASS. Native support still requires runtime qualification.
+Coverage counts the validated raw numeric IDs or RGB tuples, preserving
+their dtype; 8-bit preview conversion does not participate in the verdict.
+Alpha remains outside the colour identity comparison.
+
+The authored-label frame reaches `on_coverage_min` and the stripped-label frame
+stays at or below `off_coverage_max`. These are presence/absence pixel proxies,
+not certification of complete per-object masks, correct class values, every
+component's label, or suitability for a particular synthetic-data pipeline.
+
+This is the runtime counterpart to the offline validator. Label *format* correctness is checked by
+`validation.py`; this family confirms the labels actually render.
+
+## Tests
+
+:::{list-table}
+:header-rows: 1
+:widths: 30 45 25
+
+* - Test
+  - What It Checks
+  - Validates
+* - [semantic_labels_seg_labelled](fet011/semantic-labels-seg.md)
+  - Renders the segmentation AOV with the asset as authored and measures the fraction of the frame that resolves to a label. Passes at or above `on_coverage_min`.
+  - FET011_SemanticLabels, FET011_SemanticLabels.RTX
+* - [semantic_labels_seg_stripped](fet011/semantic-labels-seg.md)
+  - Includes instance-proxy label sources, strips recognized schemas in the disposable session layer, and requires rendered coverage at or below `off_coverage_max`; unsupported required edits remain execution errors.
+  - FET011_SemanticLabels, FET011_SemanticLabels.RTX
+:::
+
+## Relationship to the Feature
+
+This family validates the runtime behavior described by
+[FET011 Semantic Labels](../../../features/FET011_SemanticLabels.md) and
+[FET011 Semantic Labels (RTX)](../../../features/FET011_SemanticLabels.RTX.md). Label authoring and format rules live in the
+[Semantic Labels capability](../../../rules_and_reqs/semantic_labels/capability-semantic_labels.md).
+
+```{toctree}
+:maxdepth: 1
+:hidden:
+
+Segmentation AOV <fet011/semantic-labels-seg>
+```

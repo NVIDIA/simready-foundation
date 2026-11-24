@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_003_NEWTON`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=FET003_RigidBody.Newton.html" />
+<link rel="canonical" href="FET003_RigidBody.Newton.html" />
+```
+
+This published feature route moved to [`FET003_RigidBody.Newton`](FET003_RigidBody.Newton.md) (Foundations 1 ID: `FET_003_NEWTON`).

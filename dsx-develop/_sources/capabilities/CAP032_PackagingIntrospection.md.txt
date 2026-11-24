@@ -1,0 +1,78 @@
+# Capability: `CAP032_PackagingIntrospection`
+
+| **Property**            | **Value**         |
+|-------------------------|-------------------|
+| Contract                | `CAP032_PackagingIntrospection` |
+| Runtime                 | `OpenUSD` |
+| Proprietary Techs       | `None` |
+| Versions                | `0-1-0` |
+
+## Description
+
+Defines the Standard package-introspection contract by adding a Bill of Materials file that exposes package contents without requiring full download.
+
+## Dependency Graph
+
+```{mermaid}
+flowchart LR
+    FET_030_STANDARD_0_1_0["CAP030_PackagingCore\n0-1-0"]
+    FET_032_STANDARD_0_1_0["CAP032_PackagingIntrospection\n0-1-0"]
+    FET_032_STANDARD_0_1_0 --> FET_030_STANDARD_0_1_0
+
+    classDef current fill:#90EE90,stroke:#333
+```
+
+## Use Cases
+
+Products or workflows that consume this capability:
+
+- Package validation verifies BOM structure, paths, sizes, and optional hash objects.
+
+## Requirements
+
+### Version 0-1-0
+
+<details>
+<summary><strong>Details</strong></summary>
+
+#### Used in Profiles
+
+- [Package](../profiles/profiles.md): required in `1.0.0`
+
+#### Dependencies
+
+| **Property** | **Value** |
+|--------------|-----------|
+| Dependency | `CAP030_PackagingCore.0-1-0` |
+
+#### Requirement List
+
+* Capability: [Packaging/Packaging Introspection](../rules_and_reqs/packaging/packaging_introspection/capability-packaging_introspection.md)
+
+| Requirement | Requirement Doc |
+|-------------|-----------------|
+| `PKG.BOM.001` | [PKG.BOM.001](../rules_and_reqs/packaging/packaging_introspection/requirements/bom-structure.md) |
+
+</details>
+
+## Pipelines
+
+Source file type:
+
+- `.usd`, `.usda`, `.usdc`, package source folder, or package root as applicable.
+
+Validation or runtime pipeline:
+
+- Package validation verifies BOM structure, paths, sizes, and optional hash objects.
+
+## Samples
+
+- None.
+
+## Evaluates
+
+- None.
+
+## Adapters
+
+None.

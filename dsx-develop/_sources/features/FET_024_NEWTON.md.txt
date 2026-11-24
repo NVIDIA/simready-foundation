@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_024_NEWTON`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP024_BaseArticulation.Newton.html" />
+<link rel="canonical" href="../capabilities/CAP024_BaseArticulation.Newton.html" />
+```
+
+This published feature route moved to [`CAP024_BaseArticulation.Newton`](../capabilities/CAP024_BaseArticulation.Newton.md) (Foundations 1 ID: `FET_024_NEWTON`).

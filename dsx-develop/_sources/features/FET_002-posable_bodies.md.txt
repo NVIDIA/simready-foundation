@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_002-posable_bodies`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP002_PosableBodies.html" />
+<link rel="canonical" href="../capabilities/CAP002_PosableBodies.html" />
+```
+
+This published feature route moved to [`CAP002_PosableBodies`](../capabilities/CAP002_PosableBodies.md) (Foundations 1 ID: `FET_002_STANDARD`).

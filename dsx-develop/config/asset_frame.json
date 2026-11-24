@@ -1,0 +1,29 @@
+{
+    "capability": {
+        "id": "asset_frame",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "AF.001",
+                "version": null,
+                "name": "forward-direction",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "AssetFrameChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/asset_frame/requirements/forward-direction.html",
+                    "internal_path": "rules_and_reqs/core/asset_frame/requirements/forward-direction.md"
+                },
+                "message": "An asset selecting Object Forward MUST declare its semantic facing on its defaultPrim.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "rules_and_reqs/core/asset_frame/capability-asset_frame.html",
+            "internal_path": "rules_and_reqs/core/asset_frame/capability-asset_frame.md"
+        }
+    }
+}

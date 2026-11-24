@@ -1,0 +1,97 @@
+{
+    "capability": {
+        "id": "sim_ready",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "SR.002",
+                "version": null,
+                "name": "thumbnail-exist",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "sr-002",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/sim_ready/requirements/thumbnail-exist.html",
+                    "internal_path": "rules_and_reqs/core/sim_ready/requirements/thumbnail-exist.md"
+                },
+                "message": "The SimReady asset file should contain a thumbnail that is representative of the asset.",
+                "examples": []
+            },
+            {
+                "code": "SR.001",
+                "version": null,
+                "name": "metadata-whitelist",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "sr-001",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/sim_ready/requirements/metadata-whitelist.html",
+                    "internal_path": "rules_and_reqs/core/sim_ready/requirements/metadata-whitelist.md"
+                },
+                "message": "The asset stage must contain all required metadata fields in root-layer `customLayerData`.",
+                "examples": []
+            },
+            {
+                "code": "SR.003",
+                "version": null,
+                "name": "nested-simready-metadata",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "sr-003",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/sim_ready/requirements/nested-simready-metadata.html",
+                    "internal_path": "rules_and_reqs/core/sim_ready/requirements/nested-simready-metadata.md"
+                },
+                "message": "Required SimReady provenance fields must be authored inside the root-layer `SimReady_Metadata` dictionary.",
+                "examples": []
+            },
+            {
+                "code": "SR.004",
+                "version": null,
+                "name": "metadata-union",
+                "compatibility": "core-usd",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "sr-004",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/sim_ready/requirements/metadata-union.html",
+                    "internal_path": "rules_and_reqs/core/sim_ready/requirements/metadata-union.md"
+                },
+                "message": "Required SimReady provenance fields must be present in the union of USD custom layer data and an optional sidecar JSON file.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n(\n    defaultPrim = \"Copper_Brushed\"\n    customLayerData = {\n        dictionary SimReady_Metadata = {\n            string author = \"nvidia\"\n            string asset_name = \"Copper_Brushed\"\n            string asset_type = \"material\"\n            string asset_license = \"CC-BY-4.0\"\n            string category = \"metal\"\n            string source_file = \"Copper_Brushed.mtlx\"\n            string usd_date_generated = \"2026-10-22\"\n            string qcode = \"Q753\"\n            int rigid_body_count = 0\n            float3 asset_extents = (0, 0, 0)\n            float mass = 0\n        }\n    }\n)\n\ndef Material \"Copper_Brushed\"\n{\n}"
+                        },
+                        "name": "a material asset authors 0 for rigid bodies, extents and mass",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n(\n    defaultPrim = \"Chair\"\n    customLayerData = {\n        dictionary SimReady_Metadata = {\n            string author = \"nvidia\"\n            string asset_name = \"office_chair_01\"\n            string asset_type = \"prop\"\n            string asset_license = \"CC-BY-4.0\"\n            string category = \"furniture\"\n            string source_file = \"office_chair_01.blend\"\n            string usd_date_generated = \"2025-10-09\"\n            string qcode = \"Q42177\"\n            int rigid_body_count = 1\n            float3 asset_extents = (0.55, 0.55, 0.92)\n            float mass = 0\n        }\n    }\n)\n\ndef Xform \"Chair\"\n{\n}"
+                        },
+                        "name": "a prop authors a mass of 0",
+                        "result": "failure"
+                    }
+                ]
+            }
+        ],
+        "metadata": {
+            "path": "rules_and_reqs/core/sim_ready/capability-sim_ready.html",
+            "internal_path": "rules_and_reqs/core/sim_ready/capability-sim_ready.md"
+        }
+    }
+}

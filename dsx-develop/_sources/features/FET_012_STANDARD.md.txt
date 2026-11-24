@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_012_STANDARD`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=FET012_GaussianSplat.html" />
+<link rel="canonical" href="FET012_GaussianSplat.html" />
+```
+
+This published feature route moved to [`FET012_GaussianSplat`](FET012_GaussianSplat.md) (Foundations 1 ID: `FET_012_STANDARD`).

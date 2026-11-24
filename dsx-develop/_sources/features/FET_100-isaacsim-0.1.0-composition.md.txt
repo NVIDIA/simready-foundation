@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_100-isaacsim-0.1.0-composition`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP100_IsaacComposition.Isaac.html" />
+<link rel="canonical" href="../capabilities/CAP100_IsaacComposition.Isaac.html" />
+```
+
+This published feature route moved to [`CAP100_IsaacComposition.Isaac`](../capabilities/CAP100_IsaacComposition.Isaac.md) (Foundations 1 ID: `FET_100_ISAAC`).

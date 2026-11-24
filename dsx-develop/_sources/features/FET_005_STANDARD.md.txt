@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_005_STANDARD`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=FET005_Grasp.html" />
+<link rel="canonical" href="FET005_Grasp.html" />
+```
+
+This published feature route moved to [`FET005_Grasp`](FET005_Grasp.md) (Foundations 1 ID: `FET_005_STANDARD`).

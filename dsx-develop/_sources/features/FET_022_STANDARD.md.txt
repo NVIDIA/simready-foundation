@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_022_STANDARD`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=FET022_DrivenJoints.html" />
+<link rel="canonical" href="FET022_DrivenJoints.html" />
+```
+
+This published feature route moved to [`FET022_DrivenJoints`](FET022_DrivenJoints.md) (Foundations 1 ID: `FET_022_STANDARD`).

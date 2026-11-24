@@ -1,0 +1,1688 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" data-theme="auto">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>External Contribution Workflow &#8212; Content Capabilities</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=75c7c72ae941e8b558d8" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=75c7c72ae941e8b558d8" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/_style.css?v=e1c02e80" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/tags.css?v=03faa5c8" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
+
+
+
+    <script src="../_static/documentation_options.js?v=31aa9904"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'guides/external_contribution_workflow';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.24.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/simready-foundation/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dsx-develop';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+
+    <link rel="icon" href="../_static/favicon.png"/>
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Multiple Physics Solvers" href="multiphysics_solvers.html" />
+    <link rel="prev" title="SimReady Acceptance Workflow" href="acceptance_workflow.html" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="dsx-develop" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+
+
+  </head>
+
+  <body data-default-mode="auto">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation" aria-expanded="false" aria-controls="pst-primary-sidebar-modal">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Content Capabilities - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Content Capabilities - Home"/>
+  
+  
+    <p class="title logo__title">Content Capabilities</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-4"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-4"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-4"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-4">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button type="button" class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page" aria-expanded="false" aria-controls="pst-secondary-sidebar-modal">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal" tabindex="-1"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Content Capabilities - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Content Capabilities - Home"/>
+  
+  
+    <p class="title logo__title">Content Capabilities</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-5"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-5"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-5"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-5">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-6"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-6"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-6"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-6">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="guides.html">Guides</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tiers.html">SimReady Foundation Tiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="foundation_pypi.html">SimReady Foundation PyPI Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libraries.html">SimReady Python Libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validate_workflow.html">SimReady Validation Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="runtime_attribution_qa.html">Runtime Attribution QA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validator-integration.html">Foundations 2 Validator Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="foundations2-catalog-migration.html">Foundations 2 Catalog Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="foundations2-layout-migration.html">Foundations 2 Layout Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="semantic_labels/semantic_labels.html">Semantic Labels Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_a_custom_taxonomy.html">Adding a Custom Taxonomy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="packaging_workflow.html">SimReady Packaging Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thumbnail_guidelines.html">Thumbnail Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acceptance_workflow.html">SimReady Acceptance Workflow</a></li>
+<li class="toctree-l2 current active"><a aria-current="page" class="current reference internal" href="#">External Contribution Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiphysics_solvers.html">Multiple Physics Solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_adapters/feature_adapters.html">Feature Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiles/profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="evaluate/evaluate.html">SimReady Evaluate</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="evaluate/overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="evaluate/pipeline.html">Pipeline and Stages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="evaluate/running.html">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="evaluate/reading-reports.html">Reading Reports</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="evaluate/tests/tests.html">Tests Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet001-visual.html">FET001 Visual</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet003-physics.html">FET003 Physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet004-multibody.html">FET004 Multibody</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet005-grasp.html">FET005 Grasp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet006-materials.html">FET006 Materials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet008-object-forward.html">FET008 Object Forward</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet010-display-color.html">FET010 Display Color</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet011-semantic-labels.html">FET011 Semantic Labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet012-gaussian-splat.html">FET012 Gaussian Splat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet013-representation.html">FET013 Multi-Representation Visual</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet014-mesh-variant.html">FET014 Mesh Variant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet015-collision-variant.html">FET015 Collision Variant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet016-appearance-variant.html">FET016 Appearance Variant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet022-driven-joints.html">FET022 Driven Joints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/fet028-gripper.html">FET028 Gripper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/authoring.html">Authoring runtime tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/tests/experimental.html">Experimental and disabled tests</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="evaluate/newton-tests/runtime-tests.html">Newton Runtime Tests</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="evaluate/sensor-tests/tests.html">Sensor Tests Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/sensor-tests/fet034-imu-sensors.html">FET034 IMU Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/sensor-tests/fet035-render-products.html">FET035 Render Products</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/sensor-tests/fet036-rtx-sensors.html">FET036 RTX Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="evaluate/sensor-tests/fet037-joint-sensors.html">FET037 Joint Sensors</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="visual_materials/visual_materials.html">Visual Materials Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SimReady_learning_workflow.html">SimReady Learning Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="naming_conventions.html">Naming Conventions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="development.html">Development Workflows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="features_expansion_workflow.html">Features Expansion Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiles_validation_workflow.html">Profiles Validation Workflow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../rules_and_reqs/rules_and_reqs.html">Rules and Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/core/core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/core/sim_ready/capability-sim_ready.html">SimReady</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/sim_ready/requirements.html">SimReady Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/sim_ready/requirements/metadata-whitelist.html">metadata-whitelist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/sim_ready/requirements/thumbnail-exist.html">Thumbnail Exist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/sim_ready/requirements/nested-simready-metadata.html">nested-simready-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/sim_ready/requirements/metadata-union.html">metadata-union</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/core/units/capability-units.html">Units</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/units/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/core/asset_frame/capability-asset_frame.html">Asset Frame</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/asset_frame/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/core/asset_variants/capability-asset_variants.html">Asset Variants</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/asset_variants/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/core/atomic_asset/capability-atomic_asset.html">Atomic Asset</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/atomic_asset/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/atomic_asset/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/capability-naming_paths.html">Naming and Paths</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements.html">Naming and Paths Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements/prim-naming-convention.html">prim-naming-convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements/file-naming-convention.html">file-naming-convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements/directory-structure.html">directory-structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements/path-length-limits.html">path-length-limits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements/asset-folder-structure.html">asset-folder-structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements/metadata-location.html">metadata-location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/naming_paths/requirements/relative-paths.html">relative-paths</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/capability-runtime_variants.html">Runtime Variants</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements.html">Runtime Variants Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/physx-variant-set.html">physx-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/physx-runtime-payload.html">physx-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/physx-variant-metadata.html">physx-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/newton-variant-set.html">newton-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/newton-runtime-payload.html">newton-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/newton-variant-metadata.html">newton-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/mujoco-variant-set.html">mujoco-variant-set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/mujoco-runtime-payload.html">mujoco-runtime-payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/mujoco-variant-metadata.html">mujoco-variant-metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/runtime-variant-section-purity.html">runtime-variant-section-purity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/requirements/runtime-physics-isolation.html">runtime-physics-isolation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/core/runtime_variants/runtime-physics-isolation-matrix.html">Runtime Physics Isolation Matrix</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/visualization/visualization.html">Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/visualization/geometry/capability-geometry.html">Geometry</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/visualization/geometry/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/visualization/geometry/creators_overview.html">Creators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/visualization/geometry/developers_overview.html">Developers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/visualization/materials/capability-materials.html">Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/visualization/materials/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/visualization/materials/developers.html">Developers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/visualization/display_color/capability-display_color.html">Display Color</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/visualization/display_color/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/visualization/gaussian_splat/capability-gaussian_splat.html">Gaussian Splat</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/visualization/gaussian_splat/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/isaac_sim/isaac_sim.html">Isaac Sim</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/isaac_sim/composition/capability-composition.html">Composition</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/composition/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/isaac_sim/ros_bridge/capability-ros_bridge.html">ROS Bridge</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/ros_bridge/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/isaac_sim/robot_materials/capability-robot_materials.html">Robot Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/robot_materials/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/isaac_sim/robot_core/capability-robot_core.html">Robot Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/robot_core/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/isaac_sim/optimizations/capability-optimizations.html">Isaac Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/isaac_sim/optimizations/requirements.html">Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/optimizations/requirements/fixed-joint-no-mergeable-body-pair.html">fixed-joint-no-mergeable-body-pair</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/optimizations/requirements/rigid-body-no-multiple-visual-meshes.html">rigid-body-no-multiple-visual-meshes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/optimizations/requirements/render-only-no-inactive-collision-schemas.html">render-only-no-inactive-collision-schemas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/isaac_sim/optimizations/requirements/material-no-materialx-render-context.html">material-no-materialx-render-context</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_bodies.html">Physics Bodies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/physics_bodies/base_articulation/capability-base-articulation.html">Base Articulation</a></li>
+
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_rigid_bodies/capability-physics_rigid_bodies.html">Rigid Bodies and Colliders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_rigid_bodies/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_rigid_bodies/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_colliders/capability-collider_approximations.html">Collider Approximations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_colliders/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_colliders/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_joints/capability-physics_joints.html">Joints and Articulations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_joints/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_joints/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_driven_joints/capability-physics_driven_joints.html">Driven Joints</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_driven_joints/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_materials/capability-physics_materials.html">Physics Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_materials/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_materials/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_graspable/capability-physics_graspable.html">Graspable Vectors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_graspable/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_graspable/creators.html">Creators</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_grippers/capability-physics_grippers.html">Grippers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_grippers/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_sensors/capability-physics_sensors.html">Physics Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/physics_sensors/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/physics_bodies/object_affordances/capability-object_affordances.html">Object Affordances</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/object_affordances/requirements.html">Object Affordances Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/object_affordances/requirements/object-affordance-valid.html">object-affordance-valid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/physics_bodies/object_affordances/requirements/object-affordance-state-valid.html">object-affordance-state-valid</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/hierarchy/hierarchy.html">Hierarchy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/hierarchy/capability-hierarchy.html">Hierarchy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/hierarchy/requirements.html">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/hierarchy/creators_overview.html">Creators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/hierarchy/developers_overview.html">Developers</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_sensors.html">Non-Visual Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/capability-nonvisual_materials.html">Non-Visual Materials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements.html">Non-Visual Materials Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/nonvisual_attributes_table.html">Non-Visual Sensor Attributes Table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-base.html">material-base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-coating.html">material-coating</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-attributes.html">material-attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-time.html">material-time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-binding.html">material-binding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/nonvisual_materials/requirements/material-consistency.html">material-consistency</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/lidar/capability-lidar.html">LiDAR Sensor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/nonvisual_sensors/lidar/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/rendering/rendering.html">Rendering</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/rendering/render_products/capability-render_products.html">Render Products</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/rendering/render_products/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/semantic_labels/capability-semantic_labels.html">Semantic Labels</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements.html">Semantic Labels Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-capability.html">semantic-label-capability</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-deprecated-schema.html">semantic-label-deprecated-schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-qcode-valid.html">semantic-label-qcode-valid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-schema.html">semantic-label-schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-time.html">semantic-label-time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-material.html">semantic-label-material</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-capability.html">semantic-label-capability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-deprecated-schema.html">semantic-label-deprecated-schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-qcode-valid.html">semantic-label-qcode-valid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-schema.html">semantic-label-schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-time.html">semantic-label-time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/semantic_labels/requirements/semantic-label-material.html">semantic-label-material</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/capability-dataset_taxonomies.html">Dataset Taxonomies</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements.html">Dataset Taxonomies Requirements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/coco-labels.html">coco-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/cityscapes-labels.html">cityscapes-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/ade20k-labels.html">ade20k-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/pascal-voc-labels.html">pascal-voc-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/sunrgbd-labels.html">sunrgbd-labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/imagenet-labels.html">imagenet-labels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/coco-labels.html">coco-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/cityscapes-labels.html">cityscapes-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/ade20k-labels.html">ade20k-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/pascal-voc-labels.html">pascal-voc-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/sunrgbd-labels.html">sunrgbd-labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/dataset_taxonomies/requirements/imagenet-labels.html">imagenet-labels</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/packaging/packaging.html">Packaging</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/packaging/packaging_core/capability-packaging_core.html">Packaging Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/packaging/packaging_core/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/packaging/conformance_metadata/capability-conformance_metadata.html">Conformance Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/packaging/conformance_metadata/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/packaging/packaging_introspection/capability-packaging_introspection.html">Packaging Introspection</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/packaging/packaging_introspection/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/aif/aif.html">AIF</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/aif/metadata/capability-metadata.html">Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/aif/metadata/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/aif/connection_points/capability-connection_points.html">Connection Points</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/aif/connection_points/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/aif/thermal_cooling/capability-thermal_cooling.html">Thermal Cooling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/aif/thermal_cooling/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/aif/electrical/capability-electrical.html">Electrical</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/aif/electrical/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/template/template.html">Template</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/template/smoke/capability-smoke.html">Smoke</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/template/smoke/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../capabilities/capabilities.html">Capabilities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP000_Core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP000_Core.Isaac.html">Core (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP000_Core.MuJoCo.html">Core (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP000_Core.Newton.html">Core (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP000_Core.PhysX.html">Core (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP002_PosableBodies.html">Posable Bodies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP003_RigidBody.MuJoCo.html">Rigid Body Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP004_Multibody.MuJoCo.html">Simulate Multi-Body Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP004_Multibody.RobotMuJoCo.html">Simulate Multi-Body Physics (Robot MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP007_NonVisualMaterials.html">Non-Visual Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP021_RobotCore.Isaac.html">Robot Core (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP022_DrivenJoints.MuJoCo.html">Driven Joints (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP023_RobotMaterials.Isaac.html">Robot Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP024_BaseArticulation.html">Base Articulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP024_BaseArticulation.MuJoCo.html">Base Articulation (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP024_BaseArticulation.Newton.html">Base Articulation (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP024_BaseArticulation.PhysX.html">Base Articulation (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP025_RosBridge.Ros.html">ROS Ready (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP026_Mates.html">Mate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP027_Connections.html">Connections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP028_Gripper.MuJoCo.html">Gripper (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP029_ConnectionJoint.html">Connections Multibody-Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP029_ConnectionJoint.MuJoCo.html">Connections Multibody-Physics (MuJoCo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP029_ConnectionJoint.Newton.html">Connections Multibody-Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP029_ConnectionJoint.PhysX.html">Connections Multibody-Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP030_PackagingCore.html">Packaging Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP031_SelfContainedPackage.html">Self-contained Package Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP032_PackagingIntrospection.html">Packaging Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP033_SimReadyPackage.html">Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP039_ObjectAffordances.html">Object Affordances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP040_CocoLabels.html">Semantic Labels - COCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP041_CityscapesLabels.html">Semantic Labels - Cityscapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP042_Ade20kLabels.html">Semantic Labels - ADE20K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP043_PascalVocLabels.html">Semantic Labels - PASCAL VOC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP044_SunRgbdLabels.html">Semantic Labels - SUN RGB-D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP045_ImageNet1kLabels.html">Semantic Labels - ImageNet-1K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP046_WikidataLabels.html">Semantic Labels - Wikidata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP1000_TemplateSmoke.Template.html">Template Smoke</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP100_IsaacComposition.Isaac.html">IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP101_RobotComposition.Isaac.html">Robot IsaacSim Composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP102_RigidBodyCollapse.Isaac.html">Rigid-Body Collapse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP103_VisualMeshMerge.Isaac.html">Visual Mesh Merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP104_RenderCollisionSeparation.Isaac.html">Render-Collision Separation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP105_MaterialXRemoval.Isaac.html">MaterialX Removal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP200_AifMetadata.html">AIF Core Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP201_ConnectionPoints.html">Connection Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP202_ThermalCooling.html">AIF Thermal Cooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP203_Electrical.html">AIF Electrical</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rules_and_reqs/assembly/assembly.html">Assembly</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/assembly/mates/capability-mates.html">Mates</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/assembly/mates/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../rules_and_reqs/assembly/connections/capability-connections.html">Connections</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../rules_and_reqs/assembly/connections/requirements.html">Requirements</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../features/features.html">Features</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../features/feature-dependency-graph.html">Feature dependency graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET001_MinimalPlaceableVisual.html">Minimal Placeable Visual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET003_RigidBody.html">Rigid Body Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET003_RigidBody.Newton.html">Rigid Body Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET003_RigidBody.PhysX.html">Rigid Body Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET004_Multibody.html">Simulate Multi-Body Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET004_Multibody.Newton.html">Simulate Multi-Body Physics (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET004_Multibody.PhysX.html">Simulate Multi-Body Physics (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET004_Multibody.RobotNewton.html">Simulate Multi-Body Physics (Robot Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET004_Multibody.RobotPhysX.html">Simulate Multi-Body Physics (Robot PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET005_Grasp.html">Simulate Grasp Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET006_Materials.html">Materials (USDPreviewSurface)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET006_Materials.MDL.html">Materials (MDL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET006_Materials.Openpbr.html">Materials (OpenPBR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET008_ObjectForward.html">Object Forward</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET009_MaterialCoverage.html">Material Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET010_DisplayColor.html">Display Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET011_SemanticLabels.html">Semantic Labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET011_SemanticLabels.RTX.html">Semantic Labels (RTX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET012_GaussianSplat.html">Sensor Visual 3DGS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET013_MultiRepresentationVisual.html">Multi-Representation Visual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET014_MeshVariant.html">Visual Mesh Variant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET015_CollisionVariant.html">Collision Variant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET016_AppearanceVariant.html">Appearance Variant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET022_DrivenJoints.html">Driven Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET022_DrivenJoints.Isaac.html">Driven Joints (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET022_DrivenJoints.Newton.html">Driven Joints (Newton)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET022_DrivenJoints.PhysX.html">Driven Joints (PhysX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET028_Gripper.html">Gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET028_Gripper.Isaac.html">Gripper (Isaac)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET034_ImuSensor.Isaac.html">IMU Sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET035_RenderProducts.RTX.html">Camera and Render Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET036_Lidar.RTX.html">RTX Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../features/FET037_JointSensor.Isaac.html">Joint Sensor</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../profiles/profiles.html">Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robotics-prop.html">Robotics Prop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/nurec.html">NuRec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/asset-optimization.html">Asset Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-body.html">Robot Body</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-gripper.html">Robot Gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/sensor-imu.html">Sensor IMU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/sensor-joint.html">Sensor Joint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/sensor-camera.html">Sensor Camera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/sensor-lidar.html">Sensor LiDAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/material.html">Material</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/assembly.html">Assembly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/robot-assembly.html">Robot Assembly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/open-taxonomy-coco.html">Open Taxonomy COCO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/open-taxonomy-cityscapes.html">Open Taxonomy Cityscapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/open-taxonomy-ade20k.html">Open Taxonomy ADE20K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/open-taxonomy-pascal_voc.html">Open Taxonomy PASCAL VOC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/open-taxonomy-sunrgbd.html">Open Taxonomy SUN RGB-D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/open-taxonomy-imagenet_1k.html">Open Taxonomy ImageNet-1K</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiles/aif-entity.html">AIF Entity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tiers/tiers.html">Tiers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tiers/core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tiers/aif.html">AIF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tiers/newton.html">Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tiers/sensors.html">Sensors</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../indexes/indexes.html">Indexes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../indexes/capability_status_index.html">Capability Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../indexes/requirements_index.html">Requirements Index</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelist.html">Changelist</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-house"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="guides.html" class="nav-link">End to End Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">External Contribution Workflow</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="external-contribution-workflow">
+<h1>External Contribution Workflow<a class="headerlink" href="#external-contribution-workflow" title="Link to this heading">#</a></h1>
+<p>This guide connects the repository’s tier, requirement, feature, profile,
+sample-content, and Evaluate documentation into one contribution path. It is
+for an external developer proposing specification behavior against
+<a class="reference external" href="https://github.com/NVIDIA/simready-foundation"><code class="docutils literal notranslate"><span class="pre">NVIDIA/simready-foundation</span></code></a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Start with a GitHub issue to agree on scope, tier ownership, and branch access.
+A maintainer can create an upstream working branch and arrange access, or
+coordinate a fork. Public branches support specification development; a
+maintainer confirms the review route before submission. Run local checks and
+retain evidence because contributor branches have no guaranteed hosted CI.</p>
+</div>
+<p>GitHub calls the final review object a <strong>pull request (PR)</strong>. It is equivalent
+to a merge request (MR) in systems that use that term.</p>
+<section id="what-the-workflow-must-prove">
+<h2>What the workflow must prove<a class="headerlink" href="#what-the-workflow-must-prove" title="Link to this heading">#</a></h2>
+<p>Each stage closes a different risk. Do not start with a profile and fill in the
+lower layers afterward: implement the contract from the atomic rule upward.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Step</p></th>
+<th class="head"><p>Question answered</p></th>
+<th class="head"><p>Required evidence</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0. Make branch</p></td>
+<td><p>Is the work isolated and based on current upstream?</p></td>
+<td><p>Agreed upstream branch or fork, clean LFS checkout, linked issue</p></td>
+</tr>
+<tr class="row-odd"><td><p>1. Determine tier</p></td>
+<td><p>Does this belong in an existing tier, or is a new tier needed?</p></td>
+<td><p>Tier decision and dependency/portability rationale</p></td>
+</tr>
+<tr class="row-even"><td><p>2. Define contract</p></td>
+<td><p>Is the behavior documented, testable, and selectable?</p></td>
+<td><p>Requirement docs, validator rules, feature manifest/docs, profile pin/docs</p></td>
+</tr>
+<tr class="row-odd"><td><p>3. Sample content</p></td>
+<td><p>Does a real asset demonstrate the contract?</p></td>
+<td><p>Licensed, portable LFS asset that passes the intended static gate</p></td>
+</tr>
+<tr class="row-even"><td><p>4. Evaluate</p></td>
+<td><p>Does the promised behavior work in a runtime?</p></td>
+<td><p>Discovered test, plan, result JSON, logs/media, HTML report</p></td>
+</tr>
+<tr class="row-odd"><td><p>5. Make PR/MR</p></td>
+<td><p>Can reviewers reproduce and assess the complete change?</p></td>
+<td><p>Focused diff, commands/results, limitations, issue link</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Static validation and runtime evaluation are complementary. A validator proves
+that the required USD data is authored; an evaluation proves that the resulting
+asset behaves as promised in the target runtime.</p>
+</section>
+<section id="before-you-begin">
+<h2>Before you begin<a class="headerlink" href="#before-you-begin" title="Link to this heading">#</a></h2>
+<p>Read the current
+<a class="reference external" href="https://github.com/NVIDIA/simready-foundation/blob/main/CONTRIBUTING.md"><code class="docutils literal notranslate"><span class="pre">CONTRIBUTING.md</span></code></a>,
+open an issue
+describing the use case, and get agreement on scope and tier ownership. Include:</p>
+<ul class="simple">
+<li><p>the asset class and runtime behavior;</p></li>
+<li><p>the gap in existing requirements, features, and profiles;</p></li>
+<li><p>whether the proposal is runtime-neutral or runtime/vendor/domain-specific;</p></li>
+<li><p>the sample asset and runtime that can provide end-to-end evidence;</p></li>
+<li><p>any schema, package, or license dependencies.</p></li>
+</ul>
+<p>Install Git LFS before cloning because USD files and images are LFS-managed.
+Use Python 3.12 in a dedicated virtual environment for the complete validation
+and Evaluate workflow. See the repository
+<a class="reference external" href="https://github.com/NVIDIA/simready-foundation/blob/main/README.md"><code class="docutils literal notranslate"><span class="pre">README.md</span></code></a>
+for platform-specific setup.</p>
+</section>
+<section id="working-with-an-ai-agent">
+<h2>Working with an AI agent<a class="headerlink" href="#working-with-an-ai-agent" title="Link to this heading">#</a></h2>
+<p>An agent can inspect the repository, implement the specification surfaces,
+author or repair staged USD content, run available checks, and prepare review
+material. It cannot decide ambiguous asset intent, tier ownership, or acceptance
+policy for the maintainers. It also must not claim that static checks prove
+runtime behavior.</p>
+<p>Start every agent task with these instructions:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Read AGENTS.md and the complete SKILL.md for every applicable SimReady skill
+before editing. Inspect the current tier, neighboring artifacts, and published
+versions first. Preserve unrelated work and published capability, feature, and
+profile versions. Run the narrowest relevant checks, state unavailable
+tools or blocked runtime evidence explicitly, and report changed files,
+commands, results, and remaining gaps.
+</pre></div>
+</div>
+<p>Use the task-specific skill rather than asking the agent to improvise the
+repository workflow. Repo-local skills live under <code class="docutils literal notranslate"><span class="pre">skills/</span></code>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Work</p></th>
+<th class="head"><p>Skill</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Add or update a capability</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simready-foundation-add-capability</span></code> or <code class="docutils literal notranslate"><span class="pre">simready-foundation-update-capability</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Add or update a requirement</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simready-foundation-add-requirement</span></code> or <code class="docutils literal notranslate"><span class="pre">simready-foundation-update-requirement</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Add or update a validator</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simready-foundation-add-validator</span></code> or <code class="docutils literal notranslate"><span class="pre">simready-foundation-update-validator</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Add or update a feature</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simready-foundation-add-feature</span></code> or <code class="docutils literal notranslate"><span class="pre">simready-foundation-update-feature</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Add or update a profile</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simready-foundation-add-profile</span></code> or <code class="docutils literal notranslate"><span class="pre">simready-foundation-update-profile</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Add or update an adapter</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simready-foundation-add-feature-adapter</span></code> or <code class="docutils literal notranslate"><span class="pre">simready-foundation-update-feature-adapter</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Add runtime evidence</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simready-foundation-add-runtime-test</span></code>, followed by the installed Evaluate skills</p></td>
+</tr>
+<tr class="row-odd"><td><p>Audit the complete change</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simready-foundation-validate-foundation-change</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>When validating, evaluating, or packaging an asset, have the agent discover
+and follow the skills bundled with <code class="docutils literal notranslate"><span class="pre">simready-validate</span></code>, <code class="docutils literal notranslate"><span class="pre">simready-evaluate</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">simready-package</span></code>. For example,
+<code class="docutils literal notranslate"><span class="pre">simready-evaluate</span> <span class="pre">--skills-path</span></code> locates the Evaluate skills matching the
+installed CLI. Repo-local skills own Foundation source layout and contract
+wiring; library skills own the corresponding tool mechanics.</p>
+</section>
+<section id="make-a-branch">
+<span id="0-make-a-branch"></span><h2>0. Make a branch<a class="headerlink" href="#make-a-branch" title="Link to this heading">#</a></h2>
+<p>A public reader can create a local branch or fork. Creating or pushing an
+upstream branch requires repository Write access, subject to repository rules.
+If you need upstream access, open a contribution-branch issue using the format
+in <a class="reference external" href="https://github.com/NVIDIA/simready-foundation/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>.
+The maintainer creates the branch, records its work owner, arranges access, and
+confirms the base and review target. Work ownership in an issue is separate from
+GitHub permissions.</p>
+<p>For a maintainer-created upstream branch, clone the public repository and track
+the confirmed branch (replace <code class="docutils literal notranslate"><span class="pre">&lt;assigned-branch&gt;</span></code>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/NVIDIA/simready-foundation.git
+<span class="nb">cd</span><span class="w"> </span>simready-foundation
+git<span class="w"> </span>fetch<span class="w"> </span>origin
+git<span class="w"> </span>switch<span class="w"> </span>--track<span class="w"> </span>origin/&lt;assigned-branch&gt;
+git<span class="w"> </span>lfs<span class="w"> </span>pull
+git<span class="w"> </span>lfs<span class="w"> </span>ls-files
+</pre></div>
+</div>
+<p>If the maintainer coordinates a fork instead, replace <code class="docutils literal notranslate"><span class="pre">&lt;user&gt;</span></code> and
+<code class="docutils literal notranslate"><span class="pre">&lt;issue&gt;-&lt;topic&gt;</span></code> below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/&lt;user&gt;/simready-foundation.git
+<span class="nb">cd</span><span class="w"> </span>simready-foundation
+git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>upstream<span class="w"> </span>https://github.com/NVIDIA/simready-foundation.git
+git<span class="w"> </span>fetch<span class="w"> </span>upstream
+git<span class="w"> </span>switch<span class="w"> </span>-c<span class="w"> </span>&lt;issue&gt;-&lt;topic&gt;<span class="w"> </span>upstream/main
+git<span class="w"> </span>lfs<span class="w"> </span>pull
+git<span class="w"> </span>lfs<span class="w"> </span>ls-files
+</pre></div>
+</div>
+<p>Use one branch for one coherent contract change. Before editing, record the
+baseline checks that pass in your environment. Do not commit generated build
+trees, Evaluate run directories, virtual environments, or installed
+dependencies.</p>
+<section id="agent-instructions">
+<h3>Agent instructions<a class="headerlink" href="#agent-instructions" title="Link to this heading">#</a></h3>
+<p>An agent may inspect remotes and create the local topic branch. Creating a
+remote fork, pushing, or opening a PR must be covered by the user’s
+authorization and the maintainer-confirmed contribution route. A suitable instruction is:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Inspect the current branch, remotes, worktree changes, and Git LFS setup. Do
+not discard or overwrite existing work. Create local branch &lt;issue&gt;-&lt;topic&gt;
+from the agreed upstream ref, verify LFS materialization, and report the exact
+base commit. Do not push or open a pull request.
+</pre></div>
+</div>
+<p><strong>Gate:</strong> the branch is based on the intended upstream ref, LFS objects are
+materialized rather than pointer text, and the proposal has a tracking issue.</p>
+</section>
+</section>
+<section id="determine-whether-you-need-a-new-tier">
+<span id="1-determine-whether-you-need-a-new-tier"></span><h2>1. Determine whether you need a new tier<a class="headerlink" href="#determine-whether-you-need-a-new-tier" title="Link to this heading">#</a></h2>
+<p>A tier is the ownership and distribution boundary for requirements, rules,
+features, profiles, and any runtime tests. First determine whether the proposal
+fits an existing tier. Do not create a new tier merely because the proposal
+adds a capability, feature, or profile.</p>
+<p>Use these questions with the tier maintainers:</p>
+<ol class="arabic simple">
+<li><p>Does an existing tier already own this domain and its requirement namespace?</p></li>
+<li><p>Is the behavior consistent with that tier’s portability claim?</p></li>
+<li><p>Can the proposal depend on existing requirements and features without
+changing their meaning?</p></li>
+<li><p>Can the owning tier distribute the required validators, dependencies,
+samples, and runtime tests?</p></li>
+</ol>
+<p>If the answer is yes, place the work in that existing tier and continue to
+step 2:</p>
+<ul class="simple">
+<li><p>Use the <strong>core tier</strong> for behavior that is broadly agreed across runtimes and
+vendors.</p></li>
+<li><p>Use an existing runtime-, vendor-, or domain-specific tier for a narrower
+contract that falls within that tier’s ownership. Such content can still be
+production quality; its portability claim is simply narrower.</p></li>
+</ul>
+<p>If no existing tier is an appropriate owner, define a new tier. Prefer a
+separate downstream tier for organization-specific or independently
+distributed behavior. A downstream tier may depend on and reference upstream
+Foundation content without modifying or redefining it. Add a new tier to this
+repository only when the maintainers accept its ownership, distribution, and
+review model.</p>
+<p>When a new tier is required, follow
+<a class="reference internal" href="foundation_pypi.html#creating-your-own-tier"><span class="std std-ref">SimReady Foundation PyPI Packages</span></a>.
+At minimum, define its package name and owner, upstream dependencies,
+portability claim, versioning policy, <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>,
+<code class="docutils literal notranslate"><span class="pre">usd_validation_nvidia</span></code> and <code class="docutils literal notranslate"><span class="pre">simready.tier</span></code> entry points, dependency-light tier
+descriptor, package initializers, and rules_and_reqs/capabilities/features/
+profiles directories.
+For an in-repository tier, add it to <code class="docutils literal notranslate"><span class="pre">nv_core/tiers/pyproject.toml</span></code>; do not
+modify the shared builder merely to enumerate it.</p>
+<p>If the new tier owns runtime tests, place its importable test package in
+<code class="docutils literal notranslate"><span class="pre">simready/foundation/&lt;tier-module&gt;/runtime_tests/</span></code>, alongside <code class="docutils literal notranslate"><span class="pre">features/</span></code> and
+<code class="docutils literal notranslate"><span class="pre">profiles/</span></code>. Its wheel must include that package, and its descriptor must expose
+that directory through <code class="docutils literal notranslate"><span class="pre">runtime_tests_path</span></code>. The descriptor must not import
+Kit, Isaac Sim, <code class="docutils literal notranslate"><span class="pre">pxr</span></code>, or the tests merely to resolve its content paths.</p>
+<p>Document the decision in the issue or design note:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Owner: &lt;tier/package&gt;
+Decision: &lt;use existing tier or create new tier&gt;
+Upstream dependencies: &lt;tiers and versions&gt;
+Portability claim: &lt;cross-runtime or scoped runtime/domain&gt;
+Why an existing tier is sufficient, or why none is appropriate: &lt;rationale&gt;
+</pre></div>
+</div>
+<section id="id1">
+<span id="agent-instructions-1"></span><h3>Agent instructions<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Ask the agent to determine whether a new tier is necessary before scaffolding
+files:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Evaluate the proposed &lt;behavior&gt; against the existing tiers, requirements,
+features, profiles, and runtime-test providers. First determine whether it fits
+an existing tier; prefer that tier when its ownership and portability claim
+match. If none fits, explain why and recommend a separate downstream tier or a
+new in-repository tier. Cite the repository files that support the decision and
+identify package dependencies, entry points, portability claims, and review
+owners. Do not create a new tier until ownership is confirmed.
+</pre></div>
+</div>
+<p>If the choice changes the public portability claim or conflicts with existing
+contracts, the agent must stop with the alternatives and request the maintainer
+decision. Once ownership is confirmed, instruct it to scaffold only the agreed
+tier. If that is a new tier, have it verify both entry-point groups from a
+built wheel.</p>
+<p><strong>Gate:</strong> maintainers agree that the proposal belongs in the selected existing
+tier or that a new tier is necessary. Package dependencies are one-way, and the
+proposal does not redefine an upstream requirement.</p>
+</section>
+</section>
+<section id="define-the-requirement-rule-feature-profile-and-docs">
+<span id="2-define-the-requirement-rule-feature-profile-and-docs"></span><h2>2. Define the requirement, rule, feature, profile, and docs<a class="headerlink" href="#define-the-requirement-rule-feature-profile-and-docs" title="Link to this heading">#</a></h2>
+<p>Implement this layer bottom-up. Reuse an existing requirement or feature when
+it already expresses the behavior. Published capability, feature, and profile
+versions are immutable; contract changes require new versions.</p>
+<p>For an in-repository tier, the relevant source layout is:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>nv_core/tiers/&lt;tier-directory&gt;/
+├── pyproject.toml
+├── simready/foundation/&lt;tier-module&gt;/
+│   ├── rules_and_reqs/&lt;domain&gt;/&lt;requirement-group&gt;/
+│   │   ├── requirements/&lt;requirement&gt;.md
+│   │   ├── requirements.md
+│   │   └── validation.py
+│   ├── capabilities/       # Dotted CAP JSON definitions and docs
+│   ├── features/           # Dotted FET JSON definitions and docs
+│   ├── profiles/           # Selector TOMLs and authoring docs
+│   └── runtime_tests/      # Importable Evaluate test procedures
+└── tests/
+    └── runtime_tests/unit/ # Focused tests for the runtime procedures
+</pre></div>
+</div>
+<section id="requirement-and-validation-rule">
+<span id="21-requirement-and-validation-rule"></span><h3>2.1 Requirement and validation rule<a class="headerlink" href="#requirement-and-validation-rule" title="Link to this heading">#</a></h3>
+<p>A requirement is one atomic, testable statement. Add it beneath the owning
+requirement group’s <code class="docutils literal notranslate"><span class="pre">requirements/</span></code> directory under <code class="docutils literal notranslate"><span class="pre">rules_and_reqs/</span></code> and
+register it in that group’s
+<code class="docutils literal notranslate"><span class="pre">requirements.md</span></code>. Use a unique, stable code in the capability’s namespace.
+The requirement page must explain the rule, why it matters, passing and failing
+examples, how to comply, related requirements, and authoritative references.</p>
+<p>Add or update the requirement group’s <code class="docutils literal notranslate"><span class="pre">validation.py</span></code> so the requirement has an
+executable rule with requirement-specific failure messages. Update the package
+<code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> registration path when needed. Test at least:</p>
+<ul class="simple">
+<li><p>a passing asset;</p></li>
+<li><p>a failing asset that isolates this rule;</p></li>
+<li><p>edge cases and not-applicable behavior;</p></li>
+<li><p>rule discovery/registration.</p></li>
+</ul>
+<p>Do not invent custom USD properties when OpenUSD already represents the
+concept with schemas, APIs, relationships, metadata, or composition arcs.</p>
+</section>
+<section id="capabilities-features-and-contract-documentation">
+<span id="22-capabilities-features-and-contract-documentation"></span><h3>2.2 Capabilities, features, and contract documentation<a class="headerlink" href="#capabilities-features-and-contract-documentation" title="Link to this heading">#</a></h3>
+<p>Publish reusable static requirement bundles as CAP definitions under
+<code class="docutils literal notranslate"><span class="pre">capabilities/</span></code>. Runtime-tested contracts belong under <code class="docutils literal notranslate"><span class="pre">features/</span></code>. Both use a
+single dotted identity, <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;[.&lt;runtime&gt;].&lt;version&gt;</span></code>, for example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>capabilities/CAP007_NonVisualMaterials.0-2-0.json
+capabilities/CAP007_NonVisualMaterials.md
+features/FET004_Multibody.PhysX.0-4-0.json
+features/FET004_Multibody.PhysX.md
+</pre></div>
+</div>
+<p>Neutral contracts omit the runtime segment; runtime-specific contracts keep it.
+The <code class="docutils literal notranslate"><span class="pre">id</span></code> is the only identity field; do not duplicate <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">runtime</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">version</span></code>. Preserve the version token exactly, including leading zeroes. A
+contract change creates a new version; published definitions stay immutable.</p>
+<p>Runtime-tested FETs declare executable <code class="docutils literal notranslate"><span class="pre">runtime_tests</span></code>,
+<code class="docutils literal notranslate"><span class="pre">additional_requirements</span></code>, and <code class="docutils literal notranslate"><span class="pre">adapters</span></code>. A testless FET has <code class="docutils literal notranslate"><span class="pre">source=true</span></code> and
+must be named by at least one tested derived FET through <code class="docutils literal notranslate"><span class="pre">source_feature</span></code>.
+Other static contracts are capabilities. <code class="docutils literal notranslate"><span class="pre">source_feature</span></code> records provenance;
+it does not inherit requirements. Use <code class="docutils literal notranslate"><span class="pre">dependencies</span></code> when the whole source
+contract must validate, and <code class="docutils literal notranslate"><span class="pre">capabilities</span></code> for required static contracts.</p>
+<p>Dependencies are exact IDs and must resolve without cycles. Keep matching
+markdown alongside the JSON and follow <a class="reference internal" href="features/features.html"><span class="std std-doc">Features</span></a> and
+<a class="reference internal" href="features/feature-template.html"><span class="std std-doc">the feature template</span></a>. Register new definitions
+in the shared indexes and dependency graph. For the relocated catalog, use the
+<a class="reference internal" href="foundations2-layout-migration.html"><span class="std std-doc">catalog migration tooling</span></a> to regenerate hubs
+and links; do not hand-edit <code class="docutils literal notranslate"><span class="pre">catalog-map.json</span></code>.</p>
+<p>A technology-specific expansion may replace a conflicting base requirement;
+it must not silently stack mutually exclusive rules. If moving between exact
+feature contracts requires USD mutation, add a direct
+<a class="reference internal" href="feature_adapters/feature_adapters.html"><span class="std std-doc">feature adapter</span></a> and validate its output.</p>
+</section>
+<section id="profile-and-profile-documentation">
+<span id="23-profile-and-profile-documentation"></span><h3>2.3 Profile and profile documentation<a class="headerlink" href="#profile-and-profile-documentation" title="Link to this heading">#</a></h3>
+<p>A profile selects features and capabilities for an asset class or target runtime.
+Add a new profile in its own tier-owned TOML file unless the tier deliberately
+uses an established catalog file. Add a new table entry for a new version; do
+not rewrite a published entry. Keep the profile markdown and the shared profile
+index synchronized with the TOML, which is the machine-readable source of
+truth.</p>
+<p>Selectors may be exact dotted IDs or one-to-three-segment wildcards, with
+optional selectors in either the feature or capability list. Resolve them
+against all installed tiers, sort and deduplicate matches, and let a required
+path win over an optional path. An unmatched required selector is an error;
+an unmatched optional selector creates no obligation. Validate each requested
+profile/version independently; do not infer one exclusive profile from asset
+metadata. See <a class="reference internal" href="profiles/profiles.html"><span class="std std-doc">Profiles</span></a>.</p>
+<p>Document required versus optional contracts,
+expected asset type, runtime assumptions, validation commands, migration or
+adapter paths, and sample and evaluation evidence.</p>
+</section>
+<section id="run-contract-checks">
+<span id="24-run-contract-checks"></span><h3>2.4 Run contract checks<a class="headerlink" href="#run-contract-checks" title="Link to this heading">#</a></h3>
+<p>Build the tiers to exercise requirement-enum generation and wheel packaging.
+The builder requires <code class="docutils literal notranslate"><span class="pre">uv</span></code> on <code class="docutils literal notranslate"><span class="pre">PATH</span></code>. Install <code class="docutils literal notranslate"><span class="pre">uv</span></code>, then run this command from
+the repository root:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>nv_core/tiers/_tooling/build_tiers.py
+</pre></div>
+</div>
+<p>The wheels are written to <code class="docutils literal notranslate"><span class="pre">nv_core/tiers/_build/dist/</span></code>. Install the newly
+built wheel in a clean environment, then prove entry-point discovery and run
+static validation against the new profile:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"from importlib.metadata import entry_points; print([ep.name for ep in entry_points(group='simready.tier')])"</span>
+simready-validate<span class="w"> </span>--profile<span class="w"> </span>&lt;Profile-Name&gt;<span class="w"> </span>--version<span class="w"> </span>&lt;profile-version&gt;<span class="w"> </span>path/to/sample.usd
+</pre></div>
+</div>
+<p>During source development, use the local paths or project configuration
+documented by <a class="reference internal" href="validate_workflow.html"><span class="std std-doc">SimReady Validation Workflow</span></a>. A wheel-only
+test is still required because it catches missing package data and entry-point
+wiring that a source checkout can hide.</p>
+</section>
+<section id="id2">
+<span id="agent-instructions-2"></span><h3>Agent instructions<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>Give the agent the accepted behavior, owner, IDs or ID namespace, intended
+versioning impact, and success evidence. Then let it route each surface to the
+matching add/update skill. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Implement the accepted &lt;behavior&gt; in tier &lt;tier&gt;. Use the applicable
+simready-foundation add/update skills for the capability or requirement,
+validator, feature, profile, and adapter. Work bottom-up from the atomic
+requirement. Preserve published versions and add new versions when behavior
+changes. Use dotted Foundations 2 IDs and profile selectors. Keep JSON/TOML
+and markdown synchronized, update indexes and dependency documentation, add focused pass/fail/edge/discovery tests, build the
+tier wheel, and validate &lt;sample&gt; against &lt;Profile&gt;@&lt;version&gt;. Finish with the
+simready-foundation-validate-foundation-change audit and report any blocked
+checks rather than weakening the contract.
+</pre></div>
+</div>
+<p>If the feature can cause asset-level validation failures, also instruct the
+agent to add or update the exact
+<code class="docutils literal notranslate"><span class="pre">simready-foundation-conform-fet-###-&lt;runtime&gt;</span></code> skill. If automatic repair would
+be unsafe or subjective, it should document the blocked case instead. In
+particular, FET005 grasp-line repair requires visual evidence; the
+agent must not guess a grasp region.</p>
+<p><strong>Gate:</strong> requirement docs and rule behavior agree; manifests and TOML parse;
+all IDs and exact versions resolve; registration works from the built wheel;
+the intended sample passes and the negative fixture fails for the expected
+requirement.</p>
+</section>
+</section>
+<section id="add-sample-content">
+<span id="3-add-sample-content"></span><h2>3. Add sample content<a class="headerlink" href="#add-sample-content" title="Link to this heading">#</a></h2>
+<p>Put a minimal, representative OpenUSD asset under the appropriate domain in
+<code class="docutils literal notranslate"><span class="pre">sample_content/</span></code>. Prefer a small asset that makes the new behavior obvious and
+keeps runtime results reproducible. Follow the neighboring asset layout rather
+than creating a second convention.</p>
+<p>The sample must:</p>
+<ul class="simple">
+<li><p>have a clear license and redistribution provenance;</p></li>
+<li><p>use relative, portable composition and texture paths;</p></li>
+<li><p>include all referenced layers and resources needed for the test;</p></li>
+<li><p>contain values derived from the asset rather than fabricated to pass;</p></li>
+<li><p>validate against the exact proposed profile/version;</p></li>
+<li><p>be linked from the feature and profile documentation;</p></li>
+<li><p>avoid unrelated production content or sensitive metadata.</p></li>
+</ul>
+<p>USD files, images, and many source formats are tracked by Git LFS. Confirm that
+new binary content is LFS-managed and inspect the staged diff for accidental
+pointer or generated files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>check-attr<span class="w"> </span>filter<span class="w"> </span>--<span class="w"> </span>path/to/sample.usd<span class="w"> </span>path/to/thumbnail.png
+git<span class="w"> </span>lfs<span class="w"> </span>status
+git<span class="w"> </span>diff<span class="w"> </span>--check
+</pre></div>
+</div>
+<p>Keep small known-bad fixtures with focused validator tests when practical; do
+not present a deliberately invalid asset as a reference sample. Record the
+static validation command and output summary used to qualify the sample.</p>
+<section id="id3">
+<span id="agent-instructions-3"></span><h3>Agent instructions<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>Provide the source asset, output directory, exact target feature/profile, and
+license/provenance facts. Do not ask the agent to fabricate missing physical or
+semantic values merely to make validation pass:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Create a staged reference sample for &lt;Feature or Profile&gt;@&lt;version&gt; from
+&lt;source asset&gt;; never silently edit the source. Read and apply the exact
+conform-fet skills in dependency order, derive physical and provenance values
+from the asset, preserve relative dependencies, and stop on any value that
+cannot be derived. Run the simready-validate library skill against the staged
+root USD, confirm Git LFS coverage, and return the output paths, validation
+report, provenance, and any blocked requirement.
+</pre></div>
+</div>
+<p>For a brand-new sample authored directly in the contribution branch, replace
+the staging instruction with an explicit destination and still require the
+agent to preserve any supplied source. A vision-capable agent must inspect
+render or viewport evidence for visual-semantic authoring such as grasp lines.</p>
+<p><strong>Gate:</strong> a fresh clone can resolve every dependency, the sample has reviewable
+provenance, and static validation produces the expected result.</p>
+</section>
+</section>
+<section id="add-and-run-the-evaluation">
+<span id="4-add-and-run-the-evaluation"></span><h2>4. Add and run the evaluation<a class="headerlink" href="#add-and-run-the-evaluation" title="Link to this heading">#</a></h2>
+<p>Add runtime evidence when the feature promises behavior that static inspection
+cannot prove. A tier-owned test belongs in
+<code class="docutils literal notranslate"><span class="pre">simready/foundation/&lt;tier-module&gt;/runtime_tests/</span></code>, the importable package named
+by that tier’s <code class="docutils literal notranslate"><span class="pre">runtime_tests_path</span></code>, with focused unit tests under the tier’s
+<code class="docutils literal notranslate"><span class="pre">tests/runtime_tests/unit/</span></code> tree. An independent or experimental test pack
+should use Evaluate’s independent-provider or <code class="docutils literal notranslate"><span class="pre">--tests-path</span></code> workflow instead
+of being placed in an unrelated Foundation tier.</p>
+<p>Before authoring, run <code class="docutils literal notranslate"><span class="pre">simready-evaluate</span> <span class="pre">--skills-path</span></code> and follow the
+installed framework’s <code class="docutils literal notranslate"><span class="pre">write-test-pack</span></code> skill; its API and CLI match the
+installed version. Bind the test to the exact dotted FET contract through the
+catalog’s <code class="docutils literal notranslate"><span class="pre">runtime_tests</span></code> mapping and the provider’s test metadata. Follow the
+installed API for any family/version metadata; inspect <code class="docutils literal notranslate"><span class="pre">--list-tests</span></code> to verify
+the effective binding. Do not add generated plans, result JSON, media, or
+reports as test source, and do not hand-edit them.</p>
+<p>Validate discovery and planning from the checkout. Replace
+<code class="docutils literal notranslate"><span class="pre">EXACT_AVAILABLE_FEATURE_ID</span></code> with an ID reported by the installed inventory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-evaluate<span class="w"> </span>--foundations-path<span class="w"> </span>.<span class="w"> </span>--show-config
+simready-evaluate<span class="w"> </span>--foundations-path<span class="w"> </span>.<span class="w"> </span>--list-tests
+simready-evaluate<span class="w"> </span>--foundations-path<span class="w"> </span>.<span class="w"> </span>--assets<span class="w"> </span>path/to/sample.usd<span class="w"> </span>--features<span class="w"> </span>EXACT_AVAILABLE_FEATURE_ID<span class="w"> </span>--plan-only
+</pre></div>
+</div>
+<p>Then run the focused test in the supported engine without stamping the source:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simready-evaluate<span class="w"> </span>--foundations-path<span class="w"> </span>.<span class="w"> </span>--assets<span class="w"> </span>path/to/sample.usd<span class="w"> </span>--features<span class="w"> </span>EXACT_AVAILABLE_FEATURE_ID<span class="w"> </span>--no-stamp
+</pre></div>
+</div>
+<p>Repeat discovery and at least a plan-only check from the clean environment
+containing the built tier wheel, without <code class="docutils literal notranslate"><span class="pre">--foundations-path</span></code> or
+<code class="docutils literal notranslate"><span class="pre">--tests-path</span></code>. This proves that published discovery works.</p>
+<p>Review the resolved run directory, especially <code class="docutils literal notranslate"><span class="pre">run_summary.json</span></code>,
+<code class="docutils literal notranslate"><span class="pre">report/test_results_index.json</span></code>, engine logs, captured media, and
+<code class="docutils literal notranslate"><span class="pre">index.html</span></code>. Document engine/version, exact command, configuration/thresholds,
+result, and artifact location. If the required runtime is unavailable, mark the
+runtime check as blocked; unit tests and a successful plan are not a substitute
+for behavioral evidence.</p>
+<section id="id4">
+<span id="agent-instructions-4"></span><h3>Agent instructions<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>Require the repository-specific runtime-test skill and the installed Evaluate
+skills in the same task:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Add runtime evidence for &lt;Feature&gt;@&lt;version&gt; using
+simready-foundation-add-runtime-test for repository placement and wiring.
+Discover the installed simready-evaluate skills and follow write-test-pack for
+the test API, run-tests for execution, and diagnose-failures if needed. Bind
+the test to the canonical feature ID/version, add focused unit and registration
+tests, update the tier-owned test docs, verify source and built-wheel discovery,
+run plan-only, then execute with --no-stamp. Report engine/version, config,
+pass/fail/skip result, metrics, logs/media, and report paths. Do not edit or
+commit generated plans or reports as source.
+</pre></div>
+</div>
+<p>If the runtime is unavailable, the agent should complete source, registration,
+unit, discovery, and plan checks that do not need it, then report the runtime
+execution as blocked and give the exact reproduction command.</p>
+<p><strong>Gate:</strong> the test is discoverable from both source and wheel, maps to the
+correct feature version, plans only for applicable assets, runs reproducibly,
+and its report demonstrates the feature’s promised behavior.</p>
+</section>
+</section>
+<section id="make-the-pr-mr">
+<span id="5-make-the-prmr"></span><h2>5. Make the PR/MR<a class="headerlink" href="#make-the-pr-mr" title="Link to this heading">#</a></h2>
+<p>Record the branch, commit, design, and evidence in the coordinating issue.
+Follow the maintainer-confirmed review route in
+<a class="reference external" href="https://github.com/NVIDIA/simready-foundation/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>.
+A working branch is a place to develop the proposal; acceptance into main or a
+release still requires Foundation review. The public mirror and internal
+integration repository may have different branch names and acceptance steps.</p>
+<p>Sync with the agreed base without rewriting another contributor’s commits.
+For a fork, <code class="docutils literal notranslate"><span class="pre">upstream</span></code> names NVIDIA’s public repository; for an upstream branch,
+<code class="docutils literal notranslate"><span class="pre">origin</span></code> names it. Confirm the correct remote and base before merging changes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>fetch<span class="w"> </span>&lt;base-remote&gt;
+git<span class="w"> </span>merge<span class="w"> </span>&lt;base-remote&gt;/&lt;agreed-base&gt;
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>&lt;working-branch&gt;
+</pre></div>
+</div>
+<p>Open a draft pull request when the maintainer confirms its target and review
+route. A maintainer coordinates integration and public-mirror publication.</p>
+<p>The PR description should contain:</p>
+<ul class="simple">
+<li><p>the problem statement and linked issue;</p></li>
+<li><p>the tier choice and portability rationale;</p></li>
+<li><p>the requirement, capability, feature, and profile IDs/versions added or changed;</p></li>
+<li><p>the sample’s license/provenance and expected static result;</p></li>
+<li><p>exact build, unit-test, validation, and Evaluate commands with outcomes;</p></li>
+<li><p>links or attachments for the Evaluate report and essential media;</p></li>
+<li><p>adapter/migration impact and compatibility notes;</p></li>
+<li><p>blocked checks, environmental limitations, and follow-up work.</p></li>
+</ul>
+<section id="id5">
+<span id="agent-instructions-5"></span><h3>Agent instructions<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>An agent may perform the final audit and draft the PR before it has authority to
+publish anything:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Audit this branch with simready-foundation-validate-foundation-change. Review
+the full diff for contract drift, generated artifacts, LFS mistakes, secrets,
+and in-place edits to published versions. Run the available focused tests and
+strict docs build. Draft a GitHub pull-request title and body containing the
+issue, tier rationale, contract IDs/versions, sample provenance, exact commands
+and results, evaluation evidence, compatibility impact, and blocked checks. Do
+not push or open the pull request.
+</pre></div>
+</div>
+<p>Push or open the PR when the user’s authorization and the maintainer-confirmed
+route cover that action. Resolve an ambiguous repository, base, head, or review
+route before publication. Existing authorization does not need to be requested
+again.</p>
+<p>Keep generated Evaluate output out of the commit unless a specific docs page
+intentionally uses a small reviewed artifact as evidence. Review the complete
+diff, confirm that no published capability/feature/profile version changed, and run a
+strict docs build:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>build_docs.py<span class="w"> </span>--strict
+git<span class="w"> </span>diff<span class="w"> </span>--check
+</pre></div>
+</div>
+<p>Request review from the owners of every affected tier and runtime. A change is
+ready to merge only when its machine-readable contract, prose, static rule,
+sample, runtime evidence, and packaging/discovery behavior tell the same story.</p>
+</section>
+</section>
+<section id="final-review-checklist">
+<h2>Final review checklist<a class="headerlink" href="#final-review-checklist" title="Link to this heading">#</a></h2>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox">Tracking issue and maintainer-approved scope exist.</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox">Tier ownership and upstream dependencies are explicit.</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox">Requirement ID is unique, indexed, documented, and registered to a rule.</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox">Passing, failing, edge, and discovery tests cover the validator.</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox">Capability/feature JSON and markdown agree on exact dotted IDs and immutable versions.</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox">Profile TOML and markdown agree; required and optional selectors resolve correctly.</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox">Required adapters or migration blockers are documented.</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox">Sample content is portable, licensed, LFS-managed, and statically valid.</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox">Runtime test is tier-owned or independently packaged as intended.</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox">Evaluate discovery, plan, run, and report evidence are recorded.</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox">Built-wheel discovery succeeds in a clean environment.</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox">Strict documentation build and diff checks pass.</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox">Maintainer-confirmed branch access and review route are recorded in the issue.</p></li>
+</ul>
+</section>
+<section id="related-guides">
+<h2>Related guides<a class="headerlink" href="#related-guides" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="tiers.html"><span class="std std-doc">SimReady Foundation Tiers</span></a></p></li>
+<li><p><a class="reference internal" href="foundation_pypi.html"><span class="std std-doc">SimReady Foundation PyPI Packages</span></a></p></li>
+<li><p><a class="reference internal" href="acceptance_workflow.html"><span class="std std-doc">SimReady Acceptance Workflow</span></a></p></li>
+<li><p><a class="reference internal" href="features/features.html"><span class="std std-doc">Features</span></a></p></li>
+<li><p><a class="reference internal" href="profiles/profiles.html"><span class="std std-doc">Profiles</span></a></p></li>
+<li><p><a class="reference internal" href="validate_workflow.html"><span class="std std-doc">SimReady Validation Workflow</span></a></p></li>
+<li><p><a class="reference internal" href="evaluate/evaluate.html"><span class="std std-doc">SimReady Evaluate</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="acceptance_workflow.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">SimReady Acceptance Workflow</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="multiphysics_solvers.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Multiple Physics Solvers</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal" tabindex="-1"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-the-workflow-must-prove">What the workflow must prove</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-you-begin">Before you begin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-an-ai-agent">Working with an AI agent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-a-branch">0. Make a branch</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#agent-instructions">Agent instructions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determine-whether-you-need-a-new-tier">1. Determine whether you need a new tier</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Agent instructions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-requirement-rule-feature-profile-and-docs">2. Define the requirement, rule, feature, profile, and docs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#requirement-and-validation-rule">2.1 Requirement and validation rule</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#capabilities-features-and-contract-documentation">2.2 Capabilities, features, and contract documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#profile-and-profile-documentation">2.3 Profile and profile documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-contract-checks">2.4 Run contract checks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Agent instructions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-sample-content">3. Add sample content</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Agent instructions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-and-run-the-evaluation">4. Add and run the evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Agent instructions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-the-pr-mr">5. Make the PR/MR</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Agent instructions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-review-checklist">Final review checklist</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-guides">Related guides</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8"></script>
+
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2025-2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+---
+orphan: true
+---
+
+# `FET_003-rigid_body_physics`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=FET003_RigidBody.html" />
+<link rel="canonical" href="FET003_RigidBody.html" />
+```
+
+This published feature route moved to [`FET003_RigidBody`](FET003_RigidBody.md) (Foundations 1 ID: `FET_003_STANDARD`).
+
+Split runtime contracts:
+
+- [`FET003_RigidBody`](FET003_RigidBody.md) (`FET_003_STANDARD`)
+- [`FET003_RigidBody.PhysX`](FET003_RigidBody.PhysX.md) (`FET_003_PHYSX`)
+- [`FET003_RigidBody.Newton`](FET003_RigidBody.Newton.md) (`FET_003_NEWTON`)
+- [`CAP003_RigidBody.MuJoCo`](../capabilities/CAP003_RigidBody.MuJoCo.md) (`FET_003_MUJOCO`)

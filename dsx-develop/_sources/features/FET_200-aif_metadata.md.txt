@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_200-aif_metadata`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP200_AifMetadata.html" />
+<link rel="canonical" href="../capabilities/CAP200_AifMetadata.html" />
+```
+
+This published feature route moved to [`CAP200_AifMetadata`](../capabilities/CAP200_AifMetadata.md) (Foundations 1 ID: `FET_200-aif_metadata`).

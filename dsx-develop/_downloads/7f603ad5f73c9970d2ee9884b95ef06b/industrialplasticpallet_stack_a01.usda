@@ -1,0 +1,96 @@
+#usda 1.0
+(
+    doc = """Three-high stack of industrialplasticpallet_a01, mated to itself.
+
+    A compound, not three jointed bodies. Each pallet keeps the
+    PhysicsRigidBodyAPI and PhysicsMassAPI its published asset supplies and
+    sets physics:rigidBodyEnabled = false here, so the MC.003 walk passes
+    through them and both mate sites of each pair resolve to one mate body at
+    CompoundBody. CN.006 therefore takes realization = "compound".
+
+    CompoundBody is the only enabled rigid body on the stage. Per CN.011 it is
+    assembly-local (no reference arc, so its mass can never be misread as one
+    pallet's) and carries the aggregate: 3 x 28.5 kg = 85.5 kg. The pallets'
+    colliders attribute to it, so the fused actor collides with the union of
+    the three hulls and weighs what the stack weighs.
+
+    Composition holds the 50.5 mm nesting pitch, so there is no joint. No
+    connection here authors simready:mate:joint, and CN.005 and the
+    FET_029_STANDARD requirements do not apply. This stack validates against
+    the Assembly profile with FET_026_STANDARD and FET_027_STANDARD alone.
+
+    Unstacking is a composition edit: re-enable the pallet's rigid body,
+    subtract its 28.5 kg from the aggregate, and reparent it out.
+    """
+    defaultPrim = "IndustrialPlasticPallet_Stack_A01"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "IndustrialPlasticPallet_Stack_A01" (
+    kind = "assembly"
+)
+{
+    uniform token simready:mate:assemblyType = "pallet_stack"
+
+    def Xform "CompoundBody" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+        kind = "group"
+    )
+    {
+        float physics:mass = 85.5
+
+        def Xform "Pallet_0" (
+            prepend references = @../../industrialplasticpallet_a01/simready_usd/industrialplasticpallet_a01.usd@</RootNode>
+            variants = {
+                string PhysicsVariant = "RigidBody"
+            }
+        )
+        {
+            bool physics:rigidBodyEnabled = false
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Xform "Pallet_1" (
+            prepend references = @../../industrialplasticpallet_a01/simready_usd/industrialplasticpallet_a01.usd@</RootNode>
+            variants = {
+                string PhysicsVariant = "RigidBody"
+            }
+        )
+        {
+            bool physics:rigidBodyEnabled = false
+            double3 xformOp:translate = (0, 0, 0.0505)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Xform "Pallet_2" (
+            prepend references = @../../industrialplasticpallet_a01/simready_usd/industrialplasticpallet_a01.usd@</RootNode>
+            variants = {
+                string PhysicsVariant = "RigidBody"
+            }
+        )
+        {
+            bool physics:rigidBodyEnabled = false
+            double3 xformOp:translate = (0, 0, 0.101)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+    }
+
+    def Scope "Connections"
+    {
+        def Scope "pallet_0_to_pallet_1"
+        {
+            custom uniform token simready:mate:realization = "compound"
+            custom rel simready:mate:socket = </IndustrialPlasticPallet_Stack_A01/CompoundBody/Pallet_0/stack_socket>
+            custom rel simready:mate:plug = </IndustrialPlasticPallet_Stack_A01/CompoundBody/Pallet_1/stack_plug>
+        }
+
+        def Scope "pallet_1_to_pallet_2"
+        {
+            custom uniform token simready:mate:realization = "compound"
+            custom rel simready:mate:socket = </IndustrialPlasticPallet_Stack_A01/CompoundBody/Pallet_1/stack_socket>
+            custom rel simready:mate:plug = </IndustrialPlasticPallet_Stack_A01/CompoundBody/Pallet_2/stack_plug>
+        }
+    }
+}

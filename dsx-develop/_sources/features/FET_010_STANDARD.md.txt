@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_010_STANDARD`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=FET010_DisplayColor.html" />
+<link rel="canonical" href="FET010_DisplayColor.html" />
+```
+
+This published feature route moved to [`FET010_DisplayColor`](FET010_DisplayColor.md) (Foundations 1 ID: `FET_010_STANDARD`).

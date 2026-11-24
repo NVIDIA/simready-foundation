@@ -1,0 +1,257 @@
+#usda 1.0
+(
+    customLayerData = {
+        dictionary SimReady_Metadata = {
+            string asset_license = "Apache-2.0 AND BSD-3-Clause AND MIT"
+            dictionary validation = {
+                string profile = "Robot-Assembly"
+                string profile_version = "0.1.0"
+                dictionary profiles = {
+                    dictionary "Assembly@0.1.0" = {
+                        string profile = "Assembly"
+                        string profile_version = "0.1.0"
+                        dictionary validated_features = {
+                            dictionary "2026-11-03" = {
+                                dictionary "CAP026_Mates.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP027_Connections.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP026_Mates.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP029_ConnectionJoint.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP027_Connections.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP029_ConnectionJoint.MuJoCo.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP029_ConnectionJoint.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP029_ConnectionJoint.Newton.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP029_ConnectionJoint.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP029_ConnectionJoint.PhysX.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP029_ConnectionJoint.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET003_RigidBody.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-2-0"
+                                }
+                                dictionary "FET004_Multibody.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET003_RigidBody.0-2-0']"
+                                    bool passed = 1
+                                    string version = "0-2-0"
+                                }
+                            }
+                        }
+                    }
+                    dictionary "Robot-Assembly@0.1.0" = {
+                        string profile = "Robot-Assembly"
+                        string profile_version = "0.1.0"
+                        dictionary validated_features = {
+                            dictionary "2026-11-03" = {
+                                dictionary "CAP024_BaseArticulation.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP026_Mates.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP027_Connections.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP026_Mates.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "CAP029_ConnectionJoint.0-1-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['CAP027_Connections.0-1-0']"
+                                    bool passed = 1
+                                    string version = "0-1-0"
+                                }
+                                dictionary "FET003_RigidBody.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "[]"
+                                    bool passed = 1
+                                    string version = "0-2-0"
+                                }
+                                dictionary "FET004_Multibody.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET003_RigidBody.0-2-0']"
+                                    bool passed = 1
+                                    string version = "0-2-0"
+                                }
+                                dictionary "FET022_DrivenJoints.0-2-0" = {
+                                    bool blocking_failure = 0
+                                    string dependencies = "['FET004_Multibody.0-2-0']"
+                                    string "optional requirements" = "['com.nvidia.simready.DJ.002']"
+                                    bool passed = 0
+                                    string version = "0-2-0"
+                                }
+                            }
+                        }
+                    }
+                }
+                dictionary validated_features = {
+                    dictionary "2026-11-03" = {
+                        dictionary "CAP024_BaseArticulation.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "CAP026_Mates.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "CAP027_Connections.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['CAP026_Mates.0-1-0']"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "CAP029_ConnectionJoint.0-1-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['CAP027_Connections.0-1-0']"
+                            bool passed = 1
+                            string version = "0-1-0"
+                        }
+                        dictionary "FET003_RigidBody.0-2-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "[]"
+                            bool passed = 1
+                            string version = "0-2-0"
+                        }
+                        dictionary "FET004_Multibody.0-2-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['FET003_RigidBody.0-2-0']"
+                            bool passed = 1
+                            string version = "0-2-0"
+                        }
+                        dictionary "FET022_DrivenJoints.0-2-0" = {
+                            bool blocking_failure = 0
+                            string dependencies = "['FET004_Multibody.0-2-0']"
+                            string "optional requirements" = "['com.nvidia.simready.DJ.002']"
+                            bool passed = 0
+                            string version = "0-2-0"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    defaultPrim = "UR10_Robotiq_2F85"
+    doc = """UR10 arm with a Robotiq 2F-85 gripper mated at tool_mount_01.\r
+\r
+    A jointed pairing, not a compound: wrist_3_link and base_link each keep\r
+    PhysicsRigidBodyAPI, so the two mate sites resolve to two distinct mate\r
+    bodies and CN.006 takes realization = \"jointed\". CN.009 requires the\r
+    UsdPhysicsFixedJoint below to be authored, and requires the connection to\r
+    point at it with simready:mate:joint.\r
+\r
+    Both mate sites are identity transforms relative to their mate bodies, so\r
+    all four joint local poses are identity and the two mate frames coincide.\r
+\r
+    Both child assets ship their own articulation root, so this joint fuses two\r
+    articulations into one. The joint belongs to that articulation, so\r
+    physics:excludeFromArticulation is left unset, and the gripper gives up its\r
+    PhysicsArticulationRootAPI so exactly one root survives on the composed\r
+    stage (CN.PHYSX.001, CN.NEWTON.001).\r
+\r
+    Two separate edits retire the gripper's standalone-asset state, on different\r
+    prims: root_joint pinned it to the world, while the articulation root sits on\r
+    the referenced Robotiq_2F_85 prim itself.\r
+\r
+    Releasing the gripper is a runtime edit of this joint -- set\r
+    physics:jointEnabled = false or delete the prim -- not a composition edit.\r
+    """
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "UR10_Robotiq_2F85" (
+    prepend apiSchemas = ["IsaacRobotAPI"]
+    kind = "assembly"
+)
+{
+    custom rel isaac:physics:robotLinks = [
+        </UR10_Robotiq_2F85/Arm>,
+        </UR10_Robotiq_2F85/Gripper>,
+    ]
+    custom uniform token isaac:robotType = "Manipulator"
+    uniform token simready:mate:assemblyType = "robot"
+
+    def Xform "Arm" (
+        prepend references = @../../ur10/simready_usd/ur10.usd@</ur10>
+    )
+    {
+    }
+
+    def Xform "Gripper" (
+        delete apiSchemas = ["PhysicsArticulationRootAPI", "PhysxArticulationAPI"]
+        prepend references = @../../Robotiq/2F-85/simready_usd/2F-85.usda@</Robotiq_2F_85>
+    )
+    {
+        delete rel isaac:physics:robotJoints = </UR10_Robotiq_2F85/Gripper/root_joint>
+        quatd xformOp:orient = (0, 0, 0.7071067811865476, 0.7071067811865476)
+        float3 xformOp:scale = (1, 1, 1)
+        double3 xformOp:translate = (1.1842999458312988, 0.2561410665512085, 0.011599980294704437)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        over "root_joint" (
+            active = false
+        )
+        {
+        }
+    }
+
+    def Scope "Connections"
+    {
+        def Scope "arm_to_gripper"
+        {
+            custom rel simready:mate:joint = </UR10_Robotiq_2F85/Connections/arm_to_gripper_joint>
+            custom rel simready:mate:plug = </UR10_Robotiq_2F85/Gripper/base_link/tool_plug_01>
+            custom uniform token simready:mate:realization = "jointed"
+            custom rel simready:mate:socket = </UR10_Robotiq_2F85/Arm/wrist_3_link/tool_mount_01>
+        }
+
+        def PhysicsFixedJoint "arm_to_gripper_joint"
+        {
+            rel physics:body0 = </UR10_Robotiq_2F85/Arm/wrist_3_link>
+            rel physics:body1 = </UR10_Robotiq_2F85/Gripper/base_link>
+            float physics:breakForce = inf
+            float physics:breakTorque = inf
+            bool physics:collisionEnabled = 0
+            point3f physics:localPos0 = (0, 0, 0)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (1, 0, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+    }
+}
+

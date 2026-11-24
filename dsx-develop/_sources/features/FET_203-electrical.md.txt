@@ -1,0 +1,12 @@
+---
+orphan: true
+---
+
+# `FET_203-electrical`
+
+```{raw} html
+<meta http-equiv="refresh" content="0; url=../capabilities/CAP203_Electrical.html" />
+<link rel="canonical" href="../capabilities/CAP203_Electrical.html" />
+```
+
+This published feature route moved to [`CAP203_Electrical`](../capabilities/CAP203_Electrical.md) (Foundations 1 ID: `FET_203-electrical`).

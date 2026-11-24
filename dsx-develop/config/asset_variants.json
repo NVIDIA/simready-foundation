@@ -1,0 +1,309 @@
+{
+    "capability": {
+        "id": "asset_variants",
+        "version": "1.0.0",
+        "requirements": [
+            {
+                "code": "AV.006",
+                "version": null,
+                "name": "collision-envelope-invariant",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "CollisionEnvelopeInvariantChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/asset_variants/requirements/collision-envelope-invariant.html",
+                    "internal_path": "rules_and_reqs/core/asset_variants/requirements/collision-envelope-invariant.md"
+                },
+                "message": "Every option of a variation variant set that carries colliders MUST hold the\nasset's collision envelope size invariant within tolerance.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n(\n    defaultPrim = \"Asset\"\n    customLayerData = {\n        dictionary SimReady_Metadata = {\n            dictionary Variants = {\n                dictionary Collision = {\n                    dictionary Collision = {\n                        string prim = \"/Asset\"\n                        string variantSetName = \"Collision\"\n                        string category = \"Collision\"\n                        string default = \"ConvexHull\"\n                        string impactClass = \"simulation-affecting\"\n                    }\n                }\n            }\n        }\n    }\n)\ndef Xform \"Asset\" (\n    variants = {\n        string Collision = \"ConvexHull\"\n    }\n    prepend variantSets = [\"Collision\"]\n)\n{\n    variantSet \"Collision\" = {\n        \"ConvexHull\" {\n            def Cube \"Collider\" (\n                prepend apiSchemas = [\"PhysicsCollisionAPI\"]\n            )\n            {\n                double size = 0.4\n                uniform token purpose = \"proxy\"\n            }\n        }\n        \"TriangleMesh\" {\n            def Cube \"Collider\" (\n                prepend apiSchemas = [\"PhysicsCollisionAPI\"]\n            )\n            {\n                double size = 0.4\n                uniform token purpose = \"proxy\"\n            }\n        }\n    }\n}"
+                        },
+                        "name": "both collider options span the same collision envelope",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n(\n    defaultPrim = \"Asset\"\n    customLayerData = {\n        dictionary SimReady_Metadata = {\n            dictionary Variants = {\n                dictionary Collision = {\n                    dictionary Collision = {\n                        string prim = \"/Asset\"\n                        string variantSetName = \"Collision\"\n                        string category = \"Collision\"\n                        string default = \"ConvexHull\"\n                        string impactClass = \"simulation-affecting\"\n                    }\n                }\n            }\n        }\n    }\n)\ndef Xform \"Asset\" (\n    variants = {\n        string Collision = \"ConvexHull\"\n    }\n    prepend variantSets = [\"Collision\"]\n)\n{\n    variantSet \"Collision\" = {\n        \"ConvexHull\" {\n            def Cube \"Collider\" (\n                prepend apiSchemas = [\"PhysicsCollisionAPI\"]\n            )\n            {\n                double size = 0.4\n                uniform token purpose = \"proxy\"\n            }\n        }\n        \"TriangleMesh\" {\n            def Cube \"Collider\" (\n                prepend apiSchemas = [\"PhysicsCollisionAPI\"]\n            )\n            {\n                double size = 0.44\n                uniform token purpose = \"proxy\"\n            }\n        }\n    }\n}"
+                        },
+                        "name": "a collider option resizes the collision envelope",
+                        "result": "failure"
+                    }
+                ]
+            },
+            {
+                "code": "AV.008",
+                "version": null,
+                "name": "conditional-presence",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "ConditionalPresenceChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/asset_variants/requirements/conditional-presence.html",
+                    "internal_path": "rules_and_reqs/core/asset_variants/requirements/conditional-presence.md"
+                },
+                "message": "A variation variant set MUST exist if and only if its scope offers two or more\noptions; a scope with a single representation carries no variant set.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n(\n    defaultPrim = \"Asset\"\n    customLayerData = {\n        dictionary SimReady_Metadata = {\n            dictionary Variants = {\n                dictionary Representation = {\n                    dictionary Representation_shade = {\n                        string prim = \"/Asset\"\n                        string variantSetName = \"Representation_shade\"\n                        string category = \"Representation\"\n                        string default = \"Mesh\"\n                        string impactClass = \"visual-only\"\n                    }\n                }\n            }\n        }\n    }\n)\ndef Xform \"Asset\" (\n    variants = {\n        string Representation_shade = \"Mesh\"\n    }\n    prepend variantSets = [\"Representation_shade\"]\n)\n{\n    def Xform \"Base\"\n    {\n    }\n\n    variantSet \"Representation_shade\" = {\n        \"Mesh\" {\n        }\n        \"GaussianSplat\" {\n        }\n    }\n}"
+                        },
+                        "name": "a multi-option part carries a set; a single-representation part does not",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n(\n    defaultPrim = \"Asset\"\n    customLayerData = {\n        dictionary SimReady_Metadata = {\n            dictionary Variants = {\n                dictionary Representation = {\n                    dictionary Representation_base = {\n                        string prim = \"/Asset\"\n                        string variantSetName = \"Representation_base\"\n                        string category = \"Representation\"\n                        string default = \"Mesh\"\n                        string impactClass = \"visual-only\"\n                    }\n                }\n            }\n        }\n    }\n)\ndef Xform \"Asset\" (\n    variants = {\n        string Representation_base = \"Mesh\"\n    }\n    prepend variantSets = [\"Representation_base\"]\n)\n{\n    variantSet \"Representation_base\" = {\n        \"Mesh\" {\n        }\n    }\n}"
+                        },
+                        "name": "a variant set with a single option",
+                        "result": "failure"
+                    }
+                ]
+            },
+            {
+                "code": "AV.001",
+                "version": null,
+                "name": "variation-discovery-metadata",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "VariationDiscoveryMetadataChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/asset_variants/requirements/variation-discovery-metadata.html",
+                    "internal_path": "rules_and_reqs/core/asset_variants/requirements/variation-discovery-metadata.md"
+                },
+                "message": "Every advertised variation variant set MUST be declared under\n`customLayerData.SimReady_Metadata.Variants.<Category>.<VariantSetName>` with its\nowning prim, category, default option, and impact class.",
+                "examples": []
+            },
+            {
+                "code": "AV.005",
+                "version": null,
+                "name": "visual-envelope-invariant",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "VisualEnvelopeInvariantChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/asset_variants/requirements/visual-envelope-invariant.html",
+                    "internal_path": "rules_and_reqs/core/asset_variants/requirements/visual-envelope-invariant.md"
+                },
+                "message": "Every option of a variation variant set MUST hold the asset's visual envelope\nsize invariant within tolerance.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n(\n    defaultPrim = \"Asset\"\n    customLayerData = {\n        dictionary SimReady_Metadata = {\n            dictionary Variants = {\n                dictionary MeshVariant = {\n                    dictionary MeshVariant = {\n                        string prim = \"/Asset\"\n                        string variantSetName = \"MeshVariant\"\n                        string category = \"MeshVariant\"\n                        string default = \"Smooth\"\n                        string impactClass = \"visual-only\"\n                    }\n                }\n            }\n        }\n    }\n)\ndef Xform \"Asset\" (\n    variants = {\n        string MeshVariant = \"Smooth\"\n    }\n    prepend variantSets = [\"MeshVariant\"]\n)\n{\n    variantSet \"MeshVariant\" = {\n        \"Smooth\" {\n            def Cube \"Geo\"\n            {\n                double size = 0.3\n            }\n        }\n        \"Faceted\" {\n            def Cube \"Geo\"\n            {\n                double size = 0.3\n            }\n        }\n    }\n}"
+                        },
+                        "name": "both options occupy the same visual envelope",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n(\n    defaultPrim = \"Asset\"\n    customLayerData = {\n        dictionary SimReady_Metadata = {\n            dictionary Variants = {\n                dictionary MeshVariant = {\n                    dictionary MeshVariant = {\n                        string prim = \"/Asset\"\n                        string variantSetName = \"MeshVariant\"\n                        string category = \"MeshVariant\"\n                        string default = \"Smooth\"\n                        string impactClass = \"visual-only\"\n                    }\n                }\n            }\n        }\n    }\n)\ndef Xform \"Asset\" (\n    variants = {\n        string MeshVariant = \"Smooth\"\n    }\n    prepend variantSets = [\"MeshVariant\"]\n)\n{\n    variantSet \"MeshVariant\" = {\n        \"Smooth\" {\n            def Cube \"Geo\"\n            {\n                double size = 0.3\n            }\n        }\n        \"Faceted\" {\n            def Cube \"Geo\"\n            {\n                double size = 0.5\n            }\n        }\n    }\n}"
+                        },
+                        "name": "an option resizes the visual envelope",
+                        "result": "failure"
+                    }
+                ]
+            },
+            {
+                "code": "AV.004",
+                "version": null,
+                "name": "section-purity-isolation",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "VariationSectionPurityChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/asset_variants/requirements/section-purity-isolation.html",
+                    "internal_path": "rules_and_reqs/core/asset_variants/requirements/section-purity-isolation.md"
+                },
+                "message": "A per-part variation option MUST compose its content only through an isolated\npayload arc, and selecting one option MUST NOT change any content outside that\npart. A master option MUST author child variant selections only.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n(\n    defaultPrim = \"Asset\"\n    customLayerData = {\n        dictionary SimReady_Metadata = {\n            dictionary Variants = {\n                dictionary Representation = {\n                    dictionary Representation = {\n                        string prim = \"/Asset\"\n                        string variantSetName = \"Representation\"\n                        string category = \"Representation\"\n                        string default = \"Mesh\"\n                        string impactClass = \"visual-only\"\n                    }\n                    dictionary Representation_shade = {\n                        string prim = \"/Asset\"\n                        string variantSetName = \"Representation_shade\"\n                        string category = \"Representation\"\n                        string default = \"Mesh\"\n                        string impactClass = \"visual-only\"\n                    }\n                }\n            }\n        }\n    }\n)\ndef Xform \"Asset\" (\n    variants = {\n        string Representation = \"Mesh\"\n    }\n    prepend variantSets = [\"Representation\", \"Representation_shade\"]\n)\n{\n    variantSet \"Representation\" = {\n        \"Mesh\" (\n            variants = {\n                string Representation_shade = \"Mesh\"\n            }\n        ) {\n        }\n        \"GaussianSplat\" (\n            variants = {\n                string Representation_shade = \"GaussianSplat\"\n            }\n        ) {\n        }\n    }\n    variantSet \"Representation_shade\" = {\n        \"Mesh\" (\n            prepend payload = @./variants/shade_mesh.usd@\n        ) {\n        }\n        \"GaussianSplat\" (\n            prepend payload = @./variants/shade_splat.usd@\n        ) {\n        }\n    }\n}"
+                        },
+                        "name": "per-part options compose only through a payload; the master authors only selections",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n(\n    defaultPrim = \"Asset\"\n    customLayerData = {\n        dictionary SimReady_Metadata = {\n            dictionary Variants = {\n                dictionary Representation = {\n                    dictionary Representation_shade = {\n                        string prim = \"/Asset\"\n                        string variantSetName = \"Representation_shade\"\n                        string category = \"Representation\"\n                        string default = \"Mesh\"\n                        string impactClass = \"visual-only\"\n                    }\n                }\n            }\n        }\n    }\n)\ndef Xform \"Asset\" (\n    variants = {\n        string Representation_shade = \"Mesh\"\n    }\n    prepend variantSets = [\"Representation_shade\"]\n)\n{\n    variantSet \"Representation_shade\" = {\n        \"Mesh\" {\n            def Mesh \"ShadeMesh\"\n            {\n                int[] faceVertexCounts = [3]\n                int[] faceVertexIndices = [0, 1, 2]\n                point3f[] points = [(0, 0, 0), (0.1, 0, 0), (0, 0.1, 0)]\n            }\n        }\n        \"GaussianSplat\" (\n            prepend payload = @./variants/shade_splat.usd@\n        ) {\n        }\n    }\n}"
+                        },
+                        "name": "a per-part option inlines its content",
+                        "result": "failure"
+                    }
+                ]
+            },
+            {
+                "code": "AV.003",
+                "version": null,
+                "name": "option-composability",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "VariationOptionComposabilityChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/asset_variants/requirements/option-composability.html",
+                    "internal_path": "rules_and_reqs/core/asset_variants/requirements/option-composability.md"
+                },
+                "message": "Every option of a variation variant set MUST compose to a valid stage, and the\ncategory's content requirements MUST hold under **each** option, not only under\nthe authored default.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n(\n    defaultPrim = \"Asset\"\n    customLayerData = {\n        dictionary SimReady_Metadata = {\n            dictionary Variants = {\n                dictionary Representation = {\n                    dictionary Representation = {\n                        string prim = \"/Asset\"\n                        string variantSetName = \"Representation\"\n                        string category = \"Representation\"\n                        string default = \"Mesh\"\n                        string impactClass = \"visual-only\"\n                    }\n                }\n            }\n        }\n    }\n)\ndef Xform \"Asset\" (\n    variants = {\n        string Representation = \"Mesh\"\n    }\n    prepend variantSets = [\"Representation\"]\n)\n{\n    variantSet \"Representation\" = {\n        \"Mesh\" {\n            def Mesh \"Geo_mesh\"\n            {\n                int[] faceVertexCounts = [3]\n                int[] faceVertexIndices = [0, 1, 2]\n                point3f[] points = [(0, 0, 0), (0.1, 0, 0), (0, 0.1, 0)]\n            }\n        }\n        \"GaussianSplat\" {\n            def ParticleField3DGaussianSplat \"Geo_splat\"\n            {\n                point3f[] positions = [(0, 0, 0)]\n            }\n        }\n    }\n}"
+                        },
+                        "name": "each option composes its own non-empty content",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n(\n    defaultPrim = \"Asset\"\n    customLayerData = {\n        dictionary SimReady_Metadata = {\n            dictionary Variants = {\n                dictionary Representation = {\n                    dictionary Representation = {\n                        string prim = \"/Asset\"\n                        string variantSetName = \"Representation\"\n                        string category = \"Representation\"\n                        string default = \"Mesh\"\n                        string impactClass = \"visual-only\"\n                    }\n                }\n            }\n        }\n    }\n)\ndef Xform \"Asset\" (\n    variants = {\n        string Representation = \"Mesh\"\n    }\n    prepend variantSets = [\"Representation\"]\n)\n{\n    variantSet \"Representation\" = {\n        \"Mesh\" {\n            def Mesh \"Geo_mesh\"\n            {\n                int[] faceVertexCounts = [3]\n                int[] faceVertexIndices = [0, 1, 2]\n                point3f[] points = [(0, 0, 0), (0.1, 0, 0), (0, 0.1, 0)]\n            }\n        }\n        \"GaussianSplat\" {\n        }\n    }\n}"
+                        },
+                        "name": "an option composes nothing",
+                        "result": "failure"
+                    }
+                ]
+            },
+            {
+                "code": "AV.002",
+                "version": null,
+                "name": "variant-set-location",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "VariationVariantSetChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/asset_variants/requirements/variant-set-location.html",
+                    "internal_path": "rules_and_reqs/core/asset_variants/requirements/variant-set-location.md"
+                },
+                "message": "A variation variant set MUST live on the asset's default (root) prim, declare at\nleast two options, and author a valid default selection that names one of those\noptions.",
+                "examples": []
+            },
+            {
+                "code": "AV.010",
+                "version": null,
+                "name": "variation-stability",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "VariationStabilityChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/asset_variants/requirements/variation-stability.html",
+                    "internal_path": "rules_and_reqs/core/asset_variants/requirements/variation-stability.md"
+                },
+                "message": "Across a variation set's options, no prim that is present in two or more options\nMAY change its prim **type** or its authored local **transform**. A variation MAY\nonly add or remove geometry leaves under a stable part prim.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n(\n    defaultPrim = \"Asset\"\n    customLayerData = {\n        dictionary SimReady_Metadata = {\n            dictionary Variants = {\n                dictionary Representation = {\n                    dictionary Representation = {\n                        string prim = \"/Asset\"\n                        string variantSetName = \"Representation\"\n                        string category = \"Representation\"\n                        string default = \"Mesh\"\n                        string impactClass = \"visual-only\"\n                    }\n                }\n            }\n        }\n    }\n)\ndef Xform \"Asset\" (\n    variants = {\n        string Representation = \"Mesh\"\n    }\n    prepend variantSets = [\"Representation\"]\n)\n{\n    def Xform \"Part\"\n    {\n        double3 xformOp:translate = (0, 0, 0.2)\n        uniform token[] xformOpOrder = [\"xformOp:translate\"]\n    }\n\n    variantSet \"Representation\" = {\n        \"Mesh\" {\n            over \"Part\"\n            {\n                def Mesh \"Geo_mesh\"\n                {\n                    int[] faceVertexCounts = [3]\n                    int[] faceVertexIndices = [0, 1, 2]\n                    point3f[] points = [(0, 0, 0), (0.1, 0, 0), (0, 0.1, 0)]\n                }\n            }\n        }\n        \"Splat\" {\n            over \"Part\"\n            {\n                def ParticleField3DGaussianSplat \"Geo_splat\"\n                {\n                    point3f[] positions = [(0, 0, 0)]\n                }\n            }\n        }\n    }\n}"
+                        },
+                        "name": "each option adds its own geometry child under a stable part Xform",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n(\n    defaultPrim = \"Asset\"\n    customLayerData = {\n        dictionary SimReady_Metadata = {\n            dictionary Variants = {\n                dictionary Representation = {\n                    dictionary Representation = {\n                        string prim = \"/Asset\"\n                        string variantSetName = \"Representation\"\n                        string category = \"Representation\"\n                        string default = \"Mesh\"\n                        string impactClass = \"visual-only\"\n                    }\n                }\n            }\n        }\n    }\n)\ndef Xform \"Asset\" (\n    variants = {\n        string Representation = \"Mesh\"\n    }\n    prepend variantSets = [\"Representation\"]\n)\n{\n    def Xform \"Part\"\n    {\n        double3 xformOp:translate = (0, 0, 0.2)\n        uniform token[] xformOpOrder = [\"xformOp:translate\"]\n    }\n\n    variantSet \"Representation\" = {\n        \"Mesh\" {\n            over \"Part\"\n            {\n                def Mesh \"Geo\"\n                {\n                    int[] faceVertexCounts = [3]\n                    int[] faceVertexIndices = [0, 1, 2]\n                    point3f[] points = [(0, 0, 0), (0.1, 0, 0), (0, 0.1, 0)]\n                }\n            }\n        }\n        \"Splat\" {\n            over \"Part\"\n            {\n                def ParticleField3DGaussianSplat \"Geo\"\n                {\n                    point3f[] positions = [(0, 0, 0)]\n                }\n            }\n        }\n    }\n}"
+                        },
+                        "name": "a shared child changes type between options",
+                        "result": "failure"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n(\n    defaultPrim = \"Asset\"\n    customLayerData = {\n        dictionary SimReady_Metadata = {\n            dictionary Variants = {\n                dictionary Representation = {\n                    dictionary Representation = {\n                        string prim = \"/Asset\"\n                        string variantSetName = \"Representation\"\n                        string category = \"Representation\"\n                        string default = \"Closed\"\n                        string impactClass = \"visual-only\"\n                    }\n                }\n            }\n        }\n    }\n)\ndef Xform \"Asset\" (\n    variants = {\n        string Representation = \"Closed\"\n    }\n    prepend variantSets = [\"Representation\"]\n)\n{\n    def Xform \"Part\"\n    {\n    }\n\n    variantSet \"Representation\" = {\n        \"Closed\" {\n            over \"Part\"\n            {\n                double3 xformOp:translate = (0, 0, 0.2)\n                uniform token[] xformOpOrder = [\"xformOp:translate\"]\n                def Mesh \"Geo_mesh\"\n                {\n                    int[] faceVertexCounts = [3]\n                    int[] faceVertexIndices = [0, 1, 2]\n                    point3f[] points = [(0, 0, 0), (0.1, 0, 0), (0, 0.1, 0)]\n                }\n            }\n        }\n        \"Open\" {\n            over \"Part\"\n            {\n                double3 xformOp:translate = (0, 0, 0.2)\n                float3 xformOp:rotateXYZ = (45, 0, 0)\n                uniform token[] xformOpOrder = [\"xformOp:translate\", \"xformOp:rotateXYZ\"]\n                def Mesh \"Geo_mesh\"\n                {\n                    int[] faceVertexCounts = [3]\n                    int[] faceVertexIndices = [0, 1, 2]\n                    point3f[] points = [(0, 0, 0), (0.1, 0, 0), (0, 0.1, 0)]\n                }\n            }\n        }\n    }\n}"
+                        },
+                        "name": "the part's transform differs between options",
+                        "result": "failure"
+                    }
+                ]
+            },
+            {
+                "code": "AV.007",
+                "version": null,
+                "name": "impact-class-honesty",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "ImpactClassHonestyChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/asset_variants/requirements/impact-class-honesty.html",
+                    "internal_path": "rules_and_reqs/core/asset_variants/requirements/impact-class-honesty.md"
+                },
+                "message": "A variant set's declared `impactClass` MUST match what its options actually\nchange: a `visual-only` set changes no simulation-relevant data; a\n`simulation-affecting` set changes only the domain it declares.",
+                "examples": [
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n(\n    defaultPrim = \"Asset\"\n    customLayerData = {\n        dictionary SimReady_Metadata = {\n            dictionary Variants = {\n                dictionary Appearance = {\n                    dictionary Appearance = {\n                        string prim = \"/Asset\"\n                        string variantSetName = \"Appearance\"\n                        string category = \"Appearance\"\n                        string default = \"Red\"\n                        string impactClass = \"visual-only\"\n                    }\n                }\n            }\n        }\n    }\n)\ndef Xform \"Asset\" (\n    variants = {\n        string Appearance = \"Red\"\n    }\n    prepend variantSets = [\"Appearance\"]\n)\n{\n    variantSet \"Appearance\" = {\n        \"Red\" {\n            def Mesh \"Geo\"\n            {\n                int[] faceVertexCounts = [3]\n                int[] faceVertexIndices = [0, 1, 2]\n                point3f[] points = [(0, 0, 0), (0.1, 0, 0), (0, 0.1, 0)]\n                color3f[] primvars:displayColor = [(1, 0, 0)]\n            }\n        }\n        \"Blue\" {\n            def Mesh \"Geo\"\n            {\n                int[] faceVertexCounts = [3]\n                int[] faceVertexIndices = [0, 1, 2]\n                point3f[] points = [(0, 0, 0), (0.1, 0, 0), (0, 0.1, 0)]\n                color3f[] primvars:displayColor = [(0, 0, 1)]\n            }\n        }\n    }\n}"
+                        },
+                        "name": "a visual-only set changes only visual data",
+                        "result": "success"
+                    },
+                    {
+                        "snippet": {
+                            "language": "usd",
+                            "content": "#usda 1.0\n(\n    defaultPrim = \"Asset\"\n    customLayerData = {\n        dictionary SimReady_Metadata = {\n            dictionary Variants = {\n                dictionary Appearance = {\n                    dictionary Appearance = {\n                        string prim = \"/Asset\"\n                        string variantSetName = \"Appearance\"\n                        string category = \"Appearance\"\n                        string default = \"Red\"\n                        string impactClass = \"visual-only\"\n                    }\n                }\n            }\n        }\n    }\n)\ndef Xform \"Asset\" (\n    variants = {\n        string Appearance = \"Red\"\n    }\n    prepend variantSets = [\"Appearance\"]\n)\n{\n    variantSet \"Appearance\" = {\n        \"Red\" {\n            def Mesh \"Geo\"\n            {\n                int[] faceVertexCounts = [3]\n                int[] faceVertexIndices = [0, 1, 2]\n                point3f[] points = [(0, 0, 0), (0.1, 0, 0), (0, 0.1, 0)]\n                color3f[] primvars:displayColor = [(1, 0, 0)]\n            }\n        }\n        \"Blue\" {\n            def Mesh \"Geo\" (\n                prepend apiSchemas = [\"PhysicsCollisionAPI\"]\n            )\n            {\n                int[] faceVertexCounts = [3]\n                int[] faceVertexIndices = [0, 1, 2]\n                point3f[] points = [(0, 0, 0), (0.1, 0, 0), (0, 0.1, 0)]\n                color3f[] primvars:displayColor = [(0, 0, 1)]\n            }\n        }\n    }\n}"
+                        },
+                        "name": "a visual-only option changes physics",
+                        "result": "failure"
+                    }
+                ]
+            },
+            {
+                "code": "AV.009",
+                "version": null,
+                "name": "authored-physical-properties",
+                "compatibility": "open-usd",
+                "tags": [
+                    "correctness"
+                ],
+                "validator": "AuthoredPhysicalPropertiesChecker",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/core/asset_variants/requirements/authored-physical-properties.html",
+                    "internal_path": "rules_and_reqs/core/asset_variants/requirements/authored-physical-properties.md"
+                },
+                "message": "An asset with a `Collision` variation MUST author its mass, center of mass, and\ninertia explicitly with `UsdPhysics.MassAPI`, and those values MUST be identical\nacross every collider option.",
+                "examples": []
+            }
+        ],
+        "metadata": {
+            "path": "rules_and_reqs/core/asset_variants/capability-asset_variants.html",
+            "internal_path": "rules_and_reqs/core/asset_variants/capability-asset_variants.md"
+        }
+    }
+}
