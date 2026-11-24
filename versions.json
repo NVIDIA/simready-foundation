@@ -1,6 +1,5 @@
 [
   {"name": "PCB 0.1.0 (Preview)", "version": "pcb-0.1.0", "url": "https://nvidia.github.io/simready-foundation/pcb-0.1.0/"},
-  {"name": "AIF 0.1.0 (Preview)", "version": "aif-0.1.0", "url": "https://nvidia.github.io/simready-foundation/aif-0.1.0/"},
   {"name": "2026.10.0 (latest)", "version": "2026.10.0", "url": "https://nvidia.github.io/simready-foundation/2026.10.0/"},
   {"name": "2026.08.0", "version": "2026.08.0", "url": "https://nvidia.github.io/simready-foundation/2026.08.0/"},
   {"name": "2026.08.0-post1", "version": "2026.08.0-post1", "url": "https://nvidia.github.io/simready-foundation/2026.08.0-post1/"},
