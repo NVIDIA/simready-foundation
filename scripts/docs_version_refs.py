@@ -33,6 +33,9 @@ _PREVIEW_BRANCH_RE = re.compile(
 )
 _PREVIEW_SLUG_RE = re.compile(r"^(?P<product>[a-z]+)-(?P<version>\d+(?:\.\d+)*)$", re.IGNORECASE)
 
+_DEVELOP_BRANCH = "develop/DSX"
+_DEVELOP_SLUG = "dsx-develop"
+
 
 def preview_branch_to_slug(branch: str) -> str | None:
     match = _PREVIEW_BRANCH_RE.match(branch)
@@ -59,6 +62,7 @@ def fetch_refs() -> None:
             "+refs/heads/release-*:refs/remotes/origin/release-*",
             "+refs/heads/release_*:refs/remotes/origin/release_*",
             "+refs/heads/preview_*:refs/remotes/origin/preview_*",
+            "+refs/heads/develop/*:refs/remotes/origin/develop/*",
             "--tags",
         ],
         cwd=REPO_ROOT,
@@ -71,7 +75,12 @@ def fetch_refs() -> None:
 def list_branch_refs() -> list[str]:
     fetch_refs()
     refs: set[str] = set()
-    for pattern in ("refs/remotes/origin/release-*", "refs/remotes/origin/release_*", "refs/remotes/origin/preview_*"):
+    for pattern in (
+        "refs/remotes/origin/release-*",
+        "refs/remotes/origin/release_*",
+        "refs/remotes/origin/preview_*",
+        f"refs/remotes/origin/{_DEVELOP_BRANCH}",
+    ):
         result = subprocess.run(
             ["git", "for-each-ref", "--format=%(refname:short)", pattern],
             cwd=REPO_ROOT,
@@ -102,6 +111,9 @@ def ref_to_version(ref: str) -> str:
 
     branch = ref_to_branch(ref)
 
+    if branch == _DEVELOP_BRANCH:
+        return _DEVELOP_SLUG
+
     release_match = _RELEASE_BRANCH_RE.match(branch)
     if release_match:
         version = release_match.group("version")
@@ -123,6 +135,9 @@ def ref_to_version(ref: str) -> str:
 
 
 def version_label(version: str) -> str:
+    if version in (_DEVELOP_SLUG, _DEVELOP_BRANCH):
+        return "DSX (Develop)"
+
     preview_label = preview_slug_to_label(version)
     if preview_label:
         return preview_label
@@ -165,9 +180,9 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Docs version ref helpers")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    subparsers.add_parser("fetch", help="Fetch release-*, release_*, preview_*, and tags from origin")
+    subparsers.add_parser("fetch", help="Fetch release, preview, develop branches, and tags from origin")
 
-    list_parser = subparsers.add_parser("list", help="List release and preview branch names")
+    list_parser = subparsers.add_parser("list", help="List release, preview, and DSX develop branch names")
     list_parser.set_defaults(func=lambda _args: print("\n".join(list_branch_refs())))
 
     version_parser = subparsers.add_parser("version", help="Map a git ref to a docs version slug")

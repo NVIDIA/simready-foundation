@@ -9,6 +9,8 @@ on:
       - release-*
       - release_*
       - preview_*
+      - '!preview_aif_0-1-0'
+      - develop/DSX
     tags: ["v*"]
   workflow_dispatch:
     inputs:
@@ -17,7 +19,7 @@ on:
         required: false
         type: string
       branch_ref:
-        description: "Branch to build docs from (e.g. release-2026.10.0 or preview_my-feature)."
+        description: "Branch to build docs from (e.g. release-2026.10.0, preview_my-feature, or develop/DSX)."
         required: false
         type: string
 
@@ -27,6 +29,12 @@ permissions:
 
 jobs:
   build-and-deploy:
+    if: >-
+      ${{
+        github.ref != 'refs/heads/preview_aif_0-1-0' &&
+        inputs.branch_ref != 'preview_aif_0-1-0' &&
+        inputs.branch_ref != 'refs/heads/preview_aif_0-1-0'
+      }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
@@ -54,7 +62,7 @@ jobs:
             git show origin/main:scripts/docs_version_refs.py > scripts/docs_version_refs.py
           fi
 
-      - name: Fetch release and preview branches
+      - name: Fetch release, preview, and develop branches
         run: python scripts/docs_version_refs.py fetch
 
       - name: Determine version
