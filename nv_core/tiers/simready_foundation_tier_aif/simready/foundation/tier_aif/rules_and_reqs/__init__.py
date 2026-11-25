@@ -21,9 +21,11 @@
 # module's @register_rule / @register_requirements decorators (see
 # _plugin.py:SimReadyPlugin.on_startup) -- these imports are new in the port,
 # not carried over, and are what makes registration actually happen.
-from .aif.connection_points import validation
-from .aif.electrical import validation
-from .aif.metadata import validation
+# Imports register each module's decorated rules on startup.
+# ruff: noqa: F401
+from .aif.connection_points import validation as _connection_points
+from .aif.electrical import validation as _electrical
+from .aif.metadata import validation as _metadata
 from .aif.metadata import validation_03
 from .aif.thermal_cooling import validation
-from .aif.network_equipment import validation
+from .aif.network_equipment import validation as _network_equipment

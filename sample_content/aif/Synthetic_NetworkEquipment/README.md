@@ -1,6 +1,6 @@
 # Synthetic network equipment
 
-A fictional 1U network switch for the capability-only AIF 0.3 networking story.
+A fictional 1U network switch for the AIF-Entity and Networking 0.3.0 profiles.
 The asset carries eight OSFP fabric ports and one RJ45 management port using
 the AIF 0.3 connection-point contract. Connections between equipment instances belong in an
 assembled scene.
@@ -29,6 +29,7 @@ installed. Generation needs OpenUSD; rendering additionally needs a working
 ```sh
 python sample_content/aif/Synthetic_NetworkEquipment/generate.py --render
 python sample_content/aif/Synthetic_NetworkEquipment/validate.py
+python sample_content/aif/Synthetic_NetworkEquipment/validate.py --profile Networking
 python -m pytest sample_content/aif/Synthetic_NetworkEquipment/test_sample.py -q
 usdchecker sample_content/aif/Synthetic_NetworkEquipment/asset/Synthetic_NetworkEquipment.usda
 ```
@@ -40,11 +41,15 @@ its equipment property identities and types from
 `standards/equipment-classes/aif-v0.3/network-equipment.csv`; sample values are
 separate in `source.json`, and schema defaults remain empty.
 
-`validate.py` runs `AIF-Entity@0.3.0` and records executed versus selected
-requirements, resolved contracts, issues, package versions and asset SHA-256
-hashes in `validation.json`. The profile includes the network equipment capability, self-contained asset
-paths, provenance metadata and the rendered thumbnail. This proves the named
-offline profile only.
+`validate.py` defaults to `AIF-Entity@0.3.0` and preserves its report in
+`validation.json`. `--profile Networking` evaluates the dedicated
+`Networking@0.3.0` profile and writes `validation-networking.json`. Each report
+records executed versus selected requirements, resolved contracts, issues,
+package versions and asset SHA-256 hashes. Both evaluate the same authored
+asset; their results remain independent. Networking selects
+`FET207_Networking.DSXAir.0-3-0`; this script evaluates its static requirements
+without executing its registered connectivity procedure. These reports contain
+no DSX Air runtime or import result.
 
 ## License
 

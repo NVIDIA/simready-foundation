@@ -14,6 +14,7 @@ behavior or simulator adapter.
 | NET.001 | Typed network-equipment identity and physical metadata |
 | NET.002 | Typed node allocation and optional image reference |
 | NET.003 | At least one discoverable network connection point |
+| NET.004 | Unconditional class eligibility for the dedicated Networking profile |
 
 ## Scope and review status
 
@@ -33,7 +34,7 @@ assembled scene. No proprietary OEM dataset is included by this capability.
 
 AIF-Entity 0.3.0 selects CAP204_NetworkEquipment.0-3-0, which depends on
 CAP200_AifMetadata.0-3-0 and CAP201_ConnectionPoints.0-3-0. These carry the source
-card's metadata and CP2 vocabulary into the branch's AIF 0.3 contracts. NET checks
+card's metadata and CP2 vocabulary into the AIF 0.3 contracts. NET.001–NET.003
 apply only to network equipment, based on both the Properties-layer and composed
 class values. AM.008 rejects unknown classes. The versioned class registry keeps
 network equipment unavailable to legacy AM.007; existing AIF-Entity 0.1.0 and 0.2.0
@@ -53,3 +54,11 @@ a separately reviewed metadata migration. The new `memory_MB` and
 
 Requirements <requirements>
 ```
+
+## Dedicated Networking profile
+
+`Networking@0.3.0` selects FET207_Networking.DSXAir.0-3-0 in addition to CAP204.
+The feature's NET.004 eligibility check requires the network-equipment class unconditionally.
+AIF-Entity continues to select only CAP204 and its conditional NET.001–NET.003
+checks. The standalone profile adds class eligibility without changing the
+published AIF-Entity selections or acceptance of other recognized equipment.

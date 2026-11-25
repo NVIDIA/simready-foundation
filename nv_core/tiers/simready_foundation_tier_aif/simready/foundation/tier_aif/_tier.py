@@ -35,8 +35,6 @@ _PKG_ROOT = Path(__file__).resolve().parent
 _MODULE = __package__ or _PKG_ROOT.name
 _NAME = _MODULE.rsplit(".", 1)[-1]
 
-# This tier has no bundled Evaluate test package (unlike tier_core's
-# simready.foundation.tier_core.runtime_tests) -- runtime_tests_path stays unset below.
 
 
 @dataclass(frozen=True)
@@ -91,5 +89,5 @@ tier = TierContent(
     feature_contracts_path=_PKG_ROOT / "features",
     profile_contracts_path=_PKG_ROOT / "profiles",
     skills_path=_PKG_ROOT / "skills",
-    runtime_tests_path=None,
+    runtime_tests_path=_PKG_ROOT / "runtime_tests",
 )

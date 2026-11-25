@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0
-"""Offline network-equipment checks selected by CAP204 only."""
+"""Network-equipment checks for the AIF-Entity and Networking profiles."""
 import math
 
 from pxr import Sdf, Usd
@@ -127,3 +127,19 @@ class NetworkEquipmentPortsChecker(usd_validation_nvidia.BaseRuleChecker):
                     "under its default prim's ConnectionPoints Scope.",
             at=stage,
         )
+
+
+@usd_validation_nvidia.register_rule("AIF-NetworkEquipment")
+@usd_validation_nvidia.register_requirements(cap.NetworkEquipmentRequirements.NET_004, override=True)
+class NetworkDeviceEligibilityChecker(usd_validation_nvidia.BaseRuleChecker):
+    """Require the network equipment class for a dedicated Networking profile."""
+
+    def CheckStage(self, stage: Usd.Stage) -> None:
+        if not _attribute(stage, "aif:core:assetClass", Sdf.ValueTypeNames.String,
+                          lambda value: value == "network-equipment"):
+            self._AddFailedCheck(
+                requirement=cap.NetworkEquipmentRequirements.NET_004,
+                message="Networking requires aif:core:assetClass to be the string "
+                        "'network-equipment' in both the Properties layer and composed default prim.",
+                at=stage,
+            )

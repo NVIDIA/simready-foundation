@@ -22,3 +22,8 @@ Properties layer and the composed default prim.
 `AIF-Entity@0.3.0` selects `CAP204_NetworkEquipment.0-3-0` for the
 `network-equipment` class. It validates node allocations and named network
 ports for DSX Air configuration before simulation.
+
+[`Networking@0.3.0`](simready/foundation/tier_aif/profiles/networking.md) selects
+the [Networking feature](simready/foundation/tier_aif/features/FET207_Networking.DSXAir.md)
+for network equipment. The runtime procedure measures IPv4 reachability between
+two directly linked devices in an operator-designated DSX Air simulation.

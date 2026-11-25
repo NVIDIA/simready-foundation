@@ -1,0 +1,8 @@
+{
+  "id": "FET207_Networking.DSXAir.0-3-0",
+  "display_name": "Networking",
+  "capabilities": ["CAP204_NetworkEquipment.0-3-0"],
+  "additional_requirements": ["NET.004"],
+  "adapters": ["simready.foundation.tier_aif.dsx_air:run_connectivity"],
+  "runtime_tests": ["simready.foundation.tier_aif.runtime_tests:device_connectivity"]
+}

@@ -10,4 +10,5 @@
 requirements/network-equipment-metadata
 requirements/network-node-configuration
 requirements/network-connection-points
+requirements/network-device-eligibility
 ```

@@ -121,6 +121,7 @@ flowchart TD
     CAP202_ThermalCooling_OpenUSD_0_3_0["CAP202_ThermalCooling 0-3-0"]
     CAP203_Electrical_OpenUSD_0_3_0["CAP203_Electrical 0-3-0"]
     CAP204_NetworkEquipment_OpenUSD_0_3_0["CAP204_NetworkEquipment 0-3-0"]
+    FET207_Networking_DSXAir_0_3_0["FET207_Networking.DSXAir 0-3-0"]
     CAP000_Core_Isaac_0_1_0 --> CAP000_Core_OpenUSD_0_1_0
     CAP000_Core_Isaac_0_2_0 --> CAP000_Core_OpenUSD_0_2_0
     CAP000_Core_MuJoCo_0_1_0 --> CAP000_Core_OpenUSD_0_1_0
@@ -173,6 +174,7 @@ flowchart TD
     CAP203_Electrical_OpenUSD_0_3_0 --> CAP201_ConnectionPoints_OpenUSD_0_3_0
     CAP204_NetworkEquipment_OpenUSD_0_3_0 --> CAP200_AifMetadata_OpenUSD_0_3_0
     CAP204_NetworkEquipment_OpenUSD_0_3_0 --> CAP201_ConnectionPoints_OpenUSD_0_3_0
+    FET207_Networking_DSXAir_0_3_0 --> CAP204_NetworkEquipment_OpenUSD_0_3_0
     FET013_MultiRepresentationVisual_OpenUSD_0_1_0 --> FET001_MinimalPlaceableVisual_OpenUSD_1_0_1
     FET014_MeshVariant_OpenUSD_0_1_0 --> FET001_MinimalPlaceableVisual_OpenUSD_1_0_1
     FET015_CollisionVariant_OpenUSD_0_1_0 --> FET001_MinimalPlaceableVisual_OpenUSD_1_0_1
@@ -239,6 +241,7 @@ flowchart TD
 | `CAP202_ThermalCooling.0-3-0` | `CAP201_ConnectionPoints.0-3-0` |
 | `CAP203_Electrical.0-3-0` | `CAP201_ConnectionPoints.0-3-0` |
 | `CAP204_NetworkEquipment.0-3-0` | `CAP200_AifMetadata.0-3-0`, `CAP201_ConnectionPoints.0-3-0` |
+| `FET207_Networking.DSXAir.0-3-0` | `CAP204_NetworkEquipment.0-3-0` |
 | `CAP039_ObjectAffordances.0-1-0` | `FET011_SemanticLabels.0-2-0` |
 
 
