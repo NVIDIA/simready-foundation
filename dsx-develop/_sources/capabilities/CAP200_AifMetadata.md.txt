@@ -5,13 +5,13 @@
 | Contract                | `CAP200_AifMetadata` |
 | Runtime                 | `OpenUSD` |
 | Proprietary Techs       | `None` |
-| Versions                | `0-1-0` |
+| Versions                | `0-1-0`, `0-3-0` |
 
 ## Description
 
 Defines the metadata contract for AI Factory equipment. An asset that satisfies this
 feature declares what it is and what it physically occupies: manufacturer, model number
-and asset version; height, width, depth, weight, overall geometry, installation clearance
+and asset version; height, width, depth, weight, installation clearance
 and accessibility requirement; the SimReady specification version it was authored against;
 a description and a link to its model documentation. It also declares its equipment class
 in `aif:core:assetClass`, and carries the `aif:spec:*` attribute set that class defines.
@@ -115,3 +115,19 @@ Sample assets, one per equipment class, under `sample_content/aif/`:
 ## Adapters
 
 None.
+
+
+## Version 0-3-0 — AIF 0.3
+
+[AM.009](../rules_and_reqs/aif/metadata/requirements/physical-dimensions-metadata-0.3.md)
+replaces AM.004 in `CAP200_AifMetadata.0-3-0`. Authors supply width, depth and height as scalars.
+The capability uses
+[AM.008](../rules_and_reqs/aif/metadata/requirements/equipment-class-template-compliance-0.3.md)
+for equipment templates. AM.008 checks the USD types of common metadata on each equipment class.
+
+```{toctree}
+:maxdepth: 1
+:hidden:
+
+../rules_and_reqs/aif/metadata/requirements/equipment-class-template-compliance-0.3
+```

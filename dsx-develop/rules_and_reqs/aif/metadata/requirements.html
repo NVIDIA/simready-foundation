@@ -764,7 +764,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../capabilities/CAP103_VisualMeshMerge.Isaac.html">Visual Mesh Merge</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../capabilities/CAP104_RenderCollisionSeparation.Isaac.html">Render-Collision Separation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../capabilities/CAP105_MaterialXRemoval.Isaac.html">MaterialX Removal</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../capabilities/CAP200_AifMetadata.html">AIF Core Metadata</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../capabilities/CAP200_AifMetadata.html">AIF Core Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="requirements/equipment-class-template-compliance-0.3.html">equipment-class-template-compliance-0.3</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../capabilities/CAP201_ConnectionPoints.html">Connection Points</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../capabilities/CAP202_ThermalCooling.html">AIF Thermal Cooling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../capabilities/CAP203_Electrical.html">AIF Electrical</a></li>
@@ -973,6 +976,19 @@
 <td><p><a class="reference internal" href="requirements/equipment-class-template-compliance.html"><span class="std std-doc">The default prim must carry every <code class="docutils literal notranslate"><span class="pre">aif:spec:*</span></code> attribute that its declared equipment class defines.</span></a></p></td>
 <td><p><span class="tag tag-compatibility" title="Compatible with other software">other</span></p></td>
 <td><p><a class="reference external" href="https://nvidia-omniverse.github.io/usd-validation-nvidia/validation/docs/requirements.html#am-007"><span class="tag tag-nvidia">latest+</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="emoji-tag" title="Essential Requirement">🔑</span></p></td>
+<td><p><a class="reference internal" href="requirements/equipment-class-template-compliance-0.3.html"><span class="std std-doc">The default prim’s equipment class must resolve in the AIF 0.3 catalog.
+Authored common equipment metadata must use the specified USD attribute types.</span></a></p></td>
+<td><p><span class="tag tag-compatibility" title="Compatible with other software">other</span></p></td>
+<td><p><a class="reference external" href="https://nvidia-omniverse.github.io/usd-validation-nvidia/validation/docs/requirements.html#am-008"><span class="tag tag-nvidia">latest+</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="emoji-tag" title="Essential Requirement">🔑</span></p></td>
+<td><p><a class="reference internal" href="requirements/physical-dimensions-metadata-0.3.html"><span class="std std-doc">The default prim of the Properties sublayer must have <code class="docutils literal notranslate"><span class="pre">aif:core:width</span></code>,
+<code class="docutils literal notranslate"><span class="pre">aif:core:depth</span></code>, <code class="docutils literal notranslate"><span class="pre">aif:core:height</span></code>, <code class="docutils literal notranslate"><span class="pre">aif:core:weight</span></code>,
+<code class="docutils literal notranslate"><span class="pre">aif:core:installationClearance</span></code> and <code class="docutils literal notranslate"><span class="pre">aif:core:accessibilityRequirement</span></code>.</span></a></p></td>
+<td><p><span class="tag tag-compatibility" title="Compatible with other software">other</span></p></td>
+<td><p><a class="reference external" href="https://nvidia-omniverse.github.io/usd-validation-nvidia/validation/docs/requirements.html#am-009"><span class="tag tag-nvidia">latest+</span></a></p></td>
 </tr>
 </tbody>
 </table>

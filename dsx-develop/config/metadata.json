@@ -89,6 +89,23 @@
                 "examples": []
             },
             {
+                "code": "AM.009",
+                "version": null,
+                "name": "physical-dimensions-metadata-0.3",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "am-009",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/aif/metadata/requirements/physical-dimensions-metadata-0.html",
+                    "internal_path": "rules_and_reqs/aif/metadata/requirements/physical-dimensions-metadata-0.md"
+                },
+                "message": "The default prim of the Properties sublayer must have `aif:core:width`,\n`aif:core:depth`, `aif:core:height`, `aif:core:weight`,\n`aif:core:installationClearance` and `aif:core:accessibilityRequirement`.",
+                "examples": []
+            },
+            {
                 "code": "AM.005",
                 "version": null,
                 "name": "simready-version-tracking",
@@ -120,6 +137,23 @@
                     "internal_path": "rules_and_reqs/aif/metadata/requirements/physical-dimensions-metadata.md"
                 },
                 "message": "The default prim must have all seven physical dimension attributes: `aif:core:height`, `aif:core:width`, `aif:core:depth`, `aif:core:weight`, `aif:core:overallGeometryDimensions`, `aif:core:installationClearance`, and `aif:core:accessibilityRequirement`.",
+                "examples": []
+            },
+            {
+                "code": "AM.008",
+                "version": null,
+                "name": "equipment-class-template-compliance-0.3",
+                "compatibility": "other",
+                "tags": [
+                    "essential"
+                ],
+                "validator": "am-008",
+                "parameters": [],
+                "metadata": {
+                    "path": "rules_and_reqs/aif/metadata/requirements/equipment-class-template-compliance-0.html",
+                    "internal_path": "rules_and_reqs/aif/metadata/requirements/equipment-class-template-compliance-0.md"
+                },
+                "message": "The default prim's equipment class must resolve in the AIF 0.3 catalog.\nAuthored common equipment metadata must use the specified USD attribute types.",
                 "examples": []
             }
         ],

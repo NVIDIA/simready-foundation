@@ -1122,7 +1122,10 @@ window.runMermaid = runMermaid;</script>
 <li class="toctree-l2"><a class="reference internal" href="CAP103_VisualMeshMerge.Isaac.html">Visual Mesh Merge</a></li>
 <li class="toctree-l2"><a class="reference internal" href="CAP104_RenderCollisionSeparation.Isaac.html">Render-Collision Separation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="CAP105_MaterialXRemoval.Isaac.html">MaterialX Removal</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CAP200_AifMetadata.html">AIF Core Metadata</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="CAP200_AifMetadata.html">AIF Core Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/aif/metadata/requirements/equipment-class-template-compliance-0.3.html">equipment-class-template-compliance-0.3</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="CAP201_ConnectionPoints.html">Connection Points</a></li>
 <li class="toctree-l2"><a class="reference internal" href="CAP202_ThermalCooling.html">AIF Thermal Cooling</a></li>
 <li class="toctree-l2 current active"><a aria-current="page" class="current reference internal" href="#">AIF Electrical</a></li>
@@ -1485,6 +1488,14 @@ vocabulary this capability layers on.</p></li>
 <h2>Adapters<a class="headerlink" href="#adapters" title="Link to this heading">#</a></h2>
 <p>None.</p>
 </section>
+<section id="version-0-3-0-aif-0-3">
+<span id="version-0-3-0--aif-03"></span><h2>Version 0-3-0 — AIF 0.3<a class="headerlink" href="#version-0-3-0-aif-0-3" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">CAP203_Electrical.0-3-0</span></code> carries exactly the same requirements as version
+0-2-0 and depends on <code class="docutils literal notranslate"><span class="pre">CAP201_ConnectionPoints.0-3-0</span></code>. This keeps the AIF 0.3
+dependency graph on its versioned metadata catalog while preserving the 0.2
+connection-point vocabulary and thermal/electrical expectations. The 0-1-0 and
+0-2-0 definitions remain unchanged.</p>
+</section>
 </section>
 
 
@@ -1558,6 +1569,7 @@ vocabulary this capability layers on.</p></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samples">Samples</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmarks">Benchmarks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adapters">Adapters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-3-0-aif-0-3">Version 0-3-0 — AIF 0.3</a></li>
 </ul>
   </nav></div>
 

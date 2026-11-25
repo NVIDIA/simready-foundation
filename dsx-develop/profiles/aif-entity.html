@@ -764,7 +764,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP103_VisualMeshMerge.Isaac.html">Visual Mesh Merge</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP104_RenderCollisionSeparation.Isaac.html">Render-Collision Separation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP105_MaterialXRemoval.Isaac.html">MaterialX Removal</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP200_AifMetadata.html">AIF Core Metadata</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../capabilities/CAP200_AifMetadata.html">AIF Core Metadata</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/aif/metadata/requirements/equipment-class-template-compliance-0.3.html">equipment-class-template-compliance-0.3</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP201_ConnectionPoints.html">Connection Points</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP202_ThermalCooling.html">AIF Thermal Cooling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../capabilities/CAP203_Electrical.html">AIF Electrical</a></li>
@@ -1160,8 +1163,9 @@ and the sidecar is a failure.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">asset_extents</span></code> is in metres, so it is <code class="docutils literal notranslate"><span class="pre">aif:core:overallGeometryDimensions</span></code> divided by
-1000. <code class="docutils literal notranslate"><span class="pre">mass</span></code> is <code class="docutils literal notranslate"><span class="pre">aif:core:weight</span></code> in kilograms. <code class="docutils literal notranslate"><span class="pre">category</span></code> is <code class="docutils literal notranslate"><span class="pre">aif:core:assetClass</span></code>.
+<p>For AIF 0.3, derive <code class="docutils literal notranslate"><span class="pre">asset_extents</span></code> in metres from <code class="docutils literal notranslate"><span class="pre">aif:core:width</span></code>,
+<code class="docutils literal notranslate"><span class="pre">aif:core:depth</span></code> and <code class="docutils literal notranslate"><span class="pre">aif:core:height</span></code>, in that order. Divide each millimetre value by 1,000.
+<code class="docutils literal notranslate"><span class="pre">mass</span></code> is <code class="docutils literal notranslate"><span class="pre">aif:core:weight</span></code> in kilograms. <code class="docutils literal notranslate"><span class="pre">category</span></code> is <code class="docutils literal notranslate"><span class="pre">aif:core:assetClass</span></code>.
 <code class="docutils literal notranslate"><span class="pre">qcode</span></code> is the Wikidata entity for the equipment class rather than for the product.
 SR.004 checks only that it matches <code class="docutils literal notranslate"><span class="pre">^Q[0-9]+$</span></code>, so a wrong entity passes; resolve it
 against Wikidata rather than guessing.</p>
@@ -1182,6 +1186,54 @@ authored against.</p>
 <li><p><a class="reference internal" href="../rules_and_reqs/core/sim_ready/requirements/metadata-union.html"><span class="std std-doc">metadata-union (SR.004)</span></a></p></li>
 <li><p><a class="reference internal" href="../rules_and_reqs/core/sim_ready/requirements/thumbnail-exist.html"><span class="std std-doc">thumbnail-exist (SR.002)</span></a></p></li>
 </ul>
+</section>
+<section id="aif-entity-0-3-0">
+<span id="aif-entity-030"></span><h2>AIF-Entity 0.3.0<a class="headerlink" href="#aif-entity-0-3-0" title="Link to this heading">#</a></h2>
+<p>Version 0.3.0 carries forward every Core, visual, packaging, CP2, thermal and
+electrical requirement from 0.2.0. The profile selects the following contracts.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Contract</p></th>
+<th class="head"><p>Requiredness</p></th>
+<th class="head"><p>Carried-forward behavior</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FET001_MinimalPlaceableVisual.1-0-0</span></code></p></td>
+<td><p>Required</p></td>
+<td><p>Same as 0.2.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CAP000_Core.0-2-0</span></code></p></td>
+<td><p>Required</p></td>
+<td><p>Same as 0.2.0</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CAP031_SelfContainedPackage.0-1-0</span></code></p></td>
+<td><p>Required</p></td>
+<td><p>Same as 0.2.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CAP033_SimReadyPackage.0-4-0</span></code></p></td>
+<td><p>Required</p></td>
+<td><p>Same as 0.2.0</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CAP200_AifMetadata.0-3-0</span></code></p></td>
+<td><p>Required</p></td>
+<td><p>Scalar equipment dimensions (AM.009), existing class templates and USD type checks for common equipment metadata (AM.008)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CAP201_ConnectionPoints.0-3-0</span></code></p></td>
+<td><p>Required</p></td>
+<td><p>Same CP2 requirements as 0.2.0; dependency selects 0.3 metadata</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CAP202_ThermalCooling.0-3-0</span></code></p></td>
+<td><p>Required</p></td>
+<td><p>Same thermal requirements and existing class gates as 0.2.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CAP203_Electrical.0-3-0</span></code></p></td>
+<td><p>Required</p></td>
+<td><p>Same electrical requirements and existing class gates as 0.2.0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 </section>
 
@@ -1254,6 +1306,7 @@ authored against.</p>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#root-layer-metadata">Root-layer metadata</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aif-entity-0-3-0">AIF-Entity 0.3.0</a></li>
 </ul>
   </nav></div>
 

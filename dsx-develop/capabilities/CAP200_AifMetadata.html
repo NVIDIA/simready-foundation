@@ -423,7 +423,7 @@ window.runMermaid = runMermaid;</script>
 
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Capability: CAP201_ConnectionPoints" href="CAP201_ConnectionPoints.html" />
+    <link rel="next" title="equipment-class-template-compliance-0.3" href="../rules_and_reqs/aif/metadata/requirements/equipment-class-template-compliance-0.3.html" />
     <link rel="prev" title="MaterialX Removal" href="CAP105_MaterialXRemoval.Isaac.html" />
 
 
@@ -1122,7 +1122,10 @@ window.runMermaid = runMermaid;</script>
 <li class="toctree-l2"><a class="reference internal" href="CAP103_VisualMeshMerge.Isaac.html">Visual Mesh Merge</a></li>
 <li class="toctree-l2"><a class="reference internal" href="CAP104_RenderCollisionSeparation.Isaac.html">Render-Collision Separation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="CAP105_MaterialXRemoval.Isaac.html">MaterialX Removal</a></li>
-<li class="toctree-l2 current active"><a aria-current="page" class="current reference internal" href="#">AIF Core Metadata</a></li>
+<li class="toctree-l2 current active has-children"><a aria-current="page" class="current reference internal" href="#">AIF Core Metadata</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../rules_and_reqs/aif/metadata/requirements/equipment-class-template-compliance-0.3.html">equipment-class-template-compliance-0.3</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="CAP201_ConnectionPoints.html">Connection Points</a></li>
 <li class="toctree-l2"><a class="reference internal" href="CAP202_ThermalCooling.html">AIF Thermal Cooling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="CAP203_Electrical.html">AIF Electrical</a></li>
@@ -1284,7 +1287,7 @@ window.runMermaid = runMermaid;</script>
 <td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>Versions</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">0-1-0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0-1-0</span></code>, <code class="docutils literal notranslate"><span class="pre">0-3-0</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -1293,7 +1296,7 @@ window.runMermaid = runMermaid;</script>
 <h2>Description<a class="headerlink" href="#description" title="Link to this heading">#</a></h2>
 <p>Defines the metadata contract for AI Factory equipment. An asset that satisfies this
 feature declares what it is and what it physically occupies: manufacturer, model number
-and asset version; height, width, depth, weight, overall geometry, installation clearance
+and asset version; height, width, depth, weight, installation clearance
 and accessibility requirement; the SimReady specification version it was authored against;
 a description and a link to its model documentation. It also declares its equipment class
 in <code class="docutils literal notranslate"><span class="pre">aif:core:assetClass</span></code>, and carries the <code class="docutils literal notranslate"><span class="pre">aif:spec:*</span></code> attribute set that class defines.</p>
@@ -1427,6 +1430,16 @@ reference tables on the <a class="reference internal" href="../rules_and_reqs/ai
 <h2>Adapters<a class="headerlink" href="#adapters" title="Link to this heading">#</a></h2>
 <p>None.</p>
 </section>
+<section id="version-0-3-0-aif-0-3">
+<span id="version-0-3-0--aif-03"></span><h2>Version 0-3-0 — AIF 0.3<a class="headerlink" href="#version-0-3-0-aif-0-3" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="../rules_and_reqs/aif/metadata/requirements/physical-dimensions-metadata-0.3.html"><span class="std std-doc">AM.009</span></a>
+replaces AM.004 in <code class="docutils literal notranslate"><span class="pre">CAP200_AifMetadata.0-3-0</span></code>. Authors supply width, depth and height as scalars.
+The capability uses
+<a class="reference internal" href="../rules_and_reqs/aif/metadata/requirements/equipment-class-template-compliance-0.3.html"><span class="std std-doc">AM.008</span></a>
+for equipment templates. AM.008 checks the USD types of common metadata on each equipment class.</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
 </section>
 
 
@@ -1449,11 +1462,11 @@ reference tables on the <a class="reference internal" href="../rules_and_reqs/ai
       </div>
     </a>
     <a class="right-next"
-       href="CAP201_ConnectionPoints.html"
+       href="../rules_and_reqs/aif/metadata/requirements/equipment-class-template-compliance-0.3.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Capability: <code class="docutils literal notranslate"><span class="pre">CAP201_ConnectionPoints</span></code></p>
+        <p class="prev-next-title">equipment-class-template-compliance-0.3</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1494,6 +1507,7 @@ reference tables on the <a class="reference internal" href="../rules_and_reqs/ai
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samples">Samples</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmarks">Benchmarks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adapters">Adapters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-0-3-0-aif-0-3">Version 0-3-0 — AIF 0.3</a></li>
 </ul>
   </nav></div>
 

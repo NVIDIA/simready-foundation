@@ -16,13 +16,14 @@ The following tables enumerate the AIF metadata attributes that AIF assets carry
 
 ### Common Attributes (`aif:core:*`)
 
-Shared by all AIF equipment types regardless of class. Validated by AM.001–AM.006.
+These attributes are shared across equipment classes. AM.004 defines physical
+dimensions for AIF 0.1 and 0.2. [AM.009](requirements/physical-dimensions-metadata-0.3.md)
+defines them for 0.3.
 
 | Attribute | Type | Description |
 |---|---|---|
 | `aif:core:manufacturer` | string | Equipment manufacturer name |
 | `aif:core:modelNumber` | string | Equipment model number |
-| `aif:core:overallGeometryDimensions` | float3 | Overall geometry (WxDxH) in mm |
 | `aif:core:weight` | float | Equipment weight in kilograms |
 | `aif:core:height` | float | Equipment height in mm |
 | `aif:core:width` | float | Equipment width in mm |
@@ -37,6 +38,10 @@ Shared by all AIF equipment types regardless of class. Validated by AM.001–AM.
 | `aif:core:assetDescription` | string | Human-readable description of asset |
 | `aif:core:connectsToModelDocumentation` | string | URL to online documentation |
 | `aif:core:assetCreationDate` | string | Creation date of revision in ISO 8601 format (YYYY-MM-DD) |
+
+AIF 0.1 and 0.2 additionally require `aif:core:overallGeometryDimensions`
+under [AM.004](requirements/physical-dimensions-metadata.md). Remove that
+property when migrating an asset to 0.3.
 
 ### Equipment-Class-Specific Attributes (`aif:spec:*`)
 
