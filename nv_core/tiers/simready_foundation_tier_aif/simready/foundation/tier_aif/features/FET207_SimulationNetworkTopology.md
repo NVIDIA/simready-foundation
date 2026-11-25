@@ -1,13 +1,13 @@
-# Networking in DSX Air
+# Simulation Network Topology
 
-| Contract | Runtime | Profile |
+| Contract | Reference simulator | Profile |
 |---|---|---|
-| `FET207_Networking.DSXAir.0-3-0` | DSX Air | [Networking 0.3.0](../profiles/networking.md) |
+| `FET207_SimulationNetworkTopology.0-3-0` | DSX Air | [Networking 0.3.0](../profiles/networking.md) |
 
-A source device representing the asset can reach a directly linked peer over the
-designated IPv4 data interfaces in a running [DSX Air](https://dsx-air.nvidia.com/)
-simulation. The fixture maps a named USD port to the source interface. One or
-more echo replies from three probes establishes connectivity for that link.
+A named USD network port maps to a source interface in the simulated topology.
+The source and peer must be distinct devices whose designated interfaces share a
+direct link. The connectivity check passes when the peer responds to at least one
+of three IPv4 echo requests sent through the mapped source interface.
 
 ## Asset requirements
 
@@ -17,9 +17,9 @@ requires the network-equipment class for this feature. Static validation uses
 the composed equipment USD and its Properties layer. The runtime measurement
 uses the existing simulation and the port mapping supplied by its operator.
 
-## Runtime procedure
+## DSX Air connectivity procedure
 
-Use two Linux devices in an active DSX Air simulation with a direct data link,
+Use two Linux devices in an active [DSX Air](https://dsx-air.nvidia.com/) simulation with a direct data link,
 IPv4 addresses on that link, iproute2 and iputils. Each device needs an existing
 SSH service and a guest user with permission to run the probes. Set
 `DSX_AIR_TOKEN` through the environment to a bearer with read access to the

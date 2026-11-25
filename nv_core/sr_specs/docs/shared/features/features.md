@@ -42,7 +42,7 @@ of the tier that owns the contract.
 | [Camera and Render Products](../../../../tiers/simready_foundation_tier_sensors/simready/foundation/sensors/features/FET035_RenderProducts.RTX.md) | RTX | 0-1-0 | `FET035_RenderProducts.RTX` |
 | [RTX Sensors](../../../../tiers/simready_foundation_tier_sensors/simready/foundation/sensors/features/FET036_Lidar.RTX.md) | RTX | 0-1-0 | `FET036_Lidar.RTX` |
 | [Joint Sensor](../../../../tiers/simready_foundation_tier_sensors/simready/foundation/sensors/features/FET037_JointSensor.Isaac.md) | Isaac | 0-1-0 | `FET037_JointSensor.Isaac` |
-| [Networking](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/features/FET207_Networking.DSXAir.md) | DSXAir | 0-3-0 | `FET207_Networking.DSXAir` |
+| [Simulation Network Topology](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/features/FET207_SimulationNetworkTopology.md) | OpenUSD | 0-3-0 | `FET207_SimulationNetworkTopology` |
 
 ```{toctree}
 :maxdepth: 1
@@ -82,5 +82,5 @@ IMU Sensor <FET034_ImuSensor.Isaac>
 Camera and Render Products <FET035_RenderProducts.RTX>
 RTX Sensors <FET036_Lidar.RTX>
 Joint Sensor <FET037_JointSensor.Isaac>
-Networking <FET207_Networking.DSXAir>
+Simulation Network Topology <FET207_SimulationNetworkTopology>
 ```

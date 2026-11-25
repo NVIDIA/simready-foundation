@@ -16,7 +16,7 @@ both author `aif:core:assetClass` as a USD `string` whose value is exactly
 
 The dedicated `Networking@0.3.0` profile applies to network devices. An equipment
 class that skips the class-conditional network checks cannot satisfy this profile.
-NET.004 is unconditional when selected through FET207_Networking.DSXAir.0-3-0.
+NET.004 is unconditional when selected through FET207_SimulationNetworkTopology.0-3-0.
 AIF-Entity does not select that feature, so it retains its broader equipment-class scope.
 
 ## How to comply

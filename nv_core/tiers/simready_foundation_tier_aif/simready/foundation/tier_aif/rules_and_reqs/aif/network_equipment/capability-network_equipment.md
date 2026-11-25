@@ -57,7 +57,7 @@ Requirements <requirements>
 
 ## Dedicated Networking profile
 
-`Networking@0.3.0` selects FET207_Networking.DSXAir.0-3-0 alongside the Networking capability.
+`Networking@0.3.0` selects FET207_SimulationNetworkTopology.0-3-0 alongside the Networking capability.
 The feature's NET.004 eligibility check requires the network-equipment class unconditionally.
 AIF-Entity continues to select the Networking capability for its conditional NET.001–NET.003
 checks. The standalone profile adds class eligibility without changing the

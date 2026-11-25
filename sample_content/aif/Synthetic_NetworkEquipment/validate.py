@@ -25,8 +25,8 @@ def validate(output, profile_id="AIF-Entity"):
             raise RuntimeError("Full-profile evaluation is unavailable; inspect validator diagnostics")
         if "CAP204_Networking.0-3-0" not in result.features_summary:
             raise RuntimeError(f"{profile_id} 0.3.0 is missing the Networking capability")
-        if profile_id == "Networking" and "FET207_Networking.DSXAir.0-3-0" not in result.features_summary:
-            raise RuntimeError("Networking 0.3.0 is missing its DSX Air feature")
+        if profile_id == "Networking" and "FET207_SimulationNetworkTopology.0-3-0" not in result.features_summary:
+            raise RuntimeError("Networking 0.3.0 is missing the Simulation Network Topology feature")
         profile = ProfileRegistry().find(profile_id, "0.3.0")
         registry = RequirementsRegistry()
         requirements = [registry.find_requirement(code) for code in sorted(profile.mandatory_requirements)]

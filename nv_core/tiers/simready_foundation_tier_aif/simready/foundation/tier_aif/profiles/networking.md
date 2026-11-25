@@ -7,7 +7,7 @@ configuration and CP2 network ports, with the Core visual and publishing baselin
 | Kind | Exact selector |
 |---|---|
 | Feature | `FET001_MinimalPlaceableVisual.1-0-0` |
-| Feature | `FET207_Networking.DSXAir.0-3-0` |
+| Feature | `FET207_SimulationNetworkTopology.0-3-0` |
 | Capability | `CAP000_Core.0-2-0` |
 | Capability | `CAP200_AifMetadata.0-3-0` |
 | Capability | `CAP201_ConnectionPoints.0-3-0` |
@@ -31,7 +31,7 @@ is a standalone positive example. A staged copy with a different equipment class
 is a negative eligibility case. No exclusive profile stamp is authored; assets
 may be validated against both Networking and AIF-Entity independently.
 
-[FET207_Networking.DSXAir.0-3-0](../features/FET207_Networking.DSXAir.md) specifies
+[Simulation Network Topology](../features/FET207_SimulationNetworkTopology.md) specifies
 connectivity checks between two devices in an explicitly designated, running
 DSX Air simulation. The authored equipment properties configure nodes before
 simulation starts; scene topology, supported node/image mappings and the selected

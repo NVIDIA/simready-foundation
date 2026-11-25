@@ -13,7 +13,7 @@ from simready.evaluate import test
 
 
 @test(
-    features=[{"id": "FET207_Networking.DSXAir.0-3-0", "version": "*"}],
+    features=[{"id": "FET207_SimulationNetworkTopology.0-3-0", "version": "*"}],
     name="device_connectivity",
     version="0.3.0",
     description=(

@@ -24,6 +24,6 @@ Properties layer and the composed default prim.
 ports for DSX Air configuration before simulation.
 
 [`Networking@0.3.0`](simready/foundation/tier_aif/profiles/networking.md) selects
-the [Networking feature](simready/foundation/tier_aif/features/FET207_Networking.DSXAir.md)
+the [Simulation Network Topology feature](simready/foundation/tier_aif/features/FET207_SimulationNetworkTopology.md)
 for network equipment. The runtime procedure measures IPv4 reachability between
 two directly linked devices in an operator-designated DSX Air simulation.

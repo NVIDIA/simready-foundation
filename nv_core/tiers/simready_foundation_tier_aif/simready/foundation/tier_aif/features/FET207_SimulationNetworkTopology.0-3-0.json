@@ -1,6 +1,6 @@
 {
-  "id": "FET207_Networking.DSXAir.0-3-0",
-  "display_name": "Networking",
+  "id": "FET207_SimulationNetworkTopology.0-3-0",
+  "display_name": "Simulation Network Topology",
   "capabilities": ["CAP204_Networking.0-3-0"],
   "additional_requirements": ["NET.004"],
   "adapters": ["simready.foundation.tier_aif.dsx_air:run_connectivity"],

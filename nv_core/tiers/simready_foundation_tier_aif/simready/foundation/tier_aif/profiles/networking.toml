@@ -4,7 +4,7 @@
 [Networking]
 "0.3.0" = {features = [
     {selector = "FET001_MinimalPlaceableVisual.1-0-0"},
-    {selector = "FET207_Networking.DSXAir.0-3-0"},
+    {selector = "FET207_SimulationNetworkTopology.0-3-0"},
 ], capabilities = [
     {selector = "CAP000_Core.0-2-0"},
     {selector = "CAP200_AifMetadata.0-3-0"},

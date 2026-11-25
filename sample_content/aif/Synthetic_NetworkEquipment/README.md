@@ -47,7 +47,7 @@ separate in `source.json`, and schema defaults remain empty.
 records executed versus selected requirements, resolved contracts, issues,
 package versions and asset SHA-256 hashes. Both evaluate the same authored
 asset; their results remain independent. Networking selects
-`FET207_Networking.DSXAir.0-3-0`; this script evaluates its static requirements
+`FET207_SimulationNetworkTopology.0-3-0`; this script evaluates its static requirements
 without executing its registered connectivity procedure. These reports contain
 no DSX Air runtime or import result.
 

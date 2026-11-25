@@ -39,7 +39,7 @@ def _result(validator, path, profile="Networking"):
 def test_standalone_switch_passes_networking_profile(validator, standalone_switch):
     result = _result(validator, standalone_switch)
     assert validator.features_summary_passed(result.features_summary), result.features_summary
-    assert "FET207_Networking.DSXAir.0-3-0" in result.features_summary
+    assert "FET207_SimulationNetworkTopology.0-3-0" in result.features_summary
     assert not result.issues
 
 
@@ -56,7 +56,7 @@ def test_other_equipment_class_fails_dedicated_profile(validator, standalone_swi
         stage.GetRootLayer().Save()
     result = _result(validator, standalone_switch)
     assert not validator.features_summary_passed(result.features_summary)
-    failures = result.features_summary["FET207_Networking.DSXAir.0-3-0"].get("failing requirements", [])
+    failures = result.features_summary["FET207_SimulationNetworkTopology.0-3-0"].get("failing requirements", [])
     assert "com.nvidia.simready.NET.004" in failures
     assert_rule_fires(standalone_switch, "NET.004")
 
@@ -72,7 +72,7 @@ def test_networking_profile_has_only_exact_aif03_network_contracts(validator):
     profile = ProfileRegistry().find("Networking", "0.3.0")
     assert profile is not None and not profile.optional_capabilities
     ids = {contract.id for contract in profile.capabilities}
-    assert "FET207_Networking.DSXAir.0-3-0" in ids
+    assert "FET207_SimulationNetworkTopology.0-3-0" in ids
     assert {"CAP200_AifMetadata.0-3-0", "CAP201_ConnectionPoints.0-3-0",
             "CAP204_Networking.0-3-0"} <= ids
     assert not any(identity.startswith(("CAP202_", "CAP203_")) for identity in ids)

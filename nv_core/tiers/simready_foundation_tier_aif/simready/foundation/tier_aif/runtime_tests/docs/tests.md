@@ -1,7 +1,7 @@
-# AIF networking evaluations
+# Simulation Network Topology evaluation
 
 `device_connectivity@0.3.0` belongs to
-`FET207_Networking.DSXAir.0-3-0` and is provided by
+`FET207_SimulationNetworkTopology.0-3-0` and is provided by
 `simready.foundation.tier_aif.runtime_tests`. The feature manifest binds the exact
 `simready.foundation.tier_aif.runtime_tests:device_connectivity` procedure.
 

@@ -14,13 +14,13 @@ pytest.importorskip("simready.evaluate")
 from simready.evaluate import RunContext  # noqa: E402
 from simready.evaluate.core.discovery import discover_tests  # noqa: E402
 from simready.foundation.tier_aif import dsx_air  # noqa: E402
-from simready.foundation.tier_aif.runtime_tests.fet207_networking.device_connectivity import (  # noqa: E402
+from simready.foundation.tier_aif.runtime_tests.fet207_simulation_network_topology.device_connectivity import (  # noqa: E402
     device_connectivity,
 )
 
 PKG = Path(dsx_air.__file__).parent
 TIER = PKG.parents[2]
-FEATURE = "FET207_Networking.DSXAir.0-3-0"
+FEATURE = "FET207_SimulationNetworkTopology.0-3-0"
 
 
 def context(tmp_path, config=None):

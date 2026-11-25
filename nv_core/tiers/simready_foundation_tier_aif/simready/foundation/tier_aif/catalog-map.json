@@ -90,7 +90,7 @@
     },
     {
       "kind": "feature",
-      "id": "FET207_Networking.DSXAir.0-3-0",
+      "id": "FET207_SimulationNetworkTopology.0-3-0",
       "native": true,
       "runtime_tests": [
         "simready.foundation.tier_aif.runtime_tests:device_connectivity"
