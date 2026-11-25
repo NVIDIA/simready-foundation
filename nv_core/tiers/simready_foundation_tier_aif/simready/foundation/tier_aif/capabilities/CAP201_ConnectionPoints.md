@@ -225,3 +225,12 @@ The sample assets are in `sample_content/aif/` — `Generic_CDU`, `gb300`, `Synt
 
 Step-by-step conversion, including tooling for already-fielded assets, belongs to the partner
 end-to-end runbook rather than to this capability.
+
+
+## Version 0-3-0 — AIF 0.3
+
+`CAP201_ConnectionPoints.0-3-0` carries exactly the same requirements as version
+0-2-0 and depends on `CAP200_AifMetadata.0-3-0`. This keeps the AIF 0.3
+dependency graph on its versioned metadata catalog while preserving the 0.2
+connection-point vocabulary and thermal/electrical expectations. The 0-1-0 and
+0-2-0 definitions remain unchanged.

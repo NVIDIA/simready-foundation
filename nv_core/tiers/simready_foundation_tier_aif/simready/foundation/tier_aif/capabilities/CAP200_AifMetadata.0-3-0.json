@@ -1,0 +1,13 @@
+{
+  "id": "CAP200_AifMetadata.0-3-0",
+  "display_name": "AIF Core Metadata",
+  "requirements": [
+    "AM.001",
+    "AM.002",
+    "AM.003",
+    "AM.005",
+    "AM.006",
+    "AM.008",
+    "AM.009"
+  ]
+}

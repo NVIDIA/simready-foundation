@@ -13,6 +13,8 @@ from pathlib import Path
 
 from pxr import Gf, Usd, UsdGeom
 
+from build_synthetic_fixtures import equipment_extents_metres
+
 
 FACES = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4,
          1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
@@ -90,5 +92,5 @@ if __name__ == '__main__':
     args = parser.parse_args()
     for kind, source in [('crah', args.crah), ('ups', args.ups)]:
         values = json.loads((args.output / 'sources' / f'generic_{kind}.json').read_text())
-        dimensions = [v / 1000 for v in values['aif:core:overallGeometryDimensions'][1]]
+        dimensions = equipment_extents_metres(values)
         remodel(source, args.output, f'Synthetic_{kind.upper()}', dimensions)

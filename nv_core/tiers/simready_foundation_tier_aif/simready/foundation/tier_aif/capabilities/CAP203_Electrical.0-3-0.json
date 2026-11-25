@@ -1,0 +1,13 @@
+{
+  "id": "CAP203_Electrical.0-3-0",
+  "display_name": "AIF Electrical",
+  "requirements": [
+    "EL.001",
+    "EL.002",
+    "EL.003",
+    "EL.004"
+  ],
+  "dependencies": [
+    "CAP201_ConnectionPoints.0-3-0"
+  ]
+}

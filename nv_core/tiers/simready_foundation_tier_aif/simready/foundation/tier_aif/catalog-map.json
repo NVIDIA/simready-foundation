@@ -57,6 +57,30 @@
       "kind": "capability",
       "id": "CAP203_Electrical.0-2-0",
       "runtime_tests": []
+    },
+    {
+      "kind": "capability",
+      "id": "CAP200_AifMetadata.0-3-0",
+      "native": true,
+      "runtime_tests": []
+    },
+    {
+      "kind": "capability",
+      "id": "CAP201_ConnectionPoints.0-3-0",
+      "native": true,
+      "runtime_tests": []
+    },
+    {
+      "kind": "capability",
+      "id": "CAP202_ThermalCooling.0-3-0",
+      "native": true,
+      "runtime_tests": []
+    },
+    {
+      "kind": "capability",
+      "id": "CAP203_Electrical.0-3-0",
+      "native": true,
+      "runtime_tests": []
     }
   ]
 }

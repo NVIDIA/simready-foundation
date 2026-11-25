@@ -209,8 +209,9 @@ customLayerData = {
 }
 ```
 
-`asset_extents` is in metres, so it is `aif:core:overallGeometryDimensions` divided by
-1000. `mass` is `aif:core:weight` in kilograms. `category` is `aif:core:assetClass`.
+For AIF 0.3, derive `asset_extents` in metres from `aif:core:width`,
+`aif:core:depth` and `aif:core:height`, in that order. Divide each millimetre value by 1,000.
+`mass` is `aif:core:weight` in kilograms. `category` is `aif:core:assetClass`.
 `qcode` is the Wikidata entity for the equipment class rather than for the product.
 SR.004 checks only that it matches `^Q[0-9]+$`, so a wrong entity passes; resolve it
 against Wikidata rather than guessing.
@@ -230,3 +231,20 @@ authored against.
 - [Electrical feature](../capabilities/CAP203_Electrical.md)
 - [metadata-union (SR.004)](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/core/sim_ready/requirements/metadata-union.md)
 - [thumbnail-exist (SR.002)](../../../../../simready_foundation_tier_core/simready/foundation/tier_core/rules_and_reqs/core/sim_ready/requirements/thumbnail-exist.md)
+
+
+## AIF-Entity 0.3.0
+
+Version 0.3.0 carries forward every Core, visual, packaging, CP2, thermal and
+electrical requirement from 0.2.0. The profile selects the following contracts.
+
+| Contract | Requiredness | Carried-forward behavior |
+|---|---|---|
+| `FET001_MinimalPlaceableVisual.1-0-0` | Required | Same as 0.2.0 |
+| `CAP000_Core.0-2-0` | Required | Same as 0.2.0 |
+| `CAP031_SelfContainedPackage.0-1-0` | Required | Same as 0.2.0 |
+| `CAP033_SimReadyPackage.0-4-0` | Required | Same as 0.2.0 |
+| `CAP200_AifMetadata.0-3-0` | Required | Scalar equipment dimensions (AM.009), existing class templates and USD type checks for common equipment metadata (AM.008) |
+| `CAP201_ConnectionPoints.0-3-0` | Required | Same CP2 requirements as 0.2.0; dependency selects 0.3 metadata |
+| `CAP202_ThermalCooling.0-3-0` | Required | Same thermal requirements and existing class gates as 0.2.0 |
+| `CAP203_Electrical.0-3-0` | Required | Same electrical requirements and existing class gates as 0.2.0 |

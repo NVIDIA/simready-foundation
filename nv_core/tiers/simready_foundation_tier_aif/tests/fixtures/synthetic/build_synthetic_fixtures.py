@@ -196,6 +196,11 @@ def Xform "%s"
        asset_name)
 
 
+def equipment_extents_metres(values):
+    """Return the datasheet width, depth and height in metres, in that order."""
+    return [float(values[f"aif:core:{axis}"][1]) / 1000.0 for axis in ("width", "depth", "height")]
+
+
 def emit(root, cls, asset_name, source_rel, dest, classes, write):
     doc = classes[cls]
     vals = lift_values(root, source_rel) if source_rel else {}
@@ -222,7 +227,6 @@ def emit(root, cls, asset_name, source_rel, dest, classes, write):
     spec.loader.exec_module(builder)
     conn = builder.layer_text(asset_name)
 
-    dims = vals.get("aif:core:overallGeometryDimensions", (None, (1000.0, 1000.0, 2000.0)))[1]
     root_layer = root_layer_text(
         asset_name,
         sublayers=[f"./layers/{asset_name}_Properties.usda",
@@ -231,7 +235,7 @@ def emit(root, cls, asset_name, source_rel, dest, classes, write):
         # displayName is prose for a reader and groups the fixture tree wrong.
         category=str(vals["aif:core:assetClass"][1]),
         qcode=QCODE[cls],
-        extents=[float(d) / 1000.0 for d in dims],
+        extents=equipment_extents_metres(vals),
         mass=float(vals.get("aif:core:weight", (None, 1000.0))[1]),
         asset_license=LICENSES[dest],
     )

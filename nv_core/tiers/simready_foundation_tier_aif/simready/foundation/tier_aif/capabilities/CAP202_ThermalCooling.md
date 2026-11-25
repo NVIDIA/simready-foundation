@@ -136,3 +136,12 @@ Sample assets carrying thermal connection points, under `sample_content/aif/`:
 ## Adapters
 
 None.
+
+
+## Version 0-3-0 — AIF 0.3
+
+`CAP202_ThermalCooling.0-3-0` carries exactly the same requirements as version
+0-2-0 and depends on `CAP201_ConnectionPoints.0-3-0`. This keeps the AIF 0.3
+dependency graph on its versioned metadata catalog while preserving the 0.2
+connection-point vocabulary and thermal/electrical expectations. The 0-1-0 and
+0-2-0 definitions remain unchanged.

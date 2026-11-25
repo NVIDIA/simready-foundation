@@ -1,0 +1,14 @@
+{
+  "id": "CAP201_ConnectionPoints.0-3-0",
+  "display_name": "Connection Points",
+  "requirements": [
+    "CP.001",
+    "CP.005",
+    "CP.010",
+    "CP.011",
+    "CP.012"
+  ],
+  "dependencies": [
+    "CAP200_AifMetadata.0-3-0"
+  ]
+}

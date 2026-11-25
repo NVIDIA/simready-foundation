@@ -25,6 +25,7 @@ v0.2.0 exists to retire. Foundations 2 preserves those static contracts as CAPs.
 Check both the public selector snapshot and the registry's expanded membership:
 the snapshot alone cannot reveal a dependency that reintroduces an old CAP.
 """
+
 from importlib.metadata import entry_points
 
 import pytest
@@ -119,7 +120,7 @@ def test_aif_entity_is_registered(profiles: dict) -> None:
         "or capability is missing from tier_core, or the profile was skipped. "
         f"Registered: {sorted(profiles)}"
     )
-    assert set(profiles["AIF-Entity"]) == set(EXPECTED)
+    assert set(profiles["AIF-Entity"]) == set(EXPECTED) | {"0.3.0"}
 
 
 @pytest.mark.parametrize("version", sorted(EXPECTED))
@@ -201,3 +202,24 @@ def test_catalog_has_one_version_per_contract_family(
         f"{family}.{runtime}": sorted(versions) for (family, runtime), versions in seen.items() if len(versions) > 1
     }
     assert not duplicated, f"AIF-Entity {version} resolves these at more than one version: {duplicated}."
+
+
+def test_aif03_inherits_mandatory_contracts(profiles: dict, catalog_profiles: dict[str, ResolvedProfile]) -> None:
+    base = ProfileRegistry().find("AIF-Entity", "0.2.0")
+    current = ProfileRegistry().find("AIF-Entity", "0.3.0")
+    replaced = {"com.nvidia.simready.AM.004", "com.nvidia.simready.AM.007"}
+    replacements = {"com.nvidia.simready.AM.008", "com.nvidia.simready.AM.009"}
+    assert current.mandatory_requirements == (base.mandatory_requirements - replaced) | replacements
+    expected = {
+        "FET001_MinimalPlaceableVisual.1-0-0",
+        "CAP000_Core.0-2-0",
+        "CAP031_SelfContainedPackage.0-1-0",
+        "CAP033_SimReadyPackage.0-4-0",
+        "CAP200_AifMetadata.0-3-0",
+        "CAP201_ConnectionPoints.0-3-0",
+        "CAP202_ThermalCooling.0-3-0",
+        "CAP203_Electrical.0-3-0",
+    }
+    assert {c.id for c in current.capabilities} - current.optional_capabilities == expected
+    catalog = catalog_profiles["0.3.0"]
+    assert {c.id for c in (*catalog.features, *catalog.capabilities) if not c.optional} == expected

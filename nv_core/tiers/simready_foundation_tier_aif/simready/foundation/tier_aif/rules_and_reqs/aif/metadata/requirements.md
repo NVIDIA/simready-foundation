@@ -27,6 +27,7 @@ requirements/properties-sublayer-required
 requirements/asset-class-required
 requirements/asset-identification-metadata
 requirements/physical-dimensions-metadata
+requirements/physical-dimensions-metadata-0.3
 requirements/simready-version-tracking
 requirements/asset-description-required
 requirements/equipment-class-template-compliance

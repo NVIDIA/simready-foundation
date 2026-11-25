@@ -91,33 +91,39 @@ class AIFAssetIdentificationChecker(usd_validation_nvidia.BaseRuleChecker):
             )
 
 
-@usd_validation_nvidia.register_rule("AIF-Metadata")
-@usd_validation_nvidia.register_requirements(cap.MetadataRequirements.AM_004, override=True)
-class AIFPhysicalDimensionsChecker(usd_validation_nvidia.BaseRuleChecker):
-    """Checks physical dimension attributes on the default prim."""
-
+class _PhysicalDimensionsChecker(usd_validation_nvidia.BaseRuleChecker):
     _REQUIRED = (
         "aif:core:height",
         "aif:core:width",
         "aif:core:depth",
         "aif:core:weight",
-        "aif:core:overallGeometryDimensions",
         "aif:core:installationClearance",
         "aif:core:accessibilityRequirement",
     )
 
-    def CheckStage(self, stage: Usd.Stage) -> None:
-        prim_spec = _get_prim_spec(stage)
+    def _check_required_dimensions(self, stage: Usd.Stage, prim_spec) -> None:
         if not prim_spec:
             return
         present = set(prim_spec.attributes.keys())
         missing = sorted(a for a in self._REQUIRED if a not in present)
         if missing:
             self._AddFailedCheck(
-                requirement=cap.MetadataRequirements.AM_004,
+                requirement=self._REQUIREMENT,
                 message=f"Missing physical dimension attributes: {', '.join(missing)}",
                 at=stage,
             )
+
+
+@usd_validation_nvidia.register_rule("AIF-Metadata")
+@usd_validation_nvidia.register_requirements(cap.MetadataRequirements.AM_004, override=True)
+class AIFPhysicalDimensionsChecker(_PhysicalDimensionsChecker):
+    """Check all seven physical dimension attributes for AIF 0.1 and 0.2."""
+
+    _REQUIREMENT = cap.MetadataRequirements.AM_004
+    _REQUIRED = _PhysicalDimensionsChecker._REQUIRED + ("aif:core:overallGeometryDimensions",)
+
+    def CheckStage(self, stage: Usd.Stage) -> None:
+        self._check_required_dimensions(stage, _get_prim_spec(stage))
 
 
 @usd_validation_nvidia.register_rule("AIF-Metadata")

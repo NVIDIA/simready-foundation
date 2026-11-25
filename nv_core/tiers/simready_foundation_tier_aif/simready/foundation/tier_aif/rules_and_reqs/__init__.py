@@ -24,4 +24,5 @@
 from .aif.connection_points import validation
 from .aif.electrical import validation
 from .aif.metadata import validation
+from .aif.metadata import validation_03
 from .aif.thermal_cooling import validation

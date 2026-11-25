@@ -54,10 +54,10 @@ contract.
 | [Visual Mesh Merge](../../../../tiers/simready_foundation_tier_isaac/simready/foundation/tier_isaac/capabilities/CAP103_VisualMeshMerge.Isaac.md) | Isaac | 0-1-0 | `CAP103_VisualMeshMerge.Isaac` |
 | [Render-Collision Separation](../../../../tiers/simready_foundation_tier_isaac/simready/foundation/tier_isaac/capabilities/CAP104_RenderCollisionSeparation.Isaac.md) | Isaac | 0-1-0 | `CAP104_RenderCollisionSeparation.Isaac` |
 | [MaterialX Removal](../../../../tiers/simready_foundation_tier_isaac/simready/foundation/tier_isaac/capabilities/CAP105_MaterialXRemoval.Isaac.md) | Isaac | 0-1-0 | `CAP105_MaterialXRemoval.Isaac` |
-| [AIF Core Metadata](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/capabilities/CAP200_AifMetadata.md) | OpenUSD | 0-1-0 | `CAP200_AifMetadata` |
-| [Connection Points](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/capabilities/CAP201_ConnectionPoints.md) | OpenUSD | 0-1-0, 0-2-0 | `CAP201_ConnectionPoints` |
-| [AIF Thermal Cooling](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/capabilities/CAP202_ThermalCooling.md) | OpenUSD | 0-1-0, 0-2-0 | `CAP202_ThermalCooling` |
-| [AIF Electrical](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/capabilities/CAP203_Electrical.md) | OpenUSD | 0-1-0, 0-2-0 | `CAP203_Electrical` |
+| [AIF Core Metadata](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/capabilities/CAP200_AifMetadata.md) | OpenUSD | 0-1-0, 0-3-0 | `CAP200_AifMetadata` |
+| [Connection Points](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/capabilities/CAP201_ConnectionPoints.md) | OpenUSD | 0-1-0, 0-2-0, 0-3-0 | `CAP201_ConnectionPoints` |
+| [AIF Thermal Cooling](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/capabilities/CAP202_ThermalCooling.md) | OpenUSD | 0-1-0, 0-2-0, 0-3-0 | `CAP202_ThermalCooling` |
+| [AIF Electrical](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/capabilities/CAP203_Electrical.md) | OpenUSD | 0-1-0, 0-2-0, 0-3-0 | `CAP203_Electrical` |
 
 ```{toctree}
 :maxdepth: 1

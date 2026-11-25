@@ -94,7 +94,7 @@ AIF_CAPABILITIES = _TIER_AIF / "rules_and_reqs"
 AIF_FEATURES = _TIER_AIF / "features"
 AIF_PROFILES = _TIER_AIF / "profiles"
 AIF_TIER_MODULE = "simready.foundation.tier_aif"
-AIF_PROFILE_VERSIONS = (("AIF-Entity", "0.1.0"), ("AIF-Entity", "0.2.0"))
+AIF_PROFILE_VERSIONS = (("AIF-Entity", "0.1.0"), ("AIF-Entity", "0.2.0"), ("AIF-Entity", "0.3.0"))
 
 
 def _is_aif(path: Path) -> bool:
