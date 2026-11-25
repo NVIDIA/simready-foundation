@@ -12,7 +12,7 @@ pytest==9.0.3
 
 -e ${SIMREADY_TIERS_ROOT}/simready_foundation_tier_core
 -e ${SIMREADY_TIERS_ROOT}/simready_foundation_tier_newton
--e ${SIMREADY_TIERS_ROOT}/simready_foundation_tier_aif[usd]
+-e ${SIMREADY_TIERS_ROOT}/simready_foundation_tier_aif[usd,evaluate]
 
 # test_profile_resolution resolves profiles through simready.validate and skips
 # without it. Neutral FET/CAP IDs require the Foundations 2 reader in rc1.

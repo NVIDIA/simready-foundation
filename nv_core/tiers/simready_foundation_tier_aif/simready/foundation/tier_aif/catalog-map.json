@@ -81,6 +81,20 @@
       "id": "CAP203_Electrical.0-3-0",
       "native": true,
       "runtime_tests": []
+    },
+    {
+      "kind": "capability",
+      "id": "CAP204_Networking.0-3-0",
+      "native": true,
+      "runtime_tests": []
+    },
+    {
+      "kind": "feature",
+      "id": "FET207_SimulationNetworkTopology.0-3-0",
+      "native": true,
+      "runtime_tests": [
+        "simready.foundation.tier_aif.runtime_tests:device_connectivity"
+      ]
     }
   ]
 }

@@ -1,0 +1,92 @@
+{
+  "description": "Fictional vendor-neutral 1U switch. All dimensions, resource allocations, port ratings and material assumptions are synthetic, not OEM measurements or DSX Air compatibility evidence.",
+  "date": "2026-11-24",
+  "qcode": "Q1546066",
+  "attributes": {
+    "aif:core:manufacturer": "Synthetic Network Systems (fictional)",
+    "aif:core:modelNumber": "SYN-NET-8",
+    "aif:core:assetVersion": "1.0.0",
+    "aif:core:height": 44.45,
+    "aif:core:width": 482.6,
+    "aif:core:depth": 400.0,
+    "aif:core:installationClearance": 600.0,
+    "aif:core:accessibilityRequirement": 600.0,
+    "aif:spec:cpuAllocation": 4,
+    "aif:spec:memory_MB": 8192,
+    "aif:spec:storage_GB": 16,
+    "aif:spec:osImage": "synthetic://network-os/1.0"
+  },
+  "materials": {
+    "Aluminum": {
+      "color": [
+        0.45,
+        0.48,
+        0.5
+      ],
+      "density_kg_m3": 2700.0,
+      "roughness": 0.4,
+      "metallic": 0.65
+    },
+    "DarkMetal": {
+      "color": [
+        0.12,
+        0.14,
+        0.16
+      ],
+      "density_kg_m3": 2700.0,
+      "roughness": 0.5,
+      "metallic": 0.5
+    },
+    "Connector": {
+      "color": [
+        0.55,
+        0.58,
+        0.61
+      ],
+      "density_kg_m3": 7800.0,
+      "roughness": 0.3,
+      "metallic": 0.8
+    },
+    "Board": {
+      "color": [
+        0.025,
+        0.18,
+        0.09
+      ],
+      "density_kg_m3": 1850.0,
+      "roughness": 0.8,
+      "metallic": 0.0
+    },
+    "SyntheticPlate": {
+      "color": [
+        0.02,
+        0.32,
+        0.55
+      ],
+      "density_kg_m3": 1200.0,
+      "roughness": 0.5,
+      "metallic": 0.0
+    },
+    "LED": {
+      "color": [
+        0.3,
+        0.8,
+        0.05
+      ],
+      "density_kg_m3": 1200.0,
+      "roughness": 0.4,
+      "metallic": 0.0
+    }
+  },
+  "ports": {
+    "count": 8,
+    "first_x_m": -0.16,
+    "spacing_m": 0.04,
+    "front_y_m": -0.2,
+    "height_z_m": 0.022225,
+    "opening_width_m": 0.022,
+    "opening_height_m": 0.009,
+    "mating_depth_m": 0.015
+  },
+  "asset_validator_version": "simready-validate 2026.10.0"
+}

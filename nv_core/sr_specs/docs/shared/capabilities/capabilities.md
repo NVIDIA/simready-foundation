@@ -58,6 +58,7 @@ contract.
 | [Connection Points](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/capabilities/CAP201_ConnectionPoints.md) | OpenUSD | 0-1-0, 0-2-0, 0-3-0 | `CAP201_ConnectionPoints` |
 | [AIF Thermal Cooling](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/capabilities/CAP202_ThermalCooling.md) | OpenUSD | 0-1-0, 0-2-0, 0-3-0 | `CAP202_ThermalCooling` |
 | [AIF Electrical](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/capabilities/CAP203_Electrical.md) | OpenUSD | 0-1-0, 0-2-0, 0-3-0 | `CAP203_Electrical` |
+| [Networking](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/capabilities/CAP204_Networking.md) | OpenUSD | 0-3-0 | `CAP204_Networking` |
 
 ```{toctree}
 :maxdepth: 1
@@ -111,5 +112,6 @@ AIF Core Metadata <CAP200_AifMetadata>
 Connection Points <CAP201_ConnectionPoints>
 AIF Thermal Cooling <CAP202_ThermalCooling>
 AIF Electrical <CAP203_Electrical>
+Networking <CAP204_Networking>
 Assembly <../rules_and_reqs/assembly/assembly>
 ```

@@ -1,0 +1,13 @@
+{
+  "id": "CAP204_Networking.0-3-0",
+  "display_name": "Networking",
+  "requirements": [
+    "NET.001",
+    "NET.002",
+    "NET.003"
+  ],
+  "dependencies": [
+    "CAP200_AifMetadata.0-3-0",
+    "CAP201_ConnectionPoints.0-3-0"
+  ]
+}

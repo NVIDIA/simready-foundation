@@ -31,6 +31,7 @@
     {selector = "CAP201_ConnectionPoints.0-3-0"},
     {selector = "CAP202_ThermalCooling.0-3-0"},
     {selector = "CAP203_Electrical.0-3-0"},
+    {selector = "CAP204_Networking.0-3-0"},
     {selector = "CAP031_SelfContainedPackage.0-1-0"},
     {selector = "CAP033_SimReadyPackage.0-4-0"},
 ]}

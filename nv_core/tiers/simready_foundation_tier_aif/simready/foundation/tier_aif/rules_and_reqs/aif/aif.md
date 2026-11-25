@@ -11,4 +11,5 @@ Metadata <metadata/capability-metadata>
 Connection Points <connection_points/capability-connection_points>
 Thermal Cooling <thermal_cooling/capability-thermal_cooling>
 Electrical <electrical/capability-electrical>
+Networking <network_equipment/capability-network_equipment>
 ```

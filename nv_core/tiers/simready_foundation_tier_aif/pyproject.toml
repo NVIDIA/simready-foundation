@@ -45,6 +45,7 @@ tier_aif = "simready.foundation.tier_aif:tier"
 [project.optional-dependencies]
 usd = ["usd-core>=22.11"]
 test = ["pytest"]
+evaluate = ["simready-evaluate>=2026.10.0,<2026.11"]
 
 # This tier's package lives committed under ./simready/foundation/... and ships
 # as-is. The ONLY build step is generating the requirements-enum module from the

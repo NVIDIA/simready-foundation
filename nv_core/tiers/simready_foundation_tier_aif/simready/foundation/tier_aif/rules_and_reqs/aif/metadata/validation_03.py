@@ -84,15 +84,15 @@ class AIF03EquipmentTemplateChecker(usd_validation_nvidia.BaseRuleChecker):
         self._check_types(stage, prim_spec)
         attr = prim_spec.attributes.get("aif:core:assetClass")
         raw = str(attr.default) if attr and attr.default else ""
-        key = equipment_classes.normalize(raw)
+        key = equipment_classes.normalize_03(raw)
         if key is None:
             self._AddFailedCheck(
                 requirement=cap.MetadataRequirements.AM_008,
-                message=f"No AIF 0.3 equipment template for assetClass '{raw}'. Defined classes: {', '.join(equipment_classes.RECOGNISED)}.",
+                message=f"No AIF 0.3 equipment template for assetClass '{raw}'. Defined classes: {', '.join(equipment_classes.RECOGNISED_03)}.",
                 at=stage,
             )
             return
-        missing = sorted(equipment_classes.ATTRIBUTES[key] - set(prim_spec.attributes.keys()))
+        missing = sorted(equipment_classes.ATTRIBUTES_03[key] - set(prim_spec.attributes.keys()))
         if missing:
             self._AddWarning(
                 requirement=cap.MetadataRequirements.AM_008,

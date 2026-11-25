@@ -209,7 +209,8 @@ def test_aif03_inherits_mandatory_contracts(profiles: dict, catalog_profiles: di
     current = ProfileRegistry().find("AIF-Entity", "0.3.0")
     replaced = {"com.nvidia.simready.AM.004", "com.nvidia.simready.AM.007"}
     replacements = {"com.nvidia.simready.AM.008", "com.nvidia.simready.AM.009"}
-    assert current.mandatory_requirements == (base.mandatory_requirements - replaced) | replacements
+    network = {f"com.nvidia.simready.NET.{n:03}" for n in (1, 2, 3)}
+    assert current.mandatory_requirements == (base.mandatory_requirements - replaced) | replacements | network
     expected = {
         "FET001_MinimalPlaceableVisual.1-0-0",
         "CAP000_Core.0-2-0",
@@ -219,7 +220,18 @@ def test_aif03_inherits_mandatory_contracts(profiles: dict, catalog_profiles: di
         "CAP201_ConnectionPoints.0-3-0",
         "CAP202_ThermalCooling.0-3-0",
         "CAP203_Electrical.0-3-0",
+        "CAP204_Networking.0-3-0",
     }
     assert {c.id for c in current.capabilities} - current.optional_capabilities == expected
     catalog = catalog_profiles["0.3.0"]
     assert {c.id for c in (*catalog.features, *catalog.capabilities) if not c.optional} == expected
+
+
+def test_network_requirements_are_selected_only_in_aif03(profiles: dict):
+    registry = ProfileRegistry()
+    expected = {f"com.nvidia.simready.NET.{n:03}" for n in (1, 2, 3)}
+    assert "AIF-NetworkEquipment" not in profiles
+    for version in ("0.1.0", "0.2.0", "0.3.0"):
+        profile = registry.find("AIF-Entity", version)
+        actual = {code for code in profile.mandatory_requirements if ".NET." in code}
+        assert actual == (expected if version == "0.3.0" else set())

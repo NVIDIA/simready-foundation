@@ -116,6 +116,12 @@ flowchart TD
     CAP202_ThermalCooling_OpenUSD_0_2_0["CAP202_ThermalCooling 0-2-0"]
     CAP203_Electrical_OpenUSD_0_1_0["CAP203_Electrical 0-1-0"]
     CAP203_Electrical_OpenUSD_0_2_0["CAP203_Electrical 0-2-0"]
+    CAP200_AifMetadata_OpenUSD_0_3_0["CAP200_AifMetadata 0-3-0"]
+    CAP201_ConnectionPoints_OpenUSD_0_3_0["CAP201_ConnectionPoints 0-3-0"]
+    CAP202_ThermalCooling_OpenUSD_0_3_0["CAP202_ThermalCooling 0-3-0"]
+    CAP203_Electrical_OpenUSD_0_3_0["CAP203_Electrical 0-3-0"]
+    CAP204_Networking_OpenUSD_0_3_0["CAP204_Networking 0-3-0"]
+    FET207_SimulationNetworkTopology_OpenUSD_0_3_0["FET207_SimulationNetworkTopology 0-3-0"]
     CAP000_Core_Isaac_0_1_0 --> CAP000_Core_OpenUSD_0_1_0
     CAP000_Core_Isaac_0_2_0 --> CAP000_Core_OpenUSD_0_2_0
     CAP000_Core_MuJoCo_0_1_0 --> CAP000_Core_OpenUSD_0_1_0
@@ -163,6 +169,12 @@ flowchart TD
     CAP202_ThermalCooling_OpenUSD_0_2_0 --> CAP201_ConnectionPoints_OpenUSD_0_2_0
     CAP203_Electrical_OpenUSD_0_1_0 --> CAP201_ConnectionPoints_OpenUSD_0_1_0
     CAP203_Electrical_OpenUSD_0_2_0 --> CAP201_ConnectionPoints_OpenUSD_0_2_0
+    CAP201_ConnectionPoints_OpenUSD_0_3_0 --> CAP200_AifMetadata_OpenUSD_0_3_0
+    CAP202_ThermalCooling_OpenUSD_0_3_0 --> CAP201_ConnectionPoints_OpenUSD_0_3_0
+    CAP203_Electrical_OpenUSD_0_3_0 --> CAP201_ConnectionPoints_OpenUSD_0_3_0
+    CAP204_Networking_OpenUSD_0_3_0 --> CAP200_AifMetadata_OpenUSD_0_3_0
+    CAP204_Networking_OpenUSD_0_3_0 --> CAP201_ConnectionPoints_OpenUSD_0_3_0
+    FET207_SimulationNetworkTopology_OpenUSD_0_3_0 --> CAP204_Networking_OpenUSD_0_3_0
     FET013_MultiRepresentationVisual_OpenUSD_0_1_0 --> FET001_MinimalPlaceableVisual_OpenUSD_1_0_1
     FET014_MeshVariant_OpenUSD_0_1_0 --> FET001_MinimalPlaceableVisual_OpenUSD_1_0_1
     FET015_CollisionVariant_OpenUSD_0_1_0 --> FET001_MinimalPlaceableVisual_OpenUSD_1_0_1
@@ -171,7 +183,7 @@ flowchart TD
     FET016_AppearanceVariant_OpenUSD_0_1_0 --> FET006_Materials_OpenUSD_0_2_0
     classDef capability fill:#eef,stroke:#333
     class CAP039_ObjectAffordances_OpenUSD_0_1_0 capability
-    class CAP000_Core_Isaac_0_1_0,CAP000_Core_Isaac_0_2_0,CAP000_Core_MuJoCo_0_1_0,CAP000_Core_MuJoCo_0_2_0,CAP000_Core_Newton_0_1_0,CAP000_Core_Newton_0_2_0,CAP000_Core_OpenUSD_0_1_0,CAP000_Core_OpenUSD_0_2_0,CAP000_Core_PhysX_0_1_0,CAP000_Core_PhysX_0_2_0,CAP002_PosableBodies_OpenUSD_0_1_0,CAP003_RigidBody_MuJoCo_0_1_0,CAP004_Multibody_MuJoCo_0_1_0,CAP004_Multibody_RobotMuJoCo_0_1_0,CAP007_NonVisualMaterials_OpenUSD_0_2_0,CAP021_RobotCore_Isaac_0_1_0,CAP021_RobotCore_Isaac_0_2_0,CAP021_RobotCore_Isaac_0_3_0,CAP022_DrivenJoints_MuJoCo_0_1_0,CAP023_RobotMaterials_Isaac_0_1_0,CAP024_BaseArticulation_MuJoCo_0_1_0,CAP024_BaseArticulation_Newton_0_1_0,CAP024_BaseArticulation_OpenUSD_0_1_0,CAP024_BaseArticulation_PhysX_0_1_0,CAP025_RosBridge_Ros_0_1_0,CAP028_Gripper_MuJoCo_0_1_0,CAP030_PackagingCore_OpenUSD_0_1_0,CAP031_SelfContainedPackage_OpenUSD_0_1_0,CAP032_PackagingIntrospection_OpenUSD_0_1_0,CAP033_SimReadyPackage_OpenUSD_0_1_0,CAP033_SimReadyPackage_OpenUSD_0_2_0,CAP033_SimReadyPackage_OpenUSD_0_3_0,CAP033_SimReadyPackage_OpenUSD_0_4_0,CAP040_CocoLabels_OpenUSD_0_1_0,CAP041_CityscapesLabels_OpenUSD_0_1_0,CAP042_Ade20kLabels_OpenUSD_0_1_0,CAP043_PascalVocLabels_OpenUSD_0_1_0,CAP044_SunRgbdLabels_OpenUSD_0_1_0,CAP045_ImageNet1kLabels_OpenUSD_0_1_0,CAP046_WikidataLabels_OpenUSD_0_1_0,CAP100_IsaacComposition_Isaac_0_1_0,CAP100_IsaacComposition_Isaac_0_2_0,CAP100_IsaacComposition_Isaac_0_3_0,CAP100_IsaacComposition_Isaac_0_4_0,CAP101_RobotComposition_Isaac_0_1_0,CAP200_AifMetadata_OpenUSD_0_1_0,CAP201_ConnectionPoints_OpenUSD_0_1_0,CAP201_ConnectionPoints_OpenUSD_0_2_0,CAP202_ThermalCooling_OpenUSD_0_1_0,CAP202_ThermalCooling_OpenUSD_0_2_0,CAP203_Electrical_OpenUSD_0_1_0,CAP203_Electrical_OpenUSD_0_2_0 capability
+    class CAP000_Core_Isaac_0_1_0,CAP000_Core_Isaac_0_2_0,CAP000_Core_MuJoCo_0_1_0,CAP000_Core_MuJoCo_0_2_0,CAP000_Core_Newton_0_1_0,CAP000_Core_Newton_0_2_0,CAP000_Core_OpenUSD_0_1_0,CAP000_Core_OpenUSD_0_2_0,CAP000_Core_PhysX_0_1_0,CAP000_Core_PhysX_0_2_0,CAP002_PosableBodies_OpenUSD_0_1_0,CAP003_RigidBody_MuJoCo_0_1_0,CAP004_Multibody_MuJoCo_0_1_0,CAP004_Multibody_RobotMuJoCo_0_1_0,CAP007_NonVisualMaterials_OpenUSD_0_2_0,CAP021_RobotCore_Isaac_0_1_0,CAP021_RobotCore_Isaac_0_2_0,CAP021_RobotCore_Isaac_0_3_0,CAP022_DrivenJoints_MuJoCo_0_1_0,CAP023_RobotMaterials_Isaac_0_1_0,CAP024_BaseArticulation_MuJoCo_0_1_0,CAP024_BaseArticulation_Newton_0_1_0,CAP024_BaseArticulation_OpenUSD_0_1_0,CAP024_BaseArticulation_PhysX_0_1_0,CAP025_RosBridge_Ros_0_1_0,CAP028_Gripper_MuJoCo_0_1_0,CAP030_PackagingCore_OpenUSD_0_1_0,CAP031_SelfContainedPackage_OpenUSD_0_1_0,CAP032_PackagingIntrospection_OpenUSD_0_1_0,CAP033_SimReadyPackage_OpenUSD_0_1_0,CAP033_SimReadyPackage_OpenUSD_0_2_0,CAP033_SimReadyPackage_OpenUSD_0_3_0,CAP033_SimReadyPackage_OpenUSD_0_4_0,CAP040_CocoLabels_OpenUSD_0_1_0,CAP041_CityscapesLabels_OpenUSD_0_1_0,CAP042_Ade20kLabels_OpenUSD_0_1_0,CAP043_PascalVocLabels_OpenUSD_0_1_0,CAP044_SunRgbdLabels_OpenUSD_0_1_0,CAP045_ImageNet1kLabels_OpenUSD_0_1_0,CAP046_WikidataLabels_OpenUSD_0_1_0,CAP100_IsaacComposition_Isaac_0_1_0,CAP100_IsaacComposition_Isaac_0_2_0,CAP100_IsaacComposition_Isaac_0_3_0,CAP100_IsaacComposition_Isaac_0_4_0,CAP101_RobotComposition_Isaac_0_1_0,CAP200_AifMetadata_OpenUSD_0_1_0,CAP201_ConnectionPoints_OpenUSD_0_1_0,CAP201_ConnectionPoints_OpenUSD_0_2_0,CAP202_ThermalCooling_OpenUSD_0_1_0,CAP202_ThermalCooling_OpenUSD_0_2_0,CAP203_Electrical_OpenUSD_0_1_0,CAP203_Electrical_OpenUSD_0_2_0,CAP200_AifMetadata_OpenUSD_0_3_0,CAP201_ConnectionPoints_OpenUSD_0_3_0,CAP202_ThermalCooling_OpenUSD_0_3_0,CAP203_Electrical_OpenUSD_0_3_0,CAP204_Networking_OpenUSD_0_3_0 capability
 ```
 
 ## Edge List
@@ -225,6 +237,11 @@ flowchart TD
 | `CAP202_ThermalCooling.0-2-0` | `CAP201_ConnectionPoints.0-2-0` |
 | `CAP203_Electrical.0-1-0` | `CAP201_ConnectionPoints.0-1-0` |
 | `CAP203_Electrical.0-2-0` | `CAP201_ConnectionPoints.0-2-0` |
+| `CAP201_ConnectionPoints.0-3-0` | `CAP200_AifMetadata.0-3-0` |
+| `CAP202_ThermalCooling.0-3-0` | `CAP201_ConnectionPoints.0-3-0` |
+| `CAP203_Electrical.0-3-0` | `CAP201_ConnectionPoints.0-3-0` |
+| `CAP204_Networking.0-3-0` | `CAP200_AifMetadata.0-3-0`, `CAP201_ConnectionPoints.0-3-0` |
+| `FET207_SimulationNetworkTopology.0-3-0` | `CAP204_Networking.0-3-0` |
 | `CAP039_ObjectAffordances.0-1-0` | `FET011_SemanticLabels.0-2-0` |
 
 
@@ -288,3 +305,4 @@ flowchart TD
 - `CAP100_IsaacComposition.Isaac.0-4-0`
 - `CAP101_RobotComposition.Isaac.0-1-0`
 - `CAP200_AifMetadata.0-1-0`
+- `CAP200_AifMetadata.0-3-0`
