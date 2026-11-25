@@ -1,0 +1,15 @@
+Parameter,Default Value,USD Attribute Namespace,Attribute Type,Description,SI Unit Values,Needed (Required / Optional),Options
+Manufacturer,,aif:core:manufacturer,string,Manufacturer; fictional for a synthetic asset.,Not applicable,Required,Not required
+Model Number,,aif:core:modelNumber,string,Model number.,Not applicable,Required,Not required
+Asset Version,,aif:core:assetVersion,string,Version of the digital asset.,Not applicable,Required,Not required
+Height,,aif:core:height,float,Equipment height; inherited AM.009 identifier.,mm,Required,Not required
+Width,,aif:core:width,float,Equipment width; inherited AM.009 identifier.,mm,Required,Not required
+Depth,,aif:core:depth,float,Equipment depth; inherited AM.009 identifier.,mm,Required,Not required
+Weight,,aif:core:weight,float,Equipment mass; inherited AM.009 identifier.,kg,Required,Not required
+Installation Clearance,,aif:core:installationClearance,float,Installation clearance; inherited AM.009 identifier.,mm,Required,Not required
+Service Clearance,,aif:core:accessibilityRequirement,float,Service clearance; inherited AM.009 identifier.,mm,Required,Not required
+Network Ports,,ConnectionPoints/*,CP2 structure,Named network-domain connection points using CAP201_ConnectionPoints.0-3-0; links between equipment instances belong in the assembled scene.,Not applicable,Required,Not required
+CPU Allocation,,aif:spec:cpuAllocation,int,Positive CPU allocation for pre-simulation node configuration; allocation unit and DSX Air limits require consumer review.,Not specified,Required,Not required
+Memory,,aif:spec:memory_MB,int,Positive node memory allocation; source MB convention retained pending consumer mapping.,MB,Required,Not required
+Storage,,aif:spec:storage_GB,int,Positive node storage allocation; source GB convention retained pending consumer mapping.,GB,Required,Not required
+OS Image,,aif:spec:osImage,string,Nonempty node OS image reference when authored; supported identifier format and availability require consumer review.,Not applicable,Optional,Not required

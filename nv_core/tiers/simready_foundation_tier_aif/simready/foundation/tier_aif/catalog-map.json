@@ -81,6 +81,12 @@
       "id": "CAP203_Electrical.0-3-0",
       "native": true,
       "runtime_tests": []
+    },
+    {
+      "kind": "capability",
+      "id": "CAP204_NetworkEquipment.0-3-0",
+      "native": true,
+      "runtime_tests": []
     }
   ]
 }

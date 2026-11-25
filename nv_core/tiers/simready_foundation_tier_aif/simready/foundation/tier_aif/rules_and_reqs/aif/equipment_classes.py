@@ -19,12 +19,11 @@ One file per equipment class, as AM.007 describes. Each file names the class, th
 attributes it must carry, and whether the thermal cooling and AC electrical
 features apply to it.
 
-Adding an equipment class is adding a file. No validator changes, no requirement
-code, no feature JSON edit.
+Class availability is versioned. Definitions marked introducedIn 0.3.0 are
+available through the AIF 0.3 registry; legacy AM.007 retains its prior classes.
 """
 import json
 from pathlib import Path
-from typing import Optional
 
 _CONFIG_DIR = Path(__file__).resolve().parents[2] / "config"
 
@@ -64,6 +63,10 @@ def _validate(doc: dict, filename: str) -> None:
     _check(all(isinstance(a, str) and a.startswith("aif:spec:") for a in attributes), filename,
            "every entry in 'attributes' must be an 'aif:spec:*' name")
 
+    if "introducedIn" in doc:
+        _check(doc["introducedIn"] == "0.3.0", filename,
+               "'introducedIn' must be '0.3.0' when present")
+
     thermal = doc["thermalCooling"]
     _check(isinstance(thermal, dict) and "applies" in thermal, filename,
            "'thermalCooling' must be an object with an 'applies' key")
@@ -100,7 +103,12 @@ def _load() -> dict:
     return classes
 
 
-_CLASSES = _load()
+_CLASSES_03 = _load()
+# Published AM.007 class lookup remains unchanged when a 0.3-only class is added.
+_CLASSES = {key: doc for key, doc in _CLASSES_03.items()
+            if doc.get("introducedIn", "0.1.0") in ("0.1.0", "0.2.0")}
+ATTRIBUTES_03 = {key: frozenset(doc["attributes"]) for key, doc in _CLASSES_03.items()}
+RECOGNISED_03 = tuple(sorted(_CLASSES_03))
 
 # class -> the aif:spec:* attributes an asset of that class must carry (AM.007).
 ATTRIBUTES = {k: frozenset(v["attributes"]) for k, v in _CLASSES.items()}
@@ -126,6 +134,7 @@ def _build_tokens(classes: dict) -> dict:
 
 
 _TOKENS = _build_tokens(_CLASSES)
+_TOKENS_03 = _build_tokens(_CLASSES_03)
 
 # Classes the thermal cooling feature applies to (TC.001, TC.002), and the
 # connection point name prefixes each of them must carry.
@@ -150,6 +159,11 @@ AC_ATTRIBUTE = {
 }
 
 
-def normalize(raw: str) -> Optional[str]:
+def normalize(raw: str) -> str | None:
     """Resolve an authored ``aif:core:assetClass`` value to a class, or None."""
     return _TOKENS.get(raw.lower().strip())
+
+
+def normalize_03(raw: str) -> str | None:
+    """Resolve an AIF 0.3 class without expanding legacy AM.007 acceptance."""
+    return _TOKENS_03.get(raw.lower().strip())

@@ -40,3 +40,12 @@ default prim. Use the USD types listed above for common equipment metadata.
 
 - [AM.009](physical-dimensions-metadata-0.3.md) defines the physical dimension requirements for 0.3.
 - AM.007 defines the equipment template checks for AIF 0.1 and 0.2.
+
+## Network equipment availability
+
+AIF 0.3 additionally recognizes `network-equipment` through the versioned equipment
+registry. Its required node properties are `aif:spec:cpuAllocation`,
+`aif:spec:memory_MB` and `aif:spec:storage_GB`; NET.002 enforces their integer types
+and positive values. Optional `aif:spec:osImage` is checked by NET.002 when authored.
+NET.001 and NET.003 cover network-specific value bounds and required network ports.
+The legacy AM.007 registry remains unchanged and rejects this class.

@@ -1,0 +1,128 @@
+{
+  "schema": "simready-example-validation-summary-v1",
+  "asset": "asset/Synthetic_NetworkEquipment.usda",
+  "profile": {
+    "name": "AIF-Entity",
+    "version": "0.3.0"
+  },
+  "passed": true,
+  "executed_requirements": 44,
+  "selected_requirements": 44,
+  "requirement_codes": [
+    "com.nvidia.simready.AM.001",
+    "com.nvidia.simready.AM.002",
+    "com.nvidia.simready.AM.003",
+    "com.nvidia.simready.AM.005",
+    "com.nvidia.simready.AM.006",
+    "com.nvidia.simready.AM.008",
+    "com.nvidia.simready.AM.009",
+    "com.nvidia.simready.CP.001",
+    "com.nvidia.simready.CP.005",
+    "com.nvidia.simready.CP.010",
+    "com.nvidia.simready.CP.011",
+    "com.nvidia.simready.CP.012",
+    "com.nvidia.simready.EL.001",
+    "com.nvidia.simready.EL.002",
+    "com.nvidia.simready.EL.003",
+    "com.nvidia.simready.EL.004",
+    "com.nvidia.simready.HI.010",
+    "com.nvidia.simready.NET.001",
+    "com.nvidia.simready.NET.002",
+    "com.nvidia.simready.NET.003",
+    "com.nvidia.simready.NP.002",
+    "com.nvidia.simready.NP.003",
+    "com.nvidia.simready.NP.004",
+    "com.nvidia.simready.NP.005",
+    "com.nvidia.simready.NP.007",
+    "com.nvidia.simready.NP.008",
+    "com.nvidia.simready.SR.002",
+    "com.nvidia.simready.SR.004",
+    "com.nvidia.simready.TC.001",
+    "com.nvidia.simready.TC.002",
+    "com.nvidia.simready.UN.006",
+    "com.nvidia.simready.UN.007",
+    "com.nvidia.simready.VG.025",
+    "com.nvidia.simready.VG.MESH.001",
+    "com.nvidia.usd.AA.001",
+    "com.nvidia.usd.AA.002",
+    "com.nvidia.usd.HI.001",
+    "com.nvidia.usd.HI.003",
+    "com.nvidia.usd.HI.004",
+    "com.nvidia.usd.VG.002",
+    "com.nvidia.usd.VG.014",
+    "com.nvidia.usd.VG.027",
+    "com.nvidia.usd.VG.028",
+    "com.nvidia.usd.VG.029"
+  ],
+  "contracts": {
+    "CAP000_Core.0-2-0": {
+      "version": "0-2-0",
+      "dependencies": "[]",
+      "passed": true,
+      "blocking_failure": false
+    },
+    "CAP031_SelfContainedPackage.0-1-0": {
+      "version": "0-1-0",
+      "dependencies": "[]",
+      "passed": true,
+      "blocking_failure": false
+    },
+    "CAP033_SimReadyPackage.0-4-0": {
+      "version": "0-4-0",
+      "dependencies": "['CAP031_SelfContainedPackage.0-1-0']",
+      "passed": true,
+      "blocking_failure": false
+    },
+    "CAP200_AifMetadata.0-3-0": {
+      "version": "0-3-0",
+      "dependencies": "[]",
+      "passed": true,
+      "blocking_failure": false
+    },
+    "CAP201_ConnectionPoints.0-3-0": {
+      "version": "0-3-0",
+      "dependencies": "['CAP200_AifMetadata.0-3-0']",
+      "passed": true,
+      "blocking_failure": false
+    },
+    "CAP202_ThermalCooling.0-3-0": {
+      "version": "0-3-0",
+      "dependencies": "['CAP201_ConnectionPoints.0-3-0']",
+      "passed": true,
+      "blocking_failure": false
+    },
+    "CAP203_Electrical.0-3-0": {
+      "version": "0-3-0",
+      "dependencies": "['CAP201_ConnectionPoints.0-3-0']",
+      "passed": true,
+      "blocking_failure": false
+    },
+    "CAP204_NetworkEquipment.0-3-0": {
+      "version": "0-3-0",
+      "dependencies": "['CAP200_AifMetadata.0-3-0', 'CAP201_ConnectionPoints.0-3-0']",
+      "passed": true,
+      "blocking_failure": false
+    },
+    "FET001_MinimalPlaceableVisual.1-0-0": {
+      "version": "1-0-0",
+      "dependencies": "[]",
+      "passed": true,
+      "blocking_failure": false
+    }
+  },
+  "issues": [],
+  "package_versions": {
+    "simready-validate": "2026.10.0",
+    "usd-validation-nvidia": "1.23.0",
+    "usd-core": "26.11",
+    "simready-foundation-tier-core": "2026.10.0",
+    "simready-foundation-tier-aif": "2026.10.0"
+  },
+  "asset_file_sha256": {
+    "asset/.thumbs/256x256/Synthetic_NetworkEquipment.usda.png": "56e7df8e92a5634aa721d8e67dc2bef3d36aa9aed982c9af36d09406969887b4",
+    "asset/Synthetic_NetworkEquipment.usda": "56c84530cd98aa9dd40c5a3a97bc5f67adbcf14c51ebfce816815926cde48350",
+    "asset/layers/Synthetic_NetworkEquipment_ConnectionPoints.usda": "effb3ac86874c4f0b64b3bada87a14d71bc2197d51942125f8ac98f353f28a7a",
+    "asset/layers/Synthetic_NetworkEquipment_Geometry.usda": "0b98d104367f17fe5980baa0c3dd2640ccaf04473955aa9e686fa81d84c5fa5a",
+    "asset/layers/Synthetic_NetworkEquipment_Properties.usda": "a6c7c2d0ca9c69747974f35a93a667884876b2607a2402c5229846c645b778b6"
+  }
+}

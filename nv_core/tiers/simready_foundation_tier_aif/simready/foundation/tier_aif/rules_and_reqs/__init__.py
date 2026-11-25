@@ -26,3 +26,4 @@ from .aif.electrical import validation
 from .aif.metadata import validation
 from .aif.metadata import validation_03
 from .aif.thermal_cooling import validation
+from .aif.network_equipment import validation

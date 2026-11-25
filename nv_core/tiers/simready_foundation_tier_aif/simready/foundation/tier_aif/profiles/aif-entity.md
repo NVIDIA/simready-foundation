@@ -248,3 +248,18 @@ electrical requirement from 0.2.0. The profile selects the following contracts.
 | `CAP201_ConnectionPoints.0-3-0` | Required | Same CP2 requirements as 0.2.0; dependency selects 0.3 metadata |
 | `CAP202_ThermalCooling.0-3-0` | Required | Same thermal requirements and existing class gates as 0.2.0 |
 | `CAP203_Electrical.0-3-0` | Required | Same electrical requirements and existing class gates as 0.2.0 |
+| `CAP204_NetworkEquipment.0-3-0` | Required | Conditional network-equipment metadata, node allocations and CP2 network ports |
+
+`network-equipment` is an AIF 0.3-only class. Its NET.001–NET.003 requirements
+validate non-empty identity strings, finite scalar dimensions and mass, positive
+integer CPU/memory/storage allocations, optional opaque OS image strings and at
+least one network-domain CP2 port. Other recognized classes skip NET checks;
+AM.008 rejects unknown classes. Class agreement is checked in the Properties layer
+and composed interface when either identifies network equipment.
+
+AIF-Entity 0.1.0 and 0.2.0 preserve their existing class registries and do not accept
+`network-equipment`, including assets shaped like legacy metadata. Migration to
+0.3 supplies the new node allocations and CP2 properties and removes the retired
+`overallGeometryDimensions` property under AM.009. No automatic adapter is
+registered. DSX Air is the intended pre-simulation consumer; offline validation
+does not establish supported node/image mappings or runtime behavior.

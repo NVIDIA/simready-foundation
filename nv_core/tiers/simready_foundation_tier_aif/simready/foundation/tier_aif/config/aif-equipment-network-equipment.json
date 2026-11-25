@@ -1,0 +1,19 @@
+{
+  "class": "network-equipment",
+  "displayName": "Network Equipment",
+  "assetClassTokens": [
+    "network-equipment"
+  ],
+  "thermalCooling": {
+    "applies": false
+  },
+  "electricalAC": {
+    "applies": false
+  },
+  "attributes": [
+    "aif:spec:cpuAllocation",
+    "aif:spec:memory_MB",
+    "aif:spec:storage_GB"
+  ],
+  "introducedIn": "0.3.0"
+}
