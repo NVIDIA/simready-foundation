@@ -108,10 +108,11 @@
     "simready-foundation-tier-aif": "2026.10.0"
   },
   "asset_file_sha256": {
-    "asset/.thumbs/256x256/Synthetic_NetworkEquipment.usda.png": "56e7df8e92a5634aa721d8e67dc2bef3d36aa9aed982c9af36d09406969887b4",
-    "asset/Synthetic_NetworkEquipment.usda": "56c84530cd98aa9dd40c5a3a97bc5f67adbcf14c51ebfce816815926cde48350",
-    "asset/layers/Synthetic_NetworkEquipment_ConnectionPoints.usda": "effb3ac86874c4f0b64b3bada87a14d71bc2197d51942125f8ac98f353f28a7a",
-    "asset/layers/Synthetic_NetworkEquipment_Geometry.usda": "0b98d104367f17fe5980baa0c3dd2640ccaf04473955aa9e686fa81d84c5fa5a",
-    "asset/layers/Synthetic_NetworkEquipment_Properties.usda": "a6c7c2d0ca9c69747974f35a93a667884876b2607a2402c5229846c645b778b6"
+    "asset/.metadata/com.nvidia.simready.root_usds.json": "fa8c40f88545aaf88eabfcede2cfd881b194f0cdcf48f8394f40b821c944058d",
+    "asset/.thumbs/256x256/Synthetic_NetworkEquipment.usda.png": "2dad336990b4450eeea7a743fe18cc66fc190e2c3d3c5bf7d24b0e55e11ad9f4",
+    "asset/Synthetic_NetworkEquipment.usda": "25604e9093a890f5e87d620325926f5663e5f230783bfed29dbb3504c4a3707c",
+    "asset/layers/Synthetic_NetworkEquipment_ConnectionPoints.usda": "06df7fe17c0fc87b3cd834f55a274458220338c23ef3a4c9b966613ee28c7c1b",
+    "asset/layers/Synthetic_NetworkEquipment_Geometry.usda": "e1aea534fcf0ba1826001a777a0b71e4736bb8155d55de6bb916795ec232ec78",
+    "asset/layers/Synthetic_NetworkEquipment_Properties.usda": "7310bfdf752160f7e96d8213a39c00349462baa815c2e846eea70d0ac9778a95"
   }
 }

@@ -3,7 +3,9 @@
 The CDU, CRAH, UPS and compute rack examples each validate against
 `AIF-Entity` at both 0.1.0 and 0.2.0, and against `Package-Candidate` 1.3.0, the
 preflight for publishing to SimReady Central. The synthetic network switch targets
-`AIF-Entity@0.3.0`.
+`AIF-Entity@0.3.0` and `Networking@0.3.0` and passes the same package preflight.
+Its interface USD records both static profile results. The package declares one
+equipment root for discovery and keeps the render stage in `dcc_source/`.
 
 | Asset | Class | Identity |
 |---|---|---|
@@ -48,3 +50,10 @@ from `tests/fixtures/connection_points/build_connection_points.py`, whose
 For those four assets, the thumbnail at `.thumbs/256x256/<usd file name>.png` is a Storm render
 of the asset from a three-quarter view, committed rather than generated: Storm
 needs an OpenGL context, so no CI job can reproduce it.
+
+The network switch has its own reproducible generator and two camera renders:
+`preview.png` and the square publishing thumbnail. After generation and
+rendering, `validate.py --stamp` records both genuine static profile receipts
+and refreshes their reports against the final files. See the
+[network sample instructions](Synthetic_NetworkEquipment/README.md) for the
+commands and plan-only workflow. No DSX Air runtime result is included.

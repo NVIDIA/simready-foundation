@@ -27,9 +27,13 @@ fails Networking eligibility. Existing AIF-Entity 0.1.0, 0.2.0 and 0.3.0 remain
 independently selectable with their existing contract selections.
 
 The [synthetic switch](../../../../../../../sample_content/aif/Synthetic_NetworkEquipment/asset/Synthetic_NetworkEquipment.usda)
-is a standalone positive example. A staged copy with a different equipment class
-is a negative eligibility case. No exclusive profile stamp is authored; assets
-may be validated against both Networking and AIF-Entity independently.
+is a standalone positive example with static validation receipts for
+`Networking@0.3.0` and `AIF-Entity@0.3.0`. Its package declares one equipment
+interface, keeps the render stage in `dcc_source/` and passes the
+`Package-Candidate@1.3.0` preflight. After regenerating and rendering the switch,
+run `python validate.py --stamp` from its sample directory to refresh both receipts.
+Evaluate reads them during planning. A staged copy with a
+different equipment class is a negative eligibility case.
 
 [Simulation Network Topology](../features/FET207_SimulationNetworkTopology.md) specifies
 connectivity checks between two devices in an explicitly designated, running

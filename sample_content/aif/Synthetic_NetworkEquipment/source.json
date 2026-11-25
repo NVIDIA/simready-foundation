@@ -87,5 +87,6 @@
     "opening_width_m": 0.022,
     "opening_height_m": 0.009,
     "mating_depth_m": 0.015
-  }
+  },
+  "asset_validator_version": "simready-validate 2026.10.0"
 }

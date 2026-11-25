@@ -28,9 +28,9 @@ def standalone_switch(tmp_path):
     return staged / "Synthetic_NetworkEquipment.usda"
 
 
-def _result(validator, path, profile="Networking"):
+def _result(validator, path, profile="Networking", version="0.3.0"):
     result = validator.validate_asset(validator.AssetValidationConfig(
-        asset_path=str(path), profile_id=profile, profile_version="0.3.0",
+        asset_path=str(path), profile_id=profile, profile_version=version,
     ))
     assert result is not None and result.features_summary
     return result
@@ -40,6 +40,12 @@ def test_standalone_switch_passes_networking_profile(validator, standalone_switc
     result = _result(validator, standalone_switch)
     assert validator.features_summary_passed(result.features_summary), result.features_summary
     assert "FET207_SimulationNetworkTopology.0-3-0" in result.features_summary
+    assert not result.issues
+
+
+def test_relocated_switch_passes_package_candidate(validator, standalone_switch):
+    result = _result(validator, standalone_switch, "Package-Candidate", "1.3.0")
+    assert validator.features_summary_passed(result.features_summary), result.features_summary
     assert not result.issues
 
 

@@ -9,14 +9,20 @@ import argparse
 import csv
 import json
 import math
+import shutil
 from pathlib import Path
 import subprocess
+from tempfile import TemporaryDirectory
 
-from pxr import Gf, Sdf, Usd, UsdGeom, UsdLux, UsdPhysics, UsdShade, Vt
+from pxr import Gf, Kind, Sdf, Usd, UsdGeom, UsdLux, UsdPhysics, UsdShade, Vt
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[2]
 NAME = "Synthetic_NetworkEquipment"
+ROOT = "/" + NAME
+DOCUMENTATION = ("https://github.com/NVIDIA/simready-foundation/blob/"
+                 "62a318f1a2262aa8b5170c6532b8ad24276c9ea0/"
+                 "sample_content/aif/Synthetic_NetworkEquipment/README.md")
 CSV = REPO / "standards/equipment-classes/aif-v0.3/network-equipment.csv"
 TYPES = {"float": Sdf.ValueTypeNames.Float, "float3": Sdf.ValueTypeNames.Float3,
          "int": Sdf.ValueTypeNames.Int, "string": Sdf.ValueTypeNames.String,
@@ -28,7 +34,7 @@ def new_stage(path):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.unlink(missing_ok=True)
     stage = Usd.Stage.CreateNew(str(path))
-    root = UsdGeom.Xform.Define(stage, "/world").GetPrim()
+    root = UsdGeom.Xform.Define(stage, ROOT).GetPrim()
     stage.SetDefaultPrim(root)
     UsdGeom.SetStageUpAxis(stage, "Z")
     UsdGeom.SetStageMetersPerUnit(stage, 1)
@@ -42,9 +48,9 @@ class Geometry:
     def __init__(self, stage, source):
         self.stage, self.source, self.mass = stage, source, 0.0
         self.materials = {}
-        UsdGeom.Scope.Define(stage, "/world/Geometry")
+        UsdGeom.Scope.Define(stage, ROOT + "/Geometry")
         for name, data in source["materials"].items():
-            mat = UsdShade.Material.Define(stage, "/world/Looks/" + name)
+            mat = UsdShade.Material.Define(stage, ROOT + "/Looks/" + name)
             shader = UsdShade.Shader.Define(stage, str(mat.GetPath()) + "/Surface")
             shader.CreateIdAttr("UsdPreviewSurface")
             shader.CreateInput("diffuseColor", Sdf.ValueTypeNames.Color3f).Set(Gf.Vec3f(*data["color"]))
@@ -53,13 +59,27 @@ class Geometry:
             mat.CreateSurfaceOutput().ConnectToSource(shader.ConnectableAPI(), "surface")
             self.materials[name] = mat
 
+    def front_web(self, name, left, right, y, z, led_x):
+        """A front web with an exact cutout for its inset LED lens."""
+        lower, upper = z - .008225, z + .008225
+        hole_left, hole_right = led_x - .001, led_x + .001
+        hole_lower, hole_upper = z + .006, z + .008
+        for label, x0, x1, z0, z1 in (
+            ("Left", left, hole_left, lower, upper),
+            ("Right", hole_right, right, lower, upper),
+            ("Lower", hole_left, hole_right, lower, hole_lower),
+            ("Upper", hole_left, hole_right, hole_upper, upper),
+        ):
+            self.box(name + label, ((x0+x1)/2, y+.00075, (z0+z1)/2),
+                     (x1-x0, .0015, z1-z0), "DarkMetal")
+
     def box(self, name, center, size, material="Aluminum"):
         x, y, z = (v / 2 for v in size)
         points = [(-x,-y,-z),(x,-y,-z),(x,y,-z),(-x,y,-z),
                   (-x,-y,z),(x,-y,z),(x,y,z),(-x,y,z)]
         points = [Gf.Vec3f(*(v + c for v, c in zip(p, center, strict=True))) for p in points]
         faces = [(0,3,2,1),(4,5,6,7),(0,1,5,4),(1,2,6,5),(2,3,7,6),(3,0,4,7)]
-        mesh = UsdGeom.Mesh.Define(self.stage, "/world/Geometry/" + name)
+        mesh = UsdGeom.Mesh.Define(self.stage, ROOT + "/Geometry/" + name)
         mesh.CreatePointsAttr(points)
         mesh.CreateFaceVertexCountsAttr([4] * 6)
         mesh.CreateFaceVertexIndicesAttr([i for face in faces for i in face])
@@ -116,9 +136,9 @@ def geometry_layer(path, source):
         g.box(tag+"Back",(x,y+.0155,z),(p["opening_width_m"],.001,p["opening_height_m"]),"DarkMetal")
         g.box(tag+"LED",(x+.014,y+.0005,z+.007),(.002,.001,.002),"LED")
         if i < p["count"]-1:
-            g.box(tag+"Web",(x+.02,y+.00075,z),(.016,.0015,.01645),"DarkMetal")
-    g.box("FrontLeftWeb",(-.195,y+.00075,z),(.047,.0015,.01645),"DarkMetal")
-    g.box("FrontRightWeb",(.155,y+.00075,z),(.046,.0015,.01645),"DarkMetal")
+            g.front_web(tag+"Web", x+.012, x+.028, y, z, x+.014)
+    g.box("FrontLeftWeb",(-.19525,y+.00075,z),(.0465,.0015,.01645),"DarkMetal")
+    g.front_web("FrontRightWeb", .132, .178, y, z, x+.014)
     # Management jack is an integral copper connector, not a pluggable optic.
     for label, cx, cz, sx, sz in (("Lower",.19,z-.0065,.016,.001),
                                 ("Upper",.19,z+.0065,.016,.001),
@@ -161,9 +181,9 @@ def property_layer(path, source, mass, size):
     extras = {"assetClass":("string","network-equipment"), "simreadyVersion":("string","0.3.0"),
               "assetDescription":("string",source["description"]),
               "sceneOptimizerVersion":("string","not used; procedural synthetic geometry"),
-              "assetValidatorVersion":("string","simready-validate; see validation.json"),
+              "assetValidatorVersion":("string",source["asset_validator_version"]),
               "assetCreationDate":("string",source["date"]),
-              "connectsToModelDocumentation":("string","../README.md")}
+              "connectsToModelDocumentation":("string",DOCUMENTATION)}
     for name, (type_name,value) in extras.items():
         root.CreateAttribute("aif:core:"+name,TYPES[type_name],custom=True).Set(value)
     stage.GetRootLayer().Save()
@@ -171,12 +191,12 @@ def property_layer(path, source, mass, size):
 
 def connection_layer(path, source):
     stage = new_stage(path)
-    UsdGeom.Scope.Define(stage, "/world/ConnectionPoints")
+    UsdGeom.Scope.Define(stage, ROOT + "/ConnectionPoints")
     p = source["ports"]
     for i in range(p["count"]+1):
         management = i == p["count"]
         name = "management_01" if management else f"ethernet_{i+1:02}"
-        port = UsdGeom.Xform.Define(stage,"/world/ConnectionPoints/"+name)
+        port = UsdGeom.Xform.Define(stage,ROOT + "/ConnectionPoints/"+name)
         port.CreatePurposeAttr("guide")
         port.AddTranslateOp().Set(Gf.Vec3d(.19 if management else p["first_x_m"]+i*p["spacing_m"],p["front_y_m"],p["height_z_m"]))
         # Local +Z points outward from the front (-Y), local +Y is equipment +Z.
@@ -205,30 +225,48 @@ def connection_layer(path, source):
 def entry_layer(path, source, mass, size):
     stage = new_stage(path)
     stage.GetRootLayer().subLayerPaths = [f"./layers/{NAME}_{part}.usda" for part in ("Geometry","Properties","ConnectionPoints")]
+    model = Usd.ModelAPI(stage.GetDefaultPrim())
+    model.SetKind(Kind.Tokens.component)
+    model.SetAssetName(NAME)
+    model.SetAssetVersion(source["attributes"]["aif:core:assetVersion"])
     metadata = {"author":"nvidia", "asset_name":NAME,"asset_type":"equipment",
                 "asset_license":"CC-BY 4.0","category":"network-equipment",
                 "source_file":"../source.json","usd_date_generated":source["date"],
                 "qcode":source["qcode"],"rigid_body_count":0,
-                "asset_extents":Gf.Vec3f(*size),"mass":float(mass),"synthetic":True}
+                "asset_extents":Gf.Vec3f(*size),"mass":Vt.Float(mass),"synthetic":True}
     stage.GetRootLayer().customLayerData = {"SimReady_Metadata":metadata,
         **{key:metadata[key] for key in ("asset_name","asset_type","source_file","usd_date_generated")}}
     stage.GetRootLayer().Save()
 
 
 def presentation(path):
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.unlink(missing_ok=True)
     stage = Usd.Stage.CreateNew(str(path))
     root = UsdGeom.Xform.Define(stage,"/Presentation").GetPrim()
     stage.SetDefaultPrim(root)
     UsdGeom.SetStageUpAxis(stage,"Z")
     UsdGeom.SetStageMetersPerUnit(stage,1)
-    UsdGeom.Xform.Define(stage,"/Presentation/Switch").GetPrim().GetReferences().AddReference(f"./asset/{NAME}.usda")
+    switch = UsdGeom.Xform.Define(stage, "/Presentation/Switch").GetPrim()
+    switch.GetReferences().AddReference(f"../asset/{NAME}.usda")
     camera = UsdGeom.Camera.Define(stage,"/Presentation/Camera")
     view = Gf.Matrix4d().SetLookAt(Gf.Vec3d(.62,-.96,.58),Gf.Vec3d(0,-.015,.01),Gf.Vec3d(0,0,1))
     camera.AddTransformOp().Set(view.GetInverse())
     camera.CreateFocalLengthAttr(65)
     camera.CreateHorizontalApertureAttr(36)
     camera.CreateVerticalApertureAttr(20.25)
+    # Fit the square orthographic thumbnail to the switch in camera space.
+    bounds = UsdGeom.BBoxCache(Usd.TimeCode.Default(), ["default"]).ComputeWorldBound(switch)
+    center = bounds.ComputeAlignedRange().GetMidpoint()
+    thumb_view = Gf.Matrix4d().SetLookAt(center + Gf.Vec3d(.62, -.96, .48), center, Gf.Vec3d(0, 0, 1))
+    bounds.Transform(thumb_view)
+    frame = bounds.ComputeAlignedRange().GetSize()
+    thumb = Gf.Camera()
+    thumb.SetOrthographicFromAspectRatioAndSize(1.0, max(frame[0], frame[1]) * 1.08, Gf.Camera.FOVHorizontal)
+    thumb.transform = thumb_view.GetInverse()
+    thumb.clippingRange = Gf.Range1f(.01, 10)
+    UsdGeom.Camera.Define(stage, "/Presentation/Thumbnail").SetFromCamera(thumb, Usd.TimeCode.Default())
+
     dome = UsdLux.DomeLight.Define(stage,"/Presentation/Dome")
     dome.CreateIntensityAttr(.8)
     key = UsdLux.DistantLight.Define(stage,"/Presentation/Key")
@@ -246,31 +284,53 @@ def generate(destination=HERE):
     asset = destination/"asset"
     layers = asset/"layers"
     mass,size = geometry_layer(layers/f"{NAME}_Geometry.usda",source)
+    for axis, name in enumerate(("width", "depth", "height")):
+        declared = source["attributes"]["aif:core:" + name]
+        if not math.isclose(size[axis] * 1000, declared, rel_tol=1e-6, abs_tol=1e-5):
+            raise ValueError(f"Source {name}={declared} mm disagrees with generated geometry "
+                             f"({size[axis] * 1000} mm). Update the model and source together.")
+    source_path = HERE / "source.json"
+    if source_path.resolve() != (destination / "source.json").resolve():
+        shutil.copyfile(source_path, destination / "source.json")
     property_layer(layers/f"{NAME}_Properties.usda",source,mass,size)
     connection_layer(layers/f"{NAME}_ConnectionPoints.usda",source)
     entry_layer(asset/f"{NAME}.usda",source,mass,size)
-    presentation(destination/"preview.usda")
+    tracking_relative = Path("asset/.metadata/com.nvidia.simready.root_usds.json")
+    tracking_source, tracking_target = HERE / tracking_relative, destination / tracking_relative
+    if tracking_source.resolve() != tracking_target.resolve():
+        tracking_target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(tracking_source, tracking_target)
+    presentation(destination/"dcc_source/preview.usda")
     print(f"Generated {NAME}: mass={mass:.6f} kg, extent={tuple(size)} m")
 
 
 def render(destination=HERE, renderer=None):
-    from PIL import Image, ImageOps
+    from PIL import Image
+
     destination = Path(destination)
-    command = ["usdrecord","--camera","/Presentation/Camera","--imageWidth","1600"]
+    scene = destination / "dcc_source/preview.usda"
+    thumbnail = destination / "asset/.thumbs/256x256" / f"{NAME}.usda.png"
+    thumbnail.parent.mkdir(parents=True, exist_ok=True)
+    command = ["usdrecord"]
     if renderer:
-        command += ["--renderer",renderer]
-    subprocess.run(command+[str(destination/"preview.usda"),str(destination/"preview.png")],check=True)
-    with Image.open(destination/"preview.png").convert("RGBA") as rendered:
-        background = Image.new("RGBA",rendered.size,"white")
-        background.alpha_composite(rendered)
-        preview = background.convert("RGB")
-        preview.save(destination/"preview.png")
-        thumbnail = Image.new("RGB",(256,256),"white")
-        scaled = ImageOps.contain(preview,(256,256),Image.Resampling.LANCZOS)
-        thumbnail.paste(scaled,((256-scaled.width)//2,(256-scaled.height)//2))
-        target = destination/"asset/.thumbs/256x256"/f"{NAME}.usda.png"
-        target.parent.mkdir(parents=True,exist_ok=True)
-        thumbnail.save(target)
+        command.extend(["--renderer", renderer])
+    with TemporaryDirectory() as temp:
+        for camera, width, output, matte in (
+            ("Camera", 1600, destination / "preview.png", "white"),
+            ("Thumbnail", 512, thumbnail, "#F0F0F0"),
+        ):
+            raw = Path(temp) / f"{camera}.png"
+            subprocess.run([*command, "--camera", f"/Presentation/{camera}", "--imageWidth", str(width),
+                            str(scene), str(raw)], check=True)
+            with Image.open(raw) as image:
+                pixels = image.convert("RGBA")
+            background = Image.new("RGBA", pixels.size, matte)
+            background.alpha_composite(pixels)
+            if camera == "Thumbnail":
+                if background.size != (512, 512):
+                    raise ValueError(f"Expected a square 512px thumbnail render, got {background.size}.")
+                background = background.resize((256, 256), Image.Resampling.LANCZOS)
+            background.convert("RGB").save(output)
 
 
 if __name__ == "__main__":

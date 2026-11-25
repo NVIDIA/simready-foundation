@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 
 import simready.validate as sv
+from pxr import Usd
 from usd_validation_nvidia import ProfileRegistry, RequirementsRegistry, ValidationEngine
 
 
@@ -59,7 +60,8 @@ def validate(output, profile_id="AIF-Entity"):
                 for path in sorted((HERE / "asset").rglob("*")) if path.is_file()
             },
         }
-        Path(output).write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+        if output is not None:
+            Path(output).write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
         print(f"{profile_id} 0.3.0: {'PASS' if passed else 'FAIL'}; "
               f"{len(executed)}/{len(requirements)} requirements executed; {len(issues)} issues")
         if not passed:
@@ -69,10 +71,59 @@ def validate(output, profile_id="AIF-Entity"):
         sv.destroy()
 
 
+def stamp_profiles():
+    """Record both genuine static profile passes, then hash the final files.
+
+    Preflight executes both complete profiles before the interface is changed.
+    The maintained validator writes profile-keyed USD receipts; it does not run
+    or stamp runtime tests. Read-only reruns then refresh both human summaries
+    against the final stamped interface, preserving single-profile CLI behavior.
+    """
+    profiles = ("AIF-Entity", "Networking")
+    for profile_id in profiles:
+        validate(None, profile_id)
+    sv.initialize(rules_and_requirements_paths=[], features_paths=[], profiles_paths=[])
+    try:
+        stage = Usd.Stage.Open(str(ASSET))
+        results = sv.validate_stage_against_profiles(
+            stage, targets=[sv.ProfileTarget(name, "0.3.0") for name in profiles],
+            asset_path=str(ASSET),
+        )
+        if len(results) != len(profiles) or not all(
+            result is not None and sv.features_summary_passed(result.features_summary)
+            for result in results
+        ):
+            raise RuntimeError("Both static profile passes are required; inspect validator diagnostics")
+        # The validator rewrites customLayerData through Python, which widens
+        # authored USD floats to doubles. Apply only its validation dictionary.
+        receipts = Usd.Stage.CreateInMemory()
+        sv.set_simready_validation_metadata(receipts, sv.get_simready_validation_metadata(stage))
+        sv.add_profile_validation_results_to_metadata(receipts, results)
+        stage.SetMetadataByDictKey("customLayerData", "SimReady_Metadata:validation",
+                                   sv.get_simready_validation_metadata(receipts))
+        stage.GetRootLayer().Save()
+    finally:
+        sv.destroy()
+    return {
+        profile_id: validate(HERE / filename, profile_id)
+        for profile_id, filename in (
+            ("AIF-Entity", "validation.json"),
+            ("Networking", "validation-networking.json"),
+        )
+    }
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--stamp", action="store_true",
+                        help="Record both genuine static profile receipts and refresh both standard reports")
     parser.add_argument("--profile", choices=("AIF-Entity", "Networking"), default="AIF-Entity")
     parser.add_argument("--output", type=Path, help="Report path; defaults to a separate report per profile")
     args = parser.parse_args()
-    report_name = "validation.json" if args.profile == "AIF-Entity" else "validation-networking.json"
-    validate(args.output or HERE / report_name, args.profile)
+    if args.stamp:
+        if args.output is not None:
+            parser.error("--stamp refreshes both standard reports; --output applies to a single-profile run")
+        stamp_profiles()
+    else:
+        report_name = "validation.json" if args.profile == "AIF-Entity" else "validation-networking.json"
+        validate(args.output or HERE / report_name, args.profile)
