@@ -9,7 +9,7 @@
     {selector = "CAP000_Core.0-2-0"},
     {selector = "CAP200_AifMetadata.0-3-0"},
     {selector = "CAP201_ConnectionPoints.0-3-0"},
-    {selector = "CAP204_NetworkEquipment.0-3-0"},
+    {selector = "CAP204_Networking.0-3-0"},
     {selector = "CAP031_SelfContainedPackage.0-1-0"},
     {selector = "CAP033_SimReadyPackage.0-4-0"},
 ]}

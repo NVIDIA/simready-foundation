@@ -1,9 +1,9 @@
-# Capability: `CAP204_NetworkEquipment`
+# Networking
 
 | Property | Value |
 |---|---|
-| Contract | `CAP204_NetworkEquipment.0-3-0` |
-| Display name | AIF Network Equipment |
+| Contract | `CAP204_Networking.0-3-0` |
+| Display name | Networking |
 | Tier | AIF |
 | Classification | Non-standard, capability-only |
 | Status | Proposed for review |
@@ -18,7 +18,7 @@ requirements; AM.008 rejects unknown classes. Network equipment is registered
 only in the AIF 0.3 class catalog. Legacy AM.007 continues to reject that class,
 and AIF-Entity 0.1.0 / 0.2.0 retain their published selections and class behavior.
 
-DSX Air is the intended pre-simulation consumer. CAP204 validates the node
+DSX Air is the intended pre-simulation consumer. The Networking capability validates the node
 configuration and port declarations offline. The [Networking feature](../features/FET207_Networking.DSXAir.md)
 uses a named port from that contract to test reachability in a running simulation.
 

@@ -74,7 +74,7 @@ def test_networking_profile_has_only_exact_aif03_network_contracts(validator):
     ids = {contract.id for contract in profile.capabilities}
     assert "FET207_Networking.DSXAir.0-3-0" in ids
     assert {"CAP200_AifMetadata.0-3-0", "CAP201_ConnectionPoints.0-3-0",
-            "CAP204_NetworkEquipment.0-3-0"} <= ids
+            "CAP204_Networking.0-3-0"} <= ids
     assert not any(identity.startswith(("CAP202_", "CAP203_")) for identity in ids)
     assert "com.nvidia.simready.NET.004" in profile.mandatory_requirements
     families = [identity.rsplit(".", 1)[0] for identity in ids]

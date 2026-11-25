@@ -19,7 +19,7 @@ AIF-Entity 0.3.0 uses the 0.2.0 connection-point vocabulary, thermal, electrical
 and packaging requirements. AM.008 checks the common metadata types on both the
 Properties layer and the composed default prim.
 
-`AIF-Entity@0.3.0` selects `CAP204_NetworkEquipment.0-3-0` for the
+`AIF-Entity@0.3.0` selects `CAP204_Networking.0-3-0` for the
 `network-equipment` class. It validates node allocations and named network
 ports for DSX Air configuration before simulation.
 

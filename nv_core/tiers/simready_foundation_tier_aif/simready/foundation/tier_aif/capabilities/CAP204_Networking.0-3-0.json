@@ -1,6 +1,6 @@
 {
-  "id": "CAP204_NetworkEquipment.0-3-0",
-  "display_name": "AIF Network Equipment",
+  "id": "CAP204_Networking.0-3-0",
+  "display_name": "Networking",
   "requirements": [
     "NET.001",
     "NET.002",

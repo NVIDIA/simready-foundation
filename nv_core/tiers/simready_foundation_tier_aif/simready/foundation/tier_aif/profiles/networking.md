@@ -11,11 +11,11 @@ configuration and CP2 network ports, with the Core visual and publishing baselin
 | Capability | `CAP000_Core.0-2-0` |
 | Capability | `CAP200_AifMetadata.0-3-0` |
 | Capability | `CAP201_ConnectionPoints.0-3-0` |
-| Capability | `CAP204_NetworkEquipment.0-3-0` |
+| Capability | `CAP204_Networking.0-3-0` |
 | Capability | `CAP031_SelfContainedPackage.0-1-0` |
 | Capability | `CAP033_SimReadyPackage.0-4-0` |
 
-All selectors are required and exact. The Networking feature selects CAP204,
+All selectors are required and exact. The feature selects the Networking capability,
 which depends on the same metadata and connection-point versions; catalog
 resolution deduplicates the repeated selections. The profile carries no earlier AIF contract version.
 

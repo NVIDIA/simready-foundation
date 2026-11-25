@@ -80,7 +80,7 @@
       "passed": true,
       "blocking_failure": false
     },
-    "CAP204_NetworkEquipment.0-3-0": {
+    "CAP204_Networking.0-3-0": {
       "version": "0-3-0",
       "dependencies": "['CAP200_AifMetadata.0-3-0', 'CAP201_ConnectionPoints.0-3-0']",
       "passed": true,

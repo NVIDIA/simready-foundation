@@ -11,7 +11,7 @@ more echo replies from three probes establishes connectivity for that link.
 
 ## Asset requirements
 
-[CAP204](../capabilities/CAP204_NetworkEquipment.md) selects equipment identity,
+The [Networking capability](../capabilities/CAP204_Networking.md) selects equipment identity,
 node resources and network ports. [NET.004](../rules_and_reqs/aif/network_equipment/requirements/network-device-eligibility.md)
 requires the network-equipment class for this feature. Static validation uses
 the composed equipment USD and its Properties layer. The runtime measurement

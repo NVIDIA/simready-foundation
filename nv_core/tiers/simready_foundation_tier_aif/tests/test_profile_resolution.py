@@ -220,7 +220,7 @@ def test_aif03_inherits_mandatory_contracts(profiles: dict, catalog_profiles: di
         "CAP201_ConnectionPoints.0-3-0",
         "CAP202_ThermalCooling.0-3-0",
         "CAP203_Electrical.0-3-0",
-        "CAP204_NetworkEquipment.0-3-0",
+        "CAP204_Networking.0-3-0",
     }
     assert {c.id for c in current.capabilities} - current.optional_capabilities == expected
     catalog = catalog_profiles["0.3.0"]

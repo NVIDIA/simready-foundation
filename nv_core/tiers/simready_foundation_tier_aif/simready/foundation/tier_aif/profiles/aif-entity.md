@@ -248,7 +248,7 @@ electrical requirement from 0.2.0. The profile selects the following contracts.
 | `CAP201_ConnectionPoints.0-3-0` | Required | Same CP2 requirements as 0.2.0; dependency selects 0.3 metadata |
 | `CAP202_ThermalCooling.0-3-0` | Required | Same thermal requirements and existing class gates as 0.2.0 |
 | `CAP203_Electrical.0-3-0` | Required | Same electrical requirements and existing class gates as 0.2.0 |
-| `CAP204_NetworkEquipment.0-3-0` | Required | Conditional network-equipment metadata, node allocations and CP2 network ports |
+| `CAP204_Networking.0-3-0` | Required | Conditional network-equipment metadata, node allocations and CP2 network ports |
 
 `network-equipment` is an AIF 0.3-only class. Its NET.001–NET.003 requirements
 validate non-empty identity strings, finite scalar dimensions and mass, positive

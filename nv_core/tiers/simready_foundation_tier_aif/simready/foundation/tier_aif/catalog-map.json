@@ -84,7 +84,7 @@
     },
     {
       "kind": "capability",
-      "id": "CAP204_NetworkEquipment.0-3-0",
+      "id": "CAP204_Networking.0-3-0",
       "native": true,
       "runtime_tests": []
     },

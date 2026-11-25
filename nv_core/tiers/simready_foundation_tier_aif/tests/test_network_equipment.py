@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0
-"""Network CAP204 contract checks using the registered validation engine."""
+"""Networking capability checks using the registered validation engine."""
 import json
 from pathlib import Path
 import tomllib
@@ -150,8 +150,8 @@ def test_only_aif03_selects_network_contract():
     profile = tomllib.loads((root / "profiles/aif_entity.toml").read_text())
     assert not (root / "profiles/aif_network_equipment.toml").exists()
     selected = profile["AIF-Entity"]["0.3.0"]
-    assert "CAP204_NetworkEquipment.0-3-0" in {x["selector"] for x in selected["capabilities"]}
-    manifest = json.loads((root / "capabilities/CAP204_NetworkEquipment.0-3-0.json").read_text())
+    assert "CAP204_Networking.0-3-0" in {x["selector"] for x in selected["capabilities"]}
+    manifest = json.loads((root / "capabilities/CAP204_Networking.0-3-0.json").read_text())
     assert manifest["requirements"] == ["NET.001", "NET.002", "NET.003"]
     assert manifest["dependencies"] == ["CAP200_AifMetadata.0-3-0", "CAP201_ConnectionPoints.0-3-0"]
     for version in ("0.1.0", "0.2.0"):
