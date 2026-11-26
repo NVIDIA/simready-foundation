@@ -1,6 +1,6 @@
 # AI Factory sample assets
 
-Four complete equipment assets, one per AIF equipment class. Each validates against
+The CDU, CRAH, UPS and compute rack examples each validate against
 `AIF-Entity` at both 0.1.0 and 0.2.0, and against `Package-Candidate` 1.3.0, the
 preflight for publishing to SimReady Central.
 
@@ -17,7 +17,7 @@ not production content. Real partner equipment is published through SimReady
 Central.
 
 Each asset states its licence on `SimReady_Metadata.asset_license`, as the
-rest of `sample_content` does. These four are **CC-BY 4.0**.
+rest of `sample_content` does. These samples are **CC-BY 4.0**.
 
 ## Against the test fixtures
 
@@ -28,7 +28,7 @@ The tier's own fixtures stay under
   fixtures, all generated
 - `variants/` — deliberately broken assets, one per requirement
 
-Those exist to make a validator fail and are never published. These four exist to
+Those exist to make a validator fail and are never published. The published samples
 show an author what a conforming asset looks like.
 
 Because they are never published, the fixtures carry no thumbnail, so
@@ -39,10 +39,10 @@ Because they are never published, the fixtures carry no thumbnail, so
 
 `Synthetic_CRAH` and `Synthetic_UPS` come from
 `tests/fixtures/synthetic/build_synthetic_fixtures.py`, which writes each asset to
-whichever tree its `ASSETS` entry names. Connection-point layers for all four come
+whichever tree its `ASSETS` entry names. Connection-point layers for the CDU, CRAH, UPS and compute rack come
 from `tests/fixtures/connection_points/build_connection_points.py`, whose
 `values.json` addresses them as `samples/<Asset>/...`.
 
-Each asset's thumbnail at `.thumbs/256x256/<usd file name>.png` is a Storm render
+For those four assets, the thumbnail at `.thumbs/256x256/<usd file name>.png` is a Storm render
 of the asset from a three-quarter view, committed rather than generated: Storm
 needs an OpenGL context, so no CI job can reproduce it.
