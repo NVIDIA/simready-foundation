@@ -31,4 +31,5 @@ requirements/physical-dimensions-metadata-0.3
 requirements/simready-version-tracking
 requirements/asset-description-required
 requirements/equipment-class-template-compliance
+requirements/liquid-chiller-tabular-model
 ```

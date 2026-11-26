@@ -56,6 +56,7 @@ contract.
 | [MaterialX Removal](../../../../tiers/simready_foundation_tier_isaac/simready/foundation/tier_isaac/capabilities/CAP105_MaterialXRemoval.Isaac.md) | Isaac | 0-1-0 | `CAP105_MaterialXRemoval.Isaac` |
 | [AIF Core Metadata](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/capabilities/CAP200_AifMetadata.md) | OpenUSD | 0-1-0, 0-3-0 | `CAP200_AifMetadata` |
 | [Connection Points](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/capabilities/CAP201_ConnectionPoints.md) | OpenUSD | 0-1-0, 0-2-0, 0-3-0 | `CAP201_ConnectionPoints` |
+| [Liquid-Cooled Chiller](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/capabilities/CAP206_LiquidCooledChiller.md) | OpenUSD | 0-3-0 | `CAP206_LiquidCooledChiller` |
 | [AIF Thermal Cooling](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/capabilities/CAP202_ThermalCooling.md) | OpenUSD | 0-1-0, 0-2-0, 0-3-0 | `CAP202_ThermalCooling` |
 | [AIF Electrical](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/capabilities/CAP203_Electrical.md) | OpenUSD | 0-1-0, 0-2-0, 0-3-0 | `CAP203_Electrical` |
 
@@ -109,6 +110,7 @@ Render-Collision Separation <CAP104_RenderCollisionSeparation.Isaac>
 MaterialX Removal <CAP105_MaterialXRemoval.Isaac>
 AIF Core Metadata <CAP200_AifMetadata>
 Connection Points <CAP201_ConnectionPoints>
+Liquid-Cooled Chiller <CAP206_LiquidCooledChiller>
 AIF Thermal Cooling <CAP202_ThermalCooling>
 AIF Electrical <CAP203_Electrical>
 Assembly <../rules_and_reqs/assembly/assembly>

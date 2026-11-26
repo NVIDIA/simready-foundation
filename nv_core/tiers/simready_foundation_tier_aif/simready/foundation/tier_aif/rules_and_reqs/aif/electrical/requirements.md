@@ -24,4 +24,5 @@ requirements/nominal-voltage-required
 requirements/power-rating-required
 requirements/electrical-frequency-required
 requirements/electrical-connection-points
+requirements/liquid-chiller-electrical-interface
 ```
