@@ -42,6 +42,7 @@ differ between profile versions.
 | Open-Taxonomy-SUNRGBD | 0.1.0 | Semantic labels constrained to the SUN RGB-D vocabulary | FET011_SemanticLabels, CAP000_Core, CAP044_SunRgbdLabels |
 | Open-Taxonomy-ImageNet1K | 0.1.0 | Semantic labels constrained to the ImageNet-1K vocabulary | FET011_SemanticLabels, CAP000_Core, CAP045_ImageNet1kLabels |
 | Asset-Optimization | 1.0.0, 1.1.0 | Isaac tier structural optimization checks | CAP102_RigidBodyCollapse.Isaac, CAP103_VisualMeshMerge.Isaac, CAP104_RenderCollisionSeparation.Isaac, CAP105_MaterialXRemoval.Isaac |
+| Liquid-Cooled-Chiller | 0.3.0 | Liquid-cooled chiller eligibility, tabular performance, evaporator and condenser water connections, and AC power | FET001_MinimalPlaceableVisual, CAP000_Core, CAP200_AifMetadata, CAP201_ConnectionPoints, CAP202_ThermalCooling, CAP203_Electrical, CAP206_LiquidCooledChiller, CAP031_SelfContainedPackage, CAP033_SimReadyPackage |
 
 The packaging profiles validate a package folder and its sidecar JSON files
 rather than the contents of a USD stage.
@@ -67,5 +68,6 @@ Open Taxonomy ADE20K <open-taxonomy-ade20k>
 Open Taxonomy PASCAL VOC <open-taxonomy-pascal_voc>
 Open Taxonomy SUN RGB-D <open-taxonomy-sunrgbd>
 Open Taxonomy ImageNet-1K <open-taxonomy-imagenet_1k>
+Liquid-Cooled Chiller <liquid-cooled-chiller>
 AIF Entity <aif-entity>
 ```

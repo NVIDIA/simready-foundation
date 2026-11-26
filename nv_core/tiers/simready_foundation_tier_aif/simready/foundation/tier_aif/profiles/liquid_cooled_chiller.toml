@@ -1,0 +1,16 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+[Liquid-Cooled-Chiller]
+"0.3.0" = {features = [
+    {selector = "FET001_MinimalPlaceableVisual.1-0-0"},
+], capabilities = [
+    {selector = "CAP000_Core.0-2-0"},
+    {selector = "CAP200_AifMetadata.0-3-0"},
+    {selector = "CAP201_ConnectionPoints.0-3-0"},
+    {selector = "CAP202_ThermalCooling.0-3-0"},
+    {selector = "CAP203_Electrical.0-3-0"},
+    {selector = "CAP206_LiquidCooledChiller.0-3-0"},
+    {selector = "CAP031_SelfContainedPackage.0-1-0"},
+    {selector = "CAP033_SimReadyPackage.0-4-0"},
+]}

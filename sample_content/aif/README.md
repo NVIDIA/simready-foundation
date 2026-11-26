@@ -8,6 +8,7 @@ preflight for publishing to SimReady Central.
 |---|---|---|
 | `Generic_CDU` | CDU | KddcCorp Generic CDU |
 | `Synthetic_CRAH` | CRAH | Generic Cooling Systems GCS-CRAH-105D |
+| [Synthetic_LiquidCooledChiller](Synthetic_LiquidCooledChiller/README.md) | LiquidCooledChiller | 500 kW water-cooled screw chiller with evaporator and condenser water circuits. Validates against AIF-Entity and Liquid-Cooled-Chiller 0.3.0. |
 | `Synthetic_UPS` | UPS | Generic Power Systems GPS-UPS-1000 |
 | `gb300` | Compute Rack | NVIDIA Grace Blackwell 300 NVL72 |
 

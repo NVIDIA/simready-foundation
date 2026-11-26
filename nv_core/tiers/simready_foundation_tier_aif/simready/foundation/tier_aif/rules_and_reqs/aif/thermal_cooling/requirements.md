@@ -20,4 +20,5 @@
 
 requirements/nominal-cooling-capacity
 requirements/thermal-cooling-connection-points
+requirements/liquid-chiller-thermal-interfaces
 ```

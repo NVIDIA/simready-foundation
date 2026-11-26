@@ -60,6 +60,12 @@
     },
     {
       "kind": "capability",
+      "id": "CAP206_LiquidCooledChiller.0-3-0",
+      "native": true,
+      "runtime_tests": []
+    },
+    {
+      "kind": "capability",
       "id": "CAP200_AifMetadata.0-3-0",
       "native": true,
       "runtime_tests": []

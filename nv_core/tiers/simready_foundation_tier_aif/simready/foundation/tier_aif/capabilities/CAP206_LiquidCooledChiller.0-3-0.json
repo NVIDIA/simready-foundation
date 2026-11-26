@@ -1,0 +1,15 @@
+{
+  "id": "CAP206_LiquidCooledChiller.0-3-0",
+  "display_name": "Liquid-Cooled Chiller",
+  "requirements": [
+    "AM.011",
+    "TC.004",
+    "EL.006"
+  ],
+  "dependencies": [
+    "CAP200_AifMetadata.0-3-0",
+    "CAP201_ConnectionPoints.0-3-0",
+    "CAP202_ThermalCooling.0-3-0",
+    "CAP203_Electrical.0-3-0"
+  ]
+}

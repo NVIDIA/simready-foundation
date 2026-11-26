@@ -1,0 +1,128 @@
+{
+  "schema": "simready-example-validation-summary-v1",
+  "asset": "asset/Synthetic_LiquidCooledChiller.usda",
+  "profile": {
+    "name": "Liquid-Cooled-Chiller",
+    "version": "0.3.0"
+  },
+  "passed": true,
+  "executed_requirements": 44,
+  "selected_requirements": 44,
+  "requirement_codes": [
+    "com.nvidia.simready.AM.001",
+    "com.nvidia.simready.AM.002",
+    "com.nvidia.simready.AM.003",
+    "com.nvidia.simready.AM.005",
+    "com.nvidia.simready.AM.006",
+    "com.nvidia.simready.AM.008",
+    "com.nvidia.simready.AM.009",
+    "com.nvidia.simready.AM.011",
+    "com.nvidia.simready.CP.001",
+    "com.nvidia.simready.CP.005",
+    "com.nvidia.simready.CP.010",
+    "com.nvidia.simready.CP.011",
+    "com.nvidia.simready.CP.012",
+    "com.nvidia.simready.EL.001",
+    "com.nvidia.simready.EL.002",
+    "com.nvidia.simready.EL.003",
+    "com.nvidia.simready.EL.004",
+    "com.nvidia.simready.EL.006",
+    "com.nvidia.simready.HI.010",
+    "com.nvidia.simready.NP.002",
+    "com.nvidia.simready.NP.003",
+    "com.nvidia.simready.NP.004",
+    "com.nvidia.simready.NP.005",
+    "com.nvidia.simready.NP.007",
+    "com.nvidia.simready.NP.008",
+    "com.nvidia.simready.SR.002",
+    "com.nvidia.simready.SR.004",
+    "com.nvidia.simready.TC.001",
+    "com.nvidia.simready.TC.002",
+    "com.nvidia.simready.TC.004",
+    "com.nvidia.simready.UN.006",
+    "com.nvidia.simready.UN.007",
+    "com.nvidia.simready.VG.025",
+    "com.nvidia.simready.VG.MESH.001",
+    "com.nvidia.usd.AA.001",
+    "com.nvidia.usd.AA.002",
+    "com.nvidia.usd.HI.001",
+    "com.nvidia.usd.HI.003",
+    "com.nvidia.usd.HI.004",
+    "com.nvidia.usd.VG.002",
+    "com.nvidia.usd.VG.014",
+    "com.nvidia.usd.VG.027",
+    "com.nvidia.usd.VG.028",
+    "com.nvidia.usd.VG.029"
+  ],
+  "contracts": {
+    "CAP000_Core.0-2-0": {
+      "version": "0-2-0",
+      "dependencies": "[]",
+      "passed": true,
+      "blocking_failure": false
+    },
+    "CAP031_SelfContainedPackage.0-1-0": {
+      "version": "0-1-0",
+      "dependencies": "[]",
+      "passed": true,
+      "blocking_failure": false
+    },
+    "CAP033_SimReadyPackage.0-4-0": {
+      "version": "0-4-0",
+      "dependencies": "['CAP031_SelfContainedPackage.0-1-0']",
+      "passed": true,
+      "blocking_failure": false
+    },
+    "CAP200_AifMetadata.0-3-0": {
+      "version": "0-3-0",
+      "dependencies": "[]",
+      "passed": true,
+      "blocking_failure": false
+    },
+    "CAP201_ConnectionPoints.0-3-0": {
+      "version": "0-3-0",
+      "dependencies": "['CAP200_AifMetadata.0-3-0']",
+      "passed": true,
+      "blocking_failure": false
+    },
+    "CAP202_ThermalCooling.0-3-0": {
+      "version": "0-3-0",
+      "dependencies": "['CAP201_ConnectionPoints.0-3-0']",
+      "passed": true,
+      "blocking_failure": false
+    },
+    "CAP203_Electrical.0-3-0": {
+      "version": "0-3-0",
+      "dependencies": "['CAP201_ConnectionPoints.0-3-0']",
+      "passed": true,
+      "blocking_failure": false
+    },
+    "CAP206_LiquidCooledChiller.0-3-0": {
+      "version": "0-3-0",
+      "dependencies": "['CAP200_AifMetadata.0-3-0', 'CAP201_ConnectionPoints.0-3-0', 'CAP202_ThermalCooling.0-3-0', 'CAP203_Electrical.0-3-0']",
+      "passed": true,
+      "blocking_failure": false
+    },
+    "FET001_MinimalPlaceableVisual.1-0-0": {
+      "version": "1-0-0",
+      "dependencies": "[]",
+      "passed": true,
+      "blocking_failure": false
+    }
+  },
+  "issues": [],
+  "package_versions": {
+    "simready-validate": "2026.10.0",
+    "usd-validation-nvidia": "1.23.0",
+    "usd-core": "26.11",
+    "simready-foundation-tier-core": "2026.10.0",
+    "simready-foundation-tier-aif": "2026.10.0"
+  },
+  "asset_file_sha256": {
+    "asset/.thumbs/256x256/Synthetic_LiquidCooledChiller.usda.png": "fdc5fad0543a8385db02a0986ccb645d9bef6918136e8e02129c0f861b534d3d",
+    "asset/Synthetic_LiquidCooledChiller.usda": "6a1161a5f42bce5035433a5f3c28d635d6fe9bc6f12d9541555fdb49a7a34149",
+    "asset/layers/Synthetic_LiquidCooledChiller_ConnectionPoints.usda": "427ad7692b09dc453735d97d74ce28cfec81dee05d468e1169ed95cab4d10728",
+    "asset/layers/Synthetic_LiquidCooledChiller_Geometry.usda": "5115304c71eca1ad0ead7d6e266fd30832a53fd223e511398d2ead6bf3c4049c",
+    "asset/layers/Synthetic_LiquidCooledChiller_Properties.usda": "2f5e9bd35d22f81185917aacd052001c3f740ac2033b4e8ef094db54b69a05a0"
+  }
+}
