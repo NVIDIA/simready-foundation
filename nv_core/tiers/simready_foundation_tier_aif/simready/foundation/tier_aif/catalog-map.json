@@ -3,6 +3,12 @@
   "version_encoding": "published semantic version dots become hyphens",
   "contracts": [
     {
+      "kind": "capability",
+      "id": "CAP205_AirCooledChiller.0-3-0",
+      "native": true,
+      "runtime_tests": []
+    },
+    {
       "legacy_id": "FET200_AIF",
       "legacy_version": "0.1.0",
       "legacy_page": "FET_200-aif_metadata",

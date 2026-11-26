@@ -18,6 +18,7 @@
 :maxdepth: 1
 :hidden:
 
+requirements/air-chiller-thermal-interfaces
 requirements/nominal-cooling-capacity
 requirements/thermal-cooling-connection-points
 ```

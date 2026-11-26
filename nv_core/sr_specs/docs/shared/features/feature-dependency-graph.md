@@ -9,6 +9,12 @@ is not drawn, because it does not make the source contract validate.
 
 ```{mermaid}
 flowchart TD
+    CAP205_AirCooledChiller_OpenUSD_0_3_0["CAP205_AirCooledChiller 0-3-0"]
+    CAP205_AirCooledChiller_OpenUSD_0_3_0 --> CAP200_AifMetadata_OpenUSD_0_3_0
+    CAP205_AirCooledChiller_OpenUSD_0_3_0 --> CAP201_ConnectionPoints_OpenUSD_0_3_0
+    CAP205_AirCooledChiller_OpenUSD_0_3_0 --> CAP202_ThermalCooling_OpenUSD_0_3_0
+    CAP205_AirCooledChiller_OpenUSD_0_3_0 --> CAP203_Electrical_OpenUSD_0_3_0
+    class CAP205_AirCooledChiller_OpenUSD_0_3_0 capability
     CAP039_ObjectAffordances_OpenUSD_0_1_0["CAP039_ObjectAffordances 0-1-0"]
     CAP039_ObjectAffordances_OpenUSD_0_1_0 --> FET011_SemanticLabels_OpenUSD_0_2_0
     CAP000_Core_Isaac_0_1_0["CAP000_Core.Isaac 0-1-0"]
@@ -219,6 +225,7 @@ flowchart TD
 | `CAP033_SimReadyPackage.0-2-0` | `CAP031_SelfContainedPackage.0-1-0` |
 | `CAP033_SimReadyPackage.0-3-0` | `CAP031_SelfContainedPackage.0-1-0` |
 | `CAP033_SimReadyPackage.0-4-0` | `CAP031_SelfContainedPackage.0-1-0` |
+| `CAP205_AirCooledChiller.0-3-0` | `CAP200_AifMetadata.0-3-0`, `CAP201_ConnectionPoints.0-3-0`, `CAP202_ThermalCooling.0-3-0`, `CAP203_Electrical.0-3-0` |
 | `CAP201_ConnectionPoints.0-1-0` | `CAP200_AifMetadata.0-1-0` |
 | `CAP201_ConnectionPoints.0-2-0` | `CAP200_AifMetadata.0-1-0` |
 | `CAP202_ThermalCooling.0-1-0` | `CAP201_ConnectionPoints.0-1-0` |
