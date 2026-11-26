@@ -54,6 +54,7 @@ contract.
 | [Visual Mesh Merge](../../../../tiers/simready_foundation_tier_isaac/simready/foundation/tier_isaac/capabilities/CAP103_VisualMeshMerge.Isaac.md) | Isaac | 0-1-0 | `CAP103_VisualMeshMerge.Isaac` |
 | [Render-Collision Separation](../../../../tiers/simready_foundation_tier_isaac/simready/foundation/tier_isaac/capabilities/CAP104_RenderCollisionSeparation.Isaac.md) | Isaac | 0-1-0 | `CAP104_RenderCollisionSeparation.Isaac` |
 | [MaterialX Removal](../../../../tiers/simready_foundation_tier_isaac/simready/foundation/tier_isaac/capabilities/CAP105_MaterialXRemoval.Isaac.md) | Isaac | 0-1-0 | `CAP105_MaterialXRemoval.Isaac` |
+| [Air-Cooled Chiller](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/capabilities/CAP205_AirCooledChiller.md) | OpenUSD | 0-3-0 | `CAP205_AirCooledChiller` |
 | [AIF Core Metadata](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/capabilities/CAP200_AifMetadata.md) | OpenUSD | 0-1-0, 0-3-0 | `CAP200_AifMetadata` |
 | [Connection Points](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/capabilities/CAP201_ConnectionPoints.md) | OpenUSD | 0-1-0, 0-2-0, 0-3-0 | `CAP201_ConnectionPoints` |
 | [AIF Thermal Cooling](../../../../tiers/simready_foundation_tier_aif/simready/foundation/tier_aif/capabilities/CAP202_ThermalCooling.md) | OpenUSD | 0-1-0, 0-2-0, 0-3-0 | `CAP202_ThermalCooling` |
@@ -63,6 +64,7 @@ contract.
 :maxdepth: 1
 :hidden:
 
+Air-Cooled Chiller <CAP205_AirCooledChiller>
 Core <CAP000_Core>
 Core (Isaac) <CAP000_Core.Isaac>
 Core (MuJoCo) <CAP000_Core.MuJoCo>

@@ -1,0 +1,711 @@
+{
+  "description": "Fictional vendor-neutral air-cooled chiller for AIF v0.3 authoring and validator tests. All dimensions, materials, ratings, maps and interface values are invented; no OEM performance or simulator certification is claimed.",
+  "date": "2026-11-24",
+  "qcode": "Q1501558",
+  "license": "CC-BY 4.0",
+  "assumptions": {
+    "cooling_grid_order": [
+      "EvaporatorLiquidVolumetricFlowRate_m3PerS",
+      "EvaporatorLiquidLeavingTemperature_K",
+      "CondenserAirEnteringDrybulbTemperature_K",
+      "CondenserAirEnteringRelativeHumidity",
+      "AmbientPressure_Pa",
+      "CompressorSequenceNumber"
+    ],
+    "flattening": "Cartesian product in listed axis order; last axis varies fastest.",
+    "cooling_formula": "scale=(flow/0.004)*(1+0.01*(leaving_K-280.15))*(1-0.005*(entering_K-303.15))*(1+0.25*(sequence-1)); cooling_W=100000*scale; input_W=25000*scale*(1+0.01*(entering_K-303.15)); condenser_W=cooling_W+input_W; condenser_air_m3_s=12*scale.",
+    "energy_boundary": "NORMAL points include all electrical input in condenser heat rejection. Oil-cooler and auxiliary heat are zero in this fictional configuration; no separate exported heat stream exists.",
+    "fluid": "WATER fraction 1.0 means mass fraction of the declared water component. This AIF projection does not claim complete ASHRAE-205 LiquidMixture serialization.",
+    "thermal_return_temperature": "At reference point, return_C=7+100000/(0.004*1000*4180); water density=1000 kg/m3 and specific heat=4180 J/(kg K), treated constant in this illustration.",
+    "electrical": "45 kW inlet capacity is a separate design choice from 25 kW reference input; 400 V three-phase, 80 A, power factor 0.92 provides more than 45 kW.",
+    "condenser_fans": "The condenser fans form one homogeneous bank. Rotational speed denotes shaft revolutions per second and the efficiency is rated motor efficiency. The cooling map already includes fan electrical input.",
+    "refrigerant_circuit_order": ["Circuit 1", "Circuit 2"],
+    "pressure_map": "Pressure differential=20000*(flow/0.004)^2 Pa; no temperature dependence in this invented table.",
+    "conditional_fields": "All TABULAR fields are illustrated. Other conditional values describe this explicitly selected fictional configuration and are not schema defaults or universal presence requirements.",
+    "acoustic_rating": "78 dBA is an invented A-weighted sound-power illustration at the reference NORMAL point, reference power 1 pW; no test standard or OEM measurement is asserted.",
+    "part_load_ratings": "IPLV/NPLV values are invented aggregate input/cooling ratios in kW per refrigeration ton (1 ton=3516.853 W); they do not generate the point map and no AHRI certification is claimed.",
+    "mass": "Sum of authored closed mesh envelope volumes times listed material densities. The condenserCore material uses an explicitly declared 180 kg/m3 effective bulk density for its porous fin-and-tube envelope; the other components use solid material densities. This simplified geometric mass estimate is not a certified machine rating.",
+    "scope": "Static class and package validation only. No Cadence or Stratum execution, control protocol connection, manufacturability or safety certification is claimed."
+  },
+  "materials": {
+    "paintedSteel": {
+      "color": [
+        0.18,
+        0.24,
+        0.3
+      ],
+      "roughness": 0.35,
+      "metallic": 0.65,
+      "density_kg_m3": 7850.0
+    },
+    "enclosureSteel": {
+      "color": [
+        0.69,
+        0.73,
+        0.76
+      ],
+      "roughness": 0.75,
+      "metallic": 0.08,
+      "density_kg_m3": 7850.0
+    },
+    "blackSteel": {
+      "color": [
+        0.035,
+        0.045,
+        0.055
+      ],
+      "roughness": 0.76,
+      "metallic": 0.12,
+      "density_kg_m3": 7850.0
+    },
+    "aluminum": {
+      "color": [
+        0.32,
+        0.36,
+        0.39
+      ],
+      "roughness": 0.72,
+      "metallic": 0.2,
+      "density_kg_m3": 2700.0
+    },
+    "copper": {
+      "color": [
+        0.47,
+        0.24,
+        0.12
+      ],
+      "roughness": 0.3,
+      "metallic": 0.8,
+      "density_kg_m3": 8960.0
+    },
+    "blue": {
+      "color": [
+        0.055,
+        0.34,
+        0.58
+      ],
+      "roughness": 0.3,
+      "metallic": 0.5,
+      "density_kg_m3": 7850.0
+    },
+    "condenserCore": {
+      "color": [
+        0.075,
+        0.095,
+        0.105
+      ],
+      "roughness": 0.9,
+      "metallic": 0.05,
+      "density_kg_m3": 180.0,
+      "density_basis": "Effective bulk density of the simplified porous fin-and-tube core envelope, including its air void fraction; not solid aluminum density."
+    },
+    "coilFin": {
+      "color": [
+        0.15,
+        0.18,
+        0.19
+      ],
+      "roughness": 0.82,
+      "metallic": 0.15,
+      "density_kg_m3": 2700.0
+    },
+    "fanBlade": {
+      "color": [
+        0.035,
+        0.045,
+        0.055
+      ],
+      "roughness": 0.72,
+      "metallic": 0.08,
+      "density_kg_m3": 2700.0
+    }
+  },
+  "geometry": {
+    "fan_count": 4,
+    "compressor_count": 2,
+    "evaporator_pipe_outside_diameter_m": 0.1143,
+    "evaporator_pipe_inside_diameter_m": 0.1,
+    "root": "/world",
+    "up_axis": "Z",
+    "meters_per_unit": 1.0,
+    "fan_centers_x_m": [
+      -1.25,
+      -0.22,
+      0.81,
+      1.84
+    ],
+    "condenser_core_count": 8,
+    "condenser_core_z_range_m": [
+      0.8,
+      1.93
+    ],
+    "service_bay_z_range_m": [
+      0.23,
+      0.8
+    ],
+    "fan_deck_z_m": 1.999,
+    "fan_deck_thickness_m": 0.006,
+    "fan_opening_radius_m": 0.465,
+    "fan_shroud_z_range_m": [
+      2.0,
+      2.16
+    ],
+    "construction": "Packaged outdoor unit with full-height control enclosure, closed compressor service bay, two opaque fin-and-tube condenser banks, continuous pierced fan deck, and separate installed evaporator inlet/outlet branches."
+  },
+  "attributes": {
+    "aif:spec:nominalVoltage_V": 400.0,
+    "aif:spec:nominalFrequency_Hz": 50.0,
+    "aif:spec:compressorType": "SCROLL",
+    "aif:spec:refrigerant": "R-454B",
+    "aif:spec:hotGasBypassInstalled": false,
+    "aif:spec:condenserType": "AIR",
+    "aif:spec:evaporatorLiquidType": "WATER",
+    "aif:spec:evaporatorLiquidMassFraction_kgPerKg": 1.0,
+    "aif:spec:evaporatorFoulingFactor_m2KPerW": 1.8e-05,
+    "aif:spec:compressorSpeedControlType": "CONTINUOUS",
+    "aif:spec:cyclingDegradationCoefficient": 0.15,
+    "aif:spec:referenceElevation_m": 0.0,
+    "aif:spec:referenceInputPower_W": 25000.0,
+    "aif:spec:referenceNetEvaporatorCapacity_W": 100000.0,
+    "aif:spec:referenceNetCondenserCapacity_W": 125000.0,
+    "aif:spec:referenceOilCoolerHeat_W": 0.0,
+    "aif:spec:referenceAuxiliaryHeat_W": 0.0,
+    "aif:spec:performanceModelType": "TABULAR",
+    "aif:spec:performanceModelSource": "NVIDIA fictional algebraic example; AIF projection of RS0001 field vocabulary",
+    "aif:spec:performanceModelVersion": "1.0.0",
+    "aif:spec:performanceModelComponent": "SyntheticAirCooledChillerTabular",
+    "aif:spec:performanceMapCoolingGridEvaporatorLiquidVolumetricFlowRate_m3PerS": [
+      0.004,
+      0.006
+    ],
+    "aif:spec:performanceMapCoolingGridEvaporatorLiquidLeavingTemperature_K": [
+      280.15,
+      285.15
+    ],
+    "aif:spec:performanceMapCoolingGridCondenserAirEnteringDrybulbTemperature_K": [
+      303.15,
+      308.15
+    ],
+    "aif:spec:performanceMapCoolingGridCondenserAirEnteringRelativeHumidity": [
+      0.4,
+      0.6
+    ],
+    "aif:spec:performanceMapCoolingGridAmbientPressure_Pa": [
+      101325.0
+    ],
+    "aif:spec:performanceMapCoolingGridCompressorSequenceNumber": [
+      1,
+      2
+    ],
+    "aif:spec:performanceMapCoolingLookupInputPower_W": [
+      25000.0,
+      31250.0,
+      25000.0,
+      31250.0,
+      25593.75,
+      31992.1875,
+      25593.75,
+      31992.1875,
+      26250.0,
+      32812.5,
+      26250.0,
+      32812.5,
+      26873.4375,
+      33591.796875,
+      26873.4375,
+      33591.796875,
+      37500.0,
+      46875.0,
+      37500.0,
+      46875.0,
+      38390.625,
+      47988.28125,
+      38390.625,
+      47988.28125,
+      39375.0,
+      49218.75,
+      39375.0,
+      49218.75,
+      40310.15625,
+      50387.695313,
+      40310.15625,
+      50387.695313
+    ],
+    "aif:spec:performanceMapCoolingLookupNetEvaporatorCapacity_W": [
+      100000.0,
+      125000.0,
+      100000.0,
+      125000.0,
+      97500.0,
+      121875.0,
+      97500.0,
+      121875.0,
+      105000.0,
+      131250.0,
+      105000.0,
+      131250.0,
+      102375.0,
+      127968.75,
+      102375.0,
+      127968.75,
+      150000.0,
+      187500.0,
+      150000.0,
+      187500.0,
+      146250.0,
+      182812.5,
+      146250.0,
+      182812.5,
+      157500.0,
+      196875.0,
+      157500.0,
+      196875.0,
+      153562.5,
+      191953.125,
+      153562.5,
+      191953.125
+    ],
+    "aif:spec:performanceMapCoolingLookupNetCondenserCapacity_W": [
+      125000.0,
+      156250.0,
+      125000.0,
+      156250.0,
+      123093.75,
+      153867.1875,
+      123093.75,
+      153867.1875,
+      131250.0,
+      164062.5,
+      131250.0,
+      164062.5,
+      129248.4375,
+      161560.546875,
+      129248.4375,
+      161560.546875,
+      187500.0,
+      234375.0,
+      187500.0,
+      234375.0,
+      184640.625,
+      230800.78125,
+      184640.625,
+      230800.78125,
+      196875.0,
+      246093.75,
+      196875.0,
+      246093.75,
+      193872.65625,
+      242340.820313,
+      193872.65625,
+      242340.820313
+    ],
+    "aif:spec:performanceMapCoolingLookupCondenserAirVolumetricFlowRate_m3PerS": [
+      12.0,
+      15.0,
+      12.0,
+      15.0,
+      11.7,
+      14.625,
+      11.7,
+      14.625,
+      12.6,
+      15.75,
+      12.6,
+      15.75,
+      12.285,
+      15.35625,
+      12.285,
+      15.35625,
+      18.0,
+      22.5,
+      18.0,
+      22.5,
+      17.55,
+      21.9375,
+      17.55,
+      21.9375,
+      18.9,
+      23.625,
+      18.9,
+      23.625,
+      18.4275,
+      23.034375,
+      18.4275,
+      23.034375
+    ],
+    "aif:spec:performanceMapCoolingLookupOilCoolerHeat_W": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "aif:spec:performanceMapCoolingLookupAuxiliaryHeat_W": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "aif:spec:performanceMapCoolingLookupOperationState": [
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL",
+      "NORMAL"
+    ],
+    "aif:spec:performanceMapStandbyGridEnvironmentDryBulbTemperature_K": [
+      293.15,
+      303.15
+    ],
+    "aif:spec:performanceMapStandbyLookupInputPower_W": [
+      400.0,
+      500.0
+    ],
+    "aif:spec:performanceMapEvaporatorLiquidPressureDifferentialGridEvaporatorLiquidVolumetricFlowRate_m3PerS": [
+      0.004,
+      0.006
+    ],
+    "aif:spec:performanceMapEvaporatorLiquidPressureDifferentialGridEvaporatorLiquidLeavingTemperature_K": [
+      280.15,
+      285.15
+    ],
+    "aif:spec:performanceMapEvaporatorLiquidPressureDifferentialLookupEvaporatorLiquidDifferentialPressure_Pa": [
+      20000.0,
+      20000.0,
+      45000.0,
+      45000.0
+    ],
+    "aif:spec:referenceCOP": 4.0,
+    "aif:spec:evaporatorLeavingTemperatureSetpointMaximum_degC": 12.0,
+    "aif:spec:evaporatorLeavingTemperatureSetpointMinimum_degC": 7.0,
+    "aif:spec:maximumOperatingEvaporatorLiquidVolumetricFlowRate_m3PerS": 0.006,
+    "aif:spec:minimumOperatingEvaporatorLiquidVolumetricFlowRate_m3PerS": 0.004,
+    "aif:spec:evaporatorNominalPipeOutsideDiameter_mm": 114.3,
+    "aif:spec:electricalMinimumCurrentAmpacity_A": 80.0,
+    "aif:spec:numberOfCompressors": 2,
+    "aif:spec:iplv_kWPerTon": 0.82,
+    "aif:spec:nplv_kWPerTon": 0.84,
+    "aif:spec:communicationProtocol": "BACnet_IP",
+    "aif:spec:controller": "SYN-CTRL-1 fictional controller",
+    "aif:spec:soundPowerLevel_dBA": 78.0,
+    "aif:spec:referenceCoolingMapPointIndex": 0,
+    "aif:spec:numberOfFans": 4,
+    "aif:spec:fanType": "Axial EC",
+    "aif:spec:maximumCondenserFanRotationalSpeed_Hz": 15.0,
+    "aif:spec:efficiencyRotatingEquipment": 0.9,
+    "aif:spec:refrigerantChargePerCircuit_kg": [8.0, 7.5]
+  },
+  "ports": {
+    "EvaporatorSupply": {
+      "position": [
+        2.6025,
+        -0.5,
+        0.66
+      ],
+      "normal": [
+        1,
+        0,
+        0
+      ],
+      "placement_basis": "Center of the authored evaporator flange outer mating face; outward equipment normal is +X.",
+      "properties": {
+        "domain": [
+          "token",
+          "thermal"
+        ],
+        "direction": [
+          "token",
+          "supply"
+        ],
+        "system": [
+          "token",
+          "FWS"
+        ],
+        "disconnectType": [
+          "token",
+          "flanged"
+        ],
+        "serviceClearance": [
+          "float",
+          0.8
+        ],
+        "thermal:portDiameter": [
+          "float",
+          0.1
+        ],
+        "thermal:matingDepth": [
+          "float",
+          0.025
+        ],
+        "thermal:designFlowRate": [
+          "float",
+          4.0
+        ],
+        "thermal:maxFlowRate": [
+          "float",
+          6.0
+        ],
+        "thermal:designTemperature": [
+          "float",
+          7.0
+        ],
+        "thermal:maxTemperature": [
+          "float",
+          20.0
+        ],
+        "thermal:operatingPressure": [
+          "float",
+          300000.0
+        ],
+        "thermal:maxPressure": [
+          "float",
+          1000000.0
+        ],
+        "thermal:fluidType": [
+          "token",
+          "water"
+        ],
+        "thermal:flangeRating": [
+          "token",
+          "ANSI_150"
+        ],
+        "thermal:flangeSize": [
+          "token",
+          "NPS4"
+        ]
+      }
+    },
+    "EvaporatorReturn": {
+      "position": [
+        2.6025,
+        0.5,
+        0.66
+      ],
+      "normal": [
+        1,
+        0,
+        0
+      ],
+      "placement_basis": "Center of the authored evaporator flange outer mating face; outward equipment normal is +X.",
+      "properties": {
+        "domain": [
+          "token",
+          "thermal"
+        ],
+        "direction": [
+          "token",
+          "return"
+        ],
+        "system": [
+          "token",
+          "FWS"
+        ],
+        "disconnectType": [
+          "token",
+          "flanged"
+        ],
+        "serviceClearance": [
+          "float",
+          0.8
+        ],
+        "thermal:portDiameter": [
+          "float",
+          0.1
+        ],
+        "thermal:matingDepth": [
+          "float",
+          0.025
+        ],
+        "thermal:designFlowRate": [
+          "float",
+          4.0
+        ],
+        "thermal:maxFlowRate": [
+          "float",
+          6.0
+        ],
+        "thermal:designTemperature": [
+          "float",
+          12.980861244019138
+        ],
+        "thermal:maxTemperature": [
+          "float",
+          20.0
+        ],
+        "thermal:operatingPressure": [
+          "float",
+          320000.0
+        ],
+        "thermal:maxPressure": [
+          "float",
+          1000000.0
+        ],
+        "thermal:fluidType": [
+          "token",
+          "water"
+        ],
+        "thermal:flangeRating": [
+          "token",
+          "ANSI_150"
+        ],
+        "thermal:flangeSize": [
+          "token",
+          "NPS4"
+        ]
+      }
+    },
+    "ElectricalInlet": {
+      "position": [
+        -2.33,
+        -0.35,
+        0.7
+      ],
+      "normal": [
+        -1,
+        0,
+        0
+      ],
+      "placement_basis": "Center of the authored electrical inlet plate outer face; outward equipment normal is -X.",
+      "properties": {
+        "domain": [
+          "token",
+          "electrical"
+        ],
+        "direction": [
+          "token",
+          "input"
+        ],
+        "system": [
+          "token",
+          "power"
+        ],
+        "disconnectType": [
+          "token",
+          "hardwired"
+        ],
+        "serviceClearance": [
+          "float",
+          0.8
+        ],
+        "electrical:matingDepth": [
+          "float",
+          0.0
+        ],
+        "electrical:nominalVoltage": [
+          "float",
+          400.0
+        ],
+        "electrical:maxCurrent": [
+          "float",
+          80.0
+        ],
+        "electrical:phases": [
+          "int",
+          3
+        ],
+        "electrical:frequency": [
+          "float",
+          50.0
+        ],
+        "electrical:connectorType": [
+          "token",
+          "hardwired"
+        ],
+        "electrical:ratedPower": [
+          "float",
+          45000.0
+        ],
+        "electrical:breakerRating": [
+          "float",
+          80.0
+        ],
+        "electrical:powerFactor": [
+          "float",
+          0.92
+        ]
+      }
+    }
+  }
+}

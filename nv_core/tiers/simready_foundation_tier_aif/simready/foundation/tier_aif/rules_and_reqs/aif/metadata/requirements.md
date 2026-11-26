@@ -23,6 +23,7 @@
 :maxdepth: 1
 :hidden:
 
+requirements/air-chiller-tabular-model
 requirements/properties-sublayer-required
 requirements/asset-class-required
 requirements/asset-identification-metadata

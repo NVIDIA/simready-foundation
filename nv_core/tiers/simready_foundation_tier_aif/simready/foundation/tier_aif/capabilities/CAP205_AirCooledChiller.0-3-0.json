@@ -1,0 +1,15 @@
+{
+  "id": "CAP205_AirCooledChiller.0-3-0",
+  "display_name": "Air-Cooled Chiller",
+  "requirements": [
+    "AM.010",
+    "TC.003",
+    "EL.005"
+  ],
+  "dependencies": [
+    "CAP200_AifMetadata.0-3-0",
+    "CAP201_ConnectionPoints.0-3-0",
+    "CAP202_ThermalCooling.0-3-0",
+    "CAP203_Electrical.0-3-0"
+  ]
+}

@@ -6,6 +6,7 @@ preflight for publishing to SimReady Central.
 
 | Asset | Class | Identity |
 |---|---|---|
+| [Synthetic_AirCooledChiller](Synthetic_AirCooledChiller/README.md) | AirCooledChiller | Outdoor chiller with evaporator water connections and an AC inlet. Validates against AIF-Entity and Air-Cooled-Chiller 0.3.0. |
 | `Generic_CDU` | CDU | KddcCorp Generic CDU |
 | `Synthetic_CRAH` | CRAH | Generic Cooling Systems GCS-CRAH-105D |
 | `Synthetic_UPS` | UPS | Generic Power Systems GPS-UPS-1000 |

@@ -20,6 +20,7 @@
 :maxdepth: 1
 :hidden:
 
+requirements/air-chiller-electrical-interface
 requirements/nominal-voltage-required
 requirements/power-rating-required
 requirements/electrical-frequency-required
