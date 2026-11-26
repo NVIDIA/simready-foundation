@@ -7,7 +7,7 @@ from pxr import Sdf, Usd
 
 import simready.foundation.tier_aif.requirements as cap
 
-from .. import _stage, equipment_classes
+from .. import _stage, chiller_schema, equipment_classes
 from .validation import _PhysicalDimensionsChecker
 
 
@@ -77,22 +77,43 @@ class AIF03EquipmentTemplateChecker(usd_validation_nvidia.BaseRuleChecker):
                         at=composed,
                     )
 
+    def _check_chiller(self, stage, prim_spec):
+        attr = prim_spec.attributes.get("aif:core:assetClass")
+        authored = chiller_schema.schema_for(attr.default if attr else None)
+        root = stage.GetDefaultPrim()
+        composed_attr = root.GetAttribute("aif:core:assetClass") if root else None
+        composed = chiller_schema.schema_for(composed_attr.Get() if composed_attr else None)
+        if authored is None and composed is None:
+            return False
+        if authored is not composed:
+            self._AddFailedCheck(
+                requirement=cap.MetadataRequirements.AM_008,
+                message="The Properties layer and composed default prim must agree on the chiller equipment class.",
+                at=stage,
+            )
+        else:
+            for error in chiller_schema.validate_attributes(chiller_schema.properties_prim(stage)):
+                self._AddFailedCheck(requirement=cap.MetadataRequirements.AM_008, message=error, at=stage)
+        return True
+
     def CheckStage(self, stage: Usd.Stage) -> None:
         prim_spec = _stage.properties_prim_spec(stage)
         if prim_spec is None:
             return  # AM.001 owns Properties-layer availability.
         self._check_types(stage, prim_spec)
+        if self._check_chiller(stage, prim_spec):
+            return
         attr = prim_spec.attributes.get("aif:core:assetClass")
         raw = str(attr.default) if attr and attr.default else ""
-        key = equipment_classes.normalize(raw)
+        key = equipment_classes.normalize_03(raw)
         if key is None:
             self._AddFailedCheck(
                 requirement=cap.MetadataRequirements.AM_008,
-                message=f"No AIF 0.3 equipment template for assetClass '{raw}'. Defined classes: {', '.join(equipment_classes.RECOGNISED)}.",
+                message=f"No AIF 0.3 equipment template for assetClass '{raw}'. Defined classes: {', '.join(equipment_classes.RECOGNISED_03)}.",
                 at=stage,
             )
             return
-        missing = sorted(equipment_classes.ATTRIBUTES[key] - set(prim_spec.attributes.keys()))
+        missing = sorted(equipment_classes.ATTRIBUTES_03[key] - set(prim_spec.attributes.keys()))
         if missing:
             self._AddWarning(
                 requirement=cap.MetadataRequirements.AM_008,

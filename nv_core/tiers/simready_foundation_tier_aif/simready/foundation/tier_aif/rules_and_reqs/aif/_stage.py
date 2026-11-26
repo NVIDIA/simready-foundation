@@ -19,8 +19,6 @@ sublayers. Every capability needs the same two answers -- which layer holds the
 metadata, and what the default prim on it declares -- so both live here rather
 than once per capability.
 """
-from typing import Optional
-
 from pxr import Sdf, Tf, Usd
 
 # An AIF sublayer is identified by a fragment of its filename. Any of USD's three
@@ -29,7 +27,7 @@ from pxr import Sdf, Tf, Usd
 _USD_EXTENSIONS = (".usd", ".usda", ".usdc")
 
 
-def resolve_sublayer(stage: Usd.Stage, sublayer_path: str) -> Optional[Sdf.Layer]:
+def resolve_sublayer(stage: Usd.Stage, sublayer_path: str) -> Sdf.Layer | None:
     """Resolve one of the root layer's sublayer paths to an open layer."""
     root_layer = stage.GetRootLayer()
 
@@ -54,7 +52,7 @@ def resolve_sublayer(stage: Usd.Stage, sublayer_path: str) -> Optional[Sdf.Layer
         return None
 
 
-def find_sublayer(stage: Usd.Stage, name_fragment: str) -> Optional[Sdf.Layer]:
+def find_sublayer(stage: Usd.Stage, name_fragment: str) -> Sdf.Layer | None:
     """Return the sublayer holding `name_fragment`, preferring the asset's own.
 
     AM.001 asks for "a sublayer with 'properties' in its filename", which more
@@ -84,7 +82,7 @@ def find_sublayer(stage: Usd.Stage, name_fragment: str) -> Optional[Sdf.Layer]:
     return None
 
 
-def properties_prim_spec(stage: Usd.Stage) -> Optional[Sdf.PrimSpec]:
+def properties_prim_spec(stage: Usd.Stage) -> Sdf.PrimSpec | None:
     """Return the default prim spec on the asset's properties sublayer."""
     layer = find_sublayer(stage, "properties")
     if not layer or not layer.defaultPrim:
@@ -92,7 +90,7 @@ def properties_prim_spec(stage: Usd.Stage) -> Optional[Sdf.PrimSpec]:
     return layer.GetPrimAtPath(f"/{layer.defaultPrim}")
 
 
-def asset_class_value(stage: Usd.Stage) -> Optional[str]:
+def asset_class_value(stage: Usd.Stage) -> str | None:
     """Return the authored `aif:core:assetClass` value, unnormalised."""
     prim_spec = properties_prim_spec(stage)
     if not prim_spec:
@@ -101,3 +99,19 @@ def asset_class_value(stage: Usd.Stage) -> Optional[str]:
     if not attr or not attr.default:
         return None
     return str(attr.default)
+
+
+def has_typed_attribute(stage, name, type_name, valid):
+    """Require a typed value in Properties and in the composed interface."""
+    spec = properties_prim_spec(stage)
+    prim = stage.GetDefaultPrim()
+    if not spec or not prim:
+        return False
+    authored = spec.attributes.get(name)
+    composed = prim.GetAttribute(name)
+    return bool(
+        authored and authored.typeName == type_name
+        and authored.default is not None and valid(authored.default)
+        and composed and composed.GetTypeName() == type_name
+        and composed.Get() is not None and valid(composed.Get())
+    )

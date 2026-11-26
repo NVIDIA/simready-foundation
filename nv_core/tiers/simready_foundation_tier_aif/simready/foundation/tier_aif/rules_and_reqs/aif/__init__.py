@@ -14,3 +14,8 @@
 # limitations under the License.
 
 # AIF Capabilities
+
+from . import chiller_schema
+
+# Register the dedicated checks contributed by each installed chiller class.
+chiller_schema.register_chiller_classes()
